@@ -6287,7 +6287,7 @@ function renderPixelReplicaSvg(snapshot) {
   );
   const opexAngleBalanceAvailableDropY = Math.max(chartBottomLimit - opexHeight - opexAngleBalancedBaseTop, 0);
   const stageSplitAngleBalanceCountFactor =
-    rawOpexItems.length <= 2 ? 1 : rawOpexItems.length === 3 ? safeNumber(snapshot.layout?.stageSplitAngleBalanceThreeWayFactor, 0.66) : 0;
+    rawOpexItems.length <= 2 ? 1 : rawOpexItems.length === 3 ? safeNumber(snapshot.layout?.stageSplitAngleBalanceThreeWayFactor, 0.92) : 0;
   const enableStageSplitAngleBalance =
     !hasExplicitOpexNodeTop &&
     snapshot.layout?.disableStageSplitAngleBalance !== true &&
@@ -9567,14 +9567,16 @@ function renderPixelReplicaSvg(snapshot) {
     if (!opexBoxes.length || !opexSourceSlices.length) return;
     const currentOpexNodeShift = layoutReferenceOffsetFor("operating-expenses");
     const currentNodeOffsetY = currentOpexNodeShift.dy;
+    const denseOpexStageBalance = !costBreakdownBoxes.length && opexBoxes.filter(Boolean).length >= 3;
     const relevantOpexIndexes = opexBoxes
       .map((box, index) => ({ box, index }))
       .filter((entry) => entry.box)
-      .slice(0, Math.min(opexBoxes.length, 2))
+      .slice(0, Math.min(opexBoxes.length, denseOpexStageBalance ? 3 : 2))
       .map((entry) => entry.index);
     if (!relevantOpexIndexes.length) return;
     const currentTopGapY =
       Math.min(...relevantOpexIndexes.map((index) => safeNumber(opexBoxes[index]?.top, Infinity))) - (opexBottom + currentNodeOffsetY);
+    const currentOpeningGapY = opexTop + currentNodeOffsetY - grossBottom;
     const currentAverageBranchDropY =
       relevantOpexIndexes.reduce((sum, index) => {
         const box = opexBoxes[index];
@@ -9698,10 +9700,31 @@ function renderPixelReplicaSvg(snapshot) {
     const summaryGapSeverityY = scaleY(
       safeNumber(snapshot.layout?.opexSmoothSummaryGapSeverityY, costBreakdownBoxes.length >= 2 ? 24 : 20)
     );
+    const minOpeningGapY = scaleY(safeNumber(snapshot.layout?.opexSmoothMinOpeningGapY, denseOpexStageBalance ? 24 : 18));
+    const preferredOpeningGapY = clamp(
+      safeNumber(
+        snapshot.layout?.opexSmoothPreferredOpeningGapResolvedY,
+        Math.max(
+          scaleY(safeNumber(snapshot.layout?.opexSmoothPreferredOpeningGapY, denseOpexStageBalance ? 44 : 30)),
+          desiredGrossLowerSplitOpeningDeltaY *
+            safeNumber(snapshot.layout?.opexSmoothPreferredOpeningGapMatchFactor, denseOpexStageBalance ? 1.08 : 0.94)
+        )
+      ),
+      minOpeningGapY,
+      scaleY(safeNumber(snapshot.layout?.opexSmoothMaxOpeningGapY, denseOpexStageBalance ? 76 : 60))
+    );
+    const openingGapSeverityY = Math.max(
+      minOpeningGapY,
+      preferredOpeningGapY - scaleY(safeNumber(snapshot.layout?.opexSmoothOpeningGapSeverityToleranceY, denseOpexStageBalance ? 8 : 6))
+    );
+    const preferredTopGapY = scaleY(
+      safeNumber(snapshot.layout?.opexSmoothPreferredNodeToTerminalGapY, costBreakdownBoxes.length >= 2 ? 104 : 100)
+    );
     if (
       !(
         currentAverageBranchDropY > branchSeverityThresholdY ||
         currentTopGapY > topGapThresholdY ||
+        currentOpeningGapY < openingGapSeverityY ||
         currentCostClusterGapY > costClusterGapSeverityY ||
         currentSummaryCostClearance.deficitY > 0.5 ||
         currentSummaryCostClearance.minGapY < summaryGapSeverityY
@@ -9723,10 +9746,18 @@ function renderPixelReplicaSvg(snapshot) {
         )
       : 0;
     const nodeDropHeadroomFromCostY = costFollowFactor > 0.01 ? costShiftHeadroomY / costFollowFactor : Infinity;
+    const denseNodeDropBoostY = denseOpexStageBalance
+      ? Math.min(
+          scaleY(safeNumber(snapshot.layout?.opexSmoothDenseNodeDropBoostMaxY, 34)),
+          Math.max(preferredOpeningGapY - currentOpeningGapY, 0) * 0.82 +
+            Math.max(currentTopGapY - preferredTopGapY, 0) * 0.18
+        )
+      : 0;
     const nodeDropMaxY = Math.max(
       0,
       Math.min(
-        scaleY(safeNumber(snapshot.layout?.opexSmoothNodeDropMaxY, costBreakdownBoxes.length ? 92 : 34)),
+        scaleY(safeNumber(snapshot.layout?.opexSmoothNodeDropMaxY, costBreakdownBoxes.length ? 92 : denseOpexStageBalance ? 86 : 34)) +
+          denseNodeDropBoostY,
         nodeDropHeadroomFromCostY
       )
     );
@@ -9777,9 +9808,6 @@ function renderPixelReplicaSvg(snapshot) {
     const opexLiftCandidates = buildAxisCandidates(opexLiftMaxY, 6);
     const costExtraShiftCandidates = buildAxisCandidates(costExtraShiftMaxY, costBreakdownBoxes.length ? 4 : 1);
     const minTopGapY = scaleY(safeNumber(snapshot.layout?.opexSmoothMinNodeToTerminalGapY, 84));
-    const preferredTopGapY = scaleY(
-      safeNumber(snapshot.layout?.opexSmoothPreferredNodeToTerminalGapY, costBreakdownBoxes.length >= 2 ? 104 : 100)
-    );
     const maxTopGapY = scaleY(safeNumber(snapshot.layout?.opexSmoothMaxNodeToTerminalGapY, costBreakdownBoxes.length >= 2 ? 176 : 164));
     const preferredInboundDeltaY = scaleY(safeNumber(snapshot.layout?.opexSmoothPreferredInboundDeltaY, 22));
     const maxInboundDeltaY = scaleY(safeNumber(snapshot.layout?.opexSmoothMaxInboundDeltaY, 54));
@@ -9804,6 +9832,7 @@ function renderPixelReplicaSvg(snapshot) {
       const topGapY =
         Math.min(...relevantOpexIndexes.map((index) => safeNumber(opexBoxes[index]?.top, Infinity) - opexLiftY)) -
         (opexBottom + currentNodeOffsetY + nodeDropY);
+      const openingGapY = opexTop + currentNodeOffsetY + nodeDropY - grossBottom;
       let score = 0;
       relevantOpexIndexes.forEach((index, orderIndex) => {
         const box = opexBoxes[index];
@@ -9819,11 +9848,13 @@ function renderPixelReplicaSvg(snapshot) {
           safeNumber(snapshot.layout?.opexSmoothMinBranchDropBaseY, 112) +
             orderIndex * safeNumber(snapshot.layout?.opexSmoothMinBranchDropStepY, 42)
         );
-        const branchWeight = orderIndex === 0 ? 4.4 : 2.1;
+        const branchWeight = orderIndex === 0 ? (denseOpexStageBalance ? 5.6 : 4.4) : denseOpexStageBalance ? 2.6 : 2.1;
         score += Math.abs(branchDropY - preferredBranchDropY) * branchWeight;
         score += Math.max(minBranchDropY - branchDropY, 0) * (orderIndex === 0 ? 58 : 34);
       });
       const inboundDeltaY = Math.abs(opexInboundTargetBand.center + currentNodeOffsetY + nodeDropY - grossExpenseSourceBand.center);
+      score += Math.max(minOpeningGapY - openingGapY, 0) * (denseOpexStageBalance ? 320 : 210);
+      score += Math.abs(openingGapY - preferredOpeningGapY) * (denseOpexStageBalance ? 9.6 : 4.4);
       score += Math.max(minTopGapY - topGapY, 0) * 210;
       score += Math.max(topGapY - maxTopGapY, 0) * 44;
       score += Math.abs(topGapY - preferredTopGapY) * 6.4;
