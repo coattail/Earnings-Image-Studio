@@ -14816,7 +14816,7 @@ async function enrichDatasetWithFinancialFallbacks() {
   const enrichedCompanies = await Promise.all(
     state.sortedCompanies.map(async (company) => {
       try {
-        const response = await fetch(`./data/cache/${company.id}.json?v=${BUILD_ASSET_VERSION}`);
+        const response = await fetchJson(`./data/cache/${company.id}.json?v=${BUILD_ASSET_VERSION}`);
         if (!response.ok) return company;
         const fallbackCompany = await response.json();
         return mergeCompanyFinancialFallback(company, fallbackCompany);
@@ -18045,7 +18045,7 @@ function exportPng(scaleFactor = 1, suffix = "") {
 
 async function loadDataset() {
   setStatus("正在加载数据集...");
-  const response = await fetch(`./data/earnings-dataset.json?v=${BUILD_ASSET_VERSION}`);
+  const response = await fetchJson(`./data/earnings-dataset.json?v=${BUILD_ASSET_VERSION}`);
   if (!response.ok) throw new Error("数据文件读取失败。");
   state.dataset = await response.json();
   state.sortedCompanies = [...(state.dataset?.companies || [])].map((company, index) => normalizeLoadedCompany(company, index)).sort((left, right) => left.rank - right.rank);
@@ -18056,7 +18056,7 @@ async function loadDataset() {
 
 async function loadLogoCatalog() {
   try {
-    const response = await fetch(`./data/logo-catalog.json?v=${BUILD_ASSET_VERSION}`);
+    const response = await fetchJson(`./data/logo-catalog.json?v=${BUILD_ASSET_VERSION}`);
     if (!response.ok) return;
     const payload = await response.json();
     state.logoCatalog = payload?.logos || {};
@@ -18071,7 +18071,7 @@ async function loadLogoCatalog() {
 
 async function loadSupplementalComponents() {
   try {
-    const response = await fetch(`./data/supplemental-components.json?v=${BUILD_ASSET_VERSION}`);
+    const response = await fetchJson(`./data/supplemental-components.json?v=${BUILD_ASSET_VERSION}`);
     if (!response.ok) {
       state.supplementalComponents = {};
       return;
@@ -18080,6 +18080,12 @@ async function loadSupplementalComponents() {
   } catch (_error) {
     state.supplementalComponents = {};
   }
+}
+
+function fetchJson(url) {
+  return fetch(url, {
+    cache: "no-store",
+  });
 }
 
 function updateHero() {

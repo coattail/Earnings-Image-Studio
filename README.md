@@ -68,6 +68,21 @@ cd "/Users/yuwan/Documents/New project/earnings-image-studio"
 python3 scripts/check_for_updates.py --dry-run
 ```
 
+## 自动化
+
+- 仓库内置了 `.github/workflows/update-data.yml`，会每小时自动检查样本公司是否有新财报；一旦检测到新 filing，只增量刷新相关公司并自动提交到 `main`
+- 仓库内置了 `.github/workflows/deploy-pages.yml`，每次 `main` 有新提交时都会重新部署线上静态预览站
+- GitHub Pages 发布工件由 `scripts/prepare_pages_artifact.py` 生成，只会带上前端运行所需的静态文件和前端实际会读取的数据 JSON
+- Python 依赖统一写在 `requirements.txt`
+
+如果你的仓库第一次启用 Pages，自定义工作流通常需要在仓库 `Settings -> Pages` 中将发布源设为 `GitHub Actions`。
+
+部署完成后，预览地址通常会是：
+
+```text
+https://coattail.github.io/Earnings-Image-Studio/
+```
+
 ## 数据说明
 
 - 公司池基于 2026-03-14 的美股市值排名去重后取前 30 家，保留 ADR 样本
