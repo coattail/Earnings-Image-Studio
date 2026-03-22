@@ -30,8 +30,9 @@ const state = {
 };
 
 const BUILD_ASSET_VERSION = "20260322-auto-update-cache-bust-v118";
-const CORPORATE_LOGO_AREA_MULTIPLIER = 1.44;
+const CORPORATE_LOGO_AREA_MULTIPLIER = 1.728;
 const CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER = Math.sqrt(CORPORATE_LOGO_AREA_MULTIPLIER);
+const CORPORATE_LOGO_REVENUE_GAP_MULTIPLIER = 1.2;
 
 const CORPORATE_LOGO_SCALE_OVERRIDES = {
   abbvie: 1.14,
@@ -2432,6 +2433,83 @@ function previousQuarterKey(quarterKey) {
 function priorYearQuarterKey(quarterKey) {
   if (!quarterKey || !/^\d{4}Q[1-4]$/.test(quarterKey)) return null;
   return `${Number(quarterKey.slice(0, 4)) - 1}${quarterKey.slice(4)}`;
+}
+
+function quarterEntryAtOffset(company, entry, offset = 0) {
+  if (!company?.financials || !entry) return null;
+  const quarterKey = detectQuarterKeyForEntry(company, entry);
+  if (!quarterKey) return null;
+  const targetQuarterKey = shiftQuarterKey(quarterKey, offset);
+  if (!targetQuarterKey) return null;
+  return company.financials?.[targetQuarterKey] || null;
+}
+
+function comparableGrowthPct(currentValue, comparisonValue) {
+  const current = safeNumber(currentValue, null);
+  const comparison = safeNumber(comparisonValue, null);
+  if (!(current > 0.02) || !(comparison > 0.02)) return null;
+  return Number((((current / comparison) - 1) * 100).toFixed(2));
+}
+
+function revenueGroupComparableKey(company, item) {
+  return (
+    revenueRowCanonicalKey(company, item) ||
+    normalizeLabelKey(item?.memberKey || item?.id || item?.name)
+  );
+}
+
+function revenueDetailComparableKey(company, item) {
+  const targetKey =
+    revenueTargetCanonicalKey(company, item) ||
+    normalizeLabelKey(item?.targetId || item?.targetName || item?.target || item?.groupName || "");
+  const memberKey =
+    canonicalBarSegmentKey(company?.id, normalizeLabelKey(item?.memberKey || item?.id || item?.name), item?.name || "") ||
+    normalizeLabelKey(item?.memberKey || item?.id || item?.name);
+  if (!targetKey || !memberKey) return "";
+  return `${targetKey}::${memberKey}`;
+}
+
+function comparableMetricLookup(rows = [], keyResolver, valueResolver = (item) => safeNumber(item?.valueBn)) {
+  const lookup = new Map();
+  rows.forEach((item) => {
+    const key = keyResolver(item);
+    const value = safeNumber(valueResolver(item), null);
+    if (!key || !(value > 0.02)) return;
+    lookup.set(key, value);
+  });
+  return lookup;
+}
+
+function fillMissingComparableGrowthMetrics(company, entry, rows = [], options = {}) {
+  if (!Array.isArray(rows) || !rows.length) return rows;
+  const keyResolver = options.keyResolver;
+  if (typeof keyResolver !== "function") return rows;
+  const rowResolver = typeof options.rowResolver === "function" ? options.rowResolver : () => [];
+  const valueResolver = typeof options.valueResolver === "function" ? options.valueResolver : (item) => safeNumber(item?.valueBn);
+  const previousQuarterEntry = quarterEntryAtOffset(company, entry, -1);
+  const priorYearEntry = quarterEntryAtOffset(company, entry, -4);
+  const previousQuarterLookup = comparableMetricLookup(rowResolver(previousQuarterEntry) || [], keyResolver, valueResolver);
+  const priorYearLookup = comparableMetricLookup(rowResolver(priorYearEntry) || [], keyResolver, valueResolver);
+  if (!previousQuarterLookup.size && !priorYearLookup.size) return rows;
+  return rows.map((item) => {
+    const key = keyResolver(item);
+    if (!key) return item;
+    const currentValue = valueResolver(item);
+    const nextYoyPct =
+      item?.yoyPct !== null && item?.yoyPct !== undefined
+        ? item.yoyPct
+        : comparableGrowthPct(currentValue, priorYearLookup.get(key));
+    const nextQoqPct =
+      item?.qoqPct !== null && item?.qoqPct !== undefined
+        ? item.qoqPct
+        : comparableGrowthPct(currentValue, previousQuarterLookup.get(key));
+    if (nextYoyPct === item?.yoyPct && nextQoqPct === item?.qoqPct) return item;
+    return {
+      ...item,
+      yoyPct: nextYoyPct,
+      qoqPct: nextQoqPct,
+    };
+  });
 }
 
 function alibabaSegmentPhase(rows = []) {
@@ -8457,7 +8535,10 @@ function renderPixelReplicaSvg(snapshot) {
   const periodEndX = Math.min(periodEndPreferredX, width - 84);
   const logoX = revenueX + nodeWidth / 2 - (logoMetrics.width * logoScale) / 2;
   const logoHeight = logoMetrics.height * logoScale;
-  const logoDefaultY = revenueTop - logoHeight - scaleY(safeNumber(snapshot.layout?.logoGapAboveRevenueY, 42));
+  const logoDefaultY =
+    revenueTop -
+    logoHeight -
+    scaleY(safeNumber(snapshot.layout?.logoGapAboveRevenueY, 42) * CORPORATE_LOGO_REVENUE_GAP_MULTIPLIER);
   const logoMinY = layoutY(snapshot.layout?.logoMinY, 134);
   const logoY = clamp(
     logoDefaultY,
@@ -14152,9 +14233,13 @@ function buildOfficialBusinessGroups(company, entry) {
   if ((!style && officialCoverageRatio < 0.18 && curated.length < 2) || curated.every((item) => isAggregateLikeSegmentLabel(item.name))) {
     return null;
   }
+  const curatedWithGrowth = fillMissingComparableGrowthMetrics(company, entry, curated, {
+    keyResolver: (item) => revenueGroupComparableKey(company, item),
+    rowResolver: (comparisonEntry) => resolveRenderableOfficialRevenueRows(company, comparisonEntry),
+  });
   const palette = revenuePaletteForStyle(company, style, curated.length);
   const compactMode = curated.length >= 5;
-  const groups = curated.map((item, index) => {
+  const groups = curatedWithGrowth.map((item, index) => {
     const memberKey = item.memberKey || item.name;
     const color = palette[index % palette.length];
     const group = {
@@ -14237,7 +14322,18 @@ function buildOfficialDetailGroups(company, entry, businessGroups = null) {
       suppressedTargetKeys.add(targetKey);
     }
   });
-  const detailGroups = rawDetailGroups.filter((item) => !suppressedTargetKeys.has(revenueTargetCanonicalKey(company, item)));
+  const detailGroups = fillMissingComparableGrowthMetrics(
+    company,
+    entry,
+    rawDetailGroups.filter((item) => !suppressedTargetKeys.has(revenueTargetCanonicalKey(company, item))),
+    {
+      keyResolver: (item) => revenueDetailComparableKey(company, item),
+      rowResolver: (comparisonEntry) =>
+        sanitizeOfficialStructureRows(comparisonEntry, comparisonEntry?.officialRevenueDetailGroups || []).filter(
+          (item) => safeNumber(item?.valueBn) > 0.02
+        ),
+    }
+  );
   if (!detailGroups.length) return null;
   if (style === "alibaba-commerce-staged") {
     const targetGroupMap = new Map();
