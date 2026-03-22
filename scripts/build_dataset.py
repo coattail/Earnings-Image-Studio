@@ -813,18 +813,6 @@ def merge_official_segment_history(company_payload: dict[str, Any], company: dic
         entry["officialSegmentAxis"] = history.get("axis")
         entry["officialSegmentSource"] = history.get("source")
 
-    for quarter, entry in financials.items():
-        official_rows = entry.get("officialRevenueSegments") or []
-        if not official_rows:
-            continue
-        prior_period = f"{int(str(quarter)[:4]) - 1}{str(quarter)[4:]}"
-        previous_rows = financials.get(prior_period, {}).get("officialRevenueSegments") or []
-        previous_map = {str(item.get("memberKey") or item.get("name") or ""): item for item in previous_rows}
-        for row in official_rows:
-            previous = previous_map.get(str(row.get("memberKey") or row.get("name") or ""))
-            if previous and previous.get("valueBn") not in (None, 0):
-                row["yoyPct"] = round((float(row["valueBn"]) / float(previous["valueBn"]) - 1) * 100, 2)
-
     company_payload["officialSegmentHistory"] = {
         "source": history.get("source"),
         "axis": history.get("axis"),
@@ -864,16 +852,6 @@ def enrich_growth_rows(financials: dict[str, Any], field_name: str) -> None:
                 row["mixPct"] = round(share_pct, 1)
             elif revenue_bn and row.get("mixPct") is None:
                 row["mixPct"] = round(float(row.get("valueBn") or 0) / revenue_bn * 100, 1)
-            if row.get("yoyPct") is None:
-                previous = prior_year_map.get(member_key)
-                previous_value = float(previous.get("valueBn") or 0) if previous else 0
-                if previous_value:
-                    row["yoyPct"] = round((float(row.get("valueBn") or 0) / previous_value - 1) * 100, 2)
-            if row.get("qoqPct") is None:
-                previous = prior_quarter_map.get(member_key)
-                previous_value = float(previous.get("valueBn") or 0) if previous else 0
-                if previous_value:
-                    row["qoqPct"] = round((float(row.get("valueBn") or 0) / previous_value - 1) * 100, 2)
             previous = prior_year_map.get(member_key)
             previous_value = float(previous.get("valueBn") or 0) if previous else 0
             if revenue_bn and prior_year_revenue_bn and previous_value and row.get("mixYoyDeltaPp") is None:
