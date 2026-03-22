@@ -701,6 +701,8 @@ function queryRefs() {
   refs.chartMeta = document.querySelector("#chartMeta");
   refs.toolbarCompany = document.querySelector("#toolbarCompany");
   refs.toolbarQuarter = document.querySelector("#toolbarQuarter");
+  refs.toolbarUpdatedLabel = document.querySelector("#toolbarUpdatedLabel");
+  refs.toolbarUpdatedAt = document.querySelector("#toolbarUpdatedAt");
   refs.chartOutput = document.querySelector("#chartOutput");
   refs.detailSegmentCount = document.querySelector("#detailSegmentCount");
   refs.detailSegmentNote = document.querySelector("#detailSegmentNote");
@@ -17801,6 +17803,7 @@ function updateMeta(snapshot, company, viewPayload = null) {
   const isBarMode = currentChartViewMode() === "bars";
   refs.toolbarCompany.textContent = companyDisplay(company);
   refs.toolbarQuarter.textContent = `${snapshot.quarterKey} · ${snapshot.fiscalLabel || "-"}`;
+  updateDatasetTimestampUi();
 
   if (isBarMode) {
     const history = viewPayload?.history || null;
@@ -18086,6 +18089,30 @@ function fetchJson(url) {
   return fetch(url, {
     cache: "no-store",
   });
+}
+
+function formatDatasetGeneratedAt(value) {
+  if (!value) return "-";
+  const dateValue = new Date(value);
+  if (!Number.isFinite(dateValue.getTime())) return "-";
+  try {
+    return new Intl.DateTimeFormat(currentChartLanguage() === "en" ? "en-US" : "zh-CN", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    }).format(dateValue);
+  } catch (_error) {
+    return dateValue.toLocaleString();
+  }
+}
+
+function updateDatasetTimestampUi() {
+  if (!refs.toolbarUpdatedLabel || !refs.toolbarUpdatedAt) return;
+  refs.toolbarUpdatedLabel.textContent = currentChartLanguage() === "en" ? "Data updated" : "数据更新";
+  refs.toolbarUpdatedAt.textContent = formatDatasetGeneratedAt(state.dataset?.generatedAt);
 }
 
 function updateHero() {
