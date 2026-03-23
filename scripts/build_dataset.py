@@ -920,6 +920,14 @@ def enrich_growth_rows(financials: dict[str, Any], field_name: str) -> None:
                 row["mixPct"] = round(float(row.get("valueBn") or 0) / revenue_bn * 100, 1)
             previous = prior_year_map.get(member_key)
             previous_value = float(previous.get("valueBn") or 0) if previous else 0
+            if row.get("yoyPct") is None and previous_value:
+                row["yoyPct"] = round((float(row.get("valueBn") or 0) / previous_value - 1) * 100, 2)
+            previous = prior_quarter_map.get(member_key)
+            previous_value = float(previous.get("valueBn") or 0) if previous else 0
+            if row.get("qoqPct") is None and previous_value:
+                row["qoqPct"] = round((float(row.get("valueBn") or 0) / previous_value - 1) * 100, 2)
+            previous = prior_year_map.get(member_key)
+            previous_value = float(previous.get("valueBn") or 0) if previous else 0
             if revenue_bn and prior_year_revenue_bn and previous_value and row.get("mixYoyDeltaPp") is None:
                 current_mix = float(row.get("valueBn") or 0) / revenue_bn * 100
                 prior_mix = previous_value / prior_year_revenue_bn * 100
