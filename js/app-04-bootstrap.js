@@ -1,3 +1,84 @@
+const BAR_CHART_LOGO_LAYOUT_OVERRIDES = Object.freeze({
+  "procter-gamble": Object.freeze({
+    dx: -44,
+    dy: -4,
+    widthScale: 0.78,
+    heightScale: 0.78,
+    scaleMultiplier: 0.94,
+  }),
+});
+
+function resolveBarChartLogoPlacement({
+  logoKey,
+  plotLeft,
+  chartTop,
+  baselineY,
+  barStartX,
+  barWidth,
+  barGap,
+  valueScale,
+  history,
+}) {
+  const normalizedLogoKey = normalizeLogoKey(logoKey);
+  const override =
+    BAR_CHART_LOGO_LAYOUT_OVERRIDES[logoKey] ||
+    BAR_CHART_LOGO_LAYOUT_OVERRIDES[normalizedLogoKey] ||
+    {};
+  const visibleMetrics = corporateLogoVisibleMetrics(logoKey);
+  const area = {
+    width: 250 * safeNumber(override.widthScale, 1),
+    height: 156 * safeNumber(override.heightScale, 1),
+    x: plotLeft + 12 + safeNumber(override.dx, 0),
+    y: chartTop + 8 + safeNumber(override.dy, 0),
+  };
+
+  let scale =
+    Math.min(area.width / Math.max(visibleMetrics.width, 1), area.height / Math.max(visibleMetrics.height, 1)) *
+    safeNumber(override.scaleMultiplier, 1);
+  let renderedWidth = visibleMetrics.width * scale * CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER;
+  let renderedHeight = visibleMetrics.height * scale * CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER;
+  const minX = 20;
+  const minY = chartTop + 2;
+  let x = Math.max(minX, area.x + (area.width - renderedWidth) / 2);
+  let y = Math.max(minY, area.y + (area.height - renderedHeight) / 2);
+
+  const logoRight = () => x + renderedWidth;
+  const logoBottom = () => y + renderedHeight;
+  const overlappingBarTop = (history?.quarters || []).reduce((top, quarter, quarterIndex) => {
+    const barX = barStartX + quarterIndex * (barWidth + barGap);
+    const barRight = barX + barWidth;
+    if (barRight <= x || barX >= logoRight()) return top;
+    const barTop = baselineY - Math.max(safeNumber(quarter?.totalRevenueBn) * valueScale, 1.2);
+    return Math.min(top, barTop);
+  }, Number.POSITIVE_INFINITY);
+
+  if (Number.isFinite(overlappingBarTop) && logoBottom() > overlappingBarTop - 10) {
+    const requiredLift = logoBottom() - (overlappingBarTop - 10);
+    const availableLift = Math.max(y - minY, 0);
+    if (availableLift > 0) {
+      y -= Math.min(requiredLift, availableLift);
+    }
+  }
+
+  if (Number.isFinite(overlappingBarTop) && logoBottom() > overlappingBarTop - 10) {
+    const availableHeight = Math.max(overlappingBarTop - 10 - y, 72);
+    const shrinkFactor = clamp(availableHeight / Math.max(renderedHeight, 1), 0.72, 1);
+    if (shrinkFactor < 0.999) {
+      scale *= shrinkFactor;
+      renderedWidth *= shrinkFactor;
+      renderedHeight *= shrinkFactor;
+      x = Math.max(minX, area.x + (area.width - renderedWidth) / 2);
+      y = Math.max(minY, Math.min(y, area.y + (area.height - renderedHeight) / 2));
+    }
+  }
+
+  return {
+    scale,
+    x,
+    y,
+  };
+}
+
 function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
   const width = 2048;
   const height = 1325;
@@ -178,21 +259,17 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
     gridValues.push(value);
   }
   const chartLogoKey = snapshot?.companyLogoKey || company?.id || "";
-  const chartLogoVisibleMetrics = corporateLogoVisibleMetrics(chartLogoKey);
-  const chartLogoArea = {
-    width: 250,
-    height: 156,
-    x: plotLeft + 12,
-    y: chartTop + 8,
-  };
-  const chartLogoScale = Math.min(
-    chartLogoArea.width / Math.max(chartLogoVisibleMetrics.width, 1),
-    chartLogoArea.height / Math.max(chartLogoVisibleMetrics.height, 1)
-  );
-  const chartLogoRenderWidth = chartLogoVisibleMetrics.width * chartLogoScale;
-  const chartLogoRenderHeight = chartLogoVisibleMetrics.height * chartLogoScale;
-  const chartLogoX = chartLogoArea.x + (chartLogoArea.width - chartLogoRenderWidth) / 2;
-  const chartLogoY = chartLogoArea.y + (chartLogoArea.height - chartLogoRenderHeight) / 2;
+  const chartLogoPlacement = resolveBarChartLogoPlacement({
+    logoKey: chartLogoKey,
+    plotLeft,
+    chartTop,
+    baselineY,
+    barStartX,
+    barWidth,
+    barGap,
+    valueScale,
+    history,
+  });
   const isNonUsCompany = !!company?.isAdr;
   const fxNoteY = isNonUsCompany ? height - 34 : chartTop - 10;
   const fxNoteX = isNonUsCompany ? 38 : plotLeft;
@@ -262,7 +339,9 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
   svg += `<line x1="${plotLeft}" y1="${baselineY}" x2="${plotRight}" y2="${baselineY}" stroke="#C9CED6" stroke-width="2.2"></line>`;
   svg += `
     <g opacity="0.98">
-      ${renderCorporateLogo(chartLogoKey, chartLogoX.toFixed(2), chartLogoY.toFixed(2), { scale: Number(chartLogoScale.toFixed(4)) })}
+      ${renderCorporateLogo(chartLogoKey, chartLogoPlacement.x.toFixed(2), chartLogoPlacement.y.toFixed(2), {
+        scale: Number(chartLogoPlacement.scale.toFixed(4)),
+      })}
     </g>
   `;
 
