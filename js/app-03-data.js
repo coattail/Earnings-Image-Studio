@@ -1910,6 +1910,12 @@ const BAR_SEGMENT_CANONICAL_BY_COMPANY = Object.freeze({
     foodsundries: "foodssundries",
     freshfood: "freshfoods",
   }),
+  palantir: Object.freeze({
+    commercialoperating: "commercial",
+  }),
+  walmart: Object.freeze({
+    samsclubus: "samsclub",
+  }),
   micron: Object.freeze({
     cnbu: "microncomputedatacenter",
     cdbu: "microncomputedatacenter",
@@ -1923,10 +1929,17 @@ const BAR_SEGMENT_CANONICAL_BY_COMPANY = Object.freeze({
   }),
 });
 
+const BAR_SEGMENT_ROLLUPS_BY_COMPANY = Object.freeze({
+  costco: Object.freeze({
+    nonfoods: Object.freeze(["hardlines", "softlines"]),
+  }),
+});
+
 const BAR_SEGMENT_LABEL_OVERRIDES = Object.freeze({
   googleservices: Object.freeze({ name: "Google Services", nameZh: "Google 服务" }),
   othersegments: Object.freeze({ name: "Other segments", nameZh: "其他分部" }),
   otherrevenue: Object.freeze({ name: "Other revenue", nameZh: "其他营收" }),
+  nonfoods: Object.freeze({ name: "Non Foods", nameZh: "非食品" }),
   microncomputedatacenter: Object.freeze({ name: "Compute & Data Center", nameZh: "计算与数据中心" }),
   micronmobileclient: Object.freeze({ name: "Mobile & Client", nameZh: "移动与客户端" }),
   micronstoragecloudmemory: Object.freeze({ name: "Storage & Cloud Memory", nameZh: "存储与云内存" }),
@@ -1941,6 +1954,7 @@ const BAR_SEGMENT_LABEL_OVERRIDES = Object.freeze({
   mac: Object.freeze({ name: "Mac", nameZh: "Mac" }),
   ipad: Object.freeze({ name: "iPad", nameZh: "iPad" }),
   wearables: Object.freeze({ name: "Wearables", nameZh: "可穿戴设备" }),
+  samsclub: Object.freeze({ name: "Sam's Club", nameZh: "山姆会员店" }),
   auto: Object.freeze({ name: "Automotive", nameZh: "汽车业务" }),
   energygenerationstorage: Object.freeze({ name: "Energy generation & storage", nameZh: "能源发电与储能" }),
 });
@@ -2423,6 +2437,58 @@ function preferCanonicalBarSegmentRow(currentRow, candidateRow) {
   return candidateNameLength > currentNameLength;
 }
 
+function barSourceRowKey(item) {
+  return normalizeLabelKey(item?.id || item?.memberKey || item?.name);
+}
+
+function applyCompanyBarSegmentRollups(entry, rows = []) {
+  const companyId = String(entry?.companyId || "").trim().toLowerCase();
+  const rollups = BAR_SEGMENT_ROLLUPS_BY_COMPANY[companyId];
+  if (!rollups || !Array.isArray(rows) || !rows.length) return rows;
+
+  let nextRows = rows.map((item) => ({ ...item }));
+  Object.entries(rollups).forEach(([targetRawKey, childRawKeys]) => {
+    const targetKey = normalizeLabelKey(targetRawKey);
+    const childKeys = new Set((childRawKeys || []).map((key) => normalizeLabelKey(key)).filter(Boolean));
+    if (!targetKey || childKeys.size < 2) return;
+
+    const rowMap = new Map(nextRows.map((item) => [barSourceRowKey(item), item]));
+    const childRows = [...childKeys].map((key) => rowMap.get(key)).filter(Boolean);
+    if (childRows.length !== childKeys.size) return;
+
+    const explicitTargetRow = rowMap.get(targetKey) || null;
+    const childValueBn = childRows.reduce((sum, item) => sum + safeNumber(item?.valueBn), 0);
+    if (!(childValueBn > 0.02)) return;
+
+    const explicitTargetValueBn = safeNumber(explicitTargetRow?.valueBn, 0);
+    const useExplicitTargetValue =
+      explicitTargetValueBn > 0.02 &&
+      explicitTargetValueBn / Math.max(childValueBn, 0.001) >= 0.82 &&
+      explicitTargetValueBn / Math.max(childValueBn, 0.001) <= 1.18;
+    const resolvedValueBn = useExplicitTargetValue ? explicitTargetValueBn : childValueBn;
+    const labelMeta = canonicalBarSegmentMeta(companyId, targetKey, explicitTargetRow?.name || targetRawKey, explicitTargetRow?.nameZh || "");
+    const preferredSourceRow = childRows.reduce(
+      (selected, item) => (selected && !preferCanonicalBarSegmentRow(selected, item) ? selected : item),
+      explicitTargetRow
+    );
+
+    nextRows = nextRows.filter((item) => {
+      const key = barSourceRowKey(item);
+      return key !== targetKey && !childKeys.has(key);
+    });
+    nextRows.push({
+      id: targetKey,
+      name: labelMeta.name || explicitTargetRow?.name || targetRawKey,
+      nameZh: labelMeta.nameZh || explicitTargetRow?.nameZh || translateBusinessLabelToZh(targetRawKey),
+      valueBn: Number(resolvedValueBn.toFixed(3)),
+      filingDate: preferredSourceRow?.filingDate || null,
+      periodEnd: preferredSourceRow?.periodEnd || entry?.periodEnd || null,
+    });
+  });
+
+  return nextRows;
+}
+
 function normalizeBarSourceRows(entry, rows = []) {
   const sourceRows = sanitizeOfficialStructureRows(entry, rows || []);
   if (!sourceRows.length) return [];
@@ -2456,14 +2522,15 @@ function normalizeBarSourceRows(entry, rows = []) {
       };
     })
     .filter((item) => safeNumber(item.valueBn) > 0.02);
+  const rolledUpRows = applyCompanyBarSegmentRollups(entry, normalizedRows);
   if (String(entry?.companyId || "").toLowerCase() === "micron") {
-    return normalizeMicronBarRows(entry, normalizedRows);
+    return normalizeMicronBarRows(entry, rolledUpRows);
   }
   if (String(entry?.companyId || "").toLowerCase() === "alibaba") {
-    const comparableRows = buildAlibabaComparableBarRows(entry, normalizedRows);
+    const comparableRows = buildAlibabaComparableBarRows(entry, rolledUpRows);
     if (comparableRows.length >= 2) return comparableRows;
   }
-  return normalizedRows;
+  return rolledUpRows;
 }
 
 function barSourceLagDaysMedian(entry, rows = []) {
@@ -4049,4 +4116,3 @@ function barAxisUnitLines(history) {
   if (currency === "MIXED") return { line1: "单位", line2: "混合币种" };
   return { line1: "单位", line2: `${currency} 十亿` };
 }
-

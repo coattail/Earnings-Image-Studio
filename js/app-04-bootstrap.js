@@ -39,7 +39,7 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
   const titleLength = String(chartTitle || "").length;
   const titleFontSize =
     currentChartLanguage() === "en"
-      ? clamp(88 - Math.max(titleLength - 30, 0) * 1.25, 56, 88)
+      ? Math.round(clamp(88 - Math.max(titleLength - 30, 0) * 1.25, 56, 88) * 0.85)
       : clamp(80 - Math.max(titleLength - 16, 0) * 1.75, 52, 80);
 
   const latestQuarter = history.quarters[history.quarters.length - 1] || null;
