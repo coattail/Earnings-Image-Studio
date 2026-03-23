@@ -36,7 +36,7 @@ OFFICIAL_SEGMENT_CACHE_DIR = ROOT_DIR / "data" / "cache" / "official-segments"
 OFFICIAL_FINANCIAL_CACHE_DIR = ROOT_DIR / "data" / "cache" / "official-financials"
 VISION_OCR_SWIFT = ROOT_DIR / "scripts" / "vision_ocr.swift"
 VISION_OCR_BIN = CACHE_DIR / "vision-ocr"
-CACHE_VERSION = "20260321-v3"
+CACHE_VERSION = "20260323-v5"
 
 XBRL_AXIS_COMPANY_CONFIGS: dict[str, dict[str, Any]] = {
     "mastercard": {
@@ -573,6 +573,8 @@ def _build_row(
     target_name: str | None = None,
     metric_mode: str | None = None,
     mix_pct: float | None = None,
+    yoy_pct: float | None = None,
+    qoq_pct: float | None = None,
 ) -> dict[str, Any]:
     row: dict[str, Any] = {
         "name": name,
@@ -590,6 +592,10 @@ def _build_row(
         row["metricMode"] = metric_mode
     if mix_pct is not None:
         row["mixPct"] = round(float(mix_pct), 1)
+    if yoy_pct is not None:
+        row["yoyPct"] = round(float(yoy_pct), 2)
+    if qoq_pct is not None:
+        row["qoqPct"] = round(float(qoq_pct), 2)
     return row
 
 
@@ -734,6 +740,18 @@ def _parse_number_token(raw: str) -> float | None:
         return None
 
 
+def _parse_pct_token(raw: str) -> float | None:
+    cleaned = str(raw or "").strip().replace(" ", "").replace("%", "")
+    if not cleaned:
+        return None
+    if cleaned.startswith("(") and cleaned.endswith(")"):
+        cleaned = f"-{cleaned[1:-1]}"
+    try:
+        return float(cleaned)
+    except ValueError:
+        return None
+
+
 def _extract_current_table_value(text: str, label: str) -> float | None:
     normalized = _normalize_text_space(text)
     pattern = re.compile(
@@ -747,6 +765,46 @@ def _extract_current_table_value(text: str, label: str) -> float | None:
     if current_value is None:
         return None
     return round(current_value / 1000, 3)
+
+
+def _extract_alibaba_table_metrics(text: str, label: str) -> tuple[float | None, float | None]:
+    normalized = _normalize_text_space(text)
+    pattern = re.compile(
+        rf"{re.escape(label)}(?:\(\d+\))?\s+(\(?[\d,]+\)?)\s+(\(?[\d,]+\)?)\s+(?:\(?[\d,]+\)?\s+)?(\(?[\d.]+\)?%)",
+        re.IGNORECASE,
+    )
+    match = pattern.search(normalized)
+    if not match:
+        return None, None
+    current_value = _parse_number_token(match.group(2))
+    yoy_pct = _parse_pct_token(match.group(3))
+    return (round(current_value / 1000, 3) if current_value is not None else None, yoy_pct)
+
+
+def _extract_alibaba_narrative_metrics(text: str, label: str) -> tuple[float | None, float | None]:
+    normalized = _normalize_text_space(text)
+    patterns = [
+        re.compile(
+            rf"{re.escape(label)}(?:['’]s)?(?:\s+revenue)?\s+(?:grew|increased|rose|was up|up|declined|decreased)\s+(\d+(?:\.\d+)?)%\s+year-(?:on-)?year(?:\s+to\s+RMB\s*([\d,]+)\s+million)?",
+            re.IGNORECASE,
+        ),
+        re.compile(
+            rf"{re.escape(label)}(?:['’]s)?(?:\s+revenue)?[^.]*?\s+to\s+RMB\s*([\d,]+)\s+million[^.]*?\s+(\d+(?:\.\d+)?)%\s+year-(?:on-)?year",
+            re.IGNORECASE,
+        ),
+    ]
+    for pattern in patterns:
+        match = pattern.search(normalized)
+        if not match:
+            continue
+        if len(match.groups()) == 2 and pattern is patterns[0]:
+            yoy_pct = _parse_pct_token(match.group(1))
+            current_value = _parse_number_token(match.group(2)) if match.group(2) else None
+        else:
+            current_value = _parse_number_token(match.group(1))
+            yoy_pct = _parse_pct_token(match.group(2))
+        return (round(current_value / 1000, 3) if current_value is not None else None, yoy_pct)
+    return None, None
 
 
 def _extract_labeled_number_sequence(text: str, label: str, *, min_count: int = 2, max_count: int = 4) -> list[float]:
@@ -818,12 +876,29 @@ def _extract_alibaba_row_tokens(block: str, row_label: str) -> list[str]:
     return re.findall(r"\(?[\d,]+\)?|—|-", match.group(1))
 
 
+def _extract_alibaba_change_tokens(block: str) -> list[str]:
+    if not block:
+        return []
+    pattern = re.compile(
+        r"YoY% change\s+(.*?)(?:Income \(Loss\) from operations|Add:\s+Share-based compensation expense|Adjusted EBITA)",
+        re.IGNORECASE,
+    )
+    match = pattern.search(block)
+    if not match:
+        return []
+    normalized = match.group(1).replace("N/A", " N/A ")
+    normalized = re.sub(r"(?<=%)\(", " (", normalized)
+    normalized = re.sub(r"(?<=\d)%(?=\d)", "% ", normalized)
+    return re.findall(r"\(?[\d.]+\)?%|N/A", normalized, re.IGNORECASE)
+
+
 def _build_alibaba_segments_from_revenue_tokens(
     tokens: list[str],
     rows: list[tuple[str, str, str]],
     *,
     source_url: str,
     filing_date: str,
+    yoy_tokens: list[str] | None = None,
 ) -> list[dict[str, Any]]:
     segments: list[dict[str, Any]] = []
     if len(tokens) < len(rows):
@@ -832,6 +907,7 @@ def _build_alibaba_segments_from_revenue_tokens(
         current_value = _parse_number_token(tokens[index])
         if current_value is None:
             continue
+        yoy_pct = _parse_pct_token((yoy_tokens or [])[index]) if yoy_tokens and index < len(yoy_tokens) else None
         segments.append(
             _build_row(
                 display_name,
@@ -840,6 +916,7 @@ def _build_alibaba_segments_from_revenue_tokens(
                 source_url=source_url,
                 source_form="IR PDF",
                 filing_date=filing_date,
+                yoy_pct=yoy_pct,
             )
         )
     return segments
@@ -886,6 +963,57 @@ def _select_tencent_detail_value(candidates: list[float], *, vas_quarter_value: 
     # Annual decks often include both quarterly and annual narrative values.
     # When anchor filtering is unavailable, prefer the smaller candidate.
     return min(cleaned)
+
+
+def _extract_tencent_quarter_discussion(pdf_text: str, quarter: str) -> str:
+    quarter_code = f"{quarter[-1]}Q{quarter[:4]}"
+    match = re.search(
+        rf"{re.escape(quarter_code)}\s+Management Discussion and Analysis(.*?)(?=(?:FY\d{{4}}|[1-4]Q\d{{4}})\s+Management Discussion and Analysis|Non-IFRS|$)",
+        pdf_text,
+        re.IGNORECASE,
+    )
+    if match:
+        return _normalize_text_space(match.group(1))
+    return pdf_text
+
+
+def _extract_tencent_growth_metrics(text: str, label: str, *, prefix: str | None = None) -> tuple[float | None, float | None]:
+    label_pattern = rf"{_pdf_fuzzy_phrase_pattern(label)}\s*\d*"
+    prefix_pattern = rf"{re.escape(prefix)}\s+" if prefix else ""
+    yoy_pattern = r"year\s*-\s*on\s*-\s*year|year-on-year"
+    patterns = [
+        re.compile(
+            rf"{prefix_pattern}{label_pattern}\s+(?:revenues?\s+)?(?:increased|grew|rose|declined|decreased)\s+by\s+"
+            rf"(?P<yoy>[+-]?\d+(?:\.\d+)?)%\s+(?:{yoy_pattern})\s+to\s+RMB\s*(?P<value>[\d.]+)\s+billion",
+            re.IGNORECASE,
+        ),
+        re.compile(
+            rf"{prefix_pattern}{label_pattern}\s+(?:revenues?\s+)?(?:were|was)\s+RMB\s*(?P<value>[\d.]+)\s+billion,\s*"
+            rf"(?P<direction>up|down)\s+(?P<yoy>\d+(?:\.\d+)?)%\s+(?:{yoy_pattern})",
+            re.IGNORECASE,
+        ),
+        re.compile(
+            rf"{prefix_pattern}{label_pattern}\s+(?:revenues?\s+)?(?:were|was)\s+RMB\s*(?P<value>[\d.]+)\s+billion(?:\s+for\s+(?:the\s+)?[^,]+)?,\s*"
+            rf"(?P<direction>up|down)\s+(?P<yoy>\d+(?:\.\d+)?)%\s+(?:{yoy_pattern})",
+            re.IGNORECASE,
+        ),
+        re.compile(
+            rf"{prefix_pattern}{label_pattern}\s+(?:revenues?\s+)?(?:were|was)\s+RMB\s*(?P<value>[\d.]+)\s+billion(?:\s+for\s+(?:the\s+)?[^,]+)?,\s*"
+            rf"(?:reflecting|representing)\s+a\s+(?P<yoy>\d+(?:\.\d+)?)%\s+(?:{yoy_pattern})\s+(?P<direction>increase|decrease)",
+            re.IGNORECASE,
+        ),
+    ]
+    for pattern in patterns:
+        match = pattern.search(text)
+        if not match:
+            continue
+        value = _parse_number_token(match.group("value"))
+        yoy = _parse_number_token(match.group("yoy"))
+        direction = match.groupdict().get("direction", "").lower()
+        if direction in {"down", "decrease"} and yoy is not None:
+            yoy = -abs(float(yoy))
+        return value, yoy
+    return None, None
 
 
 def _parse_generic_segment_cache_records(company: dict[str, Any]) -> dict[str, Any]:
@@ -966,65 +1094,63 @@ def _parse_tencent_records(company: dict[str, Any]) -> dict[str, Any]:
         )
         try:
             pdf_text = _normalize_text_space(_extract_pdf_text(pdf_url))
+            quarter_discussion = _extract_tencent_quarter_discussion(pdf_text, quarter)
             top_level_rows = [
-                (["VAS"], "Value-added services", "valueaddedservices"),
-                (["Marketing Services", "Online Advertising"], "Marketing Services", "marketingservices"),
-                (["FinTech and Business Services"], "FinTech and Business Services", "fintechandbusinessservices"),
-                (["Others"], "Others", "others"),
+                (["VAS"], "Value-added services", "valueaddedservices", "VAS"),
+                (["Marketing Services", "Online Advertising"], "Marketing Services", "marketingservices", "Marketing Services"),
+                (["FinTech and Business Services"], "FinTech and Business Services", "fintechandbusinessservices", "FinTech and Business Services"),
+                (["Others"], "Others", "others", "Others"),
             ]
             segments = []
             selected_top_level_values: dict[str, float] = {}
-            for source_labels, display_name, member_key in top_level_rows:
+            for source_labels, display_name, member_key, narrative_label in top_level_rows:
                 values: list[float] = []
                 for source_label in source_labels:
                     values = _extract_labeled_number_sequence(pdf_text, source_label, min_count=2, max_count=4)
                     if values:
                         break
                 selected_value = _select_tencent_quarter_value(values, mode)
-                if selected_value is None:
+                narrative_value, narrative_yoy = _extract_tencent_growth_metrics(
+                    quarter_discussion,
+                    narrative_label,
+                    prefix="Revenues from",
+                )
+                current_value_bn = selected_value / 1000 if selected_value is not None else narrative_value
+                if current_value_bn is None:
                     continue
                 segments.append(
                     _build_row(
                         display_name,
-                        selected_value / 1000,
+                        current_value_bn,
                         member_key=member_key,
                         source_url=pdf_url,
                         source_form="IR PDF",
                         filing_date=filing_date,
+                        yoy_pct=narrative_yoy,
                     )
                 )
-                selected_top_level_values[member_key] = selected_value / 1000
+                selected_top_level_values[member_key] = current_value_bn
 
             detail_groups = []
             detail_names = ["Domestic Games", "International Games", "Social Networks"]
             vas_quarter_value = selected_top_level_values.get("valueaddedservices")
             for detail_name in detail_names:
-                detail_pattern = re.compile(
-                    rf"{_pdf_fuzzy_phrase_pattern(detail_name)}\s+revenues?\s+"
-                    rf"(?:were\s+RMB\s*(?P<direct>[\d.]+)\s+billion|"
-                    rf"(?:rose|grew|increased|declined|decreased).*?\bto\s+RMB\s*(?P<to_value>[\d.]+)\s+billion)",
-                    re.IGNORECASE,
-                )
-                detail_values = []
-                for detail_match in detail_pattern.finditer(pdf_text):
-                    raw_value = detail_match.group("direct") or detail_match.group("to_value")
-                    detail_value = _parse_number_token(raw_value)
-                    if detail_value is not None:
-                        detail_values.append(detail_value)
-                if not detail_values:
-                    continue
-                detail_value = _select_tencent_detail_value(detail_values, vas_quarter_value=vas_quarter_value)
+                detail_value, detail_yoy = _extract_tencent_growth_metrics(quarter_discussion, detail_name)
                 if detail_value is None:
+                    continue
+                selected_detail_value = _select_tencent_detail_value([detail_value], vas_quarter_value=vas_quarter_value)
+                if selected_detail_value is None:
                     continue
                 detail_groups.append(
                     _build_row(
                         detail_name,
-                        detail_value,
+                        selected_detail_value,
                         member_key=_normalize_member_key(detail_name),
                         source_url=pdf_url,
                         source_form="IR PDF",
                         filing_date=filing_date,
                         target_name="Value-added services",
+                        yoy_pct=detail_yoy,
                     )
                 )
 
@@ -1116,6 +1242,7 @@ def _parse_alibaba_quarter_rows(text: str, quarter: str, filing_date: str, sourc
         normalized_block = re.sub(r"\(\d+\)", "", segment_block)
         if "China commerce International commerce Local consumer services Cainiao Cloud Digital media and entertainment Innovation initiatives and others" in normalized_block:
             revenue_tokens = _extract_alibaba_row_tokens(segment_block, "Revenue")
+            yoy_tokens = _extract_alibaba_change_tokens(segment_block)
             segments = _build_alibaba_segments_from_revenue_tokens(
                 revenue_tokens,
                 [
@@ -1129,10 +1256,12 @@ def _parse_alibaba_quarter_rows(text: str, quarter: str, filing_date: str, sourc
                 ],
                 source_url=source_url,
                 filing_date=filing_date,
+                yoy_tokens=yoy_tokens,
             )
             return segments, []
         if "Commerce Cloud computing Digital media and entertainment Innovation initiatives and others" in normalized_block:
             revenue_tokens = _extract_alibaba_row_tokens(segment_block, "Revenue")
+            yoy_tokens = _extract_alibaba_change_tokens(segment_block)
             segments = _build_alibaba_segments_from_revenue_tokens(
                 revenue_tokens,
                 [
@@ -1143,10 +1272,12 @@ def _parse_alibaba_quarter_rows(text: str, quarter: str, filing_date: str, sourc
                 ],
                 source_url=source_url,
                 filing_date=filing_date,
+                yoy_tokens=yoy_tokens,
             )
             return segments, []
         if "Core commerce Cloud computing Digital media and entertainment Innovation initiatives and others" in normalized_block:
             revenue_tokens = _extract_alibaba_row_tokens(segment_block, "Revenue")
+            yoy_tokens = _extract_alibaba_change_tokens(segment_block)
             segments = _build_alibaba_segments_from_revenue_tokens(
                 revenue_tokens,
                 [
@@ -1157,13 +1288,18 @@ def _parse_alibaba_quarter_rows(text: str, quarter: str, filing_date: str, sourc
                 ],
                 source_url=source_url,
                 filing_date=filing_date,
+                yoy_tokens=yoy_tokens,
             )
             return segments, []
         return [], []
 
     segments = []
     for row_label, display_name, member_key in top_level_rows:
-        current_value = _extract_current_table_value(normalized, row_label)
+        current_value, yoy_pct = _extract_alibaba_table_metrics(normalized, row_label)
+        if current_value is None:
+            current_value = _extract_current_table_value(normalized, row_label)
+        if yoy_pct is None:
+            _, yoy_pct = _extract_alibaba_narrative_metrics(normalized, row_label)
         if current_value is None:
             continue
         segments.append(
@@ -1174,12 +1310,17 @@ def _parse_alibaba_quarter_rows(text: str, quarter: str, filing_date: str, sourc
                 source_url=source_url,
                 source_form="IR PDF",
                 filing_date=filing_date,
+                yoy_pct=yoy_pct,
             )
         )
 
     detail_groups = []
     for row_label, target_name in detail_rows:
-        current_value = _extract_current_table_value(normalized, row_label)
+        current_value, yoy_pct = _extract_alibaba_table_metrics(normalized, row_label)
+        if current_value is None:
+            current_value = _extract_current_table_value(normalized, row_label)
+        if yoy_pct is None:
+            _, yoy_pct = _extract_alibaba_narrative_metrics(normalized, row_label)
         if current_value is None:
             continue
         detail_groups.append(
@@ -1191,6 +1332,7 @@ def _parse_alibaba_quarter_rows(text: str, quarter: str, filing_date: str, sourc
                 source_form="IR PDF",
                 filing_date=filing_date,
                 target_name=target_name,
+                yoy_pct=yoy_pct,
             )
         )
     return segments, detail_groups
@@ -2259,6 +2401,19 @@ def _parse_tsmc_mix_text(ocr_text: str) -> dict[str, float]:
     return percent_map
 
 
+def _parse_tsmc_qoq_growth_text(ocr_text: str) -> dict[str, float]:
+    normalized = re.sub(r"\s+", " ", ocr_text)
+    normalized = normalized.replace("loT", "IoT").replace("1oT", "IoT").replace("Q0Q", "QoQ").replace("tsme", "tsmc")
+    marker_match = re.search(r"Growth Rate by Platform\s*\((?:QoQ)\)", normalized, re.IGNORECASE)
+    section = normalized[marker_match.end(): marker_match.end() + 260] if marker_match else normalized
+    signed_values = [_parse_pct_token(token) for token in re.findall(r"[+-]\d+(?:\.\d+)?%", section)]
+    signed_values = [value for value in signed_values if value is not None]
+    ordered_keys = ["hpc", "smartphones", "iot", "automotive", "dce", "others"]
+    if len(signed_values) >= len(ordered_keys):
+        return {member_key: float(signed_values[index]) for index, member_key in enumerate(ordered_keys)}
+    return {}
+
+
 def _tsmc_quarter_code(quarter: str) -> str:
     return f"{quarter[-1]}Q{quarter[2:4]}"
 
@@ -2512,6 +2667,7 @@ def _parse_tsmc_records(company: dict[str, Any], cik: int) -> dict[str, Any]:
             if len(mix_map) < 5:
                 result["errors"].append(f"{filing_date}: tsmc-platform-ocr-incomplete")
                 continue
+            qoq_growth_map = _parse_tsmc_qoq_growth_text(ocr_text)
             press_release_html = _request(press_release_url).decode("utf-8", errors="ignore")
             usd_revenue_match = re.search(r"In US dollars, .*? revenue was \$([0-9.]+) billion", re.sub(r"\s+", " ", press_release_html), re.IGNORECASE)
             if usd_revenue_match is None:
@@ -2540,6 +2696,7 @@ def _parse_tsmc_records(company: dict[str, Any], cik: int) -> dict[str, Any]:
                         support_lines=support_lines,
                         metric_mode="share",
                         mix_pct=mix_map[member_key],
+                        qoq_pct=qoq_growth_map.get(member_key),
                     )
                 )
             result["filingsUsed"].append({"form": "6-K", "filingDate": filing_date, "accession": accession_nodash, "presentation": presentation_name, "pressRelease": primary_document})
