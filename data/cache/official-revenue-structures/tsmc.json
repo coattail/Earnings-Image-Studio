@@ -1,19 +1,2454 @@
 {
   "source": "official-filings-presentation-ocr",
-  "quarters": {},
-  "filingsUsed": [],
-  "errors": [
-    "2023-04-20: Command '['swiftc', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/scripts/vision_ocr.swift', '-o', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/data/cache/official-revenue-structures/vision-ocr']' returned non-zero exit status 1.",
-    "2023-07-20: Command '['swiftc', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/scripts/vision_ocr.swift', '-o', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/data/cache/official-revenue-structures/vision-ocr']' returned non-zero exit status 1.",
-    "2023-10-19: Command '['swiftc', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/scripts/vision_ocr.swift', '-o', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/data/cache/official-revenue-structures/vision-ocr']' returned non-zero exit status 1.",
-    "2024-01-18: Command '['swiftc', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/scripts/vision_ocr.swift', '-o', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/data/cache/official-revenue-structures/vision-ocr']' returned non-zero exit status 1.",
-    "2024-04-18: Command '['swiftc', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/scripts/vision_ocr.swift', '-o', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/data/cache/official-revenue-structures/vision-ocr']' returned non-zero exit status 1.",
-    "2024-07-18: Command '['swiftc', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/scripts/vision_ocr.swift', '-o', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/data/cache/official-revenue-structures/vision-ocr']' returned non-zero exit status 1.",
-    "2024-10-17: Command '['swiftc', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/scripts/vision_ocr.swift', '-o', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/data/cache/official-revenue-structures/vision-ocr']' returned non-zero exit status 1.",
-    "2025-01-16: Command '['swiftc', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/scripts/vision_ocr.swift', '-o', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/data/cache/official-revenue-structures/vision-ocr']' returned non-zero exit status 1.",
-    "2025-04-17: Command '['swiftc', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/scripts/vision_ocr.swift', '-o', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/data/cache/official-revenue-structures/vision-ocr']' returned non-zero exit status 1.",
-    "2025-10-16: Command '['swiftc', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/scripts/vision_ocr.swift', '-o', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/data/cache/official-revenue-structures/vision-ocr']' returned non-zero exit status 1.",
-    "2026-01-15: Command '['swiftc', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/scripts/vision_ocr.swift', '-o', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/data/cache/official-revenue-structures/vision-ocr']' returned non-zero exit status 1."
+  "quarters": {
+    "2019Q4": {
+      "segments": [
+        {
+          "name": "High Performance Computing",
+          "memberKey": "hpc",
+          "valueBn": 29.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459020001200/gxss5fn42kvc000007.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2020-01-16",
+          "supportLines": [
+            "AI · accelerator · server"
+          ],
+          "metricMode": "share",
+          "mixPct": 29.0,
+          "qoqPct": 16.0
+        },
+        {
+          "name": "Smartphones",
+          "memberKey": "smartphones",
+          "valueBn": 53.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459020001200/gxss5fn42kvc000007.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2020-01-16",
+          "supportLines": [
+            "Mobile SoC"
+          ],
+          "metricMode": "share",
+          "mixPct": 53.0,
+          "qoqPct": 6.0
+        },
+        {
+          "name": "Internet of Things",
+          "memberKey": "iot",
+          "valueBn": 8.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459020001200/gxss5fn42kvc000007.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2020-01-16",
+          "supportLines": [
+            "IoT"
+          ],
+          "metricMode": "share",
+          "mixPct": 8.0,
+          "qoqPct": 5.0
+        },
+        {
+          "name": "Automotive",
+          "memberKey": "automotive",
+          "valueBn": 4.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459020001200/gxss5fn42kvc000007.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2020-01-16",
+          "supportLines": [
+            "Automotive"
+          ],
+          "metricMode": "share",
+          "mixPct": 4.0,
+          "qoqPct": 0.0
+        },
+        {
+          "name": "Digital Consumer Electronics",
+          "memberKey": "dce",
+          "valueBn": 3.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459020001200/gxss5fn42kvc000007.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2020-01-16",
+          "supportLines": [
+            "DCE"
+          ],
+          "metricMode": "share",
+          "mixPct": 3.0,
+          "qoqPct": -4.0
+        },
+        {
+          "name": "Others",
+          "memberKey": "others",
+          "valueBn": 3.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459020001200/gxss5fn42kvc000007.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2020-01-16",
+          "supportLines": [
+            "Other platforms"
+          ],
+          "metricMode": "share",
+          "mixPct": 3.0,
+          "qoqPct": -23.0
+        }
+      ],
+      "style": "tsmc-platform-mix",
+      "displayCurrency": "USD",
+      "displayRevenueBn": 10.39,
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459020001200/tsm-ex991_8.htm"
+    },
+    "2020Q1": {
+      "segments": [
+        {
+          "name": "High Performance Computing",
+          "memberKey": "hpc",
+          "valueBn": 30.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459020016960/gmgne3g0umhr000008.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2020-04-16",
+          "supportLines": [
+            "AI · accelerator · server"
+          ],
+          "metricMode": "share",
+          "mixPct": 30.0,
+          "qoqPct": 44.0
+        },
+        {
+          "name": "Smartphones",
+          "memberKey": "smartphones",
+          "valueBn": 49.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459020016960/gmgne3g0umhr000008.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2020-04-16",
+          "supportLines": [
+            "Mobile SoC"
+          ],
+          "metricMode": "share",
+          "mixPct": 49.0,
+          "qoqPct": 3.0
+        },
+        {
+          "name": "Internet of Things",
+          "memberKey": "iot",
+          "valueBn": 9.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459020016960/gmgne3g0umhr000008.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2020-04-16",
+          "supportLines": [
+            "IoT"
+          ],
+          "metricMode": "share",
+          "mixPct": 9.0,
+          "qoqPct": 8.0
+        },
+        {
+          "name": "Automotive",
+          "memberKey": "automotive",
+          "valueBn": 4.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459020016960/gmgne3g0umhr000008.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2020-04-16",
+          "supportLines": [
+            "Automotive"
+          ],
+          "metricMode": "share",
+          "mixPct": 4.0,
+          "qoqPct": -9.0
+        },
+        {
+          "name": "Digital Consumer Electronics",
+          "memberKey": "dce",
+          "valueBn": 5.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459020016960/gmgne3g0umhr000008.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2020-04-16",
+          "supportLines": [
+            "DCE"
+          ],
+          "metricMode": "share",
+          "mixPct": 5.0,
+          "qoqPct": -1.0
+        },
+        {
+          "name": "Others",
+          "memberKey": "others",
+          "valueBn": 3.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459020016960/gmgne3g0umhr000008.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2020-04-16",
+          "supportLines": [
+            "Other platforms"
+          ],
+          "metricMode": "share",
+          "mixPct": 3.0,
+          "qoqPct": -5.0
+        }
+      ],
+      "style": "tsmc-platform-mix",
+      "displayCurrency": "USD",
+      "displayRevenueBn": 10.31,
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459020016960/tsm-6k_20200416.htm"
+    },
+    "2020Q2": {
+      "segments": [
+        {
+          "name": "High Performance Computing",
+          "memberKey": "hpc",
+          "valueBn": 33.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459020032443/gzdiuas0jywg000006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2020-07-16",
+          "supportLines": [
+            "AI · accelerator · server"
+          ],
+          "metricMode": "share",
+          "mixPct": 33.0,
+          "qoqPct": 12.0
+        },
+        {
+          "name": "Smartphones",
+          "memberKey": "smartphones",
+          "valueBn": 47.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459020032443/gzdiuas0jywg000006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2020-07-16",
+          "supportLines": [
+            "Mobile SoC"
+          ],
+          "metricMode": "share",
+          "mixPct": 47.0,
+          "qoqPct": -4.0
+        },
+        {
+          "name": "Internet of Things",
+          "memberKey": "iot",
+          "valueBn": 8.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459020032443/gzdiuas0jywg000006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2020-07-16",
+          "supportLines": [
+            "IoT"
+          ],
+          "metricMode": "share",
+          "mixPct": 8.0,
+          "qoqPct": -5.0
+        },
+        {
+          "name": "Automotive",
+          "memberKey": "automotive",
+          "valueBn": 4.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459020032443/gzdiuas0jywg000006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2020-07-16",
+          "supportLines": [
+            "Automotive"
+          ],
+          "metricMode": "share",
+          "mixPct": 4.0,
+          "qoqPct": -5.0
+        },
+        {
+          "name": "Digital Consumer Electronics",
+          "memberKey": "dce",
+          "valueBn": 5.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459020032443/gzdiuas0jywg000006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2020-07-16",
+          "supportLines": [
+            "DCE"
+          ],
+          "metricMode": "share",
+          "mixPct": 5.0,
+          "qoqPct": -9.0
+        },
+        {
+          "name": "Others",
+          "memberKey": "others",
+          "valueBn": 3.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459020032443/gzdiuas0jywg000006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2020-07-16",
+          "supportLines": [
+            "Other platforms"
+          ],
+          "metricMode": "share",
+          "mixPct": 3.0,
+          "qoqPct": -13.0
+        }
+      ],
+      "style": "tsmc-platform-mix",
+      "displayCurrency": "USD",
+      "displayRevenueBn": 10.38,
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459020032443/tsm-ex991_64.htm"
+    },
+    "2020Q3": {
+      "segments": [
+        {
+          "name": "High Performance Computing",
+          "memberKey": "hpc",
+          "valueBn": 37.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459020046453/ghki1o1js5ys000006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2020-10-15",
+          "supportLines": [
+            "AI · accelerator · server"
+          ],
+          "metricMode": "share",
+          "mixPct": 37.0,
+          "qoqPct": 25.0
+        },
+        {
+          "name": "Smartphones",
+          "memberKey": "smartphones",
+          "valueBn": 46.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459020046453/ghki1o1js5ys000006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2020-10-15",
+          "supportLines": [
+            "Mobile SoC"
+          ],
+          "metricMode": "share",
+          "mixPct": 46.0,
+          "qoqPct": 24.0
+        },
+        {
+          "name": "Internet of Things",
+          "memberKey": "iot",
+          "valueBn": 9.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459020046453/ghki1o1js5ys000006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2020-10-15",
+          "supportLines": [
+            "IoT"
+          ],
+          "metricMode": "share",
+          "mixPct": 9.0,
+          "qoqPct": 19.0
+        },
+        {
+          "name": "Automotive",
+          "memberKey": "automotive",
+          "valueBn": 2.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459020046453/ghki1o1js5ys000006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2020-10-15",
+          "supportLines": [
+            "Automotive"
+          ],
+          "metricMode": "share",
+          "mixPct": 2.0,
+          "qoqPct": 12.0
+        },
+        {
+          "name": "Digital Consumer Electronics",
+          "memberKey": "dce",
+          "valueBn": 3.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459020046453/ghki1o1js5ys000006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2020-10-15",
+          "supportLines": [
+            "DCE"
+          ],
+          "metricMode": "share",
+          "mixPct": 3.0,
+          "qoqPct": -23.0
+        },
+        {
+          "name": "Others",
+          "memberKey": "others",
+          "valueBn": 3.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459020046453/ghki1o1js5ys000006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2020-10-15",
+          "supportLines": [
+            "Other platforms"
+          ],
+          "metricMode": "share",
+          "mixPct": 3.0,
+          "qoqPct": -24.0
+        }
+      ],
+      "style": "tsmc-platform-mix",
+      "displayCurrency": "USD",
+      "displayRevenueBn": 12.14,
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459020046453/tsm-ex991_7.htm"
+    },
+    "2020Q4": {
+      "segments": [
+        {
+          "name": "High Performance Computing",
+          "memberKey": "hpc",
+          "valueBn": 31.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459021001132/slide-0chlqh3aizp.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-01-14",
+          "supportLines": [
+            "AI · accelerator · server"
+          ],
+          "metricMode": "share",
+          "mixPct": 31.0,
+          "qoqPct": 29.0
+        },
+        {
+          "name": "Smartphones",
+          "memberKey": "smartphones",
+          "valueBn": 51.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459021001132/slide-0chlqh3aizp.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-01-14",
+          "supportLines": [
+            "Mobile SoC"
+          ],
+          "metricMode": "share",
+          "mixPct": 51.0,
+          "qoqPct": 27.0
+        },
+        {
+          "name": "Internet of Things",
+          "memberKey": "iot",
+          "valueBn": 7.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459021001132/slide-0chlqh3aizp.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-01-14",
+          "supportLines": [
+            "IoT"
+          ],
+          "metricMode": "share",
+          "mixPct": 7.0,
+          "qoqPct": 13.0
+        },
+        {
+          "name": "Automotive",
+          "memberKey": "automotive",
+          "valueBn": 3.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459021001132/slide-0chlqh3aizp.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-01-14",
+          "supportLines": [
+            "Automotive"
+          ],
+          "metricMode": "share",
+          "mixPct": 3.0,
+          "qoqPct": 10.0
+        },
+        {
+          "name": "Digital Consumer Electronics",
+          "memberKey": "dce",
+          "valueBn": 4.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459021001132/slide-0chlqh3aizp.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-01-14",
+          "supportLines": [
+            "DCE"
+          ],
+          "metricMode": "share",
+          "mixPct": 4.0,
+          "qoqPct": -14.0
+        },
+        {
+          "name": "Others",
+          "memberKey": "others",
+          "valueBn": 4.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459021001132/slide-0chlqh3aizp.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-01-14",
+          "supportLines": [
+            "Other platforms"
+          ],
+          "metricMode": "share",
+          "mixPct": 4.0,
+          "qoqPct": -13.0
+        }
+      ],
+      "style": "tsmc-platform-mix",
+      "displayCurrency": "USD",
+      "displayRevenueBn": 12.68,
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459021001132/tsm-ex991_6.htm"
+    },
+    "2021Q1": {
+      "segments": [
+        {
+          "name": "High Performance Computing",
+          "memberKey": "hpc",
+          "valueBn": 35.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459021018896/slide-d0vp4fgat4f.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-04-15",
+          "supportLines": [
+            "AI · accelerator · server"
+          ],
+          "metricMode": "share",
+          "mixPct": 35.0,
+          "qoqPct": 31.0
+        },
+        {
+          "name": "Smartphones",
+          "memberKey": "smartphones",
+          "valueBn": 45.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459021018896/slide-d0vp4fgat4f.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-04-15",
+          "supportLines": [
+            "Mobile SoC"
+          ],
+          "metricMode": "share",
+          "mixPct": 45.0,
+          "qoqPct": 14.0
+        },
+        {
+          "name": "Internet of Things",
+          "memberKey": "iot",
+          "valueBn": 9.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459021018896/slide-d0vp4fgat4f.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-04-15",
+          "supportLines": [
+            "IoT"
+          ],
+          "metricMode": "share",
+          "mixPct": 9.0,
+          "qoqPct": 10.0
+        },
+        {
+          "name": "Automotive",
+          "memberKey": "automotive",
+          "valueBn": 4.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459021018896/slide-d0vp4fgat4f.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-04-15",
+          "supportLines": [
+            "Automotive"
+          ],
+          "metricMode": "share",
+          "mixPct": 4.0,
+          "qoqPct": 11.0
+        },
+        {
+          "name": "Digital Consumer Electronics",
+          "memberKey": "dce",
+          "valueBn": 4.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459021018896/slide-d0vp4fgat4f.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-04-15",
+          "supportLines": [
+            "DCE"
+          ],
+          "metricMode": "share",
+          "mixPct": 4.0,
+          "qoqPct": -11.0
+        },
+        {
+          "name": "Others",
+          "memberKey": "others",
+          "valueBn": 3.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459021018896/slide-d0vp4fgat4f.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-04-15",
+          "supportLines": [
+            "Other platforms"
+          ],
+          "metricMode": "share",
+          "mixPct": 3.0,
+          "qoqPct": -13.0
+        }
+      ],
+      "style": "tsmc-platform-mix",
+      "displayCurrency": "USD",
+      "displayRevenueBn": 12.92,
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459021018896/tsm-ex991_6.htm"
+    },
+    "2021Q2": {
+      "segments": [
+        {
+          "name": "High Performance Computing",
+          "memberKey": "hpc",
+          "valueBn": 39.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459021036625/slide-fxs04h2lm0a.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-07-15",
+          "supportLines": [
+            "AI · accelerator · server"
+          ],
+          "metricMode": "share",
+          "mixPct": 39.0,
+          "qoqPct": 12.0
+        },
+        {
+          "name": "Smartphones",
+          "memberKey": "smartphones",
+          "valueBn": 42.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459021036625/slide-fxs04h2lm0a.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-07-15",
+          "supportLines": [
+            "Mobile SoC"
+          ],
+          "metricMode": "share",
+          "mixPct": 42.0,
+          "qoqPct": 12.0
+        },
+        {
+          "name": "Internet of Things",
+          "memberKey": "iot",
+          "valueBn": 8.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459021036625/slide-fxs04h2lm0a.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-07-15",
+          "supportLines": [
+            "IoT"
+          ],
+          "metricMode": "share",
+          "mixPct": 8.0,
+          "qoqPct": -3.0
+        },
+        {
+          "name": "Automotive",
+          "memberKey": "automotive",
+          "valueBn": 4.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459021036625/slide-fxs04h2lm0a.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-07-15",
+          "supportLines": [
+            "Automotive"
+          ],
+          "metricMode": "share",
+          "mixPct": 4.0,
+          "qoqPct": -2.0
+        },
+        {
+          "name": "Digital Consumer Electronics",
+          "memberKey": "dce",
+          "valueBn": 4.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459021036625/slide-fxs04h2lm0a.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-07-15",
+          "supportLines": [
+            "DCE"
+          ],
+          "metricMode": "share",
+          "mixPct": 4.0,
+          "qoqPct": -12.0
+        },
+        {
+          "name": "Others",
+          "memberKey": "others",
+          "valueBn": 3.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459021036625/slide-fxs04h2lm0a.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-07-15",
+          "supportLines": [
+            "Other platforms"
+          ],
+          "metricMode": "share",
+          "mixPct": 3.0,
+          "qoqPct": 4.0
+        }
+      ],
+      "style": "tsmc-platform-mix",
+      "displayCurrency": "USD",
+      "displayRevenueBn": 13.29,
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459021036625/tsm-ex991_6.htm"
+    },
+    "2021Q3": {
+      "segments": [
+        {
+          "name": "High Performance Computing",
+          "memberKey": "hpc",
+          "valueBn": 37.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459021050767/slide-11jv4dtchjr.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-10-14",
+          "supportLines": [
+            "AI · accelerator · server"
+          ],
+          "metricMode": "share",
+          "mixPct": 37.0
+        },
+        {
+          "name": "Smartphones",
+          "memberKey": "smartphones",
+          "valueBn": 44.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459021050767/slide-11jv4dtchjr.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-10-14",
+          "supportLines": [
+            "Mobile SoC"
+          ],
+          "metricMode": "share",
+          "mixPct": 44.0
+        },
+        {
+          "name": "Internet of Things",
+          "memberKey": "iot",
+          "valueBn": 9.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459021050767/slide-11jv4dtchjr.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-10-14",
+          "supportLines": [
+            "IoT"
+          ],
+          "metricMode": "share",
+          "mixPct": 9.0
+        },
+        {
+          "name": "Automotive",
+          "memberKey": "automotive",
+          "valueBn": 4.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459021050767/slide-11jv4dtchjr.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-10-14",
+          "supportLines": [
+            "Automotive"
+          ],
+          "metricMode": "share",
+          "mixPct": 4.0
+        },
+        {
+          "name": "Digital Consumer Electronics",
+          "memberKey": "dce",
+          "valueBn": 3.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459021050767/slide-11jv4dtchjr.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-10-14",
+          "supportLines": [
+            "DCE"
+          ],
+          "metricMode": "share",
+          "mixPct": 3.0
+        },
+        {
+          "name": "Others",
+          "memberKey": "others",
+          "valueBn": 3.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459021050767/slide-11jv4dtchjr.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-10-14",
+          "supportLines": [
+            "Other platforms"
+          ],
+          "metricMode": "share",
+          "mixPct": 3.0
+        }
+      ],
+      "style": "tsmc-platform-mix",
+      "displayCurrency": "USD",
+      "displayRevenueBn": 14.88,
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459021050767/tsm-ex991_29.htm"
+    },
+    "2021Q4": {
+      "segments": [
+        {
+          "name": "High Performance Computing",
+          "memberKey": "hpc",
+          "valueBn": 37.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459022001132/slide-owbtvcoq1dn.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2022-01-13",
+          "supportLines": [
+            "AI · accelerator · server"
+          ],
+          "metricMode": "share",
+          "mixPct": 37.0
+        },
+        {
+          "name": "Smartphones",
+          "memberKey": "smartphones",
+          "valueBn": 44.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459022001132/slide-owbtvcoq1dn.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2022-01-13",
+          "supportLines": [
+            "Mobile SoC"
+          ],
+          "metricMode": "share",
+          "mixPct": 44.0
+        },
+        {
+          "name": "Internet of Things",
+          "memberKey": "iot",
+          "valueBn": 9.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459022001132/slide-owbtvcoq1dn.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2022-01-13",
+          "supportLines": [
+            "IoT"
+          ],
+          "metricMode": "share",
+          "mixPct": 9.0
+        },
+        {
+          "name": "Automotive",
+          "memberKey": "automotive",
+          "valueBn": 4.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459022001132/slide-owbtvcoq1dn.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2022-01-13",
+          "supportLines": [
+            "Automotive"
+          ],
+          "metricMode": "share",
+          "mixPct": 4.0
+        },
+        {
+          "name": "Digital Consumer Electronics",
+          "memberKey": "dce",
+          "valueBn": 3.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459022001132/slide-owbtvcoq1dn.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2022-01-13",
+          "supportLines": [
+            "DCE"
+          ],
+          "metricMode": "share",
+          "mixPct": 3.0
+        },
+        {
+          "name": "Others",
+          "memberKey": "others",
+          "valueBn": 3.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459022001132/slide-owbtvcoq1dn.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2022-01-13",
+          "supportLines": [
+            "Other platforms"
+          ],
+          "metricMode": "share",
+          "mixPct": 3.0
+        }
+      ],
+      "style": "tsmc-platform-mix",
+      "displayCurrency": "USD",
+      "displayRevenueBn": 15.74,
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459022001132/tsm-ex991_6.htm"
+    },
+    "2022Q1": {
+      "segments": [
+        {
+          "name": "High Performance Computing",
+          "memberKey": "hpc",
+          "valueBn": 41.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459022014381/slide-hcc3ozdelfd.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2022-04-14",
+          "supportLines": [
+            "AI · accelerator · server"
+          ],
+          "metricMode": "share",
+          "mixPct": 41.0
+        },
+        {
+          "name": "Smartphones",
+          "memberKey": "smartphones",
+          "valueBn": 40.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459022014381/slide-hcc3ozdelfd.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2022-04-14",
+          "supportLines": [
+            "Mobile SoC"
+          ],
+          "metricMode": "share",
+          "mixPct": 40.0
+        },
+        {
+          "name": "Internet of Things",
+          "memberKey": "iot",
+          "valueBn": 8.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459022014381/slide-hcc3ozdelfd.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2022-04-14",
+          "supportLines": [
+            "IoT"
+          ],
+          "metricMode": "share",
+          "mixPct": 8.0
+        },
+        {
+          "name": "Automotive",
+          "memberKey": "automotive",
+          "valueBn": 5.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459022014381/slide-hcc3ozdelfd.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2022-04-14",
+          "supportLines": [
+            "Automotive"
+          ],
+          "metricMode": "share",
+          "mixPct": 5.0
+        },
+        {
+          "name": "Digital Consumer Electronics",
+          "memberKey": "dce",
+          "valueBn": 3.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459022014381/slide-hcc3ozdelfd.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2022-04-14",
+          "supportLines": [
+            "DCE"
+          ],
+          "metricMode": "share",
+          "mixPct": 3.0
+        },
+        {
+          "name": "Others",
+          "memberKey": "others",
+          "valueBn": 3.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459022014381/slide-hcc3ozdelfd.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2022-04-14",
+          "supportLines": [
+            "Other platforms"
+          ],
+          "metricMode": "share",
+          "mixPct": 3.0
+        }
+      ],
+      "style": "tsmc-platform-mix",
+      "displayCurrency": "USD",
+      "displayRevenueBn": 17.57,
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459022014381/tsm-ex991_6.htm"
+    },
+    "2022Q2": {
+      "segments": [
+        {
+          "name": "High Performance Computing",
+          "memberKey": "hpc",
+          "valueBn": 43.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459022025726/slide-mqyjni3omsr.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2022-07-14",
+          "supportLines": [
+            "AI · accelerator · server"
+          ],
+          "metricMode": "share",
+          "mixPct": 43.0,
+          "qoqPct": 14.0
+        },
+        {
+          "name": "Smartphones",
+          "memberKey": "smartphones",
+          "valueBn": 38.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459022025726/slide-mqyjni3omsr.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2022-07-14",
+          "supportLines": [
+            "Mobile SoC"
+          ],
+          "metricMode": "share",
+          "mixPct": 38.0,
+          "qoqPct": 14.0
+        },
+        {
+          "name": "Internet of Things",
+          "memberKey": "iot",
+          "valueBn": 8.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459022025726/slide-mqyjni3omsr.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2022-07-14",
+          "supportLines": [
+            "IoT"
+          ],
+          "metricMode": "share",
+          "mixPct": 8.0,
+          "qoqPct": 13.0
+        },
+        {
+          "name": "Automotive",
+          "memberKey": "automotive",
+          "valueBn": 5.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459022025726/slide-mqyjni3omsr.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2022-07-14",
+          "supportLines": [
+            "Automotive"
+          ],
+          "metricMode": "share",
+          "mixPct": 5.0,
+          "qoqPct": 5.0
+        },
+        {
+          "name": "Digital Consumer Electronics",
+          "memberKey": "dce",
+          "valueBn": 3.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459022025726/slide-mqyjni3omsr.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2022-07-14",
+          "supportLines": [
+            "DCE"
+          ],
+          "metricMode": "share",
+          "mixPct": 3.0,
+          "qoqPct": 3.0
+        },
+        {
+          "name": "Others",
+          "memberKey": "others",
+          "valueBn": 3.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459022025726/slide-mqyjni3omsr.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2022-07-14",
+          "supportLines": [
+            "Other platforms"
+          ],
+          "metricMode": "share",
+          "mixPct": 3.0,
+          "qoqPct": 7.0
+        }
+      ],
+      "style": "tsmc-platform-mix",
+      "displayCurrency": "USD",
+      "displayRevenueBn": 18.16,
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459022025726/tsm-ex991_6.htm"
+    },
+    "2022Q3": {
+      "segments": [
+        {
+          "name": "High Performance Computing",
+          "memberKey": "hpc",
+          "valueBn": 39.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459022034145/slide-2pyjd4vqtx5.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2022-10-13",
+          "supportLines": [
+            "AI · accelerator · server"
+          ],
+          "metricMode": "share",
+          "mixPct": 39.0,
+          "qoqPct": 33.0
+        },
+        {
+          "name": "Smartphones",
+          "memberKey": "smartphones",
+          "valueBn": 41.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459022034145/slide-2pyjd4vqtx5.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2022-10-13",
+          "supportLines": [
+            "Mobile SoC"
+          ],
+          "metricMode": "share",
+          "mixPct": 41.0,
+          "qoqPct": 25.0
+        },
+        {
+          "name": "Internet of Things",
+          "memberKey": "iot",
+          "valueBn": 10.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459022034145/slide-2pyjd4vqtx5.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2022-10-13",
+          "supportLines": [
+            "IoT"
+          ],
+          "metricMode": "share",
+          "mixPct": 10.0,
+          "qoqPct": 15.0
+        },
+        {
+          "name": "Automotive",
+          "memberKey": "automotive",
+          "valueBn": 5.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459022034145/slide-2pyjd4vqtx5.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2022-10-13",
+          "supportLines": [
+            "Automotive"
+          ],
+          "metricMode": "share",
+          "mixPct": 5.0,
+          "qoqPct": 4.0
+        },
+        {
+          "name": "Digital Consumer Electronics",
+          "memberKey": "dce",
+          "valueBn": 2.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459022034145/slide-2pyjd4vqtx5.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2022-10-13",
+          "supportLines": [
+            "DCE"
+          ],
+          "metricMode": "share",
+          "mixPct": 2.0,
+          "qoqPct": -2.0
+        },
+        {
+          "name": "Others",
+          "memberKey": "others",
+          "valueBn": 3.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459022034145/slide-2pyjd4vqtx5.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2022-10-13",
+          "supportLines": [
+            "Other platforms"
+          ],
+          "metricMode": "share",
+          "mixPct": 3.0,
+          "qoqPct": 10.0
+        }
+      ],
+      "style": "tsmc-platform-mix",
+      "displayCurrency": "USD",
+      "displayRevenueBn": 20.23,
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459022034145/tsm-ex991_104.htm"
+    },
+    "2022Q4": {
+      "segments": [
+        {
+          "name": "High Performance Computing",
+          "memberKey": "hpc",
+          "valueBn": 42.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459023000363/slide-ly0pmsm55u3.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2023-01-12",
+          "supportLines": [
+            "AI · accelerator · server"
+          ],
+          "metricMode": "share",
+          "mixPct": 42.0,
+          "qoqPct": 10.0
+        },
+        {
+          "name": "Smartphones",
+          "memberKey": "smartphones",
+          "valueBn": 38.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459023000363/slide-ly0pmsm55u3.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2023-01-12",
+          "supportLines": [
+            "Mobile SoC"
+          ],
+          "metricMode": "share",
+          "mixPct": 38.0,
+          "qoqPct": 10.0
+        },
+        {
+          "name": "Internet of Things",
+          "memberKey": "iot",
+          "valueBn": 8.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459023000363/slide-ly0pmsm55u3.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2023-01-12",
+          "supportLines": [
+            "IoT"
+          ],
+          "metricMode": "share",
+          "mixPct": 8.0,
+          "qoqPct": -4.0
+        },
+        {
+          "name": "Automotive",
+          "memberKey": "automotive",
+          "valueBn": 6.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459023000363/slide-ly0pmsm55u3.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2023-01-12",
+          "supportLines": [
+            "Automotive"
+          ],
+          "metricMode": "share",
+          "mixPct": 6.0,
+          "qoqPct": -11.0
+        },
+        {
+          "name": "Digital Consumer Electronics",
+          "memberKey": "dce",
+          "valueBn": 2.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459023000363/slide-ly0pmsm55u3.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2023-01-12",
+          "supportLines": [
+            "DCE"
+          ],
+          "metricMode": "share",
+          "mixPct": 2.0,
+          "qoqPct": -23.0
+        },
+        {
+          "name": "Others",
+          "memberKey": "others",
+          "valueBn": 4.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459023000363/slide-ly0pmsm55u3.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2023-01-12",
+          "supportLines": [
+            "Other platforms"
+          ],
+          "metricMode": "share",
+          "mixPct": 4.0,
+          "qoqPct": 28.0
+        }
+      ],
+      "style": "tsmc-platform-mix",
+      "displayCurrency": "USD",
+      "displayRevenueBn": 19.93,
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000156459023000363/tsm-ex991_38.htm"
+    },
+    "2023Q1": {
+      "segments": [
+        {
+          "name": "High Performance Computing",
+          "memberKey": "hpc",
+          "valueBn": 44.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000162828023012121/a1q23presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2023-04-20",
+          "supportLines": [
+            "AI · accelerator · server"
+          ],
+          "metricMode": "share",
+          "mixPct": 44.0,
+          "qoqPct": 5.0
+        },
+        {
+          "name": "Smartphones",
+          "memberKey": "smartphones",
+          "valueBn": 34.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000162828023012121/a1q23presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2023-04-20",
+          "supportLines": [
+            "Mobile SoC"
+          ],
+          "metricMode": "share",
+          "mixPct": 34.0,
+          "qoqPct": -5.0
+        },
+        {
+          "name": "Internet of Things",
+          "memberKey": "iot",
+          "valueBn": 9.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000162828023012121/a1q23presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2023-04-20",
+          "supportLines": [
+            "IoT"
+          ],
+          "metricMode": "share",
+          "mixPct": 9.0,
+          "qoqPct": -14.0
+        },
+        {
+          "name": "Automotive",
+          "memberKey": "automotive",
+          "valueBn": 7.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000162828023012121/a1q23presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2023-04-20",
+          "supportLines": [
+            "Automotive"
+          ],
+          "metricMode": "share",
+          "mixPct": 7.0,
+          "qoqPct": -19.0
+        },
+        {
+          "name": "Digital Consumer Electronics",
+          "memberKey": "dce",
+          "valueBn": 2.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000162828023012121/a1q23presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2023-04-20",
+          "supportLines": [
+            "DCE"
+          ],
+          "metricMode": "share",
+          "mixPct": 2.0,
+          "qoqPct": -27.0
+        },
+        {
+          "name": "Others",
+          "memberKey": "others",
+          "valueBn": 4.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000162828023012121/a1q23presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2023-04-20",
+          "supportLines": [
+            "Other platforms"
+          ],
+          "metricMode": "share",
+          "mixPct": 4.0,
+          "qoqPct": -18.0
+        }
+      ],
+      "style": "tsmc-platform-mix",
+      "displayCurrency": "USD",
+      "displayRevenueBn": 16.72,
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000162828023012121/a1q23e_withguidancexfinal.htm"
+    },
+    "2023Q2": {
+      "segments": [
+        {
+          "name": "High Performance Computing",
+          "memberKey": "hpc",
+          "valueBn": 44.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000162828023025146/a2q23presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2023-07-20",
+          "supportLines": [
+            "AI · accelerator · server"
+          ],
+          "metricMode": "share",
+          "mixPct": 44.0,
+          "qoqPct": 25.0
+        },
+        {
+          "name": "Smartphones",
+          "memberKey": "smartphones",
+          "valueBn": 33.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000162828023025146/a2q23presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2023-07-20",
+          "supportLines": [
+            "Mobile SoC"
+          ],
+          "metricMode": "share",
+          "mixPct": 33.0,
+          "qoqPct": 3.0
+        },
+        {
+          "name": "Internet of Things",
+          "memberKey": "iot",
+          "valueBn": 8.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000162828023025146/a2q23presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2023-07-20",
+          "supportLines": [
+            "IoT"
+          ],
+          "metricMode": "share",
+          "mixPct": 8.0,
+          "qoqPct": -5.0
+        },
+        {
+          "name": "Automotive",
+          "memberKey": "automotive",
+          "valueBn": 8.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000162828023025146/a2q23presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2023-07-20",
+          "supportLines": [
+            "Automotive"
+          ],
+          "metricMode": "share",
+          "mixPct": 8.0,
+          "qoqPct": -9.0
+        },
+        {
+          "name": "Digital Consumer Electronics",
+          "memberKey": "dce",
+          "valueBn": 3.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000162828023025146/a2q23presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2023-07-20",
+          "supportLines": [
+            "DCE"
+          ],
+          "metricMode": "share",
+          "mixPct": 3.0,
+          "qoqPct": -11.0
+        },
+        {
+          "name": "Others",
+          "memberKey": "others",
+          "valueBn": 4.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000162828023025146/a2q23presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2023-07-20",
+          "supportLines": [
+            "Other platforms"
+          ],
+          "metricMode": "share",
+          "mixPct": 4.0,
+          "qoqPct": -5.0
+        }
+      ],
+      "style": "tsmc-platform-mix",
+      "displayCurrency": "USD",
+      "displayRevenueBn": 15.68,
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000162828023025146/a2q23e_withguidancexfinalx.htm"
+    },
+    "2023Q3": {
+      "segments": [
+        {
+          "name": "High Performance Computing",
+          "memberKey": "hpc",
+          "valueBn": 42.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617923000014/a3q23presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2023-10-19",
+          "supportLines": [
+            "AI · accelerator · server"
+          ],
+          "metricMode": "share",
+          "mixPct": 42.0,
+          "qoqPct": 33.0
+        },
+        {
+          "name": "Smartphones",
+          "memberKey": "smartphones",
+          "valueBn": 39.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617923000014/a3q23presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2023-10-19",
+          "supportLines": [
+            "Mobile SoC"
+          ],
+          "metricMode": "share",
+          "mixPct": 39.0,
+          "qoqPct": 24.0
+        },
+        {
+          "name": "Internet of Things",
+          "memberKey": "iot",
+          "valueBn": 9.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617923000014/a3q23presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2023-10-19",
+          "supportLines": [
+            "IoT"
+          ],
+          "metricMode": "share",
+          "mixPct": 9.0,
+          "qoqPct": 6.0
+        },
+        {
+          "name": "Automotive",
+          "memberKey": "automotive",
+          "valueBn": 5.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617923000014/a3q23presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2023-10-19",
+          "supportLines": [
+            "Automotive"
+          ],
+          "metricMode": "share",
+          "mixPct": 5.0,
+          "qoqPct": -1.0
+        },
+        {
+          "name": "Digital Consumer Electronics",
+          "memberKey": "dce",
+          "valueBn": 2.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617923000014/a3q23presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2023-10-19",
+          "supportLines": [
+            "DCE"
+          ],
+          "metricMode": "share",
+          "mixPct": 2.0,
+          "qoqPct": -24.0
+        },
+        {
+          "name": "Others",
+          "memberKey": "others",
+          "valueBn": 3.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617923000014/a3q23presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2023-10-19",
+          "supportLines": [
+            "Other platforms"
+          ],
+          "metricMode": "share",
+          "mixPct": 3.0,
+          "qoqPct": -2.0
+        }
+      ],
+      "style": "tsmc-platform-mix",
+      "displayCurrency": "USD",
+      "displayRevenueBn": 17.28,
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617923000014/a3q23e_withguidancexfinal.htm"
+    },
+    "2023Q4": {
+      "segments": [
+        {
+          "name": "High Performance Computing",
+          "memberKey": "hpc",
+          "valueBn": 43.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617924000005/a4q23presentatione007.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2024-01-18",
+          "supportLines": [
+            "AI · accelerator · server"
+          ],
+          "metricMode": "share",
+          "mixPct": 43.0,
+          "qoqPct": 27.0
+        },
+        {
+          "name": "Smartphones",
+          "memberKey": "smartphones",
+          "valueBn": 43.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617924000005/a4q23presentatione007.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2024-01-18",
+          "supportLines": [
+            "Mobile SoC"
+          ],
+          "metricMode": "share",
+          "mixPct": 43.0,
+          "qoqPct": 17.0
+        },
+        {
+          "name": "Internet of Things",
+          "memberKey": "iot",
+          "valueBn": 5.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617924000005/a4q23presentatione007.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2024-01-18",
+          "supportLines": [
+            "IoT"
+          ],
+          "metricMode": "share",
+          "mixPct": 5.0,
+          "qoqPct": 13.0
+        },
+        {
+          "name": "Automotive",
+          "memberKey": "automotive",
+          "valueBn": 5.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617924000005/a4q23presentatione007.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2024-01-18",
+          "supportLines": [
+            "Automotive"
+          ],
+          "metricMode": "share",
+          "mixPct": 5.0,
+          "qoqPct": -29.0
+        },
+        {
+          "name": "Digital Consumer Electronics",
+          "memberKey": "dce",
+          "valueBn": 2.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617924000005/a4q23presentatione007.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2024-01-18",
+          "supportLines": [
+            "DCE"
+          ],
+          "metricMode": "share",
+          "mixPct": 2.0,
+          "qoqPct": -35.0
+        },
+        {
+          "name": "Others",
+          "memberKey": "others",
+          "valueBn": 2.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617924000005/a4q23presentatione007.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2024-01-18",
+          "supportLines": [
+            "Other platforms"
+          ],
+          "metricMode": "share",
+          "mixPct": 2.0,
+          "qoqPct": -16.0
+        }
+      ],
+      "style": "tsmc-platform-mix",
+      "displayCurrency": "USD",
+      "displayRevenueBn": 19.62,
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617924000005/a4q24e_withguidancexfinal.htm"
+    },
+    "2024Q1": {
+      "segments": [
+        {
+          "name": "High Performance Computing",
+          "memberKey": "hpc",
+          "valueBn": 46.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617924000046/a1q24presentatione_x006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2024-04-18",
+          "supportLines": [
+            "AI · accelerator · server"
+          ],
+          "metricMode": "share",
+          "mixPct": 46.0
+        },
+        {
+          "name": "Smartphones",
+          "memberKey": "smartphones",
+          "valueBn": 38.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617924000046/a1q24presentatione_x006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2024-04-18",
+          "supportLines": [
+            "Mobile SoC"
+          ],
+          "metricMode": "share",
+          "mixPct": 38.0
+        },
+        {
+          "name": "Internet of Things",
+          "memberKey": "iot",
+          "valueBn": 6.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617924000046/a1q24presentatione_x006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2024-04-18",
+          "supportLines": [
+            "IoT"
+          ],
+          "metricMode": "share",
+          "mixPct": 6.0
+        },
+        {
+          "name": "Automotive",
+          "memberKey": "automotive",
+          "valueBn": 6.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617924000046/a1q24presentatione_x006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2024-04-18",
+          "supportLines": [
+            "Automotive"
+          ],
+          "metricMode": "share",
+          "mixPct": 6.0
+        },
+        {
+          "name": "Digital Consumer Electronics",
+          "memberKey": "dce",
+          "valueBn": 2.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617924000046/a1q24presentatione_x006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2024-04-18",
+          "supportLines": [
+            "DCE"
+          ],
+          "metricMode": "share",
+          "mixPct": 2.0
+        },
+        {
+          "name": "Others",
+          "memberKey": "others",
+          "valueBn": 2.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617924000046/a1q24presentatione_x006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2024-04-18",
+          "supportLines": [
+            "Other platforms"
+          ],
+          "metricMode": "share",
+          "mixPct": 2.0
+        }
+      ],
+      "style": "tsmc-platform-mix",
+      "displayCurrency": "USD",
+      "displayRevenueBn": 18.87,
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617924000046/a1q24e_withguidancexfinal.htm"
+    },
+    "2024Q2": {
+      "segments": [
+        {
+          "name": "High Performance Computing",
+          "memberKey": "hpc",
+          "valueBn": 52.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617924000083/a2q24presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2024-07-18",
+          "supportLines": [
+            "AI · accelerator · server"
+          ],
+          "metricMode": "share",
+          "mixPct": 52.0
+        },
+        {
+          "name": "Smartphones",
+          "memberKey": "smartphones",
+          "valueBn": 33.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617924000083/a2q24presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2024-07-18",
+          "supportLines": [
+            "Mobile SoC"
+          ],
+          "metricMode": "share",
+          "mixPct": 33.0
+        },
+        {
+          "name": "Internet of Things",
+          "memberKey": "iot",
+          "valueBn": 6.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617924000083/a2q24presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2024-07-18",
+          "supportLines": [
+            "IoT"
+          ],
+          "metricMode": "share",
+          "mixPct": 6.0
+        },
+        {
+          "name": "Automotive",
+          "memberKey": "automotive",
+          "valueBn": 5.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617924000083/a2q24presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2024-07-18",
+          "supportLines": [
+            "Automotive"
+          ],
+          "metricMode": "share",
+          "mixPct": 5.0
+        },
+        {
+          "name": "Digital Consumer Electronics",
+          "memberKey": "dce",
+          "valueBn": 2.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617924000083/a2q24presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2024-07-18",
+          "supportLines": [
+            "DCE"
+          ],
+          "metricMode": "share",
+          "mixPct": 2.0
+        },
+        {
+          "name": "Others",
+          "memberKey": "others",
+          "valueBn": 2.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617924000083/a2q24presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2024-07-18",
+          "supportLines": [
+            "Other platforms"
+          ],
+          "metricMode": "share",
+          "mixPct": 2.0
+        }
+      ],
+      "style": "tsmc-platform-mix",
+      "displayCurrency": "USD",
+      "displayRevenueBn": 20.82,
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617924000083/a2q24e_withguidancexfinal.htm"
+    },
+    "2024Q3": {
+      "segments": [
+        {
+          "name": "High Performance Computing",
+          "memberKey": "hpc",
+          "valueBn": 51.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617924000116/a3q24presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2024-10-17",
+          "supportLines": [
+            "AI · accelerator · server"
+          ],
+          "metricMode": "share",
+          "mixPct": 51.0,
+          "qoqPct": 35.0
+        },
+        {
+          "name": "Smartphones",
+          "memberKey": "smartphones",
+          "valueBn": 34.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617924000116/a3q24presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2024-10-17",
+          "supportLines": [
+            "Mobile SoC"
+          ],
+          "metricMode": "share",
+          "mixPct": 34.0,
+          "qoqPct": 16.0
+        },
+        {
+          "name": "Internet of Things",
+          "memberKey": "iot",
+          "valueBn": 7.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617924000116/a3q24presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2024-10-17",
+          "supportLines": [
+            "IoT"
+          ],
+          "metricMode": "share",
+          "mixPct": 7.0,
+          "qoqPct": 11.0
+        },
+        {
+          "name": "Automotive",
+          "memberKey": "automotive",
+          "valueBn": 5.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617924000116/a3q24presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2024-10-17",
+          "supportLines": [
+            "Automotive"
+          ],
+          "metricMode": "share",
+          "mixPct": 5.0,
+          "qoqPct": 6.0
+        },
+        {
+          "name": "Digital Consumer Electronics",
+          "memberKey": "dce",
+          "valueBn": 1.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617924000116/a3q24presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2024-10-17",
+          "supportLines": [
+            "DCE"
+          ],
+          "metricMode": "share",
+          "mixPct": 1.0,
+          "qoqPct": -19.0
+        },
+        {
+          "name": "Others",
+          "memberKey": "others",
+          "valueBn": 2.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617924000116/a3q24presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2024-10-17",
+          "supportLines": [
+            "Other platforms"
+          ],
+          "metricMode": "share",
+          "mixPct": 2.0,
+          "qoqPct": 8.0
+        }
+      ],
+      "style": "tsmc-platform-mix",
+      "displayCurrency": "USD",
+      "displayRevenueBn": 23.5,
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617924000116/a3q24e_withguidancexfinal.htm"
+    },
+    "2024Q4": {
+      "segments": [
+        {
+          "name": "High Performance Computing",
+          "memberKey": "hpc",
+          "valueBn": 53.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617925000004/a4q24presentatione007.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2025-01-16",
+          "supportLines": [
+            "AI · accelerator · server"
+          ],
+          "metricMode": "share",
+          "mixPct": 53.0,
+          "qoqPct": 19.0
+        },
+        {
+          "name": "Smartphones",
+          "memberKey": "smartphones",
+          "valueBn": 35.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617925000004/a4q24presentatione007.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2025-01-16",
+          "supportLines": [
+            "Mobile SoC"
+          ],
+          "metricMode": "share",
+          "mixPct": 35.0,
+          "qoqPct": 17.0
+        },
+        {
+          "name": "Internet of Things",
+          "memberKey": "iot",
+          "valueBn": 5.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617925000004/a4q24presentatione007.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2025-01-16",
+          "supportLines": [
+            "IoT"
+          ],
+          "metricMode": "share",
+          "mixPct": 5.0,
+          "qoqPct": 6.0
+        },
+        {
+          "name": "Automotive",
+          "memberKey": "automotive",
+          "valueBn": 4.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617925000004/a4q24presentatione007.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2025-01-16",
+          "supportLines": [
+            "Automotive"
+          ],
+          "metricMode": "share",
+          "mixPct": 4.0,
+          "qoqPct": -6.0
+        },
+        {
+          "name": "Digital Consumer Electronics",
+          "memberKey": "dce",
+          "valueBn": 1.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617925000004/a4q24presentatione007.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2025-01-16",
+          "supportLines": [
+            "DCE"
+          ],
+          "metricMode": "share",
+          "mixPct": 1.0,
+          "qoqPct": -15.0
+        },
+        {
+          "name": "Others",
+          "memberKey": "others",
+          "valueBn": 2.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617925000004/a4q24presentatione007.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2025-01-16",
+          "supportLines": [
+            "Other platforms"
+          ],
+          "metricMode": "share",
+          "mixPct": 2.0,
+          "qoqPct": 2.0
+        }
+      ],
+      "style": "tsmc-platform-mix",
+      "displayCurrency": "USD",
+      "displayRevenueBn": 26.88,
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617925000004/a4q24e_withguidancexfinal.htm"
+    },
+    "2025Q1": {
+      "segments": [
+        {
+          "name": "High Performance Computing",
+          "memberKey": "hpc",
+          "valueBn": 59.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617925000035/a1q25presentatione_for6k006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2025-04-17",
+          "supportLines": [
+            "AI · accelerator · server"
+          ],
+          "metricMode": "share",
+          "mixPct": 59.0,
+          "qoqPct": 14.0
+        },
+        {
+          "name": "Smartphones",
+          "memberKey": "smartphones",
+          "valueBn": 28.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617925000035/a1q25presentatione_for6k006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2025-04-17",
+          "supportLines": [
+            "Mobile SoC"
+          ],
+          "metricMode": "share",
+          "mixPct": 28.0,
+          "qoqPct": 7.0
+        },
+        {
+          "name": "Internet of Things",
+          "memberKey": "iot",
+          "valueBn": 5.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617925000035/a1q25presentatione_for6k006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2025-04-17",
+          "supportLines": [
+            "IoT"
+          ],
+          "metricMode": "share",
+          "mixPct": 5.0,
+          "qoqPct": 8.0
+        },
+        {
+          "name": "Automotive",
+          "memberKey": "automotive",
+          "valueBn": 5.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617925000035/a1q25presentatione_for6k006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2025-04-17",
+          "supportLines": [
+            "Automotive"
+          ],
+          "metricMode": "share",
+          "mixPct": 5.0,
+          "qoqPct": -9.0
+        },
+        {
+          "name": "Digital Consumer Electronics",
+          "memberKey": "dce",
+          "valueBn": 1.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617925000035/a1q25presentatione_for6k006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2025-04-17",
+          "supportLines": [
+            "DCE"
+          ],
+          "metricMode": "share",
+          "mixPct": 1.0,
+          "qoqPct": -22.0
+        },
+        {
+          "name": "Others",
+          "memberKey": "others",
+          "valueBn": 2.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617925000035/a1q25presentatione_for6k006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2025-04-17",
+          "supportLines": [
+            "Other platforms"
+          ],
+          "metricMode": "share",
+          "mixPct": 2.0,
+          "qoqPct": 20.0
+        }
+      ],
+      "style": "tsmc-platform-mix",
+      "displayCurrency": "USD",
+      "displayRevenueBn": 25.53,
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617925000035/a1q25e_withguidancexfinal.htm"
+    },
+    "2025Q2": {
+      "segments": [
+        {
+          "name": "High Performance Computing",
+          "memberKey": "hpc",
+          "valueBn": 60.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617925000082/a2q25presentatione_6kxwm006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2025-07-17",
+          "supportLines": [
+            "AI · accelerator · server"
+          ],
+          "metricMode": "share",
+          "mixPct": 60.0,
+          "qoqPct": 30.0
+        },
+        {
+          "name": "Smartphones",
+          "memberKey": "smartphones",
+          "valueBn": 27.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617925000082/a2q25presentatione_6kxwm006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2025-07-17",
+          "supportLines": [
+            "Mobile SoC"
+          ],
+          "metricMode": "share",
+          "mixPct": 27.0,
+          "qoqPct": 14.0
+        },
+        {
+          "name": "Internet of Things",
+          "memberKey": "iot",
+          "valueBn": 5.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617925000082/a2q25presentatione_6kxwm006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2025-07-17",
+          "supportLines": [
+            "IoT"
+          ],
+          "metricMode": "share",
+          "mixPct": 5.0,
+          "qoqPct": 14.0
+        },
+        {
+          "name": "Automotive",
+          "memberKey": "automotive",
+          "valueBn": 5.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617925000082/a2q25presentatione_6kxwm006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2025-07-17",
+          "supportLines": [
+            "Automotive"
+          ],
+          "metricMode": "share",
+          "mixPct": 5.0,
+          "qoqPct": 7.0
+        },
+        {
+          "name": "Digital Consumer Electronics",
+          "memberKey": "dce",
+          "valueBn": 1.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617925000082/a2q25presentatione_6kxwm006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2025-07-17",
+          "supportLines": [
+            "DCE"
+          ],
+          "metricMode": "share",
+          "mixPct": 1.0,
+          "qoqPct": 0.0
+        },
+        {
+          "name": "Others",
+          "memberKey": "others",
+          "valueBn": 2.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617925000082/a2q25presentatione_6kxwm006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2025-07-17",
+          "supportLines": [
+            "Other platforms"
+          ],
+          "metricMode": "share",
+          "mixPct": 2.0,
+          "qoqPct": 6.0
+        }
+      ],
+      "style": "tsmc-platform-mix",
+      "displayCurrency": "USD",
+      "displayRevenueBn": 30.07,
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617925000082/a2q25e_withguidancexfinal.htm"
+    },
+    "2025Q3": {
+      "segments": [
+        {
+          "name": "High Performance Computing",
+          "memberKey": "hpc",
+          "valueBn": 57.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617925000116/a3q25presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2025-10-16",
+          "supportLines": [
+            "AI · accelerator · server"
+          ],
+          "metricMode": "share",
+          "mixPct": 57.0,
+          "qoqPct": 20.0
+        },
+        {
+          "name": "Smartphones",
+          "memberKey": "smartphones",
+          "valueBn": 30.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617925000116/a3q25presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2025-10-16",
+          "supportLines": [
+            "Mobile SoC"
+          ],
+          "metricMode": "share",
+          "mixPct": 30.0,
+          "qoqPct": 19.0
+        },
+        {
+          "name": "Internet of Things",
+          "memberKey": "iot",
+          "valueBn": 5.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617925000116/a3q25presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2025-10-16",
+          "supportLines": [
+            "IoT"
+          ],
+          "metricMode": "share",
+          "mixPct": 5.0,
+          "qoqPct": 18.0
+        },
+        {
+          "name": "Automotive",
+          "memberKey": "automotive",
+          "valueBn": 5.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617925000116/a3q25presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2025-10-16",
+          "supportLines": [
+            "Automotive"
+          ],
+          "metricMode": "share",
+          "mixPct": 5.0,
+          "qoqPct": -0.0
+        },
+        {
+          "name": "Digital Consumer Electronics",
+          "memberKey": "dce",
+          "valueBn": 1.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617925000116/a3q25presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2025-10-16",
+          "supportLines": [
+            "DCE"
+          ],
+          "metricMode": "share",
+          "mixPct": 1.0,
+          "qoqPct": -20.0
+        },
+        {
+          "name": "Others",
+          "memberKey": "others",
+          "valueBn": 2.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617925000116/a3q25presentatione006.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2025-10-16",
+          "supportLines": [
+            "Other platforms"
+          ],
+          "metricMode": "share",
+          "mixPct": 2.0,
+          "qoqPct": -8.0
+        }
+      ],
+      "style": "tsmc-platform-mix",
+      "displayCurrency": "USD",
+      "displayRevenueBn": 33.1,
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617925000116/a3q25e_withguidancexfinal.htm"
+    },
+    "2025Q4": {
+      "segments": [
+        {
+          "name": "High Performance Computing",
+          "memberKey": "hpc",
+          "valueBn": 55.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000008/a4q25presentatione007.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2026-01-15",
+          "supportLines": [
+            "AI · accelerator · server"
+          ],
+          "metricMode": "share",
+          "mixPct": 55.0,
+          "qoqPct": 11.0
+        },
+        {
+          "name": "Smartphones",
+          "memberKey": "smartphones",
+          "valueBn": 32.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000008/a4q25presentatione007.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2026-01-15",
+          "supportLines": [
+            "Mobile SoC"
+          ],
+          "metricMode": "share",
+          "mixPct": 32.0,
+          "qoqPct": 4.0
+        },
+        {
+          "name": "Internet of Things",
+          "memberKey": "iot",
+          "valueBn": 5.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000008/a4q25presentatione007.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2026-01-15",
+          "supportLines": [
+            "IoT"
+          ],
+          "metricMode": "share",
+          "mixPct": 5.0,
+          "qoqPct": 3.0
+        },
+        {
+          "name": "Automotive",
+          "memberKey": "automotive",
+          "valueBn": 5.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000008/a4q25presentatione007.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2026-01-15",
+          "supportLines": [
+            "Automotive"
+          ],
+          "metricMode": "share",
+          "mixPct": 5.0,
+          "qoqPct": -1.0
+        },
+        {
+          "name": "Digital Consumer Electronics",
+          "memberKey": "dce",
+          "valueBn": 1.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000008/a4q25presentatione007.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2026-01-15",
+          "supportLines": [
+            "DCE"
+          ],
+          "metricMode": "share",
+          "mixPct": 1.0,
+          "qoqPct": -22.0
+        },
+        {
+          "name": "Others",
+          "memberKey": "others",
+          "valueBn": 2.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000008/a4q25presentatione007.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2026-01-15",
+          "supportLines": [
+            "Other platforms"
+          ],
+          "metricMode": "share",
+          "mixPct": 2.0,
+          "qoqPct": 14.0
+        }
+      ],
+      "style": "tsmc-platform-mix",
+      "displayCurrency": "USD",
+      "displayRevenueBn": 33.73,
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000008/a4q25e_withguidancexfinal.htm"
+    }
+  },
+  "filingsUsed": [
+    {
+      "form": "6-K",
+      "filingDate": "2020-01-16",
+      "accession": "000156459020001200",
+      "presentation": null,
+      "pressRelease": "tsm-ex991_8.htm"
+    },
+    {
+      "form": "6-K",
+      "filingDate": "2020-04-16",
+      "accession": "000156459020016960",
+      "presentation": null,
+      "pressRelease": "tsm-6k_20200416.htm"
+    },
+    {
+      "form": "6-K",
+      "filingDate": "2020-07-16",
+      "accession": "000156459020032443",
+      "presentation": null,
+      "pressRelease": "tsm-ex991_64.htm"
+    },
+    {
+      "form": "6-K",
+      "filingDate": "2020-10-15",
+      "accession": "000156459020046453",
+      "presentation": null,
+      "pressRelease": "tsm-ex991_7.htm"
+    },
+    {
+      "form": "6-K",
+      "filingDate": "2021-01-14",
+      "accession": "000156459021001132",
+      "presentation": null,
+      "pressRelease": "tsm-ex991_6.htm"
+    },
+    {
+      "form": "6-K",
+      "filingDate": "2021-04-15",
+      "accession": "000156459021018896",
+      "presentation": null,
+      "pressRelease": "tsm-ex991_6.htm"
+    },
+    {
+      "form": "6-K",
+      "filingDate": "2021-07-15",
+      "accession": "000156459021036625",
+      "presentation": null,
+      "pressRelease": "tsm-ex991_6.htm"
+    },
+    {
+      "form": "6-K",
+      "filingDate": "2021-10-14",
+      "accession": "000156459021050767",
+      "presentation": null,
+      "pressRelease": "tsm-ex991_29.htm"
+    },
+    {
+      "form": "6-K",
+      "filingDate": "2022-01-13",
+      "accession": "000156459022001132",
+      "presentation": null,
+      "pressRelease": "tsm-ex991_6.htm"
+    },
+    {
+      "form": "6-K",
+      "filingDate": "2022-04-14",
+      "accession": "000156459022014381",
+      "presentation": null,
+      "pressRelease": "tsm-ex991_6.htm"
+    },
+    {
+      "form": "6-K",
+      "filingDate": "2022-07-14",
+      "accession": "000156459022025726",
+      "presentation": null,
+      "pressRelease": "tsm-ex991_6.htm"
+    },
+    {
+      "form": "6-K",
+      "filingDate": "2022-10-13",
+      "accession": "000156459022034145",
+      "presentation": null,
+      "pressRelease": "tsm-ex991_104.htm"
+    },
+    {
+      "form": "6-K",
+      "filingDate": "2023-01-12",
+      "accession": "000156459023000363",
+      "presentation": null,
+      "pressRelease": "tsm-ex991_38.htm"
+    },
+    {
+      "form": "6-K",
+      "filingDate": "2023-04-20",
+      "accession": "000162828023012121",
+      "presentation": "a1q23presentatione.htm",
+      "pressRelease": "a1q23e_withguidancexfinal.htm"
+    },
+    {
+      "form": "6-K",
+      "filingDate": "2023-07-20",
+      "accession": "000162828023025146",
+      "presentation": "a2q23presentatione.htm",
+      "pressRelease": "a2q23e_withguidancexfinalx.htm"
+    },
+    {
+      "form": "6-K",
+      "filingDate": "2023-10-19",
+      "accession": "000104617923000014",
+      "presentation": "a3q23presentatione.htm",
+      "pressRelease": "a3q23e_withguidancexfinal.htm"
+    },
+    {
+      "form": "6-K",
+      "filingDate": "2024-01-18",
+      "accession": "000104617924000005",
+      "presentation": "a4q23presentatione.htm",
+      "pressRelease": "a4q24e_withguidancexfinal.htm"
+    },
+    {
+      "form": "6-K",
+      "filingDate": "2024-04-18",
+      "accession": "000104617924000046",
+      "presentation": "a1q24presentatione_x.htm",
+      "pressRelease": "a1q24e_withguidancexfinal.htm"
+    },
+    {
+      "form": "6-K",
+      "filingDate": "2024-07-18",
+      "accession": "000104617924000083",
+      "presentation": "a2q24presentatione.htm",
+      "pressRelease": "a2q24e_withguidancexfinal.htm"
+    },
+    {
+      "form": "6-K",
+      "filingDate": "2024-10-17",
+      "accession": "000104617924000116",
+      "presentation": "a3q24presentatione.htm",
+      "pressRelease": "a3q24e_withguidancexfinal.htm"
+    },
+    {
+      "form": "6-K",
+      "filingDate": "2025-01-16",
+      "accession": "000104617925000004",
+      "presentation": "a4q24presentatione.htm",
+      "pressRelease": "a4q24e_withguidancexfinal.htm"
+    },
+    {
+      "form": "6-K",
+      "filingDate": "2025-04-17",
+      "accession": "000104617925000035",
+      "presentation": "a1q25presentatione_for6k.htm",
+      "pressRelease": "a1q25e_withguidancexfinal.htm"
+    },
+    {
+      "form": "6-K",
+      "filingDate": "2025-07-17",
+      "accession": "000104617925000082",
+      "presentation": "a2q25presentatione_6kxwm.htm",
+      "pressRelease": "a2q25e_withguidancexfinal.htm"
+    },
+    {
+      "form": "6-K",
+      "filingDate": "2025-10-16",
+      "accession": "000104617925000116",
+      "presentation": "a3q25presentatione.htm",
+      "pressRelease": "a3q25e_withguidancexfinal.htm"
+    },
+    {
+      "form": "6-K",
+      "filingDate": "2026-01-15",
+      "accession": "000104617926000008",
+      "presentation": "a4q25presentatione.htm",
+      "pressRelease": "a4q25e_withguidancexfinal.htm"
+    }
   ],
-  "_cacheVersion": "20260323-v5"
+  "errors": [],
+  "_cacheVersion": "20260323-v6"
 }

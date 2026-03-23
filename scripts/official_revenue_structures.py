@@ -36,7 +36,7 @@ OFFICIAL_SEGMENT_CACHE_DIR = ROOT_DIR / "data" / "cache" / "official-segments"
 OFFICIAL_FINANCIAL_CACHE_DIR = ROOT_DIR / "data" / "cache" / "official-financials"
 VISION_OCR_SWIFT = ROOT_DIR / "scripts" / "vision_ocr.swift"
 VISION_OCR_BIN = CACHE_DIR / "vision-ocr"
-CACHE_VERSION = "20260323-v5"
+CACHE_VERSION = "20260323-v6"
 
 XBRL_AXIS_COMPANY_CONFIGS: dict[str, dict[str, Any]] = {
     "mastercard": {
@@ -3064,8 +3064,8 @@ def fetch_official_revenue_structure_history(company: dict[str, Any], refresh: b
     company_id = str(company.get("id") or "")
     path = _cache_path(company_id)
     empty_result = {"source": "official-revenue-structures", "quarters": {}, "filingsUsed": [], "errors": []}
+    cached_payload = _load_cached_json(path) if path.exists() else None
     if path.exists() and not refresh:
-        cached_payload = _load_cached_json(path)
         if isinstance(cached_payload, dict) and cached_payload.get("_cacheVersion") == CACHE_VERSION:
             return cached_payload
 
@@ -3100,6 +3100,19 @@ def fetch_official_revenue_structure_history(company: dict[str, Any], refresh: b
             result = fallback_result
         elif not result.get("errors") and fallback_result.get("errors"):
             result["errors"] = fallback_result.get("errors", [])
+
+    if (
+        isinstance(cached_payload, dict)
+        and cached_payload.get("quarters")
+        and not result.get("quarters")
+    ):
+        preserved_result = dict(cached_payload)
+        preserved_errors = list(preserved_result.get("errors") or [])
+        for error in result.get("errors") or []:
+            if error not in preserved_errors:
+                preserved_errors.append(error)
+        preserved_result["errors"] = preserved_errors
+        result = preserved_result
 
     result = _post_process_result(company, result)
     result["_cacheVersion"] = CACHE_VERSION
