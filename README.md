@@ -96,7 +96,7 @@ https://coattail.github.io/Earnings-Image-Studio/
 
 - `index.html`: 页面结构
 - `style.css`: 控制台布局与视觉样式
-- `app.js`: 数据加载、控件交互、SVG 生成与导出
+- `js/app-00-foundation.js` ~ `js/app-04-bootstrap.js`: 按执行顺序拆分的前端主逻辑，分别承载基础状态/工具、布局、桑基图渲染、数据与快照构建、页面启动与导出
 - `docs/renderer-architecture.md`: 当前渲染器的布局/渲染拆层方向，以及 D3 采用建议
 - `data/manual-presets.json`: 手工精修的像素复刻快照
 - `data/earnings-dataset.json`: 编译后的前端数据

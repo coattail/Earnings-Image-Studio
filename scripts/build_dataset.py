@@ -585,7 +585,7 @@ def _pdf_label_pattern(label: str) -> re.Pattern[str]:
     escaped = re.escape(label)
     escaped = escaped.replace(r"\ ", r"\s+")
     escaped = escaped.replace(r"\(", r"\(?").replace(r"\)", r"\)?")
-    return re.compile(rf"^{escaped}\s+(.+)$", re.IGNORECASE)
+    return re.compile(rf"^(?:[A-Za-z][A-Za-z*/-]*\s+)*{escaped}\s+(.+)$", re.IGNORECASE)
 
 
 def _extract_tencent_row_values(lines: list[str], label: str) -> list[float]:
@@ -612,12 +612,18 @@ def _quarter_prior_key(quarter_key: str) -> str | None:
 
 def _parse_tencent_pdf_financial_entry(quarter_key: str, source_url: str, filing_date: str | None) -> dict[str, Any] | None:
     pdf_text = _fetch_pdf_text(source_url)
-    if not pdf_text or "CONDENSED CONSOLIDATED INCOME STATEMENT" not in pdf_text:
+    if not pdf_text:
         return None
-    section_start = pdf_text.find("CONDENSED CONSOLIDATED INCOME STATEMENT")
-    section_end = pdf_text.find("CONDENSED CONSOLIDATED STATEMENT OF COMPREHENSIVE INCOME")
-    if section_start < 0:
+    section_start_match = re.search(r"(?:CONDENSED\s+)?CONSOLIDATED\s+INCOME\s+STATEMENT", pdf_text, re.IGNORECASE)
+    if not section_start_match:
         return None
+    section_start = section_start_match.start()
+    section_end_match = re.search(
+        r"(?:CONDENSED\s+)?CONSOLIDATED\s+STATEMENT\s+OF\s+COMPREHENSIVE\s+INCOME",
+        pdf_text[section_start:],
+        re.IGNORECASE,
+    )
+    section_end = section_start + section_end_match.start() if section_end_match else -1
     statement_section = pdf_text[section_start:section_end] if section_end > section_start else pdf_text[section_start:]
     lines = _collapse_pdf_statement_lines(statement_section)
     revenue_values = _extract_tencent_row_values(lines, "Revenues")
@@ -637,23 +643,35 @@ def _parse_tencent_pdf_financial_entry(quarter_key: str, source_url: str, filing
     revenue_prior = revenue_values[1] if len(revenue_values) > 1 else None
     gross_current = gross_values[0]
     gross_prior = gross_values[1] if len(gross_values) > 1 else None
-    operating_current = operating_values[0]
-    operating_prior = operating_values[1] if len(operating_values) > 1 else None
+    reported_operating_current = operating_values[0]
+    reported_operating_prior = operating_values[1] if len(operating_values) > 1 else None
     pretax_current = pretax_values[0]
     tax_current = tax_values[0]
     tax_prior = tax_values[1] if len(tax_values) > 1 else None
     net_income_current = equity_values[0]
     net_income_prior = equity_values[1] if len(equity_values) > 1 else None
-    if revenue_current <= 0 or gross_current <= 0 or operating_current <= 0 or net_income_current <= 0:
+    if revenue_current <= 0 or gross_current <= 0 or net_income_current <= 0:
         return None
 
     cost_current = abs(cost_values[0]) if cost_values else max(revenue_current - gross_current, 0)
     selling_current = abs(selling_values[0]) if selling_values else 0
+    selling_prior = abs(selling_values[1]) if len(selling_values) > 1 else 0
     ga_current = abs(ga_values[0]) if ga_values else 0
+    ga_prior = abs(ga_values[1]) if len(ga_values) > 1 else 0
     other_current = other_values[0] if other_values else 0
-    operating_expenses_current = gross_current - operating_current
-    if operating_expenses_current < 0:
-        return None
+    other_prior = other_values[1] if len(other_values) > 1 else 0
+    explicit_operating_expenses_current = selling_current + ga_current + (abs(other_current) if other_current < 0 else 0)
+    explicit_operating_expenses_prior = selling_prior + ga_prior + (abs(other_prior) if other_prior < 0 else 0)
+    if explicit_operating_expenses_current > 0:
+        operating_expenses_current = explicit_operating_expenses_current
+        operating_current = gross_current - operating_expenses_current
+    else:
+        operating_current = reported_operating_current
+        operating_expenses_current = max(gross_current - operating_current, 0)
+    if explicit_operating_expenses_prior > 0 and gross_prior is not None:
+        operating_prior = gross_prior - explicit_operating_expenses_prior
+    else:
+        operating_prior = reported_operating_prior
     net_income_yoy = round((net_income_current / net_income_prior - 1) * 100, 3) if net_income_prior and net_income_prior > 0 else None
     gross_margin_current = round(gross_current / revenue_current * 100, 3)
     operating_margin_current = round(operating_current / revenue_current * 100, 3)
@@ -741,6 +759,54 @@ def supplement_tencent_official_financials(company_payload: dict[str, Any]) -> d
             entry["revenueQoqPct"] = round((revenue_bn / prior_quarter_revenue - 1) * 100, 3)
         if revenue_bn > 0 and prior_year_revenue > 0:
             entry["revenueYoyPct"] = round((revenue_bn / prior_year_revenue - 1) * 100, 3)
+    company_payload["quarters"] = sorted(financials.keys(), key=parse_period)
+    return company_payload
+
+
+def sanitize_implausible_q4_revenue_aligned_statements(company_payload: dict[str, Any]) -> dict[str, Any]:
+    financials: dict[str, Any] = company_payload.get("financials", {})
+    bridge_fields = (
+        "costOfRevenueBn",
+        "grossProfitBn",
+        "sgnaBn",
+        "rndBn",
+        "otherOpexBn",
+        "operatingExpensesBn",
+        "operatingIncomeBn",
+        "nonOperatingBn",
+        "pretaxIncomeBn",
+        "taxBn",
+        "netIncomeBn",
+        "netIncomeYoyPct",
+        "grossMarginPct",
+        "operatingMarginPct",
+        "profitMarginPct",
+        "effectiveTaxRatePct",
+        "grossMarginYoyDeltaPp",
+        "operatingMarginYoyDeltaPp",
+        "profitMarginYoyDeltaPp",
+    )
+    for quarter_key, entry in financials.items():
+        if not isinstance(entry, dict):
+            continue
+        quality_flags = entry.get("qualityFlags")
+        if not isinstance(quality_flags, list) or "q4-revenue-aligned-to-segment-sum" not in quality_flags:
+            continue
+        revenue_bn = float(entry.get("revenueBn") or 0)
+        if revenue_bn <= 0:
+            continue
+        suspicious_values = [
+            float(entry.get(field_name) or 0)
+            for field_name in ("costOfRevenueBn", "grossProfitBn", "operatingExpensesBn", "operatingIncomeBn", "pretaxIncomeBn", "netIncomeBn")
+            if float(entry.get(field_name) or 0) > 0
+        ]
+        if not suspicious_values or max(suspicious_values) <= revenue_bn * 1.18:
+            continue
+        for field_name in bridge_fields:
+            entry[field_name] = None
+        if "q4-statement-bridge-cleared" not in quality_flags:
+            quality_flags.append("q4-statement-bridge-cleared")
+        entry["qualityFlags"] = quality_flags
     company_payload["quarters"] = sorted(financials.keys(), key=parse_period)
     return company_payload
 
@@ -982,6 +1048,7 @@ def main() -> int:
                 payload = merge_official_segment_history(payload, company, refresh=args.refresh)
             payload = merge_official_revenue_structure_history(payload, company, refresh=args.refresh)
             payload = supplement_tencent_official_financials(payload)
+            payload = sanitize_implausible_q4_revenue_aligned_statements(payload)
             payload = apply_usd_display_fields(payload, fx_cache)
         except Exception as exc:  # noqa: BLE001
             failures.append(f"{company['ticker']}: {exc}")
@@ -1018,6 +1085,7 @@ def main() -> int:
                     payload = merge_official_segment_history(payload, company, refresh=False)
                 payload = merge_official_revenue_structure_history(payload, company, refresh=False)
                 payload = supplement_tencent_official_financials(payload)
+                payload = sanitize_implausible_q4_revenue_aligned_statements(payload)
                 payload = apply_usd_display_fields(payload, fx_cache)
             except Exception as exc:  # noqa: BLE001
                 failures.append(f"{company['ticker']}: {exc}")

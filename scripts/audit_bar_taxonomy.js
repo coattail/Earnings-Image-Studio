@@ -5,10 +5,14 @@ const path = require("path");
 const vm = require("vm");
 
 const workspaceRoot = path.resolve(__dirname, "..");
-const appPath = path.join(workspaceRoot, "app.js");
+const appChunkDir = path.join(workspaceRoot, "js");
 const datasetPath = path.join(workspaceRoot, "data", "earnings-dataset.json");
-
-const appCode = fs.readFileSync(appPath, "utf8");
+const appCode = fs
+  .readdirSync(appChunkDir)
+  .filter((filename) => /^app-\d{2}-.*\.js$/.test(filename))
+  .sort()
+  .map((filename) => fs.readFileSync(path.join(appChunkDir, filename), "utf8"))
+  .join("\n");
 const dataset = JSON.parse(fs.readFileSync(datasetPath, "utf8"));
 
 const context = {
@@ -59,7 +63,7 @@ const context = {
 context.global = context;
 context.globalThis = context;
 vm.createContext(context);
-vm.runInContext(appCode, context, { filename: "app.js" });
+vm.runInContext(appCode, context, { filename: "app-chunks.js" });
 
 function stableKeys(quarter) {
   return [...new Set((quarter?.segmentRows || []).map((item) => item.key).filter((key) => key && key !== "otherrevenue" && key !== "reportedrevenue"))].sort();

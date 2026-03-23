@@ -7,7 +7,8 @@ from pathlib import Path
 ROOT_DIR = Path(__file__).resolve().parents[1]
 DIST_DIR = ROOT_DIR / "dist"
 DATA_DIR = ROOT_DIR / "data"
-PUBLIC_FILES = ("index.html", "style.css", "app.js", "favicon.svg")
+JS_DIR = ROOT_DIR / "js"
+PUBLIC_FILES = ("index.html", "style.css", "favicon.svg")
 PUBLIC_DATA_FILES = ("earnings-dataset.json", "logo-catalog.json", "supplemental-components.json")
 
 
@@ -20,6 +21,11 @@ def reset_dist_dir() -> None:
 def copy_public_root_files() -> None:
     for filename in PUBLIC_FILES:
         shutil.copy2(ROOT_DIR / filename, DIST_DIR / filename)
+
+    dist_js_dir = DIST_DIR / "js"
+    if dist_js_dir.exists():
+        shutil.rmtree(dist_js_dir)
+    shutil.copytree(JS_DIR, dist_js_dir)
 
 
 def copy_public_data_files() -> None:
