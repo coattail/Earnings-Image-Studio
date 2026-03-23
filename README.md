@@ -70,12 +70,13 @@ python3 scripts/check_for_updates.py --dry-run
 
 ## 自动化
 
-- 仓库内置了 `.github/workflows/update-data.yml`，会每小时自动检查样本公司是否有新财报；一旦检测到新 filing，只增量刷新相关公司并自动提交到 `main`
+- 仓库内置了 `.github/workflows/update-data.yml`，会在每周一北京时间 09:17（UTC 周一 01:17）自动检查样本公司是否有新财报；一旦检测到新 filing，只增量刷新相关公司并自动提交到 `main`
+- `Update Earnings Data` 同时保留 `workflow_dispatch` 手动触发，可以在 GitHub Actions 页面随时执行；手动运行时既可以选择“检测后增量刷新”，也可以选择“强制刷新”，并可选只刷新个别公司
 - 仓库内置了 `.github/workflows/deploy-pages.yml`，每次 `main` 有新提交时都会重新部署线上静态预览站
 - GitHub Pages 发布工件由 `scripts/prepare_pages_artifact.py` 生成，只会带上前端运行所需的静态文件和前端实际会读取的数据 JSON
 - Python 依赖统一写在 `requirements.txt`
 
-如果你的仓库第一次启用 Pages，自定义工作流通常需要在仓库 `Settings -> Pages` 中将发布源设为 `GitHub Actions`。
+如果你的仓库第一次启用 Pages，建议在仓库 `Settings -> Pages` 中将发布源设为 `GitHub Actions`；当前工作流也会尝试在首次部署时自动完成 Pages enablement。
 
 部署完成后，预览地址通常会是：
 

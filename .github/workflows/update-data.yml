@@ -2,8 +2,24 @@ name: Update Earnings Data
 
 on:
   schedule:
-    - cron: "17 * * * *"
+    - cron: "17 1 * * 1"
   workflow_dispatch:
+    inputs:
+      mode:
+        description: "选择手动更新模式"
+        required: true
+        default: detect-and-refresh
+        type: choice
+        options:
+          - detect-and-refresh
+          - force-refresh
+      companies:
+        description: "可选：只更新指定公司，逗号分隔，如 nvda,aapl,googl"
+        required: false
+        type: string
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 permissions:
   contents: write
@@ -15,6 +31,7 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
 
     steps:
       - name: Check out repository
@@ -23,17 +40,41 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.11"
+          cache: "pip"
 
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Check for new filings and refresh data when needed
-        run: python scripts/check_for_updates.py
+      - name: Refresh earnings data
+        shell: bash
+        run: |
+          set -euo pipefail
+          companies_input="${{ github.event.inputs.companies || '' }}"
+          mode_input="${{ github.event.inputs.mode || 'detect-and-refresh' }}"
+
+          if [[ "${{ github.event_name }}" != "workflow_dispatch" ]]; then
+            mode_input="detect-and-refresh"
+          fi
+
+          if [[ "$mode_input" == "force-refresh" ]]; then
+            cmd=(python scripts/build_dataset.py --refresh)
+          else
+            cmd=(python scripts/check_for_updates.py)
+          fi
+
+          if [[ -n "$companies_input" ]]; then
+            cmd+=(--companies "$companies_input")
+          fi
+
+          printf '[workflow] running:'
+          printf ' %q' "${cmd[@]}"
+          printf '\n'
+          "${cmd[@]}"
 
       - name: Detect repository changes
         id: changes
