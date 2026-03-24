@@ -1307,6 +1307,36 @@ function smoothBoundaryCurve(x0, x1, y0, y1, geometry = {}) {
   return `C ${cp1x} ${y0}, ${cp2x} ${y1}, ${x1} ${y1}`;
 }
 
+function resolveBezierBoundarySegment(startX, startY, endX, endY, geometry = {}) {
+  const direction = endX >= startX ? 1 : -1;
+  const dx = Math.max(Math.abs(endX - startX), 1);
+  const startCurve = clamp(safeNumber(geometry.startCurve, 0.3), 0.05, 0.42);
+  const endCurve = clamp(safeNumber(geometry.endCurve, 0.3), 0.05, 0.42);
+  return {
+    startX,
+    startY,
+    cp1x: startX + direction * dx * startCurve,
+    cp2x: endX - direction * dx * endCurve,
+    endX,
+    endY,
+  };
+}
+
+function cubicBoundarySegmentCommand(segment) {
+  return `C ${segment.cp1x} ${segment.startY}, ${segment.cp2x} ${segment.endY}, ${segment.endX} ${segment.endY}`;
+}
+
+function reverseBezierBoundarySegment(segment) {
+  return {
+    startX: segment.endX,
+    startY: segment.endY,
+    cp1x: segment.cp2x,
+    cp2x: segment.cp1x,
+    endX: segment.startX,
+    endY: segment.startY,
+  };
+}
+
 function cubicBezierValue(p0, p1, p2, p3, t) {
   const oneMinusT = 1 - t;
   return (
@@ -1404,6 +1434,51 @@ function resolveFlowCurveGeometry(x0, y0Top, y0Bottom, x1, y1Top, y1Bottom, opti
   };
 }
 
+function resolveBridgeFlowGeometry(x0, y0Top, y0Bottom, x1, y1Top, y1Bottom, options = {}) {
+  const base = resolveFlowCurveGeometry(x0, y0Top, y0Bottom, x1, y1Top, y1Bottom, options, {
+    directionAware: false,
+  });
+  const curveSpan = base.targetJoinX - base.sourceJoinX;
+  if (Math.abs(curveSpan) <= 8) return { ...base, topSegments: null, bottomSegments: null };
+  const midXBias = clamp(safeNumber(options.bridgeMidXBias, 0.54), 0.36, 0.64);
+  const midX = base.sourceJoinX + curveSpan * midXBias;
+  if (Math.abs(midX - base.sourceJoinX) <= 0.5 || Math.abs(base.targetJoinX - midX) <= 0.5) {
+    return { ...base, topSegments: null, bottomSegments: null };
+  }
+  const sourceCenter = (y0Top + y0Bottom) / 2;
+  const targetCenter = (y1Top + y1Bottom) / 2;
+  const sourceThickness = Math.max(y0Bottom - y0Top, 1);
+  const targetThickness = Math.max(y1Bottom - y1Top, 1);
+  const midCenterBias = clamp(safeNumber(options.bridgeMidCenterBias, 0.5), 0.15, 0.85);
+  const midThicknessBias = clamp(safeNumber(options.bridgeMidThicknessBias, 0.38), 0, 1);
+  const midCenter = sourceCenter + (targetCenter - sourceCenter) * midCenterBias;
+  const midThickness = sourceThickness + (targetThickness - sourceThickness) * midThicknessBias;
+  const topMidY = midCenter - midThickness / 2;
+  const bottomMidY = midCenter + midThickness / 2;
+  const entryStartCurveScale = safeNumber(options.bridgeEntryStartCurveScale, 0.7);
+  const entryEndCurveScale = safeNumber(options.bridgeEntryEndCurveScale, 0.46);
+  const exitStartCurveScale = safeNumber(options.bridgeExitStartCurveScale, 0.46);
+  const exitEndCurveScale = safeNumber(options.bridgeExitEndCurveScale, 0.72);
+  const resolveSegments = (startY, midY, endY, startCurve, endCurve) => ({
+    entry: resolveBezierBoundarySegment(base.sourceJoinX, startY, midX, midY, {
+      startCurve: startCurve * entryStartCurveScale,
+      endCurve: startCurve * entryEndCurveScale,
+    }),
+    exit: resolveBezierBoundarySegment(midX, midY, base.targetJoinX, endY, {
+      startCurve: endCurve * exitStartCurveScale,
+      endCurve: endCurve * exitEndCurveScale,
+    }),
+  });
+  return {
+    ...base,
+    midX,
+    topMidY,
+    bottomMidY,
+    topSegments: resolveSegments(y0Top, topMidY, y1Top, base.topStartCurve, base.topEndCurve),
+    bottomSegments: resolveSegments(y0Bottom, bottomMidY, y1Bottom, base.bottomStartCurve, base.bottomEndCurve),
+  };
+}
+
 function flowEnvelopeAtX(targetX, x0, y0Top, y0Bottom, x1, y1Top, y1Bottom, options = {}) {
   const minX = Math.min(x0, x1);
   const maxX = Math.max(x0, x1);
@@ -1427,6 +1502,48 @@ function flowEnvelopeAtX(targetX, x0, y0Top, y0Bottom, x1, y1Top, y1Bottom, opti
   return {
     top: resolveBoundaryY(y0Top, y1Top, topStartCurve, topEndCurve),
     bottom: resolveBoundaryY(y0Bottom, y1Bottom, bottomStartCurve, bottomEndCurve),
+  };
+}
+
+function bridgeFlowEnvelopeAtX(targetX, x0, y0Top, y0Bottom, x1, y1Top, y1Bottom, options = {}) {
+  const minX = Math.min(x0, x1);
+  const maxX = Math.max(x0, x1);
+  if (targetX < minX || targetX > maxX) return null;
+  const geometry = resolveBridgeFlowGeometry(x0, y0Top, y0Bottom, x1, y1Top, y1Bottom, options);
+  if (!geometry.topSegments || !geometry.bottomSegments) {
+    return flowEnvelopeAtX(targetX, x0, y0Top, y0Bottom, x1, y1Top, y1Bottom, options);
+  }
+  const resolveBoundaryY = (startY, endY, segments) => {
+    if (targetX <= geometry.sourceJoinX) return startY;
+    if (targetX >= geometry.targetJoinX) return endY;
+    if (targetX <= geometry.midX) {
+      return cubicBezierYForX(
+        targetX,
+        segments.entry.startX,
+        segments.entry.cp1x,
+        segments.entry.cp2x,
+        segments.entry.endX,
+        segments.entry.startY,
+        segments.entry.startY,
+        segments.entry.endY,
+        segments.entry.endY
+      );
+    }
+    return cubicBezierYForX(
+      targetX,
+      segments.exit.startX,
+      segments.exit.cp1x,
+      segments.exit.cp2x,
+      segments.exit.endX,
+      segments.exit.startY,
+      segments.exit.startY,
+      segments.exit.endY,
+      segments.exit.endY
+    );
+  };
+  return {
+    top: resolveBoundaryY(y0Top, y1Top, geometry.topSegments),
+    bottom: resolveBoundaryY(y0Bottom, y1Bottom, geometry.bottomSegments),
   };
 }
 
@@ -1455,6 +1572,26 @@ function flowPath(x0, y0Top, y0Bottom, x1, y1Top, y1Bottom, options = {}) {
       startCurve: bottomEndCurve,
       endCurve: bottomStartCurve,
     }),
+    `L ${x0} ${y0Bottom}`,
+    "Z",
+  ].join(" ");
+}
+
+function bridgeFlowPath(x0, y0Top, y0Bottom, x1, y1Top, y1Bottom, options = {}) {
+  const geometry = resolveBridgeFlowGeometry(x0, y0Top, y0Bottom, x1, y1Top, y1Bottom, options);
+  if (!geometry.topSegments || !geometry.bottomSegments) {
+    return flowPath(x0, y0Top, y0Bottom, x1, y1Top, y1Bottom, options);
+  }
+  return [
+    `M ${x0} ${y0Top}`,
+    `L ${geometry.sourceJoinX} ${y0Top}`,
+    cubicBoundarySegmentCommand(geometry.topSegments.entry),
+    cubicBoundarySegmentCommand(geometry.topSegments.exit),
+    `L ${x1} ${y1Top}`,
+    `L ${x1} ${y1Bottom}`,
+    `L ${geometry.targetJoinX} ${y1Bottom}`,
+    cubicBoundarySegmentCommand(reverseBezierBoundarySegment(geometry.bottomSegments.exit)),
+    cubicBoundarySegmentCommand(reverseBezierBoundarySegment(geometry.bottomSegments.entry)),
     `L ${x0} ${y0Bottom}`,
     "Z",
   ].join(" ");
@@ -3082,4 +3219,3 @@ function renderBusinessLockup(lockupKey, x, y, options = {}) {
     </g>
   `;
 }
-

@@ -57,15 +57,27 @@ function renderPixelReplicaSvg(snapshot) {
     minTargetHoldLength: Math.max(safeNumber(sourceHornSource.detailMinTargetHoldLength, 2), 1),
     maxTargetHoldLength: Math.max(safeNumber(sourceHornSource.detailMaxTargetHoldLength, 8), 4),
   };
+  const bridgeRibbonGeometry = {
+    bridgeMidXBias: safeNumber(ribbonSource.bridgeMidXBias, 0.54),
+    bridgeMidCenterBias: safeNumber(ribbonSource.bridgeMidCenterBias, 0.5),
+    bridgeMidThicknessBias: safeNumber(ribbonSource.bridgeMidThicknessBias, 0.34),
+    bridgeEntryStartCurveScale: safeNumber(ribbonSource.bridgeEntryStartCurveScale, 0.68),
+    bridgeEntryEndCurveScale: safeNumber(ribbonSource.bridgeEntryEndCurveScale, 0.42),
+    bridgeExitStartCurveScale: safeNumber(ribbonSource.bridgeExitStartCurveScale, 0.42),
+    bridgeExitEndCurveScale: safeNumber(ribbonSource.bridgeExitEndCurveScale, 0.72),
+  };
   const replicaFlowPath = (x0, y0Top, y0Bottom, x1, y1Top, y1Bottom) =>
-    flowPath(
+    bridgeFlowPath(
       x0,
       y0Top,
       y0Bottom,
       x1 + safeNumber(snapshot.layout?.targetCoverInsetX, 20),
       y1Top,
       y1Bottom,
-      ribbonOptions
+      {
+        ...ribbonOptions,
+        ...bridgeRibbonGeometry,
+      }
     );
   const outflowRibbonOptions = {
     ...ribbonOptions,
@@ -96,14 +108,17 @@ function renderPixelReplicaSvg(snapshot) {
     ...overrides,
   });
   const replicaOutflowPath = (x0, y0Top, y0Bottom, x1, y1Top, y1Bottom, overrides = {}) =>
-    flowPath(
+    bridgeFlowPath(
       x0,
       y0Top,
       y0Bottom,
       x1 + safeNumber(snapshot.layout?.targetCoverInsetX, 20),
       y1Top,
       y1Bottom,
-      mergeOutflowRibbonOptions(overrides)
+      {
+        ...mergeOutflowRibbonOptions(overrides),
+        ...bridgeRibbonGeometry,
+      }
     );
   const sourceFlowPath = (x0, y0Top, y0Bottom, x1, y1Top, y1Bottom) =>
     hornFlowPath(x0, y0Top, y0Bottom, x1, y1Top, y1Bottom, sourceHornOptions);
@@ -2607,17 +2622,21 @@ function renderPixelReplicaSvg(snapshot) {
       }
     : mergeOutflowRibbonOptions();
   const netBridgePath = (x0, y0Top, y0Bottom, x1, y1Top, y1Bottom) =>
-    flowPath(
+    bridgeFlowPath(
       x0,
       y0Top,
       y0Bottom,
       x1 + safeNumber(snapshot.layout?.netTargetCoverInsetX, 0),
       y1Top,
       y1Bottom,
-      netRibbonOptions
+      {
+        ...netRibbonOptions,
+        ...bridgeRibbonGeometry,
+        bridgeMidThicknessBias: safeNumber(snapshot.ribbon?.netBridgeMidThicknessBias, 0.3),
+      }
     );
   const mainNetRibbonEnvelopeAtX = (sampleX) => {
-    return flowEnvelopeAtX(
+    return bridgeFlowEnvelopeAtX(
       sampleX,
       opX + nodeWidth,
       opNetSourceBand.top,
@@ -3677,26 +3696,26 @@ function renderPixelReplicaSvg(snapshot) {
     `;
   };
   const standardTerminalBranchOptions = {
-    curveFactor: 0.56,
-    startCurveFactor: 0.18,
-    endCurveFactor: 0.3,
+    curveFactor: 0.53,
+    startCurveFactor: 0.15,
+    endCurveFactor: 0.26,
     minStartCurveFactor: 0.14,
-    maxStartCurveFactor: 0.28,
-    minEndCurveFactor: 0.2,
-    maxEndCurveFactor: 0.34,
+    maxStartCurveFactor: 0.24,
+    minEndCurveFactor: 0.18,
+    maxEndCurveFactor: 0.32,
     deltaScale: 0.96,
-    deltaInfluence: 0.042,
-    sourceHoldFactor: 0.03,
-    minSourceHoldLength: 4,
-    maxSourceHoldLength: 8,
-    targetHoldFactor: 0.072,
-    minTargetHoldLength: 8,
-    maxTargetHoldLength: 22,
-    sourceHoldDeltaReduction: 0.72,
-    targetHoldDeltaReduction: 0.82,
-    minAdaptiveSourceHoldLength: 1.5,
-    minAdaptiveTargetHoldLength: 2.5,
-    holdDeltaScale: 0.46,
+    deltaInfluence: 0.038,
+    sourceHoldFactor: 0.048,
+    minSourceHoldLength: 8,
+    maxSourceHoldLength: 18,
+    targetHoldFactor: 0.076,
+    minTargetHoldLength: 10,
+    maxTargetHoldLength: 24,
+    sourceHoldDeltaReduction: 0.48,
+    targetHoldDeltaReduction: 0.72,
+    minAdaptiveSourceHoldLength: 4,
+    minAdaptiveTargetHoldLength: 4,
+    holdDeltaScale: 0.5,
   };
   const resolveAdaptiveNegativeTerminalBranchOptions = (baseOptions, sourceTop, sourceBottom, targetTop, targetHeight, options = {}) => {
     const sourceCenter = (safeNumber(sourceTop, 0) + safeNumber(sourceBottom, 0)) / 2;
@@ -3774,7 +3793,7 @@ function renderPixelReplicaSvg(snapshot) {
         0.14
       ),
       sourceHoldFactor: clamp(
-        safeNumber(baseOptions.sourceHoldFactor, 0.03) - safeNumber(options.sourceHoldReduction, 0.022) * divergenceStrength,
+        safeNumber(baseOptions.sourceHoldFactor, 0.03) - safeNumber(options.sourceHoldReduction, 0.014) * divergenceStrength,
         0.004,
         0.08
       ),
@@ -3790,6 +3809,46 @@ function renderPixelReplicaSvg(snapshot) {
         0.24,
         0.7
       ),
+    };
+  };
+  const resolveLateSplitOpexBranchOptions = (sourceTop, sourceBottom, targetTop, targetHeight, targetX, index, count) => {
+    const adaptiveOptions = resolveAdaptiveNegativeTerminalBranchOptions(
+      standardTerminalBranchOptions,
+      sourceTop,
+      sourceBottom,
+      targetTop,
+      targetHeight,
+      {
+        index,
+        count,
+        laneBias: 0.04,
+      }
+    );
+    const sourceX = opX + nodeWidth;
+    const runwayX = Math.max(targetX - sourceX, 0);
+    const reserveX = safeNumber(snapshot.layout?.opexSharedTargetReserveX, count >= 4 ? 22 : 18);
+    const orderNorm = count <= 1 ? 0 : index / Math.max(count - 1, 1);
+    const sharedTrunkBase = clamp(
+      runwayX * safeNumber(snapshot.layout?.opexSharedTrunkFactor, count >= 4 ? 0.24 : 0.2),
+      safeNumber(snapshot.layout?.opexMinSharedTrunkLength, count >= 4 ? 24 : 18),
+      Math.max(Math.min(runwayX - reserveX, safeNumber(snapshot.layout?.opexMaxSharedTrunkLength, count >= 4 ? 56 : 44)), 10)
+    );
+    const sharedTrunkStep = safeNumber(snapshot.layout?.opexSharedTrunkStepX, count >= 4 ? 7 : 5);
+    const stagedHoldLength = clamp(sharedTrunkBase - orderNorm * sharedTrunkStep, 10, Math.max(sharedTrunkBase, 10));
+    return {
+      ...adaptiveOptions,
+      adaptiveHold: false,
+      sourceHoldLength: stagedHoldLength,
+      minSourceHoldLength: stagedHoldLength,
+      maxSourceHoldLength: stagedHoldLength,
+      sourceHoldDeltaReduction: 0,
+      minAdaptiveSourceHoldLength: stagedHoldLength,
+      startCurveFactor: clamp(safeNumber(adaptiveOptions.startCurveFactor, 0.15) - 0.03, 0.08, 0.22),
+      maxStartCurveFactor: clamp(safeNumber(adaptiveOptions.maxStartCurveFactor, 0.24) - 0.04, 0.12, 0.28),
+      endCurveFactor: clamp(safeNumber(adaptiveOptions.endCurveFactor, 0.26) - 0.02, 0.18, 0.32),
+      minEndCurveFactor: clamp(safeNumber(adaptiveOptions.minEndCurveFactor, 0.18), 0.16, 0.24),
+      maxEndCurveFactor: clamp(safeNumber(adaptiveOptions.maxEndCurveFactor, 0.32), 0.24, 0.36),
+      targetHoldFactor: clamp(safeNumber(adaptiveOptions.targetHoldFactor, 0.076) + 0.004, 0.04, 0.1),
     };
   };
   const costBreakdownTerminalBranchOptions = {
@@ -4957,17 +5016,14 @@ function renderPixelReplicaSvg(snapshot) {
   };
   const renderRightExpenseBlock = (_nodeX, nodeWidthValue, block, targetTop, targetHeight, _labelX, fillColor, index) => {
     const terminalNodeX = rightTerminalNodeX + Math.max(nodeWidth - nodeWidthValue, 0);
-    const branchOptions = resolveAdaptiveNegativeTerminalBranchOptions(
-      standardTerminalBranchOptions,
+    const branchOptions = resolveLateSplitOpexBranchOptions(
       safeNumber(block.bridge?.sourceTop, block.top),
       safeNumber(block.bridge?.sourceBottom, block.bottom),
       targetTop,
       targetHeight,
-      {
-        index,
-        count: Math.max(opexSlices.length, 1),
-        laneBias: 0.04,
-      }
+      terminalNodeX,
+      index,
+      Math.max(opexSlices.length, 1)
     );
     return renderStandardTerminalBranchBlock({
       sourceX: opX + nodeWidth,
@@ -5732,53 +5788,55 @@ function renderPixelReplicaSvg(snapshot) {
   });
   const mainOutflowSmoothingBoost = clamp(lowerRightPressureY / scaleY(92), 0, 1);
   const grossToOperatingRibbonOptions = {
-    curveFactor: 0.6 + mainOutflowSmoothingBoost * 0.04,
-    startCurveFactor: 0.2 + mainOutflowSmoothingBoost * 0.03,
-    endCurveFactor: 0.33 + mainOutflowSmoothingBoost * 0.03,
-    minStartCurveFactor: 0.17,
-    maxStartCurveFactor: 0.32,
-    minEndCurveFactor: 0.24,
-    maxEndCurveFactor: 0.38,
+    curveFactor: 0.54 + mainOutflowSmoothingBoost * 0.03,
+    startCurveFactor: 0.14 + mainOutflowSmoothingBoost * 0.02,
+    endCurveFactor: 0.24 + mainOutflowSmoothingBoost * 0.02,
+    minStartCurveFactor: 0.1,
+    maxStartCurveFactor: 0.22,
+    minEndCurveFactor: 0.18,
+    maxEndCurveFactor: 0.3,
     deltaScale: 0.84,
-    deltaInfluence: 0.028,
-    deltaCurveBoost: 0.028,
-    sourceHoldFactor: 0.024,
-    minSourceHoldLength: 0,
-    maxSourceHoldLength: 4,
-    targetHoldFactor: 0.054,
-    minTargetHoldLength: 4,
-    maxTargetHoldLength: 16,
-    sourceHoldDeltaReduction: 0.76,
-    targetHoldDeltaReduction: 0.84,
-    minAdaptiveSourceHoldLength: 0.5,
-    minAdaptiveTargetHoldLength: 1.5,
+    deltaInfluence: 0.024,
+    deltaCurveBoost: 0.02,
+    sourceHoldFactor: 0.08,
+    minSourceHoldLength: 18,
+    maxSourceHoldLength: 34,
+    targetHoldFactor: 0.09,
+    minTargetHoldLength: 16,
+    maxTargetHoldLength: 30,
+    sourceHoldDeltaReduction: 0.18,
+    targetHoldDeltaReduction: 0.26,
+    minAdaptiveSourceHoldLength: 12,
+    minAdaptiveTargetHoldLength: 10,
     holdDeltaScale: 0.42,
+    bridgeMidThicknessBias: 0.26,
   };
   const grossToExpenseRibbonOptions = {
-    curveFactor: 0.62 + mainOutflowSmoothingBoost * 0.05,
-    startCurveFactor: 0.22 + mainOutflowSmoothingBoost * 0.04,
-    endCurveFactor: 0.34 + mainOutflowSmoothingBoost * 0.03,
-    minStartCurveFactor: 0.18,
-    maxStartCurveFactor: 0.34,
-    minEndCurveFactor: 0.24,
-    maxEndCurveFactor: 0.4,
+    curveFactor: 0.56 + mainOutflowSmoothingBoost * 0.04,
+    startCurveFactor: 0.15 + mainOutflowSmoothingBoost * 0.03,
+    endCurveFactor: 0.24 + mainOutflowSmoothingBoost * 0.02,
+    minStartCurveFactor: 0.1,
+    maxStartCurveFactor: 0.24,
+    minEndCurveFactor: 0.18,
+    maxEndCurveFactor: 0.3,
     deltaScale: 0.78,
-    deltaInfluence: 0.026,
-    deltaCurveBoost: 0.03,
-    sourceHoldFactor: 0.018,
-    minSourceHoldLength: 0,
-    maxSourceHoldLength: 3,
-    targetHoldFactor: 0.048,
-    minTargetHoldLength: 3,
-    maxTargetHoldLength: 14,
-    sourceHoldDeltaReduction: 0.82,
-    targetHoldDeltaReduction: 0.88,
-    minAdaptiveSourceHoldLength: 0.5,
-    minAdaptiveTargetHoldLength: 1.5,
+    deltaInfluence: 0.024,
+    deltaCurveBoost: 0.022,
+    sourceHoldFactor: 0.088,
+    minSourceHoldLength: 20,
+    maxSourceHoldLength: 36,
+    targetHoldFactor: 0.084,
+    minTargetHoldLength: 14,
+    maxTargetHoldLength: 28,
+    sourceHoldDeltaReduction: 0.22,
+    targetHoldDeltaReduction: 0.3,
+    minAdaptiveSourceHoldLength: 12,
+    minAdaptiveTargetHoldLength: 10,
     holdDeltaScale: 0.4,
+    bridgeMidThicknessBias: 0.24,
   };
   const shiftedMainNetRibbonEnvelopeAtX = (sampleX) =>
-    flowEnvelopeAtX(
+    bridgeFlowEnvelopeAtX(
       sampleX,
       operatingFrame.right,
       opNetBand.top,
@@ -6080,19 +6138,16 @@ function renderPixelReplicaSvg(snapshot) {
         const sourceSlice = opexSourceSlices[index] || slice;
         if (!box || !sourceSlice) return null;
         const bridge = constantThicknessBridge(sourceSlice, box.center, 12, opDeductionSourceBand.top, opDeductionSourceBand.bottom);
-        const branchOptions = resolveAdaptiveNegativeTerminalBranchOptions(
-          standardTerminalBranchOptions,
+        const targetFrame = editableNodeFrame(`opex-${index}`, rightTerminalNodeX, bridge.targetTop, nodeWidth, bridge.targetHeight);
+        const branchOptions = resolveLateSplitOpexBranchOptions(
           bridge.sourceTop + editorOffsetForNode("operating-expenses").dy,
           bridge.sourceBottom + editorOffsetForNode("operating-expenses").dy,
-          bridge.targetTop + editorOffsetForNode(`opex-${index}`).dy,
-          bridge.targetHeight,
-          {
-            index,
-            count: Math.max(opexSlices.length, 1),
-            laneBias: 0.04,
-          }
+          targetFrame.y,
+          targetFrame.height,
+          targetFrame.x,
+          index,
+          Math.max(opexSlices.length, 1)
         );
-        const targetFrame = editableNodeFrame(`opex-${index}`, rightTerminalNodeX, bridge.targetTop, nodeWidth, bridge.targetHeight);
         return bridgeObstacleRect(
           operatingExpenseFrame.right,
           bridge.sourceTop + editorOffsetForNode("operating-expenses").dy,
@@ -6157,17 +6212,14 @@ function renderPixelReplicaSvg(snapshot) {
         if (!box || !sourceSlice) return null;
         const bridge = constantThicknessBridge(sourceSlice, box.center, 14, opexTop, opexBottom);
         const targetFrame = editableNodeFrame(`opex-${index}`, rightTerminalNodeX, bridge.targetTop, nodeWidth, bridge.targetHeight);
-        const options = resolveAdaptiveNegativeTerminalBranchOptions(
-          standardTerminalBranchOptions,
+        const options = resolveLateSplitOpexBranchOptions(
           bridge.sourceTop + editorOffsetForNode("operating-expenses").dy,
           bridge.sourceBottom + editorOffsetForNode("operating-expenses").dy,
           targetFrame.y,
           targetFrame.height,
-          {
-            index,
-            count: Math.max(opexSlices.length, 1),
-            laneBias: 0.04,
-          }
+          targetFrame.x,
+          index,
+          Math.max(opexSlices.length, 1)
         );
         return {
           x0: operatingExpenseFrame.right - branchSourceInsetX,
@@ -7351,4 +7403,3 @@ function renderPixelReplicaSvg(snapshot) {
   svg += `</g></svg>`;
   return svg;
 }
-
