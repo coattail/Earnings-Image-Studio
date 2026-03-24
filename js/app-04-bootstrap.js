@@ -37,7 +37,8 @@ function resolveBarChartLogoPlacement({
     safeNumber(override.scaleMultiplier, 1);
   let renderedWidth = visibleMetrics.width * scale * CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER;
   let renderedHeight = visibleMetrics.height * scale * CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER;
-  const minX = 20;
+  // Reserve the left axis band so wide wordmarks do not touch the y-axis or tick area.
+  const minX = Math.max(20, plotLeft + 18);
   const minY = chartTop + 2;
   let x = Math.max(minX, area.x + (area.width - renderedWidth) / 2);
   let y = Math.max(minY, area.y + (area.height - renderedHeight) / 2);
@@ -79,6 +80,30 @@ function resolveBarChartLogoPlacement({
   };
 }
 
+function computeNiceBarAxisStep(maxValue, maxGridLines = 6) {
+  const numericMax = Math.max(safeNumber(maxValue, 0), 0);
+  if (!(numericMax > 0)) return 1;
+  const roughStep = numericMax / Math.max(maxGridLines, 1);
+  if (!(roughStep > 0)) return 1;
+
+  const magnitude = 10 ** Math.floor(Math.log10(roughStep));
+  const normalized = roughStep / magnitude;
+  let niceNormalized = 10;
+
+  if (normalized < 1.5) niceNormalized = 1;
+  else if (normalized < 3) niceNormalized = 2;
+  else if (normalized < 7) niceNormalized = 5;
+
+  return niceNormalized * magnitude;
+}
+
+function formatBarAxisTick(value, step) {
+  const numeric = safeNumber(value);
+  const safeStep = Math.max(safeNumber(step, 1), 0.000001);
+  const decimals = Math.max(0, Math.ceil(-Math.log10(safeStep) - 0.000001));
+  return Number(numeric.toFixed(decimals)).toString();
+}
+
 function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
   const width = 2048;
   const height = 1325;
@@ -110,6 +135,7 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
   const titleColor = "#155C8F";
   const mutedText = "#6B7280";
   const axisText = "#145B8E";
+  const unitSpec = barChartUnitSpec(history);
   const unitLines = barAxisUnitLines(history);
   const hasConvertedCurrency = history.convertedQuarterCount > 0;
   const barCount = history.quarters.length;
@@ -253,10 +279,12 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
   const strideByCount = Math.ceil(barCount / 16);
   const labelStride = Math.max(1, strideByWidth, strideByCount);
   const maxGridLines = 6;
-  const gridStep = Math.max(5, Math.ceil(history.maxRevenueBn / maxGridLines / 5) * 5);
+  const displayMaxRevenue = unitSpec.displayValue(history.maxRevenueBn);
+  const gridStepDisplay = computeNiceBarAxisStep(displayMaxRevenue, maxGridLines);
+  const gridStep = gridStepDisplay * unitSpec.unitValueBn;
   const gridValues = [];
   for (let value = gridStep; value < history.maxRevenueBn; value += gridStep) {
-    gridValues.push(value);
+    gridValues.push(Number(value.toFixed(6)));
   }
   const chartLogoKey = snapshot?.companyLogoKey || company?.id || "";
   const chartLogoPlacement = resolveBarChartLogoPlacement({
@@ -328,12 +356,14 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
     });
   });
 
+  svg += `<line x1="${plotLeft}" y1="${chartTop}" x2="${plotLeft}" y2="${baselineY}" stroke="#C9CED6" stroke-width="2.2"></line>`;
   gridValues.forEach((gridValue) => {
     const y = baselineY - gridValue * valueScale;
     if (y <= chartTop + 8 || y >= baselineY - 8) return;
     svg += `<line x1="${plotLeft}" y1="${y.toFixed(2)}" x2="${plotRight}" y2="${y.toFixed(2)}" stroke="#DDE2E8" stroke-width="1.4"></line>`;
+    svg += `<line x1="${plotLeft - 8}" y1="${y.toFixed(2)}" x2="${plotLeft}" y2="${y.toFixed(2)}" stroke="#C9CED6" stroke-width="1.8"></line>`;
     svg += `<text x="${plotLeft - 14}" y="${(y + 6).toFixed(2)}" text-anchor="end" font-size="18" fill="#8A9098">${escapeHtml(
-      `${Math.round(gridValue)}`
+      formatBarAxisTick(unitSpec.displayValue(gridValue), gridStepDisplay)
     )}</text>`;
   });
   svg += `<line x1="${plotLeft}" y1="${baselineY}" x2="${plotRight}" y2="${baselineY}" stroke="#C9CED6" stroke-width="2.2"></line>`;
@@ -366,7 +396,7 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
         isBottom,
         fillColor
       );
-      const valueLabel = formatBarSegmentValue(valueBn);
+      const valueLabel = formatBarSegmentValue(valueBn, history);
       const valueFontSize = clamp(Math.round(barWidth * 0.42), 11, 24);
       if (heightValue >= valueFontSize + 7) {
         svg += `<text x="${x + barWidth / 2}" y="${y + heightValue / 2 + valueFontSize * 0.34}" text-anchor="middle" font-size="${valueFontSize}" font-weight="700" fill="${barSegmentTextColor(

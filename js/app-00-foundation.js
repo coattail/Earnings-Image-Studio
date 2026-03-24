@@ -29,7 +29,7 @@ const state = {
   },
 };
 
-const BUILD_ASSET_VERSION = "20260323-exact-growth-and-logo-trim-v119";
+const BUILD_ASSET_VERSION = "20260324-bar-axis-unit-v123";
 const CORPORATE_LOGO_AREA_MULTIPLIER = 1.728;
 const CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER = Math.sqrt(CORPORATE_LOGO_AREA_MULTIPLIER);
 const CORPORATE_LOGO_REVENUE_GAP_MULTIPLIER = 1.2;
@@ -2651,4 +2651,3 @@ function buildAlibabaStagedBusinessGroups(company, entry) {
   });
   return normalizeGroupFlowTotalsToRevenue(groups, revenueBn);
 }
-

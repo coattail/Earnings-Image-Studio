@@ -4098,21 +4098,69 @@ function buildRevenueSegmentBarHistory(company, anchorQuarterKey, maxQuarters = 
   };
 }
 
-function formatBarSegmentValue(valueBn) {
-  const numeric = safeNumber(valueBn);
-  if (numeric >= 10) return `${Math.round(numeric)}`;
-  if (numeric >= 1) return `${Math.round(numeric)}`;
-  return numeric.toFixed(1);
+function barChartUnitSpec(history) {
+  const currency = String(history?.primaryDisplayCurrency || "USD").toUpperCase();
+  const maxRevenueBn = safeNumber(history?.maxRevenueBn, 0);
+  const unitValueBn = maxRevenueBn > 0 && maxRevenueBn < 3 ? 0.1 : 1;
+  const displayValue = (valueBn) => safeNumber(valueBn) / unitValueBn;
+
+  if (currentChartLanguage() === "en") {
+    if (currency === "MIXED") {
+      return {
+        currency,
+        unitValueBn,
+        displayValue,
+        line1: "Mixed",
+        line2: "currencies",
+      };
+    }
+    return {
+      currency,
+      unitValueBn,
+      displayValue,
+      line1: currency === "USD" ? "In $" : `In ${currency}`,
+      line2: unitValueBn >= 1 ? "billion" : "100 million",
+    };
+  }
+  if (currency === "MIXED") {
+    return {
+      currency,
+      unitValueBn,
+      displayValue,
+      line1: "单位",
+      line2: "混合币种",
+    };
+  }
+  if (currency === "USD") {
+    return {
+      currency,
+      unitValueBn,
+      displayValue,
+      line1: "单位",
+      line2: unitValueBn >= 1 ? "十亿美元" : "亿美元",
+    };
+  }
+  return {
+    currency,
+    unitValueBn,
+    displayValue,
+    line1: "单位",
+    line2: unitValueBn >= 1 ? `${currency} 十亿` : `${currency} 亿`,
+  };
+}
+
+function formatBarSegmentValue(valueBn, history) {
+  const unitSpec = barChartUnitSpec(history);
+  const numeric = unitSpec.displayValue(valueBn);
+  if (numeric >= 100) return `${Math.round(numeric)}`;
+  if (Math.abs(numeric - Math.round(numeric)) < 0.05) return `${Math.round(numeric)}`;
+  return numeric.toFixed(numeric >= 10 ? 0 : 1).replace(/\.0$/, "");
 }
 
 function barAxisUnitLines(history) {
-  const currency = String(history?.primaryDisplayCurrency || "USD").toUpperCase();
-  if (currentChartLanguage() === "en") {
-    if (currency === "USD") return { line1: "In $", line2: "billion" };
-    if (currency === "MIXED") return { line1: "Mixed", line2: "currencies" };
-    return { line1: `In ${currency}`, line2: "billion" };
-  }
-  if (currency === "USD") return { line1: "单位", line2: "十亿美元" };
-  if (currency === "MIXED") return { line1: "单位", line2: "混合币种" };
-  return { line1: "单位", line2: `${currency} 十亿` };
+  const unitSpec = barChartUnitSpec(history);
+  return {
+    line1: unitSpec.line1,
+    line2: unitSpec.line2,
+  };
 }
