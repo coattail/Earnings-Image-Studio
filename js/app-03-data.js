@@ -389,6 +389,68 @@ function resolveNormalizedNonOperating(entry, operatingProfitBn, pretaxIncomeBn)
   };
 }
 
+function resolveNormalizedPretaxIncome(entry, operatingProfitBn) {
+  const sourcePretaxIncomeBn =
+    entry?.pretaxIncomeBn !== null && entry?.pretaxIncomeBn !== undefined ? safeNumber(entry.pretaxIncomeBn) : null;
+  const netPlusTaxPretaxBn =
+    entry?.netIncomeBn !== null &&
+    entry?.netIncomeBn !== undefined &&
+    entry?.taxBn !== null &&
+    entry?.taxBn !== undefined
+      ? safeNumber(entry.netIncomeBn) + safeNumber(entry.taxBn)
+      : null;
+  const operatingBridgePretaxBn =
+    operatingProfitBn !== null &&
+    operatingProfitBn !== undefined &&
+    entry?.nonOperatingBn !== null &&
+    entry?.nonOperatingBn !== undefined
+      ? safeNumber(operatingProfitBn) + safeNumber(entry.nonOperatingBn)
+      : null;
+  const alignsWith = (left, right) => {
+    if (left === null || left === undefined || right === null || right === undefined) return false;
+    const tolerance = Math.max(0.25, Math.abs(safeNumber(right)) * 0.05);
+    return Math.abs(safeNumber(left) - safeNumber(right)) <= tolerance;
+  };
+  if (sourcePretaxIncomeBn === null) {
+    return {
+      value: netPlusTaxPretaxBn !== null ? netPlusTaxPretaxBn : operatingBridgePretaxBn,
+      sourceReliable: false,
+      source: null,
+      reconciled: netPlusTaxPretaxBn !== null ? netPlusTaxPretaxBn : operatingBridgePretaxBn,
+    };
+  }
+  if (alignsWith(sourcePretaxIncomeBn, netPlusTaxPretaxBn) || alignsWith(sourcePretaxIncomeBn, operatingBridgePretaxBn)) {
+    return {
+      value: sourcePretaxIncomeBn,
+      sourceReliable: true,
+      source: sourcePretaxIncomeBn,
+      reconciled: sourcePretaxIncomeBn,
+    };
+  }
+  if (netPlusTaxPretaxBn !== null) {
+    return {
+      value: netPlusTaxPretaxBn,
+      sourceReliable: false,
+      source: sourcePretaxIncomeBn,
+      reconciled: netPlusTaxPretaxBn,
+    };
+  }
+  if (operatingBridgePretaxBn !== null) {
+    return {
+      value: operatingBridgePretaxBn,
+      sourceReliable: false,
+      source: sourcePretaxIncomeBn,
+      reconciled: operatingBridgePretaxBn,
+    };
+  }
+  return {
+    value: sourcePretaxIncomeBn,
+    sourceReliable: true,
+    source: sourcePretaxIncomeBn,
+    reconciled: sourcePretaxIncomeBn,
+  };
+}
+
 function buildGenericBreakdown(entry) {
   const rawItems = [];
   if (entry.rndBn && entry.rndBn > 0.05) {
@@ -480,6 +542,14 @@ function buildGenericBreakdown(entry) {
   return items;
 }
 
+function reconcileExpenseBreakdownToTarget(items, totalValueBn, options = {}) {
+  return reconcileBreakdownItemsToTarget(items, totalValueBn, {
+    ...options,
+    residualName: "Residual OpEx",
+    residualNameZh: "其他营业费用",
+  });
+}
+
 function firstResolvedBreakdownNumber(...values) {
   for (const value of values) {
     if (value === null || value === undefined || value === "") continue;
@@ -493,7 +563,9 @@ function firstResolvedBreakdownNumber(...values) {
 
 function resolveOperatingExpenseBreakdown(snapshot, company, entry) {
   if (snapshot?.opexBreakdown?.length) {
-    return normalizeBreakdownItems(snapshot.opexBreakdown, snapshot?.sourceUrl || null);
+    return reconcileExpenseBreakdownToTarget(snapshot.opexBreakdown, snapshot?.operatingExpensesBn, {
+      fallbackSourceUrl: snapshot?.sourceUrl || null,
+    });
   }
   const supplemental = supplementalComponentsFor(company, snapshot?.quarterKey || entry?.quarterKey);
   const entrySupplemental = entry?.supplementalComponents || {};
@@ -506,7 +578,15 @@ function resolveOperatingExpenseBreakdown(snapshot, company, entry) {
     supplemental?.opexBreakdown;
   const sourceUrl = supplemental?.sourceUrl || entrySupplemental?.sourceUrl || null;
   if (Array.isArray(directBreakdown) && directBreakdown.length) {
-    return normalizeBreakdownItems(directBreakdown, sourceUrl);
+    const targetOperatingExpensesBn = firstResolvedBreakdownNumber(
+      snapshot?.operatingExpensesBn,
+      entry?.operatingExpensesBn,
+      entrySupplemental?.operatingExpensesBn,
+      supplemental?.operatingExpensesBn
+    );
+    return reconcileExpenseBreakdownToTarget(directBreakdown, targetOperatingExpensesBn, {
+      fallbackSourceUrl: sourceUrl,
+    });
   }
   const resolvedEntry = {
     ...entry,
@@ -1420,15 +1500,15 @@ function buildGenericSnapshot(company, entry, quarterKey) {
         ? Math.max(entry.revenueBn - grossProfitBn, 0)
         : null;
   const costOfRevenueBn = costOfRevenueBnRaw !== null && costOfRevenueBnRaw !== undefined ? costOfRevenueBnRaw : 0;
-  const normalizedPretaxIncomeBn =
+  const sourcePretaxIncomeBn =
     entry.pretaxIncomeBn !== null && entry.pretaxIncomeBn !== undefined
       ? safeNumber(entry.pretaxIncomeBn)
       : entry.netIncomeBn !== null && entry.netIncomeBn !== undefined && entry.taxBn !== null && entry.taxBn !== undefined
         ? safeNumber(entry.netIncomeBn) + safeNumber(entry.taxBn)
         : null;
   const inferredPretaxOperatingBn =
-    normalizedPretaxIncomeBn !== null && entry.nonOperatingBn !== null && entry.nonOperatingBn !== undefined
-      ? normalizedPretaxIncomeBn - safeNumber(entry.nonOperatingBn, 0)
+    sourcePretaxIncomeBn !== null && entry.nonOperatingBn !== null && entry.nonOperatingBn !== undefined
+      ? sourcePretaxIncomeBn - safeNumber(entry.nonOperatingBn, 0)
       : entry.netIncomeBn !== null && entry.netIncomeBn !== undefined
         ? safeNumber(entry.netIncomeBn) + safeNumber(entry.taxBn, 0) - safeNumber(entry.nonOperatingBn, 0)
         : null;
@@ -1439,6 +1519,8 @@ function buildGenericSnapshot(company, entry, quarterKey) {
   const operatingStageResolution = resolveNormalizedOperatingStage(entry, grossProfitBn, costOfRevenueBn, operatingProfitBnBase);
   const operatingProfitBn = operatingStageResolution.operatingProfitBn;
   const operatingExpensesBn = operatingStageResolution.operatingExpensesBn;
+  const pretaxResolution = resolveNormalizedPretaxIncome(entry, operatingProfitBn);
+  const normalizedPretaxIncomeBn = pretaxResolution.value;
   const nonOperatingResolution = resolveNormalizedNonOperating(entry, operatingProfitBn, normalizedPretaxIncomeBn);
   const inferredNonOperatingBnRaw = nonOperatingResolution.value;
   const inferredNonOperatingBn =
@@ -1547,6 +1629,31 @@ function buildGenericSnapshot(company, entry, quarterKey) {
       valueBn: Math.abs(entry.taxBn),
       color: "#16A34A",
     });
+  }
+  const explicitPositiveBridgeBn = positiveAdjustments.reduce((sum, item) => sum + Math.max(safeNumber(item?.valueBn), 0), 0);
+  const explicitNegativeBridgeBn = belowOperatingItems.reduce((sum, item) => sum + Math.max(safeNumber(item?.valueBn), 0), 0);
+  const accountedNetBridgeBn = safeNumber(operatingProfitBn) + explicitPositiveBridgeBn - explicitNegativeBridgeBn;
+  const targetNetBridgeBn = safeNumber(entry.netIncomeBn, null);
+  const netBridgeResidualBn =
+    targetNetBridgeBn !== null && targetNetBridgeBn !== undefined ? Number((targetNetBridgeBn - accountedNetBridgeBn).toFixed(3)) : null;
+  const netBridgeResidualTolerance =
+    targetNetBridgeBn !== null && targetNetBridgeBn !== undefined ? Math.max(0.08, Math.abs(targetNetBridgeBn) * 0.01) : 0;
+  if (netBridgeResidualBn !== null && Math.abs(netBridgeResidualBn) > netBridgeResidualTolerance) {
+    if (netBridgeResidualBn > 0) {
+      positiveAdjustments.push({
+        name: "Other net bridge gain",
+        nameZh: "其他净利调整收益",
+        valueBn: Math.abs(netBridgeResidualBn),
+        color: "#16A34A",
+      });
+    } else {
+      belowOperatingItems.push({
+        name: "Other net bridge expense",
+        nameZh: "其他净利调整费用",
+        valueBn: Math.abs(netBridgeResidualBn),
+        color: "#D92D20",
+      });
+    }
   }
   return {
     mode: "template-base",

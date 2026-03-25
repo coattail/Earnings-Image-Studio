@@ -1420,6 +1420,12 @@ const CHART_LABEL_TRANSLATIONS_ZH_EXACT = {
   "innovative businesses and others": "创新业务及其他",
   "other pretax gain": "其他税前收益",
   "other pretax expense": "其他税前损失",
+  cainiao: "菜鸟",
+  endocrinology: "内分泌",
+  "ip licensing": "IP 授权",
+  streaming: "流媒体",
+  dvd: "DVD",
+  "tegra processor": "Tegra 处理器",
 };
 
 const CHART_LABEL_TRANSLATIONS_ZH_PHRASES = {
@@ -1472,6 +1478,10 @@ const CHART_LABEL_TRANSLATIONS_ZH_PHRASES = {
   "pretax expense": "税前损失",
   "new initiatives": "创新业务",
   "smart ev": "智能电动汽车",
+  "north america": "北美",
+  pacific: "太平洋地区",
+  "bottling investments": "装瓶投资",
+  "games and related value-added services": "游戏及相关增值服务",
 };
 
 const CHART_LABEL_TRANSLATIONS_ZH_TOKENS = {
@@ -1655,7 +1665,40 @@ const CHART_LABEL_TRANSLATIONS_ZH_TOKENS = {
   pharmaceutical: "制药",
   med: "医疗",
   tech: "科技",
+  bottling: "装瓶",
+  investment: "投资",
+  investments: "投资",
 };
+
+const CHART_LABEL_TRANSLATIONS_ZH_BY_KEY = Object.freeze(
+  (() => {
+    const translations = {};
+    const registerTranslation = (source, target) => {
+      const key = normalizeLabelKey(source);
+      if (!key || !target) return;
+      translations[key] = target;
+    };
+    Object.entries(CHART_LABEL_TRANSLATIONS_ZH_EXACT).forEach(([source, target]) => registerTranslation(source, target));
+    Object.entries(CHART_LABEL_TRANSLATIONS_ZH_PHRASES).forEach(([source, target]) => registerTranslation(source, target));
+    [
+      ["northamerica", "北美"],
+      ["latinamerica", "拉丁美洲"],
+      ["pacific", "太平洋地区"],
+      ["bottlinginvestments", "装瓶投资"],
+      ["greaterchina", "大中华区"],
+      ["japan", "日本"],
+      ["europe", "欧洲"],
+      ["asia", "亚洲"],
+      ["americas", "美洲"],
+      ["restofasia", "亚洲其他地区"],
+      ["restofasiapacific", "亚太其他地区"],
+      ["restofworld", "世界其他地区"],
+      ["international", "国际业务"],
+      ["gamesandrelatedvalueaddedservices", "游戏及相关增值服务"],
+    ].forEach(([source, target]) => registerTranslation(source, target));
+    return translations;
+  })()
+);
 
 function normalizeTranslationKey(text) {
   return String(text || "")
@@ -1664,12 +1707,30 @@ function normalizeTranslationKey(text) {
     .toLowerCase();
 }
 
-function translateBusinessLabelToZh(text) {
+function chartLabelTranslationKey(value) {
+  const normalized = normalizeLabelKey(value);
+  if (!normalized) return "";
+  return CHART_LABEL_TRANSLATIONS_ZH_BY_KEY[normalized] ? normalized : "";
+}
+
+function hasChineseGlyph(text) {
+  return /[\u3400-\u9FFF]/u.test(String(text || ""));
+}
+
+function translateBusinessLabelToZh(text, options = {}) {
   const raw = String(text || "").trim();
-  if (!raw) return raw;
+  const keyedTranslation =
+    CHART_LABEL_TRANSLATIONS_ZH_BY_KEY[chartLabelTranslationKey(options.translationKey)] ||
+    CHART_LABEL_TRANSLATIONS_ZH_BY_KEY[chartLabelTranslationKey(options.memberKey)] ||
+    CHART_LABEL_TRANSLATIONS_ZH_BY_KEY[chartLabelTranslationKey(options.key)] ||
+    CHART_LABEL_TRANSLATIONS_ZH_BY_KEY[chartLabelTranslationKey(options.id)];
+  if (!raw) return keyedTranslation || raw;
   const normalized = normalizeTranslationKey(raw);
   const exact = CHART_LABEL_TRANSLATIONS_ZH_EXACT[normalized];
   if (exact) return exact;
+  const canonical = CHART_LABEL_TRANSLATIONS_ZH_BY_KEY[normalizeLabelKey(raw)];
+  if (canonical) return canonical;
+  if (keyedTranslation) return keyedTranslation;
 
   const tokenSource = raw
     .replace(/&/g, " & ")
@@ -1774,8 +1835,18 @@ function translateBusinessLabelToZh(text) {
 
 function localizeChartItemName(item) {
   if (currentChartLanguage() === "en") return String(item?.name || "");
-  if (item?.nameZh) return String(item.nameZh);
-  return translateBusinessLabelToZh(item?.name || "");
+  const explicitZh = String(item?.nameZh || "").trim();
+  if (explicitZh && hasChineseGlyph(explicitZh)) return explicitZh;
+  return (
+    translateBusinessLabelToZh(explicitZh || item?.name || "", {
+      translationKey: item?.memberKey || item?.key || item?.id || item?.name || "",
+      memberKey: item?.memberKey,
+      key: item?.key,
+      id: item?.id,
+    }) ||
+    explicitZh ||
+    String(item?.name || "")
+  );
 }
 
 function localizeChartPhrase(text) {

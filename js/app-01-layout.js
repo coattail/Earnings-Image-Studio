@@ -33,9 +33,79 @@ function normalizeBreakdownItems(items = [], fallbackSourceUrl = null, defaultMo
     .filter((item) => safeNumber(item.valueBn) > 0.02);
 }
 
+function reconcileBreakdownItemsToTarget(items, totalValueBn, options = {}) {
+  const normalizedItems = normalizeBreakdownItems(items, options.fallbackSourceUrl || null, options.defaultMode || "negative-parentheses");
+  if (!normalizedItems.length) return [];
+  if (totalValueBn === null || totalValueBn === undefined || totalValueBn === "") {
+    return normalizedItems;
+  }
+  const targetTotalBn = Math.max(safeNumber(totalValueBn), 0);
+  if (targetTotalBn <= 0.05) return [];
+  const tolerance = Math.max(
+    safeNumber(options.baseTolerance, 0.08),
+    targetTotalBn * safeNumber(options.relativeToleranceFactor, 0.01)
+  );
+  const rawSumBn = normalizedItems.reduce((sum, item) => sum + Math.max(safeNumber(item?.valueBn), 0), 0);
+  const rawFitsTarget =
+    normalizedItems.every((item) => Math.max(safeNumber(item?.valueBn), 0) <= targetTotalBn + tolerance) &&
+    rawSumBn <= targetTotalBn + tolerance;
+  if (rawFitsTarget) {
+    const itemsWithResidual = normalizedItems.map((item) => ({
+      ...item,
+      valueBn: Number(Math.max(safeNumber(item?.valueBn), 0).toFixed(3)),
+    }));
+    const residualBn = targetTotalBn - rawSumBn;
+    if (residualBn > tolerance) {
+      itemsWithResidual.push({
+        name: options.residualName || "Residual",
+        nameZh: options.residualNameZh || "其他",
+        valueBn: Number(residualBn.toFixed(3)),
+        valueFormat: options.defaultMode || "negative-parentheses",
+        sourceUrl: options.fallbackSourceUrl || normalizedItems[0]?.sourceUrl || null,
+      });
+    }
+    return itemsWithResidual.filter((item) => safeNumber(item?.valueBn) > 0.02);
+  }
+  if (normalizedItems.length === 1) {
+    return [
+      {
+        ...normalizedItems[0],
+        valueBn: Number(Math.min(Math.max(safeNumber(normalizedItems[0]?.valueBn), 0), targetTotalBn).toFixed(3)),
+      },
+    ].filter((item) => safeNumber(item?.valueBn) > 0.02);
+  }
+  if (rawSumBn <= 0.0001) return [];
+  const scaleFactor = targetTotalBn / rawSumBn;
+  const scaledItems = normalizedItems.map((item, index) => {
+    const scaledValueBn =
+      index === normalizedItems.length - 1
+        ? Math.max(
+            targetTotalBn -
+              normalizedItems
+                .slice(0, index)
+                .reduce((sum, priorItem) => sum + Number((Math.max(safeNumber(priorItem?.valueBn), 0) * scaleFactor).toFixed(3)), 0),
+            0
+          )
+        : Number((Math.max(safeNumber(item?.valueBn), 0) * scaleFactor).toFixed(3));
+    return {
+      ...item,
+      valueBn: Number(scaledValueBn.toFixed(3)),
+    };
+  });
+  return scaledItems.filter((item) => safeNumber(item?.valueBn) > 0.02);
+}
+
 function resolveDirectCostBreakdown(snapshot, company, entry) {
   if (snapshot?.costBreakdown?.length) {
-    return normalizeBreakdownItems(snapshot.costBreakdown);
+    const targetCostBn =
+      snapshot?.costOfRevenueBn !== null && snapshot?.costOfRevenueBn !== undefined
+        ? safeNumber(snapshot.costOfRevenueBn)
+        : entry?.costOfRevenueBn;
+    return reconcileBreakdownItemsToTarget(snapshot.costBreakdown, targetCostBn, {
+      fallbackSourceUrl: snapshot?.sourceUrl || null,
+      residualName: "Residual cost",
+      residualNameZh: "其他成本",
+    });
   }
   const supplemental = supplementalComponentsFor(company, snapshot?.quarterKey || entry?.quarterKey);
   const entrySupplemental = entry?.supplementalComponents || {};
@@ -46,7 +116,15 @@ function resolveDirectCostBreakdown(snapshot, company, entry) {
     entrySupplemental?.costBreakdown ||
     supplemental?.officialCostBreakdown ||
     supplemental?.costBreakdown;
-  return normalizeBreakdownItems(breakdown, supplemental?.sourceUrl || null);
+  const targetCostBn =
+    snapshot?.costOfRevenueBn !== null && snapshot?.costOfRevenueBn !== undefined
+      ? safeNumber(snapshot.costOfRevenueBn)
+      : entry?.costOfRevenueBn;
+  return reconcileBreakdownItemsToTarget(breakdown, targetCostBn, {
+    fallbackSourceUrl: supplemental?.sourceUrl || null,
+    residualName: "Residual cost",
+    residualNameZh: "其他成本",
+  });
 }
 
 function resolveProfileCostBreakdown(snapshot, company, entry) {
