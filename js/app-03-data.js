@@ -98,7 +98,52 @@ function renderableQuarterKeys(company) {
     if (presetKeys.has(quarterKey)) return true;
     return isRenderableBridgeEntry(company.financials?.[quarterKey]);
   });
-  return validQuarterKeys.length ? validQuarterKeys : quarterKeys;
+  const baseQuarterKeys = validQuarterKeys.length ? validQuarterKeys : quarterKeys;
+  const filteredQuarterKeys = filterQuarterKeysByClassificationPolicy(company, baseQuarterKeys);
+  return filteredQuarterKeys.length ? filteredQuarterKeys : baseQuarterKeys;
+}
+
+function reportingCycleForQuarterKey(quarterKey) {
+  const parsed = parseQuarterKey(quarterKey);
+  if (!parsed) return null;
+  if (parsed.quarter === 2) return "half-year";
+  if (parsed.quarter === 4) return "annual";
+  return "quarterly";
+}
+
+function quarterHasOfficialRevenueClassification(company, quarterKey) {
+  const entry = company?.financials?.[quarterKey];
+  if (Array.isArray(entry?.officialRevenueSegments) && entry.officialRevenueSegments.some((item) => safeNumber(item?.valueBn) > 0.02)) {
+    return true;
+  }
+  const structurePayload = company?.officialRevenueStructureHistory?.quarters?.[quarterKey];
+  return Array.isArray(structurePayload?.segments) && structurePayload.segments.some((item) => safeNumber(item?.valueBn) > 0.02);
+}
+
+function quarterHasOfficialExpenseClassification(company, quarterKey) {
+  const entry = company?.financials?.[quarterKey];
+  return (
+    (Array.isArray(entry?.officialOpexBreakdown) && entry.officialOpexBreakdown.some((item) => safeNumber(item?.valueBn) > 0.02)) ||
+    (Array.isArray(entry?.opexBreakdown) && entry.opexBreakdown.some((item) => safeNumber(item?.valueBn) > 0.02))
+  );
+}
+
+function filterQuarterKeysByClassificationPolicy(company, quarterKeys = []) {
+  const policy = company?.classificationPolicy;
+  if (!policy || !policy.displayOfficiallyClassifiedPeriodsOnly) return quarterKeys;
+  const allowedCycles = Array.isArray(policy.displayPeriodTypes) && policy.displayPeriodTypes.length
+    ? new Set(policy.displayPeriodTypes.map((item) => String(item || "").trim().toLowerCase()).filter(Boolean))
+    : null;
+  const requireRevenue = policy.requireDisplayRevenueClassification !== false;
+  const requireExpense = !!policy.requireDisplayExpenseClassification;
+  const filteredKeys = quarterKeys.filter((quarterKey) => {
+    const cycle = reportingCycleForQuarterKey(quarterKey);
+    if (allowedCycles && (!cycle || !allowedCycles.has(cycle))) return false;
+    if (requireRevenue && !quarterHasOfficialRevenueClassification(company, quarterKey)) return false;
+    if (requireExpense && !quarterHasOfficialExpenseClassification(company, quarterKey)) return false;
+    return true;
+  });
+  return filteredKeys.length ? filteredKeys : quarterKeys;
 }
 
 function preferredQuarter(company, preferReplica) {
@@ -155,6 +200,13 @@ function resolveNormalizedOperatingStage(entry, grossProfitBn, costOfRevenueBn, 
     .map((value) => (value !== null && value !== undefined ? Math.max(safeNumber(value), 0) : null))
     .filter((value) => value !== null)
     .reduce((sum, value) => sum + value, 0);
+  const explicitOpexBreakdownSumBn = (
+    Array.isArray(entry?.officialOpexBreakdown)
+      ? entry.officialOpexBreakdown
+      : Array.isArray(entry?.opexBreakdown)
+        ? entry.opexBreakdown
+        : []
+  ).reduce((sum, item) => sum + Math.max(safeNumber(item?.valueBn), 0), 0);
   const hasGrossStage =
     revenueBn !== null &&
     grossProfitBn !== null &&
@@ -183,6 +235,11 @@ function resolveNormalizedOperatingStage(entry, grossProfitBn, costOfRevenueBn, 
     totalCostsAdjustedOperatingExpensesBn <= safeNumber(grossProfitBn) + Math.max(0.35, safeNumber(grossProfitBn) * 0.04);
   const shouldNormalizeFromTotalCosts =
     totalCostsProxyLikely &&
+    !(
+      explicitOpexBreakdownSumBn > 0.05 &&
+      sourceOperatingExpensesBn !== null &&
+      Math.abs(explicitOpexBreakdownSumBn - sourceOperatingExpensesBn) <= Math.max(0.35, explicitOpexBreakdownSumBn * 0.05)
+    ) &&
     (
       sourceOperatingProfitBn === null ||
       sourceLooksDerivedFromGrossBridge ||
@@ -215,6 +272,13 @@ function resolveNormalizedOperatingExpenses(entry, grossProfitBn, operatingProfi
   const sourceOperatingExpensesBn =
     entry?.operatingExpensesBn !== null && entry?.operatingExpensesBn !== undefined ? Math.max(safeNumber(entry.operatingExpensesBn), 0) : null;
   const revenueBn = entry?.revenueBn !== null && entry?.revenueBn !== undefined ? Math.max(safeNumber(entry.revenueBn), 0) : null;
+  const explicitOpexBreakdownSumBn = (
+    Array.isArray(entry?.officialOpexBreakdown)
+      ? entry.officialOpexBreakdown
+      : Array.isArray(entry?.opexBreakdown)
+        ? entry.opexBreakdown
+        : []
+  ).reduce((sum, item) => sum + Math.max(safeNumber(item?.valueBn), 0), 0);
   const reconciledOperatingExpensesBn =
     grossProfitBn !== null && grossProfitBn !== undefined && operatingProfitBn !== null && operatingProfitBn !== undefined
       ? Math.max(safeNumber(grossProfitBn) - safeNumber(operatingProfitBn), 0)
@@ -258,7 +322,16 @@ function resolveNormalizedOperatingExpenses(entry, grossProfitBn, operatingProfi
   const relativeDelta = reconciledOperatingExpensesBn > 0.05 ? delta / reconciledOperatingExpensesBn : delta;
   const exceedsGrossProfit =
     grossProfitBn !== null && grossProfitBn !== undefined && sourceOperatingExpensesBn > safeNumber(grossProfitBn) + 0.25;
-  const sourceReliable = !exceedsGrossProfit && (delta <= 0.25 || relativeDelta <= 0.08);
+  const explicitBreakdownMatchesSource =
+    explicitOpexBreakdownSumBn > 0.05 &&
+    Math.abs(explicitOpexBreakdownSumBn - sourceOperatingExpensesBn) <= Math.max(0.35, explicitOpexBreakdownSumBn * 0.05);
+  const sourceReliable =
+    !exceedsGrossProfit &&
+    (
+      delta <= 0.25 ||
+      relativeDelta <= 0.08 ||
+      (explicitBreakdownMatchesSource && relativeDelta <= 0.12)
+    );
   return {
     value: sourceReliable ? sourceOperatingExpensesBn : reconciledOperatingExpensesBn,
     sourceReliable,
@@ -488,6 +561,7 @@ const REVENUE_STYLE_PALETTES = {
   "mastercard-revenue-bridge": UNIVERSAL_REVENUE_SEGMENT_PALETTE,
   "netflix-regional-revenue": UNIVERSAL_REVENUE_SEGMENT_PALETTE,
   "tsmc-platform-mix": UNIVERSAL_REVENUE_SEGMENT_PALETTE,
+  "xiaomi-revenue-bridge": UNIVERSAL_REVENUE_SEGMENT_PALETTE,
 };
 
 const ORACLE_SUPPORT_LINES = {
@@ -827,13 +901,14 @@ function inferResidualRevenueSegment(company, entry, rows = []) {
 
 function resolveRenderableOfficialRevenueRows(company, entry, options = {}) {
   const allowNearbyInterpolation = options.allowNearbyInterpolation !== false;
+  const includeSyntheticResidual = options.includeSyntheticResidual !== false;
   const revenueBn = safeNumber(entry?.revenueBn, null);
   const rawRows = sanitizeOfficialStructureRows(entry, entry?.officialRevenueSegments || [])
     .filter((item) => safeNumber(item?.valueBn) > 0.02)
     .sort((left, right) => safeNumber(right?.valueBn) - safeNumber(left?.valueBn));
   if (rawRows.length) {
     const nextRows = rawRows.map((item) => ({ ...item }));
-    const inferredResidual = inferResidualRevenueSegment(company, entry, nextRows);
+    const inferredResidual = includeSyntheticResidual ? inferResidualRevenueSegment(company, entry, nextRows) : null;
     if (inferredResidual) {
       nextRows.push(inferredResidual);
       nextRows.sort((left, right) => safeNumber(right?.valueBn) - safeNumber(left?.valueBn));
@@ -1069,9 +1144,9 @@ function curatedOfficialSegments(company, entry, rows, detailGroups = []) {
   return finalizeCuratedOfficialSegments(best.selected, revenueBn);
 }
 
-function buildOfficialBusinessGroups(company, entry) {
+function buildOfficialBusinessGroups(company, entry, options = {}) {
   const revenueBn = safeNumber(entry?.revenueBn);
-  const official = resolveRenderableOfficialRevenueRows(company, entry);
+  const official = resolveRenderableOfficialRevenueRows(company, entry, options);
   const detailGroups = sanitizeOfficialStructureRows(entry, entry.officialRevenueDetailGroups || [])
     .filter((item) => safeNumber(item.valueBn) > 0.02);
   if (!official.length) return null;
@@ -1417,7 +1492,12 @@ function buildGenericSnapshot(company, entry, quarterKey) {
       ? "当前桥图主干来自 Stock Analysis 财务表后备数据源，适用于验证非 SEC 公司扩展接入能力。"
       : usesFinancialFallback
         ? "当前桥图主干采用官方优先的数据流程；若官方主干字段不完整，会安全回退到标准化财务表数据，而不是凭空推断错误桥段。"
-      : "模板底稿基于公开季度财务主干字段生成；若部分利润层级未直接披露，会按财报主干关系自动补齐桥图节点。";
+        : "模板底稿基于公开季度财务主干字段生成；若部分利润层级未直接披露，会按财报主干关系自动补齐桥图节点。";
+  const operatingLossOverflowBn = operatingProfitBn < -0.02 ? Math.abs(operatingProfitBn) : 0;
+  const resolvedFinancialFootnote =
+    operatingLossOverflowBn > 0
+      ? `${financialFootnote} 当前季度营业费用高于毛利，桥图会将超出毛利的 ${formatBillions(operatingLossOverflowBn)} 视作营业亏损溢出，并保留真实营业利润标签。`
+      : financialFootnote;
   const positiveAdjustments = [];
   const belowOperatingItems = [];
   if (inferredNonOperatingBn) {
@@ -1516,7 +1596,7 @@ function buildGenericSnapshot(company, entry, quarterKey) {
     opexBreakdown: resolveOperatingExpenseBreakdown(null, company, normalizedEntry),
     positiveAdjustments,
     belowOperatingItems,
-    footnote: financialFootnote,
+    footnote: resolvedFinancialFootnote,
   };
 }
 
@@ -2594,6 +2674,7 @@ function expandBarDetailRows(company, entry, baseRows = []) {
   const detailRows = sanitizeOfficialStructureRows(entry, entry?.officialRevenueDetailGroups || [])
     .filter((item) => safeNumber(item?.valueBn) > 0.02);
   if (detailRows.length < 2 || !baseRows.length) return baseRows;
+  const bridgeStyle = resolvedBarBridgeStyle(company, entry, null, baseRows);
   const totalBaseValue = baseRows.reduce((sum, item) => sum + safeNumber(item?.valueBn), 0);
   const detailRowsByTarget = new Map();
   detailRows.forEach((item) => {
@@ -2635,6 +2716,9 @@ function expandBarDetailRows(company, entry, baseRows = []) {
     const projectedRowCount = nextRows.length - 1 + cleanedRows.length;
     const targetShare = targetValueBn / Math.max(totalBaseValue, 0.001);
     const priorityTargetKeys = new Set(["products", "product", "adrevenue"]);
+    if (bridgeStyle === "xiaomi-revenue-bridge") {
+      priorityTargetKeys.add("smartphonexaiot");
+    }
     const targetIsAggregateLike = isAggregateLikeSegmentLabel(targetRow?.name || "");
     const shouldExpand =
       projectedRowCount <= 7 &&
@@ -2745,7 +2829,7 @@ function selectQuarterBarSource(company, entry, structurePayload = null) {
   if (shouldUseOfficialGroupCandidate(company, entry, structurePayload)) {
     let groups = null;
     try {
-      groups = buildOfficialBusinessGroups(company, entry);
+      groups = buildOfficialBusinessGroups(company, entry, { includeSyntheticResidual: false });
     } catch (_error) {
       groups = null;
     }
@@ -3117,9 +3201,12 @@ function buildRevenueSegmentBarHistory(company, anchorQuarterKey, maxQuarters = 
       : {};
   const financialQuarterKeys = Array.isArray(company?.quarters) ? company.quarters : [];
   const structureQuarterKeys = Object.keys(structureQuarterMap || {});
-  const quarterKeys = [...new Set([...financialQuarterKeys, ...structureQuarterKeys])]
+  const quarterKeys = filterQuarterKeysByClassificationPolicy(
+    company,
+    [...new Set([...financialQuarterKeys, ...structureQuarterKeys])]
     .filter((quarterKey) => /^\d{4}Q[1-4]$/.test(quarterKey))
-    .sort((left, right) => quarterSortValue(left) - quarterSortValue(right));
+    .sort((left, right) => quarterSortValue(left) - quarterSortValue(right))
+  );
   if (!quarterKeys.length) return null;
   const allValidQuarterKeys = quarterKeys.filter((quarterKey) => {
     const entry = company?.financials?.[quarterKey];
@@ -3164,6 +3251,16 @@ function buildRevenueSegmentBarHistory(company, anchorQuarterKey, maxQuarters = 
   const anchorBoundKeys = allValidQuarterKeys.filter((quarterKey) => quarterSortValue(quarterKey) <= anchorSort);
   const selectedQuarterKeys = (anchorBoundKeys.length ? anchorBoundKeys : allValidQuarterKeys).slice(-windowSize);
   if (!selectedQuarterKeys.length) return null;
+  const displayPeriodTypes = Array.isArray(company?.classificationPolicy?.displayPeriodTypes)
+    ? company.classificationPolicy.displayPeriodTypes.map((item) => String(item || "").trim().toLowerCase()).filter(Boolean)
+    : [];
+  const usesNonQuarterDisplayWindow =
+    !!company?.classificationPolicy?.displayOfficiallyClassifiedPeriodsOnly &&
+    displayPeriodTypes.some((item) => item === "half-year" || item === "annual");
+  const requestedWindowCount =
+    usesNonQuarterDisplayWindow || selectedQuarterKeys.length < windowSize ? selectedQuarterKeys.length : windowSize;
+  const windowUnitLabel = usesNonQuarterDisplayWindow ? "periods" : "quarters";
+  const windowUnitLabelZh = usesNonQuarterDisplayWindow ? "个披露期" : "个季度";
 
   let quarters = selectedQuarterKeys.map((quarterKey) => {
     const entry = company.financials?.[quarterKey] || null;
@@ -3459,6 +3556,24 @@ function buildRevenueSegmentBarHistory(company, anchorQuarterKey, maxQuarters = 
       quarterHasLegacyNvidiaSchema(quarter)
     );
   };
+  const quarterAllowsAggressiveNeighborRebalance = (quarter) => {
+    const rawCoverage = safeNumber(quarter?.rawCoverageRatio, null);
+    const totalRevenueBn = Math.max(safeNumber(quarter?.totalRevenueBn), 0.001);
+    const residualShare = safeNumber(quarter?.segmentMap?.otherrevenue, 0) / totalRevenueBn;
+    const rawSource = String(quarter?.rawSegmentSource || "");
+    const hasTrustedReportedSegments =
+      quarter?.hasRawSegments &&
+      !quarter?.wasReportedOnlyRaw &&
+      !quarter?.insufficientSegments &&
+      !quarter?.isBackfilledSegments &&
+      !quarter?.isImputedSegments &&
+      rawSource !== "fallback-reported" &&
+      rawSource !== "none" &&
+      !quarterHasConceptualTaxonomy(quarter) &&
+      (rawCoverage === null || (rawCoverage >= 0.94 && rawCoverage <= 1.12)) &&
+      residualShare <= 0.05;
+    return !hasTrustedReportedSegments;
+  };
   const canUseExtendedTemplateFill = (quarter, templateIndex) => {
     if (quarter.allowsSyntheticHarmonization) return true;
     if (!Number.isInteger(templateIndex)) return false;
@@ -3691,6 +3806,11 @@ function buildRevenueSegmentBarHistory(company, anchorQuarterKey, maxQuarters = 
     const quarter = quarters[index];
     const residualRow = quarter.segmentRows.find((item) => item?.key === "otherrevenue") || null;
     if (!quarter?.hasRevenueValue || !residualRow || quarter.rawSegmentSource === "official-groups") continue;
+    const preserveHighCoverageOfficialBreakout =
+      (quarter.rawSegmentSource === "official-segments" || quarter.rawSegmentSource === "structure-history") &&
+      safeNumber(quarter.rawCoverageRatio, 0) >= 0.85 &&
+      (quarter.rawSegmentRows || []).filter((item) => item?.key && item.key !== "reportedrevenue").length >= 2;
+    if (preserveHighCoverageOfficialBreakout) continue;
     const previousQuarter = quarters[index - 1];
     const nextQuarter = quarters[index + 1];
     const previousKeys = stableQuarterKeys(previousQuarter);
@@ -3970,6 +4090,7 @@ function buildRevenueSegmentBarHistory(company, anchorQuarterKey, maxQuarters = 
     });
 
     const shouldRebalance =
+      quarterAllowsAggressiveNeighborRebalance(quarter) &&
       maxShareDeviation > 0.3 &&
       topShare > 0.68 &&
       revenueJumpRatio < 1.3 &&
@@ -4085,13 +4206,15 @@ function buildRevenueSegmentBarHistory(company, anchorQuarterKey, maxQuarters = 
     stackOrder: segmentStats.slice().sort((left, right) => left.totalValueBn - right.totalValueBn).map((item) => item.key),
     maxRevenueBn: Math.max(...quarters.map((item) => safeNumber(item.totalRevenueBn)), 1),
     anchorQuarterKey: selectedQuarterKeys[selectedQuarterKeys.length - 1] || null,
-    requestedQuarterCount: windowSize,
+    requestedQuarterCount: requestedWindowCount,
     availableQuarterCount,
     missingQuarterCount,
     reportedSegmentQuarterCount,
     imputedQuarterCount,
     smoothedQuarterCount,
     convertedQuarterCount,
+    windowUnitLabel,
+    windowUnitLabelZh,
     displayCurrencySet,
     sourceCurrencySet,
     primaryDisplayCurrency,

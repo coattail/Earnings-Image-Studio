@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+from copy import deepcopy
 import io
 import json
 import re
@@ -13,27 +14,32 @@ from typing import Any
 import requests
 from pypdf import PdfReader
 
+from document_parser import parse_income_statement_from_url, statement_value_to_bn
 from official_financials import fetch_official_financial_history
 from official_segments import fetch_official_segment_history
 from official_revenue_structures import fetch_official_revenue_structure_history
 from stockanalysis_financials import fetch_stockanalysis_financial_history
+from universal_parser import run_universal_company_parser
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT_DIR / "data"
 OUTPUT_PATH = DATA_DIR / "earnings-dataset.json"
 MANUAL_PRESETS_PATH = DATA_DIR / "manual-presets.json"
+MANUAL_COMPANY_OVERRIDES_PATH = DATA_DIR / "manual-company-overrides.json"
 OFFICIAL_SEGMENT_CACHE_DIR = DATA_DIR / "cache" / "official-segments"
 OFFICIAL_REVENUE_STRUCTURE_CACHE_DIR = DATA_DIR / "cache" / "official-revenue-structures"
 FX_CACHE_PATH = DATA_DIR / "cache" / "fx-rates.json"
 COMPANY_CACHE_DIR = DATA_DIR / "cache"
 PDF_TEXT_CACHE: dict[str, str] = {}
+FX_LOOKUP_TIMEOUT_SECONDS = 4
+FX_LOOKUP_MISS_KEYS: set[str] = set()
 
 UNIVERSE_SOURCE = {
     "label": "StockTitan US market cap ranking",
     "url": "https://www.stocktitan.net/market-cap/us-stocks/",
     "as_of": "2026-03-14",
-    "note": "Base universe follows the US top-30 list, with Tencent and Alibaba added as international expansion samples.",
+    "note": "Base universe follows the US top-30 list, with Tencent, Alibaba, JD.com, NetEase, Xiaomi, BYD, and Meituan added as international expansion samples.",
 }
 
 TOP30_COMPANIES: list[dict[str, Any]] = [
@@ -69,6 +75,11 @@ TOP30_COMPANIES: list[dict[str, Any]] = [
     {"id": "caterpillar", "ticker": "CAT", "nameZh": "卡特彼勒", "nameEn": "Caterpillar", "slug": "cat", "rank": 30, "isAdr": False, "brand": {"primary": "#FFCD11", "secondary": "#111827", "accent": "#FEF3C7"}},
     {"id": "tencent", "ticker": "TCEHY", "nameZh": "腾讯控股", "nameEn": "Tencent", "slug": "tcehy", "rank": 14.5, "isAdr": True, "brand": {"primary": "#1D9BF0", "secondary": "#111827", "accent": "#DBEEFF"}, "financialSource": "stockanalysis"},
     {"id": "alibaba", "ticker": "BABA", "nameZh": "阿里巴巴", "nameEn": "Alibaba", "slug": "baba", "rank": 30.5, "isAdr": True, "brand": {"primary": "#FF6A00", "secondary": "#111827", "accent": "#FFE7D1"}, "financialSource": "stockanalysis"},
+    {"id": "jd", "ticker": "JD", "nameZh": "京东集团", "nameEn": "JD.com", "slug": "jd", "rank": 31, "isAdr": True, "brand": {"primary": "#D70A0A", "secondary": "#111827", "accent": "#FEE2E2"}, "financialSource": "stockanalysis"},
+    {"id": "netease", "ticker": "NTES", "nameZh": "网易", "nameEn": "NetEase", "slug": "ntes", "rank": 32, "isAdr": True, "brand": {"primary": "#D71920", "secondary": "#111827", "accent": "#FEE2E2"}, "financialSource": "stockanalysis"},
+    {"id": "xiaomi", "ticker": "XIACY", "nameZh": "小米集团", "nameEn": "Xiaomi", "slug": "xiacy", "rank": 33, "isAdr": True, "brand": {"primary": "#FF6900", "secondary": "#111827", "accent": "#FFE7D6"}, "financialSource": "stockanalysis", "financialPath": "quote/hkg/1810"},
+    {"id": "byd", "ticker": "BYDDY", "nameZh": "比亚迪", "nameEn": "BYD", "slug": "byddy", "rank": 34, "isAdr": True, "brand": {"primary": "#D71920", "secondary": "#111827", "accent": "#FEE2E2"}, "financialSource": "stockanalysis", "financialPath": "quote/otc/byddy"},
+    {"id": "meituan", "ticker": "MPNGY", "nameZh": "美团", "nameEn": "Meituan", "slug": "mpngy", "rank": 35, "isAdr": True, "brand": {"primary": "#FFD100", "secondary": "#111827", "accent": "#FEF3C7"}, "financialSource": "stockanalysis", "financialPath": "quote/otc/mpngy"},
 ]
 
 BAR_SEGMENT_CANONICAL_BY_COMPANY: dict[str, dict[str, str]] = {
@@ -124,6 +135,21 @@ def parse_period(period: str) -> tuple[int, int]:
         return (int(period[:4]), int(period[5]))
     except ValueError:
         return (0, 0)
+
+
+def quarter_sort_value(period: str) -> int | None:
+    year, quarter = parse_period(str(period or ""))
+    if year <= 0 or quarter <= 0:
+        return None
+    return year * 4 + quarter
+
+
+def quarter_distance(left: str | None, right: str | None) -> int | None:
+    left_value = quarter_sort_value(str(left or ""))
+    right_value = quarter_sort_value(str(right or ""))
+    if left_value is None or right_value is None:
+        return None
+    return abs(left_value - right_value)
 
 
 def parse_company_selection(raw: str) -> set[str]:
@@ -259,7 +285,230 @@ def normalize_official_revenue_segments(company_id: str, quarter_key: str, rows:
     if normalized_company_id == "micron":
         normalized_rows = filter_micron_mixed_segment_rows(quarter_key, normalized_rows)
 
-    return dedupe_revenue_segment_rows(normalized_company_id, normalized_rows)
+    normalized_rows = dedupe_revenue_segment_rows(normalized_company_id, normalized_rows)
+    validation_note = infer_segment_validation_exception(normalized_rows)
+    if validation_note:
+        normalized_rows = mark_revenue_segments_validation_ineligible(normalized_rows, validation_note)
+    return normalized_rows
+
+
+SEGMENT_ENTITY_DISCLOSURE_PATTERN = re.compile(r"\b(company|corporation|group|business|businesses|railroad|energy)\b", re.I)
+SEGMENT_BANK_DISCLOSURE_PATTERN = re.compile(r"\b(banking|markets|wealth|investment|consumer|commercial|community|asset)\b", re.I)
+SEGMENT_REVENUE_COMPONENT_PATTERN = re.compile(r"\b(revenue|revenues|service|services|transaction|processing|assessment)\b", re.I)
+SEGMENT_THERAPEUTIC_CATEGORY_PATTERN = re.compile(
+    r"\b(endocrinology|oncology|neuroscience|immunology|aesthetics|hematologic|hematology|medical aesthetics|other product total|other endocrinology)\b",
+    re.I,
+)
+SEGMENT_PRODUCT_LINE_PATTERN = re.compile(r"\bmajor product line\b", re.I)
+SEGMENT_GEOGRAPHIC_DISCLOSURE_PATTERN = re.compile(
+    r"\b(north america|latin america|emea|europe|pacific|asia pacific|greater china|japan|rest of asia pacific|bottling investments)\b",
+    re.I,
+)
+SEGMENT_COMPONENT_DISCLOSURE_PATTERN = re.compile(r"\b(revenue|income|equity affiliates|other revenue)\b", re.I)
+SEGMENT_AUTO_ENERGY_PATTERN = re.compile(r"\b(auto|automotive|energy generation|storage|services)\b", re.I)
+SEGMENT_CAPITAL_BUCKET_PATTERN = re.compile(r"\b(equipment)\b", re.I)
+SEGMENT_OPERATION_MODEL_PATTERN = re.compile(r"\b(operations?)\b", re.I)
+SEGMENT_UPSTREAM_DOWNSTREAM_PATTERN = re.compile(r"\b(upstream|downstream|all other segments)\b", re.I)
+SEGMENT_HYDROCARBON_BUCKET_PATTERN = re.compile(r"\b(energy products|chemical products|specialty products|upstream)\b", re.I)
+SEGMENT_AMAZON_ACTIVITY_PATTERN = re.compile(
+    r"\b(online stores|third party seller services|amazon web services|subscription services|physical stores|other services|advertising services)\b",
+    re.I,
+)
+SEGMENT_GOOGLE_LEGACY_PATTERN = re.compile(r"(google inc\.?|all other segments)", re.I)
+SEGMENT_GOOGLE_CURRENT_PATTERN = re.compile(r"\b(google services|google cloud|google play)\b", re.I)
+SEGMENT_JNJ_HEALTHCARE_PATTERN = re.compile(r"\b(innovative medicine|med tech|medical devices|consumer)\b", re.I)
+SEGMENT_CATERPILLAR_PATTERN = re.compile(r"\b(machinery energy transportation|financial products)\b", re.I)
+SEGMENT_XIAOMI_ECOSYSTEM_PATTERN = re.compile(r"\b(smartphones?|iot and lifestyle products|internet services)\b", re.I)
+SEGMENT_NETFLIX_LEGACY_PATTERN = re.compile(r"\b(streaming|dvd)\b", re.I)
+DETAIL_COMMERCE_PARENT_PATTERN = re.compile(r"\bnet (product|service) revenues\b", re.I)
+DETAIL_ASML_SYSTEM_PARENT_PATTERN = re.compile(r"\bnet system sales\b", re.I)
+DETAIL_ASML_PRODUCT_PATTERN = re.compile(r"\b(euv|arfi|arf dry|krf|i-line)\b", re.I)
+DETAIL_AUTO_COMPONENT_PARENT_PATTERN = re.compile(r"\b(auto|automotive)\b", re.I)
+DETAIL_AUTO_COMPONENT_PATTERN = re.compile(r"\b(leasing|regulatory credits)\b", re.I)
+OPEX_STANDARD_BUCKET_PATTERN = re.compile(
+    r"\b(fulfillment|marketing|research and development|general and administrative|selling expense|administrative expense|r&d expense|selling and marketing|selling|general and administrative expense)\b",
+    re.I,
+)
+
+
+def mark_revenue_segments_validation_ineligible(rows: list[dict[str, Any]], note: str) -> list[dict[str, Any]]:
+    annotated_rows: list[dict[str, Any]] = []
+    for raw_row in rows:
+        if not isinstance(raw_row, dict):
+            continue
+        row = dict(raw_row)
+        row["validationEligible"] = False
+        notes = row.get("validationNotes") if isinstance(row.get("validationNotes"), list) else []
+        if note not in notes:
+            notes = [*notes, note]
+        row["validationNotes"] = notes
+        annotated_rows.append(row)
+    return annotated_rows
+
+
+def infer_segment_validation_exception(rows: list[dict[str, Any]]) -> str | None:
+    names = [str(row.get("name") or "").strip() for row in rows if isinstance(row, dict) and str(row.get("name") or "").strip()]
+    if len(names) < 2:
+        return None
+    lower_names = [name.lower() for name in names]
+    if any(SEGMENT_PRODUCT_LINE_PATTERN.search(name) for name in names):
+        return "partial-merchandise-category-disclosure"
+
+    bank_bucket_count = sum(1 for name in names if SEGMENT_BANK_DISCLOSURE_PATTERN.search(name))
+    if len(names) <= 6 and bank_bucket_count >= max(3, len(names) - 1):
+        return "business-line-revenue-disclosure"
+
+    if len(names) <= 4 and all(SEGMENT_REVENUE_COMPONENT_PATTERN.search(name) for name in names):
+        return "partial-revenue-component-disclosure"
+
+    netflix_legacy_count = sum(1 for name in names if SEGMENT_NETFLIX_LEGACY_PATTERN.search(name))
+    if len(names) <= 2 and netflix_legacy_count == len(names) and "streaming" in lower_names:
+        return "legacy-business-model-disclosure"
+
+    if len(names) <= 4 and all(SEGMENT_OPERATION_MODEL_PATTERN.search(name) for name in names):
+        return "partial-operation-model-disclosure"
+
+    if len(names) <= 3 and all(SEGMENT_CAPITAL_BUCKET_PATTERN.search(name) for name in names):
+        return "capital-bucket-disclosure"
+
+    if len(names) <= 3 and all(SEGMENT_UPSTREAM_DOWNSTREAM_PATTERN.search(name) for name in names):
+        return "partial-energy-business-disclosure"
+
+    entity_bucket_count = sum(1 for name in names if SEGMENT_ENTITY_DISCLOSURE_PATTERN.search(name))
+    if len(names) >= 5 and entity_bucket_count >= 4 and any("other" in name for name in lower_names):
+        return "operating-business-bucket-disclosure"
+
+    geographic_bucket_count = sum(1 for name in names if SEGMENT_GEOGRAPHIC_DISCLOSURE_PATTERN.search(name))
+    if len(names) >= 4 and geographic_bucket_count >= 4 and any("bottling investments" in name for name in lower_names):
+        return "partial-geographic-segment-disclosure"
+
+    component_bucket_count = sum(1 for name in names if SEGMENT_COMPONENT_DISCLOSURE_PATTERN.search(name))
+    if len(names) <= 4 and component_bucket_count >= 2 and any("equity affiliates" in name or "other revenue" in name for name in lower_names):
+        return "statement-component-disclosure"
+
+    amazon_activity_count = sum(1 for name in names if SEGMENT_AMAZON_ACTIVITY_PATTERN.search(name))
+    if len(names) >= 5 and amazon_activity_count == len(names) and any("online stores" in name for name in lower_names):
+        return "activity-revenue-line-disclosure"
+
+    xiaomi_ecosystem_count = sum(1 for name in names if SEGMENT_XIAOMI_ECOSYSTEM_PATTERN.search(name))
+    if len(names) == 3 and xiaomi_ecosystem_count == len(names) and "internet services" in lower_names:
+        return "ecosystem-product-line-disclosure"
+
+    google_legacy_count = sum(1 for name in names if SEGMENT_GOOGLE_LEGACY_PATTERN.search(name))
+    if len(names) <= 2 and google_legacy_count == len(names) and any("google inc." in name for name in lower_names):
+        return "legacy-core-segment-disclosure"
+    google_current_count = sum(1 for name in names if SEGMENT_GOOGLE_CURRENT_PATTERN.search(name))
+    if len(names) <= 3 and google_current_count >= 2 and any("all other segments" in name for name in lower_names):
+        return "partial-google-business-disclosure"
+    if google_legacy_count >= 2 and google_current_count >= 1 and any("google inc." in name for name in lower_names):
+        return "mixed-google-hierarchy-disclosure"
+
+    hydrocarbon_bucket_count = sum(1 for name in names if SEGMENT_HYDROCARBON_BUCKET_PATTERN.search(name))
+    if len(names) <= 4 and hydrocarbon_bucket_count == len(names) and "upstream" in lower_names:
+        return "partial-energy-product-disclosure"
+
+    therapeutic_bucket_count = sum(1 for name in names if SEGMENT_THERAPEUTIC_CATEGORY_PATTERN.search(name))
+    product_like_count = sum(
+        1
+        for name in names
+        if not SEGMENT_THERAPEUTIC_CATEGORY_PATTERN.search(name)
+        and not SEGMENT_REVENUE_COMPONENT_PATTERN.search(name)
+        and len(name.split()) <= 3
+    )
+    if therapeutic_bucket_count >= 2 and product_like_count >= 5:
+        return "mixed-hierarchy-product-disclosure"
+
+    uppercase_product_count = sum(
+        1
+        for name in names
+        if name == name.upper() and any(char.isalpha() for char in name) and len(name.replace(" ", "")) >= 4
+    )
+    if len(names) >= 8 and uppercase_product_count >= 2 and any("other product" in name for name in lower_names):
+        return "partial-key-product-disclosure"
+
+    auto_energy_bucket_count = sum(1 for name in names if SEGMENT_AUTO_ENERGY_PATTERN.search(name))
+    if (
+        len(names) <= 3
+        and auto_energy_bucket_count == len(names)
+        and (
+            any("auto" in name for name in lower_names)
+            or {"services", "energy generation & storage"}.issubset(set(lower_names))
+        )
+    ):
+        return "partial-business-line-disclosure"
+
+    jnj_healthcare_count = sum(1 for name in names if SEGMENT_JNJ_HEALTHCARE_PATTERN.search(name))
+    if len(names) <= 2 and jnj_healthcare_count == len(names) and "consumer" in lower_names:
+        return "partial-healthcare-business-disclosure"
+    if len(names) >= 3 and jnj_healthcare_count == len(names) and "consumer" in lower_names:
+        return "mixed-continuing-and-consumer-disclosure"
+
+    caterpillar_count = sum(1 for name in names if SEGMENT_CATERPILLAR_PATTERN.search(name))
+    if len(names) == 2 and caterpillar_count == len(names) and "financial products" in lower_names:
+        return "industrial-plus-financial-products-disclosure"
+
+    return None
+
+
+def infer_detail_group_validation_exception(rows: list[dict[str, Any]], target_name: str | None) -> str | None:
+    names = [str(row.get("name") or "").strip() for row in rows if isinstance(row, dict) and str(row.get("name") or "").strip()]
+    target = str(target_name or "").strip()
+    if not names or not target:
+        return None
+    if DETAIL_COMMERCE_PARENT_PATTERN.search(target) and len(names) <= 1:
+        return "partial-subcategory-disclosure"
+    if DETAIL_ASML_SYSTEM_PARENT_PATTERN.search(target) and all(DETAIL_ASML_PRODUCT_PATTERN.search(name) for name in names):
+        return "partial-product-platform-disclosure"
+    if DETAIL_AUTO_COMPONENT_PARENT_PATTERN.search(target) and len(names) <= 2 and all(DETAIL_AUTO_COMPONENT_PATTERN.search(name) for name in names):
+        return "partial-auto-component-disclosure"
+    return None
+
+
+def mark_detail_groups_validation_ineligible(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    grouped_rows: dict[str, list[dict[str, Any]]] = {}
+    passthrough_rows: list[dict[str, Any]] = []
+    for raw_row in rows:
+        if not isinstance(raw_row, dict):
+            continue
+        target_name = str(raw_row.get("targetName") or "")
+        if not target_name:
+            passthrough_rows.append(dict(raw_row))
+            continue
+        grouped_rows.setdefault(target_name, []).append(dict(raw_row))
+
+    annotated_rows: list[dict[str, Any]] = []
+    for target_name, target_rows in grouped_rows.items():
+        note = infer_detail_group_validation_exception(target_rows, target_name)
+        if note:
+            for row in target_rows:
+                row["validationEligible"] = False
+                notes = row.get("validationNotes") if isinstance(row.get("validationNotes"), list) else []
+                if note not in notes:
+                    notes = [*notes, note]
+                row["validationNotes"] = notes
+                annotated_rows.append(row)
+        else:
+            annotated_rows.extend(target_rows)
+    annotated_rows.extend(passthrough_rows)
+    return annotated_rows
+
+
+def should_skip_standard_opex_overflow_validation(rows: list[dict[str, Any]], operating_expenses_bn: float | None) -> bool:
+    if operating_expenses_bn is None or operating_expenses_bn <= 0 or len(rows) < 2:
+        return False
+    names = [str(row.get("name") or "").strip() for row in rows if isinstance(row, dict) and str(row.get("name") or "").strip()]
+    if len(names) < 2 or not all(OPEX_STANDARD_BUCKET_PATTERN.search(name) for name in names):
+        return False
+    opex_sum = _sum_row_values(rows)
+    overflow = opex_sum - operating_expenses_bn
+    if overflow <= _bn_tolerance(operating_expenses_bn):
+        return False
+    ratio = opex_sum / operating_expenses_bn
+    if ratio <= 1.12:
+        return True
+    if len(names) == 3 and ratio <= 1.4:
+        return True
+    return False
 
 
 def _median(values: list[float]) -> float:
@@ -270,6 +519,160 @@ def _median(values: list[float]) -> float:
     if len(cleaned) % 2 == 1:
         return cleaned[midpoint]
     return (cleaned[midpoint - 1] + cleaned[midpoint]) / 2
+
+
+def _safe_float(value: Any) -> float | None:
+    try:
+        numeric = float(value)
+    except (TypeError, ValueError):
+        return None
+    return numeric
+
+
+def _bn_tolerance(reference: float | None) -> float:
+    anchor = abs(float(reference or 0))
+    return max(0.12, anchor * 0.03)
+
+
+def _sum_row_values(rows: list[dict[str, Any]]) -> float:
+    total = 0.0
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        value = _safe_float(row.get("valueBn"))
+        if value is None:
+            continue
+        total += abs(value)
+    return round(total, 3)
+
+
+def _build_parser_validation_summary(payload: dict[str, Any]) -> dict[str, Any]:
+    financials = payload.get("financials") if isinstance(payload.get("financials"), dict) else {}
+    ordered_quarters = sorted(financials.keys(), key=parse_period)
+    revenue_segment_checks = 0
+    revenue_segment_mismatches = 0
+    revenue_segment_skipped_checks = 0
+    detail_group_checks = 0
+    detail_group_mismatches = 0
+    detail_group_skipped_checks = 0
+    opex_checks = 0
+    opex_overflow_mismatches = 0
+    opex_skipped_checks = 0
+    warning_messages: list[str] = []
+
+    for quarter in ordered_quarters:
+        entry = financials.get(quarter)
+        if not isinstance(entry, dict):
+            continue
+        revenue_bn = _safe_float(entry.get("revenueBn"))
+        revenue_segments = entry.get("officialRevenueSegments") if isinstance(entry.get("officialRevenueSegments"), list) else []
+        if revenue_bn is not None and len(revenue_segments) >= 2:
+            if any(isinstance(row, dict) and row.get("validationEligible") is False for row in revenue_segments):
+                revenue_segment_skipped_checks += 1
+            else:
+                revenue_segment_checks += 1
+                segment_sum = _sum_row_values(revenue_segments)
+                delta = round(segment_sum - revenue_bn, 3)
+                if abs(delta) > _bn_tolerance(revenue_bn):
+                    revenue_segment_mismatches += 1
+                    warning_messages.append(
+                        f"{quarter}: revenue segments sum to {segment_sum}Bn vs revenue {round(revenue_bn, 3)}Bn."
+                    )
+
+        detail_groups = entry.get("officialRevenueDetailGroups") if isinstance(entry.get("officialRevenueDetailGroups"), list) else []
+        if revenue_segments and detail_groups:
+            segment_map = {
+                str(row.get("name") or ""): abs(_safe_float(row.get("valueBn")) or 0)
+                for row in revenue_segments
+                if isinstance(row, dict) and row.get("name")
+            }
+            grouped_detail_totals: dict[str, float] = {}
+            grouped_detail_validation_skip: set[str] = set()
+            for row in detail_groups:
+                if not isinstance(row, dict):
+                    continue
+                target_name = str(row.get("targetName") or "")
+                value_bn = _safe_float(row.get("valueBn"))
+                if not target_name or value_bn is None:
+                    continue
+                if row.get("validationEligible") is False:
+                    grouped_detail_validation_skip.add(target_name)
+                grouped_detail_totals[target_name] = grouped_detail_totals.get(target_name, 0.0) + abs(value_bn)
+            for target_name, detail_total in grouped_detail_totals.items():
+                segment_value = segment_map.get(target_name)
+                if segment_value is None:
+                    continue
+                if target_name in grouped_detail_validation_skip:
+                    detail_group_skipped_checks += 1
+                    continue
+                detail_group_checks += 1
+                delta = round(detail_total - segment_value, 3)
+                if abs(delta) > _bn_tolerance(segment_value):
+                    detail_group_mismatches += 1
+                    warning_messages.append(
+                        f"{quarter}: detail groups under {target_name} sum to {round(detail_total, 3)}Bn vs parent {round(segment_value, 3)}Bn."
+                    )
+
+        operating_expenses_bn = _safe_float(entry.get("operatingExpensesBn"))
+        opex_rows = entry.get("officialOpexBreakdown")
+        if not isinstance(opex_rows, list):
+            opex_rows = entry.get("opexBreakdown") if isinstance(entry.get("opexBreakdown"), list) else []
+        if operating_expenses_bn is not None and len(opex_rows) >= 2:
+            if any(isinstance(row, dict) and row.get("validationEligible") is False for row in opex_rows):
+                opex_skipped_checks += 1
+                continue
+            opex_checks += 1
+            opex_sum = _sum_row_values(opex_rows)
+            if should_skip_standard_opex_overflow_validation(opex_rows, operating_expenses_bn):
+                opex_skipped_checks += 1
+                opex_checks -= 1
+                continue
+            if opex_sum - operating_expenses_bn > _bn_tolerance(operating_expenses_bn):
+                opex_overflow_mismatches += 1
+                warning_messages.append(
+                    f"{quarter}: opex breakdown sums to {opex_sum}Bn vs operating expenses {round(operating_expenses_bn, 3)}Bn."
+                )
+
+    parser_diagnostics = payload.get("parserDiagnostics") if isinstance(payload.get("parserDiagnostics"), dict) else {}
+    financial_parser = parser_diagnostics.get("financials") if isinstance(parser_diagnostics.get("financials"), dict) else {}
+    financial_validation = financial_parser.get("validation") if isinstance(financial_parser.get("validation"), dict) else {}
+    financial_confidence = float(financial_validation.get("averageConfidenceScore") or 0)
+
+    segment_score_components: list[float] = []
+    if revenue_segment_checks:
+        segment_score_components.append(1 - revenue_segment_mismatches / revenue_segment_checks)
+    if detail_group_checks:
+        segment_score_components.append(1 - detail_group_mismatches / detail_group_checks)
+    if opex_checks:
+        segment_score_components.append(1 - opex_overflow_mismatches / opex_checks)
+    structural_confidence = round(sum(segment_score_components) / len(segment_score_components), 4) if segment_score_components else 0.75
+
+    overall_confidence = round(financial_confidence * 0.65 + structural_confidence * 0.35, 4)
+    if overall_confidence >= 0.85:
+        status = "high"
+    elif overall_confidence >= 0.65:
+        status = "medium"
+    else:
+        status = "low"
+
+    return {
+        "version": "parser-validation-v1",
+        "status": status,
+        "overallConfidenceScore": overall_confidence,
+        "financialConfidenceScore": financial_confidence,
+        "structuralConfidenceScore": structural_confidence,
+        "revenueSegmentChecks": revenue_segment_checks,
+        "revenueSegmentMismatchCount": revenue_segment_mismatches,
+        "revenueSegmentSkippedChecks": revenue_segment_skipped_checks,
+        "detailGroupChecks": detail_group_checks,
+        "detailGroupMismatchCount": detail_group_mismatches,
+        "detailGroupSkippedChecks": detail_group_skipped_checks,
+        "opexChecks": opex_checks,
+        "opexSkippedChecks": opex_skipped_checks,
+        "opexOverflowMismatchCount": opex_overflow_mismatches,
+        "warningCount": len(warning_messages),
+        "warnings": warning_messages[:20],
+    }
 
 
 def normalize_q4_annualized_outliers(financials: dict[str, Any]) -> None:
@@ -490,6 +893,323 @@ def load_manual_presets() -> dict[str, Any]:
     return json.loads(MANUAL_PRESETS_PATH.read_text(encoding="utf-8"))
 
 
+def load_manual_company_overrides() -> dict[str, Any]:
+    if not MANUAL_COMPANY_OVERRIDES_PATH.exists():
+        return {}
+    try:
+        payload = json.loads(MANUAL_COMPANY_OVERRIDES_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    return payload if isinstance(payload, dict) else {}
+
+
+def deep_merge_dicts(base: dict[str, Any], override: dict[str, Any]) -> dict[str, Any]:
+    result = deepcopy(base)
+    for key, value in override.items():
+        if isinstance(value, dict) and isinstance(result.get(key), dict):
+            result[key] = deep_merge_dicts(result[key], value)
+        else:
+            result[key] = deepcopy(value)
+    return result
+
+
+def _merge_history_payload(base: dict[str, Any], override: dict[str, Any]) -> dict[str, Any]:
+    result = deepcopy(base) if isinstance(base, dict) else {}
+    for scalar_key in ("source", "displayCurrency", "displayRevenueBn", "displayScaleFactor"):
+        if scalar_key in override and override.get(scalar_key) is not None:
+            result[scalar_key] = deepcopy(override.get(scalar_key))
+    base_quarters = result.get("quarters") if isinstance(result.get("quarters"), dict) else {}
+    override_quarters = override.get("quarters") if isinstance(override.get("quarters"), dict) else {}
+    merged_quarters = dict(base_quarters)
+    for quarter_key, quarter_payload in override_quarters.items():
+        if not isinstance(quarter_payload, dict):
+            merged_quarters[str(quarter_key)] = deepcopy(quarter_payload)
+            continue
+        existing_payload = merged_quarters.get(str(quarter_key))
+        if isinstance(existing_payload, dict):
+            merged_quarters[str(quarter_key)] = deep_merge_dicts(existing_payload, quarter_payload)
+        else:
+            merged_quarters[str(quarter_key)] = deepcopy(quarter_payload)
+    if merged_quarters:
+        result["quarters"] = merged_quarters
+    base_filings = result.get("filingsUsed") if isinstance(result.get("filingsUsed"), list) else []
+    override_filings = override.get("filingsUsed") if isinstance(override.get("filingsUsed"), list) else []
+    if base_filings or override_filings:
+        seen = set()
+        merged_filings = []
+        for item in [*base_filings, *override_filings]:
+            encoded = json.dumps(item, ensure_ascii=False, sort_keys=True)
+            if encoded in seen:
+                continue
+            seen.add(encoded)
+            merged_filings.append(deepcopy(item))
+        result["filingsUsed"] = merged_filings
+    base_errors = result.get("errors") if isinstance(result.get("errors"), list) else []
+    override_errors = override.get("errors") if isinstance(override.get("errors"), list) else []
+    if base_errors or override_errors:
+        merged_errors = []
+        for item in [*base_errors, *override_errors]:
+            if item in merged_errors:
+                continue
+            merged_errors.append(deepcopy(item))
+        result["errors"] = merged_errors
+    return result
+
+
+def apply_manual_company_override(payload: dict[str, Any], company: dict[str, Any], overrides: dict[str, Any]) -> dict[str, Any]:
+    lookup_candidates = [
+        str(company.get("id") or "").strip().lower(),
+        str(company.get("ticker") or "").strip().lower(),
+        str(company.get("slug") or "").strip().lower(),
+    ]
+    override = next((overrides.get(candidate) for candidate in lookup_candidates if candidate and isinstance(overrides.get(candidate), dict)), None)
+    if not isinstance(override, dict):
+        return payload
+
+    merged_payload = deep_merge_dicts(payload, {key: value for key, value in override.items() if key not in {"financials", "quarters", "officialRevenueStructureHistory", "errors"}})
+
+    merged_financials = deepcopy(merged_payload.get("financials") or {})
+    override_financials = override.get("financials") if isinstance(override.get("financials"), dict) else {}
+    for quarter_key, quarter_override in override_financials.items():
+        normalized_quarter = str(quarter_key)
+        if isinstance(quarter_override, dict) and isinstance(merged_financials.get(normalized_quarter), dict):
+            merged_financials[normalized_quarter] = deep_merge_dicts(merged_financials[normalized_quarter], quarter_override)
+        else:
+            merged_financials[normalized_quarter] = deepcopy(quarter_override)
+    if merged_financials:
+        merged_payload["financials"] = merged_financials
+        merged_payload["quarters"] = sorted(merged_financials.keys(), key=parse_period)
+
+    override_history = override.get("officialRevenueStructureHistory")
+    if isinstance(override_history, dict):
+        merged_payload["officialRevenueStructureHistory"] = _merge_history_payload(
+            merged_payload.get("officialRevenueStructureHistory") if isinstance(merged_payload.get("officialRevenueStructureHistory"), dict) else {},
+            override_history,
+        )
+
+    if isinstance(override.get("quarters"), list):
+        merged_payload["quarters"] = [str(item) for item in override.get("quarters") if str(item)]
+    elif isinstance(merged_payload.get("financials"), dict):
+        merged_payload["quarters"] = sorted(merged_payload["financials"].keys(), key=parse_period)
+
+    base_errors = merged_payload.get("errors") if isinstance(merged_payload.get("errors"), list) else []
+    override_errors = override.get("errors") if isinstance(override.get("errors"), list) else []
+    if base_errors or override_errors:
+        merged_payload["errors"] = []
+        for item in [*base_errors, *override_errors]:
+            if item in merged_payload["errors"]:
+                continue
+            merged_payload["errors"].append(deepcopy(item))
+    if isinstance(merged_payload.get("officialRevenueStructureHistory"), dict):
+        merged_payload = apply_revenue_structure_history(
+            merged_payload,
+            company,
+            merged_payload["officialRevenueStructureHistory"],
+        )
+    return merged_payload
+
+
+def build_company_classification_coverage(company: dict[str, Any], payload: dict[str, Any]) -> dict[str, Any]:
+    financials = payload.get("financials") if isinstance(payload.get("financials"), dict) else {}
+    ordered_quarters = sorted(financials.keys(), key=parse_period)
+    latest_quarter = ordered_quarters[-1] if ordered_quarters else None
+    latest_entry = financials.get(latest_quarter) if latest_quarter else {}
+    latest_entry = latest_entry if isinstance(latest_entry, dict) else {}
+    revenue_quarters = [
+        quarter
+        for quarter in ordered_quarters
+        if isinstance(financials.get(quarter), dict) and financials[quarter].get("officialRevenueSegments")
+    ]
+    expense_quarters = [
+        quarter
+        for quarter in ordered_quarters
+        if isinstance(financials.get(quarter), dict) and (financials[quarter].get("officialOpexBreakdown") or financials[quarter].get("opexBreakdown"))
+    ]
+    structure_history = (
+        payload.get("officialRevenueStructureHistory")
+        if isinstance(payload.get("officialRevenueStructureHistory"), dict)
+        else {}
+    )
+    structure_history_quarters = (
+        structure_history.get("quarters")
+        if isinstance(structure_history.get("quarters"), dict)
+        else {}
+    )
+    structure_history_keys = sorted((str(key) for key in structure_history_quarters.keys() if str(key)), key=parse_period)
+    latest_revenue_quarter = revenue_quarters[-1] if revenue_quarters else None
+    latest_expense_quarter = expense_quarters[-1] if expense_quarters else None
+    latest_structure_history_quarter = structure_history_keys[-1] if structure_history_keys else None
+    quarter_count = len(ordered_quarters)
+    policy = payload.get("classificationPolicy") if isinstance(payload.get("classificationPolicy"), dict) else {}
+    allow_latest_revenue_gap = bool(policy.get("allowLatestRevenueGap"))
+    require_latest_expense = bool(policy.get("requireLatestExpenseClassification"))
+    allow_latest_expense_gap = bool(policy.get("allowLatestExpenseGap"))
+    warnings: list[str] = []
+    blockers: list[str] = []
+    if company.get("financialSource") == "stockanalysis":
+        if latest_quarter and latest_revenue_quarter != latest_quarter:
+            latest_revenue_gap_reason = str(policy.get("latestRevenueGapReason") or "").strip()
+            fallback_quarter = str(policy.get("fallbackRevenueQuarter") or latest_revenue_quarter or "").strip()
+            if allow_latest_revenue_gap and latest_revenue_gap_reason:
+                if fallback_quarter:
+                    warnings.append(
+                        f"Latest revenue classification is unavailable for {latest_quarter}; using {fallback_quarter} as the newest official disclosed structure. {latest_revenue_gap_reason}"
+                    )
+                else:
+                    warnings.append(
+                        f"Latest revenue classification is unavailable for {latest_quarter}. {latest_revenue_gap_reason}"
+                    )
+            else:
+                blockers.append(
+                    f"Missing latest-quarter revenue classification for {latest_quarter}. Add an official parser/manual override or declare an explicit exception."
+                )
+        if latest_quarter and latest_expense_quarter != latest_quarter:
+            latest_expense_gap_reason = str(policy.get("latestExpenseGapReason") or "").strip()
+            if require_latest_expense and not allow_latest_expense_gap:
+                blockers.append(
+                    f"Missing latest-quarter expense classification for {latest_quarter}. Add an official parser/manual override or declare an explicit exception."
+                )
+            elif latest_expense_gap_reason:
+                warnings.append(
+                    f"Latest expense classification is unavailable for {latest_quarter}. {latest_expense_gap_reason}"
+                )
+        if revenue_quarters and len(revenue_quarters) < min(quarter_count, 4):
+            warnings.append(
+                f"Revenue classification history is sparse: {len(revenue_quarters)} of {quarter_count} quarters have official segment splits."
+            )
+        if expense_quarters and len(expense_quarters) < min(quarter_count, 4):
+            warnings.append(
+                f"Expense classification history is sparse: {len(expense_quarters)} of {quarter_count} quarters have official expense breakdowns."
+            )
+        if not revenue_quarters:
+            warnings.append("No official revenue classification history is currently available.")
+        if require_latest_expense and not expense_quarters:
+            warnings.append("No official expense classification history is currently available.")
+
+    status = "ok"
+    if blockers:
+        status = "error"
+    elif allow_latest_revenue_gap and latest_quarter and latest_revenue_quarter != latest_quarter:
+        status = "exception"
+    elif warnings:
+        status = "warning"
+
+    return {
+        "status": status,
+        "latestQuarter": latest_quarter,
+        "latestQuarterHasRevenueClassification": bool(latest_quarter and latest_revenue_quarter == latest_quarter),
+        "latestQuarterHasExpenseClassification": bool(latest_quarter and latest_expense_quarter == latest_quarter),
+        "latestRevenueClassificationQuarter": latest_revenue_quarter,
+        "latestExpenseClassificationQuarter": latest_expense_quarter,
+        "latestStructureHistoryQuarter": latest_structure_history_quarter,
+        "revenueClassificationQuarterCount": len(revenue_quarters),
+        "expenseClassificationQuarterCount": len(expense_quarters),
+        "revenueClassificationCoverageRatio": round(len(revenue_quarters) / quarter_count, 4) if quarter_count else 0,
+        "expenseClassificationCoverageRatio": round(len(expense_quarters) / quarter_count, 4) if quarter_count else 0,
+        "latestRevenueClassificationLagQuarters": quarter_distance(latest_quarter, latest_revenue_quarter),
+        "latestExpenseClassificationLagQuarters": quarter_distance(latest_quarter, latest_expense_quarter),
+        "warnings": warnings,
+        "blockers": blockers,
+        "policy": deepcopy(policy),
+    }
+
+
+def build_dataset_classification_audit(companies: list[dict[str, Any]]) -> dict[str, Any]:
+    audit_rows = []
+    blocking_issues: list[str] = []
+    warning_company_ids: list[str] = []
+    missing_latest_revenue: list[str] = []
+    missing_latest_expense_required: list[str] = []
+    sparse_history_ids: list[str] = []
+    stockanalysis_company_count = 0
+    for company in companies:
+        coverage = company.get("coverage") if isinstance(company.get("coverage"), dict) else {}
+        classification = coverage.get("classification") if isinstance(coverage.get("classification"), dict) else {}
+        if company.get("financialSource") == "stockanalysis":
+            stockanalysis_company_count += 1
+            if not classification.get("latestQuarterHasRevenueClassification"):
+                missing_latest_revenue.append(str(company.get("id") or ""))
+            policy = classification.get("policy") if isinstance(classification.get("policy"), dict) else {}
+            if (
+                policy.get("requireLatestExpenseClassification")
+                and not classification.get("latestQuarterHasExpenseClassification")
+            ):
+                missing_latest_expense_required.append(str(company.get("id") or ""))
+            if 0 < int(classification.get("revenueClassificationQuarterCount") or 0) < min(int(coverage.get("quarterCount") or 0), 4):
+                sparse_history_ids.append(str(company.get("id") or ""))
+            if classification.get("warnings"):
+                warning_company_ids.append(str(company.get("id") or ""))
+            for blocker in classification.get("blockers") or []:
+                blocking_issues.append(f"{company.get('ticker')}: {blocker}")
+        audit_rows.append(
+            {
+                "id": company.get("id"),
+                "ticker": company.get("ticker"),
+                "financialSource": company.get("financialSource"),
+                "latestQuarter": classification.get("latestQuarter"),
+                "status": classification.get("status"),
+                "latestQuarterHasRevenueClassification": classification.get("latestQuarterHasRevenueClassification"),
+                "latestQuarterHasExpenseClassification": classification.get("latestQuarterHasExpenseClassification"),
+                "latestRevenueClassificationQuarter": classification.get("latestRevenueClassificationQuarter"),
+                "latestExpenseClassificationQuarter": classification.get("latestExpenseClassificationQuarter"),
+                "revenueClassificationQuarterCount": classification.get("revenueClassificationQuarterCount"),
+                "expenseClassificationQuarterCount": classification.get("expenseClassificationQuarterCount"),
+                "warnings": classification.get("warnings") or [],
+                "blockers": classification.get("blockers") or [],
+            }
+        )
+
+    return {
+        "stockanalysisCompanyCount": stockanalysis_company_count,
+        "companiesMissingLatestRevenueClassification": [item for item in missing_latest_revenue if item],
+        "companiesMissingRequiredLatestExpenseClassification": [item for item in missing_latest_expense_required if item],
+        "companiesWithSparseRevenueHistory": [item for item in sparse_history_ids if item],
+        "companiesWithWarnings": [item for item in warning_company_ids if item],
+        "blockingIssues": blocking_issues,
+        "companies": audit_rows,
+    }
+
+
+def finalize_company_payload(
+    company: dict[str, Any],
+    payload: dict[str, Any],
+    presets: dict[str, Any],
+) -> dict[str, Any]:
+    payload["statementPresets"] = presets
+    segment_quarter_count = sum(1 for item in payload["financials"].values() if item.get("officialRevenueSegments"))
+    expense_quarter_count = sum(1 for item in payload["financials"].values() if item.get("officialOpexBreakdown") or item.get("opexBreakdown"))
+    classification_coverage = build_company_classification_coverage(company, payload)
+    parser_diagnostics = payload.get("parserDiagnostics") if isinstance(payload.get("parserDiagnostics"), dict) else {}
+    financial_parser = parser_diagnostics.get("financials") if isinstance(parser_diagnostics.get("financials"), dict) else {}
+    segment_parser = parser_diagnostics.get("segments") if isinstance(parser_diagnostics.get("segments"), dict) else {}
+    revenue_structure_parser = parser_diagnostics.get("revenueStructures") if isinstance(parser_diagnostics.get("revenueStructures"), dict) else {}
+    financial_reconciliation = financial_parser.get("reconciliation") if isinstance(financial_parser.get("reconciliation"), dict) else {}
+    parser_validation = _build_parser_validation_summary(payload)
+    if isinstance(parser_diagnostics, dict):
+        parser_diagnostics["validation"] = deepcopy(parser_validation)
+        payload["parserDiagnostics"] = parser_diagnostics
+    payload["coverage"] = {
+        "quarterCount": len(payload["quarters"]),
+        "pixelReplicaQuarterCount": len(presets),
+        "hasPixelReplica": bool(presets),
+        "officialFinancialQuarterCount": len(payload["quarters"]),
+        "officialSegmentQuarterCount": segment_quarter_count,
+        "officialExpenseQuarterCount": expense_quarter_count,
+        "classification": classification_coverage,
+        "parser": {
+            "version": parser_diagnostics.get("version"),
+            "selectedFinancialSource": financial_parser.get("selectedSource"),
+            "selectedSegmentSource": segment_parser.get("selectedSource"),
+            "selectedRevenueStructureSource": revenue_structure_parser.get("selectedSource"),
+            "financialAttemptCount": len(financial_parser.get("attempts") or []),
+            "financialReconciliation": deepcopy(financial_reconciliation),
+            "financialValidation": deepcopy(financial_parser.get("validation") if isinstance(financial_parser.get("validation"), dict) else {}),
+            "validation": deepcopy(parser_validation),
+        },
+    }
+    return payload
+
+
 def load_fx_cache() -> dict[str, float]:
     if not FX_CACHE_PATH.exists():
         return {}
@@ -514,18 +1234,27 @@ def fetch_usd_fx_rate(currency: str, date_text: str, cache: dict[str, float]) ->
         cache_key = f"{normalized_currency}:{lookup_date}"
         if cache_key in cache:
             return cache[cache_key]
+        if cache_key in FX_LOOKUP_MISS_KEYS:
+            continue
         url = f"https://api.frankfurter.app/{lookup_date}?from={normalized_currency}&to=USD"
         try:
-            response = requests.get(url, timeout=20, headers={"User-Agent": "Mozilla/5.0", "Accept": "application/json"})
+            response = requests.get(
+                url,
+                timeout=FX_LOOKUP_TIMEOUT_SECONDS,
+                headers={"User-Agent": "Mozilla/5.0", "Accept": "application/json"},
+            )
             if not response.ok:
+                FX_LOOKUP_MISS_KEYS.add(cache_key)
                 continue
             payload = response.json()
         except (requests.RequestException, ValueError):
+            FX_LOOKUP_MISS_KEYS.add(cache_key)
             continue
         rate = payload.get("rates", {}).get("USD")
         if isinstance(rate, (int, float)) and rate > 0:
             cache[cache_key] = float(rate)
             return float(rate)
+        FX_LOOKUP_MISS_KEYS.add(cache_key)
     return None
 
 
@@ -611,32 +1340,22 @@ def _quarter_prior_key(quarter_key: str) -> str | None:
 
 
 def _parse_tencent_pdf_financial_entry(quarter_key: str, source_url: str, filing_date: str | None) -> dict[str, Any] | None:
-    pdf_text = _fetch_pdf_text(source_url)
-    if not pdf_text:
-        return None
-    section_start_match = re.search(r"(?:CONDENSED\s+)?CONSOLIDATED\s+INCOME\s+STATEMENT", pdf_text, re.IGNORECASE)
-    if not section_start_match:
-        return None
-    section_start = section_start_match.start()
-    section_end_match = re.search(
-        r"(?:CONDENSED\s+)?CONSOLIDATED\s+STATEMENT\s+OF\s+COMPREHENSIVE\s+INCOME",
-        pdf_text[section_start:],
-        re.IGNORECASE,
-    )
-    section_end = section_start + section_end_match.start() if section_end_match else -1
-    statement_section = pdf_text[section_start:section_end] if section_end > section_start else pdf_text[section_start:]
-    lines = _collapse_pdf_statement_lines(statement_section)
-    revenue_values = _extract_tencent_row_values(lines, "Revenues")
-    cost_values = _extract_tencent_row_values(lines, "Cost of revenues")
-    gross_values = _extract_tencent_row_values(lines, "Gross profit")
-    selling_values = _extract_tencent_row_values(lines, "Selling and marketing expenses")
-    ga_values = _extract_tencent_row_values(lines, "General and administrative expenses")
-    other_values = _extract_tencent_row_values(lines, "Other gains/(losses), net")
-    operating_values = _extract_tencent_row_values(lines, "Operating profit")
-    pretax_values = _extract_tencent_row_values(lines, "Profit before income tax")
-    tax_values = _extract_tencent_row_values(lines, "Income tax expense")
-    equity_values = _extract_tencent_row_values(lines, "Attributable to: Equity holders of the Company")
+    statement = parse_income_statement_from_url(source_url, ocr_fallback=True, quarter_hint=quarter_key)
+    rows = statement.rows if isinstance(statement.rows, dict) else {}
+    revenue_values = rows.get("revenue") or []
+    cost_values = rows.get("cost_of_revenue") or []
+    gross_values = rows.get("gross_profit") or []
+    selling_values = rows.get("selling_marketing") or []
+    ga_values = rows.get("general_admin") or []
+    other_values = rows.get("other_gains_losses") or []
+    operating_values = rows.get("operating_profit") or []
+    pretax_values = rows.get("pretax_income") or []
+    tax_values = rows.get("income_tax") or []
+    equity_values = rows.get("net_income_attributable") or rows.get("net_income") or []
     if not (revenue_values and gross_values and operating_values and pretax_values and tax_values and equity_values):
+        return None
+    bn_scale = statement.metadata.get("bnScale") if isinstance(statement.metadata, dict) else None
+    if bn_scale is None:
         return None
 
     revenue_current = revenue_values[0]
@@ -687,19 +1406,19 @@ def _parse_tencent_pdf_financial_entry(quarter_key: str, source_url: str, filing
         "fiscalQuarter": f"Q{quarter_key[5]}",
         "fiscalLabel": f"FY{quarter_key[:4]} Q{quarter_key[5]}",
         "statementCurrency": "CNY",
-        "revenueBn": round(revenue_current / 1000, 3),
+        "revenueBn": statement_value_to_bn(revenue_current, statement),
         "revenueYoyPct": round((revenue_current / revenue_prior - 1) * 100, 3) if revenue_prior and revenue_prior > 0 else None,
-        "costOfRevenueBn": round(cost_current / 1000, 3),
-        "grossProfitBn": round(gross_current / 1000, 3),
-        "sgnaBn": round((selling_current + ga_current) / 1000, 3) if selling_current or ga_current else None,
+        "costOfRevenueBn": statement_value_to_bn(cost_current, statement),
+        "grossProfitBn": statement_value_to_bn(gross_current, statement),
+        "sgnaBn": statement_value_to_bn(selling_current + ga_current, statement) if selling_current or ga_current else None,
         "rndBn": None,
-        "otherOpexBn": round(abs(other_current) / 1000, 3) if other_current < 0 else None,
-        "operatingExpensesBn": round(operating_expenses_current / 1000, 3),
-        "operatingIncomeBn": round(operating_current / 1000, 3),
-        "nonOperatingBn": round((pretax_current - operating_current) / 1000, 3),
-        "pretaxIncomeBn": round(pretax_current / 1000, 3),
-        "taxBn": round(abs(tax_current) / 1000, 3),
-        "netIncomeBn": round(net_income_current / 1000, 3),
+        "otherOpexBn": statement_value_to_bn(abs(other_current), statement) if other_current < 0 else None,
+        "operatingExpensesBn": statement_value_to_bn(operating_expenses_current, statement),
+        "operatingIncomeBn": statement_value_to_bn(operating_current, statement),
+        "nonOperatingBn": statement_value_to_bn(pretax_current - operating_current, statement),
+        "pretaxIncomeBn": statement_value_to_bn(pretax_current, statement),
+        "taxBn": statement_value_to_bn(abs(tax_current), statement),
+        "netIncomeBn": statement_value_to_bn(net_income_current, statement),
         "netIncomeYoyPct": net_income_yoy,
         "grossMarginPct": gross_margin_current,
         "operatingMarginPct": operating_margin_current,
@@ -717,6 +1436,16 @@ def _parse_tencent_pdf_financial_entry(quarter_key: str, source_url: str, filing
 
 def supplement_tencent_official_financials(company_payload: dict[str, Any]) -> dict[str, Any]:
     if str(company_payload.get("id") or "") != "tencent":
+        return company_payload
+    parser_diagnostics = company_payload.get("parserDiagnostics") if isinstance(company_payload.get("parserDiagnostics"), dict) else {}
+    parser_financials = parser_diagnostics.get("financials") if isinstance(parser_diagnostics.get("financials"), dict) else {}
+    parser_attempts = parser_financials.get("attempts") if isinstance(parser_financials.get("attempts"), list) else []
+    if any(
+        isinstance(attempt, dict)
+        and str(attempt.get("source_id") or "") == "tencent-ir-pdf"
+        and str(attempt.get("status") or "") == "success"
+        for attempt in parser_attempts
+    ):
         return company_payload
     financials: dict[str, Any] = company_payload.get("financials", {})
     for quarter_key, entry in financials.items():
@@ -847,10 +1576,10 @@ def load_official_segment_history(company: dict[str, Any], refresh: bool) -> dic
     return fetch_official_segment_history(company, refresh=refresh)
 
 
-def merge_official_segment_history(company_payload: dict[str, Any], company: dict[str, Any], refresh: bool) -> dict[str, Any]:
-    history = load_official_segment_history(company, refresh=refresh)
+def apply_official_segment_history(company_payload: dict[str, Any], history: dict[str, Any]) -> dict[str, Any]:
     quarter_map = history.get("quarters", {}) if isinstance(history, dict) else {}
     financials: dict[str, Any] = company_payload.get("financials", {})
+    company_id = str(company_payload.get("id") or history.get("id") or "")
     for quarter, rows in quarter_map.items():
         entry = financials.get(quarter)
         if not isinstance(entry, dict):
@@ -875,6 +1604,7 @@ def merge_official_segment_history(company_payload: dict[str, Any], company: dic
                     "periodEnd": row.get("periodEnd"),
                 }
             )
+        normalized_rows = normalize_official_revenue_segments(company_id, str(quarter), normalized_rows)
         entry["officialRevenueSegments"] = normalized_rows
         entry["officialSegmentAxis"] = history.get("axis")
         entry["officialSegmentSource"] = history.get("source")
@@ -886,6 +1616,11 @@ def merge_official_segment_history(company_payload: dict[str, Any], company: dic
         "errors": history.get("errors", []),
     }
     return company_payload
+
+
+def merge_official_segment_history(company_payload: dict[str, Any], company: dict[str, Any], refresh: bool) -> dict[str, Any]:
+    history = load_official_segment_history(company, refresh=refresh)
+    return apply_official_segment_history(company_payload, history)
 
 
 def load_official_revenue_structure_history(company: dict[str, Any], refresh: bool) -> dict[str, Any]:
@@ -934,8 +1669,11 @@ def enrich_growth_rows(financials: dict[str, Any], field_name: str) -> None:
                 row["mixYoyDeltaPp"] = round(current_mix - prior_mix, 1)
 
 
-def merge_official_revenue_structure_history(company_payload: dict[str, Any], company: dict[str, Any], refresh: bool) -> dict[str, Any]:
-    history = load_official_revenue_structure_history(company, refresh=refresh)
+def apply_revenue_structure_history(
+    company_payload: dict[str, Any],
+    company: dict[str, Any],
+    history: dict[str, Any],
+) -> dict[str, Any]:
     financials: dict[str, Any] = company_payload.get("financials", {})
     for quarter, payload in (history.get("quarters") or {}).items():
         segments = payload.get("segments") or []
@@ -958,6 +1696,8 @@ def merge_official_revenue_structure_history(company_payload: dict[str, Any], co
                         "supportLines": row.get("supportLines"),
                         "supportLinesZh": row.get("supportLinesZh"),
                         "metricMode": row.get("metricMode"),
+                        "validationEligible": row.get("validationEligible"),
+                        "validationNotes": row.get("validationNotes"),
                     }
                 )
             normalized_segments = normalize_official_revenue_segments(company["id"], quarter, normalized_segments)
@@ -993,9 +1733,45 @@ def merge_official_revenue_structure_history(company_payload: dict[str, Any], co
                         "supportLinesZh": row.get("supportLinesZh"),
                         "targetName": row.get("targetName"),
                         "metricMode": row.get("metricMode"),
+                        "validationEligible": row.get("validationEligible"),
+                        "validationNotes": row.get("validationNotes"),
                     }
                 )
+            normalized_detail_groups = mark_detail_groups_validation_ineligible(normalized_detail_groups)
             entry["officialRevenueDetailGroups"] = normalized_detail_groups
+        opex_breakdown = payload.get("opexBreakdown") or payload.get("officialOpexBreakdown") or []
+        if opex_breakdown:
+            normalized_opex_breakdown = []
+            for row in opex_breakdown:
+                normalized_opex_breakdown.append(
+                    {
+                        "name": row.get("name"),
+                        "nameZh": row.get("nameZh"),
+                        "memberKey": str(row.get("memberKey") or row.get("name") or ""),
+                        "valueBn": row.get("valueBn"),
+                        "sourceUrl": row.get("sourceUrl"),
+                        "sourceForm": row.get("sourceForm"),
+                        "filingDate": row.get("filingDate"),
+                        "validationEligible": row.get("validationEligible"),
+                        "validationNotes": row.get("validationNotes"),
+                    }
+                )
+            entry["officialOpexBreakdown"] = normalized_opex_breakdown
+        cost_breakdown = payload.get("costBreakdown") or payload.get("officialCostBreakdown") or []
+        if cost_breakdown:
+            normalized_cost_breakdown = []
+            for row in cost_breakdown:
+                normalized_cost_breakdown.append(
+                    {
+                        "name": row.get("name"),
+                        "nameZh": row.get("nameZh"),
+                        "valueBn": row.get("valueBn"),
+                        "sourceUrl": row.get("sourceUrl"),
+                        "sourceForm": row.get("sourceForm"),
+                        "filingDate": row.get("filingDate"),
+                    }
+                )
+            entry["officialCostBreakdown"] = normalized_cost_breakdown
         if payload.get("style"):
             entry["officialRevenueStyle"] = payload.get("style")
         if payload.get("displayCurrency"):
@@ -1035,13 +1811,29 @@ def merge_official_revenue_structure_history(company_payload: dict[str, Any], co
     return company_payload
 
 
+def merge_official_revenue_structure_history(company_payload: dict[str, Any], company: dict[str, Any], refresh: bool) -> dict[str, Any]:
+    history = load_official_revenue_structure_history(company, refresh=refresh)
+    return apply_revenue_structure_history(company_payload, company, history)
+
+
+def build_company_payload_with_universal_parser(company: dict[str, Any], refresh: bool) -> dict[str, Any]:
+    parse_result = run_universal_company_parser(company, refresh=refresh)
+    payload = deepcopy(parse_result.get("financialPayload") or {})
+    if not isinstance(payload, dict) or not isinstance(payload.get("financials"), dict):
+        raise RuntimeError(f"Universal parser returned no financial payload for {company.get('ticker') or company.get('id')}")
+    payload = apply_official_segment_history(payload, parse_result.get("segmentHistory") or {})
+    payload = apply_revenue_structure_history(payload, company, parse_result.get("revenueStructureHistory") or {})
+    payload["parserDiagnostics"] = deepcopy(parse_result.get("diagnostics") or {})
+    return payload
+
+
 def main() -> int:
     args = parse_args()
     manual_presets = load_manual_presets()
+    manual_company_overrides = load_manual_company_overrides()
     fx_cache = load_fx_cache()
     selected_tokens = parse_company_selection(args.companies)
     selected_companies = [company for company in TOP30_COMPANIES if company_matches_selection(company, selected_tokens)]
-    selected_company_ids = {company["id"] for company in selected_companies}
     if selected_tokens and not selected_companies:
         print("[warn] no companies matched --companies selection; nothing to refresh.", flush=True)
 
@@ -1051,28 +1843,17 @@ def main() -> int:
     for company in selected_companies:
         print(f"[build] {company['ticker']} ...", flush=True)
         try:
-            payload = fetch_company_payload(company, refresh=args.refresh)
-            if company.get("financialSource") != "stockanalysis":
-                payload = merge_official_segment_history(payload, company, refresh=args.refresh)
-            payload = merge_official_revenue_structure_history(payload, company, refresh=args.refresh)
+            payload = build_company_payload_with_universal_parser(company, refresh=args.refresh)
             payload = supplement_tencent_official_financials(payload)
             payload = sanitize_implausible_q4_revenue_aligned_statements(payload)
+            payload = apply_manual_company_override(payload, company, manual_company_overrides)
             payload = apply_usd_display_fields(payload, fx_cache)
         except Exception as exc:  # noqa: BLE001
             failures.append(f"{company['ticker']}: {exc}")
             print(f"  failed: {exc}", file=sys.stderr, flush=True)
             continue
-
         presets = manual_presets.get(str(company["id"])) or {}
-        payload["statementPresets"] = presets
-        segment_quarter_count = sum(1 for item in payload["financials"].values() if item.get("officialRevenueSegments"))
-        payload["coverage"] = {
-            "quarterCount": len(payload["quarters"]),
-            "pixelReplicaQuarterCount": len(presets),
-            "hasPixelReplica": bool(presets),
-            "officialFinancialQuarterCount": len(payload["quarters"]),
-            "officialSegmentQuarterCount": segment_quarter_count,
-        }
+        payload = finalize_company_payload(company, payload, presets)
         COMPANY_CACHE_DIR.mkdir(parents=True, exist_ok=True)
         (COMPANY_CACHE_DIR / f"{company['id']}.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
         results_by_company_id[company["id"]] = payload
@@ -1084,59 +1865,65 @@ def main() -> int:
                 continue
             cached_payload = load_cached_company_payload(company["id"])
             if cached_payload is not None:
+                presets = manual_presets.get(str(company["id"])) or {}
+                cached_payload = finalize_company_payload(company, cached_payload, presets)
                 results_by_company_id[company["id"]] = cached_payload
+                COMPANY_CACHE_DIR.mkdir(parents=True, exist_ok=True)
+                (COMPANY_CACHE_DIR / f"{company['id']}.json").write_text(json.dumps(cached_payload, ensure_ascii=False, indent=2), encoding="utf-8")
                 continue
             print(f"[build] {company['ticker']} ...", flush=True)
             try:
-                payload = fetch_company_payload(company, refresh=False)
-                if company.get("financialSource") != "stockanalysis":
-                    payload = merge_official_segment_history(payload, company, refresh=False)
-                payload = merge_official_revenue_structure_history(payload, company, refresh=False)
+                payload = build_company_payload_with_universal_parser(company, refresh=False)
                 payload = supplement_tencent_official_financials(payload)
                 payload = sanitize_implausible_q4_revenue_aligned_statements(payload)
+                payload = apply_manual_company_override(payload, company, manual_company_overrides)
                 payload = apply_usd_display_fields(payload, fx_cache)
             except Exception as exc:  # noqa: BLE001
                 failures.append(f"{company['ticker']}: {exc}")
                 print(f"  failed: {exc}", file=sys.stderr, flush=True)
                 continue
-
             presets = manual_presets.get(str(company["id"])) or {}
-            payload["statementPresets"] = presets
-            segment_quarter_count = sum(1 for item in payload["financials"].values() if item.get("officialRevenueSegments"))
-            payload["coverage"] = {
-                "quarterCount": len(payload["quarters"]),
-                "pixelReplicaQuarterCount": len(presets),
-                "hasPixelReplica": bool(presets),
-                "officialFinancialQuarterCount": len(payload["quarters"]),
-                "officialSegmentQuarterCount": segment_quarter_count,
-            }
+            payload = finalize_company_payload(company, payload, presets)
             COMPANY_CACHE_DIR.mkdir(parents=True, exist_ok=True)
             (COMPANY_CACHE_DIR / f"{company['id']}.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
             results_by_company_id[company["id"]] = payload
 
     save_fx_cache(fx_cache)
+    for company in TOP30_COMPANIES:
+        if company["id"] not in results_by_company_id:
+            continue
+        presets = manual_presets.get(str(company["id"])) or {}
+        results_by_company_id[company["id"]] = finalize_company_payload(company, results_by_company_id[company["id"]], presets)
     companies = [results_by_company_id[company["id"]] for company in TOP30_COMPANIES if company["id"] in results_by_company_id]
+    classification_audit = build_dataset_classification_audit(companies)
 
     dataset = {
         "generatedAt": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "universeSource": UNIVERSE_SOURCE,
         "companyCount": len(companies),
         "notes": [
+            "A universal parser orchestration layer now coordinates financial, segment, and revenue-structure extractors with source-level provenance and fallback metadata.",
             "Quarterly financial trunks are sourced through an official-first pipeline, using SEC EDGAR XBRL companyfacts whenever available.",
             "Revenue structure enrichment is sourced directly from official company filings and official IR disclosures, including PDF parsing for non-SEC issuers when needed.",
             "When official statement fields are incomplete or structurally incompatible, the renderer safely falls back to a normalized financial table source instead of fabricating the bridge.",
             "Pixel-replica layouts rely on manual presets and the unified replica template.",
+            "Classification coverage is audited at build time for stockanalysis-backed additions; missing latest-quarter revenue splits now surface as blocking issues unless an explicit official-disclosure exception is declared.",
         ],
         "companies": companies,
+        "classificationAudit": classification_audit,
         "failures": failures,
     }
     OUTPUT_PATH.write_text(json.dumps(dataset, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"[done] wrote {OUTPUT_PATH}", flush=True)
+    if classification_audit["blockingIssues"]:
+        print("[error] classification coverage blockers detected:", file=sys.stderr, flush=True)
+        for issue in classification_audit["blockingIssues"]:
+            print(f"  - {issue}", file=sys.stderr, flush=True)
     if failures:
         print("[warn] partial failures detected:", flush=True)
         for failure in failures:
             print(f"  - {failure}", flush=True)
-    return 0
+    return 1 if classification_audit["blockingIssues"] else 0
 
 
 if __name__ == "__main__":

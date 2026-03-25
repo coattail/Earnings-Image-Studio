@@ -75,6 +75,75 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 0,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 7.001,
+            "derived": -6.466,
+            "delta": 13.467,
+            "tolerance": 0.21
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Google Inc.",
@@ -87,6 +156,10 @@
           "filingDate": "2019-04-30",
           "periodStart": "2018-01-01",
           "periodEnd": "2018-03-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "legacy-core-segment-disclosure"
+          ],
           "mixPct": 70.6
         },
         {
@@ -100,13 +173,15 @@
           "filingDate": "2019-04-30",
           "periodStart": "2018-01-01",
           "periodEnd": "2018-03-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "legacy-core-segment-disclosure"
+          ],
           "mixPct": 0.5
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2018Q2": {
       "calendarQuarter": "2018Q2",
@@ -137,6 +212,76 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 2.807,
+            "derived": -11.076,
+            "delta": 13.883,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Google Inc.",
@@ -149,6 +294,10 @@
           "filingDate": "2019-07-26",
           "periodStart": "2018-04-01",
           "periodEnd": "2018-06-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "legacy-core-segment-disclosure"
+          ],
           "mixPct": 71.2,
           "qoqPct": 5.75
         },
@@ -163,14 +312,16 @@
           "filingDate": "2019-07-26",
           "periodStart": "2018-04-01",
           "periodEnd": "2018-06-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "legacy-core-segment-disclosure"
+          ],
           "mixPct": 0.4,
           "qoqPct": -3.33
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2018Q3": {
       "calendarQuarter": "2018Q3",
@@ -201,6 +352,76 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 8.31,
+            "derived": -5.971,
+            "delta": 14.281,
+            "tolerance": 0.249
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Google Inc.",
@@ -213,6 +434,10 @@
           "filingDate": "2019-10-29",
           "periodStart": "2018-07-01",
           "periodEnd": "2018-09-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "legacy-core-segment-disclosure"
+          ],
           "mixPct": 71.3,
           "qoqPct": 3.4
         },
@@ -227,14 +452,16 @@
           "filingDate": "2019-10-29",
           "periodStart": "2018-07-01",
           "periodEnd": "2018-09-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "legacy-core-segment-disclosure"
+          ],
           "mixPct": 0.4,
           "qoqPct": 0.69
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2018Q4": {
       "calendarQuarter": "2018Q4",
@@ -265,6 +492,76 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 8.203,
+            "derived": -9.715,
+            "delta": 17.918,
+            "tolerance": 0.246
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Google Inc.",
@@ -277,6 +574,10 @@
           "filingDate": "2020-02-04",
           "periodStart": "2018-10-01",
           "periodEnd": "2018-12-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "legacy-core-segment-disclosure"
+          ],
           "mixPct": 40.7,
           "qoqPct": -33.56
         },
@@ -291,14 +592,16 @@
           "filingDate": "2020-02-04",
           "periodStart": "2018-10-01",
           "periodEnd": "2018-12-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "legacy-core-segment-disclosure"
+          ],
           "mixPct": 0.4,
           "qoqPct": 5.48
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2019Q1": {
       "calendarQuarter": "2019Q1",
@@ -329,6 +632,81 @@
       "grossMarginYoyDeltaPp": -0.82,
       "operatingMarginYoyDeltaPp": -4.3,
       "profitMarginYoyDeltaPp": -11.86,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 6.608,
+            "derived": -9.404,
+            "delta": 16.012,
+            "tolerance": 0.198
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Google Inc.",
@@ -341,6 +719,10 @@
           "filingDate": "2019-04-30",
           "periodStart": "2019-01-01",
           "periodEnd": "2019-03-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "legacy-core-segment-disclosure"
+          ],
           "mixPct": 70.7,
           "qoqPct": 60.69,
           "mixYoyDeltaPp": 0.0
@@ -356,15 +738,17 @@
           "filingDate": "2019-04-30",
           "periodStart": "2019-01-01",
           "periodEnd": "2019-03-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "legacy-core-segment-disclosure"
+          ],
           "mixPct": 0.5,
           "qoqPct": 10.39,
           "mixYoyDeltaPp": -0.0
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2019Q2": {
       "calendarQuarter": "2019Q2",
@@ -395,6 +779,81 @@
       "grossMarginYoyDeltaPp": -1.9,
       "operatingMarginYoyDeltaPp": 14.97,
       "profitMarginYoyDeltaPp": 15.76,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 9.18,
+            "derived": -8.116,
+            "delta": 17.296,
+            "tolerance": 0.275
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Google Inc.",
@@ -407,6 +866,10 @@
           "filingDate": "2019-07-26",
           "periodStart": "2019-04-01",
           "periodEnd": "2019-06-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "legacy-core-segment-disclosure"
+          ],
           "mixPct": 70.2,
           "qoqPct": 6.44,
           "mixYoyDeltaPp": -1.0
@@ -422,15 +885,17 @@
           "filingDate": "2019-07-26",
           "periodStart": "2019-04-01",
           "periodEnd": "2019-06-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "legacy-core-segment-disclosure"
+          ],
           "mixPct": 0.4,
           "qoqPct": -4.71,
           "mixYoyDeltaPp": -0.0
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2019Q3": {
       "calendarQuarter": "2019Q3",
@@ -461,6 +926,81 @@
       "grossMarginYoyDeltaPp": -1.05,
       "operatingMarginYoyDeltaPp": -1.97,
       "profitMarginYoyDeltaPp": -9.79,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 9.177,
+            "derived": -8.391,
+            "delta": 17.568,
+            "tolerance": 0.275
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Google Inc.",
@@ -473,6 +1013,10 @@
           "filingDate": "2019-10-29",
           "periodStart": "2019-07-01",
           "periodEnd": "2019-09-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "legacy-core-segment-disclosure"
+          ],
           "mixPct": 70.7,
           "qoqPct": 4.8,
           "mixYoyDeltaPp": -0.6
@@ -488,15 +1032,17 @@
           "filingDate": "2019-10-29",
           "periodStart": "2019-07-01",
           "periodEnd": "2019-09-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "legacy-core-segment-disclosure"
+          ],
           "mixPct": 0.4,
           "qoqPct": -4.32,
           "mixYoyDeltaPp": -0.0
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2019Q4": {
       "calendarQuarter": "2019Q4",
@@ -527,6 +1073,81 @@
       "grossMarginYoyDeltaPp": 0.0,
       "operatingMarginYoyDeltaPp": -0.78,
       "profitMarginYoyDeltaPp": 0.38,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 9.266,
+            "derived": -11.754,
+            "delta": 21.02,
+            "tolerance": 0.278
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Google Inc.",
@@ -539,6 +1160,10 @@
           "filingDate": "2020-02-04",
           "periodStart": "2019-10-01",
           "periodEnd": "2019-12-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "legacy-core-segment-disclosure"
+          ],
           "mixPct": 35.7,
           "qoqPct": -42.57,
           "mixYoyDeltaPp": -5.0
@@ -554,15 +1179,17 @@
           "filingDate": "2020-02-04",
           "periodStart": "2019-10-01",
           "periodEnd": "2019-12-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "legacy-core-segment-disclosure"
+          ],
           "mixPct": 0.4,
           "qoqPct": 10.97,
           "mixYoyDeltaPp": -0.0
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2020Q1": {
       "calendarQuarter": "2020Q1",
@@ -593,6 +1220,81 @@
       "grossMarginYoyDeltaPp": -2.06,
       "operatingMarginYoyDeltaPp": 1.2,
       "profitMarginYoyDeltaPp": -1.71,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 7.977,
+            "derived": -11.005,
+            "delta": 18.982,
+            "tolerance": 0.239
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Google Services",
@@ -605,6 +1307,10 @@
           "filingDate": "2021-04-28",
           "periodStart": "2020-01-01",
           "periodEnd": "2020-03-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-google-business-disclosure"
+          ],
           "mixPct": 59.5,
           "qoqPct": 48.94,
           "mixYoyDeltaPp": -11.1
@@ -620,6 +1326,10 @@
           "filingDate": "2021-04-28",
           "periodStart": "2020-01-01",
           "periodEnd": "2020-03-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-google-business-disclosure"
+          ],
           "mixPct": 6.7
         },
         {
@@ -633,15 +1343,17 @@
           "filingDate": "2020-04-29",
           "periodStart": "2020-01-01",
           "periodEnd": "2020-03-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-google-business-disclosure"
+          ],
           "mixPct": 0.3,
           "qoqPct": -21.51,
           "mixYoyDeltaPp": -0.1
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2020Q2": {
       "calendarQuarter": "2020Q2",
@@ -672,6 +1384,81 @@
       "grossMarginYoyDeltaPp": -4.04,
       "operatingMarginYoyDeltaPp": -6.9,
       "profitMarginYoyDeltaPp": -7.37,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 6.383,
+            "derived": -12.17,
+            "delta": 18.553,
+            "tolerance": 0.191
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Google Services",
@@ -684,6 +1471,10 @@
           "filingDate": "2021-07-28",
           "periodStart": "2020-04-01",
           "periodEnd": "2020-06-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-google-business-disclosure"
+          ],
           "mixPct": 55.7,
           "qoqPct": -12.99,
           "mixYoyDeltaPp": -14.5
@@ -699,6 +1490,10 @@
           "filingDate": "2021-07-28",
           "periodStart": "2020-04-01",
           "periodEnd": "2020-06-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-google-business-disclosure"
+          ],
           "mixPct": 7.9,
           "qoqPct": 8.28
         },
@@ -713,15 +1508,17 @@
           "filingDate": "2020-07-31",
           "periodStart": "2020-04-01",
           "periodEnd": "2020-06-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-google-business-disclosure"
+          ],
           "mixPct": 0.4,
           "qoqPct": 9.63,
           "mixYoyDeltaPp": -0.0
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2020Q3": {
       "calendarQuarter": "2020Q3",
@@ -752,6 +1549,81 @@
       "grossMarginYoyDeltaPp": -2.35,
       "operatingMarginYoyDeltaPp": 1.62,
       "profitMarginYoyDeltaPp": 6.91,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 11.213,
+            "derived": -9.904,
+            "delta": 21.117,
+            "tolerance": 0.336
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Google Services",
@@ -764,6 +1636,10 @@
           "filingDate": "2021-10-27",
           "periodStart": "2020-07-01",
           "periodEnd": "2020-09-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-google-business-disclosure"
+          ],
           "mixPct": 57.0,
           "qoqPct": 23.54,
           "mixYoyDeltaPp": -13.7
@@ -779,6 +1655,10 @@
           "filingDate": "2021-10-27",
           "periodStart": "2020-07-01",
           "periodEnd": "2020-09-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-google-business-disclosure"
+          ],
           "mixPct": 7.5,
           "qoqPct": 14.53
         },
@@ -793,15 +1673,17 @@
           "filingDate": "2020-10-30",
           "periodStart": "2020-07-01",
           "periodEnd": "2020-09-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-google-business-disclosure"
+          ],
           "mixPct": 0.4,
           "qoqPct": 20.27,
           "mixYoyDeltaPp": 0.0
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2020Q4": {
       "calendarQuarter": "2020Q4",
@@ -832,6 +1714,81 @@
       "grossMarginYoyDeltaPp": -0.22,
       "operatingMarginYoyDeltaPp": 7.4,
       "profitMarginYoyDeltaPp": 3.6,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 15.651,
+            "derived": -10.429,
+            "delta": 26.08,
+            "tolerance": 0.47
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "All Other Segments",
@@ -850,9 +1807,7 @@
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2021Q1": {
       "calendarQuarter": "2021Q1",
@@ -883,6 +1838,85 @@
       "grossMarginYoyDeltaPp": 2.55,
       "operatingMarginYoyDeltaPp": 10.34,
       "profitMarginYoyDeltaPp": 15.8,
+      "statementFilingDate": "2021-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/googl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 16.437,
+            "derived": -7.666,
+            "delta": 24.103,
+            "tolerance": 0.493
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Ad Revenue",
@@ -898,7 +1932,9 @@
           "filingDate": "2021-04-28",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Play",
@@ -916,7 +1952,9 @@
             "Official: subscriptions, platforms, and devices"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Cloud",
@@ -932,7 +1970,9 @@
           "filingDate": "2021-04-28",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -950,7 +1990,9 @@
             "Other Bets + hedging"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -973,7 +2015,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google AdMob",
@@ -992,7 +2036,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "YouTube",
@@ -1009,12 +2055,12 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
-      "officialRevenueStyle": "ad-funnel-bridge",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialRevenueStyle": "ad-funnel-bridge"
     },
     "2021Q2": {
       "calendarQuarter": "2021Q2",
@@ -1045,6 +2091,85 @@
       "grossMarginYoyDeltaPp": 6.07,
       "operatingMarginYoyDeltaPp": 14.62,
       "profitMarginYoyDeltaPp": 11.77,
+      "statementFilingDate": "2021-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/googl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 19.361,
+            "derived": -6.866,
+            "delta": 26.227,
+            "tolerance": 0.581
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Ad Revenue",
@@ -1060,7 +2185,9 @@
           "filingDate": "2021-07-28",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Play",
@@ -1078,7 +2205,9 @@
             "Official: subscriptions, platforms, and devices"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Cloud",
@@ -1094,7 +2223,9 @@
           "filingDate": "2021-07-28",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -1112,7 +2243,9 @@
             "Other Bets + hedging"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1135,7 +2268,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google AdMob",
@@ -1154,7 +2289,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "YouTube",
@@ -1171,12 +2308,12 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
-      "officialRevenueStyle": "ad-funnel-bridge",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialRevenueStyle": "ad-funnel-bridge"
     },
     "2021Q3": {
       "calendarQuarter": "2021Q3",
@@ -1207,6 +2344,85 @@
       "grossMarginYoyDeltaPp": 3.31,
       "operatingMarginYoyDeltaPp": 8.02,
       "profitMarginYoyDeltaPp": 4.72,
+      "statementFilingDate": "2021-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/googl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 21.031,
+            "derived": -6.59,
+            "delta": 27.621,
+            "tolerance": 0.631
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Ad Revenue",
@@ -1222,7 +2438,9 @@
           "filingDate": "2021-10-27",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Play",
@@ -1240,7 +2458,9 @@
             "Official: subscriptions, platforms, and devices"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Cloud",
@@ -1256,7 +2476,9 @@
           "filingDate": "2021-10-27",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -1274,7 +2496,9 @@
             "Other Bets + hedging"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1297,7 +2521,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google AdMob",
@@ -1316,7 +2542,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "YouTube",
@@ -1333,12 +2561,12 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
-      "officialRevenueStyle": "ad-funnel-bridge",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialRevenueStyle": "ad-funnel-bridge"
     },
     "2021Q4": {
       "calendarQuarter": "2021Q4",
@@ -1369,6 +2597,85 @@
       "grossMarginYoyDeltaPp": 2.05,
       "operatingMarginYoyDeltaPp": 1.54,
       "profitMarginYoyDeltaPp": 0.64,
+      "statementFilingDate": "2021-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/googl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 21.885,
+            "derived": -11.103,
+            "delta": 32.988,
+            "tolerance": 0.657
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Ad Revenue",
@@ -1384,7 +2691,9 @@
           "filingDate": "2022-02-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Play",
@@ -1402,7 +2711,9 @@
             "Official: subscriptions, platforms, and devices"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Cloud",
@@ -1418,7 +2729,9 @@
           "filingDate": "2022-02-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -1436,7 +2749,9 @@
             "Other Bets + hedging"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1459,7 +2774,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google AdMob",
@@ -1478,7 +2795,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "YouTube",
@@ -1495,12 +2814,12 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
-      "officialRevenueStyle": "ad-funnel-bridge",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialRevenueStyle": "ad-funnel-bridge"
     },
     "2022Q1": {
       "calendarQuarter": "2022Q1",
@@ -1531,6 +2850,85 @@
       "grossMarginYoyDeltaPp": 0.05,
       "operatingMarginYoyDeltaPp": -0.17,
       "profitMarginYoyDeltaPp": -8.24,
+      "statementFilingDate": "2022-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/googl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 20.094,
+            "derived": -9.505,
+            "delta": 29.599,
+            "tolerance": 0.603
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Ad Revenue",
@@ -1546,7 +2944,9 @@
           "filingDate": "2022-04-27",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Play",
@@ -1564,7 +2964,9 @@
             "Official: subscriptions, platforms, and devices"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Cloud",
@@ -1580,7 +2982,9 @@
           "filingDate": "2022-04-27",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -1598,7 +3002,9 @@
             "Other Bets + hedging"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1621,7 +3027,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google AdMob",
@@ -1640,7 +3048,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "YouTube",
@@ -1657,12 +3067,12 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
-      "officialRevenueStyle": "ad-funnel-bridge",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialRevenueStyle": "ad-funnel-bridge"
     },
     "2022Q2": {
       "calendarQuarter": "2022Q2",
@@ -1693,6 +3103,85 @@
       "grossMarginYoyDeltaPp": -0.82,
       "operatingMarginYoyDeltaPp": -3.37,
       "profitMarginYoyDeltaPp": -6.98,
+      "statementFilingDate": "2022-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/googl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 19.453,
+            "derived": -10.651,
+            "delta": 30.104,
+            "tolerance": 0.584
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Ad Revenue",
@@ -1708,7 +3197,9 @@
           "filingDate": "2022-07-27",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Play",
@@ -1726,7 +3217,9 @@
             "Official: subscriptions, platforms, and devices"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Cloud",
@@ -1742,7 +3235,9 @@
           "filingDate": "2022-07-27",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -1760,7 +3255,9 @@
             "Other Bets + hedging"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1783,7 +3280,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google AdMob",
@@ -1802,7 +3301,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "YouTube",
@@ -1819,12 +3320,12 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
-      "officialRevenueStyle": "ad-funnel-bridge",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialRevenueStyle": "ad-funnel-bridge"
     },
     "2022Q3": {
       "calendarQuarter": "2022Q3",
@@ -1855,6 +3356,85 @@
       "grossMarginYoyDeltaPp": -2.68,
       "operatingMarginYoyDeltaPp": -7.5,
       "profitMarginYoyDeltaPp": -8.95,
+      "statementFilingDate": "2022-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/googl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 17.135,
+            "derived": -14.023,
+            "delta": 31.158,
+            "tolerance": 0.514
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Ad Revenue",
@@ -1870,7 +3450,9 @@
           "filingDate": "2022-10-26",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Play",
@@ -1888,7 +3470,9 @@
             "Official: subscriptions, platforms, and devices"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Cloud",
@@ -1904,7 +3488,9 @@
           "filingDate": "2022-10-26",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -1922,7 +3508,9 @@
             "Other Bets + hedging"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1945,7 +3533,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google AdMob",
@@ -1964,7 +3554,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "YouTube",
@@ -1981,12 +3573,12 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
-      "officialRevenueStyle": "ad-funnel-bridge",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialRevenueStyle": "ad-funnel-bridge"
     },
     "2022Q4": {
       "calendarQuarter": "2022Q4",
@@ -2017,6 +3609,85 @@
       "grossMarginYoyDeltaPp": -2.68,
       "operatingMarginYoyDeltaPp": -5.17,
       "profitMarginYoyDeltaPp": -9.48,
+      "statementFilingDate": "2022-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/googl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 18.16,
+            "derived": -17.182,
+            "delta": 35.342,
+            "tolerance": 0.545
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Ad Revenue",
@@ -2032,7 +3703,9 @@
           "filingDate": "2023-02-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Play",
@@ -2050,7 +3723,9 @@
             "Official: subscriptions, platforms, and devices"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Cloud",
@@ -2066,7 +3741,9 @@
           "filingDate": "2023-02-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -2084,7 +3761,9 @@
             "Other Bets + hedging"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2107,7 +3786,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google AdMob",
@@ -2126,7 +3807,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "YouTube",
@@ -2143,12 +3826,12 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
-      "officialRevenueStyle": "ad-funnel-bridge",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialRevenueStyle": "ad-funnel-bridge"
     },
     "2023Q1": {
       "calendarQuarter": "2023Q1",
@@ -2179,6 +3862,85 @@
       "grossMarginYoyDeltaPp": -0.34,
       "operatingMarginYoyDeltaPp": -4.6,
       "profitMarginYoyDeltaPp": -2.6,
+      "statementFilingDate": "2023-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/googl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 17.415,
+            "derived": -13.197,
+            "delta": 30.612,
+            "tolerance": 0.522
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Ad Revenue",
@@ -2194,7 +3956,9 @@
           "filingDate": "2023-04-26",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Cloud",
@@ -2210,7 +3974,9 @@
           "filingDate": "2023-04-26",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Play",
@@ -2228,7 +3994,9 @@
             "Official: subscriptions, platforms, and devices"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -2246,7 +4014,9 @@
             "Other Bets + hedging"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2269,7 +4039,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google AdMob",
@@ -2288,7 +4060,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "YouTube",
@@ -2305,12 +4079,12 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
-      "officialRevenueStyle": "ad-funnel-bridge",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialRevenueStyle": "ad-funnel-bridge"
     },
     "2023Q2": {
       "calendarQuarter": "2023Q2",
@@ -2341,6 +4115,85 @@
       "grossMarginYoyDeltaPp": 0.42,
       "operatingMarginYoyDeltaPp": 1.35,
       "profitMarginYoyDeltaPp": 1.66,
+      "statementFilingDate": "2023-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/googl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 21.838,
+            "derived": -10.078,
+            "delta": 31.916,
+            "tolerance": 0.655
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Ad Revenue",
@@ -2356,7 +4209,9 @@
           "filingDate": "2023-07-26",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Play",
@@ -2374,7 +4229,9 @@
             "Official: subscriptions, platforms, and devices"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Cloud",
@@ -2390,7 +4247,9 @@
           "filingDate": "2023-07-26",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -2408,7 +4267,9 @@
             "Other Bets + hedging"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2431,7 +4292,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google AdMob",
@@ -2450,7 +4313,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "YouTube",
@@ -2467,12 +4332,12 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
-      "officialRevenueStyle": "ad-funnel-bridge",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialRevenueStyle": "ad-funnel-bridge"
     },
     "2023Q3": {
       "calendarQuarter": "2023Q3",
@@ -2503,6 +4368,85 @@
       "grossMarginYoyDeltaPp": 1.77,
       "operatingMarginYoyDeltaPp": 3.03,
       "profitMarginYoyDeltaPp": 5.54,
+      "statementFilingDate": "2023-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/googl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 21.343,
+            "derived": -11.886,
+            "delta": 33.229,
+            "tolerance": 0.64
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Ad Revenue",
@@ -2518,7 +4462,9 @@
           "filingDate": "2023-10-25",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Cloud",
@@ -2534,7 +4480,9 @@
           "filingDate": "2023-10-25",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Play",
@@ -2552,7 +4500,9 @@
             "Official: subscriptions, platforms, and devices"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -2570,7 +4520,9 @@
             "Other Bets + hedging"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2593,7 +4545,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "YouTube",
@@ -2610,7 +4564,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google AdMob",
@@ -2629,12 +4585,12 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
-      "officialRevenueStyle": "ad-funnel-bridge",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialRevenueStyle": "ad-funnel-bridge"
     },
     "2023Q4": {
       "calendarQuarter": "2023Q4",
@@ -2665,6 +4621,85 @@
       "grossMarginYoyDeltaPp": 2.94,
       "operatingMarginYoyDeltaPp": 3.58,
       "profitMarginYoyDeltaPp": 6.05,
+      "statementFilingDate": "2023-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/googl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 23.697,
+            "derived": -13.878,
+            "delta": 37.575,
+            "tolerance": 0.711
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Ad Revenue",
@@ -2680,7 +4715,9 @@
           "filingDate": "2024-01-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Play",
@@ -2698,7 +4735,9 @@
             "Official: subscriptions, platforms, and devices"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Cloud",
@@ -2714,7 +4753,9 @@
           "filingDate": "2024-01-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -2732,7 +4773,9 @@
             "Other Bets + hedging"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2755,7 +4798,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "YouTube",
@@ -2772,7 +4817,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google AdMob",
@@ -2791,12 +4838,12 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
-      "officialRevenueStyle": "ad-funnel-bridge",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialRevenueStyle": "ad-funnel-bridge"
     },
     "2024Q1": {
       "calendarQuarter": "2024Q1",
@@ -2827,6 +4874,85 @@
       "grossMarginYoyDeltaPp": 2.0,
       "operatingMarginYoyDeltaPp": 6.68,
       "profitMarginYoyDeltaPp": 7.81,
+      "statementFilingDate": "2024-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/googl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 25.472,
+            "derived": -8.24,
+            "delta": 33.712,
+            "tolerance": 0.764
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Ad Revenue",
@@ -2842,7 +4968,9 @@
           "filingDate": "2024-04-26",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Cloud",
@@ -2858,7 +4986,9 @@
           "filingDate": "2024-04-26",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Play",
@@ -2876,7 +5006,9 @@
             "Official: subscriptions, platforms, and devices"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -2894,7 +5026,9 @@
             "Other Bets + hedging"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2917,7 +5051,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "YouTube",
@@ -2934,7 +5070,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google AdMob",
@@ -2953,12 +5091,12 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
-      "officialRevenueStyle": "ad-funnel-bridge",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialRevenueStyle": "ad-funnel-bridge"
     },
     "2024Q2": {
       "calendarQuarter": "2024Q2",
@@ -2989,6 +5127,85 @@
       "grossMarginYoyDeltaPp": 0.88,
       "operatingMarginYoyDeltaPp": 3.09,
       "profitMarginYoyDeltaPp": 3.25,
+      "statementFilingDate": "2024-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/googl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 27.425,
+            "derived": -8.082,
+            "delta": 35.507,
+            "tolerance": 0.823
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Ad Revenue",
@@ -3004,7 +5221,9 @@
           "filingDate": "2024-07-24",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Cloud",
@@ -3020,7 +5239,9 @@
           "filingDate": "2024-07-24",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Play",
@@ -3038,7 +5259,9 @@
             "Official: subscriptions, platforms, and devices"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -3056,7 +5279,9 @@
             "Other Bets + hedging"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -3079,7 +5304,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "YouTube",
@@ -3096,7 +5323,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google AdMob",
@@ -3115,12 +5344,12 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
-      "officialRevenueStyle": "ad-funnel-bridge",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialRevenueStyle": "ad-funnel-bridge"
     },
     "2024Q3": {
       "calendarQuarter": "2024Q3",
@@ -3151,6 +5380,85 @@
       "grossMarginYoyDeltaPp": 2.01,
       "operatingMarginYoyDeltaPp": 4.48,
       "profitMarginYoyDeltaPp": 4.13,
+      "statementFilingDate": "2024-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/googl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 28.521,
+            "derived": -7.953,
+            "delta": 36.474,
+            "tolerance": 0.856
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Ad Revenue",
@@ -3166,7 +5474,9 @@
           "filingDate": "2024-10-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Cloud",
@@ -3182,7 +5492,9 @@
           "filingDate": "2024-10-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Play",
@@ -3200,7 +5512,9 @@
             "Official: subscriptions, platforms, and devices"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -3218,7 +5532,9 @@
             "Other Bets + hedging"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -3241,7 +5557,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "YouTube",
@@ -3258,7 +5576,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google AdMob",
@@ -3277,12 +5597,12 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
-      "officialRevenueStyle": "ad-funnel-bridge",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialRevenueStyle": "ad-funnel-bridge"
     },
     "2024Q4": {
       "calendarQuarter": "2024Q4",
@@ -3313,6 +5633,85 @@
       "grossMarginYoyDeltaPp": 1.43,
       "operatingMarginYoyDeltaPp": 4.65,
       "profitMarginYoyDeltaPp": 3.54,
+      "statementFilingDate": "2024-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/googl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 30.972,
+            "derived": -9.641,
+            "delta": 40.613,
+            "tolerance": 0.929
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Ad Revenue",
@@ -3328,7 +5727,9 @@
           "filingDate": "2025-02-05",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Cloud",
@@ -3344,7 +5745,9 @@
           "filingDate": "2025-02-05",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Play",
@@ -3362,7 +5765,9 @@
             "Official: subscriptions, platforms, and devices"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -3380,7 +5785,9 @@
             "Other Bets + hedging"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -3403,7 +5810,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "YouTube",
@@ -3420,7 +5829,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google AdMob",
@@ -3439,12 +5850,12 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
-      "officialRevenueStyle": "ad-funnel-bridge",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialRevenueStyle": "ad-funnel-bridge"
     },
     "2025Q1": {
       "calendarQuarter": "2025Q1",
@@ -3475,6 +5886,85 @@
       "grossMarginYoyDeltaPp": 1.56,
       "operatingMarginYoyDeltaPp": 2.29,
       "profitMarginYoyDeltaPp": 8.9,
+      "statementFilingDate": "2025-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/googl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 30.606,
+            "derived": -5.755,
+            "delta": 36.361,
+            "tolerance": 0.918
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Ad Revenue",
@@ -3490,7 +5980,9 @@
           "filingDate": "2025-04-25",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Cloud",
@@ -3506,7 +5998,9 @@
           "filingDate": "2025-04-25",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Play",
@@ -3524,7 +6018,9 @@
             "Official: subscriptions, platforms, and devices"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -3542,7 +6038,9 @@
             "Other Bets + hedging"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -3565,7 +6063,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "YouTube",
@@ -3582,7 +6082,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google AdMob",
@@ -3601,12 +6103,12 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
-      "officialRevenueStyle": "ad-funnel-bridge",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialRevenueStyle": "ad-funnel-bridge"
     },
     "2025Q2": {
       "calendarQuarter": "2025Q2",
@@ -3637,6 +6139,85 @@
       "grossMarginYoyDeltaPp": 1.41,
       "operatingMarginYoyDeltaPp": 0.07,
       "profitMarginYoyDeltaPp": 1.37,
+      "statementFilingDate": "2025-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/googl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 31.271,
+            "derived": -7.768,
+            "delta": 39.039,
+            "tolerance": 0.938
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Ad Revenue",
@@ -3652,7 +6233,9 @@
           "filingDate": "2025-07-24",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Cloud",
@@ -3668,7 +6251,9 @@
           "filingDate": "2025-07-24",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Play",
@@ -3686,7 +6271,9 @@
             "Official: subscriptions, platforms, and devices"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -3704,7 +6291,9 @@
             "Other Bets + hedging"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -3727,7 +6316,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "YouTube",
@@ -3744,7 +6335,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google AdMob",
@@ -3763,12 +6356,12 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
-      "officialRevenueStyle": "ad-funnel-bridge",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialRevenueStyle": "ad-funnel-bridge"
     },
     "2025Q3": {
       "calendarQuarter": "2025Q3",
@@ -3799,6 +6392,85 @@
       "grossMarginYoyDeltaPp": 0.9,
       "operatingMarginYoyDeltaPp": -1.8,
       "profitMarginYoyDeltaPp": 4.38,
+      "statementFilingDate": "2025-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/googl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 31.228,
+            "derived": -10.141,
+            "delta": 41.369,
+            "tolerance": 0.937
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Ad Revenue",
@@ -3814,7 +6486,9 @@
           "filingDate": "2025-10-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Cloud",
@@ -3830,7 +6504,9 @@
           "filingDate": "2025-10-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Play",
@@ -3848,7 +6524,9 @@
             "Official: subscriptions, platforms, and devices"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -3866,7 +6544,9 @@
             "Other Bets + hedging"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -3889,7 +6569,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "YouTube",
@@ -3906,7 +6588,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google AdMob",
@@ -3925,12 +6609,12 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
-      "officialRevenueStyle": "ad-funnel-bridge",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialRevenueStyle": "ad-funnel-bridge"
     },
     "2025Q4": {
       "calendarQuarter": "2025Q4",
@@ -3961,6 +6645,85 @@
       "grossMarginYoyDeltaPp": 1.89,
       "operatingMarginYoyDeltaPp": -0.54,
       "profitMarginYoyDeltaPp": 2.76,
+      "statementFilingDate": "2025-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/googl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 35.934,
+            "derived": -9.832,
+            "delta": 45.766,
+            "tolerance": 1.078
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Ad Revenue",
@@ -3976,7 +6739,9 @@
           "filingDate": "2026-02-05",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Cloud",
@@ -3992,7 +6757,9 @@
           "filingDate": "2026-02-05",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google Play",
@@ -4010,7 +6777,9 @@
             "Official: subscriptions, platforms, and devices"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -4028,7 +6797,9 @@
             "Other Bets + hedging"
           ],
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -4051,7 +6822,9 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "YouTube",
@@ -4068,7 +6841,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Google AdMob",
@@ -4087,12 +6862,12 @@
           ],
           "supportLinesZh": null,
           "targetName": "Ad Revenue",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
-      "officialRevenueStyle": "ad-funnel-bridge",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialRevenueStyle": "ad-funnel-bridge"
     }
   },
   "statementSource": "official-sec-companyfacts",
@@ -4323,7 +7098,9 @@
             "filingDate": "2021-04-28",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Play",
@@ -4341,7 +7118,9 @@
               "Official: subscriptions, platforms, and devices"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Cloud",
@@ -4357,7 +7136,9 @@
             "filingDate": "2021-04-28",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Other",
@@ -4375,7 +7156,9 @@
               "Other Bets + hedging"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -4431,7 +7214,9 @@
             "filingDate": "2021-07-28",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Play",
@@ -4449,7 +7234,9 @@
               "Official: subscriptions, platforms, and devices"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Cloud",
@@ -4465,7 +7252,9 @@
             "filingDate": "2021-07-28",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Other",
@@ -4483,7 +7272,9 @@
               "Other Bets + hedging"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -4539,7 +7330,9 @@
             "filingDate": "2021-10-27",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Play",
@@ -4557,7 +7350,9 @@
               "Official: subscriptions, platforms, and devices"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Cloud",
@@ -4573,7 +7368,9 @@
             "filingDate": "2021-10-27",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Other",
@@ -4591,7 +7388,9 @@
               "Other Bets + hedging"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -4647,7 +7446,9 @@
             "filingDate": "2022-02-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Play",
@@ -4665,7 +7466,9 @@
               "Official: subscriptions, platforms, and devices"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Cloud",
@@ -4681,7 +7484,9 @@
             "filingDate": "2022-02-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Other",
@@ -4699,7 +7504,9 @@
               "Other Bets + hedging"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -4758,7 +7565,9 @@
             "filingDate": "2022-04-27",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Play",
@@ -4776,7 +7585,9 @@
               "Official: subscriptions, platforms, and devices"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Cloud",
@@ -4792,7 +7603,9 @@
             "filingDate": "2022-04-27",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Other",
@@ -4810,7 +7623,9 @@
               "Other Bets + hedging"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -4866,7 +7681,9 @@
             "filingDate": "2022-07-27",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Play",
@@ -4884,7 +7701,9 @@
               "Official: subscriptions, platforms, and devices"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Cloud",
@@ -4900,7 +7719,9 @@
             "filingDate": "2022-07-27",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Other",
@@ -4918,7 +7739,9 @@
               "Other Bets + hedging"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -4974,7 +7797,9 @@
             "filingDate": "2022-10-26",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Play",
@@ -4992,7 +7817,9 @@
               "Official: subscriptions, platforms, and devices"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Cloud",
@@ -5008,7 +7835,9 @@
             "filingDate": "2022-10-26",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Other",
@@ -5026,7 +7855,9 @@
               "Other Bets + hedging"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -5082,7 +7913,9 @@
             "filingDate": "2023-02-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Play",
@@ -5100,7 +7933,9 @@
               "Official: subscriptions, platforms, and devices"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Cloud",
@@ -5116,7 +7951,9 @@
             "filingDate": "2023-02-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Other",
@@ -5134,7 +7971,9 @@
               "Other Bets + hedging"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -5193,7 +8032,9 @@
             "filingDate": "2023-04-26",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Cloud",
@@ -5209,7 +8050,9 @@
             "filingDate": "2023-04-26",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Play",
@@ -5227,7 +8070,9 @@
               "Official: subscriptions, platforms, and devices"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Other",
@@ -5245,7 +8090,9 @@
               "Other Bets + hedging"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -5301,7 +8148,9 @@
             "filingDate": "2023-07-26",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Play",
@@ -5319,7 +8168,9 @@
               "Official: subscriptions, platforms, and devices"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Cloud",
@@ -5335,7 +8186,9 @@
             "filingDate": "2023-07-26",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Other",
@@ -5353,7 +8206,9 @@
               "Other Bets + hedging"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -5409,7 +8264,9 @@
             "filingDate": "2023-10-25",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Cloud",
@@ -5425,7 +8282,9 @@
             "filingDate": "2023-10-25",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Play",
@@ -5443,7 +8302,9 @@
               "Official: subscriptions, platforms, and devices"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Other",
@@ -5461,7 +8322,9 @@
               "Other Bets + hedging"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -5517,7 +8380,9 @@
             "filingDate": "2024-01-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Play",
@@ -5535,7 +8400,9 @@
               "Official: subscriptions, platforms, and devices"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Cloud",
@@ -5551,7 +8418,9 @@
             "filingDate": "2024-01-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Other",
@@ -5569,7 +8438,9 @@
               "Other Bets + hedging"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -5628,7 +8499,9 @@
             "filingDate": "2024-04-26",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Cloud",
@@ -5644,7 +8517,9 @@
             "filingDate": "2024-04-26",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Play",
@@ -5662,7 +8537,9 @@
               "Official: subscriptions, platforms, and devices"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Other",
@@ -5680,7 +8557,9 @@
               "Other Bets + hedging"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -5736,7 +8615,9 @@
             "filingDate": "2024-07-24",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Cloud",
@@ -5752,7 +8633,9 @@
             "filingDate": "2024-07-24",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Play",
@@ -5770,7 +8653,9 @@
               "Official: subscriptions, platforms, and devices"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Other",
@@ -5788,7 +8673,9 @@
               "Other Bets + hedging"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -5844,7 +8731,9 @@
             "filingDate": "2024-10-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Cloud",
@@ -5860,7 +8749,9 @@
             "filingDate": "2024-10-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Play",
@@ -5878,7 +8769,9 @@
               "Official: subscriptions, platforms, and devices"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Other",
@@ -5896,7 +8789,9 @@
               "Other Bets + hedging"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -5952,7 +8847,9 @@
             "filingDate": "2025-02-05",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Cloud",
@@ -5968,7 +8865,9 @@
             "filingDate": "2025-02-05",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Play",
@@ -5986,7 +8885,9 @@
               "Official: subscriptions, platforms, and devices"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Other",
@@ -6004,7 +8905,9 @@
               "Other Bets + hedging"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -6063,7 +8966,9 @@
             "filingDate": "2025-04-25",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Cloud",
@@ -6079,7 +8984,9 @@
             "filingDate": "2025-04-25",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Play",
@@ -6097,7 +9004,9 @@
               "Official: subscriptions, platforms, and devices"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Other",
@@ -6115,7 +9024,9 @@
               "Other Bets + hedging"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -6171,7 +9082,9 @@
             "filingDate": "2025-07-24",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Cloud",
@@ -6187,7 +9100,9 @@
             "filingDate": "2025-07-24",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Play",
@@ -6205,7 +9120,9 @@
               "Official: subscriptions, platforms, and devices"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Other",
@@ -6223,7 +9140,9 @@
               "Other Bets + hedging"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -6279,7 +9198,9 @@
             "filingDate": "2025-10-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Cloud",
@@ -6295,7 +9216,9 @@
             "filingDate": "2025-10-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Play",
@@ -6313,7 +9236,9 @@
               "Official: subscriptions, platforms, and devices"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Other",
@@ -6331,7 +9256,9 @@
               "Other Bets + hedging"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -6387,7 +9314,9 @@
             "filingDate": "2026-02-05",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Cloud",
@@ -6403,7 +9332,9 @@
             "filingDate": "2026-02-05",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Google Play",
@@ -6421,7 +9352,9 @@
               "Official: subscriptions, platforms, and devices"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Other",
@@ -6439,7 +9372,9 @@
               "Other Bets + hedging"
             ],
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -6605,6 +9540,120 @@
       }
     ],
     "errors": []
+  },
+  "parserDiagnostics": {
+    "version": "universal-parser-v3",
+    "financials": {
+      "basePreferredOrder": [
+        "official",
+        "stockanalysis"
+      ],
+      "preferredOrder": [
+        "official",
+        "stockanalysis"
+      ],
+      "selectedSource": "official",
+      "attempts": [
+        {
+          "layer": "financials",
+          "source_id": "official",
+          "status": "success",
+          "selected": true,
+          "reason": "",
+          "quarter_count": 32,
+          "latest_quarter": "2025Q4",
+          "error": ""
+        },
+        {
+          "layer": "financials",
+          "source_id": "stockanalysis",
+          "status": "success",
+          "selected": false,
+          "reason": "",
+          "quarter_count": 20,
+          "latest_quarter": "2025Q4",
+          "error": ""
+        }
+      ],
+      "reconciliation": {
+        "version": "financial-reconciler-v1",
+        "primarySource": "official",
+        "quarterCount": 32,
+        "fieldOverrideCount": 0,
+        "derivedFieldCount": 0,
+        "mixedSourceQuarterCount": 0,
+        "sourceUsageCounts": {
+          "official": 683,
+          "stockanalysis": 0
+        }
+      },
+      "validation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "quarterCount": 32,
+        "validatedQuarterCount": 32,
+        "issueCount": 32,
+        "mismatchQuarterCount": 32,
+        "highConfidenceQuarterCount": 32,
+        "averageConfidenceScore": 0.9438,
+        "latestQuarter": "2025Q4",
+        "latestQuarterConfidenceScore": 0.9438,
+        "latestQuarterIssueCount": 1
+      }
+    },
+    "segments": {
+      "selectedSource": "official-segments",
+      "attempts": [
+        {
+          "layer": "segments",
+          "source_id": "official-segments",
+          "status": "success",
+          "selected": true,
+          "reason": "",
+          "quarter_count": 32,
+          "latest_quarter": "2025Q4",
+          "error": ""
+        }
+      ]
+    },
+    "revenueStructures": {
+      "selectedSource": "official-revenue-structures",
+      "attempts": [
+        {
+          "layer": "revenue-structures",
+          "source_id": "official-revenue-structures",
+          "status": "success",
+          "selected": true,
+          "reason": "",
+          "quarter_count": 20,
+          "latest_quarter": "2025Q4",
+          "error": ""
+        }
+      ]
+    },
+    "summary": {
+      "financialQuarterCount": 32,
+      "segmentQuarterCount": 32,
+      "revenueStructureQuarterCount": 20
+    },
+    "validation": {
+      "version": "parser-validation-v1",
+      "status": "high",
+      "overallConfidenceScore": 0.9635,
+      "financialConfidenceScore": 0.9438,
+      "structuralConfidenceScore": 1.0,
+      "revenueSegmentChecks": 20,
+      "revenueSegmentMismatchCount": 0,
+      "revenueSegmentSkippedChecks": 11,
+      "detailGroupChecks": 20,
+      "detailGroupMismatchCount": 0,
+      "detailGroupSkippedChecks": 0,
+      "opexChecks": 0,
+      "opexSkippedChecks": 0,
+      "opexOverflowMismatchCount": 0,
+      "warningCount": 0,
+      "warnings": []
+    }
   },
   "statementPresets": {
     "2025Q3": {
@@ -6775,6 +9824,75 @@
     "pixelReplicaQuarterCount": 1,
     "hasPixelReplica": true,
     "officialFinancialQuarterCount": 32,
-    "officialSegmentQuarterCount": 32
+    "officialSegmentQuarterCount": 32,
+    "officialExpenseQuarterCount": 0,
+    "classification": {
+      "status": "ok",
+      "latestQuarter": "2025Q4",
+      "latestQuarterHasRevenueClassification": true,
+      "latestQuarterHasExpenseClassification": false,
+      "latestRevenueClassificationQuarter": "2025Q4",
+      "latestExpenseClassificationQuarter": null,
+      "latestStructureHistoryQuarter": "2025Q4",
+      "revenueClassificationQuarterCount": 32,
+      "expenseClassificationQuarterCount": 0,
+      "revenueClassificationCoverageRatio": 1.0,
+      "expenseClassificationCoverageRatio": 0.0,
+      "latestRevenueClassificationLagQuarters": 0,
+      "latestExpenseClassificationLagQuarters": null,
+      "warnings": [],
+      "blockers": [],
+      "policy": {}
+    },
+    "parser": {
+      "version": "universal-parser-v3",
+      "selectedFinancialSource": "official",
+      "selectedSegmentSource": "official-segments",
+      "selectedRevenueStructureSource": "official-revenue-structures",
+      "financialAttemptCount": 2,
+      "financialReconciliation": {
+        "version": "financial-reconciler-v1",
+        "primarySource": "official",
+        "quarterCount": 32,
+        "fieldOverrideCount": 0,
+        "derivedFieldCount": 0,
+        "mixedSourceQuarterCount": 0,
+        "sourceUsageCounts": {
+          "official": 683,
+          "stockanalysis": 0
+        }
+      },
+      "financialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "quarterCount": 32,
+        "validatedQuarterCount": 32,
+        "issueCount": 32,
+        "mismatchQuarterCount": 32,
+        "highConfidenceQuarterCount": 32,
+        "averageConfidenceScore": 0.9438,
+        "latestQuarter": "2025Q4",
+        "latestQuarterConfidenceScore": 0.9438,
+        "latestQuarterIssueCount": 1
+      },
+      "validation": {
+        "version": "parser-validation-v1",
+        "status": "high",
+        "overallConfidenceScore": 0.9635,
+        "financialConfidenceScore": 0.9438,
+        "structuralConfidenceScore": 1.0,
+        "revenueSegmentChecks": 20,
+        "revenueSegmentMismatchCount": 0,
+        "revenueSegmentSkippedChecks": 11,
+        "detailGroupChecks": 20,
+        "detailGroupMismatchCount": 0,
+        "detailGroupSkippedChecks": 0,
+        "opexChecks": 0,
+        "opexSkippedChecks": 0,
+        "opexOverflowMismatchCount": 0,
+        "warningCount": 0,
+        "warnings": []
+      }
+    }
   }
 }

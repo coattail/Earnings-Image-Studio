@@ -75,6 +75,57 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 0,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 0,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -90,7 +141,11 @@
           "filingDate": "2019-04-26",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -106,7 +161,11 @@
           "filingDate": "2019-04-26",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -122,7 +181,11 @@
           "filingDate": "2019-04-26",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -138,7 +201,11 @@
           "filingDate": "2019-04-26",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -175,6 +242,58 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueQoqPct": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 0,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -190,7 +309,11 @@
           "filingDate": "2019-07-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -206,7 +329,11 @@
           "filingDate": "2019-07-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -222,7 +349,11 @@
           "filingDate": "2019-07-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -238,7 +369,11 @@
           "filingDate": "2019-07-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -275,6 +410,58 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueQoqPct": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 0,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -290,7 +477,11 @@
           "filingDate": "2019-10-28",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -306,7 +497,11 @@
           "filingDate": "2019-10-28",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -322,7 +517,11 @@
           "filingDate": "2019-10-28",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -338,7 +537,11 @@
           "filingDate": "2019-10-28",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -375,6 +578,58 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueQoqPct": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 0,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -390,7 +645,11 @@
           "filingDate": "2020-02-19",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -406,7 +665,11 @@
           "filingDate": "2020-02-19",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -422,7 +685,11 @@
           "filingDate": "2020-02-19",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -438,7 +705,11 @@
           "filingDate": "2020-02-19",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -475,6 +746,61 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 1.86,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 0,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -490,7 +816,11 @@
           "filingDate": "2019-04-26",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -506,7 +836,11 @@
           "filingDate": "2019-04-26",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -522,7 +856,11 @@
           "filingDate": "2019-04-26",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -538,7 +876,11 @@
           "filingDate": "2019-04-26",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -575,6 +917,61 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 1.82,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 0,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -590,7 +987,11 @@
           "filingDate": "2019-07-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -606,7 +1007,11 @@
           "filingDate": "2019-07-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -622,7 +1027,11 @@
           "filingDate": "2019-07-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -638,7 +1047,11 @@
           "filingDate": "2019-07-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -675,6 +1088,61 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -6.14,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 0,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -690,7 +1158,11 @@
           "filingDate": "2019-10-28",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -706,7 +1178,11 @@
           "filingDate": "2019-10-28",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -722,7 +1198,11 @@
           "filingDate": "2019-10-28",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -738,7 +1218,11 @@
           "filingDate": "2019-10-28",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -775,6 +1259,61 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -0.72,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 0,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -790,7 +1329,11 @@
           "filingDate": "2020-02-19",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -806,7 +1349,11 @@
           "filingDate": "2020-02-19",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -822,7 +1369,11 @@
           "filingDate": "2020-02-19",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -838,7 +1389,11 @@
           "filingDate": "2020-02-19",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -875,6 +1430,61 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -14.17,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 0,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -890,7 +1500,11 @@
           "filingDate": "2020-05-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -906,7 +1520,11 @@
           "filingDate": "2020-05-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -922,7 +1540,11 @@
           "filingDate": "2020-05-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -938,7 +1560,11 @@
           "filingDate": "2020-05-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -975,6 +1601,61 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -16.01,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 0,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -990,7 +1671,11 @@
           "filingDate": "2020-07-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -1006,7 +1691,11 @@
           "filingDate": "2020-07-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -1022,7 +1711,11 @@
           "filingDate": "2020-07-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -1038,7 +1731,11 @@
           "filingDate": "2020-07-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1075,6 +1772,61 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -1.33,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 0,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -1090,7 +1842,11 @@
           "filingDate": "2020-10-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -1106,7 +1862,11 @@
           "filingDate": "2020-10-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -1122,7 +1882,11 @@
           "filingDate": "2020-10-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -1138,7 +1902,11 @@
           "filingDate": "2020-10-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1175,6 +1943,61 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -4.07,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 0,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -1190,7 +2013,11 @@
           "filingDate": "2021-02-24",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -1206,7 +2033,11 @@
           "filingDate": "2021-02-24",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -1222,7 +2053,11 @@
           "filingDate": "2021-02-24",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -1238,7 +2073,11 @@
           "filingDate": "2021-02-24",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1257,7 +2096,7 @@
       "revenueYoyPct": 0.237,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 3.176,
       "rndBn": null,
       "otherOpexBn": 15.515,
       "operatingExpensesBn": 15.515,
@@ -1275,6 +2114,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 17.66,
+      "statementFilingDate": "2021-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/bac/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -1290,7 +2189,11 @@
           "filingDate": "2021-04-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -1306,7 +2209,11 @@
           "filingDate": "2021-04-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -1322,7 +2229,11 @@
           "filingDate": "2021-04-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -1338,7 +2249,11 @@
           "filingDate": "2021-04-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1357,7 +2272,7 @@
       "revenueYoyPct": -3.852,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 3.66,
       "rndBn": null,
       "otherOpexBn": 15.045,
       "operatingExpensesBn": 15.045,
@@ -1375,6 +2290,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 27.15,
+      "statementFilingDate": "2021-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/bac/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -1390,7 +2365,11 @@
           "filingDate": "2021-07-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -1406,7 +2385,11 @@
           "filingDate": "2021-07-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -1422,7 +2405,11 @@
           "filingDate": "2021-07-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -1438,7 +2425,11 @@
           "filingDate": "2021-07-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1457,7 +2448,7 @@
       "revenueYoyPct": 11.949,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 3.184,
       "rndBn": null,
       "otherOpexBn": 14.44,
       "operatingExpensesBn": 14.44,
@@ -1475,6 +2466,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 9.78,
+      "statementFilingDate": "2021-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/bac/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -1490,7 +2541,11 @@
           "filingDate": "2021-10-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -1506,7 +2561,11 @@
           "filingDate": "2021-10-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -1522,7 +2581,11 @@
           "filingDate": "2021-10-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -1538,7 +2601,11 @@
           "filingDate": "2021-10-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1557,7 +2624,7 @@
       "revenueYoyPct": 9.757,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 3.344,
       "rndBn": null,
       "otherOpexBn": 14.731,
       "operatingExpensesBn": 14.731,
@@ -1575,6 +2642,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 4.57,
+      "statementFilingDate": "2021-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/bac/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -1590,7 +2717,11 @@
           "filingDate": "2022-02-22",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -1606,7 +2737,11 @@
           "filingDate": "2022-02-22",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -1622,7 +2757,11 @@
           "filingDate": "2022-02-22",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -1638,7 +2777,11 @@
           "filingDate": "2022-02-22",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1657,7 +2800,7 @@
       "revenueYoyPct": 1.783,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 3.32,
       "rndBn": null,
       "otherOpexBn": 15.319,
       "operatingExpensesBn": 15.319,
@@ -1675,6 +2818,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -4.85,
+      "statementFilingDate": "2022-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/bac/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -1690,7 +2893,11 @@
           "filingDate": "2022-04-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -1706,7 +2913,11 @@
           "filingDate": "2022-04-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -1722,7 +2933,11 @@
           "filingDate": "2022-04-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -1738,7 +2953,11 @@
           "filingDate": "2022-04-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1757,7 +2976,7 @@
       "revenueYoyPct": 5.693,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 3.44,
       "rndBn": null,
       "otherOpexBn": 15.273,
       "operatingExpensesBn": 15.273,
@@ -1775,6 +2994,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -15.44,
+      "statementFilingDate": "2022-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/bac/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -1790,7 +3069,11 @@
           "filingDate": "2022-07-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -1806,7 +3089,11 @@
           "filingDate": "2022-07-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -1822,7 +3109,11 @@
           "filingDate": "2022-07-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -1838,7 +3129,11 @@
           "filingDate": "2022-07-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1857,7 +3152,7 @@
       "revenueYoyPct": 7.625,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 3.468,
       "rndBn": null,
       "otherOpexBn": 15.303,
       "operatingExpensesBn": 15.303,
@@ -1875,6 +3170,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -4.88,
+      "statementFilingDate": "2022-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/bac/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -1890,7 +3245,11 @@
           "filingDate": "2022-10-28",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -1906,7 +3265,11 @@
           "filingDate": "2022-10-28",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -1922,7 +3285,11 @@
           "filingDate": "2022-10-28",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -1938,7 +3305,11 @@
           "filingDate": "2022-10-28",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1957,7 +3328,7 @@
       "revenueYoyPct": 11.206,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 3.671,
       "rndBn": null,
       "otherOpexBn": 15.543,
       "operatingExpensesBn": 15.543,
@@ -1975,6 +3346,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -2.72,
+      "statementFilingDate": "2022-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/bac/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -1990,7 +3421,11 @@
           "filingDate": "2023-02-22",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -2006,7 +3441,11 @@
           "filingDate": "2023-02-22",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -2022,7 +3461,11 @@
           "filingDate": "2023-02-22",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -2038,7 +3481,11 @@
           "filingDate": "2023-02-22",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2057,7 +3504,7 @@
       "revenueYoyPct": 13.045,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 3.582,
       "rndBn": null,
       "otherOpexBn": 16.238,
       "operatingExpensesBn": 16.238,
@@ -2075,6 +3522,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 0.66,
+      "statementFilingDate": "2023-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/bac/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -2090,7 +3597,11 @@
           "filingDate": "2023-05-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -2106,7 +3617,11 @@
           "filingDate": "2023-05-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -2122,7 +3637,11 @@
           "filingDate": "2023-05-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -2138,7 +3657,11 @@
           "filingDate": "2023-05-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2157,7 +3680,7 @@
       "revenueYoyPct": 11.059,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 3.64,
       "rndBn": null,
       "otherOpexBn": 16.038,
       "operatingExpensesBn": 16.038,
@@ -2175,6 +3698,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 1.87,
+      "statementFilingDate": "2023-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/bac/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -2190,7 +3773,11 @@
           "filingDate": "2023-07-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -2206,7 +3793,11 @@
           "filingDate": "2023-07-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -2222,7 +3813,11 @@
           "filingDate": "2023-07-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -2238,7 +3833,11 @@
           "filingDate": "2023-07-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2257,7 +3856,7 @@
       "revenueYoyPct": 2.714,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 3.602,
       "rndBn": null,
       "otherOpexBn": 15.838,
       "operatingExpensesBn": 15.838,
@@ -2275,6 +3874,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 2.1,
+      "statementFilingDate": "2023-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/bac/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -2290,7 +3949,11 @@
           "filingDate": "2023-10-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -2306,7 +3969,11 @@
           "filingDate": "2023-10-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -2322,7 +3989,11 @@
           "filingDate": "2023-10-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -2338,7 +4009,11 @@
           "filingDate": "2023-10-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2357,7 +4032,7 @@
       "revenueYoyPct": -10.488,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 3.577,
       "rndBn": null,
       "otherOpexBn": 17.731,
       "operatingExpensesBn": 17.731,
@@ -2375,6 +4050,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -14.75,
+      "statementFilingDate": "2023-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/bac/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -2390,7 +4125,11 @@
           "filingDate": "2024-02-20",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -2406,7 +4145,11 @@
           "filingDate": "2024-02-20",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -2422,7 +4165,11 @@
           "filingDate": "2024-02-20",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -2438,7 +4185,11 @@
           "filingDate": "2024-02-20",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2457,7 +4208,7 @@
       "revenueYoyPct": -1.676,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 3.654,
       "rndBn": null,
       "otherOpexBn": 17.237,
       "operatingExpensesBn": 17.237,
@@ -2475,6 +4226,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -5.23,
+      "statementFilingDate": "2024-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/bac/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -2490,7 +4301,11 @@
           "filingDate": "2024-04-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -2506,7 +4321,11 @@
           "filingDate": "2024-04-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -2522,7 +4341,11 @@
           "filingDate": "2024-04-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -2538,7 +4361,11 @@
           "filingDate": "2024-04-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2557,7 +4384,7 @@
       "revenueYoyPct": 0.714,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 3.795,
       "rndBn": null,
       "otherOpexBn": 16.309,
       "operatingExpensesBn": 16.309,
@@ -2575,6 +4402,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -2.22,
+      "statementFilingDate": "2024-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/bac/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -2590,7 +4477,11 @@
           "filingDate": "2024-07-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -2606,7 +4497,11 @@
           "filingDate": "2024-07-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -2622,7 +4517,11 @@
           "filingDate": "2024-07-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -2638,7 +4537,11 @@
           "filingDate": "2024-07-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2657,7 +4560,7 @@
       "revenueYoyPct": 0.707,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 3.86,
       "rndBn": null,
       "otherOpexBn": 16.479,
       "operatingExpensesBn": 16.479,
@@ -2675,6 +4578,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -3.79,
+      "statementFilingDate": "2024-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/bac/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -2690,7 +4653,11 @@
           "filingDate": "2024-10-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -2706,7 +4673,11 @@
           "filingDate": "2024-10-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -2722,7 +4693,11 @@
           "filingDate": "2024-10-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -2738,7 +4713,11 @@
           "filingDate": "2024-10-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2757,7 +4736,7 @@
       "revenueYoyPct": 15.429,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 4.041,
       "rndBn": null,
       "otherOpexBn": 16.787,
       "operatingExpensesBn": 16.787,
@@ -2775,6 +4754,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 11.98,
+      "statementFilingDate": "2024-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/bac/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -2790,7 +4829,11 @@
           "filingDate": "2025-02-25",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -2806,7 +4849,11 @@
           "filingDate": "2025-02-25",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -2822,7 +4869,11 @@
           "filingDate": "2025-02-25",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -2838,7 +4889,11 @@
           "filingDate": "2025-02-25",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2857,7 +4912,7 @@
       "revenueYoyPct": 5.996,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 3.966,
       "rndBn": null,
       "otherOpexBn": 17.77,
       "operatingExpensesBn": 17.77,
@@ -2875,6 +4930,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 1.18,
+      "statementFilingDate": "2025-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/bac/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -2890,7 +5005,11 @@
           "filingDate": "2025-04-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -2906,7 +5025,11 @@
           "filingDate": "2025-04-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -2922,7 +5045,11 @@
           "filingDate": "2025-04-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -2938,7 +5065,11 @@
           "filingDate": "2025-04-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2957,7 +5088,7 @@
       "revenueYoyPct": 4.279,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 3.996,
       "rndBn": null,
       "otherOpexBn": 17.183,
       "operatingExpensesBn": 17.183,
@@ -2975,6 +5106,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -0.29,
+      "statementFilingDate": "2025-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/bac/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -2990,7 +5181,11 @@
           "filingDate": "2025-07-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -3006,7 +5201,11 @@
           "filingDate": "2025-07-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -3022,7 +5221,11 @@
           "filingDate": "2025-07-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -3038,7 +5241,11 @@
           "filingDate": "2025-07-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -3057,7 +5264,7 @@
       "revenueYoyPct": 10.823,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 4.03,
       "rndBn": null,
       "otherOpexBn": 17.337,
       "operatingExpensesBn": 17.337,
@@ -3075,6 +5282,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 2.94,
+      "statementFilingDate": "2025-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/bac/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -3090,7 +5357,11 @@
           "filingDate": "2025-10-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -3106,7 +5377,11 @@
           "filingDate": "2025-10-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -3122,7 +5397,11 @@
           "filingDate": "2025-10-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -3138,7 +5417,11 @@
           "filingDate": "2025-10-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -3157,7 +5440,7 @@
       "revenueYoyPct": 23.013,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 4.169,
       "rndBn": null,
       "otherOpexBn": 17.437,
       "operatingExpensesBn": 17.437,
@@ -3175,6 +5458,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -2.16,
+      "statementFilingDate": "2025-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/bac/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Banking",
@@ -3190,7 +5533,11 @@
           "filingDate": "2026-02-25",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Wealth & Investment Management",
@@ -3206,7 +5553,11 @@
           "filingDate": "2026-02-25",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Banking",
@@ -3222,7 +5573,11 @@
           "filingDate": "2026-02-25",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Global Markets",
@@ -3238,7 +5593,11 @@
           "filingDate": "2026-02-25",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -3247,7 +5606,7 @@
       "displayScaleFactor": 1
     }
   },
-  "statementSource": "official-sec-companyfacts",
+  "statementSource": "official-sec-companyfacts+field-reconciled",
   "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000070858.json",
   "reportingCurrency": "USD",
   "cik": 70858,
@@ -3474,7 +5833,11 @@
             "filingDate": "2019-04-26",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -3490,7 +5853,11 @@
             "filingDate": "2019-04-26",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -3506,7 +5873,11 @@
             "filingDate": "2019-04-26",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -3522,7 +5893,11 @@
             "filingDate": "2019-04-26",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -3542,7 +5917,11 @@
             "filingDate": "2019-07-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -3558,7 +5937,11 @@
             "filingDate": "2019-07-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -3574,7 +5957,11 @@
             "filingDate": "2019-07-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -3590,7 +5977,11 @@
             "filingDate": "2019-07-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -3610,7 +6001,11 @@
             "filingDate": "2019-10-28",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -3626,7 +6021,11 @@
             "filingDate": "2019-10-28",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -3642,7 +6041,11 @@
             "filingDate": "2019-10-28",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -3658,7 +6061,11 @@
             "filingDate": "2019-10-28",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -3678,7 +6085,11 @@
             "filingDate": "2020-02-19",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -3694,7 +6105,11 @@
             "filingDate": "2020-02-19",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -3710,7 +6125,11 @@
             "filingDate": "2020-02-19",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -3726,7 +6145,11 @@
             "filingDate": "2020-02-19",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -3746,7 +6169,11 @@
             "filingDate": "2019-04-26",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -3762,7 +6189,11 @@
             "filingDate": "2019-04-26",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -3778,7 +6209,11 @@
             "filingDate": "2019-04-26",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -3794,7 +6229,11 @@
             "filingDate": "2019-04-26",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -3814,7 +6253,11 @@
             "filingDate": "2019-07-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -3830,7 +6273,11 @@
             "filingDate": "2019-07-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -3846,7 +6293,11 @@
             "filingDate": "2019-07-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -3862,7 +6313,11 @@
             "filingDate": "2019-07-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -3882,7 +6337,11 @@
             "filingDate": "2019-10-28",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -3898,7 +6357,11 @@
             "filingDate": "2019-10-28",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -3914,7 +6377,11 @@
             "filingDate": "2019-10-28",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -3930,7 +6397,11 @@
             "filingDate": "2019-10-28",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -3950,7 +6421,11 @@
             "filingDate": "2020-02-19",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -3966,7 +6441,11 @@
             "filingDate": "2020-02-19",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -3982,7 +6461,11 @@
             "filingDate": "2020-02-19",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -3998,7 +6481,11 @@
             "filingDate": "2020-02-19",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4018,7 +6505,11 @@
             "filingDate": "2020-05-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -4034,7 +6525,11 @@
             "filingDate": "2020-05-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -4050,7 +6545,11 @@
             "filingDate": "2020-05-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -4066,7 +6565,11 @@
             "filingDate": "2020-05-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4086,7 +6589,11 @@
             "filingDate": "2020-07-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -4102,7 +6609,11 @@
             "filingDate": "2020-07-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -4118,7 +6629,11 @@
             "filingDate": "2020-07-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -4134,7 +6649,11 @@
             "filingDate": "2020-07-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4154,7 +6673,11 @@
             "filingDate": "2020-10-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -4170,7 +6693,11 @@
             "filingDate": "2020-10-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -4186,7 +6713,11 @@
             "filingDate": "2020-10-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -4202,7 +6733,11 @@
             "filingDate": "2020-10-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4222,7 +6757,11 @@
             "filingDate": "2021-02-24",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -4238,7 +6777,11 @@
             "filingDate": "2021-02-24",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -4254,7 +6797,11 @@
             "filingDate": "2021-02-24",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -4270,7 +6817,11 @@
             "filingDate": "2021-02-24",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4290,7 +6841,11 @@
             "filingDate": "2021-04-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -4306,7 +6861,11 @@
             "filingDate": "2021-04-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -4322,7 +6881,11 @@
             "filingDate": "2021-04-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -4338,7 +6901,11 @@
             "filingDate": "2021-04-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4358,7 +6925,11 @@
             "filingDate": "2021-07-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -4374,7 +6945,11 @@
             "filingDate": "2021-07-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -4390,7 +6965,11 @@
             "filingDate": "2021-07-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -4406,7 +6985,11 @@
             "filingDate": "2021-07-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4426,7 +7009,11 @@
             "filingDate": "2021-10-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -4442,7 +7029,11 @@
             "filingDate": "2021-10-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -4458,7 +7049,11 @@
             "filingDate": "2021-10-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -4474,7 +7069,11 @@
             "filingDate": "2021-10-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4494,7 +7093,11 @@
             "filingDate": "2022-02-22",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -4510,7 +7113,11 @@
             "filingDate": "2022-02-22",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -4526,7 +7133,11 @@
             "filingDate": "2022-02-22",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -4542,7 +7153,11 @@
             "filingDate": "2022-02-22",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4562,7 +7177,11 @@
             "filingDate": "2022-04-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -4578,7 +7197,11 @@
             "filingDate": "2022-04-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -4594,7 +7217,11 @@
             "filingDate": "2022-04-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -4610,7 +7237,11 @@
             "filingDate": "2022-04-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4630,7 +7261,11 @@
             "filingDate": "2022-07-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -4646,7 +7281,11 @@
             "filingDate": "2022-07-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -4662,7 +7301,11 @@
             "filingDate": "2022-07-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -4678,7 +7321,11 @@
             "filingDate": "2022-07-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4698,7 +7345,11 @@
             "filingDate": "2022-10-28",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -4714,7 +7365,11 @@
             "filingDate": "2022-10-28",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -4730,7 +7385,11 @@
             "filingDate": "2022-10-28",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -4746,7 +7405,11 @@
             "filingDate": "2022-10-28",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4766,7 +7429,11 @@
             "filingDate": "2023-02-22",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -4782,7 +7449,11 @@
             "filingDate": "2023-02-22",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -4798,7 +7469,11 @@
             "filingDate": "2023-02-22",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -4814,7 +7489,11 @@
             "filingDate": "2023-02-22",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4834,7 +7513,11 @@
             "filingDate": "2023-05-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -4850,7 +7533,11 @@
             "filingDate": "2023-05-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -4866,7 +7553,11 @@
             "filingDate": "2023-05-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -4882,7 +7573,11 @@
             "filingDate": "2023-05-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4902,7 +7597,11 @@
             "filingDate": "2023-07-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -4918,7 +7617,11 @@
             "filingDate": "2023-07-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -4934,7 +7637,11 @@
             "filingDate": "2023-07-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -4950,7 +7657,11 @@
             "filingDate": "2023-07-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4970,7 +7681,11 @@
             "filingDate": "2023-10-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -4986,7 +7701,11 @@
             "filingDate": "2023-10-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -5002,7 +7721,11 @@
             "filingDate": "2023-10-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -5018,7 +7741,11 @@
             "filingDate": "2023-10-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -5038,7 +7765,11 @@
             "filingDate": "2024-02-20",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -5054,7 +7785,11 @@
             "filingDate": "2024-02-20",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -5070,7 +7805,11 @@
             "filingDate": "2024-02-20",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -5086,7 +7825,11 @@
             "filingDate": "2024-02-20",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -5106,7 +7849,11 @@
             "filingDate": "2024-04-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -5122,7 +7869,11 @@
             "filingDate": "2024-04-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -5138,7 +7889,11 @@
             "filingDate": "2024-04-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -5154,7 +7909,11 @@
             "filingDate": "2024-04-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -5174,7 +7933,11 @@
             "filingDate": "2024-07-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -5190,7 +7953,11 @@
             "filingDate": "2024-07-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -5206,7 +7973,11 @@
             "filingDate": "2024-07-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -5222,7 +7993,11 @@
             "filingDate": "2024-07-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -5242,7 +8017,11 @@
             "filingDate": "2024-10-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -5258,7 +8037,11 @@
             "filingDate": "2024-10-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -5274,7 +8057,11 @@
             "filingDate": "2024-10-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -5290,7 +8077,11 @@
             "filingDate": "2024-10-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -5310,7 +8101,11 @@
             "filingDate": "2025-02-25",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -5326,7 +8121,11 @@
             "filingDate": "2025-02-25",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -5342,7 +8141,11 @@
             "filingDate": "2025-02-25",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -5358,7 +8161,11 @@
             "filingDate": "2025-02-25",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -5378,7 +8185,11 @@
             "filingDate": "2025-04-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -5394,7 +8205,11 @@
             "filingDate": "2025-04-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -5410,7 +8225,11 @@
             "filingDate": "2025-04-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -5426,7 +8245,11 @@
             "filingDate": "2025-04-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -5446,7 +8269,11 @@
             "filingDate": "2025-07-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -5462,7 +8289,11 @@
             "filingDate": "2025-07-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -5478,7 +8309,11 @@
             "filingDate": "2025-07-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -5494,7 +8329,11 @@
             "filingDate": "2025-07-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -5514,7 +8353,11 @@
             "filingDate": "2025-10-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -5530,7 +8373,11 @@
             "filingDate": "2025-10-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -5546,7 +8393,11 @@
             "filingDate": "2025-10-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -5562,7 +8413,11 @@
             "filingDate": "2025-10-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -5582,7 +8437,11 @@
             "filingDate": "2026-02-25",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Wealth & Investment Management",
@@ -5598,7 +8457,11 @@
             "filingDate": "2026-02-25",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Banking",
@@ -5614,7 +8477,11 @@
             "filingDate": "2026-02-25",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Global Markets",
@@ -5630,7 +8497,11 @@
             "filingDate": "2026-02-25",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       }
@@ -5835,12 +8706,195 @@
     ],
     "errors": []
   },
+  "parserDiagnostics": {
+    "version": "universal-parser-v3",
+    "financials": {
+      "basePreferredOrder": [
+        "official",
+        "stockanalysis"
+      ],
+      "preferredOrder": [
+        "official",
+        "stockanalysis"
+      ],
+      "selectedSource": "official",
+      "attempts": [
+        {
+          "layer": "financials",
+          "source_id": "official",
+          "status": "success",
+          "selected": true,
+          "reason": "",
+          "quarter_count": 32,
+          "latest_quarter": "2025Q4",
+          "error": ""
+        },
+        {
+          "layer": "financials",
+          "source_id": "stockanalysis",
+          "status": "success",
+          "selected": false,
+          "reason": "",
+          "quarter_count": 20,
+          "latest_quarter": "2025Q4",
+          "error": ""
+        }
+      ],
+      "reconciliation": {
+        "version": "financial-reconciler-v1",
+        "primarySource": "official",
+        "quarterCount": 32,
+        "fieldOverrideCount": 20,
+        "derivedFieldCount": 0,
+        "mixedSourceQuarterCount": 20,
+        "sourceUsageCounts": {
+          "official": 371,
+          "stockanalysis": 20
+        }
+      },
+      "validation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "quarterCount": 32,
+        "validatedQuarterCount": 32,
+        "issueCount": 0,
+        "mismatchQuarterCount": 0,
+        "highConfidenceQuarterCount": 0,
+        "averageConfidenceScore": 0.7937,
+        "latestQuarter": "2025Q4",
+        "latestQuarterConfidenceScore": 0.7937,
+        "latestQuarterIssueCount": 0
+      }
+    },
+    "segments": {
+      "selectedSource": "official-segments",
+      "attempts": [
+        {
+          "layer": "segments",
+          "source_id": "official-segments",
+          "status": "success",
+          "selected": true,
+          "reason": "",
+          "quarter_count": 32,
+          "latest_quarter": "2025Q4",
+          "error": ""
+        }
+      ]
+    },
+    "revenueStructures": {
+      "selectedSource": "official-revenue-structures",
+      "attempts": [
+        {
+          "layer": "revenue-structures",
+          "source_id": "official-revenue-structures",
+          "status": "success",
+          "selected": true,
+          "reason": "",
+          "quarter_count": 32,
+          "latest_quarter": "2025Q4",
+          "error": ""
+        }
+      ]
+    },
+    "summary": {
+      "financialQuarterCount": 32,
+      "segmentQuarterCount": 32,
+      "revenueStructureQuarterCount": 32
+    },
+    "validation": {
+      "version": "parser-validation-v1",
+      "status": "medium",
+      "overallConfidenceScore": 0.7784,
+      "financialConfidenceScore": 0.7937,
+      "structuralConfidenceScore": 0.75,
+      "revenueSegmentChecks": 0,
+      "revenueSegmentMismatchCount": 0,
+      "revenueSegmentSkippedChecks": 32,
+      "detailGroupChecks": 0,
+      "detailGroupMismatchCount": 0,
+      "detailGroupSkippedChecks": 0,
+      "opexChecks": 0,
+      "opexSkippedChecks": 0,
+      "opexOverflowMismatchCount": 0,
+      "warningCount": 0,
+      "warnings": []
+    }
+  },
   "statementPresets": {},
   "coverage": {
     "quarterCount": 32,
     "pixelReplicaQuarterCount": 0,
     "hasPixelReplica": false,
     "officialFinancialQuarterCount": 32,
-    "officialSegmentQuarterCount": 32
+    "officialSegmentQuarterCount": 32,
+    "officialExpenseQuarterCount": 0,
+    "classification": {
+      "status": "ok",
+      "latestQuarter": "2025Q4",
+      "latestQuarterHasRevenueClassification": true,
+      "latestQuarterHasExpenseClassification": false,
+      "latestRevenueClassificationQuarter": "2025Q4",
+      "latestExpenseClassificationQuarter": null,
+      "latestStructureHistoryQuarter": "2025Q4",
+      "revenueClassificationQuarterCount": 32,
+      "expenseClassificationQuarterCount": 0,
+      "revenueClassificationCoverageRatio": 1.0,
+      "expenseClassificationCoverageRatio": 0.0,
+      "latestRevenueClassificationLagQuarters": 0,
+      "latestExpenseClassificationLagQuarters": null,
+      "warnings": [],
+      "blockers": [],
+      "policy": {}
+    },
+    "parser": {
+      "version": "universal-parser-v3",
+      "selectedFinancialSource": "official",
+      "selectedSegmentSource": "official-segments",
+      "selectedRevenueStructureSource": "official-revenue-structures",
+      "financialAttemptCount": 2,
+      "financialReconciliation": {
+        "version": "financial-reconciler-v1",
+        "primarySource": "official",
+        "quarterCount": 32,
+        "fieldOverrideCount": 20,
+        "derivedFieldCount": 0,
+        "mixedSourceQuarterCount": 20,
+        "sourceUsageCounts": {
+          "official": 371,
+          "stockanalysis": 20
+        }
+      },
+      "financialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "quarterCount": 32,
+        "validatedQuarterCount": 32,
+        "issueCount": 0,
+        "mismatchQuarterCount": 0,
+        "highConfidenceQuarterCount": 0,
+        "averageConfidenceScore": 0.7937,
+        "latestQuarter": "2025Q4",
+        "latestQuarterConfidenceScore": 0.7937,
+        "latestQuarterIssueCount": 0
+      },
+      "validation": {
+        "version": "parser-validation-v1",
+        "status": "medium",
+        "overallConfidenceScore": 0.7784,
+        "financialConfidenceScore": 0.7937,
+        "structuralConfidenceScore": 0.75,
+        "revenueSegmentChecks": 0,
+        "revenueSegmentMismatchCount": 0,
+        "revenueSegmentSkippedChecks": 32,
+        "detailGroupChecks": 0,
+        "detailGroupMismatchCount": 0,
+        "detailGroupSkippedChecks": 0,
+        "opexChecks": 0,
+        "opexSkippedChecks": 0,
+        "opexOverflowMismatchCount": 0,
+        "warningCount": 0,
+        "warnings": []
+      }
+    }
   }
 }

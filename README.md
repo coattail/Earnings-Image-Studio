@@ -6,7 +6,7 @@
 
 - 独立目录运行，不依赖旧财报项目的模板、路由或数据库
 - 静态 HTML/CSS/JavaScript 控制台，便于本地直接预览
-- 内置季度财报数据编译脚本，覆盖美股市值前 30 公司池，并直接从 SEC EDGAR 官方 XBRL 抽取 2020 年以来季度财务主干
+- 内置季度财报数据编译脚本，覆盖美股市值前 30 公司池，并额外纳入腾讯、阿里巴巴、京东、网易、小米、比亚迪、美团等国际样本
 - 支持 SVG 预览与 SVG/PNG 导出
 - 所有公司统一使用新版复刻模板引擎；命中手工精修快照时会自动套用更细的专属布局参数
 
@@ -86,9 +86,12 @@ https://coattail.github.io/Earnings-Image-Studio/
 
 ## 数据说明
 
-- 公司池基于 2026-03-14 的美股市值排名去重后取前 30 家，保留 ADR 样本
+- 公司池基于 2026-03-14 的美股市值排名去重后取前 30 家，并补充腾讯、阿里巴巴、京东、网易、小米、比亚迪、美团等国际扩展样本
 - 季度财务主干来自 SEC EDGAR `companyfacts` 与官方 XBRL 口径，按公司申报币种保留原始单位
 - 营收结构数据直接来自 SEC EDGAR 官方 filings 的分部披露 XBRL
+- 数据编译阶段现在通过统一解析编排层协调多种抓取器，并为每家公司保留来源选择、回退链路与覆盖度元数据
+- 统一解析层已支持“上下文 financial adapters”：例如腾讯会自动结合官方营收结构披露里的 IR PDF 链接，补齐并优先采用 PDF 解析出的利润表历史，再与 stockanalysis / official 字段级对账
+- 官方营收/费用分类抓取已逐步迁出手工 override：例如京东、网易、小米、美团会直接从 IR results / report PDF 自动提取 revenue structure 与 opex breakdown
 - 补充拆分指标可放在 `data/supplemental-components.json`，由原型数据适配层读取，不耦合渲染器
 - 手工精修快照保存在 `data/manual-presets.json`
 - 输出主数据保存在 `data/earnings-dataset.json`
@@ -102,3 +105,4 @@ https://coattail.github.io/Earnings-Image-Studio/
 - `data/manual-presets.json`: 手工精修的像素复刻快照
 - `data/earnings-dataset.json`: 编译后的前端数据
 - `scripts/build_dataset.py`: 公司池与季度财报数据编译脚本
+- `scripts/universal_parser.py`: 统一解析编排层，负责多源抓取的优先级、回退与来源诊断

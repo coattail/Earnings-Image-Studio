@@ -48,6 +48,11 @@ COMPANY_DOMAINS: dict[str, str] = {
     "caterpillar": "caterpillar.com",
     "tencent": "tencent.com",
     "alibaba": "alibaba.com",
+    "jd": "jd.com",
+    "netease": "netease.com",
+    "xiaomi": "xiaomi.com",
+    "byd": "byd.com",
+    "meituan": "meituan.com",
 }
 
 OVERRIDE_LOGO_SOURCES: dict[str, dict[str, Any]] = {
@@ -107,6 +112,9 @@ OVERRIDE_LOGO_SOURCES: dict[str, dict[str, Any]] = {
     },
     "micron": {
         "url": "https://cdn.worldvectorlogo.com/logos/micron.svg",
+    },
+    "netease": {
+        "url": "https://www.google.com/s2/favicons?domain_url=https://163.com&sz=256",
     },
     "netflix": {
         "url": SIMPLE_ICON_URL.format(slug="netflix"),

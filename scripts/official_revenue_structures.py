@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+from copy import deepcopy
 import json
 import re
 import subprocess
 import tempfile
+import time
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from io import BytesIO
@@ -13,6 +15,20 @@ from typing import Any
 
 from pypdf import PdfReader
 
+from document_parser import (
+    ensure_vision_ocr_binary as _shared_ensure_vision_ocr_binary,
+    extract_next_data_props as _shared_extract_next_data_props,
+    extract_pdf_page_texts_from_url as _shared_extract_pdf_page_texts_from_url,
+    extract_pdf_text_from_url as _shared_extract_pdf_text_from_url,
+    extract_text_via_jina as _shared_extract_text_via_jina,
+    labeled_row_value_to_bn as _shared_labeled_row_value_to_bn,
+    ocr_image_path as _shared_ocr_image_path,
+    ocr_image_url as _shared_ocr_image_url,
+    parse_labeled_numeric_rows as _shared_parse_labeled_numeric_rows,
+    parse_income_statement_from_url as _shared_parse_income_statement_from_url,
+    slice_text_section as _shared_slice_text_section,
+    statement_value_to_bn as _shared_statement_value_to_bn,
+)
 from official_financials import _extract_html_tables, _parse_number
 from official_segments import (
     SegmentFact,
@@ -34,9 +50,9 @@ ROOT_DIR = Path(__file__).resolve().parents[1]
 CACHE_DIR = ROOT_DIR / "data" / "cache" / "official-revenue-structures"
 OFFICIAL_SEGMENT_CACHE_DIR = ROOT_DIR / "data" / "cache" / "official-segments"
 OFFICIAL_FINANCIAL_CACHE_DIR = ROOT_DIR / "data" / "cache" / "official-financials"
-VISION_OCR_SWIFT = ROOT_DIR / "scripts" / "vision_ocr.swift"
-VISION_OCR_BIN = CACHE_DIR / "vision-ocr"
-CACHE_VERSION = "20260323-v6"
+STOCKANALYSIS_FINANCIAL_CACHE_DIR = ROOT_DIR / "data" / "cache" / "stockanalysis-financials"
+CACHE_VERSION = "20260325-v16"
+STOCKANALYSIS_FINANCIAL_CACHE: dict[str, dict[str, Any]] = {}
 
 XBRL_AXIS_COMPANY_CONFIGS: dict[str, dict[str, Any]] = {
     "mastercard": {
@@ -83,6 +99,40 @@ XBRL_AXIS_COMPANY_CONFIGS: dict[str, dict[str, Any]] = {
             "oemother": ["OEM · legacy"],
         },
     },
+}
+
+XIAOMI_QUARTERLY_PDF_URLS: dict[str, str] = {
+    "2018Q2": "https://ir.mi.com/system/files-encrypted/nasdaq_kms/assets/2021/07/27/4-49-18/2018Q2.pdf",
+    "2018Q3": "https://ir.mi.com/system/files-encrypted/nasdaq_kms/assets/2021/07/27/4-45-30/2018Q3.pdf",
+    "2018Q4": "https://ir.mi.com/system/files-encrypted/nasdaq_kms/assets/2021/07/27/4-39-22/2018Q4.pdf",
+    "2019Q1": "https://ir.mi.com/system/files-encrypted/nasdaq_kms/assets/2021/07/27/4-25-55/2019Q1.pdf",
+    "2019Q2": "https://ir.mi.com/static-files/6008527d-b4a8-4ccf-8b6f-c4df3a150d1c",
+    "2019Q3": "https://ir.mi.com/system/files-encrypted/nasdaq_kms/assets/2021/07/27/4-00-59/2019Q3.pdf",
+    "2019Q4": "https://ir.mi.com/system/files-encrypted/nasdaq_kms/assets/2021/07/27/4-06-38/2019Q4.pdf",
+    "2020Q1": "https://ir.mi.com/system/files-encrypted/nasdaq_kms/assets/2021/07/20/12-05-14/RAF_20200520_e.pdf",
+    "2020Q2": "https://ir.mi.com/system/files-encrypted/nasdaq_kms/assets/2021/07/20/12-01-59/RAF_20200630.pdf",
+    "2020Q3": "https://ir.mi.com/system/files-encrypted/nasdaq_kms/assets/2021/07/20/11-57-37/RATH_20201124_e.pdf",
+    "2020Q4": "https://ir.mi.com/system/files-encrypted/nasdaq_kms/assets/2021/07/20/11-52-53/ARAY_20210324_e.pdf",
+    "2021Q1": "https://ir.mi.com/static-files/6c2215a4-3712-4ec9-b748-f80551baae6a",
+    "2021Q2": "https://ir.mi.com/system/files-encrypted/nasdaq_kms/assets/2021/09/29/5-22-41/e228826_%28Xiaomi_IRA_Eng%29_AsPrint_Fullset_1735.pdf",
+    "2021Q3": "https://ir.mi.com/system/files-encrypted/nasdaq_kms/assets/2021/12/23/11-04-36/20211123%20RESULTS%20ANNOUNCEMENT%20FOR%20THE%20THREE%20AND%20NINE%20MONTHS%20ENDED%20SEPTEMBER%2030%2C%202021.pdf",
+    "2021Q4": "https://ir.mi.com/system/files-encrypted/nasdaq_kms/assets/2022/03/31/1-55-53/ANNUAL%20RESULTS%20ANNOUNCEMENT%20FOR%20THE%20YEAR%20ENDED%20DECEMBER%2031%2C%202021.pdf",
+    "2022Q1": "https://ir.mi.com/system/files-encrypted/nasdaq_kms/assets/2022/05/19/5-48-58/Announcement_1Q22_EN.pdf",
+    "2022Q2": "https://ir.mi.com/system/files-encrypted/nasdaq_kms/assets/2022/08/19/5-40-32/Annoucement_22Q2_EN.pdf",
+    "2022Q3": "https://ir.mi.com/system/files-encrypted/nasdaq_kms/assets/2022/11/23/4-48-56/Annoucement_22Q3_EN.pdf",
+    "2022Q4": "https://ir.mi.com/system/files-encrypted/nasdaq_kms/assets/2023/03/24/7-35-20/HKEX-EPS_20230324_10644395_0.PDF",
+    "2023Q1": "https://ir.mi.com/system/files-encrypted/nasdaq_kms/assets/2023/05/24/6-14-31/2023052400737.pdf",
+    "2023Q2": "https://ir.mi.com/system/files-encrypted/nasdaq_kms/assets/2023/08/29/6-36-44/2023082900551.pdf",
+    "2023Q3": "https://ir.mi.com/system/files-encrypted/nasdaq_kms/assets/2023/11/20/4-56-29/ANNOUNCEMENT.pdf",
+    "2023Q4": "https://ir.mi.com/system/files-encrypted/nasdaq_kms/assets/2024/03/19/5-34-07/23Q4_EN_797121_%28Xiaomi%20RA%20Eng%29_AsPrint_Fullset_1652.pdf",
+    "2024Q1": "https://ir.mi.com/static-files/4c11aa9d-79c8-4370-9f72-bc00ac39241c",
+    "2024Q2": "https://ir.mi.com/system/files-encrypted/nasdaq_kms/assets/2024/08/21/5-44-48/Announcement.pdf",
+    "2024Q3": "https://ir.mi.com/system/files-encrypted/nasdaq_kms/assets/2024/11/18/5-32-31/24Q3_Announcement.pdf",
+    "2024Q4": "https://ir.mi.com/system/files-encrypted/nasdaq_kms/assets/2025/03/18/5-38-56/%E8%8B%B1%E6%96%87%E5%85%AC%E5%91%8A.pdf",
+    "2025Q1": "https://ir.mi.com/static-files/ad8fe815-6b9f-4ee5-bd3c-5a83c1c76f9a",
+    "2025Q2": "https://ir.mi.com/system/files-encrypted/nasdaq_kms/assets/2025/08/19/5-36-23/25Q2%20AC_ENG.pdf",
+    "2025Q3": "https://ir.mi.com/static-files/e4830480-8ce9-45f8-a09d-64e40b2bdfac",
+    "2025Q4": "https://ir.mi.com/system/files-encrypted/nasdaq_kms/assets/2026/03/24/5-35-03/25Q4%20EN%20AC%20Xiaomi.pdf",
 }
 
 SEGMENT_CACHE_HIERARCHY_CONFIGS: dict[str, dict[str, Any]] = {
@@ -396,6 +446,78 @@ def _write_cached_json(path: Path, payload: Any) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
+def _sorted_quarter_payloads(quarter_map: dict[str, Any] | None) -> dict[str, Any]:
+    cleaned = quarter_map if isinstance(quarter_map, dict) else {}
+    return {
+        quarter: cleaned[quarter]
+        for quarter in sorted(cleaned.keys(), key=_period_key)
+        if quarter in cleaned
+    }
+
+
+def _merge_revenue_structure_results(base: dict[str, Any] | None, supplement: dict[str, Any] | None) -> dict[str, Any]:
+    merged: dict[str, Any] = {
+        "source": "",
+        "quarters": {},
+        "filingsUsed": [],
+        "errors": [],
+    }
+    for payload in (base, supplement):
+        if not isinstance(payload, dict):
+            continue
+        if payload.get("source"):
+            merged["source"] = str(payload.get("source") or "")
+        if isinstance(payload.get("quarters"), dict):
+            merged["quarters"].update(deepcopy(payload.get("quarters") or {}))
+        for filing in payload.get("filingsUsed") or []:
+            if not isinstance(filing, dict):
+                continue
+            if filing not in merged["filingsUsed"]:
+                merged["filingsUsed"].append(deepcopy(filing))
+        for error in payload.get("errors") or []:
+            if not error:
+                continue
+            if error not in merged["errors"]:
+                merged["errors"].append(str(error))
+    merged["quarters"] = _sorted_quarter_payloads(merged.get("quarters"))
+    return merged
+
+
+def _preserve_missing_cached_revenue_structure_quarters(
+    result: dict[str, Any] | None,
+    cached_payload: dict[str, Any] | None,
+) -> dict[str, Any] | None:
+    if not isinstance(result, dict) or not isinstance(cached_payload, dict):
+        return result
+    result_quarters = result.get("quarters") if isinstance(result.get("quarters"), dict) else {}
+    cached_quarters = cached_payload.get("quarters") if isinstance(cached_payload.get("quarters"), dict) else {}
+    if not result_quarters or not cached_quarters:
+        return result
+    missing_quarters = {
+        quarter: deepcopy(payload)
+        for quarter, payload in cached_quarters.items()
+        if quarter not in result_quarters
+    }
+    if not missing_quarters:
+        return result
+    preserved_payload = {
+        "source": cached_payload.get("source") or result.get("source") or "official-revenue-structures",
+        "quarters": missing_quarters,
+        "filingsUsed": [
+            deepcopy(filing)
+            for filing in (cached_payload.get("filingsUsed") or [])
+            if isinstance(filing, dict)
+        ],
+        "errors": [],
+    }
+    merged = _merge_revenue_structure_results(preserved_payload, result)
+    preserved_count = len(missing_quarters)
+    preservation_note = f"preserved {preserved_count} cached revenue-structure quarter(s) after partial refresh"
+    if preservation_note not in merged["errors"]:
+        merged["errors"].append(preservation_note)
+    return merged
+
+
 def _load_cached_filing_entries(company_id: str) -> list[dict[str, Any]]:
     path = OFFICIAL_SEGMENT_CACHE_DIR / f"{company_id}.json"
     if not path.exists():
@@ -538,23 +660,11 @@ def _instance_name_for_filing(cik: int, accession_nodash: str, filing: dict[str,
 
 
 def _ensure_vision_ocr_binary() -> Path:
-    CACHE_DIR.mkdir(parents=True, exist_ok=True)
-    needs_build = not VISION_OCR_BIN.exists()
-    if not needs_build:
-        needs_build = VISION_OCR_BIN.stat().st_mtime < VISION_OCR_SWIFT.stat().st_mtime
-    if needs_build:
-        subprocess.run(["swiftc", str(VISION_OCR_SWIFT), "-o", str(VISION_OCR_BIN)], check=True)
-    return VISION_OCR_BIN
+    return _shared_ensure_vision_ocr_binary()
 
 
 def _ocr_image(url: str) -> str:
-    binary = _ensure_vision_ocr_binary()
-    with tempfile.TemporaryDirectory() as temp_dir:
-        extension = Path(url).suffix or ".jpg"
-        image_path = Path(temp_dir) / f"ocr-source{extension}"
-        image_path.write_bytes(_request(url))
-        result = subprocess.run([str(binary), str(image_path)], check=True, capture_output=True, text=True)
-    return result.stdout
+    return _shared_ocr_image_url(url)
 
 
 def _normalize_member_key(label: str) -> str:
@@ -693,6 +803,43 @@ def _normalize_text_space(text: str) -> str:
     return re.sub(r"\s+", " ", str(text or "")).strip()
 
 
+def _build_opex_breakdown_from_statement(
+    source_url: str,
+    filing_date: str,
+    quarter: str,
+    row_specs: list[tuple[str, str, str, str | None]],
+) -> list[dict[str, Any]]:
+    if not source_url:
+        return []
+    try:
+        statement = _shared_parse_income_statement_from_url(source_url, ocr_fallback=True, quarter_hint=quarter)
+    except Exception:  # noqa: BLE001
+        return []
+    rows = statement.rows if isinstance(statement.rows, dict) else {}
+    breakdown: list[dict[str, Any]] = []
+    for row_key, display_name, member_key, name_zh in row_specs:
+        values = rows.get(row_key) or []
+        if not values:
+            continue
+        value_bn = _shared_statement_value_to_bn(values[0], statement)
+        if value_bn is None:
+            continue
+        row: dict[str, Any] = {
+            "name": display_name,
+            "memberKey": member_key,
+            "valueBn": round(abs(value_bn), 3),
+            "sourceUrl": source_url,
+            "sourceForm": "IR PDF income statement",
+            "filingDate": filing_date,
+            "validationEligible": False,
+            "validationNotes": ["statement-major-opex-lines"],
+        }
+        if name_zh:
+            row["nameZh"] = name_zh
+        breakdown.append(row)
+    return breakdown
+
+
 def _timestamp_ms_to_iso_date(value: Any) -> str:
     try:
         milliseconds = int(value)
@@ -712,6 +859,10 @@ def _extract_json_script_props(html_text: str) -> dict[str, Any]:
     return payload if isinstance(payload, dict) else {}
 
 
+def _extract_next_data_props(html_text: str) -> dict[str, Any]:
+    return _shared_extract_next_data_props(html_text)
+
+
 def _extract_first_pdf_link_from_html(html_text: str) -> str | None:
     match = re.search(r'href="([^"]+\.pdf)"', html_text, re.IGNORECASE)
     if match:
@@ -720,16 +871,56 @@ def _extract_first_pdf_link_from_html(html_text: str) -> str | None:
 
 
 def _extract_pdf_page_texts(url: str) -> list[str]:
-    reader = PdfReader(BytesIO(_request(url)))
-    return [page.extract_text() or "" for page in reader.pages]
+    return _shared_extract_pdf_page_texts_from_url(url, ocr_fallback=True)
 
 
 def _extract_pdf_text(url: str) -> str:
-    return " ".join(_extract_pdf_page_texts(url))
+    return _shared_extract_pdf_text_from_url(url, ocr_fallback=True)
+
+
+def _extract_text_via_jina(url: str) -> str:
+    return _shared_extract_text_via_jina(url)
+
+
+FAST_PDF_TEXT_CACHE: dict[str, str] = {}
+
+
+def _extract_pdf_text_fast(url: str) -> str:
+    cached = FAST_PDF_TEXT_CACHE.get(url)
+    if cached is not None:
+        return cached
+    with tempfile.NamedTemporaryFile(suffix=".pdf", delete=True) as handle:
+        try:
+            subprocess.run(
+                [
+                    "curl",
+                    "-L",
+                    "--fail",
+                    "--silent",
+                    "--show-error",
+                    "--max-time",
+                    "180",
+                    "-o",
+                    handle.name,
+                    url,
+                ],
+                check=True,
+                timeout=210,
+            )
+            reader = PdfReader(handle.name)
+            text = "\n".join(page.extract_text() or "" for page in reader.pages)
+            if text and len(text) > 1000:
+                FAST_PDF_TEXT_CACHE[url] = text
+                return text
+        except Exception:  # noqa: BLE001
+            pass
+    fallback_text = _extract_text_via_jina(url)
+    FAST_PDF_TEXT_CACHE[url] = fallback_text
+    return fallback_text
 
 
 def _parse_number_token(raw: str) -> float | None:
-    cleaned = str(raw or "").strip().replace(",", "")
+    cleaned = str(raw or "").strip().replace(",", "").replace(" ", "")
     if not cleaned:
         return None
     if cleaned.startswith("(") and cleaned.endswith(")"):
@@ -970,7 +1161,7 @@ def _extract_tencent_quarter_discussion(pdf_text: str, quarter: str) -> str:
     match = re.search(
         rf"{re.escape(quarter_code)}\s+Management Discussion and Analysis(.*?)(?=(?:FY\d{{4}}|[1-4]Q\d{{4}})\s+Management Discussion and Analysis|Non-IFRS|$)",
         pdf_text,
-        re.IGNORECASE,
+        re.IGNORECASE | re.DOTALL,
     )
     if match:
         return _normalize_text_space(match.group(1))
@@ -1014,6 +1205,1630 @@ def _extract_tencent_growth_metrics(text: str, label: str, *, prefix: str | None
             yoy = -abs(float(yoy))
         return value, yoy
     return None, None
+
+
+def _extract_date_from_url(url: str) -> str:
+    match = re.search(r"/(20\d{2})/(\d{2})/(\d{2})/", str(url or ""))
+    if not match:
+        return ""
+    return f"{match.group(1)}-{match.group(2)}-{match.group(3)}"
+
+
+def _extract_current_million_row_value(text: str, label: str) -> float | None:
+    parsed_rows = _shared_parse_labeled_numeric_rows(text, {"row": [label]})
+    values = parsed_rows.rows.get("row") or []
+    if len(values) < 2:
+        return None
+    value_bn = _shared_labeled_row_value_to_bn(values[1], parsed_rows)
+    if value_bn is None:
+        return None
+    return value_bn
+
+
+def _extract_jd_narrative_billion_value(text: str, label: str) -> float | None:
+    normalized = _normalize_text_space(text)
+    label_pattern = _pdf_fuzzy_phrase_pattern(label)
+    pattern = re.compile(
+        rf"{label_pattern}.*?\b(?:were|was|to)\s+RMB\s*(?P<value>[\d\s,.]+)\s*billion",
+        re.IGNORECASE,
+    )
+    match = pattern.search(normalized)
+    if not match:
+        return None
+    value = _parse_number_token(match.group("value"))
+    if value is None:
+        return None
+    return round(value, 3)
+
+
+def _extract_jd_opex_billion_value(text: str, label: str) -> float | None:
+    normalized = _normalize_text_space(text)
+    label_pattern = _pdf_fuzzy_phrase_pattern(label)
+    patterns = [
+        re.compile(
+            rf"{label_pattern}\s*\.?\s*.*?\bto\s+RMB\s*(?P<value>[\d.]+)\s*billion",
+            re.IGNORECASE,
+        ),
+        re.compile(
+            rf"{label_pattern}\s*\.?\s*.*?\bwere\s+RMB\s*(?P<value>[\d.]+)\s*billion",
+            re.IGNORECASE,
+        ),
+        re.compile(
+            rf"{label_pattern}\s*\.?\s*.*?\bwas\s+RMB\s*(?P<value>[\d.]+)\s*billion",
+            re.IGNORECASE,
+        ),
+    ]
+    for pattern in patterns:
+        match = pattern.search(normalized)
+        if not match:
+            continue
+        value = _parse_number_token(match.group("value"))
+        if value is not None:
+            return round(value, 3)
+    return None
+
+
+def _load_jd_quarterly_items() -> list[dict[str, str]]:
+    text = _extract_text_via_jina("https://ir.jd.com/quarterly-results")
+    year = ""
+    quarter = ""
+    items: list[dict[str, str]] = []
+    seen_quarters: set[str] = set()
+    for raw_line in text.splitlines():
+        line = _normalize_text_space(raw_line)
+        year_match = re.fullmatch(r"##\s*(20\d{2})", line) or re.fullmatch(r"(20\d{2})", line)
+        if year_match:
+            year = year_match.group(1)
+            quarter = ""
+            continue
+        quarter_match = re.fullmatch(r"(Q[1-4])", line)
+        if quarter_match:
+            quarter = quarter_match.group(1)
+            continue
+        if not year or not quarter:
+            continue
+        link_match = re.search(r"\[(JD\.com.*?Results.*?)\]\((http[^)\s]+)", line, re.IGNORECASE)
+        if not link_match:
+            continue
+        quarter_key = f"{year}{quarter}"
+        if quarter_key in seen_quarters:
+            continue
+        seen_quarters.add(quarter_key)
+        source_url = unescape(link_match.group(2)).strip()
+        items.append(
+            {
+                "quarter": quarter_key,
+                "title": link_match.group(1).strip(),
+                "sourceUrl": source_url,
+                "filingDate": _extract_date_from_url(source_url),
+            }
+        )
+    return sorted(items, key=lambda item: _period_key(str(item.get("quarter") or "")))[-32:]
+
+
+def _parse_jd_quarter_item(item: dict[str, Any]) -> tuple[str, dict[str, Any], dict[str, Any]] | None:
+    quarter = str(item.get("quarter") or "")
+    source_url = str(item.get("sourceUrl") or "")
+    filing_date = str(item.get("filingDate") or "")
+    if not quarter or not source_url:
+        return None
+
+    revenue_rows = [
+        ("Net product revenues", "Net product revenues", "netproductrevenues"),
+        ("Net service revenues", "Net service revenues", "netservicerevenues"),
+    ]
+    detail_rows = [
+        ("Electronics and home appliances revenues", "Electronics and home appliances revenues", "electronicsandhomeappliancesrevenues", "Net product revenues"),
+        ("General merchandise revenues", "General merchandise revenues", "generalmerchandiserevenues", "Net product revenues"),
+        ("Marketplace and marketing revenues", "Marketplace and marketing revenues", "marketplaceandmarketingrevenues", "Net service revenues"),
+        ("Logistics and other service revenues", "Logistics and other service revenues", "logisticsandotherservicerevenues", "Net service revenues"),
+    ]
+    opex_rows = [
+        ("Fulfillment Expenses", "Fulfillment", "fulfillment"),
+        ("Marketing Expenses", "Marketing", "marketing"),
+        ("Research and Development Expenses", "Research and development", "researchanddevelopment"),
+        ("General and Administrative Expenses", "General and administrative", "generalandadministrative"),
+    ]
+    text = _extract_pdf_text_fast(source_url)
+    segments = []
+    for source_label, display_name, member_key in revenue_rows:
+        value_bn = _extract_current_million_row_value(text, source_label)
+        if value_bn is None:
+            continue
+        segments.append(
+            _build_row(
+                display_name,
+                value_bn,
+                member_key=member_key,
+                source_url=source_url,
+                source_form="IR PDF",
+                filing_date=filing_date,
+            )
+        )
+    if len(segments) < 2:
+        narrative_values = {
+            "netproductrevenues": _extract_jd_narrative_billion_value(text, "Net product revenues"),
+            "netservicerevenues": _extract_jd_narrative_billion_value(text, "Net service revenues"),
+        }
+        total_revenue_bn = _extract_jd_narrative_billion_value(text, "Net revenues")
+        if narrative_values["netproductrevenues"] is None and total_revenue_bn and narrative_values["netservicerevenues"]:
+            derived_product_bn = round(total_revenue_bn - narrative_values["netservicerevenues"], 3)
+            if derived_product_bn > 0.02:
+                narrative_values["netproductrevenues"] = derived_product_bn
+        segments = []
+        for _source_label, display_name, member_key in revenue_rows:
+            value_bn = narrative_values.get(member_key)
+            if value_bn is None:
+                continue
+            segments.append(
+                _build_row(
+                    display_name,
+                    value_bn,
+                    member_key=member_key,
+                    source_url=source_url,
+                    source_form="IR PDF narrative",
+                    filing_date=filing_date,
+                )
+            )
+    if len(segments) < 2:
+        return None
+
+    detail_groups = []
+    for source_label, display_name, member_key, target_name in detail_rows:
+        value_bn = _extract_current_million_row_value(text, source_label)
+        if value_bn is None:
+            continue
+        detail_groups.append(
+            _build_row(
+                display_name,
+                value_bn,
+                member_key=member_key,
+                source_url=source_url,
+                source_form="IR PDF",
+                filing_date=filing_date,
+                target_name=target_name,
+            )
+        )
+
+    opex_breakdown = []
+    for source_label, display_name, member_key in opex_rows:
+        value_bn = _extract_jd_opex_billion_value(text, source_label)
+        if value_bn is None:
+            continue
+        opex_breakdown.append(
+            {
+                "name": display_name,
+                "memberKey": member_key,
+                "valueBn": value_bn,
+                "sourceUrl": source_url,
+                "sourceForm": "IR PDF",
+                "filingDate": filing_date,
+            }
+        )
+
+    quarter_payload: dict[str, Any] = {"segments": segments}
+    if detail_groups:
+        quarter_payload["detailGroups"] = detail_groups
+    if opex_breakdown:
+        quarter_payload["opexBreakdown"] = opex_breakdown
+
+    filing_meta = {
+        "title": item.get("title"),
+        "quarter": quarter,
+        "filingDate": filing_date,
+        "pdf": source_url,
+    }
+    return quarter, quarter_payload, filing_meta
+
+
+def _parse_jd_records(company: dict[str, Any]) -> dict[str, Any]:
+    result = {"source": "official-ir-release", "quarters": {}, "filingsUsed": [], "errors": []}
+    for item in _load_jd_quarterly_items():
+        try:
+            parsed = _parse_jd_quarter_item(item)
+            if not parsed:
+                continue
+            quarter, quarter_payload, filing_meta = parsed
+            result["quarters"][quarter] = quarter_payload
+            result["filingsUsed"].append(filing_meta)
+        except Exception as exc:  # noqa: BLE001
+            quarter = str(item.get("quarter") or "")
+            result["errors"].append(f"{quarter}: {exc}")
+    return result
+
+
+def _load_netease_quarterly_items() -> list[dict[str, str]]:
+    text = _extract_text_via_jina("https://ir.netease.com/financial-information/quarterly-results")
+    pending_date = ""
+    items: list[dict[str, str]] = []
+    for raw_line in text.splitlines():
+        line = _normalize_text_space(raw_line)
+        date_match = re.fullmatch(r"(\d{2})/(\d{2})/(\d{4})", line)
+        if date_match:
+            pending_date = f"{date_match.group(3)}-{date_match.group(1)}-{date_match.group(2)}"
+            continue
+        link_match = re.search(r"\[(Q([1-4])\s+(20\d{2})\s+Earnings Release)\]\((http[^)\s]+)", line, re.IGNORECASE)
+        if not link_match:
+            continue
+        quarter_key = f"{link_match.group(3)}Q{link_match.group(2)}"
+        items.append(
+            {
+                "quarter": quarter_key,
+                "title": link_match.group(1).strip(),
+                "sourceUrl": unescape(link_match.group(4)).strip(),
+                "filingDate": pending_date or _extract_date_from_url(link_match.group(4)),
+            }
+        )
+    return sorted(items, key=lambda item: _period_key(str(item.get("quarter") or "")))[-32:]
+
+
+def _extract_netease_current_million_value(text: str, label: str) -> float | None:
+    parsed_rows = _shared_parse_labeled_numeric_rows(text, {"row": [label]})
+    values = parsed_rows.rows.get("row") or []
+    if len(values) < 3:
+        return None
+    value_bn = _shared_labeled_row_value_to_bn(values[2], parsed_rows)
+    if value_bn is None:
+        return None
+    return value_bn
+
+
+def _extract_netease_narrative_value(text: str, label: str) -> float | None:
+    normalized = _normalize_text_space(text)
+    label_pattern = _pdf_fuzzy_phrase_pattern(label)
+    patterns = [
+        re.compile(
+            rf"{label_pattern}\s+net\s+revenues\s+were\s+RMB\s*(?P<value>[\d\s,.]+)\s*(?P<unit>billion|million)",
+            re.IGNORECASE,
+        ),
+        re.compile(
+            rf"net\s+revenues\s+from\s+{label_pattern}\s+were\s+RMB\s*(?P<value>[\d\s,.]+)\s*(?P<unit>billion|million)",
+            re.IGNORECASE,
+        ),
+        re.compile(
+            rf"{label_pattern}\s+revenues?\s+were\s+RMB\s*(?P<value>[\d\s,.]+)\s*(?P<unit>billion|million)",
+            re.IGNORECASE,
+        ),
+        re.compile(
+            rf"revenues?\s+from\s+{label_pattern}\s+(?:segment\s+)?(?:were|was|increased.*?\bto)\s+RMB\s*(?P<value>[\d\s,.]+)\s*(?P<unit>billion|million)",
+            re.IGNORECASE,
+        ),
+    ]
+    for pattern in patterns:
+        match = pattern.search(normalized)
+        if not match:
+            continue
+        value = _parse_number_token(match.group("value"))
+        unit = str(match.group("unit") or "").lower()
+        if value is None:
+            continue
+        if unit == "million":
+            return round(value / 1000, 3)
+        return round(value, 3)
+    return None
+
+
+def _load_stockanalysis_financial_payload(company_id: str) -> dict[str, Any]:
+    cached = STOCKANALYSIS_FINANCIAL_CACHE.get(company_id)
+    if cached is not None:
+        return cached
+    path = STOCKANALYSIS_FINANCIAL_CACHE_DIR / f"{company_id}.json"
+    if not path.exists():
+        payload: dict[str, Any] = {}
+    else:
+        loaded = _load_cached_json(path)
+        payload = loaded if isinstance(loaded, dict) else {}
+    STOCKANALYSIS_FINANCIAL_CACHE[company_id] = payload
+    return payload
+
+
+def _build_stockanalysis_opex_breakdown(company_id: str, quarter: str) -> list[dict[str, Any]]:
+    payload = _load_stockanalysis_financial_payload(company_id)
+    financials = payload.get("financials") if isinstance(payload, dict) else None
+    entry = financials.get(quarter) if isinstance(financials, dict) else None
+    if not isinstance(entry, dict):
+        return []
+    source_url = str(entry.get("statementSourceUrl") or payload.get("statementSourceUrl") or "").strip()
+    filing_date = str(entry.get("statementFilingDate") or entry.get("periodEnd") or "").strip()
+    rows: list[dict[str, Any]] = []
+    mapping = [
+        ("Selling, general and administrative", "sellinggeneralandadministrative", "sgnaBn"),
+        ("Research and development", "researchanddevelopment", "rndBn"),
+        ("Other operating expenses", "otheroperatingexpenses", "otherOpexBn"),
+    ]
+    for display_name, member_key, field_name in mapping:
+        value = entry.get(field_name)
+        if value is None:
+            continue
+        try:
+            value_bn = round(float(value), 3)
+        except (TypeError, ValueError):
+            continue
+        if value_bn <= 0.02:
+            continue
+        rows.append(
+            {
+                "name": display_name,
+                "memberKey": member_key,
+                "valueBn": value_bn,
+                "sourceUrl": source_url,
+                "sourceForm": "StockAnalysis quarterly financials fallback",
+                "filingDate": filing_date,
+            }
+        )
+    return rows
+
+
+def _stockanalysis_operating_expenses(company_id: str, quarter: str) -> float | None:
+    payload = _load_stockanalysis_financial_payload(company_id)
+    financials = payload.get("financials") if isinstance(payload, dict) else None
+    entry = financials.get(quarter) if isinstance(financials, dict) else None
+    if not isinstance(entry, dict):
+        return None
+    try:
+        value_bn = float(entry.get("operatingExpensesBn"))
+    except (TypeError, ValueError):
+        return None
+    return round(value_bn, 3) if value_bn > 0 else None
+
+
+def _breakdown_matches_expected_total(
+    rows: list[dict[str, Any]],
+    expected_total_bn: float | None,
+    *,
+    min_ratio: float = 0.82,
+    max_ratio: float = 1.08,
+) -> bool:
+    if not rows:
+        return False
+    if expected_total_bn is None or expected_total_bn <= 0:
+        return True
+    total = 0.0
+    for row in rows:
+        try:
+            total += abs(float(row.get("valueBn") or 0))
+        except (TypeError, ValueError):
+            continue
+    if total <= 0:
+        return False
+    ratio = total / expected_total_bn
+    return min_ratio <= ratio <= max_ratio
+
+
+def _parse_netease_quarter_item(company: dict[str, Any], item: dict[str, Any]) -> tuple[str, dict[str, Any], dict[str, Any]] | None:
+    quarter = str(item.get("quarter") or "")
+    source_url = str(item.get("sourceUrl") or "")
+    filing_date = str(item.get("filingDate") or "")
+    if not quarter or not source_url:
+        return None
+
+    revenue_rows = [
+        ("Games and related value-added services", "Games and related value-added services", "gamesandrelatedvalueaddedservices"),
+        ("Online game services", "Games and related value-added services", "gamesandrelatedvalueaddedservices"),
+        ("E-commerce", "E-commerce", "ecommerce"),
+        ("Advertising services", "Advertising services", "advertisingservices"),
+        ("E-mail and others", "E-mail and others", "emailandothers"),
+        ("Email and others", "E-mail and others", "emailandothers"),
+        ("Youdao", "Youdao", "youdao"),
+        ("NetEase Cloud Music", "Cloud Music", "cloudmusic"),
+        ("Cloud Music", "Cloud Music", "cloudmusic"),
+        ("Innovative businesses and others", "Innovative businesses and others", "innovativebusinessesandothers"),
+    ]
+    opex_rows = [
+        ("Selling and marketing expenses", "Selling and marketing", "sellingandmarketing"),
+        ("General and administrative expenses", "General and administrative", "generalandadministrative"),
+        ("Research and development expenses", "Research and development", "researchanddevelopment"),
+    ]
+    text = _extract_pdf_text_fast(source_url)
+    segments_by_key: dict[str, dict[str, Any]] = {}
+    for source_label, display_name, member_key in revenue_rows:
+        value_bn = _extract_netease_current_million_value(text, source_label)
+        if value_bn is None:
+            value_bn = _extract_netease_narrative_value(text, source_label)
+        if value_bn is None:
+            continue
+        segments_by_key[member_key] = _build_row(
+            display_name,
+            value_bn,
+            member_key=member_key,
+            source_url=source_url,
+            source_form="IR PDF",
+            filing_date=filing_date,
+        )
+    segments = sorted(segments_by_key.values(), key=lambda payload: float(payload.get("valueBn") or 0), reverse=True)
+    if len(segments) < 2:
+        return None
+
+    expected_opex_bn = _stockanalysis_operating_expenses(str(company.get("id") or ""), quarter)
+    opex_breakdown = []
+    for source_label, display_name, member_key in opex_rows:
+        value_bn = _extract_netease_current_million_value(text, source_label)
+        if value_bn is None:
+            continue
+        opex_breakdown.append(
+            {
+                "name": display_name,
+                "memberKey": member_key,
+                "valueBn": value_bn,
+                "sourceUrl": source_url,
+                "sourceForm": "IR PDF labeled rows",
+                "filingDate": filing_date,
+            }
+        )
+    if not _breakdown_matches_expected_total(opex_breakdown, expected_opex_bn):
+        opex_breakdown = _build_stockanalysis_opex_breakdown(str(company.get("id") or ""), quarter)
+
+    quarter_payload: dict[str, Any] = {"segments": segments}
+    if opex_breakdown:
+        quarter_payload["opexBreakdown"] = opex_breakdown
+
+    filing_meta = {
+        "title": item.get("title"),
+        "quarter": quarter,
+        "filingDate": filing_date,
+        "pdf": source_url,
+    }
+    return quarter, quarter_payload, filing_meta
+
+
+def _parse_netease_records(company: dict[str, Any]) -> dict[str, Any]:
+    result = {"source": "official-ir-release", "quarters": {}, "filingsUsed": [], "errors": []}
+    for item in _load_netease_quarterly_items():
+        try:
+            parsed = _parse_netease_quarter_item(company, item)
+            if not parsed:
+                continue
+            quarter, quarter_payload, filing_meta = parsed
+            result["quarters"][quarter] = quarter_payload
+            result["filingsUsed"].append(filing_meta)
+        except Exception as exc:  # noqa: BLE001
+            quarter = str(item.get("quarter") or "")
+            result["errors"].append(f"{quarter}: {exc}")
+    return result
+
+
+def _xiaomi_quarter_phrase_pattern(quarter: str | None) -> str | None:
+    if not quarter or len(quarter) < 6:
+        return None
+    quarter_ordinals = {
+        "Q1": "first",
+        "Q2": "second",
+        "Q3": "third",
+        "Q4": "fourth",
+    }
+    quarter_label = quarter_ordinals.get(quarter[-2:].upper())
+    year = quarter[:4]
+    if not quarter_label or not year.isdigit():
+        return None
+    return rf"(?:in|for)\s+the\s+{quarter_label}\s+quarter\s+of\s+{year}"
+
+
+def _xiaomi_quarter_table_label(quarter: str | None) -> str | None:
+    if not quarter or len(quarter) < 6:
+        return None
+    quarter_labels = {
+        "Q1": "first quarter",
+        "Q2": "second quarter",
+        "Q3": "third quarter",
+        "Q4": "fourth quarter",
+    }
+    quarter_label = quarter_labels.get(quarter[-2:].upper())
+    year = quarter[:4]
+    if not quarter_label or not year.isdigit():
+        return None
+    return f"{quarter_label} of {year}"
+
+
+def _xiaomi_table_section_patterns(
+    section_kind: str,
+    quarter: str | None = None,
+    *,
+    include_generic: bool = True,
+) -> tuple[list[re.Pattern[str]], list[re.Pattern[str]]]:
+    normalized_kind = str(section_kind or "").strip().lower()
+    quarter_label = _xiaomi_quarter_table_label(quarter)
+    quarter_pattern = re.escape(quarter_label).replace(r"\ ", r"\s+") if quarter_label else None
+    if normalized_kind == "cost":
+        start_patterns = []
+        if quarter_pattern:
+            start_patterns.extend([
+                re.compile(rf"The\s+following\s+table\s+sets\s+forth\s+our\s+cost\s+of\s+sales\s+by\s+line\s+of\s+business\s+in\s+the\s+{quarter_pattern}", re.IGNORECASE),
+            ])
+        if include_generic or not start_patterns:
+            start_patterns.extend([
+                re.compile(r"The\s+following\s+table\s+sets\s+forth\s+our\s+cost\s+of\s+sales\s+by\s+line\s+of\s+business", re.IGNORECASE),
+                re.compile(r"cost\s+of\s+sales\s+by\s+line\s+of\s+business", re.IGNORECASE),
+            ])
+        return (start_patterns, [re.compile(r"Gross\s+Profit\s+and\s+Margin", re.IGNORECASE)])
+    if normalized_kind == "segment-revenue":
+        start_patterns = []
+        if quarter_pattern:
+            start_patterns.extend([
+                re.compile(rf"The\s+following\s+table\s+sets\s+forth\s+our\s+revenue\s+by\s+segment\s+in\s+the\s+{quarter_pattern}", re.IGNORECASE),
+                re.compile(rf"revenue\s+by\s+segment\s+in\s+the\s+{quarter_pattern}", re.IGNORECASE),
+            ])
+        if include_generic or not start_patterns:
+            start_patterns.extend([
+                re.compile(r"The\s+following\s+table\s+sets\s+forth\s+our\s+revenue\s+by\s+segment", re.IGNORECASE),
+                re.compile(r"revenue\s+by\s+segment", re.IGNORECASE),
+            ])
+        return (start_patterns, [re.compile(r"revenue\s+by\s+line\s+of\s+our\s+smartphone\s*(?:×|x)\s*aiot\s+segment", re.IGNORECASE)])
+    if normalized_kind == "segment-detail-revenue":
+        start_patterns = []
+        if quarter_pattern:
+            start_patterns.extend([
+                re.compile(
+                    rf"The\s+following\s+table\s+sets\s+forth\s+our\s+revenue\s+by\s+line\s+of\s+our\s+smartphone\s*(?:×|x)\s*aiot\s+segment\s+in\s+the\s+{quarter_pattern}",
+                    re.IGNORECASE,
+                ),
+                re.compile(
+                    rf"revenue\s+by\s+line\s+of\s+our\s+smartphone\s*(?:×|x)\s*aiot\s+segment\s+in\s+the\s+{quarter_pattern}",
+                    re.IGNORECASE,
+                ),
+            ])
+        if include_generic or not start_patterns:
+            start_patterns.extend([
+                re.compile(r"The\s+following\s+table\s+sets\s+forth\s+our\s+revenue\s+by\s+line\s+of\s+our\s+smartphone\s*(?:×|x)\s*aiot\s+segment", re.IGNORECASE),
+                re.compile(r"revenue\s+by\s+line\s+of\s+our\s+smartphone\s*(?:×|x)\s*aiot\s+segment", re.IGNORECASE),
+            ])
+        return (start_patterns, [re.compile(r"Total\s+revenue\s+of\s+smartphone\s*(?:×|x)\s*aiot\s+segment", re.IGNORECASE), re.compile(r"Smart\s+EV", re.IGNORECASE)])
+    start_patterns = []
+    if quarter_pattern:
+        start_patterns.extend([
+            re.compile(rf"The\s+following\s+table\s+sets\s+forth\s+our\s+revenue\s+by\s+line\s+of\s+business\s+in\s+the\s+{quarter_pattern}", re.IGNORECASE),
+            re.compile(rf"revenue\s+by\s+line\s+of\s+business\s+in\s+the\s+{quarter_pattern}", re.IGNORECASE),
+        ])
+    if include_generic or not start_patterns:
+        start_patterns.extend([
+            re.compile(r"The\s+following\s+table\s+sets\s+forth\s+our\s+revenue\s+by\s+line\s+of\s+business", re.IGNORECASE),
+            re.compile(r"revenue\s+by\s+line\s+of\s+business", re.IGNORECASE),
+        ])
+    return (start_patterns, [re.compile(r"Cost\s+of\s+Sales", re.IGNORECASE)])
+
+
+def _extract_xiaomi_table_row_value_bn(text: str, row_aliases: list[str], *, quarter: str | None = None, section_kind: str = "revenue") -> float | None:
+    aliases = [str(alias or "").strip() for alias in row_aliases if str(alias or "").strip()]
+    if not aliases:
+        return None
+    parsed_rows = None
+    values = []
+    for include_generic in ([False, True] if quarter else [True]):
+        start_patterns, end_patterns = _xiaomi_table_section_patterns(section_kind, quarter=quarter, include_generic=include_generic)
+        parsed_rows = _shared_parse_labeled_numeric_rows(
+            text,
+            {"row": aliases},
+            section_start_patterns=start_patterns,
+            section_end_patterns=end_patterns,
+        )
+        values = parsed_rows.rows.get("row") if isinstance(parsed_rows.rows, dict) else []
+        if values:
+            break
+    if not values or parsed_rows is None:
+        return None
+    value_bn = _shared_labeled_row_value_to_bn(values[0], parsed_rows)
+    if value_bn is not None:
+        return value_bn
+    first_value = _parse_number_token(str(values[0]))
+    if first_value is None:
+        return None
+    if abs(first_value) >= 100:
+        return round(first_value / 1000, 3)
+    return round(first_value, 3)
+
+
+def _extract_xiaomi_billion_value(text: str, label: str, quarter: str | None = None) -> float | None:
+    normalized = _normalize_text_space(text)
+    label_pattern = _pdf_fuzzy_phrase_pattern(label)
+    quarter_pattern = _xiaomi_quarter_phrase_pattern(quarter)
+    label_has_revenue = bool(re.search(r"\brevenue\b", label, re.IGNORECASE))
+    label_suffix = "" if re.search(r"\b(segment|business|revenue)\b", label, re.IGNORECASE) else r"(?:\s+segment)?(?:\s+business)?"
+    base_label_pattern = rf"(?:our\s+)?{label_pattern}{label_suffix}"
+    revenue_value_pattern = r"(?:reached(?:\s+a\s+record\s+high)?|once\s+again\s+reached(?:\s+a\s+record\s+high)?|was|were|amounted\s+to|hit|remained\s+stable\s+at)(?:\s+of)?\s+RMB\s*(?P<value>[\d.]+)\s*billion"
+    revenue_subject_patterns = [label_pattern] if label_has_revenue else []
+    achieved_revenue_base_patterns = [base_label_pattern]
+    if label_has_revenue and re.match(r"revenue\s+from\s+", label, re.IGNORECASE):
+        label_tail = re.sub(r"^revenue\s+from\s+", "", label, flags=re.IGNORECASE)
+        tail_pattern = _pdf_fuzzy_phrase_pattern(label_tail)
+        tail_suffix = "" if re.search(r"\b(segment|business)\b", label_tail, re.IGNORECASE) else r"(?:\s+segment)?(?:\s+business)?"
+        tail_base_pattern = rf"(?:our\s+)?{tail_pattern}{tail_suffix}"
+        achieved_revenue_base_patterns.append(tail_base_pattern)
+        revenue_subject_patterns.extend(
+            [
+                rf"revenue\s+from\s+(?:our\s+)?{tail_pattern}{tail_suffix}",
+                rf"{tail_base_pattern}\s+revenue",
+            ]
+        )
+    if not label_has_revenue:
+        revenue_subject_patterns.extend(
+            [
+                rf"revenue\s+(?:from|of)\s+{base_label_pattern}",
+                rf"{base_label_pattern}\s+revenue",
+            ]
+        )
+    patterns = [
+        *(
+            [
+                *[
+                    re.compile(
+                        rf"{quarter_pattern}.{{0,180}}?{subject}\s+{revenue_value_pattern}",
+                        re.IGNORECASE,
+                    )
+                    for subject in revenue_subject_patterns
+                ],
+                *[
+                    re.compile(
+                        rf"{quarter_pattern}.{{0,180}}?{base_pattern}.{{0,80}}?achieved\s+(?:a\s+)?record-?high\s+revenue\s+of\s+RMB\s*(?P<value>[\d.]+)\s*billion",
+                        re.IGNORECASE,
+                    )
+                    for base_pattern in achieved_revenue_base_patterns
+                ],
+                *[
+                    re.compile(
+                        rf"{subject}.{{0,140}}?{revenue_value_pattern}\s+{quarter_pattern}",
+                        re.IGNORECASE,
+                    )
+                    for subject in revenue_subject_patterns
+                ],
+                *[
+                    re.compile(
+                        rf"{subject}.{{0,140}}?\bto\s+RMB\s*(?P<value>[\d.]+)\s*billion\s+{quarter_pattern}",
+                        re.IGNORECASE,
+                    )
+                    for subject in revenue_subject_patterns
+                ],
+            ]
+            if quarter_pattern
+            else []
+        ),
+        re.compile(
+            rf"revenue\s+from\s+our\s+{label_pattern}(?:\s+segment)?\s+{revenue_value_pattern}",
+            re.IGNORECASE,
+        ),
+        re.compile(
+            rf"revenue\s+of\s+our\s+{label_pattern}(?:\s+segment)?\s+{revenue_value_pattern}",
+            re.IGNORECASE,
+        ),
+        re.compile(
+            rf"our\s+{label_pattern}(?:\s+segment)?\s+revenue\s+{revenue_value_pattern}",
+            re.IGNORECASE,
+        ),
+        re.compile(
+            rf"{label_pattern}.*?revenue\s+{revenue_value_pattern}",
+            re.IGNORECASE,
+        ),
+        *[
+            re.compile(
+                rf"{base_pattern}.{{0,80}}?achieved\s+(?:a\s+)?record-?high\s+revenue\s+of\s+RMB\s*(?P<value>[\d.]+)\s*billion",
+                re.IGNORECASE,
+            )
+            for base_pattern in achieved_revenue_base_patterns
+        ],
+    ]
+    for pattern in patterns:
+        match = pattern.search(normalized)
+        if not match:
+            continue
+        value = _parse_number_token(match.group("value"))
+        if value is None:
+            continue
+        return round(value, 3)
+    return None
+
+
+def _extract_xiaomi_opex_billion_value(text: str, label: str, quarter: str | None = None) -> float | None:
+    normalized = _normalize_text_space(text)
+    label_pattern = _pdf_fuzzy_phrase_pattern(label)
+    quarter_pattern = _xiaomi_quarter_phrase_pattern(quarter)
+    patterns = [
+        *(
+            [
+                re.compile(
+                    rf"our\s+{label_pattern}\s+(?:increased|decreased).{{0,180}}?\bto\s+RMB\s*(?P<value>[\d.]+)\s*billion\s+{quarter_pattern}",
+                    re.IGNORECASE,
+                ),
+                re.compile(
+                    rf"our\s+{label_pattern}\s+remained\s+stable\s+at\s+RMB\s*(?P<value>[\d.]+)\s*billion\s+{quarter_pattern}",
+                    re.IGNORECASE,
+                ),
+                re.compile(
+                    rf"{quarter_pattern}.{{0,220}}?our\s+{label_pattern}\s+(?:increased|decreased).{{0,180}}?\bto\s+RMB\s*(?P<value>[\d.]+)\s*billion",
+                    re.IGNORECASE,
+                ),
+                re.compile(
+                    rf"{quarter_pattern}.{{0,220}}?our\s+{label_pattern}\s+remained\s+stable\s+at\s+RMB\s*(?P<value>[\d.]+)\s*billion",
+                    re.IGNORECASE,
+                ),
+            ]
+            if quarter_pattern
+            else []
+        ),
+        re.compile(
+            rf"our\s+{label_pattern}\s+(?:increased|decreased).{{0,180}}?\byear-over-year\s+to\s+RMB\s*(?P<value>[\d.]+)\s*billion",
+            re.IGNORECASE,
+        ),
+        re.compile(
+            rf"our\s+{label_pattern}\s+(?:increased|decreased).{{0,180}}?\bto\s+RMB\s*(?P<value>[\d.]+)\s*billion",
+            re.IGNORECASE,
+        ),
+        re.compile(
+            rf"our\s+{label_pattern}\s+remained\s+stable\s+at\s+RMB\s*(?P<value>[\d.]+)\s*billion",
+            re.IGNORECASE,
+        ),
+    ]
+    for pattern in patterns:
+        match = pattern.search(normalized)
+        if not match:
+            continue
+        value = _parse_number_token(match.group("value"))
+        if value is None:
+            continue
+        return round(value, 3)
+    return None
+
+
+def _extract_xiaomi_cost_billion_value(text: str, label: str, quarter: str | None = None) -> float | None:
+    normalized = _normalize_text_space(text)
+    label_pattern = _pdf_fuzzy_phrase_pattern(label)
+    quarter_pattern = _xiaomi_quarter_phrase_pattern(quarter)
+    label_suffix = "" if re.search(r"\b(segment|business)\b", label, re.IGNORECASE) else r"(?:\s+segment)?(?:\s+business)?"
+    patterns = [
+        *(
+            [
+                re.compile(
+                    rf"cost\s+of\s+sales\s+related\s+to\s+our\s+{label_pattern}{label_suffix}\s+(?:reached|was|were|amounted\s+to|hit)\s+RMB\s*(?P<value>[\d.]+)\s*billion\s+{quarter_pattern}",
+                    re.IGNORECASE,
+                ),
+                re.compile(
+                    rf"cost\s+of\s+sales\s+related\s+to\s+our\s+{label_pattern}{label_suffix}.{{0,260}}?\bto\s+RMB\s*(?P<value>[\d.]+)\s*billion\s+{quarter_pattern}",
+                    re.IGNORECASE,
+                ),
+                re.compile(
+                    rf"{quarter_pattern}.{{0,260}}?cost\s+of\s+sales\s+related\s+to\s+our\s+{label_pattern}{label_suffix}.{{0,160}}?(?:reached|was|were|amounted\s+to|hit)\s+RMB\s*(?P<value>[\d.]+)\s*billion",
+                    re.IGNORECASE,
+                ),
+            ]
+            if quarter_pattern
+            else []
+        ),
+        re.compile(
+            rf"cost\s+of\s+sales\s+related\s+to\s+our\s+{label_pattern}(?:\s+segment)?(?:\s+business)?\s+(?:reached|was|were|amounted\s+to|hit)\s+RMB\s*(?P<value>[\d.]+)\s*billion",
+            re.IGNORECASE,
+        ),
+        re.compile(
+            rf"cost\s+of\s+sales\s+related\s+to\s+our\s+{label_pattern}(?:\s+segment)?(?:\s+business)?.{{0,260}}?\bto\s+RMB\s*(?P<value>[\d.]+)\s*billion",
+            re.IGNORECASE,
+        ),
+    ]
+    for pattern in patterns:
+        match = pattern.search(normalized)
+        if not match:
+            continue
+        value = _parse_number_token(match.group("value"))
+        if value is not None:
+            return round(value, 3)
+    return None
+
+
+def _extract_xiaomi_margin_pct(text: str, label: str, quarter: str | None = None) -> float | None:
+    normalized = _normalize_text_space(text)
+    label_pattern = _pdf_fuzzy_phrase_pattern(label)
+    quarter_pattern = _xiaomi_quarter_phrase_pattern(quarter)
+    label_suffix = "" if re.search(r"\b(segment|business)\b", label, re.IGNORECASE) else r"(?:\s+segment)?(?:\s+business)?"
+    base_label_pattern = rf"(?:our\s+)?{label_pattern}{label_suffix}"
+    patterns = [
+        *(
+            [
+                re.compile(
+                    rf"{quarter_pattern}.{{0,220}}?gross\s+profit\s+margin\s+of\s+{base_label_pattern}\s+(?:was|reached)\s+(?P<value>[\d.]+)%",
+                    re.IGNORECASE,
+                ),
+                re.compile(
+                    rf"{quarter_pattern}.{{0,220}}?{base_label_pattern}.{{0,120}}?(?:gross\s+profit\s+margin\s+(?:of\s+)?(?:our\s+)?(?:segment\s+)?(?:was|reached)|with\s+a\s+gross\s+profit\s+margin\s+of|gross\s+profit\s+margin\s+reached)\s+(?P<value>[\d.]+)%",
+                    re.IGNORECASE,
+                ),
+            ]
+            if quarter_pattern
+            else []
+        ),
+        re.compile(
+            rf"{label_pattern}.*?gross\s+profit\s+margin\s+(?:of\s+)?(?:our\s+)?(?:segment\s+)?(?:was|reached)\s+(?P<value>[\d.]+)%",
+            re.IGNORECASE,
+        ),
+        re.compile(
+            rf"gross\s+profit\s+margin\s+of\s+our\s+{label_pattern}(?:\s+segment)?\s+(?:was|reached)\s+(?P<value>[\d.]+)%",
+            re.IGNORECASE,
+        ),
+        re.compile(
+            rf"{label_pattern}.*?,\s+with\s+a\s+gross\s+profit\s+margin\s+of\s+(?P<value>[\d.]+)%",
+            re.IGNORECASE,
+        ),
+        re.compile(
+            rf"{label_pattern}.*?\sand\s+gross\s+profit\s+margin\s+reached\s+(?P<value>[\d.]+)%",
+            re.IGNORECASE,
+        ),
+    ]
+    for pattern in patterns:
+        match = pattern.search(normalized)
+        if not match:
+            continue
+        value = _parse_number_token(match.group("value"))
+        if value is not None:
+            return round(value, 2)
+    return None
+
+
+def _build_xiaomi_cost_breakdown(
+    text: str,
+    quarter: str,
+    quarter_payload: dict[str, Any],
+    source_url: str,
+    filing_date: str,
+) -> list[dict[str, Any]]:
+    segment_rows = [row for row in quarter_payload.get("segments") or [] if isinstance(row, dict)]
+    detail_rows = [row for row in quarter_payload.get("detailGroups") or [] if isinstance(row, dict)]
+    if not segment_rows:
+        return []
+
+    top_level_costs: dict[str, dict[str, Any]] = {}
+    top_level_margin_labels = {
+        "smartphonexaiot": ["smartphone × AIoT segment", "smartphone x AIoT segment", "Smartphone × AIoT segment"],
+        "smartevaiandothernewinitiatives": [
+            "smart EV, AI and other new initiatives segment",
+            "smart EV and other new initiatives segment",
+            "Smart EV and other new initiatives segment",
+            "Smart EV, AI and other new initiatives segment",
+        ],
+        "smartphones": ["our smartphone revenue", "Revenue from our smartphones", "smartphones"],
+        "iotandlifestyleproducts": ["Revenue from our IoT and lifestyle products", "revenue from our IoT and lifestyle products", "IoT and lifestyle products"],
+        "internetservices": ["our internet services revenue", "Revenue from internet services", "internet services"],
+        "otherrelatedbusinesses": ["Revenue from other related businesses", "revenue from other related businesses", "other related businesses"],
+    }
+
+    def resolve_margin(member_key: str) -> float | None:
+        for candidate in top_level_margin_labels.get(member_key, []):
+            value = _extract_xiaomi_margin_pct(text, candidate, quarter=quarter)
+            if value is not None:
+                return value
+        return None
+
+    def resolve_cost(member_key: str) -> float | None:
+        for candidate in top_level_margin_labels.get(member_key, []):
+            value = _extract_xiaomi_cost_billion_value(text, candidate, quarter=quarter)
+            if value is not None:
+                return value
+        return None
+
+    for row in segment_rows:
+        member_key = str(row.get("memberKey") or "")
+        revenue_bn = float(row.get("valueBn") or 0)
+        if revenue_bn <= 0:
+            continue
+        cost_bn = resolve_cost(member_key)
+        if cost_bn is None:
+            margin_pct = resolve_margin(member_key)
+            if margin_pct is None:
+                continue
+            cost_bn = round(revenue_bn * (1 - margin_pct / 100), 3)
+        top_level_costs[member_key] = {
+            "name": row.get("name"),
+            "nameZh": row.get("nameZh"),
+            "memberKey": member_key,
+            "valueBn": cost_bn,
+            "sourceUrl": source_url,
+            "sourceForm": "IR PDF",
+            "filingDate": filing_date,
+        }
+
+    if not top_level_costs:
+        return []
+
+    detailed_costs: list[dict[str, Any]] = []
+    if detail_rows:
+        known_detail_cost_total = 0.0
+        target_key = "smartphonexaiot"
+        target_total_cost = float(top_level_costs.get(target_key, {}).get("valueBn") or 0)
+        for row in detail_rows:
+            member_key = str(row.get("memberKey") or "")
+            revenue_bn = float(row.get("valueBn") or 0)
+            if revenue_bn <= 0:
+                continue
+            cost_bn = resolve_cost(member_key)
+            if cost_bn is None:
+                margin_pct = resolve_margin(member_key)
+                if margin_pct is None:
+                    continue
+                cost_bn = round(revenue_bn * (1 - margin_pct / 100), 3)
+            known_detail_cost_total += cost_bn
+            detailed_costs.append(
+                {
+                    "name": row.get("name"),
+                    "nameZh": row.get("nameZh"),
+                    "memberKey": member_key,
+                    "valueBn": cost_bn,
+                    "sourceUrl": source_url,
+                    "sourceForm": "IR PDF",
+                    "filingDate": filing_date,
+                }
+            )
+        if target_total_cost > 0 and known_detail_cost_total > 0 and target_total_cost >= known_detail_cost_total:
+            residual_cost = round(target_total_cost - known_detail_cost_total, 3)
+            if residual_cost > 0.02:
+                merged = False
+                for item in detailed_costs:
+                    if str(item.get("memberKey") or "") == "otherrelatedbusinesses":
+                        item["valueBn"] = round(float(item.get("valueBn") or 0) + residual_cost, 3)
+                        merged = True
+                        break
+                if not merged:
+                    detailed_costs.append(
+                        {
+                            "name": "Other related businesses",
+                            "nameZh": "其他相关业务",
+                            "memberKey": "otherrelatedbusinesses",
+                            "valueBn": residual_cost,
+                            "sourceUrl": source_url,
+                            "sourceForm": "IR PDF",
+                            "filingDate": filing_date,
+                        }
+                    )
+        if detailed_costs and "smartevaiandothernewinitiatives" in top_level_costs:
+            detailed_costs.append(top_level_costs["smartevaiandothernewinitiatives"])
+        if len(detailed_costs) >= 2:
+            return detailed_costs
+
+    return sorted(top_level_costs.values(), key=lambda item: float(item.get("valueBn") or 0), reverse=True)
+
+
+def _quarterly_title_for_quarter(quarter: str) -> str:
+    return f"Xiaomi {quarter} Results Announcement"
+
+
+def _parse_xiaomi_quarter_item(quarter: str, source_url: str) -> tuple[str, dict[str, Any], dict[str, Any]] | None:
+    if not quarter or not source_url:
+        return None
+
+    filing_date = _extract_date_from_url(source_url)
+    four_segment_rows = [
+        ("smartphone revenue", "Smartphones", "smartphones"),
+        ("Revenue from smartphones", "Smartphones", "smartphones"),
+        ("IoT and lifestyle products revenue", "IoT and lifestyle products", "iotandlifestyleproducts"),
+        ("Revenue from IoT and lifestyle products", "IoT and lifestyle products", "iotandlifestyleproducts"),
+        ("internet services revenue", "Internet services", "internetservices"),
+        ("Revenue from internet services", "Internet services", "internetservices"),
+        ("other related businesses revenue", "Other related businesses", "otherrelatedbusinesses"),
+        ("Revenue from other related businesses", "Other related businesses", "otherrelatedbusinesses"),
+    ]
+    hybrid_segment_rows = [
+        ("smartphone × AIoT segment", "Smartphone x AIoT", "smartphonexaiot"),
+        ("smartphone x AIoT segment", "Smartphone x AIoT", "smartphonexaiot"),
+        ("smart EV, AI and other new initiatives segment", "Smart EV, AI and other new initiatives", "smartevaiandothernewinitiatives"),
+        ("smart EV and other new initiatives segment", "Smart EV, AI and other new initiatives", "smartevaiandothernewinitiatives"),
+    ]
+    detail_rows = [
+        ("Revenue from smartphones", "Smartphones", "smartphones", "Smartphone x AIoT"),
+        ("Revenue from IoT and lifestyle products", "IoT and lifestyle products", "iotandlifestyleproducts", "Smartphone x AIoT"),
+        ("Revenue from internet services", "Internet services", "internetservices", "Smartphone x AIoT"),
+        ("Revenue from other related businesses", "Other related businesses", "otherrelatedbusinesses", "Smartphone x AIoT"),
+    ]
+    opex_rows = [
+        ("Selling and marketing expenses", "Selling and marketing", "sellingandmarketing"),
+        ("Administrative expenses", "General and administrative", "generalandadministrative"),
+        ("Research and development expenses", "Research and development", "researchanddevelopment"),
+    ]
+    text = _extract_pdf_text_fast(source_url)
+    uses_hybrid_segment_schema = _period_key(quarter) >= _period_key("2024Q2")
+    prefer_narrative_standard_q4 = not uses_hybrid_segment_schema and str(quarter).endswith("Q4")
+    table_revenue_aliases = {
+        "smartphones": ["Smartphones", "Smartphone"],
+        "iotandlifestyleproducts": ["IoT and lifestyle products"],
+        "internetservices": ["Internet services"],
+        "otherrelatedbusinesses": ["Others", "Other related business", "Other related businesses"],
+        "smartphonexaiot": ["Smartphone × AIoT segment", "Smartphone x AIoT segment"],
+        "smartevaiandothernewinitiatives": [
+            "Smart EV, AI and other new initiatives segment",
+            "Smart EV and other new initiatives segment",
+        ],
+    }
+    table_revenue_values = {
+        member_key: value_bn
+        for member_key, aliases in table_revenue_aliases.items()
+        if (
+            value_bn := _extract_xiaomi_table_row_value_bn(
+                text,
+                aliases,
+                quarter=quarter,
+                section_kind="segment-revenue" if uses_hybrid_segment_schema and member_key in {"smartphonexaiot", "smartevaiandothernewinitiatives"} else "revenue",
+            )
+        ) is not None
+    }
+    table_detail_revenue_values = {
+        member_key: value_bn
+        for member_key, aliases in table_revenue_aliases.items()
+        if member_key in {"smartphones", "iotandlifestyleproducts", "internetservices", "otherrelatedbusinesses"}
+        if (
+            value_bn := _extract_xiaomi_table_row_value_bn(
+                text,
+                aliases,
+                quarter=quarter,
+                section_kind="segment-detail-revenue" if uses_hybrid_segment_schema else "revenue",
+            )
+        ) is not None
+    }
+    quarter_payload: dict[str, Any] = {}
+    if uses_hybrid_segment_schema:
+        segments_by_key: dict[str, dict[str, Any]] = {}
+        for source_label, display_name, member_key in hybrid_segment_rows:
+            value_bn = table_revenue_values.get(member_key)
+            if value_bn is None:
+                value_bn = _extract_xiaomi_billion_value(text, source_label, quarter=quarter)
+            if value_bn is None:
+                continue
+            segments_by_key[member_key] = _build_row(
+                display_name,
+                value_bn,
+                member_key=member_key,
+                source_url=source_url,
+                source_form="IR PDF",
+                filing_date=filing_date,
+            )
+        detail_groups = []
+        for source_label, display_name, member_key, target_name in detail_rows:
+            value_bn = table_detail_revenue_values.get(member_key)
+            if value_bn is None:
+                value_bn = _extract_xiaomi_billion_value(text, source_label, quarter=quarter)
+            if value_bn is None:
+                continue
+            detail_groups.append(
+                _build_row(
+                    display_name,
+                    value_bn,
+                    member_key=member_key,
+                    source_url=source_url,
+                    source_form="IR PDF",
+                    filing_date=filing_date,
+                    target_name=target_name,
+                )
+            )
+        if len(segments_by_key) >= 2:
+            quarter_payload["segments"] = sorted(segments_by_key.values(), key=lambda payload: float(payload.get("valueBn") or 0), reverse=True)
+            if detail_groups:
+                quarter_payload["detailGroups"] = detail_groups
+    if "segments" not in quarter_payload:
+        segments_by_key = {}
+        for source_label, display_name, member_key in four_segment_rows:
+            value_bn = None
+            prefers_table = member_key == "otherrelatedbusinesses"
+            if not prefer_narrative_standard_q4 or prefers_table:
+                value_bn = table_revenue_values.get(member_key)
+            if value_bn is None:
+                value_bn = _extract_xiaomi_billion_value(text, source_label, quarter=quarter)
+            if value_bn is None and prefer_narrative_standard_q4 and not prefers_table:
+                value_bn = table_revenue_values.get(member_key)
+            if value_bn is None:
+                continue
+            segments_by_key[member_key] = _build_row(
+                display_name,
+                value_bn,
+                member_key=member_key,
+                source_url=source_url,
+                source_form="IR PDF",
+                filing_date=filing_date,
+            )
+        if len(segments_by_key) >= 2:
+            quarter_payload["segments"] = sorted(segments_by_key.values(), key=lambda payload: float(payload.get("valueBn") or 0), reverse=True)
+
+    opex_breakdown = []
+    for source_label, display_name, member_key in opex_rows:
+        value_bn = _extract_xiaomi_opex_billion_value(text, source_label, quarter=quarter)
+        if value_bn is None:
+            continue
+        opex_breakdown.append(
+            {
+                "name": display_name,
+                "memberKey": member_key,
+                "valueBn": value_bn,
+                "sourceUrl": source_url,
+                "sourceForm": "IR PDF",
+                "filingDate": filing_date,
+            }
+        )
+    if opex_breakdown:
+        quarter_payload["opexBreakdown"] = opex_breakdown
+
+    cost_breakdown = _build_xiaomi_cost_breakdown(text, quarter, quarter_payload, source_url, filing_date)
+    if cost_breakdown:
+        quarter_payload["costBreakdown"] = cost_breakdown
+    if not quarter_payload.get("segments"):
+        return None
+
+    filing_meta = {
+        "title": _quarterly_title_for_quarter(quarter),
+        "quarter": quarter,
+        "filingDate": filing_date,
+        "pdf": source_url,
+    }
+    return quarter, quarter_payload, filing_meta
+
+
+def _quarter_from_meituan_title(title: str) -> str | None:
+    normalized = _normalize_text_space(title)
+    match = re.search(r"(March)\s+31,?\s*(20\d{2})", normalized, re.IGNORECASE)
+    if not match:
+        match = re.search(r"(June|September)\s+30,?\s*(20\d{2})", normalized, re.IGNORECASE)
+    if not match:
+        match = re.search(r"(December)\s+31,?\s*(20\d{2})", normalized, re.IGNORECASE)
+    if not match:
+        return None
+    quarter = {
+        "march": 1,
+        "june": 2,
+        "september": 3,
+        "december": 4,
+    }.get(match.group(1).lower())
+    if quarter is None:
+        return None
+    return f"{match.group(2)}Q{quarter}"
+
+
+def _load_meituan_results_items() -> list[dict[str, str]]:
+    html_text = _request("https://www.meituan.com/en-US/investor/results").decode("utf-8", errors="ignore")
+    props = _extract_next_data_props(html_text)
+    page_props = props.get("pageProps") if isinstance(props.get("pageProps"), dict) else {}
+    page_data = page_props.get("data") if isinstance(page_props.get("data"), dict) else {}
+    docs = page_data.get("docs") if isinstance(page_data.get("docs"), list) else []
+    items: list[dict[str, str]] = []
+    for doc in docs:
+        if not isinstance(doc, dict):
+            continue
+        title = _normalize_text_space(str(doc.get("title") or ""))
+        source_url = _normalize_text_space(str(doc.get("link") or ""))
+        filing_date = _normalize_text_space(str(doc.get("date") or ""))
+        quarter = _quarter_from_meituan_title(title)
+        if not title or not source_url or not quarter:
+            continue
+        if not title.lower().startswith("announcement of the results"):
+            continue
+        items.append(
+            {
+                "quarter": quarter,
+                "title": title,
+                "sourceUrl": source_url,
+                "filingDate": filing_date or _extract_date_from_url(source_url),
+            }
+        )
+    return sorted(items, key=lambda item: _period_key(str(item.get("quarter") or "")))
+
+
+def _extract_meituan_segment_values(text: str, label: str) -> list[float]:
+    parsed_rows = _shared_parse_labeled_numeric_rows(text, {"row": [label]})
+    values = parsed_rows.rows.get("row") or []
+    if not values:
+        return []
+    converted: list[float] = []
+    for value in values:
+        value_bn = _shared_labeled_row_value_to_bn(value, parsed_rows)
+        if value_bn is not None:
+            converted.append(value_bn)
+    return converted
+
+
+def _meituan_quarter_end_label(quarter: str) -> str:
+    year = int(str(quarter)[:4])
+    quarter_no = int(str(quarter)[5])
+    return {
+        1: f"March 31, {year}",
+        2: f"June 30, {year}",
+        3: f"September 30, {year}",
+        4: f"December 31, {year}",
+    }.get(quarter_no, "")
+
+
+def _meituan_segment_section_patterns(quarter: str) -> tuple[list[re.Pattern[str]], list[re.Pattern[str]]]:
+    date_label = _meituan_quarter_end_label(quarter)
+    start_patterns: list[re.Pattern[str]] = [
+        re.compile(r"Third\s+Quarter\s+Financial\s+Information\s+by\s+Segment", re.IGNORECASE),
+        re.compile(r"Financial\s+Information\s+by\s+Segment", re.IGNORECASE),
+        re.compile(r"Revenues\s+by\s+Segment", re.IGNORECASE),
+    ]
+    if date_label:
+        escaped_date_label = re.escape(date_label).replace(r"\ ", r"\s+")
+        start_patterns = [
+            re.compile(
+                rf"Financial\s+Information\s+by\s+Segment.*?Three\s+Months\s+Ended\s+{escaped_date_label}",
+                re.IGNORECASE | re.DOTALL,
+            ),
+            re.compile(
+                rf"Revenues\s+by\s+Segment.*?Three\s+Months\s+Ended\s+{escaped_date_label}",
+                re.IGNORECASE | re.DOTALL,
+            ),
+            re.compile(
+                rf"Revenues\s+by\s+Segment.*?Year\s+Ended\s+{escaped_date_label}",
+                re.IGNORECASE | re.DOTALL,
+            ),
+            *start_patterns,
+        ]
+    return (
+        start_patterns,
+        [
+            re.compile(r"Operating\s+Metrics", re.IGNORECASE),
+            re.compile(r"MANAGEMENT\s+DISCUSSION\s+AND\s+ANALYSIS", re.IGNORECASE),
+        ],
+    )
+
+
+def _parse_meituan_segment_rows(text: str, quarter: str) -> tuple[dict[str, list[float]], str]:
+    start_patterns, end_patterns = _meituan_segment_section_patterns(quarter)
+    parsed_rows = _shared_parse_labeled_numeric_rows(
+        text,
+        {
+            "food_delivery": ["Food delivery"],
+            "instore_travel": ["In-store, hotel & travel"],
+            "new_initiatives": ["New initiatives and others", "New initiatives"],
+            "total_revenues": ["Total revenues"],
+        },
+        section_start_patterns=start_patterns,
+        section_end_patterns=end_patterns,
+    )
+    section_text, _section_found, _section_label = _shared_slice_text_section(
+        text,
+        start_patterns=start_patterns or [re.compile(r"Financial\s+Information\s+by\s+Segment", re.IGNORECASE)],
+        end_patterns=end_patterns,
+    )
+    return (
+        parsed_rows.rows if isinstance(parsed_rows.rows, dict) else {},
+        section_text,
+    )
+
+
+def _extract_meituan_section_row_numbers(section_text: str, aliases: list[str]) -> list[float]:
+    lines = [_normalize_text_space(line) for line in str(section_text or "").splitlines()]
+    lines = [line for line in lines if line]
+    for alias in aliases:
+        escaped = re.escape(alias).replace(r"\ ", r"\s+")
+        pattern = re.compile(rf"^{escaped}\s+(.+)$", re.IGNORECASE)
+        for line in lines:
+            match = pattern.match(line)
+            if not match:
+                continue
+            tokens = re.findall(r"\(?-?\d[\d,]*(?:\.\d+)?\)?", match.group(1))
+            values = [_parse_number_token(token) for token in tokens]
+            parsed = [value for value in values if value is not None]
+            if parsed:
+                return parsed
+    return []
+
+
+def _build_meituan_segment_payload(
+    text: str,
+    quarter: str,
+    source_url: str,
+    filing_date: str,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    row_map, section_text = _parse_meituan_segment_rows(text, quarter)
+    food_values = row_map.get("food_delivery") or []
+    instore_values = row_map.get("instore_travel") or []
+    new_values = row_map.get("new_initiatives") or []
+    total_values = row_map.get("total_revenues") or []
+    segment_revenue_values = _extract_meituan_section_row_numbers(section_text, ["Revenues", "Revenue"])
+
+    detail_groups: list[dict[str, Any]] = []
+    segments: list[dict[str, Any]] = []
+
+    if food_values and instore_values and new_values:
+        food_bn = round(abs(food_values[0]) / 1_000_000, 3)
+        instore_bn = round(abs(instore_values[0]) / 1_000_000, 3)
+        new_bn = round(abs(new_values[0]) / 1_000_000, 3)
+        core_bn = round(food_bn + instore_bn, 3)
+        segments = [
+            _build_row(
+                "Core local commerce",
+                core_bn,
+                member_key="corelocalcommerce",
+                source_url=source_url,
+                source_form="IR PDF",
+                filing_date=filing_date,
+            ),
+            _build_row(
+                "New initiatives",
+                new_bn,
+                member_key="newinitiatives",
+                source_url=source_url,
+                source_form="IR PDF",
+                filing_date=filing_date,
+            ),
+        ]
+        segments[0]["nameZh"] = "核心本地商业"
+        segments[1]["nameZh"] = "新业务"
+        detail_groups = [
+            _build_row(
+                "Food delivery",
+                food_bn,
+                member_key="fooddelivery",
+                source_url=source_url,
+                source_form="IR PDF",
+                filing_date=filing_date,
+                target_name="Core local commerce",
+            ),
+            _build_row(
+                "In-store, hotel & travel",
+                instore_bn,
+                member_key="instorehoteltravel",
+                source_url=source_url,
+                source_form="IR PDF",
+                filing_date=filing_date,
+                target_name="Core local commerce",
+            ),
+        ]
+        detail_groups[0]["nameZh"] = "餐饮外卖"
+        detail_groups[1]["nameZh"] = "到店、酒店及旅游"
+        detail_groups.append(
+            _build_row(
+                "New initiatives and others",
+                new_bn,
+                member_key="newinitiativesandothers",
+                source_url=source_url,
+                source_form="IR PDF",
+                filing_date=filing_date,
+                target_name="New initiatives",
+            )
+        )
+        detail_groups[-1]["nameZh"] = "新业务及其他"
+        return (segments, detail_groups)
+
+    legacy_segment_matrix = bool(
+        not re.search(r"Core\s+local\s+commerce", section_text, re.IGNORECASE)
+        and re.search(r"Food\s+delivery", section_text, re.IGNORECASE)
+        and re.search(r"In-store,\s+hotel\s*&\s+travel", section_text, re.IGNORECASE)
+    )
+    if legacy_segment_matrix and len(segment_revenue_values) >= 3:
+        food_bn = round(abs(segment_revenue_values[0]) / 1_000_000, 3)
+        instore_bn = round(abs(segment_revenue_values[1]) / 1_000_000, 3)
+        new_bn = round(abs(segment_revenue_values[2]) / 1_000_000, 3)
+        core_bn = round(food_bn + instore_bn, 3)
+        segments = [
+            _build_row(
+                "Core local commerce",
+                core_bn,
+                member_key="corelocalcommerce",
+                source_url=source_url,
+                source_form="IR PDF",
+                filing_date=filing_date,
+            ),
+            _build_row(
+                "New initiatives",
+                new_bn,
+                member_key="newinitiatives",
+                source_url=source_url,
+                source_form="IR PDF",
+                filing_date=filing_date,
+            ),
+        ]
+        segments[0]["nameZh"] = "核心本地商业"
+        segments[1]["nameZh"] = "新业务"
+        detail_groups = [
+            _build_row(
+                "Food delivery",
+                food_bn,
+                member_key="fooddelivery",
+                source_url=source_url,
+                source_form="IR PDF",
+                filing_date=filing_date,
+                target_name="Core local commerce",
+            ),
+            _build_row(
+                "In-store, hotel & travel",
+                instore_bn,
+                member_key="instorehoteltravel",
+                source_url=source_url,
+                source_form="IR PDF",
+                filing_date=filing_date,
+                target_name="Core local commerce",
+            ),
+            _build_row(
+                "New initiatives and others",
+                new_bn,
+                member_key="newinitiativesandothers",
+                source_url=source_url,
+                source_form="IR PDF",
+                filing_date=filing_date,
+                target_name="New initiatives",
+            ),
+        ]
+        detail_groups[0]["nameZh"] = "餐饮外卖"
+        detail_groups[1]["nameZh"] = "到店、酒店及旅游"
+        detail_groups[2]["nameZh"] = "新业务及其他"
+        return (segments, detail_groups)
+
+    if total_values:
+        converted_values = [round(abs(value) / 1_000_000, 3) for value in total_values]
+        if len(converted_values) >= 2:
+            if legacy_segment_matrix and len(converted_values) >= 3:
+                food_bn = converted_values[0]
+                instore_bn = converted_values[1]
+                new_bn = converted_values[2]
+                core_bn = round(food_bn + instore_bn, 3)
+                detail_groups = [
+                    _build_row(
+                        "Food delivery",
+                        food_bn,
+                        member_key="fooddelivery",
+                        source_url=source_url,
+                        source_form="IR PDF",
+                        filing_date=filing_date,
+                        target_name="Core local commerce",
+                    ),
+                    _build_row(
+                        "In-store, hotel & travel",
+                        instore_bn,
+                        member_key="instorehoteltravel",
+                        source_url=source_url,
+                        source_form="IR PDF",
+                        filing_date=filing_date,
+                        target_name="Core local commerce",
+                    ),
+                    _build_row(
+                        "New initiatives and others",
+                        new_bn,
+                        member_key="newinitiativesandothers",
+                        source_url=source_url,
+                        source_form="IR PDF",
+                        filing_date=filing_date,
+                        target_name="New initiatives",
+                    ),
+                ]
+                detail_groups[0]["nameZh"] = "餐饮外卖"
+                detail_groups[1]["nameZh"] = "到店、酒店及旅游"
+                detail_groups[2]["nameZh"] = "新业务及其他"
+            else:
+                core_bn = converted_values[0]
+                new_bn = converted_values[1]
+            segments = [
+                _build_row(
+                    "Core local commerce",
+                    core_bn,
+                    member_key="corelocalcommerce",
+                    source_url=source_url,
+                    source_form="IR PDF",
+                    filing_date=filing_date,
+                ),
+                _build_row(
+                    "New initiatives",
+                    new_bn,
+                    member_key="newinitiatives",
+                    source_url=source_url,
+                    source_form="IR PDF",
+                    filing_date=filing_date,
+                ),
+            ]
+            segments[0]["nameZh"] = "核心本地商业"
+            segments[1]["nameZh"] = "新业务"
+            if not detail_groups and food_values and instore_values:
+                detail_groups = [
+                    _build_row(
+                        "Food delivery",
+                        round(abs(food_values[0]) / 1_000_000, 3),
+                        member_key="fooddelivery",
+                        source_url=source_url,
+                        source_form="IR PDF",
+                        filing_date=filing_date,
+                        target_name="Core local commerce",
+                    ),
+                    _build_row(
+                        "In-store, hotel & travel",
+                        round(abs(instore_values[0]) / 1_000_000, 3),
+                        member_key="instorehoteltravel",
+                        source_url=source_url,
+                        source_form="IR PDF",
+                        filing_date=filing_date,
+                        target_name="Core local commerce",
+                    ),
+                ]
+                detail_groups[0]["nameZh"] = "餐饮外卖"
+                detail_groups[1]["nameZh"] = "到店、酒店及旅游"
+            return (segments, detail_groups)
+
+    return ([], [])
+
+
+def _extract_meituan_current_thousand_row_value(text: str, label: str) -> float | None:
+    parsed_rows = _shared_parse_labeled_numeric_rows(text, {"row": [label]})
+    values = parsed_rows.rows.get("row") or []
+    if not values:
+        return None
+    value_bn = _shared_labeled_row_value_to_bn(values[0], parsed_rows)
+    if value_bn is None:
+        return None
+    return round(abs(value_bn), 3)
+
+
+def _parse_meituan_quarter_item(item: dict[str, Any]) -> tuple[str, dict[str, Any], dict[str, Any]] | None:
+    quarter = str(item.get("quarter") or "")
+    source_url = str(item.get("sourceUrl") or "")
+    filing_date = str(item.get("filingDate") or "")
+    if not quarter or not source_url:
+        return None
+
+    opex_rows = [
+        ("Selling and marketing expenses", "Selling and marketing", "销售及营销费用", "sellingandmarketing"),
+        ("Research and development expenses", "Research and development", "研发费用", "researchanddevelopment"),
+        ("General and administrative expenses", "General and administrative", "管理费用", "generalandadministrative"),
+        ("Net provisions for impairment losses on financial and contract assets", "Impairment losses", "减值损失", "impairmentlosses"),
+    ]
+    statement_opex_specs = [
+        ("selling_marketing", "Selling and marketing", "sellingandmarketing", "销售及营销费用"),
+        ("research_development", "Research and development", "researchanddevelopment", "研发费用"),
+        ("general_admin", "General and administrative", "generalandadministrative", "管理费用"),
+        ("impairment_losses", "Impairment losses", "impairmentlosses", "减值损失"),
+    ]
+
+    text = _extract_pdf_text(source_url)
+    segments, detail_groups = _build_meituan_segment_payload(text, quarter, source_url, filing_date)
+    if len(segments) < 2:
+        return None
+
+    opex_breakdown = _build_opex_breakdown_from_statement(source_url, filing_date, quarter, statement_opex_specs)
+    if not opex_breakdown:
+        opex_breakdown = []
+        for source_label, display_name, name_zh, member_key in opex_rows:
+            value_bn = _extract_meituan_current_thousand_row_value(text, source_label)
+            if value_bn is None:
+                continue
+            opex_breakdown.append(
+                {
+                    "name": display_name,
+                    "nameZh": name_zh,
+                    "memberKey": member_key,
+                    "valueBn": value_bn,
+                    "sourceUrl": source_url,
+                    "sourceForm": "IR PDF",
+                    "filingDate": filing_date,
+                }
+            )
+
+    quarter_payload: dict[str, Any] = {"segments": segments}
+    if detail_groups:
+        quarter_payload["detailGroups"] = detail_groups
+    if opex_breakdown:
+        quarter_payload["opexBreakdown"] = opex_breakdown
+
+    filing_meta = {
+        "title": item.get("title"),
+        "quarter": quarter,
+        "filingDate": filing_date,
+        "pdf": source_url,
+    }
+    return quarter, quarter_payload, filing_meta
+
+
+def _parse_meituan_records(company: dict[str, Any]) -> dict[str, Any]:
+    result = {"source": "official-ir-results", "quarters": {}, "filingsUsed": [], "errors": []}
+    for item in _load_meituan_results_items():
+        try:
+            parsed = _parse_meituan_quarter_item(item)
+            if not parsed:
+                continue
+            quarter, quarter_payload, filing_meta = parsed
+            result["quarters"][quarter] = quarter_payload
+            result["filingsUsed"].append(filing_meta)
+        except Exception as exc:  # noqa: BLE001
+            quarter = str(item.get("quarter") or "")
+            result["errors"].append(f"{quarter}: {exc}")
+    return result
+
+
+def _parse_xiaomi_records(company: dict[str, Any]) -> dict[str, Any]:
+    result = {"source": "official-ir-release", "quarters": {}, "filingsUsed": [], "errors": []}
+    for quarter, source_url in sorted(XIAOMI_QUARTERLY_PDF_URLS.items(), key=lambda item: _period_key(item[0])):
+        try:
+            parsed = _parse_xiaomi_quarter_item(quarter, source_url)
+            if not parsed:
+                continue
+            quarter, quarter_payload, filing_meta = parsed
+            result["quarters"][quarter] = quarter_payload
+            result["filingsUsed"].append(filing_meta)
+        except Exception as exc:  # noqa: BLE001
+            result["errors"].append(f"{quarter}: {exc}")
+    return result
 
 
 def _parse_generic_segment_cache_records(company: dict[str, Any]) -> dict[str, Any]:
@@ -1093,22 +2908,32 @@ def _parse_tencent_records(company: dict[str, Any]) -> dict[str, Any]:
             else ""
         )
         try:
-            pdf_text = _normalize_text_space(_extract_pdf_text(pdf_url))
-            quarter_discussion = _extract_tencent_quarter_discussion(pdf_text, quarter)
+            raw_pdf_text = _extract_pdf_text(pdf_url)
+            pdf_text = _normalize_text_space(raw_pdf_text)
+            quarter_discussion = _extract_tencent_quarter_discussion(raw_pdf_text, quarter)
             top_level_rows = [
                 (["VAS"], "Value-added services", "valueaddedservices", "VAS"),
                 (["Marketing Services", "Online Advertising"], "Marketing Services", "marketingservices", "Marketing Services"),
                 (["FinTech and Business Services"], "FinTech and Business Services", "fintechandbusinessservices", "FinTech and Business Services"),
                 (["Others"], "Others", "others", "Others"),
             ]
+            top_level_row_aliases = {
+                "valueaddedservices": ["VAS"],
+                "marketingservices": ["Marketing Services", "Online Advertising"],
+                "fintechandbusinessservices": ["FinTech and Business Services"],
+                "others": ["Others"],
+            }
+            parsed_top_level_rows = _shared_parse_labeled_numeric_rows(raw_pdf_text, top_level_row_aliases)
+            parsed_top_level_map = parsed_top_level_rows.rows if isinstance(parsed_top_level_rows.rows, dict) else {}
             segments = []
             selected_top_level_values: dict[str, float] = {}
             for source_labels, display_name, member_key, narrative_label in top_level_rows:
-                values: list[float] = []
-                for source_label in source_labels:
-                    values = _extract_labeled_number_sequence(pdf_text, source_label, min_count=2, max_count=4)
-                    if values:
-                        break
+                values = parsed_top_level_map.get(member_key) or []
+                if not values:
+                    for source_label in source_labels:
+                        values = _extract_labeled_number_sequence(pdf_text, source_label, min_count=2, max_count=4)
+                        if values:
+                            break
                 selected_value = _select_tencent_quarter_value(values, mode)
                 narrative_value, narrative_yoy = _extract_tencent_growth_metrics(
                     quarter_discussion,
@@ -1141,18 +2966,22 @@ def _parse_tencent_records(company: dict[str, Any]) -> dict[str, Any]:
                 selected_detail_value = _select_tencent_detail_value([detail_value], vas_quarter_value=vas_quarter_value)
                 if selected_detail_value is None:
                     continue
-                detail_groups.append(
-                    _build_row(
-                        detail_name,
-                        selected_detail_value,
-                        member_key=_normalize_member_key(detail_name),
-                        source_url=pdf_url,
-                        source_form="IR PDF",
-                        filing_date=filing_date,
-                        target_name="Value-added services",
-                        yoy_pct=detail_yoy,
-                    )
+                detail_row = _build_row(
+                    detail_name,
+                    selected_detail_value,
+                    member_key=_normalize_member_key(detail_name),
+                    source_url=pdf_url,
+                    source_form="IR PDF",
+                    filing_date=filing_date,
+                    target_name="Value-added services",
+                    yoy_pct=detail_yoy,
                 )
+                detail_groups.append(detail_row)
+
+            if detail_groups and len(detail_groups) < len(detail_names):
+                for row in detail_groups:
+                    row["validationEligible"] = False
+                    row["validationNotes"] = ["partial-narrative-detail-disclosure"]
 
             if segments:
                 quarter_payload: dict[str, Any] = {"segments": segments}
@@ -1313,6 +3142,10 @@ def _parse_alibaba_quarter_rows(text: str, quarter: str, filing_date: str, sourc
                 yoy_pct=yoy_pct,
             )
         )
+    if segments:
+        for row in segments:
+            row["validationEligible"] = False
+            row["validationNotes"] = ["segment-revenue-before-intersegment-elimination"]
 
     detail_groups = []
     for row_label, target_name in detail_rows:
@@ -2352,7 +4185,7 @@ def _find_asml_pdf_mix_ocr(pdf_bytes: bytes) -> str | None:
                 image_path = Path(temp_dir) / f"asml-{page_index + 1}-{image_index}{suffix}"
                 image_path.write_bytes(image.data)
                 try:
-                    ocr_text = subprocess.run([str(_ensure_vision_ocr_binary()), str(image_path)], check=True, capture_output=True, text=True).stdout
+                    ocr_text = _shared_ocr_image_path(image_path)
                 except Exception:  # noqa: BLE001
                     continue
                 score = _score_asml_mix_ocr(ocr_text) + (4 if page_hint else 0)
@@ -3060,6 +4893,91 @@ def _post_process_result(company: dict[str, Any], result: dict[str, Any]) -> dic
     return result
 
 
+CUSTOM_HISTORY_WINDOW_QUARTERS = 30
+CUSTOM_INCREMENTAL_HISTORY_COMPANIES = {"jd", "netease", "xiaomi", "meituan"}
+
+
+def _available_custom_history_items(company_id: str) -> dict[str, dict[str, Any]]:
+    normalized_company_id = str(company_id or "").strip().lower()
+    if normalized_company_id == "jd":
+        items = _load_jd_quarterly_items()
+    elif normalized_company_id == "netease":
+        items = _load_netease_quarterly_items()
+    elif normalized_company_id == "xiaomi":
+        items = [
+            {
+                "quarter": quarter,
+                "title": _quarterly_title_for_quarter(quarter),
+                "sourceUrl": source_url,
+                "filingDate": _extract_date_from_url(source_url),
+            }
+            for quarter, source_url in sorted(XIAOMI_QUARTERLY_PDF_URLS.items(), key=lambda item: _period_key(item[0]))
+        ]
+    elif normalized_company_id == "meituan":
+        items = _load_meituan_results_items()
+    else:
+        return {}
+    return {
+        str(item.get("quarter") or ""): item
+        for item in items
+        if isinstance(item, dict) and str(item.get("quarter") or "")
+    }
+
+
+def _parse_custom_history_item(company: dict[str, Any], item: dict[str, Any]) -> tuple[str, dict[str, Any], dict[str, Any]] | None:
+    company_id = str(company.get("id") or "").strip().lower()
+    if company_id == "jd":
+        return _parse_jd_quarter_item(item)
+    if company_id == "netease":
+        return _parse_netease_quarter_item(company, item)
+    if company_id == "xiaomi":
+        quarter = str(item.get("quarter") or "")
+        source_url = str(item.get("sourceUrl") or "")
+        return _parse_xiaomi_quarter_item(quarter, source_url)
+    if company_id == "meituan":
+        return _parse_meituan_quarter_item(item)
+    return None
+
+
+def _supplement_cached_custom_history(company: dict[str, Any], cached_payload: dict[str, Any]) -> dict[str, Any]:
+    company_id = str(company.get("id") or "").strip().lower()
+    if company_id not in CUSTOM_INCREMENTAL_HISTORY_COMPANIES:
+        return cached_payload
+    if not isinstance(cached_payload, dict):
+        return cached_payload
+
+    available_items = _available_custom_history_items(company_id)
+    available_quarters = sorted(available_items.keys(), key=_period_key)
+    if not available_quarters:
+        return cached_payload
+    target_quarters = available_quarters[-min(CUSTOM_HISTORY_WINDOW_QUARTERS, len(available_quarters)) :]
+    cached_quarters = set((cached_payload.get("quarters") or {}).keys()) if isinstance(cached_payload.get("quarters"), dict) else set()
+    missing_quarters = [quarter for quarter in target_quarters if quarter not in cached_quarters]
+    if not missing_quarters:
+        return cached_payload
+
+    supplement = {"source": cached_payload.get("source") or "official-ir-release", "quarters": {}, "filingsUsed": [], "errors": []}
+    for quarter in missing_quarters:
+        item = available_items.get(quarter)
+        if not item:
+            continue
+        try:
+            parsed = _parse_custom_history_item(company, item)
+            if not parsed:
+                continue
+            parsed_quarter, quarter_payload, filing_meta = parsed
+            supplement["quarters"][parsed_quarter] = quarter_payload
+            supplement["filingsUsed"].append(filing_meta)
+        except Exception as exc:  # noqa: BLE001
+            supplement["errors"].append(f"{quarter}: {exc}")
+    if not supplement["quarters"] and not supplement["errors"]:
+        return cached_payload
+    merged = _merge_revenue_structure_results(cached_payload, supplement)
+    if not merged.get("source"):
+        merged["source"] = supplement.get("source") or cached_payload.get("source") or "official-ir-release"
+    return merged
+
+
 def fetch_official_revenue_structure_history(company: dict[str, Any], refresh: bool = False) -> dict[str, Any]:
     company_id = str(company.get("id") or "")
     path = _cache_path(company_id)
@@ -3067,6 +4985,12 @@ def fetch_official_revenue_structure_history(company: dict[str, Any], refresh: b
     cached_payload = _load_cached_json(path) if path.exists() else None
     if path.exists() and not refresh:
         if isinstance(cached_payload, dict) and cached_payload.get("_cacheVersion") == CACHE_VERSION:
+            supplemented_payload = _supplement_cached_custom_history(company, cached_payload)
+            if supplemented_payload is not cached_payload:
+                supplemented_payload = _post_process_result(company, supplemented_payload)
+                supplemented_payload["_cacheVersion"] = CACHE_VERSION
+                _write_cached_json(path, supplemented_payload)
+                return supplemented_payload
             return cached_payload
 
     result = empty_result
@@ -3076,6 +5000,14 @@ def fetch_official_revenue_structure_history(company: dict[str, Any], refresh: b
         result = _parse_tencent_records(company)
     elif company_id == "alibaba":
         result = _parse_alibaba_records(company)
+    elif company_id == "jd":
+        result = _parse_jd_records(company)
+    elif company_id == "netease":
+        result = _parse_netease_records(company)
+    elif company_id == "meituan":
+        result = _parse_meituan_records(company)
+    elif company_id == "xiaomi":
+        result = _parse_xiaomi_records(company)
     else:
         cik = _resolve_cik(str(company.get("ticker") or ""), refresh=refresh)
         if cik is not None:
@@ -3113,6 +5045,13 @@ def fetch_official_revenue_structure_history(company: dict[str, Any], refresh: b
                 preserved_errors.append(error)
         preserved_result["errors"] = preserved_errors
         result = preserved_result
+    elif (
+        isinstance(cached_payload, dict)
+        and cached_payload.get("quarters")
+        and isinstance(result, dict)
+        and result.get("quarters")
+    ):
+        result = _preserve_missing_cached_revenue_structure_quarters(result, cached_payload)
 
     result = _post_process_result(company, result)
     result["_cacheVersion"] = CACHE_VERSION

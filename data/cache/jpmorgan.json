@@ -75,6 +75,57 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 0,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 0,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Community Banking",
@@ -90,7 +141,11 @@
           "filingDate": "2019-05-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Corporate Investment Bank",
@@ -106,7 +161,11 @@
           "filingDate": "2019-05-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -122,7 +181,11 @@
           "filingDate": "2019-05-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Commercial Banking",
@@ -138,13 +201,15 @@
           "filingDate": "2019-05-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2018Q2": {
       "calendarQuarter": "2018Q2",
@@ -175,6 +240,58 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueQoqPct": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 0,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Community Banking",
@@ -190,7 +307,11 @@
           "filingDate": "2019-08-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Corporate Investment Bank",
@@ -206,7 +327,11 @@
           "filingDate": "2019-08-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -222,7 +347,11 @@
           "filingDate": "2019-08-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Commercial Banking",
@@ -238,7 +367,11 @@
           "filingDate": "2019-08-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Corporate Non",
@@ -254,13 +387,15 @@
           "filingDate": "2019-08-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2018Q3": {
       "calendarQuarter": "2018Q3",
@@ -291,6 +426,58 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueQoqPct": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 0,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Community Banking",
@@ -306,7 +493,11 @@
           "filingDate": "2019-11-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Corporate Investment Bank",
@@ -322,7 +513,11 @@
           "filingDate": "2019-11-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -338,7 +533,11 @@
           "filingDate": "2019-11-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Commercial Banking",
@@ -354,13 +553,15 @@
           "filingDate": "2019-11-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2018Q4": {
       "calendarQuarter": "2018Q4",
@@ -391,6 +592,58 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueQoqPct": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 0,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Community Banking",
@@ -406,7 +659,11 @@
           "filingDate": "2020-02-25",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Corporate Investment Bank",
@@ -422,7 +679,11 @@
           "filingDate": "2020-02-25",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -438,7 +699,11 @@
           "filingDate": "2020-02-25",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Commercial Banking",
@@ -454,7 +719,11 @@
           "filingDate": "2020-02-25",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Corporate Non",
@@ -470,13 +739,15 @@
           "filingDate": "2020-02-25",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2019Q1": {
       "calendarQuarter": "2019Q1",
@@ -507,6 +778,61 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 0.3,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 0,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Community Banking",
@@ -522,7 +848,11 @@
           "filingDate": "2019-05-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Corporate Investment Bank",
@@ -538,7 +868,11 @@
           "filingDate": "2019-05-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -554,7 +888,11 @@
           "filingDate": "2019-05-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Commercial Banking",
@@ -570,7 +908,11 @@
           "filingDate": "2019-05-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Corporate Non",
@@ -586,13 +928,15 @@
           "filingDate": "2019-05-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2019Q2": {
       "calendarQuarter": "2019Q2",
@@ -623,6 +967,61 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 3.52,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 0,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Community Banking",
@@ -638,7 +1037,11 @@
           "filingDate": "2019-08-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Corporate Investment Bank",
@@ -654,7 +1057,11 @@
           "filingDate": "2019-08-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -670,7 +1077,11 @@
           "filingDate": "2019-08-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Commercial Banking",
@@ -686,7 +1097,11 @@
           "filingDate": "2019-08-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Corporate Non",
@@ -702,13 +1117,15 @@
           "filingDate": "2019-08-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2019Q3": {
       "calendarQuarter": "2019Q3",
@@ -739,6 +1156,61 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 0.21,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 0,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Community Banking",
@@ -754,7 +1226,11 @@
           "filingDate": "2019-11-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Corporate Investment Bank",
@@ -770,7 +1246,11 @@
           "filingDate": "2019-11-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -786,7 +1266,11 @@
           "filingDate": "2019-11-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Commercial Banking",
@@ -802,7 +1286,11 @@
           "filingDate": "2019-11-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Corporate Non",
@@ -818,13 +1306,15 @@
           "filingDate": "2019-11-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2019Q4": {
       "calendarQuarter": "2019Q4",
@@ -855,6 +1345,61 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 3.01,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 0,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Community Banking",
@@ -870,7 +1415,11 @@
           "filingDate": "2020-02-25",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Corporate Investment Bank",
@@ -886,7 +1435,11 @@
           "filingDate": "2020-02-25",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -902,7 +1455,11 @@
           "filingDate": "2020-02-25",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Commercial Banking",
@@ -918,13 +1475,15 @@
           "filingDate": "2020-02-25",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2020Q1": {
       "calendarQuarter": "2020Q1",
@@ -955,6 +1514,61 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -21.38,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 0,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Community Banking",
@@ -970,7 +1584,11 @@
           "filingDate": "2020-05-07",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Corporate Investment Bank",
@@ -986,7 +1604,11 @@
           "filingDate": "2020-05-07",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -1002,7 +1624,11 @@
           "filingDate": "2020-05-07",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Commercial Banking",
@@ -1018,7 +1644,11 @@
           "filingDate": "2020-05-07",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Corporate Non",
@@ -1034,13 +1664,15 @@
           "filingDate": "2020-05-07",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2020Q2": {
       "calendarQuarter": "2020Q2",
@@ -1071,6 +1703,61 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -19.27,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 0,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Corporate Investment Bank",
@@ -1086,7 +1773,11 @@
           "filingDate": "2020-08-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Consumer Community Banking",
@@ -1102,7 +1793,11 @@
           "filingDate": "2020-08-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -1118,7 +1813,11 @@
           "filingDate": "2020-08-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Commercial Banking",
@@ -1134,13 +1833,15 @@
           "filingDate": "2020-08-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2020Q3": {
       "calendarQuarter": "2020Q3",
@@ -1171,6 +1872,61 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 1.45,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 0,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Community Banking",
@@ -1186,7 +1942,11 @@
           "filingDate": "2020-11-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Corporate Investment Bank",
@@ -1202,7 +1962,11 @@
           "filingDate": "2020-11-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -1218,7 +1982,11 @@
           "filingDate": "2020-11-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Commercial Banking",
@@ -1234,13 +2002,15 @@
           "filingDate": "2020-11-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2020Q4": {
       "calendarQuarter": "2020Q4",
@@ -1271,6 +2041,61 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 11.54,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 0,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Community Banking",
@@ -1286,7 +2111,11 @@
           "filingDate": "2021-02-23",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Corporate Investment Bank",
@@ -1302,7 +2131,11 @@
           "filingDate": "2021-02-23",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -1318,7 +2151,11 @@
           "filingDate": "2021-02-23",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Commercial Banking",
@@ -1334,13 +2171,15 @@
           "filingDate": "2021-02-23",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2021Q1": {
       "calendarQuarter": "2021Q1",
@@ -1353,7 +2192,7 @@
       "revenueYoyPct": 14.212,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 6.588,
       "rndBn": null,
       "otherOpexBn": 18.725,
       "operatingExpensesBn": 18.725,
@@ -1371,6 +2210,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 34.18,
+      "statementFilingDate": "2021-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Corporate Investment Bank",
@@ -1386,7 +2285,11 @@
           "filingDate": "2021-05-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Consumer Community Banking",
@@ -1402,7 +2305,11 @@
           "filingDate": "2021-05-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -1418,7 +2325,11 @@
           "filingDate": "2021-05-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Commercial Banking",
@@ -1434,13 +2345,15 @@
           "filingDate": "2021-05-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2021Q2": {
       "calendarQuarter": "2021Q2",
@@ -1453,7 +2366,7 @@
       "revenueYoyPct": -7.583,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 6.589,
       "rndBn": null,
       "otherOpexBn": 17.667,
       "operatingExpensesBn": 17.667,
@@ -1471,6 +2384,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 24.99,
+      "statementFilingDate": "2021-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Corporate Investment Bank",
@@ -1486,7 +2459,11 @@
           "filingDate": "2021-08-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Consumer Community Banking",
@@ -1502,7 +2479,11 @@
           "filingDate": "2021-08-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -1518,7 +2499,11 @@
           "filingDate": "2021-08-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Commercial Banking",
@@ -1534,13 +2519,15 @@
           "filingDate": "2021-08-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2021Q3": {
       "calendarQuarter": "2021Q3",
@@ -1553,7 +2540,7 @@
       "revenueYoyPct": 1.715,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 6.817,
       "rndBn": null,
       "otherOpexBn": 17.063,
       "operatingExpensesBn": 17.063,
@@ -1571,6 +2558,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 7.02,
+      "statementFilingDate": "2021-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Community Banking",
@@ -1586,7 +2633,11 @@
           "filingDate": "2021-11-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Corporate Investment Bank",
@@ -1602,7 +2653,11 @@
           "filingDate": "2021-11-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -1618,7 +2673,11 @@
           "filingDate": "2021-11-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Commercial Banking",
@@ -1634,13 +2693,15 @@
           "filingDate": "2021-11-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2021Q4": {
       "calendarQuarter": "2021Q4",
@@ -1653,7 +2714,7 @@
       "revenueYoyPct": 0.315,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 7.313,
       "rndBn": null,
       "otherOpexBn": 17.888,
       "operatingExpensesBn": 17.888,
@@ -1671,6 +2732,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -6.07,
+      "statementFilingDate": "2021-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Community Banking",
@@ -1686,7 +2807,11 @@
           "filingDate": "2022-02-22",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Corporate Investment Bank",
@@ -1702,7 +2827,11 @@
           "filingDate": "2022-02-22",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -1718,7 +2847,11 @@
           "filingDate": "2022-02-22",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Commercial Banking",
@@ -1734,13 +2867,15 @@
           "filingDate": "2022-02-22",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2022Q1": {
       "calendarQuarter": "2022Q1",
@@ -1753,7 +2888,7 @@
       "revenueYoyPct": -4.801,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 6.986,
       "rndBn": null,
       "otherOpexBn": 19.191,
       "operatingExpensesBn": 19.191,
@@ -1771,6 +2906,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -17.36,
+      "statementFilingDate": "2022-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Corporate Investment Bank",
@@ -1786,7 +2981,11 @@
           "filingDate": "2022-05-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Consumer Community Banking",
@@ -1802,7 +3001,11 @@
           "filingDate": "2022-05-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -1818,7 +3021,11 @@
           "filingDate": "2022-05-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Commercial Banking",
@@ -1834,13 +3041,15 @@
           "filingDate": "2022-05-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2022Q2": {
       "calendarQuarter": "2022Q2",
@@ -1853,7 +3062,7 @@
       "revenueYoyPct": 0.774,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 6.855,
       "rndBn": null,
       "otherOpexBn": 18.749,
       "operatingExpensesBn": 18.749,
@@ -1871,6 +3080,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -11.04,
+      "statementFilingDate": "2022-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Community Banking",
@@ -1886,7 +3155,11 @@
           "filingDate": "2022-08-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Corporate Investment Bank",
@@ -1902,7 +3175,11 @@
           "filingDate": "2022-08-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -1918,7 +3195,11 @@
           "filingDate": "2022-08-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Commercial Banking",
@@ -1934,13 +3215,15 @@
           "filingDate": "2022-08-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2022Q3": {
       "calendarQuarter": "2022Q3",
@@ -1953,7 +3236,7 @@
       "revenueYoyPct": 10.352,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 7.026,
       "rndBn": null,
       "otherOpexBn": 19.178,
       "operatingExpensesBn": 19.178,
@@ -1971,6 +3254,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -9.66,
+      "statementFilingDate": "2022-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Community Banking",
@@ -1986,7 +3329,11 @@
           "filingDate": "2022-11-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Corporate Investment Bank",
@@ -2002,7 +3349,11 @@
           "filingDate": "2022-11-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -2018,7 +3369,11 @@
           "filingDate": "2022-11-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Commercial Banking",
@@ -2034,13 +3389,15 @@
           "filingDate": "2022-11-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2022Q4": {
       "calendarQuarter": "2022Q4",
@@ -2053,7 +3410,7 @@
       "revenueYoyPct": 18.081,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 7.272,
       "rndBn": null,
       "otherOpexBn": 19.022,
       "operatingExpensesBn": 19.022,
@@ -2071,6 +3428,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -3.68,
+      "statementFilingDate": "2022-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Community Banking",
@@ -2086,7 +3503,11 @@
           "filingDate": "2023-02-21",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Corporate Investment Bank",
@@ -2102,7 +3523,11 @@
           "filingDate": "2023-02-21",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -2118,7 +3543,11 @@
           "filingDate": "2023-02-21",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Commercial Banking",
@@ -2134,13 +3563,15 @@
           "filingDate": "2023-02-21",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2023Q1": {
       "calendarQuarter": "2023Q1",
@@ -2153,7 +3584,7 @@
       "revenueYoyPct": 24.846,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 6.792,
       "rndBn": null,
       "otherOpexBn": 20.107,
       "operatingExpensesBn": 20.107,
@@ -2171,6 +3602,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 5.95,
+      "statementFilingDate": "2023-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Community Banking",
@@ -2186,7 +3677,11 @@
           "filingDate": "2023-05-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Corporate Investment Bank",
@@ -2202,7 +3697,11 @@
           "filingDate": "2023-05-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -2218,7 +3717,11 @@
           "filingDate": "2023-05-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Commercial Banking",
@@ -2234,13 +3737,15 @@
           "filingDate": "2023-05-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2023Q2": {
       "calendarQuarter": "2023Q2",
@@ -2253,7 +3758,7 @@
       "revenueYoyPct": 34.485,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 7.02,
       "rndBn": null,
       "otherOpexBn": 20.822,
       "operatingExpensesBn": 20.822,
@@ -2271,6 +3776,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 6.88,
+      "statementFilingDate": "2023-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Community Banking",
@@ -2286,7 +3851,11 @@
           "filingDate": "2023-08-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Corporate & Investment Bank",
@@ -2302,7 +3871,11 @@
           "filingDate": "2023-08-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -2318,7 +3891,11 @@
           "filingDate": "2023-08-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Commercial Banking",
@@ -2334,13 +3911,15 @@
           "filingDate": "2023-08-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2023Q3": {
       "calendarQuarter": "2023Q3",
@@ -2353,7 +3932,7 @@
       "revenueYoyPct": 21.879,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 7.329,
       "rndBn": null,
       "otherOpexBn": 21.757,
       "operatingExpensesBn": 21.757,
@@ -2371,6 +3950,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 3.22,
+      "statementFilingDate": "2023-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Community Banking",
@@ -2386,7 +4025,11 @@
           "filingDate": "2023-11-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Corporate & Investment Bank",
@@ -2402,7 +4045,11 @@
           "filingDate": "2023-11-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -2418,7 +4065,11 @@
           "filingDate": "2023-11-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Commercial Banking",
@@ -2434,13 +4085,15 @@
           "filingDate": "2023-11-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2023Q4": {
       "calendarQuarter": "2023Q4",
@@ -2453,7 +4106,7 @@
       "revenueYoyPct": 11.657,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 7.521,
       "rndBn": null,
       "otherOpexBn": 24.486,
       "operatingExpensesBn": 24.486,
@@ -2471,6 +4124,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -7.73,
+      "statementFilingDate": "2023-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Community Banking",
@@ -2486,7 +4199,11 @@
           "filingDate": "2024-02-16",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Corporate & Investment Bank",
@@ -2502,7 +4219,11 @@
           "filingDate": "2024-02-16",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -2518,7 +4239,11 @@
           "filingDate": "2024-02-16",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Commercial Banking",
@@ -2534,13 +4259,15 @@
           "filingDate": "2024-02-16",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2024Q1": {
       "calendarQuarter": "2024Q1",
@@ -2553,7 +4280,7 @@
       "revenueYoyPct": 9.348,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 7.34,
       "rndBn": null,
       "otherOpexBn": 22.757,
       "operatingExpensesBn": 22.757,
@@ -2571,6 +4298,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -0.91,
+      "statementFilingDate": "2024-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Community Banking",
@@ -2586,7 +4373,11 @@
           "filingDate": "2024-05-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Commercial & Investment Bank",
@@ -2602,7 +4393,11 @@
           "filingDate": "2025-05-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -2618,13 +4413,15 @@
           "filingDate": "2024-05-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2024Q2": {
       "calendarQuarter": "2024Q2",
@@ -2637,7 +4434,7 @@
       "revenueYoyPct": 21.529,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 7.638,
       "rndBn": null,
       "otherOpexBn": 23.713,
       "operatingExpensesBn": 23.713,
@@ -2655,6 +4452,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 1.11,
+      "statementFilingDate": "2024-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Commercial & Investment Bank",
@@ -2670,7 +4527,11 @@
           "filingDate": "2025-08-05",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Consumer Community Banking",
@@ -2686,7 +4547,11 @@
           "filingDate": "2024-08-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -2702,13 +4567,15 @@
           "filingDate": "2024-08-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2024Q3": {
       "calendarQuarter": "2024Q3",
@@ -2721,7 +4588,7 @@
       "revenueYoyPct": 6.972,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 7.743,
       "rndBn": null,
       "otherOpexBn": 22.565,
       "operatingExpensesBn": 22.565,
@@ -2739,6 +4606,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -2.74,
+      "statementFilingDate": "2024-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Community Banking",
@@ -2754,7 +4681,11 @@
           "filingDate": "2024-10-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Commercial & Investment Bank",
@@ -2770,7 +4701,11 @@
           "filingDate": "2025-11-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -2786,13 +4721,15 @@
           "filingDate": "2024-10-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2024Q4": {
       "calendarQuarter": "2024Q4",
@@ -2805,7 +4742,7 @@
       "revenueYoyPct": 10.873,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 8.167,
       "rndBn": null,
       "otherOpexBn": 22.762,
       "operatingExpensesBn": 22.762,
@@ -2823,6 +4760,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 8.62,
+      "statementFilingDate": "2024-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Community Banking",
@@ -2838,7 +4835,11 @@
           "filingDate": "2025-02-14",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Commercial & Investment Bank",
@@ -2854,7 +4855,11 @@
           "filingDate": "2025-02-14",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -2870,13 +4875,15 @@
           "filingDate": "2025-02-14",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2025Q1": {
       "calendarQuarter": "2025Q1",
@@ -2889,7 +4896,7 @@
       "revenueYoyPct": 8.051,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 8.023,
       "rndBn": null,
       "otherOpexBn": 23.597,
       "operatingExpensesBn": 23.597,
@@ -2907,6 +4914,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 0.32,
+      "statementFilingDate": "2025-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Commercial & Investment Bank",
@@ -2922,7 +4989,11 @@
           "filingDate": "2025-05-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Consumer Community Banking",
@@ -2938,7 +5009,11 @@
           "filingDate": "2025-05-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -2954,13 +5029,15 @@
           "filingDate": "2025-05-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2025Q2": {
       "calendarQuarter": "2025Q2",
@@ -2973,7 +5050,7 @@
       "revenueYoyPct": -10.534,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 8.253,
       "rndBn": null,
       "otherOpexBn": 23.779,
       "operatingExpensesBn": 23.779,
@@ -2991,6 +5068,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -2.78,
+      "statementFilingDate": "2025-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Commercial & Investment Bank",
@@ -3006,7 +5143,11 @@
           "filingDate": "2025-08-05",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Consumer Community Banking",
@@ -3022,7 +5163,11 @@
           "filingDate": "2025-08-05",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -3038,13 +5183,15 @@
           "filingDate": "2025-08-05",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2025Q3": {
       "calendarQuarter": "2025Q3",
@@ -3057,7 +5204,7 @@
       "revenueYoyPct": 8.846,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 8.912,
       "rndBn": null,
       "otherOpexBn": 24.281,
       "operatingExpensesBn": 24.281,
@@ -3075,6 +5222,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 0.76,
+      "statementFilingDate": "2025-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Commercial & Investment Bank",
@@ -3090,7 +5297,11 @@
           "filingDate": "2025-11-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Consumer Community Banking",
@@ -3106,7 +5317,11 @@
           "filingDate": "2025-11-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -3122,13 +5337,15 @@
           "filingDate": "2025-11-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2025Q4": {
       "calendarQuarter": "2025Q4",
@@ -3141,7 +5358,7 @@
       "revenueYoyPct": 7.085,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
-      "sgnaBn": null,
+      "sgnaBn": 9.189,
       "rndBn": null,
       "otherOpexBn": 23.983,
       "operatingExpensesBn": 23.983,
@@ -3159,6 +5376,66 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -4.31,
+      "statementFilingDate": "2025-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "stockanalysis",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 3,
+        "checksPassed": 3,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Consumer Community Banking",
@@ -3174,7 +5451,11 @@
           "filingDate": "2026-02-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Commercial & Investment Bank",
@@ -3190,7 +5471,11 @@
           "filingDate": "2026-02-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         },
         {
           "name": "Asset & Wealth Management",
@@ -3206,16 +5491,18 @@
           "filingDate": "2026-02-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     }
   },
-  "statementSource": "official-sec-companyfacts",
+  "statementSource": "official-sec-companyfacts+field-reconciled",
   "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
   "reportingCurrency": "USD",
   "cik": 19617,
@@ -3442,7 +5729,11 @@
             "filingDate": "2019-05-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Corporate Investment Bank",
@@ -3458,7 +5749,11 @@
             "filingDate": "2019-05-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -3474,7 +5769,11 @@
             "filingDate": "2019-05-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Commercial Banking",
@@ -3490,7 +5789,11 @@
             "filingDate": "2019-05-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -3510,7 +5813,11 @@
             "filingDate": "2019-08-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Corporate Investment Bank",
@@ -3526,7 +5833,11 @@
             "filingDate": "2019-08-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -3542,7 +5853,11 @@
             "filingDate": "2019-08-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Commercial Banking",
@@ -3558,7 +5873,11 @@
             "filingDate": "2019-08-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Corporate Non",
@@ -3574,7 +5893,11 @@
             "filingDate": "2019-08-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -3594,7 +5917,11 @@
             "filingDate": "2019-11-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Corporate Investment Bank",
@@ -3610,7 +5937,11 @@
             "filingDate": "2019-11-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -3626,7 +5957,11 @@
             "filingDate": "2019-11-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Commercial Banking",
@@ -3642,7 +5977,11 @@
             "filingDate": "2019-11-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -3662,7 +6001,11 @@
             "filingDate": "2020-02-25",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Corporate Investment Bank",
@@ -3678,7 +6021,11 @@
             "filingDate": "2020-02-25",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -3694,7 +6041,11 @@
             "filingDate": "2020-02-25",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Commercial Banking",
@@ -3710,7 +6061,11 @@
             "filingDate": "2020-02-25",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Corporate Non",
@@ -3726,7 +6081,11 @@
             "filingDate": "2020-02-25",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -3746,7 +6105,11 @@
             "filingDate": "2019-05-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Corporate Investment Bank",
@@ -3762,7 +6125,11 @@
             "filingDate": "2019-05-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -3778,7 +6145,11 @@
             "filingDate": "2019-05-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Commercial Banking",
@@ -3794,7 +6165,11 @@
             "filingDate": "2019-05-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Corporate Non",
@@ -3810,7 +6185,11 @@
             "filingDate": "2019-05-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -3830,7 +6209,11 @@
             "filingDate": "2019-08-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Corporate Investment Bank",
@@ -3846,7 +6229,11 @@
             "filingDate": "2019-08-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -3862,7 +6249,11 @@
             "filingDate": "2019-08-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Commercial Banking",
@@ -3878,7 +6269,11 @@
             "filingDate": "2019-08-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Corporate Non",
@@ -3894,7 +6289,11 @@
             "filingDate": "2019-08-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -3914,7 +6313,11 @@
             "filingDate": "2019-11-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Corporate Investment Bank",
@@ -3930,7 +6333,11 @@
             "filingDate": "2019-11-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -3946,7 +6353,11 @@
             "filingDate": "2019-11-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Commercial Banking",
@@ -3962,7 +6373,11 @@
             "filingDate": "2019-11-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Corporate Non",
@@ -3978,7 +6393,11 @@
             "filingDate": "2019-11-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -3998,7 +6417,11 @@
             "filingDate": "2020-02-25",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Corporate Investment Bank",
@@ -4014,7 +6437,11 @@
             "filingDate": "2020-02-25",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -4030,7 +6457,11 @@
             "filingDate": "2020-02-25",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Commercial Banking",
@@ -4046,7 +6477,11 @@
             "filingDate": "2020-02-25",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4066,7 +6501,11 @@
             "filingDate": "2020-05-07",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Corporate Investment Bank",
@@ -4082,7 +6521,11 @@
             "filingDate": "2020-05-07",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -4098,7 +6541,11 @@
             "filingDate": "2020-05-07",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Commercial Banking",
@@ -4114,7 +6561,11 @@
             "filingDate": "2020-05-07",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Corporate Non",
@@ -4130,7 +6581,11 @@
             "filingDate": "2020-05-07",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4150,7 +6605,11 @@
             "filingDate": "2020-08-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Consumer Community Banking",
@@ -4166,7 +6625,11 @@
             "filingDate": "2020-08-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -4182,7 +6645,11 @@
             "filingDate": "2020-08-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Commercial Banking",
@@ -4198,7 +6665,11 @@
             "filingDate": "2020-08-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4218,7 +6689,11 @@
             "filingDate": "2020-11-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Corporate Investment Bank",
@@ -4234,7 +6709,11 @@
             "filingDate": "2020-11-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -4250,7 +6729,11 @@
             "filingDate": "2020-11-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Commercial Banking",
@@ -4266,7 +6749,11 @@
             "filingDate": "2020-11-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4286,7 +6773,11 @@
             "filingDate": "2021-02-23",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Corporate Investment Bank",
@@ -4302,7 +6793,11 @@
             "filingDate": "2021-02-23",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -4318,7 +6813,11 @@
             "filingDate": "2021-02-23",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Commercial Banking",
@@ -4334,7 +6833,11 @@
             "filingDate": "2021-02-23",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4354,7 +6857,11 @@
             "filingDate": "2021-05-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Consumer Community Banking",
@@ -4370,7 +6877,11 @@
             "filingDate": "2021-05-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -4386,7 +6897,11 @@
             "filingDate": "2021-05-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Commercial Banking",
@@ -4402,7 +6917,11 @@
             "filingDate": "2021-05-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4422,7 +6941,11 @@
             "filingDate": "2021-08-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Consumer Community Banking",
@@ -4438,7 +6961,11 @@
             "filingDate": "2021-08-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -4454,7 +6981,11 @@
             "filingDate": "2021-08-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Commercial Banking",
@@ -4470,7 +7001,11 @@
             "filingDate": "2021-08-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4490,7 +7025,11 @@
             "filingDate": "2021-11-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Corporate Investment Bank",
@@ -4506,7 +7045,11 @@
             "filingDate": "2021-11-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -4522,7 +7065,11 @@
             "filingDate": "2021-11-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Commercial Banking",
@@ -4538,7 +7085,11 @@
             "filingDate": "2021-11-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4558,7 +7109,11 @@
             "filingDate": "2022-02-22",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Corporate Investment Bank",
@@ -4574,7 +7129,11 @@
             "filingDate": "2022-02-22",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -4590,7 +7149,11 @@
             "filingDate": "2022-02-22",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Commercial Banking",
@@ -4606,7 +7169,11 @@
             "filingDate": "2022-02-22",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4626,7 +7193,11 @@
             "filingDate": "2022-05-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Consumer Community Banking",
@@ -4642,7 +7213,11 @@
             "filingDate": "2022-05-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -4658,7 +7233,11 @@
             "filingDate": "2022-05-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Commercial Banking",
@@ -4674,7 +7253,11 @@
             "filingDate": "2022-05-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4694,7 +7277,11 @@
             "filingDate": "2022-08-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Corporate Investment Bank",
@@ -4710,7 +7297,11 @@
             "filingDate": "2022-08-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -4726,7 +7317,11 @@
             "filingDate": "2022-08-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Commercial Banking",
@@ -4742,7 +7337,11 @@
             "filingDate": "2022-08-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4762,7 +7361,11 @@
             "filingDate": "2022-11-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Corporate Investment Bank",
@@ -4778,7 +7381,11 @@
             "filingDate": "2022-11-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -4794,7 +7401,11 @@
             "filingDate": "2022-11-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Commercial Banking",
@@ -4810,7 +7421,11 @@
             "filingDate": "2022-11-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4830,7 +7445,11 @@
             "filingDate": "2023-02-21",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Corporate Investment Bank",
@@ -4846,7 +7465,11 @@
             "filingDate": "2023-02-21",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -4862,7 +7485,11 @@
             "filingDate": "2023-02-21",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Commercial Banking",
@@ -4878,7 +7505,11 @@
             "filingDate": "2023-02-21",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4898,7 +7529,11 @@
             "filingDate": "2023-05-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Corporate Investment Bank",
@@ -4914,7 +7549,11 @@
             "filingDate": "2023-05-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -4930,7 +7569,11 @@
             "filingDate": "2023-05-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Commercial Banking",
@@ -4946,7 +7589,11 @@
             "filingDate": "2023-05-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -4966,7 +7613,11 @@
             "filingDate": "2023-08-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Corporate & Investment Bank",
@@ -4982,7 +7633,11 @@
             "filingDate": "2023-08-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -4998,7 +7653,11 @@
             "filingDate": "2023-08-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Commercial Banking",
@@ -5014,7 +7673,11 @@
             "filingDate": "2023-08-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -5034,7 +7697,11 @@
             "filingDate": "2023-11-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Corporate & Investment Bank",
@@ -5050,7 +7717,11 @@
             "filingDate": "2023-11-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -5066,7 +7737,11 @@
             "filingDate": "2023-11-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Commercial Banking",
@@ -5082,7 +7757,11 @@
             "filingDate": "2023-11-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -5102,7 +7781,11 @@
             "filingDate": "2024-02-16",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Corporate & Investment Bank",
@@ -5118,7 +7801,11 @@
             "filingDate": "2024-02-16",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -5134,7 +7821,11 @@
             "filingDate": "2024-02-16",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Commercial Banking",
@@ -5150,7 +7841,11 @@
             "filingDate": "2024-02-16",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -5170,7 +7865,11 @@
             "filingDate": "2024-05-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Commercial & Investment Bank",
@@ -5186,7 +7885,11 @@
             "filingDate": "2025-05-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -5202,7 +7905,11 @@
             "filingDate": "2024-05-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -5222,7 +7929,11 @@
             "filingDate": "2025-08-05",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Consumer Community Banking",
@@ -5238,7 +7949,11 @@
             "filingDate": "2024-08-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -5254,7 +7969,11 @@
             "filingDate": "2024-08-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -5274,7 +7993,11 @@
             "filingDate": "2024-10-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Commercial & Investment Bank",
@@ -5290,7 +8013,11 @@
             "filingDate": "2025-11-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -5306,7 +8033,11 @@
             "filingDate": "2024-10-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -5326,7 +8057,11 @@
             "filingDate": "2025-02-14",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Commercial & Investment Bank",
@@ -5342,7 +8077,11 @@
             "filingDate": "2025-02-14",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -5358,7 +8097,11 @@
             "filingDate": "2025-02-14",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -5378,7 +8121,11 @@
             "filingDate": "2025-05-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Consumer Community Banking",
@@ -5394,7 +8141,11 @@
             "filingDate": "2025-05-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -5410,7 +8161,11 @@
             "filingDate": "2025-05-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -5430,7 +8185,11 @@
             "filingDate": "2025-08-05",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Consumer Community Banking",
@@ -5446,7 +8205,11 @@
             "filingDate": "2025-08-05",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -5462,7 +8225,11 @@
             "filingDate": "2025-08-05",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -5482,7 +8249,11 @@
             "filingDate": "2025-11-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Consumer Community Banking",
@@ -5498,7 +8269,11 @@
             "filingDate": "2025-11-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -5514,7 +8289,11 @@
             "filingDate": "2025-11-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       },
@@ -5534,7 +8313,11 @@
             "filingDate": "2026-02-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Commercial & Investment Bank",
@@ -5550,7 +8333,11 @@
             "filingDate": "2026-02-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           },
           {
             "name": "Asset & Wealth Management",
@@ -5566,7 +8353,11 @@
             "filingDate": "2026-02-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
           }
         ]
       }
@@ -5771,12 +8562,195 @@
     ],
     "errors": []
   },
+  "parserDiagnostics": {
+    "version": "universal-parser-v3",
+    "financials": {
+      "basePreferredOrder": [
+        "official",
+        "stockanalysis"
+      ],
+      "preferredOrder": [
+        "official",
+        "stockanalysis"
+      ],
+      "selectedSource": "official",
+      "attempts": [
+        {
+          "layer": "financials",
+          "source_id": "official",
+          "status": "success",
+          "selected": true,
+          "reason": "",
+          "quarter_count": 32,
+          "latest_quarter": "2025Q4",
+          "error": ""
+        },
+        {
+          "layer": "financials",
+          "source_id": "stockanalysis",
+          "status": "success",
+          "selected": false,
+          "reason": "",
+          "quarter_count": 20,
+          "latest_quarter": "2025Q4",
+          "error": ""
+        }
+      ],
+      "reconciliation": {
+        "version": "financial-reconciler-v1",
+        "primarySource": "official",
+        "quarterCount": 32,
+        "fieldOverrideCount": 20,
+        "derivedFieldCount": 0,
+        "mixedSourceQuarterCount": 20,
+        "sourceUsageCounts": {
+          "official": 371,
+          "stockanalysis": 20
+        }
+      },
+      "validation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "quarterCount": 32,
+        "validatedQuarterCount": 32,
+        "issueCount": 0,
+        "mismatchQuarterCount": 0,
+        "highConfidenceQuarterCount": 0,
+        "averageConfidenceScore": 0.7937,
+        "latestQuarter": "2025Q4",
+        "latestQuarterConfidenceScore": 0.7937,
+        "latestQuarterIssueCount": 0
+      }
+    },
+    "segments": {
+      "selectedSource": "official-segments",
+      "attempts": [
+        {
+          "layer": "segments",
+          "source_id": "official-segments",
+          "status": "success",
+          "selected": true,
+          "reason": "",
+          "quarter_count": 32,
+          "latest_quarter": "2025Q4",
+          "error": ""
+        }
+      ]
+    },
+    "revenueStructures": {
+      "selectedSource": "official-revenue-structures",
+      "attempts": [
+        {
+          "layer": "revenue-structures",
+          "source_id": "official-revenue-structures",
+          "status": "success",
+          "selected": true,
+          "reason": "",
+          "quarter_count": 32,
+          "latest_quarter": "2025Q4",
+          "error": ""
+        }
+      ]
+    },
+    "summary": {
+      "financialQuarterCount": 32,
+      "segmentQuarterCount": 32,
+      "revenueStructureQuarterCount": 32
+    },
+    "validation": {
+      "version": "parser-validation-v1",
+      "status": "medium",
+      "overallConfidenceScore": 0.7784,
+      "financialConfidenceScore": 0.7937,
+      "structuralConfidenceScore": 0.75,
+      "revenueSegmentChecks": 0,
+      "revenueSegmentMismatchCount": 0,
+      "revenueSegmentSkippedChecks": 32,
+      "detailGroupChecks": 0,
+      "detailGroupMismatchCount": 0,
+      "detailGroupSkippedChecks": 0,
+      "opexChecks": 0,
+      "opexSkippedChecks": 0,
+      "opexOverflowMismatchCount": 0,
+      "warningCount": 0,
+      "warnings": []
+    }
+  },
   "statementPresets": {},
   "coverage": {
     "quarterCount": 32,
     "pixelReplicaQuarterCount": 0,
     "hasPixelReplica": false,
     "officialFinancialQuarterCount": 32,
-    "officialSegmentQuarterCount": 32
+    "officialSegmentQuarterCount": 32,
+    "officialExpenseQuarterCount": 0,
+    "classification": {
+      "status": "ok",
+      "latestQuarter": "2025Q4",
+      "latestQuarterHasRevenueClassification": true,
+      "latestQuarterHasExpenseClassification": false,
+      "latestRevenueClassificationQuarter": "2025Q4",
+      "latestExpenseClassificationQuarter": null,
+      "latestStructureHistoryQuarter": "2025Q4",
+      "revenueClassificationQuarterCount": 32,
+      "expenseClassificationQuarterCount": 0,
+      "revenueClassificationCoverageRatio": 1.0,
+      "expenseClassificationCoverageRatio": 0.0,
+      "latestRevenueClassificationLagQuarters": 0,
+      "latestExpenseClassificationLagQuarters": null,
+      "warnings": [],
+      "blockers": [],
+      "policy": {}
+    },
+    "parser": {
+      "version": "universal-parser-v3",
+      "selectedFinancialSource": "official",
+      "selectedSegmentSource": "official-segments",
+      "selectedRevenueStructureSource": "official-revenue-structures",
+      "financialAttemptCount": 2,
+      "financialReconciliation": {
+        "version": "financial-reconciler-v1",
+        "primarySource": "official",
+        "quarterCount": 32,
+        "fieldOverrideCount": 20,
+        "derivedFieldCount": 0,
+        "mixedSourceQuarterCount": 20,
+        "sourceUsageCounts": {
+          "official": 371,
+          "stockanalysis": 20
+        }
+      },
+      "financialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "quarterCount": 32,
+        "validatedQuarterCount": 32,
+        "issueCount": 0,
+        "mismatchQuarterCount": 0,
+        "highConfidenceQuarterCount": 0,
+        "averageConfidenceScore": 0.7937,
+        "latestQuarter": "2025Q4",
+        "latestQuarterConfidenceScore": 0.7937,
+        "latestQuarterIssueCount": 0
+      },
+      "validation": {
+        "version": "parser-validation-v1",
+        "status": "medium",
+        "overallConfidenceScore": 0.7784,
+        "financialConfidenceScore": 0.7937,
+        "structuralConfidenceScore": 0.75,
+        "revenueSegmentChecks": 0,
+        "revenueSegmentMismatchCount": 0,
+        "revenueSegmentSkippedChecks": 32,
+        "detailGroupChecks": 0,
+        "detailGroupMismatchCount": 0,
+        "detailGroupSkippedChecks": 0,
+        "opexChecks": 0,
+        "opexSkippedChecks": 0,
+        "opexOverflowMismatchCount": 0,
+        "warningCount": 0,
+        "warnings": []
+      }
+    }
   }
 }

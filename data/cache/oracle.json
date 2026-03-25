@@ -76,6 +76,84 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 0,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.8875,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.75,
+        "checksRun": 8,
+        "checksPassed": 6,
+        "issueCount": 2,
+        "issues": [
+          {
+            "code": "revenue-minus-cost-equals-gross",
+            "severity": "warning",
+            "message": "grossProfitBn does not reconcile with revenueBn and costOfRevenueBn.",
+            "expected": 5.968,
+            "derived": 0.084,
+            "delta": 5.884,
+            "tolerance": 0.179
+          },
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 3.41,
+            "derived": -0.393,
+            "delta": 3.803,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "displayCurrency": "USD",
       "displayScaleFactor": 1
     },
@@ -108,6 +186,85 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.8875,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.75,
+        "checksRun": 8,
+        "checksPassed": 6,
+        "issueCount": 2,
+        "issues": [
+          {
+            "code": "revenue-minus-cost-equals-gross",
+            "severity": "warning",
+            "message": "grossProfitBn does not reconcile with revenueBn and costOfRevenueBn.",
+            "expected": 6.994,
+            "derived": 0.128,
+            "delta": 6.866,
+            "tolerance": 0.21
+          },
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 4.379,
+            "derived": 0.121,
+            "delta": 4.258,
+            "tolerance": 0.131
+          }
+        ]
+      },
       "displayCurrency": "USD",
       "displayScaleFactor": 1
     },
@@ -140,6 +297,76 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 2.778,
+            "derived": -0.957,
+            "delta": 3.735,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud & License Business",
@@ -215,6 +442,60 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 0,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 0
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 2,
+        "checksPassed": 2,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud & License Business",
@@ -293,6 +574,64 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": -393.04,
       "profitMarginYoyDeltaPp": 534.08,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 0,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 0
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 2,
+        "checksPassed": 2,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud",
@@ -308,7 +647,9 @@
           "filingDate": "2019-03-18",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software",
@@ -324,7 +665,9 @@
           "filingDate": "2019-03-18",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Hardware",
@@ -340,7 +683,9 @@
           "filingDate": "2019-03-18",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Services",
@@ -356,7 +701,9 @@
           "filingDate": "2019-03-18",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -394,6 +741,64 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": -458.27,
       "profitMarginYoyDeltaPp": -352.59,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 0,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 0
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 2,
+        "checksPassed": 2,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud & License Business",
@@ -469,6 +874,64 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": 0.99,
       "profitMarginYoyDeltaPp": -1.46,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 0,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 0
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 2,
+        "checksPassed": 2,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud",
@@ -484,7 +947,9 @@
           "filingDate": "2019-09-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Hardware",
@@ -500,7 +965,9 @@
           "filingDate": "2019-09-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software",
@@ -516,7 +983,9 @@
           "filingDate": "2019-09-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Services",
@@ -532,7 +1001,9 @@
           "filingDate": "2019-09-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -570,6 +1041,64 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": 0.68,
       "profitMarginYoyDeltaPp": -0.36,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 0,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 0
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 2,
+        "checksPassed": 2,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud",
@@ -585,7 +1114,9 @@
           "filingDate": "2019-12-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software",
@@ -601,7 +1132,9 @@
           "filingDate": "2019-12-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Hardware",
@@ -617,7 +1150,9 @@
           "filingDate": "2019-12-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Services",
@@ -633,7 +1168,9 @@
           "filingDate": "2019-12-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -671,6 +1208,64 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": 0.66,
       "profitMarginYoyDeltaPp": -2.3,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 0,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 0
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 2,
+        "checksPassed": 2,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud",
@@ -686,7 +1281,9 @@
           "filingDate": "2020-03-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software",
@@ -702,7 +1299,9 @@
           "filingDate": "2020-03-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Hardware",
@@ -718,7 +1317,9 @@
           "filingDate": "2020-03-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Services",
@@ -734,7 +1335,9 @@
           "filingDate": "2020-03-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -772,6 +1375,64 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": 3.04,
       "profitMarginYoyDeltaPp": -3.73,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 0,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 0
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 2,
+        "checksPassed": 2,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud",
@@ -787,7 +1448,9 @@
           "filingDate": "2020-06-22",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software",
@@ -803,7 +1466,9 @@
           "filingDate": "2020-06-22",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Hardware",
@@ -819,7 +1484,9 @@
           "filingDate": "2020-06-22",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Services",
@@ -835,7 +1502,9 @@
           "filingDate": "2020-06-22",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -873,6 +1542,64 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": 3.07,
       "profitMarginYoyDeltaPp": 0.85,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 0,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 0
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 2,
+        "checksPassed": 2,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud",
@@ -888,7 +1615,9 @@
           "filingDate": "2020-09-15",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software",
@@ -904,7 +1633,9 @@
           "filingDate": "2020-09-15",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Hardware",
@@ -920,7 +1651,9 @@
           "filingDate": "2020-09-15",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Services",
@@ -936,7 +1669,9 @@
           "filingDate": "2020-09-15",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -974,6 +1709,64 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": 3.45,
       "profitMarginYoyDeltaPp": 0.88,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 0,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 0
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 2,
+        "checksPassed": 2,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud",
@@ -989,7 +1782,9 @@
           "filingDate": "2020-12-11",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software",
@@ -1005,7 +1800,9 @@
           "filingDate": "2020-12-11",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Hardware",
@@ -1021,7 +1818,9 @@
           "filingDate": "2020-12-11",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Services",
@@ -1037,7 +1836,9 @@
           "filingDate": "2020-12-11",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1075,6 +1876,64 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": 2.44,
       "profitMarginYoyDeltaPp": 23.54,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 0,
+        "grossProfitBn": 0,
+        "grossMarginPct": 0,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 0,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 0
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.7937,
+        "completenessScore": 0.625,
+        "consistencyScore": 1.0,
+        "checksRun": 2,
+        "checksPassed": 2,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud",
@@ -1090,7 +1949,9 @@
           "filingDate": "2021-03-11",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software",
@@ -1106,7 +1967,9 @@
           "filingDate": "2021-03-11",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Hardware",
@@ -1122,7 +1985,9 @@
           "filingDate": "2021-03-11",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Services",
@@ -1138,7 +2003,9 @@
           "filingDate": "2021-03-11",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1156,26 +2023,104 @@
       "statementCurrency": "USD",
       "revenueBn": 11.227,
       "revenueYoyPct": 7.538,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 2.122,
+      "grossProfitBn": 9.105,
       "sgnaBn": 2.382,
       "rndBn": 1.716,
       "otherOpexBn": 2.588,
       "operatingExpensesBn": 6.686,
       "operatingIncomeBn": 4.541,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
+      "nonOperatingBn": -0.385,
+      "pretaxIncomeBn": 4.156,
       "taxBn": 0.124,
       "netIncomeBn": 4.032,
       "netIncomeYoyPct": 29.4,
-      "grossMarginPct": null,
+      "grossMarginPct": 81.1,
       "operatingMarginPct": 40.45,
       "profitMarginPct": 35.91,
-      "effectiveTaxRatePct": null,
+      "effectiveTaxRatePct": 2.984,
       "revenueQoqPct": 11.324,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": -0.81,
       "profitMarginYoyDeltaPp": 6.06,
+      "statementFilingDate": "2021-05-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/orcl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "stockanalysis",
+        "grossProfitBn": "stockanalysis",
+        "grossMarginPct": "stockanalysis",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "stockanalysis",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis",
+        "effectiveTaxRatePct": "derived"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 0
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 4.541,
+            "derived": 2.419,
+            "delta": 2.122,
+            "tolerance": 0.136
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud",
@@ -1191,7 +2136,9 @@
           "filingDate": "2021-06-21",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software",
@@ -1207,7 +2154,9 @@
           "filingDate": "2021-06-21",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Hardware",
@@ -1223,7 +2172,9 @@
           "filingDate": "2021-06-21",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Services",
@@ -1239,7 +2190,9 @@
           "filingDate": "2021-06-21",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1257,26 +2210,104 @@
       "statementCurrency": "USD",
       "revenueBn": 9.728,
       "revenueYoyPct": 3.854,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 2.103,
+      "grossProfitBn": 7.625,
       "sgnaBn": 2.152,
       "rndBn": 1.684,
       "otherOpexBn": 2.465,
       "operatingExpensesBn": 6.301,
       "operatingIncomeBn": 3.427,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
+      "nonOperatingBn": -0.746,
+      "pretaxIncomeBn": 2.681,
       "taxBn": 0.224,
       "netIncomeBn": 2.457,
       "netIncomeYoyPct": 9.15,
-      "grossMarginPct": null,
+      "grossMarginPct": 78.38,
       "operatingMarginPct": 35.23,
       "profitMarginPct": 25.26,
-      "effectiveTaxRatePct": null,
+      "effectiveTaxRatePct": 8.355,
       "revenueQoqPct": -13.352,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": 0.95,
       "profitMarginYoyDeltaPp": 1.23,
+      "statementFilingDate": "2021-08-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/orcl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "stockanalysis",
+        "grossProfitBn": "stockanalysis",
+        "grossMarginPct": "stockanalysis",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "stockanalysis",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "stockanalysis",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 3.427,
+            "derived": 1.324,
+            "delta": 2.103,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud",
@@ -1292,7 +2323,9 @@
           "filingDate": "2021-09-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software",
@@ -1308,7 +2341,9 @@
           "filingDate": "2021-09-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Hardware",
@@ -1324,7 +2359,9 @@
           "filingDate": "2021-09-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Services",
@@ -1340,7 +2377,9 @@
           "filingDate": "2021-09-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1358,26 +2397,104 @@
       "statementCurrency": "USD",
       "revenueBn": 10.36,
       "revenueYoyPct": 5.714,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 2.159,
+      "grossProfitBn": 8.201,
       "sgnaBn": 2.273,
       "rndBn": 1.754,
       "otherOpexBn": 7.157,
       "operatingExpensesBn": 11.184,
       "operatingIncomeBn": -0.824,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
+      "nonOperatingBn": -0.672,
+      "pretaxIncomeBn": -1.496,
       "taxBn": -0.249,
       "netIncomeBn": -1.247,
       "netIncomeYoyPct": -151.06,
-      "grossMarginPct": null,
+      "grossMarginPct": 79.16,
       "operatingMarginPct": -7.95,
       "profitMarginPct": -12.04,
-      "effectiveTaxRatePct": null,
+      "effectiveTaxRatePct": 16.644,
       "revenueQoqPct": 6.497,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": -44.51,
       "profitMarginYoyDeltaPp": -36.96,
+      "statementFilingDate": "2021-11-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/orcl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "stockanalysis",
+        "grossProfitBn": "stockanalysis",
+        "grossMarginPct": "stockanalysis",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "stockanalysis",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "stockanalysis",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": -0.824,
+            "derived": -2.983,
+            "delta": 2.159,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud",
@@ -1393,7 +2510,9 @@
           "filingDate": "2021-12-10",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software",
@@ -1409,7 +2528,9 @@
           "filingDate": "2021-12-10",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Hardware",
@@ -1425,7 +2546,9 @@
           "filingDate": "2021-12-10",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Services",
@@ -1441,7 +2564,9 @@
           "filingDate": "2021-12-10",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1459,26 +2584,104 @@
       "statementCurrency": "USD",
       "revenueBn": 10.513,
       "revenueYoyPct": 4.244,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 2.218,
+      "grossProfitBn": 8.295,
       "sgnaBn": 2.339,
       "rndBn": 1.816,
       "otherOpexBn": 2.536,
       "operatingExpensesBn": 6.691,
       "operatingIncomeBn": 3.822,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
+      "nonOperatingBn": -0.982,
+      "pretaxIncomeBn": 2.84,
       "taxBn": 0.521,
       "netIncomeBn": 2.319,
       "netIncomeYoyPct": -53.81,
-      "grossMarginPct": null,
+      "grossMarginPct": 78.9,
       "operatingMarginPct": 36.35,
       "profitMarginPct": 22.06,
-      "effectiveTaxRatePct": null,
+      "effectiveTaxRatePct": 18.345,
       "revenueQoqPct": 1.477,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": -2.1,
       "profitMarginYoyDeltaPp": -27.73,
+      "statementFilingDate": "2022-02-28",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/orcl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "stockanalysis",
+        "grossProfitBn": "stockanalysis",
+        "grossMarginPct": "stockanalysis",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "stockanalysis",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "stockanalysis",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 3.822,
+            "derived": 1.604,
+            "delta": 2.218,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud",
@@ -1494,7 +2697,9 @@
           "filingDate": "2022-03-11",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software",
@@ -1510,7 +2715,9 @@
           "filingDate": "2022-03-11",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Hardware",
@@ -1526,7 +2733,9 @@
           "filingDate": "2022-03-11",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Services",
@@ -1542,7 +2751,9 @@
           "filingDate": "2022-03-11",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1560,26 +2771,105 @@
       "statementCurrency": "USD",
       "revenueBn": 11.839,
       "revenueYoyPct": 5.451,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 2.397,
+      "grossProfitBn": 9.443,
       "sgnaBn": 2.6,
       "rndBn": 1.965,
       "otherOpexBn": 2.773,
       "operatingExpensesBn": 7.338,
       "operatingIncomeBn": 4.501,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
+      "nonOperatingBn": -0.878,
+      "pretaxIncomeBn": 3.624,
       "taxBn": 0.436,
       "netIncomeBn": 3.188,
       "netIncomeYoyPct": -20.93,
-      "grossMarginPct": null,
+      "grossMarginPct": 79.76,
       "operatingMarginPct": 38.02,
       "profitMarginPct": 26.93,
-      "effectiveTaxRatePct": null,
+      "effectiveTaxRatePct": 12.003,
       "revenueQoqPct": 12.613,
-      "grossMarginYoyDeltaPp": null,
+      "grossMarginYoyDeltaPp": -1.34,
       "operatingMarginYoyDeltaPp": -2.43,
       "profitMarginYoyDeltaPp": -8.98,
+      "statementFilingDate": "2022-05-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/orcl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "stockanalysis",
+        "grossProfitBn": "stockanalysis",
+        "grossMarginPct": "stockanalysis",
+        "grossMarginYoyDeltaPp": "stockanalysis",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "stockanalysis",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "stockanalysis",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 4.501,
+            "derived": 2.105,
+            "delta": 2.396,
+            "tolerance": 0.135
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud",
@@ -1595,7 +2885,9 @@
           "filingDate": "2022-06-21",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software",
@@ -1611,7 +2903,9 @@
           "filingDate": "2022-06-21",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Hardware",
@@ -1627,7 +2921,9 @@
           "filingDate": "2022-06-21",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Services",
@@ -1643,7 +2939,9 @@
           "filingDate": "2022-06-21",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1661,26 +2959,105 @@
       "statementCurrency": "USD",
       "revenueBn": 11.445,
       "revenueYoyPct": 17.65,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 3.037,
+      "grossProfitBn": 8.408,
       "sgnaBn": 2.588,
       "rndBn": 2.093,
       "otherOpexBn": 4.141,
       "operatingExpensesBn": 8.822,
       "operatingIncomeBn": 2.623,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
+      "nonOperatingBn": -0.967,
+      "pretaxIncomeBn": 1.656,
       "taxBn": 0.108,
       "netIncomeBn": 1.548,
       "netIncomeYoyPct": -37.0,
-      "grossMarginPct": null,
+      "grossMarginPct": 73.46,
       "operatingMarginPct": 22.92,
       "profitMarginPct": 13.53,
-      "effectiveTaxRatePct": null,
+      "effectiveTaxRatePct": 6.522,
       "revenueQoqPct": -3.328,
-      "grossMarginYoyDeltaPp": null,
+      "grossMarginYoyDeltaPp": -4.92,
       "operatingMarginYoyDeltaPp": -12.31,
       "profitMarginYoyDeltaPp": -11.73,
+      "statementFilingDate": "2022-08-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/orcl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "stockanalysis",
+        "grossProfitBn": "stockanalysis",
+        "grossMarginPct": "stockanalysis",
+        "grossMarginYoyDeltaPp": "stockanalysis",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "stockanalysis",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "stockanalysis",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 2.623,
+            "derived": -0.414,
+            "delta": 3.037,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud",
@@ -1696,7 +3073,9 @@
           "filingDate": "2022-09-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Services",
@@ -1712,7 +3091,9 @@
           "filingDate": "2022-09-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software",
@@ -1728,7 +3109,9 @@
           "filingDate": "2022-09-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Hardware",
@@ -1744,7 +3127,9 @@
           "filingDate": "2022-09-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1762,26 +3147,105 @@
       "statementCurrency": "USD",
       "revenueBn": 12.275,
       "revenueYoyPct": 18.485,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 3.358,
+      "grossProfitBn": 8.917,
       "sgnaBn": 2.582,
       "rndBn": 2.158,
       "otherOpexBn": 4.464,
       "operatingExpensesBn": 9.204,
       "operatingIncomeBn": 3.071,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
+      "nonOperatingBn": -0.927,
+      "pretaxIncomeBn": 2.144,
       "taxBn": 0.403,
       "netIncomeBn": 1.741,
       "netIncomeYoyPct": -239.62,
-      "grossMarginPct": null,
+      "grossMarginPct": 72.64,
       "operatingMarginPct": 25.02,
       "profitMarginPct": 14.18,
-      "effectiveTaxRatePct": null,
+      "effectiveTaxRatePct": 18.797,
       "revenueQoqPct": 7.252,
-      "grossMarginYoyDeltaPp": null,
+      "grossMarginYoyDeltaPp": -6.52,
       "operatingMarginYoyDeltaPp": 32.97,
       "profitMarginYoyDeltaPp": 26.22,
+      "statementFilingDate": "2022-11-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/orcl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "stockanalysis",
+        "grossProfitBn": "stockanalysis",
+        "grossMarginPct": "stockanalysis",
+        "grossMarginYoyDeltaPp": "stockanalysis",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "stockanalysis",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "stockanalysis",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 3.071,
+            "derived": -0.287,
+            "delta": 3.358,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud",
@@ -1797,7 +3261,9 @@
           "filingDate": "2022-12-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software",
@@ -1813,7 +3279,9 @@
           "filingDate": "2022-12-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Services",
@@ -1829,7 +3297,9 @@
           "filingDate": "2022-12-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Hardware",
@@ -1845,7 +3315,9 @@
           "filingDate": "2022-12-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1863,26 +3335,105 @@
       "statementCurrency": "USD",
       "revenueBn": 12.398,
       "revenueYoyPct": 17.93,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 3.439,
+      "grossProfitBn": 8.959,
       "sgnaBn": 2.552,
       "rndBn": 2.146,
       "otherOpexBn": 4.44,
       "operatingExpensesBn": 9.138,
       "operatingIncomeBn": 3.26,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
+      "nonOperatingBn": -1.042,
+      "pretaxIncomeBn": 2.218,
       "taxBn": 0.322,
       "netIncomeBn": 1.896,
       "netIncomeYoyPct": -18.24,
-      "grossMarginPct": null,
+      "grossMarginPct": 72.26,
       "operatingMarginPct": 26.29,
       "profitMarginPct": 15.29,
-      "effectiveTaxRatePct": null,
+      "effectiveTaxRatePct": 14.518,
       "revenueQoqPct": 1.002,
-      "grossMarginYoyDeltaPp": null,
+      "grossMarginYoyDeltaPp": -6.64,
       "operatingMarginYoyDeltaPp": -10.06,
       "profitMarginYoyDeltaPp": -6.77,
+      "statementFilingDate": "2023-02-28",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/orcl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "stockanalysis",
+        "grossProfitBn": "stockanalysis",
+        "grossMarginPct": "stockanalysis",
+        "grossMarginYoyDeltaPp": "stockanalysis",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "stockanalysis",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "stockanalysis",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 3.26,
+            "derived": -0.179,
+            "delta": 3.439,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud",
@@ -1898,7 +3449,9 @@
           "filingDate": "2023-03-10",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Services",
@@ -1914,7 +3467,9 @@
           "filingDate": "2023-03-10",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software",
@@ -1930,7 +3485,9 @@
           "filingDate": "2023-03-10",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Hardware",
@@ -1946,7 +3503,9 @@
           "filingDate": "2023-03-10",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1964,26 +3523,105 @@
       "statementCurrency": "USD",
       "revenueBn": 13.836,
       "revenueYoyPct": 16.868,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 3.73,
+      "grossProfitBn": 10.106,
       "sgnaBn": 2.69,
       "rndBn": 2.226,
       "otherOpexBn": 4.781,
       "operatingExpensesBn": 9.697,
       "operatingIncomeBn": 4.139,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
+      "nonOperatingBn": -1.031,
+      "pretaxIncomeBn": 3.109,
       "taxBn": -0.21,
       "netIncomeBn": 3.318,
       "netIncomeYoyPct": 4.08,
-      "grossMarginPct": null,
+      "grossMarginPct": 73.04,
       "operatingMarginPct": 29.91,
       "profitMarginPct": 23.98,
-      "effectiveTaxRatePct": null,
+      "effectiveTaxRatePct": -6.755,
       "revenueQoqPct": 11.599,
-      "grossMarginYoyDeltaPp": null,
+      "grossMarginYoyDeltaPp": -6.72,
       "operatingMarginYoyDeltaPp": -8.11,
       "profitMarginYoyDeltaPp": -2.95,
+      "statementFilingDate": "2023-05-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/orcl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "stockanalysis",
+        "grossProfitBn": "stockanalysis",
+        "grossMarginPct": "stockanalysis",
+        "grossMarginYoyDeltaPp": "stockanalysis",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "stockanalysis",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "stockanalysis",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 4.139,
+            "derived": 0.409,
+            "delta": 3.73,
+            "tolerance": 0.124
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud",
@@ -1999,7 +3637,9 @@
           "filingDate": "2023-06-20",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software",
@@ -2015,7 +3655,9 @@
           "filingDate": "2023-06-20",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Services",
@@ -2031,7 +3673,9 @@
           "filingDate": "2023-06-20",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Hardware",
@@ -2047,7 +3691,9 @@
           "filingDate": "2023-06-20",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2065,26 +3711,105 @@
       "statementCurrency": "USD",
       "revenueBn": 12.453,
       "revenueYoyPct": 8.807,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 3.61,
+      "grossProfitBn": 8.843,
       "sgnaBn": 2.419,
       "rndBn": 2.216,
       "otherOpexBn": 4.522,
       "operatingExpensesBn": 9.157,
       "operatingIncomeBn": 3.296,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
+      "nonOperatingBn": -0.921,
+      "pretaxIncomeBn": 2.375,
       "taxBn": -0.045,
       "netIncomeBn": 2.42,
       "netIncomeYoyPct": 56.33,
-      "grossMarginPct": null,
+      "grossMarginPct": 71.01,
       "operatingMarginPct": 26.47,
       "profitMarginPct": 19.43,
-      "effectiveTaxRatePct": null,
+      "effectiveTaxRatePct": -1.895,
       "revenueQoqPct": -9.996,
-      "grossMarginYoyDeltaPp": null,
+      "grossMarginYoyDeltaPp": -2.45,
       "operatingMarginYoyDeltaPp": 3.55,
       "profitMarginYoyDeltaPp": 5.9,
+      "statementFilingDate": "2023-08-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/orcl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "stockanalysis",
+        "grossProfitBn": "stockanalysis",
+        "grossMarginPct": "stockanalysis",
+        "grossMarginYoyDeltaPp": "stockanalysis",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "stockanalysis",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "stockanalysis",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 3.296,
+            "derived": -0.314,
+            "delta": 3.61,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud",
@@ -2100,7 +3825,9 @@
           "filingDate": "2023-09-12",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Services",
@@ -2116,7 +3843,9 @@
           "filingDate": "2023-09-12",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software",
@@ -2132,7 +3861,9 @@
           "filingDate": "2023-09-12",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Hardware",
@@ -2148,7 +3879,9 @@
           "filingDate": "2023-09-12",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2166,26 +3899,105 @@
       "statementCurrency": "USD",
       "revenueBn": 12.941,
       "revenueYoyPct": 5.426,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 3.74,
+      "grossProfitBn": 9.201,
       "sgnaBn": 2.468,
       "rndBn": 2.226,
       "otherOpexBn": 4.625,
       "operatingExpensesBn": 9.319,
       "operatingIncomeBn": 3.622,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
+      "nonOperatingBn": -0.902,
+      "pretaxIncomeBn": 2.72,
       "taxBn": 0.217,
       "netIncomeBn": 2.503,
       "netIncomeYoyPct": 43.77,
-      "grossMarginPct": null,
+      "grossMarginPct": 71.1,
       "operatingMarginPct": 27.99,
       "profitMarginPct": 19.34,
-      "effectiveTaxRatePct": null,
+      "effectiveTaxRatePct": 7.978,
       "revenueQoqPct": 3.919,
-      "grossMarginYoyDeltaPp": null,
+      "grossMarginYoyDeltaPp": -1.54,
       "operatingMarginYoyDeltaPp": 2.97,
       "profitMarginYoyDeltaPp": 5.16,
+      "statementFilingDate": "2023-11-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/orcl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "stockanalysis",
+        "grossProfitBn": "stockanalysis",
+        "grossMarginPct": "stockanalysis",
+        "grossMarginYoyDeltaPp": "stockanalysis",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "stockanalysis",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "stockanalysis",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 3.622,
+            "derived": -0.118,
+            "delta": 3.74,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud",
@@ -2201,7 +4013,9 @@
           "filingDate": "2023-12-12",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Services",
@@ -2217,7 +4031,9 @@
           "filingDate": "2023-12-12",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software",
@@ -2233,7 +4049,9 @@
           "filingDate": "2023-12-12",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Hardware",
@@ -2249,7 +4067,9 @@
           "filingDate": "2023-12-12",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2267,26 +4087,105 @@
       "statementCurrency": "USD",
       "revenueBn": 13.28,
       "revenueYoyPct": 7.114,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 3.869,
+      "grossProfitBn": 9.411,
       "sgnaBn": 2.419,
       "rndBn": 2.248,
       "otherOpexBn": 4.863,
       "operatingExpensesBn": 9.53,
       "operatingIncomeBn": 3.75,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
+      "nonOperatingBn": -0.885,
+      "pretaxIncomeBn": 2.865,
       "taxBn": 0.464,
       "netIncomeBn": 2.401,
       "netIncomeYoyPct": 26.64,
-      "grossMarginPct": null,
+      "grossMarginPct": 70.87,
       "operatingMarginPct": 28.24,
       "profitMarginPct": 18.08,
-      "effectiveTaxRatePct": null,
+      "effectiveTaxRatePct": 16.195,
       "revenueQoqPct": 2.62,
-      "grossMarginYoyDeltaPp": null,
+      "grossMarginYoyDeltaPp": -1.39,
       "operatingMarginYoyDeltaPp": 1.95,
       "profitMarginYoyDeltaPp": 2.79,
+      "statementFilingDate": "2024-02-29",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/orcl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "stockanalysis",
+        "grossProfitBn": "stockanalysis",
+        "grossMarginPct": "stockanalysis",
+        "grossMarginYoyDeltaPp": "stockanalysis",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "stockanalysis",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "stockanalysis",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 3.75,
+            "derived": -0.119,
+            "delta": 3.869,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud",
@@ -2302,7 +4201,9 @@
           "filingDate": "2024-03-12",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Services",
@@ -2318,7 +4219,9 @@
           "filingDate": "2024-03-12",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software",
@@ -2334,7 +4237,9 @@
           "filingDate": "2024-03-12",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Hardware",
@@ -2350,7 +4255,9 @@
           "filingDate": "2024-03-12",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2368,26 +4275,105 @@
       "statementCurrency": "USD",
       "revenueBn": 14.287,
       "revenueYoyPct": 3.26,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 3.924,
+      "grossProfitBn": 10.363,
       "sgnaBn": 2.516,
       "rndBn": 2.225,
       "otherOpexBn": 4.861,
       "operatingExpensesBn": 9.602,
       "operatingIncomeBn": 4.685,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
+      "nonOperatingBn": -0.904,
+      "pretaxIncomeBn": 3.782,
       "taxBn": 0.638,
       "netIncomeBn": 3.143,
       "netIncomeYoyPct": -5.27,
-      "grossMarginPct": null,
+      "grossMarginPct": 72.53,
       "operatingMarginPct": 32.79,
       "profitMarginPct": 22.0,
-      "effectiveTaxRatePct": null,
+      "effectiveTaxRatePct": 16.869,
       "revenueQoqPct": 7.583,
-      "grossMarginYoyDeltaPp": null,
+      "grossMarginYoyDeltaPp": -0.51,
       "operatingMarginYoyDeltaPp": 2.88,
       "profitMarginYoyDeltaPp": -1.98,
+      "statementFilingDate": "2024-05-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/orcl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "stockanalysis",
+        "grossProfitBn": "stockanalysis",
+        "grossMarginPct": "stockanalysis",
+        "grossMarginYoyDeltaPp": "stockanalysis",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "stockanalysis",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "stockanalysis",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 4.685,
+            "derived": 0.761,
+            "delta": 3.924,
+            "tolerance": 0.141
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud",
@@ -2403,7 +4389,9 @@
           "filingDate": "2024-06-20",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software",
@@ -2419,7 +4407,9 @@
           "filingDate": "2024-06-20",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Services",
@@ -2435,7 +4425,9 @@
           "filingDate": "2024-06-20",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Hardware",
@@ -2451,7 +4443,9 @@
           "filingDate": "2024-06-20",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2469,26 +4463,105 @@
       "statementCurrency": "USD",
       "revenueBn": 13.307,
       "revenueYoyPct": 6.858,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 3.906,
+      "grossProfitBn": 9.401,
       "sgnaBn": 2.394,
       "rndBn": 2.306,
       "otherOpexBn": 4.616,
       "operatingExpensesBn": 9.316,
       "operatingIncomeBn": 3.991,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
+      "nonOperatingBn": -0.822,
+      "pretaxIncomeBn": 3.169,
       "taxBn": 0.24,
       "netIncomeBn": 2.929,
       "netIncomeYoyPct": 21.03,
-      "grossMarginPct": null,
+      "grossMarginPct": 70.65,
       "operatingMarginPct": 29.99,
       "profitMarginPct": 22.01,
-      "effectiveTaxRatePct": null,
+      "effectiveTaxRatePct": 7.573,
       "revenueQoqPct": -6.859,
-      "grossMarginYoyDeltaPp": null,
+      "grossMarginYoyDeltaPp": -0.36,
       "operatingMarginYoyDeltaPp": 3.52,
       "profitMarginYoyDeltaPp": 2.58,
+      "statementFilingDate": "2024-08-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/orcl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "stockanalysis",
+        "grossProfitBn": "stockanalysis",
+        "grossMarginPct": "stockanalysis",
+        "grossMarginYoyDeltaPp": "stockanalysis",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "stockanalysis",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "stockanalysis",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 3.991,
+            "derived": 0.085,
+            "delta": 3.906,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud",
@@ -2504,7 +4577,9 @@
           "filingDate": "2024-09-10",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Services",
@@ -2520,7 +4595,9 @@
           "filingDate": "2024-09-10",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software",
@@ -2536,7 +4613,9 @@
           "filingDate": "2024-09-10",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Hardware",
@@ -2552,7 +4631,9 @@
           "filingDate": "2024-09-10",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2570,26 +4651,105 @@
       "statementCurrency": "USD",
       "revenueBn": 14.059,
       "revenueYoyPct": 8.639,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 4.085,
+      "grossProfitBn": 9.974,
       "sgnaBn": 2.577,
       "rndBn": 2.471,
       "otherOpexBn": 4.791,
       "operatingExpensesBn": 9.839,
       "operatingIncomeBn": 4.22,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
+      "nonOperatingBn": -0.83,
+      "pretaxIncomeBn": 3.39,
       "taxBn": 0.239,
       "netIncomeBn": 3.151,
       "netIncomeYoyPct": 25.89,
-      "grossMarginPct": null,
+      "grossMarginPct": 70.94,
       "operatingMarginPct": 30.02,
       "profitMarginPct": 22.41,
-      "effectiveTaxRatePct": null,
+      "effectiveTaxRatePct": 7.05,
       "revenueQoqPct": 5.651,
-      "grossMarginYoyDeltaPp": null,
+      "grossMarginYoyDeltaPp": -0.16,
       "operatingMarginYoyDeltaPp": 2.03,
       "profitMarginYoyDeltaPp": 3.07,
+      "statementFilingDate": "2024-11-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/orcl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "stockanalysis",
+        "grossProfitBn": "stockanalysis",
+        "grossMarginPct": "stockanalysis",
+        "grossMarginYoyDeltaPp": "stockanalysis",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "stockanalysis",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "stockanalysis",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 4.22,
+            "derived": 0.135,
+            "delta": 4.085,
+            "tolerance": 0.127
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud",
@@ -2605,7 +4765,9 @@
           "filingDate": "2024-12-10",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Services",
@@ -2621,7 +4783,9 @@
           "filingDate": "2024-12-10",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software",
@@ -2637,7 +4801,9 @@
           "filingDate": "2024-12-10",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Hardware",
@@ -2653,7 +4819,9 @@
           "filingDate": "2024-12-10",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2671,26 +4839,105 @@
       "statementCurrency": "USD",
       "revenueBn": 14.13,
       "revenueYoyPct": 6.401,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 4.195,
+      "grossProfitBn": 9.935,
       "sgnaBn": 2.509,
       "rndBn": 2.429,
       "otherOpexBn": 4.834,
       "operatingExpensesBn": 9.772,
       "operatingIncomeBn": 4.358,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
+      "nonOperatingBn": -0.91,
+      "pretaxIncomeBn": 3.448,
       "taxBn": 0.512,
       "netIncomeBn": 2.936,
       "netIncomeYoyPct": 22.28,
-      "grossMarginPct": null,
+      "grossMarginPct": 70.31,
       "operatingMarginPct": 30.84,
       "profitMarginPct": 20.78,
-      "effectiveTaxRatePct": null,
+      "effectiveTaxRatePct": 14.849,
       "revenueQoqPct": 0.505,
-      "grossMarginYoyDeltaPp": null,
+      "grossMarginYoyDeltaPp": -0.56,
       "operatingMarginYoyDeltaPp": 2.6,
       "profitMarginYoyDeltaPp": 2.7,
+      "statementFilingDate": "2025-02-28",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/orcl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "stockanalysis",
+        "grossProfitBn": "stockanalysis",
+        "grossMarginPct": "stockanalysis",
+        "grossMarginYoyDeltaPp": "stockanalysis",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "stockanalysis",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "stockanalysis",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 4.358,
+            "derived": 0.163,
+            "delta": 4.195,
+            "tolerance": 0.131
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud",
@@ -2706,7 +4953,9 @@
           "filingDate": "2025-03-11",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Services",
@@ -2722,7 +4971,9 @@
           "filingDate": "2025-03-11",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software",
@@ -2738,7 +4989,9 @@
           "filingDate": "2025-03-11",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Hardware",
@@ -2754,7 +5007,9 @@
           "filingDate": "2025-03-11",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2772,26 +5027,105 @@
       "statementCurrency": "USD",
       "revenueBn": 15.903,
       "revenueYoyPct": 11.311,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 4.741,
+      "grossProfitBn": 11.162,
       "sgnaBn": 2.773,
       "rndBn": 2.654,
       "otherOpexBn": 5.367,
       "operatingExpensesBn": 10.794,
       "operatingIncomeBn": 5.109,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
+      "nonOperatingBn": -0.957,
+      "pretaxIncomeBn": 4.152,
       "taxBn": 0.726,
       "netIncomeBn": 3.427,
       "netIncomeYoyPct": 9.04,
-      "grossMarginPct": null,
+      "grossMarginPct": 70.19,
       "operatingMarginPct": 32.13,
       "profitMarginPct": 21.55,
-      "effectiveTaxRatePct": null,
+      "effectiveTaxRatePct": 17.461,
       "revenueQoqPct": 12.548,
-      "grossMarginYoyDeltaPp": null,
+      "grossMarginYoyDeltaPp": -2.34,
       "operatingMarginYoyDeltaPp": -0.66,
       "profitMarginYoyDeltaPp": -0.45,
+      "statementFilingDate": "2025-05-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/orcl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "stockanalysis",
+        "grossProfitBn": "stockanalysis",
+        "grossMarginPct": "stockanalysis",
+        "grossMarginYoyDeltaPp": "stockanalysis",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "stockanalysis",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "stockanalysis",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 5.109,
+            "derived": 0.368,
+            "delta": 4.741,
+            "tolerance": 0.153
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud",
@@ -2807,7 +5141,9 @@
           "filingDate": "2025-06-18",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software",
@@ -2823,7 +5159,9 @@
           "filingDate": "2025-06-18",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Services",
@@ -2839,7 +5177,9 @@
           "filingDate": "2025-06-18",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Hardware",
@@ -2855,7 +5195,9 @@
           "filingDate": "2025-06-18",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2873,26 +5215,105 @@
       "statementCurrency": "USD",
       "revenueBn": 14.926,
       "revenueYoyPct": 12.167,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 4.884,
+      "grossProfitBn": 10.042,
       "sgnaBn": 2.439,
       "rndBn": 2.491,
       "otherOpexBn": 5.719,
       "operatingExpensesBn": 10.649,
       "operatingIncomeBn": 4.277,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
+      "nonOperatingBn": -0.85,
+      "pretaxIncomeBn": 3.427,
       "taxBn": 0.5,
       "netIncomeBn": 2.927,
       "netIncomeYoyPct": -0.07,
-      "grossMarginPct": null,
+      "grossMarginPct": 67.28,
       "operatingMarginPct": 28.65,
       "profitMarginPct": 19.61,
-      "effectiveTaxRatePct": null,
+      "effectiveTaxRatePct": 14.59,
       "revenueQoqPct": -6.143,
-      "grossMarginYoyDeltaPp": null,
+      "grossMarginYoyDeltaPp": -3.37,
       "operatingMarginYoyDeltaPp": -1.34,
       "profitMarginYoyDeltaPp": -2.4,
+      "statementFilingDate": "2025-08-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/orcl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "stockanalysis",
+        "grossProfitBn": "stockanalysis",
+        "grossMarginPct": "stockanalysis",
+        "grossMarginYoyDeltaPp": "stockanalysis",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "stockanalysis",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "stockanalysis",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 4.277,
+            "derived": -0.607,
+            "delta": 4.884,
+            "tolerance": 0.128
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud",
@@ -2908,7 +5329,9 @@
           "filingDate": "2025-09-10",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software",
@@ -2924,7 +5347,9 @@
           "filingDate": "2025-09-10",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Services",
@@ -2940,7 +5365,9 @@
           "filingDate": "2025-09-10",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Hardware",
@@ -2956,7 +5383,9 @@
           "filingDate": "2025-09-10",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2977,7 +5406,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Software",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Cloud applications",
@@ -2994,7 +5425,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Cloud",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Cloud infrastructure",
@@ -3011,7 +5444,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Cloud",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software license",
@@ -3028,7 +5463,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Software",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialRevenueStyle": "oracle-revenue-bridge",
@@ -3044,26 +5481,105 @@
       "statementCurrency": "USD",
       "revenueBn": 16.058,
       "revenueYoyPct": 14.219,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 5.374,
+      "grossProfitBn": 10.684,
       "sgnaBn": 2.558,
       "rndBn": 2.561,
       "otherOpexBn": 6.208,
       "operatingExpensesBn": 11.327,
       "operatingIncomeBn": 4.731,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
+      "nonOperatingBn": 1.611,
+      "pretaxIncomeBn": 6.342,
       "taxBn": 0.207,
       "netIncomeBn": 6.135,
       "netIncomeYoyPct": 94.7,
-      "grossMarginPct": null,
+      "grossMarginPct": 66.53,
       "operatingMarginPct": 29.46,
       "profitMarginPct": 38.21,
-      "effectiveTaxRatePct": null,
+      "effectiveTaxRatePct": 3.264,
       "revenueQoqPct": 7.584,
-      "grossMarginYoyDeltaPp": null,
+      "grossMarginYoyDeltaPp": -4.41,
       "operatingMarginYoyDeltaPp": -0.56,
       "profitMarginYoyDeltaPp": 15.8,
+      "statementFilingDate": "2025-11-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/orcl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "stockanalysis",
+        "grossProfitBn": "stockanalysis",
+        "grossMarginPct": "stockanalysis",
+        "grossMarginYoyDeltaPp": "stockanalysis",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "stockanalysis",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "stockanalysis",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 4.731,
+            "derived": -0.643,
+            "delta": 5.374,
+            "tolerance": 0.142
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud",
@@ -3079,7 +5595,9 @@
           "filingDate": "2025-12-11",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software",
@@ -3095,7 +5613,9 @@
           "filingDate": "2025-12-11",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Services",
@@ -3111,7 +5631,9 @@
           "filingDate": "2025-12-11",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Hardware",
@@ -3127,7 +5649,9 @@
           "filingDate": "2025-12-11",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -3148,7 +5672,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Software",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Cloud infrastructure",
@@ -3165,7 +5691,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Cloud",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Cloud applications",
@@ -3182,7 +5710,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Cloud",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software license",
@@ -3199,7 +5729,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Software",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialRevenueStyle": "oracle-revenue-bridge",
@@ -3215,26 +5747,105 @@
       "statementCurrency": "USD",
       "revenueBn": 17.19,
       "revenueYoyPct": 21.656,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 6.092,
+      "grossProfitBn": 11.098,
       "sgnaBn": 2.441,
       "rndBn": 2.607,
       "otherOpexBn": 6.678,
       "operatingExpensesBn": 11.726,
       "operatingIncomeBn": 5.464,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
+      "nonOperatingBn": -1.048,
+      "pretaxIncomeBn": 4.416,
       "taxBn": 0.695,
       "netIncomeBn": 3.721,
       "netIncomeYoyPct": 26.74,
-      "grossMarginPct": null,
+      "grossMarginPct": 64.56,
       "operatingMarginPct": 31.79,
       "profitMarginPct": 21.65,
-      "effectiveTaxRatePct": null,
+      "effectiveTaxRatePct": 15.738,
       "revenueQoqPct": 7.049,
-      "grossMarginYoyDeltaPp": null,
+      "grossMarginYoyDeltaPp": -5.75,
       "operatingMarginYoyDeltaPp": 0.95,
       "profitMarginYoyDeltaPp": 0.87,
+      "statementFilingDate": "2026-02-28",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/orcl/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "stockanalysis",
+        "grossProfitBn": "stockanalysis",
+        "grossMarginPct": "stockanalysis",
+        "grossMarginYoyDeltaPp": "stockanalysis",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "stockanalysis",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "stockanalysis",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 5.464,
+            "derived": -0.628,
+            "delta": 6.092,
+            "tolerance": 0.164
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Cloud",
@@ -3250,7 +5861,9 @@
           "filingDate": "2026-03-11",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software",
@@ -3266,7 +5879,9 @@
           "filingDate": "2026-03-11",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Services",
@@ -3282,7 +5897,9 @@
           "filingDate": "2026-03-11",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Hardware",
@@ -3298,7 +5915,9 @@
           "filingDate": "2026-03-11",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -3319,7 +5938,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Software",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Cloud infrastructure",
@@ -3336,7 +5957,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Cloud",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Cloud applications",
@@ -3353,7 +5976,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Cloud",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Software license",
@@ -3370,7 +5995,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Software",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialRevenueStyle": "oracle-revenue-bridge",
@@ -3378,7 +6005,7 @@
       "displayScaleFactor": 1
     }
   },
-  "statementSource": "official-sec-companyfacts",
+  "statementSource": "official-sec-companyfacts+field-reconciled",
   "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001341439.json",
   "reportingCurrency": "USD",
   "cik": 1341439,
@@ -3598,7 +6225,9 @@
             "filingDate": "2019-03-18",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Software",
@@ -3614,7 +6243,9 @@
             "filingDate": "2019-03-18",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Hardware",
@@ -3630,7 +6261,9 @@
             "filingDate": "2019-03-18",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Services",
@@ -3646,7 +6279,9 @@
             "filingDate": "2019-03-18",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "style": "oracle-revenue-bridge"
@@ -3667,7 +6302,9 @@
             "filingDate": "2019-09-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Hardware",
@@ -3683,7 +6320,9 @@
             "filingDate": "2019-09-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Software",
@@ -3699,7 +6338,9 @@
             "filingDate": "2019-09-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Services",
@@ -3715,7 +6356,9 @@
             "filingDate": "2019-09-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "style": "oracle-revenue-bridge"
@@ -3736,7 +6379,9 @@
             "filingDate": "2019-12-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Software",
@@ -3752,7 +6397,9 @@
             "filingDate": "2019-12-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Hardware",
@@ -3768,7 +6415,9 @@
             "filingDate": "2019-12-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Services",
@@ -3784,7 +6433,9 @@
             "filingDate": "2019-12-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "style": "oracle-revenue-bridge"
@@ -3805,7 +6456,9 @@
             "filingDate": "2020-03-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Software",
@@ -3821,7 +6474,9 @@
             "filingDate": "2020-03-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Hardware",
@@ -3837,7 +6492,9 @@
             "filingDate": "2020-03-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Services",
@@ -3853,7 +6510,9 @@
             "filingDate": "2020-03-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "style": "oracle-revenue-bridge"
@@ -3874,7 +6533,9 @@
             "filingDate": "2020-06-22",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Software",
@@ -3890,7 +6551,9 @@
             "filingDate": "2020-06-22",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Hardware",
@@ -3906,7 +6569,9 @@
             "filingDate": "2020-06-22",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Services",
@@ -3922,7 +6587,9 @@
             "filingDate": "2020-06-22",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "style": "oracle-revenue-bridge"
@@ -3943,7 +6610,9 @@
             "filingDate": "2020-09-15",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Software",
@@ -3959,7 +6628,9 @@
             "filingDate": "2020-09-15",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Hardware",
@@ -3975,7 +6646,9 @@
             "filingDate": "2020-09-15",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Services",
@@ -3991,7 +6664,9 @@
             "filingDate": "2020-09-15",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "style": "oracle-revenue-bridge"
@@ -4012,7 +6687,9 @@
             "filingDate": "2020-12-11",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Software",
@@ -4028,7 +6705,9 @@
             "filingDate": "2020-12-11",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Hardware",
@@ -4044,7 +6723,9 @@
             "filingDate": "2020-12-11",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Services",
@@ -4060,7 +6741,9 @@
             "filingDate": "2020-12-11",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "style": "oracle-revenue-bridge"
@@ -4081,7 +6764,9 @@
             "filingDate": "2021-03-11",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Software",
@@ -4097,7 +6782,9 @@
             "filingDate": "2021-03-11",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Hardware",
@@ -4113,7 +6800,9 @@
             "filingDate": "2021-03-11",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Services",
@@ -4129,7 +6818,9 @@
             "filingDate": "2021-03-11",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "style": "oracle-revenue-bridge"
@@ -4150,7 +6841,9 @@
             "filingDate": "2021-06-21",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Software",
@@ -4166,7 +6859,9 @@
             "filingDate": "2021-06-21",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Hardware",
@@ -4182,7 +6877,9 @@
             "filingDate": "2021-06-21",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Services",
@@ -4198,7 +6895,9 @@
             "filingDate": "2021-06-21",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "style": "oracle-revenue-bridge"
@@ -4219,7 +6918,9 @@
             "filingDate": "2021-09-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Software",
@@ -4235,7 +6936,9 @@
             "filingDate": "2021-09-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Hardware",
@@ -4251,7 +6954,9 @@
             "filingDate": "2021-09-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Services",
@@ -4267,7 +6972,9 @@
             "filingDate": "2021-09-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "style": "oracle-revenue-bridge"
@@ -4288,7 +6995,9 @@
             "filingDate": "2021-12-10",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Software",
@@ -4304,7 +7013,9 @@
             "filingDate": "2021-12-10",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Hardware",
@@ -4320,7 +7031,9 @@
             "filingDate": "2021-12-10",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Services",
@@ -4336,7 +7049,9 @@
             "filingDate": "2021-12-10",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "style": "oracle-revenue-bridge"
@@ -4357,7 +7072,9 @@
             "filingDate": "2022-03-11",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Software",
@@ -4373,7 +7090,9 @@
             "filingDate": "2022-03-11",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Hardware",
@@ -4389,7 +7108,9 @@
             "filingDate": "2022-03-11",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Services",
@@ -4405,7 +7126,9 @@
             "filingDate": "2022-03-11",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "style": "oracle-revenue-bridge"
@@ -4426,7 +7149,9 @@
             "filingDate": "2022-06-21",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Software",
@@ -4442,7 +7167,9 @@
             "filingDate": "2022-06-21",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Hardware",
@@ -4458,7 +7185,9 @@
             "filingDate": "2022-06-21",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Services",
@@ -4474,7 +7203,9 @@
             "filingDate": "2022-06-21",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "style": "oracle-revenue-bridge"
@@ -4495,7 +7226,9 @@
             "filingDate": "2022-09-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Services",
@@ -4511,7 +7244,9 @@
             "filingDate": "2022-09-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Software",
@@ -4527,7 +7262,9 @@
             "filingDate": "2022-09-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Hardware",
@@ -4543,7 +7280,9 @@
             "filingDate": "2022-09-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "style": "oracle-revenue-bridge"
@@ -4564,7 +7303,9 @@
             "filingDate": "2022-12-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Software",
@@ -4580,7 +7321,9 @@
             "filingDate": "2022-12-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Services",
@@ -4596,7 +7339,9 @@
             "filingDate": "2022-12-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Hardware",
@@ -4612,7 +7357,9 @@
             "filingDate": "2022-12-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "style": "oracle-revenue-bridge"
@@ -4633,7 +7380,9 @@
             "filingDate": "2023-03-10",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Services",
@@ -4649,7 +7398,9 @@
             "filingDate": "2023-03-10",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Software",
@@ -4665,7 +7416,9 @@
             "filingDate": "2023-03-10",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Hardware",
@@ -4681,7 +7434,9 @@
             "filingDate": "2023-03-10",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "style": "oracle-revenue-bridge"
@@ -4702,7 +7457,9 @@
             "filingDate": "2023-06-20",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Software",
@@ -4718,7 +7475,9 @@
             "filingDate": "2023-06-20",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Services",
@@ -4734,7 +7493,9 @@
             "filingDate": "2023-06-20",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Hardware",
@@ -4750,7 +7511,9 @@
             "filingDate": "2023-06-20",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "style": "oracle-revenue-bridge"
@@ -4771,7 +7534,9 @@
             "filingDate": "2023-09-12",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Services",
@@ -4787,7 +7552,9 @@
             "filingDate": "2023-09-12",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Software",
@@ -4803,7 +7570,9 @@
             "filingDate": "2023-09-12",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Hardware",
@@ -4819,7 +7588,9 @@
             "filingDate": "2023-09-12",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "style": "oracle-revenue-bridge"
@@ -4840,7 +7611,9 @@
             "filingDate": "2023-12-12",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Services",
@@ -4856,7 +7629,9 @@
             "filingDate": "2023-12-12",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Software",
@@ -4872,7 +7647,9 @@
             "filingDate": "2023-12-12",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Hardware",
@@ -4888,7 +7665,9 @@
             "filingDate": "2023-12-12",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "style": "oracle-revenue-bridge"
@@ -4909,7 +7688,9 @@
             "filingDate": "2024-03-12",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Services",
@@ -4925,7 +7706,9 @@
             "filingDate": "2024-03-12",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Software",
@@ -4941,7 +7724,9 @@
             "filingDate": "2024-03-12",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Hardware",
@@ -4957,7 +7742,9 @@
             "filingDate": "2024-03-12",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "style": "oracle-revenue-bridge"
@@ -4978,7 +7765,9 @@
             "filingDate": "2024-06-20",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Software",
@@ -4994,7 +7783,9 @@
             "filingDate": "2024-06-20",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Services",
@@ -5010,7 +7801,9 @@
             "filingDate": "2024-06-20",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Hardware",
@@ -5026,7 +7819,9 @@
             "filingDate": "2024-06-20",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "style": "oracle-revenue-bridge"
@@ -5047,7 +7842,9 @@
             "filingDate": "2024-09-10",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Services",
@@ -5063,7 +7860,9 @@
             "filingDate": "2024-09-10",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Software",
@@ -5079,7 +7878,9 @@
             "filingDate": "2024-09-10",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Hardware",
@@ -5095,7 +7896,9 @@
             "filingDate": "2024-09-10",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "style": "oracle-revenue-bridge"
@@ -5116,7 +7919,9 @@
             "filingDate": "2024-12-10",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Services",
@@ -5132,7 +7937,9 @@
             "filingDate": "2024-12-10",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Software",
@@ -5148,7 +7955,9 @@
             "filingDate": "2024-12-10",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Hardware",
@@ -5164,7 +7973,9 @@
             "filingDate": "2024-12-10",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "style": "oracle-revenue-bridge"
@@ -5185,7 +7996,9 @@
             "filingDate": "2025-03-11",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Services",
@@ -5201,7 +8014,9 @@
             "filingDate": "2025-03-11",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Software",
@@ -5217,7 +8032,9 @@
             "filingDate": "2025-03-11",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Hardware",
@@ -5233,7 +8050,9 @@
             "filingDate": "2025-03-11",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "style": "oracle-revenue-bridge"
@@ -5254,7 +8073,9 @@
             "filingDate": "2025-06-18",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Software",
@@ -5270,7 +8091,9 @@
             "filingDate": "2025-06-18",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Services",
@@ -5286,7 +8109,9 @@
             "filingDate": "2025-06-18",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Hardware",
@@ -5302,7 +8127,9 @@
             "filingDate": "2025-06-18",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "style": "oracle-revenue-bridge"
@@ -5323,7 +8150,9 @@
             "filingDate": "2025-09-10",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Software",
@@ -5339,7 +8168,9 @@
             "filingDate": "2025-09-10",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Services",
@@ -5355,7 +8186,9 @@
             "filingDate": "2025-09-10",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Hardware",
@@ -5371,7 +8204,9 @@
             "filingDate": "2025-09-10",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -5430,7 +8265,9 @@
             "filingDate": "2025-12-11",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Software",
@@ -5446,7 +8283,9 @@
             "filingDate": "2025-12-11",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Services",
@@ -5462,7 +8301,9 @@
             "filingDate": "2025-12-11",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Hardware",
@@ -5478,7 +8319,9 @@
             "filingDate": "2025-12-11",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -5537,7 +8380,9 @@
             "filingDate": "2026-03-11",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Software",
@@ -5553,7 +8398,9 @@
             "filingDate": "2026-03-11",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Services",
@@ -5569,7 +8416,9 @@
             "filingDate": "2026-03-11",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Hardware",
@@ -5585,7 +8434,9 @@
             "filingDate": "2026-03-11",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -5836,12 +8687,195 @@
     ],
     "errors": []
   },
+  "parserDiagnostics": {
+    "version": "universal-parser-v3",
+    "financials": {
+      "basePreferredOrder": [
+        "official",
+        "stockanalysis"
+      ],
+      "preferredOrder": [
+        "official",
+        "stockanalysis"
+      ],
+      "selectedSource": "official",
+      "attempts": [
+        {
+          "layer": "financials",
+          "source_id": "official",
+          "status": "success",
+          "selected": true,
+          "reason": "",
+          "quarter_count": 33,
+          "latest_quarter": "2026Q1",
+          "error": ""
+        },
+        {
+          "layer": "financials",
+          "source_id": "stockanalysis",
+          "status": "success",
+          "selected": false,
+          "reason": "",
+          "quarter_count": 20,
+          "latest_quarter": "2026Q1",
+          "error": ""
+        }
+      ],
+      "reconciliation": {
+        "version": "financial-reconciler-v1",
+        "primarySource": "official",
+        "quarterCount": 33,
+        "fieldOverrideCount": 135,
+        "derivedFieldCount": 1,
+        "mixedSourceQuarterCount": 20,
+        "sourceUsageCounts": {
+          "official": 496,
+          "stockanalysis": 135
+        }
+      },
+      "validation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "quarterCount": 33,
+        "validatedQuarterCount": 33,
+        "issueCount": 25,
+        "mismatchQuarterCount": 23,
+        "highConfidenceQuarterCount": 23,
+        "averageConfidenceScore": 0.8949,
+        "latestQuarter": "2026Q1",
+        "latestQuarterConfidenceScore": 0.9438,
+        "latestQuarterIssueCount": 1
+      }
+    },
+    "segments": {
+      "selectedSource": "official-segments",
+      "attempts": [
+        {
+          "layer": "segments",
+          "source_id": "official-segments",
+          "status": "success",
+          "selected": true,
+          "reason": "",
+          "quarter_count": 31,
+          "latest_quarter": "2026Q1",
+          "error": ""
+        }
+      ]
+    },
+    "revenueStructures": {
+      "selectedSource": "official-revenue-structures",
+      "attempts": [
+        {
+          "layer": "revenue-structures",
+          "source_id": "official-revenue-structures",
+          "status": "success",
+          "selected": true,
+          "reason": "",
+          "quarter_count": 28,
+          "latest_quarter": "2026Q1",
+          "error": ""
+        }
+      ]
+    },
+    "summary": {
+      "financialQuarterCount": 33,
+      "segmentQuarterCount": 31,
+      "revenueStructureQuarterCount": 28
+    },
+    "validation": {
+      "version": "parser-validation-v1",
+      "status": "high",
+      "overallConfidenceScore": 0.9317,
+      "financialConfidenceScore": 0.8949,
+      "structuralConfidenceScore": 1.0,
+      "revenueSegmentChecks": 31,
+      "revenueSegmentMismatchCount": 0,
+      "revenueSegmentSkippedChecks": 0,
+      "detailGroupChecks": 6,
+      "detailGroupMismatchCount": 0,
+      "detailGroupSkippedChecks": 0,
+      "opexChecks": 0,
+      "opexSkippedChecks": 0,
+      "opexOverflowMismatchCount": 0,
+      "warningCount": 0,
+      "warnings": []
+    }
+  },
   "statementPresets": {},
   "coverage": {
     "quarterCount": 33,
     "pixelReplicaQuarterCount": 0,
     "hasPixelReplica": false,
     "officialFinancialQuarterCount": 33,
-    "officialSegmentQuarterCount": 31
+    "officialSegmentQuarterCount": 31,
+    "officialExpenseQuarterCount": 0,
+    "classification": {
+      "status": "ok",
+      "latestQuarter": "2026Q1",
+      "latestQuarterHasRevenueClassification": true,
+      "latestQuarterHasExpenseClassification": false,
+      "latestRevenueClassificationQuarter": "2026Q1",
+      "latestExpenseClassificationQuarter": null,
+      "latestStructureHistoryQuarter": "2026Q1",
+      "revenueClassificationQuarterCount": 31,
+      "expenseClassificationQuarterCount": 0,
+      "revenueClassificationCoverageRatio": 0.9394,
+      "expenseClassificationCoverageRatio": 0.0,
+      "latestRevenueClassificationLagQuarters": 0,
+      "latestExpenseClassificationLagQuarters": null,
+      "warnings": [],
+      "blockers": [],
+      "policy": {}
+    },
+    "parser": {
+      "version": "universal-parser-v3",
+      "selectedFinancialSource": "official",
+      "selectedSegmentSource": "official-segments",
+      "selectedRevenueStructureSource": "official-revenue-structures",
+      "financialAttemptCount": 2,
+      "financialReconciliation": {
+        "version": "financial-reconciler-v1",
+        "primarySource": "official",
+        "quarterCount": 33,
+        "fieldOverrideCount": 135,
+        "derivedFieldCount": 1,
+        "mixedSourceQuarterCount": 20,
+        "sourceUsageCounts": {
+          "official": 496,
+          "stockanalysis": 135
+        }
+      },
+      "financialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "quarterCount": 33,
+        "validatedQuarterCount": 33,
+        "issueCount": 25,
+        "mismatchQuarterCount": 23,
+        "highConfidenceQuarterCount": 23,
+        "averageConfidenceScore": 0.8949,
+        "latestQuarter": "2026Q1",
+        "latestQuarterConfidenceScore": 0.9438,
+        "latestQuarterIssueCount": 1
+      },
+      "validation": {
+        "version": "parser-validation-v1",
+        "status": "high",
+        "overallConfidenceScore": 0.9317,
+        "financialConfidenceScore": 0.8949,
+        "structuralConfidenceScore": 1.0,
+        "revenueSegmentChecks": 31,
+        "revenueSegmentMismatchCount": 0,
+        "revenueSegmentSkippedChecks": 0,
+        "detailGroupChecks": 6,
+        "detailGroupMismatchCount": 0,
+        "detailGroupSkippedChecks": 0,
+        "opexChecks": 0,
+        "opexSkippedChecks": 0,
+        "opexOverflowMismatchCount": 0,
+        "warningCount": 0,
+        "warnings": []
+      }
+    }
   }
 }

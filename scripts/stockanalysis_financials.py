@@ -286,7 +286,8 @@ def fetch_stockanalysis_financial_history(company: dict[str, Any], refresh: bool
         return _load_cached_json(cache_path)
 
     ticker = str(company.get("financialTicker") or company["ticker"]).lower()
-    source_url = f"https://stockanalysis.com/stocks/{ticker}/financials/?{urlencode({'p': 'quarterly'})}"
+    financial_path = str(company.get("financialPath") or f"stocks/{ticker}").strip().strip("/")
+    source_url = f"https://stockanalysis.com/{financial_path}/financials/?{urlencode({'p': 'quarterly'})}"
     html_text, table = _load_table(source_url)
     currency = _parse_currency(html_text)
     row_map_value = _row_map(table)

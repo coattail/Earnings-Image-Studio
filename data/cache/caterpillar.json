@@ -75,6 +75,75 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 0,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 2.108,
+            "derived": -7.167,
+            "delta": 9.275,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -90,7 +159,11 @@
           "filingDate": "2020-02-19",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -106,13 +179,15 @@
           "filingDate": "2020-02-19",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2018Q2": {
       "calendarQuarter": "2018Q2",
@@ -143,6 +218,76 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 2.167,
+            "derived": -7.987,
+            "delta": 10.154,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -158,7 +303,11 @@
           "filingDate": "2020-02-19",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -174,13 +323,15 @@
           "filingDate": "2020-02-19",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2018Q3": {
       "calendarQuarter": "2018Q3",
@@ -211,6 +362,85 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.8875,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.75,
+        "checksRun": 8,
+        "checksPassed": 6,
+        "issueCount": 2,
+        "issues": [
+          {
+            "code": "revenue-minus-cost-equals-gross",
+            "severity": "warning",
+            "message": "grossProfitBn does not reconcile with revenueBn and costOfRevenueBn.",
+            "expected": 3.741,
+            "derived": 4.488,
+            "delta": -0.747,
+            "tolerance": 0.12
+          },
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 2.135,
+            "derived": -7.634,
+            "delta": 9.769,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -226,7 +456,11 @@
           "filingDate": "2020-02-19",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -242,13 +476,15 @@
           "filingDate": "2020-02-19",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2018Q4": {
       "calendarQuarter": "2018Q4",
@@ -279,6 +515,85 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.8875,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.75,
+        "checksRun": 8,
+        "checksPassed": 6,
+        "issueCount": 2,
+        "issues": [
+          {
+            "code": "revenue-minus-cost-equals-gross",
+            "severity": "warning",
+            "message": "grossProfitBn does not reconcile with revenueBn and costOfRevenueBn.",
+            "expected": 3.643,
+            "derived": 4.355,
+            "delta": -0.712,
+            "tolerance": 0.12
+          },
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 1.883,
+            "derived": -8.816,
+            "delta": 10.699,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -294,7 +609,11 @@
           "filingDate": "2020-02-19",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -310,13 +629,15 @@
           "filingDate": "2020-02-19",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2019Q1": {
       "calendarQuarter": "2019Q1",
@@ -347,6 +668,90 @@
       "grossMarginYoyDeltaPp": -1.87,
       "operatingMarginYoyDeltaPp": -0.96,
       "profitMarginYoyDeltaPp": 0.27,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.8875,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.75,
+        "checksRun": 8,
+        "checksPassed": 6,
+        "issueCount": 2,
+        "issues": [
+          {
+            "code": "revenue-minus-cost-equals-gross",
+            "severity": "warning",
+            "message": "grossProfitBn does not reconcile with revenueBn and costOfRevenueBn.",
+            "expected": 3.721,
+            "derived": 4.463,
+            "delta": -0.742,
+            "tolerance": 0.12
+          },
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 2.207,
+            "derived": -7.538,
+            "delta": 9.745,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -362,7 +767,11 @@
           "filingDate": "2020-05-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -378,13 +787,15 @@
           "filingDate": "2020-05-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2019Q2": {
       "calendarQuarter": "2019Q2",
@@ -415,6 +826,90 @@
       "grossMarginYoyDeltaPp": -3.2,
       "operatingMarginYoyDeltaPp": -0.99,
       "profitMarginYoyDeltaPp": -1.62,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.8875,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.75,
+        "checksRun": 8,
+        "checksPassed": 6,
+        "issueCount": 2,
+        "issues": [
+          {
+            "code": "revenue-minus-cost-equals-gross",
+            "severity": "warning",
+            "message": "grossProfitBn does not reconcile with revenueBn and costOfRevenueBn.",
+            "expected": 3.73,
+            "derived": 4.491,
+            "delta": -0.761,
+            "tolerance": 0.12
+          },
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 2.213,
+            "derived": -8.489,
+            "delta": 10.702,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -430,7 +925,11 @@
           "filingDate": "2020-08-05",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -446,13 +945,15 @@
           "filingDate": "2020-08-05",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2019Q3": {
       "calendarQuarter": "2019Q3",
@@ -483,6 +984,90 @@
       "grossMarginYoyDeltaPp": -1.0,
       "operatingMarginYoyDeltaPp": 0.03,
       "profitMarginYoyDeltaPp": -1.07,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.8875,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.75,
+        "checksRun": 8,
+        "checksPassed": 6,
+        "issueCount": 2,
+        "issues": [
+          {
+            "code": "revenue-minus-cost-equals-gross",
+            "severity": "warning",
+            "message": "grossProfitBn does not reconcile with revenueBn and costOfRevenueBn.",
+            "expected": 3.405,
+            "derived": 4.189,
+            "delta": -0.784,
+            "tolerance": 0.12
+          },
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 2.02,
+            "derived": -7.333,
+            "delta": 9.353,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -498,7 +1083,11 @@
           "filingDate": "2020-11-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -514,13 +1103,15 @@
           "filingDate": "2020-11-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2019Q4": {
       "calendarQuarter": "2019Q4",
@@ -551,6 +1142,90 @@
       "grossMarginYoyDeltaPp": -0.53,
       "operatingMarginYoyDeltaPp": 0.94,
       "profitMarginYoyDeltaPp": 1.04,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.8875,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.75,
+        "checksRun": 8,
+        "checksPassed": 6,
+        "issueCount": 2,
+        "issues": [
+          {
+            "code": "revenue-minus-cost-equals-gross",
+            "severity": "warning",
+            "message": "grossProfitBn does not reconcile with revenueBn and costOfRevenueBn.",
+            "expected": 3.269,
+            "derived": 4.027,
+            "delta": -0.758,
+            "tolerance": 0.12
+          },
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 1.85,
+            "derived": -8.025,
+            "delta": 9.875,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -566,7 +1241,11 @@
           "filingDate": "2020-02-19",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -582,13 +1261,15 @@
           "filingDate": "2020-02-19",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2020Q1": {
       "calendarQuarter": "2020Q1",
@@ -619,6 +1300,90 @@
       "grossMarginYoyDeltaPp": -2.73,
       "operatingMarginYoyDeltaPp": -3.19,
       "profitMarginYoyDeltaPp": -3.71,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.8875,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.75,
+        "checksRun": 8,
+        "checksPassed": 6,
+        "issueCount": 2,
+        "issues": [
+          {
+            "code": "revenue-minus-cost-equals-gross",
+            "severity": "warning",
+            "message": "grossProfitBn does not reconcile with revenueBn and costOfRevenueBn.",
+            "expected": 2.648,
+            "derived": 3.369,
+            "delta": -0.721,
+            "tolerance": 0.12
+          },
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 1.404,
+            "derived": -6.583,
+            "delta": 7.987,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -634,7 +1399,11 @@
           "filingDate": "2020-05-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -650,13 +1419,15 @@
           "filingDate": "2020-05-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2020Q2": {
       "calendarQuarter": "2020Q2",
@@ -687,6 +1458,90 @@
       "grossMarginYoyDeltaPp": -3.87,
       "operatingMarginYoyDeltaPp": -7.49,
       "profitMarginYoyDeltaPp": -6.63,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.8875,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.75,
+        "checksRun": 8,
+        "checksPassed": 6,
+        "issueCount": 2,
+        "issues": [
+          {
+            "code": "revenue-minus-cost-equals-gross",
+            "severity": "warning",
+            "message": "grossProfitBn does not reconcile with revenueBn and costOfRevenueBn.",
+            "expected": 2.197,
+            "derived": 2.884,
+            "delta": -0.687,
+            "tolerance": 0.12
+          },
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 0.784,
+            "derived": -7.016,
+            "delta": 7.8,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -702,7 +1557,11 @@
           "filingDate": "2020-08-05",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -718,13 +1577,15 @@
           "filingDate": "2020-08-05",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2020Q3": {
       "calendarQuarter": "2020Q3",
@@ -755,6 +1616,90 @@
       "grossMarginYoyDeltaPp": -3.32,
       "operatingMarginYoyDeltaPp": -5.86,
       "profitMarginYoyDeltaPp": -4.92,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.8875,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.75,
+        "checksRun": 8,
+        "checksPassed": 6,
+        "issueCount": 2,
+        "issues": [
+          {
+            "code": "revenue-minus-cost-equals-gross",
+            "severity": "warning",
+            "message": "grossProfitBn does not reconcile with revenueBn and costOfRevenueBn.",
+            "expected": 2.309,
+            "derived": 2.962,
+            "delta": -0.653,
+            "tolerance": 0.12
+          },
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 0.985,
+            "derived": -6.587,
+            "delta": 7.572,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -770,7 +1715,11 @@
           "filingDate": "2020-11-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -786,13 +1735,15 @@
           "filingDate": "2020-11-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2020Q4": {
       "calendarQuarter": "2020Q4",
@@ -823,6 +1774,90 @@
       "grossMarginYoyDeltaPp": -0.07,
       "operatingMarginYoyDeltaPp": -1.79,
       "profitMarginYoyDeltaPp": -1.41,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.8875,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.75,
+        "checksRun": 8,
+        "checksPassed": 6,
+        "issueCount": 2,
+        "issues": [
+          {
+            "code": "revenue-minus-cost-equals-gross",
+            "severity": "warning",
+            "message": "grossProfitBn does not reconcile with revenueBn and costOfRevenueBn.",
+            "expected": 2.786,
+            "derived": 3.451,
+            "delta": -0.665,
+            "tolerance": 0.12
+          },
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 1.38,
+            "derived": -7.069,
+            "delta": 8.449,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -838,7 +1873,11 @@
           "filingDate": "2021-02-17",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -854,13 +1893,15 @@
           "filingDate": "2021-02-17",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2021Q1": {
       "calendarQuarter": "2021Q1",
@@ -891,6 +1932,85 @@
       "grossMarginYoyDeltaPp": 7.7,
       "operatingMarginYoyDeltaPp": 2.06,
       "profitMarginYoyDeltaPp": 2.6,
+      "statementFilingDate": "2021-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cat/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 1.814,
+            "derived": -6.198,
+            "delta": 8.012,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -906,7 +2026,11 @@
           "filingDate": "2021-05-05",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -922,13 +2046,15 @@
           "filingDate": "2021-05-05",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2021Q2": {
       "calendarQuarter": "2021Q2",
@@ -959,6 +2085,85 @@
       "grossMarginYoyDeltaPp": 9.12,
       "operatingMarginYoyDeltaPp": 6.04,
       "profitMarginYoyDeltaPp": 6.38,
+      "statementFilingDate": "2021-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cat/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 1.789,
+            "derived": -7.092,
+            "delta": 8.881,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -974,7 +2179,11 @@
           "filingDate": "2021-08-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -990,13 +2199,15 @@
           "filingDate": "2021-08-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2021Q3": {
       "calendarQuarter": "2021Q3",
@@ -1027,6 +2238,85 @@
       "grossMarginYoyDeltaPp": 7.12,
       "operatingMarginYoyDeltaPp": 3.45,
       "profitMarginYoyDeltaPp": 4.73,
+      "statementFilingDate": "2021-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cat/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 1.664,
+            "derived": -6.953,
+            "delta": 8.617,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -1042,7 +2332,11 @@
           "filingDate": "2021-11-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -1058,13 +2352,15 @@
           "filingDate": "2021-11-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2021Q4": {
       "calendarQuarter": "2021Q4",
@@ -1095,6 +2391,85 @@
       "grossMarginYoyDeltaPp": 2.7,
       "operatingMarginYoyDeltaPp": -0.6,
       "profitMarginYoyDeltaPp": 8.42,
+      "statementFilingDate": "2021-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cat/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 1.611,
+            "derived": -8.392,
+            "delta": 10.003,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -1110,7 +2485,11 @@
           "filingDate": "2022-02-16",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -1126,13 +2505,15 @@
           "filingDate": "2022-02-16",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2022Q1": {
       "calendarQuarter": "2022Q1",
@@ -1163,6 +2544,85 @@
       "grossMarginYoyDeltaPp": -2.94,
       "operatingMarginYoyDeltaPp": -1.61,
       "profitMarginYoyDeltaPp": -1.57,
+      "statementFilingDate": "2022-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cat/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 1.855,
+            "derived": -7.704,
+            "delta": 9.559,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -1178,7 +2638,11 @@
           "filingDate": "2022-05-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -1194,13 +2658,15 @@
           "filingDate": "2022-05-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2022Q2": {
       "calendarQuarter": "2022Q2",
@@ -1231,6 +2697,85 @@
       "grossMarginYoyDeltaPp": -1.11,
       "operatingMarginYoyDeltaPp": -0.24,
       "profitMarginYoyDeltaPp": 0.77,
+      "statementFilingDate": "2022-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cat/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 1.944,
+            "derived": -8.031,
+            "delta": 9.975,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -1246,7 +2791,11 @@
           "filingDate": "2022-08-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -1262,13 +2811,15 @@
           "filingDate": "2022-08-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2022Q3": {
       "calendarQuarter": "2022Q3",
@@ -1299,6 +2850,85 @@
       "grossMarginYoyDeltaPp": 1.47,
       "operatingMarginYoyDeltaPp": 2.75,
       "profitMarginYoyDeltaPp": 2.09,
+      "statementFilingDate": "2022-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cat/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 2.425,
+            "derived": -7.777,
+            "delta": 10.202,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -1314,7 +2944,11 @@
           "filingDate": "2022-11-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -1330,13 +2964,15 @@
           "filingDate": "2022-11-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2022Q4": {
       "calendarQuarter": "2022Q4",
@@ -1367,6 +3003,85 @@
       "grossMarginYoyDeltaPp": 2.52,
       "operatingMarginYoyDeltaPp": -1.56,
       "profitMarginYoyDeltaPp": -6.6,
+      "statementFilingDate": "2022-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cat/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 1.68,
+            "derived": -9.934,
+            "delta": 11.614,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -1382,7 +3097,11 @@
           "filingDate": "2023-02-15",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -1398,13 +3117,15 @@
           "filingDate": "2023-02-15",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2023Q1": {
       "calendarQuarter": "2023Q1",
@@ -1435,6 +3156,85 @@
       "grossMarginYoyDeltaPp": 6.65,
       "operatingMarginYoyDeltaPp": 3.57,
       "profitMarginYoyDeltaPp": 0.93,
+      "statementFilingDate": "2023-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cat/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 2.731,
+            "derived": -7.372,
+            "delta": 10.103,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -1450,7 +3250,11 @@
           "filingDate": "2023-05-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -1466,13 +3270,15 @@
           "filingDate": "2023-05-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2023Q2": {
       "calendarQuarter": "2023Q2",
@@ -1503,6 +3309,85 @@
       "grossMarginYoyDeltaPp": 6.12,
       "operatingMarginYoyDeltaPp": 7.45,
       "profitMarginYoyDeltaPp": 5.14,
+      "statementFilingDate": "2023-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cat/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 3.652,
+            "derived": -7.413,
+            "delta": 11.065,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -1518,7 +3403,11 @@
           "filingDate": "2023-08-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -1534,13 +3423,15 @@
           "filingDate": "2023-08-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2023Q3": {
       "calendarQuarter": "2023Q3",
@@ -1571,6 +3462,85 @@
       "grossMarginYoyDeltaPp": 5.08,
       "operatingMarginYoyDeltaPp": 4.35,
       "profitMarginYoyDeltaPp": 3.01,
+      "statementFilingDate": "2023-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cat/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 3.449,
+            "derived": -7.134,
+            "delta": 10.583,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -1586,7 +3556,11 @@
           "filingDate": "2023-11-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -1602,13 +3576,15 @@
           "filingDate": "2023-11-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2023Q4": {
       "calendarQuarter": "2023Q4",
@@ -1639,6 +3615,85 @@
       "grossMarginYoyDeltaPp": 5.45,
       "operatingMarginYoyDeltaPp": 8.24,
       "profitMarginYoyDeltaPp": 6.9,
+      "statementFilingDate": "2023-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cat/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 3.134,
+            "derived": -7.882,
+            "delta": 11.016,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -1654,7 +3709,11 @@
           "filingDate": "2024-02-16",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -1670,13 +3729,15 @@
           "filingDate": "2024-02-16",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2024Q1": {
       "calendarQuarter": "2024Q1",
@@ -1707,6 +3768,85 @@
       "grossMarginYoyDeltaPp": 2.53,
       "operatingMarginYoyDeltaPp": 5.05,
       "profitMarginYoyDeltaPp": 5.82,
+      "statementFilingDate": "2024-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cat/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 3.519,
+            "derived": -6.143,
+            "delta": 9.662,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -1722,7 +3862,11 @@
           "filingDate": "2024-05-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -1738,13 +3882,15 @@
           "filingDate": "2024-05-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2024Q2": {
       "calendarQuarter": "2024Q2",
@@ -1775,6 +3921,85 @@
       "grossMarginYoyDeltaPp": 3.07,
       "operatingMarginYoyDeltaPp": -0.23,
       "profitMarginYoyDeltaPp": -0.82,
+      "statementFilingDate": "2024-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cat/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 3.482,
+            "derived": -6.668,
+            "delta": 10.15,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -1790,7 +4015,11 @@
           "filingDate": "2024-08-07",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -1806,13 +4035,15 @@
           "filingDate": "2024-08-07",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2024Q3": {
       "calendarQuarter": "2024Q3",
@@ -1843,6 +4074,85 @@
       "grossMarginYoyDeltaPp": 0.46,
       "operatingMarginYoyDeltaPp": -0.98,
       "profitMarginYoyDeltaPp": -1.33,
+      "statementFilingDate": "2024-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cat/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 3.147,
+            "derived": -6.919,
+            "delta": 10.066,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -1858,7 +4168,11 @@
           "filingDate": "2024-11-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -1874,13 +4188,15 @@
           "filingDate": "2024-11-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2024Q4": {
       "calendarQuarter": "2024Q4",
@@ -1911,6 +4227,85 @@
       "grossMarginYoyDeltaPp": 0.88,
       "operatingMarginYoyDeltaPp": -0.33,
       "profitMarginYoyDeltaPp": 1.55,
+      "statementFilingDate": "2024-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cat/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 2.924,
+            "derived": -7.397,
+            "delta": 10.321,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -1926,7 +4321,11 @@
           "filingDate": "2025-02-14",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -1942,13 +4341,15 @@
           "filingDate": "2025-02-14",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2025Q1": {
       "calendarQuarter": "2025Q1",
@@ -1979,6 +4380,85 @@
       "grossMarginYoyDeltaPp": -1.76,
       "operatingMarginYoyDeltaPp": -4.17,
       "profitMarginYoyDeltaPp": -4.0,
+      "statementFilingDate": "2025-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cat/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 2.579,
+            "derived": -6.386,
+            "delta": 8.965,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -1994,7 +4474,11 @@
           "filingDate": "2025-05-07",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -2010,13 +4494,15 @@
           "filingDate": "2025-05-07",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2025Q2": {
       "calendarQuarter": "2025Q2",
@@ -2047,6 +4533,85 @@
       "grossMarginYoyDeltaPp": -4.4,
       "operatingMarginYoyDeltaPp": -3.6,
       "profitMarginYoyDeltaPp": -2.91,
+      "statementFilingDate": "2025-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cat/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 2.86,
+            "derived": -7.947,
+            "delta": 10.807,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -2062,7 +4627,11 @@
           "filingDate": "2025-08-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -2078,13 +4647,15 @@
           "filingDate": "2025-08-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2025Q3": {
       "calendarQuarter": "2025Q3",
@@ -2115,6 +4686,85 @@
       "grossMarginYoyDeltaPp": -3.68,
       "operatingMarginYoyDeltaPp": -2.24,
       "profitMarginYoyDeltaPp": -2.26,
+      "statementFilingDate": "2025-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cat/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 3.052,
+            "derived": -8.621,
+            "delta": 11.673,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Machinery Energy Transportation",
@@ -2130,7 +4780,11 @@
           "filingDate": "2025-11-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         },
         {
           "name": "Financial Products",
@@ -2146,13 +4800,15 @@
           "filingDate": "2025-11-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "industrial-plus-financial-products-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2025Q4": {
       "calendarQuarter": "2025Q4",
@@ -2183,6 +4839,85 @@
       "grossMarginYoyDeltaPp": -5.9,
       "operatingMarginYoyDeltaPp": -4.13,
       "profitMarginYoyDeltaPp": -4.66,
+      "statementFilingDate": "2025-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cat/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 2.66,
+            "derived": -10.647,
+            "delta": 13.307,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Financial Products",
@@ -2201,9 +4936,7 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     }
   },
   "statementSource": "official-sec-companyfacts",
@@ -2412,7 +5145,11 @@
             "filingDate": "2020-02-19",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -2428,7 +5165,11 @@
             "filingDate": "2020-02-19",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -2448,7 +5189,11 @@
             "filingDate": "2020-02-19",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -2464,7 +5209,11 @@
             "filingDate": "2020-02-19",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -2484,7 +5233,11 @@
             "filingDate": "2020-02-19",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -2500,7 +5253,11 @@
             "filingDate": "2020-02-19",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -2520,7 +5277,11 @@
             "filingDate": "2020-02-19",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -2536,7 +5297,11 @@
             "filingDate": "2020-02-19",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -2556,7 +5321,11 @@
             "filingDate": "2020-05-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -2572,7 +5341,11 @@
             "filingDate": "2020-05-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -2592,7 +5365,11 @@
             "filingDate": "2020-08-05",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -2608,7 +5385,11 @@
             "filingDate": "2020-08-05",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -2628,7 +5409,11 @@
             "filingDate": "2020-11-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -2644,7 +5429,11 @@
             "filingDate": "2020-11-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -2664,7 +5453,11 @@
             "filingDate": "2020-02-19",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -2680,7 +5473,11 @@
             "filingDate": "2020-02-19",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -2700,7 +5497,11 @@
             "filingDate": "2020-05-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -2716,7 +5517,11 @@
             "filingDate": "2020-05-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -2736,7 +5541,11 @@
             "filingDate": "2020-08-05",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -2752,7 +5561,11 @@
             "filingDate": "2020-08-05",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -2772,7 +5585,11 @@
             "filingDate": "2020-11-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -2788,7 +5605,11 @@
             "filingDate": "2020-11-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -2808,7 +5629,11 @@
             "filingDate": "2021-02-17",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -2824,7 +5649,11 @@
             "filingDate": "2021-02-17",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -2844,7 +5673,11 @@
             "filingDate": "2021-05-05",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -2860,7 +5693,11 @@
             "filingDate": "2021-05-05",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -2880,7 +5717,11 @@
             "filingDate": "2021-08-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -2896,7 +5737,11 @@
             "filingDate": "2021-08-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -2916,7 +5761,11 @@
             "filingDate": "2021-11-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -2932,7 +5781,11 @@
             "filingDate": "2021-11-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -2952,7 +5805,11 @@
             "filingDate": "2022-02-16",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -2968,7 +5825,11 @@
             "filingDate": "2022-02-16",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -2988,7 +5849,11 @@
             "filingDate": "2022-05-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -3004,7 +5869,11 @@
             "filingDate": "2022-05-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -3024,7 +5893,11 @@
             "filingDate": "2022-08-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -3040,7 +5913,11 @@
             "filingDate": "2022-08-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -3060,7 +5937,11 @@
             "filingDate": "2022-11-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -3076,7 +5957,11 @@
             "filingDate": "2022-11-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -3096,7 +5981,11 @@
             "filingDate": "2023-02-15",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -3112,7 +6001,11 @@
             "filingDate": "2023-02-15",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -3132,7 +6025,11 @@
             "filingDate": "2023-05-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -3148,7 +6045,11 @@
             "filingDate": "2023-05-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -3168,7 +6069,11 @@
             "filingDate": "2023-08-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -3184,7 +6089,11 @@
             "filingDate": "2023-08-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -3204,7 +6113,11 @@
             "filingDate": "2023-11-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -3220,7 +6133,11 @@
             "filingDate": "2023-11-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -3240,7 +6157,11 @@
             "filingDate": "2024-02-16",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -3256,7 +6177,11 @@
             "filingDate": "2024-02-16",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -3276,7 +6201,11 @@
             "filingDate": "2024-05-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -3292,7 +6221,11 @@
             "filingDate": "2024-05-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -3312,7 +6245,11 @@
             "filingDate": "2024-08-07",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -3328,7 +6265,11 @@
             "filingDate": "2024-08-07",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -3348,7 +6289,11 @@
             "filingDate": "2024-11-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -3364,7 +6309,11 @@
             "filingDate": "2024-11-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -3384,7 +6333,11 @@
             "filingDate": "2025-02-14",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -3400,7 +6353,11 @@
             "filingDate": "2025-02-14",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -3420,7 +6377,11 @@
             "filingDate": "2025-05-07",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -3436,7 +6397,11 @@
             "filingDate": "2025-05-07",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -3456,7 +6421,11 @@
             "filingDate": "2025-08-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -3472,7 +6441,11 @@
             "filingDate": "2025-08-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       },
@@ -3492,7 +6465,11 @@
             "filingDate": "2025-11-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           },
           {
             "name": "Financial Products",
@@ -3508,7 +6485,11 @@
             "filingDate": "2025-11-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "industrial-plus-financial-products-disclosure"
+            ]
           }
         ]
       }
@@ -3692,12 +6673,195 @@
     ],
     "errors": []
   },
+  "parserDiagnostics": {
+    "version": "universal-parser-v3",
+    "financials": {
+      "basePreferredOrder": [
+        "official",
+        "stockanalysis"
+      ],
+      "preferredOrder": [
+        "official",
+        "stockanalysis"
+      ],
+      "selectedSource": "official",
+      "attempts": [
+        {
+          "layer": "financials",
+          "source_id": "official",
+          "status": "success",
+          "selected": true,
+          "reason": "",
+          "quarter_count": 32,
+          "latest_quarter": "2025Q4",
+          "error": ""
+        },
+        {
+          "layer": "financials",
+          "source_id": "stockanalysis",
+          "status": "success",
+          "selected": false,
+          "reason": "",
+          "quarter_count": 20,
+          "latest_quarter": "2025Q4",
+          "error": ""
+        }
+      ],
+      "reconciliation": {
+        "version": "financial-reconciler-v1",
+        "primarySource": "official",
+        "quarterCount": 32,
+        "fieldOverrideCount": 0,
+        "derivedFieldCount": 0,
+        "mixedSourceQuarterCount": 0,
+        "sourceUsageCounts": {
+          "official": 683,
+          "stockanalysis": 0
+        }
+      },
+      "validation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "quarterCount": 32,
+        "validatedQuarterCount": 32,
+        "issueCount": 42,
+        "mismatchQuarterCount": 32,
+        "highConfidenceQuarterCount": 32,
+        "averageConfidenceScore": 0.9262,
+        "latestQuarter": "2025Q4",
+        "latestQuarterConfidenceScore": 0.9438,
+        "latestQuarterIssueCount": 1
+      }
+    },
+    "segments": {
+      "selectedSource": "official-segments",
+      "attempts": [
+        {
+          "layer": "segments",
+          "source_id": "official-segments",
+          "status": "success",
+          "selected": true,
+          "reason": "",
+          "quarter_count": 32,
+          "latest_quarter": "2025Q4",
+          "error": ""
+        }
+      ]
+    },
+    "revenueStructures": {
+      "selectedSource": "official-revenue-structures",
+      "attempts": [
+        {
+          "layer": "revenue-structures",
+          "source_id": "official-revenue-structures",
+          "status": "success",
+          "selected": true,
+          "reason": "",
+          "quarter_count": 31,
+          "latest_quarter": "2025Q3",
+          "error": ""
+        }
+      ]
+    },
+    "summary": {
+      "financialQuarterCount": 32,
+      "segmentQuarterCount": 32,
+      "revenueStructureQuarterCount": 31
+    },
+    "validation": {
+      "version": "parser-validation-v1",
+      "status": "high",
+      "overallConfidenceScore": 0.8645,
+      "financialConfidenceScore": 0.9262,
+      "structuralConfidenceScore": 0.75,
+      "revenueSegmentChecks": 0,
+      "revenueSegmentMismatchCount": 0,
+      "revenueSegmentSkippedChecks": 31,
+      "detailGroupChecks": 0,
+      "detailGroupMismatchCount": 0,
+      "detailGroupSkippedChecks": 0,
+      "opexChecks": 0,
+      "opexSkippedChecks": 0,
+      "opexOverflowMismatchCount": 0,
+      "warningCount": 0,
+      "warnings": []
+    }
+  },
   "statementPresets": {},
   "coverage": {
     "quarterCount": 32,
     "pixelReplicaQuarterCount": 0,
     "hasPixelReplica": false,
     "officialFinancialQuarterCount": 32,
-    "officialSegmentQuarterCount": 32
+    "officialSegmentQuarterCount": 32,
+    "officialExpenseQuarterCount": 0,
+    "classification": {
+      "status": "ok",
+      "latestQuarter": "2025Q4",
+      "latestQuarterHasRevenueClassification": true,
+      "latestQuarterHasExpenseClassification": false,
+      "latestRevenueClassificationQuarter": "2025Q4",
+      "latestExpenseClassificationQuarter": null,
+      "latestStructureHistoryQuarter": "2025Q3",
+      "revenueClassificationQuarterCount": 32,
+      "expenseClassificationQuarterCount": 0,
+      "revenueClassificationCoverageRatio": 1.0,
+      "expenseClassificationCoverageRatio": 0.0,
+      "latestRevenueClassificationLagQuarters": 0,
+      "latestExpenseClassificationLagQuarters": null,
+      "warnings": [],
+      "blockers": [],
+      "policy": {}
+    },
+    "parser": {
+      "version": "universal-parser-v3",
+      "selectedFinancialSource": "official",
+      "selectedSegmentSource": "official-segments",
+      "selectedRevenueStructureSource": "official-revenue-structures",
+      "financialAttemptCount": 2,
+      "financialReconciliation": {
+        "version": "financial-reconciler-v1",
+        "primarySource": "official",
+        "quarterCount": 32,
+        "fieldOverrideCount": 0,
+        "derivedFieldCount": 0,
+        "mixedSourceQuarterCount": 0,
+        "sourceUsageCounts": {
+          "official": 683,
+          "stockanalysis": 0
+        }
+      },
+      "financialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "quarterCount": 32,
+        "validatedQuarterCount": 32,
+        "issueCount": 42,
+        "mismatchQuarterCount": 32,
+        "highConfidenceQuarterCount": 32,
+        "averageConfidenceScore": 0.9262,
+        "latestQuarter": "2025Q4",
+        "latestQuarterConfidenceScore": 0.9438,
+        "latestQuarterIssueCount": 1
+      },
+      "validation": {
+        "version": "parser-validation-v1",
+        "status": "high",
+        "overallConfidenceScore": 0.8645,
+        "financialConfidenceScore": 0.9262,
+        "structuralConfidenceScore": 0.75,
+        "revenueSegmentChecks": 0,
+        "revenueSegmentMismatchCount": 0,
+        "revenueSegmentSkippedChecks": 31,
+        "detailGroupChecks": 0,
+        "detailGroupMismatchCount": 0,
+        "detailGroupSkippedChecks": 0,
+        "opexChecks": 0,
+        "opexSkippedChecks": 0,
+        "opexOverflowMismatchCount": 0,
+        "warningCount": 0,
+        "warnings": []
+      }
+    }
   }
 }

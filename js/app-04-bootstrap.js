@@ -462,10 +462,14 @@ function renderIncomeStatementSvg(snapshot, company) {
     snapshot.costOfRevenueBn !== null && snapshot.costOfRevenueBn !== undefined
       ? Number(snapshot.costOfRevenueBn || 0)
       : Math.max(revenue - grossProfit, 0);
-  const operatingProfit = Number(snapshot.operatingProfitBn || 0);
+  const rawOperatingProfit = Number(snapshot.operatingProfitBn || 0);
+  const hasOperatingLoss = rawOperatingProfit < -0.02;
+  const operatingProfit = hasOperatingLoss ? 0 : rawOperatingProfit;
   const operatingExpenses =
     snapshot.operatingExpensesBn !== null && snapshot.operatingExpensesBn !== undefined
-      ? Number(snapshot.operatingExpensesBn || 0)
+      ? hasOperatingLoss
+        ? Math.min(Number(snapshot.operatingExpensesBn || 0), grossProfit)
+        : Number(snapshot.operatingExpensesBn || 0)
       : Math.max(grossProfit - operatingProfit, 0);
   const netOutcome = resolvedNetOutcomeValue(snapshot);
   const netLoss = isLossMakingNetOutcome(snapshot);
@@ -717,6 +721,39 @@ if (typeof window !== "undefined") {
   window.earningsImageStudio = EarningsVizRuntime;
 }
 
+const automationBootState = {
+  isReady: false,
+  error: null,
+};
+
+let resolveAutomationReady = null;
+let rejectAutomationReady = null;
+
+const automationReadyPromise = new Promise((resolve, reject) => {
+  resolveAutomationReady = resolve;
+  rejectAutomationReady = reject;
+});
+
+function markAutomationReady() {
+  if (automationBootState.isReady) return;
+  automationBootState.isReady = true;
+  automationBootState.error = null;
+  if (typeof resolveAutomationReady === "function") {
+    resolveAutomationReady(true);
+    resolveAutomationReady = null;
+    rejectAutomationReady = null;
+  }
+}
+
+function markAutomationBootFailure(error) {
+  automationBootState.error = error instanceof Error ? error : new Error(String(error || "Automation boot failed."));
+  if (typeof rejectAutomationReady === "function") {
+    rejectAutomationReady(automationBootState.error);
+    resolveAutomationReady = null;
+    rejectAutomationReady = null;
+  }
+}
+
 function currentTemplatePresetState(company = getCompany(state.selectedCompanyId), snapshot = state.currentSnapshot) {
   if (!company || !snapshot) return null;
   const presetKey = snapshot.templatePresetKey || templatePresetKey(snapshot, company);
@@ -835,6 +872,8 @@ function updateMeta(snapshot, company, viewPayload = null) {
     const history = viewPayload?.history || null;
     const quarterCount = history?.quarters?.length || 0;
     const requestedQuarterCount = history?.requestedQuarterCount || quarterCount || 30;
+    const windowUnitLabel = history?.windowUnitLabel || "quarters";
+    const windowUnitLabelZh = history?.windowUnitLabelZh || "个季度";
     const convertedQuarterCount = history?.convertedQuarterCount || 0;
     const primaryDisplayCurrency = history?.primaryDisplayCurrency || "USD";
     const sourceCurrencySet = Array.isArray(history?.sourceCurrencySet) ? history.sourceCurrencySet : [];
@@ -855,8 +894,8 @@ function updateMeta(snapshot, company, viewPayload = null) {
         : `${company.nameZh || company.nameEn} 分部营收趋势`;
     refs.chartMeta.textContent =
       currentChartLanguage() === "en"
-        ? `${companyDisplay(company)} · ${quarterCount}/${requestedQuarterCount} quarters · Stacked segment bars`
-        : `${companyDisplay(company)} · ${quarterCount}/${requestedQuarterCount} 个季度 · 分部堆叠柱状图`;
+        ? `${companyDisplay(company)} · ${quarterCount}/${requestedQuarterCount} ${windowUnitLabel} · Stacked segment bars`
+        : `${companyDisplay(company)} · ${quarterCount}/${requestedQuarterCount} ${windowUnitLabelZh} · 分部堆叠柱状图`;
     refs.detailSegmentCount.textContent = currentChartLanguage() === "en" ? `${segmentCount} segments` : `${segmentCount} 个`;
     refs.detailSegmentNote.textContent =
       currentChartLanguage() === "en"
@@ -869,11 +908,11 @@ function updateMeta(snapshot, company, viewPayload = null) {
     refs.detailStatementNote.textContent =
       growthPct !== null && Number.isFinite(growthPct)
         ? currentChartLanguage() === "en"
-          ? `Window growth: ${formatPct(growthPct, true)} · 30-quarter continuity verified`
-          : `窗口营收增长：${formatPct(growthPct, true)} · 30 季连续性已校验`
+          ? `Window growth: ${formatPct(growthPct, true)} · ${requestedQuarterCount}-${windowUnitLabel === "quarters" ? "quarter" : "period"} continuity verified`
+          : `窗口营收增长：${formatPct(growthPct, true)} · ${requestedQuarterCount}${windowUnitLabelZh}连续性已校验`
         : currentChartLanguage() === "en"
-          ? `30-quarter continuity verified`
-          : `30 季连续性已校验`;
+          ? `${requestedQuarterCount}-${windowUnitLabel === "quarters" ? "quarter" : "period"} continuity verified`
+          : `${requestedQuarterCount}${windowUnitLabelZh}连续性已校验`;
     refs.detailSourceTitle.textContent =
       currentChartLanguage() === "en" ? "Official segments + currency normalization" : "官方分部 + 币种归一";
     refs.detailSourceNote.textContent =
@@ -1035,41 +1074,218 @@ function exportSvg() {
 }
 
 function exportPng(scaleFactor = 1, suffix = "") {
-  const svgText = currentSvgText();
-  if (!svgText) {
-    setStatus("当前没有可导出的 PNG。");
-    return;
-  }
-  const viewBoxMatch = /viewBox="([0-9.\-]+)\s+([0-9.\-]+)\s+([0-9.]+)\s+([0-9.]+)"/.exec(svgText);
-  const exportWidth = Math.max(Math.round((viewBoxMatch ? Number(viewBoxMatch[3]) : 1600) * Math.max(scaleFactor, 1)), 1);
-  const exportHeight = Math.max(Math.round((viewBoxMatch ? Number(viewBoxMatch[4]) : 900) * Math.max(scaleFactor, 1)), 1);
-  const blob = new Blob([svgText], { type: "image/svg+xml;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const image = new Image();
-  image.onload = () => {
-    const canvas = document.createElement("canvas");
-    canvas.width = exportWidth;
-    canvas.height = exportHeight;
-    const context = canvas.getContext("2d");
-    context.fillStyle = "#f7f7f5";
-    context.fillRect(0, 0, canvas.width, canvas.height);
-    context.drawImage(image, 0, 0, canvas.width, canvas.height);
-    canvas.toBlob((pngBlob) => {
-      if (!pngBlob) {
-        setStatus("PNG 导出失败。");
-        URL.revokeObjectURL(url);
-        return;
-      }
+  currentPngDataUrl(scaleFactor)
+    .then(({ dataUrl }) => {
+      const pngBlob = dataUrlToBlob(dataUrl);
       downloadBlob(pngBlob, `${currentFilenameStem()}${suffix}.png`);
       setStatus(scaleFactor > 1 ? "超清 PNG 已导出。" : "PNG 已导出。");
+    })
+    .catch(() => {
+      setStatus("PNG 导出失败。");
+    });
+}
+
+function dataUrlToBlob(dataUrl) {
+  const parts = String(dataUrl || "").split(",");
+  const header = parts[0] || "";
+  const body = parts[1] || "";
+  const mimeMatch = /^data:([^;]+);base64$/i.exec(header);
+  const mimeType = mimeMatch?.[1] || "application/octet-stream";
+  const binary = atob(body);
+  const bytes = new Uint8Array(binary.length);
+  for (let index = 0; index < binary.length; index += 1) {
+    bytes[index] = binary.charCodeAt(index);
+  }
+  return new Blob([bytes], { type: mimeType });
+}
+
+function currentPngDataUrl(scaleFactor = 1) {
+  const svgText = currentSvgText();
+  if (!svgText) return Promise.reject(new Error("当前没有可导出的 PNG。"));
+  return new Promise((resolve, reject) => {
+    const viewBoxMatch = /viewBox="([0-9.\-]+)\s+([0-9.\-]+)\s+([0-9.]+)\s+([0-9.]+)"/.exec(svgText);
+    const exportWidth = Math.max(Math.round((viewBoxMatch ? Number(viewBoxMatch[3]) : 1600) * Math.max(scaleFactor, 1)), 1);
+    const exportHeight = Math.max(Math.round((viewBoxMatch ? Number(viewBoxMatch[4]) : 900) * Math.max(scaleFactor, 1)), 1);
+    const blob = new Blob([svgText], { type: "image/svg+xml;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const image = new Image();
+    image.onload = () => {
+      try {
+        const canvas = document.createElement("canvas");
+        canvas.width = exportWidth;
+        canvas.height = exportHeight;
+        const context = canvas.getContext("2d");
+        context.fillStyle = "#f7f7f5";
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+        const dataUrl = canvas.toDataURL("image/png");
+        URL.revokeObjectURL(url);
+        resolve({
+          dataUrl,
+          width: exportWidth,
+          height: exportHeight,
+          filenameStem: currentFilenameStem(),
+        });
+      } catch (error) {
+        URL.revokeObjectURL(url);
+        reject(error);
+      }
+    };
+    image.onerror = () => {
       URL.revokeObjectURL(url);
-    }, "image/png");
+      reject(new Error("PNG 导出失败。"));
+    };
+    image.src = url;
+  });
+}
+
+function waitForAnimationFrames(count = 1) {
+  const frameCount = Math.max(1, Math.floor(safeNumber(count, 1)));
+  let remaining = frameCount;
+  return new Promise((resolve) => {
+    const advance = () => {
+      remaining -= 1;
+      if (remaining <= 0) {
+        resolve();
+        return;
+      }
+      if (typeof requestAnimationFrame === "function") {
+        requestAnimationFrame(advance);
+        return;
+      }
+      setTimeout(advance, 16);
+    };
+    if (typeof requestAnimationFrame === "function") {
+      requestAnimationFrame(advance);
+      return;
+    }
+    setTimeout(advance, 0);
+  });
+}
+
+function resolveAutomationCompanyId(target) {
+  const requested = String(target || "").trim();
+  if (!requested) return state.selectedCompanyId || null;
+  if (state.companyById?.[requested]) return requested;
+  const normalized = requested.toLowerCase();
+  const exactMatch = companies().find((company) => {
+    const fields = [
+      company.id,
+      company.ticker,
+      company.slug,
+      company.nameEn,
+      company.nameZh,
+    ];
+    return fields.some((value) => String(value || "").trim().toLowerCase() === normalized);
+  });
+  if (exactMatch) return exactMatch.id;
+  const fuzzyMatch = companies().find((company) => {
+    const fields = [
+      company.id,
+      company.ticker,
+      company.slug,
+      company.nameEn,
+      company.nameZh,
+    ];
+    return fields.some((value) => String(value || "").trim().toLowerCase().includes(normalized));
+  });
+  return fuzzyMatch?.id || null;
+}
+
+async function automationRenderSelection(options = {}) {
+  await automationReadyPromise;
+  const requestedCompanyId = resolveAutomationCompanyId(
+    options.companyId || options.company || options.ticker || options.name || ""
+  );
+  if (!requestedCompanyId) {
+    throw new Error(`无法匹配公司：${options.companyId || options.company || options.ticker || options.name || ""}`);
+  }
+  const requestedLanguage = options.language === "en" ? "en" : "zh";
+  state.uiLanguage = requestedLanguage;
+  if (refs.languageSelect) refs.languageSelect.value = requestedLanguage;
+
+  state.selectedCompanyId = requestedCompanyId;
+  state.selectedQuarter = options.quarterKey ? String(options.quarterKey).trim() : null;
+  state.chartViewMode = options.viewMode === "bars" ? "bars" : "sankey";
+  state.editor.selectedNodeId = null;
+  state.editor.dragging = null;
+  syncChartModeToggleUi();
+  syncQuarterOptions({ preferReplica: !!options.preferReplica });
+
+  const company = getCompany(requestedCompanyId);
+  if (!company) {
+    throw new Error(`公司不存在：${requestedCompanyId}`);
+  }
+  if (options.quarterKey) {
+    const requestedQuarter = String(options.quarterKey).trim();
+    const availableQuarters = renderableQuarterKeys(company);
+    if (!availableQuarters.includes(requestedQuarter)) {
+      throw new Error(`季度 ${requestedQuarter} 不可用，可选季度：${availableQuarters.join(", ")}`);
+    }
+    state.selectedQuarter = requestedQuarter;
+    if (refs.quarterSelect) refs.quarterSelect.value = requestedQuarter;
+  }
+
+  renderCompanyList();
+  renderCoverage();
+  renderCurrent();
+  await waitForAnimationFrames(2);
+  return {
+    companyId: state.selectedCompanyId,
+    quarterKey: state.selectedQuarter,
+    viewMode: currentChartViewMode(),
+    language: currentChartLanguage(),
+    filenameStem: currentFilenameStem(),
+    status: refs.statusText?.textContent || "",
   };
-  image.onerror = () => {
-    URL.revokeObjectURL(url);
-    setStatus("PNG 导出失败。");
+}
+
+async function automationCaptureCurrentChart(options = {}) {
+  const renderSummary = await automationRenderSelection(options);
+  const svgText = currentSvgText();
+  if (!svgText) {
+    throw new Error("当前图表没有可导出的 SVG。");
+  }
+  const pngPayload = await currentPngDataUrl(Math.max(safeNumber(options.scaleFactor, 1), 1));
+  return {
+    ...renderSummary,
+    svgText,
+    pngDataUrl: pngPayload.dataUrl,
+    width: pngPayload.width,
+    height: pngPayload.height,
   };
-  image.src = url;
+}
+
+async function automationExportChartSet(options = {}) {
+  const requestedModes = Array.isArray(options.modes) && options.modes.length ? options.modes : ["sankey", "bars"];
+  const exports = [];
+  for (const mode of requestedModes) {
+    exports.push(
+      await automationCaptureCurrentChart({
+        ...options,
+        viewMode: mode === "bars" ? "bars" : "sankey",
+      })
+    );
+  }
+  return {
+    companyId: exports[0]?.companyId || null,
+    quarterKey: exports[0]?.quarterKey || null,
+    language: exports[0]?.language || currentChartLanguage(),
+    exports,
+  };
+}
+
+if (typeof window !== "undefined") {
+  window.earningsImageStudioAutomation = Object.freeze({
+    waitUntilReady: () => automationReadyPromise,
+    renderSelection: automationRenderSelection,
+    captureCurrentChart: automationCaptureCurrentChart,
+    exportChartSet: automationExportChartSet,
+    getBootState: () => ({
+      isReady: automationBootState.isReady,
+      error: automationBootState.error ? String(automationBootState.error.message || automationBootState.error) : null,
+    }),
+  });
 }
 
 async function loadDataset() {
@@ -1239,6 +1455,7 @@ async function boot() {
     await Promise.all([loadDataset(), loadLogoCatalog(), loadSupplementalComponents()]);
   } catch (error) {
     setStatus(error.message || "数据加载失败。");
+    markAutomationBootFailure(error);
     return;
   }
   updateHero();
@@ -1247,6 +1464,7 @@ async function boot() {
   renderCompanyList();
   renderCoverage();
   renderCurrent();
+  markAutomationReady();
 }
 
 document.addEventListener("DOMContentLoaded", boot);

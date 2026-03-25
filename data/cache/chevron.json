@@ -75,6 +75,64 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 0,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Downstream Equipment",
@@ -87,6 +145,10 @@
           "filingDate": "2019-05-02",
           "periodStart": "2018-01-01",
           "periodEnd": "2018-03-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "capital-bucket-disclosure"
+          ],
           "mixPct": 34.5
         },
         {
@@ -100,13 +162,15 @@
           "filingDate": "2019-05-02",
           "periodStart": "2018-01-01",
           "periodEnd": "2018-03-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "capital-bucket-disclosure"
+          ],
           "mixPct": 12.1
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2018Q2": {
       "calendarQuarter": "2018Q2",
@@ -137,6 +201,65 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Downstream Equipment",
@@ -149,6 +272,10 @@
           "filingDate": "2019-08-07",
           "periodStart": "2018-04-01",
           "periodEnd": "2018-06-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "capital-bucket-disclosure"
+          ],
           "mixPct": 38.7,
           "qoqPct": 20.3
         },
@@ -163,14 +290,16 @@
           "filingDate": "2019-08-07",
           "periodStart": "2018-04-01",
           "periodEnd": "2018-06-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "capital-bucket-disclosure"
+          ],
           "mixPct": 12.5,
           "qoqPct": 10.2
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2018Q3": {
       "calendarQuarter": "2018Q3",
@@ -201,8 +330,65 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      }
     },
     "2018Q4": {
       "calendarQuarter": "2018Q4",
@@ -233,6 +419,65 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Upstream Equipment",
@@ -249,9 +494,7 @@
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2019Q1": {
       "calendarQuarter": "2019Q1",
@@ -282,6 +525,70 @@
       "grossMarginYoyDeltaPp": -1.4,
       "operatingMarginYoyDeltaPp": -6.22,
       "profitMarginYoyDeltaPp": -1.88,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Downstream Equipment",
@@ -294,6 +601,10 @@
           "filingDate": "2019-05-02",
           "periodStart": "2019-01-01",
           "periodEnd": "2019-03-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "capital-bucket-disclosure"
+          ],
           "mixPct": 36.2,
           "mixYoyDeltaPp": 1.7
         },
@@ -308,15 +619,17 @@
           "filingDate": "2019-05-02",
           "periodStart": "2019-01-01",
           "periodEnd": "2019-03-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "capital-bucket-disclosure"
+          ],
           "mixPct": 17.2,
           "qoqPct": -31.77,
           "mixYoyDeltaPp": 5.1
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2019Q2": {
       "calendarQuarter": "2019Q2",
@@ -347,6 +660,70 @@
       "grossMarginYoyDeltaPp": 3.75,
       "operatingMarginYoyDeltaPp": 5.33,
       "profitMarginYoyDeltaPp": 3.43,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Downstream Equipment",
@@ -359,6 +736,10 @@
           "filingDate": "2019-08-07",
           "periodStart": "2019-04-01",
           "periodEnd": "2019-06-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "capital-bucket-disclosure"
+          ],
           "mixPct": 40.9,
           "qoqPct": 19.91,
           "mixYoyDeltaPp": 2.1
@@ -374,15 +755,17 @@
           "filingDate": "2019-08-07",
           "periodStart": "2019-04-01",
           "periodEnd": "2019-06-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "capital-bucket-disclosure"
+          ],
           "mixPct": 16.3,
           "qoqPct": 0.77,
           "mixYoyDeltaPp": 3.9
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2019Q3": {
       "calendarQuarter": "2019Q3",
@@ -413,6 +796,70 @@
       "grossMarginYoyDeltaPp": 1.45,
       "operatingMarginYoyDeltaPp": 0.18,
       "profitMarginYoyDeltaPp": -2.19,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Downstream Equipment",
@@ -425,6 +872,10 @@
           "filingDate": "2019-11-07",
           "periodStart": "2019-07-01",
           "periodEnd": "2019-09-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "capital-bucket-disclosure"
+          ],
           "mixPct": 40.9,
           "qoqPct": -4.25
         },
@@ -439,14 +890,16 @@
           "filingDate": "2019-11-07",
           "periodStart": "2019-07-01",
           "periodEnd": "2019-09-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "capital-bucket-disclosure"
+          ],
           "mixPct": 16.1,
           "qoqPct": -5.48
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2019Q4": {
       "calendarQuarter": "2019Q4",
@@ -477,6 +930,70 @@
       "grossMarginYoyDeltaPp": 2.34,
       "operatingMarginYoyDeltaPp": -34.26,
       "profitMarginYoyDeltaPp": -28.37,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Downstream Equipment",
@@ -489,6 +1006,10 @@
           "filingDate": "2020-02-21",
           "periodStart": "2019-10-01",
           "periodEnd": "2019-12-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "capital-bucket-disclosure"
+          ],
           "mixPct": 39.9,
           "qoqPct": -2.95
         },
@@ -503,15 +1024,17 @@
           "filingDate": "2020-02-21",
           "periodStart": "2019-10-01",
           "periodEnd": "2019-12-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "capital-bucket-disclosure"
+          ],
           "mixPct": 17.2,
           "qoqPct": 6.16,
           "mixYoyDeltaPp": -4.2
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2020Q1": {
       "calendarQuarter": "2020Q1",
@@ -542,6 +1065,70 @@
       "grossMarginYoyDeltaPp": 5.42,
       "operatingMarginYoyDeltaPp": 4.71,
       "profitMarginYoyDeltaPp": 4.37,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Downstream Equipment",
@@ -554,6 +1141,10 @@
           "filingDate": "2020-05-06",
           "periodStart": "2020-01-01",
           "periodEnd": "2020-03-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "capital-bucket-disclosure"
+          ],
           "mixPct": 37.7,
           "qoqPct": -18.97,
           "mixYoyDeltaPp": 1.4
@@ -569,15 +1160,17 @@
           "filingDate": "2020-05-06",
           "periodStart": "2020-01-01",
           "periodEnd": "2020-03-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "capital-bucket-disclosure"
+          ],
           "mixPct": 15.0,
           "qoqPct": -24.9,
           "mixYoyDeltaPp": -2.2
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2020Q2": {
       "calendarQuarter": "2020Q2",
@@ -608,6 +1201,70 @@
       "grossMarginYoyDeltaPp": 6.22,
       "operatingMarginYoyDeltaPp": -54.42,
       "profitMarginYoyDeltaPp": -63.78,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Downstream Equipment",
@@ -620,6 +1277,10 @@
           "filingDate": "2020-08-05",
           "periodStart": "2020-04-01",
           "periodEnd": "2020-06-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "capital-bucket-disclosure"
+          ],
           "mixPct": 32.9,
           "qoqPct": -53.2,
           "mixYoyDeltaPp": -8.0
@@ -635,15 +1296,17 @@
           "filingDate": "2020-08-05",
           "periodStart": "2020-04-01",
           "periodEnd": "2020-06-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "capital-bucket-disclosure"
+          ],
           "mixPct": 16.0,
           "qoqPct": -43.04,
           "mixYoyDeltaPp": -0.3
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2020Q3": {
       "calendarQuarter": "2020Q3",
@@ -674,6 +1337,70 @@
       "grossMarginYoyDeltaPp": 1.13,
       "operatingMarginYoyDeltaPp": -8.75,
       "profitMarginYoyDeltaPp": -8.28,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Downstream Equipment",
@@ -686,6 +1413,10 @@
           "filingDate": "2020-11-05",
           "periodStart": "2020-07-01",
           "periodEnd": "2020-09-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "capital-bucket-disclosure"
+          ],
           "mixPct": 34.0,
           "qoqPct": 55.63,
           "mixYoyDeltaPp": -6.9
@@ -701,15 +1432,17 @@
           "filingDate": "2020-11-05",
           "periodStart": "2020-07-01",
           "periodEnd": "2020-09-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "capital-bucket-disclosure"
+          ],
           "mixPct": 14.0,
           "qoqPct": 32.35,
           "mixYoyDeltaPp": -2.1
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2020Q4": {
       "calendarQuarter": "2020Q4",
@@ -740,6 +1473,70 @@
       "grossMarginYoyDeltaPp": 3.07,
       "operatingMarginYoyDeltaPp": 27.05,
       "profitMarginYoyDeltaPp": 16.44,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Downstream",
@@ -752,6 +1549,10 @@
           "filingDate": "2021-02-25",
           "periodStart": "2020-10-01",
           "periodEnd": "2020-12-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ],
           "mixPct": 32.3
         },
         {
@@ -765,13 +1566,15 @@
           "filingDate": "2021-02-25",
           "periodStart": "2020-10-01",
           "periodEnd": "2020-12-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ],
           "mixPct": 16.9
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2021Q1": {
       "calendarQuarter": "2021Q1",
@@ -802,6 +1605,74 @@
       "grossMarginYoyDeltaPp": -4.32,
       "operatingMarginYoyDeltaPp": -8.29,
       "profitMarginYoyDeltaPp": -7.69,
+      "statementFilingDate": "2021-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cvx/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Downstream",
@@ -814,6 +1685,10 @@
           "filingDate": "2021-05-06",
           "periodStart": "2021-01-01",
           "periodEnd": "2021-03-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ],
           "mixPct": 34.9,
           "qoqPct": 35.32
         },
@@ -828,14 +1703,16 @@
           "filingDate": "2021-05-06",
           "periodStart": "2021-01-01",
           "periodEnd": "2021-03-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ],
           "mixPct": 18.6,
           "qoqPct": 37.88
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2021Q2": {
       "calendarQuarter": "2021Q2",
@@ -866,6 +1743,74 @@
       "grossMarginYoyDeltaPp": -5.98,
       "operatingMarginYoyDeltaPp": 53.43,
       "profitMarginYoyDeltaPp": 60.46,
+      "statementFilingDate": "2021-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cvx/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Downstream",
@@ -878,6 +1823,10 @@
           "filingDate": "2021-08-05",
           "periodStart": "2021-04-01",
           "periodEnd": "2021-06-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ],
           "mixPct": 38.5,
           "qoqPct": 28.16
         },
@@ -892,14 +1841,16 @@
           "filingDate": "2021-08-05",
           "periodStart": "2021-04-01",
           "periodEnd": "2021-06-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ],
           "mixPct": 16.7,
           "qoqPct": 4.2
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2021Q3": {
       "calendarQuarter": "2021Q3",
@@ -930,6 +1881,74 @@
       "grossMarginYoyDeltaPp": 0.03,
       "operatingMarginYoyDeltaPp": 15.97,
       "profitMarginYoyDeltaPp": 15.22,
+      "statementFilingDate": "2021-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cvx/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Downstream",
@@ -942,6 +1961,10 @@
           "filingDate": "2021-11-04",
           "periodStart": "2021-07-01",
           "periodEnd": "2021-09-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ],
           "mixPct": 37.6,
           "qoqPct": 14.9
         },
@@ -956,14 +1979,16 @@
           "filingDate": "2021-11-04",
           "periodStart": "2021-07-01",
           "periodEnd": "2021-09-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ],
           "mixPct": 17.3,
           "qoqPct": 22.21
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2021Q4": {
       "calendarQuarter": "2021Q4",
@@ -994,6 +2019,74 @@
       "grossMarginYoyDeltaPp": -5.73,
       "operatingMarginYoyDeltaPp": 10.03,
       "profitMarginYoyDeltaPp": 13.7,
+      "statementFilingDate": "2021-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cvx/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Downstream",
@@ -1006,6 +2099,10 @@
           "filingDate": "2022-02-24",
           "periodStart": "2021-10-01",
           "periodEnd": "2021-12-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ],
           "mixPct": 35.9,
           "qoqPct": 2.98,
           "mixYoyDeltaPp": 3.6
@@ -1021,15 +2118,17 @@
           "filingDate": "2022-02-24",
           "periodStart": "2021-10-01",
           "periodEnd": "2021-12-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ],
           "mixPct": 21.8,
           "qoqPct": 35.88,
           "mixYoyDeltaPp": 4.9
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2022Q1": {
       "calendarQuarter": "2022Q1",
@@ -1060,6 +2159,74 @@
       "grossMarginYoyDeltaPp": -5.88,
       "operatingMarginYoyDeltaPp": 3.55,
       "profitMarginYoyDeltaPp": 7.53,
+      "statementFilingDate": "2022-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cvx/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Downstream",
@@ -1072,6 +2239,10 @@
           "filingDate": "2022-05-04",
           "periodStart": "2022-01-01",
           "periodEnd": "2022-03-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ],
           "mixPct": 37.8,
           "qoqPct": 20.12,
           "mixYoyDeltaPp": 2.9
@@ -1087,15 +2258,17 @@
           "filingDate": "2022-05-04",
           "periodStart": "2022-01-01",
           "periodEnd": "2022-03-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ],
           "mixPct": 21.6,
           "qoqPct": 12.93,
           "mixYoyDeltaPp": 3.0
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2022Q2": {
       "calendarQuarter": "2022Q2",
@@ -1126,6 +2299,74 @@
       "grossMarginYoyDeltaPp": -4.07,
       "operatingMarginYoyDeltaPp": 7.07,
       "profitMarginYoyDeltaPp": 9.25,
+      "statementFilingDate": "2022-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cvx/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Downstream",
@@ -1138,6 +2379,10 @@
           "filingDate": "2022-08-04",
           "periodStart": "2022-04-01",
           "periodEnd": "2022-06-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ],
           "mixPct": 39.6,
           "qoqPct": 30.83,
           "mixYoyDeltaPp": 1.1
@@ -1153,15 +2398,17 @@
           "filingDate": "2022-08-04",
           "periodStart": "2022-04-01",
           "periodEnd": "2022-06-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ],
           "mixPct": 21.8,
           "qoqPct": 25.77,
           "mixYoyDeltaPp": 5.1
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2022Q3": {
       "calendarQuarter": "2022Q3",
@@ -1192,6 +2439,74 @@
       "grossMarginYoyDeltaPp": -3.97,
       "operatingMarginYoyDeltaPp": 0.55,
       "profitMarginYoyDeltaPp": 3.32,
+      "statementFilingDate": "2022-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cvx/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Downstream",
@@ -1204,6 +2519,10 @@
           "filingDate": "2022-11-03",
           "periodStart": "2022-07-01",
           "periodEnd": "2022-09-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ],
           "mixPct": 37.9,
           "qoqPct": -6.97,
           "mixYoyDeltaPp": 0.3
@@ -1219,15 +2538,17 @@
           "filingDate": "2022-11-03",
           "periodStart": "2022-07-01",
           "periodEnd": "2022-09-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ],
           "mixPct": 20.8,
           "qoqPct": -7.37,
           "mixYoyDeltaPp": 3.4
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2022Q4": {
       "calendarQuarter": "2022Q4",
@@ -1258,8 +2579,74 @@
       "grossMarginYoyDeltaPp": -3.98,
       "operatingMarginYoyDeltaPp": 0.15,
       "profitMarginYoyDeltaPp": 0.63,
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "statementFilingDate": "2022-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cvx/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      }
     },
     "2023Q1": {
       "calendarQuarter": "2023Q1",
@@ -1290,6 +2677,74 @@
       "grossMarginYoyDeltaPp": 2.2,
       "operatingMarginYoyDeltaPp": 4.33,
       "profitMarginYoyDeltaPp": 1.5,
+      "statementFilingDate": "2023-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cvx/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Downstream",
@@ -1302,6 +2757,10 @@
           "filingDate": "2023-05-04",
           "periodStart": "2023-01-01",
           "periodEnd": "2023-03-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ],
           "mixPct": 39.7,
           "mixYoyDeltaPp": 1.9
         },
@@ -1316,14 +2775,16 @@
           "filingDate": "2023-05-04",
           "periodStart": "2023-01-01",
           "periodEnd": "2023-03-31",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ],
           "mixPct": 19.7,
           "mixYoyDeltaPp": -1.9
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2023Q2": {
       "calendarQuarter": "2023Q2",
@@ -1354,6 +2815,74 @@
       "grossMarginYoyDeltaPp": -0.2,
       "operatingMarginYoyDeltaPp": -6.45,
       "profitMarginYoyDeltaPp": -5.05,
+      "statementFilingDate": "2023-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cvx/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Downstream",
@@ -1366,6 +2895,10 @@
           "filingDate": "2023-08-03",
           "periodStart": "2023-04-01",
           "periodEnd": "2023-06-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ],
           "mixPct": 42.9,
           "qoqPct": 4.46,
           "mixYoyDeltaPp": 3.3
@@ -1381,15 +2914,17 @@
           "filingDate": "2023-08-03",
           "periodStart": "2023-04-01",
           "periodEnd": "2023-06-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ],
           "mixPct": 18.5,
           "qoqPct": -9.02,
           "mixYoyDeltaPp": -3.2
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2023Q3": {
       "calendarQuarter": "2023Q3",
@@ -1420,6 +2955,74 @@
       "grossMarginYoyDeltaPp": -2.28,
       "operatingMarginYoyDeltaPp": -7.99,
       "profitMarginYoyDeltaPp": -5.11,
+      "statementFilingDate": "2023-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cvx/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Downstream",
@@ -1432,6 +3035,10 @@
           "filingDate": "2023-11-02",
           "periodStart": "2023-07-01",
           "periodEnd": "2023-09-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ],
           "mixPct": 43.8,
           "qoqPct": 12.31,
           "mixYoyDeltaPp": 5.9
@@ -1447,15 +3054,17 @@
           "filingDate": "2023-11-02",
           "periodStart": "2023-07-01",
           "periodEnd": "2023-09-30",
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ],
           "mixPct": 19.8,
           "qoqPct": 17.4,
           "mixYoyDeltaPp": -1.0
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2023Q4": {
       "calendarQuarter": "2023Q4",
@@ -1486,8 +3095,74 @@
       "grossMarginYoyDeltaPp": 5.4,
       "operatingMarginYoyDeltaPp": 1.7,
       "profitMarginYoyDeltaPp": -7.03,
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "statementFilingDate": "2023-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cvx/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      }
     },
     "2024Q1": {
       "calendarQuarter": "2024Q1",
@@ -1518,6 +3193,74 @@
       "grossMarginYoyDeltaPp": 0.65,
       "operatingMarginYoyDeltaPp": -2.42,
       "profitMarginYoyDeltaPp": -1.65,
+      "statementFilingDate": "2024-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cvx/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Downstream",
@@ -1533,7 +3276,11 @@
           "filingDate": "2025-05-08",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ]
         },
         {
           "name": "Upstream",
@@ -1549,7 +3296,11 @@
           "filingDate": "2025-05-08",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ]
         },
         {
           "name": "All Other Segments",
@@ -1565,13 +3316,15 @@
           "filingDate": "2025-05-08",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2024Q2": {
       "calendarQuarter": "2024Q2",
@@ -1602,6 +3355,74 @@
       "grossMarginYoyDeltaPp": -0.87,
       "operatingMarginYoyDeltaPp": -2.96,
       "profitMarginYoyDeltaPp": -3.79,
+      "statementFilingDate": "2024-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cvx/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Downstream",
@@ -1617,7 +3438,11 @@
           "filingDate": "2025-08-07",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ]
         },
         {
           "name": "Upstream",
@@ -1633,7 +3458,11 @@
           "filingDate": "2025-08-07",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ]
         },
         {
           "name": "All Other Segments",
@@ -1649,13 +3478,15 @@
           "filingDate": "2025-08-07",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2024Q3": {
       "calendarQuarter": "2024Q3",
@@ -1686,6 +3517,74 @@
       "grossMarginYoyDeltaPp": 0.02,
       "operatingMarginYoyDeltaPp": -2.95,
       "profitMarginYoyDeltaPp": -3.4,
+      "statementFilingDate": "2024-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cvx/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Downstream",
@@ -1701,7 +3600,11 @@
           "filingDate": "2025-11-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ]
         },
         {
           "name": "Upstream",
@@ -1717,7 +3620,11 @@
           "filingDate": "2025-11-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ]
         },
         {
           "name": "All Other Segments",
@@ -1733,13 +3640,15 @@
           "filingDate": "2025-11-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2024Q4": {
       "calendarQuarter": "2024Q4",
@@ -1770,6 +3679,74 @@
       "grossMarginYoyDeltaPp": -4.17,
       "operatingMarginYoyDeltaPp": -10.41,
       "profitMarginYoyDeltaPp": 2.08,
+      "statementFilingDate": "2024-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cvx/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Downstream",
@@ -1785,7 +3762,11 @@
           "filingDate": "2025-02-21",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ]
         },
         {
           "name": "Upstream",
@@ -1801,7 +3782,11 @@
           "filingDate": "2025-02-21",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ]
         },
         {
           "name": "All Other Segments",
@@ -1817,13 +3802,15 @@
           "filingDate": "2025-02-21",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2025Q1": {
       "calendarQuarter": "2025Q1",
@@ -1854,6 +3841,74 @@
       "grossMarginYoyDeltaPp": -2.5,
       "operatingMarginYoyDeltaPp": -6.09,
       "profitMarginYoyDeltaPp": -4.22,
+      "statementFilingDate": "2025-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cvx/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Downstream",
@@ -1869,7 +3924,11 @@
           "filingDate": "2025-05-08",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ]
         },
         {
           "name": "Upstream",
@@ -1885,7 +3944,11 @@
           "filingDate": "2025-05-08",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ]
         },
         {
           "name": "All Other Segments",
@@ -1901,13 +3964,15 @@
           "filingDate": "2025-05-08",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2025Q2": {
       "calendarQuarter": "2025Q2",
@@ -1938,6 +4003,74 @@
       "grossMarginYoyDeltaPp": 1.73,
       "operatingMarginYoyDeltaPp": -0.88,
       "profitMarginYoyDeltaPp": -3.33,
+      "statementFilingDate": "2025-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cvx/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Downstream",
@@ -1953,7 +4086,11 @@
           "filingDate": "2025-08-07",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ]
         },
         {
           "name": "Upstream",
@@ -1969,7 +4106,11 @@
           "filingDate": "2025-08-07",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ]
         },
         {
           "name": "All Other Segments",
@@ -1985,13 +4126,15 @@
           "filingDate": "2025-08-07",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2025Q3": {
       "calendarQuarter": "2025Q3",
@@ -2022,6 +4165,74 @@
       "grossMarginYoyDeltaPp": 5.36,
       "operatingMarginYoyDeltaPp": 3.67,
       "profitMarginYoyDeltaPp": -1.82,
+      "statementFilingDate": "2025-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cvx/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Downstream",
@@ -2037,7 +4248,11 @@
           "filingDate": "2025-11-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ]
         },
         {
           "name": "Upstream",
@@ -2053,7 +4268,11 @@
           "filingDate": "2025-11-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ]
         },
         {
           "name": "All Other Segments",
@@ -2069,13 +4288,15 @@
           "filingDate": "2025-11-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2025Q4": {
       "calendarQuarter": "2025Q4",
@@ -2106,6 +4327,74 @@
       "grossMarginYoyDeltaPp": 7.01,
       "operatingMarginYoyDeltaPp": 10.2,
       "profitMarginYoyDeltaPp": -0.65,
+      "statementFilingDate": "2025-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/cvx/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 2,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Downstream",
@@ -2121,7 +4410,11 @@
           "filingDate": "2026-02-24",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ]
         },
         {
           "name": "Upstream",
@@ -2137,7 +4430,11 @@
           "filingDate": "2026-02-24",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ]
         },
         {
           "name": "All Other Segments",
@@ -2153,13 +4450,15 @@
           "filingDate": "2026-02-24",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-business-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     }
   },
   "statementSource": "official-sec-companyfacts",
@@ -2452,7 +4751,11 @@
             "filingDate": "2025-05-08",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-business-disclosure"
+            ]
           },
           {
             "name": "Upstream",
@@ -2468,7 +4771,11 @@
             "filingDate": "2025-05-08",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-business-disclosure"
+            ]
           },
           {
             "name": "All Other Segments",
@@ -2484,7 +4791,11 @@
             "filingDate": "2025-05-08",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-business-disclosure"
+            ]
           }
         ]
       },
@@ -2504,7 +4815,11 @@
             "filingDate": "2025-08-07",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-business-disclosure"
+            ]
           },
           {
             "name": "Upstream",
@@ -2520,7 +4835,11 @@
             "filingDate": "2025-08-07",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-business-disclosure"
+            ]
           },
           {
             "name": "All Other Segments",
@@ -2536,7 +4855,11 @@
             "filingDate": "2025-08-07",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-business-disclosure"
+            ]
           }
         ]
       },
@@ -2556,7 +4879,11 @@
             "filingDate": "2025-11-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-business-disclosure"
+            ]
           },
           {
             "name": "Upstream",
@@ -2572,7 +4899,11 @@
             "filingDate": "2025-11-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-business-disclosure"
+            ]
           },
           {
             "name": "All Other Segments",
@@ -2588,7 +4919,11 @@
             "filingDate": "2025-11-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-business-disclosure"
+            ]
           }
         ]
       },
@@ -2608,7 +4943,11 @@
             "filingDate": "2025-02-21",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-business-disclosure"
+            ]
           },
           {
             "name": "Upstream",
@@ -2624,7 +4963,11 @@
             "filingDate": "2025-02-21",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-business-disclosure"
+            ]
           },
           {
             "name": "All Other Segments",
@@ -2640,7 +4983,11 @@
             "filingDate": "2025-02-21",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-business-disclosure"
+            ]
           }
         ]
       },
@@ -2660,7 +5007,11 @@
             "filingDate": "2025-05-08",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-business-disclosure"
+            ]
           },
           {
             "name": "Upstream",
@@ -2676,7 +5027,11 @@
             "filingDate": "2025-05-08",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-business-disclosure"
+            ]
           },
           {
             "name": "All Other Segments",
@@ -2692,7 +5047,11 @@
             "filingDate": "2025-05-08",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-business-disclosure"
+            ]
           }
         ]
       },
@@ -2712,7 +5071,11 @@
             "filingDate": "2025-08-07",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-business-disclosure"
+            ]
           },
           {
             "name": "Upstream",
@@ -2728,7 +5091,11 @@
             "filingDate": "2025-08-07",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-business-disclosure"
+            ]
           },
           {
             "name": "All Other Segments",
@@ -2744,7 +5111,11 @@
             "filingDate": "2025-08-07",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-business-disclosure"
+            ]
           }
         ]
       },
@@ -2764,7 +5135,11 @@
             "filingDate": "2025-11-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-business-disclosure"
+            ]
           },
           {
             "name": "Upstream",
@@ -2780,7 +5155,11 @@
             "filingDate": "2025-11-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-business-disclosure"
+            ]
           },
           {
             "name": "All Other Segments",
@@ -2796,7 +5175,11 @@
             "filingDate": "2025-11-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-business-disclosure"
+            ]
           }
         ]
       },
@@ -2816,7 +5199,11 @@
             "filingDate": "2026-02-24",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-business-disclosure"
+            ]
           },
           {
             "name": "Upstream",
@@ -2832,7 +5219,11 @@
             "filingDate": "2026-02-24",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-business-disclosure"
+            ]
           },
           {
             "name": "All Other Segments",
@@ -2848,7 +5239,11 @@
             "filingDate": "2026-02-24",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-business-disclosure"
+            ]
           }
         ]
       }
@@ -3007,12 +5402,195 @@
     ],
     "errors": []
   },
+  "parserDiagnostics": {
+    "version": "universal-parser-v3",
+    "financials": {
+      "basePreferredOrder": [
+        "official",
+        "stockanalysis"
+      ],
+      "preferredOrder": [
+        "official",
+        "stockanalysis"
+      ],
+      "selectedSource": "official",
+      "attempts": [
+        {
+          "layer": "financials",
+          "source_id": "official",
+          "status": "success",
+          "selected": true,
+          "reason": "",
+          "quarter_count": 32,
+          "latest_quarter": "2025Q4",
+          "error": ""
+        },
+        {
+          "layer": "financials",
+          "source_id": "stockanalysis",
+          "status": "success",
+          "selected": false,
+          "reason": "",
+          "quarter_count": 20,
+          "latest_quarter": "2025Q4",
+          "error": ""
+        }
+      ],
+      "reconciliation": {
+        "version": "financial-reconciler-v1",
+        "primarySource": "official",
+        "quarterCount": 32,
+        "fieldOverrideCount": 0,
+        "derivedFieldCount": 0,
+        "mixedSourceQuarterCount": 0,
+        "sourceUsageCounts": {
+          "official": 651,
+          "stockanalysis": 0
+        }
+      },
+      "validation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "quarterCount": 32,
+        "validatedQuarterCount": 32,
+        "issueCount": 0,
+        "mismatchQuarterCount": 0,
+        "highConfidenceQuarterCount": 32,
+        "averageConfidenceScore": 1.0,
+        "latestQuarter": "2025Q4",
+        "latestQuarterConfidenceScore": 1.0,
+        "latestQuarterIssueCount": 0
+      }
+    },
+    "segments": {
+      "selectedSource": "official-segments",
+      "attempts": [
+        {
+          "layer": "segments",
+          "source_id": "official-segments",
+          "status": "success",
+          "selected": true,
+          "reason": "",
+          "quarter_count": 30,
+          "latest_quarter": "2025Q4",
+          "error": ""
+        }
+      ]
+    },
+    "revenueStructures": {
+      "selectedSource": "official-revenue-structures",
+      "attempts": [
+        {
+          "layer": "revenue-structures",
+          "source_id": "official-revenue-structures",
+          "status": "success",
+          "selected": true,
+          "reason": "",
+          "quarter_count": 8,
+          "latest_quarter": "2025Q4",
+          "error": ""
+        }
+      ]
+    },
+    "summary": {
+      "financialQuarterCount": 32,
+      "segmentQuarterCount": 30,
+      "revenueStructureQuarterCount": 8
+    },
+    "validation": {
+      "version": "parser-validation-v1",
+      "status": "high",
+      "overallConfidenceScore": 0.9125,
+      "financialConfidenceScore": 1.0,
+      "structuralConfidenceScore": 0.75,
+      "revenueSegmentChecks": 0,
+      "revenueSegmentMismatchCount": 0,
+      "revenueSegmentSkippedChecks": 28,
+      "detailGroupChecks": 0,
+      "detailGroupMismatchCount": 0,
+      "detailGroupSkippedChecks": 0,
+      "opexChecks": 0,
+      "opexSkippedChecks": 0,
+      "opexOverflowMismatchCount": 0,
+      "warningCount": 0,
+      "warnings": []
+    }
+  },
   "statementPresets": {},
   "coverage": {
     "quarterCount": 32,
     "pixelReplicaQuarterCount": 0,
     "hasPixelReplica": false,
     "officialFinancialQuarterCount": 32,
-    "officialSegmentQuarterCount": 29
+    "officialSegmentQuarterCount": 29,
+    "officialExpenseQuarterCount": 0,
+    "classification": {
+      "status": "ok",
+      "latestQuarter": "2025Q4",
+      "latestQuarterHasRevenueClassification": true,
+      "latestQuarterHasExpenseClassification": false,
+      "latestRevenueClassificationQuarter": "2025Q4",
+      "latestExpenseClassificationQuarter": null,
+      "latestStructureHistoryQuarter": "2025Q4",
+      "revenueClassificationQuarterCount": 29,
+      "expenseClassificationQuarterCount": 0,
+      "revenueClassificationCoverageRatio": 0.9062,
+      "expenseClassificationCoverageRatio": 0.0,
+      "latestRevenueClassificationLagQuarters": 0,
+      "latestExpenseClassificationLagQuarters": null,
+      "warnings": [],
+      "blockers": [],
+      "policy": {}
+    },
+    "parser": {
+      "version": "universal-parser-v3",
+      "selectedFinancialSource": "official",
+      "selectedSegmentSource": "official-segments",
+      "selectedRevenueStructureSource": "official-revenue-structures",
+      "financialAttemptCount": 2,
+      "financialReconciliation": {
+        "version": "financial-reconciler-v1",
+        "primarySource": "official",
+        "quarterCount": 32,
+        "fieldOverrideCount": 0,
+        "derivedFieldCount": 0,
+        "mixedSourceQuarterCount": 0,
+        "sourceUsageCounts": {
+          "official": 651,
+          "stockanalysis": 0
+        }
+      },
+      "financialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "quarterCount": 32,
+        "validatedQuarterCount": 32,
+        "issueCount": 0,
+        "mismatchQuarterCount": 0,
+        "highConfidenceQuarterCount": 32,
+        "averageConfidenceScore": 1.0,
+        "latestQuarter": "2025Q4",
+        "latestQuarterConfidenceScore": 1.0,
+        "latestQuarterIssueCount": 0
+      },
+      "validation": {
+        "version": "parser-validation-v1",
+        "status": "high",
+        "overallConfidenceScore": 0.9125,
+        "financialConfidenceScore": 1.0,
+        "structuralConfidenceScore": 0.75,
+        "revenueSegmentChecks": 0,
+        "revenueSegmentMismatchCount": 0,
+        "revenueSegmentSkippedChecks": 28,
+        "detailGroupChecks": 0,
+        "detailGroupMismatchCount": 0,
+        "detailGroupSkippedChecks": 0,
+        "opexChecks": 0,
+        "opexSkippedChecks": 0,
+        "opexOverflowMismatchCount": 0,
+        "warningCount": 0,
+        "warnings": []
+      }
+    }
   }
 }

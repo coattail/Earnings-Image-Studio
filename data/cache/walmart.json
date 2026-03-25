@@ -76,6 +76,73 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 0,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "pretax-minus-tax-equals-net",
+            "severity": "warning",
+            "message": "netIncomeBn does not reconcile with pretaxIncomeBn and taxBn.",
+            "expected": 2.175,
+            "derived": 2.363,
+            "delta": -0.188,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "displayCurrency": "USD",
       "displayScaleFactor": 1
     },
@@ -108,6 +175,74 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "pretax-minus-tax-equals-net",
+            "severity": "warning",
+            "message": "netIncomeBn does not reconcile with pretaxIncomeBn and taxBn.",
+            "expected": 2.134,
+            "derived": 2.276,
+            "delta": -0.142,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "displayCurrency": "USD",
       "displayScaleFactor": 1
     },
@@ -140,6 +275,74 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "pretax-minus-tax-equals-net",
+            "severity": "warning",
+            "message": "netIncomeBn does not reconcile with pretaxIncomeBn and taxBn.",
+            "expected": -0.861,
+            "derived": -0.727,
+            "delta": -0.134,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Walmart US",
@@ -155,7 +358,9 @@
           "filingDate": "2019-09-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Walmart International",
@@ -171,7 +376,9 @@
           "filingDate": "2019-09-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Sams Club",
@@ -187,7 +394,9 @@
           "filingDate": "2019-09-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -224,6 +433,64 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Walmart US",
@@ -239,7 +506,9 @@
           "filingDate": "2019-12-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Walmart International",
@@ -255,7 +524,9 @@
           "filingDate": "2019-12-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Sams Club",
@@ -271,7 +542,9 @@
           "filingDate": "2019-12-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -308,6 +581,79 @@
       "grossMarginYoyDeltaPp": -0.21,
       "operatingMarginYoyDeltaPp": 1.09,
       "profitMarginYoyDeltaPp": 1.07,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "pretax-minus-tax-equals-net",
+            "severity": "warning",
+            "message": "netIncomeBn does not reconcile with pretaxIncomeBn and taxBn.",
+            "expected": 3.687,
+            "derived": 3.813,
+            "delta": -0.126,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "displayCurrency": "USD",
       "displayScaleFactor": 1
     },
@@ -340,6 +686,69 @@
       "grossMarginYoyDeltaPp": -0.27,
       "operatingMarginYoyDeltaPp": -0.22,
       "profitMarginYoyDeltaPp": 1.37,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Walmart US",
@@ -355,7 +764,9 @@
           "filingDate": "2020-06-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Walmart International",
@@ -371,7 +782,9 @@
           "filingDate": "2020-06-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Sams Club",
@@ -387,7 +800,9 @@
           "filingDate": "2020-06-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -424,6 +839,69 @@
       "grossMarginYoyDeltaPp": -0.46,
       "operatingMarginYoyDeltaPp": -0.22,
       "profitMarginYoyDeltaPp": 3.47,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Walmart US",
@@ -439,7 +917,9 @@
           "filingDate": "2019-09-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Walmart International",
@@ -455,7 +935,9 @@
           "filingDate": "2019-09-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Sams Club",
@@ -471,7 +953,9 @@
           "filingDate": "2019-09-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -508,6 +992,69 @@
       "grossMarginYoyDeltaPp": -0.36,
       "operatingMarginYoyDeltaPp": -0.3,
       "profitMarginYoyDeltaPp": 1.21,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Walmart US",
@@ -523,7 +1070,9 @@
           "filingDate": "2019-12-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Walmart International",
@@ -539,7 +1088,9 @@
           "filingDate": "2019-12-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Sams Club",
@@ -555,7 +1106,9 @@
           "filingDate": "2019-12-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -592,6 +1145,79 @@
       "grossMarginYoyDeltaPp": -0.47,
       "operatingMarginYoyDeltaPp": -0.62,
       "profitMarginYoyDeltaPp": 0.27,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "pretax-minus-tax-equals-net",
+            "severity": "warning",
+            "message": "netIncomeBn does not reconcile with pretaxIncomeBn and taxBn.",
+            "expected": 4.141,
+            "derived": 4.294,
+            "delta": -0.153,
+            "tolerance": 0.124
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Walmart US",
@@ -607,7 +1233,9 @@
           "filingDate": "2020-03-20",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Walmart International",
@@ -623,7 +1251,9 @@
           "filingDate": "2020-03-20",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Sams Club",
@@ -639,7 +1269,9 @@
           "filingDate": "2020-03-20",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -676,6 +1308,69 @@
       "grossMarginYoyDeltaPp": -0.66,
       "operatingMarginYoyDeltaPp": -0.11,
       "profitMarginYoyDeltaPp": -0.14,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Walmart US",
@@ -691,7 +1386,9 @@
           "filingDate": "2020-06-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Walmart International",
@@ -707,7 +1404,9 @@
           "filingDate": "2020-06-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Sams Club",
@@ -723,7 +1422,9 @@
           "filingDate": "2020-06-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -760,6 +1461,69 @@
       "grossMarginYoyDeltaPp": 0.63,
       "operatingMarginYoyDeltaPp": 0.12,
       "profitMarginYoyDeltaPp": 1.94,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Walmart US",
@@ -775,7 +1539,9 @@
           "filingDate": "2020-09-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Walmart International",
@@ -791,7 +1557,9 @@
           "filingDate": "2020-09-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Sams Club",
@@ -807,7 +1575,9 @@
           "filingDate": "2020-09-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -844,6 +1614,69 @@
       "grossMarginYoyDeltaPp": 0.5,
       "operatingMarginYoyDeltaPp": 0.6,
       "profitMarginYoyDeltaPp": 1.25,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Walmart US",
@@ -859,7 +1692,9 @@
           "filingDate": "2020-12-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Walmart International",
@@ -875,7 +1710,9 @@
           "filingDate": "2020-12-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Sams Club",
@@ -891,7 +1728,9 @@
           "filingDate": "2020-12-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -928,6 +1767,69 @@
       "grossMarginYoyDeltaPp": 0.29,
       "operatingMarginYoyDeltaPp": -0.15,
       "profitMarginYoyDeltaPp": -4.33,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Walmart US",
@@ -943,7 +1845,9 @@
           "filingDate": "2021-03-19",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Walmart International",
@@ -959,7 +1863,9 @@
           "filingDate": "2021-03-19",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Sams Club",
@@ -975,7 +1881,9 @@
           "filingDate": "2021-03-19",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1012,6 +1920,73 @@
       "grossMarginYoyDeltaPp": 1.04,
       "operatingMarginYoyDeltaPp": 1.13,
       "profitMarginYoyDeltaPp": -0.99,
+      "statementFilingDate": "2021-04-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/wmt/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Walmart US",
@@ -1027,7 +2002,9 @@
           "filingDate": "2021-06-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Walmart International",
@@ -1043,7 +2020,9 @@
           "filingDate": "2021-06-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Sams Club",
@@ -1059,7 +2038,9 @@
           "filingDate": "2021-06-04",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1096,6 +2077,73 @@
       "grossMarginYoyDeltaPp": -0.15,
       "operatingMarginYoyDeltaPp": 0.83,
       "profitMarginYoyDeltaPp": -1.67,
+      "statementFilingDate": "2021-07-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/wmt/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Walmart US",
@@ -1111,7 +2159,9 @@
           "filingDate": "2021-09-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Walmart International",
@@ -1127,7 +2177,9 @@
           "filingDate": "2021-09-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Sams Club",
@@ -1143,7 +2195,9 @@
           "filingDate": "2021-09-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1180,6 +2234,73 @@
       "grossMarginYoyDeltaPp": -0.42,
       "operatingMarginYoyDeltaPp": -0.16,
       "profitMarginYoyDeltaPp": -1.61,
+      "statementFilingDate": "2021-10-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/wmt/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Walmart US",
@@ -1195,7 +2316,9 @@
           "filingDate": "2021-12-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Walmart International",
@@ -1211,7 +2334,9 @@
           "filingDate": "2021-12-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Sams Club",
@@ -1227,7 +2352,9 @@
           "filingDate": "2021-12-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1264,6 +2391,73 @@
       "grossMarginYoyDeltaPp": 0.1,
       "operatingMarginYoyDeltaPp": 0.26,
       "profitMarginYoyDeltaPp": 3.73,
+      "statementFilingDate": "2022-01-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/wmt/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "displayCurrency": "USD",
       "displayScaleFactor": 1
     },
@@ -1296,6 +2490,73 @@
       "grossMarginYoyDeltaPp": -0.87,
       "operatingMarginYoyDeltaPp": -1.25,
       "profitMarginYoyDeltaPp": -0.53,
+      "statementFilingDate": "2022-04-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/wmt/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Walmart US",
@@ -1311,7 +2572,9 @@
           "filingDate": "2022-06-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Walmart International",
@@ -1327,7 +2590,9 @@
           "filingDate": "2022-06-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Sams Club",
@@ -1343,7 +2608,9 @@
           "filingDate": "2022-06-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1380,6 +2647,73 @@
       "grossMarginYoyDeltaPp": -1.32,
       "operatingMarginYoyDeltaPp": -0.73,
       "profitMarginYoyDeltaPp": 0.34,
+      "statementFilingDate": "2022-07-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/wmt/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Walmart US",
@@ -1395,7 +2729,9 @@
           "filingDate": "2022-09-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Walmart International",
@@ -1411,7 +2747,9 @@
           "filingDate": "2022-09-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Sams Club",
@@ -1427,7 +2765,9 @@
           "filingDate": "2022-09-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1464,6 +2804,73 @@
       "grossMarginYoyDeltaPp": -0.89,
       "operatingMarginYoyDeltaPp": -2.38,
       "profitMarginYoyDeltaPp": -3.42,
+      "statementFilingDate": "2022-10-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/wmt/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Walmart US",
@@ -1479,7 +2886,9 @@
           "filingDate": "2022-12-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Walmart International",
@@ -1495,7 +2904,9 @@
           "filingDate": "2022-12-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Sams Club",
@@ -1511,7 +2922,9 @@
           "filingDate": "2022-12-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1548,6 +2961,83 @@
       "grossMarginYoyDeltaPp": -0.83,
       "operatingMarginYoyDeltaPp": -0.47,
       "profitMarginYoyDeltaPp": 1.51,
+      "statementFilingDate": "2023-01-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/wmt/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "pretax-minus-tax-equals-net",
+            "severity": "warning",
+            "message": "netIncomeBn does not reconcile with pretaxIncomeBn and taxBn.",
+            "expected": 6.275,
+            "derived": 5.809,
+            "delta": 0.466,
+            "tolerance": 0.188
+          }
+        ]
+      },
       "displayCurrency": "USD",
       "displayScaleFactor": 1
     },
@@ -1580,6 +3070,83 @@
       "grossMarginYoyDeltaPp": -0.18,
       "operatingMarginYoyDeltaPp": 0.34,
       "profitMarginYoyDeltaPp": -0.35,
+      "statementFilingDate": "2023-04-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/wmt/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "pretax-minus-tax-equals-net",
+            "severity": "warning",
+            "message": "netIncomeBn does not reconcile with pretaxIncomeBn and taxBn.",
+            "expected": 1.673,
+            "derived": 1.896,
+            "delta": -0.223,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Walmart US",
@@ -1595,7 +3162,9 @@
           "filingDate": "2023-06-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Walmart International",
@@ -1611,7 +3180,9 @@
           "filingDate": "2023-06-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Sams Club",
@@ -1627,7 +3198,9 @@
           "filingDate": "2023-06-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1664,6 +3237,73 @@
       "grossMarginYoyDeltaPp": 0.5,
       "operatingMarginYoyDeltaPp": 0.03,
       "profitMarginYoyDeltaPp": 1.52,
+      "statementFilingDate": "2023-07-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/wmt/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Walmart US",
@@ -1679,7 +3319,9 @@
           "filingDate": "2023-09-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Walmart International",
@@ -1695,7 +3337,9 @@
           "filingDate": "2023-09-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Sams Club",
@@ -1711,7 +3355,9 @@
           "filingDate": "2023-09-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1748,6 +3394,83 @@
       "grossMarginYoyDeltaPp": 0.32,
       "operatingMarginYoyDeltaPp": 2.11,
       "profitMarginYoyDeltaPp": 1.47,
+      "statementFilingDate": "2023-10-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/wmt/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "pretax-minus-tax-equals-net",
+            "severity": "warning",
+            "message": "netIncomeBn does not reconcile with pretaxIncomeBn and taxBn.",
+            "expected": 0.453,
+            "derived": 0.643,
+            "delta": -0.19,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Walmart US",
@@ -1763,7 +3486,9 @@
           "filingDate": "2023-11-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Walmart International",
@@ -1779,7 +3504,9 @@
           "filingDate": "2023-11-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Sams Club",
@@ -1795,7 +3522,9 @@
           "filingDate": "2023-11-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1832,6 +3561,83 @@
       "grossMarginYoyDeltaPp": 0.39,
       "operatingMarginYoyDeltaPp": 0.8,
       "profitMarginYoyDeltaPp": -0.66,
+      "statementFilingDate": "2024-01-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/wmt/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "pretax-minus-tax-equals-net",
+            "severity": "warning",
+            "message": "netIncomeBn does not reconcile with pretaxIncomeBn and taxBn.",
+            "expected": 5.494,
+            "derived": 5.678,
+            "delta": -0.184,
+            "tolerance": 0.165
+          }
+        ]
+      },
       "displayCurrency": "USD",
       "displayScaleFactor": 1
     },
@@ -1864,6 +3670,83 @@
       "grossMarginYoyDeltaPp": 0.42,
       "operatingMarginYoyDeltaPp": 0.15,
       "profitMarginYoyDeltaPp": 2.08,
+      "statementFilingDate": "2024-04-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/wmt/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "pretax-minus-tax-equals-net",
+            "severity": "warning",
+            "message": "netIncomeBn does not reconcile with pretaxIncomeBn and taxBn.",
+            "expected": 5.104,
+            "derived": 5.307,
+            "delta": -0.203,
+            "tolerance": 0.153
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Walmart US",
@@ -1879,7 +3762,9 @@
           "filingDate": "2024-06-07",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Walmart International",
@@ -1895,7 +3780,9 @@
           "filingDate": "2024-06-07",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Sams Club US",
@@ -1911,7 +3798,9 @@
           "filingDate": "2025-06-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1948,6 +3837,83 @@
       "grossMarginYoyDeltaPp": 0.43,
       "operatingMarginYoyDeltaPp": 0.17,
       "profitMarginYoyDeltaPp": -2.24,
+      "statementFilingDate": "2024-07-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/wmt/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "pretax-minus-tax-equals-net",
+            "severity": "warning",
+            "message": "netIncomeBn does not reconcile with pretaxIncomeBn and taxBn.",
+            "expected": 4.501,
+            "derived": 4.711,
+            "delta": -0.21,
+            "tolerance": 0.135
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Walmart US",
@@ -1963,7 +3929,9 @@
           "filingDate": "2024-08-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Walmart International",
@@ -1979,7 +3947,9 @@
           "filingDate": "2024-08-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Sams Club US",
@@ -1995,7 +3965,9 @@
           "filingDate": "2025-08-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2032,6 +4004,73 @@
       "grossMarginYoyDeltaPp": 0.21,
       "operatingMarginYoyDeltaPp": 0.1,
       "profitMarginYoyDeltaPp": 2.44,
+      "statementFilingDate": "2024-10-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/wmt/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Walmart US",
@@ -2047,7 +4086,9 @@
           "filingDate": "2024-12-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Walmart International",
@@ -2063,7 +4104,9 @@
           "filingDate": "2024-12-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Sams Club US",
@@ -2079,7 +4122,9 @@
           "filingDate": "2025-12-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2116,6 +4161,83 @@
       "grossMarginYoyDeltaPp": 0.53,
       "operatingMarginYoyDeltaPp": 0.17,
       "profitMarginYoyDeltaPp": -0.26,
+      "statementFilingDate": "2025-01-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/wmt/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "pretax-minus-tax-equals-net",
+            "severity": "warning",
+            "message": "netIncomeBn does not reconcile with pretaxIncomeBn and taxBn.",
+            "expected": 5.254,
+            "derived": 5.425,
+            "delta": -0.171,
+            "tolerance": 0.158
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Walmart US",
@@ -2131,7 +4253,9 @@
           "filingDate": "2025-03-14",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Walmart International",
@@ -2147,7 +4271,9 @@
           "filingDate": "2025-03-14",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Sams Club US",
@@ -2163,7 +4289,9 @@
           "filingDate": "2025-03-14",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2200,6 +4328,83 @@
       "grossMarginYoyDeltaPp": 0.12,
       "operatingMarginYoyDeltaPp": 0.07,
       "profitMarginYoyDeltaPp": -0.45,
+      "statementFilingDate": "2025-04-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/wmt/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "pretax-minus-tax-equals-net",
+            "severity": "warning",
+            "message": "netIncomeBn does not reconcile with pretaxIncomeBn and taxBn.",
+            "expected": 4.487,
+            "derived": 4.639,
+            "delta": -0.152,
+            "tolerance": 0.135
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Walmart US",
@@ -2215,7 +4420,9 @@
           "filingDate": "2025-06-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Walmart International",
@@ -2231,7 +4438,9 @@
           "filingDate": "2025-06-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Sams Club US",
@@ -2247,7 +4456,9 @@
           "filingDate": "2025-06-06",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2284,6 +4495,73 @@
       "grossMarginYoyDeltaPp": 0.04,
       "operatingMarginYoyDeltaPp": -0.58,
       "profitMarginYoyDeltaPp": 1.32,
+      "statementFilingDate": "2025-07-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/wmt/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Walmart US",
@@ -2299,7 +4577,9 @@
           "filingDate": "2025-08-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Walmart International",
@@ -2315,7 +4595,9 @@
           "filingDate": "2025-08-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Sams Club US",
@@ -2331,7 +4613,9 @@
           "filingDate": "2025-08-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2368,6 +4652,73 @@
       "grossMarginYoyDeltaPp": 0.02,
       "operatingMarginYoyDeltaPp": -0.22,
       "profitMarginYoyDeltaPp": 0.74,
+      "statementFilingDate": "2025-10-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/wmt/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Walmart US",
@@ -2383,7 +4734,9 @@
           "filingDate": "2025-12-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Walmart International",
@@ -2399,7 +4752,9 @@
           "filingDate": "2025-12-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Sams Club US",
@@ -2415,7 +4770,9 @@
           "filingDate": "2025-12-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2452,6 +4809,83 @@
       "grossMarginYoyDeltaPp": 0.13,
       "operatingMarginYoyDeltaPp": 0.22,
       "profitMarginYoyDeltaPp": -0.7,
+      "statementFilingDate": "2026-01-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/wmt/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "pretax-minus-tax-equals-net",
+            "severity": "warning",
+            "message": "netIncomeBn does not reconcile with pretaxIncomeBn and taxBn.",
+            "expected": 4.237,
+            "derived": 4.392,
+            "delta": -0.155,
+            "tolerance": 0.127
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Walmart US",
@@ -2467,7 +4901,9 @@
           "filingDate": "2026-03-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Walmart International",
@@ -2483,7 +4919,9 @@
           "filingDate": "2026-03-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Sams Club US",
@@ -2499,7 +4937,9 @@
           "filingDate": "2026-03-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2728,7 +5168,9 @@
             "filingDate": "2019-09-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Walmart International",
@@ -2744,7 +5186,9 @@
             "filingDate": "2019-09-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Sams Club",
@@ -2760,7 +5204,9 @@
             "filingDate": "2019-09-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -2780,7 +5226,9 @@
             "filingDate": "2019-12-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Walmart International",
@@ -2796,7 +5244,9 @@
             "filingDate": "2019-12-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Sams Club",
@@ -2812,7 +5262,9 @@
             "filingDate": "2019-12-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -2832,7 +5284,9 @@
             "filingDate": "2020-06-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Walmart International",
@@ -2848,7 +5302,9 @@
             "filingDate": "2020-06-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Sams Club",
@@ -2864,7 +5320,9 @@
             "filingDate": "2020-06-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -2884,7 +5342,9 @@
             "filingDate": "2019-09-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Walmart International",
@@ -2900,7 +5360,9 @@
             "filingDate": "2019-09-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Sams Club",
@@ -2916,7 +5378,9 @@
             "filingDate": "2019-09-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -2936,7 +5400,9 @@
             "filingDate": "2019-12-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Walmart International",
@@ -2952,7 +5418,9 @@
             "filingDate": "2019-12-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Sams Club",
@@ -2968,7 +5436,9 @@
             "filingDate": "2019-12-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -2988,7 +5458,9 @@
             "filingDate": "2020-03-20",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Walmart International",
@@ -3004,7 +5476,9 @@
             "filingDate": "2020-03-20",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Sams Club",
@@ -3020,7 +5494,9 @@
             "filingDate": "2020-03-20",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -3040,7 +5516,9 @@
             "filingDate": "2020-06-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Walmart International",
@@ -3056,7 +5534,9 @@
             "filingDate": "2020-06-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Sams Club",
@@ -3072,7 +5552,9 @@
             "filingDate": "2020-06-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -3092,7 +5574,9 @@
             "filingDate": "2020-09-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Walmart International",
@@ -3108,7 +5592,9 @@
             "filingDate": "2020-09-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Sams Club",
@@ -3124,7 +5610,9 @@
             "filingDate": "2020-09-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -3144,7 +5632,9 @@
             "filingDate": "2020-12-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Walmart International",
@@ -3160,7 +5650,9 @@
             "filingDate": "2020-12-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Sams Club",
@@ -3176,7 +5668,9 @@
             "filingDate": "2020-12-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -3196,7 +5690,9 @@
             "filingDate": "2021-03-19",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Walmart International",
@@ -3212,7 +5708,9 @@
             "filingDate": "2021-03-19",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Sams Club",
@@ -3228,7 +5726,9 @@
             "filingDate": "2021-03-19",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -3248,7 +5748,9 @@
             "filingDate": "2024-06-07",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Walmart International",
@@ -3264,7 +5766,9 @@
             "filingDate": "2024-06-07",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Sams Club US",
@@ -3280,7 +5784,9 @@
             "filingDate": "2025-06-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -3300,7 +5806,9 @@
             "filingDate": "2024-08-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Walmart International",
@@ -3316,7 +5824,9 @@
             "filingDate": "2024-08-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Sams Club US",
@@ -3332,7 +5842,9 @@
             "filingDate": "2025-08-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -3352,7 +5864,9 @@
             "filingDate": "2024-12-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Walmart International",
@@ -3368,7 +5882,9 @@
             "filingDate": "2024-12-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Sams Club US",
@@ -3384,7 +5900,9 @@
             "filingDate": "2025-12-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -3404,7 +5922,9 @@
             "filingDate": "2025-03-14",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Walmart International",
@@ -3420,7 +5940,9 @@
             "filingDate": "2025-03-14",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Sams Club US",
@@ -3436,7 +5958,9 @@
             "filingDate": "2025-03-14",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -3456,7 +5980,9 @@
             "filingDate": "2025-06-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Walmart International",
@@ -3472,7 +5998,9 @@
             "filingDate": "2025-06-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Sams Club US",
@@ -3488,7 +6016,9 @@
             "filingDate": "2025-06-06",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -3508,7 +6038,9 @@
             "filingDate": "2025-08-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Walmart International",
@@ -3524,7 +6056,9 @@
             "filingDate": "2025-08-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Sams Club US",
@@ -3540,7 +6074,9 @@
             "filingDate": "2025-08-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -3560,7 +6096,9 @@
             "filingDate": "2025-12-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Walmart International",
@@ -3576,7 +6114,9 @@
             "filingDate": "2025-12-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Sams Club US",
@@ -3592,7 +6132,9 @@
             "filingDate": "2025-12-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -3612,7 +6154,9 @@
             "filingDate": "2026-03-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Walmart International",
@@ -3628,7 +6172,9 @@
             "filingDate": "2026-03-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Sams Club US",
@@ -3644,7 +6190,9 @@
             "filingDate": "2026-03-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -3664,7 +6212,9 @@
             "filingDate": "2021-06-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Walmart International",
@@ -3680,7 +6230,9 @@
             "filingDate": "2021-06-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Sams Club",
@@ -3696,7 +6248,9 @@
             "filingDate": "2021-06-04",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -3716,7 +6270,9 @@
             "filingDate": "2021-09-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Walmart International",
@@ -3732,7 +6288,9 @@
             "filingDate": "2021-09-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Sams Club",
@@ -3748,7 +6306,9 @@
             "filingDate": "2021-09-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -3768,7 +6328,9 @@
             "filingDate": "2021-12-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Walmart International",
@@ -3784,7 +6346,9 @@
             "filingDate": "2021-12-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Sams Club",
@@ -3800,7 +6364,9 @@
             "filingDate": "2021-12-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -3820,7 +6386,9 @@
             "filingDate": "2022-06-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Walmart International",
@@ -3836,7 +6404,9 @@
             "filingDate": "2022-06-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Sams Club",
@@ -3852,7 +6422,9 @@
             "filingDate": "2022-06-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -3872,7 +6444,9 @@
             "filingDate": "2022-09-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Walmart International",
@@ -3888,7 +6462,9 @@
             "filingDate": "2022-09-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Sams Club",
@@ -3904,7 +6480,9 @@
             "filingDate": "2022-09-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -3924,7 +6502,9 @@
             "filingDate": "2022-12-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Walmart International",
@@ -3940,7 +6520,9 @@
             "filingDate": "2022-12-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Sams Club",
@@ -3956,7 +6538,9 @@
             "filingDate": "2022-12-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -3976,7 +6560,9 @@
             "filingDate": "2023-06-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Walmart International",
@@ -3992,7 +6578,9 @@
             "filingDate": "2023-06-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Sams Club",
@@ -4008,7 +6596,9 @@
             "filingDate": "2023-06-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -4028,7 +6618,9 @@
             "filingDate": "2023-09-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Walmart International",
@@ -4044,7 +6636,9 @@
             "filingDate": "2023-09-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Sams Club",
@@ -4060,7 +6654,9 @@
             "filingDate": "2023-09-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -4080,7 +6676,9 @@
             "filingDate": "2023-11-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Walmart International",
@@ -4096,7 +6694,9 @@
             "filingDate": "2023-11-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Sams Club",
@@ -4112,7 +6712,9 @@
             "filingDate": "2023-11-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       }
@@ -4310,12 +6912,195 @@
     ],
     "errors": []
   },
+  "parserDiagnostics": {
+    "version": "universal-parser-v3",
+    "financials": {
+      "basePreferredOrder": [
+        "official",
+        "stockanalysis"
+      ],
+      "preferredOrder": [
+        "official",
+        "stockanalysis"
+      ],
+      "selectedSource": "official",
+      "attempts": [
+        {
+          "layer": "financials",
+          "source_id": "official",
+          "status": "success",
+          "selected": true,
+          "reason": "",
+          "quarter_count": 33,
+          "latest_quarter": "2026Q1",
+          "error": ""
+        },
+        {
+          "layer": "financials",
+          "source_id": "stockanalysis",
+          "status": "success",
+          "selected": false,
+          "reason": "",
+          "quarter_count": 20,
+          "latest_quarter": "2026Q1",
+          "error": ""
+        }
+      ],
+      "reconciliation": {
+        "version": "financial-reconciler-v1",
+        "primarySource": "official",
+        "quarterCount": 33,
+        "fieldOverrideCount": 0,
+        "derivedFieldCount": 0,
+        "mixedSourceQuarterCount": 0,
+        "sourceUsageCounts": {
+          "official": 639,
+          "stockanalysis": 0
+        }
+      },
+      "validation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "quarterCount": 33,
+        "validatedQuarterCount": 33,
+        "issueCount": 14,
+        "mismatchQuarterCount": 14,
+        "highConfidenceQuarterCount": 33,
+        "averageConfidenceScore": 0.9762,
+        "latestQuarter": "2026Q1",
+        "latestQuarterConfidenceScore": 0.9438,
+        "latestQuarterIssueCount": 1
+      }
+    },
+    "segments": {
+      "selectedSource": "official-segments",
+      "attempts": [
+        {
+          "layer": "segments",
+          "source_id": "official-segments",
+          "status": "success",
+          "selected": true,
+          "reason": "",
+          "quarter_count": 27,
+          "latest_quarter": "2026Q1",
+          "error": ""
+        }
+      ]
+    },
+    "revenueStructures": {
+      "selectedSource": "official-revenue-structures",
+      "attempts": [
+        {
+          "layer": "revenue-structures",
+          "source_id": "official-revenue-structures",
+          "status": "success",
+          "selected": true,
+          "reason": "",
+          "quarter_count": 27,
+          "latest_quarter": "2026Q1",
+          "error": ""
+        }
+      ]
+    },
+    "summary": {
+      "financialQuarterCount": 33,
+      "segmentQuarterCount": 27,
+      "revenueStructureQuarterCount": 27
+    },
+    "validation": {
+      "version": "parser-validation-v1",
+      "status": "high",
+      "overallConfidenceScore": 0.9845,
+      "financialConfidenceScore": 0.9762,
+      "structuralConfidenceScore": 1.0,
+      "revenueSegmentChecks": 27,
+      "revenueSegmentMismatchCount": 0,
+      "revenueSegmentSkippedChecks": 0,
+      "detailGroupChecks": 0,
+      "detailGroupMismatchCount": 0,
+      "detailGroupSkippedChecks": 0,
+      "opexChecks": 0,
+      "opexSkippedChecks": 0,
+      "opexOverflowMismatchCount": 0,
+      "warningCount": 0,
+      "warnings": []
+    }
+  },
   "statementPresets": {},
   "coverage": {
     "quarterCount": 33,
     "pixelReplicaQuarterCount": 0,
     "hasPixelReplica": false,
     "officialFinancialQuarterCount": 33,
-    "officialSegmentQuarterCount": 27
+    "officialSegmentQuarterCount": 27,
+    "officialExpenseQuarterCount": 0,
+    "classification": {
+      "status": "ok",
+      "latestQuarter": "2026Q1",
+      "latestQuarterHasRevenueClassification": true,
+      "latestQuarterHasExpenseClassification": false,
+      "latestRevenueClassificationQuarter": "2026Q1",
+      "latestExpenseClassificationQuarter": null,
+      "latestStructureHistoryQuarter": "2026Q1",
+      "revenueClassificationQuarterCount": 27,
+      "expenseClassificationQuarterCount": 0,
+      "revenueClassificationCoverageRatio": 0.8182,
+      "expenseClassificationCoverageRatio": 0.0,
+      "latestRevenueClassificationLagQuarters": 0,
+      "latestExpenseClassificationLagQuarters": null,
+      "warnings": [],
+      "blockers": [],
+      "policy": {}
+    },
+    "parser": {
+      "version": "universal-parser-v3",
+      "selectedFinancialSource": "official",
+      "selectedSegmentSource": "official-segments",
+      "selectedRevenueStructureSource": "official-revenue-structures",
+      "financialAttemptCount": 2,
+      "financialReconciliation": {
+        "version": "financial-reconciler-v1",
+        "primarySource": "official",
+        "quarterCount": 33,
+        "fieldOverrideCount": 0,
+        "derivedFieldCount": 0,
+        "mixedSourceQuarterCount": 0,
+        "sourceUsageCounts": {
+          "official": 639,
+          "stockanalysis": 0
+        }
+      },
+      "financialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "quarterCount": 33,
+        "validatedQuarterCount": 33,
+        "issueCount": 14,
+        "mismatchQuarterCount": 14,
+        "highConfidenceQuarterCount": 33,
+        "averageConfidenceScore": 0.9762,
+        "latestQuarter": "2026Q1",
+        "latestQuarterConfidenceScore": 0.9438,
+        "latestQuarterIssueCount": 1
+      },
+      "validation": {
+        "version": "parser-validation-v1",
+        "status": "high",
+        "overallConfidenceScore": 0.9845,
+        "financialConfidenceScore": 0.9762,
+        "structuralConfidenceScore": 1.0,
+        "revenueSegmentChecks": 27,
+        "revenueSegmentMismatchCount": 0,
+        "revenueSegmentSkippedChecks": 0,
+        "detailGroupChecks": 0,
+        "detailGroupMismatchCount": 0,
+        "detailGroupSkippedChecks": 0,
+        "opexChecks": 0,
+        "opexSkippedChecks": 0,
+        "opexOverflowMismatchCount": 0,
+        "warningCount": 0,
+        "warnings": []
+      }
+    }
   }
 }

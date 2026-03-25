@@ -75,6 +75,75 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 0,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 5.449,
+            "derived": 3.522,
+            "delta": 1.927,
+            "tolerance": 0.163
+          }
+        ]
+      },
       "displayCurrency": "USD",
       "displayScaleFactor": 1
     },
@@ -107,6 +176,76 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 5.863,
+            "derived": 3.649,
+            "delta": 2.214,
+            "tolerance": 0.176
+          }
+        ]
+      },
       "displayCurrency": "USD",
       "displayScaleFactor": 1
     },
@@ -139,6 +278,76 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 5.781,
+            "derived": 3.363,
+            "delta": 2.418,
+            "tolerance": 0.173
+          }
+        ]
+      },
       "displayCurrency": "USD",
       "displayScaleFactor": 1
     },
@@ -171,6 +380,76 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 7.82,
+            "derived": 5.024,
+            "delta": 2.796,
+            "tolerance": 0.235
+          }
+        ]
+      },
       "displayCurrency": "USD",
       "displayScaleFactor": 1
     },
@@ -203,6 +482,81 @@
       "grossMarginYoyDeltaPp": -2.58,
       "operatingMarginYoyDeltaPp": -23.54,
       "profitMarginYoyDeltaPp": -25.57,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 3.317,
+            "derived": 0.501,
+            "delta": 2.816,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "displayCurrency": "USD",
       "displayScaleFactor": 1
     },
@@ -235,6 +589,81 @@
       "grossMarginYoyDeltaPp": -2.85,
       "operatingMarginYoyDeltaPp": -16.91,
       "profitMarginYoyDeltaPp": -23.1,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 4.626,
+            "derived": 1.319,
+            "delta": 3.307,
+            "tolerance": 0.139
+          }
+        ]
+      },
       "displayCurrency": "USD",
       "displayScaleFactor": 1
     },
@@ -267,6 +696,81 @@
       "grossMarginYoyDeltaPp": -0.26,
       "operatingMarginYoyDeltaPp": -1.41,
       "profitMarginYoyDeltaPp": -2.91,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 7.185,
+            "derived": 4.03,
+            "delta": 3.155,
+            "tolerance": 0.216
+          }
+        ]
+      },
       "displayCurrency": "USD",
       "displayScaleFactor": 1
     },
@@ -299,6 +803,81 @@
       "grossMarginYoyDeltaPp": -0.03,
       "operatingMarginYoyDeltaPp": -4.21,
       "profitMarginYoyDeltaPp": -5.82,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 8.858,
+            "derived": 5.366,
+            "delta": 3.492,
+            "tolerance": 0.266
+          }
+        ]
+      },
       "displayCurrency": "USD",
       "displayScaleFactor": 1
     },
@@ -331,6 +910,81 @@
       "grossMarginYoyDeltaPp": -0.82,
       "operatingMarginYoyDeltaPp": 11.22,
       "profitMarginYoyDeltaPp": 11.53,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 5.893,
+            "derived": 2.434,
+            "delta": 3.459,
+            "tolerance": 0.177
+          }
+        ]
+      },
       "displayCurrency": "USD",
       "displayScaleFactor": 1
     },
@@ -363,6 +1017,81 @@
       "grossMarginYoyDeltaPp": -0.91,
       "operatingMarginYoyDeltaPp": 4.51,
       "profitMarginYoyDeltaPp": 12.22,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 5.963,
+            "derived": 2.134,
+            "delta": 3.829,
+            "tolerance": 0.179
+          }
+        ]
+      },
       "displayCurrency": "USD",
       "displayScaleFactor": 1
     },
@@ -395,6 +1124,81 @@
       "grossMarginYoyDeltaPp": -1.66,
       "operatingMarginYoyDeltaPp": -3.25,
       "profitMarginYoyDeltaPp": 2.03,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 8.04,
+            "derived": 3.846,
+            "delta": 4.194,
+            "tolerance": 0.241
+          }
+        ]
+      },
       "displayCurrency": "USD",
       "displayScaleFactor": 1
     },
@@ -427,6 +1231,81 @@
       "grossMarginYoyDeltaPp": -2.0,
       "operatingMarginYoyDeltaPp": 3.49,
       "profitMarginYoyDeltaPp": 5.11,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 12.775,
+            "derived": 7.565,
+            "delta": 5.21,
+            "tolerance": 0.383
+          }
+        ]
+      },
       "displayCurrency": "USD",
       "displayScaleFactor": 1
     },
@@ -459,6 +1338,85 @@
       "grossMarginYoyDeltaPp": -0.11,
       "operatingMarginYoyDeltaPp": 10.26,
       "profitMarginYoyDeltaPp": 8.65,
+      "statementFilingDate": "2021-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/meta/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 11.378,
+            "derived": 6.247,
+            "delta": 5.131,
+            "tolerance": 0.341
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Family Of Apps",
@@ -474,7 +1432,9 @@
           "filingDate": "2022-04-28",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Reality Labs",
@@ -490,7 +1450,9 @@
           "filingDate": "2022-04-28",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -511,7 +1473,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -528,7 +1492,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "displayCurrency": "USD",
@@ -563,6 +1529,85 @@
       "grossMarginYoyDeltaPp": 1.92,
       "operatingMarginYoyDeltaPp": 10.62,
       "profitMarginYoyDeltaPp": 8.04,
+      "statementFilingDate": "2021-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/meta/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 12.367,
+            "derived": 6.968,
+            "delta": 5.399,
+            "tolerance": 0.371
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Family Of Apps",
@@ -578,7 +1623,9 @@
           "filingDate": "2022-07-28",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Reality Labs",
@@ -594,7 +1641,9 @@
           "filingDate": "2022-07-28",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -615,7 +1664,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -632,7 +1683,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "displayCurrency": "USD",
@@ -667,6 +1720,85 @@
       "grossMarginYoyDeltaPp": -0.36,
       "operatingMarginYoyDeltaPp": -1.52,
       "profitMarginYoyDeltaPp": -4.85,
+      "statementFilingDate": "2021-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/meta/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 10.423,
+            "derived": 4.652,
+            "delta": 5.771,
+            "tolerance": 0.313
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Family Of Apps",
@@ -682,7 +1814,9 @@
           "filingDate": "2022-10-27",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Reality Labs",
@@ -698,7 +1832,9 @@
           "filingDate": "2022-10-27",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -719,7 +1855,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -736,7 +1874,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "displayCurrency": "USD",
@@ -771,6 +1911,85 @@
       "grossMarginYoyDeltaPp": -0.29,
       "operatingMarginYoyDeltaPp": -8.13,
       "profitMarginYoyDeltaPp": -9.42,
+      "statementFilingDate": "2021-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/meta/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 12.585,
+            "derived": 6.237,
+            "delta": 6.348,
+            "tolerance": 0.378
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Family Of Apps",
@@ -786,7 +2005,9 @@
           "filingDate": "2022-02-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Reality Labs",
@@ -802,7 +2023,9 @@
           "filingDate": "2022-02-03",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -823,7 +2046,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -840,7 +2065,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "displayCurrency": "USD",
@@ -875,6 +2102,85 @@
       "grossMarginYoyDeltaPp": -1.91,
       "operatingMarginYoyDeltaPp": -12.94,
       "profitMarginYoyDeltaPp": -9.54,
+      "statementFilingDate": "2022-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/meta/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 8.524,
+            "derived": 2.519,
+            "delta": 6.005,
+            "tolerance": 0.256
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Family Of Apps",
@@ -890,7 +2196,9 @@
           "filingDate": "2022-04-28",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Reality Labs",
@@ -906,7 +2214,9 @@
           "filingDate": "2022-04-28",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -927,7 +2237,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -944,7 +2256,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "displayCurrency": "USD",
@@ -979,6 +2293,85 @@
       "grossMarginYoyDeltaPp": 0.56,
       "operatingMarginYoyDeltaPp": -13.53,
       "profitMarginYoyDeltaPp": -12.55,
+      "statementFilingDate": "2022-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/meta/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 8.358,
+            "derived": 3.166,
+            "delta": 5.192,
+            "tolerance": 0.251
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Family Of Apps",
@@ -994,7 +2387,9 @@
           "filingDate": "2022-07-28",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Reality Labs",
@@ -1010,7 +2405,9 @@
           "filingDate": "2022-07-28",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1031,7 +2428,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -1048,7 +2447,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "displayCurrency": "USD",
@@ -1083,6 +2484,85 @@
       "grossMarginYoyDeltaPp": -0.73,
       "operatingMarginYoyDeltaPp": -15.49,
       "profitMarginYoyDeltaPp": -15.83,
+      "statementFilingDate": "2022-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/meta/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 5.664,
+            "derived": -0.052,
+            "delta": 5.716,
+            "tolerance": 0.17
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Family Of Apps",
@@ -1098,7 +2578,9 @@
           "filingDate": "2022-10-27",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Reality Labs",
@@ -1114,7 +2596,9 @@
           "filingDate": "2022-10-27",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1135,7 +2619,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -1152,7 +2638,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "displayCurrency": "USD",
@@ -1187,6 +2675,85 @@
       "grossMarginYoyDeltaPp": -7.07,
       "operatingMarginYoyDeltaPp": -17.49,
       "profitMarginYoyDeltaPp": -16.08,
+      "statementFilingDate": "2022-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/meta/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 6.398,
+            "derived": -1.938,
+            "delta": 8.336,
+            "tolerance": 0.192
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Family Of Apps",
@@ -1202,7 +2769,9 @@
           "filingDate": "2023-02-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Reality Labs",
@@ -1218,7 +2787,9 @@
           "filingDate": "2023-02-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1239,7 +2810,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -1256,7 +2829,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "displayCurrency": "USD",
@@ -1291,6 +2866,85 @@
       "grossMarginYoyDeltaPp": 0.2,
       "operatingMarginYoyDeltaPp": -5.31,
       "profitMarginYoyDeltaPp": -6.82,
+      "statementFilingDate": "2023-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/meta/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 7.227,
+            "derived": 1.119,
+            "delta": 6.108,
+            "tolerance": 0.217
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Family Of Apps",
@@ -1306,7 +2960,9 @@
           "filingDate": "2023-04-27",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Reality Labs",
@@ -1322,7 +2978,9 @@
           "filingDate": "2023-04-27",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1343,7 +3001,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -1360,7 +3020,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "displayCurrency": "USD",
@@ -1395,6 +3057,85 @@
       "grossMarginYoyDeltaPp": -0.57,
       "operatingMarginYoyDeltaPp": 0.35,
       "profitMarginYoyDeltaPp": 1.14,
+      "statementFilingDate": "2023-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/meta/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 9.392,
+            "derived": 3.447,
+            "delta": 5.945,
+            "tolerance": 0.282
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Family Of Apps",
@@ -1410,7 +3151,9 @@
           "filingDate": "2023-07-27",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Reality Labs",
@@ -1426,7 +3169,9 @@
           "filingDate": "2023-07-27",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1447,7 +3192,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -1464,7 +3211,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "displayCurrency": "USD",
@@ -1499,6 +3248,85 @@
       "grossMarginYoyDeltaPp": 2.43,
       "operatingMarginYoyDeltaPp": 19.82,
       "profitMarginYoyDeltaPp": 18.06,
+      "statementFilingDate": "2023-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/meta/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 13.748,
+            "derived": 7.538,
+            "delta": 6.21,
+            "tolerance": 0.412
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Family Of Apps",
@@ -1514,7 +3342,9 @@
           "filingDate": "2023-10-26",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Reality Labs",
@@ -1530,7 +3360,9 @@
           "filingDate": "2023-10-26",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1551,7 +3383,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -1568,7 +3402,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "displayCurrency": "USD",
@@ -1603,6 +3439,85 @@
       "grossMarginYoyDeltaPp": 6.73,
       "operatingMarginYoyDeltaPp": 20.96,
       "profitMarginYoyDeltaPp": 20.48,
+      "statementFilingDate": "2023-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/meta/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 16.384,
+            "derived": 8.688,
+            "delta": 7.696,
+            "tolerance": 0.492
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Family Of Apps",
@@ -1618,7 +3533,9 @@
           "filingDate": "2024-02-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Reality Labs",
@@ -1634,7 +3551,9 @@
           "filingDate": "2024-02-02",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1655,7 +3574,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -1672,7 +3593,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "displayCurrency": "USD",
@@ -1707,6 +3630,85 @@
       "grossMarginYoyDeltaPp": 3.11,
       "operatingMarginYoyDeltaPp": 12.67,
       "profitMarginYoyDeltaPp": 14.0,
+      "statementFilingDate": "2024-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/meta/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 13.818,
+            "derived": 7.178,
+            "delta": 6.64,
+            "tolerance": 0.415
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Family Of Apps",
@@ -1722,7 +3724,9 @@
           "filingDate": "2024-04-25",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Reality Labs",
@@ -1738,7 +3742,9 @@
           "filingDate": "2024-04-25",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1759,7 +3765,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -1776,7 +3784,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "displayCurrency": "USD",
@@ -1811,6 +3821,85 @@
       "grossMarginYoyDeltaPp": -0.12,
       "operatingMarginYoyDeltaPp": 8.65,
       "profitMarginYoyDeltaPp": 10.12,
+      "statementFilingDate": "2024-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/meta/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 14.847,
+            "derived": 7.539,
+            "delta": 7.308,
+            "tolerance": 0.445
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Family Of Apps",
@@ -1826,7 +3915,9 @@
           "filingDate": "2024-08-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Reality Labs",
@@ -1842,7 +3933,9 @@
           "filingDate": "2024-08-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1863,7 +3956,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -1880,7 +3975,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "displayCurrency": "USD",
@@ -1915,6 +4012,85 @@
       "grossMarginYoyDeltaPp": 0.02,
       "operatingMarginYoyDeltaPp": 2.49,
       "profitMarginYoyDeltaPp": 4.73,
+      "statementFilingDate": "2024-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/meta/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 17.35,
+            "derived": 9.975,
+            "delta": 7.375,
+            "tolerance": 0.521
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Family Of Apps",
@@ -1930,7 +4106,9 @@
           "filingDate": "2024-10-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Reality Labs",
@@ -1946,7 +4124,9 @@
           "filingDate": "2024-10-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -1967,7 +4147,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -1984,7 +4166,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "displayCurrency": "USD",
@@ -2019,6 +4203,85 @@
       "grossMarginYoyDeltaPp": 0.92,
       "operatingMarginYoyDeltaPp": 7.44,
       "profitMarginYoyDeltaPp": 8.12,
+      "statementFilingDate": "2024-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/meta/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 23.365,
+            "derived": 14.527,
+            "delta": 8.838,
+            "tolerance": 0.701
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Family Of Apps",
@@ -2034,7 +4297,9 @@
           "filingDate": "2025-01-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Reality Labs",
@@ -2050,7 +4315,9 @@
           "filingDate": "2025-01-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2071,7 +4338,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -2088,7 +4357,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "displayCurrency": "USD",
@@ -2123,6 +4394,85 @@
       "grossMarginYoyDeltaPp": 0.32,
       "operatingMarginYoyDeltaPp": 3.59,
       "profitMarginYoyDeltaPp": 5.4,
+      "statementFilingDate": "2025-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/meta/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 17.555,
+            "derived": 9.983,
+            "delta": 7.572,
+            "tolerance": 0.527
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Family Of Apps",
@@ -2138,7 +4488,9 @@
           "filingDate": "2025-05-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Reality Labs",
@@ -2154,7 +4506,9 @@
           "filingDate": "2025-05-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2175,7 +4529,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -2192,7 +4548,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "displayCurrency": "USD",
@@ -2227,6 +4585,85 @@
       "grossMarginYoyDeltaPp": 0.83,
       "operatingMarginYoyDeltaPp": 5.02,
       "profitMarginYoyDeltaPp": 4.13,
+      "statementFilingDate": "2025-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/meta/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 20.441,
+            "derived": 11.95,
+            "delta": 8.491,
+            "tolerance": 0.613
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Family Of Apps",
@@ -2242,7 +4679,9 @@
           "filingDate": "2025-07-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Reality Labs",
@@ -2258,7 +4697,9 @@
           "filingDate": "2025-07-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2279,7 +4720,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -2296,7 +4739,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "displayCurrency": "USD",
@@ -2331,6 +4776,85 @@
       "grossMarginYoyDeltaPp": 0.2,
       "operatingMarginYoyDeltaPp": -2.68,
       "profitMarginYoyDeltaPp": -33.36,
+      "statementFilingDate": "2025-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/meta/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 20.535,
+            "derived": 11.329,
+            "delta": 9.206,
+            "tolerance": 0.616
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Family Of Apps",
@@ -2346,7 +4870,9 @@
           "filingDate": "2025-10-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Reality Labs",
@@ -2362,7 +4888,9 @@
           "filingDate": "2025-10-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2383,7 +4911,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -2400,7 +4930,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "displayCurrency": "USD",
@@ -2435,6 +4967,85 @@
       "grossMarginYoyDeltaPp": 0.06,
       "operatingMarginYoyDeltaPp": -6.98,
       "profitMarginYoyDeltaPp": -5.06,
+      "statementFilingDate": "2025-12-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/meta/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 2,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 2,
+        "operatingIncomeBn": 2,
+        "operatingMarginPct": 2,
+        "operatingMarginYoyDeltaPp": 2,
+        "nonOperatingBn": 2,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 24.745,
+            "derived": 13.839,
+            "delta": 10.906,
+            "tolerance": 0.742
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Family Of Apps",
@@ -2450,7 +5061,9 @@
           "filingDate": "2026-01-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Reality Labs",
@@ -2466,7 +5079,9 @@
           "filingDate": "2026-01-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
@@ -2487,7 +5102,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Other",
@@ -2504,7 +5121,9 @@
           "supportLines": null,
           "supportLinesZh": null,
           "targetName": "Family Of Apps",
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "displayCurrency": "USD",
@@ -2766,7 +5385,9 @@
             "filingDate": "2022-04-28",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Reality Labs",
@@ -2782,7 +5403,9 @@
             "filingDate": "2022-04-28",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -2822,7 +5445,9 @@
             "filingDate": "2022-07-28",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Reality Labs",
@@ -2838,7 +5463,9 @@
             "filingDate": "2022-07-28",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -2878,7 +5505,9 @@
             "filingDate": "2022-10-27",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Reality Labs",
@@ -2894,7 +5523,9 @@
             "filingDate": "2022-10-27",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -2934,7 +5565,9 @@
             "filingDate": "2022-02-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Reality Labs",
@@ -2950,7 +5583,9 @@
             "filingDate": "2022-02-03",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -2990,7 +5625,9 @@
             "filingDate": "2022-04-28",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Reality Labs",
@@ -3006,7 +5643,9 @@
             "filingDate": "2022-04-28",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -3046,7 +5685,9 @@
             "filingDate": "2022-07-28",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Reality Labs",
@@ -3062,7 +5703,9 @@
             "filingDate": "2022-07-28",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -3102,7 +5745,9 @@
             "filingDate": "2022-10-27",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Reality Labs",
@@ -3118,7 +5763,9 @@
             "filingDate": "2022-10-27",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -3158,7 +5805,9 @@
             "filingDate": "2023-02-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Reality Labs",
@@ -3174,7 +5823,9 @@
             "filingDate": "2023-02-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -3214,7 +5865,9 @@
             "filingDate": "2023-04-27",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Reality Labs",
@@ -3230,7 +5883,9 @@
             "filingDate": "2023-04-27",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -3270,7 +5925,9 @@
             "filingDate": "2023-07-27",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Reality Labs",
@@ -3286,7 +5943,9 @@
             "filingDate": "2023-07-27",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -3326,7 +5985,9 @@
             "filingDate": "2023-10-26",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Reality Labs",
@@ -3342,7 +6003,9 @@
             "filingDate": "2023-10-26",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -3382,7 +6045,9 @@
             "filingDate": "2024-02-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Reality Labs",
@@ -3398,7 +6063,9 @@
             "filingDate": "2024-02-02",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -3438,7 +6105,9 @@
             "filingDate": "2024-04-25",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Reality Labs",
@@ -3454,7 +6123,9 @@
             "filingDate": "2024-04-25",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -3494,7 +6165,9 @@
             "filingDate": "2024-08-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Reality Labs",
@@ -3510,7 +6183,9 @@
             "filingDate": "2024-08-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -3550,7 +6225,9 @@
             "filingDate": "2024-10-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Reality Labs",
@@ -3566,7 +6243,9 @@
             "filingDate": "2024-10-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -3606,7 +6285,9 @@
             "filingDate": "2025-01-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Reality Labs",
@@ -3622,7 +6303,9 @@
             "filingDate": "2025-01-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -3662,7 +6345,9 @@
             "filingDate": "2025-05-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Reality Labs",
@@ -3678,7 +6363,9 @@
             "filingDate": "2025-05-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -3718,7 +6405,9 @@
             "filingDate": "2025-07-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Reality Labs",
@@ -3734,7 +6423,9 @@
             "filingDate": "2025-07-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -3774,7 +6465,9 @@
             "filingDate": "2025-10-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Reality Labs",
@@ -3790,7 +6483,9 @@
             "filingDate": "2025-10-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -3830,7 +6525,9 @@
             "filingDate": "2026-01-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Reality Labs",
@@ -3846,7 +6543,9 @@
             "filingDate": "2026-01-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ],
         "detailGroups": [
@@ -4025,6 +6724,120 @@
     ],
     "errors": []
   },
+  "parserDiagnostics": {
+    "version": "universal-parser-v3",
+    "financials": {
+      "basePreferredOrder": [
+        "official",
+        "stockanalysis"
+      ],
+      "preferredOrder": [
+        "official",
+        "stockanalysis"
+      ],
+      "selectedSource": "official",
+      "attempts": [
+        {
+          "layer": "financials",
+          "source_id": "official",
+          "status": "success",
+          "selected": true,
+          "reason": "",
+          "quarter_count": 32,
+          "latest_quarter": "2025Q4",
+          "error": ""
+        },
+        {
+          "layer": "financials",
+          "source_id": "stockanalysis",
+          "status": "success",
+          "selected": false,
+          "reason": "",
+          "quarter_count": 20,
+          "latest_quarter": "2025Q4",
+          "error": ""
+        }
+      ],
+      "reconciliation": {
+        "version": "financial-reconciler-v1",
+        "primarySource": "official",
+        "quarterCount": 32,
+        "fieldOverrideCount": 0,
+        "derivedFieldCount": 0,
+        "mixedSourceQuarterCount": 0,
+        "sourceUsageCounts": {
+          "official": 683,
+          "stockanalysis": 0
+        }
+      },
+      "validation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "quarterCount": 32,
+        "validatedQuarterCount": 32,
+        "issueCount": 32,
+        "mismatchQuarterCount": 32,
+        "highConfidenceQuarterCount": 32,
+        "averageConfidenceScore": 0.9438,
+        "latestQuarter": "2025Q4",
+        "latestQuarterConfidenceScore": 0.9438,
+        "latestQuarterIssueCount": 1
+      }
+    },
+    "segments": {
+      "selectedSource": "official-segments",
+      "attempts": [
+        {
+          "layer": "segments",
+          "source_id": "official-segments",
+          "status": "success",
+          "selected": true,
+          "reason": "",
+          "quarter_count": 20,
+          "latest_quarter": "2025Q4",
+          "error": ""
+        }
+      ]
+    },
+    "revenueStructures": {
+      "selectedSource": "official-revenue-structures",
+      "attempts": [
+        {
+          "layer": "revenue-structures",
+          "source_id": "official-revenue-structures",
+          "status": "success",
+          "selected": true,
+          "reason": "",
+          "quarter_count": 20,
+          "latest_quarter": "2025Q4",
+          "error": ""
+        }
+      ]
+    },
+    "summary": {
+      "financialQuarterCount": 32,
+      "segmentQuarterCount": 20,
+      "revenueStructureQuarterCount": 20
+    },
+    "validation": {
+      "version": "parser-validation-v1",
+      "status": "high",
+      "overallConfidenceScore": 0.9635,
+      "financialConfidenceScore": 0.9438,
+      "structuralConfidenceScore": 1.0,
+      "revenueSegmentChecks": 20,
+      "revenueSegmentMismatchCount": 0,
+      "revenueSegmentSkippedChecks": 0,
+      "detailGroupChecks": 20,
+      "detailGroupMismatchCount": 0,
+      "detailGroupSkippedChecks": 0,
+      "opexChecks": 0,
+      "opexSkippedChecks": 0,
+      "opexOverflowMismatchCount": 0,
+      "warningCount": 0,
+      "warnings": []
+    }
+  },
   "statementPresets": {
     "2025Q3": {
       "mode": "pixel-replica",
@@ -4154,6 +6967,75 @@
     "pixelReplicaQuarterCount": 1,
     "hasPixelReplica": true,
     "officialFinancialQuarterCount": 32,
-    "officialSegmentQuarterCount": 20
+    "officialSegmentQuarterCount": 20,
+    "officialExpenseQuarterCount": 0,
+    "classification": {
+      "status": "ok",
+      "latestQuarter": "2025Q4",
+      "latestQuarterHasRevenueClassification": true,
+      "latestQuarterHasExpenseClassification": false,
+      "latestRevenueClassificationQuarter": "2025Q4",
+      "latestExpenseClassificationQuarter": null,
+      "latestStructureHistoryQuarter": "2025Q4",
+      "revenueClassificationQuarterCount": 20,
+      "expenseClassificationQuarterCount": 0,
+      "revenueClassificationCoverageRatio": 0.625,
+      "expenseClassificationCoverageRatio": 0.0,
+      "latestRevenueClassificationLagQuarters": 0,
+      "latestExpenseClassificationLagQuarters": null,
+      "warnings": [],
+      "blockers": [],
+      "policy": {}
+    },
+    "parser": {
+      "version": "universal-parser-v3",
+      "selectedFinancialSource": "official",
+      "selectedSegmentSource": "official-segments",
+      "selectedRevenueStructureSource": "official-revenue-structures",
+      "financialAttemptCount": 2,
+      "financialReconciliation": {
+        "version": "financial-reconciler-v1",
+        "primarySource": "official",
+        "quarterCount": 32,
+        "fieldOverrideCount": 0,
+        "derivedFieldCount": 0,
+        "mixedSourceQuarterCount": 0,
+        "sourceUsageCounts": {
+          "official": 683,
+          "stockanalysis": 0
+        }
+      },
+      "financialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "quarterCount": 32,
+        "validatedQuarterCount": 32,
+        "issueCount": 32,
+        "mismatchQuarterCount": 32,
+        "highConfidenceQuarterCount": 32,
+        "averageConfidenceScore": 0.9438,
+        "latestQuarter": "2025Q4",
+        "latestQuarterConfidenceScore": 0.9438,
+        "latestQuarterIssueCount": 1
+      },
+      "validation": {
+        "version": "parser-validation-v1",
+        "status": "high",
+        "overallConfidenceScore": 0.9635,
+        "financialConfidenceScore": 0.9438,
+        "structuralConfidenceScore": 1.0,
+        "revenueSegmentChecks": 20,
+        "revenueSegmentMismatchCount": 0,
+        "revenueSegmentSkippedChecks": 0,
+        "detailGroupChecks": 20,
+        "detailGroupMismatchCount": 0,
+        "detailGroupSkippedChecks": 0,
+        "opexChecks": 0,
+        "opexSkippedChecks": 0,
+        "opexOverflowMismatchCount": 0,
+        "warningCount": 0,
+        "warnings": []
+      }
+    }
   }
 }

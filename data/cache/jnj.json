@@ -73,6 +73,59 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "sgnaBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 0,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 0,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.8625,
+        "completenessScore": 0.75,
+        "consistencyScore": 1.0,
+        "checksRun": 5,
+        "checksPassed": 5,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -88,7 +141,11 @@
           "filingDate": "2020-02-18",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-healthcare-business-disclosure"
+          ]
         },
         {
           "name": "Consumer",
@@ -104,13 +161,15 @@
           "filingDate": "2020-02-18",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-healthcare-business-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2018Q3": {
       "calendarQuarter": "2018Q3",
@@ -141,6 +200,60 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "sgnaBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 0,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.8625,
+        "completenessScore": 0.75,
+        "consistencyScore": 1.0,
+        "checksRun": 5,
+        "checksPassed": 5,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -156,7 +269,11 @@
           "filingDate": "2020-02-18",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-healthcare-business-disclosure"
+          ]
         },
         {
           "name": "Consumer",
@@ -172,13 +289,15 @@
           "filingDate": "2020-02-18",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-healthcare-business-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2018Q4": {
       "calendarQuarter": "2018Q4",
@@ -209,6 +328,60 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "sgnaBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 0,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.8625,
+        "completenessScore": 0.75,
+        "consistencyScore": 1.0,
+        "checksRun": 5,
+        "checksPassed": 5,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -224,7 +397,11 @@
           "filingDate": "2020-02-18",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-healthcare-business-disclosure"
+          ]
         },
         {
           "name": "Consumer",
@@ -240,13 +417,15 @@
           "filingDate": "2020-02-18",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-healthcare-business-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2019Q1": {
       "calendarQuarter": "2019Q1",
@@ -277,6 +456,60 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "sgnaBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 0,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.8625,
+        "completenessScore": 0.75,
+        "consistencyScore": 1.0,
+        "checksRun": 5,
+        "checksPassed": 5,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -292,7 +525,11 @@
           "filingDate": "2020-04-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Med Tech",
@@ -308,7 +545,11 @@
           "filingDate": "2020-04-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Consumer",
@@ -324,13 +565,15 @@
           "filingDate": "2020-04-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2019Q2": {
       "calendarQuarter": "2019Q2",
@@ -361,6 +604,64 @@
       "grossMarginYoyDeltaPp": -0.69,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 5.44,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 0,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.8625,
+        "completenessScore": 0.75,
+        "consistencyScore": 1.0,
+        "checksRun": 5,
+        "checksPassed": 5,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -376,7 +677,11 @@
           "filingDate": "2020-07-24",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Med Tech",
@@ -392,7 +697,11 @@
           "filingDate": "2020-07-24",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Consumer",
@@ -408,13 +717,15 @@
           "filingDate": "2020-07-24",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2019Q3": {
       "calendarQuarter": "2019Q3",
@@ -445,6 +756,64 @@
       "grossMarginYoyDeltaPp": -0.75,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -10.87,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 0,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.8625,
+        "completenessScore": 0.75,
+        "consistencyScore": 1.0,
+        "checksRun": 5,
+        "checksPassed": 5,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -460,7 +829,11 @@
           "filingDate": "2020-10-23",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Med Tech",
@@ -476,7 +849,11 @@
           "filingDate": "2020-10-23",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Consumer",
@@ -492,13 +869,15 @@
           "filingDate": "2020-10-23",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2019Q4": {
       "calendarQuarter": "2019Q4",
@@ -529,6 +908,64 @@
       "grossMarginYoyDeltaPp": -0.26,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 4.41,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 0,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.8625,
+        "completenessScore": 0.75,
+        "consistencyScore": 1.0,
+        "checksRun": 5,
+        "checksPassed": 5,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -544,7 +981,11 @@
           "filingDate": "2020-02-18",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Med Tech",
@@ -560,7 +1001,11 @@
           "filingDate": "2020-02-18",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Consumer",
@@ -576,13 +1021,15 @@
           "filingDate": "2020-02-18",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2020Q1": {
       "calendarQuarter": "2020Q1",
@@ -613,6 +1060,64 @@
       "grossMarginYoyDeltaPp": -1.09,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 9.28,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 0,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.8625,
+        "completenessScore": 0.75,
+        "consistencyScore": 1.0,
+        "checksRun": 5,
+        "checksPassed": 5,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -628,7 +1133,11 @@
           "filingDate": "2020-04-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Med Tech",
@@ -644,7 +1153,11 @@
           "filingDate": "2020-04-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Consumer",
@@ -660,13 +1173,15 @@
           "filingDate": "2020-04-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2020Q2": {
       "calendarQuarter": "2020Q2",
@@ -697,6 +1212,64 @@
       "grossMarginYoyDeltaPp": -2.13,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -7.49,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 0,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.8625,
+        "completenessScore": 0.75,
+        "consistencyScore": 1.0,
+        "checksRun": 5,
+        "checksPassed": 5,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -712,7 +1285,11 @@
           "filingDate": "2020-07-24",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Med Tech",
@@ -728,7 +1305,11 @@
           "filingDate": "2020-07-24",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Consumer",
@@ -744,13 +1325,15 @@
           "filingDate": "2020-07-24",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2020Q3": {
       "calendarQuarter": "2020Q3",
@@ -781,6 +1364,64 @@
       "grossMarginYoyDeltaPp": 0.06,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 8.4,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 0,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.8625,
+        "completenessScore": 0.75,
+        "consistencyScore": 1.0,
+        "checksRun": 5,
+        "checksPassed": 5,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -796,7 +1437,11 @@
           "filingDate": "2020-10-23",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Med Tech",
@@ -812,7 +1457,11 @@
           "filingDate": "2020-10-23",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Consumer",
@@ -828,13 +1477,15 @@
           "filingDate": "2020-10-23",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2021Q1": {
       "calendarQuarter": "2021Q1",
@@ -865,6 +1516,64 @@
       "grossMarginYoyDeltaPp": -0.38,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -11.6,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 0,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.8625,
+        "completenessScore": 0.75,
+        "consistencyScore": 1.0,
+        "checksRun": 5,
+        "checksPassed": 5,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -880,7 +1589,11 @@
           "filingDate": "2021-02-22",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Med Tech",
@@ -896,7 +1609,11 @@
           "filingDate": "2021-02-22",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Consumer",
@@ -912,13 +1629,15 @@
           "filingDate": "2021-02-22",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2021Q2": {
       "calendarQuarter": "2021Q2",
@@ -949,6 +1668,64 @@
       "grossMarginYoyDeltaPp": 2.49,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -0.25,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 0,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.8625,
+        "completenessScore": 0.75,
+        "consistencyScore": 1.0,
+        "checksRun": 5,
+        "checksPassed": 5,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -964,7 +1741,11 @@
           "filingDate": "2021-04-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Med Tech",
@@ -980,7 +1761,11 @@
           "filingDate": "2021-04-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Consumer",
@@ -996,13 +1781,15 @@
           "filingDate": "2021-04-30",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2021Q3": {
       "calendarQuarter": "2021Q3",
@@ -1016,23 +1803,91 @@
       "costOfRevenueBn": 7.587,
       "grossProfitBn": 15.725,
       "sgnaBn": 6.073,
-      "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "rndBn": 3.394,
+      "otherOpexBn": 0.056,
+      "operatingExpensesBn": 9.523,
+      "operatingIncomeBn": 6.202,
+      "nonOperatingBn": 0.46,
       "pretaxIncomeBn": 6.662,
       "taxBn": 0.384,
       "netIncomeBn": 6.278,
       "netIncomeYoyPct": 73.14,
       "grossMarginPct": 67.45,
-      "operatingMarginPct": null,
+      "operatingMarginPct": 26.6,
       "profitMarginPct": 26.93,
       "effectiveTaxRatePct": 5.76,
       "revenueQoqPct": 4.44,
       "grossMarginYoyDeltaPp": 3.33,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 7.15,
+      "statementFilingDate": "2021-07-04",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jnj/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "stockanalysis",
+        "otherOpexBn": "stockanalysis",
+        "operatingExpensesBn": "stockanalysis",
+        "operatingIncomeBn": "stockanalysis",
+        "operatingMarginPct": "stockanalysis",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -1048,7 +1903,11 @@
           "filingDate": "2021-07-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Med Tech",
@@ -1064,7 +1923,11 @@
           "filingDate": "2021-07-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Consumer",
@@ -1080,13 +1943,15 @@
           "filingDate": "2021-07-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2021Q4": {
       "calendarQuarter": "2021Q4",
@@ -1100,23 +1965,91 @@
       "costOfRevenueBn": 7.25,
       "grossProfitBn": 16.088,
       "sgnaBn": 6.0,
-      "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "rndBn": 4.322,
+      "otherOpexBn": 0.06,
+      "operatingExpensesBn": 10.382,
+      "operatingIncomeBn": 5.706,
+      "nonOperatingBn": -1.857,
       "pretaxIncomeBn": 3.849,
       "taxBn": 0.182,
       "netIncomeBn": 3.667,
       "netIncomeYoyPct": 3.18,
       "grossMarginPct": 68.93,
-      "operatingMarginPct": null,
+      "operatingMarginPct": 24.45,
       "profitMarginPct": 15.71,
       "effectiveTaxRatePct": 4.73,
       "revenueQoqPct": 0.112,
       "grossMarginYoyDeltaPp": 2.0,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -1.15,
+      "statementFilingDate": "2021-10-03",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jnj/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "stockanalysis",
+        "otherOpexBn": "stockanalysis",
+        "operatingExpensesBn": "stockanalysis",
+        "operatingIncomeBn": "stockanalysis",
+        "operatingMarginPct": "stockanalysis",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -1132,7 +2065,11 @@
           "filingDate": "2021-10-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Med Tech",
@@ -1148,7 +2085,11 @@
           "filingDate": "2021-10-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Consumer",
@@ -1164,13 +2105,15 @@
           "filingDate": "2021-10-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2022Q1": {
       "calendarQuarter": "2022Q1",
@@ -1184,23 +2127,91 @@
       "costOfRevenueBn": 7.955,
       "grossProfitBn": 16.849,
       "sgnaBn": 7.154,
-      "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "rndBn": 4.733,
+      "otherOpexBn": 0.083,
+      "operatingExpensesBn": 11.97,
+      "operatingIncomeBn": 4.879,
+      "nonOperatingBn": -0.056,
       "pretaxIncomeBn": 4.836,
       "taxBn": 0.1,
       "netIncomeBn": 4.736,
       "netIncomeYoyPct": 172.5,
       "grossMarginPct": 67.93,
-      "operatingMarginPct": null,
+      "operatingMarginPct": 19.67,
       "profitMarginPct": 19.09,
       "effectiveTaxRatePct": 2.07,
       "revenueQoqPct": 6.282,
       "grossMarginYoyDeltaPp": 2.7,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 11.36,
+      "statementFilingDate": "2022-01-02",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jnj/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "stockanalysis",
+        "otherOpexBn": "stockanalysis",
+        "operatingExpensesBn": "stockanalysis",
+        "operatingIncomeBn": "stockanalysis",
+        "operatingMarginPct": "stockanalysis",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -1216,7 +2227,11 @@
           "filingDate": "2022-02-17",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Med Tech",
@@ -1232,7 +2247,11 @@
           "filingDate": "2022-02-17",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Consumer",
@@ -1248,13 +2267,15 @@
           "filingDate": "2022-02-17",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2022Q2": {
       "calendarQuarter": "2022Q2",
@@ -1268,23 +2289,91 @@
       "costOfRevenueBn": 7.598,
       "grossProfitBn": 15.828,
       "sgnaBn": 5.938,
-      "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "rndBn": 4.072,
+      "otherOpexBn": 0.07,
+      "operatingExpensesBn": 10.08,
+      "operatingIncomeBn": 5.748,
+      "nonOperatingBn": 0.114,
       "pretaxIncomeBn": 5.862,
       "taxBn": 0.713,
       "netIncomeBn": 5.149,
       "netIncomeYoyPct": -16.91,
       "grossMarginPct": 67.57,
-      "operatingMarginPct": null,
+      "operatingMarginPct": 24.54,
       "profitMarginPct": 21.98,
       "effectiveTaxRatePct": 12.16,
       "revenueQoqPct": -5.556,
       "grossMarginYoyDeltaPp": -0.79,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -5.78,
+      "statementFilingDate": "2022-04-03",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jnj/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "stockanalysis",
+        "otherOpexBn": "stockanalysis",
+        "operatingExpensesBn": "stockanalysis",
+        "operatingIncomeBn": "stockanalysis",
+        "operatingMarginPct": "stockanalysis",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 2,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -1300,7 +2389,11 @@
           "filingDate": "2022-04-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Med Tech",
@@ -1316,7 +2409,11 @@
           "filingDate": "2022-04-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Consumer",
@@ -1332,13 +2429,15 @@
           "filingDate": "2022-04-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2022Q3": {
       "calendarQuarter": "2022Q3",
@@ -1352,23 +2451,92 @@
       "costOfRevenueBn": 7.919,
       "grossProfitBn": 16.101,
       "sgnaBn": 6.226,
-      "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "rndBn": 3.703,
+      "otherOpexBn": 0.085,
+      "operatingExpensesBn": 10.014,
+      "operatingIncomeBn": 6.087,
+      "nonOperatingBn": -0.247,
       "pretaxIncomeBn": 5.84,
       "taxBn": 1.026,
       "netIncomeBn": 4.814,
       "netIncomeYoyPct": -23.32,
       "grossMarginPct": 67.03,
-      "operatingMarginPct": null,
+      "operatingMarginPct": 25.34,
       "profitMarginPct": 20.04,
       "effectiveTaxRatePct": 17.57,
       "revenueQoqPct": 2.536,
       "grossMarginYoyDeltaPp": -0.42,
-      "operatingMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": -1.26,
       "profitMarginYoyDeltaPp": -6.89,
+      "statementFilingDate": "2022-07-03",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jnj/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "stockanalysis",
+        "otherOpexBn": "stockanalysis",
+        "operatingExpensesBn": "stockanalysis",
+        "operatingIncomeBn": "stockanalysis",
+        "operatingMarginPct": "stockanalysis",
+        "operatingMarginYoyDeltaPp": "stockanalysis",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -1384,7 +2552,11 @@
           "filingDate": "2022-07-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Med Tech",
@@ -1400,7 +2572,11 @@
           "filingDate": "2022-07-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Consumer",
@@ -1416,13 +2592,15 @@
           "filingDate": "2022-07-29",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2022Q4": {
       "calendarQuarter": "2022Q4",
@@ -1436,23 +2614,120 @@
       "costOfRevenueBn": 7.807,
       "grossProfitBn": 15.984,
       "sgnaBn": 6.089,
-      "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "rndBn": 3.485,
+      "otherOpexBn": 0.065,
+      "operatingExpensesBn": 8.525,
+      "operatingIncomeBn": 5.299,
+      "nonOperatingBn": -0.127,
       "pretaxIncomeBn": 5.822,
       "taxBn": 1.364,
       "netIncomeBn": 4.458,
       "netIncomeYoyPct": 21.57,
       "grossMarginPct": 67.19,
-      "operatingMarginPct": null,
+      "operatingMarginPct": 26.5,
       "profitMarginPct": 18.74,
       "effectiveTaxRatePct": 23.43,
       "revenueQoqPct": -0.953,
       "grossMarginYoyDeltaPp": -1.74,
-      "operatingMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": 2.05,
       "profitMarginYoyDeltaPp": 3.03,
+      "statementFilingDate": "2022-10-02",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jnj/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "stockanalysis",
+        "otherOpexBn": "stockanalysis",
+        "operatingExpensesBn": "stockanalysis",
+        "operatingIncomeBn": "stockanalysis",
+        "operatingMarginPct": "stockanalysis",
+        "operatingMarginYoyDeltaPp": "stockanalysis",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.8313,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.625,
+        "checksRun": 8,
+        "checksPassed": 5,
+        "issueCount": 3,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 5.299,
+            "derived": 7.459,
+            "delta": -2.16,
+            "tolerance": 0.159
+          },
+          {
+            "code": "operating-plus-nonoperating-equals-pretax",
+            "severity": "warning",
+            "message": "pretaxIncomeBn does not reconcile with operatingIncomeBn and nonOperatingBn.",
+            "expected": 5.822,
+            "derived": 5.172,
+            "delta": 0.65,
+            "tolerance": 0.175
+          },
+          {
+            "code": "operating-margin-check",
+            "severity": "warning",
+            "message": "operatingMarginPct does not reconcile with operatingIncomeBn and revenueBn.",
+            "expected": 26.5,
+            "derived": 22.273,
+            "delta": 4.227,
+            "tolerance": 0.795
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -1468,7 +2743,11 @@
           "filingDate": "2022-10-27",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Med Tech",
@@ -1484,7 +2763,11 @@
           "filingDate": "2022-10-27",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Consumer",
@@ -1500,13 +2783,15 @@
           "filingDate": "2022-10-27",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2023Q1": {
       "calendarQuarter": "2023Q1",
@@ -1520,23 +2805,111 @@
       "costOfRevenueBn": 7.765,
       "grossProfitBn": 13.855,
       "sgnaBn": 6.512,
-      "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "rndBn": 3.883,
+      "otherOpexBn": 0.075,
+      "operatingExpensesBn": 9.297,
+      "operatingIncomeBn": 4.558,
+      "nonOperatingBn": -0.718,
       "pretaxIncomeBn": 3.84,
       "taxBn": 0.681,
       "netIncomeBn": 3.52,
       "netIncomeYoyPct": -25.68,
       "grossMarginPct": 69.49,
-      "operatingMarginPct": null,
+      "operatingMarginPct": 22.86,
       "profitMarginPct": 17.65,
       "effectiveTaxRatePct": 17.73,
       "revenueQoqPct": -16.191,
       "grossMarginYoyDeltaPp": 1.56,
-      "operatingMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": 3.19,
       "profitMarginYoyDeltaPp": -1.44,
+      "statementFilingDate": "2023-01-01",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jnj/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "stockanalysis",
+        "otherOpexBn": "stockanalysis",
+        "operatingExpensesBn": "stockanalysis",
+        "operatingIncomeBn": "stockanalysis",
+        "operatingMarginPct": "stockanalysis",
+        "operatingMarginYoyDeltaPp": "stockanalysis",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.8875,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.75,
+        "checksRun": 8,
+        "checksPassed": 6,
+        "issueCount": 2,
+        "issues": [
+          {
+            "code": "revenue-minus-cost-equals-gross",
+            "severity": "warning",
+            "message": "grossProfitBn does not reconcile with revenueBn and costOfRevenueBn.",
+            "expected": 13.855,
+            "derived": 12.174,
+            "delta": 1.681,
+            "tolerance": 0.416
+          },
+          {
+            "code": "pretax-minus-tax-equals-net",
+            "severity": "warning",
+            "message": "netIncomeBn does not reconcile with pretaxIncomeBn and taxBn.",
+            "expected": 3.52,
+            "derived": 3.159,
+            "delta": 0.361,
+            "tolerance": 0.12
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -1552,7 +2925,11 @@
           "filingDate": "2024-02-16",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Med Tech",
@@ -1568,7 +2945,11 @@
           "filingDate": "2024-02-16",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Consumer",
@@ -1584,13 +2965,15 @@
           "filingDate": "2023-02-16",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2023Q2": {
       "calendarQuarter": "2023Q2",
@@ -1604,23 +2987,120 @@
       "costOfRevenueBn": 8.395,
       "grossProfitBn": 16.351,
       "sgnaBn": 6.138,
-      "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "rndBn": 3.504,
+      "otherOpexBn": 0.13,
+      "operatingExpensesBn": 8.54,
+      "operatingIncomeBn": 5.667,
+      "nonOperatingBn": -6.954,
       "pretaxIncomeBn": -0.737,
       "taxBn": -0.669,
       "netIncomeBn": -0.068,
       "netIncomeYoyPct": -101.32,
       "grossMarginPct": 66.08,
-      "operatingMarginPct": null,
+      "operatingMarginPct": 27.12,
       "profitMarginPct": -0.27,
       "effectiveTaxRatePct": 90.77,
       "revenueQoqPct": 24.109,
       "grossMarginYoyDeltaPp": -1.49,
-      "operatingMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": 2.58,
       "profitMarginYoyDeltaPp": -22.25,
+      "statementFilingDate": "2023-04-02",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jnj/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "stockanalysis",
+        "otherOpexBn": "stockanalysis",
+        "operatingExpensesBn": "stockanalysis",
+        "operatingIncomeBn": "stockanalysis",
+        "operatingMarginPct": "stockanalysis",
+        "operatingMarginYoyDeltaPp": "stockanalysis",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.8313,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.625,
+        "checksRun": 8,
+        "checksPassed": 5,
+        "issueCount": 3,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 5.667,
+            "derived": 7.811,
+            "delta": -2.144,
+            "tolerance": 0.17
+          },
+          {
+            "code": "operating-plus-nonoperating-equals-pretax",
+            "severity": "warning",
+            "message": "pretaxIncomeBn does not reconcile with operatingIncomeBn and nonOperatingBn.",
+            "expected": -0.737,
+            "derived": -1.287,
+            "delta": 0.55,
+            "tolerance": 0.12
+          },
+          {
+            "code": "operating-margin-check",
+            "severity": "warning",
+            "message": "operatingMarginPct does not reconcile with operatingIncomeBn and revenueBn.",
+            "expected": 27.12,
+            "derived": 22.901,
+            "delta": 4.219,
+            "tolerance": 0.814
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -1636,7 +3116,11 @@
           "filingDate": "2023-04-28",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Med Tech",
@@ -1652,7 +3136,11 @@
           "filingDate": "2023-04-28",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Consumer",
@@ -1668,13 +3156,15 @@
           "filingDate": "2023-04-28",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2023Q3": {
       "calendarQuarter": "2023Q3",
@@ -1688,23 +3178,120 @@
       "costOfRevenueBn": 8.212,
       "grossProfitBn": 17.318,
       "sgnaBn": 6.665,
-      "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "rndBn": 3.703,
+      "otherOpexBn": 0.145,
+      "operatingExpensesBn": 9.244,
+      "operatingIncomeBn": 5.813,
+      "nonOperatingBn": 0.493,
       "pretaxIncomeBn": 6.762,
       "taxBn": 1.618,
       "netIncomeBn": 5.144,
       "netIncomeYoyPct": 6.86,
       "grossMarginPct": 67.83,
-      "operatingMarginPct": null,
+      "operatingMarginPct": 27.01,
       "profitMarginPct": 20.15,
       "effectiveTaxRatePct": 23.93,
       "revenueQoqPct": 3.168,
       "grossMarginYoyDeltaPp": 0.8,
-      "operatingMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": 1.67,
       "profitMarginYoyDeltaPp": 0.11,
+      "statementFilingDate": "2023-07-02",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jnj/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "stockanalysis",
+        "otherOpexBn": "stockanalysis",
+        "operatingExpensesBn": "stockanalysis",
+        "operatingIncomeBn": "stockanalysis",
+        "operatingMarginPct": "stockanalysis",
+        "operatingMarginYoyDeltaPp": "stockanalysis",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "medium",
+        "confidenceScore": 0.8313,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.625,
+        "checksRun": 8,
+        "checksPassed": 5,
+        "issueCount": 3,
+        "issues": [
+          {
+            "code": "gross-minus-opex-equals-operating",
+            "severity": "warning",
+            "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
+            "expected": 5.813,
+            "derived": 8.074,
+            "delta": -2.261,
+            "tolerance": 0.174
+          },
+          {
+            "code": "operating-plus-nonoperating-equals-pretax",
+            "severity": "warning",
+            "message": "pretaxIncomeBn does not reconcile with operatingIncomeBn and nonOperatingBn.",
+            "expected": 6.762,
+            "derived": 6.306,
+            "delta": 0.456,
+            "tolerance": 0.203
+          },
+          {
+            "code": "operating-margin-check",
+            "severity": "warning",
+            "message": "operatingMarginPct does not reconcile with operatingIncomeBn and revenueBn.",
+            "expected": 27.01,
+            "derived": 22.769,
+            "delta": 4.241,
+            "tolerance": 0.81
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -1720,7 +3307,11 @@
           "filingDate": "2023-07-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Med Tech",
@@ -1736,7 +3327,11 @@
           "filingDate": "2023-07-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         },
         {
           "name": "Consumer",
@@ -1752,13 +3347,15 @@
           "filingDate": "2023-07-31",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "mixed-continuing-and-consumer-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2023Q4": {
       "calendarQuarter": "2023Q4",
@@ -1772,23 +3369,102 @@
       "costOfRevenueBn": 6.606,
       "grossProfitBn": 14.745,
       "sgnaBn": 5.4,
-      "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "rndBn": 3.653,
+      "otherOpexBn": 0.158,
+      "operatingExpensesBn": 9.211,
+      "operatingIncomeBn": 5.534,
+      "nonOperatingBn": -0.317,
       "pretaxIncomeBn": 5.217,
       "taxBn": 0.908,
       "netIncomeBn": 26.028,
       "netIncomeYoyPct": 483.85,
       "grossMarginPct": 69.06,
-      "operatingMarginPct": null,
+      "operatingMarginPct": 25.92,
       "profitMarginPct": 121.91,
       "effectiveTaxRatePct": 17.4,
       "revenueQoqPct": -16.369,
       "grossMarginYoyDeltaPp": 1.87,
-      "operatingMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": -0.58,
       "profitMarginYoyDeltaPp": 103.17,
+      "statementFilingDate": "2023-10-01",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jnj/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "stockanalysis",
+        "otherOpexBn": "stockanalysis",
+        "operatingExpensesBn": "stockanalysis",
+        "operatingIncomeBn": "stockanalysis",
+        "operatingMarginPct": "stockanalysis",
+        "operatingMarginYoyDeltaPp": "stockanalysis",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1.0,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "pretax-minus-tax-equals-net",
+            "severity": "warning",
+            "message": "netIncomeBn does not reconcile with pretaxIncomeBn and taxBn.",
+            "expected": 26.028,
+            "derived": 4.309,
+            "delta": 21.719,
+            "tolerance": 0.781
+          }
+        ]
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -1804,7 +3480,9 @@
           "filingDate": "2023-10-27",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Med Tech",
@@ -1820,13 +3498,13 @@
           "filingDate": "2023-10-27",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2024Q1": {
       "calendarQuarter": "2024Q1",
@@ -1840,23 +3518,92 @@
       "costOfRevenueBn": 6.511,
       "grossProfitBn": 14.872,
       "sgnaBn": 5.257,
-      "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "rndBn": 3.542,
+      "otherOpexBn": 0.164,
+      "operatingExpensesBn": 8.963,
+      "operatingIncomeBn": 5.909,
+      "nonOperatingBn": -2.195,
       "pretaxIncomeBn": 3.714,
       "taxBn": 0.459,
       "netIncomeBn": 3.255,
       "netIncomeYoyPct": -7.53,
       "grossMarginPct": 69.55,
-      "operatingMarginPct": null,
+      "operatingMarginPct": 27.63,
       "profitMarginPct": 15.22,
       "effectiveTaxRatePct": 12.36,
       "revenueQoqPct": 0.15,
       "grossMarginYoyDeltaPp": 0.06,
-      "operatingMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": 4.77,
       "profitMarginYoyDeltaPp": -2.43,
+      "statementFilingDate": "2024-03-31",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jnj/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "stockanalysis",
+        "otherOpexBn": "stockanalysis",
+        "operatingExpensesBn": "stockanalysis",
+        "operatingIncomeBn": "stockanalysis",
+        "operatingMarginPct": "stockanalysis",
+        "operatingMarginYoyDeltaPp": "stockanalysis",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -1872,7 +3619,9 @@
           "filingDate": "2024-05-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Med Tech",
@@ -1888,13 +3637,13 @@
           "filingDate": "2024-05-01",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2024Q2": {
       "calendarQuarter": "2024Q2",
@@ -1908,23 +3657,92 @@
       "costOfRevenueBn": 6.869,
       "grossProfitBn": 15.578,
       "sgnaBn": 5.681,
-      "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "rndBn": 3.634,
+      "otherOpexBn": -0.013,
+      "operatingExpensesBn": 9.302,
+      "operatingIncomeBn": 6.276,
+      "nonOperatingBn": -0.528,
       "pretaxIncomeBn": 5.748,
       "taxBn": 1.062,
       "netIncomeBn": 4.686,
       "netIncomeYoyPct": -6991.18,
       "grossMarginPct": 69.4,
-      "operatingMarginPct": null,
+      "operatingMarginPct": 27.96,
       "profitMarginPct": 20.88,
       "effectiveTaxRatePct": 18.48,
       "revenueQoqPct": 4.976,
       "grossMarginYoyDeltaPp": 3.32,
-      "operatingMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": 0.84,
       "profitMarginYoyDeltaPp": 21.15,
+      "statementFilingDate": "2024-06-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jnj/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "stockanalysis",
+        "otherOpexBn": "stockanalysis",
+        "operatingExpensesBn": "stockanalysis",
+        "operatingIncomeBn": "stockanalysis",
+        "operatingMarginPct": "stockanalysis",
+        "operatingMarginYoyDeltaPp": "stockanalysis",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -1940,7 +3758,9 @@
           "filingDate": "2024-07-25",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Med Tech",
@@ -1956,13 +3776,13 @@
           "filingDate": "2024-07-25",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2024Q3": {
       "calendarQuarter": "2024Q3",
@@ -1976,23 +3796,92 @@
       "costOfRevenueBn": 6.963,
       "grossProfitBn": 15.508,
       "sgnaBn": 5.478,
-      "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "rndBn": 4.952,
+      "otherOpexBn": 0.041,
+      "operatingExpensesBn": 10.471,
+      "operatingIncomeBn": 5.037,
+      "nonOperatingBn": -1.699,
       "pretaxIncomeBn": 3.338,
       "taxBn": 0.644,
       "netIncomeBn": 2.694,
       "netIncomeYoyPct": -47.63,
       "grossMarginPct": 69.01,
-      "operatingMarginPct": null,
+      "operatingMarginPct": 22.42,
       "profitMarginPct": 11.99,
       "effectiveTaxRatePct": 19.29,
       "revenueQoqPct": 0.107,
       "grossMarginYoyDeltaPp": 1.18,
-      "operatingMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": -4.59,
       "profitMarginYoyDeltaPp": -8.16,
+      "statementFilingDate": "2024-09-29",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jnj/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "stockanalysis",
+        "otherOpexBn": "stockanalysis",
+        "operatingExpensesBn": "stockanalysis",
+        "operatingIncomeBn": "stockanalysis",
+        "operatingMarginPct": "stockanalysis",
+        "operatingMarginYoyDeltaPp": "stockanalysis",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -2008,7 +3897,9 @@
           "filingDate": "2024-10-23",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Med Tech",
@@ -2024,13 +3915,13 @@
           "filingDate": "2024-10-23",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2024Q4": {
       "calendarQuarter": "2024Q4",
@@ -2044,23 +3935,92 @@
       "costOfRevenueBn": 7.128,
       "grossProfitBn": 15.392,
       "sgnaBn": 6.453,
-      "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "rndBn": 5.315,
+      "otherOpexBn": 0.042,
+      "operatingExpensesBn": 11.81,
+      "operatingIncomeBn": 3.582,
+      "nonOperatingBn": 0.305,
       "pretaxIncomeBn": 3.887,
       "taxBn": 0.456,
       "netIncomeBn": 3.431,
       "netIncomeYoyPct": -86.82,
       "grossMarginPct": 68.35,
-      "operatingMarginPct": null,
+      "operatingMarginPct": 15.91,
       "profitMarginPct": 15.24,
       "effectiveTaxRatePct": 11.73,
       "revenueQoqPct": 0.218,
       "grossMarginYoyDeltaPp": -0.71,
-      "operatingMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": -10.01,
       "profitMarginYoyDeltaPp": -106.67,
+      "statementFilingDate": "2024-12-29",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jnj/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "stockanalysis",
+        "otherOpexBn": "stockanalysis",
+        "operatingExpensesBn": "stockanalysis",
+        "operatingIncomeBn": "stockanalysis",
+        "operatingMarginPct": "stockanalysis",
+        "operatingMarginYoyDeltaPp": "stockanalysis",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -2076,7 +4036,9 @@
           "filingDate": "2025-02-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Med Tech",
@@ -2092,13 +4054,13 @@
           "filingDate": "2025-02-13",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2025Q1": {
       "calendarQuarter": "2025Q1",
@@ -2112,23 +4074,92 @@
       "costOfRevenueBn": 7.357,
       "grossProfitBn": 14.536,
       "sgnaBn": 5.112,
-      "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "rndBn": 3.225,
+      "otherOpexBn": 0.017,
+      "operatingExpensesBn": 8.354,
+      "operatingIncomeBn": 6.182,
+      "nonOperatingBn": 7.449,
       "pretaxIncomeBn": 13.631,
       "taxBn": 2.632,
       "netIncomeBn": 10.999,
       "netIncomeYoyPct": 237.91,
       "grossMarginPct": 66.4,
-      "operatingMarginPct": null,
+      "operatingMarginPct": 28.24,
       "profitMarginPct": 50.24,
       "effectiveTaxRatePct": 19.31,
       "revenueQoqPct": -2.784,
       "grossMarginYoyDeltaPp": -3.15,
-      "operatingMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": 0.61,
       "profitMarginYoyDeltaPp": 35.02,
+      "statementFilingDate": "2025-03-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jnj/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "stockanalysis",
+        "otherOpexBn": "stockanalysis",
+        "operatingExpensesBn": "stockanalysis",
+        "operatingIncomeBn": "stockanalysis",
+        "operatingMarginPct": "stockanalysis",
+        "operatingMarginYoyDeltaPp": "stockanalysis",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -2144,7 +4175,9 @@
           "filingDate": "2025-04-23",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Med Tech",
@@ -2160,13 +4193,13 @@
           "filingDate": "2025-04-23",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2025Q2": {
       "calendarQuarter": "2025Q2",
@@ -2180,23 +4213,92 @@
       "costOfRevenueBn": 7.628,
       "grossProfitBn": 16.115,
       "sgnaBn": 5.889,
-      "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "rndBn": 3.516,
+      "otherOpexBn": 0.064,
+      "operatingExpensesBn": 9.469,
+      "operatingIncomeBn": 6.646,
+      "nonOperatingBn": -0.155,
       "pretaxIncomeBn": 6.491,
       "taxBn": 0.954,
       "netIncomeBn": 5.537,
       "netIncomeYoyPct": 18.16,
       "grossMarginPct": 67.87,
-      "operatingMarginPct": null,
+      "operatingMarginPct": 27.99,
       "profitMarginPct": 23.32,
       "effectiveTaxRatePct": 14.7,
       "revenueQoqPct": 8.45,
       "grossMarginYoyDeltaPp": -1.53,
-      "operatingMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": 0.03,
       "profitMarginYoyDeltaPp": 2.44,
+      "statementFilingDate": "2025-06-29",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jnj/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "stockanalysis",
+        "otherOpexBn": "stockanalysis",
+        "operatingExpensesBn": "stockanalysis",
+        "operatingIncomeBn": "stockanalysis",
+        "operatingMarginPct": "stockanalysis",
+        "operatingMarginYoyDeltaPp": "stockanalysis",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -2212,7 +4314,9 @@
           "filingDate": "2025-07-24",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Med Tech",
@@ -2228,13 +4332,13 @@
           "filingDate": "2025-07-24",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2025Q3": {
       "calendarQuarter": "2025Q3",
@@ -2248,23 +4352,92 @@
       "costOfRevenueBn": 7.303,
       "grossProfitBn": 16.69,
       "sgnaBn": 5.922,
-      "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "rndBn": 3.672,
+      "otherOpexBn": 0.063,
+      "operatingExpensesBn": 9.657,
+      "operatingIncomeBn": 7.033,
+      "nonOperatingBn": 0.46,
       "pretaxIncomeBn": 7.493,
       "taxBn": 2.341,
       "netIncomeBn": 5.152,
       "netIncomeYoyPct": 91.24,
       "grossMarginPct": 69.56,
-      "operatingMarginPct": null,
+      "operatingMarginPct": 29.31,
       "profitMarginPct": 21.47,
       "effectiveTaxRatePct": 31.24,
       "revenueQoqPct": 1.053,
       "grossMarginYoyDeltaPp": 0.55,
-      "operatingMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": 6.89,
       "profitMarginYoyDeltaPp": 9.48,
+      "statementFilingDate": "2025-09-28",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jnj/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "stockanalysis",
+        "otherOpexBn": "stockanalysis",
+        "operatingExpensesBn": "stockanalysis",
+        "operatingIncomeBn": "stockanalysis",
+        "operatingMarginPct": "stockanalysis",
+        "operatingMarginYoyDeltaPp": "stockanalysis",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -2280,7 +4453,9 @@
           "filingDate": "2025-10-22",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Med Tech",
@@ -2296,13 +4471,13 @@
           "filingDate": "2025-10-22",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     },
     "2025Q4": {
       "calendarQuarter": "2025Q4",
@@ -2316,23 +4491,92 @@
       "costOfRevenueBn": 7.968,
       "grossProfitBn": 16.596,
       "sgnaBn": 6.753,
-      "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "rndBn": 4.333,
+      "otherOpexBn": 0.084,
+      "operatingExpensesBn": 11.17,
+      "operatingIncomeBn": 5.426,
+      "nonOperatingBn": -0.46,
       "pretaxIncomeBn": 4.966,
       "taxBn": -0.15,
       "netIncomeBn": 5.116,
       "netIncomeYoyPct": 49.11,
       "grossMarginPct": 67.56,
-      "operatingMarginPct": null,
+      "operatingMarginPct": 22.09,
       "profitMarginPct": 20.83,
       "effectiveTaxRatePct": -3.02,
       "revenueQoqPct": 2.38,
       "grossMarginYoyDeltaPp": -0.79,
-      "operatingMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": 6.18,
       "profitMarginYoyDeltaPp": 5.59,
+      "statementFilingDate": "2025-12-28",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jnj/financials/?p=quarterly",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "stockanalysis",
+        "otherOpexBn": "stockanalysis",
+        "operatingExpensesBn": "stockanalysis",
+        "operatingIncomeBn": "stockanalysis",
+        "operatingMarginPct": "stockanalysis",
+        "operatingMarginYoyDeltaPp": "stockanalysis",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 2,
+        "revenueYoyPct": 2,
+        "revenueQoqPct": 2,
+        "costOfRevenueBn": 2,
+        "grossProfitBn": 2,
+        "grossMarginPct": 2,
+        "grossMarginYoyDeltaPp": 2,
+        "sgnaBn": 2,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 2,
+        "taxBn": 2,
+        "netIncomeBn": 2,
+        "netIncomeYoyPct": 2,
+        "profitMarginPct": 2,
+        "profitMarginYoyDeltaPp": 2,
+        "effectiveTaxRatePct": 2
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
       "officialRevenueSegments": [
         {
           "name": "Innovative Medicine",
@@ -2348,7 +4592,9 @@
           "filingDate": "2026-02-11",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Med Tech",
@@ -2364,16 +4610,16 @@
           "filingDate": "2026-02-11",
           "supportLines": null,
           "supportLinesZh": null,
-          "metricMode": null
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-      "officialSegmentSource": "official-filings",
-      "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "officialSegmentSource": "official-filings"
     }
   },
-  "statementSource": "official-sec-companyfacts",
+  "statementSource": "official-sec-companyfacts+field-reconciled",
   "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000200406.json",
   "reportingCurrency": "USD",
   "cik": 200406,
@@ -2593,7 +4839,11 @@
             "filingDate": "2020-02-18",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-healthcare-business-disclosure"
+            ]
           },
           {
             "name": "Consumer",
@@ -2609,7 +4859,11 @@
             "filingDate": "2020-02-18",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-healthcare-business-disclosure"
+            ]
           }
         ]
       },
@@ -2629,7 +4883,11 @@
             "filingDate": "2020-02-18",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-healthcare-business-disclosure"
+            ]
           },
           {
             "name": "Consumer",
@@ -2645,7 +4903,11 @@
             "filingDate": "2020-02-18",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-healthcare-business-disclosure"
+            ]
           }
         ]
       },
@@ -2665,7 +4927,11 @@
             "filingDate": "2020-02-18",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-healthcare-business-disclosure"
+            ]
           },
           {
             "name": "Consumer",
@@ -2681,7 +4947,11 @@
             "filingDate": "2020-02-18",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-healthcare-business-disclosure"
+            ]
           }
         ]
       },
@@ -2701,7 +4971,11 @@
             "filingDate": "2020-04-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Med Tech",
@@ -2717,7 +4991,11 @@
             "filingDate": "2020-04-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Consumer",
@@ -2733,7 +5011,11 @@
             "filingDate": "2020-04-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           }
         ]
       },
@@ -2753,7 +5035,11 @@
             "filingDate": "2020-07-24",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Med Tech",
@@ -2769,7 +5055,11 @@
             "filingDate": "2020-07-24",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Consumer",
@@ -2785,7 +5075,11 @@
             "filingDate": "2020-07-24",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           }
         ]
       },
@@ -2805,7 +5099,11 @@
             "filingDate": "2020-10-23",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Med Tech",
@@ -2821,7 +5119,11 @@
             "filingDate": "2020-10-23",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Consumer",
@@ -2837,7 +5139,11 @@
             "filingDate": "2020-10-23",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           }
         ]
       },
@@ -2857,7 +5163,11 @@
             "filingDate": "2020-02-18",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Med Tech",
@@ -2873,7 +5183,11 @@
             "filingDate": "2020-02-18",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Consumer",
@@ -2889,7 +5203,11 @@
             "filingDate": "2020-02-18",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           }
         ]
       },
@@ -2909,7 +5227,11 @@
             "filingDate": "2020-04-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Med Tech",
@@ -2925,7 +5247,11 @@
             "filingDate": "2020-04-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Consumer",
@@ -2941,7 +5267,11 @@
             "filingDate": "2020-04-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           }
         ]
       },
@@ -2961,7 +5291,11 @@
             "filingDate": "2020-07-24",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Med Tech",
@@ -2977,7 +5311,11 @@
             "filingDate": "2020-07-24",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Consumer",
@@ -2993,7 +5331,11 @@
             "filingDate": "2020-07-24",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           }
         ]
       },
@@ -3013,7 +5355,11 @@
             "filingDate": "2020-10-23",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Med Tech",
@@ -3029,7 +5375,11 @@
             "filingDate": "2020-10-23",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Consumer",
@@ -3045,7 +5395,11 @@
             "filingDate": "2020-10-23",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           }
         ]
       },
@@ -3065,7 +5419,11 @@
             "filingDate": "2021-02-22",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Med Tech",
@@ -3081,7 +5439,11 @@
             "filingDate": "2021-02-22",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Consumer",
@@ -3097,7 +5459,11 @@
             "filingDate": "2021-02-22",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           }
         ]
       },
@@ -3117,7 +5483,11 @@
             "filingDate": "2021-04-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Med Tech",
@@ -3133,7 +5503,11 @@
             "filingDate": "2021-04-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Consumer",
@@ -3149,7 +5523,11 @@
             "filingDate": "2021-04-30",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           }
         ]
       },
@@ -3169,7 +5547,11 @@
             "filingDate": "2021-07-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Med Tech",
@@ -3185,7 +5567,11 @@
             "filingDate": "2021-07-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Consumer",
@@ -3201,7 +5587,11 @@
             "filingDate": "2021-07-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           }
         ]
       },
@@ -3221,7 +5611,11 @@
             "filingDate": "2021-10-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Med Tech",
@@ -3237,7 +5631,11 @@
             "filingDate": "2021-10-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Consumer",
@@ -3253,7 +5651,11 @@
             "filingDate": "2021-10-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           }
         ]
       },
@@ -3273,7 +5675,11 @@
             "filingDate": "2022-02-17",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Med Tech",
@@ -3289,7 +5695,11 @@
             "filingDate": "2022-02-17",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Consumer",
@@ -3305,7 +5715,11 @@
             "filingDate": "2022-02-17",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           }
         ]
       },
@@ -3325,7 +5739,11 @@
             "filingDate": "2022-04-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Med Tech",
@@ -3341,7 +5759,11 @@
             "filingDate": "2022-04-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Consumer",
@@ -3357,7 +5779,11 @@
             "filingDate": "2022-04-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           }
         ]
       },
@@ -3377,7 +5803,11 @@
             "filingDate": "2022-07-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Med Tech",
@@ -3393,7 +5823,11 @@
             "filingDate": "2022-07-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Consumer",
@@ -3409,7 +5843,11 @@
             "filingDate": "2022-07-29",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           }
         ]
       },
@@ -3429,7 +5867,11 @@
             "filingDate": "2022-10-27",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Med Tech",
@@ -3445,7 +5887,11 @@
             "filingDate": "2022-10-27",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Consumer",
@@ -3461,7 +5907,11 @@
             "filingDate": "2022-10-27",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           }
         ]
       },
@@ -3481,7 +5931,11 @@
             "filingDate": "2024-02-16",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Med Tech",
@@ -3497,7 +5951,11 @@
             "filingDate": "2024-02-16",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Consumer",
@@ -3513,7 +5971,11 @@
             "filingDate": "2023-02-16",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           }
         ]
       },
@@ -3533,7 +5995,11 @@
             "filingDate": "2023-04-28",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Med Tech",
@@ -3549,7 +6015,11 @@
             "filingDate": "2023-04-28",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Consumer",
@@ -3565,7 +6035,11 @@
             "filingDate": "2023-04-28",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           }
         ]
       },
@@ -3585,7 +6059,11 @@
             "filingDate": "2023-07-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Med Tech",
@@ -3601,7 +6079,11 @@
             "filingDate": "2023-07-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           },
           {
             "name": "Consumer",
@@ -3617,7 +6099,11 @@
             "filingDate": "2023-07-31",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "mixed-continuing-and-consumer-disclosure"
+            ]
           }
         ]
       },
@@ -3637,7 +6123,9 @@
             "filingDate": "2023-10-27",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Med Tech",
@@ -3653,7 +6141,9 @@
             "filingDate": "2023-10-27",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -3673,7 +6163,9 @@
             "filingDate": "2024-05-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Med Tech",
@@ -3689,7 +6181,9 @@
             "filingDate": "2024-05-01",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -3709,7 +6203,9 @@
             "filingDate": "2024-07-25",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Med Tech",
@@ -3725,7 +6221,9 @@
             "filingDate": "2024-07-25",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -3745,7 +6243,9 @@
             "filingDate": "2024-10-23",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Med Tech",
@@ -3761,7 +6261,9 @@
             "filingDate": "2024-10-23",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -3781,7 +6283,9 @@
             "filingDate": "2025-02-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Med Tech",
@@ -3797,7 +6301,9 @@
             "filingDate": "2025-02-13",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -3817,7 +6323,9 @@
             "filingDate": "2025-04-23",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Med Tech",
@@ -3833,7 +6341,9 @@
             "filingDate": "2025-04-23",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -3853,7 +6363,9 @@
             "filingDate": "2025-07-24",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Med Tech",
@@ -3869,7 +6381,9 @@
             "filingDate": "2025-07-24",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -3889,7 +6403,9 @@
             "filingDate": "2025-10-22",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Med Tech",
@@ -3905,7 +6421,9 @@
             "filingDate": "2025-10-22",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -3925,7 +6443,9 @@
             "filingDate": "2026-02-11",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Med Tech",
@@ -3941,7 +6461,9 @@
             "filingDate": "2026-02-11",
             "supportLines": null,
             "supportLinesZh": null,
-            "metricMode": null
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       }
@@ -4100,12 +6622,195 @@
     ],
     "errors": []
   },
+  "parserDiagnostics": {
+    "version": "universal-parser-v3",
+    "financials": {
+      "basePreferredOrder": [
+        "official",
+        "stockanalysis"
+      ],
+      "preferredOrder": [
+        "official",
+        "stockanalysis"
+      ],
+      "selectedSource": "official",
+      "attempts": [
+        {
+          "layer": "financials",
+          "source_id": "official",
+          "status": "success",
+          "selected": true,
+          "reason": "",
+          "quarter_count": 30,
+          "latest_quarter": "2025Q4",
+          "error": ""
+        },
+        {
+          "layer": "financials",
+          "source_id": "stockanalysis",
+          "status": "success",
+          "selected": false,
+          "reason": "",
+          "quarter_count": 18,
+          "latest_quarter": "2025Q4",
+          "error": ""
+        }
+      ],
+      "reconciliation": {
+        "version": "financial-reconciler-v1",
+        "primarySource": "official",
+        "quarterCount": 30,
+        "fieldOverrideCount": 122,
+        "derivedFieldCount": 0,
+        "mixedSourceQuarterCount": 18,
+        "sourceUsageCounts": {
+          "official": 433,
+          "stockanalysis": 122
+        }
+      },
+      "validation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "quarterCount": 30,
+        "validatedQuarterCount": 30,
+        "issueCount": 12,
+        "mismatchQuarterCount": 5,
+        "highConfidenceQuarterCount": 27,
+        "averageConfidenceScore": 0.9225,
+        "latestQuarter": "2025Q4",
+        "latestQuarterConfidenceScore": 1.0,
+        "latestQuarterIssueCount": 0
+      }
+    },
+    "segments": {
+      "selectedSource": "official-segments",
+      "attempts": [
+        {
+          "layer": "segments",
+          "source_id": "official-segments",
+          "status": "success",
+          "selected": true,
+          "reason": "",
+          "quarter_count": 30,
+          "latest_quarter": "2025Q4",
+          "error": ""
+        }
+      ]
+    },
+    "revenueStructures": {
+      "selectedSource": "official-revenue-structures",
+      "attempts": [
+        {
+          "layer": "revenue-structures",
+          "source_id": "official-revenue-structures",
+          "status": "success",
+          "selected": true,
+          "reason": "",
+          "quarter_count": 30,
+          "latest_quarter": "2025Q4",
+          "error": ""
+        }
+      ]
+    },
+    "summary": {
+      "financialQuarterCount": 30,
+      "segmentQuarterCount": 30,
+      "revenueStructureQuarterCount": 30
+    },
+    "validation": {
+      "version": "parser-validation-v1",
+      "status": "high",
+      "overallConfidenceScore": 0.9496,
+      "financialConfidenceScore": 0.9225,
+      "structuralConfidenceScore": 1.0,
+      "revenueSegmentChecks": 9,
+      "revenueSegmentMismatchCount": 0,
+      "revenueSegmentSkippedChecks": 21,
+      "detailGroupChecks": 0,
+      "detailGroupMismatchCount": 0,
+      "detailGroupSkippedChecks": 0,
+      "opexChecks": 0,
+      "opexSkippedChecks": 0,
+      "opexOverflowMismatchCount": 0,
+      "warningCount": 0,
+      "warnings": []
+    }
+  },
   "statementPresets": {},
   "coverage": {
     "quarterCount": 30,
     "pixelReplicaQuarterCount": 0,
     "hasPixelReplica": false,
     "officialFinancialQuarterCount": 30,
-    "officialSegmentQuarterCount": 30
+    "officialSegmentQuarterCount": 30,
+    "officialExpenseQuarterCount": 0,
+    "classification": {
+      "status": "ok",
+      "latestQuarter": "2025Q4",
+      "latestQuarterHasRevenueClassification": true,
+      "latestQuarterHasExpenseClassification": false,
+      "latestRevenueClassificationQuarter": "2025Q4",
+      "latestExpenseClassificationQuarter": null,
+      "latestStructureHistoryQuarter": "2025Q4",
+      "revenueClassificationQuarterCount": 30,
+      "expenseClassificationQuarterCount": 0,
+      "revenueClassificationCoverageRatio": 1.0,
+      "expenseClassificationCoverageRatio": 0.0,
+      "latestRevenueClassificationLagQuarters": 0,
+      "latestExpenseClassificationLagQuarters": null,
+      "warnings": [],
+      "blockers": [],
+      "policy": {}
+    },
+    "parser": {
+      "version": "universal-parser-v3",
+      "selectedFinancialSource": "official",
+      "selectedSegmentSource": "official-segments",
+      "selectedRevenueStructureSource": "official-revenue-structures",
+      "financialAttemptCount": 2,
+      "financialReconciliation": {
+        "version": "financial-reconciler-v1",
+        "primarySource": "official",
+        "quarterCount": 30,
+        "fieldOverrideCount": 122,
+        "derivedFieldCount": 0,
+        "mixedSourceQuarterCount": 18,
+        "sourceUsageCounts": {
+          "official": 433,
+          "stockanalysis": 122
+        }
+      },
+      "financialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "quarterCount": 30,
+        "validatedQuarterCount": 30,
+        "issueCount": 12,
+        "mismatchQuarterCount": 5,
+        "highConfidenceQuarterCount": 27,
+        "averageConfidenceScore": 0.9225,
+        "latestQuarter": "2025Q4",
+        "latestQuarterConfidenceScore": 1.0,
+        "latestQuarterIssueCount": 0
+      },
+      "validation": {
+        "version": "parser-validation-v1",
+        "status": "high",
+        "overallConfidenceScore": 0.9496,
+        "financialConfidenceScore": 0.9225,
+        "structuralConfidenceScore": 1.0,
+        "revenueSegmentChecks": 9,
+        "revenueSegmentMismatchCount": 0,
+        "revenueSegmentSkippedChecks": 21,
+        "detailGroupChecks": 0,
+        "detailGroupMismatchCount": 0,
+        "detailGroupSkippedChecks": 0,
+        "opexChecks": 0,
+        "opexSkippedChecks": 0,
+        "opexOverflowMismatchCount": 0,
+        "warningCount": 0,
+        "warnings": []
+      }
+    }
   }
 }
