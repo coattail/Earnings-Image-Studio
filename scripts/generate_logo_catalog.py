@@ -1,8 +1,11 @@
 from __future__ import annotations
 
 import base64
+import html
 import json
 import re
+import subprocess
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -56,6 +59,10 @@ COMPANY_DOMAINS: dict[str, str] = {
 }
 
 OVERRIDE_LOGO_SOURCES: dict[str, dict[str, Any]] = {
+    "alibaba": {
+        "url": "https://data.alibabagroup.com/ecms-files/1514443390/a9519967-5bc1-4dfe-990a-7fcf444fd5fe/Alibaba%20Logo.png",
+        "official": True,
+    },
     "alphabet": {
         "url": "https://www.gstatic.com/images/branding/productlogos/googleg/v6/192px.svg",
     },
@@ -114,7 +121,8 @@ OVERRIDE_LOGO_SOURCES: dict[str, dict[str, Any]] = {
         "url": "https://cdn.worldvectorlogo.com/logos/micron.svg",
     },
     "netease": {
-        "url": "https://www.google.com/s2/favicons?domain_url=https://163.com&sz=256",
+        "url": "https://ir.netease.com/sites/g/files/knoqqb53596/themes/site/nir_pid158/client/images/NetEase-logo.png",
+        "official": True,
     },
     "netflix": {
         "url": SIMPLE_ICON_URL.format(slug="netflix"),
@@ -142,6 +150,10 @@ OVERRIDE_LOGO_SOURCES: dict[str, dict[str, Any]] = {
     "walmart": {
         "url": "https://brandcenter.walmart.com/content/brand/us/en/home/brand-identity/spark/_jcr_content/root/container/footer_copy_copy/logo.coreimg.svg/1740780744169/spark.svg",
     },
+    "tencent": {
+        "url": "https://www.tencent.com/img/index/tencent_logo.png",
+        "official": True,
+    },
     "home-depot": {
         "url": "https://cdn.worldvectorlogo.com/logos/the-home-depot.svg",
     },
@@ -155,15 +167,56 @@ OVERRIDE_LOGO_SOURCES: dict[str, dict[str, Any]] = {
         "url": SIMPLE_ICON_URL.format(slug="abbvie"),
         "fill": "#071D49",
     },
+    "xiaomi": {
+        "url": "https://i01.appmifile.com/webfile/globalimg/mobile/logo/mi.png",
+        "official": True,
+    },
+    "jd": {
+        "url": "https://ir.jd.com/sites/g/files/knoqqb53391/themes/site/nir_pid834/client/images/main-logo.png",
+        "official": True,
+    },
 }
 
-CANDIDATE_URLS = (
+OFFICIAL_DISCOVERY_PAGE_URLS = (
+    "https://www.{domain}/",
+    "https://{domain}/",
+    "https://www.{domain}/about",
+    "https://{domain}/about",
+    "https://www.{domain}/about.html",
+    "https://{domain}/about.html",
+    "https://www.{domain}/en-us/",
+    "https://{domain}/en-us/",
+    "https://www.{domain}/investors",
+    "https://{domain}/investors",
+    "https://www.{domain}/investors.html",
+    "https://{domain}/investors.html",
+    "https://ir.{domain}/",
+)
+
+OFFICIAL_CANDIDATE_URLS = (
+    "https://{domain}/logo.svg",
+    "https://www.{domain}/logo.svg",
+    "https://{domain}/logo.png",
+    "https://www.{domain}/logo.png",
+    "https://{domain}/assets/logo.svg",
+    "https://www.{domain}/assets/logo.svg",
+    "https://{domain}/assets/logo.png",
+    "https://www.{domain}/assets/logo.png",
+    "https://{domain}/img/logo.svg",
+    "https://www.{domain}/img/logo.svg",
+    "https://{domain}/img/logo.png",
+    "https://www.{domain}/img/logo.png",
+)
+
+FALLBACK_CANDIDATE_URLS = (
     "https://{domain}/apple-touch-icon.png",
     "https://www.{domain}/apple-touch-icon.png",
     "https://{domain}/apple-touch-icon-precomposed.png",
     "https://www.{domain}/apple-touch-icon-precomposed.png",
     "https://www.google.com/s2/favicons?domain_url=https://{domain}&sz=256",
 )
+
+LOGO_HINT_KEYWORDS = ("logo", "brand", "wordmark", "logotype")
 
 REQUEST_HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36",
@@ -173,9 +226,35 @@ REQUEST_HEADERS = {
 
 def _request_bytes(url: str) -> tuple[bytes, str]:
     request = urllib.request.Request(url, headers=REQUEST_HEADERS)
-    with urllib.request.urlopen(request, timeout=25) as response:
-        content_type = response.headers.get_content_type() or "application/octet-stream"
-        return response.read(), content_type
+    try:
+        with urllib.request.urlopen(request, timeout=40) as response:
+            content_type = response.headers.get_content_type() or "application/octet-stream"
+            return response.read(), content_type
+    except Exception:
+        curl = subprocess.run(
+            ["curl", "--http1.1", "-L", "-sS", "--max-time", "40", url],
+            check=True,
+            capture_output=True,
+        )
+        return curl.stdout, "application/octet-stream"
+
+
+def _request_text(url: str) -> str:
+    request = urllib.request.Request(
+        url,
+        headers={**REQUEST_HEADERS, "Accept": "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8"},
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=40) as response:
+            charset = response.headers.get_content_charset() or "utf-8"
+            return response.read().decode(charset, errors="ignore")
+    except Exception:
+        curl = subprocess.run(
+            ["curl", "--http1.1", "-L", "-sS", "--max-time", "40", url],
+            check=True,
+            capture_output=True,
+        )
+        return curl.stdout.decode("utf-8", errors="ignore")
 
 
 def _png_dimensions(data: bytes) -> tuple[int, int] | None:
@@ -207,6 +286,27 @@ def _apply_svg_fill(payload: bytes, fill: str | None) -> bytes:
     return text.encode("utf-8")
 
 
+def _png_has_transparency(data: bytes) -> bool:
+    if not data.startswith(b"\x89PNG\r\n\x1a\n") or len(data) < 26:
+        return False
+    color_type = data[25]
+    if color_type in (4, 6):
+        return True
+    offset = 8
+    while offset + 8 <= len(data):
+        chunk_length = int.from_bytes(data[offset : offset + 4], "big")
+        chunk_type = data[offset + 4 : offset + 8]
+        offset += 8
+        if offset + chunk_length + 4 > len(data):
+            break
+        if chunk_type == b"tRNS":
+            return True
+        offset += chunk_length + 4
+        if chunk_type == b"IEND":
+            break
+    return False
+
+
 def _svg_dimensions(payload: bytes) -> tuple[int, int] | None:
     text = payload.decode("utf-8", errors="ignore")
     view_box_match = re.search(r'viewBox\s*=\s*["\']\s*[0-9.]+\s+[0-9.]+\s+([0-9.]+)\s+([0-9.]+)\s*["\']', text)
@@ -217,6 +317,105 @@ def _svg_dimensions(payload: bytes) -> tuple[int, int] | None:
     if size_match and height_match:
       return (max(int(float(size_match.group(1))), 1), max(int(float(height_match.group(1))), 1))
     return None
+
+
+def _is_official_host(url: str, domain: str, extra_hosts: tuple[str, ...] = ()) -> bool:
+    host = urllib.parse.urlparse(url).netloc.lower()
+    normalized_domain = domain.lower()
+    if host == normalized_domain or host.endswith(f".{normalized_domain}"):
+        return True
+    return any(host == item.lower() or host.endswith(f".{item.lower()}") for item in extra_hosts)
+
+
+def _raster_is_crisp(dimensions: tuple[int, int] | None) -> bool:
+    if dimensions is None:
+        return False
+    width, height = dimensions
+    return max(width, height) >= 120 and width * height >= 6000
+
+
+def _looks_like_logo_url(url: str, company_id: str, domain: str) -> bool:
+    path = urllib.parse.unquote(urllib.parse.urlparse(url).path.lower())
+    company_tokens = {
+        company_id.lower(),
+        company_id.lower().replace("-", ""),
+        company_id.lower().split("-")[0],
+        domain.lower().split(".")[0],
+    }
+    if any(keyword in path for keyword in LOGO_HINT_KEYWORDS):
+        return True
+    return any(token and token in path for token in company_tokens)
+
+
+def _extract_official_logo_urls(company_id: str, domain: str) -> list[str]:
+    discovered: list[str] = []
+    seen: set[str] = set()
+    for template in OFFICIAL_DISCOVERY_PAGE_URLS:
+        page_url = template.format(domain=domain)
+        try:
+            html_text = _request_text(page_url)
+        except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError, UnicodeDecodeError, subprocess.CalledProcessError):
+            continue
+        html_text = html_text.replace("\\/", "/")
+        raw_values = re.findall(r'(?i)(?:src|href|content)=["\']([^"\']+)["\']', html_text)
+        raw_values.extend(re.findall(r'https?://[^"\'>\s]+|/[^"\'>\s]+', html_text))
+        for raw_value in raw_values:
+            candidate = html.unescape(raw_value).strip()
+            if not candidate or candidate.startswith("data:"):
+                continue
+            absolute_url = urllib.parse.urljoin(page_url, candidate)
+            parsed = urllib.parse.urlparse(absolute_url)
+            path = urllib.parse.unquote(parsed.path.lower())
+            if parsed.scheme not in ("http", "https"):
+                continue
+            if absolute_url in seen:
+                continue
+            if not _is_official_host(absolute_url, domain):
+                continue
+            if not re.search(r"\.(svg|png|webp|jpg|jpeg)$", path):
+                continue
+            if not _looks_like_logo_url(absolute_url, company_id, domain):
+                continue
+            seen.add(absolute_url)
+            discovered.append(absolute_url)
+    return discovered
+
+
+def _resolve_logo_source(
+    url: str,
+    company_id: str,
+    domain: str,
+    *,
+    fill: str | None = None,
+    official_override: bool | None = None,
+    source_type: str,
+) -> dict[str, Any] | None:
+    payload, content_type = _request_bytes(url)
+    payload = _apply_svg_fill(payload, fill)
+    mime = _normalize_mime(content_type, payload)
+    dimensions = _svg_dimensions(payload) if mime == "image/svg+xml" else _png_dimensions(payload)
+    is_transparent = mime == "image/svg+xml" or (mime == "image/png" and _png_has_transparency(payload))
+    is_official = _is_official_host(url, domain) if official_override is None else official_override
+    if source_type != "override":
+        if not is_official:
+            return None
+        if mime not in ("image/svg+xml", "image/png"):
+            return None
+        if mime == "image/png" and not is_transparent:
+            return None
+        if mime != "image/svg+xml" and not _raster_is_crisp(dimensions):
+            return None
+
+    return {
+        "sourceUrl": url,
+        "mime": mime,
+        "dataUrl": f"data:{mime};base64,{base64.b64encode(payload).decode('ascii')}",
+        "width": dimensions[0] if dimensions else 64,
+        "height": dimensions[1] if dimensions else 64,
+        "officialSource": is_official,
+        "transparentBackground": is_transparent,
+        "sourceType": source_type,
+    }
 
 
 def _load_brand_colors() -> dict[str, str]:
@@ -233,51 +432,53 @@ def _select_logo(company_id: str, domain: str) -> dict[str, Any]:
     last_error: str | None = None
     override_source = OVERRIDE_LOGO_SOURCES.get(company_id)
     if override_source:
-        override_url = override_source["url"]
-        payload, content_type = _request_bytes(override_url)
-        payload = _apply_svg_fill(payload, override_source.get("fill"))
-        mime = _normalize_mime(content_type, payload)
-        dimensions = _svg_dimensions(payload) if mime == "image/svg+xml" else _png_dimensions(payload)
-        return {
-            "sourceUrl": override_url,
-            "mime": mime,
-            "dataUrl": f"data:{mime};base64,{base64.b64encode(payload).decode('ascii')}",
-            "width": dimensions[0] if dimensions else 64,
-            "height": dimensions[1] if dimensions else 64,
-        }
-    for template in CANDIDATE_URLS:
-        url = template.format(domain=domain)
+        resolved_override = _resolve_logo_source(
+            override_source["url"],
+            company_id,
+            domain,
+            fill=override_source.get("fill"),
+            official_override=override_source.get("official"),
+            source_type="override",
+        )
+        if resolved_override is not None:
+            return resolved_override
+        last_error = f"override rejected by logo quality policy: {override_source['url']}"
+
+    candidate_urls = [
+        *_extract_official_logo_urls(company_id, domain),
+        *(template.format(domain=domain) for template in OFFICIAL_CANDIDATE_URLS),
+        *(template.format(domain=domain) for template in FALLBACK_CANDIDATE_URLS),
+    ]
+    seen_urls: set[str] = set()
+    for url in candidate_urls:
+        if url in seen_urls:
+            continue
+        seen_urls.add(url)
         try:
-            payload, content_type = _request_bytes(url)
-        except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError) as exc:
+            resolved = _resolve_logo_source(url, company_id, domain, source_type="discovered")
+        except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError, subprocess.CalledProcessError) as exc:
             last_error = str(exc)
             continue
-
-        mime = _normalize_mime(content_type, payload)
-        if not mime.startswith("image/"):
-            last_error = f"unexpected content-type {mime}"
+        if resolved is None:
+            last_error = f"rejected by logo quality policy: {url}"
             continue
-
-        dimensions = _png_dimensions(payload)
-        if dimensions is None and mime == "image/svg+xml":
-            dimensions = _svg_dimensions(payload)
-        if dimensions is not None and min(dimensions) < 48 and "google.com/s2/favicons" not in url:
-            last_error = f"icon too small {dimensions}"
-            continue
-
-        return {
-            "sourceUrl": url,
-            "mime": mime,
-            "dataUrl": f"data:{mime};base64,{base64.b64encode(payload).decode('ascii')}",
-            "width": dimensions[0] if dimensions else 64,
-            "height": dimensions[1] if dimensions else 64,
-        }
+        if "google.com/s2/favicons" in url:
+            resolved["sourceType"] = "fallback-favicon"
+        return resolved
 
     raise RuntimeError(last_error or "no usable logo asset found")
 
 
 def main() -> int:
     brand_colors = _load_brand_colors()
+    existing_catalog: dict[str, Any] = {}
+    if OUTPUT_PATH.exists():
+        try:
+            existing_payload = json.loads(OUTPUT_PATH.read_text(encoding="utf-8"))
+            if isinstance(existing_payload.get("logos"), dict):
+                existing_catalog = existing_payload["logos"]
+        except Exception:
+            existing_catalog = {}
     catalog: dict[str, Any] = {}
     failures: dict[str, str] = {}
     for company_id, domain in COMPANY_DOMAINS.items():
@@ -290,11 +491,16 @@ def main() -> int:
             }
             print(f"[ok] {company_id} <- {catalog[company_id]['sourceUrl']}", flush=True)
         except Exception as exc:  # noqa: BLE001
-            failures[company_id] = str(exc)
-            print(f"[warn] {company_id}: {exc}", flush=True)
+            if company_id in existing_catalog:
+                catalog[company_id] = existing_catalog[company_id]
+                failures[company_id] = f"{exc} (kept previous cached asset)"
+                print(f"[warn] {company_id}: {exc} -> kept previous cached asset", flush=True)
+            else:
+                failures[company_id] = str(exc)
+                print(f"[warn] {company_id}: {exc}", flush=True)
 
     payload = {
-        "generatedAt": __import__("time").strftime("%Y-%m-%dT%H:%M:%SZ", __import__("time").gmtime()),
+        "generatedAt": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "logos": catalog,
         "failures": failures,
     }
