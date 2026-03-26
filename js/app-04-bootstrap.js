@@ -1,10 +1,24 @@
 const BAR_CHART_LOGO_LAYOUT_OVERRIDES = Object.freeze({
+  alibaba: Object.freeze({
+    dx: 36,
+    dy: -96,
+    widthScale: 0.68,
+    heightScale: 0.68,
+    scaleMultiplier: 0.76,
+  }),
+  jnj: Object.freeze({
+    dx: 52,
+    dy: -48,
+    widthScale: 0.66,
+    heightScale: 0.58,
+    scaleMultiplier: 0.68,
+  }),
   "procter-gamble": Object.freeze({
-    dx: -44,
-    dy: -4,
-    widthScale: 0.78,
-    heightScale: 0.78,
-    scaleMultiplier: 0.94,
+    dx: -70,
+    dy: -22,
+    widthScale: 0.58,
+    heightScale: 0.58,
+    scaleMultiplier: 0.72,
   }),
 });
 
@@ -154,6 +168,183 @@ function resolveBarChartLogoPlacement({
     x: safeNumber(bestPlacement?.x, area.x),
     y: safeNumber(bestPlacement?.y, area.y),
   };
+}
+
+function barChartClientRect(node, padding = 0) {
+  if (!node?.getBoundingClientRect) return null;
+  const rect = node.getBoundingClientRect();
+  if (!Number.isFinite(rect.left) || !Number.isFinite(rect.top) || !Number.isFinite(rect.right) || !Number.isFinite(rect.bottom)) {
+    return null;
+  }
+  return {
+    left: rect.left - padding,
+    top: rect.top - padding,
+    right: rect.right + padding,
+    bottom: rect.bottom + padding,
+  };
+}
+
+function parseBarChartLogoTransform(transformText) {
+  const transform = String(transformText || "").trim();
+  const translateMatch = transform.match(/translate\(\s*([-0-9.]+)(?:[\s,]+([-0-9.]+))?\s*\)/i);
+  if (!translateMatch) return null;
+  const scaleMatch = transform.match(/scale\(\s*([-0-9.]+)\s*\)/i);
+  return {
+    x: safeNumber(translateMatch[1], 0),
+    y: safeNumber(translateMatch[2], 0),
+    scale: Math.max(safeNumber(scaleMatch?.[1], 1), 0.0001),
+  };
+}
+
+function setBarChartLogoTransform(node, x, y, scale) {
+  if (!node) return;
+  node.setAttribute("transform", `translate(${safeNumber(x, 0).toFixed(2)} ${safeNumber(y, 0).toFixed(2)}) scale(${Math.max(safeNumber(scale, 1), 0.0001).toFixed(4)})`);
+}
+
+function collectBarChartDomObstacleRects(svg, logoWrapper) {
+  const chartContent = svg?.querySelector("#chartContent");
+  if (!chartContent || !logoWrapper) return [];
+  const logoDescendants = new Set([logoWrapper, ...Array.from(logoWrapper.querySelectorAll("*"))]);
+  return Array.from(chartContent.querySelectorAll("text, [data-bar-axis='true'], path, rect, ellipse, circle, polygon, polyline"))
+    .filter((node) => {
+      if (logoDescendants.has(node)) return false;
+      if (node.getAttribute?.("data-bar-chart-logo-ignore") === "true") return false;
+      if (safeNumber(node.getAttribute?.("opacity"), 1) <= 0.001) return false;
+      return true;
+    })
+    .map((node) => {
+      const tagName = String(node.tagName || "").toLowerCase();
+      const padding = tagName === "text" ? 6 : tagName === "line" ? 6 : 4;
+      return barChartClientRect(node, padding);
+    })
+    .filter((rect) => rect && rect.right > rect.left && rect.bottom > rect.top);
+}
+
+function refineRenderedBarChartLogoPlacement(svg) {
+  const logoWrapper = svg?.querySelector("[data-bar-chart-logo='true']");
+  const logoInner = logoWrapper?.firstElementChild;
+  if (!svg || !logoWrapper || !logoInner) return;
+  const baseTransform = logoInner.getAttribute("data-base-transform") || logoInner.getAttribute("transform") || "";
+  const parsedBaseTransform = parseBarChartLogoTransform(baseTransform);
+  if (!parsedBaseTransform) return;
+  logoInner.setAttribute("data-base-transform", baseTransform);
+  logoWrapper.removeAttribute("transform");
+  setBarChartLogoTransform(logoInner, parsedBaseTransform.x, parsedBaseTransform.y, parsedBaseTransform.scale);
+
+  const viewBoxValues = String(svg.getAttribute("viewBox") || "")
+    .trim()
+    .split(/\s+/)
+    .map((value) => Number(value));
+  const viewBox = viewBoxValues.length === 4 && viewBoxValues.every((value) => Number.isFinite(value))
+    ? {
+        left: viewBoxValues[0],
+        top: viewBoxValues[1],
+        right: viewBoxValues[0] + viewBoxValues[2],
+        bottom: viewBoxValues[1] + viewBoxValues[3],
+      }
+    : { left: 0, top: 0, right: 2048, bottom: 1325 };
+  const svgClientRect = barChartClientRect(svg, 0);
+  if (!svgClientRect) return;
+  const svgWidth = Math.max(viewBox.right - viewBox.left, 1);
+  const svgHeight = Math.max(viewBox.bottom - viewBox.top, 1);
+  const scaleX = (svgClientRect.right - svgClientRect.left) / svgWidth;
+  const scaleY = (svgClientRect.bottom - svgClientRect.top) / svgHeight;
+  const zone = {
+    left: safeNumber(logoWrapper.getAttribute("data-logo-zone-left"), viewBox.left + 20),
+    top: safeNumber(logoWrapper.getAttribute("data-logo-zone-top"), viewBox.top + 96),
+    right: safeNumber(logoWrapper.getAttribute("data-logo-zone-right"), viewBox.left + 420),
+    bottom: safeNumber(logoWrapper.getAttribute("data-logo-zone-bottom"), viewBox.top + 420),
+  };
+  const clientZone = {
+    left: svgClientRect.left + (zone.left - viewBox.left) * scaleX,
+    top: svgClientRect.top + (zone.top - viewBox.top) * scaleY,
+    right: svgClientRect.left + (zone.right - viewBox.left) * scaleX,
+    bottom: svgClientRect.top + (zone.bottom - viewBox.top) * scaleY,
+  };
+  const initialLogoRect = barChartClientRect(logoWrapper, 0);
+  const isWideWordmark = !!initialLogoRect && initialLogoRect.right - initialLogoRect.left > (initialLogoRect.bottom - initialLogoRect.top) * 1.65;
+  const isMediumWideLogo = !!initialLogoRect && initialLogoRect.right - initialLogoRect.left > (initialLogoRect.bottom - initialLogoRect.top) * 1.35;
+  if (isWideWordmark) {
+    const leftHeaderRects = Array.from(svg.querySelectorAll("#chartContent text, #chartContent [data-bar-axis='true']"))
+      .filter((node) => !logoWrapper.contains(node))
+      .map((node) => barChartClientRect(node, String(node.tagName || "").toLowerCase() === "line" ? 6 : 4))
+      .filter(
+        (rect) =>
+          rect &&
+          rect.left < svgClientRect.left + (svgClientRect.right - svgClientRect.left) * 0.26 &&
+          rect.top < svgClientRect.top + (svgClientRect.bottom - svgClientRect.top) * 0.72
+      );
+    const leftHeaderRight = leftHeaderRects.reduce((maxRight, rect) => Math.max(maxRight, rect.right), clientZone.left);
+    clientZone.left = Math.max(clientZone.left, leftHeaderRight + 16);
+  }
+  if (isMediumWideLogo) {
+    clientZone.right = Math.min(clientZone.right, svgClientRect.left + (svgClientRect.right - svgClientRect.left) * 0.43);
+    clientZone.bottom = Math.min(clientZone.bottom, svgClientRect.top + (svgClientRect.bottom - svgClientRect.top) * 0.37);
+  }
+  const obstacleRects = collectBarChartDomObstacleRects(svg, logoWrapper);
+  const xOffsets = [0, 18, -18, 36, -36, 58, -58, 82, -82, 108, -108, 136, -136, 166, -166, 198, -198, 232, -232, 268, -268, 308, -308, 352, -352, 400, -400];
+  const yOffsets = [0, -16, 16, -32, 32, -50, 50, -72, 72, -98, 98, -126, 126, -158, 158, -194, -232];
+  const scaleFactors = [1, 0.97, 0.94, 0.91, 0.88, 0.85, 0.82, 0.79, 0.76, 0.73, 0.7];
+  let bestPlacement = null;
+
+  scaleFactors.some((scaleFactor) => {
+    const candidateScale = parsedBaseTransform.scale * scaleFactor;
+    let localBest = null;
+    setBarChartLogoTransform(logoInner, parsedBaseTransform.x, parsedBaseTransform.y, candidateScale);
+    yOffsets.forEach((yOffset) => {
+      xOffsets.forEach((xOffset) => {
+        if (xOffset === 0 && yOffset === 0) {
+          logoWrapper.removeAttribute("transform");
+        } else {
+          logoWrapper.setAttribute("transform", `translate(${xOffset.toFixed(2)} ${yOffset.toFixed(2)})`);
+        }
+        const logoRect = barChartClientRect(logoWrapper, 2);
+        if (!logoRect) return;
+        const overflowPenalty =
+          Math.max(clientZone.left - logoRect.left, 0) +
+          Math.max(clientZone.top - logoRect.top, 0) +
+          Math.max(logoRect.right - clientZone.right, 0) +
+          Math.max(logoRect.bottom - clientZone.bottom, 0);
+        let collisionArea = 0;
+        let collisionCount = 0;
+        obstacleRects.forEach((obstacleRect) => {
+          if (!barChartRectsOverlap(logoRect, obstacleRect, 2)) return;
+          collisionCount += 1;
+          collisionArea += barChartRectIntersectionArea(logoRect, obstacleRect, 2);
+        });
+        const penalty =
+          overflowPenalty * 1000000 +
+          collisionCount * 100000 +
+          collisionArea * 100 +
+          Math.abs(xOffset) * 48 +
+          Math.abs(yOffset) * 32 +
+          (1 - scaleFactor) * 18000;
+        if (!localBest || penalty < localBest.penalty) {
+          localBest = {
+            penalty,
+            collisionCount,
+            xOffset,
+            yOffset,
+            scale: candidateScale,
+          };
+        }
+      });
+    });
+    if (localBest && (!bestPlacement || localBest.penalty < bestPlacement.penalty)) {
+      bestPlacement = localBest;
+    }
+    return !!localBest && localBest.collisionCount === 0;
+  });
+
+  logoWrapper.removeAttribute("transform");
+  setBarChartLogoTransform(logoInner, parsedBaseTransform.x, parsedBaseTransform.y, parsedBaseTransform.scale);
+  if (!bestPlacement) return;
+  setBarChartLogoTransform(logoInner, parsedBaseTransform.x, parsedBaseTransform.y, bestPlacement.scale);
+  if (bestPlacement.xOffset !== 0 || bestPlacement.yOffset !== 0) {
+    logoWrapper.setAttribute("transform", `translate(${bestPlacement.xOffset.toFixed(2)} ${bestPlacement.yOffset.toFixed(2)})`);
+  } else {
+    logoWrapper.removeAttribute("transform");
+  }
 }
 
 function computeNiceBarAxisStep(maxValue, maxGridLines = 6) {
@@ -425,6 +616,12 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
     });
   });
   const chartLogoKey = snapshot?.companyLogoKey || company?.id || "";
+  const chartLogoZone = {
+    left: Math.max(20, plotLeft - 18),
+    top: Math.max(96, chartTop - 220),
+    right: Math.min(plotRight - 28, plotLeft + 760),
+    bottom: Math.min(baselineY - 26, chartTop + 244),
+  };
   const chartLogoPlacement = resolveBarChartLogoPlacement({
     logoKey: chartLogoKey,
     plotLeft,
@@ -442,7 +639,7 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
   const fxNoteFontSize = hasConvertedCurrency ? 20 : 18;
 
   let svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="${escapeHtml(chartTitle)}">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="${escapeHtml(chartTitle)}" data-chart-mode="bars">
       <rect x="0" y="0" width="${width}" height="${height}" fill="${background}"></rect>
       <g id="chartContent">
         <text x="${titleX}" y="${titleY}" text-anchor="middle" font-size="${titleFontSize}" font-weight="800" fill="${titleColor}">${escapeHtml(chartTitle)}</text>
@@ -494,19 +691,21 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
     });
   });
 
-  svg += `<line x1="${plotLeft}" y1="${chartTop}" x2="${plotLeft}" y2="${baselineY}" stroke="#C9CED6" stroke-width="2.2"></line>`;
+  svg += `<line x1="${plotLeft}" y1="${chartTop}" x2="${plotLeft}" y2="${baselineY}" stroke="#C9CED6" stroke-width="2.2" data-bar-axis="true"></line>`;
   gridValues.forEach((gridValue) => {
     const y = baselineY - gridValue * valueScale;
     if (y <= chartTop + 8 || y >= baselineY - 8) return;
-    svg += `<line x1="${plotLeft}" y1="${y.toFixed(2)}" x2="${plotRight}" y2="${y.toFixed(2)}" stroke="#DDE2E8" stroke-width="1.4"></line>`;
-    svg += `<line x1="${plotLeft - 8}" y1="${y.toFixed(2)}" x2="${plotLeft}" y2="${y.toFixed(2)}" stroke="#C9CED6" stroke-width="1.8"></line>`;
+    svg += `<line x1="${plotLeft}" y1="${y.toFixed(2)}" x2="${plotRight}" y2="${y.toFixed(2)}" stroke="#DDE2E8" stroke-width="1.4" data-bar-grid="true"></line>`;
+    svg += `<line x1="${plotLeft - 8}" y1="${y.toFixed(2)}" x2="${plotLeft}" y2="${y.toFixed(2)}" stroke="#C9CED6" stroke-width="1.8" data-bar-axis="true"></line>`;
     svg += `<text x="${plotLeft - 14}" y="${(y + 6).toFixed(2)}" text-anchor="end" font-size="18" fill="#8A9098">${escapeHtml(
       formatBarAxisTick(unitSpec.displayValue(gridValue), gridStepDisplay)
     )}</text>`;
   });
-  svg += `<line x1="${plotLeft}" y1="${baselineY}" x2="${plotRight}" y2="${baselineY}" stroke="#C9CED6" stroke-width="2.2"></line>`;
+  svg += `<line x1="${plotLeft}" y1="${baselineY}" x2="${plotRight}" y2="${baselineY}" stroke="#C9CED6" stroke-width="2.2" data-bar-axis="true"></line>`;
   svg += `
-    <g opacity="0.98">
+    <g opacity="0.98" data-bar-chart-logo="true" data-logo-zone-left="${chartLogoZone.left.toFixed(2)}" data-logo-zone-top="${chartLogoZone.top.toFixed(
+      2
+    )}" data-logo-zone-right="${chartLogoZone.right.toFixed(2)}" data-logo-zone-bottom="${chartLogoZone.bottom.toFixed(2)}">
       ${renderCorporateLogo(chartLogoKey, chartLogoPlacement.x.toFixed(2), chartLogoPlacement.y.toFixed(2), {
         scale: Number(chartLogoPlacement.scale.toFixed(4)),
       })}
@@ -1165,6 +1364,7 @@ function renderCurrent() {
       const barRenderResult = EarningsVizRuntime.render.renderRevenueSegmentBarsSvg(snapshot, company, { maxQuarters: 30 });
       refs.chartOutput.innerHTML = barRenderResult.svg;
       refs.chartOutput.style.aspectRatio = `${barRenderResult.width} / ${barRenderResult.height}`;
+      refineRenderedBarChartLogoPlacement(refs.chartOutput?.querySelector("svg"));
       barHistory = barRenderResult.history;
     } else {
       refs.chartOutput.innerHTML = EarningsVizRuntime.render.renderIncomeStatementSvg(snapshot, company);
