@@ -12,7 +12,7 @@ from financial_source_adapters import fetch_tencent_ir_pdf_financial_history
 from stockanalysis_financials import fetch_stockanalysis_financial_history
 
 
-UNIVERSAL_PARSER_VERSION = "universal-parser-v3"
+UNIVERSAL_PARSER_VERSION = "universal-parser-v4"
 FINANCIAL_RECONCILER_VERSION = "financial-reconciler-v1"
 FINANCIAL_VALIDATION_VERSION = "financial-validation-v1"
 FINANCIAL_VALUE_FIELDS = [
@@ -397,6 +397,40 @@ def _derive_missing_financial_fields(entry: dict[str, Any], field_sources: dict[
     pretax_income = entry.get("pretaxIncomeBn")
     tax = entry.get("taxBn")
     net_income = entry.get("netIncomeBn")
+
+    # Bank-like statements often disclose revenue/opex/pretax but omit a classical
+    # cost-of-revenue + gross-profit stage. Recover a stable bridge conservatively.
+    if (
+        gross is None
+        and cost is None
+        and _is_number(revenue)
+        and _is_number(operating_expenses)
+        and (
+            _is_number(operating_income)
+            or _is_number(pretax_income)
+        )
+    ):
+        revenue_value = float(revenue)
+        opex_value = float(operating_expenses)
+        operating_proxy = float(operating_income) if _is_number(operating_income) else revenue_value - opex_value
+        pretax_value = float(pretax_income) if _is_number(pretax_income) else None
+        if pretax_value is not None:
+            proxy_gap = abs(operating_proxy - pretax_value)
+            proxy_tolerance = max(1.2, abs(revenue_value) * 0.2)
+            if proxy_gap > proxy_tolerance:
+                operating_proxy = float("nan")
+        if _is_number(operating_proxy):
+            if operating_income is None:
+                entry["operatingIncomeBn"] = round(float(operating_proxy), 3)
+                field_sources["operatingIncomeBn"] = "derived"
+            entry["grossProfitBn"] = round(revenue_value, 3)
+            entry["costOfRevenueBn"] = 0.0
+            field_sources["grossProfitBn"] = "derived"
+            field_sources["costOfRevenueBn"] = "derived"
+            if non_operating is None and _is_number(entry.get("pretaxIncomeBn")) and _is_number(entry.get("operatingIncomeBn")):
+                entry["nonOperatingBn"] = round(float(entry["pretaxIncomeBn"]) - float(entry["operatingIncomeBn"]), 3)
+                field_sources["nonOperatingBn"] = "derived"
+
     if gross is None and _is_number(revenue) and _is_number(cost):
         entry["grossProfitBn"] = round(float(revenue) - float(cost), 3)
         field_sources["grossProfitBn"] = "derived"

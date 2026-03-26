@@ -29,7 +29,7 @@ const state = {
   },
 };
 
-const BUILD_ASSET_VERSION = "20260325-company-pool-v128";
+const BUILD_ASSET_VERSION = "20260326-company-pool-v132";
 const CORPORATE_LOGO_AREA_MULTIPLIER = 1.728;
 const CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER = Math.sqrt(CORPORATE_LOGO_AREA_MULTIPLIER);
 const CORPORATE_LOGO_REVENUE_GAP_MULTIPLIER = 1.2;
@@ -949,6 +949,7 @@ const CHART_TEXT_TRANSLATIONS_ZH = {
   "cost of revenues": "营收成本",
   "cost of sales": "销售成本",
   "operating profit": "营业利润",
+  "operating loss": "营业亏损",
   "operating expenses": "营业费用",
   "residual opex": "其余营业费用",
   "net profit": "净利润",

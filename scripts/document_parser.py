@@ -573,8 +573,9 @@ def _score_statement_row_candidate(
 ) -> int:
     if not quarter_hint:
         return 0
-    context = " ".join(lines[max(0, index - 10) : index + 1])
+    context = " ".join(lines[max(0, index - 12) : index + 1])
     compact_context = re.sub(r"\s+", " ", context).strip()
+    current_line = re.sub(r"\s+", " ", str(lines[index] or "")).strip()
     hints = _quarter_context_hints(quarter_hint)
     score = 0
     if re.search(r"three\s+months\s+ended|three-month period|current quarter", compact_context, re.IGNORECASE):
@@ -587,8 +588,18 @@ def _score_statement_row_candidate(
         score -= 8
     if re.search(r"share-based\s+compensation|stock-?based\s+compensation", compact_context, re.IGNORECASE):
         score -= 12
-    if re.search(r"non-gaap|reconciliation|note\s+\d+|附注", compact_context, re.IGNORECASE):
-        score -= 8
+    if re.search(r"non-gaap|non-ifrs|adjusted|reconciliation|note\s+\d+|附注", compact_context, re.IGNORECASE):
+        score -= 14
+    if re.search(r"condensed\s+consolidated|income\s+statement|unaudited|audited", compact_context, re.IGNORECASE):
+        score += 8
+    if re.search(r"\b(?:q[1-4]\s*20\d{2}|20\d{2}\s*q[1-4]|4q20\d{2}|3q20\d{2}|2q20\d{2}|1q20\d{2})\b", compact_context, re.IGNORECASE):
+        score += 4
+    if re.search(r"\b(?:yoy|year-on-year|quarter-on-quarter|qoq)\b|margin increased|margin decreased|\bwas\b", current_line, re.IGNORECASE):
+        score -= 10
+    if re.search(r"basic earnings per share|diluted earnings per share|capital expenditure|free cash flow", compact_context, re.IGNORECASE):
+        score -= 12
+    if len(re.findall(r"(?:^|\s)[—–-](?:\s|$)", current_line)) >= 2:
+        score -= 10
     current_date_patterns = hints.get("current_date_patterns")
     if isinstance(current_date_patterns, list) and _context_matches_any(compact_context, current_date_patterns):
         score += 4
@@ -597,10 +608,17 @@ def _score_statement_row_candidate(
         score += 8
     if any(token.endswith("%") for token in raw_tokens):
         score -= 2
-    if len(parsed_values) >= 2:
-        score += 1
-    if len(parsed_values) > 4:
-        score -= 2
+    numeric_count = len(parsed_values)
+    if numeric_count == 4:
+        score += 10
+    elif numeric_count == 2:
+        score += 6
+    elif numeric_count >= 3:
+        score += 2
+    else:
+        score -= 4
+    if numeric_count > 4:
+        score -= min(12, (numeric_count - 4) * 4)
     return score
 
 
@@ -629,7 +647,14 @@ def _extract_statement_row_values(lines: list[str], aliases: list[str], *, quart
                     parsed_values,
                     quarter_hint=quarter_hint,
                 )
-                score_key = (score, -sum(1 for token in leading_tokens if token.endswith("%")), len(parsed_values), -index)
+                desired_count = 4
+                score_key = (
+                    score,
+                    -sum(1 for token in leading_tokens if token.endswith("%")),
+                    -abs(len(parsed_values) - desired_count),
+                    -len(parsed_values),
+                    -index,
+                )
                 if best_score is None or score_key > best_score:
                     best_score = score_key
                     best_values = parsed_values
@@ -812,12 +837,24 @@ def _detect_statement_value_scale(
     if section_text:
         sample = f"{sample}\n{str(section_text)[:1200]}".strip()
     patterns = [
-        (re.compile(r"\(?(?:RMB|USD|HK\$|HKD|CNY|EUR|JPY)\s+in\s+thousands\)?", re.IGNORECASE), 1_000.0, "thousands"),
-        (re.compile(r"\(?(?:RMB|USD|HK\$|HKD|CNY|EUR|JPY)\s+in\s+millions\)?", re.IGNORECASE), 1_000_000.0, "millions"),
-        (re.compile(r"\(?(?:RMB|USD|HK\$|HKD|CNY|EUR|JPY)\s+in\s+billions\)?", re.IGNORECASE), 1_000_000_000.0, "billions"),
-        (re.compile(r"人民币千元"), 1_000.0, "cny-thousands"),
-        (re.compile(r"人民币百万元"), 1_000_000.0, "cny-millions"),
-        (re.compile(r"人民币亿元"), 100_000_000.0, "cny-hundred-millions"),
+        (
+            re.compile(r"\(?(?:RMB|USD|HK\$|HKD|CNY|EUR|JPY)\s+in\s+thousands(?:\s*,\s*unless\s+specified)?\)?", re.IGNORECASE),
+            1_000.0,
+            "thousands",
+        ),
+        (
+            re.compile(r"\(?(?:RMB|USD|HK\$|HKD|CNY|EUR|JPY)\s+in\s+millions(?:\s*,\s*unless\s+specified)?\)?", re.IGNORECASE),
+            1_000_000.0,
+            "millions",
+        ),
+        (
+            re.compile(r"\(?(?:RMB|USD|HK\$|HKD|CNY|EUR|JPY)\s+in\s+billions(?:\s*,\s*unless\s+specified)?\)?", re.IGNORECASE),
+            1_000_000_000.0,
+            "billions",
+        ),
+        (re.compile(r"人民币千元(?:，除非另有说明)?"), 1_000.0, "cny-thousands"),
+        (re.compile(r"人民币百万元(?:，除非另有说明)?"), 1_000_000.0, "cny-millions"),
+        (re.compile(r"人民币亿元(?:，除非另有说明)?"), 100_000_000.0, "cny-hundred-millions"),
     ]
     for pattern, value_scale, label in patterns:
         if pattern.search(sample):
@@ -847,7 +884,8 @@ def parse_income_statement(
         if values:
             rows[canonical_name] = values
     language_profile = language_hint or detect_language_profile(section_text)
-    value_scale, value_unit = _detect_statement_value_scale(search_text, lines, rows)
+    scale_search_text = section_text or search_text
+    value_scale, value_unit = _detect_statement_value_scale(scale_search_text, lines, rows)
     bn_scale = (value_scale / 1_000_000_000) if value_scale else None
     return ParsedFinancialStatement(
         version=f"{PARSER_VERSION}-income-statement-v2",

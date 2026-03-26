@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -62,23 +63,72 @@ def _quarter_prior_key(quarter_key: str) -> str | None:
 def _parse_tencent_pdf_financial_entry(quarter_key: str, source_url: str, filing_date: str | None) -> dict[str, Any] | None:
     statement = parse_income_statement_from_url(source_url, ocr_fallback=True, quarter_hint=quarter_key)
     rows = statement.rows
-    if not rows:
+    lines = statement.lines if isinstance(statement.lines, list) else []
+    if not rows and not lines:
         return None
-    revenue_values = rows.get("revenue") or []
-    cost_values = rows.get("cost_of_revenue") or []
-    gross_values = rows.get("gross_profit") or []
-    selling_values = rows.get("selling_marketing") or []
-    ga_values = rows.get("general_admin") or []
-    other_values = rows.get("other_gains_losses") or []
-    operating_values = rows.get("operating_profit") or []
-    pretax_values = rows.get("pretax_income") or []
-    tax_values = rows.get("income_tax") or []
-    equity_values = rows.get("net_income_attributable") or rows.get("net_income") or []
+
+    def direct_row_values(label: str) -> list[float]:
+        escaped = re.escape(label).replace(r"\ ", r"\s+")
+        pattern = re.compile(rf"^{escaped}\s+(.+)$", re.IGNORECASE)
+        best_values: list[float] = []
+        best_score: tuple[int, int, float] | None = None
+        for line in lines:
+            match = pattern.match(str(line or ""))
+            if not match:
+                continue
+            values = [
+                float(token.replace(",", "").replace("(", "-").replace(")", ""))
+                for token in re.findall(r"\(?\d[\d,]*(?:\.\d+)?\)?", match.group(1))
+            ]
+            if not values:
+                continue
+            normalized_line = re.sub(r"\s+", " ", str(line or "")).strip()
+            score = 0
+            if len(values) == 4:
+                score += 12
+            elif len(values) == 2:
+                score += 8
+            elif len(values) >= 3:
+                score += 4
+            if re.search(r"\b(?:was|were|up|down|year-on-year|yoy|quarter)\b|for the year ended|for the fourth quarter", normalized_line, re.IGNORECASE):
+                score -= 12
+            if ":" in normalized_line:
+                score -= 6
+            score_key = (score, len(values), abs(values[0]) if values else 0.0)
+            if best_score is None or score_key > best_score:
+                best_score = score_key
+                best_values = values
+        return best_values
+
+    def table_or_row_values(label: str, row_key: str) -> list[float]:
+        return direct_row_values(label) or rows.get(row_key) or []
+
+    revenue_values = table_or_row_values("Revenues", "revenue")
+    cost_values = table_or_row_values("Cost of revenues", "cost_of_revenue")
+    gross_values = table_or_row_values("Gross profit", "gross_profit")
+    selling_values = table_or_row_values("Selling and marketing expenses", "selling_marketing")
+    ga_values = table_or_row_values("General and administrative expenses", "general_admin")
+    other_values = table_or_row_values("Other gains/(losses), net", "other_gains_losses")
+    operating_values = table_or_row_values("Operating profit", "operating_profit")
+    pretax_values = table_or_row_values("Profit before income tax", "pretax_income")
+    tax_values = table_or_row_values("Income tax expense", "income_tax")
+    equity_values = table_or_row_values("Equity holders of the Company", "net_income_attributable") or rows.get("net_income") or []
     if not (revenue_values and gross_values and operating_values and pretax_values and tax_values and equity_values):
         return None
     bn_scale = statement.metadata.get("bnScale") if isinstance(statement.metadata, dict) else None
     if bn_scale is None:
+        sample = "\n".join(lines[:40])
+        if re.search(r"\bRMB\s+in\s+millions(?:\s*,\s*unless\s+specified)?\b", sample, re.IGNORECASE):
+            bn_scale = 0.001
+        elif re.search(r"人民币百万元(?:，除非另有说明)?", sample):
+            bn_scale = 0.001
+    if bn_scale is None:
         return None
+
+    def to_bn(value: float | int | None) -> float | None:
+        if value is None:
+            return None
+        return round(float(value) * float(bn_scale), 3)
 
     revenue_current = revenue_values[0]
     revenue_prior = revenue_values[1] if len(revenue_values) > 1 else None
@@ -97,10 +147,10 @@ def _parse_tencent_pdf_financial_entry(quarter_key: str, source_url: str, filing
     selling_current = abs(selling_values[0]) if selling_values else 0
     ga_current = abs(ga_values[0]) if ga_values else 0
     other_current = other_values[0] if other_values else 0
-    explicit_operating_expenses_current = selling_current + ga_current + (abs(other_current) if other_current < 0 else 0)
+    explicit_operating_expenses_current = max(selling_current + ga_current - other_current, 0)
     if explicit_operating_expenses_current > 0:
         operating_expenses_current = explicit_operating_expenses_current
-        operating_current = gross_current - operating_expenses_current
+        operating_current = reported_operating_current if reported_operating_current is not None else gross_current - operating_expenses_current
     else:
         operating_current = reported_operating_current
         operating_expenses_current = max(gross_current - operating_current, 0)
@@ -120,19 +170,19 @@ def _parse_tencent_pdf_financial_entry(quarter_key: str, source_url: str, filing
         "fiscalQuarter": f"Q{quarter_key[5]}",
         "fiscalLabel": f"FY{quarter_key[:4]} Q{quarter_key[5]}",
         "statementCurrency": "CNY",
-        "revenueBn": statement_value_to_bn(revenue_current, statement),
+        "revenueBn": to_bn(revenue_current),
         "revenueYoyPct": round((revenue_current / revenue_prior - 1) * 100, 3) if revenue_prior and revenue_prior > 0 else None,
-        "costOfRevenueBn": statement_value_to_bn(cost_current, statement),
-        "grossProfitBn": statement_value_to_bn(gross_current, statement),
-        "sgnaBn": statement_value_to_bn(selling_current + ga_current, statement) if selling_current or ga_current else None,
+        "costOfRevenueBn": to_bn(cost_current),
+        "grossProfitBn": to_bn(gross_current),
+        "sgnaBn": to_bn(selling_current + ga_current) if selling_current or ga_current else None,
         "rndBn": None,
-        "otherOpexBn": statement_value_to_bn(abs(other_current), statement) if other_current < 0 else None,
-        "operatingExpensesBn": statement_value_to_bn(operating_expenses_current, statement),
-        "operatingIncomeBn": statement_value_to_bn(operating_current, statement),
-        "nonOperatingBn": statement_value_to_bn(pretax_current - operating_current, statement),
-        "pretaxIncomeBn": statement_value_to_bn(pretax_current, statement),
-        "taxBn": statement_value_to_bn(abs(tax_current), statement),
-        "netIncomeBn": statement_value_to_bn(net_income_current, statement),
+        "otherOpexBn": to_bn(abs(other_current)) if other_current < 0 else None,
+        "operatingExpensesBn": to_bn(operating_expenses_current),
+        "operatingIncomeBn": to_bn(operating_current),
+        "nonOperatingBn": to_bn(pretax_current - operating_current),
+        "pretaxIncomeBn": to_bn(pretax_current),
+        "taxBn": to_bn(abs(tax_current)),
+        "netIncomeBn": to_bn(net_income_current),
         "netIncomeYoyPct": net_income_yoy,
         "grossMarginPct": gross_margin_current,
         "operatingMarginPct": operating_margin_current,

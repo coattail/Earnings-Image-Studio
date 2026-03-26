@@ -20,6 +20,7 @@ from official_segments import fetch_official_segment_history
 from official_revenue_structures import fetch_official_revenue_structure_history
 from stockanalysis_financials import fetch_stockanalysis_financial_history
 from universal_parser import run_universal_company_parser
+from extraction_engine import build_unified_extraction, merge_unified_extraction
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
@@ -1318,15 +1319,37 @@ def _pdf_label_pattern(label: str) -> re.Pattern[str]:
 
 
 def _extract_tencent_row_values(lines: list[str], label: str) -> list[float]:
-    pattern = _pdf_label_pattern(label)
+    escaped = re.escape(label).replace(r"\ ", r"\s+")
+    pattern = re.compile(rf"^{escaped}\s+(.+)$", re.IGNORECASE)
+    best_values: list[float] = []
+    best_score: tuple[int, int, float] | None = None
     for line in lines:
         match = pattern.match(line)
         if not match:
             continue
         tokens = re.findall(r"\(?\d[\d,]*\)?%?", match.group(1))
         values = [_parse_numeric_token(token) for token in tokens]
-        return [value for value in values if value is not None]
-    return []
+        numeric_values = [value for value in values if value is not None]
+        amount_values = [value for token, value in zip(tokens, values) if value is not None and not str(token).endswith("%")]
+        if not amount_values:
+            continue
+        normalized_line = re.sub(r"\s+", " ", str(line or "")).strip()
+        score = 0
+        if len(amount_values) == 4:
+            score += 12
+        elif len(amount_values) == 2:
+            score += 8
+        elif len(amount_values) >= 3:
+            score += 4
+        if re.search(r"\b(?:was|were|up|down|year-on-year|yoy|quarter)\b|for the year ended|for the fourth quarter", normalized_line, re.IGNORECASE):
+            score -= 12
+        if ":" in normalized_line:
+            score -= 6
+        score_key = (score, len(amount_values), abs(amount_values[0]) if amount_values else 0.0)
+        if best_score is None or score_key > best_score:
+            best_score = score_key
+            best_values = amount_values
+    return best_values
 
 
 def _quarter_prior_key(quarter_key: str) -> str | None:
@@ -1342,21 +1365,42 @@ def _quarter_prior_key(quarter_key: str) -> str | None:
 def _parse_tencent_pdf_financial_entry(quarter_key: str, source_url: str, filing_date: str | None) -> dict[str, Any] | None:
     statement = parse_income_statement_from_url(source_url, ocr_fallback=True, quarter_hint=quarter_key)
     rows = statement.rows if isinstance(statement.rows, dict) else {}
-    revenue_values = rows.get("revenue") or []
-    cost_values = rows.get("cost_of_revenue") or []
-    gross_values = rows.get("gross_profit") or []
-    selling_values = rows.get("selling_marketing") or []
-    ga_values = rows.get("general_admin") or []
-    other_values = rows.get("other_gains_losses") or []
-    operating_values = rows.get("operating_profit") or []
-    pretax_values = rows.get("pretax_income") or []
-    tax_values = rows.get("income_tax") or []
-    equity_values = rows.get("net_income_attributable") or rows.get("net_income") or []
+    lines = statement.lines if isinstance(statement.lines, list) else []
+
+    def table_or_row_values(label: str, row_key: str) -> list[float]:
+        table_values = _extract_tencent_row_values(lines, label)
+        return table_values or rows.get(row_key) or []
+
+    revenue_values = table_or_row_values("Revenues", "revenue")
+    cost_values = table_or_row_values("Cost of revenues", "cost_of_revenue")
+    gross_values = table_or_row_values("Gross profit", "gross_profit")
+    selling_values = table_or_row_values("Selling and marketing expenses", "selling_marketing")
+    ga_values = table_or_row_values("General and administrative expenses", "general_admin")
+    other_values = table_or_row_values("Other gains/(losses), net", "other_gains_losses")
+    operating_values = table_or_row_values("Operating profit", "operating_profit")
+    pretax_values = table_or_row_values("Profit before income tax", "pretax_income")
+    tax_values = table_or_row_values("Income tax expense", "income_tax")
+    equity_values = table_or_row_values("Equity holders of the Company", "net_income_attributable") or rows.get("net_income") or []
     if not (revenue_values and gross_values and operating_values and pretax_values and tax_values and equity_values):
         return None
     bn_scale = statement.metadata.get("bnScale") if isinstance(statement.metadata, dict) else None
     if bn_scale is None:
+        sample = "\n".join(lines[:40])
+        if re.search(r"\bRMB\s+in\s+millions(?:\s*,\s*unless\s+specified)?\b", sample, re.IGNORECASE):
+            bn_scale = 0.001
+        elif re.search(r"人民币百万元(?:，除非另有说明)?", sample):
+            bn_scale = 0.001
+        elif re.search(r"\bRMB\s+in\s+billions(?:\s*,\s*unless\s+specified)?\b", sample, re.IGNORECASE):
+            bn_scale = 1.0
+        elif re.search(r"人民币亿元(?:，除非另有说明)?", sample):
+            bn_scale = 1.0
+    if bn_scale is None:
         return None
+
+    def to_bn(value: float | int | None) -> float | None:
+        if value is None:
+            return None
+        return round(float(value) * float(bn_scale), 3)
 
     revenue_current = revenue_values[0]
     revenue_prior = revenue_values[1] if len(revenue_values) > 1 else None
@@ -1379,16 +1423,16 @@ def _parse_tencent_pdf_financial_entry(quarter_key: str, source_url: str, filing
     ga_prior = abs(ga_values[1]) if len(ga_values) > 1 else 0
     other_current = other_values[0] if other_values else 0
     other_prior = other_values[1] if len(other_values) > 1 else 0
-    explicit_operating_expenses_current = selling_current + ga_current + (abs(other_current) if other_current < 0 else 0)
-    explicit_operating_expenses_prior = selling_prior + ga_prior + (abs(other_prior) if other_prior < 0 else 0)
+    explicit_operating_expenses_current = max(selling_current + ga_current - other_current, 0)
+    explicit_operating_expenses_prior = max(selling_prior + ga_prior - other_prior, 0)
     if explicit_operating_expenses_current > 0:
         operating_expenses_current = explicit_operating_expenses_current
-        operating_current = gross_current - operating_expenses_current
+        operating_current = reported_operating_current if reported_operating_current is not None else gross_current - operating_expenses_current
     else:
         operating_current = reported_operating_current
         operating_expenses_current = max(gross_current - operating_current, 0)
     if explicit_operating_expenses_prior > 0 and gross_prior is not None:
-        operating_prior = gross_prior - explicit_operating_expenses_prior
+        operating_prior = reported_operating_prior if reported_operating_prior is not None else gross_prior - explicit_operating_expenses_prior
     else:
         operating_prior = reported_operating_prior
     net_income_yoy = round((net_income_current / net_income_prior - 1) * 100, 3) if net_income_prior and net_income_prior > 0 else None
@@ -1406,19 +1450,19 @@ def _parse_tencent_pdf_financial_entry(quarter_key: str, source_url: str, filing
         "fiscalQuarter": f"Q{quarter_key[5]}",
         "fiscalLabel": f"FY{quarter_key[:4]} Q{quarter_key[5]}",
         "statementCurrency": "CNY",
-        "revenueBn": statement_value_to_bn(revenue_current, statement),
+        "revenueBn": to_bn(revenue_current),
         "revenueYoyPct": round((revenue_current / revenue_prior - 1) * 100, 3) if revenue_prior and revenue_prior > 0 else None,
-        "costOfRevenueBn": statement_value_to_bn(cost_current, statement),
-        "grossProfitBn": statement_value_to_bn(gross_current, statement),
-        "sgnaBn": statement_value_to_bn(selling_current + ga_current, statement) if selling_current or ga_current else None,
+        "costOfRevenueBn": to_bn(cost_current),
+        "grossProfitBn": to_bn(gross_current),
+        "sgnaBn": to_bn(selling_current + ga_current) if selling_current or ga_current else None,
         "rndBn": None,
-        "otherOpexBn": statement_value_to_bn(abs(other_current), statement) if other_current < 0 else None,
-        "operatingExpensesBn": statement_value_to_bn(operating_expenses_current, statement),
-        "operatingIncomeBn": statement_value_to_bn(operating_current, statement),
-        "nonOperatingBn": statement_value_to_bn(pretax_current - operating_current, statement),
-        "pretaxIncomeBn": statement_value_to_bn(pretax_current, statement),
-        "taxBn": statement_value_to_bn(abs(tax_current), statement),
-        "netIncomeBn": statement_value_to_bn(net_income_current, statement),
+        "otherOpexBn": to_bn(abs(other_current)) if other_current < 0 else None,
+        "operatingExpensesBn": to_bn(operating_expenses_current),
+        "operatingIncomeBn": to_bn(operating_current),
+        "nonOperatingBn": to_bn(pretax_current - operating_current),
+        "pretaxIncomeBn": to_bn(pretax_current),
+        "taxBn": to_bn(abs(tax_current)),
+        "netIncomeBn": to_bn(net_income_current),
         "netIncomeYoyPct": net_income_yoy,
         "grossMarginPct": gross_margin_current,
         "operatingMarginPct": operating_margin_current,
@@ -1448,8 +1492,12 @@ def supplement_tencent_official_financials(company_payload: dict[str, Any]) -> d
     ):
         return company_payload
     financials: dict[str, Any] = company_payload.get("financials", {})
+    ordered_quarters = sorted(financials.keys(), key=parse_period)
+    latest_quarter_key = ordered_quarters[-1] if ordered_quarters else None
     for quarter_key, entry in financials.items():
         if not isinstance(entry, dict):
+            continue
+        if latest_quarter_key and quarter_key != latest_quarter_key:
             continue
         source_rows = [row for row in (entry.get("officialRevenueSegments") or []) if isinstance(row, dict)]
         source_url = next((str(row.get("sourceUrl") or "") for row in source_rows if row.get("sourceUrl")), "")
@@ -1474,7 +1522,6 @@ def supplement_tencent_official_financials(company_payload: dict[str, Any]) -> d
             if value is not None:
                 entry[key] = value
 
-    ordered_quarters = sorted(financials.keys(), key=parse_period)
     for quarter_key in ordered_quarters:
         entry = financials.get(quarter_key)
         if not isinstance(entry, dict):
@@ -1827,6 +1874,19 @@ def build_company_payload_with_universal_parser(company: dict[str, Any], refresh
     return payload
 
 
+def apply_fused_extraction(payload: dict[str, Any], company: dict[str, Any], refresh: bool) -> dict[str, Any]:
+    try:
+        extraction = build_unified_extraction(company, refresh=refresh, base_payload=payload)
+        return merge_unified_extraction(payload, extraction)
+    except Exception as exc:  # noqa: BLE001
+        diagnostics = payload.get("parserDiagnostics")
+        if not isinstance(diagnostics, dict):
+            diagnostics = {}
+        diagnostics["fusedExtractionError"] = str(exc)
+        payload["parserDiagnostics"] = diagnostics
+        return payload
+
+
 def main() -> int:
     args = parse_args()
     manual_presets = load_manual_presets()
@@ -1848,6 +1908,7 @@ def main() -> int:
             payload = sanitize_implausible_q4_revenue_aligned_statements(payload)
             payload = apply_manual_company_override(payload, company, manual_company_overrides)
             payload = apply_usd_display_fields(payload, fx_cache)
+            payload = apply_fused_extraction(payload, company, refresh=args.refresh)
         except Exception as exc:  # noqa: BLE001
             failures.append(f"{company['ticker']}: {exc}")
             print(f"  failed: {exc}", file=sys.stderr, flush=True)
@@ -1878,6 +1939,7 @@ def main() -> int:
                 payload = sanitize_implausible_q4_revenue_aligned_statements(payload)
                 payload = apply_manual_company_override(payload, company, manual_company_overrides)
                 payload = apply_usd_display_fields(payload, fx_cache)
+                payload = apply_fused_extraction(payload, company, refresh=False)
             except Exception as exc:  # noqa: BLE001
                 failures.append(f"{company['ticker']}: {exc}")
                 print(f"  failed: {exc}", file=sys.stderr, flush=True)
@@ -1903,6 +1965,7 @@ def main() -> int:
         "companyCount": len(companies),
         "notes": [
             "A universal parser orchestration layer now coordinates financial, segment, and revenue-structure extractors with source-level provenance and fallback metadata.",
+            "A fused extraction engine then reconciles adapter-level statement and taxonomy candidates to fill missing fields with explicit field-level provenance and diagnostics.",
             "Quarterly financial trunks are sourced through an official-first pipeline, using SEC EDGAR XBRL companyfacts whenever available.",
             "Revenue structure enrichment is sourced directly from official company filings and official IR disclosures, including PDF parsing for non-SEC issuers when needed.",
             "When official statement fields are incomplete or structurally incompatible, the renderer safely falls back to a normalized financial table source instead of fabricating the bridge.",
