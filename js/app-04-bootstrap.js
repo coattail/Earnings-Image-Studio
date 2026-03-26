@@ -8,6 +8,41 @@ const BAR_CHART_LOGO_LAYOUT_OVERRIDES = Object.freeze({
   }),
 });
 
+function barChartRectsOverlap(left, right, padding = 0) {
+  return (
+    safeNumber(left?.left) < safeNumber(right?.right) + padding &&
+    safeNumber(left?.right) > safeNumber(right?.left) - padding &&
+    safeNumber(left?.top) < safeNumber(right?.bottom) + padding &&
+    safeNumber(left?.bottom) > safeNumber(right?.top) - padding
+  );
+}
+
+function barChartRectIntersectionArea(left, right, padding = 0) {
+  const intersectionLeft = Math.max(safeNumber(left?.left), safeNumber(right?.left) - padding);
+  const intersectionTop = Math.max(safeNumber(left?.top), safeNumber(right?.top) - padding);
+  const intersectionRight = Math.min(safeNumber(left?.right), safeNumber(right?.right) + padding);
+  const intersectionBottom = Math.min(safeNumber(left?.bottom), safeNumber(right?.bottom) + padding);
+  const intersectionWidth = Math.max(intersectionRight - intersectionLeft, 0);
+  const intersectionHeight = Math.max(intersectionBottom - intersectionTop, 0);
+  return intersectionWidth * intersectionHeight;
+}
+
+function collectBarChartLogoObstacleRects({ baselineY, barStartX, barWidth, barGap, valueScale, history }) {
+  return (history?.quarters || []).reduce((rects, quarter, quarterIndex) => {
+    const totalRevenueBn = safeNumber(quarter?.totalRevenueBn);
+    if (!(totalRevenueBn > 0.005)) return rects;
+    const x = barStartX + quarterIndex * (barWidth + barGap);
+    const top = baselineY - Math.max(totalRevenueBn * valueScale, 1.2);
+    rects.push({
+      left: x - 4,
+      top: top - 8,
+      right: x + barWidth + 4,
+      bottom: baselineY + 2,
+    });
+    return rects;
+  }, []);
+}
+
 function resolveBarChartLogoPlacement({
   logoKey,
   plotLeft,
@@ -18,65 +53,106 @@ function resolveBarChartLogoPlacement({
   barGap,
   valueScale,
   history,
+  reservedRects = [],
 }) {
   const normalizedLogoKey = normalizeLogoKey(logoKey);
   const override =
     BAR_CHART_LOGO_LAYOUT_OVERRIDES[logoKey] ||
     BAR_CHART_LOGO_LAYOUT_OVERRIDES[normalizedLogoKey] ||
     {};
-  const visibleMetrics = corporateLogoVisibleMetrics(logoKey);
+  const logoMetrics = corporateLogoLayoutMetrics(logoKey);
   const area = {
     width: 250 * safeNumber(override.widthScale, 1),
     height: 156 * safeNumber(override.heightScale, 1),
     x: plotLeft + 12 + safeNumber(override.dx, 0),
     y: chartTop + 8 + safeNumber(override.dy, 0),
   };
-
-  let scale =
-    Math.min(area.width / Math.max(visibleMetrics.width, 1), area.height / Math.max(visibleMetrics.height, 1)) *
+  const baseScale =
+    Math.min(area.width / Math.max(logoMetrics.visibleWidth, 1), area.height / Math.max(logoMetrics.visibleHeight, 1)) *
     safeNumber(override.scaleMultiplier, 1);
-  let renderedWidth = visibleMetrics.width * scale * CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER;
-  let renderedHeight = visibleMetrics.height * scale * CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER;
-  // Reserve the left axis band so wide wordmarks do not touch the y-axis or tick area.
-  const minX = Math.max(20, plotLeft + 18);
-  const minY = chartTop + 2;
-  let x = Math.max(minX, area.x + (area.width - renderedWidth) / 2);
-  let y = Math.max(minY, area.y + (area.height - renderedHeight) / 2);
+  const minVisibleX = Math.max(20, plotLeft - 18);
+  const minVisibleY = Math.max(96, chartTop - 220);
+  const maxVisibleRight = plotLeft + area.width + 96;
+  const obstacleRects = collectBarChartLogoObstacleRects({
+    baselineY,
+    barStartX,
+    barWidth,
+    barGap,
+    valueScale,
+    history,
+  }).concat(
+    Array.isArray(reservedRects)
+      ? reservedRects.filter(
+          (rect) =>
+            rect &&
+            Number.isFinite(safeNumber(rect.left, NaN)) &&
+            Number.isFinite(safeNumber(rect.top, NaN)) &&
+            Number.isFinite(safeNumber(rect.right, NaN)) &&
+            Number.isFinite(safeNumber(rect.bottom, NaN))
+        )
+      : []
+  );
+  const xOffsets = [0, 18, -18, 36, -36, 58, -58, 82, -82, 108];
+  const yOffsets = [0, 14, -18, 28, -36, 46, -58, 68, -82, -108, -136];
+  const shrinkFactors = [1, 0.96, 0.92, 0.88, 0.84, 0.8, 0.76, 0.72];
+  let bestPlacement = null;
 
-  const logoRight = () => x + renderedWidth;
-  const logoBottom = () => y + renderedHeight;
-  const overlappingBarTop = (history?.quarters || []).reduce((top, quarter, quarterIndex) => {
-    const barX = barStartX + quarterIndex * (barWidth + barGap);
-    const barRight = barX + barWidth;
-    if (barRight <= x || barX >= logoRight()) return top;
-    const barTop = baselineY - Math.max(safeNumber(quarter?.totalRevenueBn) * valueScale, 1.2);
-    return Math.min(top, barTop);
-  }, Number.POSITIVE_INFINITY);
+  shrinkFactors.some((shrinkFactor) => {
+    const scale = baseScale * shrinkFactor;
+    const visibleWidth = logoMetrics.visibleWidth * scale * CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER;
+    const visibleHeight = logoMetrics.visibleHeight * scale * CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER;
+    const offsetX = logoMetrics.offsetX * scale * CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER;
+    const offsetY = logoMetrics.offsetY * scale * CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER;
+    const maxVisibleX = Math.max(minVisibleX, maxVisibleRight - visibleWidth);
+    const anchorVisibleX = clamp(area.x + (area.width - visibleWidth) / 2, minVisibleX, maxVisibleX);
+    const anchorVisibleY = Math.max(minVisibleY, area.y + (area.height - visibleHeight) / 2);
+    let localBest = null;
 
-  if (Number.isFinite(overlappingBarTop) && logoBottom() > overlappingBarTop - 10) {
-    const requiredLift = logoBottom() - (overlappingBarTop - 10);
-    const availableLift = Math.max(y - minY, 0);
-    if (availableLift > 0) {
-      y -= Math.min(requiredLift, availableLift);
+    yOffsets.forEach((yOffset) => {
+      const visibleY = Math.max(minVisibleY, anchorVisibleY + yOffset);
+      xOffsets.forEach((xOffset) => {
+        const visibleX = clamp(anchorVisibleX + xOffset, minVisibleX, maxVisibleX);
+        const visibleRect = {
+          left: visibleX,
+          top: visibleY,
+          right: visibleX + visibleWidth,
+          bottom: visibleY + visibleHeight,
+        };
+        let collisionArea = 0;
+        let collisionCount = 0;
+        obstacleRects.forEach((obstacleRect) => {
+          if (!barChartRectsOverlap(visibleRect, obstacleRect, 10)) return;
+          collisionCount += 1;
+          collisionArea += barChartRectIntersectionArea(visibleRect, obstacleRect, 10);
+        });
+        const penalty =
+          collisionArea +
+          collisionCount * 10000 +
+          Math.abs(xOffset) * 80 +
+          Math.abs(yOffset) * 96 +
+          (1 - shrinkFactor) * 160000;
+        if (!localBest || penalty < localBest.penalty) {
+          localBest = {
+            penalty,
+            collisionCount,
+            scale,
+            x: visibleX - offsetX,
+            y: visibleY - offsetY,
+          };
+        }
+      });
+    });
+
+    if (localBest && (!bestPlacement || localBest.penalty < bestPlacement.penalty)) {
+      bestPlacement = localBest;
     }
-  }
-
-  if (Number.isFinite(overlappingBarTop) && logoBottom() > overlappingBarTop - 10) {
-    const availableHeight = Math.max(overlappingBarTop - 10 - y, 72);
-    const shrinkFactor = clamp(availableHeight / Math.max(renderedHeight, 1), 0.72, 1);
-    if (shrinkFactor < 0.999) {
-      scale *= shrinkFactor;
-      renderedWidth *= shrinkFactor;
-      renderedHeight *= shrinkFactor;
-      x = Math.max(minX, area.x + (area.width - renderedWidth) / 2);
-      y = Math.max(minY, Math.min(y, area.y + (area.height - renderedHeight) / 2));
-    }
-  }
+    return !!localBest && localBest.collisionCount === 0;
+  });
 
   return {
-    scale,
-    x,
-    y,
+    scale: safeNumber(bestPlacement?.scale, baseScale),
+    x: safeNumber(bestPlacement?.x, area.x),
+    y: safeNumber(bestPlacement?.y, area.y),
   };
 }
 
@@ -286,6 +362,68 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
   for (let value = gridStep; value < history.maxRevenueBn; value += gridStep) {
     gridValues.push(Number(value.toFixed(6)));
   }
+  const titleHalfWidth = approximateTextWidth(chartTitle, titleFontSize) / 2;
+  const unitLabelX = Math.max(18, plotLeft - 72);
+  const unitLabelWidth = Math.max(
+    approximateTextWidth(unitLines.line1, yLabelFontSize),
+    approximateTextWidth(unitLines.line2, yLabelFontSize)
+  );
+  const reservedRects = [
+    {
+      left: titleX - titleHalfWidth - 28,
+      top: titleY - titleFontSize * 0.96,
+      right: titleX + titleHalfWidth + 28,
+      bottom: titleY + titleFontSize * 0.22,
+    },
+    {
+      left: unitLabelX - 10,
+      top: legendTop - 2,
+      right: unitLabelX + unitLabelWidth + 14,
+      bottom: legendTop + 58,
+    },
+  ];
+  if (latestFiscalLabel) {
+    const quarterWidth = approximateTextWidth(latestFiscalLabel, topQuarterFontSize);
+    reservedRects.push({
+      left: topInfoX - quarterWidth - 14,
+      top: topQuarterDisplayY - topQuarterFontSize * 0.92,
+      right: topInfoX + 10,
+      bottom: topQuarterDisplayY + topQuarterFontSize * 0.16,
+    });
+  }
+  if (latestPeriodEnd) {
+    const periodWidth = approximateTextWidth(latestPeriodEnd, periodEndFontSize);
+    reservedRects.push({
+      left: topInfoX - periodWidth - 12,
+      top: topPeriodY - periodEndFontSize * 0.92,
+      right: topInfoX + 10,
+      bottom: topPeriodY + periodEndFontSize * 0.18,
+    });
+  }
+  gridValues.forEach((gridValue) => {
+    const tickValue = formatBarAxisTick(unitSpec.displayValue(gridValue), gridStepDisplay);
+    const tickWidth = approximateTextWidth(tickValue, 18);
+    const y = baselineY - gridValue * valueScale;
+    if (y <= chartTop + 8 || y >= baselineY - 8) return;
+    reservedRects.push({
+      left: plotLeft - 18 - tickWidth,
+      top: y - 16,
+      right: plotLeft - 6,
+      bottom: y + 10,
+    });
+  });
+  legendRows.forEach((row, rowIndex) => {
+    const rowWidth = legendRowWidths[rowIndex] || 0;
+    const centeredFromTitle = titleX - rowWidth / 2;
+    const rowStartX = clamp(centeredFromTitle, legendAreaLeft, Math.max(legendAreaLeft, legendAreaRight - rowWidth));
+    const rowY = legendTop + rowIndex * (legendLineHeight + legendRowGap);
+    reservedRects.push({
+      left: rowStartX - 12,
+      top: rowY - 10,
+      right: rowStartX + rowWidth + 12,
+      bottom: rowY + legendLineHeight + 10,
+    });
+  });
   const chartLogoKey = snapshot?.companyLogoKey || company?.id || "";
   const chartLogoPlacement = resolveBarChartLogoPlacement({
     logoKey: chartLogoKey,
@@ -297,6 +435,7 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
     barGap,
     valueScale,
     history,
+    reservedRects,
   });
   const fxNoteY = hasConvertedCurrency ? height - 34 : chartTop - 10;
   const fxNoteX = hasConvertedCurrency ? 38 : plotLeft;

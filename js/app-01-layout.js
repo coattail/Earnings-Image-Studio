@@ -2921,6 +2921,41 @@ function corporateLogoMetrics(logoKey) {
   return { width: 116, height: 116 };
 }
 
+function corporateLogoLayoutMetrics(logoKey) {
+  if (logoKey === "microsoft-corporate") {
+    return {
+      width: 116,
+      height: 116,
+      visibleWidth: 116,
+      visibleHeight: 116,
+      offsetX: 0,
+      offsetY: 0,
+    };
+  }
+  if (getLogoAsset(logoKey)) {
+    const metrics = logoFrameMetrics(logoKey, "corporate");
+    const paddingX = safeNumber(metrics.paddingX, safeNumber(metrics.padding, 0));
+    const paddingY = safeNumber(metrics.paddingY, safeNumber(metrics.padding, 0));
+    return {
+      width: safeNumber(metrics.width, 116),
+      height: safeNumber(metrics.height, 116),
+      visibleWidth: Math.max(safeNumber(metrics.width, 116) - paddingX * 2, 24),
+      visibleHeight: Math.max(safeNumber(metrics.height, 116) - paddingY * 2, 12),
+      offsetX: paddingX,
+      offsetY: paddingY,
+    };
+  }
+  const metrics = corporateLogoMetrics(logoKey);
+  return {
+    width: metrics.width,
+    height: metrics.height,
+    visibleWidth: metrics.width,
+    visibleHeight: metrics.height,
+    offsetX: 0,
+    offsetY: 0,
+  };
+}
+
 function corporateLogoVisibleMetrics(logoKey) {
   if (logoKey === "microsoft-corporate") return { width: 116, height: 116 };
   if (getLogoAsset(logoKey)) {
