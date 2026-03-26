@@ -120,12 +120,60 @@ function quarterHasOfficialRevenueClassification(company, quarterKey) {
   return Array.isArray(structurePayload?.segments) && structurePayload.segments.some((item) => safeNumber(item?.valueBn) > 0.02);
 }
 
+function expenseBreakdownItems(entry) {
+  if (Array.isArray(entry?.officialOpexBreakdown)) return entry.officialOpexBreakdown;
+  if (Array.isArray(entry?.opexBreakdown)) return entry.opexBreakdown;
+  return [];
+}
+
+function hasDirectOfficialExpenseCategories(entry) {
+  return ["rndBn", "sgnaBn", "otherOpexBn"].some((fieldName) => safeNumber(entry?.[fieldName]) > 0.02);
+}
+
+function isSuspiciousExpenseBreakdown(items, totalValueBn, entry = null) {
+  const normalizedItems = normalizeBreakdownItems(items, null, "negative-parentheses");
+  if (normalizedItems.length < 2) return false;
+  const values = normalizedItems.map((item) => Number(Math.max(safeNumber(item?.valueBn), 0).toFixed(3))).filter((value) => value > 0.02);
+  if (values.length < 2) return false;
+  const targetTotalBn = Math.max(safeNumber(totalValueBn, entry?.operatingExpensesBn), 0);
+  const uniqueValueCount = new Set(values.map((value) => value.toFixed(3))).size;
+  const rawSumBn = values.reduce((sum, value) => sum + value, 0);
+  const maxItemBn = Math.max(...values);
+  const equalCluster = values.length >= 4 && uniqueValueCount <= 1;
+  const rawSumFarAboveTarget =
+    targetTotalBn > 0.05 &&
+    rawSumBn > targetTotalBn * 1.35 + Math.max(0.35, targetTotalBn * 0.03);
+  const itemFarAboveTarget =
+    targetTotalBn > 0.05 &&
+    maxItemBn > targetTotalBn * 1.08 + Math.max(0.12, targetTotalBn * 0.01);
+  const referenceValues = entry
+    ? [
+        entry?.revenueBn,
+        entry?.costOfRevenueBn,
+        entry?.grossProfitBn,
+        entry?.operatingIncomeBn,
+        entry?.pretaxIncomeBn,
+        entry?.taxBn,
+        entry?.netIncomeBn,
+      ]
+        .map((value) => Number(Math.max(safeNumber(value), 0).toFixed(3)))
+        .filter((value) => value > 0.02)
+    : [];
+  const echoesStatementValue =
+    equalCluster &&
+    referenceValues.some((value) => Math.abs(value - values[0]) <= Math.max(0.05, value * 0.0025));
+  return equalCluster && (rawSumFarAboveTarget || itemFarAboveTarget || echoesStatementValue);
+}
+
+function hasUsableOfficialExpenseBreakdown(entry, totalValueBn = null) {
+  const items = expenseBreakdownItems(entry);
+  if (!items.length) return false;
+  return !isSuspiciousExpenseBreakdown(items, totalValueBn, entry);
+}
+
 function quarterHasOfficialExpenseClassification(company, quarterKey) {
   const entry = company?.financials?.[quarterKey];
-  return (
-    (Array.isArray(entry?.officialOpexBreakdown) && entry.officialOpexBreakdown.some((item) => safeNumber(item?.valueBn) > 0.02)) ||
-    (Array.isArray(entry?.opexBreakdown) && entry.opexBreakdown.some((item) => safeNumber(item?.valueBn) > 0.02))
-  );
+  return hasUsableOfficialExpenseBreakdown(entry, entry?.operatingExpensesBn) || hasDirectOfficialExpenseCategories(entry);
 }
 
 function filterQuarterKeysByClassificationPolicy(company, quarterKeys = []) {
@@ -562,28 +610,32 @@ function firstResolvedBreakdownNumber(...values) {
 }
 
 function resolveOperatingExpenseBreakdown(snapshot, company, entry) {
-  if (snapshot?.opexBreakdown?.length) {
+  if (snapshot?.opexBreakdown?.length && !isSuspiciousExpenseBreakdown(snapshot.opexBreakdown, snapshot?.operatingExpensesBn, snapshot)) {
     return reconcileExpenseBreakdownToTarget(snapshot.opexBreakdown, snapshot?.operatingExpensesBn, {
       fallbackSourceUrl: snapshot?.sourceUrl || null,
     });
   }
   const supplemental = supplementalComponentsFor(company, snapshot?.quarterKey || entry?.quarterKey);
   const entrySupplemental = entry?.supplementalComponents || {};
-  const directBreakdown =
-    entry?.officialOpexBreakdown ||
-    entry?.opexBreakdown ||
-    entrySupplemental?.officialOpexBreakdown ||
-    entrySupplemental?.opexBreakdown ||
-    supplemental?.officialOpexBreakdown ||
-    supplemental?.opexBreakdown;
+  const directBreakdownCandidates = [
+    entry?.officialOpexBreakdown,
+    entry?.opexBreakdown,
+    entrySupplemental?.officialOpexBreakdown,
+    entrySupplemental?.opexBreakdown,
+    supplemental?.officialOpexBreakdown,
+    supplemental?.opexBreakdown,
+  ].filter((candidate) => Array.isArray(candidate) && candidate.length);
   const sourceUrl = supplemental?.sourceUrl || entrySupplemental?.sourceUrl || null;
-  if (Array.isArray(directBreakdown) && directBreakdown.length) {
-    const targetOperatingExpensesBn = firstResolvedBreakdownNumber(
-      snapshot?.operatingExpensesBn,
-      entry?.operatingExpensesBn,
-      entrySupplemental?.operatingExpensesBn,
-      supplemental?.operatingExpensesBn
-    );
+  const targetOperatingExpensesBn = firstResolvedBreakdownNumber(
+    snapshot?.operatingExpensesBn,
+    entry?.operatingExpensesBn,
+    entrySupplemental?.operatingExpensesBn,
+    supplemental?.operatingExpensesBn
+  );
+  const directBreakdown = directBreakdownCandidates.find(
+    (candidate) => !isSuspiciousExpenseBreakdown(candidate, targetOperatingExpensesBn, entry)
+  );
+  if (directBreakdown) {
     return reconcileExpenseBreakdownToTarget(directBreakdown, targetOperatingExpensesBn, {
       fallbackSourceUrl: sourceUrl,
     });
@@ -2080,6 +2132,126 @@ function mergeCompanyFinancialFallback(company, fallbackCompany) {
   };
 }
 
+const auxiliaryFinancialCacheLoaders = {
+  officialFinancials: new Map(),
+  genericIrPdf: new Map(),
+};
+
+async function loadAuxiliaryFinancialCache(cacheKey, companyId) {
+  const cacheStore = auxiliaryFinancialCacheLoaders[cacheKey];
+  if (!cacheStore) return null;
+  if (!cacheStore.has(companyId)) {
+    const cachePath = cacheKey === "officialFinancials" ? "official-financials" : "generic-ir-pdf";
+    const request = fetchJson(`./data/cache/${cachePath}/${companyId}.json?v=${BUILD_ASSET_VERSION}`)
+      .then(async (response) => (response.ok ? response.json() : null))
+      .catch(() => null);
+    cacheStore.set(companyId, request);
+  }
+  return cacheStore.get(companyId);
+}
+
+function selectPreferredOfficialExpenseBreakdown(entry, candidateEntries = []) {
+  const targetOperatingExpensesBn = firstResolvedBreakdownNumber(entry?.operatingExpensesBn);
+  let bestCandidate = null;
+  candidateEntries.forEach((candidateEntry) => {
+    const candidateItems = expenseBreakdownItems(candidateEntry);
+    if (!candidateItems.length || isSuspiciousExpenseBreakdown(candidateItems, targetOperatingExpensesBn, candidateEntry || entry)) {
+      return;
+    }
+    const normalizedItems = normalizeBreakdownItems(candidateItems);
+    if (!normalizedItems.length) return;
+    const coveredTotalBn = normalizedItems.reduce((sum, item) => sum + Math.max(safeNumber(item?.valueBn), 0), 0);
+    const candidateScore =
+      normalizedItems.length * 100 +
+      Math.min(coveredTotalBn, Math.max(safeNumber(targetOperatingExpensesBn), 0)) -
+      Math.max(Math.abs(coveredTotalBn - Math.max(safeNumber(targetOperatingExpensesBn), 0)) - 0.2, 0) * 10;
+    if (!bestCandidate || candidateScore > bestCandidate.score) {
+      bestCandidate = {
+        score: candidateScore,
+        items: normalizedItems.map((item) => ({ ...item })),
+        sourceUrl: candidateEntry?.statementSourceUrl || candidateEntry?.sourceUrl || null,
+        statementSource: candidateEntry?.statementSource || null,
+      };
+    }
+  });
+  return bestCandidate;
+}
+
+function repairQuarterOfficialExpenseBreakdown(entry, candidateEntries = []) {
+  if (!entry) return entry;
+  const currentItems = expenseBreakdownItems(entry);
+  if (currentItems.length && !isSuspiciousExpenseBreakdown(currentItems, entry?.operatingExpensesBn, entry)) {
+    return entry;
+  }
+  const bestCandidate = selectPreferredOfficialExpenseBreakdown(entry, candidateEntries);
+  if (bestCandidate) {
+    return {
+      ...entry,
+      officialOpexBreakdown: bestCandidate.items,
+      opexBreakdown: bestCandidate.items,
+      statementSourceUrl: entry?.statementSourceUrl || bestCandidate.sourceUrl || null,
+      fieldSources: {
+        ...(entry?.fieldSources || {}),
+        opexBreakdown: [
+          {
+            adapterId: bestCandidate.statementSource === "generic-ir-pdf" ? "generic_ir_pdf" : "official_financials",
+            label: bestCandidate.statementSource === "generic-ir-pdf" ? "Generic IR PDF parser" : "SEC companyfacts / filings",
+            score: bestCandidate.statementSource === "generic-ir-pdf" ? 80 : 124,
+            itemCount: bestCandidate.items.length,
+          },
+        ],
+      },
+      extractionDiagnostics: {
+        ...(entry?.extractionDiagnostics || {}),
+        opexBreakdownMode: "explicit",
+      },
+    };
+  }
+  const nextEntry = { ...entry };
+  delete nextEntry.officialOpexBreakdown;
+  delete nextEntry.opexBreakdown;
+  if (nextEntry.fieldSources?.opexBreakdown) {
+    nextEntry.fieldSources = { ...nextEntry.fieldSources };
+    delete nextEntry.fieldSources.opexBreakdown;
+  }
+  if (nextEntry.extractionDiagnostics) {
+    nextEntry.extractionDiagnostics = {
+      ...nextEntry.extractionDiagnostics,
+      opexBreakdownMode: "none",
+      opexBreakdownCoveragePct: 0,
+      opexBreakdownResidualBn: null,
+    };
+  }
+  return nextEntry;
+}
+
+async function enrichCompanyWithOfficialExpenseBreakdowns(company) {
+  const suspectQuarterKeys = (company?.quarters || []).filter((quarterKey) => {
+    const entry = company?.financials?.[quarterKey];
+    if (!entry) return false;
+    return isSuspiciousExpenseBreakdown(expenseBreakdownItems(entry), entry?.operatingExpensesBn, entry);
+  });
+  if (!suspectQuarterKeys.length) return company;
+  const [officialFinancialsPayload, genericIrPdfPayload] = await Promise.all([
+    loadAuxiliaryFinancialCache("officialFinancials", company.id),
+    loadAuxiliaryFinancialCache("genericIrPdf", company.id),
+  ]);
+  const nextFinancials = { ...(company?.financials || {}) };
+  suspectQuarterKeys.forEach((quarterKey) => {
+    const currentEntry = nextFinancials[quarterKey];
+    if (!currentEntry) return;
+    const candidateEntries = [
+      genericIrPdfPayload?.financials?.[quarterKey],
+      officialFinancialsPayload?.financials?.[quarterKey],
+    ].filter(Boolean);
+    nextFinancials[quarterKey] = repairQuarterOfficialExpenseBreakdown(currentEntry, candidateEntries);
+  });
+  return {
+    ...company,
+    financials: nextFinancials,
+  };
+}
+
 async function enrichDatasetWithFinancialFallbacks() {
   if (!state.sortedCompanies.length) return;
   const enrichedCompanies = await Promise.all(
@@ -2088,7 +2260,8 @@ async function enrichDatasetWithFinancialFallbacks() {
         const response = await fetchJson(`./data/cache/${company.id}.json?v=${BUILD_ASSET_VERSION}`);
         if (!response.ok) return company;
         const fallbackCompany = await response.json();
-        return mergeCompanyFinancialFallback(company, fallbackCompany);
+        const mergedCompany = mergeCompanyFinancialFallback(company, fallbackCompany);
+        return enrichCompanyWithOfficialExpenseBreakdowns(mergedCompany);
       } catch (_error) {
         return company;
       }

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections import Counter
 import json
 import re
 from datetime import date
@@ -316,6 +317,45 @@ def _row_numeric_series(row: list[str] | None, expected_count: int, *, absolute:
     return values[:expected_count]
 
 
+def _breakdown_looks_degenerate(items: list[dict[str, Any]], total_value_bn: float | None) -> bool:
+    if not isinstance(items, list) or len(items) < 4:
+        return False
+    values = [round(abs(float(item.get("valueBn") or 0)), 3) for item in items if float(item.get("valueBn") or 0) > 0.02]
+    if len(values) < 4:
+        return False
+    counts = Counter(values)
+    repeated_value, repeated_count = counts.most_common(1)[0]
+    if repeated_count < 4:
+        return False
+    total_value = float(total_value_bn or 0)
+    raw_sum = sum(values)
+    if total_value <= 0:
+        return len(counts) <= 1
+    return repeated_value > total_value * 1.08 + max(total_value * 0.01, 0.12) or raw_sum > total_value * 1.35 + max(total_value * 0.03, 0.35)
+
+
+def _entry_looks_degenerate(entry: dict[str, Any]) -> bool:
+    candidate_fields = (
+        "revenueBn",
+        "costOfRevenueBn",
+        "grossProfitBn",
+        "sgnaBn",
+        "rndBn",
+        "operatingExpensesBn",
+        "operatingIncomeBn",
+        "pretaxIncomeBn",
+        "taxBn",
+        "netIncomeBn",
+    )
+    values = [round(abs(float(entry.get(field_name) or 0)), 3) for field_name in candidate_fields if float(entry.get(field_name) or 0) > 0.02]
+    if len(values) >= 6:
+        counts = Counter(values)
+        _most_common_value, most_common_count = counts.most_common(1)[0]
+        if most_common_count >= 6 and len(counts) <= 2:
+            return True
+    return _breakdown_looks_degenerate(entry.get("officialOpexBreakdown") or [], entry.get("operatingExpensesBn"))
+
+
 def _score_entry(entry: dict[str, Any]) -> tuple[int, int, int, int]:
     field_count = sum(1 for key in ("revenueBn", "costOfRevenueBn", "grossProfitBn", "operatingIncomeBn", "pretaxIncomeBn", "taxBn", "netIncomeBn") if entry.get(key) is not None)
     has_breakdown = int(bool(entry.get("officialOpexBreakdown")))
@@ -473,8 +513,10 @@ def _period_entries_from_table(rows: list[list[str]], currency: str, source_url:
                     source_url=source_url,
                 )
             )
-        if opex_items:
+        if opex_items and not _breakdown_looks_degenerate(opex_items, entry.get("operatingExpensesBn")):
             entry["officialOpexBreakdown"] = opex_items
+        if _entry_looks_degenerate(entry):
+            continue
         results.append(entry)
     return results
 

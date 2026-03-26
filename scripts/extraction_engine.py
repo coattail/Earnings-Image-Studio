@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections import Counter
 from copy import deepcopy
 from typing import Any
 
@@ -87,6 +88,23 @@ def _entry_completeness(entry: dict[str, Any]) -> float:
     return float(score)
 
 
+def _breakdown_collection_looks_suspicious(items: list[dict[str, Any]], total_value: float | None) -> bool:
+    if not isinstance(items, list) or len(items) < 4:
+        return False
+    values = [round(abs(float(item.get("valueBn") or 0)), 3) for item in items if float(item.get("valueBn") or 0) > 0.02]
+    if len(values) < 4:
+        return False
+    counts = Counter(values)
+    repeated_value, repeated_count = counts.most_common(1)[0]
+    if repeated_count < 4:
+        return False
+    total = float(total_value or 0)
+    raw_sum = sum(values)
+    if total <= 0:
+        return len(counts) <= 1
+    return repeated_value > total * 1.08 + max(total * 0.01, 0.12) or raw_sum > total * 1.35 + max(total * 0.03, 0.35)
+
+
 def _merge_best_breakdown_by_taxonomy(
     kind: str,
     field_name: str,
@@ -102,6 +120,8 @@ def _merge_best_breakdown_by_taxonomy(
         adapter = candidate["adapter"]
         items = normalize_breakdown_items(kind, candidate.get("items"))
         if not items:
+            continue
+        if _breakdown_collection_looks_suspicious(items, total_value):
             continue
         collection_score = _collection_score(adapter, field_name, items, total_value)
         collection_meta.append((collection_score, items, adapter))
@@ -119,6 +139,8 @@ def _merge_best_breakdown_by_taxonomy(
     selected = [payload for _score, payload, _adapter in best_by_taxonomy.values()]
     selected.sort(key=lambda item: (-float(item.get("valueBn") or 0), str(item.get("taxonomyId") or "")))
     if not selected:
+        return [], []
+    if _breakdown_collection_looks_suspicious(selected, total_value):
         return [], []
 
     disclosed_total = sum(float(item.get("valueBn") or 0) for item in selected)

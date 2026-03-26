@@ -2162,7 +2162,12 @@ function renderPixelReplicaSvg(snapshot) {
     const baseHeight = Math.max(safeNumber(nodeHeight, 0), 1);
     const resolvedCollisionHeight = Math.max(safeNumber(collisionHeight, baseHeight), baseHeight);
     const maxExtraY = scaleY(safeNumber(options.maxExtraY, 52));
-    return Math.max(baseHeight, Math.min(resolvedCollisionHeight, baseHeight + maxExtraY));
+    const collisionOverflowY = Math.max(resolvedCollisionHeight - baseHeight - maxExtraY, 0);
+    const retainedOverflowY = Math.min(
+      collisionOverflowY * clamp(safeNumber(options.overflowRetentionFactor, 0.78), 0, 1),
+      scaleY(safeNumber(options.overflowRetentionMaxY, 38))
+    );
+    return Math.max(baseHeight, Math.min(resolvedCollisionHeight, baseHeight + maxExtraY + retainedOverflowY));
   };
   const enforceMinimumCenterGap = (boxes, slices, desiredGapY, minTop, maxBottom, collisionHeights = null) => {
     if (!Array.isArray(boxes) || boxes.length !== 2 || !Array.isArray(slices) || slices.length !== 2) return;
@@ -4055,8 +4060,18 @@ function renderPixelReplicaSvg(snapshot) {
     if (!flowModel) return preferredCenterY;
     const clearanceY = Math.max(scaleY(safeNumber(options.ribbonClearanceY, 10)), 0);
     const labelPadX = scaleY(safeNumber(options.labelPadX, 8));
-    const minCenterY = safeNumber(options.minLabelCenterY, preferredCenterY - scaleY(safeNumber(options.maxAutoShiftY, 42)));
-    const maxCenterY = safeNumber(options.maxLabelCenterY, preferredCenterY + scaleY(safeNumber(options.maxAutoShiftY, 42)));
+    const maxAutoShiftY = scaleY(safeNumber(options.maxAutoShiftY, 42));
+    let minCenterY = safeNumber(options.minLabelCenterY, preferredCenterY - maxAutoShiftY);
+    let maxCenterY = safeNumber(options.maxLabelCenterY, preferredCenterY + maxAutoShiftY);
+    const collisionBandCenterY = Number.isFinite(Number(options.collisionBandCenterY))
+      ? Number(options.collisionBandCenterY)
+      : preferredCenterY;
+    const collisionBandHeight = Math.max(safeNumber(options.collisionBandHeight, 0), 0);
+    if (collisionBandHeight > 0) {
+      const bandShiftAllowanceY = Math.max((collisionBandHeight - labelSpec.collisionHeight) / 2, 0);
+      minCenterY = Math.max(minCenterY, collisionBandCenterY - bandShiftAllowanceY);
+      maxCenterY = Math.min(maxCenterY, collisionBandCenterY + bandShiftAllowanceY);
+    }
     if (!(maxCenterY >= minCenterY)) return preferredCenterY;
     const rectForCenterY = (centerY) => ({
       left: labelSpec.labelX - labelPadX,
@@ -4099,22 +4114,17 @@ function renderPixelReplicaSvg(snapshot) {
         shiftDistance: Math.abs(centerY - preferredCenterY),
       };
     };
-    const candidateCenters = [
-      preferredCenterY,
-      preferredCenterY - scaleY(12),
-      preferredCenterY + scaleY(12),
-      preferredCenterY - scaleY(24),
-      preferredCenterY + scaleY(24),
-      preferredCenterY - scaleY(36),
-      preferredCenterY + scaleY(36),
-      minCenterY,
-      maxCenterY,
-    ]
+    const candidateStepY = Math.max(scaleY(safeNumber(options.candidateStepY, 8)), 4);
+    const candidateCenters = [preferredCenterY, minCenterY, maxCenterY];
+    for (let offsetY = candidateStepY; offsetY <= maxAutoShiftY + 0.5; offsetY += candidateStepY) {
+      candidateCenters.push(preferredCenterY - offsetY, preferredCenterY + offsetY);
+    }
+    const resolvedCandidateCenters = candidateCenters
       .map((value) => clamp(value, minCenterY, maxCenterY))
       .filter((value, index, values) => values.findIndex((candidate) => Math.abs(candidate - value) < 0.5) === index);
     let bestCenterY = preferredCenterY;
     let bestScore = null;
-    candidateCenters.forEach((candidateCenterY) => {
+    resolvedCandidateCenters.forEach((candidateCenterY) => {
       const score = overlapScore(candidateCenterY);
       if (
         !bestScore ||
@@ -4134,7 +4144,11 @@ function renderPixelReplicaSvg(snapshot) {
     {
       const labelSpec = resolveRightBranchLabelSpec(item, terminalNodeX, terminalNodeWidth, options);
       const preferredLabelCenterY = safeNumber(options.labelCenterY, box.center);
-      const resolvedLabelCenterY = resolveRightBranchLabelCenterY(labelSpec, preferredLabelCenterY, options);
+      const resolvedLabelCenterY = resolveRightBranchLabelCenterY(labelSpec, preferredLabelCenterY, {
+        ...options,
+        collisionBandCenterY: safeNumber(options.collisionBandCenterY, box.center),
+        collisionBandHeight: safeNumber(options.collisionBandHeight, box.height),
+      });
       return renderTreeLabelBlock(item, box, labelSpec.labelX, color, {
         ...options,
         anchor: "start",
@@ -6535,6 +6549,113 @@ function renderPixelReplicaSvg(snapshot) {
     setAutoLayoutNodeOffset("cost", { dy: currentAutoCostShiftY - appliedLiftY });
   };
   refineCostStageElbowBalance();
+  const rebalanceNegativeTerminalLabelClearance = () => {
+    const labelGapY = scaleY(safeNumber(snapshot.layout?.rightTerminalLabelClearanceGapY, 8));
+    const minTopY = Math.max(
+      rightTerminalSummaryObstacleBottom,
+      netBottom + scaleY(safeNumber(snapshot.layout?.rightTerminalLabelClearanceMinOffsetFromNetY, 18))
+    );
+    const getEntryBox = (entry) => (entry.lane === "deduction" ? deductionBoxes[entry.index] : opexBoxes[entry.index]);
+    const setEntryBoxCenter = (entry, nextCenterY) => {
+      const currentBox = getEntryBox(entry);
+      if (!currentBox) return;
+      const nextBox = shiftBoxCenter(currentBox, nextCenterY);
+      if (entry.lane === "deduction") {
+        deductionBoxes[entry.index] = nextBox;
+      } else {
+        opexBoxes[entry.index] = nextBox;
+      }
+      entry.box = nextBox;
+    };
+    const buildEntries = () => {
+      const entries = [];
+      deductionBoxes.forEach((box, index) => {
+        const slice = deductionSourceSlices[index] || deductionSlices[index];
+        if (!box || !slice?.item) return;
+        entries.push({
+          lane: "deduction",
+          index,
+          box,
+          spec: resolveRightBranchLabelSpec(slice.item, rightTerminalNodeX, nodeWidth, {
+            density: deductionSlices.length >= 3 ? "dense" : "regular",
+            defaultMode: "negative-parentheses",
+            labelX: negativeTerminalLabelX,
+          }),
+        });
+      });
+      opexBoxes.forEach((box, index) => {
+        const slice = opexSourceSlices[index] || opexSlices[index];
+        if (!box || !slice?.item) return;
+        entries.push({
+          lane: "opex",
+          index,
+          box,
+          spec: resolveRightBranchLabelSpec(slice.item, rightTerminalNodeX, nodeWidth, {
+            density: opexDensity,
+            defaultMode: "negative-parentheses",
+          }),
+        });
+      });
+      return entries.sort((left, right) => left.box.center - right.box.center || left.index - right.index);
+    };
+    const shiftEntryRange = (entries, startIndex, endIndex, deltaY) => {
+      if (!(Math.abs(deltaY) > 0.01)) return;
+      for (let index = startIndex; index <= endIndex; index += 1) {
+        const entry = entries[index];
+        if (!entry) continue;
+        setEntryBoxCenter(entry, safeNumber(getEntryBox(entry)?.center, entry.box.center) + deltaY);
+      }
+    };
+    for (let pass = 0; pass < 4; pass += 1) {
+      const entries = buildEntries();
+      let moved = false;
+      for (let index = 0; index < entries.length - 1; index += 1) {
+        const upper = entries[index];
+        const lower = entries[index + 1];
+        if (!upper?.box || !lower?.box) continue;
+        const horizontalOverlapX =
+          Math.min(upper.spec.labelX + upper.spec.blockWidth, lower.spec.labelX + lower.spec.blockWidth) -
+          Math.max(upper.spec.labelX, lower.spec.labelX);
+        if (!(horizontalOverlapX > 1)) continue;
+        const upperBottomY = safeNumber(upper.box.center, 0) + upper.spec.collisionHeight / 2;
+        const lowerTopY = safeNumber(lower.box.center, 0) - lower.spec.collisionHeight / 2;
+        const deficitY = upperBottomY + labelGapY - lowerTopY;
+        if (!(deficitY > 0.5)) continue;
+        const prefixTopY = entries
+          .slice(0, index + 1)
+          .reduce((minValue, entry) => Math.min(minValue, safeNumber(getEntryBox(entry)?.top, Infinity)), Infinity);
+        const suffixBottomY = entries
+          .slice(index + 1)
+          .reduce((maxValue, entry) => Math.max(maxValue, safeNumber(getEntryBox(entry)?.bottom, -Infinity)), -Infinity);
+        const availableUpY = Math.max(prefixTopY - minTopY, 0);
+        const availableDownY = Math.max(terminalLayoutBottomLimit - suffixBottomY, 0);
+        let shiftDownY = Math.min(deficitY * 0.72, availableDownY);
+        let remainingDeficitY = deficitY - shiftDownY;
+        let shiftUpY = Math.min(remainingDeficitY, availableUpY);
+        remainingDeficitY -= shiftUpY;
+        if (remainingDeficitY > 0.01 && availableDownY > shiftDownY) {
+          const extraDownY = Math.min(remainingDeficitY, availableDownY - shiftDownY);
+          shiftDownY += extraDownY;
+          remainingDeficitY -= extraDownY;
+        }
+        if (remainingDeficitY > 0.01 && availableUpY > shiftUpY) {
+          const extraUpY = Math.min(remainingDeficitY, availableUpY - shiftUpY);
+          shiftUpY += extraUpY;
+        }
+        if (shiftUpY > 0.01) {
+          shiftEntryRange(entries, 0, index, -shiftUpY);
+        }
+        if (shiftDownY > 0.01) {
+          shiftEntryRange(entries, index + 1, entries.length - 1, shiftDownY);
+        }
+        if (shiftUpY > 0.01 || shiftDownY > 0.01) {
+          moved = true;
+        }
+      }
+      if (!moved) break;
+    }
+  };
+  rebalanceNegativeTerminalLabelClearance();
   refreshEditableNodeFrames();
   const revenueGrossBand = shiftedInterval(revenueGrossSourceBand.top, revenueGrossSourceBand.bottom, "revenue");
   const revenueCostBand = revenueCostSourceBand ? shiftedInterval(revenueCostSourceBand.top, revenueCostSourceBand.bottom, "revenue") : null;
