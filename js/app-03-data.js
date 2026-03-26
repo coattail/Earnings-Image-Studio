@@ -591,10 +591,23 @@ function buildGenericBreakdown(entry) {
 }
 
 function reconcileExpenseBreakdownToTarget(items, totalValueBn, options = {}) {
-  return reconcileBreakdownItemsToTarget(items, totalValueBn, {
+  const reconciledItems = reconcileBreakdownItemsToTarget(items, totalValueBn, {
     ...options,
     residualName: "Residual OpEx",
     residualNameZh: "其他营业费用",
+  });
+  const revenueBn = Math.max(safeNumber(options.revenueBn), 0);
+  if (!(revenueBn > 0.05)) return reconciledItems;
+  return reconciledItems.map((item) => {
+    const existingNote = String(item?.note || "").trim();
+    if (existingNote) return item;
+    const itemValueBn = Math.max(safeNumber(item?.valueBn), 0);
+    if (!(itemValueBn > 0.02)) return item;
+    return {
+      ...item,
+      pctOfRevenue: (itemValueBn / revenueBn) * 100,
+      note: formatShareMetricNote((itemValueBn / revenueBn) * 100, { basis: "of revenue" }),
+    };
   });
 }
 
@@ -613,6 +626,7 @@ function resolveOperatingExpenseBreakdown(snapshot, company, entry) {
   if (snapshot?.opexBreakdown?.length && !isSuspiciousExpenseBreakdown(snapshot.opexBreakdown, snapshot?.operatingExpensesBn, snapshot)) {
     return reconcileExpenseBreakdownToTarget(snapshot.opexBreakdown, snapshot?.operatingExpensesBn, {
       fallbackSourceUrl: snapshot?.sourceUrl || null,
+      revenueBn: snapshot?.revenueBn ?? entry?.revenueBn,
     });
   }
   const supplemental = supplementalComponentsFor(company, snapshot?.quarterKey || entry?.quarterKey);
@@ -638,6 +652,7 @@ function resolveOperatingExpenseBreakdown(snapshot, company, entry) {
   if (directBreakdown) {
     return reconcileExpenseBreakdownToTarget(directBreakdown, targetOperatingExpensesBn, {
       fallbackSourceUrl: sourceUrl,
+      revenueBn: firstResolvedBreakdownNumber(snapshot?.revenueBn, entry?.revenueBn, entrySupplemental?.revenueBn, supplemental?.revenueBn),
     });
   }
   const resolvedEntry = {
