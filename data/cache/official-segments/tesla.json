@@ -1,9 +1,32 @@
 {
+  "_cacheVersion": "20260327-v3",
   "source": "official-filings",
   "ticker": "TSLA",
   "cik": 1318605,
   "axis": "StatementBusinessSegmentsAxis",
   "quarters": {
+    "2018Q1": [
+      {
+        "name": "Automotive",
+        "memberKey": "automotive",
+        "valueBn": 2.183,
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000156459019013462/tsla-20190331.xml",
+        "sourceForm": "10-Q",
+        "filingDate": "2019-04-29",
+        "periodStart": "2018-01-01",
+        "periodEnd": "2018-03-31"
+      },
+      {
+        "name": "Energy Generation & Storage",
+        "memberKey": "energygenerationstorage",
+        "valueBn": 0.298,
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000156459019013462/tsla-20190331.xml",
+        "sourceForm": "10-Q",
+        "filingDate": "2019-04-29",
+        "periodStart": "2018-01-01",
+        "periodEnd": "2018-03-31"
+      }
+    ],
     "2018Q2": [
       {
         "name": "Automotive",
@@ -48,14 +71,36 @@
         "periodEnd": "2018-09-30"
       }
     ],
+    "2018Q4": [
+      {
+        "name": "Automotive",
+        "memberKey": "automotive",
+        "valueBn": 5.632,
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000156459020004475/tsla-10k_20191231_htm.xml",
+        "sourceForm": "10-K",
+        "filingDate": "2020-02-13",
+        "periodStart": "2018-10-01",
+        "periodEnd": "2018-12-31"
+      },
+      {
+        "name": "Energy Generation & Storage",
+        "memberKey": "energygenerationstorage",
+        "valueBn": 0.265,
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000156459020004475/tsla-10k_20191231_htm.xml",
+        "sourceForm": "10-K",
+        "filingDate": "2020-02-13",
+        "periodStart": "2018-10-01",
+        "periodEnd": "2018-12-31"
+      }
+    ],
     "2019Q1": [
       {
         "name": "Automotive",
         "memberKey": "automotive",
         "valueBn": 3.683,
-        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000156459020019931/tsla-10q_20200331_htm.xml",
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000156459019013462/tsla-20190331.xml",
         "sourceForm": "10-Q",
-        "filingDate": "2020-04-30",
+        "filingDate": "2019-04-29",
         "periodStart": "2019-01-01",
         "periodEnd": "2019-03-31"
       },
@@ -63,9 +108,9 @@
         "name": "Energy Generation & Storage",
         "memberKey": "energygenerationstorage",
         "valueBn": 0.212,
-        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000156459020019931/tsla-10q_20200331_htm.xml",
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000156459019013462/tsla-20190331.xml",
         "sourceForm": "10-Q",
-        "filingDate": "2020-04-30",
+        "filingDate": "2019-04-29",
         "periodStart": "2019-01-01",
         "periodEnd": "2019-03-31"
       }
@@ -118,7 +163,7 @@
       {
         "name": "Automotive",
         "memberKey": "automotive",
-        "valueBn": 5.79,
+        "valueBn": 5.789,
         "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000156459020004475/tsla-10k_20191231_htm.xml",
         "sourceForm": "10-K",
         "filingDate": "2020-02-13",
@@ -470,7 +515,7 @@
       {
         "name": "Automotive",
         "memberKey": "automotive",
-        "valueBn": 44.0,
+        "valueBn": 29.65,
         "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828024002390/tsla-20231231_htm.xml",
         "sourceForm": "10-K",
         "filingDate": "2024-01-29",
@@ -854,8 +899,14 @@
       "accession": "0001564590-19-026445",
       "primaryDocument": "tsla-10q_20190630.htm",
       "instance": "tsla-10q_20190630_htm.xml"
+    },
+    {
+      "form": "10-Q",
+      "filingDate": "2019-04-29",
+      "accession": "0001564590-19-013462",
+      "primaryDocument": "tsla-10q_20190331.htm",
+      "instance": "tsla-20190331.xml"
     }
   ],
-  "errors": [],
-  "_cacheVersion": "20260321-v2"
+  "errors": []
 }

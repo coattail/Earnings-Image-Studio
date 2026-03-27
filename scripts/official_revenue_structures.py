@@ -53,7 +53,7 @@ CACHE_DIR = ROOT_DIR / "data" / "cache" / "official-revenue-structures"
 OFFICIAL_SEGMENT_CACHE_DIR = ROOT_DIR / "data" / "cache" / "official-segments"
 OFFICIAL_FINANCIAL_CACHE_DIR = ROOT_DIR / "data" / "cache" / "official-financials"
 STOCKANALYSIS_FINANCIAL_CACHE_DIR = ROOT_DIR / "data" / "cache" / "stockanalysis-financials"
-CACHE_VERSION = "20260325-v16"
+CACHE_VERSION = "20260327-v17"
 STOCKANALYSIS_FINANCIAL_CACHE: dict[str, dict[str, Any]] = {}
 
 XBRL_AXIS_COMPANY_CONFIGS: dict[str, dict[str, Any]] = {

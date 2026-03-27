@@ -20,7 +20,7 @@ CACHE_DIR = ROOT_DIR / "data" / "cache" / "official-segments"
 SEC_TICKER_CACHE: dict[str, int] | None = None
 MIN_FILING_DATE = "2017-01-01"
 MIN_CALENDAR_QUARTER = (2018, 1)
-CACHE_VERSION = "20260321-v2"
+CACHE_VERSION = "20260327-v3"
 
 SEC_HEADERS = {
     "User-Agent": "Codex/official-segments yuwan@example.com",
@@ -251,7 +251,7 @@ def _group_signature_tokens(label: str) -> list[str]:
     tokens = [token for token in re.split(r"[^a-z0-9]+", normalized) if token]
     normalized_tokens: list[str] = []
     for token in tokens:
-        if token in {"and", "seg", "segment", "segments", "member"}:
+        if token in {"and", "seg", "segment", "segments", "member", "service", "services"}:
             continue
         if len(token) in {4, 5} and token.endswith("s") and token not in {"news", "this", "us"}:
             token = token[:-1]

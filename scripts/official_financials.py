@@ -69,7 +69,6 @@ FINANCIAL_CONCEPTS: dict[str, list[str]] = {
         "OperatingExpenses",
         "OperatingExpenseExcludingCostOfSales",
         "NoninterestExpense",
-        "CostsAndExpenses",
     ],
     "operatingIncome": [
         "OperatingIncomeLoss",

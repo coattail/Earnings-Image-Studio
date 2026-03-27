@@ -3181,6 +3181,31 @@ function expandBarDetailRows(company, entry, baseRows = []) {
   return nextRows.sort((left, right) => safeNumber(right?.valueBn) - safeNumber(left?.valueBn));
 }
 
+function inferredResidualBarSegmentKey(company, rows = [], residualValueBn = 0, totalRevenueBn = null) {
+  const normalizedCompanyId = String(company?.id || "").trim().toLowerCase();
+  const residualValue = safeNumber(residualValueBn, 0);
+  const totalRevenue = safeNumber(totalRevenueBn, null);
+  const residualShare = totalRevenue > 0.02 ? residualValue / totalRevenue : 0;
+  const presentKeys = new Set(
+    (rows || [])
+      .map((item) => normalizeLabelKey(item?.key || item?.id || item?.memberKey || item?.name))
+      .filter(Boolean)
+  );
+
+  // Tesla 2019-2020 disclosures often provide only Services + Energy rows.
+  // The large residual is Automotive and should stay in the same taxonomy regime.
+  if (
+    normalizedCompanyId === "tesla" &&
+    residualShare >= 0.45 &&
+    !presentKeys.has("auto") &&
+    presentKeys.has("services") &&
+    presentKeys.has("energygenerationstorage")
+  ) {
+    return canonicalBarSegmentKey(company?.id, "auto", "Automotive");
+  }
+  return canonicalBarSegmentKey(company?.id, "otherrevenue", "Other revenue");
+}
+
 function reconcileBarSegmentRowsToRevenue(company, rows = [], totalRevenueBn = null, options = {}) {
   const revenueBn = safeNumber(totalRevenueBn, null);
   const inputRows = Array.isArray(rows) ? rows : [];
@@ -3215,8 +3240,11 @@ function reconcileBarSegmentRowsToRevenue(company, rows = [], totalRevenueBn = n
   } else if (coverageRatio < 0.94) {
     const residualValue = revenueBn - segmentSum;
     if (residualValue > 0.03) {
-      const residualKey = canonicalBarSegmentKey(company?.id, "otherrevenue", "Other revenue");
-      const residualMeta = canonicalBarSegmentMeta(company?.id, residualKey, "Other revenue", "其他营收");
+      const residualKey = inferredResidualBarSegmentKey(company, nextRows, residualValue, revenueBn);
+      const residualMeta =
+        residualKey === "auto"
+          ? canonicalBarSegmentMeta(company?.id, residualKey, "Automotive", "汽车业务")
+          : canonicalBarSegmentMeta(company?.id, residualKey, "Other revenue", "其他营收");
       const existingIndex = nextRows.findIndex((item) => item.key === residualKey);
       if (existingIndex >= 0) {
         nextRows[existingIndex].valueBn = Number((safeNumber(nextRows[existingIndex].valueBn) + residualValue).toFixed(3));

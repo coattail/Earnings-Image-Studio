@@ -6132,122 +6132,6 @@
         "qualityFlags": [],
         "adapterId": "generic_filing_tables"
       },
-      "opexBreakdown": [
-        {
-          "taxonomyId": "finance_expense",
-          "name": "Finance Expense",
-          "nameZh": "财务费用",
-          "memberKey": "financeexpense",
-          "valueBn": 292.023,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000029/nvda-20240128.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000029/nvda-20240128.htm"
-          }
-        },
-        {
-          "taxonomyId": "fulfillment",
-          "name": "Fulfillment",
-          "nameZh": "履约",
-          "memberKey": "fulfillment",
-          "valueBn": 292.023,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000029/nvda-20240128.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000029/nvda-20240128.htm"
-          }
-        },
-        {
-          "taxonomyId": "general_administrative",
-          "name": "G&A",
-          "nameZh": "管理费用",
-          "memberKey": "ga",
-          "valueBn": 292.023,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000029/nvda-20240128.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000029/nvda-20240128.htm"
-          }
-        },
-        {
-          "taxonomyId": "rnd",
-          "name": "R&D",
-          "nameZh": "研发",
-          "memberKey": "rd",
-          "valueBn": 292.023,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000029/nvda-20240128.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000029/nvda-20240128.htm"
-          }
-        },
-        {
-          "taxonomyId": "sales_marketing",
-          "name": "Sales & Marketing",
-          "nameZh": "销售与营销",
-          "memberKey": "salesmarketing",
-          "valueBn": 292.023,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000029/nvda-20240128.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000029/nvda-20240128.htm"
-          }
-        },
-        {
-          "taxonomyId": "taxes_surcharges",
-          "name": "Taxes & Surcharges",
-          "nameZh": "税金及附加",
-          "memberKey": "taxessurcharges",
-          "valueBn": 292.023,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000029/nvda-20240128.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000029/nvda-20240128.htm"
-          }
-        }
-      ],
       "fieldSources": {
         "revenueBn": {
           "adapterId": "official_financials",
@@ -6315,14 +6199,6 @@
           "score": 118.0,
           "sourceUrl": null
         },
-        "opexBreakdown": [
-          {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "itemCount": 6
-          }
-        ],
         "statementMeta": {
           "adapterId": "generic_filing_tables",
           "label": "Generic official filing table parser",
@@ -6337,25 +6213,26 @@
         }
       },
       "extractionDiagnostics": {
-        "qualityScore": 93,
+        "qualityScore": 80,
         "availableRequiredFieldCount": 3,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 14,
+        "sourceFieldCount": 13,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "explicit",
+        "opexBreakdownMode": "none",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
-        "opexBreakdownCoveragePct": 100.0,
+        "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": 0,
+        "opexBreakdownResidualBn": null,
         "statementSource": "generic-official-filing-table",
         "statementValueMode": "direct",
         "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
-          "cost-breakdown-coverage-low"
+          "cost-breakdown-coverage-low",
+          "opex-breakdown-coverage-low"
         ]
       }
     },
@@ -7515,122 +7392,6 @@
         "qualityFlags": [],
         "adapterId": "generic_filing_tables"
       },
-      "opexBreakdown": [
-        {
-          "taxonomyId": "finance_expense",
-          "name": "Finance Expense",
-          "nameZh": "财务费用",
-          "memberKey": "financeexpense",
-          "valueBn": 282.024,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm"
-          }
-        },
-        {
-          "taxonomyId": "fulfillment",
-          "name": "Fulfillment",
-          "nameZh": "履约",
-          "memberKey": "fulfillment",
-          "valueBn": 282.024,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm"
-          }
-        },
-        {
-          "taxonomyId": "general_administrative",
-          "name": "G&A",
-          "nameZh": "管理费用",
-          "memberKey": "ga",
-          "valueBn": 282.024,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm"
-          }
-        },
-        {
-          "taxonomyId": "rnd",
-          "name": "R&D",
-          "nameZh": "研发",
-          "memberKey": "rd",
-          "valueBn": 282.024,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm"
-          }
-        },
-        {
-          "taxonomyId": "sales_marketing",
-          "name": "Sales & Marketing",
-          "nameZh": "销售与营销",
-          "memberKey": "salesmarketing",
-          "valueBn": 282.024,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm"
-          }
-        },
-        {
-          "taxonomyId": "taxes_surcharges",
-          "name": "Taxes & Surcharges",
-          "nameZh": "税金及附加",
-          "memberKey": "taxessurcharges",
-          "valueBn": 282.024,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm"
-          }
-        }
-      ],
       "fieldSources": {
         "revenueBn": {
           "adapterId": "official_financials",
@@ -7698,14 +7459,6 @@
           "score": 118.0,
           "sourceUrl": null
         },
-        "opexBreakdown": [
-          {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "itemCount": 6
-          }
-        ],
         "statementMeta": {
           "adapterId": "generic_filing_tables",
           "label": "Generic official filing table parser",
@@ -7720,25 +7473,26 @@
         }
       },
       "extractionDiagnostics": {
-        "qualityScore": 93,
+        "qualityScore": 80,
         "availableRequiredFieldCount": 3,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 14,
+        "sourceFieldCount": 13,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "explicit",
+        "opexBreakdownMode": "none",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
-        "opexBreakdownCoveragePct": 100.0,
+        "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": 0,
+        "opexBreakdownResidualBn": null,
         "statementSource": "generic-official-filing-table",
         "statementValueMode": "direct",
         "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
-          "cost-breakdown-coverage-low"
+          "cost-breakdown-coverage-low",
+          "opex-breakdown-coverage-low"
         ]
       }
     },
@@ -7953,122 +7707,6 @@
         "qualityFlags": [],
         "adapterId": "generic_filing_tables"
       },
-      "opexBreakdown": [
-        {
-          "taxonomyId": "finance_expense",
-          "name": "Finance Expense",
-          "nameZh": "财务费用",
-          "memberKey": "financeexpense",
-          "valueBn": 1.25,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000124/nvda-20240428.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000124/nvda-20240428.htm"
-          }
-        },
-        {
-          "taxonomyId": "fulfillment",
-          "name": "Fulfillment",
-          "nameZh": "履约",
-          "memberKey": "fulfillment",
-          "valueBn": 1.25,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000124/nvda-20240428.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000124/nvda-20240428.htm"
-          }
-        },
-        {
-          "taxonomyId": "general_administrative",
-          "name": "G&A",
-          "nameZh": "管理费用",
-          "memberKey": "ga",
-          "valueBn": 1.25,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000124/nvda-20240428.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000124/nvda-20240428.htm"
-          }
-        },
-        {
-          "taxonomyId": "rnd",
-          "name": "R&D",
-          "nameZh": "研发",
-          "memberKey": "rd",
-          "valueBn": 1.25,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000124/nvda-20240428.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000124/nvda-20240428.htm"
-          }
-        },
-        {
-          "taxonomyId": "sales_marketing",
-          "name": "Sales & Marketing",
-          "nameZh": "销售与营销",
-          "memberKey": "salesmarketing",
-          "valueBn": 1.25,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000124/nvda-20240428.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000124/nvda-20240428.htm"
-          }
-        },
-        {
-          "taxonomyId": "taxes_surcharges",
-          "name": "Taxes & Surcharges",
-          "nameZh": "税金及附加",
-          "memberKey": "taxessurcharges",
-          "valueBn": 1.25,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000124/nvda-20240428.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000124/nvda-20240428.htm"
-          }
-        }
-      ],
       "fieldSources": {
         "revenueBn": {
           "adapterId": "official_financials",
@@ -8136,14 +7774,6 @@
           "score": 118.0,
           "sourceUrl": null
         },
-        "opexBreakdown": [
-          {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "itemCount": 6
-          }
-        ],
         "statementMeta": {
           "adapterId": "generic_filing_tables",
           "label": "Generic official filing table parser",
@@ -8158,25 +7788,26 @@
         }
       },
       "extractionDiagnostics": {
-        "qualityScore": 93,
+        "qualityScore": 80,
         "availableRequiredFieldCount": 3,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 14,
+        "sourceFieldCount": 13,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "explicit",
+        "opexBreakdownMode": "none",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
-        "opexBreakdownCoveragePct": 100.0,
+        "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": 0,
+        "opexBreakdownResidualBn": null,
         "statementSource": "generic-official-filing-table",
         "statementValueMode": "direct",
         "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
-          "cost-breakdown-coverage-low"
+          "cost-breakdown-coverage-low",
+          "opex-breakdown-coverage-low"
         ]
       }
     },
@@ -9291,122 +8922,6 @@
         "qualityFlags": [],
         "adapterId": "generic_filing_tables"
       },
-      "opexBreakdown": [
-        {
-          "taxonomyId": "finance_expense",
-          "name": "Finance Expense",
-          "nameZh": "财务费用",
-          "memberKey": "financeexpense",
-          "valueBn": 262.025,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm"
-          }
-        },
-        {
-          "taxonomyId": "fulfillment",
-          "name": "Fulfillment",
-          "nameZh": "履约",
-          "memberKey": "fulfillment",
-          "valueBn": 262.025,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm"
-          }
-        },
-        {
-          "taxonomyId": "general_administrative",
-          "name": "G&A",
-          "nameZh": "管理费用",
-          "memberKey": "ga",
-          "valueBn": 262.025,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm"
-          }
-        },
-        {
-          "taxonomyId": "rnd",
-          "name": "R&D",
-          "nameZh": "研发",
-          "memberKey": "rd",
-          "valueBn": 262.025,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm"
-          }
-        },
-        {
-          "taxonomyId": "sales_marketing",
-          "name": "Sales & Marketing",
-          "nameZh": "销售与营销",
-          "memberKey": "salesmarketing",
-          "valueBn": 262.025,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm"
-          }
-        },
-        {
-          "taxonomyId": "taxes_surcharges",
-          "name": "Taxes & Surcharges",
-          "nameZh": "税金及附加",
-          "memberKey": "taxessurcharges",
-          "valueBn": 262.025,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm"
-          }
-        }
-      ],
       "fieldSources": {
         "revenueBn": {
           "adapterId": "official_financials",
@@ -9474,14 +8989,6 @@
           "score": 118.0,
           "sourceUrl": null
         },
-        "opexBreakdown": [
-          {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "itemCount": 6
-          }
-        ],
         "statementMeta": {
           "adapterId": "generic_filing_tables",
           "label": "Generic official filing table parser",
@@ -9496,25 +9003,26 @@
         }
       },
       "extractionDiagnostics": {
-        "qualityScore": 93,
+        "qualityScore": 80,
         "availableRequiredFieldCount": 3,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 14,
+        "sourceFieldCount": 13,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "explicit",
+        "opexBreakdownMode": "none",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
-        "opexBreakdownCoveragePct": 100.0,
+        "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": 0,
+        "opexBreakdownResidualBn": null,
         "statementSource": "generic-official-filing-table",
         "statementValueMode": "direct",
         "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
-          "cost-breakdown-coverage-low"
+          "cost-breakdown-coverage-low",
+          "opex-breakdown-coverage-low"
         ]
       }
     },
@@ -9729,122 +9237,6 @@
         "qualityFlags": [],
         "adapterId": "generic_filing_tables"
       },
-      "opexBreakdown": [
-        {
-          "taxonomyId": "finance_expense",
-          "name": "Finance Expense",
-          "nameZh": "财务费用",
-          "memberKey": "financeexpense",
-          "valueBn": 3.75,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000116/nvda-20250427.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000116/nvda-20250427.htm"
-          }
-        },
-        {
-          "taxonomyId": "fulfillment",
-          "name": "Fulfillment",
-          "nameZh": "履约",
-          "memberKey": "fulfillment",
-          "valueBn": 3.75,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000116/nvda-20250427.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000116/nvda-20250427.htm"
-          }
-        },
-        {
-          "taxonomyId": "general_administrative",
-          "name": "G&A",
-          "nameZh": "管理费用",
-          "memberKey": "ga",
-          "valueBn": 3.75,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000116/nvda-20250427.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000116/nvda-20250427.htm"
-          }
-        },
-        {
-          "taxonomyId": "rnd",
-          "name": "R&D",
-          "nameZh": "研发",
-          "memberKey": "rd",
-          "valueBn": 3.75,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000116/nvda-20250427.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000116/nvda-20250427.htm"
-          }
-        },
-        {
-          "taxonomyId": "sales_marketing",
-          "name": "Sales & Marketing",
-          "nameZh": "销售与营销",
-          "memberKey": "salesmarketing",
-          "valueBn": 3.75,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000116/nvda-20250427.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000116/nvda-20250427.htm"
-          }
-        },
-        {
-          "taxonomyId": "taxes_surcharges",
-          "name": "Taxes & Surcharges",
-          "nameZh": "税金及附加",
-          "memberKey": "taxessurcharges",
-          "valueBn": 3.75,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000116/nvda-20250427.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000116/nvda-20250427.htm"
-          }
-        }
-      ],
       "fieldSources": {
         "revenueBn": {
           "adapterId": "official_financials",
@@ -9912,14 +9304,6 @@
           "score": 118.0,
           "sourceUrl": null
         },
-        "opexBreakdown": [
-          {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "itemCount": 6
-          }
-        ],
         "statementMeta": {
           "adapterId": "generic_filing_tables",
           "label": "Generic official filing table parser",
@@ -9934,25 +9318,26 @@
         }
       },
       "extractionDiagnostics": {
-        "qualityScore": 93,
+        "qualityScore": 80,
         "availableRequiredFieldCount": 3,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 14,
+        "sourceFieldCount": 13,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "explicit",
+        "opexBreakdownMode": "none",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
-        "opexBreakdownCoveragePct": 100.0,
+        "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": 0,
+        "opexBreakdownResidualBn": null,
         "statementSource": "generic-official-filing-table",
         "statementValueMode": "direct",
         "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
-          "cost-breakdown-coverage-low"
+          "cost-breakdown-coverage-low",
+          "opex-breakdown-coverage-low"
         ]
       }
     },
@@ -10167,122 +9552,6 @@
         "qualityFlags": [],
         "adapterId": "generic_filing_tables"
       },
-      "opexBreakdown": [
-        {
-          "taxonomyId": "finance_expense",
-          "name": "Finance Expense",
-          "nameZh": "财务费用",
-          "memberKey": "financeexpense",
-          "valueBn": 22.521,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000209/nvda-20250727.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000209/nvda-20250727.htm"
-          }
-        },
-        {
-          "taxonomyId": "fulfillment",
-          "name": "Fulfillment",
-          "nameZh": "履约",
-          "memberKey": "fulfillment",
-          "valueBn": 22.521,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000209/nvda-20250727.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000209/nvda-20250727.htm"
-          }
-        },
-        {
-          "taxonomyId": "general_administrative",
-          "name": "G&A",
-          "nameZh": "管理费用",
-          "memberKey": "ga",
-          "valueBn": 22.521,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000209/nvda-20250727.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000209/nvda-20250727.htm"
-          }
-        },
-        {
-          "taxonomyId": "rnd",
-          "name": "R&D",
-          "nameZh": "研发",
-          "memberKey": "rd",
-          "valueBn": 22.521,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000209/nvda-20250727.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000209/nvda-20250727.htm"
-          }
-        },
-        {
-          "taxonomyId": "sales_marketing",
-          "name": "Sales & Marketing",
-          "nameZh": "销售与营销",
-          "memberKey": "salesmarketing",
-          "valueBn": 22.521,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000209/nvda-20250727.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000209/nvda-20250727.htm"
-          }
-        },
-        {
-          "taxonomyId": "taxes_surcharges",
-          "name": "Taxes & Surcharges",
-          "nameZh": "税金及附加",
-          "memberKey": "taxessurcharges",
-          "valueBn": 22.521,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000209/nvda-20250727.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000209/nvda-20250727.htm"
-          }
-        }
-      ],
       "fieldSources": {
         "revenueBn": {
           "adapterId": "official_financials",
@@ -10350,14 +9619,6 @@
           "score": 118.0,
           "sourceUrl": null
         },
-        "opexBreakdown": [
-          {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "itemCount": 6
-          }
-        ],
         "statementMeta": {
           "adapterId": "generic_filing_tables",
           "label": "Generic official filing table parser",
@@ -10372,25 +9633,26 @@
         }
       },
       "extractionDiagnostics": {
-        "qualityScore": 93,
+        "qualityScore": 80,
         "availableRequiredFieldCount": 3,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 14,
+        "sourceFieldCount": 13,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "explicit",
+        "opexBreakdownMode": "none",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
-        "opexBreakdownCoveragePct": 100.0,
+        "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": 0,
+        "opexBreakdownResidualBn": null,
         "statementSource": "generic-official-filing-table",
         "statementValueMode": "direct",
         "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
-          "cost-breakdown-coverage-low"
+          "cost-breakdown-coverage-low",
+          "opex-breakdown-coverage-low"
         ]
       }
     },
@@ -10605,122 +9867,6 @@
         "qualityFlags": [],
         "adapterId": "generic_filing_tables"
       },
-      "opexBreakdown": [
-        {
-          "taxonomyId": "finance_expense",
-          "name": "Finance Expense",
-          "nameZh": "财务费用",
-          "memberKey": "financeexpense",
-          "valueBn": 21.848,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/nvda-20251026.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/nvda-20251026.htm"
-          }
-        },
-        {
-          "taxonomyId": "fulfillment",
-          "name": "Fulfillment",
-          "nameZh": "履约",
-          "memberKey": "fulfillment",
-          "valueBn": 21.848,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/nvda-20251026.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/nvda-20251026.htm"
-          }
-        },
-        {
-          "taxonomyId": "general_administrative",
-          "name": "G&A",
-          "nameZh": "管理费用",
-          "memberKey": "ga",
-          "valueBn": 21.848,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/nvda-20251026.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/nvda-20251026.htm"
-          }
-        },
-        {
-          "taxonomyId": "rnd",
-          "name": "R&D",
-          "nameZh": "研发",
-          "memberKey": "rd",
-          "valueBn": 21.848,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/nvda-20251026.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/nvda-20251026.htm"
-          }
-        },
-        {
-          "taxonomyId": "sales_marketing",
-          "name": "Sales & Marketing",
-          "nameZh": "销售与营销",
-          "memberKey": "salesmarketing",
-          "valueBn": 21.848,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/nvda-20251026.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/nvda-20251026.htm"
-          }
-        },
-        {
-          "taxonomyId": "taxes_surcharges",
-          "name": "Taxes & Surcharges",
-          "nameZh": "税金及附加",
-          "memberKey": "taxessurcharges",
-          "valueBn": 21.848,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/nvda-20251026.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/nvda-20251026.htm"
-          }
-        }
-      ],
       "fieldSources": {
         "revenueBn": {
           "adapterId": "official_financials",
@@ -10788,14 +9934,6 @@
           "score": 118.0,
           "sourceUrl": null
         },
-        "opexBreakdown": [
-          {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "itemCount": 6
-          }
-        ],
         "statementMeta": {
           "adapterId": "generic_filing_tables",
           "label": "Generic official filing table parser",
@@ -10810,25 +9948,26 @@
         }
       },
       "extractionDiagnostics": {
-        "qualityScore": 93,
+        "qualityScore": 80,
         "availableRequiredFieldCount": 3,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 14,
+        "sourceFieldCount": 13,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "explicit",
+        "opexBreakdownMode": "none",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
-        "opexBreakdownCoveragePct": 100.0,
+        "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": 0,
+        "opexBreakdownResidualBn": null,
         "statementSource": "generic-official-filing-table",
         "statementValueMode": "direct",
         "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
-          "cost-breakdown-coverage-low"
+          "cost-breakdown-coverage-low",
+          "opex-breakdown-coverage-low"
         ]
       }
     },
@@ -11043,122 +10182,6 @@
         "qualityFlags": [],
         "adapterId": "generic_filing_tables"
       },
-      "opexBreakdown": [
-        {
-          "taxonomyId": "finance_expense",
-          "name": "Finance Expense",
-          "nameZh": "财务费用",
-          "memberKey": "financeexpense",
-          "valueBn": 252.026,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm"
-          }
-        },
-        {
-          "taxonomyId": "fulfillment",
-          "name": "Fulfillment",
-          "nameZh": "履约",
-          "memberKey": "fulfillment",
-          "valueBn": 252.026,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm"
-          }
-        },
-        {
-          "taxonomyId": "general_administrative",
-          "name": "G&A",
-          "nameZh": "管理费用",
-          "memberKey": "ga",
-          "valueBn": 252.026,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm"
-          }
-        },
-        {
-          "taxonomyId": "rnd",
-          "name": "R&D",
-          "nameZh": "研发",
-          "memberKey": "rd",
-          "valueBn": 252.026,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm"
-          }
-        },
-        {
-          "taxonomyId": "sales_marketing",
-          "name": "Sales & Marketing",
-          "nameZh": "销售与营销",
-          "memberKey": "salesmarketing",
-          "valueBn": 252.026,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm"
-          }
-        },
-        {
-          "taxonomyId": "taxes_surcharges",
-          "name": "Taxes & Surcharges",
-          "nameZh": "税金及附加",
-          "memberKey": "taxessurcharges",
-          "valueBn": 252.026,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm"
-          }
-        }
-      ],
       "fieldSources": {
         "revenueBn": {
           "adapterId": "official_financials",
@@ -11226,14 +10249,6 @@
           "score": 118.0,
           "sourceUrl": null
         },
-        "opexBreakdown": [
-          {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "itemCount": 6
-          }
-        ],
         "statementMeta": {
           "adapterId": "generic_filing_tables",
           "label": "Generic official filing table parser",
@@ -11248,25 +10263,26 @@
         }
       },
       "extractionDiagnostics": {
-        "qualityScore": 93,
+        "qualityScore": 80,
         "availableRequiredFieldCount": 3,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 14,
+        "sourceFieldCount": 13,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "explicit",
+        "opexBreakdownMode": "none",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
-        "opexBreakdownCoveragePct": 100.0,
+        "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": 0,
+        "opexBreakdownResidualBn": null,
         "statementSource": "generic-official-filing-table",
         "statementValueMode": "direct",
         "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
-          "cost-breakdown-coverage-low"
+          "cost-breakdown-coverage-low",
+          "opex-breakdown-coverage-low"
         ]
       }
     }
@@ -14675,29 +13691,20 @@
     "validation": {
       "version": "parser-validation-v1",
       "status": "high",
-      "overallConfidenceScore": 0.86,
+      "overallConfidenceScore": 1.0,
       "financialConfidenceScore": 1.0,
-      "structuralConfidenceScore": 0.6,
+      "structuralConfidenceScore": 1.0,
       "revenueSegmentChecks": 33,
       "revenueSegmentMismatchCount": 0,
       "revenueSegmentSkippedChecks": 0,
       "detailGroupChecks": 0,
       "detailGroupMismatchCount": 0,
       "detailGroupSkippedChecks": 0,
-      "opexChecks": 10,
+      "opexChecks": 2,
       "opexSkippedChecks": 0,
-      "opexOverflowMismatchCount": 8,
-      "warningCount": 8,
-      "warnings": [
-        "2023Q1: opex breakdown sums to 1752.138Bn vs operating expenses 2.577Bn.",
-        "2024Q1: opex breakdown sums to 1692.144Bn vs operating expenses 3.176Bn.",
-        "2024Q2: opex breakdown sums to 7.5Bn vs operating expenses 3.497Bn.",
-        "2025Q1: opex breakdown sums to 1572.15Bn vs operating expenses 4.689Bn.",
-        "2025Q2: opex breakdown sums to 22.5Bn vs operating expenses 5.03Bn.",
-        "2025Q3: opex breakdown sums to 135.126Bn vs operating expenses 5.413Bn.",
-        "2025Q4: opex breakdown sums to 131.088Bn vs operating expenses 5.839Bn.",
-        "2026Q1: opex breakdown sums to 1512.156Bn vs operating expenses 6.794Bn."
-      ]
+      "opexOverflowMismatchCount": 0,
+      "warningCount": 0,
+      "warnings": []
     }
   },
   "unifiedExtraction": {
@@ -16450,14 +15457,6 @@
           "score": 118.0,
           "sourceUrl": null
         },
-        "opexBreakdown": [
-          {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "itemCount": 6
-          }
-        ],
         "statementMeta": {
           "adapterId": "generic_filing_tables",
           "label": "Generic official filing table parser",
@@ -16778,14 +15777,6 @@
           "score": 118.0,
           "sourceUrl": null
         },
-        "opexBreakdown": [
-          {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "itemCount": 6
-          }
-        ],
         "statementMeta": {
           "adapterId": "generic_filing_tables",
           "label": "Generic official filing table parser",
@@ -16866,14 +15857,6 @@
           "score": 118.0,
           "sourceUrl": null
         },
-        "opexBreakdown": [
-          {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "itemCount": 6
-          }
-        ],
         "statementMeta": {
           "adapterId": "generic_filing_tables",
           "label": "Generic official filing table parser",
@@ -17130,14 +16113,6 @@
           "score": 118.0,
           "sourceUrl": null
         },
-        "opexBreakdown": [
-          {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "itemCount": 6
-          }
-        ],
         "statementMeta": {
           "adapterId": "generic_filing_tables",
           "label": "Generic official filing table parser",
@@ -17218,14 +16193,6 @@
           "score": 118.0,
           "sourceUrl": null
         },
-        "opexBreakdown": [
-          {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "itemCount": 6
-          }
-        ],
         "statementMeta": {
           "adapterId": "generic_filing_tables",
           "label": "Generic official filing table parser",
@@ -17306,14 +16273,6 @@
           "score": 118.0,
           "sourceUrl": null
         },
-        "opexBreakdown": [
-          {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "itemCount": 6
-          }
-        ],
         "statementMeta": {
           "adapterId": "generic_filing_tables",
           "label": "Generic official filing table parser",
@@ -17394,14 +16353,6 @@
           "score": 118.0,
           "sourceUrl": null
         },
-        "opexBreakdown": [
-          {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "itemCount": 6
-          }
-        ],
         "statementMeta": {
           "adapterId": "generic_filing_tables",
           "label": "Generic official filing table parser",
@@ -17482,14 +16433,6 @@
           "score": 118.0,
           "sourceUrl": null
         },
-        "opexBreakdown": [
-          {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "itemCount": 6
-          }
-        ],
         "statementMeta": {
           "adapterId": "generic_filing_tables",
           "label": "Generic official filing table parser",
@@ -17966,25 +16909,26 @@
         ]
       },
       "2023Q1": {
-        "qualityScore": 93,
+        "qualityScore": 80,
         "availableRequiredFieldCount": 3,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 14,
+        "sourceFieldCount": 13,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "explicit",
+        "opexBreakdownMode": "none",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
-        "opexBreakdownCoveragePct": 100.0,
+        "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": 0,
+        "opexBreakdownResidualBn": null,
         "statementSource": "generic-official-filing-table",
         "statementValueMode": "direct",
         "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
-          "cost-breakdown-coverage-low"
+          "cost-breakdown-coverage-low",
+          "opex-breakdown-coverage-low"
         ]
       },
       "2023Q2": {
@@ -18057,47 +17001,49 @@
         ]
       },
       "2024Q1": {
-        "qualityScore": 93,
+        "qualityScore": 80,
         "availableRequiredFieldCount": 3,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 14,
+        "sourceFieldCount": 13,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "explicit",
+        "opexBreakdownMode": "none",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
-        "opexBreakdownCoveragePct": 100.0,
+        "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": 0,
+        "opexBreakdownResidualBn": null,
         "statementSource": "generic-official-filing-table",
         "statementValueMode": "direct",
         "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
-          "cost-breakdown-coverage-low"
+          "cost-breakdown-coverage-low",
+          "opex-breakdown-coverage-low"
         ]
       },
       "2024Q2": {
-        "qualityScore": 93,
+        "qualityScore": 80,
         "availableRequiredFieldCount": 3,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 14,
+        "sourceFieldCount": 13,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "explicit",
+        "opexBreakdownMode": "none",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
-        "opexBreakdownCoveragePct": 100.0,
+        "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": 0,
+        "opexBreakdownResidualBn": null,
         "statementSource": "generic-official-filing-table",
         "statementValueMode": "direct",
         "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
-          "cost-breakdown-coverage-low"
+          "cost-breakdown-coverage-low",
+          "opex-breakdown-coverage-low"
         ]
       },
       "2024Q3": {
@@ -18145,113 +17091,118 @@
         ]
       },
       "2025Q1": {
-        "qualityScore": 93,
+        "qualityScore": 80,
         "availableRequiredFieldCount": 3,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 14,
+        "sourceFieldCount": 13,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "explicit",
+        "opexBreakdownMode": "none",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
-        "opexBreakdownCoveragePct": 100.0,
+        "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": 0,
+        "opexBreakdownResidualBn": null,
         "statementSource": "generic-official-filing-table",
         "statementValueMode": "direct",
         "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
-          "cost-breakdown-coverage-low"
+          "cost-breakdown-coverage-low",
+          "opex-breakdown-coverage-low"
         ]
       },
       "2025Q2": {
-        "qualityScore": 93,
+        "qualityScore": 80,
         "availableRequiredFieldCount": 3,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 14,
+        "sourceFieldCount": 13,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "explicit",
+        "opexBreakdownMode": "none",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
-        "opexBreakdownCoveragePct": 100.0,
+        "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": 0,
+        "opexBreakdownResidualBn": null,
         "statementSource": "generic-official-filing-table",
         "statementValueMode": "direct",
         "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
-          "cost-breakdown-coverage-low"
+          "cost-breakdown-coverage-low",
+          "opex-breakdown-coverage-low"
         ]
       },
       "2025Q3": {
-        "qualityScore": 93,
+        "qualityScore": 80,
         "availableRequiredFieldCount": 3,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 14,
+        "sourceFieldCount": 13,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "explicit",
+        "opexBreakdownMode": "none",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
-        "opexBreakdownCoveragePct": 100.0,
+        "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": 0,
+        "opexBreakdownResidualBn": null,
         "statementSource": "generic-official-filing-table",
         "statementValueMode": "direct",
         "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
-          "cost-breakdown-coverage-low"
+          "cost-breakdown-coverage-low",
+          "opex-breakdown-coverage-low"
         ]
       },
       "2025Q4": {
-        "qualityScore": 93,
+        "qualityScore": 80,
         "availableRequiredFieldCount": 3,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 14,
+        "sourceFieldCount": 13,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "explicit",
+        "opexBreakdownMode": "none",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
-        "opexBreakdownCoveragePct": 100.0,
+        "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": 0,
+        "opexBreakdownResidualBn": null,
         "statementSource": "generic-official-filing-table",
         "statementValueMode": "direct",
         "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
-          "cost-breakdown-coverage-low"
+          "cost-breakdown-coverage-low",
+          "opex-breakdown-coverage-low"
         ]
       },
       "2026Q1": {
-        "qualityScore": 93,
+        "qualityScore": 80,
         "availableRequiredFieldCount": 3,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 14,
+        "sourceFieldCount": 13,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "explicit",
+        "opexBreakdownMode": "none",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
-        "opexBreakdownCoveragePct": 100.0,
+        "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": 0,
+        "opexBreakdownResidualBn": null,
         "statementSource": "generic-official-filing-table",
         "statementValueMode": "direct",
         "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
-          "cost-breakdown-coverage-low"
+          "cost-breakdown-coverage-low",
+          "opex-breakdown-coverage-low"
         ]
       }
     }
@@ -18380,21 +17331,21 @@
     "hasPixelReplica": true,
     "officialFinancialQuarterCount": 33,
     "officialSegmentQuarterCount": 33,
-    "officialExpenseQuarterCount": 10,
+    "officialExpenseQuarterCount": 2,
     "classification": {
       "status": "ok",
       "latestQuarter": "2026Q1",
       "latestQuarterHasRevenueClassification": true,
-      "latestQuarterHasExpenseClassification": true,
+      "latestQuarterHasExpenseClassification": false,
       "latestRevenueClassificationQuarter": "2026Q1",
-      "latestExpenseClassificationQuarter": "2026Q1",
+      "latestExpenseClassificationQuarter": "2024Q4",
       "latestStructureHistoryQuarter": "2026Q1",
       "revenueClassificationQuarterCount": 33,
-      "expenseClassificationQuarterCount": 10,
+      "expenseClassificationQuarterCount": 2,
       "revenueClassificationCoverageRatio": 1.0,
-      "expenseClassificationCoverageRatio": 0.303,
+      "expenseClassificationCoverageRatio": 0.0606,
       "latestRevenueClassificationLagQuarters": 0,
-      "latestExpenseClassificationLagQuarters": 0,
+      "latestExpenseClassificationLagQuarters": 5,
       "warnings": [],
       "blockers": [],
       "policy": {}
@@ -18433,29 +17384,20 @@
       "validation": {
         "version": "parser-validation-v1",
         "status": "high",
-        "overallConfidenceScore": 0.86,
+        "overallConfidenceScore": 1.0,
         "financialConfidenceScore": 1.0,
-        "structuralConfidenceScore": 0.6,
+        "structuralConfidenceScore": 1.0,
         "revenueSegmentChecks": 33,
         "revenueSegmentMismatchCount": 0,
         "revenueSegmentSkippedChecks": 0,
         "detailGroupChecks": 0,
         "detailGroupMismatchCount": 0,
         "detailGroupSkippedChecks": 0,
-        "opexChecks": 10,
+        "opexChecks": 2,
         "opexSkippedChecks": 0,
-        "opexOverflowMismatchCount": 8,
-        "warningCount": 8,
-        "warnings": [
-          "2023Q1: opex breakdown sums to 1752.138Bn vs operating expenses 2.577Bn.",
-          "2024Q1: opex breakdown sums to 1692.144Bn vs operating expenses 3.176Bn.",
-          "2024Q2: opex breakdown sums to 7.5Bn vs operating expenses 3.497Bn.",
-          "2025Q1: opex breakdown sums to 1572.15Bn vs operating expenses 4.689Bn.",
-          "2025Q2: opex breakdown sums to 22.5Bn vs operating expenses 5.03Bn.",
-          "2025Q3: opex breakdown sums to 135.126Bn vs operating expenses 5.413Bn.",
-          "2025Q4: opex breakdown sums to 131.088Bn vs operating expenses 5.839Bn.",
-          "2026Q1: opex breakdown sums to 1512.156Bn vs operating expenses 6.794Bn."
-        ]
+        "opexOverflowMismatchCount": 0,
+        "warningCount": 0,
+        "warnings": []
       }
     }
   }

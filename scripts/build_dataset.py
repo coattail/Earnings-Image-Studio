@@ -110,6 +110,9 @@ BAR_SEGMENT_CANONICAL_BY_COMPANY: dict[str, dict[str, str]] = {
         "foodsundries": "foodssundries",
         "freshfood": "freshfoods",
     },
+    "amazon": {
+        "advertising": "advertisingservices",
+    },
 }
 
 MICRON_LEGACY_SEGMENT_KEYS = {"cnbu", "mbu", "sbu", "ebu", "allothersegments"}
@@ -545,6 +548,176 @@ def _sum_row_values(rows: list[dict[str, Any]]) -> float:
             continue
         total += abs(value)
     return round(total, 3)
+
+
+RESIDUAL_INFERENCE_ALLOWED_MISSING_KEYS = {
+    "auto",
+    "allothersegments",
+    "othersegments",
+}
+
+
+def infer_missing_revenue_segments_from_residuals(company_id: str, financials: dict[str, Any]) -> None:
+    if not isinstance(financials, dict) or not financials:
+        return
+
+    ordered_quarters = sorted(financials.keys(), key=parse_period)
+    snapshots: list[dict[str, Any]] = []
+
+    for quarter in ordered_quarters:
+        entry = financials.get(quarter)
+        if not isinstance(entry, dict):
+            continue
+        revenue_bn = _safe_float(entry.get("revenueBn"))
+        if revenue_bn is None or revenue_bn <= 0:
+            continue
+        rows = entry.get("officialRevenueSegments")
+        if not isinstance(rows, list) or len(rows) < 2:
+            continue
+        normalized_rows: list[dict[str, Any]] = []
+        value_by_key: dict[str, float] = {}
+        row_by_key: dict[str, dict[str, Any]] = {}
+        for raw_row in rows:
+            if not isinstance(raw_row, dict):
+                continue
+            key = canonical_revenue_segment_member_key(company_id, raw_row.get("memberKey"), raw_row.get("name"))
+            value_bn = _safe_float(raw_row.get("valueBn"))
+            if not key or value_bn is None or value_bn <= 0:
+                continue
+            row = dict(raw_row)
+            row["memberKey"] = key
+            normalized_rows.append(row)
+            value_by_key[key] = max(value_by_key.get(key, 0.0), value_bn)
+            row_by_key[key] = row
+        if len(value_by_key) < 2:
+            continue
+        segment_sum = round(sum(value_by_key.values()), 3)
+        if segment_sum <= 0:
+            continue
+        snapshots.append(
+            {
+                "quarter": quarter,
+                "entry": entry,
+                "revenueBn": float(revenue_bn),
+                "segmentSumBn": float(segment_sum),
+                "coverageRatio": float(segment_sum / revenue_bn),
+                "keys": set(value_by_key.keys()),
+                "valueByKey": value_by_key,
+                "rowByKey": row_by_key,
+            }
+        )
+
+    if len(snapshots) < 3:
+        return
+
+    template_key_support_count: dict[str, int] = {}
+    for snapshot in snapshots:
+        template_coverage = float(snapshot["coverageRatio"])
+        if template_coverage < 0.82 or template_coverage > 1.22:
+            continue
+        for key in snapshot["keys"]:
+            template_key_support_count[key] = template_key_support_count.get(key, 0) + 1
+
+    for snapshot in snapshots:
+        coverage = float(snapshot["coverageRatio"])
+        if coverage >= 0.72:
+            continue
+        current_keys: set[str] = snapshot["keys"]
+        if len(current_keys) < 2:
+            continue
+        revenue_bn = float(snapshot["revenueBn"])
+        segment_sum_bn = float(snapshot["segmentSumBn"])
+        residual_bn = round(revenue_bn - segment_sum_bn, 3)
+        if residual_bn <= max(0.2, revenue_bn * 0.1):
+            continue
+        residual_share = residual_bn / revenue_bn if revenue_bn > 0 else 0
+        if residual_share < 0.25 or residual_share > 0.92:
+            continue
+
+        best_candidate: dict[str, Any] | None = None
+        for template in snapshots:
+            if template is snapshot:
+                continue
+            template_coverage = float(template["coverageRatio"])
+            if template_coverage < 0.82 or template_coverage > 1.22:
+                continue
+            template_keys: set[str] = template["keys"]
+            if not current_keys.issubset(template_keys):
+                continue
+            missing_keys = template_keys - current_keys
+            if len(missing_keys) != 1:
+                continue
+            missing_key = next(iter(missing_keys))
+            if missing_key not in RESIDUAL_INFERENCE_ALLOWED_MISSING_KEYS:
+                continue
+            if template_key_support_count.get(missing_key, 0) < 2:
+                continue
+            missing_value_bn = float(template["valueByKey"].get(missing_key) or 0)
+            if missing_value_bn <= 0:
+                continue
+            template_sum_bn = float(template["segmentSumBn"])
+            if template_sum_bn <= 0:
+                continue
+            missing_template_share = missing_value_bn / template_sum_bn
+            if missing_template_share < 0.12:
+                continue
+            residual_to_template_ratio = residual_share / max(missing_template_share, 1e-6)
+            if residual_to_template_ratio < 0.45 or residual_to_template_ratio > 2.4:
+                continue
+            distance = quarter_distance(str(snapshot["quarter"]), str(template["quarter"]))
+            distance_score = float(distance if distance is not None else 99)
+            score = distance_score * 10 + abs(1 - residual_to_template_ratio) * 6 + abs(template_coverage - 1) * 5
+            if best_candidate is None or score < float(best_candidate["score"]):
+                best_candidate = {
+                    "score": score,
+                    "missingKey": missing_key,
+                    "templateQuarter": template["quarter"],
+                    "templateRow": template["rowByKey"].get(missing_key),
+                }
+
+        if best_candidate is None:
+            continue
+
+        template_row = best_candidate.get("templateRow")
+        if not isinstance(template_row, dict):
+            continue
+        missing_key = str(best_candidate.get("missingKey") or "")
+        if not missing_key:
+            continue
+        entry = snapshot["entry"]
+        current_rows = entry.get("officialRevenueSegments")
+        if not isinstance(current_rows, list):
+            continue
+        if any(canonical_revenue_segment_member_key(company_id, row.get("memberKey"), row.get("name")) == missing_key for row in current_rows if isinstance(row, dict)):
+            continue
+
+        inferred_row = {
+            "name": template_row.get("name"),
+            "nameZh": template_row.get("nameZh"),
+            "memberKey": missing_key,
+            "valueBn": round(residual_bn, 3),
+            "yoyPct": None,
+            "qoqPct": None,
+            "mixPct": round(residual_share * 100, 1),
+            "mixYoyDeltaPp": None,
+            "sourceUrl": template_row.get("sourceUrl"),
+            "sourceForm": template_row.get("sourceForm"),
+            "filingDate": template_row.get("filingDate") or entry.get("statementFilingDate"),
+            "supportLines": template_row.get("supportLines"),
+            "supportLinesZh": template_row.get("supportLinesZh"),
+            "metricMode": "flow",
+            "syntheticResidual": True,
+            "inferredFromTemplateQuarter": best_candidate.get("templateQuarter"),
+            "validationEligible": False,
+            "validationNotes": ["inferred-missing-segment-from-residual"],
+        }
+        entry["officialRevenueSegments"] = dedupe_revenue_segment_rows(company_id, [*current_rows, inferred_row])
+        quality_flags = entry.get("qualityFlags")
+        if not isinstance(quality_flags, list):
+            quality_flags = []
+        if "inferred-missing-segment-from-residual" not in quality_flags:
+            quality_flags.append("inferred-missing-segment-from-residual")
+        entry["qualityFlags"] = quality_flags
 
 
 def _build_parser_validation_summary(payload: dict[str, Any]) -> dict[str, Any]:
@@ -1838,6 +2011,13 @@ def apply_revenue_structure_history(
             entry["displayScaleFactor"] = round(float(payload["displayRevenueBn"]) / float(entry["revenueBn"]), 6)
 
     normalize_q4_annualized_outliers(financials)
+    for quarter_key, entry in financials.items():
+        if not isinstance(entry, dict):
+            continue
+        rows = entry.get("officialRevenueSegments")
+        if isinstance(rows, list) and rows:
+            entry["officialRevenueSegments"] = dedupe_revenue_segment_rows(company["id"], rows)
+    infer_missing_revenue_segments_from_residuals(company["id"], financials)
     for quarter_key, entry in financials.items():
         if not isinstance(entry, dict):
             continue

@@ -8851,117 +8851,41 @@
       },
       "opexBreakdown": [
         {
-          "taxonomyId": "finance_expense",
-          "name": "Finance Expense",
-          "nameZh": "财务费用",
-          "memberKey": "financeexpense",
-          "valueBn": 32.024,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000114036124024352/ef20028273_8k.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000114036124024352/ef20028273_8k.htm"
-          }
-        },
-        {
-          "taxonomyId": "fulfillment",
-          "name": "Fulfillment",
-          "nameZh": "履约",
-          "memberKey": "fulfillment",
-          "valueBn": 32.024,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000114036124024352/ef20028273_8k.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000114036124024352/ef20028273_8k.htm"
-          }
-        },
-        {
-          "taxonomyId": "general_administrative",
-          "name": "G&A",
-          "nameZh": "管理费用",
-          "memberKey": "ga",
-          "valueBn": 32.024,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000114036124024352/ef20028273_8k.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000114036124024352/ef20028273_8k.htm"
-          }
-        },
-        {
           "taxonomyId": "rnd",
           "name": "R&D",
           "nameZh": "研发",
-          "memberKey": "rd",
-          "valueBn": 32.024,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000114036124024352/ef20028273_8k.htm",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 8.006,
+          "sourceUrl": "https://s2.q4cdn.com/470004039/files/doc_earnings/2024/q3/filing/_10-Q-Q3-2024-As-Filed.pdf",
           "sourceForm": null,
           "filingDate": null,
           "metricMode": null,
           "supportLines": null,
           "supportLinesZh": null,
           "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000114036124024352/ef20028273_8k.htm"
+            "adapterId": "generic_ir_pdf",
+            "label": "Generic IR PDF parser",
+            "score": 96.01,
+            "sourceUrl": "https://s2.q4cdn.com/470004039/files/doc_earnings/2024/q3/filing/_10-Q-Q3-2024-As-Filed.pdf"
           }
         },
         {
-          "taxonomyId": "sales_marketing",
-          "name": "Sales & Marketing",
-          "nameZh": "销售与营销",
-          "memberKey": "salesmarketing",
-          "valueBn": 32.024,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000114036124024352/ef20028273_8k.htm",
+          "taxonomyId": "sellinggeneralandadministrative",
+          "name": "Selling, general and administrative",
+          "nameZh": "Selling, general and administrative",
+          "memberKey": "sellinggeneralandadministrative",
+          "valueBn": 6.32,
+          "sourceUrl": "https://s2.q4cdn.com/470004039/files/doc_earnings/2024/q3/filing/_10-Q-Q3-2024-As-Filed.pdf",
           "sourceForm": null,
           "filingDate": null,
           "metricMode": null,
           "supportLines": null,
           "supportLinesZh": null,
           "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000114036124024352/ef20028273_8k.htm"
-          }
-        },
-        {
-          "taxonomyId": "taxes_surcharges",
-          "name": "Taxes & Surcharges",
-          "nameZh": "税金及附加",
-          "memberKey": "taxessurcharges",
-          "valueBn": 32.024,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000114036124024352/ef20028273_8k.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000114036124024352/ef20028273_8k.htm"
+            "adapterId": "generic_ir_pdf",
+            "label": "Generic IR PDF parser",
+            "score": 96.01,
+            "sourceUrl": "https://s2.q4cdn.com/470004039/files/doc_earnings/2024/q3/filing/_10-Q-Q3-2024-As-Filed.pdf"
           }
         }
       ],
@@ -9040,12 +8964,6 @@
         },
         "opexBreakdown": [
           {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "itemCount": 6
-          },
-          {
             "adapterId": "generic_ir_pdf",
             "label": "Generic IR PDF parser",
             "score": 96.0,
@@ -9084,7 +9002,7 @@
         "opexBreakdownCoveragePct": 100.0,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": 0,
+        "opexBreakdownResidualBn": 0.0,
         "statementSource": "generic-official-filing-table",
         "statementValueMode": "direct",
         "statementSpanQuarters": 1,
@@ -9328,122 +9246,6 @@
         "qualityFlags": [],
         "adapterId": "generic_filing_tables"
       },
-      "opexBreakdown": [
-        {
-          "taxonomyId": "finance_expense",
-          "name": "Finance Expense",
-          "nameZh": "财务费用",
-          "memberKey": "financeexpense",
-          "valueBn": 282024302.023,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/R12.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/R12.htm"
-          }
-        },
-        {
-          "taxonomyId": "fulfillment",
-          "name": "Fulfillment",
-          "nameZh": "履约",
-          "memberKey": "fulfillment",
-          "valueBn": 282024302.023,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/R12.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/R12.htm"
-          }
-        },
-        {
-          "taxonomyId": "general_administrative",
-          "name": "G&A",
-          "nameZh": "管理费用",
-          "memberKey": "ga",
-          "valueBn": 282024302.023,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/R12.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/R12.htm"
-          }
-        },
-        {
-          "taxonomyId": "rnd",
-          "name": "R&D",
-          "nameZh": "研发",
-          "memberKey": "rd",
-          "valueBn": 282024302.023,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/R12.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/R12.htm"
-          }
-        },
-        {
-          "taxonomyId": "sales_marketing",
-          "name": "Sales & Marketing",
-          "nameZh": "销售与营销",
-          "memberKey": "salesmarketing",
-          "valueBn": 282024302.023,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/R12.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/R12.htm"
-          }
-        },
-        {
-          "taxonomyId": "taxes_surcharges",
-          "name": "Taxes & Surcharges",
-          "nameZh": "税金及附加",
-          "memberKey": "taxessurcharges",
-          "valueBn": 282024302.023,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/R12.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/R12.htm"
-          }
-        }
-      ],
       "fieldSources": {
         "revenueBn": {
           "adapterId": "official_financials",
@@ -9517,14 +9319,6 @@
           "score": 94.0,
           "sourceUrl": null
         },
-        "opexBreakdown": [
-          {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "itemCount": 6
-          }
-        ],
         "statementMeta": {
           "adapterId": "generic_filing_tables",
           "label": "Generic official filing table parser",
@@ -9545,24 +9339,26 @@
         }
       },
       "extractionDiagnostics": {
-        "qualityScore": 100,
+        "qualityScore": 93,
         "availableRequiredFieldCount": 3,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 16,
+        "sourceFieldCount": 15,
         "hasCostBreakdownProfile": true,
         "costBreakdownMode": "profile-assisted",
-        "opexBreakdownMode": "explicit",
+        "opexBreakdownMode": "none",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": null,
-        "opexBreakdownCoveragePct": 100.0,
+        "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": 0,
+        "opexBreakdownResidualBn": null,
         "statementSource": "generic-official-filing-table",
         "statementValueMode": "direct",
         "statementSpanQuarters": 1,
         "statementQualityFlags": [],
-        "issues": []
+        "issues": [
+          "opex-breakdown-coverage-low"
+        ]
       }
     },
     "2024Q4": {
@@ -10804,117 +10600,41 @@
       },
       "opexBreakdown": [
         {
-          "taxonomyId": "finance_expense",
-          "name": "Finance Expense",
-          "nameZh": "财务费用",
-          "memberKey": "financeexpense",
-          "valueBn": 12.025,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000055/aapl-20250501.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000055/aapl-20250501.htm"
-          }
-        },
-        {
-          "taxonomyId": "fulfillment",
-          "name": "Fulfillment",
-          "nameZh": "履约",
-          "memberKey": "fulfillment",
-          "valueBn": 12.025,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000055/aapl-20250501.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000055/aapl-20250501.htm"
-          }
-        },
-        {
-          "taxonomyId": "general_administrative",
-          "name": "G&A",
-          "nameZh": "管理费用",
-          "memberKey": "ga",
-          "valueBn": 12.025,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000055/aapl-20250501.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000055/aapl-20250501.htm"
-          }
-        },
-        {
           "taxonomyId": "rnd",
           "name": "R&D",
           "nameZh": "研发",
-          "memberKey": "rd",
-          "valueBn": 12.025,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000055/aapl-20250501.htm",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 8.866,
+          "sourceUrl": "https://s2.q4cdn.com/470004039/files/doc_earnings/2025/q3/filing/10Q-Q3-2025-as-filed.pdf",
           "sourceForm": null,
           "filingDate": null,
           "metricMode": null,
           "supportLines": null,
           "supportLinesZh": null,
           "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000055/aapl-20250501.htm"
+            "adapterId": "generic_ir_pdf",
+            "label": "Generic IR PDF parser",
+            "score": 96.01,
+            "sourceUrl": "https://s2.q4cdn.com/470004039/files/doc_earnings/2025/q3/filing/10Q-Q3-2025-as-filed.pdf"
           }
         },
         {
-          "taxonomyId": "sales_marketing",
-          "name": "Sales & Marketing",
-          "nameZh": "销售与营销",
-          "memberKey": "salesmarketing",
-          "valueBn": 12.025,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000055/aapl-20250501.htm",
+          "taxonomyId": "sellinggeneralandadministrative",
+          "name": "Selling, general and administrative",
+          "nameZh": "Selling, general and administrative",
+          "memberKey": "sellinggeneralandadministrative",
+          "valueBn": 6.65,
+          "sourceUrl": "https://s2.q4cdn.com/470004039/files/doc_earnings/2025/q3/filing/10Q-Q3-2025-as-filed.pdf",
           "sourceForm": null,
           "filingDate": null,
           "metricMode": null,
           "supportLines": null,
           "supportLinesZh": null,
           "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000055/aapl-20250501.htm"
-          }
-        },
-        {
-          "taxonomyId": "taxes_surcharges",
-          "name": "Taxes & Surcharges",
-          "nameZh": "税金及附加",
-          "memberKey": "taxessurcharges",
-          "valueBn": 12.025,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000055/aapl-20250501.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000055/aapl-20250501.htm"
+            "adapterId": "generic_ir_pdf",
+            "label": "Generic IR PDF parser",
+            "score": 96.01,
+            "sourceUrl": "https://s2.q4cdn.com/470004039/files/doc_earnings/2025/q3/filing/10Q-Q3-2025-as-filed.pdf"
           }
         }
       ],
@@ -10993,12 +10713,6 @@
         },
         "opexBreakdown": [
           {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "itemCount": 6
-          },
-          {
             "adapterId": "generic_ir_pdf",
             "label": "Generic IR PDF parser",
             "score": 96.0,
@@ -11037,7 +10751,7 @@
         "opexBreakdownCoveragePct": 100.0,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": 0,
+        "opexBreakdownResidualBn": 0.0,
         "statementSource": "generic-official-filing-table",
         "statementValueMode": "direct",
         "statementSpanQuarters": 1,
@@ -11281,122 +10995,6 @@
         "qualityFlags": [],
         "adapterId": "generic_filing_tables"
       },
-      "opexBreakdown": [
-        {
-          "taxonomyId": "finance_expense",
-          "name": "Finance Expense",
-          "nameZh": "财务费用",
-          "memberKey": "financeexpense",
-          "valueBn": 272025282.024,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/R12.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/R12.htm"
-          }
-        },
-        {
-          "taxonomyId": "fulfillment",
-          "name": "Fulfillment",
-          "nameZh": "履约",
-          "memberKey": "fulfillment",
-          "valueBn": 272025282.024,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/R12.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/R12.htm"
-          }
-        },
-        {
-          "taxonomyId": "general_administrative",
-          "name": "G&A",
-          "nameZh": "管理费用",
-          "memberKey": "ga",
-          "valueBn": 272025282.024,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/R12.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/R12.htm"
-          }
-        },
-        {
-          "taxonomyId": "rnd",
-          "name": "R&D",
-          "nameZh": "研发",
-          "memberKey": "rd",
-          "valueBn": 272025282.024,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/R12.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/R12.htm"
-          }
-        },
-        {
-          "taxonomyId": "sales_marketing",
-          "name": "Sales & Marketing",
-          "nameZh": "销售与营销",
-          "memberKey": "salesmarketing",
-          "valueBn": 272025282.024,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/R12.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/R12.htm"
-          }
-        },
-        {
-          "taxonomyId": "taxes_surcharges",
-          "name": "Taxes & Surcharges",
-          "nameZh": "税金及附加",
-          "memberKey": "taxessurcharges",
-          "valueBn": 272025282.024,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/R12.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/R12.htm"
-          }
-        }
-      ],
       "fieldSources": {
         "revenueBn": {
           "adapterId": "official_financials",
@@ -11470,14 +11068,6 @@
           "score": 94.0,
           "sourceUrl": null
         },
-        "opexBreakdown": [
-          {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "itemCount": 6
-          }
-        ],
         "statementMeta": {
           "adapterId": "generic_filing_tables",
           "label": "Generic official filing table parser",
@@ -11498,24 +11088,26 @@
         }
       },
       "extractionDiagnostics": {
-        "qualityScore": 100,
+        "qualityScore": 93,
         "availableRequiredFieldCount": 3,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 16,
+        "sourceFieldCount": 15,
         "hasCostBreakdownProfile": true,
         "costBreakdownMode": "profile-assisted",
-        "opexBreakdownMode": "explicit",
+        "opexBreakdownMode": "none",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": null,
-        "opexBreakdownCoveragePct": 100.0,
+        "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": 0,
+        "opexBreakdownResidualBn": null,
         "statementSource": "generic-official-filing-table",
         "statementValueMode": "direct",
         "statementSpanQuarters": 1,
         "statementQualityFlags": [],
-        "issues": []
+        "issues": [
+          "opex-breakdown-coverage-low"
+        ]
       }
     },
     "2025Q4": {
@@ -11756,79 +11348,22 @@
       },
       "opexBreakdown": [
         {
-          "taxonomyId": "finance_expense",
-          "name": "Finance Expense",
-          "nameZh": "财务费用",
-          "memberKey": "financeexpense",
-          "valueBn": 52.025,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000114036125044561/ef20060722_8k.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000114036125044561/ef20060722_8k.htm"
-          }
-        },
-        {
-          "taxonomyId": "fulfillment",
-          "name": "Fulfillment",
-          "nameZh": "履约",
-          "memberKey": "fulfillment",
-          "valueBn": 52.025,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000114036125044561/ef20060722_8k.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000114036125044561/ef20060722_8k.htm"
-          }
-        },
-        {
-          "taxonomyId": "general_administrative",
-          "name": "G&A",
-          "nameZh": "管理费用",
-          "memberKey": "ga",
-          "valueBn": 52.025,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000114036125044561/ef20060722_8k.htm",
-          "sourceForm": null,
-          "filingDate": null,
-          "metricMode": null,
-          "supportLines": null,
-          "supportLinesZh": null,
-          "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000114036125044561/ef20060722_8k.htm"
-          }
-        },
-        {
           "taxonomyId": "rnd",
           "name": "R&D",
           "nameZh": "研发",
           "memberKey": "rd",
-          "valueBn": 52.025,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000114036125044561/ef20060722_8k.htm",
+          "valueBn": 10.887,
+          "sourceUrl": "https://s2.q4cdn.com/470004039/files/doc_earnings/2026/q1/filing/10Q-Q1-2026-as-filed.pdf",
           "sourceForm": null,
           "filingDate": null,
           "metricMode": null,
           "supportLines": null,
           "supportLinesZh": null,
           "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000114036125044561/ef20060722_8k.htm"
+            "adapterId": "generic_ir_pdf",
+            "label": "Generic IR PDF parser",
+            "score": 96.27,
+            "sourceUrl": "https://s2.q4cdn.com/470004039/files/doc_earnings/2026/q1/filing/10Q-Q1-2026-as-filed.pdf"
           }
         },
         {
@@ -11836,37 +11371,49 @@
           "name": "Sales & Marketing",
           "nameZh": "销售与营销",
           "memberKey": "salesmarketing",
-          "valueBn": 52.025,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000114036125044561/ef20060722_8k.htm",
+          "valueBn": 2.727,
+          "sourceUrl": "https://s2.q4cdn.com/470004039/files/doc_earnings/2026/q1/filing/10Q-Q1-2026-as-filed.pdf",
           "sourceForm": null,
           "filingDate": null,
           "metricMode": null,
           "supportLines": null,
           "supportLinesZh": null,
           "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000114036125044561/ef20060722_8k.htm"
+            "adapterId": "generic_ir_pdf",
+            "label": "Generic IR PDF parser",
+            "score": 96.26,
+            "sourceUrl": "https://s2.q4cdn.com/470004039/files/doc_earnings/2026/q1/filing/10Q-Q1-2026-as-filed.pdf"
           }
         },
         {
-          "taxonomyId": "taxes_surcharges",
-          "name": "Taxes & Surcharges",
-          "nameZh": "税金及附加",
-          "memberKey": "taxessurcharges",
-          "valueBn": 52.025,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000114036125044561/ef20060722_8k.htm",
+          "taxonomyId": "general_administrative",
+          "name": "G&A",
+          "nameZh": "管理费用",
+          "memberKey": "ga",
+          "valueBn": 2.095,
+          "sourceUrl": "https://s2.q4cdn.com/470004039/files/doc_earnings/2026/q1/filing/10Q-Q1-2026-as-filed.pdf",
           "sourceForm": null,
           "filingDate": null,
           "metricMode": null,
           "supportLines": null,
           "supportLinesZh": null,
           "provenance": {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000114036125044561/ef20060722_8k.htm"
+            "adapterId": "generic_ir_pdf",
+            "label": "Generic IR PDF parser",
+            "score": 96.26,
+            "sourceUrl": "https://s2.q4cdn.com/470004039/files/doc_earnings/2026/q1/filing/10Q-Q1-2026-as-filed.pdf"
+          }
+        },
+        {
+          "taxonomyId": "other_opex",
+          "name": "Other opex",
+          "nameZh": "其他经营费用",
+          "memberKey": "otheropex",
+          "valueBn": 2.67,
+          "provenance": {
+            "adapterId": "derived_residual",
+            "label": "Residual after explicit categories",
+            "score": 30
           }
         }
       ],
@@ -11945,12 +11492,6 @@
         },
         "opexBreakdown": [
           {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "itemCount": 6
-          },
-          {
             "adapterId": "generic_ir_pdf",
             "label": "Generic IR PDF parser",
             "score": 96.26,
@@ -11989,7 +11530,7 @@
         "opexBreakdownCoveragePct": 100.0,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": 0,
+        "opexBreakdownResidualBn": 0.0,
         "statementSource": "generic-official-filing-table",
         "statementValueMode": "direct",
         "statementSpanQuarters": 1,
@@ -15052,26 +14593,20 @@
     "validation": {
       "version": "parser-validation-v1",
       "status": "high",
-      "overallConfidenceScore": 0.947,
+      "overallConfidenceScore": 1.0,
       "financialConfidenceScore": 1.0,
-      "structuralConfidenceScore": 0.8485,
+      "structuralConfidenceScore": 1.0,
       "revenueSegmentChecks": 31,
       "revenueSegmentMismatchCount": 0,
       "revenueSegmentSkippedChecks": 0,
       "detailGroupChecks": 31,
       "detailGroupMismatchCount": 0,
       "detailGroupSkippedChecks": 0,
-      "opexChecks": 11,
+      "opexChecks": 9,
       "opexSkippedChecks": 0,
-      "opexOverflowMismatchCount": 5,
-      "warningCount": 5,
-      "warnings": [
-        "2024Q2: opex breakdown sums to 192.144Bn vs operating expenses 14.326Bn.",
-        "2024Q3: opex breakdown sums to 1692145812.138Bn vs operating expenses 14.288Bn.",
-        "2025Q2: opex breakdown sums to 72.15Bn vs operating expenses 15.516Bn.",
-        "2025Q3: opex breakdown sums to 1632151692.144Bn vs operating expenses 15.914Bn.",
-        "2025Q4: opex breakdown sums to 312.15Bn vs operating expenses 18.379Bn."
-      ]
+      "opexOverflowMismatchCount": 0,
+      "warningCount": 0,
+      "warnings": []
     }
   },
   "unifiedExtraction": {
@@ -17474,12 +17009,6 @@
         },
         "opexBreakdown": [
           {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "itemCount": 6
-          },
-          {
             "adapterId": "generic_ir_pdf",
             "label": "Generic IR PDF parser",
             "score": 96.0,
@@ -17578,14 +17107,6 @@
           "score": 94.0,
           "sourceUrl": null
         },
-        "opexBreakdown": [
-          {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "itemCount": 6
-          }
-        ],
         "statementMeta": {
           "adapterId": "generic_filing_tables",
           "label": "Generic official filing table parser",
@@ -17892,12 +17413,6 @@
         },
         "opexBreakdown": [
           {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "itemCount": 6
-          },
-          {
             "adapterId": "generic_ir_pdf",
             "label": "Generic IR PDF parser",
             "score": 96.0,
@@ -17996,14 +17511,6 @@
           "score": 94.0,
           "sourceUrl": null
         },
-        "opexBreakdown": [
-          {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "itemCount": 6
-          }
-        ],
         "statementMeta": {
           "adapterId": "generic_filing_tables",
           "label": "Generic official filing table parser",
@@ -18098,12 +17605,6 @@
         },
         "opexBreakdown": [
           {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "itemCount": 6
-          },
-          {
             "adapterId": "generic_ir_pdf",
             "label": "Generic IR PDF parser",
             "score": 96.26,
@@ -18196,14 +17697,6 @@
           "score": 87.0,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000114036126000199/ef20060722_8k.htm"
         },
-        "opexBreakdown": [
-          {
-            "adapterId": "generic_filing_tables",
-            "label": "Generic official filing table parser",
-            "score": 112.0,
-            "itemCount": 6
-          }
-        ],
         "statementMeta": {
           "adapterId": "generic_filing_tables",
           "label": "Generic official filing table parser",
@@ -18746,7 +18239,7 @@
         "opexBreakdownCoveragePct": 100.0,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": 0,
+        "opexBreakdownResidualBn": 0.0,
         "statementSource": "generic-official-filing-table",
         "statementValueMode": "direct",
         "statementSpanQuarters": 1,
@@ -18754,24 +18247,26 @@
         "issues": []
       },
       "2024Q3": {
-        "qualityScore": 100,
+        "qualityScore": 93,
         "availableRequiredFieldCount": 3,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 16,
+        "sourceFieldCount": 15,
         "hasCostBreakdownProfile": true,
         "costBreakdownMode": "profile-assisted",
-        "opexBreakdownMode": "explicit",
+        "opexBreakdownMode": "none",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": null,
-        "opexBreakdownCoveragePct": 100.0,
+        "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": 0,
+        "opexBreakdownResidualBn": null,
         "statementSource": "generic-official-filing-table",
         "statementValueMode": "direct",
         "statementSpanQuarters": 1,
         "statementQualityFlags": [],
-        "issues": []
+        "issues": [
+          "opex-breakdown-coverage-low"
+        ]
       },
       "2024Q4": {
         "qualityScore": 100,
@@ -18826,7 +18321,7 @@
         "opexBreakdownCoveragePct": 100.0,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": 0,
+        "opexBreakdownResidualBn": 0.0,
         "statementSource": "generic-official-filing-table",
         "statementValueMode": "direct",
         "statementSpanQuarters": 1,
@@ -18834,24 +18329,26 @@
         "issues": []
       },
       "2025Q3": {
-        "qualityScore": 100,
+        "qualityScore": 93,
         "availableRequiredFieldCount": 3,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 16,
+        "sourceFieldCount": 15,
         "hasCostBreakdownProfile": true,
         "costBreakdownMode": "profile-assisted",
-        "opexBreakdownMode": "explicit",
+        "opexBreakdownMode": "none",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": null,
-        "opexBreakdownCoveragePct": 100.0,
+        "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": 0,
+        "opexBreakdownResidualBn": null,
         "statementSource": "generic-official-filing-table",
         "statementValueMode": "direct",
         "statementSpanQuarters": 1,
         "statementQualityFlags": [],
-        "issues": []
+        "issues": [
+          "opex-breakdown-coverage-low"
+        ]
       },
       "2025Q4": {
         "qualityScore": 100,
@@ -18866,7 +18363,7 @@
         "opexBreakdownCoveragePct": 100.0,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": 0,
+        "opexBreakdownResidualBn": 0.0,
         "statementSource": "generic-official-filing-table",
         "statementValueMode": "direct",
         "statementSpanQuarters": 1,
@@ -18874,26 +18371,27 @@
         "issues": []
       },
       "2026Q1": {
-        "qualityScore": 73,
+        "qualityScore": 60,
         "availableRequiredFieldCount": 3,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 13,
+        "sourceFieldCount": 12,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "explicit",
+        "opexBreakdownMode": "none",
         "revenueSegmentCoveragePct": 0,
         "costBreakdownCoveragePct": 0,
-        "opexBreakdownCoveragePct": 100.0,
+        "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": null,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": 0,
+        "opexBreakdownResidualBn": null,
         "statementSource": "generic-official-filing-table",
         "statementValueMode": "direct",
         "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
           "revenue-segment-coverage-low",
-          "cost-breakdown-coverage-low"
+          "cost-breakdown-coverage-low",
+          "opex-breakdown-coverage-low"
         ]
       }
     }
@@ -19058,7 +18556,7 @@
     "hasPixelReplica": true,
     "officialFinancialQuarterCount": 31,
     "officialSegmentQuarterCount": 31,
-    "officialExpenseQuarterCount": 12,
+    "officialExpenseQuarterCount": 10,
     "classification": {
       "status": "ok",
       "latestQuarter": "2025Q4",
@@ -19068,9 +18566,9 @@
       "latestExpenseClassificationQuarter": "2025Q4",
       "latestStructureHistoryQuarter": "2025Q4",
       "revenueClassificationQuarterCount": 31,
-      "expenseClassificationQuarterCount": 12,
+      "expenseClassificationQuarterCount": 10,
       "revenueClassificationCoverageRatio": 1.0,
-      "expenseClassificationCoverageRatio": 0.3871,
+      "expenseClassificationCoverageRatio": 0.3226,
       "latestRevenueClassificationLagQuarters": 0,
       "latestExpenseClassificationLagQuarters": 0,
       "warnings": [],
@@ -19111,26 +18609,20 @@
       "validation": {
         "version": "parser-validation-v1",
         "status": "high",
-        "overallConfidenceScore": 0.947,
+        "overallConfidenceScore": 1.0,
         "financialConfidenceScore": 1.0,
-        "structuralConfidenceScore": 0.8485,
+        "structuralConfidenceScore": 1.0,
         "revenueSegmentChecks": 31,
         "revenueSegmentMismatchCount": 0,
         "revenueSegmentSkippedChecks": 0,
         "detailGroupChecks": 31,
         "detailGroupMismatchCount": 0,
         "detailGroupSkippedChecks": 0,
-        "opexChecks": 11,
+        "opexChecks": 9,
         "opexSkippedChecks": 0,
-        "opexOverflowMismatchCount": 5,
-        "warningCount": 5,
-        "warnings": [
-          "2024Q2: opex breakdown sums to 192.144Bn vs operating expenses 14.326Bn.",
-          "2024Q3: opex breakdown sums to 1692145812.138Bn vs operating expenses 14.288Bn.",
-          "2025Q2: opex breakdown sums to 72.15Bn vs operating expenses 15.516Bn.",
-          "2025Q3: opex breakdown sums to 1632151692.144Bn vs operating expenses 15.914Bn.",
-          "2025Q4: opex breakdown sums to 312.15Bn vs operating expenses 18.379Bn."
-        ]
+        "opexOverflowMismatchCount": 0,
+        "warningCount": 0,
+        "warnings": []
       }
     }
   }
