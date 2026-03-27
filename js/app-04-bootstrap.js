@@ -270,19 +270,6 @@ function refineRenderedBarChartLogoPlacement(svg) {
   const initialLogoRect = barChartClientRect(logoWrapper, 0);
   const isWideWordmark = !!initialLogoRect && initialLogoRect.right - initialLogoRect.left > (initialLogoRect.bottom - initialLogoRect.top) * 1.65;
   const isMediumWideLogo = !!initialLogoRect && initialLogoRect.right - initialLogoRect.left > (initialLogoRect.bottom - initialLogoRect.top) * 1.35;
-  if (isWideWordmark) {
-    const leftHeaderRects = Array.from(svg.querySelectorAll("#chartContent text, #chartContent [data-bar-axis='true']"))
-      .filter((node) => !logoWrapper.contains(node))
-      .map((node) => barChartClientRect(node, String(node.tagName || "").toLowerCase() === "line" ? 6 : 4))
-      .filter(
-        (rect) =>
-          rect &&
-          rect.left < svgClientRect.left + (svgClientRect.right - svgClientRect.left) * 0.26 &&
-          rect.top < svgClientRect.top + (svgClientRect.bottom - svgClientRect.top) * 0.72
-      );
-    const leftHeaderRight = leftHeaderRects.reduce((maxRight, rect) => Math.max(maxRight, rect.right), clientZone.left);
-    clientZone.left = Math.max(clientZone.left, leftHeaderRight + 16);
-  }
   if (isMediumWideLogo) {
     clientZone.right = Math.min(clientZone.right, svgClientRect.left + (svgClientRect.right - svgClientRect.left) * 0.35);
     clientZone.bottom = Math.min(clientZone.bottom, svgClientRect.top + (svgClientRect.bottom - svgClientRect.top) * 0.33);
@@ -326,7 +313,7 @@ function refineRenderedBarChartLogoPlacement(svg) {
           collisionCount * 100000 +
           collisionArea * 100 +
           cornerDistancePenalty +
-          Math.max(xOffset, 0) * 100 +
+          Math.max(xOffset, 0) * (isWideWordmark ? 180 : 100) +
           Math.max(yOffset, 0) * 124 +
           Math.abs(Math.min(xOffset, 0)) * 28 +
           Math.abs(Math.min(yOffset, 0)) * 36 +
