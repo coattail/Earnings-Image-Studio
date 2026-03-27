@@ -76,10 +76,10 @@ function resolveBarChartLogoPlacement({
     {};
   const logoMetrics = corporateLogoLayoutMetrics(logoKey);
   const area = {
-    width: 250 * safeNumber(override.widthScale, 1),
-    height: 156 * safeNumber(override.heightScale, 1),
-    x: plotLeft + 12 + safeNumber(override.dx, 0),
-    y: chartTop + 8 + safeNumber(override.dy, 0),
+    width: 228 * safeNumber(override.widthScale, 1),
+    height: 148 * safeNumber(override.heightScale, 1),
+    x: plotLeft + 30 + safeNumber(override.dx, 0),
+    y: chartTop + 10 + safeNumber(override.dy, 0),
   };
   const baseScale =
     Math.min(area.width / Math.max(logoMetrics.visibleWidth, 1), area.height / Math.max(logoMetrics.visibleHeight, 1)) *
@@ -106,8 +106,8 @@ function resolveBarChartLogoPlacement({
         )
       : []
   );
-  const xOffsets = [0, 18, -18, 36, -36, 58, -58, 82, -82, 108];
-  const yOffsets = [0, 14, -18, 28, -36, 46, -58, 68, -82, -108, -136];
+  const xOffsets = [0, 12, 24, 40, 58, 78, 102, -12, -24, 126, -40, 154];
+  const yOffsets = [0, 10, 22, 38, 56, 78, 104, -10, -24, 132];
   const shrinkFactors = [1, 0.96, 0.92, 0.88, 0.84, 0.8, 0.76, 0.72];
   let bestPlacement = null;
 
@@ -118,8 +118,8 @@ function resolveBarChartLogoPlacement({
     const offsetX = logoMetrics.offsetX * scale * CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER;
     const offsetY = logoMetrics.offsetY * scale * CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER;
     const maxVisibleX = Math.max(minVisibleX, maxVisibleRight - visibleWidth);
-    const anchorVisibleX = clamp(area.x + (area.width - visibleWidth) / 2, minVisibleX, maxVisibleX);
-    const anchorVisibleY = Math.max(minVisibleY, area.y + (area.height - visibleHeight) / 2);
+    const anchorVisibleX = clamp(area.x, minVisibleX, maxVisibleX);
+    const anchorVisibleY = Math.max(minVisibleY, area.y);
     let localBest = null;
 
     yOffsets.forEach((yOffset) => {
@@ -139,11 +139,17 @@ function resolveBarChartLogoPlacement({
           collisionCount += 1;
           collisionArea += barChartRectIntersectionArea(visibleRect, obstacleRect, 10);
         });
+        const cornerDistancePenalty =
+          Math.max(visibleRect.left - area.x, 0) * 180 +
+          Math.max(visibleRect.top - area.y, 0) * 260;
         const penalty =
           collisionArea +
           collisionCount * 10000 +
-          Math.abs(xOffset) * 80 +
-          Math.abs(yOffset) * 96 +
+          cornerDistancePenalty +
+          Math.max(xOffset, 0) * 120 +
+          Math.max(yOffset, 0) * 150 +
+          Math.abs(Math.min(xOffset, 0)) * 36 +
+          Math.abs(Math.min(yOffset, 0)) * 52 +
           (1 - shrinkFactor) * 160000;
         if (!localBest || penalty < localBest.penalty) {
           localBest = {
@@ -278,12 +284,12 @@ function refineRenderedBarChartLogoPlacement(svg) {
     clientZone.left = Math.max(clientZone.left, leftHeaderRight + 16);
   }
   if (isMediumWideLogo) {
-    clientZone.right = Math.min(clientZone.right, svgClientRect.left + (svgClientRect.right - svgClientRect.left) * 0.43);
-    clientZone.bottom = Math.min(clientZone.bottom, svgClientRect.top + (svgClientRect.bottom - svgClientRect.top) * 0.37);
+    clientZone.right = Math.min(clientZone.right, svgClientRect.left + (svgClientRect.right - svgClientRect.left) * 0.35);
+    clientZone.bottom = Math.min(clientZone.bottom, svgClientRect.top + (svgClientRect.bottom - svgClientRect.top) * 0.33);
   }
   const obstacleRects = collectBarChartDomObstacleRects(svg, logoWrapper);
-  const xOffsets = [0, 18, -18, 36, -36, 58, -58, 82, -82, 108, -108, 136, -136, 166, -166, 198, -198, 232, -232, 268, -268, 308, -308, 352, -352, 400, -400];
-  const yOffsets = [0, -16, 16, -32, 32, -50, 50, -72, 72, -98, 98, -126, 126, -158, 158, -194, -232];
+  const xOffsets = [0, 12, 24, 40, 58, 78, 102, 128, -12, -24, -40, 160, -58, 196, -82, 236];
+  const yOffsets = [0, 10, 24, 42, 64, 90, 120, -10, -24, 154, -42, 192];
   const scaleFactors = [1, 0.97, 0.94, 0.91, 0.88, 0.85, 0.82, 0.79, 0.76, 0.73, 0.7];
   let bestPlacement = null;
 
@@ -312,12 +318,18 @@ function refineRenderedBarChartLogoPlacement(svg) {
           collisionCount += 1;
           collisionArea += barChartRectIntersectionArea(logoRect, obstacleRect, 2);
         });
+        const cornerDistancePenalty =
+          Math.max(logoRect.left - clientZone.left, 0) * 220 +
+          Math.max(logoRect.top - clientZone.top, 0) * 320;
         const penalty =
           overflowPenalty * 1000000 +
           collisionCount * 100000 +
           collisionArea * 100 +
-          Math.abs(xOffset) * 48 +
-          Math.abs(yOffset) * 32 +
+          cornerDistancePenalty +
+          Math.max(xOffset, 0) * 100 +
+          Math.max(yOffset, 0) * 124 +
+          Math.abs(Math.min(xOffset, 0)) * 28 +
+          Math.abs(Math.min(yOffset, 0)) * 36 +
           (1 - scaleFactor) * 18000;
         if (!localBest || penalty < localBest.penalty) {
           localBest = {
@@ -617,10 +629,10 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
   });
   const chartLogoKey = snapshot?.companyLogoKey || company?.id || "";
   const chartLogoZone = {
-    left: Math.max(20, plotLeft - 18),
+    left: Math.max(28, plotLeft + 14),
     top: Math.max(96, chartTop - 220),
-    right: Math.min(plotRight - 28, plotLeft + 760),
-    bottom: Math.min(baselineY - 26, chartTop + 244),
+    right: Math.min(plotRight - 32, plotLeft + 520),
+    bottom: Math.min(baselineY - 26, chartTop + 214),
   };
   const chartLogoPlacement = resolveBarChartLogoPlacement({
     logoKey: chartLogoKey,
