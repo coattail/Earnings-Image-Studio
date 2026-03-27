@@ -1006,42 +1006,15 @@ function snapshotCanvasSize(snapshot) {
 }
 
 function currentSnapshotLogoKeys() {
-  const snapshot = state.currentSnapshot;
-  if (!snapshot) return [];
-  const keys = new Set();
-  if (snapshot.companyLogoKey) keys.add(normalizeLogoKey(snapshot.companyLogoKey));
-  (snapshot.businessGroups || []).forEach((item) => {
-    if (item.lockupKey && !String(item.lockupKey).startsWith("region-")) {
-      keys.add(normalizeLogoKey(item.lockupKey));
-    }
-  });
-  return [...keys].filter(Boolean);
+  return [];
 }
 
 function queueLogoNormalization(logoKey) {
-  const normalizedKey = normalizeLogoKey(logoKey);
-  const asset = state.logoCatalog?.[normalizedKey];
-  if (!normalizedKey || !asset || state.normalizedLogoKeys[normalizedKey] || state.logoNormalizationJobs[normalizedKey]) return;
-  state.logoNormalizationJobs[normalizedKey] = normalizeBitmapLogoAsset(asset)
-    .then((normalizedAsset) => {
-      state.logoCatalog[normalizedKey] = normalizedAsset || asset;
-      state.normalizedLogoKeys[normalizedKey] = true;
-    })
-    .catch(() => {
-      state.normalizedLogoKeys[normalizedKey] = true;
-    })
-    .finally(() => {
-      delete state.logoNormalizationJobs[normalizedKey];
-      if (currentSnapshotLogoKeys().includes(normalizedKey)) {
-        requestAnimationFrame(() => {
-          if (state.currentSnapshot) renderCurrent();
-        });
-      }
-    });
+  return;
 }
 
 function warmVisibleLogoAssets() {
-  currentSnapshotLogoKeys().forEach((logoKey) => queueLogoNormalization(logoKey));
+  return;
 }
 
 function normalizeCompanyBrand(brand = null) {
@@ -2675,60 +2648,6 @@ function renderCorporateLogo(logoKey, x, y, options = {}) {
   const { scale = 1 } = options;
   const effectiveScale = scale * CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER;
   const normalizedKey = normalizeLogoKey(logoKey);
-  if (normalizedKey === "jpmorgan") {
-    return `
-      <g transform="translate(${x}, ${y}) scale(${effectiveScale})">
-        <text x="0" y="34" font-family="Aptos, Segoe UI, Arial, Helvetica, sans-serif" font-size="34" font-weight="700" letter-spacing="-0.4" fill="#1F3C88">JPMorganChase</text>
-      </g>
-    `;
-  }
-  if (normalizedKey === "exxon") {
-    return `
-      <g transform="translate(${x}, ${y}) scale(${effectiveScale})">
-        <text x="0" y="36" font-family="Aptos, Segoe UI, Arial, Helvetica, sans-serif" font-size="36" font-weight="800" letter-spacing="-1.1" fill="#E51636">ExxonMobil</text>
-      </g>
-    `;
-  }
-  if (normalizedKey === "eli-lilly") {
-    return `
-      <g transform="translate(${x}, ${y}) scale(${effectiveScale})">
-        <text x="0" y="52" font-family="Times New Roman, Georgia, serif" font-style="italic" font-size="56" font-weight="700" fill="#111111">Lilly</text>
-      </g>
-    `;
-  }
-  if (normalizedKey === "meituan") {
-    return `
-      <g transform="translate(${x}, ${y}) scale(${effectiveScale})">
-        <rect x="2" y="2" width="114" height="114" rx="24" fill="#FFD100" stroke="#F59E0B" stroke-width="4"></rect>
-        <text x="59" y="74" text-anchor="middle" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="42" font-weight="800" fill="#111111">美团</text>
-      </g>
-    `;
-  }
-  if (normalizedKey === "byd") {
-    return `
-      <g transform="translate(${x}, ${y}) scale(${effectiveScale})">
-        <ellipse cx="94" cy="46" rx="82" ry="32" fill="none" stroke="#D71920" stroke-width="9"></ellipse>
-        <text x="94" y="58" text-anchor="middle" font-family="Aptos, Segoe UI, Arial, Helvetica, sans-serif" font-size="46" font-weight="800" letter-spacing="1.6" fill="#D71920">BYD</text>
-      </g>
-    `;
-  }
-  if (normalizedKey === "jd") {
-    return `
-      <g transform="translate(${x}, ${y}) scale(${effectiveScale})">
-        <text x="0" y="48" font-family="Aptos, Segoe UI, Arial, Helvetica, sans-serif" font-size="48" font-weight="800" letter-spacing="-0.8" fill="#E1251B">JD.com</text>
-      </g>
-    `;
-  }
-  if (logoKey === "microsoft-corporate") {
-    return `
-      <g transform="translate(${x}, ${y}) scale(${effectiveScale})">
-        <rect x="0" y="0" width="54" height="54" fill="#F25022"></rect>
-        <rect x="62" y="0" width="54" height="54" fill="#7FBA00"></rect>
-        <rect x="0" y="62" width="54" height="54" fill="#00A4EF"></rect>
-        <rect x="62" y="62" width="54" height="54" fill="#FFB900"></rect>
-      </g>
-    `;
-  }
   const asset = getLogoAsset(logoKey);
   if (asset) {
     const company = getCompany(normalizedKey);
@@ -2913,7 +2832,6 @@ function bindInteractiveEditor(snapshot = state.currentSnapshot) {
 }
 
 function corporateLogoMetrics(logoKey) {
-  if (logoKey === "microsoft-corporate") return { width: 116, height: 116 };
   if (getLogoAsset(logoKey)) {
     const metrics = logoFrameMetrics(logoKey, "corporate");
     return { width: metrics.width, height: metrics.height };
@@ -2922,16 +2840,6 @@ function corporateLogoMetrics(logoKey) {
 }
 
 function corporateLogoLayoutMetrics(logoKey) {
-  if (logoKey === "microsoft-corporate") {
-    return {
-      width: 116,
-      height: 116,
-      visibleWidth: 116,
-      visibleHeight: 116,
-      offsetX: 0,
-      offsetY: 0,
-    };
-  }
   if (getLogoAsset(logoKey)) {
     const metrics = logoFrameMetrics(logoKey, "corporate");
     const paddingX = safeNumber(metrics.paddingX, safeNumber(metrics.padding, 0));
@@ -2957,7 +2865,6 @@ function corporateLogoLayoutMetrics(logoKey) {
 }
 
 function corporateLogoVisibleMetrics(logoKey) {
-  if (logoKey === "microsoft-corporate") return { width: 116, height: 116 };
   if (getLogoAsset(logoKey)) {
     const metrics = logoFrameMetrics(logoKey, "corporate");
     const paddingX = safeNumber(metrics.paddingX, safeNumber(metrics.padding, 0));

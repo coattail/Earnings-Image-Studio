@@ -283,6 +283,7 @@ function resolveNormalizedOperatingStage(entry, grossProfitBn, costOfRevenueBn, 
     totalCostsAdjustedOperatingExpensesBn <= safeNumber(grossProfitBn) + Math.max(0.35, safeNumber(grossProfitBn) * 0.04);
   const shouldNormalizeFromTotalCosts =
     totalCostsProxyLikely &&
+    !sourceLooksDerivedFromGrossBridge &&
     !(
       explicitOpexBreakdownSumBn > 0.05 &&
       sourceOperatingExpensesBn !== null &&
@@ -290,7 +291,6 @@ function resolveNormalizedOperatingStage(entry, grossProfitBn, costOfRevenueBn, 
     ) &&
     (
       sourceOperatingProfitBn === null ||
-      sourceLooksDerivedFromGrossBridge ||
       (totalCostsOperatingProfitBn !== null &&
         sourceOperatingProfitBn < totalCostsOperatingProfitBn - Math.max(0.4, Math.abs(totalCostsOperatingProfitBn) * 0.08)) ||
       (disclosedOperatingExpensesBn > 0.05 && totalCostsAdjustedOperatingExpensesBn >= disclosedOperatingExpensesBn - 0.35)
@@ -1628,6 +1628,12 @@ function buildGenericSnapshot(company, entry, quarterKey) {
       : hasRenderableGrossStage && entry.revenueBn && operatingProfitBn !== null && operatingProfitBn !== undefined
         ? (operatingProfitBn / entry.revenueBn) * 100
         : null;
+  const netMarginPct =
+    entry.profitMarginPct !== null && entry.profitMarginPct !== undefined
+      ? entry.profitMarginPct
+      : entry.revenueBn && entry.netIncomeBn !== null && entry.netIncomeBn !== undefined
+        ? (safeNumber(entry.netIncomeBn) / entry.revenueBn) * 100
+        : null;
   const normalizedEntry = {
     ...entry,
     quarterKey: entry.quarterKey || quarterKey,
@@ -1810,7 +1816,7 @@ function buildGenericSnapshot(company, entry, quarterKey) {
     operatingLossOverflowBn,
     netProfitBn: entry.netIncomeBn,
     pretaxIncomeBn: normalizedPretaxIncomeBn,
-    netMarginPct: entry.profitMarginPct,
+    netMarginPct,
     netMarginYoyDeltaPp: entry.profitMarginYoyDeltaPp,
     opexBreakdown: hasRenderableGrossStage
       ? resolveOperatingExpenseBreakdown(null, company, {

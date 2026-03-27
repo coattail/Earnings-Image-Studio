@@ -60,6 +60,7 @@ COMPANY_DOMAINS: dict[str, str] = {
 }
 
 OFFICIAL_HOST_ALIASES: dict[str, tuple[str, ...]] = {
+    "alphabet": ("google.com", "www.google.com", "gstatic.com", "www.gstatic.com"),
     "alibaba": (
         "alibaba.com",
         "alibabagroup.com",
@@ -67,7 +68,10 @@ OFFICIAL_HOST_ALIASES: dict[str, tuple[str, ...]] = {
         "data.alibabagroup.com",
         "static.alibabagroup.com",
     ),
+    "amazon": ("aboutamazon.com", "www.aboutamazon.com", "assets.aboutamazon.com"),
+    "eli-lilly": ("delivery-p137454-e1438138.adobeaemcloud.com",),
     "jnj": ("johnsonandjohnson.com", "jnj-content-lab2.brightspotcdn.com"),
+    "meituan": ("p0.meituan.net", "s3plus.meituan.net"),
 }
 
 OVERRIDE_LOGO_SOURCES: dict[str, dict[str, Any]] = {
@@ -77,9 +81,11 @@ OVERRIDE_LOGO_SOURCES: dict[str, dict[str, Any]] = {
     },
     "alphabet": {
         "url": "https://www.gstatic.com/images/branding/productlogos/googleg/v6/192px.svg",
+        "official": True,
     },
     "amazon": {
         "url": "https://assets.aboutamazon.com/48/8c/1bc5933b414d82435b08581f742d/logo-1.svg",
+        "official": True,
     },
     "apple": {
         "url": SIMPLE_ICON_URL.format(slug="apple"),
@@ -114,10 +120,12 @@ OVERRIDE_LOGO_SOURCES: dict[str, dict[str, Any]] = {
         "url": "https://cdn.worldvectorlogo.com/logos/costco-wholesale.svg",
     },
     "eli-lilly": {
-        "url": "https://cdn.worldvectorlogo.com/logos/lilly.svg",
+        "url": "https://delivery-p137454-e1438138.adobeaemcloud.com/adobe/assets/urn:aaid:aem:2843cade-80ee-42b6-b285-a1450fef6b77/renditions/original/as/LillyLogo_RGB_Red_v3.svg?assetname=LillyLogo_RGB_Red_v3.svg",
+        "official": True,
     },
     "exxon": {
-        "url": "https://corporate.exxonmobil.com/-/media/global/icons/logos/em-default-img-2880-1620.png",
+        "url": "https://corporate.exxonmobil.com/-/media/global/icons/footer/sites/logo-exxonmobil-main.svg",
+        "official": True,
     },
     "jnj": {
         "url": "https://jnj-content-lab2.brightspotcdn.com/ac/25/bd2078f54d5992dd486ed26140ce/johnson-johnson-logo.svg",
@@ -128,6 +136,10 @@ OVERRIDE_LOGO_SOURCES: dict[str, dict[str, Any]] = {
     "meta": {
         "url": SIMPLE_ICON_URL.format(slug="meta"),
         "fill": "#0866FF",
+    },
+    "microsoft": {
+        "url": "https://uhf.microsoft.com/images/microsoft/RE1Mu3b.png",
+        "official": True,
     },
     "micron": {
         "url": "https://cdn.worldvectorlogo.com/logos/micron.svg",
@@ -187,6 +199,11 @@ OVERRIDE_LOGO_SOURCES: dict[str, dict[str, Any]] = {
         "url": "https://ir.jd.com/sites/g/files/knoqqb53391/themes/site/nir_pid834/client/images/main-logo.png",
         "official": True,
     },
+    "meituan": {
+        "page_url": "https://www.meituan.com/",
+        "symbol_id": "wk-meituan",
+        "official": True,
+    },
 }
 
 OFFICIAL_DISCOVERY_PAGE_URLS = (
@@ -220,14 +237,6 @@ OFFICIAL_CANDIDATE_URLS = (
     "https://www.{domain}/img/logo.png",
 )
 
-FALLBACK_CANDIDATE_URLS = (
-    "https://{domain}/apple-touch-icon.png",
-    "https://www.{domain}/apple-touch-icon.png",
-    "https://{domain}/apple-touch-icon-precomposed.png",
-    "https://www.{domain}/apple-touch-icon-precomposed.png",
-    "https://www.google.com/s2/favicons?domain_url=https://{domain}&sz=256",
-)
-
 LOGO_HINT_KEYWORDS = ("logo", "brand", "wordmark", "logotype")
 NEGATIVE_LOGO_URL_KEYWORDS = (
     "og-image",
@@ -245,23 +254,40 @@ NEGATIVE_LOGO_URL_KEYWORDS = (
     "share",
     "default-img",
     "defaultimage",
+    "favicon",
+    "fileicon",
+    "fileiconsvg",
 )
 
 REQUEST_HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36",
-    "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+    "Accept": "image/svg+xml,image/png,image/*;q=0.8,*/*;q=0.5",
 }
 
 
+def _request_headers_for_url(url: str, *, text_mode: bool = False) -> dict[str, str]:
+    if text_mode:
+        return {**REQUEST_HEADERS, "Accept": "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8"}
+    path = urllib.parse.urlparse(url).path.lower()
+    if path.endswith(".svg"):
+        accept = "image/svg+xml,image/*;q=0.8,*/*;q=0.5"
+    elif path.endswith(".png"):
+        accept = "image/png,image/*;q=0.8,*/*;q=0.5"
+    else:
+        accept = REQUEST_HEADERS["Accept"]
+    return {**REQUEST_HEADERS, "Accept": accept}
+
+
 def _request_bytes(url: str) -> tuple[bytes, str]:
-    request = urllib.request.Request(url, headers=REQUEST_HEADERS)
+    request_headers = _request_headers_for_url(url)
+    request = urllib.request.Request(url, headers=request_headers)
     try:
         with urllib.request.urlopen(request, timeout=40) as response:
             content_type = response.headers.get_content_type() or "application/octet-stream"
             return response.read(), content_type
     except Exception:
         curl = subprocess.run(
-            ["curl", "--http1.1", "-L", "-sS", "--max-time", "40", url],
+            ["curl", "--http1.1", "-L", "-sS", "--max-time", "40", "-H", f"Accept: {request_headers['Accept']}", url],
             check=True,
             capture_output=True,
         )
@@ -269,9 +295,10 @@ def _request_bytes(url: str) -> tuple[bytes, str]:
 
 
 def _request_text(url: str) -> str:
+    request_headers = _request_headers_for_url(url, text_mode=True)
     request = urllib.request.Request(
         url,
-        headers={**REQUEST_HEADERS, "Accept": "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8"},
+        headers=request_headers,
     )
     try:
         with urllib.request.urlopen(request, timeout=40) as response:
@@ -279,7 +306,7 @@ def _request_text(url: str) -> str:
             return response.read().decode(charset, errors="ignore")
     except Exception:
         curl = subprocess.run(
-            ["curl", "--http1.1", "-L", "-sS", "--max-time", "40", url],
+            ["curl", "--http1.1", "-L", "-sS", "--max-time", "40", "-H", f"Accept: {request_headers['Accept']}", url],
             check=True,
             capture_output=True,
         )
@@ -368,6 +395,278 @@ def _paeth_predictor(left: int, up: int, up_left: int) -> int:
     if up_distance <= up_left_distance:
         return up
     return up_left
+
+
+def _decode_png_rgba(payload: bytes) -> tuple[int, int, bytearray] | None:
+    dimensions = _png_dimensions(payload)
+    if dimensions is None:
+        return None
+    width, height = dimensions
+    chunks = _png_chunks(payload)
+    if not chunks:
+        return None
+    ihdr = next((chunk for chunk_type, chunk in chunks if chunk_type == b"IHDR"), None)
+    if ihdr is None or len(ihdr) < 13:
+        return None
+    bit_depth = ihdr[8]
+    color_type = ihdr[9]
+    interlace_method = ihdr[12]
+    if bit_depth != 8 or interlace_method != 0 or color_type not in (2, 6):
+        return None
+    bytes_per_pixel = 4 if color_type == 6 else 3
+    compressed = b"".join(chunk for chunk_type, chunk in chunks if chunk_type == b"IDAT")
+    if not compressed:
+        return None
+    try:
+        raw = zlib.decompress(compressed)
+    except zlib.error:
+        return None
+    row_size = width * bytes_per_pixel
+    if len(raw) < height * (row_size + 1):
+        return None
+
+    rgba = bytearray(width * height * 4)
+    position = 0
+    previous_row = bytearray(row_size)
+    for y in range(height):
+        filter_type = raw[position]
+        position += 1
+        current_row = bytearray(raw[position : position + row_size])
+        position += row_size
+        if len(current_row) != row_size:
+            return None
+        if filter_type == 1:
+            for index in range(row_size):
+                current_row[index] = (current_row[index] + (current_row[index - bytes_per_pixel] if index >= bytes_per_pixel else 0)) & 0xFF
+        elif filter_type == 2:
+            for index in range(row_size):
+                current_row[index] = (current_row[index] + previous_row[index]) & 0xFF
+        elif filter_type == 3:
+            for index in range(row_size):
+                left = current_row[index - bytes_per_pixel] if index >= bytes_per_pixel else 0
+                current_row[index] = (current_row[index] + ((left + previous_row[index]) // 2)) & 0xFF
+        elif filter_type == 4:
+            for index in range(row_size):
+                left = current_row[index - bytes_per_pixel] if index >= bytes_per_pixel else 0
+                up = previous_row[index]
+                up_left = previous_row[index - bytes_per_pixel] if index >= bytes_per_pixel else 0
+                current_row[index] = (current_row[index] + _paeth_predictor(left, up, up_left)) & 0xFF
+        previous_row = current_row
+
+        for x in range(width):
+            src_offset = x * bytes_per_pixel
+            dst_offset = (y * width + x) * 4
+            rgba[dst_offset] = current_row[src_offset]
+            rgba[dst_offset + 1] = current_row[src_offset + 1]
+            rgba[dst_offset + 2] = current_row[src_offset + 2]
+            rgba[dst_offset + 3] = current_row[src_offset + 3] if color_type == 6 else 255
+    return width, height, rgba
+
+
+def _encode_png_rgba(width: int, height: int, rgba: bytes) -> bytes:
+    stride = width * 4
+    raw = bytearray()
+    for y in range(height):
+        raw.append(0)
+        raw.extend(rgba[y * stride : (y + 1) * stride])
+    compressed = zlib.compress(bytes(raw), level=9)
+
+    def _chunk(chunk_type: bytes, data: bytes) -> bytes:
+        checksum = zlib.crc32(chunk_type + data) & 0xFFFFFFFF
+        return len(data).to_bytes(4, "big") + chunk_type + data + checksum.to_bytes(4, "big")
+
+    ihdr = (
+        width.to_bytes(4, "big")
+        + height.to_bytes(4, "big")
+        + bytes([8, 6, 0, 0, 0])
+    )
+    return b"".join(
+        [
+            b"\x89PNG\r\n\x1a\n",
+            _chunk(b"IHDR", ihdr),
+            _chunk(b"IDAT", compressed),
+            _chunk(b"IEND", b""),
+        ]
+    )
+
+
+def _is_neutral_background_pixel(red: int, green: int, blue: int) -> bool:
+    return max(red, green, blue) - min(red, green, blue) <= 22
+
+
+def _detect_logo_background_rgba(rgba: bytearray, width: int, height: int) -> dict[str, Any] | None:
+    samples: list[tuple[int, int, int, int, int]] = []
+
+    def _push_sample(x: int, y: int) -> None:
+        offset = (y * width + x) * 4
+        if rgba[offset + 3] < 245:
+            return
+        samples.append((x, y, rgba[offset], rgba[offset + 1], rgba[offset + 2]))
+
+    for x in range(width):
+        for y in range(height):
+            if rgba[(y * width + x) * 4 + 3] >= 245:
+                _push_sample(x, y)
+                break
+        for y in range(height - 1, -1, -1):
+            if rgba[(y * width + x) * 4 + 3] >= 245:
+                _push_sample(x, y)
+                break
+    for y in range(height):
+        for x in range(width):
+            if rgba[(y * width + x) * 4 + 3] >= 245:
+                _push_sample(x, y)
+                break
+        for x in range(width - 1, -1, -1):
+            if rgba[(y * width + x) * 4 + 3] >= 245:
+                _push_sample(x, y)
+                break
+
+    neutral_samples = []
+    for x, y, red, green, blue in samples:
+        if not _is_neutral_background_pixel(red, green, blue):
+            continue
+        luminance = (red + green + blue) / 3
+        if luminance < 18 or luminance > 236:
+            neutral_samples.append((x, y, red, green, blue))
+    if len(neutral_samples) < 12:
+        return None
+    red = round(sum(item[2] for item in neutral_samples) / len(neutral_samples))
+    green = round(sum(item[3] for item in neutral_samples) / len(neutral_samples))
+    blue = round(sum(item[4] for item in neutral_samples) / len(neutral_samples))
+    if not _is_neutral_background_pixel(red, green, blue):
+        return None
+    stable_samples = [
+        (x, y)
+        for x, y, sample_red, sample_green, sample_blue in neutral_samples
+        if abs(sample_red - red) <= 18 and abs(sample_green - green) <= 18 and abs(sample_blue - blue) <= 18
+    ]
+    if len(stable_samples) < 8:
+        return None
+    return {"red": red, "green": green, "blue": blue, "seeds": stable_samples}
+
+
+def _remove_edge_background_rgba(rgba: bytes, width: int, height: int, background: dict[str, Any]) -> bytes | None:
+    data = bytearray(rgba)
+    visited = bytearray(width * height)
+    queue = list(background.get("seeds") or [])
+    queue_index = 0
+    tolerance = 26
+    removed = 0
+
+    def _matches_background(point_index: int) -> bool:
+        pixel_index = point_index * 4
+        if data[pixel_index + 3] < 20:
+            return False
+        return (
+            abs(data[pixel_index] - background["red"]) <= tolerance
+            and abs(data[pixel_index + 1] - background["green"]) <= tolerance
+            and abs(data[pixel_index + 2] - background["blue"]) <= tolerance
+        )
+
+    while queue_index < len(queue):
+        x, y = queue[queue_index]
+        queue_index += 1
+        if not (0 <= x < width and 0 <= y < height):
+            continue
+        point_index = y * width + x
+        if visited[point_index]:
+            continue
+        visited[point_index] = 1
+        if not _matches_background(point_index):
+            continue
+        pixel_index = point_index * 4
+        data[pixel_index + 3] = 0
+        removed += 1
+        if x > 0:
+            queue.append((x - 1, y))
+        if x + 1 < width:
+            queue.append((x + 1, y))
+        if y > 0:
+            queue.append((x, y - 1))
+        if y + 1 < height:
+            queue.append((x, y + 1))
+
+    if removed < width * height * 0.04:
+        return None
+    return bytes(data)
+
+
+def _opaque_bounds_rgba(rgba: bytes, width: int, height: int, alpha_threshold: int = 10) -> dict[str, int] | None:
+    min_x = width
+    min_y = height
+    max_x = -1
+    max_y = -1
+    for y in range(height):
+        for x in range(width):
+            offset = (y * width + x) * 4
+            if rgba[offset + 3] < alpha_threshold:
+                continue
+            if x < min_x:
+                min_x = x
+            if y < min_y:
+                min_y = y
+            if x > max_x:
+                max_x = x
+            if y > max_y:
+                max_y = y
+    if max_x < min_x or max_y < min_y:
+        return None
+    return {
+        "left": min_x,
+        "top": min_y,
+        "right": max_x,
+        "bottom": max_y,
+        "width": max_x - min_x + 1,
+        "height": max_y - min_y + 1,
+    }
+
+
+def _crop_rgba(rgba: bytes, width: int, height: int, left: int, top: int, crop_width: int, crop_height: int) -> bytes:
+    result = bytearray(crop_width * crop_height * 4)
+    source_stride = width * 4
+    target_stride = crop_width * 4
+    for row in range(crop_height):
+        source_start = ((top + row) * width + left) * 4
+        source_end = source_start + target_stride
+        target_start = row * target_stride
+        result[target_start : target_start + target_stride] = rgba[source_start:source_end]
+    return bytes(result)
+
+
+def _normalize_png_payload(payload: bytes) -> tuple[bytes, dict[str, Any]]:
+    decoded = _decode_png_rgba(payload)
+    if decoded is None:
+        return payload, {"normalized": False}
+    width, height, rgba = decoded
+    background = _detect_logo_background_rgba(rgba, width, height)
+    transparent_rgba = _remove_edge_background_rgba(rgba, width, height, background) if background else None
+    normalized_rgba = transparent_rgba or bytes(rgba)
+    bounds = _opaque_bounds_rgba(normalized_rgba, width, height)
+    if bounds is None:
+        if transparent_rgba is None:
+            return payload, {"normalized": False}
+        return _encode_png_rgba(width, height, normalized_rgba), {
+            "normalized": True,
+            "backgroundRemoved": True,
+            "cropped": False,
+        }
+
+    trim_padding = max(1, round(min(width, height) * 0.012))
+    crop_left = max(bounds["left"] - trim_padding, 0)
+    crop_top = max(bounds["top"] - trim_padding, 0)
+    crop_right = min(bounds["right"] + trim_padding, width - 1)
+    crop_bottom = min(bounds["bottom"] + trim_padding, height - 1)
+    crop_width = crop_right - crop_left + 1
+    crop_height = crop_bottom - crop_top + 1
+    if transparent_rgba is None and crop_width >= width - 2 and crop_height >= height - 2:
+        return payload, {"normalized": False}
+    cropped_rgba = _crop_rgba(normalized_rgba, width, height, crop_left, crop_top, crop_width, crop_height)
+    return _encode_png_rgba(crop_width, crop_height, cropped_rgba), {
+        "normalized": True,
+        "backgroundRemoved": transparent_rgba is not None,
+        "cropped": crop_width != width or crop_height != height,
+    }
 
 
 def _png_visual_stats(payload: bytes) -> dict[str, Any] | None:
@@ -574,6 +873,46 @@ def _extract_official_logo_urls(company_id: str, domain: str) -> list[str]:
     return discovered
 
 
+def _resolve_symbol_logo_source(
+    page_url: str,
+    symbol_id: str,
+    company_id: str,
+    domain: str,
+    *,
+    official_override: bool | None = None,
+    source_type: str,
+) -> dict[str, Any] | None:
+    html_text = _request_text(page_url).replace("\\/", "/")
+    symbol_match = re.search(
+        rf"<symbol[^>]+id=[\"']{re.escape(symbol_id)}[\"'][^>]*viewBox=[\"']([^\"']+)[\"'][^>]*>(.*?)</symbol>",
+        html_text,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    if not symbol_match:
+        return None
+    view_box = symbol_match.group(1).strip()
+    inner_markup = symbol_match.group(2).strip()
+    payload = (
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{html.escape(view_box, quote=True)}">'
+        f"{inner_markup}</svg>"
+    ).encode("utf-8")
+    dimensions = _svg_dimensions(payload)
+    is_official = _is_official_host(page_url, domain, _extra_official_hosts(company_id, domain)) if official_override is None else official_override
+    return {
+        "sourceUrl": f"{page_url}#symbol:{symbol_id}",
+        "mime": "image/svg+xml",
+        "dataUrl": f"data:image/svg+xml;base64,{base64.b64encode(payload).decode('ascii')}",
+        "width": dimensions[0] if dimensions else 64,
+        "height": dimensions[1] if dimensions else 64,
+        "officialSource": is_official,
+        "transparentBackground": True,
+        "sourceType": source_type,
+        "visualStats": {},
+        "containsEmbeddedRaster": _svg_contains_embedded_raster(payload),
+        "normalization": {"normalized": True, "source": "inline-symbol"},
+    }
+
+
 def _resolve_logo_source(
     url: str,
     company_id: str,
@@ -586,13 +925,17 @@ def _resolve_logo_source(
     payload, content_type = _request_bytes(url)
     payload = _apply_svg_fill(payload, fill)
     mime = _normalize_mime(content_type, payload)
-    dimensions = _svg_dimensions(payload) if mime == "image/svg+xml" else _png_dimensions(payload)
-    png_visual_stats = _png_visual_stats(payload) if mime == "image/png" else None
-    is_transparent = mime == "image/svg+xml" or (mime == "image/png" and _png_has_transparency(payload))
     is_official = _is_official_host(url, domain, _extra_official_hosts(company_id, domain)) if official_override is None else official_override
     if mime not in ("image/svg+xml", "image/png"):
         return None
-    if mime != "image/svg+xml" and not _raster_is_crisp(dimensions):
+    original_dimensions = _svg_dimensions(payload) if mime == "image/svg+xml" else _png_dimensions(payload)
+    normalization: dict[str, Any] = {"normalized": False}
+    if mime == "image/png":
+        payload, normalization = _normalize_png_payload(payload)
+    dimensions = _svg_dimensions(payload) if mime == "image/svg+xml" else _png_dimensions(payload)
+    png_visual_stats = _png_visual_stats(payload) if mime == "image/png" else None
+    is_transparent = mime == "image/svg+xml" or (mime == "image/png" and _png_has_transparency(payload))
+    if mime != "image/svg+xml" and not _raster_is_crisp(original_dimensions or dimensions):
         return None
 
     return {
@@ -606,6 +949,7 @@ def _resolve_logo_source(
         "sourceType": source_type,
         "visualStats": png_visual_stats or {},
         "containsEmbeddedRaster": _svg_contains_embedded_raster(payload) if mime == "image/svg+xml" else False,
+        "normalization": normalization,
     }
 
 
@@ -638,6 +982,9 @@ def _score_logo_candidate(candidate: dict[str, Any]) -> tuple[int, list[str]]:
     if source_type == "override":
         score += 80
         reasons.append("manual-override")
+    elif source_type == "official-inline":
+        score += 95
+        reasons.append("official-inline")
     elif source_type == "discovered":
         score += 55
         reasons.append("discovered")
@@ -667,7 +1014,7 @@ def _score_logo_candidate(candidate: dict[str, Any]) -> tuple[int, list[str]]:
     if 1.2 <= aspect_ratio <= 9:
         score += 20
         reasons.append("logo-like-aspect-ratio")
-    if width * height < 4096:
+    if mime != "image/svg+xml" and width * height < 4096:
         score -= 80
         reasons.append("too-small")
 
@@ -690,14 +1037,24 @@ def _select_logo(company_id: str, domain: str) -> dict[str, Any]:
     override_source = OVERRIDE_LOGO_SOURCES.get(company_id)
     candidate_specs: list[dict[str, Any]] = []
     if override_source:
-        candidate_specs.append(
-            {
-                "url": override_source["url"],
-                "fill": override_source.get("fill"),
-                "official_override": override_source.get("official"),
-                "source_type": "override",
-            }
-        )
+        if override_source.get("page_url") and override_source.get("symbol_id"):
+            candidate_specs.append(
+                {
+                    "page_url": override_source["page_url"],
+                    "symbol_id": override_source["symbol_id"],
+                    "official_override": override_source.get("official"),
+                    "source_type": "official-inline",
+                }
+            )
+        elif override_source.get("url"):
+            candidate_specs.append(
+                {
+                    "url": override_source["url"],
+                    "fill": override_source.get("fill"),
+                    "official_override": override_source.get("official"),
+                    "source_type": "override",
+                }
+            )
 
     candidate_specs.extend(
         {"url": url, "source_type": "discovered"}
@@ -707,31 +1064,36 @@ def _select_logo(company_id: str, domain: str) -> dict[str, Any]:
         {"url": template.format(domain=domain), "source_type": "discovered"}
         for template in OFFICIAL_CANDIDATE_URLS
     )
-    candidate_specs.extend(
-        {"url": template.format(domain=domain), "source_type": "fallback-favicon"}
-        for template in FALLBACK_CANDIDATE_URLS
-    )
-
-    seen_urls: set[str] = set()
+    seen_sources: set[str] = set()
     for spec in candidate_specs:
-        url = spec["url"]
-        if url in seen_urls:
+        source_key = spec.get("url") or f"{spec.get('page_url')}#symbol:{spec.get('symbol_id')}"
+        if source_key in seen_sources:
             continue
-        seen_urls.add(url)
+        seen_sources.add(source_key)
         try:
-            resolved = _resolve_logo_source(
-                url,
-                company_id,
-                domain,
-                fill=spec.get("fill"),
-                official_override=spec.get("official_override"),
-                source_type=spec["source_type"],
-            )
+            if spec.get("page_url") and spec.get("symbol_id"):
+                resolved = _resolve_symbol_logo_source(
+                    spec["page_url"],
+                    spec["symbol_id"],
+                    company_id,
+                    domain,
+                    official_override=spec.get("official_override"),
+                    source_type=spec["source_type"],
+                )
+            else:
+                resolved = _resolve_logo_source(
+                    spec["url"],
+                    company_id,
+                    domain,
+                    fill=spec.get("fill"),
+                    official_override=spec.get("official_override"),
+                    source_type=spec["source_type"],
+                )
         except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError, subprocess.CalledProcessError) as exc:
             last_error = str(exc)
             continue
         if resolved is None:
-            last_error = f"unsupported image type or dimensions: {url}"
+            last_error = f"unsupported image type or dimensions: {source_key}"
             continue
         score, reasons = _score_logo_candidate(resolved)
         resolved["selectionScore"] = score

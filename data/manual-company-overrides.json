@@ -453,6 +453,13 @@
       "latestExpenseGapReason": "Xiaomi's 2025Q4 annual results release provides revenue segment tables, but the parseable quarterly materials do not expose a same-quarter operating-expense-by-function breakdown."
     }
   },
+  "meituan": {
+    "classificationPolicy": {
+      "allowLatestRevenueGap": true,
+      "fallbackRevenueQuarter": "2025Q3",
+      "latestRevenueGapReason": "As of 2026-03-27, Meituan's official investor results page exposes parseable segment disclosure through 2025Q3 only. The 2025Q4 financial statement trunk is now available from Stock Analysis's Hong Kong listing page, and the latest official segment split currently available to the parser remains 2025Q3."
+    }
+  },
   "byd": {
     "financials": {
       "2023Q2": {
@@ -754,6 +761,61 @@
             "sourceUrl": "https://static.cninfo.com.cn/finalpage/2025-10-31/1224776127.PDF"
           }
         ]
+      },
+      "2025Q4": {
+        "fiscalLabel": "FY 2025",
+        "statementSource": "manual-byd-official",
+        "statementSourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF",
+        "statementFilingDate": "2026-03-28",
+        "revenueBn": 803.965,
+        "costOfRevenueBn": 661.305,
+        "operatingIncomeBn": 40.185,
+        "operatingExpensesBn": null,
+        "netIncomeBn": 32.619,
+        "taxBn": 5.992,
+        "officialRevenueSegments": [
+          {
+            "name": "Transportation equipment & electrical manufacturing",
+            "nameZh": "交通运输设备及电气制造业",
+            "memberKey": "transportationelectricalmanufacturing",
+            "valueBn": 648.646,
+            "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF"
+          },
+          {
+            "name": "Daily electronic devices manufacturing",
+            "nameZh": "日用电子器件制造业",
+            "memberKey": "dailyelectronicdevicesmanufacturing",
+            "valueBn": 155.237,
+            "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF"
+          },
+          {
+            "name": "Other",
+            "nameZh": "其他",
+            "memberKey": "other",
+            "valueBn": 0.083,
+            "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF"
+          }
+        ],
+        "officialOpexBreakdown": [
+          {
+            "name": "Selling expense",
+            "nameZh": "销售费用",
+            "valueBn": 26.185,
+            "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF"
+          },
+          {
+            "name": "Administrative expense",
+            "nameZh": "管理费用",
+            "valueBn": 20.2,
+            "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF"
+          },
+          {
+            "name": "R&D expense",
+            "nameZh": "研发费用",
+            "valueBn": 57.978,
+            "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF"
+          }
+        ]
       }
     },
     "officialRevenueStructureHistory": {
@@ -898,6 +960,34 @@
               "sourceUrl": "https://static.cninfo.com.cn/finalpage/2025-08-30/1224626653.PDF"
             }
           ]
+        },
+        "2025Q4": {
+          "segments": [
+            {
+              "name": "Transportation equipment & electrical manufacturing",
+              "nameZh": "交通运输设备及电气制造业",
+              "memberKey": "transportationelectricalmanufacturing",
+              "valueBn": 648.646,
+              "filingDate": "2026-03-28",
+              "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF"
+            },
+            {
+              "name": "Daily electronic devices manufacturing",
+              "nameZh": "日用电子器件制造业",
+              "memberKey": "dailyelectronicdevicesmanufacturing",
+              "valueBn": 155.237,
+              "filingDate": "2026-03-28",
+              "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF"
+            },
+            {
+              "name": "Other",
+              "nameZh": "其他",
+              "memberKey": "other",
+              "valueBn": 0.083,
+              "filingDate": "2026-03-28",
+              "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF"
+            }
+          ]
         }
       },
       "filingsUsed": [
@@ -930,6 +1020,12 @@
           "quarter": "2025Q2",
           "filingDate": "2025-08-30",
           "pdf": "https://static.cninfo.com.cn/finalpage/2025-08-30/1224626653.PDF"
+        },
+        {
+          "title": "BYD 2025 Annual Report",
+          "quarter": "2025Q4",
+          "filingDate": "2026-03-28",
+          "pdf": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF"
         }
       ],
       "errors": []
@@ -943,8 +1039,8 @@
       "requireDisplayRevenueClassification": true,
       "requireDisplayExpenseClassification": true,
       "allowLatestRevenueGap": true,
-      "fallbackRevenueQuarter": "2025Q2",
-      "latestRevenueGapReason": "BYD's 2025Q3 report discloses statement and expense lines, but the official Q3 filing does not include a segment revenue composition table in the parseable report text. The latest official disclosed revenue split currently available is the 2025Q2 half-year report."
+      "fallbackRevenueQuarter": "2025Q4",
+      "latestRevenueGapReason": "BYD's Q1/Q3 interim filings may disclose statement and expense lines without a parseable same-quarter segment revenue composition table. The latest official disclosed revenue split currently available is the 2025 annual report filed on 2026-03-28."
     }
   }
 }

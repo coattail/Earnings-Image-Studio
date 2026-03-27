@@ -3281,8 +3281,8 @@ function renderPixelReplicaSvg(snapshot) {
   });
   const titleVisualWidth = inlinePeriodLayout.titleVisualWidth;
   const periodEndY = layoutY(snapshot.layout?.periodEndInlineY, inlinePeriodLayout.periodEndY / verticalScale);
-  const referenceLogoMetrics = corporateLogoVisibleMetrics("microsoft-corporate");
-  const referenceLogoScale = corporateLogoBaseScale("microsoft-corporate", {
+  const referenceLogoMetrics = corporateLogoVisibleMetrics("microsoft");
+  const referenceLogoScale = corporateLogoBaseScale("microsoft", {
     hero: usesHeroLockups,
     config: templateTokens.logo?.corporate || BASE_CORPORATE_LOGO_TOKENS,
   });

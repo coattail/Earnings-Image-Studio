@@ -79,8 +79,8 @@ TOP30_COMPANIES: list[dict[str, Any]] = [
     {"id": "jd", "ticker": "JD", "nameZh": "京东集团", "nameEn": "JD.com", "slug": "jd", "rank": 31, "isAdr": True, "brand": {"primary": "#D70A0A", "secondary": "#111827", "accent": "#FEE2E2"}, "financialSource": "stockanalysis"},
     {"id": "netease", "ticker": "NTES", "nameZh": "网易", "nameEn": "NetEase", "slug": "ntes", "rank": 32, "isAdr": True, "brand": {"primary": "#D71920", "secondary": "#111827", "accent": "#FEE2E2"}, "financialSource": "stockanalysis"},
     {"id": "xiaomi", "ticker": "XIACY", "nameZh": "小米集团", "nameEn": "Xiaomi", "slug": "xiacy", "rank": 33, "isAdr": True, "brand": {"primary": "#FF6900", "secondary": "#111827", "accent": "#FFE7D6"}, "financialSource": "stockanalysis", "financialPath": "quote/hkg/1810"},
-    {"id": "byd", "ticker": "BYDDY", "nameZh": "比亚迪", "nameEn": "BYD", "slug": "byddy", "rank": 34, "isAdr": True, "brand": {"primary": "#D71920", "secondary": "#111827", "accent": "#FEE2E2"}, "financialSource": "stockanalysis", "financialPath": "quote/otc/byddy"},
-    {"id": "meituan", "ticker": "MPNGY", "nameZh": "美团", "nameEn": "Meituan", "slug": "mpngy", "rank": 35, "isAdr": True, "brand": {"primary": "#FFD100", "secondary": "#111827", "accent": "#FEF3C7"}, "financialSource": "stockanalysis", "financialPath": "quote/otc/mpngy"},
+    {"id": "byd", "ticker": "BYDDY", "nameZh": "比亚迪", "nameEn": "BYD", "slug": "byddy", "rank": 34, "isAdr": True, "brand": {"primary": "#D71920", "secondary": "#111827", "accent": "#FEE2E2"}, "financialSource": "stockanalysis", "financialPath": "quote/hkg/1211"},
+    {"id": "meituan", "ticker": "MPNGY", "nameZh": "美团", "nameEn": "Meituan", "slug": "mpngy", "rank": 35, "isAdr": True, "brand": {"primary": "#FFD100", "secondary": "#111827", "accent": "#FEF3C7"}, "financialSource": "stockanalysis", "financialPath": "quote/hkg/3690"},
 ]
 
 BAR_SEGMENT_CANONICAL_BY_COMPANY: dict[str, dict[str, str]] = {
