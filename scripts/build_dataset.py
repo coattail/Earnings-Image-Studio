@@ -1666,11 +1666,8 @@ def supplement_tencent_official_financials(company_payload: dict[str, Any]) -> d
         return company_payload
     financials: dict[str, Any] = company_payload.get("financials", {})
     ordered_quarters = sorted(financials.keys(), key=parse_period)
-    latest_quarter_key = ordered_quarters[-1] if ordered_quarters else None
     for quarter_key, entry in financials.items():
         if not isinstance(entry, dict):
-            continue
-        if latest_quarter_key and quarter_key != latest_quarter_key:
             continue
         source_rows = [row for row in (entry.get("officialRevenueSegments") or []) if isinstance(row, dict)]
         source_url = next((str(row.get("sourceUrl") or "") for row in source_rows if row.get("sourceUrl")), "")
