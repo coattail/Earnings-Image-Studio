@@ -1672,7 +1672,8 @@ async function loadLogoCatalog() {
     const response = await fetchJson(`./data/logo-catalog.json?v=${BUILD_ASSET_VERSION}`);
     if (!response.ok) return;
     const payload = await response.json();
-    state.logoCatalog = payload?.logos || {};
+    const rawCatalog = payload?.logos || {};
+    state.logoCatalog = await normalizeLogoCatalogAssets(rawCatalog);
     state.normalizedLogoKeys = {};
     state.logoNormalizationJobs = {};
   } catch (_error) {

@@ -17,7 +17,7 @@ from typing import Any
 ROOT_DIR = Path(__file__).resolve().parents[1]
 OUTPUT_PATH = ROOT_DIR / "data" / "logo-catalog.json"
 DATASET_PATH = ROOT_DIR / "data" / "earnings-dataset.json"
-SIMPLE_ICON_URL = "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/{slug}.svg"
+SIMPLE_ICON_URL = "https://cdn.jsdelivr.net/npm/simple-icons/icons/{slug}.svg"
 
 COMPANY_DOMAINS: dict[str, str] = {
     "nvidia": "nvidia.com",
@@ -76,8 +76,8 @@ OFFICIAL_HOST_ALIASES: dict[str, tuple[str, ...]] = {
 
 OVERRIDE_LOGO_SOURCES: dict[str, dict[str, Any]] = {
     "alibaba": {
-        "url": "https://static.alibabagroup.com/static/c33a2ec2-de56-429a-b279-2d6211a83108.png",
-        "official": True,
+        "url": SIMPLE_ICON_URL.format(slug="alibabadotcom"),
+        "fill": "#FF6A00",
     },
     "alphabet": {
         "url": "https://www.gstatic.com/images/branding/productlogos/googleg/v6/192px.svg",
@@ -141,6 +141,10 @@ OVERRIDE_LOGO_SOURCES: dict[str, dict[str, Any]] = {
         "url": "https://uhf.microsoft.com/images/microsoft/RE1Mu3b.png",
         "official": True,
     },
+    "mastercard": {
+        "url": SIMPLE_ICON_URL.format(slug="mastercard"),
+        "fill": "#EB001B",
+    },
     "micron": {
         "url": "https://cdn.worldvectorlogo.com/logos/micron.svg",
     },
@@ -196,7 +200,7 @@ OVERRIDE_LOGO_SOURCES: dict[str, dict[str, Any]] = {
         "official": True,
     },
     "jd": {
-        "url": "https://ir.jd.com/sites/g/files/knoqqb53391/themes/site/nir_pid834/client/images/main-logo.png",
+        "url": "https://img14.360buyimg.com/imagetools/jfs/t1/265960/38/828/10287/676565f6Fcdb37884/072d830437959819.png",
         "official": True,
     },
     "meituan": {
@@ -241,6 +245,9 @@ LOGO_HINT_KEYWORDS = ("logo", "brand", "wordmark", "logotype")
 NEGATIVE_LOGO_URL_KEYWORDS = (
     "og-image",
     "ogimage",
+    "earnings",
+    "quarter",
+    "report",
     "hero",
     "banner",
     "cover",
@@ -252,6 +259,15 @@ NEGATIVE_LOGO_URL_KEYWORDS = (
     "media",
     "social",
     "share",
+    "campaign",
+    "event",
+    "olympic",
+    "games",
+    "campus",
+    "launch",
+    "launches",
+    "customer",
+    "customers",
     "default-img",
     "defaultimage",
     "favicon",
@@ -322,11 +338,27 @@ def _png_dimensions(data: bytes) -> tuple[int, int] | None:
     )
 
 
+def _text_sniff_prefix(payload: bytes, limit: int = 4096) -> str:
+    return payload[:limit].decode("utf-8", errors="ignore").lstrip("\ufeff \t\r\n\0").lower()
+
+
+def _looks_like_svg_payload(payload: bytes) -> bool:
+    prefix = _text_sniff_prefix(payload)
+    return bool(re.search(r"<svg\b", prefix))
+
+
+def _looks_like_html_payload(payload: bytes) -> bool:
+    prefix = _text_sniff_prefix(payload)
+    return bool(re.search(r"<!doctype\s+html\b|<html\b|<body\b|<head\b|<title\b", prefix))
+
+
 def _normalize_mime(content_type: str, payload: bytes) -> str:
-    if payload.startswith(b"<svg") or payload.lstrip().startswith(b"<?xml"):
-        return "image/svg+xml"
     if payload.startswith(b"\x89PNG"):
         return "image/png"
+    if _looks_like_svg_payload(payload):
+        return "image/svg+xml"
+    if _looks_like_html_payload(payload):
+        return "text/html"
     return content_type or "application/octet-stream"
 
 
@@ -923,8 +955,10 @@ def _resolve_logo_source(
     source_type: str,
 ) -> dict[str, Any] | None:
     payload, content_type = _request_bytes(url)
-    payload = _apply_svg_fill(payload, fill)
     mime = _normalize_mime(content_type, payload)
+    if mime == "text/html":
+        return None
+    payload = _apply_svg_fill(payload, fill)
     is_official = _is_official_host(url, domain, _extra_official_hosts(company_id, domain)) if official_override is None else official_override
     if mime not in ("image/svg+xml", "image/png"):
         return None
@@ -969,6 +1003,8 @@ def _score_logo_candidate(candidate: dict[str, Any]) -> tuple[int, list[str]]:
     average_visible_luminance = float(visual_stats.get("averageVisibleLuminance") or 0)
     near_white_visible_ratio = float(visual_stats.get("nearWhiteVisibleRatio") or 0)
     aspect_ratio = width / max(height, 1)
+    raster_area = width * height
+    has_logo_hint = any(keyword in path_and_query for keyword in LOGO_HINT_KEYWORDS)
 
     if official:
         score += 320
@@ -992,18 +1028,27 @@ def _score_logo_candidate(candidate: dict[str, Any]) -> tuple[int, list[str]]:
         score -= 60
         reasons.append("favicon-fallback")
 
-    if any(keyword in path_and_query for keyword in LOGO_HINT_KEYWORDS):
+    if has_logo_hint:
         score += 65
         reasons.append("logo-keyword")
     if any(keyword in path_and_query for keyword in NEGATIVE_LOGO_URL_KEYWORDS):
         score -= 220
         reasons.append("marketing-image-keyword")
+    if "s2/favicons" in path_and_query:
+        score -= 320
+        reasons.append("google-favicon")
     if mime != "image/svg+xml" and not transparent:
         score -= 180
         reasons.append("opaque-raster")
+    if mime == "image/png" and source_type == "discovered" and not has_logo_hint and raster_area >= 120000:
+        score -= 180
+        reasons.append("large-discovered-raster-without-logo-hint")
     if mime == "image/png" and sample_unique_colors > 96 and not transparent:
         score -= 140
         reasons.append("photo-like-color-diversity")
+    if mime == "image/png" and source_type == "discovered" and not has_logo_hint and sample_unique_colors > 48:
+        score -= 120
+        reasons.append("photo-like-discovered-raster")
     if mime == "image/png" and transparent and near_white_visible_ratio >= 0.72 and average_visible_luminance >= 232:
         score -= 260
         reasons.append("light-bg-invisible")
