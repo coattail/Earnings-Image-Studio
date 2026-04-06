@@ -3269,13 +3269,13 @@
       "operatingIncomeBn": 1.561,
       "nonOperatingBn": -0.012,
       "pretaxIncomeBn": 1.549,
-      "taxBn": 0.23,
+      "taxBn": -0.23,
       "netIncomeBn": 1.038,
       "netIncomeYoyPct": 38.22,
       "grossMarginPct": 50.87,
       "operatingMarginPct": 35.76,
       "profitMarginPct": 25.82,
-      "effectiveTaxRatePct": 14.868,
+      "effectiveTaxRatePct": -14.868,
       "revenueQoqPct": -7.883,
       "grossMarginYoyDeltaPp": 2.67,
       "operatingMarginYoyDeltaPp": null,
@@ -3360,8 +3360,8 @@
             "severity": "warning",
             "message": "netIncomeBn does not reconcile with pretaxIncomeBn and taxBn.",
             "expected": 1.038,
-            "derived": 1.319,
-            "delta": -0.281,
+            "derived": 1.779,
+            "delta": -0.741,
             "tolerance": 0.12
           },
           {
@@ -5008,13 +5008,13 @@
       "operatingIncomeBn": 0.785,
       "nonOperatingBn": -0.016,
       "pretaxIncomeBn": 0.769,
-      "taxBn": 0.114,
+      "taxBn": -0.114,
       "netIncomeBn": 1.411,
       "netIncomeYoyPct": 35.93,
       "grossMarginPct": 49.07,
       "operatingMarginPct": 22.2,
       "profitMarginPct": 25.98,
-      "effectiveTaxRatePct": 14.876,
+      "effectiveTaxRatePct": -14.876,
       "revenueQoqPct": 53.679,
       "grossMarginYoyDeltaPp": -1.8,
       "operatingMarginYoyDeltaPp": -13.56,
@@ -5100,8 +5100,8 @@
             "severity": "warning",
             "message": "netIncomeBn does not reconcile with pretaxIncomeBn and taxBn.",
             "expected": 1.411,
-            "derived": 0.655,
-            "delta": 0.756,
+            "derived": 0.883,
+            "delta": 0.528,
             "tolerance": 0.12
           },
           {
@@ -5748,13 +5748,13 @@
       "operatingIncomeBn": 1.939,
       "nonOperatingBn": -0.015,
       "pretaxIncomeBn": 1.923,
-      "taxBn": 0.252,
+      "taxBn": -0.252,
       "netIncomeBn": 1.817,
       "netIncomeYoyPct": 2.42,
       "grossMarginPct": 51.49,
       "operatingMarginPct": 33.55,
       "profitMarginPct": 28.26,
-      "effectiveTaxRatePct": 13.105,
+      "effectiveTaxRatePct": -13.105,
       "revenueQoqPct": 11.284,
       "grossMarginYoyDeltaPp": -2.68,
       "operatingMarginYoyDeltaPp": -3.07,
@@ -5840,8 +5840,8 @@
             "severity": "warning",
             "message": "netIncomeBn does not reconcile with pretaxIncomeBn and taxBn.",
             "expected": 1.817,
-            "derived": 1.671,
-            "delta": 0.146,
+            "derived": 2.175,
+            "delta": -0.358,
             "tolerance": 0.12
           },
           {
@@ -7484,13 +7484,13 @@
       "operatingIncomeBn": 2.182,
       "nonOperatingBn": 0.007,
       "pretaxIncomeBn": 2.19,
-      "taxBn": 0.344,
+      "taxBn": -0.344,
       "netIncomeBn": 2.048,
       "netIncomeYoyPct": 12.71,
       "grossMarginPct": 51.36,
       "operatingMarginPct": 32.7,
       "profitMarginPct": 28.3,
-      "effectiveTaxRatePct": 15.694,
+      "effectiveTaxRatePct": -15.694,
       "revenueQoqPct": 8.452,
       "grossMarginYoyDeltaPp": -0.13,
       "operatingMarginYoyDeltaPp": -0.85,
@@ -7576,8 +7576,8 @@
             "severity": "warning",
             "message": "netIncomeBn does not reconcile with pretaxIncomeBn and taxBn.",
             "expected": 2.048,
-            "derived": 1.846,
-            "delta": 0.202,
+            "derived": 2.534,
+            "delta": -0.486,
             "tolerance": 0.12
           },
           {
@@ -8360,13 +8360,13 @@
       "operatingIncomeBn": 1.835,
       "nonOperatingBn": -0.012,
       "pretaxIncomeBn": 1.823,
-      "taxBn": 0.292,
+      "taxBn": -0.292,
       "netIncomeBn": 1.578,
       "netIncomeYoyPct": -18.74,
       "grossMarginPct": 51.45,
       "operatingMarginPct": 29.39,
       "profitMarginPct": 25.28,
-      "effectiveTaxRatePct": 15.996,
+      "effectiveTaxRatePct": -15.996,
       "revenueQoqPct": 18.015,
       "grossMarginYoyDeltaPp": 0.1,
       "operatingMarginYoyDeltaPp": -3.3,
@@ -8431,13 +8431,23 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
+        "confidenceScore": 0.9438,
         "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "consistencyScore": 0.875,
         "checksRun": 8,
-        "checksPassed": 8,
-        "issueCount": 0,
-        "issues": []
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "pretax-minus-tax-equals-net",
+            "severity": "warning",
+            "message": "netIncomeBn does not reconcile with pretaxIncomeBn and taxBn.",
+            "expected": 1.578,
+            "derived": 2.115,
+            "delta": -0.537,
+            "tolerance": 0.12
+          }
+        ]
       },
       "officialRevenueSegments": [
         {
@@ -9044,13 +9054,13 @@
       "operatingIncomeBn": 3.355,
       "nonOperatingBn": 0.006,
       "pretaxIncomeBn": 3.362,
-      "taxBn": 0.724,
+      "taxBn": -0.724,
       "netIncomeBn": 2.693,
       "netIncomeYoyPct": 31.49,
       "grossMarginPct": 51.71,
       "operatingMarginPct": 36.22,
       "profitMarginPct": 29.07,
-      "effectiveTaxRatePct": 21.529,
+      "effectiveTaxRatePct": -21.529,
       "revenueQoqPct": 24.052,
       "grossMarginYoyDeltaPp": 0.35,
       "operatingMarginYoyDeltaPp": 3.52,
@@ -9115,13 +9125,23 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
+        "confidenceScore": 0.9438,
         "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "consistencyScore": 0.875,
         "checksRun": 8,
-        "checksPassed": 8,
-        "issueCount": 0,
-        "issues": []
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "pretax-minus-tax-equals-net",
+            "severity": "warning",
+            "message": "netIncomeBn does not reconcile with pretaxIncomeBn and taxBn.",
+            "expected": 2.693,
+            "derived": 4.086,
+            "delta": -1.393,
+            "tolerance": 0.12
+          }
+        ]
       },
       "officialRevenueSegments": [
         {
@@ -9551,13 +9571,13 @@
       "operatingIncomeBn": 2.738,
       "nonOperatingBn": 0.049,
       "pretaxIncomeBn": 2.787,
-      "taxBn": 0.465,
+      "taxBn": -0.465,
       "netIncomeBn": 2.355,
       "netIncomeYoyPct": 92.4,
       "grossMarginPct": 53.99,
       "operatingMarginPct": 35.37,
       "profitMarginPct": 30.42,
-      "effectiveTaxRatePct": 16.688,
+      "effectiveTaxRatePct": -16.688,
       "revenueQoqPct": -16.42,
       "grossMarginYoyDeltaPp": 3.01,
       "operatingMarginYoyDeltaPp": 9.07,
@@ -9622,13 +9642,23 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
+        "confidenceScore": 0.9438,
         "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "consistencyScore": 0.875,
         "checksRun": 8,
-        "checksPassed": 8,
-        "issueCount": 0,
-        "issues": []
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "pretax-minus-tax-equals-net",
+            "severity": "warning",
+            "message": "netIncomeBn does not reconcile with pretaxIncomeBn and taxBn.",
+            "expected": 2.355,
+            "derived": 3.252,
+            "delta": -0.897,
+            "tolerance": 0.12
+          }
+        ]
       },
       "officialRevenueSegments": [
         {
@@ -9893,13 +9923,13 @@
       "operatingIncomeBn": 2.664,
       "nonOperatingBn": 0.025,
       "pretaxIncomeBn": 2.689,
-      "taxBn": 0.487,
+      "taxBn": -0.487,
       "netIncomeBn": 2.29,
       "netIncomeYoyPct": 45.12,
       "grossMarginPct": 53.69,
       "operatingMarginPct": 34.64,
       "profitMarginPct": 29.77,
-      "effectiveTaxRatePct": 18.126,
+      "effectiveTaxRatePct": -18.126,
       "revenueQoqPct": -0.646,
       "grossMarginYoyDeltaPp": 2.24,
       "operatingMarginYoyDeltaPp": 5.25,
@@ -9964,13 +9994,23 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
+        "confidenceScore": 0.9438,
         "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "consistencyScore": 0.875,
         "checksRun": 8,
-        "checksPassed": 8,
-        "issueCount": 0,
-        "issues": []
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "pretax-minus-tax-equals-net",
+            "severity": "warning",
+            "message": "netIncomeBn does not reconcile with pretaxIncomeBn and taxBn.",
+            "expected": 2.29,
+            "derived": 3.176,
+            "delta": -0.886,
+            "tolerance": 0.12
+          }
+        ]
       },
       "officialRevenueSegments": [
         {
@@ -10235,13 +10275,13 @@
       "operatingIncomeBn": 2.468,
       "nonOperatingBn": 0.019,
       "pretaxIncomeBn": 2.488,
-      "taxBn": 0.442,
+      "taxBn": -0.442,
       "netIncomeBn": 2.125,
       "netIncomeYoyPct": 2.31,
       "grossMarginPct": 51.62,
       "operatingMarginPct": 32.84,
       "profitMarginPct": 28.27,
-      "effectiveTaxRatePct": 17.773,
+      "effectiveTaxRatePct": -17.773,
       "revenueQoqPct": -2.288,
       "grossMarginYoyDeltaPp": 0.82,
       "operatingMarginYoyDeltaPp": 0.15,
@@ -10306,13 +10346,23 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
+        "confidenceScore": 0.9438,
         "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "consistencyScore": 0.875,
         "checksRun": 8,
-        "checksPassed": 8,
-        "issueCount": 0,
-        "issues": []
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "pretax-minus-tax-equals-net",
+            "severity": "warning",
+            "message": "netIncomeBn does not reconcile with pretaxIncomeBn and taxBn.",
+            "expected": 2.125,
+            "derived": 2.93,
+            "delta": -0.805,
+            "tolerance": 0.12
+          }
+        ]
       },
       "officialRevenueSegments": [
         {
@@ -10577,13 +10627,13 @@
       "operatingIncomeBn": 3.431,
       "nonOperatingBn": 0.011,
       "pretaxIncomeBn": 3.442,
-      "taxBn": 0.619,
+      "taxBn": -0.619,
       "netIncomeBn": 2.84,
       "netIncomeYoyPct": 5.46,
       "grossMarginPct": 52.15,
       "operatingMarginPct": 35.31,
       "profitMarginPct": 29.22,
-      "effectiveTaxRatePct": 17.975,
+      "effectiveTaxRatePct": -17.975,
       "revenueQoqPct": 29.297,
       "grossMarginYoyDeltaPp": 0.44,
       "operatingMarginYoyDeltaPp": -0.91,
@@ -10648,13 +10698,23 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
+        "confidenceScore": 0.9438,
         "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "consistencyScore": 0.875,
         "checksRun": 8,
-        "checksPassed": 8,
-        "issueCount": 0,
-        "issues": []
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "pretax-minus-tax-equals-net",
+            "severity": "warning",
+            "message": "netIncomeBn does not reconcile with pretaxIncomeBn and taxBn.",
+            "expected": 2.84,
+            "derived": 4.061,
+            "delta": -1.221,
+            "tolerance": 0.12
+          }
+        ]
       },
       "officialRevenueSegments": [
         {
@@ -14168,7 +14228,8 @@
       "2025-04-16: Command '['swiftc', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/scripts/vision_ocr.swift', '-o', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/data/cache/document-parser/vision-ocr']' returned non-zero exit status 1.",
       "2025-07-16: Command '['swiftc', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/scripts/vision_ocr.swift', '-o', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/data/cache/document-parser/vision-ocr']' returned non-zero exit status 1.",
       "2025-10-15: Command '['swiftc', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/scripts/vision_ocr.swift', '-o', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/data/cache/document-parser/vision-ocr']' returned non-zero exit status 1.",
-      "2026-01-28: Command '['swiftc', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/scripts/vision_ocr.swift', '-o', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/data/cache/document-parser/vision-ocr']' returned non-zero exit status 1."
+      "2026-01-28: Command '['swiftc', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/scripts/vision_ocr.swift', '-o', '/home/runner/work/Earnings-Image-Studio/Earnings-Image-Studio/data/cache/document-parser/vision-ocr']' returned non-zero exit status 1.",
+      "2023-07-19: HTTP Error 429: Too Many Requests"
     ]
   },
   "parserDiagnostics": {
@@ -14222,13 +14283,13 @@
         "status": "medium",
         "quarterCount": 32,
         "validatedQuarterCount": 32,
-        "issueCount": 22,
-        "mismatchQuarterCount": 9,
+        "issueCount": 28,
+        "mismatchQuarterCount": 15,
         "highConfidenceQuarterCount": 11,
-        "averageConfidenceScore": 0.8324,
+        "averageConfidenceScore": 0.8219,
         "latestQuarter": "2025Q4",
-        "latestQuarterConfidenceScore": 1.0,
-        "latestQuarterIssueCount": 0
+        "latestQuarterConfidenceScore": 0.9438,
+        "latestQuarterIssueCount": 1
       }
     },
     "segments": {
@@ -14269,8 +14330,8 @@
     "validation": {
       "version": "parser-validation-v1",
       "status": "high",
-      "overallConfidenceScore": 0.8911,
-      "financialConfidenceScore": 0.8324,
+      "overallConfidenceScore": 0.8842,
+      "financialConfidenceScore": 0.8219,
       "structuralConfidenceScore": 1.0,
       "revenueSegmentChecks": 24,
       "revenueSegmentMismatchCount": 0,
@@ -14358,7 +14419,7 @@
         "label": "Official filing revenue structure",
         "enabled": true,
         "priority": 106,
-        "errorCount": 25
+        "errorCount": 28
       }
     ],
     "provenance": {
@@ -16968,19 +17029,19 @@
         "status": "medium",
         "quarterCount": 32,
         "validatedQuarterCount": 32,
-        "issueCount": 22,
-        "mismatchQuarterCount": 9,
+        "issueCount": 28,
+        "mismatchQuarterCount": 15,
         "highConfidenceQuarterCount": 11,
-        "averageConfidenceScore": 0.8324,
+        "averageConfidenceScore": 0.8219,
         "latestQuarter": "2025Q4",
-        "latestQuarterConfidenceScore": 1.0,
-        "latestQuarterIssueCount": 0
+        "latestQuarterConfidenceScore": 0.9438,
+        "latestQuarterIssueCount": 1
       },
       "validation": {
         "version": "parser-validation-v1",
         "status": "high",
-        "overallConfidenceScore": 0.8911,
-        "financialConfidenceScore": 0.8324,
+        "overallConfidenceScore": 0.8842,
+        "financialConfidenceScore": 0.8219,
         "structuralConfidenceScore": 1.0,
         "revenueSegmentChecks": 24,
         "revenueSegmentMismatchCount": 0,
