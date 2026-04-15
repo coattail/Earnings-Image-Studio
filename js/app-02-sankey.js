@@ -1787,10 +1787,11 @@ function renderPixelReplicaSvg(snapshot) {
     );
   const totalPositiveStackHeight = totalPositiveHeight + Math.max(0, positiveAdjustments.length - 1) * positiveGap;
   const maxPositiveLabelBlockWidth = positiveAdjustments.reduce((maxWidth, item) => {
-    const positiveNameSize = String(item.name || "").length > 14 ? 18 : 22;
-    const positiveValueSize = String(item.name || "").length > 14 ? 18 : 20;
+    const localizedPositiveName = localizeChartItemName(item);
+    const positiveNameSize = localizedPositiveName.length > 14 ? 18 : 22;
+    const positiveValueSize = localizedPositiveName.length > 14 ? 18 : 20;
     const labelWidth = Math.max(
-      approximateTextWidth(localizeChartPhrase(item.name), positiveNameSize),
+      approximateTextWidth(localizedPositiveName, positiveNameSize),
       approximateTextWidth(formatItemBillions(item, "positive-plus"), positiveValueSize),
       1
     );
@@ -7501,8 +7502,9 @@ function renderPixelReplicaSvg(snapshot) {
     positiveAdjustments.forEach((item, index) => {
       const gainHeight = positiveHeights[index];
       const mergeHeight = positiveMergeHeights[index] ?? Math.max(safeNumber(item.valueBn) * scale, 0);
-      const positiveNameSize = String(item.name || "").length > 14 ? 18 : 22;
-      const positiveValueSize = String(item.name || "").length > 14 ? 18 : 20;
+      const localizedPositiveName = localizeChartItemName(item);
+      const positiveNameSize = localizedPositiveName.length > 14 ? 18 : 22;
+      const positiveValueSize = localizedPositiveName.length > 14 ? 18 : 20;
       const labelGapX = safeNumber(snapshot.layout?.positiveLabelGapX, 14);
       const twoLineGap = scaleY(safeNumber(snapshot.layout?.positiveLabelLineGapY, 8));
       const valueYOffset = scaleY(safeNumber(snapshot.layout?.positiveLabelValueOffsetY, 16));
@@ -7520,7 +7522,7 @@ function renderPixelReplicaSvg(snapshot) {
       );
       const labelValue = formatItemBillions(item, "positive-plus");
       const leftCorridor = positiveNodeX - (opX + nodeWidth);
-      const labelNameWidth = approximateTextWidth(localizeChartPhrase(item.name), positiveNameSize);
+      const labelNameWidth = approximateTextWidth(localizedPositiveName, positiveNameSize);
       const labelValueWidth = approximateTextWidth(labelValue, positiveValueSize);
       const labelBlockWidth = Math.max(labelNameWidth, labelValueWidth, 1);
       const positiveLabelMinLeftPad = safeNumber(snapshot.layout?.positiveLabelMinLeftPadX, 10);
@@ -8185,7 +8187,7 @@ function renderPixelReplicaSvg(snapshot) {
       const labelCenterY = chosenPlacement.centerY + positiveShift.dy;
       const chosenLabelRect = labelBoundsRect(labelAnchor, labelX, labelCenterY);
       placedPositiveLabelRects.push(chosenLabelRect);
-      positiveMarkup += `<text x="${labelX}" y="${labelCenterY - twoLineGap}" text-anchor="${labelAnchor}" font-size="${positiveNameSize}" font-weight="700" fill="${greenText}" paint-order="stroke fill" stroke="${background}" stroke-width="7" stroke-linejoin="round">${escapeHtml(localizeChartPhrase(item.name))}</text>`;
+      positiveMarkup += `<text x="${labelX}" y="${labelCenterY - twoLineGap}" text-anchor="${labelAnchor}" font-size="${positiveNameSize}" font-weight="700" fill="${greenText}" paint-order="stroke fill" stroke="${background}" stroke-width="7" stroke-linejoin="round">${escapeHtml(localizedPositiveName)}</text>`;
       positiveMarkup += `<text x="${labelX}" y="${labelCenterY + valueYOffset}" text-anchor="${labelAnchor}" font-size="${positiveValueSize}" font-weight="700" fill="${greenText}" paint-order="stroke fill" stroke="${background}" stroke-width="6" stroke-linejoin="round">${escapeHtml(labelValue)}</text>`;
       positiveTop = finalSourceTop + gainHeight + positiveGap;
       netPositiveCursor += mergeHeight;

@@ -1753,15 +1753,15 @@ function buildGenericSnapshot(company, entry, quarterKey) {
   if (hasRenderableGrossStage && netBridgeResidualBn !== null && Math.abs(netBridgeResidualBn) > netBridgeResidualTolerance) {
     if (netBridgeResidualBn > 0) {
       positiveAdjustments.push({
-        name: "Other net bridge gain",
-        nameZh: "其他净利调整收益",
+        name: "Other net gain",
+        nameZh: "其他净收益",
         valueBn: Math.abs(netBridgeResidualBn),
         color: "#16A34A",
       });
     } else {
       belowOperatingItems.push({
-        name: "Other net bridge expense",
-        nameZh: "其他净利调整费用",
+        name: "Other net expense",
+        nameZh: "其他净费用",
         valueBn: Math.abs(netBridgeResidualBn),
         color: "#D92D20",
       });
