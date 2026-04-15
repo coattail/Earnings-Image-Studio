@@ -1,8 +1,10 @@
 from __future__ import annotations
 
+import io
 import json
 import math
 import re
+import requests
 from dataclasses import dataclass
 from datetime import date, timedelta
 from html import unescape
@@ -10,13 +12,20 @@ from pathlib import Path
 from typing import Any
 
 from official_segments import ALLOWED_FORMS, _calendar_quarter, _period_key, _request, _request_json, _resolve_cik, _submission_records
+from pypdf import PdfReader
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 CACHE_DIR = ROOT_DIR / "data" / "cache" / "official-financials"
+OFFICIAL_FINANCIALS_CACHE_VERSION = "20260415-v2"
 CURRENCY_UNIT_PATTERN = re.compile(r"^[A-Z]{3}$")
 MIN_FILING_DATE = "2017-01-01"
 MIN_CALENDAR_QUARTER = (2018, 1)
+ASML_FINANCIAL_RESULTS_INDEX_URL = "https://www.asml.com/en/investors/financial-results"
+ASML_RESULTS_PAGE_PATH_PATTERN = re.compile(r'href="(/en/investors/financial-results/q([1-4])-(20\d{2}))"')
+ASML_FINANCIAL_PDF_URL_PATTERN = re.compile(r'href="(https://[^"]*Financial-statements-US-GAAP[^"]+\.pdf[^"]*)"')
+ASML_PUBLISHED_TIME_PATTERN = re.compile(r'property="article:published_time"\s+content="([^"]+)"')
+ASML_SC_PUBLICATION_DATE_PATTERN = re.compile(r'name="sc:publication_date"\s+content="([^"]+)"')
 NAMESPACE_PRIORITY = {
     "us-gaap": 20,
     "ifrs-full": 18,
@@ -140,6 +149,36 @@ def _load_cached_json(path: Path) -> Any:
 
 def _write_cached_json(path: Path, payload: Any) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def _append_error_detail(
+    result: dict[str, Any],
+    *,
+    message: str,
+    phase: str,
+    severity: str = "error",
+    error_type: str | None = None,
+    **extra: Any,
+) -> None:
+    detail: dict[str, Any] = {
+        "message": message,
+        "layer": "financials",
+        "sourceId": "official_financials",
+        "phase": phase,
+        "severity": severity,
+    }
+    if error_type:
+        detail["errorType"] = error_type
+    for key, value in extra.items():
+        if value is not None:
+            detail[key] = value
+    error_details = result.setdefault("errorDetails", [])
+    if detail not in error_details:
+        error_details.append(detail)
+
+
+def _is_current_official_financials_cache(payload: Any) -> bool:
+    return isinstance(payload, dict) and payload.get("_cacheVersion") == OFFICIAL_FINANCIALS_CACHE_VERSION
 
 
 def _is_money_unit(unit: str) -> bool:
@@ -856,6 +895,163 @@ def _parse_asml_release(html_text: str, filing_date: str, source_url: str, curre
     return None
 
 
+def _extract_asml_latest_results_page_path(html_text: str) -> str | None:
+    matches = {
+        (int(year), int(quarter), path)
+        for path, quarter, year in ASML_RESULTS_PAGE_PATH_PATTERN.findall(str(html_text or ""))
+    }
+    if not matches:
+        return None
+    _, _, path = max(matches, key=lambda item: (item[0], item[1]))
+    return path
+
+
+def _extract_asml_financial_pdf_url(html_text: str) -> str | None:
+    match = ASML_FINANCIAL_PDF_URL_PATTERN.search(str(html_text or ""))
+    return match.group(1) if match else None
+
+
+def _extract_asml_published_date(html_text: str) -> str | None:
+    match = ASML_PUBLISHED_TIME_PATTERN.search(str(html_text or "")) or ASML_SC_PUBLICATION_DATE_PATTERN.search(str(html_text or ""))
+    if not match:
+        return None
+    published = str(match.group(1) or "").strip()
+    return published[:10] if len(published) >= 10 else None
+
+
+def _extract_asml_pdf_row_value(lines: list[str], *labels: str) -> float | None:
+    normalized_labels = [str(label or "").strip().lower() for label in labels if str(label or "").strip()]
+    for line in lines:
+        lowered = line.lower()
+        if not any(lowered.startswith(label) for label in normalized_labels):
+            continue
+        matches = re.findall(r"\([0-9,]+\.[0-9]+\)|[0-9,]+\.[0-9]+", line)
+        if len(matches) < 2:
+            continue
+        return _parse_number(matches[-1])
+    return None
+
+
+def _parse_asml_pdf_financial_page(text: str, filing_date: str, source_url: str, currency: str) -> tuple[str, dict[str, Any]] | None:
+    lines = [re.sub(r"\s+", " ", line).strip() for line in str(text or "").splitlines()]
+    lines = [line for line in lines if line]
+    if not lines:
+        return None
+    compact_text = "\n".join(lines)
+    header_match = re.search(
+        r"Three months ended\s+([A-Za-z]{3,9})\s+(\d{1,2}),\s+([A-Za-z]{3,9})\s+(\d{1,2}),\s+\(unaudited.*?\)\s+(\d{4})\s+(\d{4})",
+        compact_text,
+        re.IGNORECASE | re.DOTALL,
+    )
+    if not header_match:
+        return None
+
+    current_label = f"{header_match.group(3)} {header_match.group(4)}, {header_match.group(6)}"
+    date_match = re.search(r"([A-Za-z]{3,9})\s+(\d{1,2}),\s*(\d{4})", current_label)
+    quarter_info = _quarter_from_month_day_year_label(current_label)
+    if quarter_info is None or date_match is None:
+        return None
+    quarter, _ = quarter_info
+    month_lookup = {
+        "jan": 1,
+        "feb": 2,
+        "mar": 3,
+        "apr": 4,
+        "may": 5,
+        "jun": 6,
+        "jul": 7,
+        "aug": 8,
+        "sep": 9,
+        "oct": 10,
+        "nov": 11,
+        "dec": 12,
+    }
+    month = month_lookup.get(date_match.group(1).strip().lower()[:3])
+    if month is None:
+        return None
+    period_end = f"{int(date_match.group(3)):04d}-{month:02d}-{int(date_match.group(2)):02d}"
+
+    revenue_value = _extract_asml_pdf_row_value(lines, "Total net sales")
+    cost_value = _extract_asml_pdf_row_value(lines, "Total cost of sales")
+    gross_value = _extract_asml_pdf_row_value(lines, "Gross profit")
+    rnd_value = _extract_asml_pdf_row_value(lines, "Research and development costs")
+    sgna_value = _extract_asml_pdf_row_value(lines, "Selling, general and administrative costs")
+    operating_income_value = _extract_asml_pdf_row_value(lines, "Income from operations")
+    non_operating_value = _extract_asml_pdf_row_value(lines, "Interest and other, net")
+    pretax_value = _extract_asml_pdf_row_value(lines, "Income before income taxes")
+    tax_value = _extract_asml_pdf_row_value(lines, "Income tax expense", "Benefit from (provision for) income taxes")
+    net_income_value = _extract_asml_pdf_row_value(lines, "Net income")
+    if revenue_value is None or net_income_value is None:
+        return None
+
+    scale = 1_000_000
+    entry = _build_financial_entry(
+        quarter,
+        currency,
+        period_end,
+        quarter[:4],
+        f"Q{quarter[-1]}",
+        revenue_value=revenue_value * scale,
+        cost_value=abs(cost_value) * scale if cost_value is not None else None,
+        gross_value=gross_value * scale if gross_value is not None else None,
+        sgna_value=abs(sgna_value) * scale if sgna_value is not None else None,
+        rnd_value=abs(rnd_value) * scale if rnd_value is not None else None,
+        operating_income_value=operating_income_value * scale if operating_income_value is not None else None,
+        non_operating_value=non_operating_value * scale if non_operating_value is not None else None,
+        pretax_value=pretax_value * scale if pretax_value is not None else None,
+        tax_value=abs(tax_value) * scale if tax_value is not None else None,
+        net_income_value=net_income_value * scale,
+    )
+    entry["statementSourceUrl"] = source_url
+    entry["statementFilingDate"] = filing_date
+    return (quarter, entry)
+
+
+def _request_bytes_resilient(url: str) -> bytes:
+    try:
+        return _request(url)
+    except Exception:
+        response = requests.get(url, timeout=60)
+        response.raise_for_status()
+        return response.content
+
+
+def _load_asml_website_financials(currency: str) -> dict[str, dict[str, Any]]:
+    try:
+        index_html = _request_bytes_resilient(ASML_FINANCIAL_RESULTS_INDEX_URL).decode("utf-8", errors="ignore")
+    except Exception:
+        return {}
+    page_path = _extract_asml_latest_results_page_path(index_html)
+    if not page_path:
+        return {}
+    page_url = f"https://www.asml.com{page_path}"
+    try:
+        page_html = _request_bytes_resilient(page_url).decode("utf-8", errors="ignore")
+    except Exception:
+        return {}
+    pdf_url = _extract_asml_financial_pdf_url(page_html)
+    if not pdf_url:
+        return {}
+    filing_date = _extract_asml_published_date(page_html) or ""
+    try:
+        pdf_bytes = _request_bytes_resilient(pdf_url)
+    except Exception:
+        return {}
+    try:
+        reader = PdfReader(io.BytesIO(pdf_bytes))
+    except Exception:
+        return {}
+
+    for page in reader.pages:
+        text = page.extract_text() or ""
+        parsed = _parse_asml_pdf_financial_page(text, filing_date, pdf_url, currency)
+        if parsed is None:
+            continue
+        quarter, entry = parsed
+        return {quarter: entry}
+    return {}
+
+
 def _quarter_from_month_day_year_label(label: str) -> tuple[str, str] | None:
     match = re.search(r"([A-Za-z]{3,9})\.?\s+(\d{1,2}),\s*(\d{4})", str(label or ""))
     if not match:
@@ -1121,16 +1317,30 @@ def _load_html_fallback_financials(company: dict[str, Any], cik: int, currency: 
                 if len(periods) >= expected:
                     return results
             break
+    if company["id"] == "asml":
+        website_financials = _load_asml_website_financials(currency)
+        for quarter, entry in website_financials.items():
+            current = results.get(quarter)
+            if current is None or str(entry.get("statementFilingDate") or "") > str(current.get("statementFilingDate") or ""):
+                results[quarter] = entry
     return results
 
 
 def fetch_official_financial_history(company: dict[str, Any], refresh: bool = False) -> dict[str, Any]:
     path = _cache_path(str(company["id"]))
     if path.exists() and not refresh:
-        return _load_cached_json(path)
+        cached_payload = _load_cached_json(path)
+        if _is_current_official_financials_cache(cached_payload):
+            return cached_payload
 
-    cik = _resolve_cik(str(company.get("ticker") or ""), refresh=refresh)
+    cik: int | None = None
+    cik_lookup_error: Exception | None = None
+    try:
+        cik = _resolve_cik(str(company.get("ticker") or ""), refresh=refresh)
+    except Exception as exc:  # noqa: BLE001
+        cik_lookup_error = exc
     result = {
+        "_cacheVersion": OFFICIAL_FINANCIALS_CACHE_VERSION,
         "id": company["id"],
         "ticker": company["ticker"],
         "nameZh": company["nameZh"],
@@ -1146,9 +1356,36 @@ def fetch_official_financial_history(company: dict[str, Any], refresh: bool = Fa
         "reportingCurrency": None,
         "cik": cik,
         "errors": [],
+        "errorDetails": [],
     }
+    if cik_lookup_error is not None:
+        result["errors"].append(f"resolve_cik: {cik_lookup_error}")
+        _append_error_detail(
+            result,
+            message=str(cik_lookup_error),
+            phase="resolve-cik",
+            error_type=type(cik_lookup_error).__name__,
+        )
+        if str(company.get("id") or "") == "asml":
+            website_financials = _load_asml_website_financials("EUR")
+            if website_financials:
+                ordered_periods, ordered_financials = _finalize_financials(website_financials)
+                result["quarters"] = ordered_periods
+                result["financials"] = ordered_financials
+                result["reportingCurrency"] = "EUR"
+                result["statementSource"] = "official-asml-website"
+                if ordered_periods:
+                    latest_entry = ordered_financials[ordered_periods[-1]]
+                    result["statementSourceUrl"] = latest_entry.get("statementSourceUrl")
+        _write_cached_json(path, result)
+        return result
     if cik is None:
         result["errors"].append("Unable to resolve SEC CIK.")
+        _append_error_detail(
+            result,
+            message="Unable to resolve SEC CIK.",
+            phase="resolve-cik",
+        )
         _write_cached_json(path, result)
         return result
 
@@ -1158,12 +1395,35 @@ def fetch_official_financial_history(company: dict[str, Any], refresh: bool = Fa
         companyfacts = _request_json(source_url)
     except Exception as exc:  # noqa: BLE001
         result["errors"].append(f"companyfacts: {exc}")
+        _append_error_detail(
+            result,
+            message=str(exc),
+            phase="companyfacts",
+            error_type=type(exc).__name__,
+            url=source_url,
+        )
+        if str(company.get("id") or "") == "asml":
+            website_financials = _load_asml_website_financials("EUR")
+            if website_financials:
+                ordered_periods, ordered_financials = _finalize_financials(website_financials)
+                result["quarters"] = ordered_periods
+                result["financials"] = ordered_financials
+                result["reportingCurrency"] = "EUR"
+                result["statementSource"] = "official-asml-website"
+                if ordered_periods:
+                    latest_entry = ordered_financials[ordered_periods[-1]]
+                    result["statementSourceUrl"] = latest_entry.get("statementSourceUrl")
         _write_cached_json(path, result)
         return result
 
     reporting_currency = _select_reporting_currency(companyfacts)
     if reporting_currency is None:
         result["errors"].append("Unable to determine reporting currency from companyfacts.")
+        _append_error_detail(
+            result,
+            message="Unable to determine reporting currency from companyfacts.",
+            phase="reporting-currency",
+        )
         _write_cached_json(path, result)
         return result
     result["reportingCurrency"] = reporting_currency
