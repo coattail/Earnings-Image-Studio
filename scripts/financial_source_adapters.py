@@ -9,6 +9,7 @@ from document_parser import parse_income_statement_from_url, statement_value_to_
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 CACHE_DIR = ROOT_DIR / "data" / "cache" / "financial-source-adapters"
+FINANCIAL_SOURCE_ADAPTERS_CACHE_VERSION = "financial-source-adapters-v1"
 
 
 def _cache_path(name: str) -> Path:
@@ -22,6 +23,10 @@ def _load_cached_json(path: Path) -> Any:
 
 def _write_cached_json(path: Path, payload: Any) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def _is_current_financial_source_adapter_cache(payload: Any) -> bool:
+    return isinstance(payload, dict) and payload.get("_cacheVersion") == FINANCIAL_SOURCE_ADAPTERS_CACHE_VERSION
 
 
 def quarter_end_date(quarter_key: str) -> str | None:
@@ -205,8 +210,11 @@ def fetch_tencent_ir_pdf_financial_history(
 ) -> dict[str, Any]:
     cache_path = _cache_path(f"tencent-ir-pdf-{company.get('id')}.json")
     if cache_path.exists() and not refresh:
-        return _load_cached_json(cache_path)
+        cached_payload = _load_cached_json(cache_path)
+        if _is_current_financial_source_adapter_cache(cached_payload):
+            return cached_payload
     result = {
+        "_cacheVersion": FINANCIAL_SOURCE_ADAPTERS_CACHE_VERSION,
         "id": company["id"],
         "ticker": company["ticker"],
         "nameZh": company["nameZh"],

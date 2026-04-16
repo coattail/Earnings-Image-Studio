@@ -41,6 +41,8 @@ After the merge, the project keeps the original `earnings-image-studio` renderin
 ### 1. Install dependencies
 
 ```bash
+python3 -m venv .venv
+. .venv/bin/activate
 python3 -m pip install -r requirements.txt
 ```
 
@@ -49,6 +51,14 @@ If you run JavaScript audit/export helpers:
 ```bash
 npm install
 ```
+
+Runtime assumptions:
+
+- Python `3.10+` is required. The scripts use modern type-union syntax such as `str | None`.
+- `requirements.txt` is mandatory for first run. A plain system `python3` without `requests` / `beautifulsoup4` will fail before parsing starts.
+- `pypdf 6.x` is supported for the checked entrypoints; the dependency range is intentionally `<7`.
+- `scripts/run_parser_regression_suite.py` also assumes network access plus macOS OCR tooling (`swiftc` builds `scripts/vision_ocr.swift` on demand).
+- The regression suite is not fully hermetic: FedEx cases depend on live remote PDFs / IR pages and can fail when source sites or crawl targets drift, even if local dependencies are installed.
 
 ### 2. Build/refresh dataset
 

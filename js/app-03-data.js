@@ -130,16 +130,65 @@ function hasDirectOfficialExpenseCategories(entry) {
   return ["rndBn", "sgnaBn", "otherOpexBn"].some((fieldName) => safeNumber(entry?.[fieldName]) > 0.02);
 }
 
+const SUSPICIOUS_PLACEHOLDER_EXPENSE_KEYS = new Set([
+  "financeexpense",
+  "finance_expense",
+  "fulfillment",
+  "ga",
+  "generaladministrative",
+  "general_administrative",
+  "rd",
+  "rnd",
+  "salesmarketing",
+  "sales_marketing",
+  "taxessurcharges",
+  "taxes_surcharges",
+]);
+
+function normalizeSuspiciousExpenseKey(value) {
+  return String(value || "").trim().toLowerCase().replace(/[^a-z0-9]+/g, "");
+}
+
+function looksLikePlaceholderEchoExpenseCluster(items, repeatedValue) {
+  const matchingItems = items.filter((item) => Number(Math.max(safeNumber(item?.valueBn), 0).toFixed(3)) === repeatedValue);
+  if (matchingItems.length < 4) return false;
+  const keys = new Set();
+  matchingItems.forEach((item) => {
+    [item?.taxonomyId, item?.memberKey, item?.name].forEach((rawValue) => {
+      const normalized = normalizeSuspiciousExpenseKey(rawValue);
+      if (normalized) keys.add(normalized);
+    });
+  });
+  return [...keys].filter((key) => SUSPICIOUS_PLACEHOLDER_EXPENSE_KEYS.has(key)).length >= 4;
+}
+
 function isSuspiciousExpenseBreakdown(items, totalValueBn, entry = null) {
   const normalizedItems = normalizeBreakdownItems(items, null, "negative-parentheses");
   if (normalizedItems.length < 2) return false;
   const values = normalizedItems.map((item) => Number(Math.max(safeNumber(item?.valueBn), 0).toFixed(3))).filter((value) => value > 0.02);
   if (values.length < 2) return false;
   const targetTotalBn = Math.max(safeNumber(totalValueBn, entry?.operatingExpensesBn), 0);
-  const uniqueValueCount = new Set(values.map((value) => value.toFixed(3))).size;
   const rawSumBn = values.reduce((sum, value) => sum + value, 0);
   const maxItemBn = Math.max(...values);
+  const counts = new Map();
+  values.forEach((value) => {
+    const key = value.toFixed(3);
+    counts.set(key, (counts.get(key) || 0) + 1);
+  });
+  let repeatedValue = null;
+  let repeatedCount = 0;
+  counts.forEach((count, key) => {
+    if (count > repeatedCount) {
+      repeatedCount = count;
+      repeatedValue = Number(key);
+    }
+  });
+  const uniqueValueCount = counts.size;
   const equalCluster = values.length >= 4 && uniqueValueCount <= 1;
+  const placeholderEchoCluster =
+    repeatedCount >= 4 &&
+    repeatedValue !== null &&
+    looksLikePlaceholderEchoExpenseCluster(normalizedItems, repeatedValue);
   const rawSumFarAboveTarget =
     targetTotalBn > 0.05 &&
     rawSumBn > targetTotalBn * 1.35 + Math.max(0.35, targetTotalBn * 0.03);
@@ -162,6 +211,7 @@ function isSuspiciousExpenseBreakdown(items, totalValueBn, entry = null) {
   const echoesStatementValue =
     equalCluster &&
     referenceValues.some((value) => Math.abs(value - values[0]) <= Math.max(0.05, value * 0.0025));
+  if (placeholderEchoCluster) return true;
   return equalCluster && (rawSumFarAboveTarget || itemFarAboveTarget || echoesStatementValue);
 }
 
@@ -192,6 +242,19 @@ function filterQuarterKeysByClassificationPolicy(company, quarterKeys = []) {
     return true;
   });
   return filteredKeys.length ? filteredKeys : quarterKeys;
+}
+
+function shouldExpandClassifiedBarQuarterWindow(company, fullQuarterKeys = [], filteredQuarterKeys = [], maxQuarters = 30) {
+  const policy = company?.classificationPolicy;
+  if (!policy?.displayOfficiallyClassifiedPeriodsOnly) return false;
+  if (!Array.isArray(fullQuarterKeys) || !Array.isArray(filteredQuarterKeys)) return false;
+  if (!fullQuarterKeys.length || filteredQuarterKeys.length >= fullQuarterKeys.length) return false;
+  const requestedWindowSize = Math.max(1, Math.floor(safeNumber(maxQuarters, 30)));
+  if (filteredQuarterKeys.length >= Math.min(requestedWindowSize, fullQuarterKeys.length)) return false;
+  const latestQuarterKey = fullQuarterKeys[fullQuarterKeys.length - 1] || null;
+  if (!latestQuarterKey) return false;
+  const latestHasRevenueAnchor = quarterHasOfficialRevenueClassification(company, latestQuarterKey) || policy.allowLatestRevenueGap === true;
+  return latestHasRevenueAnchor && filteredQuarterKeys.length >= 2;
 }
 
 function preferredQuarter(company, preferReplica) {
@@ -3683,12 +3746,18 @@ function buildRevenueSegmentBarHistory(company, anchorQuarterKey, maxQuarters = 
       : {};
   const financialQuarterKeys = Array.isArray(company?.quarters) ? company.quarters : [];
   const structureQuarterKeys = Object.keys(structureQuarterMap || {});
-  const quarterKeys = filterQuarterKeysByClassificationPolicy(
-    company,
+  const candidateQuarterKeys =
     [...new Set([...financialQuarterKeys, ...structureQuarterKeys])]
-    .filter((quarterKey) => /^\d{4}Q[1-4]$/.test(quarterKey))
-    .sort((left, right) => quarterSortValue(left) - quarterSortValue(right))
+      .filter((quarterKey) => /^\d{4}Q[1-4]$/.test(quarterKey))
+      .sort((left, right) => quarterSortValue(left) - quarterSortValue(right));
+  const policyFilteredQuarterKeys = filterQuarterKeysByClassificationPolicy(company, candidateQuarterKeys);
+  const usesExpandedQuarterWindow = shouldExpandClassifiedBarQuarterWindow(
+    company,
+    candidateQuarterKeys,
+    policyFilteredQuarterKeys,
+    maxQuarters
   );
+  const quarterKeys = usesExpandedQuarterWindow ? candidateQuarterKeys : policyFilteredQuarterKeys;
   if (!quarterKeys.length) return null;
   const allValidQuarterKeys = quarterKeys.filter((quarterKey) => {
     const entry = company?.financials?.[quarterKey];
@@ -3715,6 +3784,7 @@ function buildRevenueSegmentBarHistory(company, anchorQuarterKey, maxQuarters = 
     ? company.classificationPolicy.displayPeriodTypes.map((item) => String(item || "").trim().toLowerCase()).filter(Boolean)
     : [];
   const usesNonQuarterDisplayWindow =
+    !usesExpandedQuarterWindow &&
     !!company?.classificationPolicy?.displayOfficiallyClassifiedPeriodsOnly &&
     displayPeriodTypes.some((item) => item === "half-year" || item === "annual");
   const requestedWindowCount =

@@ -5,7 +5,7 @@ from typing import Any
 
 from manual_data_sources import load_manual_company_overrides, lookup_company_record
 
-from .base import AdapterResult
+from .base import AdapterResult, payload_error_bundle
 
 
 FIELD_PRIORITIES = {
@@ -74,6 +74,12 @@ def run(company: dict[str, Any], refresh: bool = False, base_payload: dict[str, 
     record = lookup_company_record(source_payload, company)
     payload = _normalize_manual_payload(record) if isinstance(record, dict) else {}
     enabled = isinstance(payload.get("financials"), dict)
+    errors, error_details = payload_error_bundle(
+        payload,
+        layer="financials",
+        source_id="manual_financials",
+        phase="manual-override",
+    )
     return AdapterResult(
         adapter_id="manual_financials",
         kind="statement",
@@ -81,6 +87,7 @@ def run(company: dict[str, Any], refresh: bool = False, base_payload: dict[str, 
         priority=146,
         payload=payload if isinstance(payload, dict) else {},
         field_priorities=FIELD_PRIORITIES,
-        errors=list(payload.get("errors") or []) if isinstance(payload, dict) else [],
+        errors=errors,
+        error_details=error_details,
         enabled=enabled,
     )

@@ -31,8 +31,9 @@ from document_parser import (
     slice_text_section as _shared_slice_text_section,
     statement_value_to_bn as _shared_statement_value_to_bn,
 )
-from official_financials import _extract_html_tables, _parse_number
+from official_financials import _extract_html_tables, _is_current_official_financials_cache, _parse_number
 from official_segments import (
+    CACHE_VERSION as OFFICIAL_SEGMENTS_CACHE_VERSION,
     SegmentFact,
     _build_quarterly_series,
     _calendar_quarter,
@@ -54,6 +55,7 @@ OFFICIAL_SEGMENT_CACHE_DIR = ROOT_DIR / "data" / "cache" / "official-segments"
 OFFICIAL_FINANCIAL_CACHE_DIR = ROOT_DIR / "data" / "cache" / "official-financials"
 STOCKANALYSIS_FINANCIAL_CACHE_DIR = ROOT_DIR / "data" / "cache" / "stockanalysis-financials"
 CACHE_VERSION = "20260327-v17"
+STOCKANALYSIS_FINANCIAL_PAYLOAD_CACHE_VERSION = "20260329-v1"
 STOCKANALYSIS_FINANCIAL_CACHE: dict[str, dict[str, Any]] = {}
 
 XBRL_AXIS_COMPANY_CONFIGS: dict[str, dict[str, Any]] = {
@@ -448,6 +450,32 @@ def _write_cached_json(path: Path, payload: Any) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
+def _append_error_detail(
+    result: dict[str, Any],
+    *,
+    message: str,
+    phase: str,
+    severity: str = "error",
+    error_type: str | None = None,
+    **extra: Any,
+) -> None:
+    detail: dict[str, Any] = {
+        "message": message,
+        "layer": "revenue-structures",
+        "sourceId": "official_revenue_structures",
+        "phase": phase,
+        "severity": severity,
+    }
+    if error_type:
+        detail["errorType"] = error_type
+    for key, value in extra.items():
+        if value is not None:
+            detail[key] = value
+    error_details = result.setdefault("errorDetails", [])
+    if detail not in error_details:
+        error_details.append(detail)
+
+
 def _sorted_quarter_payloads(quarter_map: dict[str, Any] | None) -> dict[str, Any]:
     cleaned = quarter_map if isinstance(quarter_map, dict) else {}
     return {
@@ -463,6 +491,7 @@ def _merge_revenue_structure_results(base: dict[str, Any] | None, supplement: di
         "quarters": {},
         "filingsUsed": [],
         "errors": [],
+        "errorDetails": [],
     }
     for payload in (base, supplement):
         if not isinstance(payload, dict):
@@ -481,6 +510,12 @@ def _merge_revenue_structure_results(base: dict[str, Any] | None, supplement: di
                 continue
             if error not in merged["errors"]:
                 merged["errors"].append(str(error))
+        for detail in payload.get("errorDetails") or []:
+            if not isinstance(detail, dict):
+                continue
+            copied_detail = deepcopy(detail)
+            if copied_detail not in merged["errorDetails"]:
+                merged["errorDetails"].append(copied_detail)
     merged["quarters"] = _sorted_quarter_payloads(merged.get("quarters"))
     return merged
 
@@ -520,19 +555,31 @@ def _preserve_missing_cached_revenue_structure_quarters(
     return merged
 
 
-def _load_cached_filing_entries(company_id: str) -> list[dict[str, Any]]:
+def _is_current_revenue_structure_cache(payload: Any) -> bool:
+    return isinstance(payload, dict) and payload.get("_cacheVersion") == CACHE_VERSION
+
+
+def _load_cached_filing_entries(company_id: str, refresh: bool = False) -> list[dict[str, Any]]:
+    if refresh:
+        return []
     path = OFFICIAL_SEGMENT_CACHE_DIR / f"{company_id}.json"
     if not path.exists():
         return []
     payload = _load_cached_json(path)
+    if not isinstance(payload, dict) or payload.get("_cacheVersion") != OFFICIAL_SEGMENTS_CACHE_VERSION:
+        return []
     return [item for item in payload.get("filingsUsed", []) if isinstance(item, dict)]
 
 
-def _load_cached_financial_entries(company_id: str) -> list[tuple[str, dict[str, Any]]]:
+def _load_cached_financial_entries(company_id: str, refresh: bool = False) -> list[tuple[str, dict[str, Any]]]:
+    if refresh:
+        return []
     path = OFFICIAL_FINANCIAL_CACHE_DIR / f"{company_id}.json"
     if not path.exists():
         return []
     payload = _load_cached_json(path)
+    if not _is_current_official_financials_cache(payload):
+        return []
     quarters = sorted(payload.get("quarters", []), key=_period_key)
     financials = payload.get("financials", {})
     return [(quarter, financials.get(quarter) or {}) for quarter in quarters]
@@ -551,19 +598,19 @@ def _submission_filing_entries(cik: int) -> list[dict[str, Any]]:
     ]
 
 
-def _merged_filing_entries(company_id: str, cik: int) -> list[dict[str, Any]]:
+def _merged_filing_entries(company_id: str, cik: int, refresh: bool = False) -> list[dict[str, Any]]:
     merged: dict[str, dict[str, Any]] = {}
     for filing in _submission_filing_entries(cik):
         accession = str(filing.get("accession") or "")
         if not accession:
             continue
         merged[accession] = dict(filing)
-    for filing in _load_cached_filing_entries(company_id):
+    for filing in _load_cached_filing_entries(company_id, refresh=refresh):
         accession = str(filing.get("accession") or "")
         if not accession:
             continue
         existing = merged.get(accession, {})
-        merged[accession] = {**existing, **filing}
+        merged[accession] = {**filing, **existing}
     return sorted(merged.values(), key=lambda item: str(item.get("filingDate") or ""), reverse=True)
 
 
@@ -1424,7 +1471,7 @@ def _parse_jd_quarter_item(item: dict[str, Any]) -> tuple[str, dict[str, Any], d
 
 
 def _parse_jd_records(company: dict[str, Any]) -> dict[str, Any]:
-    result = {"source": "official-ir-release", "quarters": {}, "filingsUsed": [], "errors": []}
+    result = {"source": "official-ir-release", "quarters": {}, "filingsUsed": [], "errors": [], "errorDetails": []}
     for item in _load_jd_quarterly_items():
         try:
             parsed = _parse_jd_quarter_item(item)
@@ -1436,6 +1483,14 @@ def _parse_jd_records(company: dict[str, Any]) -> dict[str, Any]:
         except Exception as exc:  # noqa: BLE001
             quarter = str(item.get("quarter") or "")
             result["errors"].append(f"{quarter}: {exc}")
+            _append_error_detail(
+                result,
+                message=str(exc),
+                phase="jd-quarter-parse",
+                error_type=type(exc).__name__,
+                quarter=quarter,
+                sourceUrl=item.get("sourceUrl"),
+            )
     return result
 
 
@@ -1510,7 +1565,9 @@ def _extract_netease_narrative_value(text: str, label: str) -> float | None:
     return None
 
 
-def _load_stockanalysis_financial_payload(company_id: str) -> dict[str, Any]:
+def _load_stockanalysis_financial_payload(company_id: str, refresh: bool = False) -> dict[str, Any]:
+    if refresh:
+        return {}
     cached = STOCKANALYSIS_FINANCIAL_CACHE.get(company_id)
     if cached is not None:
         return cached
@@ -1520,12 +1577,14 @@ def _load_stockanalysis_financial_payload(company_id: str) -> dict[str, Any]:
     else:
         loaded = _load_cached_json(path)
         payload = loaded if isinstance(loaded, dict) else {}
+        if payload.get("_cacheVersion") != STOCKANALYSIS_FINANCIAL_PAYLOAD_CACHE_VERSION:
+            payload = {}
     STOCKANALYSIS_FINANCIAL_CACHE[company_id] = payload
     return payload
 
 
-def _build_stockanalysis_opex_breakdown(company_id: str, quarter: str) -> list[dict[str, Any]]:
-    payload = _load_stockanalysis_financial_payload(company_id)
+def _build_stockanalysis_opex_breakdown(company_id: str, quarter: str, refresh: bool = False) -> list[dict[str, Any]]:
+    payload = _load_stockanalysis_financial_payload(company_id, refresh=refresh)
     financials = payload.get("financials") if isinstance(payload, dict) else None
     entry = financials.get(quarter) if isinstance(financials, dict) else None
     if not isinstance(entry, dict):
@@ -1561,8 +1620,8 @@ def _build_stockanalysis_opex_breakdown(company_id: str, quarter: str) -> list[d
     return rows
 
 
-def _stockanalysis_operating_expenses(company_id: str, quarter: str) -> float | None:
-    payload = _load_stockanalysis_financial_payload(company_id)
+def _stockanalysis_operating_expenses(company_id: str, quarter: str, refresh: bool = False) -> float | None:
+    payload = _load_stockanalysis_financial_payload(company_id, refresh=refresh)
     financials = payload.get("financials") if isinstance(payload, dict) else None
     entry = financials.get(quarter) if isinstance(financials, dict) else None
     if not isinstance(entry, dict):
@@ -1597,7 +1656,11 @@ def _breakdown_matches_expected_total(
     return min_ratio <= ratio <= max_ratio
 
 
-def _parse_netease_quarter_item(company: dict[str, Any], item: dict[str, Any]) -> tuple[str, dict[str, Any], dict[str, Any]] | None:
+def _parse_netease_quarter_item(
+    company: dict[str, Any],
+    item: dict[str, Any],
+    refresh: bool = False,
+) -> tuple[str, dict[str, Any], dict[str, Any]] | None:
     quarter = str(item.get("quarter") or "")
     source_url = str(item.get("sourceUrl") or "")
     filing_date = str(item.get("filingDate") or "")
@@ -1641,7 +1704,7 @@ def _parse_netease_quarter_item(company: dict[str, Any], item: dict[str, Any]) -
     if len(segments) < 2:
         return None
 
-    expected_opex_bn = _stockanalysis_operating_expenses(str(company.get("id") or ""), quarter)
+    expected_opex_bn = _stockanalysis_operating_expenses(str(company.get("id") or ""), quarter, refresh=refresh)
     opex_breakdown = []
     for source_label, display_name, member_key in opex_rows:
         value_bn = _extract_netease_current_million_value(text, source_label)
@@ -1658,7 +1721,7 @@ def _parse_netease_quarter_item(company: dict[str, Any], item: dict[str, Any]) -
             }
         )
     if not _breakdown_matches_expected_total(opex_breakdown, expected_opex_bn):
-        opex_breakdown = _build_stockanalysis_opex_breakdown(str(company.get("id") or ""), quarter)
+        opex_breakdown = _build_stockanalysis_opex_breakdown(str(company.get("id") or ""), quarter, refresh=refresh)
 
     quarter_payload: dict[str, Any] = {"segments": segments}
     if opex_breakdown:
@@ -1673,11 +1736,11 @@ def _parse_netease_quarter_item(company: dict[str, Any], item: dict[str, Any]) -
     return quarter, quarter_payload, filing_meta
 
 
-def _parse_netease_records(company: dict[str, Any]) -> dict[str, Any]:
-    result = {"source": "official-ir-release", "quarters": {}, "filingsUsed": [], "errors": []}
+def _parse_netease_records(company: dict[str, Any], refresh: bool = False) -> dict[str, Any]:
+    result = {"source": "official-ir-release", "quarters": {}, "filingsUsed": [], "errors": [], "errorDetails": []}
     for item in _load_netease_quarterly_items():
         try:
-            parsed = _parse_netease_quarter_item(company, item)
+            parsed = _parse_netease_quarter_item(company, item, refresh=refresh)
             if not parsed:
                 continue
             quarter, quarter_payload, filing_meta = parsed
@@ -1686,6 +1749,14 @@ def _parse_netease_records(company: dict[str, Any]) -> dict[str, Any]:
         except Exception as exc:  # noqa: BLE001
             quarter = str(item.get("quarter") or "")
             result["errors"].append(f"{quarter}: {exc}")
+            _append_error_detail(
+                result,
+                message=str(exc),
+                phase="netease-quarter-parse",
+                error_type=type(exc).__name__,
+                quarter=quarter,
+                sourceUrl=item.get("sourceUrl"),
+            )
     return result
 
 
@@ -2803,7 +2874,7 @@ def _parse_meituan_quarter_item(item: dict[str, Any]) -> tuple[str, dict[str, An
 
 
 def _parse_meituan_records(company: dict[str, Any]) -> dict[str, Any]:
-    result = {"source": "official-ir-results", "quarters": {}, "filingsUsed": [], "errors": []}
+    result = {"source": "official-ir-results", "quarters": {}, "filingsUsed": [], "errors": [], "errorDetails": []}
     for item in _load_meituan_results_items():
         try:
             parsed = _parse_meituan_quarter_item(item)
@@ -2815,11 +2886,19 @@ def _parse_meituan_records(company: dict[str, Any]) -> dict[str, Any]:
         except Exception as exc:  # noqa: BLE001
             quarter = str(item.get("quarter") or "")
             result["errors"].append(f"{quarter}: {exc}")
+            _append_error_detail(
+                result,
+                message=str(exc),
+                phase="meituan-quarter-parse",
+                error_type=type(exc).__name__,
+                quarter=quarter,
+                sourceUrl=item.get("sourceUrl"),
+            )
     return result
 
 
 def _parse_xiaomi_records(company: dict[str, Any]) -> dict[str, Any]:
-    result = {"source": "official-ir-release", "quarters": {}, "filingsUsed": [], "errors": []}
+    result = {"source": "official-ir-release", "quarters": {}, "filingsUsed": [], "errors": [], "errorDetails": []}
     for quarter, source_url in sorted(XIAOMI_QUARTERLY_PDF_URLS.items(), key=lambda item: _period_key(item[0])):
         try:
             parsed = _parse_xiaomi_quarter_item(quarter, source_url)
@@ -2830,17 +2909,39 @@ def _parse_xiaomi_records(company: dict[str, Any]) -> dict[str, Any]:
             result["filingsUsed"].append(filing_meta)
         except Exception as exc:  # noqa: BLE001
             result["errors"].append(f"{quarter}: {exc}")
+            _append_error_detail(
+                result,
+                message=str(exc),
+                phase="xiaomi-quarter-parse",
+                error_type=type(exc).__name__,
+                quarter=quarter,
+                sourceUrl=source_url,
+            )
     return result
 
 
-def _parse_generic_segment_cache_records(company: dict[str, Any]) -> dict[str, Any]:
-    result = {"source": "official-segment-cache", "quarters": {}, "filingsUsed": [], "errors": []}
+def _parse_generic_segment_cache_records(company: dict[str, Any], refresh: bool = False) -> dict[str, Any]:
+    result = {"source": "official-segment-cache", "quarters": {}, "filingsUsed": [], "errors": [], "errorDetails": []}
+    if refresh:
+        return result
     payload = fetch_official_segment_history(company, refresh=False)
     if not isinstance(payload, dict) or not payload.get("quarters"):
-        result["errors"].append("segment-cache-missing")
+        if isinstance(payload, dict):
+            result["errors"] = list(payload.get("errors") or [])
+            if payload.get("errorDetails"):
+                result["errorDetails"] = deepcopy(payload.get("errorDetails") or [])
+        if "segment-cache-missing" not in result["errors"]:
+            result["errors"].append("segment-cache-missing")
+        _append_error_detail(
+            result,
+            message="segment-cache-missing",
+            phase="segment-cache-load",
+        )
         return result
     result["filingsUsed"] = payload.get("filingsUsed", [])
     result["errors"] = payload.get("errors", [])
+    if payload.get("errorDetails"):
+        result["errorDetails"] = deepcopy(payload.get("errorDetails") or [])
     for quarter, rows in (payload.get("quarters") or {}).items():
         cleaned_rows = [
             row
@@ -2869,7 +2970,7 @@ def _parse_generic_segment_cache_records(company: dict[str, Any]) -> dict[str, A
 
 
 def _parse_tencent_records(company: dict[str, Any]) -> dict[str, Any]:
-    result = {"source": "official-ir-pdf", "quarters": {}, "filingsUsed": [], "errors": []}
+    result = {"source": "official-ir-pdf", "quarters": {}, "filingsUsed": [], "errors": [], "errorDetails": []}
     html_text = _request("https://www.tencent.com/en-us/investors/financial-news").decode("utf-8", errors="ignore")
     link_pattern = re.compile(
         r'<a\b[^>]*class="[^"]*ten_finance_item[^"]*"[^>]*>(?P<body>.*?)</a>',
@@ -2993,6 +3094,14 @@ def _parse_tencent_records(company: dict[str, Any]) -> dict[str, Any]:
                 result["filingsUsed"].append({"title": title, "quarter": quarter, "filingDate": filing_date, "pdf": pdf_url})
         except Exception as exc:  # noqa: BLE001
             result["errors"].append(f"{quarter}: {exc}")
+            _append_error_detail(
+                result,
+                message=str(exc),
+                phase="tencent-quarter-parse",
+                error_type=type(exc).__name__,
+                quarter=quarter,
+                sourceUrl=pdf_url,
+            )
     return result
 
 
@@ -3174,7 +3283,7 @@ def _parse_alibaba_quarter_rows(text: str, quarter: str, filing_date: str, sourc
 
 
 def _parse_alibaba_records(company: dict[str, Any]) -> dict[str, Any]:
-    result = {"source": "official-ir-pdf", "quarters": {}, "filingsUsed": [], "errors": []}
+    result = {"source": "official-ir-pdf", "quarters": {}, "filingsUsed": [], "errors": [], "errorDetails": []}
     for item in _load_alibaba_quarterly_items():
         if not isinstance(item, dict):
             continue
@@ -3199,6 +3308,13 @@ def _parse_alibaba_records(company: dict[str, Any]) -> dict[str, Any]:
             result["filingsUsed"].append({"title": title, "quarter": quarter, "filingDate": filing_date, "pdf": pdf_url, "page": page_url})
         except Exception as exc:  # noqa: BLE001
             result["errors"].append(f"{quarter}: {exc}")
+            _append_error_detail(
+                result,
+                message=str(exc),
+                phase="alibaba-quarter-parse",
+                error_type=type(exc).__name__,
+                quarter=quarter,
+            )
     return result
 
 
@@ -4077,13 +4193,13 @@ def _parse_alphabet_period_records(
     return segment_period_records, detail_period_records
 
 
-def _parse_alphabet_records(company: dict[str, Any], cik: int) -> dict[str, Any]:
-    result = {"source": "official-filing-tables", "quarters": {}, "filingsUsed": [], "errors": []}
+def _parse_alphabet_records(company: dict[str, Any], cik: int, refresh: bool = False) -> dict[str, Any]:
+    result = {"source": "official-filing-tables", "quarters": {}, "filingsUsed": [], "errors": [], "errorDetails": []}
     segment_period_records: list[dict[str, Any]] = []
     detail_period_records: list[dict[str, Any]] = []
     seen_accessions: set[str] = set()
 
-    for filing in _merged_filing_entries(str(company.get("id") or ""), cik):
+    for filing in _merged_filing_entries(str(company.get("id") or ""), cik, refresh=refresh):
         form = str(filing.get("form") or "")
         accession = str(filing.get("accession") or "")
         filing_date = str(filing.get("filingDate") or "")
@@ -4094,6 +4210,7 @@ def _parse_alphabet_records(company: dict[str, Any], cik: int) -> dict[str, Any]
         if accession_nodash in seen_accessions:
             continue
         seen_accessions.add(accession_nodash)
+        source_url = ""
         try:
             source_url = f"https://www.sec.gov/Archives/edgar/data/{cik}/{accession_nodash}/{primary_document}"
             html_text = _request(source_url).decode("utf-8", errors="ignore")
@@ -4104,6 +4221,17 @@ def _parse_alphabet_records(company: dict[str, Any], cik: int) -> dict[str, Any]
                 result["filingsUsed"].append({"form": form, "filingDate": filing_date, "accession": accession, "primaryDocument": primary_document})
         except Exception as exc:  # noqa: BLE001
             result["errors"].append(f"{filing_date}: {exc}")
+            _append_error_detail(
+                result,
+                message=str(exc),
+                phase="alphabet-filing-parse",
+                error_type=type(exc).__name__,
+                filingDate=filing_date,
+                form=form,
+                accession=accession,
+                primaryDocument=primary_document,
+                url=source_url,
+            )
 
     segment_quarter_rows = _build_quarter_rows_from_period_records(segment_period_records)
     detail_quarter_rows = _build_quarter_rows_from_period_records(detail_period_records)
@@ -4436,6 +4564,9 @@ def _find_tsmc_mix_ocr(
         )
         if mix_block is not None:
             image_url = f"https://www.sec.gov/Archives/edgar/data/{cik}/{accession_nodash}/{mix_block['image']}"
+            slide_text = str(mix_block.get("text") or "").strip()
+            if _score_tsmc_mix_ocr(slide_text, quarter) >= 8:
+                return slide_text, image_url
             return _ocr_image(image_url), image_url
 
     candidate_names: list[str] = []
@@ -4474,8 +4605,8 @@ def _find_tsmc_mix_ocr(
     return best_text, best_url
 
 
-def _parse_asml_records(company: dict[str, Any], cik: int) -> dict[str, Any]:
-    result = {"source": "official-filings-presentation-ocr", "quarters": {}, "filingsUsed": [], "errors": []}
+def _parse_asml_records(company: dict[str, Any], cik: int, refresh: bool = False) -> dict[str, Any]:
+    result = {"source": "official-filings-presentation-ocr", "quarters": {}, "filingsUsed": [], "errors": [], "errorDetails": []}
     tech_support_lines = {
         "euv": ["Extreme Ultraviolet"],
         "arfi": ["Argon Fluoride Immersion"],
@@ -4492,7 +4623,7 @@ def _parse_asml_records(company: dict[str, Any], cik: int) -> dict[str, Any]:
         "iline": "I-line",
         "metrologyinspection": "Metrology & Inspection",
     }
-    for quarter, entry in _load_cached_financial_entries("asml"):
+    for quarter, entry in _load_cached_financial_entries("asml", refresh=refresh):
         press_release_url = str(entry.get("statementSourceUrl") or "")
         filing_date = str(entry.get("statementFilingDate") or "")
         if not press_release_url or not filing_date or filing_date < "2020-01-01":
@@ -4567,6 +4698,14 @@ def _parse_asml_records(company: dict[str, Any], cik: int) -> dict[str, Any]:
                 tech_mix = _parse_asml_mix_text(mix_ocr_text, quarter)
             if len(tech_mix) < 5:
                 result["errors"].append(f"{filing_date}: asml-tech-mix-ocr-incomplete")
+                _append_error_detail(
+                    result,
+                    message="asml-tech-mix-ocr-incomplete",
+                    phase="asml-tech-mix",
+                    filingDate=filing_date,
+                    quarter=quarter,
+                    url=mix_source_url,
+                )
                 continue
             net_system_sales_bn = round((float(exact_total) - float(exact_installed)) / 1000, 3)
             installed_bn = round(float(exact_installed) / 1000, 3)
@@ -4608,11 +4747,20 @@ def _parse_asml_records(company: dict[str, Any], cik: int) -> dict[str, Any]:
             result["filingsUsed"].append({"form": "6-K", "filingDate": filing_date, "accession": accession_nodash, "presentation": presentation_name, "pressRelease": primary_document})
         except Exception as exc:  # noqa: BLE001
             result["errors"].append(f"{filing_date}: {exc}")
+            _append_error_detail(
+                result,
+                message=str(exc),
+                phase="asml-presentation-parse",
+                error_type=type(exc).__name__,
+                filingDate=filing_date,
+                quarter=quarter,
+                url=press_release_url,
+            )
     return result
 
 
-def _parse_tsmc_records(company: dict[str, Any], cik: int) -> dict[str, Any]:
-    result = {"source": "official-filings-presentation-ocr", "quarters": {}, "filingsUsed": [], "errors": []}
+def _parse_tsmc_records(company: dict[str, Any], cik: int, refresh: bool = False) -> dict[str, Any]:
+    result = {"source": "official-filings-presentation-ocr", "quarters": {}, "filingsUsed": [], "errors": [], "errorDetails": []}
     platform_names = {
         "hpc": ("High Performance Computing", ["AI · accelerator · server"]),
         "smartphones": ("Smartphones", ["Mobile SoC"]),
@@ -4621,7 +4769,7 @@ def _parse_tsmc_records(company: dict[str, Any], cik: int) -> dict[str, Any]:
         "dce": ("Digital Consumer Electronics", ["DCE"]),
         "others": ("Others", ["Other platforms"]),
     }
-    for quarter, entry in _load_cached_financial_entries("tsmc"):
+    for quarter, entry in _load_cached_financial_entries("tsmc", refresh=refresh):
         press_release_url = str(entry.get("statementSourceUrl") or "")
         filing_date = str(entry.get("statementFilingDate") or "")
         if not press_release_url or not filing_date or filing_date < "2020-01-01":
@@ -4653,6 +4801,14 @@ def _parse_tsmc_records(company: dict[str, Any], cik: int) -> dict[str, Any]:
             mix_map = _parse_tsmc_mix_text(ocr_text)
             if len(mix_map) < 5:
                 result["errors"].append(f"{filing_date}: tsmc-platform-ocr-incomplete")
+                _append_error_detail(
+                    result,
+                    message="tsmc-platform-ocr-incomplete",
+                    phase="tsmc-platform-mix",
+                    filingDate=filing_date,
+                    quarter=quarter,
+                    url=ocr_source_url,
+                )
                 continue
             qoq_growth_map = _parse_tsmc_qoq_growth_text(ocr_text)
             press_release_html = _request(press_release_url).decode("utf-8", errors="ignore")
@@ -4689,21 +4845,40 @@ def _parse_tsmc_records(company: dict[str, Any], cik: int) -> dict[str, Any]:
             result["filingsUsed"].append({"form": "6-K", "filingDate": filing_date, "accession": accession_nodash, "presentation": presentation_name, "pressRelease": primary_document})
         except Exception as exc:  # noqa: BLE001
             result["errors"].append(f"{filing_date}: {exc}")
+            _append_error_detail(
+                result,
+                message=str(exc),
+                phase="tsmc-presentation-parse",
+                error_type=type(exc).__name__,
+                filingDate=filing_date,
+                quarter=quarter,
+                url=press_release_url,
+            )
     return result
 
 
-def _parse_cached_segment_hierarchy_records(company: dict[str, Any]) -> dict[str, Any]:
+def _parse_cached_segment_hierarchy_records(company: dict[str, Any], refresh: bool = False) -> dict[str, Any]:
     company_id = str(company.get("id") or "")
     config = SEGMENT_CACHE_HIERARCHY_CONFIGS[company_id]
-    segment_history_path = OFFICIAL_SEGMENT_CACHE_DIR / f"{company_id}.json"
-    result = {"source": "official-segment-cache-hierarchy", "quarters": {}, "filingsUsed": [], "errors": []}
-    if not segment_history_path.exists():
-        result["errors"].append("segment-cache-missing")
+    result = {"source": "official-segment-cache-hierarchy", "quarters": {}, "filingsUsed": [], "errors": [], "errorDetails": []}
+    payload = fetch_official_segment_history(company, refresh=refresh)
+    if not isinstance(payload, dict) or not payload.get("quarters"):
+        result["errors"] = list(payload.get("errors", [])) if isinstance(payload, dict) else []
+        if isinstance(payload, dict) and payload.get("errorDetails"):
+            result["errorDetails"] = deepcopy(payload.get("errorDetails") or [])
+        if not result["errors"]:
+            result["errors"].append("segment-cache-missing")
+            _append_error_detail(
+                result,
+                message="segment-cache-missing",
+                phase="segment-cache-load",
+            )
         return result
-    payload = _load_cached_json(segment_history_path)
     quarter_rows = payload.get("quarters") or {}
     result["filingsUsed"] = payload.get("filingsUsed", [])
     result["errors"] = payload.get("errors", [])
+    if payload.get("errorDetails"):
+        result["errorDetails"] = deepcopy(payload.get("errorDetails") or [])
 
     for quarter, rows in quarter_rows.items():
         row_map = {
@@ -4754,14 +4929,14 @@ def _parse_cached_segment_hierarchy_records(company: dict[str, Any]) -> dict[str
     return result
 
 
-def _parse_custom_xbrl_hierarchy_records(company: dict[str, Any], cik: int) -> dict[str, Any]:
+def _parse_custom_xbrl_hierarchy_records(company: dict[str, Any], cik: int, refresh: bool = False) -> dict[str, Any]:
     company_id = str(company.get("id") or "")
     config = CUSTOM_XBRL_HIERARCHY_CONFIGS[company_id]
-    result = {"source": str(config.get("source") or "official-filings-xbrl-hierarchy"), "quarters": {}, "filingsUsed": [], "errors": []}
+    result = {"source": str(config.get("source") or "official-filings-xbrl-hierarchy"), "quarters": {}, "filingsUsed": [], "errors": [], "errorDetails": []}
     segment_facts: list[SegmentFact] = []
     detail_facts: list[SegmentFact] = []
 
-    for filing in _merged_filing_entries(company_id, cik):
+    for filing in _merged_filing_entries(company_id, cik, refresh=refresh):
         form = str(filing.get("form") or "")
         filing_date = str(filing.get("filingDate") or "")
         accession = str(filing.get("accession") or "")
@@ -4802,6 +4977,15 @@ def _parse_custom_xbrl_hierarchy_records(company: dict[str, Any], cik: int) -> d
             )
         except Exception as exc:  # noqa: BLE001
             result["errors"].append(f"{filing_date}: {exc}")
+            _append_error_detail(
+                result,
+                message=str(exc),
+                phase="custom-xbrl-hierarchy-parse",
+                error_type=type(exc).__name__,
+                filingDate=filing_date,
+                form=form,
+                accession=accession,
+            )
 
     segment_rows_by_quarter = _build_quarterly_series(segment_facts)
     detail_rows_by_quarter = _build_quarterly_series(detail_facts)
@@ -4853,12 +5037,12 @@ def _parse_custom_xbrl_hierarchy_records(company: dict[str, Any], cik: int) -> d
     return result
 
 
-def _parse_xbrl_axis_company_records(company: dict[str, Any], cik: int, axis_key: str) -> dict[str, Any]:
+def _parse_xbrl_axis_company_records(company: dict[str, Any], cik: int, axis_key: str, refresh: bool = False) -> dict[str, Any]:
     company_id = str(company.get("id") or "")
     config = XBRL_AXIS_COMPANY_CONFIGS.get(company_id, {})
-    result = {"source": str(config.get("source") or "official-filings-xbrl-axis"), "quarters": {}, "filingsUsed": [], "errors": []}
+    result = {"source": str(config.get("source") or "official-filings-xbrl-axis"), "quarters": {}, "filingsUsed": [], "errors": [], "errorDetails": []}
     facts = []
-    for filing in _merged_filing_entries(str(company.get("id") or ""), cik):
+    for filing in _merged_filing_entries(str(company.get("id") or ""), cik, refresh=refresh):
         form = str(filing.get("form") or "")
         filing_date = str(filing.get("filingDate") or "")
         accession = str(filing.get("accession") or "")
@@ -4899,6 +5083,16 @@ def _parse_xbrl_axis_company_records(company: dict[str, Any], cik: int, axis_key
             )
         except Exception as exc:  # noqa: BLE001
             result["errors"].append(f"{filing_date}: {exc}")
+            _append_error_detail(
+                result,
+                message=str(exc),
+                phase="xbrl-axis-parse",
+                error_type=type(exc).__name__,
+                filingDate=filing_date,
+                form=form,
+                accession=accession,
+                axisKey=axis_key,
+            )
 
     quarter_rows = _build_quarterly_series(facts)
     allowed = dict(config.get("labels") or {})
@@ -4962,7 +5156,7 @@ def _table_parser_candidate_urls(
     return urls
 
 
-def _parse_table_company_records(company: dict[str, Any], cik: int) -> dict[str, Any]:
+def _parse_table_company_records(company: dict[str, Any], cik: int, refresh: bool = False) -> dict[str, Any]:
     company_id = str(company.get("id") or "")
     parsers = {
         "oracle": _parse_oracle_records,
@@ -4970,10 +5164,10 @@ def _parse_table_company_records(company: dict[str, Any], cik: int) -> dict[str,
         "netflix": _parse_netflix_records,
     }
     parser = parsers[company_id]
-    result = {"source": "official-filing-tables", "quarters": {}, "filingsUsed": [], "errors": []}
+    result = {"source": "official-filing-tables", "quarters": {}, "filingsUsed": [], "errors": [], "errorDetails": []}
     period_records: list[dict[str, Any]] = []
     detail_period_records: list[dict[str, Any]] = []
-    filings = _merged_filing_entries(str(company.get("id") or ""), cik)
+    filings = _merged_filing_entries(str(company.get("id") or ""), cik, refresh=refresh)
     seen_accessions: set[str] = set()
     for filing in filings:
         form = str(filing.get("form") or "")
@@ -5017,6 +5211,17 @@ def _parse_table_company_records(company: dict[str, Any], cik: int) -> dict[str,
                 )
         except Exception as exc:  # noqa: BLE001
             result["errors"].append(f"{filing_date}: {exc}")
+            _append_error_detail(
+                result,
+                message=str(exc),
+                phase="table-company-parse",
+                error_type=type(exc).__name__,
+                filingDate=filing_date,
+                form=form,
+                accession=accession,
+                primaryDocument=primary_document,
+                companyId=company_id,
+            )
     style_by_company = {
         "oracle": "oracle-revenue-bridge",
         "mastercard": "mastercard-revenue-bridge",
@@ -5110,7 +5315,13 @@ def _supplement_cached_custom_history(company: dict[str, Any], cached_payload: d
     if not missing_quarters:
         return cached_payload
 
-    supplement = {"source": cached_payload.get("source") or "official-ir-release", "quarters": {}, "filingsUsed": [], "errors": []}
+    supplement = {
+        "source": cached_payload.get("source") or "official-ir-release",
+        "quarters": {},
+        "filingsUsed": [],
+        "errors": [],
+        "errorDetails": [],
+    }
     for quarter in missing_quarters:
         item = available_items.get(quarter)
         if not item:
@@ -5124,6 +5335,13 @@ def _supplement_cached_custom_history(company: dict[str, Any], cached_payload: d
             supplement["filingsUsed"].append(filing_meta)
         except Exception as exc:  # noqa: BLE001
             supplement["errors"].append(f"{quarter}: {exc}")
+            _append_error_detail(
+                supplement,
+                message=str(exc),
+                phase="custom-history-supplement",
+                error_type=type(exc).__name__,
+                quarter=quarter,
+            )
     if not supplement["quarters"] and not supplement["errors"]:
         return cached_payload
     merged = _merge_revenue_structure_results(cached_payload, supplement)
@@ -5135,10 +5353,16 @@ def _supplement_cached_custom_history(company: dict[str, Any], cached_payload: d
 def fetch_official_revenue_structure_history(company: dict[str, Any], refresh: bool = False) -> dict[str, Any]:
     company_id = str(company.get("id") or "")
     path = _cache_path(company_id)
-    empty_result = {"source": "official-revenue-structures", "quarters": {}, "filingsUsed": [], "errors": []}
+    empty_result = {
+        "source": "official-revenue-structures",
+        "quarters": {},
+        "filingsUsed": [],
+        "errors": [],
+        "errorDetails": [],
+    }
     cached_payload = _load_cached_json(path) if path.exists() else None
     if path.exists() and not refresh:
-        if isinstance(cached_payload, dict) and cached_payload.get("_cacheVersion") == CACHE_VERSION:
+        if _is_current_revenue_structure_cache(cached_payload):
             supplemented_payload = _supplement_cached_custom_history(company, cached_payload)
             if supplemented_payload is not cached_payload:
                 supplemented_payload = _post_process_result(company, supplemented_payload)
@@ -5157,7 +5381,7 @@ def fetch_official_revenue_structure_history(company: dict[str, Any], refresh: b
     elif company_id == "jd":
         result = _parse_jd_records(company)
     elif company_id == "netease":
-        result = _parse_netease_records(company)
+        result = _parse_netease_records(company, refresh=refresh)
     elif company_id == "meituan":
         result = _parse_meituan_records(company)
     elif company_id == "xiaomi":
@@ -5166,45 +5390,61 @@ def fetch_official_revenue_structure_history(company: dict[str, Any], refresh: b
         cik = _resolve_cik(str(company.get("ticker") or ""), refresh=refresh)
         if cik is not None:
             if company_id in SEGMENT_CACHE_HIERARCHY_CONFIGS:
-                result = _parse_cached_segment_hierarchy_records(company)
+                result = _parse_cached_segment_hierarchy_records(company, refresh=refresh)
             elif company_id == "alphabet":
-                result = _parse_alphabet_records(company, cik)
+                result = _parse_alphabet_records(company, cik, refresh=refresh)
             elif company_id == "asml":
-                result = _parse_asml_records(company, cik)
+                result = _parse_asml_records(company, cik, refresh=refresh)
             elif company_id in {"oracle", "mastercard", "netflix"}:
-                result = _parse_table_company_records(company, cik)
+                result = _parse_table_company_records(company, cik, refresh=refresh)
             elif company_id in CUSTOM_XBRL_HIERARCHY_CONFIGS:
-                result = _parse_custom_xbrl_hierarchy_records(company, cik)
+                result = _parse_custom_xbrl_hierarchy_records(company, cik, refresh=refresh)
             elif company_id == "tsmc":
-                result = _parse_tsmc_records(company, cik)
+                result = _parse_tsmc_records(company, cik, refresh=refresh)
             elif company_id in XBRL_AXIS_COMPANY_CONFIGS:
-                result = _parse_xbrl_axis_company_records(company, cik, str(XBRL_AXIS_COMPANY_CONFIGS[company_id]["axis"]))
+                result = _parse_xbrl_axis_company_records(
+                    company,
+                    cik,
+                    str(XBRL_AXIS_COMPANY_CONFIGS[company_id]["axis"]),
+                    refresh=refresh,
+                )
 
-    if not result.get("quarters"):
-        fallback_result = _parse_generic_segment_cache_records(company)
+    if not refresh and not result.get("quarters"):
+        fallback_result = _parse_generic_segment_cache_records(company, refresh=refresh)
         if fallback_result.get("quarters"):
-            result = fallback_result
+            result = _merge_revenue_structure_results(result, fallback_result)
         elif not result.get("errors") and fallback_result.get("errors"):
             result["errors"] = fallback_result.get("errors", [])
+            result["errorDetails"] = deepcopy(fallback_result.get("errorDetails") or [])
 
-    if (
-        isinstance(cached_payload, dict)
+    can_preserve_cached_quarters = (
+        not refresh
+        and _is_current_revenue_structure_cache(cached_payload)
+        and isinstance(cached_payload, dict)
         and cached_payload.get("quarters")
-        and not result.get("quarters")
-    ):
+    )
+
+    if can_preserve_cached_quarters and not result.get("quarters"):
         preserved_result = dict(cached_payload)
         preserved_errors = list(preserved_result.get("errors") or [])
+        preserved_error_details = [
+            deepcopy(detail)
+            for detail in (preserved_result.get("errorDetails") or [])
+            if isinstance(detail, dict)
+        ]
         for error in result.get("errors") or []:
             if error not in preserved_errors:
                 preserved_errors.append(error)
+        for detail in result.get("errorDetails") or []:
+            if not isinstance(detail, dict):
+                continue
+            copied_detail = deepcopy(detail)
+            if copied_detail not in preserved_error_details:
+                preserved_error_details.append(copied_detail)
         preserved_result["errors"] = preserved_errors
+        preserved_result["errorDetails"] = preserved_error_details
         result = preserved_result
-    elif (
-        isinstance(cached_payload, dict)
-        and cached_payload.get("quarters")
-        and isinstance(result, dict)
-        and result.get("quarters")
-    ):
+    elif can_preserve_cached_quarters and isinstance(result, dict) and result.get("quarters"):
         result = _preserve_missing_cached_revenue_structure_quarters(result, cached_payload)
 
     result = _post_process_result(company, result)

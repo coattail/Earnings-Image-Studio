@@ -11,16 +11,56 @@ from datetime import date, timedelta
 from pathlib import Path
 from typing import Any
 
-import requests
-from pypdf import PdfReader
+_MISSING_RUNTIME_MODULES: list[str] = []
+RUNTIME_DEPENDENCY_INSTALL_HINT = "python3 -m pip install -r requirements.txt"
 
-from document_parser import parse_income_statement_from_url, statement_value_to_bn
-from official_financials import fetch_official_financial_history
-from official_segments import fetch_official_segment_history
-from official_revenue_structures import fetch_official_revenue_structure_history
-from stockanalysis_financials import fetch_stockanalysis_financial_history
-from universal_parser import run_universal_company_parser
-from extraction_engine import build_unified_extraction, merge_unified_extraction
+
+def _record_missing_runtime_module(exc: ModuleNotFoundError) -> None:
+    module_name = str(getattr(exc, "name", "") or str(exc)).strip()
+    if module_name and module_name not in _MISSING_RUNTIME_MODULES:
+        _MISSING_RUNTIME_MODULES.append(module_name)
+
+
+def _runtime_dependency_error() -> str | None:
+    if not _MISSING_RUNTIME_MODULES:
+        return None
+    missing = ", ".join(sorted(_MISSING_RUNTIME_MODULES))
+    return f"Missing Python dependencies: {missing}. Install them with `{RUNTIME_DEPENDENCY_INSTALL_HINT}`."
+
+
+try:
+    import requests
+except ModuleNotFoundError as exc:
+    requests = None  # type: ignore[assignment]
+    _record_missing_runtime_module(exc)
+
+try:
+    from pypdf import PdfReader
+except ModuleNotFoundError as exc:
+    PdfReader = None  # type: ignore[assignment]
+    _record_missing_runtime_module(exc)
+
+try:
+    from document_parser import parse_income_statement_from_url, statement_value_to_bn
+    from official_financials import fetch_official_financial_history
+    from official_segments import fetch_official_segment_history
+    from official_revenue_structures import fetch_official_revenue_structure_history
+    from stockanalysis_financials import fetch_stockanalysis_financial_history
+    from universal_parser import UNIVERSAL_PARSER_VERSION, run_universal_company_parser
+    from extraction_engine import ENGINE_VERSION as UNIFIED_EXTRACTION_ENGINE_VERSION, build_unified_extraction, merge_unified_extraction
+except ModuleNotFoundError as exc:
+    _record_missing_runtime_module(exc)
+    parse_income_statement_from_url = None  # type: ignore[assignment]
+    statement_value_to_bn = None  # type: ignore[assignment]
+    fetch_official_financial_history = None  # type: ignore[assignment]
+    fetch_official_segment_history = None  # type: ignore[assignment]
+    fetch_official_revenue_structure_history = None  # type: ignore[assignment]
+    fetch_stockanalysis_financial_history = None  # type: ignore[assignment]
+    UNIVERSAL_PARSER_VERSION = "unavailable"
+    UNIFIED_EXTRACTION_ENGINE_VERSION = "unavailable"
+    run_universal_company_parser = None  # type: ignore[assignment]
+    build_unified_extraction = None  # type: ignore[assignment]
+    merge_unified_extraction = None  # type: ignore[assignment]
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
@@ -188,6 +228,36 @@ def load_cached_company_payload(company_id: str) -> dict[str, Any] | None:
     except Exception:
         return None
     return payload if isinstance(payload, dict) else None
+
+
+def is_company_payload_cache_compatible(payload: dict[str, Any] | None) -> bool:
+    if not isinstance(payload, dict):
+        return False
+    diagnostics = payload.get("parserDiagnostics")
+    if not isinstance(diagnostics, dict):
+        return False
+    if diagnostics.get("version") != UNIVERSAL_PARSER_VERSION:
+        return False
+    unified_extraction = payload.get("unifiedExtraction")
+    if not isinstance(unified_extraction, dict):
+        return False
+    return unified_extraction.get("engineVersion") == UNIFIED_EXTRACTION_ENGINE_VERSION
+
+
+def build_company_payload_for_dataset(
+    company: dict[str, Any],
+    *,
+    refresh: bool,
+    manual_company_overrides: dict[str, Any],
+    fx_cache: dict[str, float],
+) -> dict[str, Any]:
+    payload = build_company_payload_with_universal_parser(company, refresh=refresh)
+    payload = supplement_tencent_official_financials(payload)
+    payload = sanitize_implausible_q4_revenue_aligned_statements(payload)
+    payload = apply_manual_company_override(payload, company, manual_company_overrides)
+    payload = apply_usd_display_fields(payload, fx_cache)
+    payload = apply_fused_extraction(payload, company, refresh=refresh)
+    return payload
 
 
 def normalize_segment_label_key(value: Any) -> str:
@@ -1688,9 +1758,48 @@ def supplement_tencent_official_financials(company_payload: dict[str, Any]) -> d
             "qualityFlags": entry.get("qualityFlags"),
         }
         entry.update(parsed_entry)
+        entry["statementValueMode"] = "reported"
+        entry["statementSpanQuarters"] = 1
         for key, value in preserved_fields.items():
             if value is not None:
                 entry[key] = value
+        field_sources = entry.get("fieldSources") if isinstance(entry.get("fieldSources"), dict) else {}
+        source_meta = {
+            "adapterId": "tencent_ir_pdf_supplement",
+            "label": "Tencent IR PDF supplement",
+            "score": 160,
+            "sourceUrl": parsed_entry.get("statementSourceUrl"),
+        }
+        for key, value in parsed_entry.items():
+            if key in {
+                "calendarQuarter",
+                "periodEnd",
+                "fiscalYear",
+                "fiscalQuarter",
+                "fiscalLabel",
+                "statementCurrency",
+                "statementSource",
+                "statementSourceUrl",
+                "statementFilingDate",
+            }:
+                continue
+            if value is None:
+                continue
+            field_sources[key] = deepcopy(source_meta)
+        entry["fieldSources"] = field_sources
+        entry["statementMeta"] = {
+            "statementSource": entry.get("statementSource"),
+            "statementSourceUrl": entry.get("statementSourceUrl"),
+            "statementValueMode": entry.get("statementValueMode"),
+            "statementSpanQuarters": entry.get("statementSpanQuarters"),
+            "qualityFlags": list(entry.get("qualityFlags") or []),
+        }
+        extraction_diagnostics = entry.get("extractionDiagnostics") if isinstance(entry.get("extractionDiagnostics"), dict) else {}
+        extraction_diagnostics["statementSource"] = entry.get("statementSource")
+        extraction_diagnostics["statementValueMode"] = entry.get("statementValueMode")
+        extraction_diagnostics["statementSpanQuarters"] = entry.get("statementSpanQuarters")
+        extraction_diagnostics["statementQualityFlags"] = list(entry.get("qualityFlags") or [])
+        entry["extractionDiagnostics"] = extraction_diagnostics
 
     for quarter_key in ordered_quarters:
         entry = financials.get(quarter_key)
@@ -2061,10 +2170,16 @@ def apply_fused_extraction(payload: dict[str, Any], company: dict[str, Any], ref
             diagnostics = {}
         diagnostics["fusedExtractionError"] = str(exc)
         payload["parserDiagnostics"] = diagnostics
-        return payload
+        company_label = company.get("ticker") or company.get("id") or "unknown"
+        raise RuntimeError(f"Fused extraction failed for {company_label}: {exc}") from exc
 
 
 def main() -> int:
+    dependency_error = _runtime_dependency_error()
+    if dependency_error:
+        print(f"[error] {dependency_error}", file=sys.stderr, flush=True)
+        return 2
+
     args = parse_args()
     manual_presets = load_manual_presets()
     manual_company_overrides = load_manual_company_overrides()
@@ -2080,12 +2195,12 @@ def main() -> int:
     for company in selected_companies:
         print(f"[build] {company['ticker']} ...", flush=True)
         try:
-            payload = build_company_payload_with_universal_parser(company, refresh=args.refresh)
-            payload = supplement_tencent_official_financials(payload)
-            payload = sanitize_implausible_q4_revenue_aligned_statements(payload)
-            payload = apply_manual_company_override(payload, company, manual_company_overrides)
-            payload = apply_usd_display_fields(payload, fx_cache)
-            payload = apply_fused_extraction(payload, company, refresh=args.refresh)
+            payload = build_company_payload_for_dataset(
+                company,
+                refresh=args.refresh,
+                manual_company_overrides=manual_company_overrides,
+                fx_cache=fx_cache,
+            )
         except Exception as exc:  # noqa: BLE001
             failures.append(f"{company['ticker']}: {exc}")
             print(f"  failed: {exc}", file=sys.stderr, flush=True)
@@ -2102,21 +2217,36 @@ def main() -> int:
             if company["id"] in results_by_company_id:
                 continue
             cached_payload = load_cached_company_payload(company["id"])
-            if cached_payload is not None:
+            if is_company_payload_cache_compatible(cached_payload):
                 presets = manual_presets.get(str(company["id"])) or {}
                 cached_payload = finalize_company_payload(company, cached_payload, presets)
                 results_by_company_id[company["id"]] = cached_payload
                 COMPANY_CACHE_DIR.mkdir(parents=True, exist_ok=True)
                 (COMPANY_CACHE_DIR / f"{company['id']}.json").write_text(json.dumps(cached_payload, ensure_ascii=False, indent=2), encoding="utf-8")
                 continue
+            if cached_payload is not None:
+                cached_version = ((cached_payload.get("parserDiagnostics") or {}).get("version")) or "unknown"
+                unified_extraction = cached_payload.get("unifiedExtraction")
+                has_unified_extraction = isinstance(unified_extraction, dict)
+                unified_engine_version = (
+                    str(unified_extraction.get("engineVersion") or "unknown")
+                    if has_unified_extraction
+                    else "none"
+                )
+                print(
+                    f"[rebuild] {company['ticker']} incompatible cache "
+                    f"(version={cached_version}, unifiedExtraction={'yes' if has_unified_extraction else 'no'}, "
+                    f"unifiedEngineVersion={unified_engine_version})",
+                    flush=True,
+                )
             print(f"[build] {company['ticker']} ...", flush=True)
             try:
-                payload = build_company_payload_with_universal_parser(company, refresh=False)
-                payload = supplement_tencent_official_financials(payload)
-                payload = sanitize_implausible_q4_revenue_aligned_statements(payload)
-                payload = apply_manual_company_override(payload, company, manual_company_overrides)
-                payload = apply_usd_display_fields(payload, fx_cache)
-                payload = apply_fused_extraction(payload, company, refresh=False)
+                payload = build_company_payload_for_dataset(
+                    company,
+                    refresh=False,
+                    manual_company_overrides=manual_company_overrides,
+                    fx_cache=fx_cache,
+                )
             except Exception as exc:  # noqa: BLE001
                 failures.append(f"{company['ticker']}: {exc}")
                 print(f"  failed: {exc}", file=sys.stderr, flush=True)

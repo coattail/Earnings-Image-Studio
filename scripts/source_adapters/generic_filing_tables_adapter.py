@@ -4,7 +4,7 @@ from typing import Any
 
 from generic_filing_table_parser import fetch_generic_filing_table_history
 
-from .base import AdapterResult
+from .base import AdapterResult, payload_error_bundle
 
 
 FIELD_PRIORITIES = {
@@ -25,6 +25,12 @@ FIELD_PRIORITIES = {
 def run(company: dict[str, Any], refresh: bool = False, base_payload: dict[str, Any] | None = None) -> AdapterResult:
     del base_payload
     payload = fetch_generic_filing_table_history(company, refresh=refresh)
+    errors, error_details = payload_error_bundle(
+        payload,
+        layer="financials",
+        source_id="generic_filing_tables",
+        phase="fetch",
+    )
     return AdapterResult(
         adapter_id="generic_filing_tables",
         kind="statement",
@@ -32,6 +38,7 @@ def run(company: dict[str, Any], refresh: bool = False, base_payload: dict[str, 
         priority=80,
         payload=payload if isinstance(payload, dict) else {},
         field_priorities=FIELD_PRIORITIES,
-        errors=list(payload.get("errors") or []) if isinstance(payload, dict) else [],
+        errors=errors,
+        error_details=error_details,
         enabled=bool((payload or {}).get("financials")) if isinstance(payload, dict) else False,
     )

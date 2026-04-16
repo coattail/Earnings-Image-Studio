@@ -31,6 +31,8 @@ DEFAULT_HEADERS = {
     "Cache-Control": "no-cache",
 }
 PARSER_VERSION = "document-parser-v4"
+TEXT_MIRROR_CACHE_VERSION = "document-parser-text-mirror-v1"
+TEXT_MIRROR_CACHE_TTL_SECONDS = 24 * 60 * 60
 QUARTER_END_MONTH_DAY = {
     1: (3, 31),
     2: (6, 30),
@@ -51,7 +53,7 @@ ENGLISH_MONTH_NAMES = {
     11: "November",
     12: "December",
 }
-TEXT_MIRROR_CACHE: dict[str, str] = {}
+TEXT_MIRROR_CACHE: dict[str, dict[str, Any]] = {}
 INCOME_STATEMENT_START_PATTERNS = [
     re.compile(r"(?:CONDENSED\s+)?CONSOLIDATED\s+INCOME\s+STATEMENT", re.IGNORECASE),
     re.compile(r"(?:CONDENSED\s+)?CONSOLIDATED\s+STATEMENTS?\s+OF\s+OPERATIONS", re.IGNORECASE),
@@ -211,7 +213,7 @@ def _parsed_cache_path(url: str, *, ocr_fallback: bool) -> Path:
 
 def _mirror_cache_path(url: str) -> Path:
     TEXT_MIRROR_CACHE_DIR.mkdir(parents=True, exist_ok=True)
-    return TEXT_MIRROR_CACHE_DIR / f"{_cache_key(url)}.txt"
+    return TEXT_MIRROR_CACHE_DIR / f"{_cache_key(url)}.json"
 
 
 def _load_cached_json(path: Path) -> Any:
@@ -220,6 +222,26 @@ def _load_cached_json(path: Path) -> Any:
 
 def _write_cached_json(path: Path, payload: Any) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def _is_current_parsed_cache(payload: Any) -> bool:
+    return isinstance(payload, dict) and str(payload.get("version") or "") == PARSER_VERSION
+
+
+def _is_current_text_mirror_cache(payload: Any, *, now_ts: int | None = None) -> bool:
+    if not isinstance(payload, dict):
+        return False
+    if str(payload.get("_cacheVersion") or "") != TEXT_MIRROR_CACHE_VERSION:
+        return False
+    text = payload.get("text")
+    if not isinstance(text, str) or not text:
+        return False
+    try:
+        fetched_at = int(payload.get("fetchedAt"))
+    except (TypeError, ValueError):
+        return False
+    current_ts = int(time.time()) if now_ts is None else int(now_ts)
+    return current_ts - fetched_at <= TEXT_MIRROR_CACHE_TTL_SECONDS
 
 
 def _request_timeout(url: str, accept: str | None = None) -> tuple[int, int]:
@@ -917,9 +939,23 @@ def parse_income_statement_from_url(
     try:
         parsed = parse_document_url(url, refresh=refresh, ocr_fallback=ocr_fallback)
         return parse_income_statement(parsed.text, language_hint=parsed.language_profile, quarter_hint=quarter_hint)
-    except Exception:
+    except Exception as exc:
         mirrored_text = extract_text_via_jina(url, refresh=refresh)
-        return parse_income_statement(mirrored_text, quarter_hint=quarter_hint)
+        fallback_statement = parse_income_statement(mirrored_text, quarter_hint=quarter_hint)
+        fallback_metadata = dict(fallback_statement.metadata) if isinstance(fallback_statement.metadata, dict) else {}
+        fallback_metadata["fallbackUsed"] = True
+        fallback_metadata["fallbackSource"] = "jina"
+        fallback_metadata["fallbackReason"] = str(exc)
+        return ParsedFinancialStatement(
+            version=fallback_statement.version,
+            statement_kind=fallback_statement.statement_kind,
+            section_found=fallback_statement.section_found,
+            section_label=fallback_statement.section_label,
+            language_profile=fallback_statement.language_profile,
+            lines=list(fallback_statement.lines),
+            rows=dict(fallback_statement.rows),
+            metadata=fallback_metadata,
+        )
 
 
 def statement_value_to_bn(value: float | int | None, statement: ParsedFinancialStatement) -> float | None:
@@ -952,7 +988,8 @@ def parse_document_url(url: str, *, refresh: bool = False, ocr_fallback: bool = 
     cache_path = _parsed_cache_path(url, ocr_fallback=ocr_fallback)
     if cache_path.exists() and not refresh:
         cached = _load_cached_json(cache_path)
-        return ParsedDocument(**cached)
+        if _is_current_parsed_cache(cached):
+            return ParsedDocument(**cached)
 
     response = _request_url(url)
     content_type = str(response.headers.get("content-type") or "").lower()
@@ -1035,21 +1072,33 @@ def _jina_proxy_url(url: str) -> str:
 
 
 def extract_text_via_jina(url: str, *, refresh: bool = False) -> str:
+    now_ts = int(time.time())
     if not refresh:
         cached = TEXT_MIRROR_CACHE.get(url)
+        if _is_current_text_mirror_cache(cached, now_ts=now_ts):
+            return str(cached.get("text") or "")
         if cached is not None:
-            return cached
+            TEXT_MIRROR_CACHE.pop(url, None)
         cache_path = _mirror_cache_path(url)
         if cache_path.exists():
-            cached_text = cache_path.read_text(encoding="utf-8")
-            TEXT_MIRROR_CACHE[url] = cached_text
-            return cached_text
+            try:
+                cached_payload = _load_cached_json(cache_path)
+            except Exception:  # noqa: BLE001
+                cached_payload = None
+            if _is_current_text_mirror_cache(cached_payload, now_ts=now_ts):
+                TEXT_MIRROR_CACHE[url] = cached_payload
+                return str(cached_payload.get("text") or "")
     last_error: Exception | None = None
     for attempt in range(3):
         try:
             text = _request_url(_jina_proxy_url(url), accept="text/plain,*/*;q=0.8").text
-            TEXT_MIRROR_CACHE[url] = text
-            _mirror_cache_path(url).write_text(text, encoding="utf-8")
+            cached_payload = {
+                "_cacheVersion": TEXT_MIRROR_CACHE_VERSION,
+                "fetchedAt": int(time.time()),
+                "text": text,
+            }
+            TEXT_MIRROR_CACHE[url] = cached_payload
+            _write_cached_json(_mirror_cache_path(url), cached_payload)
             return text
         except Exception as exc:  # noqa: BLE001
             last_error = exc

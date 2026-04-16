@@ -1656,7 +1656,7 @@ function renderPixelReplicaSvg(snapshot) {
     }
   );
   const positiveGap = scaleY(safeNumber(snapshot.layout?.positiveGapY, 18));
-  const positiveLabelBlockHeight = scaleY(safeNumber(snapshot.layout?.positiveLabelBlockHeight, 82));
+  const positiveLabelMinBlockHeight = scaleY(safeNumber(snapshot.layout?.positiveLabelBlockHeight, 82));
   const positiveNodeGap = scaleY(safeNumber(snapshot.layout?.positiveNodeGap, 26));
   const positiveFloatPadding = scaleY(safeNumber(snapshot.layout?.positiveFloatPadding, 18));
   const positiveDeductionClearance = scaleY(safeNumber(snapshot.layout?.positiveDeductionClearance, 20));
@@ -1754,6 +1754,75 @@ function renderPixelReplicaSvg(snapshot) {
         rightBaseX - scaleY(safeNumber(snapshot.layout?.positiveDecisionCorridorTargetInsetX, 18))
       )
     : rightBaseX;
+  const positiveDecisionRunwayAvailable = Math.max(rightBaseX - (opX + nodeWidth), 1);
+  const positiveDecisionReferenceHeight = positiveHeights.length ? Math.max(...positiveHeights) : scaleY(10);
+  const estimatePositiveDecisionNodePlacement = (placePositiveAbove) => {
+    const candidateNodeWidth = clamp(
+      safeNumber(
+        snapshot.layout?.positiveNodeWidth,
+        Math.max(
+          positiveDecisionReferenceHeight * safeNumber(snapshot.layout?.positiveSourceCapWidthFactor, 3.4),
+          positiveDecisionRunwayAvailable * safeNumber(snapshot.layout?.positiveSourceCapWidthRunwayFactor, 0.065) +
+            safeNumber(snapshot.layout?.positiveSourceCapBaseWidth, 52)
+        )
+      ),
+      safeNumber(snapshot.layout?.positiveNodeMinWidth, 56),
+      Math.max(
+        safeNumber(snapshot.layout?.positiveNodeMaxWidth, clamp(positiveDecisionRunwayAvailable * 0.22, 84, 112)),
+        safeNumber(snapshot.layout?.positiveNodeMinWidth, 56)
+      )
+    );
+    const candidateNodeMinX = opX + nodeWidth + clamp(
+      safeNumber(
+        snapshot.layout?.positiveNodeMinOffsetFromOpX,
+        positiveDecisionRunwayAvailable * (placePositiveAbove ? 0.08 : 0.1)
+      ),
+      24,
+      56
+    );
+    const candidateNodeMaxX = rightBaseX - candidateNodeWidth - clamp(
+      safeNumber(
+        snapshot.layout?.positiveNodeMinOffsetFromNetX,
+        positiveDecisionRunwayAvailable * (placePositiveAbove ? 0.055 : 0.07)
+      ),
+      18,
+      56
+    );
+    const candidateBranchRunwayX = clamp(
+      safeNumber(
+        snapshot.layout?.positiveBranchRunwayX,
+        Math.max(
+          positiveDecisionReferenceHeight *
+            safeNumber(snapshot.layout?.positiveBranchRunwayHeightFactor, placePositiveAbove ? 0.98 : 0.94),
+          positiveDecisionRunwayAvailable *
+            safeNumber(snapshot.layout?.positiveBranchRunwayFactor, placePositiveAbove ? 0.074 : 0.068),
+          placePositiveAbove ? 42 : 38
+        )
+      ),
+      placePositiveAbove ? 30 : 28,
+      Math.max(positiveDecisionRunwayAvailable - candidateNodeWidth - 20, placePositiveAbove ? 30 : 28)
+    );
+    const candidateNodeX = clamp(
+      rightBaseX - candidateNodeWidth - candidateBranchRunwayX,
+      candidateNodeMinX,
+      Math.max(candidateNodeMaxX, candidateNodeMinX)
+    );
+    const runwayDx = Math.max(rightBaseX - (candidateNodeX + candidateNodeWidth), 1);
+    const nodeSampleXs = [0.16, 0.5, 0.84].map((t) => candidateNodeX + candidateNodeWidth * t);
+    const corridorSampleXs = [0.14, 0.32, 0.52, 0.74].map((t) =>
+      clamp(
+        candidateNodeX + candidateNodeWidth + runwayDx * t,
+        candidateNodeX + candidateNodeWidth + 1,
+        Math.max(rightBaseX - 2, candidateNodeX + candidateNodeWidth + 1)
+      )
+    );
+    return {
+      nodeWidth: candidateNodeWidth,
+      nodeX: candidateNodeX,
+      corridorSampleXs,
+      sampleXs: [...nodeSampleXs, ...corridorSampleXs],
+    };
+  };
   const positiveDecisionSampleXs = positiveAdjustments.length
     ? [0, 0.25, 0.5, 0.75, 1].map((t) =>
         clamp(
@@ -1773,8 +1842,18 @@ function renderPixelReplicaSvg(snapshot) {
     });
     return floor;
   };
+  const positiveAboveDecisionNodePlacement = positiveAdjustments.length
+    ? estimatePositiveDecisionNodePlacement(true)
+    : null;
   const positiveUpperObstacleFloorEstimate = positiveDecisionSampleXs.length
-    ? Math.max(...positiveDecisionSampleXs.map((sampleX) => positiveUpperObstacleFloorEstimateAtX(sampleX)), 0)
+    ? Math.max(
+        ...(
+          positiveAboveDecisionNodePlacement?.sampleXs?.length
+            ? positiveAboveDecisionNodePlacement.sampleXs
+            : positiveDecisionSampleXs
+        ).map((sampleX) => positiveUpperObstacleFloorEstimateAtX(sampleX)),
+        0
+      )
     : Math.max(grossMetricPlacementObstacle.bottom, operatingMetricPlacementObstacle.bottom);
   const deductionEntriesForPositiveState = (placePositiveAbove) =>
     deductionEntries.map((entry, index) =>
@@ -1786,7 +1865,16 @@ function renderPixelReplicaSvg(snapshot) {
         : entry
     );
   const totalPositiveStackHeight = totalPositiveHeight + Math.max(0, positiveAdjustments.length - 1) * positiveGap;
-  const maxPositiveLabelBlockWidth = positiveAdjustments.reduce((maxWidth, item) => {
+  const positiveLabelDecisionLineGapY = scaleY(safeNumber(snapshot.layout?.positiveLabelLineGapY, 8));
+  const positiveLabelDecisionValueOffsetY = scaleY(safeNumber(snapshot.layout?.positiveLabelValueOffsetY, 16));
+  const positiveLabelDecisionObstaclePadding = scaleY(
+    safeNumber(snapshot.layout?.positiveDecisionLabelObstaclePaddingY, safeNumber(snapshot.layout?.positiveLabelObstaclePadding, 6))
+  );
+  const positiveLabelDecisionWidthPadding = Math.max(
+    positiveLabelDecisionObstaclePadding,
+    scaleY(safeNumber(snapshot.layout?.positiveLabelWidthPaddingX, 10))
+  );
+  const positiveLabelDecisionMetrics = positiveAdjustments.map((item) => {
     const localizedPositiveName = localizeChartItemName(item);
     const positiveNameSize = localizedPositiveName.length > 14 ? 18 : 22;
     const positiveValueSize = localizedPositiveName.length > 14 ? 18 : 20;
@@ -1795,14 +1883,234 @@ function renderPixelReplicaSvg(snapshot) {
       approximateTextWidth(formatItemBillions(item, "positive-plus"), positiveValueSize),
       1
     );
-    return Math.max(
-      maxWidth,
-      labelWidth + scaleY(safeNumber(snapshot.layout?.positiveLabelWidthPaddingX, 10)) * 2
-    );
-  }, 0);
+    const labelNameAscent = positiveNameSize * 0.9;
+    const labelNameDescent = positiveNameSize * 0.34;
+    const labelValueAscent = positiveValueSize * 0.9;
+    const labelValueDescent = positiveValueSize * 0.36;
+    const labelTopOffset =
+      Math.min(-positiveLabelDecisionLineGapY - labelNameAscent, positiveLabelDecisionValueOffsetY - labelValueAscent) -
+      positiveLabelDecisionObstaclePadding;
+    const labelBottomOffset =
+      Math.max(-positiveLabelDecisionLineGapY + labelNameDescent, positiveLabelDecisionValueOffsetY + labelValueDescent) +
+      positiveLabelDecisionObstaclePadding;
+    return {
+      width: labelWidth + positiveLabelDecisionWidthPadding * 2,
+      height: labelBottomOffset - labelTopOffset,
+    };
+  });
+  const maxPositiveLabelBlockWidth = positiveLabelDecisionMetrics.reduce(
+    (maxWidth, metric) => Math.max(maxWidth, safeNumber(metric?.width)),
+    0
+  );
+  const positiveLabelBlockHeight = positiveLabelDecisionMetrics.reduce(
+    (maxHeight, metric) => Math.max(maxHeight, safeNumber(metric?.height)),
+    positiveLabelMinBlockHeight
+  );
   const positiveDecisionCorridorWidth = Math.max(positiveDecisionCorridorMaxX - positiveDecisionCorridorMinX, 1);
+  const positiveDecisionLabelMinLeftX = opX + nodeWidth + scaleY(safeNumber(snapshot.layout?.positiveLabelMinLeftPadX, 10));
+  const positiveDecisionLabelPreferredMaxRightX = Math.max(
+    positiveDecisionLabelMinLeftX + scaleY(safeNumber(snapshot.layout?.positiveDecisionLabelMinWidthX, 72)),
+    rightLabelXBase - scaleY(safeNumber(snapshot.layout?.positiveDecisionLabelNetSummaryGapX, 26))
+  );
+  const positiveDecisionLabelHardMaxRightX = Math.max(
+    positiveDecisionLabelPreferredMaxRightX,
+    width - 56 - positiveLabelDecisionWidthPadding
+  );
+  const evaluatePositiveDecisionLabelPlacement = (options = {}) => {
+    const minLeft = Math.max(safeNumber(options.minLeft, positiveDecisionLabelMinLeftX), positiveDecisionLabelMinLeftX);
+    const preferredMaxRight = Math.min(
+      Math.max(safeNumber(options.preferredMaxRight, positiveDecisionLabelPreferredMaxRightX), minLeft),
+      positiveDecisionLabelHardMaxRightX
+    );
+    const maxRight = Math.min(
+      Math.max(safeNumber(options.maxRight, positiveDecisionLabelHardMaxRightX), preferredMaxRight),
+      positiveDecisionLabelHardMaxRightX
+    );
+    const usableWidth = Math.max(maxRight - minLeft, 0);
+    const preferredUsableWidth = Math.max(preferredMaxRight - minLeft, 0);
+    const hardWidthShortfall = Math.max(maxPositiveLabelBlockWidth - usableWidth, 0);
+    const widthShortfall = Math.max(maxPositiveLabelBlockWidth - preferredUsableWidth, 0);
+    const widthSlack = preferredUsableWidth - maxPositiveLabelBlockWidth;
+    const preferredCenterX = clamp(
+      safeNumber(options.preferredCenterX, positiveDecisionCorridorMaxX - maxPositiveLabelBlockWidth / 2),
+      minLeft + maxPositiveLabelBlockWidth / 2,
+      maxRight - maxPositiveLabelBlockWidth / 2
+    );
+    if (hardWidthShortfall > 0.5) {
+      return {
+        feasible: false,
+        minLeft,
+        maxRight,
+        usableWidth,
+        usableHeight: 0,
+        widthShortfall,
+        hardWidthShortfall,
+        heightShortfall: positiveLabelBlockHeight,
+        widthSlack,
+        heightSlack: -positiveLabelBlockHeight,
+        penalty: hardWidthShortfall * safeNumber(snapshot.layout?.positiveDecisionLabelWidthShortfallPenaltyFactor, 1.35),
+        score: hardWidthShortfall * safeNumber(snapshot.layout?.positiveDecisionLabelWidthShortfallPenaltyFactor, 1.35),
+      };
+    }
+    const minCenterX = minLeft + maxPositiveLabelBlockWidth / 2;
+    const maxCenterX = maxRight - maxPositiveLabelBlockWidth / 2;
+    const centerCandidates = [0, 0.18, 0.36, 0.54, 0.72, 1]
+      .map((t) => clamp(minCenterX + (maxCenterX - minCenterX) * t, minCenterX, maxCenterX))
+      .concat([preferredCenterX, minCenterX, maxCenterX])
+      .filter((value, index, values) => values.findIndex((candidate) => Math.abs(candidate - value) < 1) === index);
+    let bestPlacement = null;
+    centerCandidates.forEach((centerX) => {
+      const rect = {
+        left: centerX - maxPositiveLabelBlockWidth / 2,
+        right: centerX + maxPositiveLabelBlockWidth / 2,
+      };
+      const bandTop = typeof options.topResolver === "function" ? safeNumber(options.topResolver(rect), 0) : safeNumber(options.bandTop, 0);
+      const bandBottom =
+        typeof options.bottomResolver === "function"
+          ? safeNumber(options.bottomResolver(rect), chartBottomLimit)
+          : safeNumber(options.bandBottom, chartBottomLimit);
+      const usableHeight = Math.max(bandBottom - bandTop, 0);
+      const heightShortfall = Math.max(positiveLabelBlockHeight - usableHeight, 0);
+      const heightSlack = usableHeight - positiveLabelBlockHeight;
+      const sideSlack = Math.min(rect.left - minLeft, maxRight - rect.right);
+      const centerDeviation = Math.abs(centerX - preferredCenterX);
+      const preferredOverflow =
+        Math.max(minLeft - rect.left, 0) + Math.max(rect.right - preferredMaxRight, 0);
+      const penalty =
+        heightShortfall * safeNumber(snapshot.layout?.positiveDecisionLabelHeightPenaltyFactor, 0.82) +
+        Math.max(-heightSlack, 0) * safeNumber(snapshot.layout?.positiveDecisionLabelHeightShortfallPenaltyFactor, 1.8) +
+        preferredOverflow * safeNumber(snapshot.layout?.positiveDecisionLabelReservedZonePenaltyFactor, 0.18);
+      const score =
+        penalty +
+        centerDeviation * safeNumber(snapshot.layout?.positiveDecisionLabelCenterDeviationPenaltyFactor, 0.08) -
+        Math.max(sideSlack, 0) * safeNumber(snapshot.layout?.positiveDecisionLabelSideSlackScoreFactor, 0.04);
+      const candidate = {
+        feasible: heightShortfall <= 0.5,
+        minLeft,
+        maxRight,
+        usableWidth,
+        usableHeight,
+        widthShortfall,
+        hardWidthShortfall,
+        heightShortfall,
+        widthSlack,
+        heightSlack,
+        preferredOverflow,
+        penalty,
+        score,
+      };
+      if (!bestPlacement) {
+        bestPlacement = candidate;
+        return;
+      }
+      if (candidate.feasible !== bestPlacement.feasible) {
+        if (candidate.feasible) bestPlacement = candidate;
+        return;
+      }
+      if (Math.abs(candidate.penalty - bestPlacement.penalty) > 0.001) {
+        if (candidate.penalty < bestPlacement.penalty) bestPlacement = candidate;
+        return;
+      }
+      if (candidate.score < bestPlacement.score) bestPlacement = candidate;
+    });
+    return (
+      bestPlacement || {
+        feasible: false,
+        minLeft,
+        maxRight,
+        usableWidth,
+        usableHeight: 0,
+        widthShortfall,
+        hardWidthShortfall,
+        heightShortfall: positiveLabelBlockHeight,
+        widthSlack,
+        heightSlack: -positiveLabelBlockHeight,
+        penalty: positiveLabelBlockHeight * safeNumber(snapshot.layout?.positiveDecisionLabelHeightShortfallPenaltyFactor, 1.8),
+        score: positiveLabelBlockHeight * safeNumber(snapshot.layout?.positiveDecisionLabelHeightShortfallPenaltyFactor, 1.8),
+      }
+    );
+  };
+  const comparePositiveDecisionLabelBand = (candidate, baseline) => {
+    if (!baseline) return true;
+    if (candidate.feasible !== baseline.feasible) return candidate.feasible;
+    if (Math.abs(candidate.penalty - baseline.penalty) > 0.001) return candidate.penalty < baseline.penalty;
+    return candidate.score < baseline.score;
+  };
+  const positiveDecisionMetricObstacleBottomForRect = (rect) => {
+    let bottom = 0;
+    [grossMetricPlacementObstacle, operatingMetricPlacementObstacle].forEach((obstacle) => {
+      if (!obstacle) return;
+      if (rect.right >= obstacle.left && rect.left <= obstacle.right) {
+        bottom = Math.max(bottom, obstacle.bottom);
+      }
+    });
+    return bottom;
+  };
   const positiveBelowTopMin = Math.max(netBottom + positiveNodeGap, scaleY(308));
   const positiveBelowTopMax = chartBottomLimit - totalPositiveStackHeight - positiveLabelBlockHeight - scaleY(12);
+  const positiveDecisionRectSampleXs = (rect, count = 7) => {
+    if (!rect) return [];
+    const left = clamp(rect.left + 1, opX + nodeWidth + 1, rightBaseX - 2);
+    const right = clamp(rect.right - 1, opX + nodeWidth + 1, rightBaseX - 2);
+    if (right <= left) return [left];
+    return Array.from({ length: count }, (_unused, index) =>
+      clamp(left + ((right - left) * index) / Math.max(count - 1, 1), opX + nodeWidth + 1, rightBaseX - 2)
+    ).filter((value, index, values) => Number.isFinite(value) && (index === 0 || Math.abs(value - values[index - 1]) > 0.8));
+  };
+  const positiveDecisionBelowNodePlacement = positiveAdjustments.length
+    ? estimatePositiveDecisionNodePlacement(false)
+    : null;
+  const positiveDecisionBelowBranchPathOptions = {
+    curveFactor: 0.7,
+    startCurveFactor: 0.26,
+    endCurveFactor: 0.46,
+    minStartCurveFactor: 0.22,
+    maxStartCurveFactor: 0.36,
+    minEndCurveFactor: 0.34,
+    maxEndCurveFactor: 0.54,
+    deltaScale: 0.78,
+    deltaInfluence: 0.036,
+    thicknessInfluence: 0.038,
+    sourceHoldFactor: 0,
+    minSourceHoldLength: 0,
+    maxSourceHoldLength: 1,
+    targetHoldFactor: 0,
+    minTargetHoldLength: 0,
+    maxTargetHoldLength: 2,
+    sourceHoldDeltaReduction: 0.08,
+    targetHoldDeltaReduction: 0.14,
+    minAdaptiveSourceHoldLength: 0,
+    minAdaptiveTargetHoldLength: 0,
+  };
+  const positiveDecisionBelowBranchTopForRect = (rect) => {
+    if (!positiveAdjustments.length || !positiveDecisionBelowNodePlacement) return Infinity;
+    const sampleXs = positiveDecisionRectSampleXs(rect, 9);
+    const sourceTop = positiveBelowTopMin;
+    const sourceBottom = sourceTop + totalPositiveStackHeight;
+    const targetTop = netTop + coreNetTargetHeight;
+    const targetBottom = targetTop + totalPositiveHeight;
+    let top = Infinity;
+    sampleXs.forEach((sampleX) => {
+      if (sampleX <= positiveDecisionBelowNodePlacement.nodeX + positiveDecisionBelowNodePlacement.nodeWidth) {
+        top = Math.min(top, sourceTop);
+        return;
+      }
+      const envelope = flowEnvelopeAtX(
+        sampleX,
+        positiveDecisionBelowNodePlacement.nodeX + positiveDecisionBelowNodePlacement.nodeWidth,
+        sourceTop,
+        sourceBottom,
+        rightBaseX + safeNumber(snapshot.layout?.positiveTargetInsetX, 0),
+        targetTop,
+        targetBottom,
+        positiveDecisionBelowBranchPathOptions
+      );
+      if (envelope) {
+        top = Math.min(top, envelope.top);
+      }
+    });
+    return top;
+  };
   const positiveBelowReservedHeight =
     totalPositiveStackHeight + positiveLabelBlockHeight + positiveFloatPadding + positiveDeductionClearance + positiveTaxCorridorExtraY;
   if (positiveAdjustments.length && opexBoxes.length) {
@@ -1853,9 +2161,46 @@ function renderPixelReplicaSvg(snapshot) {
     : Infinity;
   const highestRightObstacleTopBelow = Math.min(highestDeductionBoxTopBelow, opexObstacleTop);
   const belowPositiveClearance = highestRightObstacleTopBelow - (positiveBelowTopMin + totalPositiveStackHeight + positiveLabelBlockHeight);
+  const positiveDecisionLabelToNodeGapY = scaleY(safeNumber(snapshot.layout?.positiveDecisionLabelToNodeGapY, 10));
+  const abovePositiveLabelDecision = positiveAdjustments.length
+    ? evaluatePositiveDecisionLabelPlacement({
+        preferredCenterX: positiveDecisionCorridorMaxX - maxPositiveLabelBlockWidth / 2,
+        topResolver: (rect) =>
+          positiveDecisionMetricObstacleBottomForRect(rect) +
+          scaleY(safeNumber(snapshot.layout?.positiveAboveCorridorTopGapY, 10)),
+        bottomResolver: () => netTop - totalPositiveStackHeight - positiveNodeGap - positiveDecisionLabelToNodeGapY,
+      })
+    : null;
+  let belowPositiveLabelDecision = null;
+  if (positiveAdjustments.length) {
+    const positiveDecisionBelowUpperRibbonGapY = scaleY(
+      safeNumber(snapshot.layout?.positiveDecisionBelowUpperRibbonGapY, safeNumber(snapshot.layout?.positiveLabelRibbonClearanceY, 12))
+    );
+    const belowPositiveUpperLabelDecision = evaluatePositiveDecisionLabelPlacement({
+      preferredCenterX: positiveDecisionCorridorMaxX - maxPositiveLabelBlockWidth / 2,
+      bandTop: netBottom + scaleY(safeNumber(snapshot.layout?.positiveDecisionBelowUpperBandTopGapY, 8)),
+      bottomResolver: (rect) =>
+        Math.min(
+          positiveBelowTopMin - positiveDecisionLabelToNodeGapY,
+          positiveDecisionBelowBranchTopForRect(rect) - positiveDecisionBelowUpperRibbonGapY
+        ),
+    });
+    const belowPositiveLowerLabelDecision = evaluatePositiveDecisionLabelPlacement({
+      preferredCenterX: positiveDecisionCorridorMaxX - maxPositiveLabelBlockWidth / 2,
+      bandTop: positiveBelowTopMin + totalPositiveStackHeight + positiveDecisionLabelToNodeGapY,
+      bandBottom: highestRightObstacleTopBelow - scaleY(safeNumber(snapshot.layout?.positiveDecisionBelowLowerBandBottomGapY, 8)),
+    });
+    belowPositiveLabelDecision = comparePositiveDecisionLabelBand(
+      belowPositiveUpperLabelDecision,
+      belowPositiveLowerLabelDecision
+    )
+      ? belowPositiveUpperLabelDecision
+      : belowPositiveLowerLabelDecision;
+  }
   const belowPositiveFeasible = positiveAdjustments.length
     ? positiveBelowTopMax >= positiveBelowTopMin &&
-      belowPositiveClearance >= positiveFloatPadding * 0.8
+      belowPositiveClearance >= positiveFloatPadding * 0.8 &&
+      !!belowPositiveLabelDecision?.feasible
     : false;
   const abovePositiveCorridorHeight =
     netTop +
@@ -1870,19 +2215,28 @@ function renderPixelReplicaSvg(snapshot) {
       scaleY(safeNumber(snapshot.layout?.positiveAboveLabelGapY, 8)),
       positiveFloatPadding * safeNumber(snapshot.layout?.positiveAboveLabelGapFactor, 0.72)
     );
-  const abovePositiveFeasible = positiveAdjustments.length ? abovePositiveCorridorHeight >= abovePositiveRequiredHeight : false;
-  const belowPositiveSlack = positiveAdjustments.length ? belowPositiveClearance - positiveFloatPadding * 0.8 : -Infinity;
+  const abovePositiveFeasible = positiveAdjustments.length
+    ? abovePositiveCorridorHeight >= abovePositiveRequiredHeight && !!abovePositiveLabelDecision?.feasible
+    : false;
+  const belowPositiveSlack = positiveAdjustments.length
+    ? belowPositiveClearance -
+      positiveFloatPadding * 0.8 -
+      safeNumber(belowPositiveLabelDecision?.penalty) * safeNumber(snapshot.layout?.positiveDecisionLabelPenaltyWeight, 1)
+    : -Infinity;
   const abovePositiveWidthShortfall = positiveAdjustments.length
-    ? Math.max(
-        maxPositiveLabelBlockWidth -
-          positiveDecisionCorridorWidth * safeNumber(snapshot.layout?.positiveAboveUsableCorridorWidthFactor, 0.92),
+    ? safeNumber(abovePositiveLabelDecision?.hardWidthShortfall) +
+      Math.max(
+        safeNumber(abovePositiveLabelDecision?.widthShortfall) -
+          safeNumber(abovePositiveLabelDecision?.hardWidthShortfall),
         0
-      )
+      ) *
+        safeNumber(snapshot.layout?.positiveAboveSoftWidthPenaltyFactor, 0.08)
     : 0;
   const abovePositiveSlack = positiveAdjustments.length
     ? abovePositiveCorridorHeight -
       abovePositiveRequiredHeight -
-      abovePositiveWidthShortfall * safeNumber(snapshot.layout?.positiveAboveWidthPenaltyFactor, 0.36)
+      abovePositiveWidthShortfall * safeNumber(snapshot.layout?.positiveAboveWidthPenaltyFactor, 0.36) -
+      safeNumber(abovePositiveLabelDecision?.penalty) * safeNumber(snapshot.layout?.positiveDecisionLabelPenaltyWeight, 1)
     : -Infinity;
   const belowPositiveComfortable = positiveAdjustments.length
     ? belowPositiveClearance >= Math.max(scaleY(36), positiveFloatPadding * 1.35, totalPositiveStackHeight * 1.2)
@@ -6734,7 +7088,6 @@ function renderPixelReplicaSvg(snapshot) {
       netDisplayBand.bottom,
       netRibbonOptions
     );
-
   let svg = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="${escapeHtml(titleText)}" font-family="Aptos, Segoe UI, Arial, Helvetica, sans-serif" data-editor-bounds-left="0" data-editor-bounds-top="0" data-editor-bounds-right="${width}" data-editor-bounds-bottom="${height}">
       <rect x="0" y="0" width="${width}" height="${height}" fill="${background}"></rect>

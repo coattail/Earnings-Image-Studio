@@ -9,7 +9,7 @@ from html import unescape
 from pathlib import Path
 import subprocess
 from typing import Any
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urlencode, urljoin, urlparse
 import urllib.request
 
 from generic_filing_table_parser import OPTIONAL_BREAKDOWN_ROWS, ROW_ALIASES, _merge_entry
@@ -33,6 +33,7 @@ MAX_IR_DETAIL_PAGES = 10
 MAX_IR_CRAWL_PAGES = 24
 MAX_IR_PDF_CANDIDATES = 40
 TARGET_HISTORY_WINDOW_QUARTERS = 30
+GENERIC_IR_PDF_CACHE_VERSION = "generic-ir-pdf-v2"
 OCR_PDF_PAGE_LIMIT = 24
 OCR_MIN_TEXT_SIGNAL = 80
 OCR_MIN_MEANINGFUL_SIGNAL = 50
@@ -212,6 +213,26 @@ def _quick_fetch_text(url: str) -> str:
     return _mirror_fetch_text(url, timeout_seconds=15)
 
 
+def _quick_fetch_json(url: str, params: dict[str, Any] | list[tuple[str, Any]] | None = None) -> Any:
+    query = urlencode(params or {}, doseq=True)
+    target = f"{url}?{query}" if query else url
+    request = urllib.request.Request(
+        target,
+        headers={
+            "User-Agent": HTTP_USER_AGENT,
+            "Accept": "application/json,text/plain;q=0.9,*/*;q=0.8",
+            "Accept-Language": "en-US,en;q=0.9",
+            "Referer": url,
+        },
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=12) as response:
+            return json.loads(response.read().decode("utf-8", errors="ignore"))
+    except Exception:
+        curled = str(_fetch_via_curl(target, accept="application/json,text/plain;q=0.9,*/*;q=0.8", timeout_seconds=20, binary=False))
+        return json.loads(curled)
+
+
 def _quick_fetch_pdf_bytes(url: str) -> bytes:
     request = urllib.request.Request(
         url,
@@ -227,6 +248,97 @@ def _quick_fetch_pdf_bytes(url: str) -> bytes:
             return response.read()
     except Exception:
         return bytes(_fetch_via_curl(url, accept="application/pdf,application/octet-stream;q=0.9,*/*;q=0.8", timeout_seconds=30, binary=True))
+
+
+def _q4_public_api_key_from_html(html_text: str) -> str | None:
+    match = re.search(r"Q4ApiKey\s*=\s*['\"]([A-Za-z0-9]+)['\"]", html_text)
+    return match.group(1).strip() if match else None
+
+
+def _q4_public_language_id_from_html(html_text: str) -> int:
+    match = re.search(r"GetLanguageId\(\)\s*\{\s*return\s*['\"]?(\d+)['\"]?", html_text)
+    if not match:
+        return 1
+    try:
+        return max(int(match.group(1)), 1)
+    except Exception:
+        return 1
+
+
+def _q4_financial_report_types_from_html(html_text: str) -> list[str]:
+    match = re.search(r"\.financials\(\{.*?reportTypes:\s*\[(.*?)\]", html_text, flags=re.IGNORECASE | re.DOTALL)
+    if not match:
+        return ["First Quarter", "Second Quarter", "Third Quarter", "Fourth Quarter"]
+    report_types = [value.strip() for value in re.findall(r"['\"]([^'\"]+)['\"]", match.group(1))]
+    return report_types or ["First Quarter", "Second Quarter", "Third Quarter", "Fourth Quarter"]
+
+
+def _extract_q4_widget_feed_pdf_links(page_url: str, html_text: str) -> list[str]:
+    api_key = _q4_public_api_key_from_html(html_text)
+    if not api_key:
+        return []
+
+    parsed_page = urlparse(page_url)
+    base_url = f"{parsed_page.scheme}://{parsed_page.netloc}"
+    language_id = _q4_public_language_id_from_html(html_text)
+    collected_links: list[str] = []
+
+    def is_statement_pdf(link: str) -> bool:
+        return urlparse(link).path.lower().endswith(".pdf") and _is_likely_ir_statement_pdf(link)
+
+    if ".financials(" in html_text:
+        report_types = _q4_financial_report_types_from_html(html_text)
+        params: list[tuple[str, Any]] = [
+            ("apiKey", api_key),
+            ("LanguageId", language_id),
+            ("reportTypes", "|".join(report_types)),
+            ("year", -1),
+            ("excludeSelection", 0),
+        ]
+        for report_type in report_types:
+            params.append(("reportSubType", report_type))
+            params.append(("reportSubTypeList", report_type))
+        try:
+            payload = _quick_fetch_json(urljoin(base_url, "/feed/FinancialReport.svc/GetFinancialReportList"), params)
+        except Exception:
+            payload = {}
+        for item in payload.get("GetFinancialReportListResult") or []:
+            for document in item.get("Documents") or []:
+                link = _normalize_ir_url(urljoin(base_url, str(document.get("DocumentPath") or "").strip()))
+                if link and is_statement_pdf(link):
+                    collected_links.append(link)
+
+    if ".news(" in html_text:
+        params = [
+            ("apiKey", api_key),
+            ("LanguageId", language_id),
+            ("tagList", "earnings"),
+            ("bodyType", 0),
+            ("pressReleaseDateFilter", 3),
+            ("excludeSelection", 0),
+            ("year", -1),
+        ]
+        try:
+            payload = _quick_fetch_json(urljoin(base_url, "/feed/PressRelease.svc/GetPressReleaseList"), params)
+        except Exception:
+            payload = {}
+        for item in payload.get("GetPressReleaseListResult") or []:
+            primary_link = _normalize_ir_url(urljoin(base_url, str(item.get("DocumentPath") or "").strip()))
+            if primary_link and is_statement_pdf(primary_link):
+                collected_links.append(primary_link)
+            for attachment in item.get("Attachments") or []:
+                attachment_link = _normalize_ir_url(urljoin(base_url, str(attachment.get("Url") or "").strip()))
+                if attachment_link and is_statement_pdf(attachment_link):
+                    collected_links.append(attachment_link)
+
+    deduped: list[str] = []
+    seen: set[str] = set()
+    for link in collected_links:
+        if link in seen:
+            continue
+        seen.add(link)
+        deduped.append(link)
+    return deduped
 
 
 def _extract_pdf_page_texts(url: str) -> list[str]:
@@ -354,7 +466,7 @@ def _structured_ocr_grid_lines(observations: list[dict[str, Any]]) -> list[str]:
         if not non_empty:
             continue
         line_rows.append((min(float(item["y"]) for item in row), " | ".join(non_empty)))
-    return [line for _y, line in sorted(line_rows, key=lambda item: item[0])]
+    return [line for _y, line in sorted(line_rows, key=lambda item: item[0], reverse=True)]
 
 
 def _structured_ocr_lines(observations: list[dict[str, Any]]) -> list[str]:
@@ -378,7 +490,7 @@ def _structured_ocr_lines(observations: list[dict[str, Any]]) -> list[str]:
         line = "".join(parts).strip()
         if line:
             line_rows.append((min(float(item["y"]) for item in row), line))
-    return [line for _y, line in sorted(line_rows, key=lambda item: item[0])]
+    return [line for _y, line in sorted(line_rows, key=lambda item: item[0], reverse=True)]
 
 
 def _ocr_pipe_data_cell_count(line: str) -> int:
@@ -687,6 +799,41 @@ def _company_domain(company: dict[str, Any]) -> str:
             host = str(entry.get("domain") or "").strip().lower()
             return host[4:] if host.startswith("www.") else host
     return ""
+
+
+def _is_generic_ir_pdf_cache_compatible(payload: Any) -> bool:
+    return isinstance(payload, dict) and payload.get("_cacheVersion") == GENERIC_IR_PDF_CACHE_VERSION
+
+
+def _previous_quarter_label(quarter: str) -> str | None:
+    match = re.fullmatch(r"(\d{4})Q([1-4])", str(quarter or "").strip())
+    if not match:
+        return None
+    year = int(match.group(1))
+    quarter_number = int(match.group(2))
+    if quarter_number > 1:
+        return f"{year}Q{quarter_number - 1}"
+    return f"{year - 1}Q4"
+
+
+def _trim_recent_contiguous_financials(financials: dict[str, Any]) -> dict[str, Any]:
+    ordered_items = sorted(
+        [(str(quarter), payload) for quarter, payload in (financials or {}).items() if str(quarter).strip()],
+        key=lambda item: _period_key(item[0]),
+    )
+    if len(ordered_items) < 2:
+        return {quarter: payload for quarter, payload in ordered_items}
+
+    contiguous_tail: list[tuple[str, Any]] = [ordered_items[-1]]
+    for quarter, payload in reversed(ordered_items[:-1]):
+        expected_previous = _previous_quarter_label(contiguous_tail[0][0])
+        if quarter != expected_previous:
+            break
+        contiguous_tail.insert(0, (quarter, payload))
+
+    if len(contiguous_tail) >= 4 and len(contiguous_tail) < len(ordered_items):
+        return {quarter: payload for quarter, payload in contiguous_tail}
+    return {quarter: payload for quarter, payload in ordered_items}
 
 
 def _clamp_day(year: int, month: int, day: int) -> int:
@@ -1963,6 +2110,7 @@ def _official_ir_pdf_candidates(company: dict[str, Any]) -> list[str]:
         except Exception:
             continue
         pdf_links.extend(_normalize_ir_url(link) for link in _extract_pdf_links_from_html(normalized_page_url, html_text))
+        pdf_links.extend(_normalize_ir_url(link) for link in _extract_q4_widget_feed_pdf_links(normalized_page_url, html_text))
         discovered_html_links = [
             _normalize_ir_url(link)
             for link in _extract_html_links_from_html(normalized_page_url, html_text, domain)
@@ -1988,9 +2136,12 @@ def _official_ir_pdf_candidates(company: dict[str, Any]) -> list[str]:
 def fetch_generic_ir_pdf_history(company: dict[str, Any], refresh: bool = False) -> dict[str, Any]:
     path = _cache_path(str(company.get("id") or "company"))
     if path.exists() and not refresh:
-        return _load_cached_json(path)
+        cached = _load_cached_json(path)
+        if _is_generic_ir_pdf_cache_compatible(cached):
+            return cached
 
     result = {
+        "_cacheVersion": GENERIC_IR_PDF_CACHE_VERSION,
         "id": company.get("id"),
         "ticker": company.get("ticker"),
         "quarters": [],
@@ -2058,6 +2209,7 @@ def fetch_generic_ir_pdf_history(company: dict[str, Any], refresh: bool = False)
                 break
 
     financials = finalize_period_entries(period_entries, merge_entry=_merge_entry, score_entry=_score_entry)
+    financials = _trim_recent_contiguous_financials(financials)
     result["quarters"] = sorted(financials.keys(), key=_period_key)
     result["financials"] = {quarter: financials[quarter] for quarter in result["quarters"]}
     _write_cached_json(path, result)
