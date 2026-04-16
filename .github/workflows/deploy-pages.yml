@@ -37,6 +37,11 @@ jobs:
           python-version: "3.11"
           cache: "pip"
 
+      - name: Explain branch-only manual runs
+        if: github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/main'
+        run: |
+          echo "::notice title=Pages deploy skipped::Manual runs from ${GITHUB_REF_NAME} only build the artifact. Merge to main to publish to GitHub Pages."
+
       - name: Prepare deploy artifact
         run: python scripts/prepare_pages_artifact.py
 
@@ -47,6 +52,7 @@ jobs:
 
   deploy:
     needs: build
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

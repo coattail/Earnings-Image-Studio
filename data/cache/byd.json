@@ -14,7 +14,6 @@
   "financialSource": "stockanalysis",
   "financialPath": "quote/hkg/1211",
   "quarters": [
-    "2020Q4",
     "2021Q1",
     "2021Q2",
     "2021Q3",
@@ -37,37 +36,37 @@
     "2025Q4"
   ],
   "financials": {
-    "2020Q4": {
-      "calendarQuarter": "2020Q4",
-      "periodEnd": "2020-12-31",
-      "fiscalYear": "2020",
-      "fiscalQuarter": "Q4",
-      "fiscalLabel": "FY2020 Q4",
+    "2021Q1": {
+      "calendarQuarter": "2021Q1",
+      "periodEnd": "2021-03-31",
+      "fiscalYear": "2021",
+      "fiscalQuarter": "Q1",
+      "fiscalLabel": "FY2021 Q1",
       "statementCurrency": "CNY",
-      "revenueBn": 51.575,
+      "revenueBn": 40.992,
       "revenueYoyPct": null,
-      "costOfRevenueBn": 43.519,
-      "grossProfitBn": 8.056,
-      "sgnaBn": 2.748,
-      "rndBn": 2.573,
-      "otherOpexBn": 0.106,
-      "operatingExpensesBn": 6.304,
-      "operatingIncomeBn": 1.752,
-      "nonOperatingBn": -0.547,
-      "pretaxIncomeBn": 1.205,
-      "taxBn": 0.093,
-      "netIncomeBn": 0.821,
-      "netIncomeYoyPct": 1943.87,
-      "grossMarginPct": 15.62,
-      "operatingMarginPct": 3.4,
-      "profitMarginPct": 1.59,
-      "effectiveTaxRatePct": 7.695,
+      "costOfRevenueBn": 35.829,
+      "grossProfitBn": 5.163,
+      "sgnaBn": 2.41,
+      "rndBn": 1.217,
+      "otherOpexBn": 0.003,
+      "operatingExpensesBn": 3.642,
+      "operatingIncomeBn": 1.52,
+      "nonOperatingBn": -0.864,
+      "pretaxIncomeBn": 0.656,
+      "taxBn": 0.145,
+      "netIncomeBn": 0.237,
+      "netIncomeYoyPct": 110.73,
+      "grossMarginPct": 12.6,
+      "operatingMarginPct": 3.71,
+      "profitMarginPct": 0.58,
+      "effectiveTaxRatePct": 22.108,
       "revenueQoqPct": null,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
       "statementSourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly",
-      "statementFilingDate": "2020-12-31",
+      "statementFilingDate": "2021-03-31",
       "parserFinancialFieldSources": {
         "revenueBn": "stockanalysis",
         "revenueYoyPct": "stockanalysis",
@@ -100,220 +99,6 @@
         "revenueBn": 1,
         "revenueYoyPct": 1,
         "revenueQoqPct": 0,
-        "costOfRevenueBn": 1,
-        "grossProfitBn": 1,
-        "grossMarginPct": 1,
-        "grossMarginYoyDeltaPp": 0,
-        "sgnaBn": 1,
-        "rndBn": 1,
-        "otherOpexBn": 1,
-        "operatingExpensesBn": 1,
-        "operatingIncomeBn": 1,
-        "operatingMarginPct": 1,
-        "operatingMarginYoyDeltaPp": 0,
-        "nonOperatingBn": 0,
-        "pretaxIncomeBn": 1,
-        "taxBn": 1,
-        "netIncomeBn": 1,
-        "netIncomeYoyPct": 1,
-        "profitMarginPct": 1,
-        "profitMarginYoyDeltaPp": 0,
-        "effectiveTaxRatePct": 1
-      },
-      "parserFinancialValidation": {
-        "version": "financial-validation-v1",
-        "status": "high",
-        "confidenceScore": 0.9438,
-        "completenessScore": 1.0,
-        "consistencyScore": 0.875,
-        "checksRun": 8,
-        "checksPassed": 7,
-        "issueCount": 1,
-        "issues": [
-          {
-            "code": "pretax-minus-tax-equals-net",
-            "severity": "warning",
-            "message": "netIncomeBn does not reconcile with pretaxIncomeBn and taxBn.",
-            "expected": 0.821,
-            "derived": 1.112,
-            "delta": -0.291,
-            "tolerance": 0.12
-          }
-        ]
-      },
-      "displayCurrency": "USD",
-      "displayScaleFactor": 0.15362,
-      "statementMeta": {
-        "statementSource": null,
-        "statementSourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly",
-        "statementValueMode": null,
-        "statementSpanQuarters": null,
-        "qualityFlags": [],
-        "adapterId": "stockanalysis_financials"
-      },
-      "fieldSources": {
-        "revenueBn": {
-          "adapterId": "stockanalysis_financials",
-          "label": "StockAnalysis financials",
-          "score": 75.0,
-          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
-        },
-        "costOfRevenueBn": {
-          "adapterId": "stockanalysis_financials",
-          "label": "StockAnalysis financials",
-          "score": 73.0,
-          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
-        },
-        "grossProfitBn": {
-          "adapterId": "stockanalysis_financials",
-          "label": "StockAnalysis financials",
-          "score": 73.0,
-          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
-        },
-        "sgnaBn": {
-          "adapterId": "stockanalysis_financials",
-          "label": "StockAnalysis financials",
-          "score": 69.0,
-          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
-        },
-        "rndBn": {
-          "adapterId": "stockanalysis_financials",
-          "label": "StockAnalysis financials",
-          "score": 69.0,
-          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
-        },
-        "otherOpexBn": {
-          "adapterId": "stockanalysis_financials",
-          "label": "StockAnalysis financials",
-          "score": 67.0,
-          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
-        },
-        "operatingExpensesBn": {
-          "adapterId": "stockanalysis_financials",
-          "label": "StockAnalysis financials",
-          "score": 73.0,
-          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
-        },
-        "operatingIncomeBn": {
-          "adapterId": "stockanalysis_financials",
-          "label": "StockAnalysis financials",
-          "score": 73.0,
-          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
-        },
-        "pretaxIncomeBn": {
-          "adapterId": "stockanalysis_financials",
-          "label": "StockAnalysis financials",
-          "score": 73.0,
-          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
-        },
-        "taxBn": {
-          "adapterId": "stockanalysis_financials",
-          "label": "StockAnalysis financials",
-          "score": 69.0,
-          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
-        },
-        "netIncomeBn": {
-          "adapterId": "stockanalysis_financials",
-          "label": "StockAnalysis financials",
-          "score": 73.0,
-          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
-        },
-        "statementMeta": {
-          "adapterId": "stockanalysis_financials",
-          "label": "StockAnalysis financials",
-          "score": 12.14,
-          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
-        }
-      },
-      "extractionDiagnostics": {
-        "qualityScore": 60,
-        "availableRequiredFieldCount": 3,
-        "requiredFieldCount": 3,
-        "sourceFieldCount": 12,
-        "hasCostBreakdownProfile": false,
-        "costBreakdownMode": "none",
-        "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 0,
-        "costBreakdownCoveragePct": 0,
-        "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": null,
-        "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": null,
-        "statementSource": null,
-        "statementValueMode": null,
-        "statementSpanQuarters": null,
-        "statementQualityFlags": [],
-        "issues": [
-          "revenue-segment-coverage-low",
-          "cost-breakdown-coverage-low",
-          "opex-breakdown-coverage-low"
-        ]
-      }
-    },
-    "2021Q1": {
-      "calendarQuarter": "2021Q1",
-      "periodEnd": "2021-03-31",
-      "fiscalYear": "2021",
-      "fiscalQuarter": "Q1",
-      "fiscalLabel": "FY2021 Q1",
-      "statementCurrency": "CNY",
-      "revenueBn": 40.992,
-      "revenueYoyPct": null,
-      "costOfRevenueBn": 35.829,
-      "grossProfitBn": 5.163,
-      "sgnaBn": 2.41,
-      "rndBn": 1.217,
-      "otherOpexBn": 0.003,
-      "operatingExpensesBn": 3.642,
-      "operatingIncomeBn": 1.52,
-      "nonOperatingBn": -0.864,
-      "pretaxIncomeBn": 0.656,
-      "taxBn": 0.145,
-      "netIncomeBn": 0.237,
-      "netIncomeYoyPct": 110.73,
-      "grossMarginPct": 12.6,
-      "operatingMarginPct": 3.71,
-      "profitMarginPct": 0.58,
-      "effectiveTaxRatePct": 22.108,
-      "revenueQoqPct": -20.52,
-      "grossMarginYoyDeltaPp": null,
-      "operatingMarginYoyDeltaPp": null,
-      "profitMarginYoyDeltaPp": null,
-      "statementSourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly",
-      "statementFilingDate": "2021-03-31",
-      "parserFinancialFieldSources": {
-        "revenueBn": "stockanalysis",
-        "revenueYoyPct": "stockanalysis",
-        "revenueQoqPct": "stockanalysis",
-        "costOfRevenueBn": "stockanalysis",
-        "grossProfitBn": "stockanalysis",
-        "grossMarginPct": "stockanalysis",
-        "sgnaBn": "stockanalysis",
-        "rndBn": "stockanalysis",
-        "otherOpexBn": "stockanalysis",
-        "operatingExpensesBn": "stockanalysis",
-        "operatingIncomeBn": "stockanalysis",
-        "operatingMarginPct": "stockanalysis",
-        "pretaxIncomeBn": "stockanalysis",
-        "taxBn": "stockanalysis",
-        "netIncomeBn": "stockanalysis",
-        "netIncomeYoyPct": "stockanalysis",
-        "profitMarginPct": "stockanalysis",
-        "effectiveTaxRatePct": "stockanalysis",
-        "calendarQuarter": "stockanalysis",
-        "periodEnd": "stockanalysis",
-        "fiscalYear": "stockanalysis",
-        "fiscalQuarter": "stockanalysis",
-        "fiscalLabel": "stockanalysis",
-        "statementCurrency": "stockanalysis",
-        "statementFilingDate": "stockanalysis",
-        "statementSourceUrl": "stockanalysis",
-        "nonOperatingBn": "derived"
-      },
-      "parserFinancialCandidateCounts": {
-        "revenueBn": 1,
-        "revenueYoyPct": 1,
-        "revenueQoqPct": 1,
         "costOfRevenueBn": 1,
         "grossProfitBn": 1,
         "grossMarginPct": 1,
@@ -900,7 +685,7 @@
       "fiscalLabel": "FY2021 Q4",
       "statementCurrency": "CNY",
       "revenueBn": 70.95,
-      "revenueYoyPct": 37.567,
+      "revenueYoyPct": null,
       "costOfRevenueBn": 62.352,
       "grossProfitBn": 8.598,
       "sgnaBn": 3.75,
@@ -918,9 +703,9 @@
       "profitMarginPct": 0.82,
       "effectiveTaxRatePct": -13.385,
       "revenueQoqPct": 30.646,
-      "grossMarginYoyDeltaPp": -3.5,
-      "operatingMarginYoyDeltaPp": -1.67,
-      "profitMarginYoyDeltaPp": -0.77,
+      "grossMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": null,
+      "profitMarginYoyDeltaPp": null,
       "statementSourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly",
       "statementFilingDate": "2021-12-31",
       "parserFinancialFieldSources": {
@@ -930,20 +715,17 @@
         "costOfRevenueBn": "stockanalysis",
         "grossProfitBn": "stockanalysis",
         "grossMarginPct": "stockanalysis",
-        "grossMarginYoyDeltaPp": "stockanalysis",
         "sgnaBn": "stockanalysis",
         "rndBn": "stockanalysis",
         "otherOpexBn": "stockanalysis",
         "operatingExpensesBn": "stockanalysis",
         "operatingIncomeBn": "stockanalysis",
         "operatingMarginPct": "stockanalysis",
-        "operatingMarginYoyDeltaPp": "stockanalysis",
         "pretaxIncomeBn": "stockanalysis",
         "taxBn": "stockanalysis",
         "netIncomeBn": "stockanalysis",
         "netIncomeYoyPct": "stockanalysis",
         "profitMarginPct": "stockanalysis",
-        "profitMarginYoyDeltaPp": "stockanalysis",
         "effectiveTaxRatePct": "stockanalysis",
         "calendarQuarter": "stockanalysis",
         "periodEnd": "stockanalysis",
@@ -962,21 +744,21 @@
         "costOfRevenueBn": 1,
         "grossProfitBn": 1,
         "grossMarginPct": 1,
-        "grossMarginYoyDeltaPp": 1,
+        "grossMarginYoyDeltaPp": 0,
         "sgnaBn": 1,
         "rndBn": 1,
         "otherOpexBn": 1,
         "operatingExpensesBn": 1,
         "operatingIncomeBn": 1,
         "operatingMarginPct": 1,
-        "operatingMarginYoyDeltaPp": 1,
+        "operatingMarginYoyDeltaPp": 0,
         "nonOperatingBn": 0,
         "pretaxIncomeBn": 1,
         "taxBn": 1,
         "netIncomeBn": 1,
         "netIncomeYoyPct": 1,
         "profitMarginPct": 1,
-        "profitMarginYoyDeltaPp": 1,
+        "profitMarginYoyDeltaPp": 0,
         "effectiveTaxRatePct": 1
       },
       "parserFinancialValidation": {
@@ -3753,24 +3535,24 @@
       "revenueBn": 777.102,
       "revenueYoyPct": 29.019,
       "costOfRevenueBn": 626.047,
-      "grossProfitBn": 43.859,
-      "sgnaBn": 6.4,
+      "grossProfitBn": 51.137,
+      "sgnaBn": 13.678,
       "rndBn": 19.876,
-      "otherOpexBn": 4.135,
-      "operatingExpensesBn": 30.879,
+      "otherOpexBn": 0.354,
+      "operatingExpensesBn": 34.377,
       "operatingIncomeBn": 50.486,
-      "nonOperatingBn": 5.381,
+      "nonOperatingBn": 1.601,
       "pretaxIncomeBn": 18.361,
       "taxBn": 8.093,
       "netIncomeBn": 40.254,
       "netIncomeYoyPct": 73.12,
-      "grossMarginPct": 15.96,
-      "operatingMarginPct": 4.72,
+      "grossMarginPct": 18.61,
+      "operatingMarginPct": 6.1,
       "profitMarginPct": 5.45,
       "effectiveTaxRatePct": 16.453,
       "revenueQoqPct": 286.378,
-      "grossMarginYoyDeltaPp": 1.45,
-      "operatingMarginYoyDeltaPp": -0.4,
+      "grossMarginYoyDeltaPp": 4.1,
+      "operatingMarginYoyDeltaPp": 0.98,
       "profitMarginYoyDeltaPp": 0.65,
       "statementSourceUrl": "https://static.cninfo.com.cn/finalpage/2025-03-25/1222881496.PDF",
       "statementFilingDate": "2025-03-25",
@@ -4808,16 +4590,104 @@
       }
     },
     "2025Q4": {
+      "calendarQuarter": "2025Q4",
+      "periodEnd": "2025-12-31",
+      "fiscalYear": "2025",
+      "fiscalQuarter": "Q4",
       "fiscalLabel": "FY 2025",
-      "statementSource": "manual-byd-official",
+      "statementCurrency": "CNY",
+      "revenueBn": 803.965,
+      "revenueYoyPct": 3.457,
+      "costOfRevenueBn": 661.305,
+      "grossProfitBn": 39.826,
+      "sgnaBn": 12.608,
+      "rndBn": 14.23,
+      "otherOpexBn": 3.895,
+      "operatingExpensesBn": 31.04,
+      "operatingIncomeBn": 40.185,
+      "nonOperatingBn": 2.308,
+      "pretaxIncomeBn": 11.093,
+      "taxBn": 5.992,
+      "netIncomeBn": 32.619,
+      "netIncomeYoyPct": -38.16,
+      "grossMarginPct": 16.75,
+      "operatingMarginPct": 3.7,
+      "profitMarginPct": 3.78,
+      "effectiveTaxRatePct": 14.099,
+      "revenueQoqPct": 312.321,
+      "grossMarginYoyDeltaPp": -1.86,
+      "operatingMarginYoyDeltaPp": -2.4,
+      "profitMarginYoyDeltaPp": -1.67,
       "statementSourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF",
       "statementFilingDate": "2026-03-28",
-      "revenueBn": 803.965,
-      "costOfRevenueBn": 661.305,
-      "operatingIncomeBn": 40.185,
-      "operatingExpensesBn": null,
-      "netIncomeBn": 32.619,
-      "taxBn": 5.992,
+      "parserFinancialFieldSources": {
+        "revenueBn": "stockanalysis",
+        "revenueYoyPct": "stockanalysis",
+        "revenueQoqPct": "stockanalysis",
+        "costOfRevenueBn": "stockanalysis",
+        "grossProfitBn": "stockanalysis",
+        "grossMarginPct": "stockanalysis",
+        "grossMarginYoyDeltaPp": "stockanalysis",
+        "sgnaBn": "stockanalysis",
+        "rndBn": "stockanalysis",
+        "otherOpexBn": "stockanalysis",
+        "operatingExpensesBn": "stockanalysis",
+        "operatingIncomeBn": "stockanalysis",
+        "operatingMarginPct": "stockanalysis",
+        "operatingMarginYoyDeltaPp": "stockanalysis",
+        "pretaxIncomeBn": "stockanalysis",
+        "taxBn": "stockanalysis",
+        "netIncomeBn": "stockanalysis",
+        "netIncomeYoyPct": "stockanalysis",
+        "profitMarginPct": "stockanalysis",
+        "profitMarginYoyDeltaPp": "stockanalysis",
+        "effectiveTaxRatePct": "stockanalysis",
+        "calendarQuarter": "stockanalysis",
+        "periodEnd": "stockanalysis",
+        "fiscalYear": "stockanalysis",
+        "fiscalQuarter": "stockanalysis",
+        "fiscalLabel": "stockanalysis",
+        "statementCurrency": "stockanalysis",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis",
+        "nonOperatingBn": "derived"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
+      "statementSource": "manual-byd-official",
       "officialRevenueSegments": [
         {
           "name": "Transportation equipment & electrical manufacturing",
@@ -4894,15 +4764,15 @@
           "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF"
         }
       ],
-      "revenueQoqPct": 312.321,
-      "revenueYoyPct": 3.457,
+      "displayCurrency": "USD",
+      "displayScaleFactor": 0.14464,
       "statementMeta": {
-        "statementSource": "manual-byd-official",
-        "statementSourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF",
+        "statementSource": null,
+        "statementSourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly",
         "statementValueMode": null,
         "statementSpanQuarters": null,
         "qualityFlags": [],
-        "adapterId": "manual_financials"
+        "adapterId": "stockanalysis_financials"
       },
       "fieldSources": {
         "revenueBn": {
@@ -4917,11 +4787,47 @@
           "score": 153.0,
           "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF"
         },
+        "grossProfitBn": {
+          "adapterId": "stockanalysis_financials",
+          "label": "StockAnalysis financials",
+          "score": 73.0,
+          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
+        },
+        "sgnaBn": {
+          "adapterId": "stockanalysis_financials",
+          "label": "StockAnalysis financials",
+          "score": 69.0,
+          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
+        },
+        "rndBn": {
+          "adapterId": "stockanalysis_financials",
+          "label": "StockAnalysis financials",
+          "score": 69.0,
+          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
+        },
+        "otherOpexBn": {
+          "adapterId": "stockanalysis_financials",
+          "label": "StockAnalysis financials",
+          "score": 67.0,
+          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "stockanalysis_financials",
+          "label": "StockAnalysis financials",
+          "score": 73.0,
+          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
+        },
         "operatingIncomeBn": {
           "adapterId": "manual_financials",
           "label": "Manual company overrides",
           "score": 153.0,
           "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "stockanalysis_financials",
+          "label": "StockAnalysis financials",
+          "score": 73.0,
+          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
         },
         "taxBn": {
           "adapterId": "manual_financials",
@@ -4939,15 +4845,15 @@
           {
             "adapterId": "manual_financials",
             "label": "Manual company overrides",
-            "score": 160.0,
+            "score": 172.0,
             "itemCount": 3
           }
         ],
         "statementMeta": {
-          "adapterId": "manual_financials",
-          "label": "Manual company overrides",
-          "score": 7.56,
-          "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF"
+          "adapterId": "stockanalysis_financials",
+          "label": "StockAnalysis financials",
+          "score": 12.14,
+          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
         },
         "officialRevenueSegments": {
           "adapterId": "manual_revenue_structures",
@@ -4960,17 +4866,17 @@
         "qualityScore": 93,
         "availableRequiredFieldCount": 3,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 8,
+        "sourceFieldCount": 14,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "explicit",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
-        "opexBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": 100.0,
         "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": null,
-        "statementSource": "manual-byd-official",
+        "opexBreakdownResidualBn": 0,
+        "statementSource": null,
         "statementValueMode": null,
         "statementSpanQuarters": null,
         "statementQualityFlags": [],
@@ -5404,7 +5310,7 @@
           "selected": true,
           "reason": "",
           "quarter_count": 20,
-          "latest_quarter": "2025Q3",
+          "latest_quarter": "2025Q4",
           "error": ""
         },
         {
@@ -5434,13 +5340,13 @@
         "status": "high",
         "quarterCount": 20,
         "validatedQuarterCount": 20,
-        "issueCount": 17,
-        "mismatchQuarterCount": 17,
+        "issueCount": 16,
+        "mismatchQuarterCount": 16,
         "highConfidenceQuarterCount": 20,
-        "averageConfidenceScore": 0.9522,
-        "latestQuarter": "2025Q3",
-        "latestQuarterConfidenceScore": 0.9438,
-        "latestQuarterIssueCount": 1
+        "averageConfidenceScore": 0.955,
+        "latestQuarter": "2025Q4",
+        "latestQuarterConfidenceScore": 1.0,
+        "latestQuarterIssueCount": 0
       }
     },
     "segments": {
@@ -5481,8 +5387,8 @@
     "validation": {
       "version": "parser-validation-v1",
       "status": "medium",
-      "overallConfidenceScore": 0.7939,
-      "financialConfidenceScore": 0.9522,
+      "overallConfidenceScore": 0.7957,
+      "financialConfidenceScore": 0.955,
       "structuralConfidenceScore": 0.5,
       "revenueSegmentChecks": 6,
       "revenueSegmentMismatchCount": 0,
@@ -5490,16 +5396,17 @@
       "detailGroupChecks": 0,
       "detailGroupMismatchCount": 0,
       "detailGroupSkippedChecks": 0,
-      "opexChecks": 5,
+      "opexChecks": 6,
       "opexSkippedChecks": 1,
-      "opexOverflowMismatchCount": 5,
-      "warningCount": 5,
+      "opexOverflowMismatchCount": 6,
+      "warningCount": 6,
       "warnings": [
         "2023Q2: opex breakdown sums to 31.492Bn vs operating expenses 18.854Bn.",
         "2023Q4: opex breakdown sums to 78.248Bn vs operating expenses 16.901Bn.",
         "2024Q2: opex breakdown sums to 41.633Bn vs operating expenses 18.747Bn.",
-        "2024Q4: opex breakdown sums to 95.925Bn vs operating expenses 30.879Bn.",
-        "2025Q2: opex breakdown sums to 52.393Bn vs operating expenses 27.433Bn."
+        "2024Q4: opex breakdown sums to 95.925Bn vs operating expenses 34.377Bn.",
+        "2025Q2: opex breakdown sums to 52.393Bn vs operating expenses 27.433Bn.",
+        "2025Q4: opex breakdown sums to 104.363Bn vs operating expenses 31.04Bn."
       ]
     }
   },
@@ -5592,80 +5499,6 @@
       }
     ],
     "provenance": {
-      "2020Q4": {
-        "revenueBn": {
-          "adapterId": "stockanalysis_financials",
-          "label": "StockAnalysis financials",
-          "score": 75.0,
-          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
-        },
-        "costOfRevenueBn": {
-          "adapterId": "stockanalysis_financials",
-          "label": "StockAnalysis financials",
-          "score": 73.0,
-          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
-        },
-        "grossProfitBn": {
-          "adapterId": "stockanalysis_financials",
-          "label": "StockAnalysis financials",
-          "score": 73.0,
-          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
-        },
-        "sgnaBn": {
-          "adapterId": "stockanalysis_financials",
-          "label": "StockAnalysis financials",
-          "score": 69.0,
-          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
-        },
-        "rndBn": {
-          "adapterId": "stockanalysis_financials",
-          "label": "StockAnalysis financials",
-          "score": 69.0,
-          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
-        },
-        "otherOpexBn": {
-          "adapterId": "stockanalysis_financials",
-          "label": "StockAnalysis financials",
-          "score": 67.0,
-          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
-        },
-        "operatingExpensesBn": {
-          "adapterId": "stockanalysis_financials",
-          "label": "StockAnalysis financials",
-          "score": 73.0,
-          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
-        },
-        "operatingIncomeBn": {
-          "adapterId": "stockanalysis_financials",
-          "label": "StockAnalysis financials",
-          "score": 73.0,
-          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
-        },
-        "pretaxIncomeBn": {
-          "adapterId": "stockanalysis_financials",
-          "label": "StockAnalysis financials",
-          "score": 73.0,
-          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
-        },
-        "taxBn": {
-          "adapterId": "stockanalysis_financials",
-          "label": "StockAnalysis financials",
-          "score": 69.0,
-          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
-        },
-        "netIncomeBn": {
-          "adapterId": "stockanalysis_financials",
-          "label": "StockAnalysis financials",
-          "score": 73.0,
-          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
-        },
-        "statementMeta": {
-          "adapterId": "stockanalysis_financials",
-          "label": "StockAnalysis financials",
-          "score": 12.14,
-          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
-        }
-      },
       "2021Q1": {
         "revenueBn": {
           "adapterId": "stockanalysis_financials",
@@ -7163,11 +6996,47 @@
           "score": 153.0,
           "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF"
         },
+        "grossProfitBn": {
+          "adapterId": "stockanalysis_financials",
+          "label": "StockAnalysis financials",
+          "score": 73.0,
+          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
+        },
+        "sgnaBn": {
+          "adapterId": "stockanalysis_financials",
+          "label": "StockAnalysis financials",
+          "score": 69.0,
+          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
+        },
+        "rndBn": {
+          "adapterId": "stockanalysis_financials",
+          "label": "StockAnalysis financials",
+          "score": 69.0,
+          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
+        },
+        "otherOpexBn": {
+          "adapterId": "stockanalysis_financials",
+          "label": "StockAnalysis financials",
+          "score": 67.0,
+          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "stockanalysis_financials",
+          "label": "StockAnalysis financials",
+          "score": 73.0,
+          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
+        },
         "operatingIncomeBn": {
           "adapterId": "manual_financials",
           "label": "Manual company overrides",
           "score": 153.0,
           "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "stockanalysis_financials",
+          "label": "StockAnalysis financials",
+          "score": 73.0,
+          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
         },
         "taxBn": {
           "adapterId": "manual_financials",
@@ -7185,15 +7054,15 @@
           {
             "adapterId": "manual_financials",
             "label": "Manual company overrides",
-            "score": 160.0,
+            "score": 172.0,
             "itemCount": 3
           }
         ],
         "statementMeta": {
-          "adapterId": "manual_financials",
-          "label": "Manual company overrides",
-          "score": 7.56,
-          "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF"
+          "adapterId": "stockanalysis_financials",
+          "label": "StockAnalysis financials",
+          "score": 12.14,
+          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
         },
         "officialRevenueSegments": {
           "adapterId": "manual_revenue_structures",
@@ -7204,30 +7073,6 @@
       }
     },
     "diagnostics": {
-      "2020Q4": {
-        "qualityScore": 60,
-        "availableRequiredFieldCount": 3,
-        "requiredFieldCount": 3,
-        "sourceFieldCount": 12,
-        "hasCostBreakdownProfile": false,
-        "costBreakdownMode": "none",
-        "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 0,
-        "costBreakdownCoveragePct": 0,
-        "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": null,
-        "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": null,
-        "statementSource": null,
-        "statementValueMode": null,
-        "statementSpanQuarters": null,
-        "statementQualityFlags": [],
-        "issues": [
-          "revenue-segment-coverage-low",
-          "cost-breakdown-coverage-low",
-          "opex-breakdown-coverage-low"
-        ]
-      },
       "2021Q1": {
         "qualityScore": 60,
         "availableRequiredFieldCount": 3,
@@ -7677,17 +7522,17 @@
         "qualityScore": 93,
         "availableRequiredFieldCount": 3,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 8,
+        "sourceFieldCount": 14,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "explicit",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
-        "opexBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": 100.0,
         "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": null,
-        "statementSource": "manual-byd-official",
+        "opexBreakdownResidualBn": 0,
+        "statementSource": null,
         "statementValueMode": null,
         "statementSpanQuarters": null,
         "statementQualityFlags": [],
@@ -7699,10 +7544,10 @@
   },
   "statementPresets": {},
   "coverage": {
-    "quarterCount": 21,
+    "quarterCount": 20,
     "pixelReplicaQuarterCount": 0,
     "hasPixelReplica": false,
-    "officialFinancialQuarterCount": 21,
+    "officialFinancialQuarterCount": 20,
     "officialSegmentQuarterCount": 6,
     "officialExpenseQuarterCount": 7,
     "classification": {
@@ -7715,8 +7560,8 @@
       "latestStructureHistoryQuarter": "2025Q4",
       "revenueClassificationQuarterCount": 6,
       "expenseClassificationQuarterCount": 7,
-      "revenueClassificationCoverageRatio": 0.2857,
-      "expenseClassificationCoverageRatio": 0.3333,
+      "revenueClassificationCoverageRatio": 0.3,
+      "expenseClassificationCoverageRatio": 0.35,
       "latestRevenueClassificationLagQuarters": 0,
       "latestExpenseClassificationLagQuarters": 0,
       "warnings": [],
@@ -7756,19 +7601,19 @@
         "status": "high",
         "quarterCount": 20,
         "validatedQuarterCount": 20,
-        "issueCount": 17,
-        "mismatchQuarterCount": 17,
+        "issueCount": 16,
+        "mismatchQuarterCount": 16,
         "highConfidenceQuarterCount": 20,
-        "averageConfidenceScore": 0.9522,
-        "latestQuarter": "2025Q3",
-        "latestQuarterConfidenceScore": 0.9438,
-        "latestQuarterIssueCount": 1
+        "averageConfidenceScore": 0.955,
+        "latestQuarter": "2025Q4",
+        "latestQuarterConfidenceScore": 1.0,
+        "latestQuarterIssueCount": 0
       },
       "validation": {
         "version": "parser-validation-v1",
         "status": "medium",
-        "overallConfidenceScore": 0.7939,
-        "financialConfidenceScore": 0.9522,
+        "overallConfidenceScore": 0.7957,
+        "financialConfidenceScore": 0.955,
         "structuralConfidenceScore": 0.5,
         "revenueSegmentChecks": 6,
         "revenueSegmentMismatchCount": 0,
@@ -7776,16 +7621,17 @@
         "detailGroupChecks": 0,
         "detailGroupMismatchCount": 0,
         "detailGroupSkippedChecks": 0,
-        "opexChecks": 5,
+        "opexChecks": 6,
         "opexSkippedChecks": 1,
-        "opexOverflowMismatchCount": 5,
-        "warningCount": 5,
+        "opexOverflowMismatchCount": 6,
+        "warningCount": 6,
         "warnings": [
           "2023Q2: opex breakdown sums to 31.492Bn vs operating expenses 18.854Bn.",
           "2023Q4: opex breakdown sums to 78.248Bn vs operating expenses 16.901Bn.",
           "2024Q2: opex breakdown sums to 41.633Bn vs operating expenses 18.747Bn.",
-          "2024Q4: opex breakdown sums to 95.925Bn vs operating expenses 30.879Bn.",
-          "2025Q2: opex breakdown sums to 52.393Bn vs operating expenses 27.433Bn."
+          "2024Q4: opex breakdown sums to 95.925Bn vs operating expenses 34.377Bn.",
+          "2025Q2: opex breakdown sums to 52.393Bn vs operating expenses 27.433Bn.",
+          "2025Q4: opex breakdown sums to 104.363Bn vs operating expenses 31.04Bn."
         ]
       }
     }

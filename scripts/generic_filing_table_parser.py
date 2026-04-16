@@ -22,6 +22,7 @@ from statement_periods import finalize_period_entries
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 CACHE_DIR = ROOT_DIR / "data" / "cache" / "generic-filing-tables"
+GENERIC_FILING_TABLE_CACHE_VERSION = "20260329-v1"
 MIN_FILING_DATE = "2018-01-01"
 SUPPORTED_FORMS = {"10-Q", "10-K", "20-F", "6-K", "8-K"}
 MAX_FILINGS_TO_SCAN = 28
@@ -182,6 +183,10 @@ def _write_cached_json(path: Path, payload: Any) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
+def _is_cache_compatible(payload: Any) -> bool:
+    return isinstance(payload, dict) and payload.get("_cacheVersion") == GENERIC_FILING_TABLE_CACHE_VERSION
+
+
 def _table_scale(rows: list[list[str]]) -> float:
     header_text = " ".join(" ".join(row[:4]) for row in rows[:6]).lower()
     if "in billions" in header_text or "billions" in header_text:
@@ -320,6 +325,9 @@ def _row_numeric_series(row: list[str] | None, expected_count: int, *, absolute:
 def _breakdown_looks_degenerate(items: list[dict[str, Any]], total_value_bn: float | None) -> bool:
     if not isinstance(items, list) or len(items) < 4:
         return False
+    magnitudes = [round(abs(float(item.get("valueBn") or 0)), 3) for item in items if isinstance(item, dict)]
+    if magnitudes and max(magnitudes) <= 0.02:
+        return True
     values = [round(abs(float(item.get("valueBn") or 0)), 3) for item in items if float(item.get("valueBn") or 0) > 0.02]
     if len(values) < 4:
         return False
@@ -557,7 +565,9 @@ def _preferred_html_names(index_payload: dict[str, Any], primary_document: str) 
 def fetch_generic_filing_table_history(company: dict[str, Any], refresh: bool = False) -> dict[str, Any]:
     path = _cache_path(str(company.get("id") or "company"))
     if path.exists() and not refresh:
-        return _load_cached_json(path)
+        cached_payload = _load_cached_json(path)
+        if _is_cache_compatible(cached_payload):
+            return cached_payload
 
     result = {
         "id": company.get("id"),
@@ -569,6 +579,7 @@ def fetch_generic_filing_table_history(company: dict[str, Any], refresh: bool = 
         "reportingCurrency": None,
         "errors": [],
         "filingsUsed": [],
+        "_cacheVersion": GENERIC_FILING_TABLE_CACHE_VERSION,
     }
     cik = _resolve_cik(str(company.get("ticker") or ""), refresh=refresh)
     if cik is None:

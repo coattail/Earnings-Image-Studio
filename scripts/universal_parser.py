@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 import math
 from typing import Any, Callable
 
@@ -10,6 +10,7 @@ from official_revenue_structures import fetch_official_revenue_structure_history
 from official_segments import fetch_official_segment_history
 from financial_source_adapters import fetch_tencent_ir_pdf_financial_history
 from stockanalysis_financials import fetch_stockanalysis_financial_history
+from source_adapters.base import build_error_detail, payload_error_bundle
 
 
 UNIVERSAL_PARSER_VERSION = "universal-parser-v4"
@@ -71,6 +72,7 @@ class SourceAttempt:
     quarter_count: int = 0
     latest_quarter: str = ""
     error: str = ""
+    error_details: list[dict[str, Any]] = field(default_factory=list)
 
 
 def _parse_period(period: str) -> tuple[int, int]:
@@ -137,6 +139,15 @@ def _run_source_attempt(
                 source_id=source_id,
                 status="error",
                 error=str(exc),
+                error_details=[
+                    build_error_detail(
+                        str(exc),
+                        layer=layer,
+                        source_id=source_id,
+                        phase="fetch",
+                        error_type=exc.__class__.__name__,
+                    )
+                ],
             ),
             None,
         )
@@ -147,9 +158,24 @@ def _run_source_attempt(
                 source_id=source_id,
                 status="error",
                 error="Fetcher returned a non-dict payload.",
+                error_details=[
+                    build_error_detail(
+                        "Fetcher returned a non-dict payload.",
+                        layer=layer,
+                        source_id=source_id,
+                        phase="fetch",
+                        error_type="InvalidPayload",
+                    )
+                ],
             ),
             None,
         )
+    payload_errors, payload_error_details = payload_error_bundle(
+        payload,
+        layer=layer,
+        source_id=source_id,
+        phase="fetch",
+    )
     quarters = quarter_getter(payload)
     status = "success" if is_usable(payload) else "empty"
     return (
@@ -159,6 +185,8 @@ def _run_source_attempt(
             status=status,
             quarter_count=len(quarters),
             latest_quarter=quarters[-1] if quarters else "",
+            error="; ".join(payload_errors) if status != "success" and payload_errors else "",
+            error_details=deepcopy(payload_error_details) if status != "success" else [],
         ),
         payload,
     )

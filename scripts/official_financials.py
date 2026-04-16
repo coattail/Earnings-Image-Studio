@@ -1402,6 +1402,17 @@ def fetch_official_financial_history(company: dict[str, Any], refresh: bool = Fa
             error_type=type(exc).__name__,
             url=source_url,
         )
+        if str(company.get("id") or "") == "tsmc":
+            fallback_financials = _load_html_fallback_financials(company, cik, "TWD")
+            if fallback_financials:
+                ordered_periods, ordered_financials = _finalize_financials(fallback_financials)
+                result["quarters"] = ordered_periods
+                result["financials"] = ordered_financials
+                result["reportingCurrency"] = "TWD"
+                result["statementSource"] = "official-sec-filings-fallback"
+                if ordered_periods:
+                    latest_entry = ordered_financials[ordered_periods[-1]]
+                    result["statementSourceUrl"] = latest_entry.get("statementSourceUrl") or source_url
         if str(company.get("id") or "") == "asml":
             website_financials = _load_asml_website_financials("EUR")
             if website_financials:

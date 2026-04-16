@@ -10,6 +10,13 @@ from .base import AdapterResult
 FIELD_PRIORITIES = {
     "officialRevenueSegments": 154,
     "officialRevenueDetailGroups": 152,
+    "revenueBn": 150,
+    "statementMeta": 148,
+    "officialCostBreakdown": 147,
+    "officialOpexBreakdown": 147,
+    "officialRevenueStyle": 146,
+    "displayCurrency": 146,
+    "displayScaleFactor": 146,
 }
 
 

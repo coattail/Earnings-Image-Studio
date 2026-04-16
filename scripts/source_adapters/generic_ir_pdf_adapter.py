@@ -4,7 +4,7 @@ from typing import Any
 
 from generic_ir_pdf_parser import fetch_generic_ir_pdf_history
 
-from .base import AdapterResult
+from .base import AdapterResult, payload_error_bundle
 
 
 FIELD_PRIORITIES = {
@@ -26,6 +26,12 @@ FIELD_PRIORITIES = {
 def run(company: dict[str, Any], refresh: bool = False, base_payload: dict[str, Any] | None = None) -> AdapterResult:
     del base_payload
     payload = fetch_generic_ir_pdf_history(company, refresh=refresh)
+    errors, error_details = payload_error_bundle(
+        payload,
+        layer="financials",
+        source_id="generic_ir_pdf",
+        phase="fetch",
+    )
     return AdapterResult(
         adapter_id="generic_ir_pdf",
         kind="statement",
@@ -33,6 +39,7 @@ def run(company: dict[str, Any], refresh: bool = False, base_payload: dict[str, 
         priority=72,
         payload=payload if isinstance(payload, dict) else {},
         field_priorities=FIELD_PRIORITIES,
-        errors=list(payload.get("errors") or []) if isinstance(payload, dict) else [],
+        errors=errors,
+        error_details=error_details,
         enabled=bool((payload or {}).get("financials")) if isinstance(payload, dict) else False,
     )

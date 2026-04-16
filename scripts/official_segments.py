@@ -14,6 +14,8 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
+import requests
+
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 CACHE_DIR = ROOT_DIR / "data" / "cache" / "official-segments"
@@ -182,6 +184,12 @@ def _request(url: str) -> bytes:
         ) as exc:
             last_error = exc
             time.sleep(0.8 * (attempt + 1))
+    try:
+        response = requests.get(url, timeout=60, headers=SEC_HEADERS)
+        response.raise_for_status()
+        return response.content
+    except Exception as exc:  # noqa: BLE001
+        last_error = exc
     if last_error is not None:
         raise last_error
     raise RuntimeError(f"Unable to fetch {url}")
@@ -202,6 +210,32 @@ def _load_cached_json(path: Path) -> Any:
 
 def _write_cached_json(path: Path, payload: Any) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def _append_error_detail(
+    result: dict[str, Any],
+    *,
+    message: str,
+    phase: str,
+    severity: str = "error",
+    error_type: str | None = None,
+    **extra: Any,
+) -> None:
+    detail: dict[str, Any] = {
+        "message": message,
+        "layer": "segments",
+        "sourceId": "official_segments",
+        "phase": phase,
+        "severity": severity,
+    }
+    if error_type:
+        detail["errorType"] = error_type
+    for key, value in extra.items():
+        if value is not None:
+            detail[key] = value
+    error_details = result.setdefault("errorDetails", [])
+    if detail not in error_details:
+        error_details.append(detail)
 
 
 def _normalize_ticker(ticker: str) -> str:
@@ -838,24 +872,30 @@ def _build_quarterly_series(facts: list[SegmentFact]) -> dict[str, list[dict[str
 def _resolve_cik(ticker: str, refresh: bool) -> int | None:
     global SEC_TICKER_CACHE
     path = _cache_path("sec-company-tickers.json")
-    if SEC_TICKER_CACHE is None:
+    if SEC_TICKER_CACHE is None or refresh:
         if path.exists() and not refresh:
             payload = _load_cached_json(path)
         else:
-            payload = _request_json("https://www.sec.gov/files/company_tickers.json")
-            _write_cached_json(path, payload)
+            try:
+                payload = _request_json("https://www.sec.gov/files/company_tickers.json")
+                _write_cached_json(path, payload)
+            except Exception:
+                if not path.exists():
+                    raise
+                payload = _load_cached_json(path)
         SEC_TICKER_CACHE = {
             _normalize_ticker(entry.get("ticker")): int(entry.get("cik_str"))
             for entry in payload.values()
             if isinstance(entry, dict) and entry.get("ticker")
         }
-    if refresh and not path.exists():
-        payload = _request_json("https://www.sec.gov/files/company_tickers.json")
-        _write_cached_json(path, payload)
     return SEC_TICKER_CACHE.get(_normalize_ticker(ticker))
 
 
-def _submission_records(submissions: dict[str, Any]) -> list[tuple[str, str, str, str]]:
+def _submission_records(
+    submissions: dict[str, Any],
+    diagnostics: list[str] | None = None,
+    diagnostic_details: list[dict[str, Any]] | None = None,
+) -> list[tuple[str, str, str, str]]:
     records: list[tuple[str, str, str, str]] = []
     recent = submissions.get("filings", {}).get("recent", {})
     records.extend(zip(recent.get("form", []), recent.get("accessionNumber", []), recent.get("filingDate", []), recent.get("primaryDocument", [])))
@@ -864,8 +904,24 @@ def _submission_records(submissions: dict[str, Any]) -> list[tuple[str, str, str
         if not name:
             continue
         try:
-            archived = _request_json(f"https://data.sec.gov/submissions/{name}")
-        except Exception:
+            archived_url = f"https://data.sec.gov/submissions/{name}"
+            archived = _request_json(archived_url)
+        except Exception as exc:
+            if diagnostics is not None:
+                diagnostics.append(f"archived submissions {name}: {exc}")
+            if diagnostic_details is not None:
+                detail = {
+                    "message": str(exc),
+                    "layer": "segments",
+                    "sourceId": "official_segments",
+                    "phase": "archived-submissions",
+                    "severity": "error",
+                    "errorType": type(exc).__name__,
+                    "file": str(name),
+                    "url": archived_url,
+                }
+                if detail not in diagnostic_details:
+                    diagnostic_details.append(detail)
             continue
         records.extend(
             zip(
@@ -899,20 +955,29 @@ def fetch_official_segment_history(company: dict[str, Any], refresh: bool = Fals
         "quarters": {},
         "filingsUsed": [],
         "errors": [],
+        "errorDetails": [],
     }
     if cik is None:
         _write_cached_json(path, result)
         return result
 
+    submissions_url = f"https://data.sec.gov/submissions/CIK{cik:010d}.json"
     try:
-        submissions = _request_json(f"https://data.sec.gov/submissions/CIK{cik:010d}.json")
+        submissions = _request_json(submissions_url)
     except Exception as exc:  # noqa: BLE001
         result["errors"].append(f"submissions: {exc}")
+        _append_error_detail(
+            result,
+            message=str(exc),
+            phase="submissions",
+            error_type=type(exc).__name__,
+            url=submissions_url,
+        )
         _write_cached_json(path, result)
         return result
 
     facts: list[SegmentFact] = []
-    records = _submission_records(submissions)
+    records = _submission_records(submissions, result["errors"], result["errorDetails"])
     seen_accessions: set[str] = set()
     for form, accession, filing_date, primary_document in records:
         if form not in ALLOWED_FORMS or filing_date < MIN_FILING_DATE:
@@ -921,8 +986,9 @@ def fetch_official_segment_history(company: dict[str, Any], refresh: bool = Fals
         if accession_nodash in seen_accessions:
             continue
         seen_accessions.add(accession_nodash)
+        index_url = f"https://www.sec.gov/Archives/edgar/data/{cik}/{accession_nodash}/index.json"
         try:
-            index_payload = _request_json(f"https://www.sec.gov/Archives/edgar/data/{cik}/{accession_nodash}/index.json")
+            index_payload = _request_json(index_url)
             instance_name = _choose_instance_name(index_payload)
             if not instance_name:
                 continue
@@ -957,6 +1023,16 @@ def fetch_official_segment_history(company: dict[str, Any], refresh: bool = Fals
             socket.timeout,
         ) as exc:
             result["errors"].append(f"{form} {filing_date}: {exc}")
+            _append_error_detail(
+                result,
+                message=str(exc),
+                phase="filing-parse",
+                error_type=type(exc).__name__,
+                form=form,
+                filingDate=filing_date,
+                accession=accession,
+                url=index_url,
+            )
             continue
 
     best_axis = _pick_best_axis(facts)

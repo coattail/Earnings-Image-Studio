@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from collections import Counter
 from copy import deepcopy
+import re
 from typing import Any
 
 from source_adapters import (
@@ -22,6 +23,20 @@ from taxonomy_normalizer import STATEMENT_FIELDS, normalize_breakdown_items, nor
 ENGINE_VERSION = "20260324-v2"
 PROFILE_FIELDS: tuple[str, ...] = ("costBreakdownProfile",)
 STATEMENT_META_FIELDS: tuple[str, ...] = ("statementMeta",)
+SUSPICIOUS_PLACEHOLDER_EXPENSE_KEYS: set[str] = {
+    "financeexpense",
+    "finance_expense",
+    "fulfillment",
+    "ga",
+    "generaladministrative",
+    "general_administrative",
+    "rd",
+    "rnd",
+    "salesmarketing",
+    "sales_marketing",
+    "taxessurcharges",
+    "taxes_surcharges",
+}
 
 
 def parse_period(period: str) -> tuple[int, int]:
@@ -78,6 +93,18 @@ def _source_meta(adapter: AdapterResult, *, score: float, source_url: Any = None
     }
 
 
+def _representative_source_url(*collections: Any) -> str | None:
+    for collection in collections:
+        if isinstance(collection, list):
+            for item in collection:
+                if not isinstance(item, dict):
+                    continue
+                source_url = str(item.get("sourceUrl") or "").strip()
+                if source_url:
+                    return source_url
+    return None
+
+
 def _entry_completeness(entry: dict[str, Any]) -> float:
     score = sum(1 for field_name in STATEMENT_FIELDS if entry.get(field_name) is not None)
     score += min(len(entry.get("officialCostBreakdown") or []) + len(entry.get("officialOpexBreakdown") or []), 6) * 0.2
@@ -88,9 +115,63 @@ def _entry_completeness(entry: dict[str, Any]) -> float:
     return float(score)
 
 
+def _has_mergeable_unified_data(entry: dict[str, Any]) -> bool:
+    if not isinstance(entry, dict):
+        return False
+    if any(entry.get(field_name) is not None for field_name in STATEMENT_FIELDS):
+        return True
+    list_fields = (
+        "officialRevenueSegments",
+        "officialRevenueDetailGroups",
+        "costBreakdown",
+        "opexBreakdown",
+    )
+    if any(isinstance(entry.get(field_name), list) and entry.get(field_name) for field_name in list_fields):
+        return True
+    dict_fields = (
+        "costBreakdownProfile",
+        "statementMeta",
+    )
+    return any(isinstance(entry.get(field_name), dict) and entry.get(field_name) for field_name in dict_fields)
+
+
+def _merge_dict_records(existing: Any, incoming: Any) -> dict[str, Any]:
+    merged = deepcopy(existing) if isinstance(existing, dict) else {}
+    if isinstance(incoming, dict):
+        for key, value in incoming.items():
+            merged[str(key)] = deepcopy(value)
+    return merged
+
+
+def _normalize_suspicious_breakdown_key(value: Any) -> str:
+    return re.sub(r"[^a-z0-9]+", "", str(value or "").strip().lower())
+
+
+def _looks_like_placeholder_echo_cluster(items: list[dict[str, Any]], repeated_value: float) -> bool:
+    cluster_keys: set[str] = set()
+    cluster_count = 0
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        value = round(abs(float(item.get("valueBn") or 0)), 3)
+        if value != repeated_value:
+            continue
+        cluster_count += 1
+        for raw_key in (item.get("taxonomyId"), item.get("memberKey"), item.get("name")):
+            normalized = _normalize_suspicious_breakdown_key(raw_key)
+            if normalized:
+                cluster_keys.add(normalized)
+    if cluster_count < 4:
+        return False
+    return len(cluster_keys & SUSPICIOUS_PLACEHOLDER_EXPENSE_KEYS) >= 4
+
+
 def _breakdown_collection_looks_suspicious(items: list[dict[str, Any]], total_value: float | None) -> bool:
     if not isinstance(items, list) or len(items) < 4:
         return False
+    magnitudes = [round(abs(float(item.get("valueBn") or 0)), 3) for item in items if isinstance(item, dict)]
+    if magnitudes and max(magnitudes) <= 0.02:
+        return True
     values = [round(abs(float(item.get("valueBn") or 0)), 3) for item in items if float(item.get("valueBn") or 0) > 0.02]
     if len(values) < 4:
         return False
@@ -98,6 +179,8 @@ def _breakdown_collection_looks_suspicious(items: list[dict[str, Any]], total_va
     repeated_value, repeated_count = counts.most_common(1)[0]
     if repeated_count < 4:
         return False
+    if _looks_like_placeholder_echo_cluster(items, repeated_value):
+        return True
     total = float(total_value or 0)
     raw_sum = sum(values)
     if total <= 0:
@@ -290,9 +373,13 @@ def _reconcile_statement_sources(
     return unified, provenance
 
 
-def _reconcile_revenue_sources(results: list[AdapterResult]) -> tuple[dict[str, dict[str, Any]], dict[str, dict[str, Any]]]:
+def _reconcile_revenue_sources(
+    results: list[AdapterResult],
+    base_payload: dict[str, Any] | None = None,
+) -> tuple[dict[str, dict[str, Any]], dict[str, dict[str, Any]]]:
     unified: dict[str, dict[str, Any]] = {}
     provenance: dict[str, dict[str, Any]] = {}
+    base_financials = base_payload.get("financials") if isinstance(base_payload, dict) and isinstance(base_payload.get("financials"), dict) else {}
 
     for adapter in results:
         if not adapter.enabled:
@@ -306,10 +393,15 @@ def _reconcile_revenue_sources(results: list[AdapterResult]) -> tuple[dict[str, 
                 if not normalized:
                     continue
                 bucket = unified.setdefault(str(quarter), {})
+                source_url = _representative_source_url(normalized)
                 current = bucket.get("officialRevenueSegments") or []
                 if len(normalized) >= len(current):
                     bucket["officialRevenueSegments"] = normalized
-                    provenance.setdefault(str(quarter), {})["officialRevenueSegments"] = _source_meta(adapter, score=adapter.field_priorities.get("officialRevenueSegments", adapter.priority))
+                    provenance.setdefault(str(quarter), {})["officialRevenueSegments"] = _source_meta(
+                        adapter,
+                        score=adapter.field_priorities.get("officialRevenueSegments", adapter.priority),
+                        source_url=source_url,
+                    )
 
         if adapter.kind == "revenue_structure":
             quarter_map = adapter.payload.get("quarters") or {}
@@ -320,17 +412,88 @@ def _reconcile_revenue_sources(results: list[AdapterResult]) -> tuple[dict[str, 
                     continue
                 segments = normalize_revenue_segments(payload.get("segments"))
                 detail_groups = normalize_revenue_segments(payload.get("detailGroups"))
+                opex_breakdown = payload.get("opexBreakdown") or payload.get("officialOpexBreakdown") or []
+                cost_breakdown = payload.get("costBreakdown") or payload.get("officialCostBreakdown") or []
                 bucket = unified.setdefault(str(quarter), {})
+                provenance_entry = provenance.setdefault(str(quarter), {})
+                structure_source_url = _representative_source_url(segments, detail_groups, opex_breakdown, cost_breakdown)
                 if segments:
                     bucket["officialRevenueSegments"] = segments
-                    provenance.setdefault(str(quarter), {})["officialRevenueSegments"] = _source_meta(adapter, score=adapter.field_priorities.get("officialRevenueSegments", adapter.priority))
+                    provenance_entry["officialRevenueSegments"] = _source_meta(
+                        adapter,
+                        score=adapter.field_priorities.get("officialRevenueSegments", adapter.priority),
+                        source_url=_representative_source_url(segments) or structure_source_url,
+                    )
                 if detail_groups:
                     bucket["officialRevenueDetailGroups"] = detail_groups
-                    provenance.setdefault(str(quarter), {})["officialRevenueDetailGroups"] = _source_meta(adapter, score=adapter.field_priorities.get("officialRevenueDetailGroups", adapter.priority))
+                    provenance_entry["officialRevenueDetailGroups"] = _source_meta(
+                        adapter,
+                        score=adapter.field_priorities.get("officialRevenueDetailGroups", adapter.priority),
+                        source_url=_representative_source_url(detail_groups) or structure_source_url,
+                    )
+                if isinstance(cost_breakdown, list) and cost_breakdown:
+                    bucket["costBreakdown"] = deepcopy(cost_breakdown)
+                    provenance_entry["costBreakdown"] = _source_meta(
+                        adapter,
+                        score=adapter.field_priorities.get("officialCostBreakdown", adapter.priority),
+                        source_url=_representative_source_url(cost_breakdown) or structure_source_url,
+                    )
+                if isinstance(opex_breakdown, list) and opex_breakdown:
+                    bucket["opexBreakdown"] = deepcopy(opex_breakdown)
+                    provenance_entry["opexBreakdown"] = _source_meta(
+                        adapter,
+                        score=adapter.field_priorities.get("officialOpexBreakdown", adapter.priority),
+                        source_url=_representative_source_url(opex_breakdown) or structure_source_url,
+                    )
                 if payload.get("style"):
                     bucket["officialRevenueStyle"] = payload.get("style")
+                    provenance_entry["officialRevenueStyle"] = _source_meta(
+                        adapter,
+                        score=adapter.field_priorities.get("officialRevenueStyle", adapter.priority),
+                        source_url=structure_source_url,
+                    )
                 if payload.get("displayCurrency"):
                     bucket["displayCurrency"] = payload.get("displayCurrency")
+                    provenance_entry["displayCurrency"] = _source_meta(
+                        adapter,
+                        score=adapter.field_priorities.get("displayCurrency", adapter.priority),
+                        source_url=structure_source_url,
+                    )
+                if payload.get("displayScaleFactor") is not None:
+                    bucket["displayScaleFactor"] = payload.get("displayScaleFactor")
+                    provenance_entry["displayScaleFactor"] = _source_meta(
+                        adapter,
+                        score=adapter.field_priorities.get("displayScaleFactor", adapter.priority),
+                        source_url=structure_source_url,
+                    )
+
+                base_entry = base_financials.get(str(quarter))
+                if isinstance(base_entry, dict) and str(base_entry.get("statementSource") or "") == "official-revenue-structure":
+                    statement_source_url = str(base_entry.get("statementSourceUrl") or structure_source_url or "").strip() or None
+                    if bucket.get("revenueBn") is None and base_entry.get("revenueBn") is not None:
+                        bucket["revenueBn"] = base_entry.get("revenueBn")
+                        provenance_entry["revenueBn"] = _source_meta(
+                            adapter,
+                            score=adapter.field_priorities.get("revenueBn", adapter.priority),
+                            source_url=statement_source_url,
+                        )
+                    statement_meta = {
+                        "statementSource": base_entry.get("statementSource"),
+                        "statementSourceUrl": base_entry.get("statementSourceUrl"),
+                        "statementValueMode": base_entry.get("statementValueMode"),
+                        "statementSpanQuarters": base_entry.get("statementSpanQuarters"),
+                        "qualityFlags": list(base_entry.get("qualityFlags") or []),
+                    }
+                    if any(
+                        statement_meta.get(key) is not None and statement_meta.get(key) != []
+                        for key in ("statementSource", "statementSourceUrl", "statementValueMode", "statementSpanQuarters", "qualityFlags")
+                    ):
+                        bucket["statementMeta"] = statement_meta
+                        provenance_entry["statementMeta"] = _source_meta(
+                            adapter,
+                            score=adapter.field_priorities.get("statementMeta", adapter.priority),
+                            source_url=statement_source_url,
+                        )
     return unified, provenance
 
 
@@ -423,7 +586,7 @@ def _quarter_diagnostics(entry: dict[str, Any], provenance: dict[str, Any]) -> d
 def build_unified_extraction(company: dict[str, Any], refresh: bool = False, base_payload: dict[str, Any] | None = None) -> dict[str, Any]:
     results = _adapter_results(company, refresh=refresh, base_payload=base_payload)
     statement_quarters, statement_provenance = _reconcile_statement_sources(results)
-    revenue_quarters, revenue_provenance = _reconcile_revenue_sources(results)
+    revenue_quarters, revenue_provenance = _reconcile_revenue_sources(results, base_payload=base_payload)
     ordered_quarters = sorted(set(statement_quarters) | set(revenue_quarters), key=parse_period)
 
     quarter_payloads: dict[str, Any] = {}
@@ -449,6 +612,8 @@ def build_unified_extraction(company: dict[str, Any], refresh: bool = False, bas
                 "enabled": result.enabled,
                 "priority": result.priority,
                 "errorCount": len(result.errors),
+                **({"errors": list(result.errors)} if result.errors else {}),
+                **({"errorDetails": deepcopy(result.error_details)} if result.error_details else {}),
             }
             for result in results
         ],
@@ -470,34 +635,52 @@ def merge_unified_extraction(payload: dict[str, Any], extraction: dict[str, Any]
         if not isinstance(unified_entry, dict):
             continue
         quarter_key = str(quarter)
-        if quarter_key not in financials and not allow_new_quarters:
+        if quarter_key not in financials and not allow_new_quarters and not _has_mergeable_unified_data(unified_entry):
             continue
         entry = financials.setdefault(quarter_key, {"calendarQuarter": quarter_key})
         if not isinstance(entry, dict):
             continue
+        applied_fields: set[str] = set()
         for field_name in STATEMENT_FIELDS:
             if entry.get(field_name) is None and unified_entry.get(field_name) is not None:
                 entry[field_name] = unified_entry.get(field_name)
+                applied_fields.add(field_name)
         if not entry.get("officialRevenueSegments") and isinstance(unified_entry.get("officialRevenueSegments"), list):
             entry["officialRevenueSegments"] = deepcopy(unified_entry["officialRevenueSegments"])
+            applied_fields.add("officialRevenueSegments")
         if not entry.get("officialRevenueDetailGroups") and isinstance(unified_entry.get("officialRevenueDetailGroups"), list):
             entry["officialRevenueDetailGroups"] = deepcopy(unified_entry["officialRevenueDetailGroups"])
+            applied_fields.add("officialRevenueDetailGroups")
         if not entry.get("officialRevenueStyle") and unified_entry.get("officialRevenueStyle"):
             entry["officialRevenueStyle"] = unified_entry["officialRevenueStyle"]
+            applied_fields.add("officialRevenueStyle")
         if not entry.get("displayCurrency") and unified_entry.get("displayCurrency"):
             entry["displayCurrency"] = unified_entry["displayCurrency"]
+            applied_fields.add("displayCurrency")
+        if entry.get("displayScaleFactor") is None and unified_entry.get("displayScaleFactor") is not None:
+            entry["displayScaleFactor"] = unified_entry["displayScaleFactor"]
+            applied_fields.add("displayScaleFactor")
         if not entry.get("costBreakdownProfile") and isinstance(unified_entry.get("costBreakdownProfile"), dict):
             entry["costBreakdownProfile"] = deepcopy(unified_entry["costBreakdownProfile"])
+            applied_fields.add("costBreakdownProfile")
         if not entry.get("statementMeta") and isinstance(unified_entry.get("statementMeta"), dict):
             entry["statementMeta"] = deepcopy(unified_entry["statementMeta"])
+            applied_fields.add("statementMeta")
         if not entry.get("officialCostBreakdown") and not entry.get("costBreakdown") and isinstance(unified_entry.get("costBreakdown"), list):
             entry["costBreakdown"] = deepcopy(unified_entry["costBreakdown"])
+            applied_fields.add("costBreakdown")
         if not entry.get("officialOpexBreakdown") and not entry.get("opexBreakdown") and isinstance(unified_entry.get("opexBreakdown"), list):
             entry["opexBreakdown"] = deepcopy(unified_entry["opexBreakdown"])
-        if provenance_map.get(quarter_key):
-            entry["fieldSources"] = deepcopy(provenance_map[quarter_key])
-        if diagnostics_map.get(quarter_key):
-            entry["extractionDiagnostics"] = deepcopy(diagnostics_map[quarter_key])
+            applied_fields.add("opexBreakdown")
+        applied_provenance = {
+            field_name: deepcopy(source_meta)
+            for field_name, source_meta in (provenance_map.get(quarter_key) or {}).items()
+            if field_name in applied_fields
+        }
+        if applied_provenance:
+            entry["fieldSources"] = _merge_dict_records(entry.get("fieldSources"), applied_provenance)
+        if applied_fields and diagnostics_map.get(quarter_key):
+            entry["extractionDiagnostics"] = _merge_dict_records(entry.get("extractionDiagnostics"), diagnostics_map[quarter_key])
 
     result["quarters"] = sorted([str(item) for item in financials.keys() if str(item)], key=parse_period)
     result["unifiedExtraction"] = {

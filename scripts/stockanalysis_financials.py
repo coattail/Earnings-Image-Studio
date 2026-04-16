@@ -20,6 +20,8 @@ from official_revenue_structures import (
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 CACHE_DIR = ROOT_DIR / "data" / "cache" / "stockanalysis-financials"
+STOCKANALYSIS_CACHE_VERSION = "20260329-v1"
+FINANCIAL_TABLE_LABELS = ("Fiscal Quarter", "Fiscal Year", "Period Ending")
 
 REQUEST_HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36",
@@ -59,6 +61,21 @@ def _load_cached_json(path: Path) -> Any:
 
 def _write_cached_json(path: Path, payload: Any) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def _is_current_stockanalysis_cache(payload: Any) -> bool:
+    return isinstance(payload, dict) and payload.get("_cacheVersion") == STOCKANALYSIS_CACHE_VERSION
+
+
+def _table_has_fiscal_label(table: Any, label: str) -> bool:
+    marker = label.lower()
+    for tr in table.find_all("tr"):
+        first_cell = tr.find(["th", "td"])
+        if not first_cell:
+            continue
+        if marker in first_cell.get_text(" ", strip=True).lower():
+            return True
+    return False
 
 
 def _request_text(url: str) -> str:
@@ -274,16 +291,24 @@ def _supplement_alibaba_missing_quarters(result: dict[str, Any]) -> None:
 def _load_table(url: str) -> tuple[str, Any]:
     html_text = _request_text(url)
     soup = BeautifulSoup(html_text, "html.parser")
-    table = soup.find("table")
-    if table is None:
+    tables = soup.find_all("table")
+    if not tables:
         raise RuntimeError(f"Unable to locate financial table for {url}")
-    return html_text, table
+
+    for label in FINANCIAL_TABLE_LABELS:
+        for candidate in tables:
+            if _table_has_fiscal_label(candidate, label):
+                return html_text, candidate
+
+    return html_text, tables[0]
 
 
 def fetch_stockanalysis_financial_history(company: dict[str, Any], refresh: bool = False) -> dict[str, Any]:
     cache_path = _cache_path(company["id"])
     if cache_path.exists() and not refresh:
-        return _load_cached_json(cache_path)
+        cached_payload = _load_cached_json(cache_path)
+        if _is_current_stockanalysis_cache(cached_payload):
+            return cached_payload
 
     ticker = str(company.get("financialTicker") or company["ticker"]).lower()
     financial_path = str(company.get("financialPath") or f"stocks/{ticker}").strip().strip("/")
@@ -301,6 +326,7 @@ def fetch_stockanalysis_financial_history(company: dict[str, Any], refresh: bool
     column_count = min(len(headers), len(period_ends))
     result = {
         **company,
+        "_cacheVersion": STOCKANALYSIS_CACHE_VERSION,
         "quarters": [],
         "financials": {},
         "statementSource": "stockanalysis-financials",

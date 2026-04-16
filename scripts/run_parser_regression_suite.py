@@ -2,21 +2,55 @@ from __future__ import annotations
 
 import json
 from io import BytesIO
+import sys
 from typing import Any
 
-from pypdf import PdfReader
+_MISSING_RUNTIME_MODULES: list[str] = []
+RUNTIME_DEPENDENCY_INSTALL_HINT = "python3 -m pip install -r requirements.txt"
 
-from generic_filing_table_parser import _merge_entry
-from generic_ir_pdf_parser import (
-    _extract_pdf_page_texts,
-    _maybe_enrich_page_texts_with_ocr,
-    _period_entries_from_pdf_pages,
-    _quick_fetch_pdf_bytes,
-    _score_entry,
-    fetch_generic_ir_pdf_history,
-)
-from statement_periods import finalize_period_entries
-from taxonomy_normalizer import normalize_breakdown_items
+
+def _record_missing_runtime_module(exc: ModuleNotFoundError) -> None:
+    module_name = str(getattr(exc, "name", "") or str(exc)).strip()
+    if module_name and module_name not in _MISSING_RUNTIME_MODULES:
+        _MISSING_RUNTIME_MODULES.append(module_name)
+
+
+def _runtime_dependency_error() -> str | None:
+    if not _MISSING_RUNTIME_MODULES:
+        return None
+    missing = ", ".join(sorted(_MISSING_RUNTIME_MODULES))
+    return f"Missing Python dependencies: {missing}. Install them with `{RUNTIME_DEPENDENCY_INSTALL_HINT}`."
+
+
+try:
+    from pypdf import PdfReader
+except ModuleNotFoundError as exc:
+    PdfReader = None  # type: ignore[assignment]
+    _record_missing_runtime_module(exc)
+
+try:
+    from generic_filing_table_parser import _merge_entry
+    from generic_ir_pdf_parser import (
+        _extract_pdf_page_texts,
+        _maybe_enrich_page_texts_with_ocr,
+        _period_entries_from_pdf_pages,
+        _quick_fetch_pdf_bytes,
+        _score_entry,
+        fetch_generic_ir_pdf_history,
+    )
+    from statement_periods import finalize_period_entries
+    from taxonomy_normalizer import normalize_breakdown_items
+except ModuleNotFoundError as exc:
+    _record_missing_runtime_module(exc)
+    _merge_entry = None  # type: ignore[assignment]
+    _extract_pdf_page_texts = None  # type: ignore[assignment]
+    _maybe_enrich_page_texts_with_ocr = None  # type: ignore[assignment]
+    _period_entries_from_pdf_pages = None  # type: ignore[assignment]
+    _quick_fetch_pdf_bytes = None  # type: ignore[assignment]
+    _score_entry = None  # type: ignore[assignment]
+    fetch_generic_ir_pdf_history = None  # type: ignore[assignment]
+    finalize_period_entries = None  # type: ignore[assignment]
+    normalize_breakdown_items = None  # type: ignore[assignment]
 
 
 def _approx_equal(actual: Any, expected: float, tolerance: float = 0.02) -> bool:
@@ -147,6 +181,11 @@ def _fedex_history_case() -> dict[str, Any]:
 
 
 def main() -> None:
+    dependency_error = _runtime_dependency_error()
+    if dependency_error:
+        print(f"[error] {dependency_error}", file=sys.stderr, flush=True)
+        raise SystemExit(2)
+
     cases = [
         _fedex_release_summary_ocr_case,
         _fedex_formal_statement_ocr_case,

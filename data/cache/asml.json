@@ -40,37 +40,37 @@
     "2026Q1"
   ],
   "financials": {
-    "2021Q3": {
-      "calendarQuarter": "2021Q3",
-      "periodEnd": "2021-07-04",
+    "2021Q2": {
+      "calendarQuarter": "2021Q2",
+      "periodEnd": "2021-04-04",
       "fiscalYear": "2021",
-      "fiscalQuarter": "Q2",
-      "fiscalLabel": "FY2021 Q2",
+      "fiscalQuarter": "Q1",
+      "fiscalLabel": "FY2021 Q1",
       "statementCurrency": "EUR",
-      "revenueBn": 4.02,
-      "revenueYoyPct": 1.566,
-      "costOfRevenueBn": 1.976,
-      "grossProfitBn": 2.045,
-      "sgnaBn": 0.172,
-      "rndBn": 0.634,
+      "revenueBn": 4.364,
+      "revenueYoyPct": null,
+      "costOfRevenueBn": 2.012,
+      "grossProfitBn": 2.352,
+      "sgnaBn": 0.168,
+      "rndBn": 0.623,
       "otherOpexBn": null,
-      "operatingExpensesBn": 0.806,
-      "operatingIncomeBn": 1.239,
-      "nonOperatingBn": -0.01,
-      "pretaxIncomeBn": 1.229,
-      "taxBn": 0.204,
-      "netIncomeBn": 1.038,
-      "netIncomeYoyPct": 38.24,
-      "grossMarginPct": 50.86,
-      "operatingMarginPct": 30.82,
-      "profitMarginPct": 25.5,
-      "effectiveTaxRatePct": 16.615,
+      "operatingExpensesBn": 0.792,
+      "operatingIncomeBn": 1.561,
+      "nonOperatingBn": -0.012,
+      "pretaxIncomeBn": 1.549,
+      "taxBn": 0.23,
+      "netIncomeBn": 1.331,
+      "netIncomeYoyPct": 240.86,
+      "grossMarginPct": 53.91,
+      "operatingMarginPct": 35.76,
+      "profitMarginPct": 30.21,
+      "effectiveTaxRatePct": 14.868,
       "revenueQoqPct": 0.0,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
       "statementSourceUrl": "https://stockanalysis.com/stocks/asml/financials/?p=quarterly",
-      "statementFilingDate": "2021-07-04",
+      "statementFilingDate": "2021-04-04",
       "parserFinancialFieldSources": {
         "revenueBn": "stockanalysis",
         "revenueYoyPct": "stockanalysis",
@@ -102,6 +102,300 @@
         "revenueBn": 1,
         "revenueYoyPct": 1,
         "revenueQoqPct": 0,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
+      "officialRevenueSegments": [
+        {
+          "name": "Net system sales",
+          "nameZh": null,
+          "memberKey": "netsystemsales",
+          "valueBn": 2.949,
+          "yoyPct": null,
+          "qoqPct": -5.75,
+          "mixPct": 67.6,
+          "mixYoyDeltaPp": null,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000016/pressreleasequarterlyresul.htm",
+          "sourceForm": "6-K",
+          "filingDate": "2021-07-21",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "Installed base management",
+          "nameZh": null,
+          "memberKey": "installedbasemanagement",
+          "valueBn": 1.071,
+          "yoyPct": null,
+          "qoqPct": -13.28,
+          "mixPct": 24.5,
+          "mixYoyDeltaPp": null,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000016/pressreleasequarterlyresul.htm",
+          "sourceForm": "6-K",
+          "filingDate": "2021-07-21",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        }
+      ],
+      "officialRevenueDetailGroups": [
+        {
+          "name": "EUV",
+          "nameZh": null,
+          "memberKey": "euv",
+          "valueBn": 1.327,
+          "yoyPct": null,
+          "qoqPct": 17.85,
+          "mixPct": 30.4,
+          "mixYoyDeltaPp": null,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000016/a20210721presentationweb008.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-07-21",
+          "supportLines": [
+            "Extreme Ultraviolet"
+          ],
+          "supportLinesZh": null,
+          "targetName": "Net system sales",
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "ArFi",
+          "nameZh": null,
+          "memberKey": "arfi",
+          "valueBn": 1.003,
+          "yoyPct": null,
+          "qoqPct": -31.82,
+          "mixPct": 23.0,
+          "mixYoyDeltaPp": null,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000016/a20210721presentationweb008.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-07-21",
+          "supportLines": [
+            "Argon Fluoride Immersion"
+          ],
+          "supportLinesZh": null,
+          "targetName": "Net system sales",
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "ArF Dry",
+          "nameZh": null,
+          "memberKey": "arfdry",
+          "valueBn": 0.147,
+          "yoyPct": null,
+          "qoqPct": 133.33,
+          "mixPct": 3.4,
+          "mixYoyDeltaPp": null,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000016/a20210721presentationweb008.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-07-21",
+          "supportLines": [
+            "Argon Fluoride Dry"
+          ],
+          "supportLinesZh": null,
+          "targetName": "Net system sales",
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "KrF",
+          "nameZh": null,
+          "memberKey": "krf",
+          "valueBn": 0.324,
+          "yoyPct": null,
+          "qoqPct": -5.81,
+          "mixPct": 7.4,
+          "mixYoyDeltaPp": null,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000016/a20210721presentationweb008.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-07-21",
+          "supportLines": [
+            "Krypton Fluoride"
+          ],
+          "supportLinesZh": null,
+          "targetName": "Net system sales",
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "I-line",
+          "nameZh": null,
+          "memberKey": "iline",
+          "valueBn": 0.029,
+          "yoyPct": null,
+          "qoqPct": -6.45,
+          "mixPct": 0.7,
+          "mixYoyDeltaPp": null,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000016/a20210721presentationweb008.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-07-21",
+          "supportLines": [
+            "Mercury I-line"
+          ],
+          "supportLinesZh": null,
+          "targetName": "Net system sales",
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "Metrology & Inspection",
+          "nameZh": null,
+          "memberKey": "metrologyinspection",
+          "valueBn": 0.119,
+          "yoyPct": null,
+          "qoqPct": 26.6,
+          "mixPct": 2.7,
+          "mixYoyDeltaPp": null,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000016/a20210721presentationweb008.jpg",
+          "sourceForm": "6-K",
+          "filingDate": "2021-07-21",
+          "supportLines": [
+            "YieldStar · e-beam"
+          ],
+          "supportLinesZh": null,
+          "targetName": "Net system sales",
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        }
+      ],
+      "officialRevenueStyle": "asml-technology-bridge",
+      "displayCurrency": "EUR",
+      "displayScaleFactor": 1,
+      "fieldSources": {
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000016/pressreleasequarterlyresul.htm"
+        }
+      },
+      "extractionDiagnostics": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      }
+    },
+    "2021Q3": {
+      "calendarQuarter": "2021Q3",
+      "periodEnd": "2021-07-04",
+      "fiscalYear": "2021",
+      "fiscalQuarter": "Q2",
+      "fiscalLabel": "FY2021 Q2",
+      "statementCurrency": "EUR",
+      "revenueBn": 4.02,
+      "revenueYoyPct": 1.566,
+      "costOfRevenueBn": 1.976,
+      "grossProfitBn": 2.045,
+      "sgnaBn": 0.172,
+      "rndBn": 0.634,
+      "otherOpexBn": null,
+      "operatingExpensesBn": 0.806,
+      "operatingIncomeBn": 1.239,
+      "nonOperatingBn": -0.01,
+      "pretaxIncomeBn": 1.229,
+      "taxBn": 0.204,
+      "netIncomeBn": 1.038,
+      "netIncomeYoyPct": 38.24,
+      "grossMarginPct": 50.86,
+      "operatingMarginPct": 30.82,
+      "profitMarginPct": 25.5,
+      "effectiveTaxRatePct": 16.615,
+      "revenueQoqPct": -7.883,
+      "grossMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": null,
+      "profitMarginYoyDeltaPp": null,
+      "statementSourceUrl": "https://stockanalysis.com/stocks/asml/financials/?p=quarterly",
+      "statementFilingDate": "2021-07-04",
+      "parserFinancialFieldSources": {
+        "revenueBn": "stockanalysis",
+        "revenueYoyPct": "stockanalysis",
+        "revenueQoqPct": "stockanalysis",
+        "costOfRevenueBn": "stockanalysis",
+        "grossProfitBn": "stockanalysis",
+        "grossMarginPct": "stockanalysis",
+        "sgnaBn": "stockanalysis",
+        "rndBn": "stockanalysis",
+        "operatingExpensesBn": "stockanalysis",
+        "operatingIncomeBn": "stockanalysis",
+        "operatingMarginPct": "stockanalysis",
+        "nonOperatingBn": "stockanalysis",
+        "pretaxIncomeBn": "stockanalysis",
+        "taxBn": "stockanalysis",
+        "netIncomeBn": "stockanalysis",
+        "netIncomeYoyPct": "stockanalysis",
+        "profitMarginPct": "stockanalysis",
+        "effectiveTaxRatePct": "stockanalysis",
+        "calendarQuarter": "stockanalysis",
+        "periodEnd": "stockanalysis",
+        "fiscalYear": "stockanalysis",
+        "fiscalQuarter": "stockanalysis",
+        "fiscalLabel": "stockanalysis",
+        "statementCurrency": "stockanalysis",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
         "costOfRevenueBn": 1,
         "grossProfitBn": 1,
         "grossMarginPct": 1,
@@ -300,7 +594,38 @@
         }
       ],
       "officialRevenueStyle": "asml-technology-bridge",
-      "displayCurrency": "EUR"
+      "displayCurrency": "EUR",
+      "displayScaleFactor": 1,
+      "fieldSources": {
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000019/pressreleasequarterlyresul.htm"
+        }
+      },
+      "extractionDiagnostics": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      }
     },
     "2021Q4": {
       "calendarQuarter": "2021Q4",
@@ -552,7 +877,38 @@
         }
       ],
       "officialRevenueStyle": "asml-technology-bridge",
-      "displayCurrency": "EUR"
+      "displayCurrency": "EUR",
+      "displayScaleFactor": 1,
+      "fieldSources": {
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000004/pressreleasequarterlyresul.htm"
+        }
+      },
+      "extractionDiagnostics": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      }
     },
     "2022Q2": {
       "calendarQuarter": "2022Q2",
@@ -562,7 +918,7 @@
       "fiscalLabel": "FY2022 Q1",
       "statementCurrency": "EUR",
       "revenueBn": 3.534,
-      "revenueYoyPct": -12.09,
+      "revenueYoyPct": -19.019,
       "costOfRevenueBn": 1.803,
       "grossProfitBn": 1.731,
       "sgnaBn": 0.208,
@@ -580,9 +936,9 @@
       "profitMarginPct": 18.52,
       "effectiveTaxRatePct": 14.876,
       "revenueQoqPct": 0.0,
-      "grossMarginYoyDeltaPp": null,
-      "operatingMarginYoyDeltaPp": null,
-      "profitMarginYoyDeltaPp": null,
+      "grossMarginYoyDeltaPp": -4.93,
+      "operatingMarginYoyDeltaPp": -13.56,
+      "profitMarginYoyDeltaPp": -11.69,
       "statementSourceUrl": "https://stockanalysis.com/stocks/asml/financials/?p=quarterly",
       "statementFilingDate": "2022-04-03",
       "parserFinancialFieldSources": {
@@ -591,17 +947,20 @@
         "costOfRevenueBn": "stockanalysis",
         "grossProfitBn": "stockanalysis",
         "grossMarginPct": "stockanalysis",
+        "grossMarginYoyDeltaPp": "stockanalysis",
         "sgnaBn": "stockanalysis",
         "rndBn": "stockanalysis",
         "operatingExpensesBn": "stockanalysis",
         "operatingIncomeBn": "stockanalysis",
         "operatingMarginPct": "stockanalysis",
+        "operatingMarginYoyDeltaPp": "stockanalysis",
         "nonOperatingBn": "stockanalysis",
         "pretaxIncomeBn": "stockanalysis",
         "taxBn": "stockanalysis",
         "netIncomeBn": "stockanalysis",
         "netIncomeYoyPct": "stockanalysis",
         "profitMarginPct": "stockanalysis",
+        "profitMarginYoyDeltaPp": "stockanalysis",
         "effectiveTaxRatePct": "stockanalysis",
         "calendarQuarter": "stockanalysis",
         "periodEnd": "stockanalysis",
@@ -619,21 +978,21 @@
         "costOfRevenueBn": 1,
         "grossProfitBn": 1,
         "grossMarginPct": 1,
-        "grossMarginYoyDeltaPp": 0,
+        "grossMarginYoyDeltaPp": 1,
         "sgnaBn": 1,
         "rndBn": 1,
         "otherOpexBn": 0,
         "operatingExpensesBn": 1,
         "operatingIncomeBn": 1,
         "operatingMarginPct": 1,
-        "operatingMarginYoyDeltaPp": 0,
+        "operatingMarginYoyDeltaPp": 1,
         "nonOperatingBn": 1,
         "pretaxIncomeBn": 1,
         "taxBn": 1,
         "netIncomeBn": 1,
         "netIncomeYoyPct": 1,
         "profitMarginPct": 1,
-        "profitMarginYoyDeltaPp": 0,
+        "profitMarginYoyDeltaPp": 1,
         "effectiveTaxRatePct": 1
       },
       "parserFinancialValidation": {
@@ -666,7 +1025,7 @@
           "yoyPct": 40.42,
           "qoqPct": 81.07,
           "mixPct": 117.2,
-          "mixYoyDeltaPp": 43.8,
+          "mixYoyDeltaPp": 49.6,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000019/pressreleasequarterlyresul.htm",
           "sourceForm": "6-K",
           "filingDate": "2022-07-20",
@@ -684,7 +1043,7 @@
           "yoyPct": 20.45,
           "qoqPct": 3.45,
           "mixPct": 36.5,
-          "mixYoyDeltaPp": 9.9,
+          "mixYoyDeltaPp": 12.0,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000019/pressreleasequarterlyresul.htm",
           "sourceForm": "6-K",
           "filingDate": "2022-07-20",
@@ -704,7 +1063,7 @@
           "yoyPct": 49.81,
           "qoqPct": 234.12,
           "mixPct": 56.3,
-          "mixYoyDeltaPp": 23.2,
+          "mixYoyDeltaPp": 25.8,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000019/presentationinvestorrela008.jpg",
           "sourceForm": "6-K",
           "filingDate": "2022-07-20",
@@ -725,7 +1084,7 @@
           "yoyPct": 36.29,
           "qoqPct": 27.16,
           "mixPct": 38.7,
-          "mixYoyDeltaPp": 13.7,
+          "mixYoyDeltaPp": 15.7,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000019/presentationinvestorrela008.jpg",
           "sourceForm": "6-K",
           "filingDate": "2022-07-20",
@@ -746,7 +1105,7 @@
           "yoyPct": 12.93,
           "qoqPct": 21.17,
           "mixPct": 4.7,
-          "mixYoyDeltaPp": 1.0,
+          "mixYoyDeltaPp": 1.3,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000019/presentationinvestorrela008.jpg",
           "sourceForm": "6-K",
           "filingDate": "2022-07-20",
@@ -767,7 +1126,7 @@
           "yoyPct": 27.78,
           "qoqPct": 51.09,
           "mixPct": 11.7,
-          "mixYoyDeltaPp": 3.7,
+          "mixYoyDeltaPp": 4.3,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000019/presentationinvestorrela008.jpg",
           "sourceForm": "6-K",
           "filingDate": "2022-07-20",
@@ -788,7 +1147,7 @@
           "yoyPct": 41.38,
           "qoqPct": -10.87,
           "mixPct": 1.2,
-          "mixYoyDeltaPp": 0.4,
+          "mixYoyDeltaPp": 0.5,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000019/presentationinvestorrela008.jpg",
           "sourceForm": "6-K",
           "filingDate": "2022-07-20",
@@ -809,7 +1168,7 @@
           "yoyPct": 38.66,
           "qoqPct": 3.12,
           "mixPct": 4.7,
-          "mixYoyDeltaPp": 1.7,
+          "mixYoyDeltaPp": 1.9,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000019/presentationinvestorrela008.jpg",
           "sourceForm": "6-K",
           "filingDate": "2022-07-20",
@@ -824,7 +1183,38 @@
         }
       ],
       "officialRevenueStyle": "asml-technology-bridge",
-      "displayCurrency": "EUR"
+      "displayCurrency": "EUR",
+      "displayScaleFactor": 1,
+      "fieldSources": {
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000019/pressreleasequarterlyresul.htm"
+        }
+      },
+      "extractionDiagnostics": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      }
     },
     "2022Q3": {
       "calendarQuarter": "2022Q3",
@@ -1090,7 +1480,38 @@
         }
       ],
       "officialRevenueStyle": "asml-technology-bridge",
-      "displayCurrency": "EUR"
+      "displayCurrency": "EUR",
+      "displayScaleFactor": 1,
+      "fieldSources": {
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000022/pressreleasequarterlyresul.htm"
+        }
+      },
+      "extractionDiagnostics": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      }
     },
     "2022Q4": {
       "calendarQuarter": "2022Q4",
@@ -1356,7 +1777,38 @@
         }
       ],
       "officialRevenueStyle": "asml-technology-bridge",
-      "displayCurrency": "EUR"
+      "displayCurrency": "EUR",
+      "displayScaleFactor": 1,
+      "fieldSources": {
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796623000003/pressreleasequarterlyresul.htm"
+        }
+      },
+      "extractionDiagnostics": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      }
     },
     "2023Q2": {
       "calendarQuarter": "2023Q2",
@@ -1621,7 +2073,38 @@
         }
       ],
       "officialRevenueStyle": "asml-technology-bridge",
-      "displayCurrency": "EUR"
+      "displayCurrency": "EUR",
+      "displayScaleFactor": 1,
+      "fieldSources": {
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796623000026/pressreleasequarterlyresul.htm"
+        }
+      },
+      "extractionDiagnostics": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      }
     },
     "2023Q3": {
       "calendarQuarter": "2023Q3",
@@ -1897,7 +2380,38 @@
         }
       ],
       "officialRevenueStyle": "asml-technology-bridge",
-      "displayCurrency": "EUR"
+      "displayCurrency": "EUR",
+      "displayScaleFactor": 1,
+      "fieldSources": {
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796623000029/pressreleasequarterlyresul.htm"
+        }
+      },
+      "extractionDiagnostics": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      }
     },
     "2023Q4": {
       "calendarQuarter": "2023Q4",
@@ -2163,7 +2677,38 @@
         }
       ],
       "officialRevenueStyle": "asml-technology-bridge",
-      "displayCurrency": "EUR"
+      "displayCurrency": "EUR",
+      "displayScaleFactor": 1,
+      "fieldSources": {
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796624000003/pressreleasequarterlyresul.htm"
+        }
+      },
+      "extractionDiagnostics": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      }
     },
     "2024Q1": {
       "calendarQuarter": "2024Q1",
@@ -2426,7 +2971,38 @@
         }
       ],
       "officialRevenueStyle": "asml-technology-bridge",
-      "displayCurrency": "EUR"
+      "displayCurrency": "EUR",
+      "displayScaleFactor": 1,
+      "fieldSources": {
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796624000013/pressreleasequarterlyresul.htm"
+        }
+      },
+      "extractionDiagnostics": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      }
     },
     "2024Q2": {
       "calendarQuarter": "2024Q2",
@@ -2702,7 +3278,38 @@
         }
       ],
       "officialRevenueStyle": "asml-technology-bridge",
-      "displayCurrency": "EUR"
+      "displayCurrency": "EUR",
+      "displayScaleFactor": 1,
+      "fieldSources": {
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796624000019/pressreleasequarterlyresul.htm"
+        }
+      },
+      "extractionDiagnostics": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      }
     },
     "2024Q3": {
       "calendarQuarter": "2024Q3",
@@ -2978,7 +3585,38 @@
         }
       ],
       "officialRevenueStyle": "asml-technology-bridge",
-      "displayCurrency": "EUR"
+      "displayCurrency": "EUR",
+      "displayScaleFactor": 1,
+      "fieldSources": {
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796624000022/pressreleasequarterlyresul.htm"
+        }
+      },
+      "extractionDiagnostics": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      }
     },
     "2024Q4": {
       "calendarQuarter": "2024Q4",
@@ -3244,7 +3882,38 @@
         }
       ],
       "officialRevenueStyle": "asml-technology-bridge",
-      "displayCurrency": "EUR"
+      "displayCurrency": "EUR",
+      "displayScaleFactor": 1,
+      "fieldSources": {
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796625000003/pressreleasequarterlyresul.htm"
+        }
+      },
+      "extractionDiagnostics": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      }
     },
     "2025Q1": {
       "calendarQuarter": "2025Q1",
@@ -3510,7 +4179,38 @@
         }
       ],
       "officialRevenueStyle": "asml-technology-bridge",
-      "displayCurrency": "EUR"
+      "displayCurrency": "EUR",
+      "displayScaleFactor": 1,
+      "fieldSources": {
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796625000014/pressreleasequarterlyresul.htm"
+        }
+      },
+      "extractionDiagnostics": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      }
     },
     "2025Q2": {
       "calendarQuarter": "2025Q2",
@@ -3786,7 +4486,38 @@
         }
       ],
       "officialRevenueStyle": "asml-technology-bridge",
-      "displayCurrency": "EUR"
+      "displayCurrency": "EUR",
+      "displayScaleFactor": 1,
+      "fieldSources": {
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828025034992/pressreleasequarterlyresul.htm"
+        }
+      },
+      "extractionDiagnostics": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      }
     },
     "2025Q3": {
       "calendarQuarter": "2025Q3",
@@ -4062,7 +4793,38 @@
         }
       ],
       "officialRevenueStyle": "asml-technology-bridge",
-      "displayCurrency": "EUR"
+      "displayCurrency": "EUR",
+      "displayScaleFactor": 1,
+      "fieldSources": {
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828025045043/pressreleasequarterlyresul.htm"
+        }
+      },
+      "extractionDiagnostics": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      }
     },
     "2025Q4": {
       "calendarQuarter": "2025Q4",
@@ -4328,7 +5090,38 @@
         }
       ],
       "officialRevenueStyle": "asml-technology-bridge",
-      "displayCurrency": "EUR"
+      "displayCurrency": "EUR",
+      "displayScaleFactor": 1,
+      "fieldSources": {
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026003701/pressreleasefinancialresul.htm"
+        }
+      },
+      "extractionDiagnostics": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      }
     },
     "2026Q1": {
       "calendarQuarter": "2026Q1",
@@ -4350,7 +5143,7 @@
       "pretaxIncomeBn": 3.199,
       "taxBn": 0.547,
       "netIncomeBn": 2.757,
-      "netIncomeYoyPct": 17.06,
+      "netIncomeYoyPct": 17.07,
       "grossMarginPct": 52.98,
       "operatingMarginPct": 36.02,
       "profitMarginPct": 31.44,
@@ -4358,30 +5151,24 @@
       "revenueQoqPct": -9.786,
       "grossMarginYoyDeltaPp": -1.01,
       "operatingMarginYoyDeltaPp": 0.65,
-      "profitMarginYoyDeltaPp": 0.26,
+      "profitMarginYoyDeltaPp": 1.45,
       "statementSourceUrl": "https://ourbrand.asml.com/asset/3f4235e1-ad38-4af8-a39b-de0d39cb71d1/Financial-statements-US-GAAP-Q1-2026.pdf",
       "statementFilingDate": "2026-04-15",
       "parserFinancialFieldSources": {
         "revenueBn": "official",
-        "revenueYoyPct": "stockanalysis",
-        "revenueQoqPct": "stockanalysis",
         "costOfRevenueBn": "official",
         "grossProfitBn": "official",
         "grossMarginPct": "official",
-        "grossMarginYoyDeltaPp": "stockanalysis",
         "sgnaBn": "official",
         "rndBn": "official",
         "operatingExpensesBn": "official",
         "operatingIncomeBn": "official",
         "operatingMarginPct": "official",
-        "operatingMarginYoyDeltaPp": "stockanalysis",
         "nonOperatingBn": "official",
         "pretaxIncomeBn": "official",
         "taxBn": "official",
         "netIncomeBn": "official",
-        "netIncomeYoyPct": "stockanalysis",
         "profitMarginPct": "official",
-        "profitMarginYoyDeltaPp": "stockanalysis",
         "effectiveTaxRatePct": "official",
         "calendarQuarter": "official",
         "periodEnd": "official",
@@ -4390,31 +5177,37 @@
         "fiscalLabel": "official",
         "statementCurrency": "official",
         "statementFilingDate": "official",
-        "statementSourceUrl": "official"
+        "statementSourceUrl": "official",
+        "revenueYoyPct": "derived",
+        "netIncomeYoyPct": "derived",
+        "revenueQoqPct": "derived",
+        "grossMarginYoyDeltaPp": "derived",
+        "operatingMarginYoyDeltaPp": "derived",
+        "profitMarginYoyDeltaPp": "derived"
       },
       "parserFinancialCandidateCounts": {
-        "revenueBn": 2,
-        "revenueYoyPct": 1,
-        "revenueQoqPct": 1,
-        "costOfRevenueBn": 2,
-        "grossProfitBn": 2,
-        "grossMarginPct": 2,
-        "grossMarginYoyDeltaPp": 1,
-        "sgnaBn": 2,
-        "rndBn": 2,
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 0,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
         "otherOpexBn": 0,
-        "operatingExpensesBn": 2,
-        "operatingIncomeBn": 2,
-        "operatingMarginPct": 2,
-        "operatingMarginYoyDeltaPp": 1,
-        "nonOperatingBn": 2,
-        "pretaxIncomeBn": 2,
-        "taxBn": 2,
-        "netIncomeBn": 2,
-        "netIncomeYoyPct": 1,
-        "profitMarginPct": 2,
-        "profitMarginYoyDeltaPp": 1,
-        "effectiveTaxRatePct": 2
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
       },
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
@@ -4594,7 +5387,53 @@
         }
       ],
       "officialRevenueStyle": "asml-technology-bridge",
-      "displayCurrency": "EUR"
+      "displayCurrency": "EUR",
+      "displayScaleFactor": 1,
+      "statementMeta": {
+        "statementSource": null,
+        "statementSourceUrl": "https://ourbrand.asml.com/asset/3f4235e1-ad38-4af8-a39b-de0d39cb71d1/Financial-statements-US-GAAP-Q1-2026.pdf",
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "qualityFlags": [],
+        "adapterId": "official_financials"
+      },
+      "fieldSources": {
+        "statementMeta": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 12.6,
+          "sourceUrl": "https://ourbrand.asml.com/asset/3f4235e1-ad38-4af8-a39b-de0d39cb71d1/Financial-statements-US-GAAP-Q1-2026.pdf"
+        },
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://ourbrand.asml.com/asset/6ec62875-6d6a-4ec5-a4d7-43f59ce8e5c5/ASML-Press-Release-Financial-Results-Q1-2026.pdf"
+        }
+      },
+      "extractionDiagnostics": {
+        "qualityScore": 80,
+        "availableRequiredFieldCount": 3,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 17,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": 100.0,
+        "costBreakdownCoveragePct": 0,
+        "opexBreakdownCoveragePct": 0,
+        "revenueSegmentResidualBn": 0.0,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "cost-breakdown-coverage-low",
+          "opex-breakdown-coverage-low"
+        ]
+      }
     },
     "2019Q4": {
       "calendarQuarter": "2019Q4",
@@ -4795,7 +5634,45 @@
         }
       ],
       "officialRevenueStyle": "asml-technology-bridge",
-      "displayCurrency": "EUR"
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1.1088,
+      "statementMeta": {
+        "statementSource": "official-revenue-structure",
+        "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796620000003/pressreleasequarterlyresul.htm",
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "qualityFlags": []
+      },
+      "fieldSources": {
+        "statementMeta": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 108.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796620000003/pressreleasequarterlyresul.htm"
+        }
+      },
+      "extractionDiagnostics": {
+        "qualityScore": 78,
+        "availableRequiredFieldCount": 1,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 7,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": 100.0,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": 0.0,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": "official-revenue-structure",
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:operatingIncomeBn,netIncomeBn"
+        ]
+      }
     },
     "2020Q1": {
       "calendarQuarter": "2020Q1",
@@ -4996,7 +5873,45 @@
         }
       ],
       "officialRevenueStyle": "asml-technology-bridge",
-      "displayCurrency": "EUR"
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1.0903,
+      "statementMeta": {
+        "statementSource": "official-revenue-structure",
+        "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796620000014/pressreleasequarterlyresul.htm",
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "qualityFlags": []
+      },
+      "fieldSources": {
+        "statementMeta": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 108.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796620000014/pressreleasequarterlyresul.htm"
+        }
+      },
+      "extractionDiagnostics": {
+        "qualityScore": 78,
+        "availableRequiredFieldCount": 1,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 7,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": 100.0,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": 0.0,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": "official-revenue-structure",
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:operatingIncomeBn,netIncomeBn"
+        ]
+      }
     },
     "2020Q3": {
       "calendarQuarter": "2020Q3",
@@ -5197,7 +6112,45 @@
         }
       ],
       "officialRevenueStyle": "asml-technology-bridge",
-      "displayCurrency": "EUR"
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1.175,
+      "statementMeta": {
+        "statementSource": "official-revenue-structure",
+        "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796620000020/pressreleasequarterlyr.htm",
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "qualityFlags": []
+      },
+      "fieldSources": {
+        "statementMeta": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 108.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796620000020/pressreleasequarterlyr.htm"
+        }
+      },
+      "extractionDiagnostics": {
+        "qualityScore": 78,
+        "availableRequiredFieldCount": 1,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 7,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": 100.0,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": 0.0,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": "official-revenue-structure",
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:operatingIncomeBn,netIncomeBn"
+        ]
+      }
     },
     "2020Q4": {
       "calendarQuarter": "2020Q4",
@@ -5398,7 +6351,45 @@
         }
       ],
       "officialRevenueStyle": "asml-technology-bridge",
-      "displayCurrency": "EUR"
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1.2101,
+      "statementMeta": {
+        "statementSource": "official-revenue-structure",
+        "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000003/pressreleasequarterlyresul.htm",
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "qualityFlags": []
+      },
+      "fieldSources": {
+        "statementMeta": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 108.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000003/pressreleasequarterlyresul.htm"
+        }
+      },
+      "extractionDiagnostics": {
+        "qualityScore": 78,
+        "availableRequiredFieldCount": 1,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 7,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": 100.0,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": 0.0,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": "official-revenue-structure",
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:operatingIncomeBn,netIncomeBn"
+        ]
+      }
     },
     "2021Q1": {
       "calendarQuarter": "2021Q1",
@@ -5599,208 +6590,45 @@
         }
       ],
       "officialRevenueStyle": "asml-technology-bridge",
-      "displayCurrency": "EUR"
-    },
-    "2021Q2": {
-      "calendarQuarter": "2021Q2",
-      "periodEnd": "2021-06-30",
-      "fiscalYear": "2021",
-      "fiscalQuarter": "Q2",
-      "fiscalLabel": "FY2021 Q2",
-      "statementCurrency": "EUR",
-      "revenueBn": 4.02,
-      "revenueYoyPct": null,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
-      "sgnaBn": null,
-      "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
-      "taxBn": null,
-      "netIncomeBn": null,
-      "netIncomeYoyPct": null,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": null,
-      "effectiveTaxRatePct": null,
-      "revenueQoqPct": -7.883,
-      "grossMarginYoyDeltaPp": null,
-      "operatingMarginYoyDeltaPp": null,
-      "profitMarginYoyDeltaPp": null,
-      "statementSource": "official-revenue-structure",
-      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000016/pressreleasequarterlyresul.htm",
-      "statementFilingDate": "2021-07-21",
-      "officialRevenueSegments": [
-        {
-          "name": "Net system sales",
-          "nameZh": null,
-          "memberKey": "netsystemsales",
-          "valueBn": 2.949,
-          "yoyPct": null,
-          "qoqPct": -5.75,
-          "mixPct": 73.4,
-          "mixYoyDeltaPp": null,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000016/pressreleasequarterlyresul.htm",
-          "sourceForm": "6-K",
-          "filingDate": "2021-07-21",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": null,
-          "validationNotes": null
-        },
-        {
-          "name": "Installed base management",
-          "nameZh": null,
-          "memberKey": "installedbasemanagement",
-          "valueBn": 1.071,
-          "yoyPct": null,
-          "qoqPct": -13.28,
-          "mixPct": 26.6,
-          "mixYoyDeltaPp": null,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000016/pressreleasequarterlyresul.htm",
-          "sourceForm": "6-K",
-          "filingDate": "2021-07-21",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": null,
-          "validationNotes": null
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1.2007,
+      "statementMeta": {
+        "statementSource": "official-revenue-structure",
+        "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000012/pressreleasequarterlyresul.htm",
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "qualityFlags": []
+      },
+      "fieldSources": {
+        "statementMeta": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 108.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000012/pressreleasequarterlyresul.htm"
         }
-      ],
-      "officialRevenueDetailGroups": [
-        {
-          "name": "EUV",
-          "nameZh": null,
-          "memberKey": "euv",
-          "valueBn": 1.327,
-          "yoyPct": null,
-          "qoqPct": 17.85,
-          "mixPct": 33.0,
-          "mixYoyDeltaPp": null,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000016/a20210721presentationweb008.jpg",
-          "sourceForm": "6-K",
-          "filingDate": "2021-07-21",
-          "supportLines": [
-            "Extreme Ultraviolet"
-          ],
-          "supportLinesZh": null,
-          "targetName": "Net system sales",
-          "metricMode": null,
-          "validationEligible": null,
-          "validationNotes": null
-        },
-        {
-          "name": "ArFi",
-          "nameZh": null,
-          "memberKey": "arfi",
-          "valueBn": 1.003,
-          "yoyPct": null,
-          "qoqPct": -31.82,
-          "mixPct": 25.0,
-          "mixYoyDeltaPp": null,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000016/a20210721presentationweb008.jpg",
-          "sourceForm": "6-K",
-          "filingDate": "2021-07-21",
-          "supportLines": [
-            "Argon Fluoride Immersion"
-          ],
-          "supportLinesZh": null,
-          "targetName": "Net system sales",
-          "metricMode": null,
-          "validationEligible": null,
-          "validationNotes": null
-        },
-        {
-          "name": "ArF Dry",
-          "nameZh": null,
-          "memberKey": "arfdry",
-          "valueBn": 0.147,
-          "yoyPct": null,
-          "qoqPct": 133.33,
-          "mixPct": 3.7,
-          "mixYoyDeltaPp": null,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000016/a20210721presentationweb008.jpg",
-          "sourceForm": "6-K",
-          "filingDate": "2021-07-21",
-          "supportLines": [
-            "Argon Fluoride Dry"
-          ],
-          "supportLinesZh": null,
-          "targetName": "Net system sales",
-          "metricMode": null,
-          "validationEligible": null,
-          "validationNotes": null
-        },
-        {
-          "name": "KrF",
-          "nameZh": null,
-          "memberKey": "krf",
-          "valueBn": 0.324,
-          "yoyPct": null,
-          "qoqPct": -5.81,
-          "mixPct": 8.1,
-          "mixYoyDeltaPp": null,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000016/a20210721presentationweb008.jpg",
-          "sourceForm": "6-K",
-          "filingDate": "2021-07-21",
-          "supportLines": [
-            "Krypton Fluoride"
-          ],
-          "supportLinesZh": null,
-          "targetName": "Net system sales",
-          "metricMode": null,
-          "validationEligible": null,
-          "validationNotes": null
-        },
-        {
-          "name": "I-line",
-          "nameZh": null,
-          "memberKey": "iline",
-          "valueBn": 0.029,
-          "yoyPct": null,
-          "qoqPct": -6.45,
-          "mixPct": 0.7,
-          "mixYoyDeltaPp": null,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000016/a20210721presentationweb008.jpg",
-          "sourceForm": "6-K",
-          "filingDate": "2021-07-21",
-          "supportLines": [
-            "Mercury I-line"
-          ],
-          "supportLinesZh": null,
-          "targetName": "Net system sales",
-          "metricMode": null,
-          "validationEligible": null,
-          "validationNotes": null
-        },
-        {
-          "name": "Metrology & Inspection",
-          "nameZh": null,
-          "memberKey": "metrologyinspection",
-          "valueBn": 0.119,
-          "yoyPct": null,
-          "qoqPct": 26.6,
-          "mixPct": 3.0,
-          "mixYoyDeltaPp": null,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000016/a20210721presentationweb008.jpg",
-          "sourceForm": "6-K",
-          "filingDate": "2021-07-21",
-          "supportLines": [
-            "YieldStar · e-beam"
-          ],
-          "supportLinesZh": null,
-          "targetName": "Net system sales",
-          "metricMode": null,
-          "validationEligible": null,
-          "validationNotes": null
-        }
-      ],
-      "officialRevenueStyle": "asml-technology-bridge",
-      "displayCurrency": "EUR"
+      },
+      "extractionDiagnostics": {
+        "qualityScore": 78,
+        "availableRequiredFieldCount": 1,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 7,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": 100.0,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": 0.0,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": "official-revenue-structure",
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:operatingIncomeBn,netIncomeBn"
+        ]
+      }
     },
     "2022Q1": {
       "calendarQuarter": "2022Q1",
@@ -6001,7 +6829,45 @@
         }
       ],
       "officialRevenueStyle": "asml-technology-bridge",
-      "displayCurrency": "EUR"
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1.083,
+      "statementMeta": {
+        "statementSource": "official-revenue-structure",
+        "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000016/pressreleasequarterlyresul.htm",
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "qualityFlags": []
+      },
+      "fieldSources": {
+        "statementMeta": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 108.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000016/pressreleasequarterlyresul.htm"
+        }
+      },
+      "extractionDiagnostics": {
+        "qualityScore": 78,
+        "availableRequiredFieldCount": 1,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 7,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": 100.0,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": 0.0,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": "official-revenue-structure",
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:operatingIncomeBn,netIncomeBn"
+        ]
+      }
     },
     "2023Q1": {
       "calendarQuarter": "2023Q1",
@@ -6202,17 +7068,57 @@
         }
       ],
       "officialRevenueStyle": "asml-technology-bridge",
-      "displayCurrency": "EUR"
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1.0933,
+      "statementMeta": {
+        "statementSource": "official-revenue-structure",
+        "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796623000019/pressreleasequarterlyresul.htm",
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "qualityFlags": []
+      },
+      "fieldSources": {
+        "statementMeta": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 108.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796623000019/pressreleasequarterlyresul.htm"
+        }
+      },
+      "extractionDiagnostics": {
+        "qualityScore": 78,
+        "availableRequiredFieldCount": 1,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 7,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": 100.0,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": 0.0,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": "official-revenue-structure",
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:operatingIncomeBn,netIncomeBn"
+        ]
+      }
     }
   },
-  "statementSource": "official-asml-website+field-reconciled",
+  "statementSource": "official-asml-website",
   "statementSourceUrl": "https://ourbrand.asml.com/asset/3f4235e1-ad38-4af8-a39b-de0d39cb71d1/Financial-statements-US-GAAP-Q1-2026.pdf",
   "reportingCurrency": "EUR",
   "cik": null,
-  "errors": [],
+  "errors": [
+    "resolve_cik: IncompleteRead(723071 bytes read)"
+  ],
   "errorDetails": [
     {
-      "message": "IncompleteRead(704512 bytes read)",
+      "message": "IncompleteRead(723071 bytes read)",
       "layer": "financials",
       "sourceId": "official_financials",
       "phase": "resolve-cik",
@@ -6222,80 +7128,11 @@
   ],
   "officialSegmentHistory": {
     "source": "official-filings",
-    "axis": "StatementBusinessSegmentsAxis",
-    "filingsUsed": [
-      {
-        "form": "20-F",
-        "filingDate": "2026-02-25",
-        "accession": "0001628280-26-011378",
-        "primaryDocument": "asml-20251231.htm",
-        "instance": "asml-20251231_htm.xml"
-      },
-      {
-        "form": "20-F",
-        "filingDate": "2025-03-05",
-        "accession": "0000937966-25-000009",
-        "primaryDocument": "asml-20241231.htm",
-        "instance": "asml-20241231_htm.xml"
-      },
-      {
-        "form": "20-F",
-        "filingDate": "2024-02-14",
-        "accession": "0000937966-24-000008",
-        "primaryDocument": "asml-20231231.htm",
-        "instance": "asml-20231231_htm.xml"
-      },
-      {
-        "form": "20-F",
-        "filingDate": "2023-02-15",
-        "accession": "0000937966-23-000014",
-        "primaryDocument": "asml-20221231.htm",
-        "instance": "asml-20221231_htm.xml"
-      },
-      {
-        "form": "20-F",
-        "filingDate": "2022-02-09",
-        "accession": "0000937966-22-000013",
-        "primaryDocument": "asml-20211231.htm",
-        "instance": "asml-20211231_htm.xml"
-      },
-      {
-        "form": "20-F",
-        "filingDate": "2021-02-10",
-        "accession": "0000937966-21-000007",
-        "primaryDocument": "asml-20201231.htm",
-        "instance": "asml-20201231_htm.xml"
-      },
-      {
-        "form": "20-F",
-        "filingDate": "2020-02-12",
-        "accession": "0000937966-20-000011",
-        "primaryDocument": "a2019integratedreportb.htm",
-        "instance": "a2019integratedreportb_htm.xml"
-      },
-      {
-        "form": "20-F",
-        "filingDate": "2019-02-06",
-        "accession": "0000937966-19-000007",
-        "primaryDocument": "a2018integratedreportbased.htm",
-        "instance": "asml-20181231.xml"
-      },
-      {
-        "form": "20-F",
-        "filingDate": "2018-02-07",
-        "accession": "0000937966-18-000007",
-        "primaryDocument": "a2017integratedreportbased.htm",
-        "instance": "asml-20171231.xml"
-      },
-      {
-        "form": "20-F",
-        "filingDate": "2017-02-08",
-        "accession": "0000937966-17-000007",
-        "primaryDocument": "a20-fasml2016.htm",
-        "instance": "asml-20161231.xml"
-      }
-    ],
-    "errors": []
+    "axis": null,
+    "filingsUsed": [],
+    "errors": [
+      "submissions: IncompleteRead(80009 bytes read, 16288 more expected)"
+    ]
   },
   "officialRevenueStructureHistory": {
     "source": "official-filings-presentation-ocr",
@@ -9495,7 +10332,8 @@
           "reason": "",
           "quarter_count": 1,
           "latest_quarter": "2026Q1",
-          "error": ""
+          "error": "",
+          "error_details": []
         },
         {
           "layer": "financials",
@@ -9504,31 +10342,32 @@
           "selected": false,
           "reason": "",
           "quarter_count": 17,
-          "latest_quarter": "2026Q1",
-          "error": ""
+          "latest_quarter": "2025Q4",
+          "error": "",
+          "error_details": []
         }
       ],
       "reconciliation": {
         "version": "financial-reconciler-v1",
         "primarySource": "official",
-        "quarterCount": 17,
-        "fieldOverrideCount": 6,
+        "quarterCount": 18,
+        "fieldOverrideCount": 0,
         "derivedFieldCount": 0,
-        "mixedSourceQuarterCount": 1,
+        "mixedSourceQuarterCount": 0,
         "sourceUsageCounts": {
           "official": 15,
-          "stockanalysis": 327
+          "stockanalysis": 342
         }
       },
       "validation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "quarterCount": 17,
-        "validatedQuarterCount": 17,
+        "quarterCount": 18,
+        "validatedQuarterCount": 18,
         "issueCount": 7,
         "mismatchQuarterCount": 7,
-        "highConfidenceQuarterCount": 17,
-        "averageConfidenceScore": 0.9769,
+        "highConfidenceQuarterCount": 18,
+        "averageConfidenceScore": 0.9781,
         "latestQuarter": "2026Q1",
         "latestQuarterConfidenceScore": 1.0,
         "latestQuarterIssueCount": 0
@@ -9540,12 +10379,23 @@
         {
           "layer": "segments",
           "source_id": "official-segments",
-          "status": "error",
+          "status": "empty",
           "selected": false,
           "reason": "",
           "quarter_count": 0,
           "latest_quarter": "",
-          "error": "IncompleteRead(767259 bytes read)"
+          "error": "submissions: IncompleteRead(80009 bytes read, 16288 more expected)",
+          "error_details": [
+            {
+              "message": "IncompleteRead(80009 bytes read, 16288 more expected)",
+              "layer": "segments",
+              "sourceId": "official_segments",
+              "phase": "submissions",
+              "severity": "error",
+              "errorType": "IncompleteRead",
+              "url": "https://data.sec.gov/submissions/CIK0000937966.json"
+            }
+          ]
         }
       ]
     },
@@ -9560,23 +10410,24 @@
           "reason": "",
           "quarter_count": 25,
           "latest_quarter": "2026Q1",
-          "error": ""
+          "error": "",
+          "error_details": []
         }
       ]
     },
     "summary": {
-      "financialQuarterCount": 17,
+      "financialQuarterCount": 18,
       "segmentQuarterCount": 0,
       "revenueStructureQuarterCount": 25
     },
     "validation": {
       "version": "parser-validation-v1",
       "status": "high",
-      "overallConfidenceScore": 0.936,
-      "financialConfidenceScore": 0.9769,
-      "structuralConfidenceScore": 0.86,
+      "overallConfidenceScore": 0.9298,
+      "financialConfidenceScore": 0.9781,
+      "structuralConfidenceScore": 0.84,
       "revenueSegmentChecks": 25,
-      "revenueSegmentMismatchCount": 7,
+      "revenueSegmentMismatchCount": 8,
       "revenueSegmentSkippedChecks": 0,
       "detailGroupChecks": 25,
       "detailGroupMismatchCount": 0,
@@ -9584,8 +10435,9 @@
       "opexChecks": 0,
       "opexSkippedChecks": 0,
       "opexOverflowMismatchCount": 0,
-      "warningCount": 7,
+      "warningCount": 8,
       "warnings": [
+        "2021Q2: revenue segments sum to 4.02Bn vs revenue 4.364Bn.",
         "2021Q3: revenue segments sum to 5.241Bn vs revenue 4.02Bn.",
         "2021Q4: revenue segments sum to 4.986Bn vs revenue 5.241Bn.",
         "2022Q2: revenue segments sum to 5.431Bn vs revenue 3.534Bn.",
@@ -9594,6 +10446,1657 @@
         "2023Q3: revenue segments sum to 6.673Bn vs revenue 6.902Bn.",
         "2023Q4: revenue segments sum to 7.237Bn vs revenue 6.673Bn."
       ]
+    }
+  },
+  "unifiedExtraction": {
+    "engineVersion": "20260324-v2",
+    "sources": [
+      {
+        "adapterId": "manual_financials",
+        "kind": "statement",
+        "label": "Manual company overrides",
+        "enabled": false,
+        "priority": 146,
+        "errorCount": 0
+      },
+      {
+        "adapterId": "manual_revenue_structures",
+        "kind": "revenue_structure",
+        "label": "Manual revenue structure overrides",
+        "enabled": false,
+        "priority": 146,
+        "errorCount": 0
+      },
+      {
+        "adapterId": "official_financials",
+        "kind": "statement",
+        "label": "SEC companyfacts / filings",
+        "enabled": true,
+        "priority": 110,
+        "errorCount": 1,
+        "errors": [
+          "resolve_cik: IncompleteRead(723071 bytes read)"
+        ],
+        "errorDetails": [
+          {
+            "message": "IncompleteRead(723071 bytes read)",
+            "layer": "financials",
+            "sourceId": "official_financials",
+            "phase": "resolve-cik",
+            "severity": "error",
+            "errorType": "IncompleteRead"
+          }
+        ]
+      },
+      {
+        "adapterId": "generic_filing_tables",
+        "kind": "statement",
+        "label": "Generic official filing table parser",
+        "enabled": false,
+        "priority": 80,
+        "errorCount": 1,
+        "errors": [
+          "companyfacts: <urlopen error [Errno 1] Operation not permitted>"
+        ],
+        "errorDetails": [
+          {
+            "message": "companyfacts: <urlopen error [Errno 1] Operation not permitted>",
+            "severity": "error",
+            "layer": "financials",
+            "sourceId": "generic_filing_tables",
+            "phase": "fetch"
+          }
+        ]
+      },
+      {
+        "adapterId": "generic_ir_pdf",
+        "kind": "statement",
+        "label": "Generic IR PDF parser",
+        "enabled": false,
+        "priority": 72,
+        "errorCount": 1,
+        "errors": [
+          "submissions: <urlopen error [Errno 1] Operation not permitted>"
+        ],
+        "errorDetails": [
+          {
+            "message": "submissions: <urlopen error [Errno 1] Operation not permitted>",
+            "severity": "error",
+            "layer": "financials",
+            "sourceId": "generic_ir_pdf",
+            "phase": "fetch"
+          }
+        ]
+      },
+      {
+        "adapterId": "stockanalysis_financials",
+        "kind": "statement",
+        "label": "StockAnalysis financials",
+        "enabled": false,
+        "priority": 64,
+        "errorCount": 0
+      },
+      {
+        "adapterId": "supplemental_components",
+        "kind": "statement",
+        "label": "Supplemental structured components",
+        "enabled": false,
+        "priority": 84,
+        "errorCount": 0
+      },
+      {
+        "adapterId": "official_segments",
+        "kind": "revenue_segments",
+        "label": "Official XBRL segment facts",
+        "enabled": true,
+        "priority": 96,
+        "errorCount": 1,
+        "errors": [
+          "submissions: IncompleteRead(80009 bytes read, 16288 more expected)"
+        ],
+        "errorDetails": [
+          {
+            "message": "IncompleteRead(80009 bytes read, 16288 more expected)",
+            "layer": "segments",
+            "sourceId": "official_segments",
+            "phase": "submissions",
+            "severity": "error",
+            "errorType": "IncompleteRead",
+            "url": "https://data.sec.gov/submissions/CIK0000937966.json"
+          }
+        ]
+      },
+      {
+        "adapterId": "official_revenue_structures",
+        "kind": "revenue_structure",
+        "label": "Official filing revenue structure",
+        "enabled": true,
+        "priority": 106,
+        "errorCount": 1,
+        "errors": [
+          "2020-07-15: asml-tech-mix-ocr-incomplete"
+        ],
+        "errorDetails": [
+          {
+            "message": "2020-07-15: asml-tech-mix-ocr-incomplete",
+            "severity": "error",
+            "layer": "revenue-structures",
+            "sourceId": "official_revenue_structures",
+            "phase": "fetch"
+          }
+        ]
+      }
+    ],
+    "provenance": {
+      "2019Q4": {
+        "officialRevenueSegments": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 114.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796620000003/pressreleasequarterlyresul.htm"
+        },
+        "officialRevenueDetailGroups": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 112.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796620000003/a20200122q4presentatione009.jpg"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796620000003/pressreleasequarterlyresul.htm"
+        },
+        "displayCurrency": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796620000003/pressreleasequarterlyresul.htm"
+        },
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796620000003/pressreleasequarterlyresul.htm"
+        },
+        "revenueBn": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 110.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796620000003/pressreleasequarterlyresul.htm"
+        },
+        "statementMeta": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 108.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796620000003/pressreleasequarterlyresul.htm"
+        }
+      },
+      "2020Q1": {
+        "officialRevenueSegments": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 114.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796620000014/pressreleasequarterlyresul.htm"
+        },
+        "officialRevenueDetailGroups": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 112.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796620000014/a20200415q1presentationf007.jpg"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796620000014/pressreleasequarterlyresul.htm"
+        },
+        "displayCurrency": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796620000014/pressreleasequarterlyresul.htm"
+        },
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796620000014/pressreleasequarterlyresul.htm"
+        },
+        "revenueBn": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 110.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796620000014/pressreleasequarterlyresul.htm"
+        },
+        "statementMeta": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 108.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796620000014/pressreleasequarterlyresul.htm"
+        }
+      },
+      "2020Q3": {
+        "officialRevenueSegments": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 114.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796620000020/pressreleasequarterlyr.htm"
+        },
+        "officialRevenueDetailGroups": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 112.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796620000020/a2020-10x14q3presentatio008.jpg"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796620000020/pressreleasequarterlyr.htm"
+        },
+        "displayCurrency": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796620000020/pressreleasequarterlyr.htm"
+        },
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796620000020/pressreleasequarterlyr.htm"
+        },
+        "revenueBn": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 110.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796620000020/pressreleasequarterlyr.htm"
+        },
+        "statementMeta": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 108.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796620000020/pressreleasequarterlyr.htm"
+        }
+      },
+      "2020Q4": {
+        "officialRevenueSegments": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 114.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000003/pressreleasequarterlyresul.htm"
+        },
+        "officialRevenueDetailGroups": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 112.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000003/q4presentationfinaldownl008.jpg"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000003/pressreleasequarterlyresul.htm"
+        },
+        "displayCurrency": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000003/pressreleasequarterlyresul.htm"
+        },
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000003/pressreleasequarterlyresul.htm"
+        },
+        "revenueBn": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 110.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000003/pressreleasequarterlyresul.htm"
+        },
+        "statementMeta": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 108.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000003/pressreleasequarterlyresul.htm"
+        }
+      },
+      "2021Q1": {
+        "officialRevenueSegments": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 114.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000012/pressreleasequarterlyresul.htm"
+        },
+        "officialRevenueDetailGroups": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 112.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000012/q1presentation007.jpg"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000012/pressreleasequarterlyresul.htm"
+        },
+        "displayCurrency": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000012/pressreleasequarterlyresul.htm"
+        },
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000012/pressreleasequarterlyresul.htm"
+        },
+        "revenueBn": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 110.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000012/pressreleasequarterlyresul.htm"
+        },
+        "statementMeta": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 108.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000012/pressreleasequarterlyresul.htm"
+        }
+      },
+      "2021Q2": {
+        "officialRevenueSegments": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 114.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000016/pressreleasequarterlyresul.htm"
+        },
+        "officialRevenueDetailGroups": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 112.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000016/a20210721presentationweb008.jpg"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000016/pressreleasequarterlyresul.htm"
+        },
+        "displayCurrency": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000016/pressreleasequarterlyresul.htm"
+        },
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000016/pressreleasequarterlyresul.htm"
+        }
+      },
+      "2021Q3": {
+        "officialRevenueSegments": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 114.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000019/pressreleasequarterlyresul.htm"
+        },
+        "officialRevenueDetailGroups": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 112.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000019/q3presentation007.jpg"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000019/pressreleasequarterlyresul.htm"
+        },
+        "displayCurrency": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000019/pressreleasequarterlyresul.htm"
+        },
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796621000019/pressreleasequarterlyresul.htm"
+        }
+      },
+      "2021Q4": {
+        "officialRevenueSegments": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 114.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000004/pressreleasequarterlyresul.htm"
+        },
+        "officialRevenueDetailGroups": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 112.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000004/q4presentationfromwebsit008.jpg"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000004/pressreleasequarterlyresul.htm"
+        },
+        "displayCurrency": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000004/pressreleasequarterlyresul.htm"
+        },
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000004/pressreleasequarterlyresul.htm"
+        }
+      },
+      "2022Q1": {
+        "officialRevenueSegments": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 114.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000016/pressreleasequarterlyresul.htm"
+        },
+        "officialRevenueDetailGroups": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 112.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000016/q12022presentationwebsit007.jpg"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000016/pressreleasequarterlyresul.htm"
+        },
+        "displayCurrency": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000016/pressreleasequarterlyresul.htm"
+        },
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000016/pressreleasequarterlyresul.htm"
+        },
+        "revenueBn": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 110.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000016/pressreleasequarterlyresul.htm"
+        },
+        "statementMeta": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 108.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000016/pressreleasequarterlyresul.htm"
+        }
+      },
+      "2022Q2": {
+        "officialRevenueSegments": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 114.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000019/pressreleasequarterlyresul.htm"
+        },
+        "officialRevenueDetailGroups": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 112.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000019/presentationinvestorrela008.jpg"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000019/pressreleasequarterlyresul.htm"
+        },
+        "displayCurrency": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000019/pressreleasequarterlyresul.htm"
+        },
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000019/pressreleasequarterlyresul.htm"
+        }
+      },
+      "2022Q3": {
+        "officialRevenueSegments": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 114.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000022/pressreleasequarterlyresul.htm"
+        },
+        "officialRevenueDetailGroups": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 112.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000022/presentationinvestorrela008.jpg"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000022/pressreleasequarterlyresul.htm"
+        },
+        "displayCurrency": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000022/pressreleasequarterlyresul.htm"
+        },
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796622000022/pressreleasequarterlyresul.htm"
+        }
+      },
+      "2022Q4": {
+        "officialRevenueSegments": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 114.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796623000003/pressreleasequarterlyresul.htm"
+        },
+        "officialRevenueDetailGroups": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 112.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796623000003/presentationinvestorrela008.jpg"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796623000003/pressreleasequarterlyresul.htm"
+        },
+        "displayCurrency": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796623000003/pressreleasequarterlyresul.htm"
+        },
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796623000003/pressreleasequarterlyresul.htm"
+        }
+      },
+      "2023Q1": {
+        "officialRevenueSegments": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 114.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796623000019/pressreleasequarterlyresul.htm"
+        },
+        "officialRevenueDetailGroups": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 112.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796623000019/q12023presentationinvest008.jpg"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796623000019/pressreleasequarterlyresul.htm"
+        },
+        "displayCurrency": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796623000019/pressreleasequarterlyresul.htm"
+        },
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796623000019/pressreleasequarterlyresul.htm"
+        },
+        "revenueBn": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 110.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796623000019/pressreleasequarterlyresul.htm"
+        },
+        "statementMeta": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 108.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796623000019/pressreleasequarterlyresul.htm"
+        }
+      },
+      "2023Q2": {
+        "officialRevenueSegments": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 114.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796623000026/pressreleasequarterlyresul.htm"
+        },
+        "officialRevenueDetailGroups": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 112.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796623000026/presentationinvestorrela007.jpg"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796623000026/pressreleasequarterlyresul.htm"
+        },
+        "displayCurrency": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796623000026/pressreleasequarterlyresul.htm"
+        },
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796623000026/pressreleasequarterlyresul.htm"
+        }
+      },
+      "2023Q3": {
+        "officialRevenueSegments": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 114.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796623000029/pressreleasequarterlyresul.htm"
+        },
+        "officialRevenueDetailGroups": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 112.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796623000029/presentationinvestorrela007.jpg"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796623000029/pressreleasequarterlyresul.htm"
+        },
+        "displayCurrency": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796623000029/pressreleasequarterlyresul.htm"
+        },
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796623000029/pressreleasequarterlyresul.htm"
+        }
+      },
+      "2023Q4": {
+        "officialRevenueSegments": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 114.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796624000003/pressreleasequarterlyresul.htm"
+        },
+        "officialRevenueDetailGroups": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 112.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796624000003/presentationinvestorrela009.jpg"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796624000003/pressreleasequarterlyresul.htm"
+        },
+        "displayCurrency": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796624000003/pressreleasequarterlyresul.htm"
+        },
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796624000003/pressreleasequarterlyresul.htm"
+        }
+      },
+      "2024Q1": {
+        "officialRevenueSegments": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 114.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796624000013/pressreleasequarterlyresul.htm"
+        },
+        "officialRevenueDetailGroups": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 112.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796624000013/presentationinvestorrela008.jpg"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796624000013/pressreleasequarterlyresul.htm"
+        },
+        "displayCurrency": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796624000013/pressreleasequarterlyresul.htm"
+        },
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796624000013/pressreleasequarterlyresul.htm"
+        }
+      },
+      "2024Q2": {
+        "officialRevenueSegments": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 114.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796624000019/pressreleasequarterlyresul.htm"
+        },
+        "officialRevenueDetailGroups": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 112.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796624000019/presentationinvestorrela007.jpg"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796624000019/pressreleasequarterlyresul.htm"
+        },
+        "displayCurrency": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796624000019/pressreleasequarterlyresul.htm"
+        },
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796624000019/pressreleasequarterlyresul.htm"
+        }
+      },
+      "2024Q3": {
+        "officialRevenueSegments": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 114.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796624000022/pressreleasequarterlyresul.htm"
+        },
+        "officialRevenueDetailGroups": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 112.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796624000022/presentationinvestorrela007.jpg"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796624000022/pressreleasequarterlyresul.htm"
+        },
+        "displayCurrency": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796624000022/pressreleasequarterlyresul.htm"
+        },
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796624000022/pressreleasequarterlyresul.htm"
+        }
+      },
+      "2024Q4": {
+        "officialRevenueSegments": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 114.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796625000003/pressreleasequarterlyresul.htm"
+        },
+        "officialRevenueDetailGroups": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 112.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796625000003/a2025_01x29presentationi010.jpg"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796625000003/pressreleasequarterlyresul.htm"
+        },
+        "displayCurrency": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796625000003/pressreleasequarterlyresul.htm"
+        },
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796625000003/pressreleasequarterlyresul.htm"
+        }
+      },
+      "2025Q1": {
+        "officialRevenueSegments": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 114.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796625000014/pressreleasequarterlyresul.htm"
+        },
+        "officialRevenueDetailGroups": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 112.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796625000014/presentationinvestorrela007.jpg"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796625000014/pressreleasequarterlyresul.htm"
+        },
+        "displayCurrency": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796625000014/pressreleasequarterlyresul.htm"
+        },
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000093796625000014/pressreleasequarterlyresul.htm"
+        }
+      },
+      "2025Q2": {
+        "officialRevenueSegments": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 114.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828025034992/pressreleasequarterlyresul.htm"
+        },
+        "officialRevenueDetailGroups": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 112.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828025034992/presentationinvestorrela008.jpg"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828025034992/pressreleasequarterlyresul.htm"
+        },
+        "displayCurrency": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828025034992/pressreleasequarterlyresul.htm"
+        },
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828025034992/pressreleasequarterlyresul.htm"
+        }
+      },
+      "2025Q3": {
+        "officialRevenueSegments": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 114.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828025045043/pressreleasequarterlyresul.htm"
+        },
+        "officialRevenueDetailGroups": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 112.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828025045043/presentationinvestorrela008.jpg"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828025045043/pressreleasequarterlyresul.htm"
+        },
+        "displayCurrency": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828025045043/pressreleasequarterlyresul.htm"
+        },
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828025045043/pressreleasequarterlyresul.htm"
+        }
+      },
+      "2025Q4": {
+        "officialRevenueSegments": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 114.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026003701/pressreleasefinancialresul.htm"
+        },
+        "officialRevenueDetailGroups": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 112.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026003701/a2026_01x28xpresentation008.jpg"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026003701/pressreleasefinancialresul.htm"
+        },
+        "displayCurrency": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026003701/pressreleasefinancialresul.htm"
+        },
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026003701/pressreleasefinancialresul.htm"
+        }
+      },
+      "2026Q1": {
+        "revenueBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 123.0,
+          "sourceUrl": "https://ourbrand.asml.com/asset/3f4235e1-ad38-4af8-a39b-de0d39cb71d1/Financial-statements-US-GAAP-Q1-2026.pdf"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 123.0,
+          "sourceUrl": "https://ourbrand.asml.com/asset/3f4235e1-ad38-4af8-a39b-de0d39cb71d1/Financial-statements-US-GAAP-Q1-2026.pdf"
+        },
+        "grossProfitBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 121.0,
+          "sourceUrl": "https://ourbrand.asml.com/asset/3f4235e1-ad38-4af8-a39b-de0d39cb71d1/Financial-statements-US-GAAP-Q1-2026.pdf"
+        },
+        "sgnaBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 115.0,
+          "sourceUrl": "https://ourbrand.asml.com/asset/3f4235e1-ad38-4af8-a39b-de0d39cb71d1/Financial-statements-US-GAAP-Q1-2026.pdf"
+        },
+        "rndBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 115.0,
+          "sourceUrl": "https://ourbrand.asml.com/asset/3f4235e1-ad38-4af8-a39b-de0d39cb71d1/Financial-statements-US-GAAP-Q1-2026.pdf"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 121.0,
+          "sourceUrl": "https://ourbrand.asml.com/asset/3f4235e1-ad38-4af8-a39b-de0d39cb71d1/Financial-statements-US-GAAP-Q1-2026.pdf"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 121.0,
+          "sourceUrl": "https://ourbrand.asml.com/asset/3f4235e1-ad38-4af8-a39b-de0d39cb71d1/Financial-statements-US-GAAP-Q1-2026.pdf"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 113.0,
+          "sourceUrl": "https://ourbrand.asml.com/asset/3f4235e1-ad38-4af8-a39b-de0d39cb71d1/Financial-statements-US-GAAP-Q1-2026.pdf"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 121.0,
+          "sourceUrl": "https://ourbrand.asml.com/asset/3f4235e1-ad38-4af8-a39b-de0d39cb71d1/Financial-statements-US-GAAP-Q1-2026.pdf"
+        },
+        "taxBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 115.0,
+          "sourceUrl": "https://ourbrand.asml.com/asset/3f4235e1-ad38-4af8-a39b-de0d39cb71d1/Financial-statements-US-GAAP-Q1-2026.pdf"
+        },
+        "netIncomeBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 121.0,
+          "sourceUrl": "https://ourbrand.asml.com/asset/3f4235e1-ad38-4af8-a39b-de0d39cb71d1/Financial-statements-US-GAAP-Q1-2026.pdf"
+        },
+        "statementMeta": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 12.6,
+          "sourceUrl": "https://ourbrand.asml.com/asset/3f4235e1-ad38-4af8-a39b-de0d39cb71d1/Financial-statements-US-GAAP-Q1-2026.pdf"
+        },
+        "officialRevenueSegments": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 114.0,
+          "sourceUrl": "https://ourbrand.asml.com/asset/6ec62875-6d6a-4ec5-a4d7-43f59ce8e5c5/ASML-Press-Release-Financial-Results-Q1-2026.pdf"
+        },
+        "officialRevenueDetailGroups": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 112.0,
+          "sourceUrl": "https://ourbrand.asml.com/asset/d7b914e6-fdd1-4262-b805-d80f3efcb39a/2026_04_15_Presentation-Investor-Relations-Q1-2026.pdf"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://ourbrand.asml.com/asset/6ec62875-6d6a-4ec5-a4d7-43f59ce8e5c5/ASML-Press-Release-Financial-Results-Q1-2026.pdf"
+        },
+        "displayCurrency": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://ourbrand.asml.com/asset/6ec62875-6d6a-4ec5-a4d7-43f59ce8e5c5/ASML-Press-Release-Financial-Results-Q1-2026.pdf"
+        },
+        "displayScaleFactor": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://ourbrand.asml.com/asset/6ec62875-6d6a-4ec5-a4d7-43f59ce8e5c5/ASML-Press-Release-Financial-Results-Q1-2026.pdf"
+        }
+      }
+    },
+    "diagnostics": {
+      "2019Q4": {
+        "qualityScore": 78,
+        "availableRequiredFieldCount": 1,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 7,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": 100.0,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": 0.0,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": "official-revenue-structure",
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:operatingIncomeBn,netIncomeBn"
+        ]
+      },
+      "2020Q1": {
+        "qualityScore": 78,
+        "availableRequiredFieldCount": 1,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 7,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": 100.0,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": 0.0,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": "official-revenue-structure",
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:operatingIncomeBn,netIncomeBn"
+        ]
+      },
+      "2020Q3": {
+        "qualityScore": 78,
+        "availableRequiredFieldCount": 1,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 7,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": 100.0,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": 0.0,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": "official-revenue-structure",
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:operatingIncomeBn,netIncomeBn"
+        ]
+      },
+      "2020Q4": {
+        "qualityScore": 78,
+        "availableRequiredFieldCount": 1,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 7,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": 100.0,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": 0.0,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": "official-revenue-structure",
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:operatingIncomeBn,netIncomeBn"
+        ]
+      },
+      "2021Q1": {
+        "qualityScore": 78,
+        "availableRequiredFieldCount": 1,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 7,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": 100.0,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": 0.0,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": "official-revenue-structure",
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:operatingIncomeBn,netIncomeBn"
+        ]
+      },
+      "2021Q2": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      },
+      "2021Q3": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      },
+      "2021Q4": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      },
+      "2022Q1": {
+        "qualityScore": 78,
+        "availableRequiredFieldCount": 1,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 7,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": 100.0,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": 0.0,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": "official-revenue-structure",
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:operatingIncomeBn,netIncomeBn"
+        ]
+      },
+      "2022Q2": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      },
+      "2022Q3": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      },
+      "2022Q4": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      },
+      "2023Q1": {
+        "qualityScore": 78,
+        "availableRequiredFieldCount": 1,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 7,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": 100.0,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": 0.0,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": "official-revenue-structure",
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:operatingIncomeBn,netIncomeBn"
+        ]
+      },
+      "2023Q2": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      },
+      "2023Q3": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      },
+      "2023Q4": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      },
+      "2024Q1": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      },
+      "2024Q2": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      },
+      "2024Q3": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      },
+      "2024Q4": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      },
+      "2025Q1": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      },
+      "2025Q2": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      },
+      "2025Q3": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      },
+      "2025Q4": {
+        "qualityScore": 63,
+        "availableRequiredFieldCount": 0,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 5,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": null,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+        ]
+      },
+      "2026Q1": {
+        "qualityScore": 80,
+        "availableRequiredFieldCount": 3,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 17,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": 100.0,
+        "costBreakdownCoveragePct": 0,
+        "opexBreakdownCoveragePct": 0,
+        "revenueSegmentResidualBn": 0.0,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "cost-breakdown-coverage-low",
+          "opex-breakdown-coverage-low"
+        ]
+      }
     }
   },
   "statementPresets": {},
@@ -9631,24 +12134,24 @@
       "financialReconciliation": {
         "version": "financial-reconciler-v1",
         "primarySource": "official",
-        "quarterCount": 17,
-        "fieldOverrideCount": 6,
+        "quarterCount": 18,
+        "fieldOverrideCount": 0,
         "derivedFieldCount": 0,
-        "mixedSourceQuarterCount": 1,
+        "mixedSourceQuarterCount": 0,
         "sourceUsageCounts": {
           "official": 15,
-          "stockanalysis": 327
+          "stockanalysis": 342
         }
       },
       "financialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "quarterCount": 17,
-        "validatedQuarterCount": 17,
+        "quarterCount": 18,
+        "validatedQuarterCount": 18,
         "issueCount": 7,
         "mismatchQuarterCount": 7,
-        "highConfidenceQuarterCount": 17,
-        "averageConfidenceScore": 0.9769,
+        "highConfidenceQuarterCount": 18,
+        "averageConfidenceScore": 0.9781,
         "latestQuarter": "2026Q1",
         "latestQuarterConfidenceScore": 1.0,
         "latestQuarterIssueCount": 0
@@ -9656,11 +12159,11 @@
       "validation": {
         "version": "parser-validation-v1",
         "status": "high",
-        "overallConfidenceScore": 0.936,
-        "financialConfidenceScore": 0.9769,
-        "structuralConfidenceScore": 0.86,
+        "overallConfidenceScore": 0.9298,
+        "financialConfidenceScore": 0.9781,
+        "structuralConfidenceScore": 0.84,
         "revenueSegmentChecks": 25,
-        "revenueSegmentMismatchCount": 7,
+        "revenueSegmentMismatchCount": 8,
         "revenueSegmentSkippedChecks": 0,
         "detailGroupChecks": 25,
         "detailGroupMismatchCount": 0,
@@ -9668,8 +12171,9 @@
         "opexChecks": 0,
         "opexSkippedChecks": 0,
         "opexOverflowMismatchCount": 0,
-        "warningCount": 7,
+        "warningCount": 8,
         "warnings": [
+          "2021Q2: revenue segments sum to 4.02Bn vs revenue 4.364Bn.",
           "2021Q3: revenue segments sum to 5.241Bn vs revenue 4.02Bn.",
           "2021Q4: revenue segments sum to 4.986Bn vs revenue 5.241Bn.",
           "2022Q2: revenue segments sum to 5.431Bn vs revenue 3.534Bn.",
