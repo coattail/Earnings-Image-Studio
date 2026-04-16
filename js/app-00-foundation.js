@@ -6,6 +6,7 @@ const state = {
   logoNormalizationJobs: {},
   sortedCompanies: [],
   companyById: {},
+  companyHistoryLoadJobs: new Map(),
   selectedCompanyId: null,
   selectedQuarter: null,
   chartViewMode: "sankey",
@@ -29,7 +30,7 @@ const state = {
   },
 };
 
-const BUILD_ASSET_VERSION = "20260416-opex-sanitize-v137";
+const BUILD_ASSET_VERSION = "20260417-lazy-home-index-v138";
 const CORPORATE_LOGO_AREA_MULTIPLIER = 1.728;
 const CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER = Math.sqrt(CORPORATE_LOGO_AREA_MULTIPLIER);
 const CORPORATE_LOGO_REVENUE_GAP_MULTIPLIER = 1.2;

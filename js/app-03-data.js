@@ -45,7 +45,7 @@ function requestRenderCurrent() {
   }
   const execute = () => {
     state.pendingRenderFrame = 0;
-    renderCurrent();
+    void renderCurrent();
   };
   if (typeof requestAnimationFrame === "function") {
     state.pendingRenderFrame = requestAnimationFrame(execute);
@@ -92,6 +92,9 @@ function isRenderableBridgeEntry(entry) {
 
 function renderableQuarterKeys(company) {
   if (!company) return [];
+  if (company?.dataLoadMode === "latest-only" && Array.isArray(company?.quarters) && company.quarters.length) {
+    return company.quarters;
+  }
   const quarterKeys = Array.isArray(company.quarters) ? company.quarters : [];
   const presetKeys = new Set(Object.keys(company.statementPresets || {}));
   const validQuarterKeys = quarterKeys.filter((quarterKey) => {
@@ -2216,6 +2219,52 @@ function mergeCompanyFinancialFallback(company, fallbackCompany) {
   };
 }
 
+function replaceCompanyInState(nextCompany) {
+  if (!nextCompany?.id) return null;
+  const normalizedCompany = normalizeLoadedCompany(nextCompany, 0);
+  state.sortedCompanies = state.sortedCompanies
+    .map((company) => (company?.id === normalizedCompany.id ? normalizedCompany : company))
+    .map((company, index) => normalizeLoadedCompany(company, index))
+    .sort((left, right) => left.rank - right.rank);
+  state.companyById = Object.fromEntries(state.sortedCompanies.map((company) => [company.id, company]));
+  if (state.dataset) {
+    state.dataset.companies = state.sortedCompanies;
+    state.dataset.companyCount = state.sortedCompanies.length;
+  }
+  return state.companyById[normalizedCompany.id] || normalizedCompany;
+}
+
+function applyLoadedCompaniesToState(companiesPayload = [], dataLoadMode = null) {
+  const preparedCompanies = [...(companiesPayload || [])]
+    .filter((company) => company && typeof company === "object")
+    .map((company, index) => normalizeLoadedCompany({
+      ...company,
+      dataLoadMode: company?.dataLoadMode || dataLoadMode || "full",
+    }, index))
+    .sort((left, right) => left.rank - right.rank);
+  state.sortedCompanies = preparedCompanies;
+  state.companyById = Object.fromEntries(preparedCompanies.map((company) => [company.id, company]));
+  if (state.dataset) {
+    state.dataset.companies = preparedCompanies;
+    state.dataset.companyCount = preparedCompanies.length;
+  }
+}
+
+function mergeCompanyHistoricalPayload(company, fallbackCompany) {
+  const mergedFinancialCompany = mergeCompanyFinancialFallback(company, fallbackCompany);
+  return {
+    ...company,
+    ...fallbackCompany,
+    quarters: mergedFinancialCompany.quarters || fallbackCompany?.quarters || company?.quarters || [],
+    financials: mergedFinancialCompany.financials || fallbackCompany?.financials || company?.financials || {},
+    statementPresets: fallbackCompany?.statementPresets || company?.statementPresets || {},
+    officialRevenueStructureHistory:
+      fallbackCompany?.officialRevenueStructureHistory || company?.officialRevenueStructureHistory || {},
+    officialSegmentHistory: fallbackCompany?.officialSegmentHistory || company?.officialSegmentHistory || {},
+    dataLoadMode: "full",
+  };
+}
+
 const auxiliaryFinancialCacheLoaders = {
   officialFinancials: new Map(),
   genericIrPdf: new Map(),
@@ -2355,6 +2404,45 @@ async function enrichDatasetWithFinancialFallbacks() {
   state.companyById = Object.fromEntries(state.sortedCompanies.map((company) => [company.id, company]));
   if (state.dataset) {
     state.dataset.companies = state.sortedCompanies;
+  }
+}
+
+function companyNeedsHistoricalData(company, quarterKey, viewMode = currentChartViewMode()) {
+  if (!company || company?.dataLoadMode !== "latest-only") return false;
+  const latestQuarter =
+    company?.latestQuarter || (Array.isArray(company?.quarters) ? company.quarters[company.quarters.length - 1] : null);
+  if (viewMode === "bars") return true;
+  return !!quarterKey && !!latestQuarter && quarterKey !== latestQuarter;
+}
+
+async function ensureCompanyHistoricalDataLoaded(companyId, options = {}) {
+  const company = getCompany(companyId);
+  if (!company || company?.dataLoadMode !== "latest-only") return company;
+  if (state.companyHistoryLoadJobs.has(companyId)) {
+    return state.companyHistoryLoadJobs.get(companyId);
+  }
+  const loadJob = (async () => {
+    const response = await fetchJson(`./data/cache/${companyId}.json?v=${BUILD_ASSET_VERSION}`);
+    if (!response.ok) {
+      throw new Error(`${company.nameEn || company.ticker || companyId} 历史数据读取失败。`);
+    }
+    const fallbackCompany = await response.json();
+    const mergedCompany = mergeCompanyHistoricalPayload(company, fallbackCompany);
+    const enrichedCompany = await enrichCompanyWithOfficialExpenseBreakdowns(mergedCompany);
+    const nextCompany = replaceCompanyInState({
+      ...enrichedCompany,
+      dataLoadMode: "full",
+    });
+    if (state.selectedCompanyId === companyId && typeof syncQuarterOptions === "function") {
+      syncQuarterOptions({ preferReplica: !!options.preferReplica });
+    }
+    return nextCompany;
+  })();
+  state.companyHistoryLoadJobs.set(companyId, loadJob);
+  try {
+    return await loadJob;
+  } finally {
+    state.companyHistoryLoadJobs.delete(companyId);
   }
 }
 
