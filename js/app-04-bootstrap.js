@@ -1339,12 +1339,17 @@ function tightenRenderedSvgViewport() {
   }
 }
 
-function renderCurrent() {
-  const company = getCompany(state.selectedCompanyId);
+async function renderCurrent() {
+  let company = getCompany(state.selectedCompanyId);
   if (!company) return;
   const quarterKey = refs.quarterSelect?.value || state.selectedQuarter;
   state.selectedQuarter = quarterKey;
   try {
+    if (companyNeedsHistoricalData(company, quarterKey, currentChartViewMode())) {
+      setStatus(`正在加载 ${company.nameEn} 历史数据...`);
+      company = await ensureCompanyHistoricalDataLoaded(company.id, { preferReplica: false });
+      if (!company || state.selectedCompanyId !== company.id) return;
+    }
     const snapshot = buildSnapshot(company, quarterKey);
     if (!snapshot) {
       refs.chartOutput.innerHTML = "";
@@ -1596,7 +1601,7 @@ async function automationRenderSelection(options = {}) {
 
   renderCompanyList();
   renderCoverage();
-  renderCurrent();
+  await renderCurrent();
   await waitForAnimationFrames(2);
   return {
     companyId: state.selectedCompanyId,
@@ -1658,13 +1663,15 @@ if (typeof window !== "undefined") {
 
 async function loadDataset() {
   setStatus("正在加载数据集...");
-  const response = await fetchJson(`./data/earnings-dataset.json?v=${BUILD_ASSET_VERSION}`);
+  let response = await fetchJson(`./data/dataset-index.json?v=${BUILD_ASSET_VERSION}`);
+  let defaultDataLoadMode = "latest-only";
+  if (!response.ok) {
+    response = await fetchJson(`./data/earnings-dataset.json?v=${BUILD_ASSET_VERSION}`);
+    defaultDataLoadMode = "full";
+  }
   if (!response.ok) throw new Error("数据文件读取失败。");
   state.dataset = await response.json();
-  state.sortedCompanies = [...(state.dataset?.companies || [])].map((company, index) => normalizeLoadedCompany(company, index)).sort((left, right) => left.rank - right.rank);
-  state.companyById = Object.fromEntries(state.sortedCompanies.map((company) => [company.id, company]));
-  state.dataset.companies = state.sortedCompanies;
-  await enrichDatasetWithFinancialFallbacks();
+  applyLoadedCompaniesToState(state.dataset?.companies || [], defaultDataLoadMode);
 }
 
 async function loadLogoCatalog() {
@@ -1832,7 +1839,7 @@ async function boot() {
   syncQuarterOptions({ preferReplica: false });
   renderCompanyList();
   renderCoverage();
-  renderCurrent();
+  await renderCurrent();
   markAutomationReady();
 }
 
