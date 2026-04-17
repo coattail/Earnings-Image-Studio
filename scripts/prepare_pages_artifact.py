@@ -89,6 +89,14 @@ def build_dataset_index_payload(dataset_payload: dict) -> dict:
     }
 
 
+def write_dataset_index_file(dataset_payload: dict, output_path: Path) -> None:
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(
+        json.dumps(build_dataset_index_payload(dataset_payload), ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+
+
 def reset_dist_dir() -> None:
     if DIST_DIR.exists():
         shutil.rmtree(DIST_DIR)
@@ -115,11 +123,7 @@ def copy_public_data_files() -> None:
         shutil.copy2(DATA_DIR / filename, dist_data_dir / filename)
 
     dataset_payload = json.loads((DATA_DIR / "earnings-dataset.json").read_text(encoding="utf-8"))
-    dataset_index_payload = build_dataset_index_payload(dataset_payload)
-    (dist_data_dir / DATASET_INDEX_FILENAME).write_text(
-        json.dumps(dataset_index_payload, ensure_ascii=False, indent=2),
-        encoding="utf-8",
-    )
+    write_dataset_index_file(dataset_payload, dist_data_dir / DATASET_INDEX_FILENAME)
 
     for company_cache_path in sorted((DATA_DIR / "cache").glob("*.json")):
         shutil.copy2(company_cache_path, dist_cache_dir / company_cache_path.name)

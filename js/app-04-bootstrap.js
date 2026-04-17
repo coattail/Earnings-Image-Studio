@@ -1663,22 +1663,20 @@ if (typeof window !== "undefined") {
 
 async function loadDataset() {
   setStatus("正在加载数据集...");
-  let response = await fetchJson(`./data/dataset-index.json?v=${BUILD_ASSET_VERSION}`);
   let defaultDataLoadMode = "latest-only";
-  if (!response.ok) {
-    response = await fetchJson(`./data/earnings-dataset.json?v=${BUILD_ASSET_VERSION}`);
+  state.dataset = await loadJsonAsset(`./data/dataset-index.json?v=${BUILD_ASSET_VERSION}`);
+  if (!state.dataset) {
+    state.dataset = await loadJsonAsset(`./data/earnings-dataset.json?v=${BUILD_ASSET_VERSION}`);
     defaultDataLoadMode = "full";
   }
-  if (!response.ok) throw new Error("数据文件读取失败。");
-  state.dataset = await response.json();
+  if (!state.dataset) throw new Error("数据文件读取失败。");
   applyLoadedCompaniesToState(state.dataset?.companies || [], defaultDataLoadMode);
 }
 
 async function loadLogoCatalog() {
   try {
-    const response = await fetchJson(`./data/logo-catalog.json?v=${BUILD_ASSET_VERSION}`);
-    if (!response.ok) return;
-    const payload = await response.json();
+    const payload = await loadJsonAsset(`./data/logo-catalog.json?v=${BUILD_ASSET_VERSION}`);
+    if (!payload) return;
     const rawCatalog = payload?.logos || {};
     state.logoCatalog = await normalizeLogoCatalogAssets(rawCatalog);
     state.normalizedLogoKeys = {};
@@ -1692,14 +1690,30 @@ async function loadLogoCatalog() {
 
 async function loadSupplementalComponents() {
   try {
-    const response = await fetchJson(`./data/supplemental-components.json?v=${BUILD_ASSET_VERSION}`);
-    if (!response.ok) {
+    const payload = await loadJsonAsset(`./data/supplemental-components.json?v=${BUILD_ASSET_VERSION}`);
+    if (!payload) {
       state.supplementalComponents = {};
       return;
     }
-    state.supplementalComponents = await response.json();
+    state.supplementalComponents = payload;
   } catch (_error) {
     state.supplementalComponents = {};
+  }
+}
+
+async function loadJsonAsset(url) {
+  const response = await fetchJson(url);
+  return safeParseJsonAssetResponse(response);
+}
+
+async function safeParseJsonAssetResponse(response) {
+  const parser = globalThis?.EarningsVizHttp?.safeParseJsonResponse;
+  if (typeof parser === "function") return parser(response);
+  if (!response?.ok) return null;
+  try {
+    return await response.json();
+  } catch (_error) {
+    return null;
   }
 }
 

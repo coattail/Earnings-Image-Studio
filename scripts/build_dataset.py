@@ -62,10 +62,16 @@ except ModuleNotFoundError as exc:
     build_unified_extraction = None  # type: ignore[assignment]
     merge_unified_extraction = None  # type: ignore[assignment]
 
+try:
+    from scripts.prepare_pages_artifact import write_dataset_index_file
+except ModuleNotFoundError:
+    from prepare_pages_artifact import write_dataset_index_file  # type: ignore[no-redef]
+
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT_DIR / "data"
 OUTPUT_PATH = DATA_DIR / "earnings-dataset.json"
+DATASET_INDEX_PATH = DATA_DIR / "dataset-index.json"
 MANUAL_PRESETS_PATH = DATA_DIR / "manual-presets.json"
 MANUAL_COMPANY_OVERRIDES_PATH = DATA_DIR / "manual-company-overrides.json"
 OFFICIAL_SEGMENT_CACHE_DIR = DATA_DIR / "cache" / "official-segments"
@@ -2285,6 +2291,8 @@ def main() -> int:
     }
     OUTPUT_PATH.write_text(json.dumps(dataset, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"[done] wrote {OUTPUT_PATH}", flush=True)
+    write_dataset_index_file(dataset, DATASET_INDEX_PATH)
+    print(f"[done] wrote {DATASET_INDEX_PATH}", flush=True)
     if classification_audit["blockingIssues"]:
         print("[error] classification coverage blockers detected:", file=sys.stderr, flush=True)
         for issue in classification_audit["blockingIssues"]:

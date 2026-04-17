@@ -1,4 +1,7 @@
+import json
+import tempfile
 import unittest
+from pathlib import Path
 
 from scripts import prepare_pages_artifact
 
@@ -58,6 +61,33 @@ class PagesDatasetIndexTests(unittest.TestCase):
         self.assertEqual(set(company["officialSegmentHistory"]["quarters"].keys()), {"2026Q1"})
         self.assertNotIn("parserDiagnostics", company)
         self.assertNotIn("unifiedExtraction", company)
+
+    def test_write_dataset_index_file_writes_latest_only_sidecar(self) -> None:
+        dataset = {
+            "generatedAt": "2026-04-17T00:00:00Z",
+            "companyCount": 1,
+            "companies": [
+                {
+                    "id": "nvda",
+                    "ticker": "NVDA",
+                    "quarters": ["2025Q4", "2026Q1"],
+                    "financials": {
+                        "2025Q4": {"revenueBn": 44.1},
+                        "2026Q1": {"revenueBn": 48.3},
+                    },
+                }
+            ],
+        }
+        expected_payload = prepare_pages_artifact.build_dataset_index_payload(dataset)
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            output_path = Path(tmp_dir) / "dataset-index.json"
+
+            prepare_pages_artifact.write_dataset_index_file(dataset, output_path)
+
+            written_payload = json.loads(output_path.read_text(encoding="utf-8"))
+
+        self.assertEqual(written_payload, expected_payload)
 
 
 if __name__ == "__main__":
