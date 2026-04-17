@@ -1359,6 +1359,7 @@ function curatedOfficialSegments(company, entry, rows, detailGroups = []) {
 
 function buildOfficialBusinessGroups(company, entry, options = {}) {
   const revenueBn = safeNumber(entry?.revenueBn);
+  const quarterKey = entryQuarterKey(company, entry);
   const official = resolveRenderableOfficialRevenueRows(company, entry, options);
   const detailGroups = sanitizeOfficialStructureRows(entry, entry.officialRevenueDetailGroups || [])
     .filter((item) => safeNumber(item.valueBn) > 0.02);
@@ -1390,8 +1391,8 @@ function buildOfficialBusinessGroups(company, entry, options = {}) {
       displayLines: wrapLines(item.name, compactMode ? 14 : 16),
       valueBn: item.valueBn,
       flowValueBn: item.flowValueBn ?? item.valueBn,
-      yoyPct: item.yoyPct ?? null,
-      qoqPct: item.qoqPct ?? null,
+      yoyPct: resolvedDisplayAdjustedGrowthPct(company, quarterKey, item.yoyPct, "yoy"),
+      qoqPct: resolvedDisplayAdjustedGrowthPct(company, quarterKey, item.qoqPct, "qoq"),
       mixPct: item.mixPct ?? null,
       mixYoyDeltaPp: item.mixYoyDeltaPp ?? null,
       metricMode: item.metricMode || null,
@@ -1424,6 +1425,7 @@ function buildOfficialBusinessGroups(company, entry, options = {}) {
 }
 
 function buildOfficialDetailGroups(company, entry, businessGroups = null) {
+  const quarterKey = entryQuarterKey(company, entry);
   const style = inferredOfficialRevenueStyle(company, entry, entry.officialRevenueSegments || []);
   const rawDetailGroups = sanitizeOfficialStructureRows(entry, entry.officialRevenueDetailGroups || [])
     .filter((item) => safeNumber(item.valueBn) > 0.02);
@@ -1514,8 +1516,8 @@ function buildOfficialDetailGroups(company, entry, businessGroups = null) {
           nameZh: item.nameZh || translateBusinessLabelToZh(item.name),
           displayLines: wrapLines(item.name, 14),
           valueBn: item.valueBn,
-          yoyPct: item.yoyPct ?? null,
-          qoqPct: item.qoqPct ?? null,
+          yoyPct: resolvedDisplayAdjustedGrowthPct(company, quarterKey, item.yoyPct, "yoy"),
+          qoqPct: resolvedDisplayAdjustedGrowthPct(company, quarterKey, item.qoqPct, "qoq"),
           nodeColor: color,
           flowColor: rgba(color, 0.72),
           labelColor: color,
@@ -1539,8 +1541,8 @@ function buildOfficialDetailGroups(company, entry, businessGroups = null) {
           nameZh: item.nameZh || translateBusinessLabelToZh(item.name),
           displayLines: wrapLines(item.name, 14),
           valueBn: item.valueBn,
-          yoyPct: item.yoyPct ?? null,
-          qoqPct: item.qoqPct ?? null,
+          yoyPct: resolvedDisplayAdjustedGrowthPct(company, quarterKey, item.yoyPct, "yoy"),
+          qoqPct: resolvedDisplayAdjustedGrowthPct(company, quarterKey, item.qoqPct, "qoq"),
           nodeColor: color,
           flowColor: rgba(color, 0.72),
           labelColor: "#55595F",
@@ -1596,8 +1598,8 @@ function buildOfficialDetailGroups(company, entry, businessGroups = null) {
       nameZh: item.nameZh || translateBusinessLabelToZh(item.name),
       displayLines: wrapLines(item.name, 14),
       valueBn: item.valueBn,
-      yoyPct: item.yoyPct ?? null,
-      qoqPct: item.qoqPct ?? null,
+      yoyPct: resolvedDisplayAdjustedGrowthPct(company, quarterKey, item.yoyPct, "yoy"),
+      qoqPct: resolvedDisplayAdjustedGrowthPct(company, quarterKey, item.qoqPct, "qoq"),
       nodeColor: color,
       flowColor: rgba(color, 0.72),
       labelColor: color,
@@ -1613,6 +1615,8 @@ function buildOfficialDetailGroups(company, entry, businessGroups = null) {
 function buildGenericSnapshot(company, entry, quarterKey) {
   const companyBrand = resolvedCompanyBrand(company);
   const displayConfig = resolveQuarterDisplayConfig(company, entry, null);
+  const revenueYoyPct = resolvedRevenueGrowthPct(company, quarterKey, "yoy");
+  const revenueQoqPct = resolvedRevenueGrowthPct(company, quarterKey, "qoq");
   const formatSnapshotBillions = (value, wrapNegative = false) =>
     formatBillionsInCurrency(safeNumber(value) * safeNumber(displayConfig.displayScaleFactor, 1), displayConfig.displayCurrency, wrapNegative);
   const grossProfitBnRaw =
@@ -1859,16 +1863,16 @@ function buildGenericSnapshot(company, entry, quarterKey) {
         displayLines: [company.nameEn],
         lockupKey: company.id,
         valueBn: entry.revenueBn,
-        yoyPct: entry.revenueYoyPct,
-        qoqPct: entry.revenueQoqPct,
+        yoyPct: revenueYoyPct,
+        qoqPct: revenueQoqPct,
         operatingMarginPct,
         nodeColor: companyBrand.primary,
         flowColor: rgba(companyBrand.primary, 0.55),
       },
     ],
     revenueBn: entry.revenueBn,
-    revenueYoyPct: entry.revenueYoyPct,
-    revenueQoqPct: entry.revenueQoqPct,
+    revenueYoyPct,
+    revenueQoqPct,
     grossProfitBn,
     grossMarginPct,
     grossMarginYoyDeltaPp: entry.grossMarginYoyDeltaPp,
@@ -2016,6 +2020,8 @@ function mergeOfficialRevenueStructureIntoSnapshot(snapshot, company, entry) {
 function buildSnapshot(company, quarterKey) {
   const entry = company.financials?.[quarterKey];
   const preset = company.statementPresets?.[quarterKey];
+  const resolvedRevenueYoyPct = resolvedRevenueGrowthPct(company, quarterKey, "yoy");
+  const resolvedRevenueQoqPct = resolvedRevenueGrowthPct(company, quarterKey, "qoq");
   if (!entry && !preset) return null;
   if (preset) {
     return applyTemplateTokensToSnapshot(
@@ -2032,7 +2038,8 @@ function buildSnapshot(company, quarterKey) {
             ticker: company.ticker,
             quarterKey,
             fiscalLabel: entry?.fiscalLabel || preset.quarterSummary || quarterKey,
-            revenueQoqPct: preset.revenueQoqPct ?? entry?.revenueQoqPct ?? null,
+            revenueYoyPct: resolvedRevenueYoyPct ?? preset.revenueYoyPct ?? entry?.revenueYoyPct ?? null,
+            revenueQoqPct: resolvedRevenueQoqPct ?? preset.revenueQoqPct ?? entry?.revenueQoqPct ?? null,
           },
           company,
           entry
@@ -3070,6 +3077,70 @@ function resolveQuarterDisplayConfig(company, entry = null, structurePayload = n
     sourceCurrency,
     usesFxConversion: sourceCurrency !== "USD" && displayCurrency === "USD" && Math.abs(scaleFactor - 1) > 0.000001,
   };
+}
+
+function priorQuarterKeyForGrowth(quarterKey, period = "yoy") {
+  const parsed = parseQuarterKey(quarterKey);
+  if (!parsed) return null;
+  if (period === "yoy") {
+    return `${parsed.year - 1}Q${parsed.quarter}`;
+  }
+  if (period === "qoq") {
+    if (parsed.quarter === 1) {
+      return `${parsed.year - 1}Q4`;
+    }
+    return `${parsed.year}Q${parsed.quarter - 1}`;
+  }
+  return null;
+}
+
+function displayAdjustedScalarValueBn(company, quarterKey, fieldName) {
+  const entry = company?.financials?.[quarterKey];
+  if (!entry) return null;
+  const rawValueBn = safeNumber(entry?.[fieldName], null);
+  if (rawValueBn === null) return null;
+  const displayConfig = resolveQuarterDisplayConfig(company, entry, null);
+  const displayScaleFactor = safeNumber(displayConfig?.displayScaleFactor, 1);
+  return rawValueBn * displayScaleFactor;
+}
+
+function resolvedRevenueGrowthPct(company, quarterKey, period = "yoy") {
+  const entry = company?.financials?.[quarterKey];
+  if (!entry) return null;
+  const fallbackPct = period === "qoq" ? safeNumber(entry?.revenueQoqPct, null) : safeNumber(entry?.revenueYoyPct, null);
+  const displayConfig = resolveQuarterDisplayConfig(company, entry, null);
+  if (!displayConfig?.usesFxConversion) {
+    return fallbackPct;
+  }
+  const priorQuarterKey = priorQuarterKeyForGrowth(quarterKey, period);
+  if (!priorQuarterKey) return fallbackPct;
+  const currentRevenueBn = displayAdjustedScalarValueBn(company, quarterKey, "revenueBn");
+  const priorRevenueBn = displayAdjustedScalarValueBn(company, priorQuarterKey, "revenueBn");
+  if (!(currentRevenueBn > 0.000001) || !(priorRevenueBn > 0.000001)) {
+    return fallbackPct;
+  }
+  return Number((((currentRevenueBn / priorRevenueBn) - 1) * 100).toFixed(3));
+}
+
+function resolvedDisplayAdjustedGrowthPct(company, quarterKey, rawPct, period = "yoy") {
+  const fallbackPct = safeNumber(rawPct, null);
+  if (fallbackPct === null) return null;
+  const entry = company?.financials?.[quarterKey];
+  if (!entry) return fallbackPct;
+  const displayConfig = resolveQuarterDisplayConfig(company, entry, null);
+  if (!displayConfig?.usesFxConversion) {
+    return fallbackPct;
+  }
+  const priorQuarterKey = priorQuarterKeyForGrowth(quarterKey, period);
+  if (!priorQuarterKey) return fallbackPct;
+  const priorEntry = company?.financials?.[priorQuarterKey];
+  if (!priorEntry) return fallbackPct;
+  const currentScale = safeNumber(displayConfig?.displayScaleFactor, null);
+  const priorScale = safeNumber(resolveQuarterDisplayConfig(company, priorEntry, null)?.displayScaleFactor, null);
+  if (!(currentScale > 0.000001) || !(priorScale > 0.000001)) {
+    return fallbackPct;
+  }
+  return Number(((((fallbackPct / 100) + 1) * (currentScale / priorScale) - 1) * 100).toFixed(3));
 }
 
 function resolveBarQuarterDisplayConfig(company, entry = null, structurePayload = null) {
