@@ -2302,6 +2302,7 @@ async function normalizeBitmapLogoAsset(asset) {
   const mime = String(asset?.mime || "").trim().toLowerCase();
   if (!asset?.dataUrl || !/^image\/(png|jpeg|jpg|webp|svg\+xml|svg)$/i.test(mime)) return asset;
   try {
+    const logoRasterApi = globalThis?.EarningsVizLogoRaster || {};
     const image = new Image();
     image.decoding = "async";
     const loaded = new Promise((resolve, reject) => {
@@ -2313,10 +2314,19 @@ async function normalizeBitmapLogoAsset(asset) {
     const naturalWidth = image.naturalWidth || safeNumber(asset.width, 0);
     const naturalHeight = image.naturalHeight || safeNumber(asset.height, 0);
     if (!naturalWidth || !naturalHeight) return asset;
-    const maxRasterSide = 900;
-    const rasterScale = Math.min(1, maxRasterSide / Math.max(naturalWidth, naturalHeight, 1));
-    const width = Math.max(1, Math.round(naturalWidth * rasterScale));
-    const height = Math.max(1, Math.round(naturalHeight * rasterScale));
+    const isSmallSvgRasterFallback =
+      typeof logoRasterApi.shouldRasterizeSmallSvgLogo === "function"
+        ? logoRasterApi.shouldRasterizeSmallSvgLogo(asset, naturalWidth, naturalHeight)
+        : false;
+    const rasterDimensions =
+      typeof logoRasterApi.resolveLogoRasterDimensions === "function"
+        ? logoRasterApi.resolveLogoRasterDimensions(asset, naturalWidth, naturalHeight)
+        : {
+            width: Math.max(1, Math.round(naturalWidth)),
+            height: Math.max(1, Math.round(naturalHeight)),
+          };
+    const width = Math.max(1, safeNumber(rasterDimensions.width, naturalWidth));
+    const height = Math.max(1, safeNumber(rasterDimensions.height, naturalHeight));
     const canvas = document.createElement("canvas");
     canvas.width = width;
     canvas.height = height;
@@ -2331,7 +2341,7 @@ async function normalizeBitmapLogoAsset(asset) {
     context.putImageData(normalizedImageData, 0, 0);
     const visibleBounds = opaqueBoundsFromImageData(normalizedImageData, width, height);
     if (!visibleBounds) {
-      if (!transparentImageData) return asset;
+      if (!transparentImageData && !isSmallSvgRasterFallback) return asset;
       return {
         ...asset,
         mime: "image/png",
@@ -2347,7 +2357,9 @@ async function normalizeBitmapLogoAsset(asset) {
     const cropBottom = Math.min(visibleBounds.bottom + trimPadding, height - 1);
     const cropWidth = cropRight - cropLeft + 1;
     const cropHeight = cropBottom - cropTop + 1;
-    if (!transparentImageData && cropWidth >= width - 2 && cropHeight >= height - 2) return asset;
+    if (!transparentImageData && cropWidth >= width - 2 && cropHeight >= height - 2 && !isSmallSvgRasterFallback) {
+      return asset;
+    }
     const croppedCanvas = document.createElement("canvas");
     croppedCanvas.width = cropWidth;
     croppedCanvas.height = cropHeight;
