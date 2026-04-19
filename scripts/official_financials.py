@@ -555,7 +555,7 @@ def _money_to_bn(value: float | None) -> float | None:
 def _safe_pct(numerator: float | None, denominator: float | None) -> float | None:
     if numerator is None or denominator in (None, 0):
         return None
-    return round(numerator / denominator * 100, 2)
+    return round(numerator / denominator * 100, 3)
 
 
 def _fiscal_label(fiscal_year: str, fiscal_quarter: str) -> str:

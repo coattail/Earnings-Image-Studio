@@ -64,7 +64,7 @@ def _period_span(entry: dict[str, Any]) -> int:
 def _safe_pct(numerator: float | None, denominator: float | None) -> float | None:
     if numerator is None or denominator in (None, 0):
         return None
-    return round((float(numerator) / float(denominator)) * 100, 2)
+    return round((float(numerator) / float(denominator)) * 100, 3)
 
 
 def _normalize_money_fields(entry: dict[str, Any]) -> dict[str, Any]:
