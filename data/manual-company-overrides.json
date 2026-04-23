@@ -1042,5 +1042,171 @@
       "fallbackRevenueQuarter": "2025Q4",
       "latestRevenueGapReason": "BYD's Q1/Q3 interim filings may disclose statement and expense lines without a parseable same-quarter segment revenue composition table. The latest official disclosed revenue split currently available is the 2025 annual report filed on 2026-03-28."
     }
+  },
+  "tesla": {
+    "financials": {
+      "2026Q1": {
+        "calendarQuarter": "2026Q1",
+        "periodEnd": "2026-03-31",
+        "fiscalYear": "2026",
+        "fiscalQuarter": "Q1",
+        "fiscalLabel": "FY2026 Q1",
+        "statementCurrency": "USD",
+        "revenueBn": 22.387,
+        "costOfRevenueBn": 17.667,
+        "grossProfitBn": 4.72,
+        "rndBn": 1.946,
+        "sgnaBn": 1.833,
+        "otherOpexBn": null,
+        "operatingExpensesBn": 3.779,
+        "operatingIncomeBn": 0.941,
+        "nonOperatingBn": -0.193,
+        "pretaxIncomeBn": 0.748,
+        "taxBn": 0.257,
+        "netIncomeBn": 0.477,
+        "grossMarginPct": 21.08,
+        "operatingMarginPct": 4.2,
+        "profitMarginPct": 2.13,
+        "effectiveTaxRatePct": 34.358,
+        "epsDiluted": 0.13,
+        "operatingCashFlowBn": 3.937,
+        "capitalExpenditureBn": 2.493,
+        "freeCashFlowBn": 1.444,
+        "statementSource": "manual-tesla-ir-pdf",
+        "statementSourceUrl": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q1-2026-Update.pdf",
+        "statementFilingDate": "2026-04-22",
+        "statementMeta": {
+          "statementSource": "manual-tesla-ir-pdf",
+          "statementSourceUrl": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q1-2026-Update.pdf",
+          "statementValueMode": "quarterly",
+          "statementSpanQuarters": 1,
+          "qualityFlags": [],
+          "adapterId": "manual_financials"
+        }
+      }
+    },
+    "officialRevenueStructureHistory": {
+      "source": "manual-official-quarterly-results",
+      "quarters": {
+        "2026Q1": {
+          "segments": [
+            {
+              "name": "Auto",
+              "nameZh": "汽车业务",
+              "memberKey": "auto",
+              "valueBn": 16.234,
+              "filingDate": "2026-04-22",
+              "sourceUrl": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q1-2026-Update.pdf",
+              "sourceForm": "QuarterlyResultsPDF"
+            },
+            {
+              "name": "Energy generation & storage",
+              "nameZh": "储能与发电",
+              "memberKey": "energygenerationstorage",
+              "valueBn": 2.408,
+              "filingDate": "2026-04-22",
+              "sourceUrl": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q1-2026-Update.pdf",
+              "sourceForm": "QuarterlyResultsPDF"
+            },
+            {
+              "name": "Services and other",
+              "nameZh": "服务及其他",
+              "memberKey": "services",
+              "valueBn": 3.745,
+              "filingDate": "2026-04-22",
+              "sourceUrl": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q1-2026-Update.pdf",
+              "sourceForm": "QuarterlyResultsPDF"
+            }
+          ],
+          "detailGroups": [
+            {
+              "name": "Auto sales",
+              "nameZh": "汽车销售",
+              "memberKey": "autosales",
+              "targetName": "Auto",
+              "valueBn": 15.473,
+              "filingDate": "2026-04-22",
+              "sourceUrl": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q1-2026-Update.pdf",
+              "sourceForm": "QuarterlyResultsPDF"
+            },
+            {
+              "name": "Regulatory credits",
+              "nameZh": "监管积分",
+              "memberKey": "regulatorycredits",
+              "targetName": "Auto",
+              "valueBn": 0.38,
+              "filingDate": "2026-04-22",
+              "sourceUrl": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q1-2026-Update.pdf",
+              "sourceForm": "QuarterlyResultsPDF"
+            },
+            {
+              "name": "Leasing",
+              "nameZh": "汽车租赁",
+              "memberKey": "leasing",
+              "targetName": "Auto",
+              "valueBn": 0.381,
+              "filingDate": "2026-04-22",
+              "sourceUrl": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q1-2026-Update.pdf",
+              "sourceForm": "QuarterlyResultsPDF"
+            }
+          ],
+          "costBreakdown": [
+            {
+              "name": "Auto",
+              "nameZh": "汽车业务",
+              "valueBn": 12.812,
+              "filingDate": "2026-04-22",
+              "sourceUrl": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q1-2026-Update.pdf",
+              "sourceForm": "QuarterlyResultsPDF"
+            },
+            {
+              "name": "Energy generation & storage",
+              "nameZh": "储能与发电",
+              "valueBn": 1.456,
+              "filingDate": "2026-04-22",
+              "sourceUrl": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q1-2026-Update.pdf",
+              "sourceForm": "QuarterlyResultsPDF"
+            },
+            {
+              "name": "Services and other",
+              "nameZh": "服务及其他",
+              "valueBn": 3.399,
+              "filingDate": "2026-04-22",
+              "sourceUrl": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q1-2026-Update.pdf",
+              "sourceForm": "QuarterlyResultsPDF"
+            }
+          ],
+          "opexBreakdown": [
+            {
+              "name": "Research and development",
+              "nameZh": "研发费用",
+              "memberKey": "researchanddevelopment",
+              "valueBn": 1.946,
+              "filingDate": "2026-04-22",
+              "sourceUrl": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q1-2026-Update.pdf",
+              "sourceForm": "QuarterlyResultsPDF"
+            },
+            {
+              "name": "Selling, general and administrative",
+              "nameZh": "销售、一般及行政费用",
+              "memberKey": "sellinggeneralandadministrative",
+              "valueBn": 1.833,
+              "filingDate": "2026-04-22",
+              "sourceUrl": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q1-2026-Update.pdf",
+              "sourceForm": "QuarterlyResultsPDF"
+            }
+          ]
+        }
+      },
+      "filingsUsed": [
+        {
+          "title": "Tesla Q1 2026 Update",
+          "quarter": "2026Q1",
+          "filingDate": "2026-04-22",
+          "pdf": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q1-2026-Update.pdf"
+        }
+      ],
+      "errors": []
+    }
   }
 }
