@@ -2511,6 +2511,16 @@ const BAR_COMPANY_PALETTE_OVERRIDES = Object.freeze({
     "#2E8F63",
     "#F05D5E",
   ]),
+  tsmc: Object.freeze([
+    "#2499D5",
+    "#F6C244",
+    "#A8ABB4",
+    "#8BCB9B",
+    "#F28B52",
+    "#8E6BBE",
+    "#E58FA7",
+    "#58B8C9",
+  ]),
   tencent: Object.freeze([
     "#1D9BF0",
     "#13A9B8",
@@ -2576,6 +2586,15 @@ const BAR_SEGMENT_CANONICAL_BY_COMPANY = Object.freeze({
     ebu: "micronautoembedded",
     aebu: "micronautoembedded",
     allothersegments: "othersegments",
+  }),
+  tsmc: Object.freeze({
+    highperformancecomputing: "hpc",
+    internetofthings: "iot",
+    digitalconsumerelectronics: "dce",
+    smartphones: "smartphones",
+    smartphone: "smartphones",
+    others: "others",
+    otherplatforms: "others",
   }),
 });
 
@@ -2658,6 +2677,18 @@ const BAR_SEGMENT_COLOR_SLOT_OVERRIDES = Object.freeze({
 });
 
 const BAR_SEGMENT_COLOR_SLOT_OVERRIDES_BY_COMPANY = Object.freeze({
+  tsmc: Object.freeze({
+    smartphones: 0,
+    hpc: 1,
+    highperformancecomputing: 1,
+    iot: 2,
+    internetofthings: 2,
+    automotive: 3,
+    dce: 4,
+    digitalconsumerelectronics: 4,
+    others: 5,
+    otherplatforms: 5,
+  }),
   visa: Object.freeze({
     dataprocessingrevenues: 0,
     internationaltransactionrevenues: 1,
