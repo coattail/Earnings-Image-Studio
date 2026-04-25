@@ -6903,7 +6903,136 @@ function renderPixelReplicaSvg(snapshot) {
     const currentAutoCostShiftY = autoLayoutOffsetForNode("cost").dy;
     setAutoLayoutNodeOffset("cost", { dy: currentAutoCostShiftY - appliedLiftY });
   };
+  const refineCostStageInboundSmoothness = () => {
+    if (!showCostBridge) return;
+    const costShift = layoutReferenceOffsetFor("cost");
+    const grossShift = layoutReferenceOffsetFor("gross");
+    const currentVisibleCostGapY = costTop + costShift.dy - (grossBottom + grossShift.dy);
+    const preferredVisibleCostGapY = scaleY(
+      safeNumber(
+        snapshot.layout?.costStageSmoothPreferredGrossGapY,
+        costBreakdownBoxes.length >= 3 ? 164 : costBreakdownBoxes.length ? 172 : 188
+      )
+    );
+    const activationToleranceY = scaleY(safeNumber(snapshot.layout?.costStageSmoothActivationToleranceY, 10));
+    if (!(currentVisibleCostGapY > preferredVisibleCostGapY + activationToleranceY)) return;
+    const retainedVisibleCostGapY = Math.max(
+      costMinGapFromGross,
+      scaleY(safeNumber(snapshot.layout?.costStageSmoothMinGrossGapY, costBreakdownBoxes.length >= 3 ? 128 : 140))
+    );
+    const availableLiftY = Math.max(currentVisibleCostGapY - retainedVisibleCostGapY, 0);
+    const requestedLiftY = Math.max(currentVisibleCostGapY - preferredVisibleCostGapY, 0);
+    const appliedLiftY = Math.min(
+      requestedLiftY,
+      availableLiftY,
+      scaleY(
+        safeNumber(
+          snapshot.layout?.costStageSmoothInboundLiftMaxY,
+          costBreakdownBoxes.length >= 3 ? 64 : costBreakdownBoxes.length ? 52 : 40
+        )
+      )
+    );
+    if (!(appliedLiftY > 0.5)) return;
+    const currentAutoCostShiftY = autoLayoutOffsetForNode("cost").dy;
+    setAutoLayoutNodeOffset("cost", { dy: currentAutoCostShiftY - appliedLiftY });
+  };
+  const refineNegativeTerminalElbowSmoothness = () => {
+    const entries = [
+      ...deductionBoxes.map((box, index) => {
+        const sourceSlice = deductionSourceSlices[index] || deductionSlices[index];
+        if (!box || !sourceSlice) return null;
+        return {
+          lane: "deduction",
+          index,
+          box,
+          sourceSlice,
+          sourceNodeId: "operating",
+          targetNodeId: `deduction-${index}`,
+          height: Math.max(safeNumber(box.height, 0), deductionSlices[index]?.item?.name === "Other" ? 6 : 12),
+        };
+      }),
+      ...opexBoxes.map((box, index) => {
+        const sourceSlice = opexSourceSlices[index] || opexSlices[index];
+        if (!box || !sourceSlice) return null;
+        return {
+          lane: "opex",
+          index,
+          box,
+          sourceSlice,
+          sourceNodeId: "operating-expenses",
+          targetNodeId: `opex-${index}`,
+          height: Math.max(safeNumber(box.height, 0), 14),
+        };
+      }),
+    ]
+      .filter(Boolean)
+      .sort((left, right) => left.box.center - right.box.center || left.index - right.index);
+    if (!entries.length) return;
+    const minTopY = Math.max(
+      rightTerminalSummaryObstacleBottom,
+      netBottom + scaleY(safeNumber(snapshot.layout?.negativeTerminalSmoothMinOffsetFromNetY, 18))
+    );
+    const minGapY = Math.max(
+      rightTerminalSeparationGap,
+      scaleY(safeNumber(snapshot.layout?.negativeTerminalSmoothMinGapY, entries.length >= 4 ? 30 : 24))
+    );
+    const maxLiftY = scaleY(
+      safeNumber(snapshot.layout?.negativeTerminalSmoothMaxLiftY, entries.length >= 4 ? 168 : entries.length >= 3 ? 132 : 96)
+    );
+    const activationOvershootY = scaleY(safeNumber(snapshot.layout?.negativeTerminalSmoothActivationOvershootY, 32));
+    let previousCenter = null;
+    let previousHeight = 0;
+    const nextCenters = entries.map((entry) => {
+      const sourceShift = layoutReferenceOffsetFor(entry.sourceNodeId);
+      const targetShift = layoutReferenceOffsetFor(entry.targetNodeId);
+      const sourceCenterY = safeNumber(entry.sourceSlice.center, entry.box.center) + sourceShift.dy;
+      const renderedCenterY = safeNumber(entry.box.center, 0) + targetShift.dy;
+      const preferredDropY =
+        entry.lane === "opex"
+          ? scaleY(
+              safeNumber(
+                snapshot.layout?.negativeTerminalSmoothOpexPreferredDropY,
+                132 + entry.index * (opexBoxes.length <= 2 ? 112 : 88)
+              )
+            )
+          : scaleY(
+              safeNumber(
+                snapshot.layout?.negativeTerminalSmoothDeductionPreferredDropY,
+                88 + entry.index * (deductionBoxes.length <= 2 ? 58 : 46)
+              )
+            );
+      const overshootY = renderedCenterY - (sourceCenterY + preferredDropY);
+      const requestedLiftY = overshootY > activationOvershootY ? Math.min(overshootY - activationOvershootY * 0.35, maxLiftY) : 0;
+      const preferredCenter = entry.box.center - Math.max(requestedLiftY, 0);
+      const entryMinCenter = Math.max(
+        minTopY + entry.height / 2,
+        previousCenter === null ? -Infinity : previousCenter + (previousHeight + entry.height) / 2 + minGapY
+      );
+      const nextCenter = entryMinCenter <= entry.box.center
+        ? clamp(preferredCenter, entryMinCenter, entry.box.center)
+        : entry.box.center;
+      previousCenter = nextCenter;
+      previousHeight = entry.height;
+      return nextCenter;
+    });
+    let moved = false;
+    entries.forEach((entry, orderIndex) => {
+      const nextCenter = nextCenters[orderIndex];
+      if (!(entry.box.center - nextCenter > 0.5)) return;
+      moved = true;
+      if (entry.lane === "deduction") {
+        deductionBoxes[entry.index] = shiftBoxCenter(entry.box, nextCenter);
+      } else {
+        opexBoxes[entry.index] = shiftBoxCenter(entry.box, nextCenter);
+      }
+    });
+    if (moved && costBreakdownBoxes.length) {
+      maintainCostBreakdownNodeGap();
+    }
+  };
+  refineCostStageInboundSmoothness();
   refineCostStageElbowBalance();
+  refineNegativeTerminalElbowSmoothness();
   const rebalanceNegativeTerminalLabelClearance = () => {
     const labelGapY = scaleY(safeNumber(snapshot.layout?.rightTerminalLabelClearanceGapY, 8));
     const minTopY = Math.max(
