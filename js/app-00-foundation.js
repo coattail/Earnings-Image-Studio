@@ -705,6 +705,17 @@ function queryRefs() {
   refs.toolbarQuarter = document.querySelector("#toolbarQuarter");
   refs.toolbarUpdatedLabel = document.querySelector("#toolbarUpdatedLabel");
   refs.toolbarUpdatedAt = document.querySelector("#toolbarUpdatedAt");
+  refs.analysisQualityPill = document.querySelector("#analysisQualityPill");
+  refs.analysisSourcePill = document.querySelector("#analysisSourcePill");
+  refs.analysisCurrencyPill = document.querySelector("#analysisCurrencyPill");
+  refs.kpiRevenueValue = document.querySelector("#kpiRevenueValue");
+  refs.kpiRevenueDelta = document.querySelector("#kpiRevenueDelta");
+  refs.kpiGrossMarginValue = document.querySelector("#kpiGrossMarginValue");
+  refs.kpiGrossMarginDelta = document.querySelector("#kpiGrossMarginDelta");
+  refs.kpiOperatingMarginValue = document.querySelector("#kpiOperatingMarginValue");
+  refs.kpiOperatingMarginDelta = document.querySelector("#kpiOperatingMarginDelta");
+  refs.kpiNetMarginValue = document.querySelector("#kpiNetMarginValue");
+  refs.kpiNetMarginDelta = document.querySelector("#kpiNetMarginDelta");
   refs.chartOutput = document.querySelector("#chartOutput");
   refs.detailSegmentCount = document.querySelector("#detailSegmentCount");
   refs.detailSegmentNote = document.querySelector("#detailSegmentNote");

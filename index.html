@@ -6,41 +6,42 @@
     <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-    <title>财报图片生成台</title>
+    <title>财报分析工作台</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="preload"
       as="style"
-      href="https://fonts.googleapis.com/css2?family=Marcellus&family=Noto+Sans+SC:wght@400;500;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700;800&display=swap"
       onload="this.onload=null;this.rel='stylesheet'"
     />
     <noscript>
       <link
         rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Marcellus&family=Noto+Sans+SC:wght@400;500;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700;800&display=swap"
       />
     </noscript>
-    <link rel="stylesheet" href="style.css?v=20260416-opex-sanitize-v137" />
-    <script defer src="js/app-00-http.js?v=20260416-opex-sanitize-v137"></script>
-    <script defer src="js/app-00-logo-raster.js?v=20260416-opex-sanitize-v137"></script>
-    <script defer src="js/app-00-foundation.js?v=20260416-opex-sanitize-v137"></script>
-    <script defer src="js/app-01-layout.js?v=20260416-opex-sanitize-v137"></script>
-    <script defer src="js/app-02-sankey.js?v=20260416-opex-sanitize-v137"></script>
-    <script defer src="js/app-03-data.js?v=20260416-opex-sanitize-v137"></script>
-    <script defer src="js/app-04-bootstrap.js?v=20260416-opex-sanitize-v137"></script>
+    <link rel="stylesheet" href="style.css?v=20260425-analysis-desk-v139" />
+    <script defer src="js/app-00-http.js?v=20260425-analysis-desk-v139"></script>
+    <script defer src="js/app-00-logo-raster.js?v=20260425-analysis-desk-v139"></script>
+    <script defer src="js/app-00-foundation.js?v=20260425-analysis-desk-v139"></script>
+    <script defer src="js/app-01-layout.js?v=20260425-analysis-desk-v139"></script>
+    <script defer src="js/app-02-sankey.js?v=20260425-analysis-desk-v139"></script>
+    <script defer src="js/app-03-data.js?v=20260425-analysis-desk-v139"></script>
+    <script defer src="js/app-04-bootstrap.js?v=20260425-analysis-desk-v139"></script>
   </head>
   <body>
     <main class="page">
       <section class="hero">
-        <p class="eyebrow">Independent Visual Studio</p>
-        <h1>财报图片生成台</h1>
+        <p class="eyebrow">Earnings Analysis Desk</p>
+        <h1>财报分析工作台</h1>
+        <p id="heroCoverageText" class="subtitle">-</p>
       </section>
 
       <section class="workspace">
         <aside class="controls">
-          <h2>设置</h2>
+          <h2>筛选与操作</h2>
 
           <div class="control-block">
             <div class="block-head">
@@ -75,7 +76,8 @@
           </div>
 
           <div class="control-block actions">
-            <button id="renderBtn" class="primary-btn" type="button">一键生成</button>
+            <h3>分析</h3>
+            <button id="renderBtn" class="primary-btn" type="button">更新分析图表</button>
             <p id="statusText" class="status">正在加载数据...</p>
           </div>
         </aside>
@@ -118,6 +120,41 @@
               <span id="toolbarUpdatedLabel">数据更新</span>
               <strong id="toolbarUpdatedAt">-</strong>
             </div>
+            <div class="toolbar-item">
+              <span>数据质量</span>
+              <strong id="analysisQualityPill" class="quality-pill">-</strong>
+            </div>
+            <div class="toolbar-item">
+              <span>数据来源</span>
+              <strong id="analysisSourcePill">-</strong>
+            </div>
+            <div class="toolbar-item">
+              <span>显示币种</span>
+              <strong id="analysisCurrencyPill">-</strong>
+            </div>
+          </div>
+
+          <div class="kpi-grid">
+            <article class="kpi-card">
+              <span class="kpi-label">营收</span>
+              <strong id="kpiRevenueValue" class="kpi-value">-</strong>
+              <p id="kpiRevenueDelta" class="kpi-delta">-</p>
+            </article>
+            <article class="kpi-card">
+              <span class="kpi-label">毛利率</span>
+              <strong id="kpiGrossMarginValue" class="kpi-value">-</strong>
+              <p id="kpiGrossMarginDelta" class="kpi-delta">-</p>
+            </article>
+            <article class="kpi-card">
+              <span class="kpi-label">经营利润率</span>
+              <strong id="kpiOperatingMarginValue" class="kpi-value">-</strong>
+              <p id="kpiOperatingMarginDelta" class="kpi-delta">-</p>
+            </article>
+            <article class="kpi-card">
+              <span class="kpi-label">净利率</span>
+              <strong id="kpiNetMarginValue" class="kpi-value">-</strong>
+              <p id="kpiNetMarginDelta" class="kpi-delta">-</p>
+            </article>
           </div>
 
           <div class="preview-stage">
@@ -128,17 +165,17 @@
 
           <div class="detail-grid">
             <article class="detail-card">
-              <span>业务分部</span>
+              <span>业务结构</span>
               <strong id="detailSegmentCount">-</strong>
               <p id="detailSegmentNote">-</p>
             </article>
             <article class="detail-card">
-              <span>利润桥主干</span>
+              <span>利润桥概览</span>
               <strong id="detailStatementSummary">-</strong>
               <p id="detailStatementNote">-</p>
             </article>
             <article class="detail-card">
-              <span>数据口径</span>
+              <span>口径与来源</span>
               <strong id="detailSourceTitle">-</strong>
               <p id="detailSourceNote">-</p>
             </article>

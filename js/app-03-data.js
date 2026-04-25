@@ -65,7 +65,7 @@ function selectCompany(companyId, { preferReplica = false, rerenderList = false 
     syncActiveCompanyCard();
   }
   renderCoverage();
-  setStatus(`正在生成 ${company.nameEn} 图像...`);
+  setStatus(`正在刷新 ${company.nameEn} 分析图表...`);
   requestRenderCurrent();
 }
 

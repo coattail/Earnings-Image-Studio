@@ -1206,11 +1206,106 @@ function loadReferenceOverlayFile(file) {
   reader.readAsDataURL(file);
 }
 
+function setKpiDelta(node, text, deltaValue = null) {
+  if (!node) return;
+  node.classList.remove("is-positive", "is-negative", "is-neutral");
+  const normalizedText = String(text || "").trim();
+  if (!normalizedText || normalizedText === "-") {
+    node.textContent = currentChartLanguage() === "en" ? "No signal" : "暂无信号";
+    node.classList.add("is-neutral");
+    return;
+  }
+  node.textContent = normalizedText;
+  if (deltaValue === null || deltaValue === undefined || Number.isNaN(Number(deltaValue))) {
+    node.classList.add("is-neutral");
+    return;
+  }
+  const numeric = Number(deltaValue);
+  if (numeric > 0.05) {
+    node.classList.add("is-positive");
+  } else if (numeric < -0.05) {
+    node.classList.add("is-negative");
+  } else {
+    node.classList.add("is-neutral");
+  }
+}
+
+function updateKpiStrip(snapshot) {
+  if (refs.kpiRevenueValue) refs.kpiRevenueValue.textContent = formatBillions(snapshot?.revenueBn);
+  const revenueYoyLabel = formatGrowthMetric(snapshot?.revenueYoyPct, "yoy");
+  const revenueQoqLabel = formatGrowthMetric(snapshot?.revenueQoqPct, "qoq");
+  const revenueDelta = [revenueYoyLabel, revenueQoqLabel].filter(Boolean).join(" · ");
+  const revenueToneValue =
+    snapshot?.revenueYoyPct !== null && snapshot?.revenueYoyPct !== undefined
+      ? safeNumber(snapshot.revenueYoyPct, null)
+      : safeNumber(snapshot?.revenueQoqPct, null);
+  setKpiDelta(refs.kpiRevenueDelta, revenueDelta, revenueToneValue);
+
+  if (refs.kpiGrossMarginValue) refs.kpiGrossMarginValue.textContent = formatPct(snapshot?.grossMarginPct);
+  const grossDeltaValue = safeNumber(snapshot?.grossMarginYoyDeltaPp, null);
+  setKpiDelta(refs.kpiGrossMarginDelta, formatPp(grossDeltaValue, "yoy"), grossDeltaValue);
+
+  if (refs.kpiOperatingMarginValue) refs.kpiOperatingMarginValue.textContent = formatPct(snapshot?.operatingMarginPct);
+  const operatingDeltaValue = safeNumber(snapshot?.operatingMarginYoyDeltaPp, null);
+  setKpiDelta(refs.kpiOperatingMarginDelta, formatPp(operatingDeltaValue, "yoy"), operatingDeltaValue);
+
+  if (refs.kpiNetMarginValue) refs.kpiNetMarginValue.textContent = formatPct(snapshot?.netMarginPct);
+  const netDeltaValue = safeNumber(snapshot?.netMarginYoyDeltaPp, null);
+  setKpiDelta(refs.kpiNetMarginDelta, formatPp(netDeltaValue, "yoy"), netDeltaValue);
+}
+
+function updateAnalysisSignalStrip(snapshot, company, isBarMode, viewPayload = null) {
+  if (!refs.analysisQualityPill && !refs.analysisSourcePill && !refs.analysisCurrencyPill) return;
+  const quarterEntry = company?.financials?.[snapshot?.quarterKey] || null;
+  const diagnostics = quarterEntry?.extractionDiagnostics || null;
+  const qualityScore = safeNumber(diagnostics?.qualityScore, null);
+  const issueCount = Array.isArray(diagnostics?.issues) ? diagnostics.issues.length : 0;
+  if (refs.analysisQualityPill) {
+    refs.analysisQualityPill.classList.remove("is-good", "is-medium", "is-low");
+    if (qualityScore === null) {
+      refs.analysisQualityPill.textContent = currentChartLanguage() === "en" ? "Unknown" : "未知";
+    } else if (qualityScore >= 85) {
+      refs.analysisQualityPill.classList.add("is-good");
+      refs.analysisQualityPill.textContent =
+        currentChartLanguage() === "en" ? `High ${Math.round(qualityScore)}${issueCount ? ` · ${issueCount} issues` : ""}` : `高 ${Math.round(qualityScore)}分${issueCount ? ` · ${issueCount}项` : ""}`;
+    } else if (qualityScore >= 70) {
+      refs.analysisQualityPill.classList.add("is-medium");
+      refs.analysisQualityPill.textContent =
+        currentChartLanguage() === "en" ? `Medium ${Math.round(qualityScore)}${issueCount ? ` · ${issueCount} issues` : ""}` : `中 ${Math.round(qualityScore)}分${issueCount ? ` · ${issueCount}项` : ""}`;
+    } else {
+      refs.analysisQualityPill.classList.add("is-low");
+      refs.analysisQualityPill.textContent =
+        currentChartLanguage() === "en" ? `Low ${Math.round(qualityScore)}${issueCount ? ` · ${issueCount} issues` : ""}` : `低 ${Math.round(qualityScore)}分${issueCount ? ` · ${issueCount}项` : ""}`;
+    }
+  }
+  if (refs.analysisSourcePill) {
+    const sourceLabel = snapshot?.sourceLabel || quarterEntry?.statementSource || (currentChartLanguage() === "en" ? "Mixed sources" : "多源融合");
+    refs.analysisSourcePill.textContent = sourceLabel;
+  }
+  if (refs.analysisCurrencyPill) {
+    if (isBarMode) {
+      const history = viewPayload?.history || null;
+      const primaryDisplayCurrency = history?.primaryDisplayCurrency || snapshot?.displayCurrency || "USD";
+      const convertedQuarterCount = history?.convertedQuarterCount || 0;
+      const quarterCount = history?.quarters?.length || 0;
+      refs.analysisCurrencyPill.textContent =
+        convertedQuarterCount > 0
+          ? `${primaryDisplayCurrency} (FX ${convertedQuarterCount}/${quarterCount})`
+          : primaryDisplayCurrency;
+    } else {
+      const displayCurrency = snapshot?.displayCurrency || "USD";
+      refs.analysisCurrencyPill.textContent = snapshot?.usesFxConversion ? `${displayCurrency} (FX)` : displayCurrency;
+    }
+  }
+}
+
 function updateMeta(snapshot, company, viewPayload = null) {
   const isBarMode = currentChartViewMode() === "bars";
   refs.toolbarCompany.textContent = companyDisplay(company);
   refs.toolbarQuarter.textContent = `${snapshot.quarterKey} · ${snapshot.fiscalLabel || "-"}`;
   updateDatasetTimestampUi();
+  updateAnalysisSignalStrip(snapshot, company, isBarMode, viewPayload);
+  updateKpiStrip(snapshot);
 
   if (isBarMode) {
     const history = viewPayload?.history || null;
@@ -1238,8 +1333,8 @@ function updateMeta(snapshot, company, viewPayload = null) {
         : `${company.nameZh || company.nameEn} 分部营收趋势`;
     refs.chartMeta.textContent =
       currentChartLanguage() === "en"
-        ? `${companyDisplay(company)} · ${quarterCount}/${requestedQuarterCount} ${windowUnitLabel} · Stacked segment bars`
-        : `${companyDisplay(company)} · ${quarterCount}/${requestedQuarterCount} ${windowUnitLabelZh} · 分部堆叠柱状图`;
+        ? `${companyDisplay(company)} · ${quarterCount}/${requestedQuarterCount} ${windowUnitLabel} · Segment trend view`
+        : `${companyDisplay(company)} · ${quarterCount}/${requestedQuarterCount} ${windowUnitLabelZh} · 分部趋势视图`;
     refs.detailSegmentCount.textContent = currentChartLanguage() === "en" ? `${segmentCount} segments` : `${segmentCount} 个`;
     refs.detailSegmentNote.textContent =
       currentChartLanguage() === "en"
@@ -1269,14 +1364,24 @@ function updateMeta(snapshot, company, viewPayload = null) {
         : `颜色映射由公司品牌自动驱动，并在当前窗口内按分部键保持稳定。`;
   } else {
     refs.chartTitle.textContent = localizeChartTitle(snapshot);
-    refs.chartMeta.textContent = [companyDisplay(company), snapshot.quarterKey].filter(Boolean).join(" · ");
-    refs.detailSegmentCount.textContent = `${snapshot.businessGroups?.length || 0} 个`;
+    refs.chartMeta.textContent = [companyDisplay(company), snapshot.quarterKey, currentChartLanguage() === "en" ? "Earnings bridge view" : "利润桥视图"]
+      .filter(Boolean)
+      .join(" · ");
+    refs.detailSegmentCount.textContent =
+      currentChartLanguage() === "en" ? `${snapshot.businessGroups?.length || 0} segments` : `${snapshot.businessGroups?.length || 0} 个`;
     refs.detailSegmentNote.textContent =
       snapshot.mode === "pixel-replica"
-        ? "当前季度使用统一高精复刻模板生成，并按参考样板参数校准业务板块布局。"
-        : "当前季度使用统一高精复刻模板自动生成；如果缺少分部数据，会保留同一套汇聚/分散主桥并自动收敛为单收入块。";
+        ? currentChartLanguage() === "en"
+          ? "This quarter uses a calibrated high-fidelity template with company-specific layout tuning."
+          : "当前季度使用统一高精复刻模板生成，并按参考样板参数校准业务板块布局。"
+        : currentChartLanguage() === "en"
+          ? "This quarter uses the unified replica template; if segment data is missing, the bridge safely collapses to revenue-only."
+          : "当前季度使用统一高精复刻模板自动生成；如果缺少分部数据，会保留同一套汇聚/分散主桥并自动收敛为单收入块。";
     refs.detailStatementSummary.textContent = `${formatBillions(snapshot.revenueBn)} → ${formatNetOutcomeBillions(snapshot)}`;
-    refs.detailStatementNote.textContent = `毛利 ${formatBillions(snapshot.grossProfitBn)} / ${localizeChartPhrase(resolvedOperatingOutcomeLabel(snapshot))} ${formatOperatingOutcomeBillions(snapshot)}`;
+    refs.detailStatementNote.textContent =
+      currentChartLanguage() === "en"
+        ? `Gross profit ${formatBillions(snapshot.grossProfitBn)} / ${resolvedOperatingOutcomeLabel(snapshot)} ${formatOperatingOutcomeBillions(snapshot)}`
+        : `毛利 ${formatBillions(snapshot.grossProfitBn)} / ${localizeChartPhrase(resolvedOperatingOutcomeLabel(snapshot))} ${formatOperatingOutcomeBillions(snapshot)}`;
     refs.detailSourceTitle.textContent = snapshot.sourceLabel;
     refs.detailSourceNote.textContent = snapshot.footnote;
     refs.footnoteText.textContent = snapshot.footnote;
@@ -1387,8 +1492,8 @@ async function renderCurrent() {
     bindInteractiveEditor(snapshot);
     setStatus(
       currentChartViewMode() === "bars"
-        ? `已生成 ${company.nameEn} ${quarterKey} 分部柱状图。`
-        : `已生成 ${company.nameEn} ${quarterKey} 图像。`
+        ? `已更新 ${company.nameEn} ${quarterKey} 分部趋势图。`
+        : `已更新 ${company.nameEn} ${quarterKey} 利润桥图。`
     );
     if (typeof requestIdleCallback === "function") {
       requestIdleCallback(() => warmVisibleLogoAssets(), { timeout: 180 });
@@ -1398,8 +1503,8 @@ async function renderCurrent() {
   } catch (error) {
     refs.chartOutput.innerHTML = "";
     syncEditModeUi();
-    const message = error?.message || String(error || "图像渲染失败。");
-    setStatus(`图像渲染失败：${message}`);
+    const message = error?.message || String(error || "图表渲染失败。");
+    setStatus(`图表渲染失败：${message}`);
     if (typeof window !== "undefined") {
       window.__codexDebugError = message;
     }
