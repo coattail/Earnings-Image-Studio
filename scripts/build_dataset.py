@@ -2097,6 +2097,7 @@ def apply_revenue_structure_history(
                     {
                         "name": row.get("name"),
                         "nameZh": row.get("nameZh"),
+                        "memberKey": str(row.get("memberKey") or row.get("name") or ""),
                         "valueBn": row.get("valueBn"),
                         "sourceUrl": row.get("sourceUrl"),
                         "sourceForm": row.get("sourceForm"),

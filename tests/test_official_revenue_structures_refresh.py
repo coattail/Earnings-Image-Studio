@@ -225,6 +225,66 @@ class OfficialRevenueStructuresRefreshTests(unittest.TestCase):
         self.assertIn("primary parse failed", result["errors"])
         self.assertNotIn("fallback cache used", result["errors"])
 
+    def test_custom_xbrl_hierarchy_extracts_cost_breakdown_rows(self) -> None:
+        xml = """<?xml version="1.0" encoding="UTF-8"?>
+        <xbrli:xbrl xmlns:xbrli="http://www.xbrl.org/2003/instance"
+          xmlns:xbrldi="http://xbrl.org/2006/xbrldi"
+          xmlns:us-gaap="http://fasb.org/us-gaap/2025"
+          xmlns:tsla="http://www.tesla.com/2025">
+          <xbrli:context id="auto-cost">
+            <xbrli:entity>
+              <xbrli:identifier scheme="http://www.sec.gov/CIK">0001318605</xbrli:identifier>
+              <xbrli:segment>
+                <xbrldi:explicitMember dimension="srt:ProductOrServiceAxis">tsla:AutomotiveRevenuesMember</xbrldi:explicitMember>
+              </xbrli:segment>
+            </xbrli:entity>
+            <xbrli:period><xbrli:startDate>2025-10-01</xbrli:startDate><xbrli:endDate>2025-12-31</xbrli:endDate></xbrli:period>
+          </xbrli:context>
+          <xbrli:context id="energy-cost">
+            <xbrli:entity>
+              <xbrli:identifier scheme="http://www.sec.gov/CIK">0001318605</xbrli:identifier>
+              <xbrli:segment>
+                <xbrldi:explicitMember dimension="srt:ProductOrServiceAxis">tsla:EnergyGenerationAndStorageMember</xbrldi:explicitMember>
+              </xbrli:segment>
+            </xbrli:entity>
+            <xbrli:period><xbrli:startDate>2025-10-01</xbrli:startDate><xbrli:endDate>2025-12-31</xbrli:endDate></xbrli:period>
+          </xbrli:context>
+          <us-gaap:CostOfRevenue contextRef="auto-cost" decimals="-6" unitRef="usd">12812000000</us-gaap:CostOfRevenue>
+          <us-gaap:CostOfRevenue contextRef="energy-cost" decimals="-6" unitRef="usd">1456000000</us-gaap:CostOfRevenue>
+        </xbrli:xbrl>
+        """
+        rows = [
+            {
+                "name": "Auto",
+                "memberKey": "auto",
+                "filters": {"ProductOrServiceAxis": ["AutomotiveRevenuesMember"]},
+                "exactDimensions": ["ProductOrServiceAxis"],
+            },
+            {
+                "name": "Energy generation & storage",
+                "memberKey": "energygenerationstorage",
+                "filters": {"ProductOrServiceAxis": ["EnergyGenerationAndStorageMember"]},
+                "exactDimensions": ["ProductOrServiceAxis"],
+            },
+        ]
+
+        with patch.object(official_revenue_structures, "_request", return_value=xml.encode("utf-8")):
+            facts = official_revenue_structures._collect_custom_hierarchy_facts(
+                1318605,
+                "000000000000000000",
+                "2026-01-29",
+                "10-K",
+                "tsla-20251231_htm.xml",
+                rows,
+                concept_priority_fn=official_revenue_structures._cost_priority,
+            )
+
+        quarter_rows = official_revenue_structures._build_quarterly_series(facts)
+        self.assertEqual(
+            {row["memberKey"]: row["valueBn"] for row in quarter_rows["2025Q4"]},
+            {"auto": 12.812, "energygenerationstorage": 1.456},
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

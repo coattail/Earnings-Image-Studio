@@ -57,6 +57,17 @@ STOCKANALYSIS_FINANCIAL_CACHE_DIR = ROOT_DIR / "data" / "cache" / "stockanalysis
 CACHE_VERSION = "20260327-v17"
 STOCKANALYSIS_FINANCIAL_PAYLOAD_CACHE_VERSION = "20260329-v1"
 STOCKANALYSIS_FINANCIAL_CACHE: dict[str, dict[str, Any]] = {}
+CUSTOM_HIERARCHY_COST_SUPPLEMENT_WINDOW_QUARTERS = 12
+
+COST_TAG_PRIORITY = {
+    "CostOfRevenue": 120,
+    "CostOfRevenues": 119,
+    "CostOfGoodsAndServicesSold": 116,
+    "CostOfGoodsSold": 114,
+    "CostOfSales": 112,
+    "CostOfServicesRevenue": 110,
+    "CostOfGoodsRevenue": 108,
+}
 
 XBRL_AXIS_COMPANY_CONFIGS: dict[str, dict[str, Any]] = {
     "mastercard": {
@@ -431,6 +442,35 @@ CUSTOM_XBRL_HIERARCHY_CONFIGS: dict[str, dict[str, Any]] = {
                 },
                 "exactDimensions": ["ProductOrServiceAxis"],
                 "targetName": "Auto",
+            },
+        ],
+        "costBreakdown": [
+            {
+                "name": "Auto",
+                "nameZh": "汽车业务",
+                "memberKey": "auto",
+                "filters": {
+                    "ProductOrServiceAxis": ["AutomotiveRevenuesMember"],
+                },
+                "exactDimensions": ["ProductOrServiceAxis"],
+            },
+            {
+                "name": "Energy generation & storage",
+                "nameZh": "储能与发电",
+                "memberKey": "energygenerationstorage",
+                "filters": {
+                    "ProductOrServiceAxis": ["EnergyGenerationAndStorageMember", "EnergyGenerationAndStorageSegmentMember"],
+                },
+                "exactDimensions": ["ProductOrServiceAxis"],
+            },
+            {
+                "name": "Services",
+                "nameZh": "服务及其他",
+                "memberKey": "services",
+                "filters": {
+                    "ProductOrServiceAxis": ["ServicesAndOtherMember"],
+                },
+                "exactDimensions": ["ProductOrServiceAxis"],
             },
         ],
     },
@@ -990,6 +1030,20 @@ def _parse_pct_token(raw: str) -> float | None:
         return float(cleaned)
     except ValueError:
         return None
+
+
+def _cost_priority(concept: str) -> int:
+    if concept in COST_TAG_PRIORITY:
+        return COST_TAG_PRIORITY[concept]
+    normalized = str(concept or "").lower()
+    if (
+        "costofrevenue" in normalized
+        or "costofrevenues" in normalized
+        or "costofsales" in normalized
+        or "costofgoodssold" in normalized
+    ):
+        return 70
+    return -1
 
 
 def _extract_current_table_value(text: str, label: str) -> float | None:
@@ -3346,9 +3400,54 @@ def _collect_custom_hierarchy_facts(
     form: str,
     instance_name: str,
     rows: list[dict[str, Any]],
+    *,
+    concept_priority_fn=_revenue_priority,
 ) -> list[SegmentFact]:
     url = f"https://www.sec.gov/Archives/edgar/data/{cik}/{accession_nodash}/{instance_name}"
     root = ET.fromstring(_request(url))
+    return _collect_custom_hierarchy_facts_from_root(
+        root,
+        filing_date,
+        form,
+        rows,
+        source_url=url,
+        accession=accession_nodash,
+        concept_priority_fn=concept_priority_fn,
+    )
+
+
+def _collect_custom_hierarchy_facts_from_url(
+    source_url: str,
+    filing_date: str,
+    form: str,
+    rows: list[dict[str, Any]],
+    *,
+    concept_priority_fn=_revenue_priority,
+) -> list[SegmentFact]:
+    root = ET.fromstring(_request(source_url))
+    accession_match = re.search(r"/Archives/edgar/data/\d+/(\d+)/", source_url)
+    accession = accession_match.group(1) if accession_match else ""
+    return _collect_custom_hierarchy_facts_from_root(
+        root,
+        filing_date,
+        form,
+        rows,
+        source_url=source_url,
+        accession=accession,
+        concept_priority_fn=concept_priority_fn,
+    )
+
+
+def _collect_custom_hierarchy_facts_from_root(
+    root: ET.Element,
+    filing_date: str,
+    form: str,
+    rows: list[dict[str, Any]],
+    *,
+    source_url: str,
+    accession: str = "",
+    concept_priority_fn=_revenue_priority,
+) -> list[SegmentFact]:
     ns = {"xbrli": "http://www.xbrl.org/2003/instance", "xbrldi": "http://xbrl.org/2006/xbrldi"}
 
     contexts: dict[str, tuple[str, str, dict[str, str]]] = {}
@@ -3370,7 +3469,7 @@ def _collect_custom_hierarchy_facts(
         if not context_ref or context_ref not in contexts:
             continue
         concept = child.tag.split("}")[-1]
-        concept_priority = _revenue_priority(concept)
+        concept_priority = concept_priority_fn(concept)
         if concept_priority < 0:
             continue
         value_text = (child.text or "").strip()
@@ -3385,7 +3484,7 @@ def _collect_custom_hierarchy_facts(
             if not _matches_member_filters(member_map, dict(row.get("filters") or {}), row.get("exactDimensions")):
                 continue
             fact = SegmentFact(
-                accession=accession_nodash,
+                accession=accession,
                 filing_date=filing_date,
                 form=form,
                 concept=concept,
@@ -3397,7 +3496,7 @@ def _collect_custom_hierarchy_facts(
                 start_date=start_date,
                 end_date=end_date,
                 value=value,
-                source_url=url,
+                source_url=source_url,
             )
             if row.get("aggregateMatches"):
                 aggregate_key = (
@@ -4935,6 +5034,7 @@ def _parse_custom_xbrl_hierarchy_records(company: dict[str, Any], cik: int, refr
     result = {"source": str(config.get("source") or "official-filings-xbrl-hierarchy"), "quarters": {}, "filingsUsed": [], "errors": [], "errorDetails": []}
     segment_facts: list[SegmentFact] = []
     detail_facts: list[SegmentFact] = []
+    cost_facts: list[SegmentFact] = []
 
     for filing in _merged_filing_entries(company_id, cik, refresh=refresh):
         form = str(filing.get("form") or "")
@@ -4967,6 +5067,18 @@ def _parse_custom_xbrl_hierarchy_records(company: dict[str, Any], cik: int, refr
                     list(config.get("detailGroups", [])),
                 )
             )
+            if config.get("costBreakdown"):
+                cost_facts.extend(
+                    _collect_custom_hierarchy_facts(
+                        cik,
+                        accession_nodash,
+                        filing_date,
+                        form,
+                        instance_name,
+                        list(config.get("costBreakdown", [])),
+                        concept_priority_fn=_cost_priority,
+                    )
+                )
             result["filingsUsed"].append(
                 {
                     "form": form,
@@ -4989,6 +5101,7 @@ def _parse_custom_xbrl_hierarchy_records(company: dict[str, Any], cik: int, refr
 
     segment_rows_by_quarter = _build_quarterly_series(segment_facts)
     detail_rows_by_quarter = _build_quarterly_series(detail_facts)
+    cost_rows_by_quarter = _build_quarterly_series(cost_facts)
     detail_target_map = {
         str(item.get("memberKey") or item.get("name") or ""): str(item.get("targetName") or "")
         for item in config.get("detailGroups", [])
@@ -4997,8 +5110,12 @@ def _parse_custom_xbrl_hierarchy_records(company: dict[str, Any], cik: int, refr
         str(item.get("memberKey") or item.get("name") or ""): item.get("supportLines")
         for item in config.get("detailGroups", [])
     }
+    cost_name_zh_map = {
+        str(item.get("memberKey") or item.get("name") or ""): item.get("nameZh")
+        for item in config.get("costBreakdown", [])
+    }
 
-    all_quarters = sorted(set(segment_rows_by_quarter) | set(detail_rows_by_quarter), key=_period_key)
+    all_quarters = sorted(set(segment_rows_by_quarter) | set(detail_rows_by_quarter) | set(cost_rows_by_quarter), key=_period_key)
     for quarter in all_quarters:
         segment_rows = []
         for row in segment_rows_by_quarter.get(quarter, []):
@@ -5027,11 +5144,27 @@ def _parse_custom_xbrl_hierarchy_records(company: dict[str, Any], cik: int, refr
                     target_name=detail_target_map.get(member_key),
                 )
             )
+        cost_rows = []
+        for row in cost_rows_by_quarter.get(quarter, []):
+            member_key = str(row.get("memberKey") or row.get("name") or "")
+            cost_row = _build_row(
+                str(row.get("name") or ""),
+                float(row.get("valueBn") or 0),
+                member_key=member_key,
+                source_url=str(row.get("sourceUrl") or ""),
+                source_form=str(row.get("sourceForm") or ""),
+                filing_date=str(row.get("filingDate") or ""),
+            )
+            if cost_name_zh_map.get(member_key):
+                cost_row["nameZh"] = cost_name_zh_map[member_key]
+            cost_rows.append(cost_row)
         quarter_payload: dict[str, Any] = {}
         if segment_rows:
             quarter_payload["segments"] = sorted(segment_rows, key=lambda item: float(item.get("valueBn") or 0), reverse=True)
         if detail_rows:
             quarter_payload["detailGroups"] = sorted(detail_rows, key=lambda item: float(item.get("valueBn") or 0), reverse=True)
+        if cost_rows:
+            quarter_payload["costBreakdown"] = sorted(cost_rows, key=lambda item: float(item.get("valueBn") or 0), reverse=True)
         if quarter_payload:
             result["quarters"][quarter] = quarter_payload
     return result
@@ -5247,8 +5380,97 @@ def _parse_table_company_records(company: dict[str, Any], cik: int, refresh: boo
     return result
 
 
+def _supplement_custom_hierarchy_cost_breakdowns(company: dict[str, Any], result: dict[str, Any]) -> dict[str, Any]:
+    company_id = str(company.get("id") or "")
+    config = CUSTOM_XBRL_HIERARCHY_CONFIGS.get(company_id)
+    cost_rows_config = list((config or {}).get("costBreakdown") or [])
+    quarters = result.get("quarters") if isinstance(result.get("quarters"), dict) else {}
+    if not cost_rows_config or not quarters:
+        return result
+
+    source_entries: dict[str, dict[str, str]] = {}
+    recent_missing_quarters = [
+        quarter
+        for quarter, payload in sorted(quarters.items(), key=lambda item: _period_key(str(item[0])))
+        if isinstance(payload, dict) and not payload.get("costBreakdown")
+    ][-CUSTOM_HIERARCHY_COST_SUPPLEMENT_WINDOW_QUARTERS:]
+    recent_missing_quarter_set = set(recent_missing_quarters)
+    for quarter, payload in quarters.items():
+        if quarter not in recent_missing_quarter_set:
+            continue
+        if not isinstance(payload, dict) or payload.get("costBreakdown"):
+            continue
+        for field_name in ("segments", "detailGroups"):
+            for row in payload.get(field_name) or []:
+                if not isinstance(row, dict):
+                    continue
+                source_url = str(row.get("sourceUrl") or "")
+                if not source_url or not source_url.endswith(".xml"):
+                    continue
+                source_entries[source_url] = {
+                    "filingDate": str(row.get("filingDate") or ""),
+                    "sourceForm": str(row.get("sourceForm") or ""),
+                }
+    if not source_entries:
+        return result
+
+    cost_facts: list[SegmentFact] = []
+    for source_url, meta in source_entries.items():
+        try:
+            cost_facts.extend(
+                _collect_custom_hierarchy_facts_from_url(
+                    source_url,
+                    meta.get("filingDate", ""),
+                    meta.get("sourceForm", ""),
+                    cost_rows_config,
+                    concept_priority_fn=_cost_priority,
+                )
+            )
+        except Exception as exc:  # noqa: BLE001
+            note = f"cost breakdown supplement {source_url}: {exc}"
+            if note not in result.setdefault("errors", []):
+                result["errors"].append(note)
+            _append_error_detail(
+                result,
+                message=str(exc),
+                phase="custom-xbrl-cost-supplement",
+                error_type=type(exc).__name__,
+                sourceUrl=source_url,
+                severity="warning",
+            )
+
+    cost_rows_by_quarter = _build_quarterly_series(cost_facts)
+    cost_name_zh_map = {
+        str(item.get("memberKey") or item.get("name") or ""): item.get("nameZh")
+        for item in cost_rows_config
+    }
+    for quarter, rows in cost_rows_by_quarter.items():
+        payload = quarters.get(quarter)
+        if not isinstance(payload, dict) or payload.get("costBreakdown"):
+            continue
+        cost_rows = []
+        for row in rows:
+            member_key = str(row.get("memberKey") or row.get("name") or "")
+            cost_row = _build_row(
+                str(row.get("name") or ""),
+                float(row.get("valueBn") or 0),
+                member_key=member_key,
+                source_url=str(row.get("sourceUrl") or ""),
+                source_form=str(row.get("sourceForm") or ""),
+                filing_date=str(row.get("filingDate") or ""),
+            )
+            if cost_name_zh_map.get(member_key):
+                cost_row["nameZh"] = cost_name_zh_map[member_key]
+            cost_rows.append(cost_row)
+        if cost_rows:
+            payload["costBreakdown"] = sorted(cost_rows, key=lambda item: float(item.get("valueBn") or 0), reverse=True)
+    result["quarters"] = quarters
+    return result
+
+
 def _post_process_result(company: dict[str, Any], result: dict[str, Any]) -> dict[str, Any]:
     result["quarters"] = result.get("quarters", {})
+    result = _supplement_custom_hierarchy_cost_breakdowns(company, result)
     return result
 
 
@@ -5364,12 +5586,14 @@ def fetch_official_revenue_structure_history(company: dict[str, Any], refresh: b
     if path.exists() and not refresh:
         if _is_current_revenue_structure_cache(cached_payload):
             supplemented_payload = _supplement_cached_custom_history(company, cached_payload)
-            if supplemented_payload is not cached_payload:
-                supplemented_payload = _post_process_result(company, supplemented_payload)
+            before_post_process_payload = deepcopy(supplemented_payload)
+            processed_payload = _post_process_result(company, supplemented_payload)
+            if processed_payload != before_post_process_payload:
+                supplemented_payload = processed_payload
                 supplemented_payload["_cacheVersion"] = CACHE_VERSION
                 _write_cached_json(path, supplemented_payload)
                 return supplemented_payload
-            return cached_payload
+            return processed_payload
 
     result = empty_result
     cik: int | None = None

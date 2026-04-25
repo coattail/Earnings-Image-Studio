@@ -109,9 +109,16 @@ function resolveDirectCostBreakdown(snapshot, company, entry) {
   }
   const supplemental = supplementalComponentsFor(company, snapshot?.quarterKey || entry?.quarterKey);
   const entrySupplemental = entry?.supplementalComponents || {};
+  const quarterKey = snapshot?.quarterKey || entry?.quarterKey;
+  const structureQuarter =
+    quarterKey && company?.officialRevenueStructureHistory?.quarters
+      ? company.officialRevenueStructureHistory.quarters[quarterKey]
+      : null;
   const breakdown =
     entry?.officialCostBreakdown ||
     entry?.costBreakdown ||
+    structureQuarter?.officialCostBreakdown ||
+    structureQuarter?.costBreakdown ||
     entrySupplemental?.officialCostBreakdown ||
     entrySupplemental?.costBreakdown ||
     supplemental?.officialCostBreakdown ||
