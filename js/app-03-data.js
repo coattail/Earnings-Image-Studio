@@ -1913,7 +1913,14 @@ function buildHistoryHarmonizedBusinessGroups(company, quarterKey) {
   return candidateRows.map((item, index) => {
     const key = canonicalBarSegmentKey(company?.id, item?.key || item?.id || item?.name, item?.name || "");
     const canonicalMeta = canonicalBarSegmentMeta(company?.id, key, item?.name || "Segment", item?.nameZh || "");
-    const color = history?.colorBySegment?.[key] || stableBarColorMap(company?.id, candidateRows.map((row) => row.key || row.id || row.name))[key];
+    const isTsmcHistory = String(company?.id || "").toLowerCase() === "tsmc";
+    const tsmcColorKey = canonicalBarSegmentKey("tsmc", key, canonicalMeta.name || item?.name || "");
+    const fallbackStableColor = stableBarColorMap(company?.id, candidateRows.map((row) => row.key || row.id || row.name))[key];
+    const color = isTsmcHistory
+      ? TSMC_HISTORY_SANKEY_COLOR_BY_SEGMENT[tsmcColorKey] ||
+        TSMC_HISTORY_SANKEY_COLOR_BY_SEGMENT[key] ||
+        UNIVERSAL_REVENUE_SEGMENT_PALETTE[index % UNIVERSAL_REVENUE_SEGMENT_PALETTE.length]
+      : history?.colorBySegment?.[key] || fallbackStableColor;
     return {
       id: key,
       memberKey: key,
@@ -2511,16 +2518,6 @@ const BAR_COMPANY_PALETTE_OVERRIDES = Object.freeze({
     "#2E8F63",
     "#F05D5E",
   ]),
-  tsmc: Object.freeze([
-    "#2499D5",
-    "#F6C244",
-    "#A8ABB4",
-    "#8BCB9B",
-    "#F28B52",
-    "#8E6BBE",
-    "#E58FA7",
-    "#58B8C9",
-  ]),
   tencent: Object.freeze([
     "#1D9BF0",
     "#13A9B8",
@@ -2628,6 +2625,19 @@ const BAR_SEGMENT_LABEL_OVERRIDES = Object.freeze({
   energygenerationstorage: Object.freeze({ name: "Energy generation & storage", nameZh: "能源发电与储能" }),
 });
 
+const TSMC_HISTORY_SANKEY_COLOR_BY_SEGMENT = Object.freeze({
+  smartphones: "#2499D5",
+  hpc: "#F6C244",
+  highperformancecomputing: "#F6C244",
+  iot: "#A8ABB4",
+  internetofthings: "#A8ABB4",
+  automotive: "#8BCB9B",
+  dce: "#F28B52",
+  digitalconsumerelectronics: "#F28B52",
+  others: "#8E6BBE",
+  otherplatforms: "#8E6BBE",
+});
+
 const BAR_SEGMENT_COLOR_SLOT_OVERRIDES = Object.freeze({
   microncomputedatacenter: 0,
   micronmobileclient: 1,
@@ -2677,18 +2687,6 @@ const BAR_SEGMENT_COLOR_SLOT_OVERRIDES = Object.freeze({
 });
 
 const BAR_SEGMENT_COLOR_SLOT_OVERRIDES_BY_COMPANY = Object.freeze({
-  tsmc: Object.freeze({
-    smartphones: 0,
-    hpc: 1,
-    highperformancecomputing: 1,
-    iot: 2,
-    internetofthings: 2,
-    automotive: 3,
-    dce: 4,
-    digitalconsumerelectronics: 4,
-    others: 5,
-    otherplatforms: 5,
-  }),
   visa: Object.freeze({
     dataprocessingrevenues: 0,
     internationaltransactionrevenues: 1,

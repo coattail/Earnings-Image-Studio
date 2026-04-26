@@ -413,15 +413,17 @@ select:focus {
 
 .preview-toolbar {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
   margin-top: 14px;
 }
 
 .toolbar-item {
   display: grid;
-  gap: 2px;
-  padding: 10px 11px;
+  gap: 6px;
+  align-content: start;
+  min-height: 96px;
+  padding: 14px 18px;
   border-radius: 10px;
   background: #fff;
   border: 1px solid var(--line);
@@ -429,13 +431,17 @@ select:focus {
 
 .toolbar-item span {
   color: var(--muted-soft);
-  font-size: 11px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
 }
 
 .toolbar-item strong {
   color: var(--title);
-  font-size: 13px;
+  font-size: 19px;
   font-weight: 700;
+  line-height: 1.35;
+  word-break: break-word;
 }
 
 .quality-pill {
@@ -631,10 +637,6 @@ select:focus {
   .controls {
     position: static;
   }
-
-  .preview-toolbar {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
 }
 
 @media (max-width: 960px) {
@@ -659,7 +661,21 @@ select:focus {
   }
 
   .preview-toolbar {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+
+  .toolbar-item {
+    min-height: 88px;
+    padding: 12px 14px;
+    gap: 4px;
+  }
+
+  .toolbar-item span {
+    font-size: 13px;
+  }
+
+  .toolbar-item strong {
+    font-size: 17px;
   }
 
   .kpi-grid {
