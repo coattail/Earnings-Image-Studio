@@ -39,6 +39,7 @@ COMPANY_DOMAINS: dict[str, str] = {
     "asml": "asml.com",
     "oracle": "oracle.com",
     "micron": "micron.com",
+    "amd": "amd.com",
     "costco": "costco.com",
     "mastercard": "mastercard.com",
     "abbvie": "abbvie.com",
@@ -78,6 +79,11 @@ OVERRIDE_LOGO_SOURCES: dict[str, dict[str, Any]] = {
     "alibaba": {
         "url": SIMPLE_ICON_URL.format(slug="alibabadotcom"),
         "fill": "#FF6A00",
+    },
+    "amd": {
+        "url": "https://dhndm4wak5fw9.cloudfront.net/AMD/TRMisc/7a/fc/f8/b4/29/A308OL1.png?Expires=32472144000&Signature=jgOX-MU9vt5qyqKFBhfgOELcWkVSs~9Tb3kLVGdtE7N0Z7hvJTOfFLl431NL6NfHtYGI8SMQ2BzDzZ0kWKf-4ipygsc7-28amr4k6T5BdKtt9rbDDAT5jOGeWVpc7IrilT6x-pRTQ6zSabO1OnMKTOoFUJ6ucO5NMxnodBuu1pUz1yd-6URcJ~-ZSfFjRm0nQQz7dTJYTMWAg1KSNGQpF9l3C18rL2j9T6Yz2oE4BEUeEd9nTfE4TJcblLnC3lf-RSMwE73uGg5p4WX2J1aGTC2yXGxR9GXTUEp3Udibi6qj3k2867VdnStufD5aNn9YZr10CzoA6QJt0R8b85Us2w__&Key-Pair-Id=K4IL6M96S15NB",
+        "official": True,
+        "skip_normalization": True,
     },
     "alphabet": {
         "url": "https://www.gstatic.com/images/branding/productlogos/googleg/v6/192px.svg",
@@ -952,6 +958,7 @@ def _resolve_logo_source(
     *,
     fill: str | None = None,
     official_override: bool | None = None,
+    skip_normalization: bool = False,
     source_type: str,
 ) -> dict[str, Any] | None:
     payload, content_type = _request_bytes(url)
@@ -964,7 +971,7 @@ def _resolve_logo_source(
         return None
     original_dimensions = _svg_dimensions(payload) if mime == "image/svg+xml" else _png_dimensions(payload)
     normalization: dict[str, Any] = {"normalized": False}
-    if mime == "image/png":
+    if mime == "image/png" and not skip_normalization:
         payload, normalization = _normalize_png_payload(payload)
     dimensions = _svg_dimensions(payload) if mime == "image/svg+xml" else _png_dimensions(payload)
     png_visual_stats = _png_visual_stats(payload) if mime == "image/png" else None
@@ -1097,6 +1104,7 @@ def _select_logo(company_id: str, domain: str) -> dict[str, Any]:
                     "url": override_source["url"],
                     "fill": override_source.get("fill"),
                     "official_override": override_source.get("official"),
+                    "skip_normalization": bool(override_source.get("skip_normalization")),
                     "source_type": "override",
                 }
             )
@@ -1132,6 +1140,7 @@ def _select_logo(company_id: str, domain: str) -> dict[str, Any]:
                     domain,
                     fill=spec.get("fill"),
                     official_override=spec.get("official_override"),
+                    skip_normalization=bool(spec.get("skip_normalization")),
                     source_type=spec["source_type"],
                 )
         except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError, subprocess.CalledProcessError) as exc:

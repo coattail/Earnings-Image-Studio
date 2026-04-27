@@ -95,11 +95,13 @@ class BuildDatasetIncrementalCacheTests(unittest.TestCase):
             tmp_path = Path(tmp_dir)
             cache_dir = tmp_path / "cache"
             output_path = tmp_path / "earnings-dataset.json"
+            dataset_index_path = tmp_path / "dataset-index.json"
 
             with (
                 patch.object(build_dataset, "TOP30_COMPANIES", [selected_company, stale_company]),
                 patch.object(build_dataset, "COMPANY_CACHE_DIR", cache_dir),
                 patch.object(build_dataset, "OUTPUT_PATH", output_path),
+                patch.object(build_dataset, "DATASET_INDEX_PATH", dataset_index_path),
                 patch.object(build_dataset, "parse_args", return_value=Namespace(refresh=False, companies="selected")),
                 patch.object(build_dataset, "load_manual_presets", return_value={}),
                 patch.object(build_dataset, "load_manual_company_overrides", return_value={}),
@@ -148,11 +150,13 @@ class BuildDatasetIncrementalCacheTests(unittest.TestCase):
             tmp_path = Path(tmp_dir)
             cache_dir = tmp_path / "cache"
             output_path = tmp_path / "earnings-dataset.json"
+            dataset_index_path = tmp_path / "dataset-index.json"
 
             with (
                 patch.object(build_dataset, "TOP30_COMPANIES", [selected_company, stale_company]),
                 patch.object(build_dataset, "COMPANY_CACHE_DIR", cache_dir),
                 patch.object(build_dataset, "OUTPUT_PATH", output_path),
+                patch.object(build_dataset, "DATASET_INDEX_PATH", dataset_index_path),
                 patch.object(build_dataset, "parse_args", return_value=Namespace(refresh=False, companies="selected")),
                 patch.object(build_dataset, "load_manual_presets", return_value={}),
                 patch.object(build_dataset, "load_manual_company_overrides", return_value={}),

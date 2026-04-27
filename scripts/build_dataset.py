@@ -109,6 +109,7 @@ TOP30_COMPANIES: list[dict[str, Any]] = [
     {"id": "asml", "ticker": "ASML", "nameZh": "阿斯麦", "nameEn": "ASML", "slug": "asml", "rank": 17, "isAdr": True, "brand": {"primary": "#009FE3", "secondary": "#111827", "accent": "#E0F2FE"}},
     {"id": "oracle", "ticker": "ORCL", "nameZh": "甲骨文", "nameEn": "Oracle", "slug": "orcl", "rank": 18, "isAdr": False, "brand": {"primary": "#F80000", "secondary": "#111827", "accent": "#FEE2E2"}},
     {"id": "micron", "ticker": "MU", "nameZh": "美光科技", "nameEn": "Micron Technology", "slug": "mu", "rank": 19, "isAdr": False, "brand": {"primary": "#005EB8", "secondary": "#111827", "accent": "#DBEAFE"}},
+    {"id": "amd", "ticker": "AMD", "nameZh": "超威半导体", "nameEn": "AMD", "slug": "amd", "rank": 19.5, "isAdr": False, "brand": {"primary": "#111827", "secondary": "#ED1C24", "accent": "#E5E7EB"}, "financialSource": "stockanalysis"},
     {"id": "costco", "ticker": "COST", "nameZh": "好市多", "nameEn": "Costco", "slug": "cost", "rank": 20, "isAdr": False, "brand": {"primary": "#E31837", "secondary": "#005DAA", "accent": "#FCE7F3"}},
     {"id": "mastercard", "ticker": "MA", "nameZh": "万事达卡", "nameEn": "Mastercard", "slug": "ma", "rank": 21, "isAdr": False, "brand": {"primary": "#EB001B", "secondary": "#F79E1B", "accent": "#FDF2D8"}},
     {"id": "abbvie", "ticker": "ABBV", "nameZh": "艾伯维", "nameEn": "AbbVie", "slug": "abbv", "rank": 22, "isAdr": False, "brand": {"primary": "#071D49", "secondary": "#3AB6C1", "accent": "#D9F5F6"}},
@@ -164,6 +165,84 @@ BAR_SEGMENT_CANONICAL_BY_COMPANY: dict[str, dict[str, str]] = {
 MICRON_LEGACY_SEGMENT_KEYS = {"cnbu", "mbu", "sbu", "ebu", "allothersegments"}
 MICRON_CURRENT_SEGMENT_KEYS = {"cmbu", "mcbu", "cdbu", "aebu"}
 MICRON_SCHEMA_CHANGE_QUARTER = "2025Q4"
+
+AMD_SEGMENT_LABELS: dict[str, tuple[str, str]] = {
+    "datacenter": ("Data Center", "数据中心"),
+    "client": ("Client", "客户端"),
+    "gaming": ("Gaming", "游戏"),
+    "embedded": ("Embedded", "嵌入式"),
+}
+
+AMD_OFFICIAL_SEGMENT_REVENUE_CORRECTIONS: dict[str, dict[str, Any]] = {
+    "2022Q1": {
+        "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2023-5-2-amd-reports-first-quarter-2023-financial-results.html",
+        "filingDate": "2023-05-02",
+        "segments": {"datacenter": 1.293, "client": 2.124, "gaming": 1.875, "embedded": 0.595},
+    },
+    "2022Q2": {
+        "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2022-8-2-amd-reports-second-quarter-2022-financial-results-.html",
+        "filingDate": "2022-08-02",
+        "segments": {"datacenter": 1.486, "client": 2.152, "gaming": 1.655, "embedded": 1.257},
+    },
+    "2022Q3": {
+        "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2023-10-31-amd-reports-third-quarter-2023-financial-results.html",
+        "filingDate": "2023-10-31",
+        "segments": {"datacenter": 1.609, "client": 1.022, "gaming": 1.631, "embedded": 1.303},
+    },
+    "2022Q4": {
+        "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2024-1-30-amd-reports-fourth-quarter-and-full-year-2023-fina.html",
+        "filingDate": "2024-01-30",
+        "segments": {"datacenter": 1.655, "client": 0.903, "gaming": 1.644, "embedded": 1.397},
+    },
+    "2023Q1": {
+        "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2023-5-2-amd-reports-first-quarter-2023-financial-results.html",
+        "filingDate": "2023-05-02",
+        "segments": {"datacenter": 1.295, "client": 0.739, "gaming": 1.757, "embedded": 1.562},
+    },
+    "2023Q2": {
+        "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2023-8-1-amd-reports-second-quarter-2023-financial-results.html",
+        "filingDate": "2023-08-01",
+        "segments": {"datacenter": 1.321, "client": 0.998, "gaming": 1.581, "embedded": 1.459},
+    },
+    "2023Q3": {
+        "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2023-10-31-amd-reports-third-quarter-2023-financial-results.html",
+        "filingDate": "2023-10-31",
+        "segments": {"datacenter": 1.598, "client": 1.453, "gaming": 1.506, "embedded": 1.243},
+    },
+    "2023Q4": {
+        "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2024-1-30-amd-reports-fourth-quarter-and-full-year-2023-fina.html",
+        "filingDate": "2024-01-30",
+        "segments": {"datacenter": 2.282, "client": 1.461, "gaming": 1.368, "embedded": 1.057},
+    },
+}
+
+AMD_OFFICIAL_FINANCIAL_ENTRY_CORRECTIONS: dict[str, dict[str, Any]] = {
+    "2023Q3": {
+        "calendarQuarter": "2023Q3",
+        "periodEnd": "2023-09-30",
+        "fiscalYear": "2023",
+        "fiscalQuarter": "Q3",
+        "fiscalLabel": "FY2023 Q3",
+        "statementCurrency": "USD",
+        "revenueBn": 5.8,
+        "revenueYoyPct": 4.223,
+        "costOfRevenueBn": 2.843,
+        "grossProfitBn": 2.747,
+        "operatingExpensesBn": 2.523,
+        "operatingIncomeBn": 0.224,
+        "pretaxIncomeBn": 0.257,
+        "taxBn": -0.042,
+        "netIncomeBn": 0.299,
+        "nonOperatingBn": 0.033,
+        "grossMarginPct": 47.362,
+        "operatingMarginPct": 3.862,
+        "profitMarginPct": 5.155,
+        "effectiveTaxRatePct": -16.342,
+        "statementSource": "manual-amd-official",
+        "statementSourceUrl": "https://www.amd.com/en/newsroom/press-releases/2023-10-31-amd-reports-third-quarter-2023-financial-results.html",
+        "statementFilingDate": "2023-10-31",
+    },
+}
 
 
 def parse_args() -> argparse.Namespace:
@@ -263,6 +342,7 @@ def build_company_payload_for_dataset(
     payload = apply_manual_company_override(payload, company, manual_company_overrides)
     payload = apply_usd_display_fields(payload, fx_cache)
     payload = apply_fused_extraction(payload, company, refresh=refresh)
+    payload = apply_amd_official_segment_revenue_corrections(payload)
     return payload
 
 
@@ -370,6 +450,82 @@ def normalize_official_revenue_segments(company_id: str, quarter_key: str, rows:
     if validation_note:
         normalized_rows = mark_revenue_segments_validation_ineligible(normalized_rows, validation_note)
     return normalized_rows
+
+
+def apply_amd_official_segment_revenue_corrections(company_payload: dict[str, Any]) -> dict[str, Any]:
+    if str(company_payload.get("id") or "").strip().lower() != "amd":
+        return company_payload
+    financials = company_payload.get("financials")
+    if not isinstance(financials, dict):
+        return company_payload
+
+    fiscal_realignments = (
+        ("2023Q2", "2023Q1", "Q1", "2023-04-01"),
+        ("2023Q3", "2023Q2", "Q2", "2023-07-01"),
+    )
+    for source_quarter, target_quarter, fiscal_quarter, period_end in fiscal_realignments:
+        entry = financials.get(source_quarter)
+        if not isinstance(entry, dict):
+            continue
+        if str(entry.get("fiscalQuarter") or "") != fiscal_quarter or str(entry.get("periodEnd") or "") != period_end:
+            continue
+        moved_entry = dict(entry)
+        moved_entry["calendarQuarter"] = target_quarter
+        financials[target_quarter] = moved_entry
+        if source_quarter != target_quarter:
+            financials.pop(source_quarter, None)
+
+    for quarter_key, correction in AMD_OFFICIAL_FINANCIAL_ENTRY_CORRECTIONS.items():
+        entry = financials.get(quarter_key)
+        if not isinstance(entry, dict) or str(entry.get("periodEnd") or "") != str(correction.get("periodEnd") or ""):
+            financials[quarter_key] = dict(correction)
+
+    for quarter_key, correction in AMD_OFFICIAL_SEGMENT_REVENUE_CORRECTIONS.items():
+        entry = financials.get(quarter_key)
+        if not isinstance(entry, dict):
+            continue
+        source_url = str(correction.get("sourceUrl") or "")
+        filing_date = str(correction.get("filingDate") or "")
+        segments = correction.get("segments")
+        if not isinstance(segments, dict):
+            continue
+        rows: list[dict[str, Any]] = []
+        revenue_bn = _safe_float(entry.get("revenueBn"))
+        for member_key in ("datacenter", "client", "gaming", "embedded"):
+            value_bn = _safe_float(segments.get(member_key))
+            if value_bn is None:
+                continue
+            name, name_zh = AMD_SEGMENT_LABELS[member_key]
+            rows.append(
+                {
+                    "name": name,
+                    "nameZh": name_zh,
+                    "memberKey": member_key,
+                    "valueBn": round(value_bn, 3),
+                    "yoyPct": None,
+                    "qoqPct": None,
+                    "mixPct": round(value_bn / revenue_bn * 100, 1) if revenue_bn and revenue_bn > 0 else None,
+                    "mixYoyDeltaPp": None,
+                    "sourceUrl": source_url,
+                    "sourceForm": "QuarterlyResultsRelease",
+                    "filingDate": filing_date,
+                    "metricMode": "flow",
+                    "validationNotes": ["amd-official-restated-segment-table"],
+                }
+            )
+        if len(rows) == 4:
+            entry["officialRevenueSegments"] = normalize_official_revenue_segments("amd", quarter_key, rows)
+            entry["officialRevenueStyle"] = entry.get("officialRevenueStyle") or "semiconductor-segments"
+            flags = entry.get("qualityFlags")
+            if not isinstance(flags, list):
+                flags = []
+            if "amd-official-segment-label-correction" not in flags:
+                flags.append("amd-official-segment-label-correction")
+            entry["qualityFlags"] = flags
+
+    enrich_growth_rows(financials, "officialRevenueSegments")
+    company_payload["quarters"] = sorted(financials.keys(), key=parse_period)
+    return company_payload
 
 
 SEGMENT_ENTITY_DISCLOSURE_PATTERN = re.compile(r"\b(company|corporation|group|business|businesses|railroad|energy)\b", re.I)

@@ -95,6 +95,45 @@ class OfficialSegmentsArchivedDiagnosticsTests(unittest.TestCase):
             ],
         )
 
+    def test_submission_records_skips_archived_files_older_than_min_filing_date(self) -> None:
+        submissions_payload = {
+            "filings": {
+                "recent": {
+                    "form": ["10-Q"],
+                    "accessionNumber": ["0000000123-24-000001"],
+                    "filingDate": ["2024-04-30"],
+                    "primaryDocument": ["current.htm"],
+                },
+                "files": [
+                    {"name": "CIK0000000123-submissions-2016.json", "filingTo": "2016-12-31"},
+                    {"name": "CIK0000000123-submissions-2018.json", "filingTo": "2018-12-31"},
+                ],
+            }
+        }
+
+        def fake_request_json(url: str):
+            if url.endswith("2018.json"):
+                return {
+                    "form": ["10-K"],
+                    "accessionNumber": ["0000000123-18-000001"],
+                    "filingDate": ["2018-02-15"],
+                    "primaryDocument": ["archive.htm"],
+                }
+            raise AssertionError(f"unexpected archived fetch: {url}")
+
+        with patch.object(official_segments, "_request_json", side_effect=fake_request_json) as mock_request_json:
+            records = official_segments._submission_records(submissions_payload)
+
+        requested_urls = [str(call.args[0]) for call in mock_request_json.call_args_list]
+        self.assertEqual(requested_urls, ["https://data.sec.gov/submissions/CIK0000000123-submissions-2018.json"])
+        self.assertEqual(
+            records,
+            [
+                ("10-Q", "0000000123-24-000001", "2024-04-30", "current.htm"),
+                ("10-K", "0000000123-18-000001", "2018-02-15", "archive.htm"),
+            ],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -501,7 +501,7 @@ function renderPixelReplicaSvg(snapshot) {
   const scale = revenueHeight / revenueBn;
   const grossHeight = Math.max(grossProfitBn * scale, 4);
   const costHeight = costOfRevenueBn > 0.05 ? Math.max(costOfRevenueBn * scale, 4) : 0;
-  const opHeight = Math.max(operatingProfitBn * scale, 4);
+  const opHeight = hasOperatingLoss ? 0 : Math.max(operatingProfitBn * scale, 4);
   const opexHeight = Math.max(operatingExpensesBn * scale, 4);
   const netHeight = Math.max(netProfitBn * scale, nearZeroNet ? scaleY(4.5) : 4);
   const showCostBridge = costHeight > 0;
@@ -701,12 +701,19 @@ function renderPixelReplicaSvg(snapshot) {
         chartBottomLimit - costHeight
       )
     : chartBottomLimit - scaleY(8);
-  const opTopBase = clamp(
+  const profitOpTopBase = clamp(
     (hasExplicitOpNodeTop ? layoutY(snapshot.layout?.opNodeTop) : grossTopBase - profitRiseY) +
       stageCenteringShiftY * safeNumber(snapshot.layout?.operatingStageShiftFactor, 1),
     scaleY(220),
     chartBottomLimit - opHeight
   );
+  const opTopBase = hasOperatingLoss
+    ? clamp(
+        Math.max(profitOpTopBase, grossTopBase - scaleY(safeNumber(snapshot.layout?.operatingLossMaxRiseAboveGrossY, 108))),
+        scaleY(220),
+        chartBottomLimit - opHeight
+      )
+    : profitOpTopBase;
   const opexMinGapFromOperating = scaleY(safeNumber(snapshot.layout?.opexMinGapFromOperating, usesHeroLockups ? 46 : 40));
   const grossExpenseGapRatio = safeNumber(snapshot.layout?.grossExpenseGapRatio, 0.44);
   const grossExpenseGapBaseY = scaleY(safeNumber(snapshot.layout?.grossExpenseGapBaseY, 0));
@@ -957,14 +964,15 @@ function renderPixelReplicaSvg(snapshot) {
   const minCoreNetHeight = positiveAdjustments.length || belowOperatingItems.length ? 0 : Math.min(4, opHeight);
   const coreNetHeight = clamp(sourceCoreNetHeight, minCoreNetHeight, opHeight);
   const residualNetTargetHeight = positiveAdjustments.length ? Math.max(netHeight - totalPositiveMergeHeight, 0) : netHeight;
+  const explicitNetSourceBn = Math.max(operatingProfitBn - explicitBelowOperatingBn, 0);
   const implicitPositiveNetBridgeBn =
-    !positiveAdjustments.length && !belowOperatingItems.length
-      ? Math.max(netProfitBn - operatingProfitBn, 0)
+    !netLoss && !positiveAdjustments.length
+      ? Math.max(netProfitBn - explicitNetSourceBn, 0)
       : 0;
-  const implicitPositiveNetBridgeMaxBn = Math.max(
-    safeNumber(snapshot.layout?.implicitPositiveNetBridgeMaxBn, 0.06),
-    0
-  );
+  const implicitPositiveNetBridgeMaxBn =
+    snapshot.layout?.implicitPositiveNetBridgeMaxBn !== null && snapshot.layout?.implicitPositiveNetBridgeMaxBn !== undefined
+      ? Math.max(safeNumber(snapshot.layout?.implicitPositiveNetBridgeMaxBn), 0)
+      : 0.045;
   const useImplicitPositiveNetExpansion =
     implicitPositiveNetBridgeBn > 0.002 && implicitPositiveNetBridgeBn <= implicitPositiveNetBridgeMaxBn;
   const coreNetTargetHeight = useImplicitPositiveNetExpansion
@@ -2254,12 +2262,14 @@ function renderPixelReplicaSvg(snapshot) {
   const belowPositiveVisuallyClear = positiveAdjustments.length
     ? positiveBelowTopMax >= positiveBelowTopMin && belowPositiveVisibleDelta >= positivePreferredMergeDeltaY
     : false;
+  const forcePositiveAbove = snapshot.layout?.forcePositiveAbove === true;
   const positiveAbove = positiveAdjustments.length
-    ? abovePositiveFeasible &&
+    ? forcePositiveAbove ||
+      (abovePositiveFeasible &&
       (!belowPositiveFeasible ||
         !belowPositiveComfortable ||
         !belowPositiveVisuallyClear ||
-        abovePositiveSlack + scaleY(8) >= belowPositiveSlack)
+        abovePositiveSlack + scaleY(8) >= belowPositiveSlack))
     : false;
   const positiveBelowLabelAbove =
     positiveAdjustments.length && !positiveAbove && belowPositiveClearance < positiveFloatPadding * 1.45;
@@ -3646,7 +3656,7 @@ function renderPixelReplicaSvg(snapshot) {
     Math.max(referenceLogoMetrics.width * referenceLogoMetrics.height * referenceLogoScale * referenceLogoScale, 1)
   );
   const rawLogoScale = Math.sqrt(logoTargetArea / Math.max(logoVisibleMetrics.width * logoVisibleMetrics.height, 1));
-  const logoScale = clamp(
+  const autoLogoScale = clamp(
     rawLogoScale * safeNumber(snapshot.layout?.logoAreaScaleFactor, 1),
     safeNumber(snapshot.layout?.logoMinScale, 0.74),
     safeNumber(snapshot.layout?.logoMaxScale, 1.32)
@@ -3657,18 +3667,28 @@ function renderPixelReplicaSvg(snapshot) {
       ? safeNumber(snapshot.layout?.periodEndInlineX) + leftShiftX
       : inlinePeriodLayout.periodEndX;
   const periodEndX = Math.min(periodEndPreferredX, width - 84);
-  const logoX = revenueX + nodeWidth / 2 - (logoMetrics.width * logoScale) / 2;
+  const hasExplicitLogoPosition =
+    snapshot.layout?.logoX !== null &&
+    snapshot.layout?.logoX !== undefined &&
+    snapshot.layout?.logoY !== null &&
+    snapshot.layout?.logoY !== undefined;
+  const logoScale = hasExplicitLogoPosition ? safeNumber(snapshot.layout?.logoScale, autoLogoScale) : autoLogoScale;
+  const logoX = hasExplicitLogoPosition
+    ? safeNumber(snapshot.layout?.logoX) + leftShiftX
+    : revenueX + nodeWidth / 2 - (logoMetrics.width * logoScale) / 2;
   const logoHeight = logoMetrics.height * logoScale;
   const logoDefaultY =
     revenueTop -
     logoHeight -
     scaleY(safeNumber(snapshot.layout?.logoGapAboveRevenueY, 42) * CORPORATE_LOGO_REVENUE_GAP_MULTIPLIER);
   const logoMinY = layoutY(snapshot.layout?.logoMinY, 134);
-  const logoY = clamp(
-    logoDefaultY,
-    logoMinY,
-    revenueTop - logoHeight - scaleY(safeNumber(snapshot.layout?.logoBottomClearanceY, 16))
-  );
+  const logoY = hasExplicitLogoPosition
+    ? layoutY(snapshot.layout?.logoY)
+    : clamp(
+        logoDefaultY,
+        logoMinY,
+        revenueTop - logoHeight - scaleY(safeNumber(snapshot.layout?.logoBottomClearanceY, 16))
+      );
   const opexSummaryX =
     snapshot.layout?.opexSummaryX !== null && snapshot.layout?.opexSummaryX !== undefined
       ? safeNumber(snapshot.layout?.opexSummaryX) + leftShiftX
@@ -4723,7 +4743,7 @@ function renderPixelReplicaSvg(snapshot) {
     const isSelected = selectedEditorNodeId === frame.id;
     const visibleStroke = isSelected ? ` stroke="${rgba("#175C8E", 0.8)}" stroke-width="3"` : "";
     return `
-      <rect x="${frame.x.toFixed(1)}" y="${frame.y.toFixed(1)}" width="${frame.width.toFixed(1)}" height="${frame.height.toFixed(1)}" fill="${fill}"${visibleStroke}></rect>
+      <rect x="${frame.x.toFixed(1)}" y="${frame.y.toFixed(1)}" width="${frame.width.toFixed(1)}" height="${frame.height.toFixed(1)}" fill="${fill}"${visibleStroke} data-edit-node-visible-id="${escapeHtml(frame.id)}"></rect>
       <rect x="${(frame.x - hitPaddingX).toFixed(1)}" y="${(frame.y - hitPaddingY).toFixed(1)}" width="${(frame.width + hitPaddingX * 2).toFixed(1)}" height="${(frame.height + hitPaddingY * 2).toFixed(1)}" fill="transparent" opacity="0.001" data-edit-hit="true" data-edit-node-id="${escapeHtml(frame.id)}"></rect>
     `;
   };
@@ -7223,7 +7243,6 @@ function renderPixelReplicaSvg(snapshot) {
       <g id="chartContent">
       <text x="${titleX}" y="${titleY}" text-anchor="${titleAnchor}" font-size="${titleFontSize}" font-weight="800" fill="${titleColor}" letter-spacing="0.3">${escapeHtml(titleText)}</text>
       ${snapshot.periodEndLabel ? `<text x="${periodEndX}" y="${periodEndY}" text-anchor="start" font-size="${periodEndFontSize}" fill="${muted}">${escapeHtml(localizePeriodEndLabel(snapshot.periodEndLabel || ""))}</text>` : ""}
-      ${renderCorporateLogo(snapshot.companyLogoKey, logoX, logoY, { scale: logoScale })}
     `;
 
   leftDetailRenderSlices.forEach((slice, index) => {
@@ -7289,17 +7308,21 @@ function renderPixelReplicaSvg(snapshot) {
       }
       <path d="${replicaOutflowPath(grossFrame.right, grossExpenseBand.top, grossExpenseBand.bottom, operatingExpenseFrame.left, opexInboundBand.top, opexInboundBand.bottom, grossToExpenseRibbonOptions)}" fill="${redFlow}" opacity="0.97"></path>
 
-      ${renderEditableNodeRect(operatingFrame, operatingOutcomeNodeFill)}
-      ${renderMetricCluster(
-        operatingFrame.centerX,
-        operatingMetricYShifted,
-        localizeChartPhrase(operatingOutcomeLabel),
-        operatingOutcomeValueText,
-        snapshot.operatingMarginPct !== null && snapshot.operatingMarginPct !== undefined ? `${formatPct(snapshot.operatingMarginPct)} ${marginLabel()}` : "",
-        snapshot.operatingMarginYoyDeltaPp !== null && snapshot.operatingMarginYoyDeltaPp !== undefined ? formatPp(snapshot.operatingMarginYoyDeltaPp) : "",
-        operatingOutcomeTextColor,
-        operatingMetricLayout
-      )}
+      ${renderEditableNodeRect(operatingFrame, hasOperatingLoss ? "transparent" : operatingOutcomeNodeFill)}
+      ${
+        hasOperatingLoss
+          ? ""
+          : renderMetricCluster(
+              operatingFrame.centerX,
+              operatingMetricYShifted,
+              localizeChartPhrase(operatingOutcomeLabel),
+              operatingOutcomeValueText,
+              snapshot.operatingMarginPct !== null && snapshot.operatingMarginPct !== undefined ? `${formatPct(snapshot.operatingMarginPct)} ${marginLabel()}` : "",
+              snapshot.operatingMarginYoyDeltaPp !== null && snapshot.operatingMarginYoyDeltaPp !== undefined ? formatPp(snapshot.operatingMarginYoyDeltaPp) : "",
+              operatingOutcomeTextColor,
+              operatingMetricLayout
+            )
+      }
 
       ${renderEditableNodeRect(operatingExpenseFrame, redNode)}
 
@@ -7978,6 +8001,13 @@ function renderPixelReplicaSvg(snapshot) {
         positiveTopMin = bestNodePlacement.topMin;
         positiveTopMax = bestNodePlacement.topMax;
       }
+    }
+    if (snapshot.layout?.positiveForceTopY !== null && snapshot.layout?.positiveForceTopY !== undefined) {
+      positiveTop = clamp(
+        layoutY(snapshot.layout?.positiveForceTopY),
+        positiveTopMin,
+        positiveTopMax
+      );
     }
     const placedPositiveLabelRects = [];
     let netPositiveCursor = netPositiveTop;
@@ -8787,6 +8817,7 @@ function renderPixelReplicaSvg(snapshot) {
   svg += renderOperatingProfitBreakdownCallout();
 
   svg += `
+    ${renderCorporateLogo(snapshot.companyLogoKey, logoX, logoY, { scale: logoScale })}
     ${revenueLabelMarkup}
     ${renderOpexSummaryMarkup()}
   `;

@@ -30,7 +30,7 @@ const state = {
   },
 };
 
-const BUILD_ASSET_VERSION = "20260417-lazy-home-index-v138";
+const BUILD_ASSET_VERSION = "20260427-stable-bars-mastercard-amd-v147";
 const CORPORATE_LOGO_AREA_MULTIPLIER = 1.728;
 const CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER = Math.sqrt(CORPORATE_LOGO_AREA_MULTIPLIER);
 const CORPORATE_LOGO_REVENUE_GAP_MULTIPLIER = 1.2;
@@ -385,6 +385,27 @@ const STRUCTURAL_PROTOTYPES = {
     },
     defaults: {},
   },
+  "semiconductor-segments-bridge": {
+    label: "Semiconductor segment bridge",
+    tokenPresetKey: "tsmc-platform-mix",
+    tokens: {
+      layout: {
+        logoScale: 1.1,
+        logoAreaScaleFactor: 1.38,
+        logoGapAboveRevenueY: 50,
+        operatingLossMaxRiseAboveGrossY: 88,
+        sourceNodeMinY: 326,
+        sourceNodeMaxY: 1088,
+        opexMinGapFromOperating: 56,
+      },
+    },
+    flags: {
+      preferCompactSources: true,
+    },
+    defaults: {
+      costLabel: "Cost of revenue",
+    },
+  },
   "membership-fee-bridge": {
     label: "Membership fee bridge",
     tokens: {
@@ -666,6 +687,7 @@ const OFFICIAL_STYLE_TO_PROTOTYPE = {
   "alibaba-commerce-staged": "hierarchical-detail-bridge",
   "asml-technology-bridge": "hierarchical-detail-bridge",
   "commerce-service-bridge": "commerce-service-bridge",
+  "semiconductor-segments": "semiconductor-segments-bridge",
   "tsmc-platform-mix": "share-platform-mix",
 };
 
@@ -2312,6 +2334,9 @@ function opaqueBoundsFromImageData(imageData, width, height, alphaThreshold = 10
 async function normalizeBitmapLogoAsset(asset) {
   const mime = String(asset?.mime || "").trim().toLowerCase();
   if (!asset?.dataUrl || !/^image\/(png|jpeg|jpg|webp|svg\+xml|svg)$/i.test(mime)) return asset;
+  if (asset?.sourceType === "user-uploaded" || asset?.skipBrowserNormalization || asset?.normalization?.skipBrowserNormalization) {
+    return asset;
+  }
   try {
     const logoRasterApi = globalThis?.EarningsVizLogoRaster || {};
     const image = new Image();
@@ -2518,6 +2543,15 @@ function inferredOfficialRevenueStyle(company, entry, rows = []) {
       memberKeys.has("micronautoembedded"))
   ) {
     return "micron-business-unit-bridge";
+  }
+  if (
+    company?.id === "amd" &&
+    memberKeys.has("datacenter") &&
+    memberKeys.has("client") &&
+    memberKeys.has("gaming") &&
+    memberKeys.has("embedded")
+  ) {
+    return "semiconductor-segments";
   }
   return "";
 }

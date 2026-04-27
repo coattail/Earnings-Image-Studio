@@ -349,6 +349,7 @@ function resolveNormalizedOperatingStage(entry, grossProfitBn, costOfRevenueBn, 
     totalCostsAdjustedOperatingExpensesBn <= safeNumber(grossProfitBn) + Math.max(0.35, safeNumber(grossProfitBn) * 0.04);
   const shouldNormalizeFromTotalCosts =
     totalCostsProxyLikely &&
+    sourceOperatingProfitBn === null &&
     !sourceLooksDerivedFromGrossBridge &&
     !(
       explicitOpexBreakdownSumBn > 0.05 &&
@@ -439,8 +440,11 @@ function resolveNormalizedOperatingExpenses(entry, grossProfitBn, operatingProfi
   const explicitBreakdownMatchesSource =
     explicitOpexBreakdownSumBn > 0.05 &&
     Math.abs(explicitOpexBreakdownSumBn - sourceOperatingExpensesBn) <= Math.max(0.35, explicitOpexBreakdownSumBn * 0.05);
+  const exceedsGrossBridgeResidual =
+    sourceOperatingExpensesBn > reconciledOperatingExpensesBn + Math.max(0.02, Math.abs(reconciledOperatingExpensesBn) * 0.002);
   const sourceReliable =
     !exceedsGrossProfit &&
+    !exceedsGrossBridgeResidual &&
     (
       delta <= 0.25 ||
       relativeDelta <= 0.08 ||
@@ -1382,13 +1386,15 @@ function buildOfficialBusinessGroups(company, entry, options = {}) {
   const palette = revenuePaletteForStyle(company, style, curated.length);
   const compactMode = curated.length >= 5;
   const groups = curated.map((item, index) => {
-    const memberKey = item.memberKey || item.name;
+    const rawMemberKey = item.memberKey || item.name;
+    const memberKey = canonicalBarSegmentKey(company?.id, rawMemberKey, item.name || "");
+    const labelMeta = canonicalBarSegmentMeta(company?.id, memberKey, item.name || "Segment", item.nameZh || "");
     const color = palette[index % palette.length];
     const group = {
       id: memberKey,
-      name: item.name,
-      nameZh: item.nameZh || translateBusinessLabelToZh(item.name),
-      displayLines: wrapLines(item.name, compactMode ? 14 : 16),
+      name: labelMeta.name || item.name,
+      nameZh: labelMeta.nameZh || item.nameZh || translateBusinessLabelToZh(item.name),
+      displayLines: wrapLines(labelMeta.name || item.name, compactMode ? 14 : 16),
       valueBn: item.valueBn,
       flowValueBn: item.flowValueBn ?? item.valueBn,
       yoyPct: resolvedDisplayAdjustedGrowthPct(company, quarterKey, item.yoyPct, "yoy"),
@@ -1741,6 +1747,12 @@ function buildGenericSnapshot(company, entry, quarterKey) {
       ? "当前桥图主干采用官方优先的数据流程；若官方主干字段不完整，会安全回退到标准化财务表数据，而不是凭空推断错误桥段。"
       : "模板底稿基于公开季度财务主干字段生成；若部分利润层级未直接披露，会按财报主干关系自动补齐桥图节点。";
   const operatingLossOverflowBn = hasRenderableGrossStage && operatingProfitBn < -0.02 ? Math.abs(operatingProfitBn) : 0;
+  const shouldSimplifyOperatingLossPositiveBridge =
+    String(company?.id || "").toLowerCase() === "amd" &&
+    hasRenderableGrossStage &&
+    operatingLossOverflowBn > 0.02 &&
+    safeNumber(entry.netIncomeBn) > 0.02 &&
+    operatingLossOverflowBn <= Math.max(0.18, safeNumber(entry.revenueBn) * 0.025);
   const displayOperatingExpensesBn =
     !hasRenderableGrossStage
       ? null
@@ -1750,12 +1762,16 @@ function buildGenericSnapshot(company, entry, quarterKey) {
   const resolvedFinancialFootnote =
     !hasRenderableGrossStage
       ? `${financialFootnote} 当前季度缺少可稳定还原毛利桥的财务主干字段，因此仅保留营收结构，不再伪造利润桥节点。`
+      : shouldSimplifyOperatingLossPositiveBridge
+      ? `${financialFootnote} 当前季度实际营业费用为 ${formatSnapshotBillions(operatingExpensesBn)}，营业亏损仅 ${formatSnapshotBillions(
+          operatingLossOverflowBn
+        )}；为避免小额亏损与税项收益交叉，桥图将其并入净利调整口径展示。`
       : operatingLossOverflowBn > 0
       ? `${financialFootnote} 当前季度实际营业费用为 ${formatSnapshotBillions(operatingExpensesBn)}；其中 ${formatSnapshotBillions(displayOperatingExpensesBn)} 由毛利覆盖，超出的 ${formatSnapshotBillions(operatingLossOverflowBn)} 会在净利桥中单列为营业亏损。`
       : financialFootnote;
   const positiveAdjustments = [];
   const belowOperatingItems = [];
-  if (hasRenderableGrossStage && operatingLossOverflowBn > 0.05) {
+  if (hasRenderableGrossStage && operatingLossOverflowBn > 0.05 && !shouldSimplifyOperatingLossPositiveBridge) {
     belowOperatingItems.push({
       name: "Operating loss overflow",
       nameZh: "超出毛利的营业费用",
@@ -1819,7 +1835,7 @@ function buildGenericSnapshot(company, entry, quarterKey) {
   const netBridgeResidualBn =
     targetNetBridgeBn !== null && targetNetBridgeBn !== undefined ? Number((targetNetBridgeBn - accountedNetBridgeBn).toFixed(3)) : null;
   const netBridgeResidualTolerance =
-    targetNetBridgeBn !== null && targetNetBridgeBn !== undefined ? Math.max(0.08, Math.abs(targetNetBridgeBn) * 0.01) : 0;
+    targetNetBridgeBn !== null && targetNetBridgeBn !== undefined ? Math.max(0.045, Math.abs(targetNetBridgeBn) * 0.005) : 0;
   if (hasRenderableGrossStage && netBridgeResidualBn !== null && Math.abs(netBridgeResidualBn) > netBridgeResidualTolerance) {
     if (netBridgeResidualBn > 0) {
       positiveAdjustments.push({
@@ -1836,6 +1852,19 @@ function buildGenericSnapshot(company, entry, quarterKey) {
         color: "#D92D20",
       });
     }
+  }
+  if (shouldSimplifyOperatingLossPositiveBridge && positiveAdjustments.length > 1) {
+    const collapsedPositiveBridgeBn =
+      targetNetBridgeBn !== null && targetNetBridgeBn !== undefined && targetNetBridgeBn > 0
+        ? safeNumber(targetNetBridgeBn)
+        : positiveAdjustments.reduce((sum, item) => sum + Math.max(safeNumber(item?.valueBn), 0), 0);
+    positiveAdjustments.splice(0, positiveAdjustments.length, {
+      name: "Tax and other net benefits",
+      nameZh: "税项及其他净收益",
+      valueBn: Number(collapsedPositiveBridgeBn.toFixed(3)),
+      color: "#16A34A",
+      valueFormat: "plain",
+    });
   }
   return {
     mode: "template-base",
@@ -1857,6 +1886,24 @@ function buildGenericSnapshot(company, entry, quarterKey) {
     displayScaleFactor: displayConfig.displayScaleFactor,
     usesFxConversion: displayConfig.usesFxConversion,
     bridgeCoverageMode,
+    layout: shouldSimplifyOperatingLossPositiveBridge
+      ? {
+          forcePositiveAbove: true,
+          positiveBranchRunwayX: 250,
+          positivePreferredRunwayX: 230,
+          positiveNodeMinOffsetFromNetX: 210,
+          positiveNodeMinOffsetFromOpX: 52,
+          positiveAestheticNudgeStrength: 0,
+          positiveForceTopY: 235,
+          positiveAboveCorridorTopGapY: 0,
+          positiveAboveHardCorridorTopGapY: -16,
+          positiveAboveHardCorridorBottomGapY: 2,
+        }
+      : positiveAdjustments.length
+      ? {
+          forcePositiveAbove: true,
+        }
+      : undefined,
     businessGroups: [
       {
         name: "Reported revenue",
@@ -2593,6 +2640,12 @@ const BAR_SEGMENT_CANONICAL_BY_COMPANY = Object.freeze({
     others: "others",
     otherplatforms: "others",
   }),
+  amd: Object.freeze({
+    computingandgraphics: "computinggraphics",
+    computinggraphics: "computinggraphics",
+    enterpriseembeddedandsemicustom: "enterpriseembeddedsemicustom",
+    enterpriseembeddedsemicustom: "enterpriseembeddedsemicustom",
+  }),
 });
 
 const BAR_SEGMENT_ROLLUPS_BY_COMPANY = Object.freeze({
@@ -2623,6 +2676,8 @@ const BAR_SEGMENT_LABEL_OVERRIDES = Object.freeze({
   samsclub: Object.freeze({ name: "Sam's Club", nameZh: "山姆会员店" }),
   auto: Object.freeze({ name: "Automotive", nameZh: "汽车业务" }),
   energygenerationstorage: Object.freeze({ name: "Energy generation & storage", nameZh: "能源发电与储能" }),
+  computinggraphics: Object.freeze({ name: "Computing & Graphics", nameZh: "计算与图形" }),
+  enterpriseembeddedsemicustom: Object.freeze({ name: "Enterprise, Embedded & Semi-Custom", nameZh: "企业、嵌入式与半定制" }),
 });
 
 const TSMC_HISTORY_SANKEY_COLOR_BY_SEGMENT = Object.freeze({
@@ -4835,6 +4890,17 @@ function buildRevenueSegmentBarHistory(company, anchorQuarterKey, maxQuarters = 
   const visibleQuarters = quarters.filter((quarter) => visibleQuarterKeySet.has(quarter.quarterKey));
   if (!visibleQuarters.length) return null;
 
+  const fullHistoryTotals = new Map();
+  quarters.forEach((quarter) => {
+    quarter.segmentRows.forEach((item) => {
+      if (!item?.key) return;
+      fullHistoryTotals.set(item.key, (fullHistoryTotals.get(item.key) || 0) + safeNumber(item.valueBn));
+    });
+  });
+  const fullHistorySegmentKeys = [...fullHistoryTotals.entries()]
+    .sort((left, right) => right[1] - left[1])
+    .map(([key]) => key);
+
   const totals = new Map();
   const nameRegistry = new Map();
   visibleQuarters.forEach((quarter) => {
@@ -4894,7 +4960,11 @@ function buildRevenueSegmentBarHistory(company, anchorQuarterKey, maxQuarters = 
       .map(([key]) => key);
   }
 
-  const colorBySegment = stableBarColorMap(company?.id, sortedSegmentKeys);
+  const stableColorSegmentKeys = [
+    ...fullHistorySegmentKeys,
+    ...sortedSegmentKeys.filter((segmentKey) => !fullHistoryTotals.has(segmentKey)),
+  ];
+  const colorBySegment = stableBarColorMap(company?.id, stableColorSegmentKeys);
 
   const segmentStats = sortedSegmentKeys.map((segmentKey) => ({
     key: segmentKey,

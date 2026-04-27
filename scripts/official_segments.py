@@ -903,6 +903,9 @@ def _submission_records(
         name = file_entry.get("name")
         if not name:
             continue
+        filing_to = str(file_entry.get("filingTo") or "")
+        if filing_to and filing_to < MIN_FILING_DATE:
+            continue
         try:
             archived_url = f"https://data.sec.gov/submissions/{name}"
             archived = _request_json(archived_url)

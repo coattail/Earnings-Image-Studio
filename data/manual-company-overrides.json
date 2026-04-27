@@ -1,4 +1,157 @@
 {
+  "amd": {
+    "financials": {
+      "2025Q4": {
+        "statementSourceUrl": "https://www.amd.com/en/newsroom/press-releases/2026-2-3-amd-reports-fourth-quarter-and-full-year-2025-fina.html",
+        "statementFilingDate": "2026-02-03",
+        "officialRevenueSegments": [
+          {
+            "name": "Data Center Segment",
+            "nameZh": "数据中心",
+            "memberKey": "datacenter",
+            "valueBn": 5.38,
+            "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2026-2-3-amd-reports-fourth-quarter-and-full-year-2025-fina.html",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-02-03",
+            "supportLines": [
+              "EPYC CPUs",
+              "AMD Instinct GPUs"
+            ]
+          },
+          {
+            "name": "Client",
+            "nameZh": "客户端",
+            "memberKey": "client",
+            "valueBn": 3.097,
+            "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2026-2-3-amd-reports-fourth-quarter-and-full-year-2025-fina.html",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-02-03",
+            "supportLines": [
+              "Ryzen CPUs"
+            ]
+          },
+          {
+            "name": "Gaming",
+            "nameZh": "游戏",
+            "memberKey": "gaming",
+            "valueBn": 0.843,
+            "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2026-2-3-amd-reports-fourth-quarter-and-full-year-2025-fina.html",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-02-03",
+            "supportLines": [
+              "Radeon GPUs",
+              "semi-custom"
+            ]
+          },
+          {
+            "name": "Embedded Segment",
+            "nameZh": "嵌入式",
+            "memberKey": "embedded",
+            "valueBn": 0.95,
+            "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2026-2-3-amd-reports-fourth-quarter-and-full-year-2025-fina.html",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-02-03"
+          }
+        ],
+        "officialRevenueDetailGroups": [
+          {
+            "name": "Client",
+            "nameZh": "客户端",
+            "memberKey": "client",
+            "targetName": "Client and Gaming Segment",
+            "valueBn": 3.097,
+            "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2026-2-3-amd-reports-fourth-quarter-and-full-year-2025-fina.html",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-02-03"
+          },
+          {
+            "name": "Gaming",
+            "nameZh": "游戏",
+            "memberKey": "gaming",
+            "targetName": "Client and Gaming Segment",
+            "valueBn": 0.843,
+            "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2026-2-3-amd-reports-fourth-quarter-and-full-year-2025-fina.html",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-02-03"
+          }
+        ]
+      }
+    },
+    "officialRevenueStructureHistory": {
+      "source": "manual-official-quarterly-results",
+      "quarters": {
+        "2025Q4": {
+          "segments": [
+            {
+              "name": "Data Center Segment",
+              "nameZh": "数据中心",
+              "memberKey": "datacenter",
+              "valueBn": 5.38,
+              "filingDate": "2026-02-03",
+              "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2026-2-3-amd-reports-fourth-quarter-and-full-year-2025-fina.html"
+            },
+            {
+              "name": "Client",
+              "nameZh": "客户端",
+              "memberKey": "client",
+              "valueBn": 3.097,
+              "filingDate": "2026-02-03",
+              "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2026-2-3-amd-reports-fourth-quarter-and-full-year-2025-fina.html"
+            },
+            {
+              "name": "Gaming",
+              "nameZh": "游戏",
+              "memberKey": "gaming",
+              "valueBn": 0.843,
+              "filingDate": "2026-02-03",
+              "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2026-2-3-amd-reports-fourth-quarter-and-full-year-2025-fina.html"
+            },
+            {
+              "name": "Embedded Segment",
+              "nameZh": "嵌入式",
+              "memberKey": "embedded",
+              "valueBn": 0.95,
+              "filingDate": "2026-02-03",
+              "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2026-2-3-amd-reports-fourth-quarter-and-full-year-2025-fina.html"
+            }
+          ],
+          "detailGroups": [
+            {
+              "name": "Client",
+              "nameZh": "客户端",
+              "memberKey": "client",
+              "targetName": "Client and Gaming Segment",
+              "valueBn": 3.097,
+              "filingDate": "2026-02-03",
+              "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2026-2-3-amd-reports-fourth-quarter-and-full-year-2025-fina.html"
+            },
+            {
+              "name": "Gaming",
+              "nameZh": "游戏",
+              "memberKey": "gaming",
+              "targetName": "Client and Gaming Segment",
+              "valueBn": 0.843,
+              "filingDate": "2026-02-03",
+              "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2026-2-3-amd-reports-fourth-quarter-and-full-year-2025-fina.html"
+            }
+          ]
+        }
+      },
+      "filingsUsed": [
+        {
+          "title": "AMD Fourth Quarter and Full Year 2025 Financial Results",
+          "quarter": "2025Q4",
+          "filingDate": "2026-02-03",
+          "url": "https://www.amd.com/en/newsroom/press-releases/2026-2-3-amd-reports-fourth-quarter-and-full-year-2025-fina.html"
+        }
+      ],
+      "errors": []
+    },
+    "classificationPolicy": {
+      "allowLatestRevenueGap": true,
+      "latestRevenueGapReason": "AMD's latest statement-level financials are available from the normalized quarterly table source, while the local SEC segment taxonomy scan timed out on recent archive index requests. Keep AMD selectable with statement-level data until a parseable official segment split is added."
+    }
+  },
   "jd": {
     "financials": {
       "2025Q4": {

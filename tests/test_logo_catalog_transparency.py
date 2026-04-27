@@ -83,15 +83,24 @@ class LogoCatalogTransparencyTests(unittest.TestCase):
             "text/html",
         )
 
-    def test_mastercard_uses_vector_logo_instead_of_cached_favicon(self) -> None:
+    def test_mastercard_uses_user_uploaded_transparent_logo_asset(self) -> None:
         asset = load_logo_catalog()["mastercard"]
-        payload = decode_data_url_payload(asset).decode("utf-8", errors="ignore").lower()
+        stats = edge_alpha_stats(asset)
 
-        self.assertEqual(asset["mime"], "image/svg+xml")
-        self.assertNotIn("google.com/s2/favicons", asset["sourceUrl"])
+        self.assertEqual(asset["mime"], "image/png")
+        self.assertEqual(asset["sourceType"], "user-uploaded")
         self.assertTrue(asset["transparentBackground"])
-        self.assertIn("<svg", payload)
-        self.assertNotIn("<html", payload)
+        self.assertTrue(str(asset["sourceUrl"]).endswith("Mastercard-Logo.png"))
+        self.assertGreaterEqual(
+            stats["transparent_ratio"],
+            0.9,
+            "Mastercard uploaded logo should keep a transparent outer background.",
+        )
+        self.assertGreater(
+            asset["visualStats"]["opaquePixelRatio"],
+            0.2,
+            "Mastercard uploaded logo should remain visibly rendered after transparency handling.",
+        )
 
     def test_jd_png_logo_edges_are_mostly_transparent(self) -> None:
         asset = load_logo_catalog()["jd"]
@@ -121,6 +130,30 @@ class LogoCatalogTransparencyTests(unittest.TestCase):
         )
         self.assertIn("<svg", payload)
         self.assertNotIn("<html", payload)
+
+    def test_amd_uses_user_uploaded_transparent_logo_asset(self) -> None:
+        asset = load_logo_catalog()["amd"]
+        stats = edge_alpha_stats(asset)
+
+        self.assertEqual(asset["mime"], "image/png")
+        self.assertEqual(asset["sourceType"], "user-uploaded")
+        self.assertTrue(asset["transparentBackground"])
+        self.assertTrue(str(asset["sourceUrl"]).endswith("amd7686.jpg"))
+        self.assertGreaterEqual(
+            stats["transparent_ratio"],
+            0.65,
+            "AMD uploaded logo should retain a transparent background after processing.",
+        )
+        self.assertLessEqual(
+            stats["opaque_white_ratio"],
+            0.05,
+            "AMD logo edges should not be an opaque white rectangle.",
+        )
+        self.assertGreater(
+            asset["visualStats"]["opaquePixelRatio"],
+            0.2,
+            "AMD logo should remain visibly rendered after transparency handling.",
+        )
 
 
 if __name__ == "__main__":

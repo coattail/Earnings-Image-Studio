@@ -694,7 +694,10 @@ function applyPrototypeLanguage(snapshot, company, entry = null) {
         return lockupKey ? { ...item, lockupKey } : item;
       })
     ),
-    leftDetailGroups: normalizePrototypeDetailGroups(attachLocalizedNameHints(snapshot.leftDetailGroups || []), prototypeKey),
+    leftDetailGroups:
+      prototypeKey === "semiconductor-segments-bridge"
+        ? []
+        : normalizePrototypeDetailGroups(attachLocalizedNameHints(snapshot.leftDetailGroups || []), prototypeKey),
     opexBreakdown: attachLocalizedNameHints(snapshot.opexBreakdown || []),
     costBreakdown: attachLocalizedNameHints(snapshot.costBreakdown || []),
     belowOperatingItems: normalizedBelowOperatingItems,
@@ -2596,6 +2599,7 @@ function resolveAnchoredBandBoxes(entries, minY, maxY, options = {}) {
 function logoFrameMetrics(logoKey, context = "corporate") {
   const normalizedKey = normalizeLogoKey(logoKey);
   if (context === "corporate") {
+    if (normalizedKey === "amd") return { width: 244, height: 68, paddingX: 0, paddingY: 0, radius: 0, showPlate: false };
     if (normalizedKey === "meituan") return { width: 118, height: 118, paddingX: 0, paddingY: 0, radius: 26, showPlate: false };
     if (normalizedKey === "byd") return { width: 188, height: 92, paddingX: 0, paddingY: 0, radius: 0, showPlate: false };
     if (normalizedKey === "jd") return { width: 188, height: 64, paddingX: 0, paddingY: 0, radius: 0, showPlate: false };
@@ -2637,14 +2641,17 @@ function renderImageLogo(asset, x, y, options = {}) {
     showPlate = true,
     borderColor = "#E5E7EB",
     plateFill = "#FFFFFF",
+    logoKey = "",
   } = options;
   const imageWidth = Math.max(boxWidth - paddingX * 2, 24);
   const imageHeight = Math.max(boxHeight - paddingY * 2, 12);
   const plateMarkup = showPlate
     ? `<rect x="0" y="0" width="${boxWidth}" height="${boxHeight}" rx="${radius}" fill="${plateFill}" stroke="${borderColor}" stroke-width="2.5"></rect>`
     : "";
+  const normalizedLogoKey = normalizeLogoKey(logoKey);
+  const logoDataAttr = normalizedLogoKey ? ` data-corporate-logo="${escapeHtml(normalizedLogoKey)}"` : "";
   return `
-    <g transform="translate(${x}, ${y}) scale(${scale})">
+    <g transform="translate(${x}, ${y}) scale(${scale})"${logoDataAttr} data-logo-width="${boxWidth}" data-logo-height="${boxHeight}">
       ${plateMarkup}
       <image x="${paddingX}" y="${paddingY}" width="${imageWidth}" height="${imageHeight}" href="${asset.dataUrl}" preserveAspectRatio="xMidYMid meet"></image>
     </g>
@@ -2671,6 +2678,7 @@ function renderCorporateLogo(logoKey, x, y, options = {}) {
       borderColor: rgba(primary, 0.18),
       plateFill: "#FFFFFF",
       showPlate: false,
+      logoKey,
     });
   }
   const company = getCompany(logoKey);
