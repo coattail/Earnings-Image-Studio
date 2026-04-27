@@ -3624,7 +3624,6 @@ function renderPixelReplicaSvg(snapshot) {
     scaleY(operatingMetricLayout.minTop),
     opTop - scaleY(operatingMetricLayout.bottomClearance)
   );
-  const logoMetrics = corporateLogoMetrics(snapshot.companyLogoKey);
   const logoVisibleMetrics = corporateLogoVisibleMetrics(snapshot.companyLogoKey);
   const normalizedCompanyLogoKey = normalizeLogoKey(snapshot.companyLogoKey);
   const titleText = localizeChartTitle(snapshot);
@@ -3668,15 +3667,17 @@ function renderPixelReplicaSvg(snapshot) {
       : inlinePeriodLayout.periodEndX;
   const periodEndX = Math.min(periodEndPreferredX, width - 84);
   const hasExplicitLogoPosition =
+    snapshot.layout?.logoPositionMode === "manual" &&
     snapshot.layout?.logoX !== null &&
     snapshot.layout?.logoX !== undefined &&
     snapshot.layout?.logoY !== null &&
     snapshot.layout?.logoY !== undefined;
   const logoScale = hasExplicitLogoPosition ? safeNumber(snapshot.layout?.logoScale, autoLogoScale) : autoLogoScale;
+  const renderedLogoMetrics = corporateLogoRenderedMetrics(snapshot.companyLogoKey, logoScale);
   const logoX = hasExplicitLogoPosition
     ? safeNumber(snapshot.layout?.logoX) + leftShiftX
-    : revenueX + nodeWidth / 2 - (logoMetrics.width * logoScale) / 2;
-  const logoHeight = logoMetrics.height * logoScale;
+    : revenueX + nodeWidth / 2 - renderedLogoMetrics.width / 2;
+  const logoHeight = renderedLogoMetrics.height;
   const logoDefaultY =
     revenueTop -
     logoHeight -

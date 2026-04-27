@@ -2658,10 +2658,35 @@ function renderImageLogo(asset, x, y, options = {}) {
   `;
 }
 
+function renderInlineCorporateLogo(logoKey, x, y, scale = 1) {
+  const normalizedKey = normalizeLogoKey(logoKey);
+  const effectiveScale = corporateLogoRenderedScale(scale);
+  if (normalizedKey === "jpmorgan") {
+    return `
+      <g transform="translate(${x}, ${y}) scale(${effectiveScale})" data-corporate-logo="jpmorgan" data-logo-width="248" data-logo-height="44">
+        <rect x="0" y="0" width="248" height="44" fill="transparent"></rect>
+        <text x="124" y="30" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="28" font-weight="700" fill="#111827">JPMorgan Chase</text>
+      </g>
+    `;
+  }
+  if (normalizedKey === "byd") {
+    return `
+      <g transform="translate(${x}, ${y}) scale(${effectiveScale})" data-corporate-logo="byd" data-logo-width="188" data-logo-height="92">
+        <rect x="0" y="0" width="188" height="92" fill="transparent"></rect>
+        <ellipse cx="94" cy="46" rx="82" ry="33" fill="none" stroke="#E60012" stroke-width="8"></ellipse>
+        <text x="94" y="60" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="45" font-weight="800" fill="#E60012">BYD</text>
+      </g>
+    `;
+  }
+  return "";
+}
+
 function renderCorporateLogo(logoKey, x, y, options = {}) {
   const { scale = 1 } = options;
-  const effectiveScale = scale * CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER;
+  const effectiveScale = corporateLogoRenderedScale(scale);
   const normalizedKey = normalizeLogoKey(logoKey);
+  const inlineLogo = renderInlineCorporateLogo(normalizedKey, x, y, scale);
+  if (inlineLogo) return inlineLogo;
   const asset = getLogoAsset(logoKey);
   if (asset) {
     const company = getCompany(normalizedKey);
@@ -2890,6 +2915,20 @@ function corporateLogoVisibleMetrics(logoKey) {
     };
   }
   return { width: 116, height: 116 };
+}
+
+function corporateLogoRenderedScale(scale = 1) {
+  return safeNumber(scale, 1) * CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER;
+}
+
+function corporateLogoRenderedMetrics(logoKey, scale = 1) {
+  const metrics = corporateLogoMetrics(logoKey);
+  const effectiveScale = corporateLogoRenderedScale(scale);
+  return {
+    width: metrics.width * effectiveScale,
+    height: metrics.height * effectiveScale,
+    scale: effectiveScale,
+  };
 }
 
 function corporateLogoBaseScale(logoKey, options = {}) {

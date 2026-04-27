@@ -81,8 +81,8 @@ OVERRIDE_LOGO_SOURCES: dict[str, dict[str, Any]] = {
         "fill": "#FF6A00",
     },
     "amd": {
-        "url": "https://dhndm4wak5fw9.cloudfront.net/AMD/TRMisc/7a/fc/f8/b4/29/A308OL1.png?Expires=32472144000&Signature=jgOX-MU9vt5qyqKFBhfgOELcWkVSs~9Tb3kLVGdtE7N0Z7hvJTOfFLl431NL6NfHtYGI8SMQ2BzDzZ0kWKf-4ipygsc7-28amr4k6T5BdKtt9rbDDAT5jOGeWVpc7IrilT6x-pRTQ6zSabO1OnMKTOoFUJ6ucO5NMxnodBuu1pUz1yd-6URcJ~-ZSfFjRm0nQQz7dTJYTMWAg1KSNGQpF9l3C18rL2j9T6Yz2oE4BEUeEd9nTfE4TJcblLnC3lf-RSMwE73uGg5p4WX2J1aGTC2yXGxR9GXTUEp3Udibi6qj3k2867VdnStufD5aNn9YZr10CzoA6QJt0R8b85Us2w__&Key-Pair-Id=K4IL6M96S15NB",
-        "official": True,
+        "local_path": "assets/logos/amd-uploaded-transparent.png",
+        "source_type": "user-uploaded",
         "skip_normalization": True,
     },
     "alphabet": {
@@ -148,8 +148,9 @@ OVERRIDE_LOGO_SOURCES: dict[str, dict[str, Any]] = {
         "official": True,
     },
     "mastercard": {
-        "url": SIMPLE_ICON_URL.format(slug="mastercard"),
-        "fill": "#EB001B",
+        "local_path": "assets/logos/mastercard-uploaded-transparent.png",
+        "source_type": "user-uploaded",
+        "skip_normalization": True,
     },
     "micron": {
         "url": "https://cdn.worldvectorlogo.com/logos/micron.svg",
@@ -994,6 +995,47 @@ def _resolve_logo_source(
     }
 
 
+def _resolve_local_logo_source(
+    relative_path: str,
+    *,
+    skip_normalization: bool = False,
+    source_type: str,
+) -> dict[str, Any] | None:
+    normalized_path = relative_path.lstrip("/").replace("\\", "/")
+    asset_path = ROOT_DIR / normalized_path
+    if not asset_path.exists() or not asset_path.is_file():
+        return None
+    payload = asset_path.read_bytes()
+    suffix = asset_path.suffix.lower()
+    content_type = "image/svg+xml" if suffix == ".svg" else "image/png" if suffix == ".png" else "application/octet-stream"
+    mime = _normalize_mime(content_type, payload)
+    if mime not in ("image/svg+xml", "image/png"):
+        return None
+    original_dimensions = _svg_dimensions(payload) if mime == "image/svg+xml" else _png_dimensions(payload)
+    normalization: dict[str, Any] = {"normalized": False}
+    if mime == "image/png" and not skip_normalization:
+        payload, normalization = _normalize_png_payload(payload)
+    dimensions = _svg_dimensions(payload) if mime == "image/svg+xml" else _png_dimensions(payload)
+    png_visual_stats = _png_visual_stats(payload) if mime == "image/png" else None
+    is_transparent = mime == "image/svg+xml" or (mime == "image/png" and _png_has_transparency(payload))
+    if mime != "image/svg+xml" and not _raster_is_crisp(original_dimensions or dimensions):
+        return None
+
+    return {
+        "sourceUrl": normalized_path,
+        "mime": mime,
+        "dataUrl": f"data:{mime};base64,{base64.b64encode(payload).decode('ascii')}",
+        "width": dimensions[0] if dimensions else 64,
+        "height": dimensions[1] if dimensions else 64,
+        "officialSource": False,
+        "transparentBackground": is_transparent,
+        "sourceType": source_type,
+        "visualStats": png_visual_stats or {},
+        "containsEmbeddedRaster": _svg_contains_embedded_raster(payload) if mime == "image/svg+xml" else False,
+        "normalization": normalization,
+    }
+
+
 def _score_logo_candidate(candidate: dict[str, Any]) -> tuple[int, list[str]]:
     score = 0
     reasons: list[str] = []
@@ -1025,6 +1067,9 @@ def _score_logo_candidate(candidate: dict[str, Any]) -> tuple[int, list[str]]:
     if source_type == "override":
         score += 80
         reasons.append("manual-override")
+    elif source_type == "user-uploaded":
+        score += 130
+        reasons.append("user-uploaded")
     elif source_type == "official-inline":
         score += 95
         reasons.append("official-inline")
@@ -1089,13 +1134,22 @@ def _select_logo(company_id: str, domain: str) -> dict[str, Any]:
     override_source = OVERRIDE_LOGO_SOURCES.get(company_id)
     candidate_specs: list[dict[str, Any]] = []
     if override_source:
-        if override_source.get("page_url") and override_source.get("symbol_id"):
+        override_source_type = str(override_source.get("source_type") or "override")
+        if override_source.get("local_path"):
+            candidate_specs.append(
+                {
+                    "local_path": override_source["local_path"],
+                    "skip_normalization": bool(override_source.get("skip_normalization")),
+                    "source_type": override_source_type,
+                }
+            )
+        elif override_source.get("page_url") and override_source.get("symbol_id"):
             candidate_specs.append(
                 {
                     "page_url": override_source["page_url"],
                     "symbol_id": override_source["symbol_id"],
                     "official_override": override_source.get("official"),
-                    "source_type": "official-inline",
+                    "source_type": str(override_source.get("source_type") or "official-inline"),
                 }
             )
         elif override_source.get("url"):
@@ -1105,7 +1159,7 @@ def _select_logo(company_id: str, domain: str) -> dict[str, Any]:
                     "fill": override_source.get("fill"),
                     "official_override": override_source.get("official"),
                     "skip_normalization": bool(override_source.get("skip_normalization")),
-                    "source_type": "override",
+                    "source_type": override_source_type,
                 }
             )
 
@@ -1119,12 +1173,18 @@ def _select_logo(company_id: str, domain: str) -> dict[str, Any]:
     )
     seen_sources: set[str] = set()
     for spec in candidate_specs:
-        source_key = spec.get("url") or f"{spec.get('page_url')}#symbol:{spec.get('symbol_id')}"
+        source_key = spec.get("url") or spec.get("local_path") or f"{spec.get('page_url')}#symbol:{spec.get('symbol_id')}"
         if source_key in seen_sources:
             continue
         seen_sources.add(source_key)
         try:
-            if spec.get("page_url") and spec.get("symbol_id"):
+            if spec.get("local_path"):
+                resolved = _resolve_local_logo_source(
+                    spec["local_path"],
+                    skip_normalization=bool(spec.get("skip_normalization")),
+                    source_type=spec["source_type"],
+                )
+            elif spec.get("page_url") and spec.get("symbol_id"):
                 resolved = _resolve_symbol_logo_source(
                     spec["page_url"],
                     spec["symbol_id"],

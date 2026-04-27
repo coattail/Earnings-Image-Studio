@@ -21,6 +21,10 @@ def load_logo_catalog() -> dict[str, dict]:
     return payload["logos"]
 
 
+def load_logo_catalog_payload() -> dict:
+    return json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
+
+
 def decode_png_asset(asset: dict) -> tuple[int, int, bytearray]:
     raw = base64.b64decode(asset["dataUrl"].split(",", 1)[1])
     decoded = generate_logo_catalog._decode_png_rgba(raw)
@@ -72,6 +76,18 @@ def edge_alpha_stats(asset: dict) -> dict[str, float]:
 
 
 class LogoCatalogTransparencyTests(unittest.TestCase):
+    def test_logo_catalog_has_no_unresolved_logo_failures(self) -> None:
+        payload = load_logo_catalog_payload()
+
+        self.assertEqual(payload.get("failures") or {}, {})
+
+    def test_logo_catalog_sources_are_portable_project_or_web_urls(self) -> None:
+        for company_id, asset in load_logo_catalog().items():
+            with self.subTest(company_id=company_id):
+                source_url = str(asset.get("sourceUrl") or "")
+                self.assertFalse(source_url.startswith("/Users/"), "Logo catalog should not depend on a local user path.")
+                self.assertNotIn("/Downloads/", source_url, "Logo catalog should not depend on a local Downloads path.")
+
     def test_normalize_mime_does_not_treat_html_error_page_as_svg(self) -> None:
         payload = b"""<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html>
@@ -90,7 +106,7 @@ class LogoCatalogTransparencyTests(unittest.TestCase):
         self.assertEqual(asset["mime"], "image/png")
         self.assertEqual(asset["sourceType"], "user-uploaded")
         self.assertTrue(asset["transparentBackground"])
-        self.assertTrue(str(asset["sourceUrl"]).endswith("Mastercard-Logo.png"))
+        self.assertEqual(asset["sourceUrl"], "assets/logos/mastercard-uploaded-transparent.png")
         self.assertGreaterEqual(
             stats["transparent_ratio"],
             0.9,
@@ -138,7 +154,7 @@ class LogoCatalogTransparencyTests(unittest.TestCase):
         self.assertEqual(asset["mime"], "image/png")
         self.assertEqual(asset["sourceType"], "user-uploaded")
         self.assertTrue(asset["transparentBackground"])
-        self.assertTrue(str(asset["sourceUrl"]).endswith("amd7686.jpg"))
+        self.assertEqual(asset["sourceUrl"], "assets/logos/amd-uploaded-transparent.png")
         self.assertGreaterEqual(
             stats["transparent_ratio"],
             0.65,
