@@ -176,7 +176,35 @@ BAR_SEGMENT_CANONICAL_BY_COMPANY: dict[str, dict[str, str]] = {
 
 MICRON_LEGACY_SEGMENT_KEYS = {"cnbu", "mbu", "sbu", "ebu", "allothersegments"}
 MICRON_CURRENT_SEGMENT_KEYS = {"cmbu", "mcbu", "cdbu", "aebu"}
-MICRON_SCHEMA_CHANGE_QUARTER = "2025Q4"
+MICRON_SCHEMA_CHANGE_QUARTER = "2025Q3"
+
+MICRON_BU_LABELS: dict[str, tuple[str, str]] = {
+    "cmbu": ("CMBU", "云内存业务单元"),
+    "cdbu": ("CDBU", "核心数据中心业务单元"),
+    "mcbu": ("MCBU", "移动与客户端业务单元"),
+    "aebu": ("AEBU", "汽车与嵌入式业务单元"),
+}
+
+MICRON_OFFICIAL_BU_RESTATEMENTS: dict[str, dict[str, Any]] = {
+    "2024Q3": {
+        "sourceUrl": "https://investors.micron.com/news-releases/news-release-details/micron-technology-inc-reports-results-fourth-quarter-and-full-8",
+        "sourceForm": "FY2025 Q4 earnings release",
+        "filingDate": "2025-09-23",
+        "segments": {"cmbu": 1.449, "cdbu": 2.048, "mcbu": 3.019, "aebu": 1.23},
+    },
+    "2025Q2": {
+        "sourceUrl": "https://investors.micron.com/news-releases/news-release-details/micron-technology-inc-reports-results-fourth-quarter-and-full-8",
+        "sourceForm": "FY2025 Q4 earnings release",
+        "filingDate": "2025-09-23",
+        "segments": {"cmbu": 3.386, "cdbu": 1.53, "mcbu": 3.255, "aebu": 1.127},
+    },
+    "2025Q3": {
+        "sourceUrl": "https://investors.micron.com/news-releases/news-release-details/micron-technology-inc-reports-results-fourth-quarter-and-full-8",
+        "sourceForm": "FY2025 Q4 earnings release",
+        "filingDate": "2025-09-23",
+        "segments": {"cmbu": 4.543, "cdbu": 1.577, "mcbu": 3.76, "aebu": 1.434},
+    },
+}
 
 AMD_SEGMENT_LABELS: dict[str, tuple[str, str]] = {
     "datacenter": ("Data Center", "数据中心"),
@@ -476,6 +504,77 @@ def filter_micron_mixed_segment_rows(quarter_key: str, rows: list[dict[str, Any]
         if normalize_segment_label_key((row or {}).get("memberKey") or (row or {}).get("name")) in allowed_keys
     ]
     return filtered_rows or rows
+
+
+def _micron_official_bu_rows(correction: dict[str, Any]) -> list[dict[str, Any]]:
+    source_url = str(correction.get("sourceUrl") or "")
+    source_form = str(correction.get("sourceForm") or "")
+    filing_date = str(correction.get("filingDate") or "")
+    rows: list[dict[str, Any]] = []
+    segments = correction.get("segments")
+    if not isinstance(segments, dict):
+        return rows
+    for member_key in ("cmbu", "cdbu", "mcbu", "aebu"):
+        value = segments.get(member_key)
+        if value is None:
+            continue
+        name, name_zh = MICRON_BU_LABELS[member_key]
+        rows.append(
+            {
+                "name": name,
+                "nameZh": name_zh,
+                "memberKey": member_key,
+                "valueBn": float(value),
+                "sourceUrl": source_url,
+                "sourceForm": source_form,
+                "filingDate": filing_date,
+            }
+        )
+    return rows
+
+
+def apply_micron_official_business_unit_restatements(company_payload: dict[str, Any]) -> dict[str, Any]:
+    if str(company_payload.get("id") or "").strip().lower() != "micron":
+        return company_payload
+    financials = company_payload.get("financials")
+    if not isinstance(financials, dict):
+        return company_payload
+
+    history = company_payload.get("officialRevenueStructureHistory")
+    if not isinstance(history, dict):
+        history = {"source": "official-segment-cache", "quarters": {}, "filingsUsed": [], "errors": []}
+        company_payload["officialRevenueStructureHistory"] = history
+    history_quarters = history.setdefault("quarters", {})
+    if not isinstance(history_quarters, dict):
+        history_quarters = {}
+        history["quarters"] = history_quarters
+
+    for quarter_key, correction in MICRON_OFFICIAL_BU_RESTATEMENTS.items():
+        entry = financials.get(quarter_key)
+        if not isinstance(entry, dict):
+            continue
+        rows = _micron_official_bu_rows(correction)
+        if not rows:
+            continue
+        normalized_rows = normalize_official_revenue_segments("micron", quarter_key, rows)
+        entry["officialRevenueSegments"] = normalized_rows
+        entry["officialRevenueStyle"] = "micron-business-unit-bridge"
+        source_url = str(correction.get("sourceUrl") or "")
+        source_form = str(correction.get("sourceForm") or "")
+        filing_date = str(correction.get("filingDate") or "")
+        history_quarters[quarter_key] = {
+            "segments": deepcopy(normalized_rows),
+            "style": "micron-business-unit-bridge",
+            "sourceUrl": source_url,
+            "sourceForm": source_form,
+            "filingDate": filing_date,
+        }
+        field_sources = entry.setdefault("parserFinancialFieldSources", {})
+        if isinstance(field_sources, dict):
+            field_sources["officialRevenueSegments"] = "micron-official-bu-restatement"
+            field_sources["officialRevenueStyle"] = "micron-official-bu-restatement"
+    enrich_growth_rows(financials, "officialRevenueSegments")
+    return company_payload
 
 
 def normalize_official_revenue_segments(company_id: str, quarter_key: str, rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -1650,6 +1749,7 @@ def finalize_company_payload(
     presets: dict[str, Any],
 ) -> dict[str, Any]:
     payload["statementPresets"] = presets
+    apply_micron_official_business_unit_restatements(payload)
     sync_revenue_structure_history_into_financial_entries(payload, company)
     segment_quarter_count = sum(1 for item in payload["financials"].values() if item.get("officialRevenueSegments"))
     expense_quarter_count = sum(1 for item in payload["financials"].values() if item.get("officialOpexBreakdown") or item.get("opexBreakdown"))

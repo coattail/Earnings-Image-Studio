@@ -2770,7 +2770,7 @@ function buildAlibabaComparableBarRows(entry, rows = []) {
 // For bars we stabilize both schemas into comparable buckets and discard mixed future-filing contamination.
 const MICRON_LEGACY_SEGMENT_KEYS = new Set(["cnbu", "mbu", "sbu", "ebu", "allothersegments"]);
 const MICRON_CURRENT_SEGMENT_KEYS = new Set(["cmbu", "mcbu", "cdbu", "aebu"]);
-const MICRON_SCHEMA_CHANGE_QUARTER = "2025Q4";
+const MICRON_SCHEMA_CHANGE_QUARTER = "2025Q3";
 
 function micronSegmentPhase(rows = []) {
   const memberKeys = new Set([...(rows || [])].map((item) => normalizeLabelKey(item?.memberKey || item?.id || item?.name)));
