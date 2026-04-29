@@ -29,6 +29,12 @@ def _company() -> dict[str, object]:
     }
 
 
+def _coca_cola_company() -> dict[str, object]:
+    company = _company()
+    company.update({"id": "coca-cola", "ticker": "KO", "slug": "ko", "nameEn": "Coca-Cola", "nameZh": "可口可乐"})
+    return company
+
+
 def _single_quarter_table():
     html = """
     <table>
@@ -36,6 +42,18 @@ def _single_quarter_table():
       <tr><th>Period Ending</th><td>Mar 31, 2026</td></tr>
       <tr><th>Revenue</th><td>123,000</td></tr>
       <tr><th>Net Income</th><td>12,300</td></tr>
+    </table>
+    """
+    return BeautifulSoup(html, "html.parser").find("table")
+
+
+def _coca_cola_early_april_table():
+    html = """
+    <table>
+      <tr><th>Fiscal Quarter</th><th>Q1 2026</th></tr>
+      <tr><th>Period Ending</th><td>Apr 3, 2026</td></tr>
+      <tr><th>Revenue</th><td>12,472</td></tr>
+      <tr><th>Net Income</th><td>3,924</td></tr>
     </table>
     """
     return BeautifulSoup(html, "html.parser").find("table")
@@ -99,6 +117,19 @@ class StockAnalysisFinancialContractsTests(unittest.TestCase):
         self.assertEqual(rebuilt["_cacheVersion"], "test-current")
         self.assertEqual(rebuilt["financials"]["2026Q1"]["revenueBn"], 123.0)
         self.assertEqual(reused["financials"]["2026Q1"]["revenueBn"], 123.0)
+
+    def test_coca_cola_early_april_fiscal_q1_maps_to_q1_not_calendar_q2(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            cache_dir = Path(tmp_dir)
+            with (
+                patch.object(stockanalysis_financials, "CACHE_DIR", cache_dir),
+                patch.object(stockanalysis_financials, "_load_table", return_value=("Financials in millions USD", _coca_cola_early_april_table())),
+            ):
+                result = stockanalysis_financials.fetch_stockanalysis_financial_history(_coca_cola_company(), refresh=True)
+
+        self.assertIn("2026Q1", result["financials"])
+        self.assertNotIn("2026Q2", result["financials"])
+        self.assertEqual(result["financials"]["2026Q1"]["periodEnd"], "2026-04-03")
 
 
 if __name__ == "__main__":

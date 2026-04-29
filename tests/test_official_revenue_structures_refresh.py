@@ -93,6 +93,35 @@ class OfficialRevenueStructuresRefreshTests(unittest.TestCase):
                 self.assertEqual(official_revenue_structures._load_cached_financial_entries("asml", refresh=True), [])
                 self.assertEqual(official_revenue_structures._load_stockanalysis_financial_payload("tsmc", refresh=True), {})
 
+    def test_coca_cola_8k_exhibit_revenue_segments_are_parsed_as_q1(self) -> None:
+        html = """
+        <html><body>
+        <table>
+          <tr><td>THE COCA-COLA COMPANY AND SUBSIDIARIES</td></tr>
+          <tr><td>Operating Segments and Corporate</td></tr>
+          <tr><td>(In millions)</td></tr>
+          <tr><td>Three Months Ended</td></tr>
+          <tr><td>Net Operating Revenues 1</td><td>Operating Income (Loss)</td></tr>
+          <tr><td>April 3, 2026</td><td>March 28, 2025</td><td>% Fav. / (Unfav.)</td><td>April 3, 2026</td><td>March 28, 2025</td><td>% Fav. / (Unfav.)</td></tr>
+          <tr><td>EMEA</td><td>$</td><td>3,012</td><td>$</td><td>2,657</td><td>13</td><td>$</td><td>1,259</td></tr>
+          <tr><td>Latin America</td><td>1,678</td><td>1,477</td><td>14</td><td>1,038</td></tr>
+          <tr><td>North America</td><td>4,893</td><td>4,361</td><td>12</td><td>1,606</td></tr>
+          <tr><td>Asia Pacific</td><td>1,508</td><td>1,421</td><td>6</td><td>536</td></tr>
+          <tr><td>Bottling Investments</td><td>1,640</td><td>1,463</td><td>12</td><td>191</td></tr>
+          <tr><td>Corporate</td><td>32</td><td>26</td><td>20</td><td>(271)</td></tr>
+          <tr><td>Eliminations</td><td>(291)</td><td>(276)</td><td>(6)</td><td>—</td></tr>
+          <tr><td>Consolidated</td><td>$</td><td>12,472</td><td>$</td><td>11,129</td><td>12</td><td>$</td><td>4,359</td></tr>
+        </table>
+        </body></html>
+        """
+
+        records = official_revenue_structures._parse_coca_cola_records(html, "2026-04-28", "https://example.com/ex99.htm", "8-K")
+
+        self.assertEqual(len(records), 1)
+        self.assertEqual(records[0]["quarter"], "2026Q1")
+        self.assertEqual([row["memberKey"] for row in records[0]["rows"]], ["emea", "latinamerica", "northamerica", "pacific", "bottlinginvestments"])
+        self.assertAlmostEqual(records[0]["rows"][2]["valueBn"], 4.893)
+
     def test_refresh_does_not_preserve_cached_quarters_when_fresh_parse_is_partial(self) -> None:
         cached_payload = {
             "_cacheVersion": official_revenue_structures.CACHE_VERSION,

@@ -3997,6 +3997,75 @@ def _parse_netflix_records(html_text: str, filing_date: str, source_url: str, so
     return period_records
 
 
+def _coca_cola_quarter_from_period_end(period_end: str) -> str | None:
+    if not period_end:
+        return None
+    year, month, day = (int(part) for part in period_end.split("-"))
+    if month == 4 and day <= 7:
+        return f"{year}Q1"
+    if month == 1 and day <= 7:
+        return f"{year - 1}Q4"
+    return _calendar_quarter(period_end)
+
+
+def _parse_coca_cola_records(html_text: str, filing_date: str, source_url: str, source_form: str) -> list[dict[str, Any]]:
+    period_records: list[dict[str, Any]] = []
+    segment_names = {
+        "emea": ("EMEA", "emea"),
+        "latinamerica": ("Latin America", "latinamerica"),
+        "northamerica": ("North America", "northamerica"),
+        "asiapacific": ("Asia Pacific", "pacific"),
+        "bottlinginvestments": ("Bottling Investments", "bottlinginvestments"),
+    }
+    for rows in _extract_html_tables(html_text):
+        if len(rows) < 8:
+            continue
+        flat = " | ".join(" / ".join(row) for row in rows[:10]).lower()
+        if "operating segments and corporate" not in flat or "net operating revenues" not in flat:
+            continue
+        date_text = " ".join(" ".join(row) for row in rows[:8])
+        date_match = re.search(r"([A-Za-z]+\s+\d{1,2}),\s+(20\d{2})", date_text)
+        if not date_match:
+            continue
+        period_end = _combine_date_label(date_match.group(1), date_match.group(2))
+        quarter = _coca_cola_quarter_from_period_end(period_end or "")
+        if not quarter:
+            continue
+        record_rows: list[dict[str, Any]] = []
+        display_revenue_bn: float | None = None
+        for row in rows:
+            if not row:
+                continue
+            label_key = _normalize_member_key(row[0])
+            values = _numeric_cells(row)
+            if not values:
+                continue
+            if label_key in segment_names:
+                name, member_key = segment_names[label_key]
+                record_rows.append(
+                    _build_row(
+                        name,
+                        values[0] / 1000,
+                        member_key=member_key,
+                        source_url=source_url,
+                        source_form=source_form,
+                        filing_date=filing_date,
+                    )
+                )
+            elif label_key == "consolidated":
+                display_revenue_bn = round(values[0] / 1000, 3)
+        if len(record_rows) == len(segment_names):
+            period_records.append(
+                {
+                    "quarter": quarter,
+                    "span": 1,
+                    "rows": record_rows,
+                    "displayRevenueBn": display_revenue_bn,
+                }
+            )
+    return period_records
+
+
 def _latest_year_in_rows(rows: list[list[str]], limit: int = 4) -> str:
     years = re.findall(r"\b(20\d{2})\b", " ".join(" ".join(row) for row in rows[:limit]))
     return max(years) if years else ""
@@ -5267,7 +5336,7 @@ def _table_parser_candidate_urls(
     form: str,
 ) -> list[str]:
     candidate_names = [primary_document]
-    if company_id == "netflix" and form == "8-K":
+    if company_id in {"netflix", "coca-cola"} and form == "8-K":
         try:
             index_payload = _request_json(f"https://www.sec.gov/Archives/edgar/data/{cik}/{accession_nodash}/index.json")
         except Exception:
@@ -5277,7 +5346,8 @@ def _table_parser_candidate_urls(
             if not name or name == primary_document:
                 continue
             lowered_name = name.lower()
-            if lowered_name.endswith((".htm", ".html")) and "ex99" in lowered_name:
+            is_exhibit = "ex99" in lowered_name or (company_id == "coca-cola" and "earningsrelease" in lowered_name)
+            if lowered_name.endswith((".htm", ".html")) and is_exhibit:
                 candidate_names.append(name)
     seen_names: set[str] = set()
     urls: list[str] = []
@@ -5295,6 +5365,7 @@ def _parse_table_company_records(company: dict[str, Any], cik: int, refresh: boo
         "oracle": _parse_oracle_records,
         "mastercard": _parse_mastercard_records,
         "netflix": _parse_netflix_records,
+        "coca-cola": _parse_coca_cola_records,
     }
     parser = parsers[company_id]
     result = {"source": "official-filing-tables", "quarters": {}, "filingsUsed": [], "errors": [], "errorDetails": []}
@@ -5307,8 +5378,10 @@ def _parse_table_company_records(company: dict[str, Any], cik: int, refresh: boo
         accession = str(filing.get("accession") or "")
         filing_date = str(filing.get("filingDate") or "")
         primary_document = str(filing.get("primaryDocument") or "")
-        allowed_forms = {"10-Q", "10-K"} | ({"8-K"} if company_id == "netflix" else set())
+        allowed_forms = {"10-Q", "10-K"} | ({"8-K"} if company_id in {"netflix", "coca-cola"} else set())
         if filing_date < "2019-01-01" or form not in allowed_forms or not accession or not primary_document:
+            continue
+        if company_id == "coca-cola" and (form != "8-K" or filing_date < "2026-01-01"):
             continue
         accession_nodash = str(accession).replace("-", "")
         if accession_nodash in seen_accessions:
@@ -5621,6 +5694,10 @@ def fetch_official_revenue_structure_history(company: dict[str, Any], refresh: b
                 result = _parse_asml_records(company, cik, refresh=refresh)
             elif company_id in {"oracle", "mastercard", "netflix"}:
                 result = _parse_table_company_records(company, cik, refresh=refresh)
+            elif company_id == "coca-cola":
+                xbrl_result = dict(cached_payload) if _is_current_revenue_structure_cache(cached_payload) else _parse_custom_xbrl_hierarchy_records(company, cik, refresh=refresh)
+                table_result = _parse_table_company_records(company, cik, refresh=refresh)
+                result = _merge_revenue_structure_results(xbrl_result, table_result)
             elif company_id in CUSTOM_XBRL_HIERARCHY_CONFIGS:
                 result = _parse_custom_xbrl_hierarchy_records(company, cik, refresh=refresh)
             elif company_id == "tsmc":

@@ -133,6 +133,17 @@ def _calendar_quarter(period_end: str) -> str:
     return f"{year}Q{quarter}"
 
 
+def _stockanalysis_quarter_key(company: dict[str, Any], period_end: str, fiscal_year: str, fiscal_quarter: str) -> str:
+    company_id = str(company.get("id") or "")
+    if company_id == "coca-cola" and fiscal_year and fiscal_quarter:
+        year, month, day = (int(part) for part in period_end.split("-"))
+        if month == 4 and day <= 7 and fiscal_quarter == "Q1":
+            return f"{fiscal_year}{fiscal_quarter}"
+        if month == 1 and day <= 7 and fiscal_quarter == "Q4":
+            return f"{int(fiscal_year) - 1}Q4"
+    return _calendar_quarter(period_end)
+
+
 def _normalize_fiscal_header(raw: str) -> tuple[str, str, str]:
     text = str(raw or "").strip()
     quarter_match = re.fullmatch(r"Q([1-4])\s+(\d{4})", text)
@@ -345,7 +356,7 @@ def fetch_stockanalysis_financial_history(company: dict[str, Any], refresh: bool
         if not period_end:
             continue
         fiscal_year, fiscal_quarter, fiscal_label = _normalize_fiscal_header(headers[index])
-        quarter_key = _calendar_quarter(period_end)
+        quarter_key = _stockanalysis_quarter_key(company, period_end, fiscal_year, fiscal_quarter)
         if headers[0].startswith("FY "):
             quarter_key = f"{fiscal_year}Q4"
 
