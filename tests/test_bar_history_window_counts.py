@@ -117,6 +117,75 @@ class BarHistoryWindowCountTests(unittest.TestCase):
                 f"{label} should keep the same bar color regardless of the selected quarter.",
             )
 
+    def test_visa_sankey_revenue_groups_match_bar_taxonomy(self) -> None:
+        script = r"""
+const fs = require("fs");
+const path = require("path");
+const vm = require("vm");
+const root = process.cwd();
+function createContext() {
+  const noop = () => {};
+  const documentStub = {
+    addEventListener: noop,
+    removeEventListener: noop,
+    querySelector: () => null,
+    querySelectorAll: () => [],
+    getElementById: () => null,
+    createElement: () => ({ style: {}, setAttribute: noop, appendChild: noop }),
+    createElementNS: () => ({ style: {}, setAttribute: noop, appendChild: noop }),
+    body: null,
+    documentElement: null,
+  };
+  const windowStub = { addEventListener: noop, removeEventListener: noop, document: documentStub, devicePixelRatio: 1 };
+  const context = {
+    console, setTimeout, clearTimeout, setInterval, clearInterval,
+    requestAnimationFrame: (callback) => setTimeout(() => callback(Date.now()), 0),
+    cancelAnimationFrame: clearTimeout,
+    performance: { now: () => Date.now() },
+    Math, Number, String, Boolean, Array, Object, JSON, Date, RegExp, Map, Set, WeakMap, WeakSet, Intl, Promise,
+    URL, URLSearchParams, TextEncoder, TextDecoder,
+    window: windowStub, document: documentStub, navigator: { userAgent: "node" },
+    globalThis: null, self: null, fetch: undefined,
+  };
+  context.globalThis = context;
+  context.self = context;
+  windowStub.window = windowStub;
+  windowStub.self = windowStub;
+  windowStub.globalThis = context;
+  return vm.createContext(context);
+}
+const context = createContext();
+["app-00-foundation.js", "app-01-layout.js", "app-02-sankey.js", "app-03-data.js", "app-04-bootstrap.js"].forEach((filename) => {
+  vm.runInContext(fs.readFileSync(path.join(root, "js", filename), "utf8"), context, { filename });
+});
+const dataset = JSON.parse(fs.readFileSync(path.join(root, "data", "earnings-dataset.json"), "utf8"));
+context.__payload = dataset.companies.find((company) => company.id === "visa");
+const result = vm.runInContext(`(() => {
+  const company = normalizeLoadedCompany(__payload, 0);
+  const snapshot = buildSnapshot(company, "2026Q1");
+  const history = buildRevenueSegmentBarHistory(company, "2026Q1", 30);
+  const normalize = (rows) => rows.map((item) => ({
+    key: item.memberKey || item.key || item.id,
+    valueBn: Number(item.valueBn.toFixed(3)),
+  })).sort((left, right) => left.key.localeCompare(right.key));
+  return {
+    sankey: normalize(snapshot.businessGroups || []),
+    bars: normalize(history.quarters[history.quarters.length - 1].segmentRows || []),
+  };
+})()`, context);
+process.stdout.write(JSON.stringify(result));
+"""
+        result = subprocess.run(
+            ["node", "-e", script],
+            cwd=ROOT_DIR,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        payload = json.loads(result.stdout)
+
+        self.assertEqual(payload["sankey"], payload["bars"])
+
 
 if __name__ == "__main__":
     unittest.main()

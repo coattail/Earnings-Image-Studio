@@ -1286,6 +1286,9 @@ function curatedOfficialSegments(company, entry, rows, detailGroups = []) {
   if (!workingCandidates.length || revenueBn <= 0) {
     return finalizeCuratedOfficialSegments(workingCandidates, revenueBn);
   }
+  if (String(company?.id || "").toLowerCase() === "visa" && visaRowsUseAddableRevenueCategoryTaxonomy(workingCandidates)) {
+    return finalizeCuratedOfficialSegments(workingCandidates, revenueBn, { preserveAllRows: true });
+  }
   const requiredTargetKeys = new Set(
     [...(detailGroups || [])]
       .flatMap((item) => [
