@@ -192,6 +192,18 @@ MICRON_OFFICIAL_BU_RESTATEMENTS: dict[str, dict[str, Any]] = {
         "filingDate": "2025-09-23",
         "segments": {"cmbu": 1.449, "cdbu": 2.048, "mcbu": 3.019, "aebu": 1.23},
     },
+    "2024Q4": {
+        "sourceUrl": "https://investors.micron.com/news-releases/news-release-details/micron-technology-inc-reports-results-first-quarter-fiscal-2026",
+        "sourceForm": "FY2026 Q1 earnings release",
+        "filingDate": "2025-12-17",
+        "segments": {"cmbu": 2.648, "cdbu": 2.292, "mcbu": 2.608, "aebu": 1.158},
+    },
+    "2025Q1": {
+        "sourceUrl": "https://investors.micron.com/news-releases/news-release-details/micron-technology-inc-reports-results-second-quarter-fiscal-2026",
+        "sourceForm": "FY2026 Q2 earnings release",
+        "filingDate": "2026-03-18",
+        "segments": {"cmbu": 2.947, "cdbu": 1.83, "mcbu": 2.236, "aebu": 1.034},
+    },
     "2025Q2": {
         "sourceUrl": "https://investors.micron.com/news-releases/news-release-details/micron-technology-inc-reports-results-fourth-quarter-and-full-8",
         "sourceForm": "FY2025 Q4 earnings release",
@@ -533,6 +545,59 @@ def _micron_official_bu_rows(correction: dict[str, Any]) -> list[dict[str, Any]]
     return rows
 
 
+def _micron_restatement_rows_for_quarter(quarter_key: str) -> list[dict[str, Any]]:
+    correction = MICRON_OFFICIAL_BU_RESTATEMENTS.get(str(quarter_key))
+    return _micron_official_bu_rows(correction) if isinstance(correction, dict) else []
+
+
+def _micron_growth_baseline_rows(financials: dict[str, Any], quarter_key: str) -> list[dict[str, Any]]:
+    entry = financials.get(quarter_key)
+    rows = entry.get("officialRevenueSegments") if isinstance(entry, dict) else None
+    has_current_bu_rows = (
+        isinstance(rows, list)
+        and any(normalize_segment_label_key((row or {}).get("memberKey") or (row or {}).get("name")) in MICRON_CURRENT_SEGMENT_KEYS for row in rows)
+    )
+    if has_current_bu_rows:
+        return rows
+    return _micron_restatement_rows_for_quarter(quarter_key)
+
+
+def apply_micron_restatement_growth_metrics(financials: dict[str, Any]) -> None:
+    for quarter_key, entry in sorted(financials.items(), key=lambda item: parse_period(str(item[0]))):
+        if parse_period(str(quarter_key)) < parse_period(MICRON_SCHEMA_CHANGE_QUARTER):
+            continue
+        if not isinstance(entry, dict):
+            continue
+        rows = entry.get("officialRevenueSegments")
+        if not isinstance(rows, list) or not rows:
+            continue
+        prior_quarter_key = f"{int(quarter_key[:4]) - 1}Q4" if str(quarter_key).endswith("Q1") else f"{quarter_key[:4]}Q{int(quarter_key[-1]) - 1}"
+        prior_year_key = f"{int(quarter_key[:4]) - 1}{quarter_key[4:]}"
+        prior_quarter_map = {
+            normalize_segment_label_key((row or {}).get("memberKey") or (row or {}).get("name")): row
+            for row in _micron_growth_baseline_rows(financials, prior_quarter_key)
+        }
+        prior_year_map = {
+            normalize_segment_label_key((row or {}).get("memberKey") or (row or {}).get("name")): row
+            for row in _micron_growth_baseline_rows(financials, prior_year_key)
+        }
+        for row in rows:
+            member_key = normalize_segment_label_key((row or {}).get("memberKey") or (row or {}).get("name"))
+            if member_key not in MICRON_CURRENT_SEGMENT_KEYS:
+                continue
+            value = float((row or {}).get("valueBn") or 0)
+            if row.get("qoqPct") is None:
+                previous = prior_quarter_map.get(member_key)
+                previous_value = float(previous.get("valueBn") or 0) if isinstance(previous, dict) else 0
+                if previous_value:
+                    row["qoqPct"] = round((value / previous_value - 1) * 100, 2)
+            if row.get("yoyPct") is None:
+                previous = prior_year_map.get(member_key)
+                previous_value = float(previous.get("valueBn") or 0) if isinstance(previous, dict) else 0
+                if previous_value:
+                    row["yoyPct"] = round((value / previous_value - 1) * 100, 2)
+
+
 def apply_micron_official_business_unit_restatements(company_payload: dict[str, Any]) -> dict[str, Any]:
     if str(company_payload.get("id") or "").strip().lower() != "micron":
         return company_payload
@@ -552,6 +617,8 @@ def apply_micron_official_business_unit_restatements(company_payload: dict[str, 
     for quarter_key, correction in MICRON_OFFICIAL_BU_RESTATEMENTS.items():
         entry = financials.get(quarter_key)
         if not isinstance(entry, dict):
+            continue
+        if parse_period(str(quarter_key)) < parse_period(MICRON_SCHEMA_CHANGE_QUARTER):
             continue
         rows = _micron_official_bu_rows(correction)
         if not rows:
@@ -574,6 +641,7 @@ def apply_micron_official_business_unit_restatements(company_payload: dict[str, 
             field_sources["officialRevenueSegments"] = "micron-official-bu-restatement"
             field_sources["officialRevenueStyle"] = "micron-official-bu-restatement"
     enrich_growth_rows(financials, "officialRevenueSegments")
+    apply_micron_restatement_growth_metrics(financials)
     return company_payload
 
 
@@ -611,6 +679,11 @@ def normalize_official_revenue_segments(company_id: str, quarter_key: str, rows:
 
     if normalized_company_id == "micron":
         normalized_rows = filter_micron_mixed_segment_rows(quarter_key, normalized_rows)
+        normalized_rows = [
+            row
+            for row in normalized_rows
+            if normalize_segment_label_key((row or {}).get("memberKey") or (row or {}).get("name")) != "allothersegments"
+        ]
 
     normalized_rows = dedupe_revenue_segment_rows(normalized_company_id, normalized_rows)
     validation_note = infer_segment_validation_exception(normalized_rows)
