@@ -14,6 +14,7 @@
   "financialSource": "stockanalysis",
   "financialPath": "quote/hkg/1211",
   "quarters": [
+    "2020Q4",
     "2021Q1",
     "2021Q2",
     "2021Q3",
@@ -4882,6 +4883,219 @@
         "statementQualityFlags": [],
         "issues": [
           "cost-breakdown-coverage-low"
+        ]
+      }
+    },
+    "2020Q4": {
+      "calendarQuarter": "2020Q4",
+      "periodEnd": "2020-12-31",
+      "fiscalYear": "2020",
+      "fiscalQuarter": "Q4",
+      "fiscalLabel": "FY2020 Q4",
+      "statementCurrency": "CNY",
+      "revenueBn": 51.575,
+      "revenueYoyPct": null,
+      "costOfRevenueBn": 43.519,
+      "grossProfitBn": 8.056,
+      "sgnaBn": 2.748,
+      "rndBn": 2.573,
+      "otherOpexBn": 0.106,
+      "operatingExpensesBn": 6.304,
+      "operatingIncomeBn": 1.752,
+      "nonOperatingBn": -0.547,
+      "pretaxIncomeBn": 1.205,
+      "taxBn": 0.093,
+      "netIncomeBn": 0.821,
+      "netIncomeYoyPct": 1943.87,
+      "grossMarginPct": 15.62,
+      "operatingMarginPct": 3.4,
+      "profitMarginPct": 1.59,
+      "effectiveTaxRatePct": 7.695,
+      "revenueQoqPct": null,
+      "grossMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": null,
+      "profitMarginYoyDeltaPp": null,
+      "statementSourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly",
+      "statementFilingDate": "2020-12-31",
+      "parserFinancialFieldSources": {
+        "revenueBn": "stockanalysis",
+        "revenueYoyPct": "stockanalysis",
+        "costOfRevenueBn": "stockanalysis",
+        "grossProfitBn": "stockanalysis",
+        "grossMarginPct": "stockanalysis",
+        "sgnaBn": "stockanalysis",
+        "rndBn": "stockanalysis",
+        "otherOpexBn": "stockanalysis",
+        "operatingExpensesBn": "stockanalysis",
+        "operatingIncomeBn": "stockanalysis",
+        "operatingMarginPct": "stockanalysis",
+        "pretaxIncomeBn": "stockanalysis",
+        "taxBn": "stockanalysis",
+        "netIncomeBn": "stockanalysis",
+        "netIncomeYoyPct": "stockanalysis",
+        "profitMarginPct": "stockanalysis",
+        "effectiveTaxRatePct": "stockanalysis",
+        "calendarQuarter": "stockanalysis",
+        "periodEnd": "stockanalysis",
+        "fiscalYear": "stockanalysis",
+        "fiscalQuarter": "stockanalysis",
+        "fiscalLabel": "stockanalysis",
+        "statementCurrency": "stockanalysis",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis",
+        "nonOperatingBn": "derived"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 0,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 0.9438,
+        "completenessScore": 1,
+        "consistencyScore": 0.875,
+        "checksRun": 8,
+        "checksPassed": 7,
+        "issueCount": 1,
+        "issues": [
+          {
+            "code": "pretax-minus-tax-equals-net",
+            "severity": "warning",
+            "message": "netIncomeBn does not reconcile with pretaxIncomeBn and taxBn.",
+            "expected": 0.821,
+            "derived": 1.112,
+            "delta": -0.291,
+            "tolerance": 0.12
+          }
+        ]
+      },
+      "displayCurrency": "USD",
+      "displayScaleFactor": 0.15362,
+      "statementMeta": {
+        "statementSource": null,
+        "statementSourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly",
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "qualityFlags": [],
+        "adapterId": "stockanalysis_financials"
+      },
+      "fieldSources": {
+        "revenueBn": {
+          "adapterId": "stockanalysis_financials",
+          "label": "StockAnalysis financials",
+          "score": 75,
+          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "stockanalysis_financials",
+          "label": "StockAnalysis financials",
+          "score": 73,
+          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
+        },
+        "grossProfitBn": {
+          "adapterId": "stockanalysis_financials",
+          "label": "StockAnalysis financials",
+          "score": 73,
+          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
+        },
+        "sgnaBn": {
+          "adapterId": "stockanalysis_financials",
+          "label": "StockAnalysis financials",
+          "score": 69,
+          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
+        },
+        "rndBn": {
+          "adapterId": "stockanalysis_financials",
+          "label": "StockAnalysis financials",
+          "score": 69,
+          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
+        },
+        "otherOpexBn": {
+          "adapterId": "stockanalysis_financials",
+          "label": "StockAnalysis financials",
+          "score": 67,
+          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "stockanalysis_financials",
+          "label": "StockAnalysis financials",
+          "score": 73,
+          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "stockanalysis_financials",
+          "label": "StockAnalysis financials",
+          "score": 73,
+          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "stockanalysis_financials",
+          "label": "StockAnalysis financials",
+          "score": 73,
+          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
+        },
+        "taxBn": {
+          "adapterId": "stockanalysis_financials",
+          "label": "StockAnalysis financials",
+          "score": 69,
+          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
+        },
+        "netIncomeBn": {
+          "adapterId": "stockanalysis_financials",
+          "label": "StockAnalysis financials",
+          "score": 73,
+          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
+        },
+        "statementMeta": {
+          "adapterId": "stockanalysis_financials",
+          "label": "StockAnalysis financials",
+          "score": 12.14,
+          "sourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly"
+        }
+      },
+      "extractionDiagnostics": {
+        "qualityScore": 60,
+        "availableRequiredFieldCount": 3,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 12,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "none",
+        "revenueSegmentCoveragePct": 0,
+        "costBreakdownCoveragePct": 0,
+        "opexBreakdownCoveragePct": 0,
+        "revenueSegmentResidualBn": null,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "revenue-segment-coverage-low",
+          "cost-breakdown-coverage-low",
+          "opex-breakdown-coverage-low"
         ]
       }
     }

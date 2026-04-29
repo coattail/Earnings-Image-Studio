@@ -693,6 +693,9 @@ function firstResolvedBreakdownNumber(...values) {
 }
 
 function resolveOperatingExpenseBreakdown(snapshot, company, entry) {
+  if (String(company?.id || "").toLowerCase() === "visa") {
+    return [];
+  }
   if (snapshot?.opexBreakdown?.length && !isSuspiciousExpenseBreakdown(snapshot.opexBreakdown, snapshot?.operatingExpensesBn, snapshot)) {
     return reconcileExpenseBreakdownToTarget(snapshot.opexBreakdown, snapshot?.operatingExpensesBn, {
       fallbackSourceUrl: snapshot?.sourceUrl || null,
@@ -2646,6 +2649,16 @@ const BAR_SEGMENT_CANONICAL_BY_COMPANY = Object.freeze({
     enterpriseembeddedandsemicustom: "enterpriseembeddedsemicustom",
     enterpriseembeddedsemicustom: "enterpriseembeddedsemicustom",
   }),
+  visa: Object.freeze({
+    servicerevenue: "servicerevenues",
+    servicerevenues: "servicerevenues",
+    dataprocessingrevenue: "dataprocessingrevenues",
+    dataprocessingrevenues: "dataprocessingrevenues",
+    internationaltransactionrevenue: "internationaltransactionrevenues",
+    internationaltransactionrevenues: "internationaltransactionrevenues",
+    otherrevenue: "otherrevenues",
+    otherrevenues: "otherrevenues",
+  }),
 });
 
 const BAR_SEGMENT_ROLLUPS_BY_COMPANY = Object.freeze({
@@ -2678,6 +2691,11 @@ const BAR_SEGMENT_LABEL_OVERRIDES = Object.freeze({
   energygenerationstorage: Object.freeze({ name: "Energy generation & storage", nameZh: "能源发电与储能" }),
   computinggraphics: Object.freeze({ name: "Computing & Graphics", nameZh: "计算与图形" }),
   enterpriseembeddedsemicustom: Object.freeze({ name: "Enterprise, Embedded & Semi-Custom", nameZh: "企业、嵌入式与半定制" }),
+  servicerevenues: Object.freeze({ name: "Service Revenues", nameZh: "服务收入" }),
+  dataprocessingrevenues: Object.freeze({ name: "Data Processing Revenues", nameZh: "数据处理收入" }),
+  internationaltransactionrevenues: Object.freeze({ name: "International Transaction Revenues", nameZh: "国际交易收入" }),
+  otherrevenues: Object.freeze({ name: "Other Revenues", nameZh: "其他收入" }),
+  valueaddedservices: Object.freeze({ name: "Value Added Services", nameZh: "增值服务" }),
 });
 
 const TSMC_HISTORY_SANKEY_COLOR_BY_SEGMENT = Object.freeze({
@@ -2743,9 +2761,10 @@ const BAR_SEGMENT_COLOR_SLOT_OVERRIDES = Object.freeze({
 
 const BAR_SEGMENT_COLOR_SLOT_OVERRIDES_BY_COMPANY = Object.freeze({
   visa: Object.freeze({
-    dataprocessingrevenues: 0,
-    internationaltransactionrevenues: 1,
-    valueaddedservices: 2,
+    servicerevenues: 0,
+    dataprocessingrevenues: 1,
+    internationaltransactionrevenues: 2,
+    otherrevenues: 3,
   }),
 });
 
@@ -2776,6 +2795,31 @@ function canonicalBarSegmentMeta(companyId, canonicalKey, fallbackName, fallback
     name: fallbackName || "Segment",
     nameZh: fallbackNameZh || translateBusinessLabelToZh(fallbackName || "Segment"),
   };
+}
+
+const VISA_ADDABLE_REVENUE_CATEGORY_KEYS = Object.freeze([
+  "servicerevenues",
+  "dataprocessingrevenues",
+  "internationaltransactionrevenues",
+  "otherrevenues",
+]);
+
+function visaRowsUseAddableRevenueCategoryTaxonomy(rows = []) {
+  if (!Array.isArray(rows) || !rows.length) return false;
+  const keys = new Set(
+    rows
+      .filter((item) => safeNumber(item?.valueBn) > 0.02)
+      .map((item) => canonicalBarSegmentKey("visa", item?.memberKey || item?.key || item?.id || item?.name, item?.name || ""))
+      .filter(Boolean)
+  );
+  return VISA_ADDABLE_REVENUE_CATEGORY_KEYS.every((key) => keys.has(key)) && !keys.has("valueaddedservices");
+}
+
+function visaQuarterHasAddableRevenueCategoryTaxonomy(entry, structurePayload = null) {
+  return (
+    visaRowsUseAddableRevenueCategoryTaxonomy(entry?.officialRevenueSegments || []) ||
+    visaRowsUseAddableRevenueCategoryTaxonomy(structurePayload?.segments || [])
+  );
 }
 
 function hashStringDeterministic(text) {
@@ -3614,7 +3658,7 @@ function selectQuarterBarSource(company, entry, structurePayload = null) {
 
   addCandidate("structure-history", Array.isArray(structurePayload?.segments) ? structurePayload.segments : []);
   addCandidate("official-segments", Array.isArray(entry?.officialRevenueSegments) ? entry.officialRevenueSegments : []);
-  if (shouldUseOfficialGroupCandidate(company, entry, structurePayload)) {
+  if (String(company?.id || "").toLowerCase() !== "visa" && shouldUseOfficialGroupCandidate(company, entry, structurePayload)) {
     let groups = null;
     try {
       groups = buildOfficialBusinessGroups(company, entry, { includeSyntheticResidual: false });
@@ -4005,6 +4049,9 @@ function buildRevenueSegmentBarHistory(company, anchorQuarterKey, maxQuarters = 
   const allValidQuarterKeys = quarterKeys.filter((quarterKey) => {
     const entry = company?.financials?.[quarterKey];
     const structurePayload = structureQuarterMap?.[quarterKey];
+    if (String(company?.id || "").toLowerCase() === "visa" && !visaQuarterHasAddableRevenueCategoryTaxonomy(entry, structurePayload)) {
+      return false;
+    }
     const structureSegments = Array.isArray(structurePayload?.segments) ? structurePayload.segments : [];
     const structureSum = structureSegments.reduce((sum, item) => sum + safeNumber(item?.valueBn), 0);
     const hasRevenue = safeNumber(entry?.revenueBn, null) > 0.02 || safeNumber(structurePayload?.displayRevenueBn, null) > 0.02 || structureSum > 0.02;
@@ -4048,8 +4095,12 @@ function buildRevenueSegmentBarHistory(company, anchorQuarterKey, maxQuarters = 
     const revenueBnRaw = safeNumber(entry?.revenueBn, null);
     const revenueBnDisplay = revenueBnRaw > 0.02 ? revenueBnRaw * safeNumber(displayConfig.displayScaleFactor, 1) : null;
     const structureDisplayRevenueBn = safeNumber(structurePayload?.displayRevenueBn, null);
+    const isVisaAddableRevenueCategoryQuarter =
+      String(company?.id || "").toLowerCase() === "visa" && visaRowsUseAddableRevenueCategoryTaxonomy(scaledSegments);
     const resolvedRevenueBn =
-      revenueBnDisplay > 0.02
+      isVisaAddableRevenueCategoryQuarter && scaledSegmentSum > 0.02
+        ? scaledSegmentSum
+        : revenueBnDisplay > 0.02
         ? revenueBnDisplay
         : structureDisplayRevenueBn > 0.02
           ? structureDisplayRevenueBn
@@ -4061,9 +4112,16 @@ function buildRevenueSegmentBarHistory(company, anchorQuarterKey, maxQuarters = 
     const segmentSchemaFamily =
       methodTag ||
       (rawSegmentKeys.length >= 2 ? `legacy:${rawSegmentKeys.slice(0, 3).join("|")}` : rawSegmentKeys.length === 1 ? `single:${rawSegmentKeys[0]}` : "unknown");
-    const reconciled = reconcileBarSegmentRowsToRevenue(company, scaledSegments, resolvedRevenueBn, {
-      minCoverageForResidualAddition: methodTag ? 0.36 : 0.62,
-    });
+    const reconciled = isVisaAddableRevenueCategoryQuarter
+      ? {
+          rows: scaledSegments,
+          coverageRatio: 1,
+          insufficientCoverage: false,
+          reconciliationMode: "official-gross-components",
+        }
+      : reconcileBarSegmentRowsToRevenue(company, scaledSegments, resolvedRevenueBn, {
+          minCoverageForResidualAddition: methodTag ? 0.36 : 0.62,
+        });
     const segmentRows = reconciled.rows;
     const segmentMap = Object.fromEntries(segmentRows.map((item) => [item.key, safeNumber(item.valueBn)]));
     return {
@@ -4096,6 +4154,59 @@ function buildRevenueSegmentBarHistory(company, anchorQuarterKey, maxQuarters = 
       rawSegmentSourceScore: sourceSelection.score,
     };
   });
+
+  if (String(company?.id || "").toLowerCase() === "visa") {
+    const visibleQuarterKeySet = new Set(includeAllQuarters ? allValidQuarterKeys : selectedQuarterKeys);
+    const visibleQuarters = quarters.filter((quarter) => visibleQuarterKeySet.has(quarter.quarterKey));
+    if (!visibleQuarters.length) return null;
+    const totals = new Map();
+    const nameRegistry = new Map();
+    quarters.forEach((quarter) => {
+      quarter.segmentRows.forEach((item) => {
+        if (!item?.key) return;
+        totals.set(item.key, (totals.get(item.key) || 0) + safeNumber(item.valueBn));
+        if (!nameRegistry.has(item.key)) {
+          const canonicalMeta = canonicalBarSegmentMeta(company?.id, item.key, item.name || "Segment", item.nameZh || "");
+          nameRegistry.set(item.key, {
+            name: canonicalMeta.name || item.name || "Segment",
+            nameZh: canonicalMeta.nameZh || item.nameZh || translateBusinessLabelToZh(item.name || "Segment"),
+          });
+        }
+      });
+    });
+    const sortedSegmentKeys = [...totals.entries()]
+      .sort((left, right) => right[1] - left[1])
+      .map(([key]) => key);
+    const colorBySegment = stableBarColorMap(company?.id, sortedSegmentKeys);
+    const segmentStats = sortedSegmentKeys.map((segmentKey) => ({
+      key: segmentKey,
+      totalValueBn: Number(safeNumber(totals.get(segmentKey)).toFixed(3)),
+      name: nameRegistry.get(segmentKey)?.name || "Segment",
+      nameZh: nameRegistry.get(segmentKey)?.nameZh || translateBusinessLabelToZh(nameRegistry.get(segmentKey)?.name || "Segment"),
+      color: colorBySegment[segmentKey],
+    }));
+    const displayCurrencySet = [...new Set(visibleQuarters.map((item) => item.displayCurrency).filter(Boolean))];
+    const sourceCurrencySet = [...new Set(visibleQuarters.map((item) => item.sourceCurrency).filter(Boolean))];
+    return {
+      quarters: visibleQuarters,
+      segmentStats,
+      colorBySegment,
+      stackOrder: segmentStats.slice().sort((left, right) => left.totalValueBn - right.totalValueBn).map((item) => item.key),
+      maxRevenueBn: Math.max(...visibleQuarters.map((item) => safeNumber(item.totalRevenueBn)), 1),
+      anchorQuarterKey: selectedQuarterKeys[selectedQuarterKeys.length - 1] || null,
+      requestedQuarterCount: requestedWindowCount,
+      availableQuarterCount: visibleQuarters.length,
+      missingQuarterCount: 0,
+      imputedQuarterCount: 0,
+      smoothedQuarterCount: 0,
+      reportedSegmentQuarterCount: visibleQuarters.length,
+      displayCurrency: displayCurrencySet.length === 1 ? displayCurrencySet[0] : "MIXED",
+      sourceCurrencies: sourceCurrencySet,
+      convertedQuarterCount: visibleQuarters.filter((item) => Math.abs(safeNumber(item.displayScaleFactor, 1) - 1) > 0.000001).length,
+      windowUnitLabel,
+      windowUnitLabelZh,
+    };
+  }
 
   const taxonomyPhases = buildBarTaxonomyPhases(company, quarters);
   applyBarTaxonomyPhaseAlignment(company, quarters, taxonomyPhases);

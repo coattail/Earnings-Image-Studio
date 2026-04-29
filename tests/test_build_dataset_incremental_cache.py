@@ -189,6 +189,145 @@ class BuildDatasetIncrementalCacheTests(unittest.TestCase):
         self.assertEqual(len(rebuild_logs), 1)
         self.assertIn("unifiedEngineVersion=old-engine", rebuild_logs[0])
 
+    def test_incremental_build_preserves_existing_selected_company_history(self) -> None:
+        selected_company = _company("selected", "SEL")
+        existing_payload = _payload("selected", "universal-parser-v4", with_unified=True)
+        existing_payload["quarters"] = ["2024Q4"]
+        existing_payload["financials"] = {
+            "2024Q4": {
+                "calendarQuarter": "2024Q4",
+                "revenueBn": 10,
+                "officialRevenueSegments": [
+                    {"name": "Legacy Segment", "memberKey": "legacy", "valueBn": 4},
+                ],
+            }
+        }
+        new_payload = _payload("selected", "universal-parser-v4", with_unified=True)
+        new_payload["quarters"] = ["2025Q1"]
+        new_payload["financials"] = {
+            "2025Q1": {
+                "calendarQuarter": "2025Q1",
+                "revenueBn": 12,
+            }
+        }
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            tmp_path = Path(tmp_dir)
+            cache_dir = tmp_path / "cache"
+            output_path = tmp_path / "earnings-dataset.json"
+            dataset_index_path = tmp_path / "dataset-index.json"
+            output_path.write_text(
+                json.dumps({"companies": [existing_payload]}),
+                encoding="utf-8",
+            )
+
+            with (
+                patch.object(build_dataset, "TOP30_COMPANIES", [selected_company]),
+                patch.object(build_dataset, "COMPANY_CACHE_DIR", cache_dir),
+                patch.object(build_dataset, "OUTPUT_PATH", output_path),
+                patch.object(build_dataset, "DATASET_INDEX_PATH", dataset_index_path),
+                patch.object(build_dataset, "parse_args", return_value=Namespace(refresh=True, companies="selected")),
+                patch.object(build_dataset, "load_manual_presets", return_value={}),
+                patch.object(build_dataset, "load_manual_company_overrides", return_value={}),
+                patch.object(build_dataset, "load_fx_cache", return_value={}),
+                patch.object(build_dataset, "save_fx_cache"),
+                patch.object(build_dataset, "time") as mock_time,
+                patch.object(build_dataset, "build_company_payload_with_universal_parser", return_value=json.loads(json.dumps(new_payload))),
+                patch.object(build_dataset, "supplement_tencent_official_financials", side_effect=lambda payload: payload),
+                patch.object(build_dataset, "sanitize_implausible_q4_revenue_aligned_statements", side_effect=lambda payload: payload),
+                patch.object(build_dataset, "apply_manual_company_override", side_effect=lambda payload, company, overrides: payload),
+                patch.object(build_dataset, "apply_usd_display_fields", side_effect=lambda payload, cache: payload),
+                patch.object(build_dataset, "apply_fused_extraction", side_effect=lambda payload, company, refresh: payload),
+                patch.object(build_dataset, "build_dataset_classification_audit", return_value={"blockingIssues": []}),
+            ):
+                mock_time.sleep.return_value = None
+                mock_time.strftime.return_value = "2026-03-29T00:00:00Z"
+                mock_time.gmtime.return_value = object()
+
+                exit_code = build_dataset.main()
+                dataset = json.loads(output_path.read_text(encoding="utf-8"))
+
+        selected_entry = dataset["companies"][0]
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(selected_entry["quarters"], ["2024Q4", "2025Q1"])
+        self.assertEqual(selected_entry["financials"]["2024Q4"]["officialRevenueSegments"][0]["name"], "Legacy Segment")
+
+    def test_full_build_preserves_existing_company_history(self) -> None:
+        selected_company = _company("selected", "SEL")
+        existing_payload = _payload("selected", "universal-parser-v4", with_unified=True)
+        existing_payload["quarters"] = ["2024Q4"]
+        existing_payload["financials"] = {
+            "2024Q4": {
+                "calendarQuarter": "2024Q4",
+                "revenueBn": 10,
+                "officialRevenueSegments": [
+                    {"name": "Legacy Segment", "memberKey": "legacy", "valueBn": 4},
+                ],
+            }
+        }
+        existing_payload["officialRevenueStructureHistory"] = {
+            "quarters": {
+                "2024Q4": {
+                    "segments": [
+                        {"name": "Legacy Segment", "memberKey": "legacy", "valueBn": 4},
+                    ],
+                },
+            },
+        }
+        new_payload = _payload("selected", "universal-parser-v4", with_unified=True)
+        new_payload["quarters"] = ["2025Q1"]
+        new_payload["financials"] = {
+            "2025Q1": {
+                "calendarQuarter": "2025Q1",
+                "revenueBn": 12,
+            }
+        }
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            tmp_path = Path(tmp_dir)
+            cache_dir = tmp_path / "cache"
+            output_path = tmp_path / "earnings-dataset.json"
+            dataset_index_path = tmp_path / "dataset-index.json"
+            output_path.write_text(
+                json.dumps({"companies": [existing_payload]}),
+                encoding="utf-8",
+            )
+
+            with (
+                patch.object(build_dataset, "TOP30_COMPANIES", [selected_company]),
+                patch.object(build_dataset, "COMPANY_CACHE_DIR", cache_dir),
+                patch.object(build_dataset, "OUTPUT_PATH", output_path),
+                patch.object(build_dataset, "DATASET_INDEX_PATH", dataset_index_path),
+                patch.object(build_dataset, "parse_args", return_value=Namespace(refresh=True, companies="")),
+                patch.object(build_dataset, "load_manual_presets", return_value={}),
+                patch.object(build_dataset, "load_manual_company_overrides", return_value={}),
+                patch.object(build_dataset, "load_fx_cache", return_value={}),
+                patch.object(build_dataset, "save_fx_cache"),
+                patch.object(build_dataset, "time") as mock_time,
+                patch.object(build_dataset, "build_company_payload_with_universal_parser", return_value=json.loads(json.dumps(new_payload))),
+                patch.object(build_dataset, "supplement_tencent_official_financials", side_effect=lambda payload: payload),
+                patch.object(build_dataset, "sanitize_implausible_q4_revenue_aligned_statements", side_effect=lambda payload: payload),
+                patch.object(build_dataset, "apply_manual_company_override", side_effect=lambda payload, company, overrides: payload),
+                patch.object(build_dataset, "apply_usd_display_fields", side_effect=lambda payload, cache: payload),
+                patch.object(build_dataset, "apply_fused_extraction", side_effect=lambda payload, company, refresh: payload),
+                patch.object(build_dataset, "build_dataset_classification_audit", return_value={"blockingIssues": []}),
+            ):
+                mock_time.sleep.return_value = None
+                mock_time.strftime.return_value = "2026-03-29T00:00:00Z"
+                mock_time.gmtime.return_value = object()
+
+                exit_code = build_dataset.main()
+                dataset = json.loads(output_path.read_text(encoding="utf-8"))
+
+        selected_entry = dataset["companies"][0]
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(selected_entry["quarters"], ["2024Q4", "2025Q1"])
+        self.assertEqual(selected_entry["financials"]["2024Q4"]["officialRevenueSegments"][0]["memberKey"], "legacy")
+        self.assertEqual(
+            selected_entry["officialRevenueStructureHistory"]["quarters"]["2024Q4"]["segments"][0]["memberKey"],
+            "legacy",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

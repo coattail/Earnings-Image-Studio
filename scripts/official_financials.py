@@ -21,6 +21,10 @@ OFFICIAL_FINANCIALS_CACHE_VERSION = "20260415-v2"
 CURRENCY_UNIT_PATTERN = re.compile(r"^[A-Z]{3}$")
 MIN_FILING_DATE = "2017-01-01"
 MIN_CALENDAR_QUARTER = (2018, 1)
+SEC_HEADERS = {
+    "User-Agent": "Codex/official-financials yuwan@example.com",
+    "Accept-Encoding": "gzip, deflate",
+}
 ASML_FINANCIAL_RESULTS_INDEX_URL = "https://www.asml.com/en/investors/financial-results"
 ASML_RESULTS_PAGE_PATH_PATTERN = re.compile(r'href="(/en/investors/financial-results/q([1-4])-(20\d{2}))"')
 ASML_FINANCIAL_PDF_URL_PATTERN = re.compile(r'href="(https://[^"]*Financial-statements-US-GAAP[^"]+\.pdf[^"]*)"')
@@ -1011,7 +1015,7 @@ def _request_bytes_resilient(url: str) -> bytes:
     try:
         return _request(url)
     except Exception:
-        response = requests.get(url, timeout=60)
+        response = requests.get(url, timeout=60, headers=SEC_HEADERS)
         response.raise_for_status()
         return response.content
 

@@ -160,6 +160,18 @@ BAR_SEGMENT_CANONICAL_BY_COMPANY: dict[str, dict[str, str]] = {
     "amazon": {
         "advertising": "advertisingservices",
     },
+    "visa": {
+        "servicerevenue": "servicerevenues",
+        "servicerevenues": "servicerevenues",
+        "dataprocessingrevenue": "dataprocessingrevenues",
+        "dataprocessingrevenues": "dataprocessingrevenues",
+        "internationaltransactionrevenue": "internationaltransactionrevenues",
+        "internationaltransactionrevenues": "internationaltransactionrevenues",
+        "otherrevenue": "otherrevenues",
+        "otherrevenues": "otherrevenues",
+        "valueaddedservice": "valueaddedservices",
+        "valueaddedservices": "valueaddedservices",
+    },
 }
 
 MICRON_LEGACY_SEGMENT_KEYS = {"cnbu", "mbu", "sbu", "ebu", "allothersegments"}
@@ -313,6 +325,62 @@ def load_cached_company_payload(company_id: str) -> dict[str, Any] | None:
     except Exception:
         return None
     return payload if isinstance(payload, dict) else None
+
+
+def load_existing_dataset_companies_by_id() -> dict[str, dict[str, Any]]:
+    if not OUTPUT_PATH.exists():
+        return {}
+    try:
+        dataset = json.loads(OUTPUT_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    companies = dataset.get("companies")
+    if not isinstance(companies, list):
+        return {}
+    return {
+        str(company.get("id")): company
+        for company in companies
+        if isinstance(company, dict) and str(company.get("id") or "").strip()
+    }
+
+
+def preserve_existing_company_history(payload: dict[str, Any], existing_payload: dict[str, Any] | None) -> dict[str, Any]:
+    if not isinstance(existing_payload, dict):
+        return payload
+    financials = payload.setdefault("financials", {})
+    existing_financials = existing_payload.get("financials")
+    if not isinstance(financials, dict) or not isinstance(existing_financials, dict):
+        return payload
+    preserved_fields = (
+        "officialRevenueSegments",
+        "officialRevenueDetailGroups",
+        "officialOpexBreakdown",
+        "officialCostBreakdown",
+        "officialRevenueStyle",
+    )
+    for quarter, existing_entry in existing_financials.items():
+        if not isinstance(existing_entry, dict):
+            continue
+        current_entry = financials.get(quarter)
+        if not isinstance(current_entry, dict):
+            financials[quarter] = deepcopy(existing_entry)
+            continue
+        for field_name in preserved_fields:
+            if existing_entry.get(field_name) and not current_entry.get(field_name):
+                current_entry[field_name] = deepcopy(existing_entry[field_name])
+    existing_history = existing_payload.get("officialRevenueStructureHistory")
+    current_history = payload.get("officialRevenueStructureHistory")
+    if isinstance(existing_history, dict):
+        if not isinstance(current_history, dict):
+            payload["officialRevenueStructureHistory"] = deepcopy(existing_history)
+        else:
+            current_quarters = current_history.setdefault("quarters", {})
+            existing_quarters = existing_history.get("quarters")
+            if isinstance(current_quarters, dict) and isinstance(existing_quarters, dict):
+                for quarter, history_entry in existing_quarters.items():
+                    current_quarters.setdefault(quarter, deepcopy(history_entry))
+    payload["quarters"] = sorted(financials.keys(), key=parse_period)
+    return payload
 
 
 def is_company_payload_cache_compatible(payload: dict[str, Any] | None) -> bool:
@@ -1582,6 +1650,7 @@ def finalize_company_payload(
     presets: dict[str, Any],
 ) -> dict[str, Any]:
     payload["statementPresets"] = presets
+    sync_revenue_structure_history_into_financial_entries(payload, company)
     segment_quarter_count = sum(1 for item in payload["financials"].values() if item.get("officialRevenueSegments"))
     expense_quarter_count = sum(1 for item in payload["financials"].values() if item.get("officialOpexBreakdown") or item.get("opexBreakdown"))
     classification_coverage = build_company_classification_coverage(company, payload)
@@ -1594,6 +1663,7 @@ def finalize_company_payload(
     if isinstance(parser_diagnostics, dict):
         parser_diagnostics["validation"] = deepcopy(parser_validation)
         payload["parserDiagnostics"] = parser_diagnostics
+    apply_company_rendering_preferences(company, payload)
     payload["coverage"] = {
         "quarterCount": len(payload["quarters"]),
         "pixelReplicaQuarterCount": len(presets),
@@ -1613,6 +1683,220 @@ def finalize_company_payload(
             "validation": deepcopy(parser_validation),
         },
     }
+    return payload
+
+
+VISA_NET_REVENUE_CATEGORY_KEYS = {
+    "servicerevenues",
+    "dataprocessingrevenues",
+    "internationaltransactionrevenues",
+    "otherrevenues",
+}
+
+VISA_REVENUE_CATEGORY_ROWS = {
+    "servicerevenue": {
+        "name": "Service Revenues",
+        "memberKey": "servicerevenues",
+    },
+    "servicerevenues": {
+        "name": "Service Revenues",
+        "memberKey": "servicerevenues",
+    },
+    "dataprocessingrevenue": {
+        "name": "Data Processing Revenues",
+        "memberKey": "dataprocessingrevenues",
+    },
+    "dataprocessingrevenues": {
+        "name": "Data Processing Revenues",
+        "memberKey": "dataprocessingrevenues",
+    },
+    "internationaltransactionrevenue": {
+        "name": "International Transaction Revenues",
+        "memberKey": "internationaltransactionrevenues",
+    },
+    "internationaltransactionrevenues": {
+        "name": "International Transaction Revenues",
+        "memberKey": "internationaltransactionrevenues",
+    },
+    "otherrevenue": {
+        "name": "Other Revenues",
+        "memberKey": "otherrevenues",
+    },
+    "otherrevenues": {
+        "name": "Other Revenues",
+        "memberKey": "otherrevenues",
+    },
+}
+
+
+def _visa_rows_are_net_revenue_category_taxonomy(rows: Any) -> bool:
+    if not isinstance(rows, list) or not rows:
+        return False
+    keys = {
+        canonical_revenue_segment_member_key("visa", row.get("memberKey"), row.get("name"))
+        for row in rows
+        if isinstance(row, dict) and float(row.get("valueBn") or 0) > 0
+    }
+    if "valueaddedservices" in keys:
+        return False
+    return VISA_NET_REVENUE_CATEGORY_KEYS.issubset(keys)
+
+
+def _visa_mapped_revenue_category_rows(rows: Any) -> list[dict[str, Any]]:
+    if not isinstance(rows, list):
+        return []
+    mapped_rows: list[dict[str, Any]] = []
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        key = normalize_segment_label_key(row.get("memberKey") or row.get("name"))
+        mapping = VISA_REVENUE_CATEGORY_ROWS.get(key)
+        if not mapping:
+            continue
+        value_bn = float(row.get("valueBn") or 0)
+        if value_bn <= 0:
+            continue
+        next_row = deepcopy(row)
+        next_row["name"] = mapping["name"]
+        next_row["memberKey"] = mapping["memberKey"]
+        next_row["valueBn"] = row.get("valueBn")
+        notes = list(next_row.get("validationNotes") or [])
+        if "visa-addable-revenue-category-taxonomy" not in notes:
+            notes.append("visa-addable-revenue-category-taxonomy")
+        next_row["validationNotes"] = notes
+        mapped_rows.append(next_row)
+    return mapped_rows
+
+
+def _visa_revenue_rows_for_addable_category_display(entry: dict[str, Any], structure_payload: dict[str, Any] | None) -> list[dict[str, Any]]:
+    structure_rows = (structure_payload or {}).get("segments")
+    if _visa_rows_are_net_revenue_category_taxonomy(structure_rows):
+        return normalize_official_revenue_segments("visa", str(entry.get("calendarQuarter") or ""), deepcopy(structure_rows))
+    entry_rows = entry.get("officialRevenueSegments")
+    if _visa_rows_are_net_revenue_category_taxonomy(entry_rows):
+        return normalize_official_revenue_segments("visa", str(entry.get("calendarQuarter") or ""), deepcopy(entry_rows))
+    mapped_rows = _visa_mapped_revenue_category_rows(structure_rows)
+    if not mapped_rows:
+        mapped_rows = _visa_mapped_revenue_category_rows(entry_rows)
+    if mapped_rows:
+        quarter_key = str(entry.get("calendarQuarter") or "")
+        return normalize_official_revenue_segments("visa", quarter_key, mapped_rows)
+    return []
+
+
+def _suppress_visa_misaligned_cost_of_revenue(entry: dict[str, Any]) -> None:
+    revenue_bn = float(entry.get("revenueBn") or 0)
+    cost_bn = float(entry.get("costOfRevenueBn") or 0)
+    if not (revenue_bn > 0 and cost_bn > 0.5 and cost_bn / revenue_bn > 0.08):
+        return
+    entry["costOfRevenueBn"] = None
+    entry["grossProfitBn"] = None
+    entry["grossMarginPct"] = None
+    field_sources = entry.get("parserFinancialFieldSources")
+    if isinstance(field_sources, dict):
+        field_sources["costOfRevenueBn"] = "suppressed-misaligned-visa-cost-basis"
+        field_sources["grossProfitBn"] = "suppressed-misaligned-visa-cost-basis"
+        field_sources["grossMarginPct"] = "suppressed-misaligned-visa-cost-basis"
+    diagnostics = entry.get("extractionDiagnostics")
+    if isinstance(diagnostics, dict):
+        issues = diagnostics.setdefault("issues", [])
+        if isinstance(issues, list) and "visa-cost-of-revenue-basis-suppressed" not in issues:
+            issues.append("visa-cost-of-revenue-basis-suppressed")
+
+
+def apply_visa_display_normalizations(payload: dict[str, Any]) -> dict[str, Any]:
+    financials = payload.get("financials")
+    if not isinstance(financials, dict):
+        return payload
+    history = payload.get("officialRevenueStructureHistory")
+    history_quarters = history.get("quarters") if isinstance(history, dict) else {}
+    if not isinstance(history_quarters, dict):
+        history_quarters = {}
+
+    for quarter_key, entry in financials.items():
+        if not isinstance(entry, dict):
+            continue
+        structure_payload = history_quarters.get(quarter_key)
+        if not isinstance(structure_payload, dict):
+            structure_payload = None
+        entry.setdefault("calendarQuarter", quarter_key)
+        rows = _visa_revenue_rows_for_addable_category_display(entry, structure_payload)
+        if rows:
+            entry["officialRevenueSegments"] = rows
+            if structure_payload is not None:
+                structure_payload["segments"] = deepcopy(rows)
+        _suppress_visa_misaligned_cost_of_revenue(entry)
+    return payload
+
+
+def apply_company_rendering_preferences(company: dict[str, Any], payload: dict[str, Any]) -> dict[str, Any]:
+    company_id = str(company.get("id") or payload.get("id") or "").strip().lower()
+    financials = payload.get("financials")
+    if company_id != "visa" or not isinstance(financials, dict):
+        return payload
+    apply_visa_display_normalizations(payload)
+    detailed_fields = (
+        "officialRevenueDetailGroups",
+        "officialOpexBreakdown",
+        "officialCostBreakdown",
+        "costBreakdown",
+        "opexBreakdown",
+    )
+    for entry in financials.values():
+        if not isinstance(entry, dict):
+            continue
+        for field_name in detailed_fields:
+            entry.pop(field_name, None)
+        diagnostics = entry.get("extractionDiagnostics")
+        if isinstance(diagnostics, dict):
+            diagnostics["costBreakdownMode"] = "none"
+            diagnostics["opexBreakdownMode"] = "none"
+            diagnostics["costBreakdownCoveragePct"] = None
+            diagnostics["opexBreakdownCoveragePct"] = None
+            diagnostics["costBreakdownResidualBn"] = None
+            diagnostics["opexBreakdownResidualBn"] = None
+    return payload
+
+
+def sync_revenue_structure_history_into_financial_entries(
+    payload: dict[str, Any],
+    company: dict[str, Any],
+) -> dict[str, Any]:
+    history = payload.get("officialRevenueStructureHistory")
+    if not isinstance(history, dict):
+        return payload
+    quarter_map = history.get("quarters")
+    financials = payload.get("financials")
+    if not isinstance(quarter_map, dict) or not isinstance(financials, dict):
+        return payload
+    company_id = str(company.get("id") or payload.get("id") or "")
+    for quarter, structure_payload in quarter_map.items():
+        if not isinstance(structure_payload, dict):
+            continue
+        entry = financials.get(quarter)
+        if not isinstance(entry, dict):
+            continue
+        if not entry.get("officialRevenueSegments"):
+            segments = structure_payload.get("segments")
+            if isinstance(segments, list) and segments:
+                normalized_segments = normalize_official_revenue_segments(company_id, str(quarter), deepcopy(segments))
+                entry["officialRevenueSegments"] = dedupe_revenue_segment_rows(company_id, normalized_segments)
+        if not entry.get("officialRevenueDetailGroups"):
+            detail_groups = structure_payload.get("detailGroups")
+            if isinstance(detail_groups, list) and detail_groups:
+                entry["officialRevenueDetailGroups"] = mark_detail_groups_validation_ineligible(deepcopy(detail_groups))
+        if not entry.get("officialOpexBreakdown"):
+            opex_breakdown = structure_payload.get("opexBreakdown") or structure_payload.get("officialOpexBreakdown")
+            if isinstance(opex_breakdown, list) and opex_breakdown:
+                entry["officialOpexBreakdown"] = deepcopy(opex_breakdown)
+        if not entry.get("officialCostBreakdown"):
+            cost_breakdown = structure_payload.get("costBreakdown") or structure_payload.get("officialCostBreakdown")
+            if isinstance(cost_breakdown, list) and cost_breakdown:
+                entry["officialCostBreakdown"] = deepcopy(cost_breakdown)
+        if not entry.get("officialRevenueStyle") and structure_payload.get("style"):
+            entry["officialRevenueStyle"] = structure_payload.get("style")
+    enrich_growth_rows(financials, "officialRevenueSegments")
+    enrich_growth_rows(financials, "officialRevenueDetailGroups")
     return payload
 
 
@@ -2351,6 +2635,7 @@ def main() -> int:
     selected_companies = [company for company in TOP30_COMPANIES if company_matches_selection(company, selected_tokens)]
     if selected_tokens and not selected_companies:
         print("[warn] no companies matched --companies selection; nothing to refresh.", flush=True)
+    existing_companies_by_id = load_existing_dataset_companies_by_id()
 
     results_by_company_id: dict[str, dict[str, Any]] = {}
 
@@ -2368,6 +2653,7 @@ def main() -> int:
             failures.append(f"{company['ticker']}: {exc}")
             print(f"  failed: {exc}", file=sys.stderr, flush=True)
             continue
+        payload = preserve_existing_company_history(payload, existing_companies_by_id.get(str(company["id"])))
         presets = manual_presets.get(str(company["id"])) or {}
         payload = finalize_company_payload(company, payload, presets)
         COMPANY_CACHE_DIR.mkdir(parents=True, exist_ok=True)
@@ -2382,6 +2668,7 @@ def main() -> int:
             cached_payload = load_cached_company_payload(company["id"])
             if is_company_payload_cache_compatible(cached_payload):
                 presets = manual_presets.get(str(company["id"])) or {}
+                cached_payload = preserve_existing_company_history(cached_payload, existing_companies_by_id.get(str(company["id"])))
                 cached_payload = finalize_company_payload(company, cached_payload, presets)
                 results_by_company_id[company["id"]] = cached_payload
                 COMPANY_CACHE_DIR.mkdir(parents=True, exist_ok=True)
@@ -2414,6 +2701,7 @@ def main() -> int:
                 failures.append(f"{company['ticker']}: {exc}")
                 print(f"  failed: {exc}", file=sys.stderr, flush=True)
                 continue
+            payload = preserve_existing_company_history(payload, existing_companies_by_id.get(str(company["id"])))
             presets = manual_presets.get(str(company["id"])) or {}
             payload = finalize_company_payload(company, payload, presets)
             COMPANY_CACHE_DIR.mkdir(parents=True, exist_ok=True)
