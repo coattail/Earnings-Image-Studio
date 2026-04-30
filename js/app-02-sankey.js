@@ -969,6 +969,9 @@ function renderPixelReplicaSvg(snapshot) {
   const operatingProfitBreakdown = [...(snapshot.operatingProfitBreakdown || [])].filter((item) => safeNumber(item.valueBn) > 0.02);
   const belowOperatingItems = rawBelowOperatingItems;
   const positiveAdjustments = rawPositiveAdjustments;
+  const usesExtremePositiveTopLane =
+    positiveAdjustments.length === 1 &&
+    positiveAdjustmentExtremeStrength >= safeNumber(snapshot.layout?.extremePositiveTopLaneThreshold, 0.72);
   const positiveMinVisibleHeight = scaleY(safeNumber(snapshot.layout?.positiveMinVisibleHeight, 6.5));
   const positiveCollapsedMinHeight = scaleY(safeNumber(snapshot.layout?.positiveCollapsedMinHeight, 4.5));
   const positiveVisibilityLiftTarget = scaleY(safeNumber(snapshot.layout?.positiveVisibilityLiftTarget, 14));
@@ -998,6 +1001,33 @@ function renderPixelReplicaSvg(snapshot) {
   }
   const totalPositiveHeight = positiveHeights.reduce((sum, height) => sum + height, 0);
   const totalPositiveMergeHeight = positiveMergeHeights.reduce((sum, height) => sum + height, 0);
+  const positiveExtremeTopReleaseY = safeNumber(
+    snapshot.layout?.positiveExtremeSourceTopReleaseY,
+    usesExtremePositiveTopLane ? 74 : 68
+  );
+  const positiveExtremeTopFloorY = scaleY(160 - positiveAdjustmentExtremeStrength * positiveExtremeTopReleaseY);
+  const extremePositiveTopLaneBottomGapY = scaleY(
+    safeNumber(
+      snapshot.layout?.extremePositiveTopLaneBottomGapY,
+      24
+    )
+  );
+  const opLanePushdownY =
+    usesExtremePositiveTopLane
+      ? Math.max(
+          scaleY(safeNumber(snapshot.layout?.extremePositiveOperatingLanePushdownY, 0)),
+          Math.max(
+            positiveExtremeTopFloorY +
+              totalPositiveHeight +
+              extremePositiveTopLaneBottomGapY -
+              opTop,
+            0
+          ) +
+            scaleY(safeNumber(snapshot.layout?.extremePositiveOperatingLaneExtraGapY, 16))
+        )
+      : 0;
+  const operatingLaneTop = opTop + opLanePushdownY;
+  const operatingLaneBottom = opBottom + opLanePushdownY;
   const explicitBelowOperatingBn = belowOperatingItems.reduce((sum, item) => sum + Math.max(safeNumber(item.valueBn), 0), 0);
   const explicitCoreNetHeight = Math.max((operatingProfitBn - explicitBelowOperatingBn) * scale, 0);
   const zeroNetRibbonHeight =
@@ -1023,8 +1053,8 @@ function renderPixelReplicaSvg(snapshot) {
   const coreNetTargetHeight = useImplicitPositiveNetExpansion
     ? netHeight
     : clamp(Math.min(coreNetHeight, residualNetTargetHeight), 0, netHeight);
-  const deductionTop = opTop + coreNetHeight;
-  const deductionBottom = opBottom;
+  const deductionTop = operatingLaneTop + coreNetHeight;
+  const deductionBottom = operatingLaneBottom;
   const revenueNodeFill = revenueNode;
   const revenueTextColor = "#111111";
   const revenueLabelCenterX = revenueX + nodeWidth / 2 + safeNumber(snapshot.layout?.revenueLabelOffsetX, 0);
@@ -2428,7 +2458,13 @@ function renderPixelReplicaSvg(snapshot) {
   const rightTerminalSummaryObstacleBottom = netSummaryBottom + rightTerminalSummaryClearance;
   const branchSourceGapY = scaleY(safeNumber(snapshot.layout?.branchSourceGapY, 16));
   const branchSourceMinThickness = scaleY(safeNumber(snapshot.layout?.branchSourceMinThickness, 8));
-  const netPositiveTop = positiveAdjustments.length ? (positiveAbove ? netTop : netTop + coreNetTargetHeight) : netBottom;
+  const netPositiveTop = positiveAdjustments.length
+    ? positiveAbove
+      ? netTop
+      : usesExtremePositiveTopLane
+        ? netTop
+        : netTop + coreNetTargetHeight
+    : netBottom;
   const netCoreTop = positiveAdjustments.length && positiveAbove ? netTop + totalPositiveMergeHeight : netTop;
   const netCoreBottom = netCoreTop + coreNetTargetHeight;
   const revenueGrossSourceBand = {
@@ -2475,10 +2511,10 @@ function renderPixelReplicaSvg(snapshot) {
     align: snapshot.layout?.opexInboundTargetBandAlign || "top",
   });
   const opNetSourceBand = {
-    top: opTop,
-    bottom: opTop + coreNetHeight,
+    top: operatingLaneTop,
+    bottom: operatingLaneTop + coreNetHeight,
     height: Math.max(coreNetHeight, 1),
-    center: opTop + Math.max(coreNetHeight, 1) / 2,
+    center: operatingLaneTop + Math.max(coreNetHeight, 1) / 2,
   };
   const opDeductionSourceBand = {
     top: deductionTop,
@@ -3656,12 +3692,12 @@ function renderPixelReplicaSvg(snapshot) {
     noteLineHeight: profitMetricNoteLineHeight,
     noteSize: profitMetricNoteSize,
   });
-  const operatingMetricLayout = resolveReplicaMetricClusterLayout(opTop, snapshot.operatingMarginYoyDeltaPp !== null && snapshot.operatingMarginYoyDeltaPp !== undefined, {
+  const operatingMetricLayout = resolveReplicaMetricClusterLayout(operatingLaneTop, snapshot.operatingMarginYoyDeltaPp !== null && snapshot.operatingMarginYoyDeltaPp !== undefined, {
     compactThreshold: scaleY(352),
     noteLineHeight: profitMetricNoteLineHeight,
     noteSize: profitMetricNoteSize,
   });
-  const expenseSummaryLayout = resolveReplicaMetricClusterLayout(opTop, false, {
+  const expenseSummaryLayout = resolveReplicaMetricClusterLayout(operatingLaneTop, false, {
     compactThreshold: scaleY(352),
     noteLineHeight: profitMetricNoteLineHeight,
     noteSize: profitMetricNoteSize,
@@ -3681,10 +3717,10 @@ function renderPixelReplicaSvg(snapshot) {
   const operatingMetricY = clamp(
     layoutY(
       snapshot.layout?.operatingMetricY,
-      (opTop - scaleY(operatingMetricLayout.preferredClearance)) / Math.max(verticalScale, 0.0001)
+      (operatingLaneTop - scaleY(operatingMetricLayout.preferredClearance)) / Math.max(verticalScale, 0.0001)
     ),
     scaleY(operatingMetricLayout.minTop),
-    opTop - scaleY(operatingMetricLayout.bottomClearance)
+    operatingLaneTop - scaleY(operatingMetricLayout.bottomClearance)
   );
   const logoVisibleMetrics = corporateLogoVisibleMetrics(snapshot.companyLogoKey);
   const normalizedCompanyLogoKey = normalizeLogoKey(snapshot.companyLogoKey);
@@ -3695,7 +3731,7 @@ function renderPixelReplicaSvg(snapshot) {
   const titleX = width / 2;
   const titleY = scaleY(
     safeNumber(snapshot.layout?.titleY, 112) -
-      positiveAdjustmentExtremeStrength * safeNumber(snapshot.layout?.positiveBridgeHeaderLiftY, 22)
+      positiveAdjustmentExtremeStrength * safeNumber(snapshot.layout?.positiveBridgeHeaderLiftY, 46)
   );
   const periodEndFontSize = 28;
   const inlinePeriodLayout = inlinePeriodEndLayout({
@@ -3754,7 +3790,7 @@ function renderPixelReplicaSvg(snapshot) {
   ) + scaleY(
     safeNumber(
       snapshot.layout?.headerContentClearanceY,
-      34 + positiveAdjustmentExtremeStrength * 22
+      42 + positiveAdjustmentExtremeStrength * 34
     )
   );
   const positiveHeaderLabelClearanceBottom = (
@@ -3762,7 +3798,7 @@ function renderPixelReplicaSvg(snapshot) {
   ) + scaleY(
     safeNumber(
       snapshot.layout?.positiveHeaderLabelClearanceY,
-      12 + positiveAdjustmentExtremeStrength * 8
+      24 + positiveAdjustmentExtremeStrength * 14
     )
   );
   const hasExplicitLogoPosition =
@@ -6420,7 +6456,7 @@ function renderPixelReplicaSvg(snapshot) {
     revenueFrame = editableNodeFrame("revenue", revenueX, revenueTop, nodeWidth, revenueHeight);
     grossFrame = editableNodeFrame("gross", grossX, grossTop, nodeWidth, grossHeight);
     costFrame = editableNodeFrame("cost", grossX, costTop, nodeWidth, costHeight);
-    operatingFrame = editableNodeFrame("operating", opX, opTop, nodeWidth, opHeight);
+    operatingFrame = editableNodeFrame("operating", opX, operatingLaneTop, nodeWidth, opHeight);
     operatingExpenseFrame = editableNodeFrame("operating-expenses", opX, opexTop, nodeWidth, opexHeight);
     netFrame = editableNodeFrame("net", netX, netTop, nodeWidth, netHeight);
   };
@@ -7500,18 +7536,39 @@ function renderPixelReplicaSvg(snapshot) {
     };
     let positiveNodeX = defaultPositiveNodeX;
     const positiveSourceDropY = 0;
-    const positiveExtremeTopFloorY = scaleY(160 - positiveAdjustmentExtremeStrength * safeNumber(snapshot.layout?.positiveExtremeSourceTopReleaseY, 68));
+    const extremePositiveTopLaneMinGapX =
+      usesExtremePositiveTopLane
+        ? scaleY(safeNumber(snapshot.layout?.extremePositiveTopLaneMinGapX, 180))
+        : 0;
+    const extremePositiveTopLaneMaxBottom =
+      usesExtremePositiveTopLane
+        ? operatingLaneTop - extremePositiveTopLaneBottomGapY
+        : Infinity;
+    const extremePositiveTopLaneMinTop =
+      usesExtremePositiveTopLane
+        ? Math.max(
+            positiveHeaderLabelClearanceBottom - scaleY(safeNumber(snapshot.layout?.extremePositiveTopLaneHeaderOverlapAllowanceY, 24)),
+            scaleY(safeNumber(snapshot.layout?.extremePositiveTopLaneMinTopY, 88))
+          )
+        : -Infinity;
     let positiveTop = positiveAbove
       ? clamp(
           netTop - totalPositiveStackHeight - positiveNodeGap,
-          scaleY(212 - positiveAdjustmentExtremeStrength * safeNumber(snapshot.layout?.positiveExtremeTopReleaseY, 88)) +
-            positiveLabelBlockHeight * (1 - positiveAdjustmentExtremeStrength * 0.46),
+          Math.max(
+            scaleY(212 - positiveAdjustmentExtremeStrength * safeNumber(snapshot.layout?.positiveExtremeTopReleaseY, 88)) +
+              positiveLabelBlockHeight * (1 - positiveAdjustmentExtremeStrength * 0.46),
+            extremePositiveTopLaneMinTop
+          ),
           netTop - scaleY(10) - totalPositiveStackHeight
         )
       : clamp(
-          netBottom + positiveNodeGap,
-          scaleY(308),
-          chartBottomLimit - totalPositiveStackHeight - positiveLabelBlockHeight - scaleY(12)
+          usesExtremePositiveTopLane
+            ? Math.min(netTop + scaleY(safeNumber(snapshot.layout?.extremePositiveTopLaneNetOffsetY, 4)), extremePositiveTopLaneMaxBottom - totalPositiveStackHeight)
+            : netBottom + positiveNodeGap,
+          usesExtremePositiveTopLane ? extremePositiveTopLaneMinTop : scaleY(308),
+          usesExtremePositiveTopLane
+            ? Math.max(extremePositiveTopLaneMinTop, extremePositiveTopLaneMaxBottom - totalPositiveStackHeight)
+            : chartBottomLimit - totalPositiveStackHeight - positiveLabelBlockHeight - scaleY(12)
         );
     let upperMetricFloor = Math.max(grossMetricY + grossMetricLayout.blockHeight, operatingMetricY + operatingMetricLayout.blockHeight);
     let positiveBranchClearanceY = Math.max(scaleY(16), positiveReferenceHeight * 0.72);
@@ -7824,27 +7881,33 @@ function renderPixelReplicaSvg(snapshot) {
           bottom: model.targetTop + model.targetHeight + positiveTerminalCapClearanceY,
         }));
       positiveTerminalNodeObstacles = [...positiveTerminalLabelObstacles, ...positiveTerminalCapObstacles];
-      const positiveProminentMinRunwayX = positiveProminentAbove
+      const positiveProminentMinRunwayX = positiveProminentAbove || usesExtremePositiveTopLane
         ? Math.max(
-            safeNumber(snapshot.layout?.positiveProminentMinRunwayX, 96),
-            totalPositiveStackHeight * safeNumber(snapshot.layout?.positiveProminentMinRunwayHeightFactor, 0.78)
+            safeNumber(snapshot.layout?.positiveProminentMinRunwayX, usesExtremePositiveTopLane ? 160 : 96),
+            totalPositiveStackHeight * safeNumber(snapshot.layout?.positiveProminentMinRunwayHeightFactor, usesExtremePositiveTopLane ? 0.5 : 0.78)
           )
         : 0;
-      const effectivePositiveNodeMaxX = positiveProminentAbove
+      const effectivePositiveNodeMaxX = positiveProminentAbove || usesExtremePositiveTopLane
         ? Math.min(positiveNodeMaxX, netX - positiveNodeWidth - positiveProminentMinRunwayX)
         : positiveNodeMaxX;
+      const extremePositiveTopLaneMinX = usesExtremePositiveTopLane
+        ? Math.min(
+            Math.max(positiveNodeMinX, opX + nodeWidth + extremePositiveTopLaneMinGapX),
+            Math.max(effectivePositiveNodeMaxX, positiveNodeMinX)
+          )
+        : positiveNodeMinX;
       const positiveNodeXCandidates = [
         effectivePositiveNodeMaxX,
         netX - positiveNodeWidth - Math.max(positiveBranchRunwayX * 0.36, positiveAbove ? 14 : 12),
         netX - positiveNodeWidth - Math.max(positiveBranchRunwayX * 0.58, positiveAbove ? 20 : 18),
         defaultPositiveNodeX,
         netX - positiveNodeWidth - Math.max(positiveBranchRunwayX * 0.82, positiveAbove ? 28 : 24),
-        positiveNodeMinX,
-        positiveNodeMinX + (effectivePositiveNodeMaxX - positiveNodeMinX) * 0.25,
-        (positiveNodeMinX + effectivePositiveNodeMaxX) / 2,
-        positiveNodeMinX + (effectivePositiveNodeMaxX - positiveNodeMinX) * 0.75,
+        extremePositiveTopLaneMinX,
+        extremePositiveTopLaneMinX + (effectivePositiveNodeMaxX - extremePositiveTopLaneMinX) * 0.25,
+        (extremePositiveTopLaneMinX + effectivePositiveNodeMaxX) / 2,
+        extremePositiveTopLaneMinX + (effectivePositiveNodeMaxX - extremePositiveTopLaneMinX) * 0.75,
       ]
-        .map((value) => clamp(value, positiveNodeMinX, Math.max(effectivePositiveNodeMaxX, positiveNodeMinX)))
+        .map((value) => clamp(value, extremePositiveTopLaneMinX, Math.max(effectivePositiveNodeMaxX, extremePositiveTopLaneMinX)))
         .filter((value, index, values) => values.findIndex((candidate) => Math.abs(candidate - value) < 1) === index);
       let bestNodePlacement = null;
       positiveNodeXCandidates.forEach((candidateNodeX) => {
@@ -7899,13 +7962,17 @@ function renderPixelReplicaSvg(snapshot) {
                 safeNumber(snapshot.layout?.positiveProminentMaxMergeDeltaTargetFactor, 0.84)
             )
           : Infinity;
-        const prominentTopFloor = positiveProminentAbove
-          ? positiveTargetStackCenter - positiveProminentMaxMergeDeltaY - totalPositiveStackHeight / 2
-          : -Infinity;
+        const prominentTopFloor = Math.max(
+          positiveProminentAbove
+            ? positiveTargetStackCenter - positiveProminentMaxMergeDeltaY - totalPositiveStackHeight / 2
+            : -Infinity,
+          usesExtremePositiveTopLane ? extremePositiveTopLaneMinTop : -Infinity
+        );
         const preferredTopMin = Math.max(preferredCorridorTop, prominentTopFloor);
-        const preferredTopMax = Math.max(preferredCorridorBottom - totalPositiveStackHeight, preferredTopMin);
+        const laneTopMax = usesExtremePositiveTopLane ? extremePositiveTopLaneMaxBottom - totalPositiveStackHeight : Infinity;
+        const preferredTopMax = Math.max(Math.min(preferredCorridorBottom - totalPositiveStackHeight, laneTopMax), preferredTopMin);
         const candidateTopMin = Math.max(hardCorridorTop, prominentTopFloor);
-        const candidateTopMax = Math.max(hardCorridorBottom - totalPositiveStackHeight, candidateTopMin);
+        const candidateTopMax = Math.max(Math.min(hardCorridorBottom - totalPositiveStackHeight, laneTopMax), candidateTopMin);
         const desiredTop = clamp(
           desiredCenter - totalPositiveStackHeight / 2,
           preferredTopMin <= preferredTopMax ? preferredTopMin : candidateTopMin,
@@ -8099,8 +8166,8 @@ function renderPixelReplicaSvg(snapshot) {
           (1 - positiveAdjustmentExtremeStrength);
         positiveNodeX = clamp(
           bestNodePlacement.nodeX + positiveAestheticNudgeX,
-          positiveNodeMinX,
-          Math.max(positiveNodeMaxX, positiveNodeMinX)
+          extremePositiveTopLaneMinX,
+          Math.max(positiveNodeMaxX, extremePositiveTopLaneMinX)
         );
         positiveTop = clamp(bestNodePlacement.top + positiveAestheticNudgeY, bestNodePlacement.topMin, bestNodePlacement.topMax);
         corridorSampleXs = positiveCorridorSampleXsForNode(positiveNodeX);
@@ -8174,6 +8241,10 @@ function renderPixelReplicaSvg(snapshot) {
           : null;
       const positiveExtremeAttachedLabel =
         positiveAbove && positiveAdjustmentExtremeStrength >= safeNumber(snapshot.layout?.positiveExtremeAttachedLabelThreshold, 0.72);
+      const preferExtremeLeftLabel =
+        usesExtremePositiveTopLane &&
+        positiveAdjustmentExtremeStrength >= safeNumber(snapshot.layout?.positiveExtremeLeftLabelThreshold, 0.72) &&
+        leftCorridor >= labelBlockWidth + safeNumber(snapshot.layout?.positiveExtremeLeftLabelMinCorridorX, 34);
       const labelBoundsRect = (anchor, x, centerY) => {
         const left =
           anchor === "middle"
@@ -8470,7 +8541,7 @@ function renderPixelReplicaSvg(snapshot) {
             scaleY(
               safeNumber(
                 snapshot.layout?.positiveLabelHardAssociationDistanceY,
-                candidate.variant === "extreme-attached" ? 170 : 88
+                candidate.variant === "extreme-attached" || candidate.variant === "extreme-left" ? 170 : 88
               )
             ),
             labelBlockHeight + scaleY(16)
@@ -8500,7 +8571,7 @@ function renderPixelReplicaSvg(snapshot) {
             associationDistance *
               safeNumber(
                 snapshot.layout?.positiveLabelAssociationDistancePenaltyFactor,
-                candidate.variant === "extreme-attached" ? 0.02 : 0.1
+                candidate.variant === "extreme-attached" || candidate.variant === "extreme-left" ? 0.02 : 0.1
               ) +
             directionalPenalty +
             placementOrderPenalty;
@@ -8528,6 +8599,7 @@ function renderPixelReplicaSvg(snapshot) {
         );
         const positiveLabelCandidatePriority = (type, variant = null) => {
           if (type === "left") {
+            if (variant === "extreme-left") return -2.4;
             return leftCorridor >= labelBlockWidth + safeNumber(snapshot.layout?.positiveLabelMinCorridorX, 72) ? 1.2 : 3.2;
           }
           let priority = type === "above" ? 0 : 0.1;
@@ -8543,10 +8615,24 @@ function renderPixelReplicaSvg(snapshot) {
           return priority;
         };
         const candidatePlacements = [
+          ...(preferExtremeLeftLabel
+            ? [
+                {
+                  priority: -2.4,
+                  type: "left",
+                  anchor: "end",
+                  x: positiveNodeX - scaleY(safeNumber(snapshot.layout?.positiveExtremeLeftLabelGapX, 22)),
+                  centerY: positiveSourceTop +
+                    gainHeight * safeNumber(snapshot.layout?.positiveExtremeLeftLabelSourceFactor, 0.18) -
+                    labelCenterBias,
+                  variant: "extreme-left",
+                },
+              ]
+            : []),
           ...(positiveExtremeAttachedLabel
             ? [
                 {
-                  priority: -1.2,
+                  priority: preferExtremeLeftLabel ? 0.6 : -1.2,
                   type: "left",
                   anchor: "end",
                   x: positiveNodeX - labelGapX,
@@ -8620,7 +8706,7 @@ function renderPixelReplicaSvg(snapshot) {
             positiveAbove &&
             positiveAdjustments.length > 1
               ? positiveLabelRibbonClearance * safeNumber(snapshot.layout?.positiveLabelBelowSplitClearanceFactor, 0.45)
-              : candidate.variant === "extreme-attached"
+              : candidate.variant === "extreme-attached" || candidate.variant === "extreme-left"
                 ? positiveLabelRibbonClearance * safeNumber(snapshot.layout?.positiveExtremeAttachedRibbonClearanceFactor, 0.18)
               : positiveLabelRibbonClearance;
           const hardUpperBoundary = upperObstacleBottomForRect(baseRect) + effectiveRibbonClearance;
@@ -8689,6 +8775,30 @@ function renderPixelReplicaSvg(snapshot) {
           if (!placement) return;
           if (comparePlacement(placement, bestPlacement)) bestPlacement = placement;
         });
+        if (preferExtremeLeftLabel) {
+          const forcedCenterY = Math.max(
+            positiveSourceTop +
+              gainHeight * safeNumber(snapshot.layout?.positiveExtremeLeftLabelSourceFactor, 0.18) -
+              labelCenterBias,
+            positiveHeaderLabelClearanceBottom + scaleY(safeNumber(snapshot.layout?.positiveExtremeAttachedHeaderGapY, 6)) - labelTopOffset
+          );
+          const forcedX = positiveNodeX - scaleY(safeNumber(snapshot.layout?.positiveExtremeLeftLabelGapX, 22));
+          bestPlacement = {
+            type: "left",
+            anchor: "end",
+            x: forcedX,
+            centerY: forcedCenterY,
+            rect: labelBoundsRect("end", forcedX, forcedCenterY),
+            score: -Infinity,
+            collisionPenalty: 0,
+            ambiguityPenalty: 0,
+            hardAmbiguityCount: 0,
+            hardViolationCount: 0,
+            hardCollisionCount: 0,
+            collisionFree: true,
+            variant: "extreme-left",
+          };
+        }
         if (positiveAbove && positiveAdjustments.length === 2) {
           const forcedNodeCenteredCandidate =
             index === 0
@@ -8819,7 +8929,16 @@ function renderPixelReplicaSvg(snapshot) {
           placement: bestPlacement,
         };
       };
-      const lockedSourceTop = clamp(positiveTop + positiveSourceDropY, sourceTopSearchMin, sourceTopSearchMax);
+      const lockedSourceTop = clamp(
+        positiveTop + positiveSourceDropY,
+        sourceTopSearchMin,
+        usesExtremePositiveTopLane
+          ? Math.min(
+              sourceTopSearchMax,
+              operatingLaneTop - extremePositiveTopLaneBottomGapY - gainHeight
+            )
+          : sourceTopSearchMax
+      );
       const chosenLayout = resolvePositivePlacement(lockedSourceTop);
       const finalSourceTop = chosenLayout?.sourceTop ?? lockedSourceTop;
       const finalSourceBottom = chosenLayout?.sourceBottom ?? finalSourceTop + gainHeight;

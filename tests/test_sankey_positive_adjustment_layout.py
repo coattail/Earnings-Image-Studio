@@ -100,6 +100,14 @@ def path_start_center(numbers: list[float]) -> float:
     return (numbers[1] + numbers[-1]) / 2
 
 
+def path_start_top(numbers: list[float]) -> float:
+    return numbers[1]
+
+
+def path_start_bottom(numbers: list[float]) -> float:
+    return numbers[-1]
+
+
 def path_target_center(numbers: list[float]) -> float:
     return (numbers[11] + numbers[13]) / 2
 
@@ -117,6 +125,14 @@ def find_text(svg_root: ET.Element, text: str) -> ET.Element:
 
 def text_y(svg_root: ET.Element, text: str) -> float:
     return float(find_text(svg_root, text).attrib["y"])
+
+
+def text_x(svg_root: ET.Element, text: str) -> float:
+    return float(find_text(svg_root, text).attrib["x"])
+
+
+def text_anchor(svg_root: ET.Element, text: str) -> str:
+    return find_text(svg_root, text).attrib.get("text-anchor", "")
 
 
 def viewbox_height(svg_root: ET.Element) -> float:
@@ -216,10 +232,11 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
             208,
             "Extreme positive bridges should lift the net-profit node away from tax and expense branches.",
         )
+        operating = rect_attrs(svg_root, "operating")
         self.assertLessEqual(
-            positive["y"],
-            122,
-            "Extreme positive bridges should lift the positive-adjustment node into an isolated top-right lane.",
+            positive["y"] + positive["height"],
+            operating["y"] - 18,
+            "Extreme positive bridges should keep the positive-adjustment node in an isolated top-right lane above operating profit.",
         )
         self.assertLessEqual(
             title_y,
@@ -238,8 +255,123 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
         )
         self.assertLessEqual(
             positive_label_y,
-            positive["y"] + 78,
+            positive["y"] + positive["height"] * 0.7,
             "The positive-adjustment label should stay visually attached to the lifted positive node.",
+        )
+
+    def test_berkshire_extreme_positive_bridge_keeps_header_and_top_lane_separated(self) -> None:
+        for quarter, title, period_end, value in (
+            ("2023Q1", "伯克希尔哈撒韦 Q1 FY23", "截至 2023年3月31日", "$34.2B"),
+            ("2023Q4", "伯克希尔哈撒韦 Q4 FY23", "截至 2023年12月31日", "$36.0B"),
+        ):
+            with self.subTest(quarter=quarter):
+                svg_root = render_sankey_svg(BERKSHIRE_PAYLOAD, "zh", f"berkshire-{quarter.lower()}-zh", quarter=quarter)
+
+                positive = rect_attrs(svg_root, "positive-0")
+                title_y = text_y(svg_root, title)
+                period_end_y = text_y(svg_root, period_end)
+                positive_label_y = text_y(svg_root, "营业外收益")
+                positive_value_y = text_y(svg_root, value)
+
+                self.assertLessEqual(
+                    title_y,
+                    96,
+                    "Extreme Berkshire bridges should reserve a high header lane instead of crowding the lifted gain node.",
+                )
+                self.assertLessEqual(
+                    period_end_y,
+                    80,
+                    "The inline period-end label should move above the extreme positive-bridge lane.",
+                )
+                self.assertGreaterEqual(
+                    positive["y"] - period_end_y,
+                    30,
+                    "The lifted positive node should not visually touch the period-end label.",
+                )
+                self.assertGreaterEqual(
+                    positive_label_y - period_end_y,
+                    88,
+                    "The positive-adjustment label should clear the header/date area by a stable margin.",
+                )
+                self.assertGreaterEqual(
+                    positive_value_y - period_end_y,
+                    116,
+                    "The positive-adjustment value should remain well below the header/date area.",
+                )
+
+    def test_berkshire_extreme_positive_bridge_uses_independent_top_lane(self) -> None:
+        for quarter in ("2023Q1", "2023Q4"):
+            with self.subTest(quarter=quarter):
+                svg_root = render_sankey_svg(BERKSHIRE_PAYLOAD, "zh", f"berkshire-{quarter.lower()}-lane-zh", quarter=quarter)
+
+                operating = rect_attrs(svg_root, "operating")
+                positive = rect_attrs(svg_root, "positive-0")
+                net = rect_attrs(svg_root, "net")
+
+                self.assertGreaterEqual(
+                    positive["x"] - (operating["x"] + operating["width"]),
+                    150,
+                    "Extreme positive bridge should move into a separate upper-right input lane instead of sitting on the operating-profit node.",
+                )
+                self.assertGreaterEqual(
+                    positive["height"],
+                    net["height"] * 0.88,
+                    "Extreme positive bridge should keep its source thickness; the layout should move lanes instead of compressing the gain node.",
+                )
+                self.assertLessEqual(
+                    positive["y"] + positive["height"],
+                    operating["y"] - 18,
+                    "Extreme positive bridge should not overlap the operating-profit node vertically.",
+                )
+                self.assertLessEqual(
+                    operating["y"] - (positive["y"] + positive["height"]),
+                    78,
+                    "Extreme positive bridge should lift the gain node into the top lane instead of pushing operating profit far downward.",
+                )
+                self.assertLessEqual(
+                    positive["y"],
+                    104,
+                    "Extreme positive bridge should sit high in the top-right lane, matching the manual layout direction.",
+                )
+
+    def test_berkshire_extreme_positive_bridge_labels_sit_left_of_gain_node(self) -> None:
+        svg_root = render_sankey_svg(BERKSHIRE_PAYLOAD, "zh", "berkshire-2023q1-left-label-zh", quarter="2023Q1")
+
+        positive = rect_attrs(svg_root, "positive-0")
+        label_x = text_x(svg_root, "营业外收益")
+        value_x = text_x(svg_root, "$34.2B")
+
+        self.assertLessEqual(
+            label_x,
+            positive["x"] - 10,
+            "Extreme positive bridge label should sit to the left of the green source node, not inside it.",
+        )
+        self.assertLessEqual(
+            value_x,
+            positive["x"] - 10,
+            "Extreme positive bridge value should sit to the left of the green source node, not inside it.",
+        )
+        self.assertEqual("end", text_anchor(svg_root, "营业外收益"))
+        self.assertEqual("end", text_anchor(svg_root, "$34.2B"))
+
+    def test_berkshire_q4_gross_to_operating_ribbon_stays_attached_to_gross_node(self) -> None:
+        svg_root = render_sankey_svg(BERKSHIRE_PAYLOAD, "zh", "berkshire-2025q4-continuity-zh", quarter="2025Q4")
+
+        gross = rect_attrs(svg_root, "gross")
+        operating = rect_attrs(svg_root, "operating")
+        gross_to_operating_paths = green_paths_between(svg_root, gross, operating)
+
+        self.assertEqual(1, len(gross_to_operating_paths), "Expected one green gross-profit to operating-profit ribbon.")
+        path = gross_to_operating_paths[0]
+        self.assertGreaterEqual(
+            path_start_top(path),
+            gross["y"] - 2,
+            "The gross-profit ribbon should leave from inside the gross-profit node, not float above it.",
+        )
+        self.assertLessEqual(
+            path_start_bottom(path),
+            gross["y"] + gross["height"] + 2,
+            "The gross-profit ribbon should remain attached to the gross-profit node.",
         )
 
 if __name__ == "__main__":
