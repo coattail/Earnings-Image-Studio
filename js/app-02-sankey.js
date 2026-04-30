@@ -868,9 +868,20 @@ function renderPixelReplicaSvg(snapshot) {
     netRiseMinY,
     netRiseMaxY + positiveFlowRiseBoostY * 1.2 + positiveBridgeCoreTargetLiftY
   );
+  const netLossPositiveOffsetY =
+    netLoss && rawPositiveAdjustments.length
+      ? Math.max(
+          scaleY(safeNumber(snapshot.layout?.netLossPositiveOffsetY, 34)),
+          Math.min(rawPositiveAdjustments.reduce((sum, item) => sum + Math.max(safeNumber(item?.valueBn), 0), 0) * scale * 0.28, scaleY(76))
+        )
+      : 0;
   const netBaseCandidate =
-    (hasExplicitNetNodeTop ? layoutY(snapshot.layout?.netNodeTop) : opTopBase - netRiseY) +
-    stageCenteringShiftY * safeNumber(snapshot.layout?.netStageShiftFactor, 0.36);
+    (hasExplicitNetNodeTop
+      ? layoutY(snapshot.layout?.netNodeTop)
+      : netLoss && rawPositiveAdjustments.length
+      ? opTopBase + opHeight + netLossPositiveOffsetY
+      : opTopBase - netRiseY) +
+    stageCenteringShiftY * safeNumber(snapshot.layout?.netStageShiftFactor, netLoss && rawPositiveAdjustments.length ? 0.62 : 0.36);
   const netTopMinY = scaleY(
     safeNumber(
       snapshot.layout?.netTopMinY,
@@ -7373,6 +7384,56 @@ function renderPixelReplicaSvg(snapshot) {
       netDisplayBand.bottom,
       netRibbonOptions
     );
+  const netLossDriverIndex =
+    netLoss && belowOperatingItems.length
+      ? belowOperatingItems.reduce(
+          (bestIndex, item, index) =>
+            safeNumber(item?.valueBn) > safeNumber(belowOperatingItems[bestIndex]?.valueBn) ? index : bestIndex,
+          0
+        )
+      : -1;
+  const renderNetLossDriverBridge = () => {
+    if (netLossDriverIndex < 0) return "";
+    const driverItem = belowOperatingItems[netLossDriverIndex];
+    const driverValueBn = Math.max(safeNumber(driverItem?.valueBn), 0);
+    if (!(driverValueBn > 0.05)) return "";
+    const driverHeight = Math.max(driverValueBn * scale, scaleY(12));
+    const driverWidth = Math.max(nodeWidth, scaleY(safeNumber(snapshot.layout?.netLossDriverWidth, 72)));
+    const driverGapX = scaleY(safeNumber(snapshot.layout?.netLossDriverGapX, 78));
+    const driverX = netFrame.x - driverGapX - driverWidth;
+    const driverCenterY = netFrame.centerY;
+    const driverTop = clamp(driverCenterY - driverHeight / 2, scaleY(184), Math.max(chartBottomLimit - driverHeight, scaleY(184)));
+    const driverFrame = editableNodeFrame(`net-loss-driver-${netLossDriverIndex}`, driverX, driverTop, driverWidth, driverHeight);
+    const targetHeight = Math.min(driverFrame.height, netFrame.height);
+    const targetTop = clamp(driverFrame.centerY - targetHeight / 2, netFrame.top, Math.max(netFrame.bottom - targetHeight, netFrame.top));
+    const branchOptions = {
+      ...mergeOutflowRibbonOptions(),
+      curveFactor: 0.42,
+      startCurveFactor: 0.2,
+      endCurveFactor: 0.22,
+      minStartCurveFactor: 0.14,
+      maxStartCurveFactor: 0.26,
+      minEndCurveFactor: 0.14,
+      maxEndCurveFactor: 0.28,
+      deltaScale: 0.6,
+      deltaInfluence: 0.018,
+      sourceHoldFactor: 0.08,
+      targetHoldFactor: 0.08,
+      minSourceHoldLength: 8,
+      maxSourceHoldLength: 28,
+      minTargetHoldLength: 8,
+      maxTargetHoldLength: 28,
+    };
+    const driverLabel = localizeChartPhrase(driverItem?.nameZh || driverItem?.name || "Loss driver");
+    const driverValue = formatBillionsByMode(driverValueBn, "negative-parentheses");
+    const labelX = driverFrame.x - scaleY(14);
+    return `
+      <path d="${flowPath(driverFrame.right, driverFrame.top, driverFrame.bottom, netFrame.x, targetTop, targetTop + targetHeight, branchOptions)}" fill="${redFlow}" opacity="0.97"></path>
+      ${renderEditableNodeRect(driverFrame, redNode)}
+      <text x="${labelX}" y="${driverFrame.centerY - scaleY(12)}" text-anchor="end" font-size="24" font-weight="700" fill="${redText}" paint-order="stroke fill" stroke="${background}" stroke-width="7" stroke-linejoin="round">${escapeHtml(driverLabel)}</text>
+      <text x="${labelX}" y="${driverFrame.centerY + scaleY(20)}" text-anchor="end" font-size="22" font-weight="700" fill="${redText}" paint-order="stroke fill" stroke="${background}" stroke-width="6" stroke-linejoin="round">${escapeHtml(driverValue)}</text>
+    `;
+  };
   let svg = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="${escapeHtml(titleText)}" font-family="Aptos, Segoe UI, Arial, Helvetica, sans-serif" data-editor-bounds-left="0" data-editor-bounds-top="0" data-editor-bounds-right="${width}" data-editor-bounds-bottom="${height}">
       <rect x="0" y="0" width="${width}" height="${height}" fill="${background}"></rect>
@@ -8983,12 +9044,14 @@ function renderPixelReplicaSvg(snapshot) {
     )}" fill="${netLoss ? redFlow : greenFlow}" opacity="0.97"></path>`;
   }
   svg += positiveMarkup;
+  svg += renderNetLossDriverBridge();
   svg += `
       ${renderEditableNodeRect(netFrame, netLoss ? redNode : greenNode)}
       ${renderRightSummaryLabel(netSummaryLines, netFrame.x + nodeWidth + rightPrimaryLabelGapX, netFrame.centerY)}
   `;
 
   deductionSlices.forEach((slice, index) => {
+    if (index === netLossDriverIndex) return;
     const box = deductionBoxes[index];
     const sourceSlice = deductionSourceSlices[index] || slice;
     const deductionSourceSlice = resolveDeductionTerminalSourceSlice(index, sourceSlice);

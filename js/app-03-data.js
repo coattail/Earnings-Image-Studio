@@ -1626,7 +1626,40 @@ function buildOfficialDetailGroups(company, entry, businessGroups = null) {
   });
 }
 
+function shouldDeriveBerkshireHistoricalOperatingBridge(company, entry, quarterKey) {
+  if (String(company?.id || "").toLowerCase() !== "berkshire") return false;
+  const parsedQuarter = parseQuarterKey(quarterKey);
+  if (!parsedQuarter || parsedQuarter.year > 2020) return false;
+  if (entry?.grossProfitBn !== null && entry?.grossProfitBn !== undefined && entry?.costOfRevenueBn !== null && entry?.costOfRevenueBn !== undefined) {
+    return false;
+  }
+  return (
+    safeNumber(entry?.revenueBn, null) !== null &&
+    safeNumber(entry?.operatingExpensesBn, null) !== null &&
+    safeNumber(entry?.pretaxIncomeBn, null) !== null
+  );
+}
+
+function deriveBerkshireHistoricalOperatingBridge(company, entry, quarterKey) {
+  if (!shouldDeriveBerkshireHistoricalOperatingBridge(company, entry, quarterKey)) return entry;
+  const revenueBn = safeNumber(entry.revenueBn);
+  const operatingExpensesBn = safeNumber(entry.operatingExpensesBn);
+  const operatingIncomeBn = Number((revenueBn - operatingExpensesBn).toFixed(3));
+  const pretaxIncomeBn = safeNumber(entry.pretaxIncomeBn);
+  return {
+    ...entry,
+    costOfRevenueBn: 0,
+    grossProfitBn: Number(revenueBn.toFixed(3)),
+    operatingIncomeBn,
+    nonOperatingBn: Number((pretaxIncomeBn - operatingIncomeBn).toFixed(3)),
+    grossMarginPct: 100,
+    operatingMarginPct: revenueBn ? Number(((operatingIncomeBn / revenueBn) * 100).toFixed(3)) : null,
+    qualityFlags: [...new Set([...(Array.isArray(entry.qualityFlags) ? entry.qualityFlags : []), "derived-berkshire-historical-operating-bridge"])],
+  };
+}
+
 function buildGenericSnapshot(company, entry, quarterKey) {
+  entry = deriveBerkshireHistoricalOperatingBridge(company, entry, quarterKey);
   const companyBrand = resolvedCompanyBrand(company);
   const displayConfig = resolveQuarterDisplayConfig(company, entry, null);
   const revenueYoyPct = resolvedRevenueGrowthPct(company, quarterKey, "yoy");
@@ -1831,6 +1864,7 @@ function buildGenericSnapshot(company, entry, quarterKey) {
   } else if (hasRenderableGrossStage && entry.taxBn && entry.taxBn < -0.05) {
     positiveAdjustments.push({
       name: "Tax benefit",
+      nameZh: "税项收益",
       valueBn: Math.abs(entry.taxBn),
       color: "#16A34A",
     });

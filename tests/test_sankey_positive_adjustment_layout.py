@@ -79,12 +79,20 @@ def path_numbers(path_d: str) -> list[float]:
 
 
 def green_paths_between(svg_root: ET.Element, source: dict[str, float], target: dict[str, float]) -> list[list[float]]:
+    return colored_paths_between(svg_root, source, target, "#ACDBA3")
+
+
+def red_paths_between(svg_root: ET.Element, source: dict[str, float], target: dict[str, float]) -> list[list[float]]:
+    return colored_paths_between(svg_root, source, target, "#E58A92")
+
+
+def colored_paths_between(svg_root: ET.Element, source: dict[str, float], target: dict[str, float], color: str) -> list[list[float]]:
     paths: list[list[float]] = []
     source_right = source["x"] + source["width"]
     target_left = target["x"]
     for path in svg_root.findall(".//svg:path", SVG_NS):
         fill = path.attrib.get("fill", "")
-        if fill.upper() != "#ACDBA3":
+        if fill.upper() != color.upper():
             continue
         numbers = path_numbers(path.attrib.get("d", ""))
         if len(numbers) < 18:
@@ -133,6 +141,10 @@ def text_x(svg_root: ET.Element, text: str) -> float:
 
 def text_anchor(svg_root: ET.Element, text: str) -> str:
     return find_text(svg_root, text).attrib.get("text-anchor", "")
+
+
+def text_count(svg_root: ET.Element, text: str) -> int:
+    return sum(1 for element in svg_root.findall(".//svg:text", SVG_NS) if "".join(element.itertext()).strip() == text)
 
 
 def viewbox_height(svg_root: ET.Element) -> float:
@@ -372,6 +384,64 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
             path_start_bottom(path),
             gross["y"] + gross["height"] + 2,
             "The gross-profit ribbon should remain attached to the gross-profit node.",
+        )
+
+    def test_berkshire_2020_q4_renders_full_profit_bridge(self) -> None:
+        svg_root = render_sankey_svg(BERKSHIRE_PAYLOAD, "zh", "berkshire-2020q4-full-bridge-zh", quarter="2020Q4")
+        text_content = svg_text_content(svg_root)
+
+        self.assertNotIn("仅展示营收结构", text_content)
+        self.assertIn("毛利润", text_content)
+        self.assertIn("净利润", text_content)
+        self.assertIsNotNone(find_rect(svg_root, "gross"))
+        self.assertIsNotNone(find_rect(svg_root, "operating"))
+        self.assertIsNotNone(find_rect(svg_root, "net"))
+
+    def test_berkshire_net_loss_result_sits_below_tax_benefit_lane(self) -> None:
+        svg_root = render_sankey_svg(BERKSHIRE_PAYLOAD, "zh", "berkshire-2022q2-net-loss-zh", quarter="2022Q2")
+        text_content = svg_text_content(svg_root)
+
+        net = rect_attrs(svg_root, "net")
+        tax_benefit = rect_attrs(svg_root, "positive-0")
+        loss_driver = rect_attrs(svg_root, "net-loss-driver-0")
+
+        self.assertIn("税项收益", text_content)
+        self.assertNotIn("税项benefit", text_content)
+        self.assertEqual(
+            1,
+            text_count(svg_root, "营业外费用"),
+            "The primary loss driver should be promoted into the net-loss bridge instead of being duplicated as a separate terminal.",
+        )
+        self.assertGreaterEqual(
+            net["y"],
+            tax_benefit["y"] + tax_benefit["height"] + 28,
+            "Net-loss result should sit below the tax-benefit lane so the benefit reads as an offset, not as an inflow that enlarges the loss.",
+        )
+        self.assertLess(
+            loss_driver["x"] + loss_driver["width"],
+            net["x"],
+            "The primary loss driver should be a visible source node feeding into the net-loss result.",
+        )
+        self.assertGreaterEqual(
+            min(loss_driver["y"] + loss_driver["height"], net["y"] + net["height"]) - max(loss_driver["y"], net["y"]),
+            net["height"] * 0.6,
+            "The primary loss-driver node should overlap the net-loss result vertically enough to make the large loss source visually obvious.",
+        )
+        driver_paths = red_paths_between(svg_root, loss_driver, net)
+        self.assertEqual(
+            1,
+            len(driver_paths),
+            "The large non-operating expense must render as one direct red ribbon into net loss.",
+        )
+        self.assertGreaterEqual(
+            path_target_center(driver_paths[0]),
+            net["y"] + net["height"] * 0.35,
+            "The large loss-driver ribbon should enter the body of the net-loss node, not clip into its top edge.",
+        )
+        self.assertLessEqual(
+            path_target_center(driver_paths[0]),
+            net["y"] + net["height"] * 0.65,
+            "The large loss-driver ribbon should enter the body of the net-loss node, not clip into its bottom edge.",
         )
 
 if __name__ == "__main__":
