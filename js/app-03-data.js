@@ -57,8 +57,10 @@ function requestRenderCurrent() {
 function selectCompany(companyId, { preferReplica = false, rerenderList = false } = {}) {
   const company = getCompany(companyId);
   if (!company) return;
+  const isCompanySwitch = companyId !== state.selectedCompanyId;
   state.selectedCompanyId = companyId;
-  syncQuarterOptions({ preferReplica });
+  if (isCompanySwitch) state.selectedQuarter = null;
+  syncQuarterOptions({ preferReplica, preserveSelectedQuarter: !isCompanySwitch });
   if (rerenderList) {
     renderCompanyList();
   } else {
@@ -260,11 +262,11 @@ function shouldExpandClassifiedBarQuarterWindow(company, fullQuarterKeys = [], f
   return latestHasRevenueAnchor && filteredQuarterKeys.length >= 2;
 }
 
-function preferredQuarter(company, preferReplica) {
+function preferredQuarter(company, preferReplica, preserveSelectedQuarter = true) {
   const presetQuarters = Object.keys(company.statementPresets || {}).sort((left, right) => quarterSortValue(right) - quarterSortValue(left));
   if (preferReplica && presetQuarters.length) return presetQuarters[0];
   const availableQuarters = renderableQuarterKeys(company);
-  if (state.selectedQuarter && availableQuarters.includes(state.selectedQuarter)) return state.selectedQuarter;
+  if (preserveSelectedQuarter && state.selectedQuarter && availableQuarters.includes(state.selectedQuarter)) return state.selectedQuarter;
   return availableQuarters[availableQuarters.length - 1] || presetQuarters[0] || null;
 }
 
@@ -288,10 +290,10 @@ function initializeDefaultLandingSelection() {
   state.chartViewMode = "sankey";
 }
 
-function syncQuarterOptions({ preferReplica } = { preferReplica: false }) {
+function syncQuarterOptions({ preferReplica, preserveSelectedQuarter = true } = { preferReplica: false, preserveSelectedQuarter: true }) {
   const company = getCompany(state.selectedCompanyId);
   if (!company || !refs.quarterSelect) return;
-  const nextQuarter = preferredQuarter(company, preferReplica);
+  const nextQuarter = preferredQuarter(company, preferReplica, preserveSelectedQuarter);
   state.selectedQuarter = nextQuarter;
   refs.quarterSelect.innerHTML = renderableQuarterKeys(company)
     .slice()
