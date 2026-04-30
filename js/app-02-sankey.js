@@ -7400,11 +7400,17 @@ function renderPixelReplicaSvg(snapshot) {
       ? belowOperatingItems.reduce((sum, item) => sum + Math.max(safeNumber(item?.valueBn), 0), 0)
       : Math.max(safeNumber(driverItem?.valueBn), 0);
     if (!(driverValueBn > 0.05)) return "";
+    const primaryDriverValueBn = Math.max(safeNumber(driverItem?.valueBn), 0);
+    const otherLossDriversBn = Math.max(driverValueBn - primaryDriverValueBn, 0);
     const driverHeight = Math.max(driverValueBn * scale, scaleY(12));
     const driverWidth = Math.max(nodeWidth, scaleY(safeNumber(snapshot.layout?.netLossDriverWidth, 72)));
     const driverGapX = scaleY(safeNumber(snapshot.layout?.netLossDriverGapX, 78));
     const driverX = netFrame.x - driverGapX - driverWidth;
-    const driverCenterY = netFrame.centerY;
+    const detailLabelLiftY =
+      useNetLossBalanceBridge && otherLossDriversBn > 0.05
+        ? scaleY(safeNumber(snapshot.layout?.netLossDriverDetailLiftY, 50))
+        : 0;
+    const driverCenterY = netFrame.centerY - detailLabelLiftY;
     const driverTop = clamp(driverCenterY - driverHeight / 2, scaleY(184), Math.max(chartBottomLimit - driverHeight, scaleY(184)));
     const driverFrame = editableNodeFrame(`net-loss-driver-${netLossDriverIndex}`, driverX, driverTop, driverWidth, driverHeight);
     const targetHeight = Math.min(driverFrame.height, netFrame.height);
@@ -7439,8 +7445,7 @@ function renderPixelReplicaSvg(snapshot) {
       maxTargetHoldLength: 28,
     };
     const driverLabel = localizeChartPhrase(driverItem?.nameZh || driverItem?.name || "Loss driver");
-    const driverValue = formatBillionsByMode(Math.max(safeNumber(driverItem?.valueBn), 0), "negative-parentheses");
-    const otherLossDriversBn = Math.max(driverValueBn - Math.max(safeNumber(driverItem?.valueBn), 0), 0);
+    const driverValue = formatBillionsByMode(primaryDriverValueBn, "negative-parentheses");
     const otherLossDriverLabel = currentChartLanguage() === "zh" ? "另含其他净费用" : "Includes other net expense";
     const offsetLabel = currentChartLanguage() === "zh" ? "营业利润及税项收益" : "Operating profit and tax benefit";
     const offsetActionLabel = currentChartLanguage() === "zh" ? "抵减" : "offset";

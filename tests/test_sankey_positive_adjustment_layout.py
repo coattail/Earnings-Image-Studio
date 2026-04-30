@@ -103,6 +103,18 @@ def red_paths_between(svg_root: ET.Element, source: dict[str, float], target: di
     return colored_paths_between(svg_root, source, target, "#E58A92")
 
 
+def red_path_numbers(svg_root: ET.Element) -> list[list[float]]:
+    paths: list[list[float]] = []
+    for path in svg_root.findall(".//svg:path", SVG_NS):
+        fill = path.attrib.get("fill", "")
+        if fill.upper() != "#E58A92":
+            continue
+        numbers = path_numbers(path.attrib.get("d", ""))
+        if len(numbers) >= 18:
+            paths.append(numbers)
+    return paths
+
+
 def colored_paths_between(svg_root: ET.Element, source: dict[str, float], target: dict[str, float], color: str) -> list[list[float]]:
     paths: list[list[float]] = []
     source_right = source["x"] + source["width"]
@@ -487,6 +499,17 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
             "The excess non-operating-expense segment should be explicitly labeled as offset by operating profit and tax benefit.",
         )
         self.assertIn("另含其他净费用", text_content)
+        downstream_opex_tops = [
+            path_start_top(numbers)
+            for numbers in red_path_numbers(svg_root)
+            if numbers[0] < loss_driver["x"] and max(numbers[0::2]) > loss_driver["x"]
+        ]
+        self.assertTrue(downstream_opex_tops, "Expected downstream operating-expense ribbons near the net-loss bridge.")
+        self.assertLessEqual(
+            text_y(svg_root, "另含其他净费用 ($0.6B)"),
+            max(downstream_opex_tops) - 12,
+            "The other-loss detail label should sit above the lower red expense ribbon instead of being overdrawn by it.",
+        )
 
     def test_berkshire_q3_net_loss_bridge_labels_do_not_collide(self) -> None:
         svg_root = render_sankey_svg(BERKSHIRE_PAYLOAD, "zh", "berkshire-2022q3-net-loss-zh", quarter="2022Q3")
