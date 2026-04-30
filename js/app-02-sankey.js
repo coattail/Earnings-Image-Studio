@@ -516,6 +516,22 @@ function renderPixelReplicaSvg(snapshot) {
   const rawOpexItems = collapsedOpexItem ? [] : rawOpexItemsSource;
   const rawBelowOperatingItems = [...(snapshot.belowOperatingItems || [])].filter((item) => safeNumber(item.valueBn) > 0.02);
   const rawPositiveAdjustments = [...(snapshot.positiveAdjustments || [])].filter((item) => safeNumber(item.valueBn) > 0.02);
+  const positiveAdjustmentTotalBn = rawPositiveAdjustments.reduce((sum, item) => sum + Math.max(safeNumber(item.valueBn), 0), 0);
+  const positiveAdjustmentOpRatio =
+    positiveAdjustmentTotalBn > 0.02 && operatingProfitBn > 0.02 ? positiveAdjustmentTotalBn / operatingProfitBn : 0;
+  const positiveAdjustmentNetExpansionRatio =
+    positiveAdjustmentTotalBn > 0.02 && !netLoss && netProfitBn > 0.02
+      ? Math.max(netProfitBn - operatingProfitBn, 0) / netProfitBn
+      : 0;
+  const positiveAdjustmentScaleStrength = rawPositiveAdjustments.length
+    ? clamp(
+        positiveAdjustmentOpRatio * 0.58 +
+          positiveAdjustmentNetExpansionRatio * 0.74 +
+          (positiveAdjustmentTotalBn / Math.max(revenueBn, 0.05)) * 0.38,
+        0,
+        1
+      )
+    : 0;
   const leftBranchCount = rawSources.length + rawLeftDetailGroups.length * 0.92;
   const rightBranchCount =
     rawOpexItems.length +
@@ -618,10 +634,11 @@ function renderPixelReplicaSvg(snapshot) {
             snapshot.layout?.positiveFlowRiseBoostY,
             22 +
               Math.max(rawPositiveAdjustments.length - 1, 0) * 8 +
-              Math.max(rawOpexItems.length + rawBelowOperatingItems.length - 2, 0) * 4
+              Math.max(rawOpexItems.length + rawBelowOperatingItems.length - 2, 0) * 4 +
+              positiveAdjustmentScaleStrength * 42
           ),
           usesHeroLockups ? 18 : 16,
-          usesHeroLockups ? 62 : 54
+          usesHeroLockups ? 104 : 92
         )
       )
     : 0;
@@ -837,27 +854,43 @@ function renderPixelReplicaSvg(snapshot) {
   const netRiseMinY = scaleY(safeNumber(snapshot.layout?.netRiseMinY, usesHeroLockups ? 46 : 40));
   const netRiseMaxY = scaleY(safeNumber(snapshot.layout?.netRiseMaxY, usesHeroLockups ? 86 : 74));
   const netRiseSeedHeight = Math.max(opHeight - Math.min(netHeight, opHeight), 0);
+  const positiveBridgeCoreTargetLiftY =
+    rawPositiveAdjustments.length && operatingProfitBn > 0.02 && netProfitBn > 0.02
+      ? clamp(
+          (positiveAdjustmentTotalBn * scale + Math.max(netHeight - opHeight, 0) * 0.42) *
+            safeNumber(snapshot.layout?.positiveBridgeCoreTargetLiftFactor, 0.58),
+          0,
+          scaleY(safeNumber(snapshot.layout?.positiveBridgeCoreTargetLiftMaxY, usesHeroLockups ? 136 : 120))
+        )
+      : 0;
   const netRiseY = clamp(
-    netRiseBaseY + netRiseSeedHeight * netRiseRatio + positiveFlowRiseBoostY * 1.18,
+    netRiseBaseY + netRiseSeedHeight * netRiseRatio + positiveFlowRiseBoostY * 1.18 + positiveBridgeCoreTargetLiftY * 0.68,
     netRiseMinY,
-    netRiseMaxY + positiveFlowRiseBoostY * 1.2
+    netRiseMaxY + positiveFlowRiseBoostY * 1.2 + positiveBridgeCoreTargetLiftY
   );
   const netBaseCandidate =
     (hasExplicitNetNodeTop ? layoutY(snapshot.layout?.netNodeTop) : opTopBase - netRiseY) +
     stageCenteringShiftY * safeNumber(snapshot.layout?.netStageShiftFactor, 0.36);
-  const netAdaptiveLiftHeadroom = Math.max(netBaseCandidate - scaleY(220), 0);
+  const netTopMinY = scaleY(
+    safeNumber(
+      snapshot.layout?.netTopMinY,
+      220 - positiveAdjustmentScaleStrength * safeNumber(snapshot.layout?.positiveBridgeNetTopReleaseY, usesHeroLockups ? 84 : 72)
+    )
+  );
+  const netAdaptiveLiftHeadroom = Math.max(netBaseCandidate - netTopMinY, 0);
   const netAdaptiveLiftY =
     snapshot.layout?.disableAdaptiveRightStageLift === true
       ? 0
       : Math.min(
-          scaleY(safeNumber(snapshot.layout?.netAdaptiveLiftMaxY, 58)),
+          scaleY(safeNumber(snapshot.layout?.netAdaptiveLiftMaxY, 58 + positiveAdjustmentScaleStrength * 62)),
           netAdaptiveLiftHeadroom * safeNumber(snapshot.layout?.netAdaptiveLiftHeadroomFactor, 0.72),
           scaleY(safeNumber(snapshot.layout?.netAdaptiveLiftBaseY, 12)) +
-            scaleY(safeNumber(snapshot.layout?.netAdaptiveLiftCrowdingY, 26)) * rightStageCrowdingStrength
+            scaleY(safeNumber(snapshot.layout?.netAdaptiveLiftCrowdingY, 26)) * rightStageCrowdingStrength +
+            positiveBridgeCoreTargetLiftY * 0.28
         );
   const netTopBase = clamp(
     netBaseCandidate - netAdaptiveLiftY,
-    scaleY(220),
+    netTopMinY,
     chartBottomLimit - netHeight
   );
   const preliminaryStageTop = Math.min(revenueTopBase, grossTopBase, costTopBase, opTopBase, opexTopBase);
@@ -1479,7 +1512,23 @@ function renderPixelReplicaSvg(snapshot) {
   const opexSlices = stackValueSlices(opexItems, opexTop, scale, { minHeight: 12, targetBottom: opexBottom });
   const opexBand = prototypeBandConfig(templateTokens, "opex", opexItems.length);
   const opexDensity = opexBand.densityKey === "dense" ? "dense" : "regular";
-  const opexMinY = scaleY(safeNumber(opexBand.minY, opexItems.length >= 5 ? 680 : 700));
+  const positiveBridgeTerminalLiftY =
+    rawPositiveAdjustments.length && opexItems.length
+      ? scaleY(
+          clamp(
+            safeNumber(
+              snapshot.layout?.positiveBridgeTerminalLiftY,
+              positiveAdjustmentScaleStrength * 34 + Math.max(positiveAdjustmentOpRatio - 0.35, 0) * 18
+            ),
+            0,
+            usesHeroLockups ? 46 : 38
+          )
+        )
+      : 0;
+  const opexMinY = Math.max(
+    scaleY(safeNumber(snapshot.layout?.opexPositiveBridgeMinClampY, opexItems.length >= 5 ? 642 : 662)),
+    scaleY(safeNumber(opexBand.minY, opexItems.length >= 5 ? 680 : 700)) - positiveBridgeTerminalLiftY
+  );
   const rightBandBottomPaddingBase = scaleY(safeNumber(snapshot.layout?.rightBandBottomPadding, 122));
   const rightBandBottomReleaseY =
     lowerRightPressureY *
@@ -1505,7 +1554,8 @@ function renderPixelReplicaSvg(snapshot) {
     return {
       center:
         scaleY(safeNumber(opexBand.centerStart, opexItems.length >= 5 ? 710 : 736)) +
-        index * scaleY(safeNumber(opexBand.centerStep, opexItems.length >= 5 ? 102 : 126)),
+        index * scaleY(safeNumber(opexBand.centerStep, opexItems.length >= 5 ? 102 : 126)) -
+        positiveBridgeTerminalLiftY,
       height: Math.max(layout.totalHeight + safeNumber(opexBand.heightOffset, 0), 24),
       minHeight: layout.minHeight,
       layout,

@@ -12,6 +12,7 @@ APPLE_PAYLOAD = ROOT_DIR / "data" / "cache" / "apple.json"
 AMAZON_PAYLOAD = ROOT_DIR / "data" / "cache" / "amazon.json"
 WALMART_PAYLOAD = ROOT_DIR / "data" / "cache" / "walmart.json"
 ASML_PAYLOAD = ROOT_DIR / "data" / "cache" / "asml.json"
+ALPHABET_PAYLOAD = ROOT_DIR / "data" / "cache" / "alphabet.json"
 SVG_NS = {"svg": "http://www.w3.org/2000/svg"}
 
 
@@ -58,6 +59,48 @@ def rect_top(rect: ET.Element) -> float:
 
 def rect_bottom(rect: ET.Element) -> float:
     return rect_top(rect) + float(rect.attrib["height"])
+
+
+def rect_attrs(svg_root: ET.Element, node_id: str) -> dict[str, float]:
+    rect = find_rect(svg_root, node_id)
+    return {
+        "x": float(rect.attrib["x"]),
+        "y": float(rect.attrib["y"]),
+        "width": float(rect.attrib["width"]),
+        "height": float(rect.attrib["height"]),
+    }
+
+
+def path_numbers(path_d: str) -> list[float]:
+    import re
+
+    return [float(match.group(0)) for match in re.finditer(r"-?\d+(?:\.\d+)?", path_d)]
+
+
+def green_paths_between(svg_root: ET.Element, source: dict[str, float], target: dict[str, float]) -> list[list[float]]:
+    paths: list[list[float]] = []
+    source_right = source["x"] + source["width"]
+    target_left = target["x"]
+    for path in svg_root.findall(".//svg:path", SVG_NS):
+        fill = path.attrib.get("fill", "")
+        if fill.upper() != "#ACDBA3":
+            continue
+        numbers = path_numbers(path.attrib.get("d", ""))
+        if len(numbers) < 18:
+            continue
+        start_x = numbers[0]
+        reaches_target = any(abs(value - (target_left + 12)) <= 18 for index, value in enumerate(numbers) if index % 2 == 0)
+        if abs(start_x - (source_right - 12)) <= 24 and reaches_target:
+            paths.append(numbers)
+    return paths
+
+
+def path_start_center(numbers: list[float]) -> float:
+    return (numbers[1] + numbers[-1]) / 2
+
+
+def path_target_center(numbers: list[float]) -> float:
+    return (numbers[11] + numbers[13]) / 2
 
 
 def svg_text_content(svg_root: ET.Element) -> str:
@@ -115,6 +158,28 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
         self.assertIn("其他净收益", text_content)
         self.assertNotIn("bridge", text_content)
         self.assertNotIn("其他净bridge收益", text_content)
+
+    def test_alphabet_large_positive_bridge_keeps_core_profit_ribbon_rising(self) -> None:
+        svg_root = render_sankey_svg(ALPHABET_PAYLOAD, "zh", "alphabet-zh", quarter="2026Q1")
+
+        operating = rect_attrs(svg_root, "operating")
+        net = rect_attrs(svg_root, "net")
+        positive = rect_attrs(svg_root, "positive-0")
+        main_profit_paths = green_paths_between(svg_root, operating, net)
+
+        self.assertEqual(1, len(main_profit_paths), "Expected one green operating-profit to net-profit ribbon.")
+        path = main_profit_paths[0]
+
+        self.assertLessEqual(
+            path_target_center(path),
+            path_start_center(path) - 8,
+            "Large positive bridges should leave the operating-profit ribbon rising into net profit.",
+        )
+        self.assertLessEqual(
+            positive["y"] + positive["height"],
+            net["y"] + net["height"] * 0.5,
+            "Large positive bridge should merge into the upper half of the net-profit node.",
+        )
 
 if __name__ == "__main__":
     unittest.main()
