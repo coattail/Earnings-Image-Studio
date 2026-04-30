@@ -7406,6 +7406,8 @@ function renderPixelReplicaSvg(snapshot) {
     const driverFrame = editableNodeFrame(`net-loss-driver-${netLossDriverIndex}`, driverX, driverTop, driverWidth, driverHeight);
     const targetHeight = Math.min(driverFrame.height, netFrame.height);
     const targetTop = clamp(driverFrame.centerY - targetHeight / 2, netFrame.top, Math.max(netFrame.bottom - targetHeight, netFrame.top));
+    const sourceTop = clamp(driverFrame.centerY - targetHeight / 2, driverFrame.top, Math.max(driverFrame.bottom - targetHeight, driverFrame.top));
+    const sourceBottom = sourceTop + targetHeight;
     const branchOptions = {
       ...mergeOutflowRibbonOptions(),
       curveFactor: 0.42,
@@ -7428,7 +7430,7 @@ function renderPixelReplicaSvg(snapshot) {
     const driverValue = formatBillionsByMode(driverValueBn, "negative-parentheses");
     const labelX = driverFrame.x - scaleY(14);
     return `
-      <path d="${flowPath(driverFrame.right, driverFrame.top, driverFrame.bottom, netFrame.x, targetTop, targetTop + targetHeight, branchOptions)}" fill="${redFlow}" opacity="0.97"></path>
+      <path d="${flowPath(driverFrame.right, sourceTop, sourceBottom, netFrame.x, targetTop, targetTop + targetHeight, branchOptions)}" fill="${redFlow}" opacity="0.97"></path>
       ${renderEditableNodeRect(driverFrame, redNode)}
       <text x="${labelX}" y="${driverFrame.centerY - scaleY(12)}" text-anchor="end" font-size="24" font-weight="700" fill="${redText}" paint-order="stroke fill" stroke="${background}" stroke-width="7" stroke-linejoin="round">${escapeHtml(driverLabel)}</text>
       <text x="${labelX}" y="${driverFrame.centerY + scaleY(20)}" text-anchor="end" font-size="22" font-weight="700" fill="${redText}" paint-order="stroke fill" stroke="${background}" stroke-width="6" stroke-linejoin="round">${escapeHtml(driverValue)}</text>

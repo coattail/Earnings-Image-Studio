@@ -116,8 +116,16 @@ def path_start_bottom(numbers: list[float]) -> float:
     return numbers[-1]
 
 
+def path_start_height(numbers: list[float]) -> float:
+    return abs(path_start_bottom(numbers) - path_start_top(numbers))
+
+
 def path_target_center(numbers: list[float]) -> float:
     return (numbers[11] + numbers[13]) / 2
+
+
+def path_target_height(numbers: list[float]) -> float:
+    return abs(numbers[13] - numbers[11])
 
 
 def svg_text_content(svg_root: ET.Element) -> str:
@@ -442,6 +450,11 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
             path_target_center(driver_paths[0]),
             net["y"] + net["height"] * 0.65,
             "The large loss-driver ribbon should enter the body of the net-loss node, not clip into its bottom edge.",
+        )
+        self.assertLessEqual(
+            abs(path_start_height(driver_paths[0]) - path_target_height(driver_paths[0])),
+            4,
+            "The visible net-loss driver ribbon should keep a constant thickness instead of tapering from the full loss-driver node.",
         )
 
 if __name__ == "__main__":
