@@ -13,6 +13,7 @@ AMAZON_PAYLOAD = ROOT_DIR / "data" / "cache" / "amazon.json"
 WALMART_PAYLOAD = ROOT_DIR / "data" / "cache" / "walmart.json"
 ASML_PAYLOAD = ROOT_DIR / "data" / "cache" / "asml.json"
 ALPHABET_PAYLOAD = ROOT_DIR / "data" / "cache" / "alphabet.json"
+BERKSHIRE_PAYLOAD = ROOT_DIR / "data" / "cache" / "berkshire.json"
 SVG_NS = {"svg": "http://www.w3.org/2000/svg"}
 
 
@@ -107,6 +108,17 @@ def svg_text_content(svg_root: ET.Element) -> str:
     return " ".join(part.strip() for part in svg_root.itertext() if part and part.strip())
 
 
+def find_text(svg_root: ET.Element, text: str) -> ET.Element:
+    for element in svg_root.findall(".//svg:text", SVG_NS):
+        if "".join(element.itertext()).strip() == text:
+            return element
+    raise AssertionError(f"Expected SVG text '{text}'.")
+
+
+def text_y(svg_root: ET.Element, text: str) -> float:
+    return float(find_text(svg_root, text).attrib["y"])
+
+
 class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
     def test_apple_english_positive_adjustment_stays_above_net_profit(self) -> None:
         svg_root = render_sankey_svg(APPLE_PAYLOAD, "en", "apple-en")
@@ -179,6 +191,30 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
             positive["y"] + positive["height"],
             net["y"] + net["height"] * 0.5,
             "Large positive bridge should merge into the upper half of the net-profit node.",
+        )
+
+    def test_berkshire_extreme_positive_bridge_avoids_top_right_label_collision(self) -> None:
+        svg_root = render_sankey_svg(BERKSHIRE_PAYLOAD, "zh", "berkshire-zh", quarter="2023Q1")
+
+        net = rect_attrs(svg_root, "net")
+        positive = rect_attrs(svg_root, "positive-0")
+        period_end_y = text_y(svg_root, "截至 2023年3月31日")
+        positive_label_y = text_y(svg_root, "营业外收益")
+
+        self.assertLessEqual(
+            net["y"],
+            208,
+            "Extreme positive bridges should lift the net-profit node away from tax and expense branches.",
+        )
+        self.assertLessEqual(
+            positive["y"],
+            156,
+            "Extreme positive bridges should lift the positive-adjustment node above the crowded top-right corridor.",
+        )
+        self.assertGreaterEqual(
+            period_end_y - positive_label_y,
+            30,
+            "Positive-adjustment labels should clear the inline period-end label in the top-right corner.",
         )
 
 if __name__ == "__main__":

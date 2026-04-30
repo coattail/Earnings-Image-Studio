@@ -537,6 +537,14 @@ function renderPixelReplicaSvg(snapshot) {
         1
       )
     : 0;
+  const positiveAdjustmentExtremeStrength = rawPositiveAdjustments.length
+    ? clamp(
+        Math.max(positiveAdjustmentOpRatio - 1.1, 0) / 1.7 +
+          Math.max(positiveAdjustmentNetExpansionRatio - 0.45, 0) * 0.6,
+        0,
+        1
+      )
+    : 0;
   const leftBranchCount = rawSources.length + rawLeftDetailGroups.length * 0.92;
   const rightBranchCount =
     rawOpexItems.length +
@@ -865,7 +873,7 @@ function renderPixelReplicaSvg(snapshot) {
           (positiveAdjustmentTotalBn * scale + Math.max(netHeight - opHeight, 0) * 0.42) *
             safeNumber(snapshot.layout?.positiveBridgeCoreTargetLiftFactor, 0.58),
           0,
-          scaleY(safeNumber(snapshot.layout?.positiveBridgeCoreTargetLiftMaxY, usesHeroLockups ? 136 : 120))
+          scaleY(safeNumber(snapshot.layout?.positiveBridgeCoreTargetLiftMaxY, (usesHeroLockups ? 136 : 120) + positiveAdjustmentExtremeStrength * 44))
         )
       : 0;
   const netRiseY = clamp(
@@ -879,7 +887,9 @@ function renderPixelReplicaSvg(snapshot) {
   const netTopMinY = scaleY(
     safeNumber(
       snapshot.layout?.netTopMinY,
-      220 - positiveAdjustmentScaleStrength * safeNumber(snapshot.layout?.positiveBridgeNetTopReleaseY, usesHeroLockups ? 84 : 72)
+      220 -
+        positiveAdjustmentScaleStrength * safeNumber(snapshot.layout?.positiveBridgeNetTopReleaseY, usesHeroLockups ? 84 : 72) -
+        positiveAdjustmentExtremeStrength * safeNumber(snapshot.layout?.positiveBridgeExtremeNetTopReleaseY, usesHeroLockups ? 72 : 64)
     )
   );
   const netAdaptiveLiftHeadroom = Math.max(netBaseCandidate - netTopMinY, 0);
@@ -911,8 +921,18 @@ function renderPixelReplicaSvg(snapshot) {
     ? Math.max(stageCenterTargetY - (preliminaryStageTop + preliminaryStageBottom) / 2, 0)
     : 0;
   const netRecenteringFactor = safeNumber(snapshot.layout?.netRecenteringShiftFactor, 0.44);
+  const positiveBridgeStageLiftY = scaleY(
+    clamp(
+      safeNumber(
+        snapshot.layout?.positiveBridgeStageLiftY,
+        positiveAdjustmentExtremeStrength * safeNumber(snapshot.layout?.positiveBridgeStageLiftMaxY, usesHeroLockups ? 86 : 78)
+      ),
+      0,
+      usesHeroLockups ? 96 : 86
+    )
+  );
   const stageRecenteringDownY = clamp(
-    stageRecenteringDownYDesired,
+    Math.max(stageRecenteringDownYDesired - positiveBridgeStageLiftY, 0),
     0,
     Math.max(
       0,
@@ -3721,6 +3741,23 @@ function renderPixelReplicaSvg(snapshot) {
       ? safeNumber(snapshot.layout?.periodEndInlineX) + leftShiftX
       : inlinePeriodLayout.periodEndX;
   const periodEndX = Math.min(periodEndPreferredX, width - 84);
+  const periodEndObstacle = snapshot.periodEndLabel
+    ? {
+        left: periodEndX - scaleY(safeNumber(snapshot.layout?.periodEndObstaclePadX, 10)),
+        right:
+          periodEndX +
+          approximateTextWidth(localizePeriodEndLabel(snapshot.periodEndLabel || ""), periodEndFontSize) +
+          scaleY(safeNumber(snapshot.layout?.periodEndObstaclePadX, 10)),
+        top: periodEndY - periodEndFontSize - scaleY(safeNumber(snapshot.layout?.periodEndObstaclePadY, 8)),
+        bottom: periodEndY + periodEndFontSize * 0.42 + scaleY(safeNumber(snapshot.layout?.periodEndObstaclePadY, 8)),
+      }
+    : null;
+  const titleObstacle = {
+    left: titleX - titleVisualWidth / 2 - scaleY(safeNumber(snapshot.layout?.titleObstaclePadX, 10)),
+    right: titleX + titleVisualWidth / 2 + scaleY(safeNumber(snapshot.layout?.titleObstaclePadX, 10)),
+    top: titleY - titleFontSize - scaleY(safeNumber(snapshot.layout?.titleObstaclePadY, 8)),
+    bottom: titleY + titleFontSize * 0.42 + scaleY(safeNumber(snapshot.layout?.titleObstaclePadY, 8)),
+  };
   const hasExplicitLogoPosition =
     snapshot.layout?.logoPositionMode === "manual" &&
     snapshot.layout?.logoX !== null &&
@@ -7459,7 +7496,8 @@ function renderPixelReplicaSvg(snapshot) {
     let positiveTop = positiveAbove
       ? clamp(
           netTop - totalPositiveStackHeight - positiveNodeGap,
-          scaleY(212) + positiveLabelBlockHeight,
+          scaleY(212 - positiveAdjustmentExtremeStrength * safeNumber(snapshot.layout?.positiveExtremeTopReleaseY, 88)) +
+            positiveLabelBlockHeight * (1 - positiveAdjustmentExtremeStrength * 0.46),
           netTop - scaleY(10) - totalPositiveStackHeight
         )
       : clamp(
@@ -7525,7 +7563,7 @@ function renderPixelReplicaSvg(snapshot) {
     );
     const positiveUpperObstacleBottomAtX = (sampleX) => {
       let bottom = 0;
-      [grossMetricObstacle, operatingMetricObstacle].forEach((obstacle) => {
+      [titleObstacle, periodEndObstacle, grossMetricObstacle, operatingMetricObstacle].forEach((obstacle) => {
         if (!obstacle) return;
         if (sampleX >= obstacle.left && sampleX <= obstacle.right) {
           bottom = Math.max(bottom, obstacle.bottom);
@@ -7538,11 +7576,13 @@ function renderPixelReplicaSvg(snapshot) {
     const rightSideObstacles = [
       { left: netFrame.left - 10, right: netFrame.right + 10, top: netFrame.top - 10, bottom: netFrame.bottom + 10 },
       netSummaryObstacle,
+      titleObstacle,
+      periodEndObstacle,
       grossMetricObstacle,
       operatingMetricObstacle,
       ...deductionBoxes.map((box) => ({ left: belowLabelX - 12, right: width - 56, top: box.top - 6, bottom: box.bottom + 6 })),
       ...opexBoxes.map((box) => ({ left: opexLabelX - 12, right: width - 56, top: box.top - 6, bottom: box.bottom + 6 })),
-    ];
+    ].filter(Boolean);
     const deductionFlowObstacles = deductionSlices
       .map((slice, index) => {
         const box = deductionBoxes[index];
@@ -8046,7 +8086,9 @@ function renderPixelReplicaSvg(snapshot) {
         const positiveAestheticNudgeX =
           scaleY(safeNumber(snapshot.layout?.positiveAestheticNudgeX, positiveAbove ? 48 : 0)) * positiveAestheticNudgeStrength;
         const positiveAestheticNudgeY =
-          scaleY(safeNumber(snapshot.layout?.positiveAestheticNudgeY, positiveAbove ? 40 : 0)) * positiveAestheticNudgeStrength;
+          scaleY(safeNumber(snapshot.layout?.positiveAestheticNudgeY, positiveAbove ? 40 : 0)) *
+          positiveAestheticNudgeStrength *
+          (1 - positiveAdjustmentExtremeStrength);
         positiveNodeX = clamp(
           bestNodePlacement.nodeX + positiveAestheticNudgeX,
           positiveNodeMinX,
@@ -8144,7 +8186,7 @@ function renderPixelReplicaSvg(snapshot) {
       };
       const sourceTopSearchMin = clamp(
         positiveTopMin + positiveSourceDropY,
-        scaleY(160),
+        scaleY(160 - positiveAdjustmentExtremeStrength * safeNumber(snapshot.layout?.positiveExtremeSourceTopReleaseY, 56)),
         chartBottomLimit - gainHeight - scaleY(6)
       );
       const sourceTopSearchMax = clamp(
