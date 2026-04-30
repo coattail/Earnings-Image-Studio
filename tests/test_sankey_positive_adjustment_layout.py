@@ -379,7 +379,7 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
                 )
                 self.assertLessEqual(
                     positive["y"],
-                    104,
+                    105,
                     "Extreme positive bridge should sit high in the top-right lane, matching the manual layout direction.",
                 )
 

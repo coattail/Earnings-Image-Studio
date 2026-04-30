@@ -5517,8 +5517,8 @@
           "latestStructureHistoryQuarter": "2025Q4",
           "revenueClassificationQuarterCount": 32,
           "expenseClassificationQuarterCount": 0,
-          "revenueClassificationCoverageRatio": 1,
-          "expenseClassificationCoverageRatio": 0,
+          "revenueClassificationCoverageRatio": 1.0,
+          "expenseClassificationCoverageRatio": 0.0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
@@ -5526,7 +5526,7 @@
           "policy": {}
         },
         "parser": {
-          "version": "universal-parser-v3",
+          "version": "universal-parser-v4",
           "selectedFinancialSource": "official",
           "selectedSegmentSource": "official-segments",
           "selectedRevenueStructureSource": "official-revenue-structures",
@@ -5536,7 +5536,7 @@
             "primarySource": "official",
             "quarterCount": 32,
             "fieldOverrideCount": 172,
-            "derivedFieldCount": 0,
+            "derivedFieldCount": 6,
             "mixedSourceQuarterCount": 20,
             "sourceUsageCounts": {
               "official": 371,
@@ -5550,8 +5550,8 @@
             "validatedQuarterCount": 32,
             "issueCount": 81,
             "mismatchQuarterCount": 20,
-            "highConfidenceQuarterCount": 0,
-            "averageConfidenceScore": 0.7803,
+            "highConfidenceQuarterCount": 1,
+            "averageConfidenceScore": 0.7867,
             "latestQuarter": "2025Q4",
             "latestQuarterConfidenceScore": 0.775,
             "latestQuarterIssueCount": 4
@@ -5559,8 +5559,8 @@
           "validation": {
             "version": "parser-validation-v1",
             "status": "medium",
-            "overallConfidenceScore": 0.7697,
-            "financialConfidenceScore": 0.7803,
+            "overallConfidenceScore": 0.7739,
+            "financialConfidenceScore": 0.7867,
             "structuralConfidenceScore": 0.75,
             "revenueSegmentChecks": 0,
             "revenueSegmentMismatchCount": 0,
@@ -5591,7 +5591,7 @@
           "costOfRevenueBn": 67.006,
           "grossProfitBn": 27.226,
           "sgnaBn": 7.838,
-          "rndBn": null,
+          "rndBn": 0.0,
           "otherOpexBn": 81.685,
           "operatingExpensesBn": 81.685,
           "operatingIncomeBn": 13.845,
@@ -5669,7 +5669,7 @@
             "version": "financial-validation-v1",
             "status": "medium",
             "confidenceScore": 0.775,
-            "completenessScore": 1,
+            "completenessScore": 1.0,
             "consistencyScore": 0.5,
             "checksRun": 8,
             "checksPassed": 4,
@@ -5715,8 +5715,8 @@
           },
           "officialRevenueSegments": [
             {
-              "name": "Insurance Corporate & Other",
-              "nameZh": null,
+              "name": "Insurance, Corporate & Other",
+              "nameZh": "保险、企业及其他",
               "memberKey": "insurancecorporateother",
               "valueBn": 27.507,
               "yoyPct": -2.71,
@@ -5731,37 +5731,18 @@
               "metricMode": null,
               "validationEligible": false,
               "validationNotes": [
-                "operating-business-bucket-disclosure"
+                "operating-business-bucket-disclosure",
+                "berkshire-stable-operating-business-taxonomy"
               ]
             },
             {
-              "name": "Berkshire Hathaway Insurance Group",
-              "nameZh": null,
-              "memberKey": "berkshirehathawayinsurancegroup",
-              "valueBn": 11.401,
-              "yoyPct": null,
-              "qoqPct": 1.22,
-              "mixPct": 18.2,
-              "mixYoyDeltaPp": null,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231_htm.xml",
-              "sourceForm": "10-K",
-              "filingDate": "2026-03-02",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": false,
-              "validationNotes": [
-                "operating-business-bucket-disclosure"
-              ]
-            },
-            {
-              "name": "Pilot Travel Centers LLC",
-              "nameZh": null,
+              "name": "Pilot Travel Centers",
+              "nameZh": "Pilot 旅行中心",
               "memberKey": "pilottravelcentersllc",
               "valueBn": 10.693,
               "yoyPct": -75.9,
               "qoqPct": -0.71,
-              "mixPct": 17,
+              "mixPct": 17.0,
               "mixYoyDeltaPp": -53.5,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231_htm.xml",
               "sourceForm": "10-K",
@@ -5771,12 +5752,13 @@
               "metricMode": null,
               "validationEligible": false,
               "validationNotes": [
-                "operating-business-bucket-disclosure"
+                "operating-business-bucket-disclosure",
+                "berkshire-stable-operating-business-taxonomy"
               ]
             },
             {
-              "name": "Mc Lane Company",
-              "nameZh": null,
+              "name": "McLane Company",
+              "nameZh": "麦克莱恩公司",
               "memberKey": "mclanecompany",
               "valueBn": 7.855,
               "yoyPct": -11.31,
@@ -5791,12 +5773,13 @@
               "metricMode": null,
               "validationEligible": false,
               "validationNotes": [
-                "operating-business-bucket-disclosure"
+                "operating-business-bucket-disclosure",
+                "berkshire-stable-operating-business-taxonomy"
               ]
             },
             {
-              "name": "Manufacturing Businesses",
-              "nameZh": null,
+              "name": "Manufacturing businesses",
+              "nameZh": "制造业务",
               "memberKey": "manufacturingbusinesses",
               "valueBn": 7.46,
               "yoyPct": 5.77,
@@ -5811,12 +5794,13 @@
               "metricMode": null,
               "validationEligible": false,
               "validationNotes": [
-                "operating-business-bucket-disclosure"
+                "operating-business-bucket-disclosure",
+                "berkshire-stable-operating-business-taxonomy"
               ]
             },
             {
-              "name": "Burlington Northern Santa Fe Corporation",
-              "nameZh": null,
+              "name": "BNSF Railway",
+              "nameZh": "伯灵顿北方圣太菲铁路",
               "memberKey": "burlingtonnorthernsantafecorporation",
               "valueBn": 5.937,
               "yoyPct": -2.61,
@@ -5831,18 +5815,19 @@
               "metricMode": null,
               "validationEligible": false,
               "validationNotes": [
-                "operating-business-bucket-disclosure"
+                "operating-business-bucket-disclosure",
+                "berkshire-stable-operating-business-taxonomy"
               ]
             },
             {
-              "name": "Berkshire Hathaway Energy Company",
-              "nameZh": null,
+              "name": "Berkshire Hathaway Energy",
+              "nameZh": "伯克希尔哈撒韦能源",
               "memberKey": "berkshirehathawayenergycompany",
               "valueBn": 0.943,
               "yoyPct": -0.84,
               "qoqPct": -14.58,
               "mixPct": 1.5,
-              "mixYoyDeltaPp": 0,
+              "mixYoyDeltaPp": -0.0,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231_htm.xml",
               "sourceForm": "10-K",
               "filingDate": "2026-03-02",
@@ -5851,18 +5836,19 @@
               "metricMode": null,
               "validationEligible": false,
               "validationNotes": [
-                "operating-business-bucket-disclosure"
+                "operating-business-bucket-disclosure",
+                "berkshire-stable-operating-business-taxonomy"
               ]
             },
             {
-              "name": "Service & Retailing Businesses",
-              "nameZh": null,
-              "memberKey": "serviceretailingbusinesses",
+              "name": "Service & Retail businesses",
+              "nameZh": "服务与零售业务",
+              "memberKey": "serviceretailbusinesses",
               "valueBn": 0.039,
               "yoyPct": -27.78,
               "qoqPct": 14.71,
               "mixPct": 0.1,
-              "mixYoyDeltaPp": 0,
+              "mixYoyDeltaPp": -0.0,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231_htm.xml",
               "sourceForm": "10-K",
               "filingDate": "2026-03-02",
@@ -5871,14 +5857,132 @@
               "metricMode": null,
               "validationEligible": false,
               "validationNotes": [
-                "operating-business-bucket-disclosure"
+                "operating-business-bucket-disclosure",
+                "berkshire-stable-operating-business-taxonomy"
               ]
             }
           ],
           "officialSegmentAxis": "StatementBusinessSegmentsAxis",
           "officialSegmentSource": "official-filings",
           "displayCurrency": "USD",
-          "displayScaleFactor": 1
+          "displayScaleFactor": 1,
+          "statementMeta": {
+            "statementSource": "generic-official-filing-table",
+            "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231.htm",
+            "statementValueMode": "direct",
+            "statementSpanQuarters": 1,
+            "qualityFlags": [],
+            "adapterId": "generic_filing_tables"
+          },
+          "fieldSources": {
+            "revenueBn": {
+              "adapterId": "official_financials",
+              "label": "SEC companyfacts / filings",
+              "score": 120.0,
+              "sourceUrl": null
+            },
+            "costOfRevenueBn": {
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 87.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231.htm"
+            },
+            "grossProfitBn": {
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 87.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231.htm"
+            },
+            "sgnaBn": {
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 85.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231.htm"
+            },
+            "rndBn": {
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 85.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231.htm"
+            },
+            "otherOpexBn": {
+              "adapterId": "official_financials",
+              "label": "SEC companyfacts / filings",
+              "score": 110.0,
+              "sourceUrl": null
+            },
+            "operatingExpensesBn": {
+              "adapterId": "official_financials",
+              "label": "SEC companyfacts / filings",
+              "score": 118.0,
+              "sourceUrl": null
+            },
+            "operatingIncomeBn": {
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 87.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231.htm"
+            },
+            "nonOperatingBn": {
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 83.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231.htm"
+            },
+            "pretaxIncomeBn": {
+              "adapterId": "official_financials",
+              "label": "SEC companyfacts / filings",
+              "score": 118.0,
+              "sourceUrl": null
+            },
+            "taxBn": {
+              "adapterId": "official_financials",
+              "label": "SEC companyfacts / filings",
+              "score": 112.0,
+              "sourceUrl": null
+            },
+            "netIncomeBn": {
+              "adapterId": "official_financials",
+              "label": "SEC companyfacts / filings",
+              "score": 118.0,
+              "sourceUrl": null
+            },
+            "statementMeta": {
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 13.5,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231.htm"
+            },
+            "officialRevenueSegments": {
+              "adapterId": "official_revenue_structures",
+              "label": "Official filing revenue structure",
+              "score": 114.0,
+              "sourceUrl": null
+            }
+          },
+          "extractionDiagnostics": {
+            "qualityScore": 93,
+            "availableRequiredFieldCount": 3,
+            "requiredFieldCount": 3,
+            "sourceFieldCount": 14,
+            "hasCostBreakdownProfile": false,
+            "costBreakdownMode": "none",
+            "opexBreakdownMode": "none",
+            "revenueSegmentCoveragePct": 100.0,
+            "costBreakdownCoveragePct": null,
+            "opexBreakdownCoveragePct": 0,
+            "revenueSegmentResidualBn": 0,
+            "costBreakdownResidualBn": null,
+            "opexBreakdownResidualBn": null,
+            "statementSource": "generic-official-filing-table",
+            "statementValueMode": "direct",
+            "statementSpanQuarters": 1,
+            "statementQualityFlags": [],
+            "issues": [
+              "opex-breakdown-coverage-low"
+            ]
+          },
+          "officialRevenueStyle": "berkshire-operating-businesses"
         }
       },
       "statementPresets": {},
@@ -5888,14 +5992,14 @@
           "2025Q4": {
             "segments": [
               {
-                "name": "Insurance Corporate & Other",
-                "nameZh": null,
+                "name": "Insurance, Corporate & Other",
+                "nameZh": "保险、企业及其他",
                 "memberKey": "insurancecorporateother",
                 "valueBn": 27.507,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
+                "yoyPct": -2.71,
+                "qoqPct": 0.97,
+                "mixPct": 43.8,
+                "mixYoyDeltaPp": -1.1,
                 "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231_htm.xml",
                 "sourceForm": "10-K",
                 "filingDate": "2026-03-02",
@@ -5904,38 +6008,19 @@
                 "metricMode": null,
                 "validationEligible": false,
                 "validationNotes": [
-                  "operating-business-bucket-disclosure"
+                  "operating-business-bucket-disclosure",
+                  "berkshire-stable-operating-business-taxonomy"
                 ]
               },
               {
-                "name": "Berkshire Hathaway Insurance Group",
-                "nameZh": null,
-                "memberKey": "berkshirehathawayinsurancegroup",
-                "valueBn": 11.401,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231_htm.xml",
-                "sourceForm": "10-K",
-                "filingDate": "2026-03-02",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": false,
-                "validationNotes": [
-                  "operating-business-bucket-disclosure"
-                ]
-              },
-              {
-                "name": "Pilot Travel Centers LLC",
-                "nameZh": null,
+                "name": "Pilot Travel Centers",
+                "nameZh": "Pilot 旅行中心",
                 "memberKey": "pilottravelcentersllc",
                 "valueBn": 10.693,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
+                "yoyPct": -75.9,
+                "qoqPct": -0.71,
+                "mixPct": 17.0,
+                "mixYoyDeltaPp": -53.5,
                 "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231_htm.xml",
                 "sourceForm": "10-K",
                 "filingDate": "2026-03-02",
@@ -5944,18 +6029,19 @@
                 "metricMode": null,
                 "validationEligible": false,
                 "validationNotes": [
-                  "operating-business-bucket-disclosure"
+                  "operating-business-bucket-disclosure",
+                  "berkshire-stable-operating-business-taxonomy"
                 ]
               },
               {
-                "name": "Mc Lane Company",
-                "nameZh": null,
+                "name": "McLane Company",
+                "nameZh": "麦克莱恩公司",
                 "memberKey": "mclanecompany",
                 "valueBn": 7.855,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
+                "yoyPct": -11.31,
+                "qoqPct": -0.37,
+                "mixPct": 12.5,
+                "mixYoyDeltaPp": -1.6,
                 "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231_htm.xml",
                 "sourceForm": "10-K",
                 "filingDate": "2026-03-02",
@@ -5964,18 +6050,19 @@
                 "metricMode": null,
                 "validationEligible": false,
                 "validationNotes": [
-                  "operating-business-bucket-disclosure"
+                  "operating-business-bucket-disclosure",
+                  "berkshire-stable-operating-business-taxonomy"
                 ]
               },
               {
-                "name": "Manufacturing Businesses",
-                "nameZh": null,
+                "name": "Manufacturing businesses",
+                "nameZh": "制造业务",
                 "memberKey": "manufacturingbusinesses",
                 "valueBn": 7.46,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
+                "yoyPct": 5.77,
+                "qoqPct": -2.23,
+                "mixPct": 11.9,
+                "mixYoyDeltaPp": 0.7,
                 "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231_htm.xml",
                 "sourceForm": "10-K",
                 "filingDate": "2026-03-02",
@@ -5984,18 +6071,19 @@
                 "metricMode": null,
                 "validationEligible": false,
                 "validationNotes": [
-                  "operating-business-bucket-disclosure"
+                  "operating-business-bucket-disclosure",
+                  "berkshire-stable-operating-business-taxonomy"
                 ]
               },
               {
-                "name": "Burlington Northern Santa Fe Corporation",
-                "nameZh": null,
+                "name": "BNSF Railway",
+                "nameZh": "伯灵顿北方圣太菲铁路",
                 "memberKey": "burlingtonnorthernsantafecorporation",
                 "valueBn": 5.937,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
+                "yoyPct": -2.61,
+                "qoqPct": -0.49,
+                "mixPct": 9.5,
+                "mixYoyDeltaPp": -0.2,
                 "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231_htm.xml",
                 "sourceForm": "10-K",
                 "filingDate": "2026-03-02",
@@ -6004,18 +6092,19 @@
                 "metricMode": null,
                 "validationEligible": false,
                 "validationNotes": [
-                  "operating-business-bucket-disclosure"
+                  "operating-business-bucket-disclosure",
+                  "berkshire-stable-operating-business-taxonomy"
                 ]
               },
               {
-                "name": "Berkshire Hathaway Energy Company",
-                "nameZh": null,
+                "name": "Berkshire Hathaway Energy",
+                "nameZh": "伯克希尔哈撒韦能源",
                 "memberKey": "berkshirehathawayenergycompany",
                 "valueBn": 0.943,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
+                "yoyPct": -0.84,
+                "qoqPct": -14.58,
+                "mixPct": 1.5,
+                "mixYoyDeltaPp": -0.0,
                 "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231_htm.xml",
                 "sourceForm": "10-K",
                 "filingDate": "2026-03-02",
@@ -6024,18 +6113,19 @@
                 "metricMode": null,
                 "validationEligible": false,
                 "validationNotes": [
-                  "operating-business-bucket-disclosure"
+                  "operating-business-bucket-disclosure",
+                  "berkshire-stable-operating-business-taxonomy"
                 ]
               },
               {
-                "name": "Service & Retailing Businesses",
-                "nameZh": null,
-                "memberKey": "serviceretailingbusinesses",
+                "name": "Service & Retail businesses",
+                "nameZh": "服务与零售业务",
+                "memberKey": "serviceretailbusinesses",
                 "valueBn": 0.039,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
+                "yoyPct": -27.78,
+                "qoqPct": 14.71,
+                "mixPct": 0.1,
+                "mixYoyDeltaPp": -0.0,
                 "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231_htm.xml",
                 "sourceForm": "10-K",
                 "filingDate": "2026-03-02",
@@ -6044,10 +6134,12 @@
                 "metricMode": null,
                 "validationEligible": false,
                 "validationNotes": [
-                  "operating-business-bucket-disclosure"
+                  "operating-business-bucket-disclosure",
+                  "berkshire-stable-operating-business-taxonomy"
                 ]
               }
-            ]
+            ],
+            "style": "berkshire-operating-businesses"
           }
         },
         "filingsUsed": [

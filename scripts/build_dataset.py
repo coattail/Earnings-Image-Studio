@@ -147,6 +147,10 @@ BAR_SEGMENT_CANONICAL_BY_COMPANY: dict[str, dict[str, str]] = {
     "berkshire": {
         "serviceandretailingbusinesses": "serviceretailbusinesses",
         "serviceandretailbusinesses": "serviceretailbusinesses",
+        "serviceretailingbusinesses": "serviceretailbusinesses",
+        "serviceretailbusinesses": "serviceretailbusinesses",
+        "pilottravelcenterslimitedliabilitycompany": "pilottravelcentersllc",
+        "pilottravelcenters": "pilottravelcentersllc",
     },
     "tesla": {
         "automotive": "auto",
@@ -491,6 +495,152 @@ def dedupe_revenue_segment_rows(company_id: str, rows: list[dict[str, Any]]) -> 
             merged["nameZh"] = row.get("nameZh") or existing.get("nameZh")
         deduped[canonical_key] = merged
     return list(deduped.values())
+
+
+BERKSHIRE_REVENUE_SEGMENT_ORDER = {
+    "insurancecorporateother": 0,
+    "pilottravelcentersllc": 1,
+    "mclanecompany": 2,
+    "manufacturingbusinesses": 3,
+    "burlingtonnorthernsantafecorporation": 4,
+    "berkshirehathawayenergycompany": 5,
+    "serviceretailbusinesses": 6,
+}
+
+BERKSHIRE_REVENUE_SEGMENT_LABELS = {
+    "insurancecorporateother": ("Insurance, Corporate & Other", "保险、企业及其他"),
+    "pilottravelcentersllc": ("Pilot Travel Centers", "Pilot 旅行中心"),
+    "mclanecompany": ("McLane Company", "麦克莱恩公司"),
+    "manufacturingbusinesses": ("Manufacturing businesses", "制造业务"),
+    "burlingtonnorthernsantafecorporation": ("BNSF Railway", "伯灵顿北方圣太菲铁路"),
+    "berkshirehathawayenergycompany": ("Berkshire Hathaway Energy", "伯克希尔哈撒韦能源"),
+    "serviceretailbusinesses": ("Service & Retail businesses", "服务与零售业务"),
+}
+
+
+def _sort_berkshire_revenue_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return sorted(
+        rows,
+        key=lambda row: (
+            BERKSHIRE_REVENUE_SEGMENT_ORDER.get(str(row.get("memberKey") or ""), 99),
+            -float(row.get("valueBn") or 0),
+            str(row.get("memberKey") or ""),
+        ),
+    )
+
+
+def _normalize_berkshire_segment_rows(rows: Any) -> list[dict[str, Any]]:
+    if not isinstance(rows, list):
+        return []
+    normalized: list[dict[str, Any]] = []
+    for raw_row in rows:
+        if not isinstance(raw_row, dict):
+            continue
+        canonical_key = canonical_revenue_segment_member_key("berkshire", raw_row.get("memberKey"), raw_row.get("name"))
+        if canonical_key == "berkshirehathawayinsurancegroup":
+            continue
+        if canonical_key not in BERKSHIRE_REVENUE_SEGMENT_ORDER:
+            continue
+        row = dict(raw_row)
+        row["memberKey"] = canonical_key
+        label = BERKSHIRE_REVENUE_SEGMENT_LABELS.get(canonical_key)
+        if label:
+            row["name"], row["nameZh"] = label
+        notes = list(row.get("validationNotes") or [])
+        if "berkshire-stable-operating-business-taxonomy" not in notes:
+            notes.append("berkshire-stable-operating-business-taxonomy")
+        row["validationEligible"] = False
+        row["validationNotes"] = notes
+        normalized.append(row)
+    return _sort_berkshire_revenue_rows(dedupe_revenue_segment_rows("berkshire", normalized))
+
+
+def _berkshire_neighbor_average_value(
+    financials: dict[str, Any],
+    quarter_key: str,
+    member_key: str,
+) -> float | None:
+    match = re.fullmatch(r"(\d{4})Q([1-4])", str(quarter_key or ""))
+    if not match:
+        return None
+    year = int(match.group(1))
+    quarter = int(match.group(2))
+    neighbor_keys = []
+    if quarter > 1:
+        neighbor_keys.append(f"{year}Q{quarter - 1}")
+    if quarter < 4:
+        neighbor_keys.append(f"{year}Q{quarter + 1}")
+    values: list[float] = []
+    for neighbor_key in neighbor_keys:
+        neighbor_entry = financials.get(neighbor_key)
+        rows = neighbor_entry.get("officialRevenueSegments") if isinstance(neighbor_entry, dict) else []
+        if not isinstance(rows, list):
+            continue
+        for row in rows:
+            if not isinstance(row, dict):
+                continue
+            key = canonical_revenue_segment_member_key("berkshire", row.get("memberKey"), row.get("name"))
+            if key != member_key:
+                continue
+            value = _safe_float(row.get("valueBn"))
+            if value is not None and value > 0:
+                values.append(value)
+    if not values:
+        return None
+    return round(sum(values) / len(values), 3)
+
+
+def apply_berkshire_display_normalizations(payload: dict[str, Any]) -> dict[str, Any]:
+    financials = payload.get("financials")
+    if not isinstance(financials, dict):
+        return payload
+    history = payload.get("officialRevenueStructureHistory")
+    history_quarters = history.get("quarters") if isinstance(history, dict) else {}
+    if not isinstance(history_quarters, dict):
+        history_quarters = {}
+
+    for quarter_key, entry in financials.items():
+        if not isinstance(entry, dict):
+            continue
+        rows = _normalize_berkshire_segment_rows(entry.get("officialRevenueSegments"))
+        if not rows:
+            continue
+        revenue_bn = _safe_float(entry.get("revenueBn"))
+        for row in rows:
+            key = str(row.get("memberKey") or "")
+            value = _safe_float(row.get("valueBn"))
+            if key != "pilottravelcentersllc" or value is None or revenue_bn is None or revenue_bn <= 0:
+                continue
+            if value / revenue_bn <= 0.35:
+                continue
+            replacement = _berkshire_neighbor_average_value(financials, str(quarter_key), key)
+            if replacement is None or replacement <= 0:
+                continue
+            row["valueBn"] = replacement
+            row["qoqPct"] = None
+            row["yoyPct"] = None
+            row["mixPct"] = round(replacement / revenue_bn * 100, 1)
+            row["mixYoyDeltaPp"] = None
+            notes = list(row.get("validationNotes") or [])
+            if "berkshire-quarterized-from-neighbor-average" not in notes:
+                notes.append("berkshire-quarterized-from-neighbor-average")
+            row["validationNotes"] = notes
+            quality_flags = entry.get("qualityFlags")
+            if not isinstance(quality_flags, list):
+                quality_flags = []
+            if "berkshire-quarterized-segment-outlier" not in quality_flags:
+                quality_flags.append("berkshire-quarterized-segment-outlier")
+            entry["qualityFlags"] = quality_flags
+        rows = _sort_berkshire_revenue_rows(rows)
+        entry["officialRevenueSegments"] = rows
+        structure_payload = history_quarters.get(quarter_key)
+        if isinstance(structure_payload, dict):
+            structure_payload["segments"] = deepcopy(rows)
+            structure_payload["style"] = structure_payload.get("style") or "berkshire-operating-businesses"
+        entry["officialRevenueStyle"] = entry.get("officialRevenueStyle") or "berkshire-operating-businesses"
+
+    enrich_growth_rows(financials, "officialRevenueSegments")
+    return payload
 
 
 def filter_micron_mixed_segment_rows(quarter_key: str, rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -2005,7 +2155,11 @@ def apply_visa_display_normalizations(payload: dict[str, Any]) -> dict[str, Any]
 def apply_company_rendering_preferences(company: dict[str, Any], payload: dict[str, Any]) -> dict[str, Any]:
     company_id = str(company.get("id") or payload.get("id") or "").strip().lower()
     financials = payload.get("financials")
-    if company_id != "visa" or not isinstance(financials, dict):
+    if not isinstance(financials, dict):
+        return payload
+    if company_id == "berkshire":
+        return apply_berkshire_display_normalizations(payload)
+    if company_id != "visa":
         return payload
     apply_visa_display_normalizations(payload)
     detailed_fields = (

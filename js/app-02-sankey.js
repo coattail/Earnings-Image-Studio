@@ -7403,17 +7403,26 @@ function renderPixelReplicaSvg(snapshot) {
     const primaryDriverValueBn = Math.max(safeNumber(driverItem?.valueBn), 0);
     const otherLossDriversBn = Math.max(driverValueBn - primaryDriverValueBn, 0);
     const driverHeight = Math.max(driverValueBn * scale, scaleY(12));
+    const targetHeight = Math.min(driverHeight, netFrame.height);
     const driverWidth = Math.max(nodeWidth, scaleY(safeNumber(snapshot.layout?.netLossDriverWidth, 72)));
     const driverGapX = scaleY(safeNumber(snapshot.layout?.netLossDriverGapX, 78));
     const driverX = netFrame.x - driverGapX - driverWidth;
-    const detailLabelLiftY =
+    const baseDetailLabelLiftY =
       useNetLossBalanceBridge && otherLossDriversBn > 0.05
         ? scaleY(safeNumber(snapshot.layout?.netLossDriverDetailLiftY, 50))
         : 0;
-    const driverCenterY = netFrame.centerY - detailLabelLiftY;
+    const lowerOpexRibbonTopY =
+      useNetLossBalanceBridge && otherLossDriversBn > 0.05
+        ? opexSourceSlices.reduce((maxTop, slice) => Math.max(maxTop, safeNumber(slice?.top, -Infinity)), -Infinity)
+        : -Infinity;
+    const detailLabelOffsetY = scaleY(otherLossDriversBn > 0.05 ? 30 : 20);
+    const maxDriverCenterForDetailClearance =
+      Number.isFinite(lowerOpexRibbonTopY)
+        ? lowerOpexRibbonTopY - scaleY(12) - detailLabelOffsetY - Math.max(driverHeight - targetHeight, 0) / 2
+        : Infinity;
+    const driverCenterY = Math.min(netFrame.centerY - baseDetailLabelLiftY, maxDriverCenterForDetailClearance);
     const driverTop = clamp(driverCenterY - driverHeight / 2, scaleY(184), Math.max(chartBottomLimit - driverHeight, scaleY(184)));
     const driverFrame = editableNodeFrame(`net-loss-driver-${netLossDriverIndex}`, driverX, driverTop, driverWidth, driverHeight);
-    const targetHeight = Math.min(driverFrame.height, netFrame.height);
     const targetTop = clamp(driverFrame.centerY - targetHeight / 2, netFrame.top, Math.max(netFrame.bottom - targetHeight, netFrame.top));
     const sourceTop = Math.max(driverFrame.bottom - targetHeight, driverFrame.top);
     const sourceBottom = sourceTop + targetHeight;

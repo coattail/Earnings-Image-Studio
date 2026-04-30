@@ -2646,6 +2646,10 @@ const BAR_SEGMENT_CANONICAL_BY_COMPANY = Object.freeze({
   berkshire: Object.freeze({
     serviceandretailingbusinesses: "serviceretailbusinesses",
     serviceandretailbusinesses: "serviceretailbusinesses",
+    serviceretailingbusinesses: "serviceretailbusinesses",
+    serviceretailbusinesses: "serviceretailbusinesses",
+    pilottravelcenterslimitedliabilitycompany: "pilottravelcentersllc",
+    pilottravelcenters: "pilottravelcentersllc",
   }),
   tesla: Object.freeze({
     automotive: "auto",
@@ -2721,6 +2725,12 @@ const BAR_SEGMENT_LABEL_OVERRIDES = Object.freeze({
   innovativemedicine: Object.freeze({ name: "Innovative Medicine", nameZh: "创新药" }),
   medtech: Object.freeze({ name: "Med Tech", nameZh: "医疗科技" }),
   serviceretailbusinesses: Object.freeze({ name: "Service & Retail businesses", nameZh: "服务与零售业务" }),
+  insurancecorporateother: Object.freeze({ name: "Insurance, Corporate & Other", nameZh: "保险、企业及其他" }),
+  pilottravelcentersllc: Object.freeze({ name: "Pilot Travel Centers", nameZh: "Pilot 旅行中心" }),
+  mclanecompany: Object.freeze({ name: "McLane Company", nameZh: "麦克莱恩公司" }),
+  manufacturingbusinesses: Object.freeze({ name: "Manufacturing businesses", nameZh: "制造业务" }),
+  burlingtonnorthernsantafecorporation: Object.freeze({ name: "BNSF Railway", nameZh: "伯灵顿北方圣太菲铁路" }),
+  berkshirehathawayenergycompany: Object.freeze({ name: "Berkshire Hathaway Energy", nameZh: "伯克希尔哈撒韦能源" }),
   iphone: Object.freeze({ name: "iPhone", nameZh: "iPhone" }),
   mac: Object.freeze({ name: "Mac", nameZh: "Mac" }),
   ipad: Object.freeze({ name: "iPad", nameZh: "iPad" }),

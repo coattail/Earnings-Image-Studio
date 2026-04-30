@@ -12,6 +12,109 @@ import build_dataset  # noqa: E402
 
 
 class RevenueStructureCostBreakdownMergeTests(unittest.TestCase):
+    def test_finalize_stabilizes_berkshire_revenue_taxonomy(self) -> None:
+        company = {"id": "berkshire", "ticker": "BRK.B"}
+        company_payload = {
+            "id": "berkshire",
+            "ticker": "BRK.B",
+            "quarters": ["2023Q1", "2024Q3", "2024Q4", "2025Q4"],
+            "financials": {
+                "2023Q1": {
+                    "calendarQuarter": "2023Q1",
+                    "revenueBn": 59.745,
+                    "officialRevenueSegments": [
+                        {"name": "Insurance Corporate & Other", "memberKey": "insurancecorporateother", "valueBn": 22.409},
+                        {"name": "Berkshire Hathaway Insurance Group", "memberKey": "berkshirehathawayinsurancegroup", "valueBn": 22.188},
+                        {"name": "Mc Lane Company", "memberKey": "mclanecompany", "valueBn": 7.793},
+                        {"name": "Manufacturing Businesses", "memberKey": "manufacturingbusinesses", "valueBn": 7.229},
+                        {"name": "Burlington Northern Santa Fe Corporation", "memberKey": "burlingtonnorthernsantafecorporation", "valueBn": 5.985},
+                        {"name": "Berkshire Hathaway Energy Company", "memberKey": "berkshirehathawayenergycompany", "valueBn": 0.811},
+                        {"name": "Pilot Travel Centers LLC", "memberKey": "pilottravelcentersllc", "valueBn": 0.422},
+                        {
+                            "name": "Pilot Travel Centers Limited Liability Company",
+                            "memberKey": "pilottravelcenterslimitedliabilitycompany",
+                            "valueBn": 0.422,
+                        },
+                        {"name": "Service & Retailing Businesses", "memberKey": "serviceretailingbusinesses", "valueBn": 0.065},
+                    ],
+                },
+                "2024Q3": {
+                    "calendarQuarter": "2024Q3",
+                    "revenueBn": 60.238,
+                    "officialRevenueSegments": [
+                        {"name": "Insurance Corporate & Other", "memberKey": "insurancecorporateother", "valueBn": 27.104},
+                        {"name": "Berkshire Hathaway Insurance Group", "memberKey": "berkshirehathawayinsurancegroup", "valueBn": 26.664},
+                        {"name": "Mc Lane Company", "memberKey": "mclanecompany", "valueBn": 7.911},
+                        {"name": "Manufacturing Businesses", "memberKey": "manufacturingbusinesses", "valueBn": 7.492},
+                        {"name": "Burlington Northern Santa Fe Corporation", "memberKey": "burlingtonnorthernsantafecorporation", "valueBn": 5.925},
+                        {"name": "Berkshire Hathaway Energy Company", "memberKey": "berkshirehathawayenergycompany", "valueBn": 1.179},
+                        {"name": "Pilot Travel Centers LLC", "memberKey": "pilottravelcentersllc", "valueBn": 0.733},
+                        {"name": "Service & Retailing Businesses", "memberKey": "serviceretailingbusinesses", "valueBn": 0.046},
+                    ],
+                },
+                "2024Q4": {
+                    "calendarQuarter": "2024Q4",
+                    "revenueBn": 62.856,
+                    "officialRevenueSegments": [
+                        {"name": "Pilot Travel Centers LLC", "memberKey": "pilottravelcentersllc", "valueBn": 44.37, "sourceForm": "10-K"},
+                        {"name": "Insurance Corporate & Other", "memberKey": "insurancecorporateother", "valueBn": 28.274},
+                        {"name": "Mc Lane Company", "memberKey": "mclanecompany", "valueBn": 8.857},
+                        {"name": "Manufacturing Businesses", "memberKey": "manufacturingbusinesses", "valueBn": 7.053},
+                        {"name": "Burlington Northern Santa Fe Corporation", "memberKey": "burlingtonnorthernsantafecorporation", "valueBn": 6.096},
+                        {"name": "Berkshire Hathaway Energy Company", "memberKey": "berkshirehathawayenergycompany", "valueBn": 0.951},
+                        {"name": "Service & Retailing Businesses", "memberKey": "serviceretailingbusinesses", "valueBn": 0.054},
+                    ],
+                },
+                "2025Q4": {
+                    "calendarQuarter": "2025Q4",
+                    "revenueBn": 62.734,
+                    "officialRevenueSegments": [
+                        {"name": "Insurance Corporate & Other", "memberKey": "insurancecorporateother", "valueBn": 27.507},
+                        {"name": "Berkshire Hathaway Insurance Group", "memberKey": "berkshirehathawayinsurancegroup", "valueBn": 11.401},
+                        {"name": "Pilot Travel Centers LLC", "memberKey": "pilottravelcentersllc", "valueBn": 10.693},
+                        {"name": "Mc Lane Company", "memberKey": "mclanecompany", "valueBn": 7.855},
+                        {"name": "Manufacturing Businesses", "memberKey": "manufacturingbusinesses", "valueBn": 7.46},
+                        {"name": "Burlington Northern Santa Fe Corporation", "memberKey": "burlingtonnorthernsantafecorporation", "valueBn": 5.937},
+                        {"name": "Berkshire Hathaway Energy Company", "memberKey": "berkshirehathawayenergycompany", "valueBn": 0.943},
+                        {"name": "Service & Retailing Businesses", "memberKey": "serviceretailingbusinesses", "valueBn": 0.039},
+                    ],
+                },
+            },
+            "officialRevenueStructureHistory": {
+                "source": "official-segment-cache",
+                "quarters": {},
+                "filingsUsed": [],
+                "errors": [],
+            },
+            "parserDiagnostics": {
+                "version": "universal-parser-v4",
+                "financials": {},
+                "segments": {},
+                "revenueStructures": {},
+                "summary": {},
+            },
+        }
+
+        result = build_dataset.finalize_company_payload(company, company_payload, {})
+        q1_keys = [row["memberKey"] for row in result["financials"]["2023Q1"]["officialRevenueSegments"]]
+        q4_2024 = {row["memberKey"]: row for row in result["financials"]["2024Q4"]["officialRevenueSegments"]}
+        q4_2025_keys = [row["memberKey"] for row in result["financials"]["2025Q4"]["officialRevenueSegments"]]
+
+        self.assertEqual(q1_keys.count("pilottravelcentersllc"), 1)
+        self.assertNotIn("pilottravelcenterslimitedliabilitycompany", q1_keys)
+        self.assertNotIn("berkshirehathawayinsurancegroup", q1_keys)
+        self.assertIn("serviceretailbusinesses", q1_keys)
+        self.assertLess(q4_2024["pilottravelcentersllc"]["valueBn"], 15)
+        self.assertEqual(q4_2025_keys, [
+            "insurancecorporateother",
+            "pilottravelcentersllc",
+            "mclanecompany",
+            "manufacturingbusinesses",
+            "burlingtonnorthernsantafecorporation",
+            "berkshirehathawayenergycompany",
+            "serviceretailbusinesses",
+        ])
+
     def test_finalize_syncs_revenue_structure_history_into_financial_entries(self) -> None:
         company = {"id": "visa", "ticker": "V"}
         company_payload = {
