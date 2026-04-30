@@ -521,30 +521,17 @@ function renderPixelReplicaSvg(snapshot) {
   const rawOpexItems = collapsedOpexItem ? [] : rawOpexItemsSource;
   const rawBelowOperatingItems = [...(snapshot.belowOperatingItems || [])].filter((item) => safeNumber(item.valueBn) > 0.02);
   const rawPositiveAdjustments = [...(snapshot.positiveAdjustments || [])].filter((item) => safeNumber(item.valueBn) > 0.02);
-  const positiveAdjustmentTotalBn = rawPositiveAdjustments.reduce((sum, item) => sum + Math.max(safeNumber(item.valueBn), 0), 0);
-  const positiveAdjustmentOpRatio =
-    positiveAdjustmentTotalBn > 0.02 && operatingProfitBn > 0.02 ? positiveAdjustmentTotalBn / operatingProfitBn : 0;
-  const positiveAdjustmentNetExpansionRatio =
-    positiveAdjustmentTotalBn > 0.02 && !netLoss && netProfitBn > 0.02
-      ? Math.max(netProfitBn - operatingProfitBn, 0) / netProfitBn
-      : 0;
-  const positiveAdjustmentScaleStrength = rawPositiveAdjustments.length
-    ? clamp(
-        positiveAdjustmentOpRatio * 0.58 +
-          positiveAdjustmentNetExpansionRatio * 0.74 +
-          (positiveAdjustmentTotalBn / Math.max(revenueBn, 0.05)) * 0.38,
-        0,
-        1
-      )
-    : 0;
-  const positiveAdjustmentExtremeStrength = rawPositiveAdjustments.length
-    ? clamp(
-        Math.max(positiveAdjustmentOpRatio - 1.1, 0) / 1.7 +
-          Math.max(positiveAdjustmentNetExpansionRatio - 0.45, 0) * 0.6,
-        0,
-        1
-      )
-    : 0;
+  const positiveBridgeStrength = resolvePositiveAdjustmentBridgeStrengths(snapshot, {
+    positiveAdjustments: rawPositiveAdjustments,
+    operatingProfitBn,
+    netProfitBn,
+    netLoss,
+    revenueBn,
+  });
+  const positiveAdjustmentTotalBn = positiveBridgeStrength.totalBn;
+  const positiveAdjustmentOpRatio = positiveBridgeStrength.opRatio;
+  const positiveAdjustmentScaleStrength = positiveBridgeStrength.scaleStrength;
+  const positiveAdjustmentExtremeStrength = positiveBridgeStrength.extremeStrength;
   const leftBranchCount = rawSources.length + rawLeftDetailGroups.length * 0.92;
   const rightBranchCount =
     rawOpexItems.length +
@@ -3758,6 +3745,15 @@ function renderPixelReplicaSvg(snapshot) {
     top: titleY - titleFontSize - scaleY(safeNumber(snapshot.layout?.titleObstaclePadY, 8)),
     bottom: titleY + titleFontSize * 0.42 + scaleY(safeNumber(snapshot.layout?.titleObstaclePadY, 8)),
   };
+  const headerClearanceBottom = Math.max(
+    titleObstacle.bottom,
+    periodEndObstacle ? periodEndObstacle.bottom : 0
+  ) + scaleY(
+    safeNumber(
+      snapshot.layout?.headerContentClearanceY,
+      34 + positiveAdjustmentExtremeStrength * 22
+    )
+  );
   const hasExplicitLogoPosition =
     snapshot.layout?.logoPositionMode === "manual" &&
     snapshot.layout?.logoX !== null &&
@@ -7493,6 +7489,7 @@ function renderPixelReplicaSvg(snapshot) {
     };
     let positiveNodeX = defaultPositiveNodeX;
     const positiveSourceDropY = 0;
+    const positiveExtremeTopFloorY = scaleY(160 - positiveAdjustmentExtremeStrength * safeNumber(snapshot.layout?.positiveExtremeSourceTopReleaseY, 56));
     let positiveTop = positiveAbove
       ? clamp(
           netTop - totalPositiveStackHeight - positiveNodeGap,
@@ -8186,7 +8183,7 @@ function renderPixelReplicaSvg(snapshot) {
       };
       const sourceTopSearchMin = clamp(
         positiveTopMin + positiveSourceDropY,
-        scaleY(160 - positiveAdjustmentExtremeStrength * safeNumber(snapshot.layout?.positiveExtremeSourceTopReleaseY, 56)),
+        positiveExtremeTopFloorY,
         chartBottomLimit - gainHeight - scaleY(6)
       );
       const sourceTopSearchMax = clamp(
@@ -8237,7 +8234,7 @@ function renderPixelReplicaSvg(snapshot) {
         };
         const upperObstacleBottomForRect = (rect) => {
           const sampleXs = sampleXsAcrossRect(rect, 7);
-          let bottom = positiveAbove ? 0 : upperMetricFloor;
+          let bottom = positiveAbove ? headerClearanceBottom : Math.max(upperMetricFloor, headerClearanceBottom);
           sampleXs.forEach((sampleX) => {
             const mainBottom = positiveAbove ? positiveUpperObstacleBottomAtX(sampleX) : netMainRibbonBottomAtX(sampleX);
             if (Number.isFinite(mainBottom)) {
@@ -8743,12 +8740,20 @@ function renderPixelReplicaSvg(snapshot) {
             })
             .find(Boolean);
           const fallbackPlacement = resolvedFallback || {
-            type: "above",
-            anchor: "middle",
-            x: positiveNodeCenterX,
-            centerY: abovePlacementBaseCenterY,
-            rect: labelBoundsRect("middle", positiveNodeCenterX, abovePlacementBaseCenterY),
+            type: "left",
+            anchor: "end",
+            x: positiveNodeX - labelGapX,
+            centerY: clamp(
+              Math.max(
+                positiveSourceTop + gainHeight * safeNumber(snapshot.layout?.positiveExtremeFallbackLabelSourceFactor, positiveAbove ? 0.28 : 0.5) - labelCenterBias,
+                headerClearanceBottom + scaleY(safeNumber(snapshot.layout?.positiveFallbackHeaderGapY, 8)) - labelTopOffset
+              ),
+              headerClearanceBottom + scaleY(safeNumber(snapshot.layout?.positiveFallbackHeaderGapY, 8)) - labelTopOffset,
+              chartBottomLimit - scaleY(6) - labelBottomOffset
+            ),
+            rect: null,
           };
+          fallbackPlacement.rect = labelBoundsRect(fallbackPlacement.anchor, fallbackPlacement.x, fallbackPlacement.centerY);
           bestPlacement = {
             ...fallbackPlacement,
             score: 9_999_999,

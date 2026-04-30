@@ -800,6 +800,9 @@ function snapshotCanvasSize(snapshot) {
     : [];
   const costBreakdownItems = Array.isArray(snapshot?.costBreakdown) ? snapshot.costBreakdown.filter((item) => safeNumber(item?.valueBn) > 0.02) : [];
   const positiveItems = Array.isArray(snapshot?.positiveAdjustments) ? snapshot.positiveAdjustments.filter((item) => safeNumber(item?.valueBn) > 0.02) : [];
+  const positiveBridgeStrength = resolvePositiveAdjustmentBridgeStrengths(snapshot, {
+    positiveAdjustments: positiveItems,
+  });
   const detailTargetKeys = new Set(
     detailGroups
       .map((item) => normalizeLabelKey(item.targetId || item.targetName || item.target || item.groupName))
@@ -996,7 +999,8 @@ function snapshotCanvasSize(snapshot) {
     Math.max(rightExtra, 0) +
     densityExtra * detailLayoutExtraScale +
     hierarchyExtra * detailLayoutExtraScale +
-    structuralOverflow * (usesPreDetailRevenueLayout ? 0.58 : 0.78);
+    structuralOverflow * (usesPreDetailRevenueLayout ? 0.58 : 0.78) +
+    positiveBridgeStrength.extremeStrength * safeNumber(snapshot?.layout?.positiveBridgeExtremeCanvasExtraY, 148);
   const height = baseHeight + extraHeight;
   const revenueBn = Math.max(safeNumber(snapshot?.revenueBn), safeNumber(snapshot?.layout?.ratioRevenueFloorBn, 0.25));
   const opexRatio = Math.max(safeNumber(snapshot?.operatingExpensesBn) / revenueBn, 0);
@@ -1006,7 +1010,8 @@ function snapshotCanvasSize(snapshot) {
     Math.max(opexRatio - 1.45, 0) * 320 +
     Math.max(costRatio - 1.15, 0) * 120 +
     structuralOverflow * (usesPreDetailRevenueLayout ? 0.48 : 1.05) +
-    Math.max(detailCount - 2, 0) * 22;
+    Math.max(detailCount - 2, 0) * 22 +
+    positiveBridgeStrength.extremeStrength * safeNumber(snapshot?.layout?.positiveBridgeExtremeDesignExtraY, 28);
   return {
     width: Math.max(Math.round(baseWidth + leftShiftX + safeNumber(stageLayout.rightExpansion, 0)), 1),
     height: Math.max(Math.round(height + bottomCanvasPadding), 1),
@@ -1025,6 +1030,59 @@ function queueLogoNormalization(logoKey) {
 
 function warmVisibleLogoAssets() {
   return;
+}
+
+function resolvePositiveAdjustmentBridgeStrengths(snapshot, options = {}) {
+  const rawPositiveAdjustments = Array.isArray(options.positiveAdjustments)
+    ? options.positiveAdjustments
+    : Array.isArray(snapshot?.positiveAdjustments)
+      ? snapshot.positiveAdjustments.filter((item) => safeNumber(item?.valueBn) > 0.02)
+      : [];
+  const operatingProfitBn =
+    options.operatingProfitBn !== null && options.operatingProfitBn !== undefined
+      ? Math.max(safeNumber(options.operatingProfitBn), 0)
+      : Math.max(safeNumber(snapshot?.operatingProfitBn), 0);
+  const netLoss =
+    options.netLoss !== null && options.netLoss !== undefined
+      ? !!options.netLoss
+      : isLossMakingNetOutcome(snapshot);
+  const netProfitBn =
+    options.netProfitBn !== null && options.netProfitBn !== undefined
+      ? Math.max(safeNumber(options.netProfitBn), 0)
+      : netLoss
+        ? Math.abs(resolvedNetOutcomeValue(snapshot))
+        : Math.max(resolvedNetOutcomeValue(snapshot), 0);
+  const revenueBn = Math.max(safeNumber(options.revenueBn, snapshot?.revenueBn), 0.05);
+  const totalBn = rawPositiveAdjustments.reduce((sum, item) => sum + Math.max(safeNumber(item?.valueBn), 0), 0);
+  const opRatio = totalBn > 0.02 && operatingProfitBn > 0.02 ? totalBn / operatingProfitBn : 0;
+  const netExpansionRatio =
+    totalBn > 0.02 && !netLoss && netProfitBn > 0.02
+      ? Math.max(netProfitBn - operatingProfitBn, 0) / netProfitBn
+      : 0;
+  const scaleStrength = rawPositiveAdjustments.length
+    ? clamp(
+        opRatio * 0.58 +
+          netExpansionRatio * 0.74 +
+          (totalBn / revenueBn) * 0.38,
+        0,
+        1
+      )
+    : 0;
+  const extremeStrength = rawPositiveAdjustments.length
+    ? clamp(
+        Math.max(opRatio - 1.1, 0) / 1.7 +
+          Math.max(netExpansionRatio - 0.45, 0) * 0.6,
+        0,
+        1
+      )
+    : 0;
+  return {
+    totalBn,
+    opRatio,
+    netExpansionRatio,
+    scaleStrength,
+    extremeStrength,
+  };
 }
 
 function normalizeCompanyBrand(brand = null) {

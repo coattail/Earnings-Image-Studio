@@ -119,6 +119,14 @@ def text_y(svg_root: ET.Element, text: str) -> float:
     return float(find_text(svg_root, text).attrib["y"])
 
 
+def viewbox_height(svg_root: ET.Element) -> float:
+    viewbox = svg_root.attrib.get("viewBox", "")
+    parts = viewbox.split()
+    if len(parts) != 4:
+        raise AssertionError("Expected SVG viewBox with four values.")
+    return float(parts[3])
+
+
 class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
     def test_apple_english_positive_adjustment_stays_above_net_profit(self) -> None:
         svg_root = render_sankey_svg(APPLE_PAYLOAD, "en", "apple-en")
@@ -200,6 +208,7 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
         positive = rect_attrs(svg_root, "positive-0")
         period_end_y = text_y(svg_root, "截至 2023年3月31日")
         positive_label_y = text_y(svg_root, "营业外收益")
+        positive_value_y = text_y(svg_root, "$34.2B")
 
         self.assertLessEqual(
             net["y"],
@@ -212,9 +221,19 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
             "Extreme positive bridges should lift the positive-adjustment node above the crowded top-right corridor.",
         )
         self.assertGreaterEqual(
-            period_end_y - positive_label_y,
-            30,
-            "Positive-adjustment labels should clear the inline period-end label in the top-right corner.",
+            viewbox_height(svg_root),
+            1660,
+            "Extreme positive bridges should receive extra canvas height instead of crowding the header.",
+        )
+        self.assertGreaterEqual(
+            positive_label_y - period_end_y,
+            62,
+            "Positive-adjustment labels should sit below the inline period-end label with clear header spacing.",
+        )
+        self.assertGreaterEqual(
+            positive_value_y - period_end_y,
+            88,
+            "The full positive-adjustment label block should clear the period-end label.",
         )
 
 if __name__ == "__main__":
