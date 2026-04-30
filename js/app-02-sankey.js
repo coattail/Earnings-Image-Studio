@@ -7406,8 +7406,10 @@ function renderPixelReplicaSvg(snapshot) {
     const driverFrame = editableNodeFrame(`net-loss-driver-${netLossDriverIndex}`, driverX, driverTop, driverWidth, driverHeight);
     const targetHeight = Math.min(driverFrame.height, netFrame.height);
     const targetTop = clamp(driverFrame.centerY - targetHeight / 2, netFrame.top, Math.max(netFrame.bottom - targetHeight, netFrame.top));
-    const sourceTop = clamp(driverFrame.centerY - targetHeight / 2, driverFrame.top, Math.max(driverFrame.bottom - targetHeight, driverFrame.top));
+    const sourceTop = Math.max(driverFrame.bottom - targetHeight, driverFrame.top);
     const sourceBottom = sourceTop + targetHeight;
+    const offsetHeight = Math.max(sourceTop - driverFrame.top, 0);
+    const offsetValueBn = Math.max(driverValueBn - targetHeight / Math.max(scale, 0.0001), 0);
     const branchOptions = {
       ...mergeOutflowRibbonOptions(),
       curveFactor: 0.42,
@@ -7428,10 +7430,22 @@ function renderPixelReplicaSvg(snapshot) {
     };
     const driverLabel = localizeChartPhrase(driverItem?.nameZh || driverItem?.name || "Loss driver");
     const driverValue = formatBillionsByMode(driverValueBn, "negative-parentheses");
+    const offsetLabel = currentChartLanguage() === "zh" ? "利润及税项抵减" : "Profit and tax benefit offset";
+    const offsetValue = formatBillionsByMode(offsetValueBn, "positive-plus");
     const labelX = driverFrame.x - scaleY(14);
+    const offsetLabelY = driverFrame.top + Math.max(offsetHeight * 0.5, scaleY(34));
     return `
       <path d="${flowPath(driverFrame.right, sourceTop, sourceBottom, netFrame.x, targetTop, targetTop + targetHeight, branchOptions)}" fill="${redFlow}" opacity="0.97"></path>
       ${renderEditableNodeRect(driverFrame, redNode)}
+      ${
+        offsetHeight > scaleY(28)
+          ? `
+      <line x1="${driverFrame.x}" y1="${sourceTop}" x2="${driverFrame.right}" y2="${sourceTop}" stroke="${background}" stroke-width="${scaleY(5)}" stroke-linecap="round" opacity="0.95"></line>
+      <text x="${labelX}" y="${offsetLabelY - scaleY(8)}" text-anchor="end" font-size="18" font-weight="700" fill="${redText}" paint-order="stroke fill" stroke="${background}" stroke-width="6" stroke-linejoin="round">${escapeHtml(offsetLabel)}</text>
+      <text x="${labelX}" y="${offsetLabelY + scaleY(16)}" text-anchor="end" font-size="17" font-weight="700" fill="${redText}" paint-order="stroke fill" stroke="${background}" stroke-width="5" stroke-linejoin="round">${escapeHtml(offsetValue)}</text>
+      `
+          : ""
+      }
       <text x="${labelX}" y="${driverFrame.centerY - scaleY(12)}" text-anchor="end" font-size="24" font-weight="700" fill="${redText}" paint-order="stroke fill" stroke="${background}" stroke-width="7" stroke-linejoin="round">${escapeHtml(driverLabel)}</text>
       <text x="${labelX}" y="${driverFrame.centerY + scaleY(20)}" text-anchor="end" font-size="22" font-weight="700" fill="${redText}" paint-order="stroke fill" stroke="${background}" stroke-width="6" stroke-linejoin="round">${escapeHtml(driverValue)}</text>
     `;

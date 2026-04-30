@@ -54,6 +54,13 @@ def find_rect(svg_root: ET.Element, node_id: str) -> ET.Element:
     return rect
 
 
+def find_visible_rect(svg_root: ET.Element, node_id: str) -> ET.Element:
+    rect = svg_root.find(f".//svg:rect[@data-edit-node-visible-id='{node_id}']", SVG_NS)
+    if rect is None:
+        raise AssertionError(f"Expected visible SVG rect for node '{node_id}'.")
+    return rect
+
+
 def rect_top(rect: ET.Element) -> float:
     return float(rect.attrib["y"])
 
@@ -64,6 +71,16 @@ def rect_bottom(rect: ET.Element) -> float:
 
 def rect_attrs(svg_root: ET.Element, node_id: str) -> dict[str, float]:
     rect = find_rect(svg_root, node_id)
+    return {
+        "x": float(rect.attrib["x"]),
+        "y": float(rect.attrib["y"]),
+        "width": float(rect.attrib["width"]),
+        "height": float(rect.attrib["height"]),
+    }
+
+
+def visible_rect_attrs(svg_root: ET.Element, node_id: str) -> dict[str, float]:
+    rect = find_visible_rect(svg_root, node_id)
     return {
         "x": float(rect.attrib["x"]),
         "y": float(rect.attrib["y"]),
@@ -412,6 +429,7 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
         net = rect_attrs(svg_root, "net")
         tax_benefit = rect_attrs(svg_root, "positive-0")
         loss_driver = rect_attrs(svg_root, "net-loss-driver-0")
+        visible_loss_driver = visible_rect_attrs(svg_root, "net-loss-driver-0")
 
         self.assertIn("税项收益", text_content)
         self.assertNotIn("税项benefit", text_content)
@@ -455,6 +473,18 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
             abs(path_start_height(driver_paths[0]) - path_target_height(driver_paths[0])),
             4,
             "The visible net-loss driver ribbon should keep a constant thickness instead of tapering from the full loss-driver node.",
+        )
+        expected_source_top = visible_loss_driver["y"] + visible_loss_driver["height"] - path_start_height(driver_paths[0])
+        self.assertAlmostEqual(
+            expected_source_top,
+            path_start_top(driver_paths[0]),
+            delta=4,
+            msg="The net-loss ribbon should leave from the lower residual-loss segment, not from the middle of the full loss-driver node.",
+        )
+        self.assertIn(
+            "利润及税项抵减",
+            text_content,
+            "The excess non-operating-expense segment should be explicitly labeled as offset by operating profit and tax benefit.",
         )
 
 if __name__ == "__main__":
