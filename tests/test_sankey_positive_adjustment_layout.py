@@ -206,6 +206,7 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
 
         net = rect_attrs(svg_root, "net")
         positive = rect_attrs(svg_root, "positive-0")
+        title_y = text_y(svg_root, "伯克希尔哈撒韦 Q1 FY23")
         period_end_y = text_y(svg_root, "截至 2023年3月31日")
         positive_label_y = text_y(svg_root, "营业外收益")
         positive_value_y = text_y(svg_root, "$34.2B")
@@ -217,23 +218,28 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
         )
         self.assertLessEqual(
             positive["y"],
-            156,
-            "Extreme positive bridges should lift the positive-adjustment node above the crowded top-right corridor.",
+            122,
+            "Extreme positive bridges should lift the positive-adjustment node into an isolated top-right lane.",
+        )
+        self.assertLessEqual(
+            title_y,
+            118,
+            "Extra canvas height should let the header move up instead of scaling the whole chart downward.",
         )
         self.assertGreaterEqual(
             viewbox_height(svg_root),
-            1660,
-            "Extreme positive bridges should receive extra canvas height instead of crowding the header.",
+            1800,
+            "Extreme positive bridges should receive extra canvas height for a taller composition.",
         )
         self.assertGreaterEqual(
             positive_label_y - period_end_y,
-            62,
-            "Positive-adjustment labels should sit below the inline period-end label with clear header spacing.",
+            32,
+            "Positive-adjustment labels should clear the inline period-end label without being pushed into the middle of the graph.",
         )
-        self.assertGreaterEqual(
-            positive_value_y - period_end_y,
-            88,
-            "The full positive-adjustment label block should clear the period-end label.",
+        self.assertLessEqual(
+            positive_label_y,
+            positive["y"] + 78,
+            "The positive-adjustment label should stay visually attached to the lifted positive node.",
         )
 
 if __name__ == "__main__":

@@ -1000,7 +1000,7 @@ function snapshotCanvasSize(snapshot) {
     densityExtra * detailLayoutExtraScale +
     hierarchyExtra * detailLayoutExtraScale +
     structuralOverflow * (usesPreDetailRevenueLayout ? 0.58 : 0.78) +
-    positiveBridgeStrength.extremeStrength * safeNumber(snapshot?.layout?.positiveBridgeExtremeCanvasExtraY, 148);
+    positiveBridgeStrength.extremeStrength * safeNumber(snapshot?.layout?.positiveBridgeExtremeCanvasExtraY, 300);
   const height = baseHeight + extraHeight;
   const revenueBn = Math.max(safeNumber(snapshot?.revenueBn), safeNumber(snapshot?.layout?.ratioRevenueFloorBn, 0.25));
   const opexRatio = Math.max(safeNumber(snapshot?.operatingExpensesBn) / revenueBn, 0);
@@ -1011,7 +1011,7 @@ function snapshotCanvasSize(snapshot) {
     Math.max(costRatio - 1.15, 0) * 120 +
     structuralOverflow * (usesPreDetailRevenueLayout ? 0.48 : 1.05) +
     Math.max(detailCount - 2, 0) * 22 +
-    positiveBridgeStrength.extremeStrength * safeNumber(snapshot?.layout?.positiveBridgeExtremeDesignExtraY, 28);
+    positiveBridgeStrength.extremeStrength * safeNumber(snapshot?.layout?.positiveBridgeExtremeDesignExtraY, 172);
   return {
     width: Math.max(Math.round(baseWidth + leftShiftX + safeNumber(stageLayout.rightExpansion, 0)), 1),
     height: Math.max(Math.round(height + bottomCanvasPadding), 1),

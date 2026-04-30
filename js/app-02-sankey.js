@@ -3693,7 +3693,10 @@ function renderPixelReplicaSvg(snapshot) {
   const titleMaxWidth = safeNumber(snapshot.layout?.titleMaxWidth, 1540);
   const titleFontSize = titleBaseSize;
   const titleX = width / 2;
-  const titleY = layoutY(snapshot.layout?.titleY, 112);
+  const titleY = scaleY(
+    safeNumber(snapshot.layout?.titleY, 112) -
+      positiveAdjustmentExtremeStrength * safeNumber(snapshot.layout?.positiveBridgeHeaderLiftY, 22)
+  );
   const periodEndFontSize = 28;
   const inlinePeriodLayout = inlinePeriodEndLayout({
     titleText,
@@ -3752,6 +3755,14 @@ function renderPixelReplicaSvg(snapshot) {
     safeNumber(
       snapshot.layout?.headerContentClearanceY,
       34 + positiveAdjustmentExtremeStrength * 22
+    )
+  );
+  const positiveHeaderLabelClearanceBottom = (
+    periodEndObstacle ? periodEndObstacle.bottom : titleObstacle.bottom
+  ) + scaleY(
+    safeNumber(
+      snapshot.layout?.positiveHeaderLabelClearanceY,
+      12 + positiveAdjustmentExtremeStrength * 8
     )
   );
   const hasExplicitLogoPosition =
@@ -7489,7 +7500,7 @@ function renderPixelReplicaSvg(snapshot) {
     };
     let positiveNodeX = defaultPositiveNodeX;
     const positiveSourceDropY = 0;
-    const positiveExtremeTopFloorY = scaleY(160 - positiveAdjustmentExtremeStrength * safeNumber(snapshot.layout?.positiveExtremeSourceTopReleaseY, 56));
+    const positiveExtremeTopFloorY = scaleY(160 - positiveAdjustmentExtremeStrength * safeNumber(snapshot.layout?.positiveExtremeSourceTopReleaseY, 68));
     let positiveTop = positiveAbove
       ? clamp(
           netTop - totalPositiveStackHeight - positiveNodeGap,
@@ -8161,6 +8172,8 @@ function renderPixelReplicaSvg(snapshot) {
             ? "below"
             : "above"
           : null;
+      const positiveExtremeAttachedLabel =
+        positiveAbove && positiveAdjustmentExtremeStrength >= safeNumber(snapshot.layout?.positiveExtremeAttachedLabelThreshold, 0.72);
       const labelBoundsRect = (anchor, x, centerY) => {
         const left =
           anchor === "middle"
@@ -8234,7 +8247,7 @@ function renderPixelReplicaSvg(snapshot) {
         };
         const upperObstacleBottomForRect = (rect) => {
           const sampleXs = sampleXsAcrossRect(rect, 7);
-          let bottom = positiveAbove ? headerClearanceBottom : Math.max(upperMetricFloor, headerClearanceBottom);
+          let bottom = positiveAbove ? positiveHeaderLabelClearanceBottom : Math.max(upperMetricFloor, positiveHeaderLabelClearanceBottom);
           sampleXs.forEach((sampleX) => {
             const mainBottom = positiveAbove ? positiveUpperObstacleBottomAtX(sampleX) : netMainRibbonBottomAtX(sampleX);
             if (Number.isFinite(mainBottom)) {
@@ -8454,7 +8467,12 @@ function renderPixelReplicaSvg(snapshot) {
           const labelAssociationCenterY = (rect.top + rect.bottom) / 2;
           const associationDistance = Math.abs(labelAssociationCenterY - sourceAssociationCenterY);
           const hardAssociationDistanceThreshold = Math.max(
-            scaleY(safeNumber(snapshot.layout?.positiveLabelHardAssociationDistanceY, 88)),
+            scaleY(
+              safeNumber(
+                snapshot.layout?.positiveLabelHardAssociationDistanceY,
+                candidate.variant === "extreme-attached" ? 170 : 88
+              )
+            ),
             labelBlockHeight + scaleY(16)
           );
           if (associationDistance > hardAssociationDistanceThreshold) {
@@ -8479,7 +8497,11 @@ function renderPixelReplicaSvg(snapshot) {
           const penalty =
             hardAmbiguityCount * safeNumber(snapshot.layout?.positiveLabelHardAmbiguityPenalty, 260) +
             proximityPenalty +
-            associationDistance * safeNumber(snapshot.layout?.positiveLabelAssociationDistancePenaltyFactor, 0.1) +
+            associationDistance *
+              safeNumber(
+                snapshot.layout?.positiveLabelAssociationDistancePenaltyFactor,
+                candidate.variant === "extreme-attached" ? 0.02 : 0.1
+              ) +
             directionalPenalty +
             placementOrderPenalty;
           return {
@@ -8521,6 +8543,23 @@ function renderPixelReplicaSvg(snapshot) {
           return priority;
         };
         const candidatePlacements = [
+          ...(positiveExtremeAttachedLabel
+            ? [
+                {
+                  priority: -1.2,
+                  type: "left",
+                  anchor: "end",
+                  x: positiveNodeX - labelGapX,
+                  centerY: Math.max(
+                    positiveSourceTop +
+                      gainHeight * safeNumber(snapshot.layout?.positiveExtremeAttachedLabelSourceFactor, 0.12) -
+                      labelCenterBias,
+                    positiveHeaderLabelClearanceBottom + scaleY(safeNumber(snapshot.layout?.positiveExtremeAttachedHeaderGapY, 6)) - labelTopOffset
+                  ),
+                  variant: "extreme-attached",
+                },
+              ]
+            : []),
           {
             priority: positiveLabelCandidatePriority("above"),
             type: "above",
@@ -8581,6 +8620,8 @@ function renderPixelReplicaSvg(snapshot) {
             positiveAbove &&
             positiveAdjustments.length > 1
               ? positiveLabelRibbonClearance * safeNumber(snapshot.layout?.positiveLabelBelowSplitClearanceFactor, 0.45)
+              : candidate.variant === "extreme-attached"
+                ? positiveLabelRibbonClearance * safeNumber(snapshot.layout?.positiveExtremeAttachedRibbonClearanceFactor, 0.18)
               : positiveLabelRibbonClearance;
           const hardUpperBoundary = upperObstacleBottomForRect(baseRect) + effectiveRibbonClearance;
           const hardLowerBoundaryTop = lowerObstacleTopForRect(baseRect);
@@ -8606,12 +8647,15 @@ function renderPixelReplicaSvg(snapshot) {
           const sourceMovePenalty = Math.abs(positiveSourceTop - (positiveTop + positiveSourceDropY)) * 0.06;
           const leftPlacementPenalty =
             candidate.type === "left"
-              ? 0.9 +
+              ? (candidate.variant === "extreme-attached" ? -3.4 : 0.9) +
                 Math.max(
                   mergeRunway - scaleY(safeNumber(snapshot.layout?.positiveLabelPreferredLeftRunwayX, 46)),
                   0
                 ) *
-                  safeNumber(snapshot.layout?.positiveLabelLeftRunwayPenaltyFactor, 0.03)
+                  safeNumber(
+                    snapshot.layout?.positiveLabelLeftRunwayPenaltyFactor,
+                    candidate.variant === "extreme-attached" ? 0.006 : 0.03
+                  )
               : 0;
           const score =
             candidate.priority +
@@ -8745,10 +8789,10 @@ function renderPixelReplicaSvg(snapshot) {
             x: positiveNodeX - labelGapX,
             centerY: clamp(
               Math.max(
-                positiveSourceTop + gainHeight * safeNumber(snapshot.layout?.positiveExtremeFallbackLabelSourceFactor, positiveAbove ? 0.28 : 0.5) - labelCenterBias,
-                headerClearanceBottom + scaleY(safeNumber(snapshot.layout?.positiveFallbackHeaderGapY, 8)) - labelTopOffset
+                positiveSourceTop + gainHeight * safeNumber(snapshot.layout?.positiveExtremeFallbackLabelSourceFactor, positiveExtremeAttachedLabel ? 0.12 : positiveAbove ? 0.28 : 0.5) - labelCenterBias,
+                positiveHeaderLabelClearanceBottom + scaleY(safeNumber(snapshot.layout?.positiveFallbackHeaderGapY, 8)) - labelTopOffset
               ),
-              headerClearanceBottom + scaleY(safeNumber(snapshot.layout?.positiveFallbackHeaderGapY, 8)) - labelTopOffset,
+              positiveHeaderLabelClearanceBottom + scaleY(safeNumber(snapshot.layout?.positiveFallbackHeaderGapY, 8)) - labelTopOffset,
               chartBottomLimit - scaleY(6) - labelBottomOffset
             ),
             rect: null,
