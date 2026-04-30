@@ -18,6 +18,43 @@ def load_amd_company_payload() -> dict:
     return next(company for company in dataset["companies"] if company["id"] == "amd")
 
 
+def load_dataset_company_payload(company_id: str) -> dict:
+    dataset = json.loads(DATASET_PATH.read_text(encoding="utf-8"))
+    return next(company for company in dataset["companies"] if company["id"] == company_id)
+
+
+def render_company_sankey_markup(company_id: str, quarter: str) -> str:
+    with tempfile.TemporaryDirectory(prefix=f"{company_id}-sankey-{quarter}-") as temp_dir:
+        output_dir = Path(temp_dir)
+        payload_path = output_dir / f"{company_id}.json"
+        payload_path.write_text(json.dumps(load_dataset_company_payload(company_id), ensure_ascii=False), encoding="utf-8")
+        result = subprocess.run(
+            [
+                "node",
+                str(NODE_RENDERER),
+                "--payload",
+                str(payload_path),
+                "--quarter",
+                quarter,
+                "--language",
+                "zh",
+                "--modes",
+                "sankey",
+                "--output-dir",
+                str(output_dir),
+                "--basename",
+                f"{company_id}-{quarter}",
+            ],
+            cwd=ROOT_DIR,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        summary = json.loads(result.stdout)
+        svg_path = Path(summary["outputs"]["sankey"]["svg"])
+        return svg_path.read_text(encoding="utf-8")
+
+
 def render_amd_sankey_svg(quarter: str) -> ET.Element:
     return ET.fromstring(render_amd_sankey_markup(quarter))
 
@@ -87,6 +124,46 @@ def rect_center_x(svg_root: ET.Element, node_id: str) -> float:
     if rect is None:
         raise AssertionError(f"Expected SVG rect for node '{node_id}'.")
     return float(rect.attrib["x"]) + float(rect.attrib["width"]) / 2
+
+
+def rect_right(svg_root: ET.Element, node_id: str) -> float:
+    rect = svg_root.find(f".//svg:rect[@data-edit-node-visible-id='{node_id}']", SVG_NS)
+    if rect is None:
+        raise AssertionError(f"Expected SVG rect for node '{node_id}'.")
+    return float(rect.attrib["x"]) + float(rect.attrib["width"])
+
+
+def path_numbers(path_d: str) -> list[float]:
+    return [float(match.group(0)) for match in re.finditer(r"-?\d+(?:\.\d+)?", path_d)]
+
+
+def path_source_height(numbers: list[float]) -> float:
+    return numbers[23] - numbers[1]
+
+
+def path_target_height(numbers: list[float]) -> float:
+    return numbers[13] - numbers[11]
+
+
+def main_revenue_to_cost_path(svg_markup: str, svg_root: ET.Element) -> list[float]:
+    revenue_right = rect_right(svg_root, "revenue")
+    cost_left = rect_left(svg_root, "cost")
+    for match in re.finditer(r"<path\b([^>]*)>", svg_markup):
+        tag = match.group(1)
+        fill_match = re.search(r'fill="([^"]+)"', tag)
+        if fill_match is None or fill_match.group(1).lower() != "#e58a92":
+            continue
+        path_match = re.search(r'd="([^"]+)"', tag)
+        if path_match is None:
+            continue
+        numbers = path_numbers(path_match.group(1))
+        if len(numbers) < 24:
+            continue
+        starts_at_revenue = abs(numbers[0] - revenue_right) <= 1
+        reaches_cost = any(abs(value - (cost_left + 32)) <= 18 for index, value in enumerate(numbers) if index % 2 == 0)
+        if starts_at_revenue and reaches_cost:
+            return numbers
+    raise AssertionError("Expected main revenue-to-cost ribbon.")
 
 
 def net_main_ribbon_terminal_height(svg_markup: str, svg_root: ET.Element) -> float:
@@ -165,6 +242,24 @@ def logo_group_end_index(svg_markup: str) -> int:
 
 
 class AmdSankeyFlowConservationTests(unittest.TestCase):
+    def test_berkshire_q4_fy25_revenue_to_cost_ribbon_keeps_constant_thickness(self) -> None:
+        svg_markup = render_company_sankey_markup("berkshire", "2025Q4")
+        svg_root = ET.fromstring(svg_markup)
+        cost_path = main_revenue_to_cost_path(svg_markup, svg_root)
+
+        self.assertAlmostEqual(
+            path_source_height(cost_path),
+            path_target_height(cost_path),
+            delta=1.0,
+            msg="The revenue-to-cost ribbon should not widen or shrink between the revenue and cost nodes.",
+        )
+        self.assertAlmostEqual(
+            rect_height(svg_root, "cost"),
+            path_target_height(cost_path),
+            delta=1.0,
+            msg="The cost node height should match the conserved incoming cost ribbon.",
+        )
+
     def test_q4_fy25_operating_stage_does_not_exceed_gross_profit_node(self) -> None:
         svg_root = render_amd_sankey_svg("2025Q4")
 

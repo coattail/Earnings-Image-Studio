@@ -478,10 +478,15 @@ function renderPixelReplicaSvg(snapshot) {
   // phantom slack inside the revenue node that later makes cost ribbons appear to taper.
   const revenueBn = Math.max(safeNumber(snapshot.revenueBn), safeNumber(snapshot.layout?.revenueScaleFloorBn, 0.05));
   const grossProfitBn = Math.max(safeNumber(snapshot.grossProfitBn), 0);
-  const costOfRevenueBn =
+  const sourceCostOfRevenueBn =
     snapshot.costOfRevenueBn !== null && snapshot.costOfRevenueBn !== undefined
       ? Math.max(safeNumber(snapshot.costOfRevenueBn), 0)
       : Math.max(revenueBn - grossProfitBn, 0);
+  const grossStageResidualCostBn = Math.max(revenueBn - grossProfitBn, 0);
+  const costOfRevenueBn =
+    grossProfitBn > 0.02 && grossStageResidualCostBn > 0.02
+      ? grossStageResidualCostBn
+      : sourceCostOfRevenueBn;
   const rawOperatingProfitBn = safeNumber(snapshot.operatingProfitBn);
   const hasOperatingLoss = rawOperatingProfitBn < -0.02;
   const operatingOutcomeLoss = isLossMakingOperatingOutcome(snapshot);
