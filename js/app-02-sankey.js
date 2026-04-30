@@ -7392,10 +7392,13 @@ function renderPixelReplicaSvg(snapshot) {
           0
         )
       : -1;
+  const useNetLossBalanceBridge = netLossDriverIndex >= 0 && belowOperatingItems.length && positiveAdjustments.length;
   const renderNetLossDriverBridge = () => {
     if (netLossDriverIndex < 0) return "";
     const driverItem = belowOperatingItems[netLossDriverIndex];
-    const driverValueBn = Math.max(safeNumber(driverItem?.valueBn), 0);
+    const driverValueBn = useNetLossBalanceBridge
+      ? belowOperatingItems.reduce((sum, item) => sum + Math.max(safeNumber(item?.valueBn), 0), 0)
+      : Math.max(safeNumber(driverItem?.valueBn), 0);
     if (!(driverValueBn > 0.05)) return "";
     const driverHeight = Math.max(driverValueBn * scale, scaleY(12));
     const driverWidth = Math.max(nodeWidth, scaleY(safeNumber(snapshot.layout?.netLossDriverWidth, 72)));
@@ -7410,6 +7413,13 @@ function renderPixelReplicaSvg(snapshot) {
     const sourceBottom = sourceTop + targetHeight;
     const offsetHeight = Math.max(sourceTop - driverFrame.top, 0);
     const offsetValueBn = Math.max(driverValueBn - targetHeight / Math.max(scale, 0.0001), 0);
+    const positiveOffsetBn = positiveAdjustments.reduce((sum, item) => sum + Math.max(safeNumber(item?.valueBn), 0), 0);
+    const positiveOffsetHeight = Math.min(offsetHeight, positiveOffsetBn * scale);
+    const operatingOffsetHeight = Math.max(offsetHeight - positiveOffsetHeight, 0);
+    const positiveOffsetTop = driverFrame.top;
+    const positiveOffsetBottom = positiveOffsetTop + positiveOffsetHeight;
+    const operatingOffsetTop = positiveOffsetBottom;
+    const operatingOffsetBottom = sourceTop;
     const branchOptions = {
       ...mergeOutflowRibbonOptions(),
       curveFactor: 0.42,
@@ -7429,25 +7439,80 @@ function renderPixelReplicaSvg(snapshot) {
       maxTargetHoldLength: 28,
     };
     const driverLabel = localizeChartPhrase(driverItem?.nameZh || driverItem?.name || "Loss driver");
-    const driverValue = formatBillionsByMode(driverValueBn, "negative-parentheses");
-    const offsetLabel = currentChartLanguage() === "zh" ? "利润及税项抵减" : "Profit and tax benefit offset";
+    const driverValue = formatBillionsByMode(Math.max(safeNumber(driverItem?.valueBn), 0), "negative-parentheses");
+    const otherLossDriversBn = Math.max(driverValueBn - Math.max(safeNumber(driverItem?.valueBn), 0), 0);
+    const otherLossDriverLabel = currentChartLanguage() === "zh" ? "另含其他净费用" : "Includes other net expense";
+    const offsetLabel = currentChartLanguage() === "zh" ? "营业利润及税项收益" : "Operating profit and tax benefit";
+    const offsetActionLabel = currentChartLanguage() === "zh" ? "抵减" : "offset";
     const offsetValue = formatBillionsByMode(offsetValueBn, "positive-plus");
     const labelX = driverFrame.x - scaleY(14);
     const offsetLabelY = driverFrame.top + Math.max(offsetHeight * 0.5, scaleY(34));
+    const residualLabelY = sourceTop + targetHeight / 2;
+    const manualPositiveMarkup = (() => {
+      if (!useNetLossBalanceBridge || !(positiveOffsetHeight > scaleY(4))) return "";
+      const item = positiveAdjustments[0] || {};
+      const positiveWidth = Math.max(nodeWidth, scaleY(64));
+      const positiveGapX = scaleY(34);
+      const positiveFrameHeight = Math.max(positiveOffsetHeight, scaleY(12));
+      const positiveFrame = editableNodeFrame(
+        "positive-0",
+        driverFrame.x - positiveGapX - positiveWidth,
+        Math.max(driverFrame.top - positiveFrameHeight - scaleY(30), scaleY(152)),
+        positiveWidth,
+        positiveFrameHeight
+      );
+      const positiveLabel = localizeChartItemName(item);
+      const positiveValue = formatItemBillions(item, "positive-plus");
+      const positiveLabelX = positiveFrame.x - scaleY(12);
+      const positiveLabelY = positiveFrame.centerY;
+      return `
+      <path d="${flowPath(positiveFrame.right, positiveFrame.top, positiveFrame.bottom, driverFrame.x, positiveOffsetTop, positiveOffsetBottom, branchOptions)}" fill="${greenFlow}" opacity="0.97"></path>
+      ${renderEditableNodeRect(positiveFrame, greenNode)}
+      <text x="${positiveLabelX}" y="${positiveLabelY - scaleY(8)}" text-anchor="end" font-size="20" font-weight="700" fill="${greenText}" paint-order="stroke fill" stroke="${background}" stroke-width="7" stroke-linejoin="round">${escapeHtml(positiveLabel)}</text>
+      <text x="${positiveLabelX}" y="${positiveLabelY + scaleY(18)}" text-anchor="end" font-size="18" font-weight="700" fill="${greenText}" paint-order="stroke fill" stroke="${background}" stroke-width="6" stroke-linejoin="round">${escapeHtml(positiveValue)}</text>
+      `;
+    })();
+    const operatingOffsetMarkup =
+      useNetLossBalanceBridge && operatingOffsetHeight > scaleY(4)
+        ? (() => {
+            const operatingSourceHeight = Math.min(operatingOffsetHeight, operatingFrame.height);
+            const operatingSourceTop = clamp(
+              operatingFrame.centerY - operatingSourceHeight / 2,
+              operatingFrame.top,
+              Math.max(operatingFrame.bottom - operatingSourceHeight, operatingFrame.top)
+            );
+            return `<path d="${flowPath(
+              operatingFrame.right,
+              operatingSourceTop,
+              operatingSourceTop + operatingSourceHeight,
+              driverFrame.x,
+              operatingOffsetTop,
+              operatingOffsetBottom,
+              branchOptions
+            )}" fill="${greenFlow}" opacity="0.95"></path>`;
+          })()
+        : "";
     return `
+      ${operatingOffsetMarkup}
+      ${manualPositiveMarkup}
       <path d="${flowPath(driverFrame.right, sourceTop, sourceBottom, netFrame.x, targetTop, targetTop + targetHeight, branchOptions)}" fill="${redFlow}" opacity="0.97"></path>
       ${renderEditableNodeRect(driverFrame, redNode)}
       ${
         offsetHeight > scaleY(28)
           ? `
       <line x1="${driverFrame.x}" y1="${sourceTop}" x2="${driverFrame.right}" y2="${sourceTop}" stroke="${background}" stroke-width="${scaleY(5)}" stroke-linecap="round" opacity="0.95"></line>
-      <text x="${labelX}" y="${offsetLabelY - scaleY(8)}" text-anchor="end" font-size="18" font-weight="700" fill="${redText}" paint-order="stroke fill" stroke="${background}" stroke-width="6" stroke-linejoin="round">${escapeHtml(offsetLabel)}</text>
-      <text x="${labelX}" y="${offsetLabelY + scaleY(16)}" text-anchor="end" font-size="17" font-weight="700" fill="${redText}" paint-order="stroke fill" stroke="${background}" stroke-width="5" stroke-linejoin="round">${escapeHtml(offsetValue)}</text>
+      <text x="${labelX}" y="${offsetLabelY - scaleY(16)}" text-anchor="end" font-size="17" font-weight="700" fill="${greenText}" paint-order="stroke fill" stroke="${background}" stroke-width="6" stroke-linejoin="round">${escapeHtml(offsetLabel)}</text>
+      <text x="${labelX}" y="${offsetLabelY + scaleY(7)}" text-anchor="end" font-size="17" font-weight="700" fill="${greenText}" paint-order="stroke fill" stroke="${background}" stroke-width="5" stroke-linejoin="round">${escapeHtml(offsetActionLabel)} ${escapeHtml(offsetValue)}</text>
       `
           : ""
       }
-      <text x="${labelX}" y="${driverFrame.centerY - scaleY(12)}" text-anchor="end" font-size="24" font-weight="700" fill="${redText}" paint-order="stroke fill" stroke="${background}" stroke-width="7" stroke-linejoin="round">${escapeHtml(driverLabel)}</text>
-      <text x="${labelX}" y="${driverFrame.centerY + scaleY(20)}" text-anchor="end" font-size="22" font-weight="700" fill="${redText}" paint-order="stroke fill" stroke="${background}" stroke-width="6" stroke-linejoin="round">${escapeHtml(driverValue)}</text>
+      <text x="${labelX}" y="${residualLabelY - scaleY(otherLossDriversBn > 0.05 ? 24 : 12)}" text-anchor="end" font-size="22" font-weight="700" fill="${redText}" paint-order="stroke fill" stroke="${background}" stroke-width="7" stroke-linejoin="round">${escapeHtml(driverLabel)}</text>
+      <text x="${labelX}" y="${residualLabelY + scaleY(otherLossDriversBn > 0.05 ? 4 : 20)}" text-anchor="end" font-size="20" font-weight="700" fill="${redText}" paint-order="stroke fill" stroke="${background}" stroke-width="6" stroke-linejoin="round">${escapeHtml(driverValue)}</text>
+      ${
+        otherLossDriversBn > 0.05
+          ? `<text x="${labelX}" y="${residualLabelY + scaleY(30)}" text-anchor="end" font-size="15" font-weight="700" fill="${redText}" paint-order="stroke fill" stroke="${background}" stroke-width="5" stroke-linejoin="round">${escapeHtml(otherLossDriverLabel)} ${escapeHtml(formatBillionsByMode(otherLossDriversBn, "negative-parentheses"))}</text>`
+          : ""
+      }
     `;
   };
   let svg = `
@@ -8262,6 +8327,7 @@ function renderPixelReplicaSvg(snapshot) {
     const placedPositiveLabelRects = [];
     let netPositiveCursor = netPositiveTop;
     positiveAdjustments.forEach((item, index) => {
+      if (useNetLossBalanceBridge) return;
       const gainHeight = positiveHeights[index];
       const mergeHeight = positiveMergeHeights[index] ?? Math.max(safeNumber(item.valueBn) * scale, 0);
       const localizedPositiveName = localizeChartItemName(item);
@@ -9067,6 +9133,7 @@ function renderPixelReplicaSvg(snapshot) {
   `;
 
   deductionSlices.forEach((slice, index) => {
+    if (useNetLossBalanceBridge) return;
     if (index === netLossDriverIndex) return;
     const box = deductionBoxes[index];
     const sourceSlice = deductionSourceSlices[index] || slice;

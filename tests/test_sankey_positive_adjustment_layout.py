@@ -482,9 +482,28 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
             msg="The net-loss ribbon should leave from the lower residual-loss segment, not from the middle of the full loss-driver node.",
         )
         self.assertIn(
-            "利润及税项抵减",
+            "营业利润及税项收益",
             text_content,
             "The excess non-operating-expense segment should be explicitly labeled as offset by operating profit and tax benefit.",
+        )
+        self.assertIn("另含其他净费用", text_content)
+
+    def test_berkshire_q3_net_loss_bridge_labels_do_not_collide(self) -> None:
+        svg_root = render_sankey_svg(BERKSHIRE_PAYLOAD, "zh", "berkshire-2022q3-net-loss-zh", quarter="2022Q3")
+        text_content = svg_text_content(svg_root)
+
+        self.assertIn("营业利润及税项收益", text_content)
+        self.assertIn("抵减 +$11.5B", text_content)
+        self.assertIn("营业外费用", text_content)
+        self.assertGreaterEqual(
+            text_y(svg_root, "营业利润及税项收益") - text_y(svg_root, "$1.5B"),
+            42,
+            "The tax-benefit value should not collide with the net-loss offset label.",
+        )
+        self.assertGreaterEqual(
+            text_y(svg_root, "营业外费用") - text_y(svg_root, "抵减 +$11.5B"),
+            36,
+            "The non-operating expense label should sit below the offset label with readable spacing.",
         )
 
 if __name__ == "__main__":
