@@ -449,6 +449,8 @@ def build_company_payload_for_dataset(
     fx_cache: dict[str, float],
 ) -> dict[str, Any]:
     payload = build_company_payload_with_universal_parser(company, refresh=refresh)
+    payload = supplement_apple_earnings_release_financials(payload)
+    payload = supplement_berkshire_earnings_release_financials(payload)
     payload = supplement_tencent_official_financials(payload)
     payload = sanitize_implausible_q4_revenue_aligned_statements(payload)
     payload = apply_manual_company_override(payload, company, manual_company_overrides)
@@ -2494,6 +2496,234 @@ def _parse_tencent_pdf_financial_entry(quarter_key: str, source_url: str, filing
     }
 
 
+APPLE_FY2026_Q2_RELEASE_URL = "https://www.apple.com/newsroom/2026/04/apple-reports-second-quarter-results/"
+APPLE_FY2026_Q2_PDF_URL = "https://www.apple.com/newsroom/pdfs/fy2026q2/FY26_Q2_Consolidated_Financial_Statements.pdf"
+
+
+def _apple_release_row(name: str, member_key: str, value_bn: float, *, target_name: str | None = None) -> dict[str, Any]:
+    row = {
+        "name": name,
+        "nameZh": None,
+        "memberKey": member_key,
+        "valueBn": value_bn,
+        "yoyPct": None,
+        "qoqPct": None,
+        "mixPct": None,
+        "mixYoyDeltaPp": None,
+        "sourceUrl": APPLE_FY2026_Q2_PDF_URL,
+        "sourceForm": "FY2026 Q2 earnings release",
+        "filingDate": "2026-04-30",
+    }
+    if target_name:
+        row["targetName"] = target_name
+    return row
+
+
+def supplement_apple_earnings_release_financials(company_payload: dict[str, Any]) -> dict[str, Any]:
+    if str(company_payload.get("id") or "") != "apple":
+        return company_payload
+    financials = company_payload.get("financials")
+    if not isinstance(financials, dict):
+        return company_payload
+
+    financials["2026Q1"] = {
+        "calendarQuarter": "2026Q1",
+        "periodEnd": "2026-03-28",
+        "fiscalYear": "2026",
+        "fiscalQuarter": "Q2",
+        "fiscalLabel": "FY2026 Q2",
+        "statementCurrency": "USD",
+        "revenueBn": 111.184,
+        "revenueYoyPct": 16.594,
+        "costOfRevenueBn": 56.403,
+        "grossProfitBn": 54.781,
+        "sgnaBn": 7.477,
+        "rndBn": 11.419,
+        "otherOpexBn": None,
+        "operatingExpensesBn": 18.896,
+        "operatingIncomeBn": 35.885,
+        "nonOperatingBn": -0.052,
+        "pretaxIncomeBn": 35.833,
+        "taxBn": 6.255,
+        "netIncomeBn": 29.578,
+        "netIncomeYoyPct": 19.362,
+        "grossMarginPct": 49.271,
+        "operatingMarginPct": 32.275,
+        "profitMarginPct": 26.602,
+        "effectiveTaxRatePct": 17.455,
+        "revenueQoqPct": -22.659,
+        "grossMarginYoyDeltaPp": 2.224,
+        "operatingMarginYoyDeltaPp": 1.249,
+        "profitMarginYoyDeltaPp": 0.614,
+        "statementSource": "apple-earnings-release",
+        "statementSourceUrl": APPLE_FY2026_Q2_RELEASE_URL,
+        "statementFilingDate": "2026-04-30",
+        "statementValueMode": "reported",
+        "statementSpanQuarters": 1,
+        "officialRevenueSegments": [
+            _apple_release_row("Products", "products", 80.208),
+            _apple_release_row("Services", "services", 30.976),
+        ],
+        "officialRevenueDetailGroups": [
+            _apple_release_row("iPhone", "iphone", 56.994, target_name="Products"),
+            _apple_release_row("Mac", "mac", 8.399, target_name="Products"),
+            _apple_release_row("iPad", "ipad", 6.914, target_name="Products"),
+            _apple_release_row("Wearables, Home and Accessories", "wearables", 7.901, target_name="Products"),
+        ],
+        "officialCostBreakdown": [
+            _apple_release_row("Products cost of sales", "products", 49.179),
+            _apple_release_row("Services cost of sales", "services", 7.224),
+        ],
+        "officialOpexBreakdown": [
+            _apple_release_row("Research and development", "researchanddevelopment", 11.419),
+            _apple_release_row("Selling, general and administrative", "sellinggeneralandadministrative", 7.477),
+        ],
+        "fieldSources": {
+            "revenueBn": {
+                "adapterId": "apple_earnings_release_supplement",
+                "label": "Apple FY2026 Q2 earnings release",
+                "score": 170,
+                "sourceUrl": APPLE_FY2026_Q2_PDF_URL,
+            }
+        },
+    }
+    enrich_growth_rows(financials, "officialRevenueSegments")
+    enrich_growth_rows(financials, "officialRevenueDetailGroups")
+    recompute_revenue_growth_metrics(financials)
+    company_payload["quarters"] = sorted(financials.keys(), key=parse_period)
+    return company_payload
+
+
+BERKSHIRE_FY2026_Q1_RELEASE_URL = "https://www.berkshirehathaway.com/news/may0226.pdf"
+BERKSHIRE_FY2026_Q1_REPORT_URL = "https://www.berkshirehathaway.com/qtrly/1stqtr26.pdf"
+
+
+def _berkshire_release_row(
+    name: str,
+    name_zh: str,
+    member_key: str,
+    value_bn: float,
+    *,
+    yoy_pct: float | None = None,
+) -> dict[str, Any]:
+    return {
+        "name": name,
+        "nameZh": name_zh,
+        "memberKey": member_key,
+        "valueBn": value_bn,
+        "yoyPct": yoy_pct,
+        "qoqPct": None,
+        "suppressQoQGrowth": True,
+        "mixPct": None,
+        "mixYoyDeltaPp": None,
+        "sourceUrl": BERKSHIRE_FY2026_Q1_REPORT_URL,
+        "sourceForm": "FY2026 Q1 Form 10-Q",
+        "filingDate": "2026-05-02",
+        "supportLines": None,
+        "supportLinesZh": None,
+        "metricMode": None,
+        "validationEligible": False,
+        "validationNotes": [
+            "operating-business-bucket-disclosure",
+            "berkshire-stable-operating-business-taxonomy",
+            "berkshire-fy2026-q1-official-report-supplement",
+        ],
+    }
+
+
+def supplement_berkshire_earnings_release_financials(company_payload: dict[str, Any]) -> dict[str, Any]:
+    if str(company_payload.get("id") or "") != "berkshire":
+        return company_payload
+    financials = company_payload.get("financials")
+    if not isinstance(financials, dict):
+        return company_payload
+
+    segments = [
+        _berkshire_release_row("Insurance, Corporate & Other", "保险、企业及其他", "insurancecorporateother", 26.178, yoy_pct=0.14),
+        _berkshire_release_row("Pilot Travel Centers", "Pilot 旅行中心", "pilottravelcentersllc", 11.245, yoy_pct=7.81),
+        _berkshire_release_row("McLane Company", "麦克莱恩公司", "mclanecompany", 11.936, yoy_pct=-1.96),
+        _berkshire_release_row("Manufacturing businesses", "制造业务", "manufacturingbusinesses", 20.672, yoy_pct=10.16),
+        _berkshire_release_row("BNSF Railway", "伯灵顿北方圣太菲铁路", "burlingtonnorthernsantafecorporation", 5.994, yoy_pct=4.79),
+        _berkshire_release_row("Berkshire Hathaway Energy", "伯克希尔哈撒韦能源", "berkshirehathawayenergycompany", 6.661, yoy_pct=4.80),
+        _berkshire_release_row("Service & Retail businesses", "服务与零售业务", "serviceretailbusinesses", 10.989, yoy_pct=8.40),
+    ]
+
+    financials["2026Q1"] = {
+        "calendarQuarter": "2026Q1",
+        "periodEnd": "2026-03-31",
+        "fiscalYear": "2026",
+        "fiscalQuarter": "Q1",
+        "fiscalLabel": "FY2026 Q1",
+        "statementCurrency": "USD",
+        "revenueBn": 93.675,
+        "revenueYoyPct": 4.402,
+        "costOfRevenueBn": 66.697,
+        "grossProfitBn": 26.978,
+        "sgnaBn": 6.556,
+        "rndBn": 0.0,
+        "otherOpexBn": 5.373,
+        "operatingExpensesBn": 11.929,
+        "operatingIncomeBn": 15.049,
+        "nonOperatingBn": -2.73,
+        "pretaxIncomeBn": 12.319,
+        "taxBn": 2.14,
+        "netIncomeBn": 10.106,
+        "netIncomeYoyPct": 119.552,
+        "grossMarginPct": 28.8,
+        "operatingMarginPct": 16.065,
+        "profitMarginPct": 10.788,
+        "effectiveTaxRatePct": 17.372,
+        "revenueQoqPct": -0.591,
+        "grossMarginYoyDeltaPp": 0.26,
+        "operatingMarginYoyDeltaPp": 1.895,
+        "profitMarginYoyDeltaPp": 3.038,
+        "statementSource": "berkshire-earnings-release",
+        "statementSourceUrl": BERKSHIRE_FY2026_Q1_RELEASE_URL,
+        "statementFilingDate": "2026-05-02",
+        "statementValueMode": "reported",
+        "statementSpanQuarters": 1,
+        "officialRevenueSegments": segments,
+        "officialRevenueStyle": "berkshire-operating-businesses",
+        "fieldSources": {
+            "revenueBn": {
+                "adapterId": "berkshire_earnings_release_supplement",
+                "label": "Berkshire Hathaway FY2026 Q1 Form 10-Q",
+                "score": 170,
+                "sourceUrl": BERKSHIRE_FY2026_Q1_REPORT_URL,
+            }
+        },
+    }
+
+    history = company_payload.setdefault("officialRevenueStructureHistory", {})
+    if isinstance(history, dict):
+        quarters = history.setdefault("quarters", {})
+        if isinstance(quarters, dict):
+            quarters["2026Q1"] = {
+                "segments": deepcopy(segments),
+                "style": "berkshire-operating-businesses",
+                "sourceUrl": BERKSHIRE_FY2026_Q1_REPORT_URL,
+                "sourceForm": "FY2026 Q1 Form 10-Q",
+                "filingDate": "2026-05-02",
+            }
+        filings_used = history.setdefault("filingsUsed", [])
+        if isinstance(filings_used, list) and not any(
+            isinstance(item, dict) and item.get("sourceUrl") == BERKSHIRE_FY2026_Q1_REPORT_URL for item in filings_used
+        ):
+            filings_used.append(
+                {
+                    "form": "10-Q",
+                    "filingDate": "2026-05-02",
+                    "periodEnd": "2026-03-31",
+                    "sourceUrl": BERKSHIRE_FY2026_Q1_REPORT_URL,
+                }
+            )
+
+    enrich_growth_rows(financials, "officialRevenueSegments")
+    recompute_revenue_growth_metrics(financials)
+    company_payload["quarters"] = sorted(financials.keys(), key=parse_period)
+    return company_payload
+
+
 def supplement_tencent_official_financials(company_payload: dict[str, Any]) -> dict[str, Any]:
     if str(company_payload.get("id") or "") != "tencent":
         return company_payload
@@ -2758,7 +2988,8 @@ def enrich_growth_rows(financials: dict[str, Any], field_name: str) -> None:
                 row["yoyPct"] = round((float(row.get("valueBn") or 0) / previous_value - 1) * 100, 2)
             previous = prior_quarter_map.get(member_key)
             previous_value = float(previous.get("valueBn") or 0) if previous else 0
-            if row.get("qoqPct") is None and previous_value:
+            suppress_qoq = "suppressQoQGrowth" in row and bool(row.get("suppressQoQGrowth"))
+            if not suppress_qoq and row.get("qoqPct") is None and previous_value:
                 row["qoqPct"] = round((float(row.get("valueBn") or 0) / previous_value - 1) * 100, 2)
             previous = prior_year_map.get(member_key)
             previous_value = float(previous.get("valueBn") or 0) if previous else 0

@@ -1749,7 +1749,7 @@ function renderPixelReplicaSvg(snapshot) {
         scaleY(
           safeNumber(
             snapshot.layout?.costBreakdownSelfBottomBufferY,
-            costBreakdownExpandedFanout ? (costBreakdownSlices.length === 2 ? 122 : 102) : 78
+            costBreakdownExpandedFanout ? (costBreakdownSlices.length === 2 ? 158 : 118) : 94
           )
         )
     ),
@@ -2980,6 +2980,41 @@ function renderPixelReplicaSvg(snapshot) {
     shiftBoxSetBy(costBreakdownBoxes, appliedShiftY);
     clampCostBreakdownBoxesToBounds();
     return appliedShiftY;
+  };
+  const shiftCostBreakdownBoxDown = (index, requestedShiftY) => {
+    const box = costBreakdownBoxes[index];
+    if (!(requestedShiftY > 0.01) || !box) return 0;
+    const { maxCenter } = resolveCostBreakdownCenterBounds(index, box);
+    let nextMaxCenter = maxCenter;
+    if (index < costBreakdownBoxes.length - 1) {
+      const nextBox = costBreakdownBoxes[index + 1];
+      if (nextBox) {
+        const currentSpacingHeight = Math.max(
+          safeNumber(box.height, 0),
+          safeNumber(costBreakdownLabelSpecs[index]?.collisionHeight, 0),
+          1
+        );
+        const nextSpacingHeight = Math.max(
+          safeNumber(nextBox.height, 0),
+          safeNumber(costBreakdownLabelSpecs[index + 1]?.collisionHeight, 0),
+          1
+        );
+        const minimumGapY = Math.max(
+          rightTerminalSeparationGap,
+          scaleY(safeNumber(snapshot.layout?.costBreakdownIndividualShiftMinGapY, 20))
+        );
+        nextMaxCenter = Math.min(
+          nextMaxCenter,
+          nextBox.center - (currentSpacingHeight + nextSpacingHeight) / 2 - minimumGapY
+        );
+      }
+    }
+    if (!(nextMaxCenter > box.center + 0.01)) return 0;
+    const nextCenter = Math.min(box.center + requestedShiftY, nextMaxCenter);
+    if (!(nextCenter > box.center + 0.01)) return 0;
+    costBreakdownBoxes[index] = shiftBoxCenter(box, nextCenter);
+    clampCostBreakdownBoxesToBounds();
+    return nextCenter - box.center;
   };
   const resolveCostBreakdownMinDownwardShiftY = (index) => {
     const configuredShiftY =
@@ -6000,7 +6035,8 @@ function renderPixelReplicaSvg(snapshot) {
   if (costBreakdownSharesOpexColumn) {
     alignOpexSummaryToNode();
   }
-  if (costBreakdownSharesOpexColumn && costBreakdownBoxes.length) {
+  const repelCostBreakdownFromOpexSummary = () => {
+    if (!(costBreakdownSharesOpexColumn && costBreakdownBoxes.length)) return;
     const opexSummaryShift = layoutReferenceOffsetFor("operating-expenses");
     const opexSummaryMetrics = resolveOpexSummaryMetrics(opexSummaryShift);
     const opexSummaryObstaclePadX = scaleY(safeNumber(snapshot.layout?.costBreakdownOpexRibbonObstaclePadX, 10));
@@ -6080,6 +6116,7 @@ function renderPixelReplicaSvg(snapshot) {
       const box = costBreakdownBoxes[index];
       if (!box) return 0;
       const targetShift = layoutReferenceOffsetFor(`cost-breakdown-${index}`);
+      const labelSpec = costBreakdownLabelSpecs[index];
       const collisionHeight = Math.max(
         safeNumber(costBreakdownGapHeights[index], box.height),
         safeNumber(costBreakdownPackingHeights[index], box.height),
@@ -6088,14 +6125,24 @@ function renderPixelReplicaSvg(snapshot) {
       );
       const collisionTop = safeNumber(box.center, 0) + targetShift.dy - collisionHeight / 2;
       const nodeTop = safeNumber(box.top, 0) + targetShift.dy;
+      const labelCenterY = safeNumber(box.center, 0) + targetShift.dy;
+      const labelTop = labelCenterY - safeNumber(labelSpec?.collisionHeight, 0) / 2;
+      const summaryTitleToCostLabelGapY = scaleY(
+        safeNumber(
+          snapshot.layout?.opexSummaryTitleToCostBreakdownLabelGapY,
+          costBreakdownSlices.length === 2 && costBreakdownSharesOpexColumn ? 210 : 168
+        )
+      );
       return Math.max(
         opexSummaryObstacle.bottom + costBreakdownSummaryClearanceY - collisionTop,
         opexSummaryObstacle.bottom + scaleY(8) - nodeTop,
+        opexSummaryMetrics.titleY + summaryTitleToCostLabelGapY - labelTop,
         computeCostBreakdownEnvelopeDeficit(index)
       );
     };
     for (let pass = 0; pass < 4; pass += 1) {
       let moved = false;
+      let movedIndividually = false;
       const groupDeficit = costBreakdownBoxes.reduce(
         (maxDeficit, _box, index) => Math.max(maxDeficit, computeCostBreakdownSummaryDeficit(index)),
         0
@@ -6105,32 +6152,24 @@ function renderPixelReplicaSvg(snapshot) {
         if (groupShiftY > 0.01) {
           maintainCostBreakdownNodeGap();
           moved = true;
-          continue;
         }
       }
       for (let index = 0; index < costBreakdownBoxes.length; index += 1) {
         const deficit = computeCostBreakdownSummaryDeficit(index);
         if (deficit <= 0.5) continue;
-        const box = costBreakdownBoxes[index];
-        const maxCenter =
-          costBreakdownMaxY -
-          Math.max(
-            safeNumber(costBreakdownGapHeights[index], box.height),
-            safeNumber(costBreakdownPackingHeights[index], box.height),
-            safeNumber(box.height, 0),
-            1
-          ) /
-            2;
-        const nextCenter = clamp(box.center + deficit + scaleY(2), box.center, maxCenter);
-        if (nextCenter <= box.center + 0.1) continue;
-        costBreakdownBoxes[index] = shiftBoxCenter(box, nextCenter);
-        maintainCostBreakdownNodeGap();
-        moved = true;
+        const appliedShiftY = shiftCostBreakdownBoxDown(index, deficit + scaleY(2));
+        if (appliedShiftY > 0.01) {
+          moved = true;
+          movedIndividually = true;
+        }
+      }
+      if (movedIndividually) {
+        clampCostBreakdownBoxesToBounds();
       }
       if (!moved) break;
     }
-    maintainCostBreakdownNodeGap();
-  }
+  };
+  repelCostBreakdownFromOpexSummary();
   const renderStandardTerminalBranchBlock = ({
     sourceX,
     sourceNodeId = null,
@@ -6260,8 +6299,10 @@ function renderPixelReplicaSvg(snapshot) {
       bottom: frame.bottom + deltaY,
       centerY: frame.centerY + deltaY,
     });
-    let upperFrame = editableNodeFrame("cost-breakdown-0", costBreakdownX, upperBlock.bridge.targetTop, nodeWidth, upperBlock.bridge.targetHeight);
-    let lowerFrame = editableNodeFrame("cost-breakdown-1", costBreakdownX, lowerBlock.bridge.targetTop, nodeWidth, lowerBlock.bridge.targetHeight);
+    const upperTargetTop = safeNumber(upperBlock.box?.center, upperBlock.bridge.targetTop + upperBlock.bridge.targetHeight / 2) - upperBlock.bridge.targetHeight / 2;
+    const lowerTargetTop = safeNumber(lowerBlock.box?.center, lowerBlock.bridge.targetTop + lowerBlock.bridge.targetHeight / 2) - lowerBlock.bridge.targetHeight / 2;
+    let upperFrame = editableNodeFrame("cost-breakdown-0", costBreakdownX, upperTargetTop, nodeWidth, upperBlock.bridge.targetHeight);
+    let lowerFrame = editableNodeFrame("cost-breakdown-1", costBreakdownX, lowerTargetTop, nodeWidth, lowerBlock.bridge.targetHeight);
     const desiredRenderGapY = scaleY(
       safeNumber(
         snapshot.layout?.costBreakdownRenderGapY,
@@ -6888,7 +6929,7 @@ function renderPixelReplicaSvg(snapshot) {
       scaleY(
         safeNumber(
           snapshot.layout?.opexSummaryToCostBreakdownGapY,
-          costBreakdownSlices.length === 2 && costBreakdownSharesOpexColumn ? 30 : 24
+          costBreakdownSlices.length === 2 && costBreakdownSharesOpexColumn ? 86 : 34
         )
       );
     const costBreakdownShiftY = desiredCostBreakdownTopY - firstCostBreakdownTopY;
@@ -6962,6 +7003,7 @@ function renderPixelReplicaSvg(snapshot) {
       if (appliedNodeDropY > 0.5) {
         setAutoLayoutNodeOffset("operating-expenses", { dy: currentNodeShiftY + appliedNodeDropY });
         alignOpexSummaryToNode();
+        repelCostBreakdownFromOpexSummary();
       }
     }
   }
@@ -7307,6 +7349,7 @@ function renderPixelReplicaSvg(snapshot) {
     }
   };
   rebalanceNegativeTerminalLabelClearance();
+  repelCostBreakdownFromOpexSummary();
   refreshEditableNodeFrames();
   const revenueGrossBand = shiftedInterval(revenueGrossSourceBand.top, revenueGrossSourceBand.bottom, "revenue");
   const revenueCostBand = revenueCostSourceBand ? shiftedInterval(revenueCostSourceBand.top, revenueCostSourceBand.bottom, "revenue") : null;

@@ -2,7 +2,10 @@ name: Update Earnings Data
 
 on:
   schedule:
-    - cron: "17 1 * * 1"
+    # NYSE close + 1 hour is 17:00 America/New_York.
+    # GitHub cron is UTC, so run both DST and standard-time slots and gate below.
+    - cron: "0 21 * * 1-5"
+    - cron: "0 22 * * 1-5"
   workflow_dispatch:
     inputs:
       mode:
@@ -50,7 +53,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Gate scheduled run to NYSE close + 1 hour
+        id: market-close-gate
+        if: github.event_name == 'schedule'
+        shell: bash
+        run: |
+          if python scripts/should_run_market_close_refresh.py; then
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+            echo "[workflow] skipping: not NYSE close + 1 hour"
+          fi
+
       - name: Refresh earnings data
+        if: github.event_name != 'schedule' || steps.market-close-gate.outputs.should_run == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -78,6 +94,7 @@ jobs:
 
       - name: Detect repository changes
         id: changes
+        if: github.event_name != 'schedule' || steps.market-close-gate.outputs.should_run == 'true'
         run: |
           if git diff --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
@@ -86,7 +103,7 @@ jobs:
           fi
 
       - name: Commit refreshed data
-        if: steps.changes.outputs.changed == 'true'
+        if: (github.event_name != 'schedule' || steps.market-close-gate.outputs.should_run == 'true') && steps.changes.outputs.changed == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -94,5 +111,5 @@ jobs:
           git commit -m "chore: refresh earnings data"
 
       - name: Push refreshed data
-        if: steps.changes.outputs.changed == 'true'
+        if: (github.event_name != 'schedule' || steps.market-close-gate.outputs.should_run == 'true') && steps.changes.outputs.changed == 'true'
         run: git push

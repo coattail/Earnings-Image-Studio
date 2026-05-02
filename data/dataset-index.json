@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-29T16:53:01Z",
+  "generatedAt": "2026-05-02T13:43:11Z",
   "companyCount": 38,
   "companies": [
     {
@@ -759,7 +759,8 @@
         "2025Q1",
         "2025Q2",
         "2025Q3",
-        "2025Q4"
+        "2025Q4",
+        "2026Q1"
       ],
       "statementSource": "official-sec-companyfacts",
       "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
@@ -767,24 +768,24 @@
       "cik": 320193,
       "errors": [],
       "coverage": {
-        "quarterCount": 31,
+        "quarterCount": 32,
         "pixelReplicaQuarterCount": 1,
         "hasPixelReplica": true,
-        "officialFinancialQuarterCount": 31,
-        "officialSegmentQuarterCount": 31,
-        "officialExpenseQuarterCount": 10,
+        "officialFinancialQuarterCount": 32,
+        "officialSegmentQuarterCount": 32,
+        "officialExpenseQuarterCount": 9,
         "classification": {
           "status": "ok",
-          "latestQuarter": "2025Q4",
+          "latestQuarter": "2026Q1",
           "latestQuarterHasRevenueClassification": true,
           "latestQuarterHasExpenseClassification": true,
-          "latestRevenueClassificationQuarter": "2025Q4",
-          "latestExpenseClassificationQuarter": "2025Q4",
+          "latestRevenueClassificationQuarter": "2026Q1",
+          "latestExpenseClassificationQuarter": "2026Q1",
           "latestStructureHistoryQuarter": "2025Q4",
-          "revenueClassificationQuarterCount": 31,
-          "expenseClassificationQuarterCount": 10,
-          "revenueClassificationCoverageRatio": 1,
-          "expenseClassificationCoverageRatio": 0.3226,
+          "revenueClassificationQuarterCount": 32,
+          "expenseClassificationQuarterCount": 9,
+          "revenueClassificationCoverageRatio": 1.0,
+          "expenseClassificationCoverageRatio": 0.2812,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": 0,
           "warnings": [],
@@ -825,16 +826,16 @@
           "validation": {
             "version": "parser-validation-v1",
             "status": "high",
-            "overallConfidenceScore": 1,
-            "financialConfidenceScore": 1,
-            "structuralConfidenceScore": 1,
-            "revenueSegmentChecks": 31,
+            "overallConfidenceScore": 1.0,
+            "financialConfidenceScore": 1.0,
+            "structuralConfidenceScore": 1.0,
+            "revenueSegmentChecks": 32,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
-            "detailGroupChecks": 31,
+            "detailGroupChecks": 32,
             "detailGroupMismatchCount": 0,
             "detailGroupSkippedChecks": 0,
-            "opexChecks": 9,
+            "opexChecks": 8,
             "opexSkippedChecks": 0,
             "opexOverflowMismatchCount": 0,
             "warningCount": 0,
@@ -843,783 +844,196 @@
         }
       },
       "dataLoadMode": "latest-only",
-      "latestQuarter": "2025Q4",
+      "latestQuarter": "2026Q1",
       "financials": {
-        "2025Q4": {
-          "calendarQuarter": "2025Q4",
-          "periodEnd": "2025-12-27",
+        "2026Q1": {
+          "calendarQuarter": "2026Q1",
+          "periodEnd": "2026-03-28",
           "fiscalYear": "2026",
-          "fiscalQuarter": "Q1",
-          "fiscalLabel": "FY2026 Q1",
+          "fiscalQuarter": "Q2",
+          "fiscalLabel": "FY2026 Q2",
           "statementCurrency": "USD",
-          "revenueBn": 143.756,
-          "revenueYoyPct": 15.652,
-          "costOfRevenueBn": 74.525,
-          "grossProfitBn": 69.231,
-          "sgnaBn": 7.492,
-          "rndBn": 10.887,
+          "revenueBn": 111.184,
+          "revenueYoyPct": 16.595,
+          "costOfRevenueBn": 56.403,
+          "grossProfitBn": 54.781,
+          "sgnaBn": 7.477,
+          "rndBn": 11.419,
           "otherOpexBn": null,
-          "operatingExpensesBn": 18.379,
-          "operatingIncomeBn": 50.852,
-          "nonOperatingBn": 0.15,
-          "pretaxIncomeBn": 51.002,
-          "taxBn": 8.905,
-          "netIncomeBn": 42.097,
-          "netIncomeYoyPct": 15.87,
-          "grossMarginPct": 48.16,
-          "operatingMarginPct": 35.37,
-          "profitMarginPct": 29.28,
-          "effectiveTaxRatePct": 17.46,
-          "revenueQoqPct": 40.296,
-          "grossMarginYoyDeltaPp": 1.28,
-          "operatingMarginYoyDeltaPp": 0.91,
-          "profitMarginYoyDeltaPp": 0.05,
-          "statementFilingDate": "2025-12-27",
-          "statementSourceUrl": "https://stockanalysis.com/stocks/aapl/financials/?p=quarterly",
-          "parserFinancialFieldSources": {
-            "revenueBn": "official",
-            "revenueYoyPct": "official",
-            "revenueQoqPct": "official",
-            "costOfRevenueBn": "official",
-            "grossProfitBn": "official",
-            "grossMarginPct": "official",
-            "grossMarginYoyDeltaPp": "official",
-            "sgnaBn": "official",
-            "rndBn": "official",
-            "operatingExpensesBn": "official",
-            "operatingIncomeBn": "official",
-            "operatingMarginPct": "official",
-            "operatingMarginYoyDeltaPp": "official",
-            "nonOperatingBn": "official",
-            "pretaxIncomeBn": "official",
-            "taxBn": "official",
-            "netIncomeBn": "official",
-            "netIncomeYoyPct": "official",
-            "profitMarginPct": "official",
-            "profitMarginYoyDeltaPp": "official",
-            "effectiveTaxRatePct": "official",
-            "calendarQuarter": "official",
-            "periodEnd": "official",
-            "fiscalYear": "official",
-            "fiscalQuarter": "official",
-            "fiscalLabel": "official",
-            "statementCurrency": "official",
-            "statementFilingDate": "stockanalysis",
-            "statementSourceUrl": "stockanalysis"
-          },
-          "parserFinancialCandidateCounts": {
-            "revenueBn": 2,
-            "revenueYoyPct": 2,
-            "revenueQoqPct": 2,
-            "costOfRevenueBn": 2,
-            "grossProfitBn": 2,
-            "grossMarginPct": 2,
-            "grossMarginYoyDeltaPp": 2,
-            "sgnaBn": 2,
-            "rndBn": 2,
-            "otherOpexBn": 0,
-            "operatingExpensesBn": 2,
-            "operatingIncomeBn": 2,
-            "operatingMarginPct": 2,
-            "operatingMarginYoyDeltaPp": 2,
-            "nonOperatingBn": 2,
-            "pretaxIncomeBn": 2,
-            "taxBn": 2,
-            "netIncomeBn": 2,
-            "netIncomeYoyPct": 2,
-            "profitMarginPct": 2,
-            "profitMarginYoyDeltaPp": 2,
-            "effectiveTaxRatePct": 2
-          },
-          "parserFinancialValidation": {
-            "version": "financial-validation-v1",
-            "status": "high",
-            "confidenceScore": 1,
-            "completenessScore": 1,
-            "consistencyScore": 1,
-            "checksRun": 8,
-            "checksPassed": 8,
-            "issueCount": 0,
-            "issues": []
-          },
+          "operatingExpensesBn": 18.896,
+          "operatingIncomeBn": 35.885,
+          "nonOperatingBn": -0.052,
+          "pretaxIncomeBn": 35.833,
+          "taxBn": 6.255,
+          "netIncomeBn": 29.578,
+          "netIncomeYoyPct": 19.362,
+          "grossMarginPct": 49.271,
+          "operatingMarginPct": 32.275,
+          "profitMarginPct": 26.602,
+          "effectiveTaxRatePct": 17.455,
+          "revenueQoqPct": -22.658,
+          "grossMarginYoyDeltaPp": 2.224,
+          "operatingMarginYoyDeltaPp": 1.249,
+          "profitMarginYoyDeltaPp": 0.614,
+          "statementSource": "apple-earnings-release",
+          "statementSourceUrl": "https://www.apple.com/newsroom/2026/04/apple-reports-second-quarter-results/",
+          "statementFilingDate": "2026-04-30",
+          "statementValueMode": "reported",
+          "statementSpanQuarters": 1,
           "officialRevenueSegments": [
             {
               "name": "Products",
               "nameZh": null,
               "memberKey": "products",
-              "valueBn": 113.743,
-              "yoyPct": 16.11,
-              "qoqPct": 54.3,
-              "mixPct": 79.1,
-              "mixYoyDeltaPp": 0.3,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000006/aapl-20251227_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-01-30",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": null,
-              "validationNotes": null
+              "valueBn": 80.208,
+              "yoyPct": 16.73,
+              "qoqPct": -29.48,
+              "mixPct": 72.1,
+              "mixYoyDeltaPp": 0.1,
+              "sourceUrl": "https://www.apple.com/newsroom/pdfs/fy2026q2/FY26_Q2_Consolidated_Financial_Statements.pdf",
+              "sourceForm": "FY2026 Q2 earnings release",
+              "filingDate": "2026-04-30"
             },
             {
               "name": "Services",
               "nameZh": null,
               "memberKey": "services",
-              "valueBn": 30.013,
-              "yoyPct": 13.94,
-              "qoqPct": 4.39,
-              "mixPct": 20.9,
-              "mixYoyDeltaPp": -0.3,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000006/aapl-20251227_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-01-30",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": null,
-              "validationNotes": null
+              "valueBn": 30.976,
+              "yoyPct": 16.25,
+              "qoqPct": 3.21,
+              "mixPct": 27.9,
+              "mixYoyDeltaPp": -0.1,
+              "sourceUrl": "https://www.apple.com/newsroom/pdfs/fy2026q2/FY26_Q2_Consolidated_Financial_Statements.pdf",
+              "sourceForm": "FY2026 Q2 earnings release",
+              "filingDate": "2026-04-30"
             }
           ],
-          "officialSegmentAxis": "ProductOrServiceAxis",
-          "officialSegmentSource": "official-filings",
           "officialRevenueDetailGroups": [
             {
               "name": "iPhone",
               "nameZh": null,
               "memberKey": "iphone",
-              "valueBn": 85.269,
-              "yoyPct": 23.33,
-              "qoqPct": 73.93,
-              "mixPct": 59.3,
-              "mixYoyDeltaPp": 3.7,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000006/aapl-20251227_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-01-30",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "targetName": "Products",
-              "metricMode": null,
-              "validationEligible": null,
-              "validationNotes": null
-            },
-            {
-              "name": "Wearables",
-              "nameZh": null,
-              "memberKey": "wearables",
-              "valueBn": 11.493,
-              "yoyPct": -2.16,
-              "qoqPct": 27.52,
-              "mixPct": 8,
-              "mixYoyDeltaPp": -1.5,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000006/aapl-20251227_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-01-30",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "targetName": "Products",
-              "metricMode": null,
-              "validationEligible": null,
-              "validationNotes": null
-            },
-            {
-              "name": "iPad",
-              "nameZh": null,
-              "memberKey": "ipad",
-              "valueBn": 8.595,
-              "yoyPct": 6.27,
-              "qoqPct": 23.63,
-              "mixPct": 6,
-              "mixYoyDeltaPp": -0.5,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000006/aapl-20251227_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-01-30",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "targetName": "Products",
-              "metricMode": null,
-              "validationEligible": null,
-              "validationNotes": null
+              "valueBn": 56.994,
+              "yoyPct": 21.68,
+              "qoqPct": -33.16,
+              "mixPct": 51.3,
+              "mixYoyDeltaPp": 2.1,
+              "sourceUrl": "https://www.apple.com/newsroom/pdfs/fy2026q2/FY26_Q2_Consolidated_Financial_Statements.pdf",
+              "sourceForm": "FY2026 Q2 earnings release",
+              "filingDate": "2026-04-30",
+              "targetName": "Products"
             },
             {
               "name": "Mac",
               "nameZh": null,
               "memberKey": "mac",
-              "valueBn": 8.386,
-              "yoyPct": -6.69,
-              "qoqPct": -3.9,
-              "mixPct": 5.8,
-              "mixYoyDeltaPp": -1.4,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000006/aapl-20251227_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-01-30",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "targetName": "Products",
-              "metricMode": null,
-              "validationEligible": null,
-              "validationNotes": null
+              "valueBn": 8.399,
+              "yoyPct": 5.66,
+              "qoqPct": 0.16,
+              "mixPct": 7.6,
+              "mixYoyDeltaPp": -0.8,
+              "sourceUrl": "https://www.apple.com/newsroom/pdfs/fy2026q2/FY26_Q2_Consolidated_Financial_Statements.pdf",
+              "sourceForm": "FY2026 Q2 earnings release",
+              "filingDate": "2026-04-30",
+              "targetName": "Products"
+            },
+            {
+              "name": "iPad",
+              "nameZh": null,
+              "memberKey": "ipad",
+              "valueBn": 6.914,
+              "yoyPct": 8.0,
+              "qoqPct": -19.56,
+              "mixPct": 6.2,
+              "mixYoyDeltaPp": -0.5,
+              "sourceUrl": "https://www.apple.com/newsroom/pdfs/fy2026q2/FY26_Q2_Consolidated_Financial_Statements.pdf",
+              "sourceForm": "FY2026 Q2 earnings release",
+              "filingDate": "2026-04-30",
+              "targetName": "Products"
+            },
+            {
+              "name": "Wearables, Home and Accessories",
+              "nameZh": null,
+              "memberKey": "wearables",
+              "valueBn": 7.901,
+              "yoyPct": 5.04,
+              "qoqPct": -31.25,
+              "mixPct": 7.1,
+              "mixYoyDeltaPp": -0.8,
+              "sourceUrl": "https://www.apple.com/newsroom/pdfs/fy2026q2/FY26_Q2_Consolidated_Financial_Statements.pdf",
+              "sourceForm": "FY2026 Q2 earnings release",
+              "filingDate": "2026-04-30",
+              "targetName": "Products"
             }
           ],
-          "displayCurrency": "USD",
-          "displayScaleFactor": 1,
-          "costBreakdownProfile": {
-            "segmentOrder": [
-              "Products",
-              "Services"
-            ],
-            "fixedGrossMarginPctBySegment": {
-              "Services": 75
-            },
-            "valueFormat": "negative-parentheses",
-            "sourceLabel": "Apple supplemental cost profile"
-          },
-          "statementMeta": {
-            "statementSource": "generic-official-filing-table",
-            "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000114036125044561/ef20060722_8k.htm",
-            "statementValueMode": "direct",
-            "statementSpanQuarters": 1,
-            "qualityFlags": [],
-            "adapterId": "generic_filing_tables"
-          },
-          "opexBreakdown": [
+          "officialCostBreakdown": [
             {
-              "taxonomyId": "rnd",
-              "name": "R&D",
-              "nameZh": "研发",
-              "memberKey": "rd",
-              "valueBn": 10.887,
-              "sourceUrl": "https://s2.q4cdn.com/470004039/files/doc_earnings/2026/q1/filing/10Q-Q1-2026-as-filed.pdf",
-              "sourceForm": null,
-              "filingDate": null,
-              "metricMode": null,
-              "supportLines": null,
-              "supportLinesZh": null,
-              "provenance": {
-                "adapterId": "generic_ir_pdf",
-                "label": "Generic IR PDF parser",
-                "score": 96.27,
-                "sourceUrl": "https://s2.q4cdn.com/470004039/files/doc_earnings/2026/q1/filing/10Q-Q1-2026-as-filed.pdf"
-              }
+              "name": "Products cost of sales",
+              "nameZh": null,
+              "memberKey": "products",
+              "valueBn": 49.179,
+              "yoyPct": null,
+              "qoqPct": null,
+              "mixPct": null,
+              "mixYoyDeltaPp": null,
+              "sourceUrl": "https://www.apple.com/newsroom/pdfs/fy2026q2/FY26_Q2_Consolidated_Financial_Statements.pdf",
+              "sourceForm": "FY2026 Q2 earnings release",
+              "filingDate": "2026-04-30"
             },
             {
-              "taxonomyId": "sales_marketing",
-              "name": "Sales & Marketing",
-              "nameZh": "销售与营销",
-              "memberKey": "salesmarketing",
-              "valueBn": 2.727,
-              "sourceUrl": "https://s2.q4cdn.com/470004039/files/doc_earnings/2026/q1/filing/10Q-Q1-2026-as-filed.pdf",
-              "sourceForm": null,
-              "filingDate": null,
-              "metricMode": null,
-              "supportLines": null,
-              "supportLinesZh": null,
-              "provenance": {
-                "adapterId": "generic_ir_pdf",
-                "label": "Generic IR PDF parser",
-                "score": 96.26,
-                "sourceUrl": "https://s2.q4cdn.com/470004039/files/doc_earnings/2026/q1/filing/10Q-Q1-2026-as-filed.pdf"
-              }
+              "name": "Services cost of sales",
+              "nameZh": null,
+              "memberKey": "services",
+              "valueBn": 7.224,
+              "yoyPct": null,
+              "qoqPct": null,
+              "mixPct": null,
+              "mixYoyDeltaPp": null,
+              "sourceUrl": "https://www.apple.com/newsroom/pdfs/fy2026q2/FY26_Q2_Consolidated_Financial_Statements.pdf",
+              "sourceForm": "FY2026 Q2 earnings release",
+              "filingDate": "2026-04-30"
+            }
+          ],
+          "officialOpexBreakdown": [
+            {
+              "name": "Research and development",
+              "nameZh": null,
+              "memberKey": "researchanddevelopment",
+              "valueBn": 11.419,
+              "yoyPct": null,
+              "qoqPct": null,
+              "mixPct": null,
+              "mixYoyDeltaPp": null,
+              "sourceUrl": "https://www.apple.com/newsroom/pdfs/fy2026q2/FY26_Q2_Consolidated_Financial_Statements.pdf",
+              "sourceForm": "FY2026 Q2 earnings release",
+              "filingDate": "2026-04-30"
             },
             {
-              "taxonomyId": "general_administrative",
-              "name": "G&A",
-              "nameZh": "管理费用",
-              "memberKey": "ga",
-              "valueBn": 2.095,
-              "sourceUrl": "https://s2.q4cdn.com/470004039/files/doc_earnings/2026/q1/filing/10Q-Q1-2026-as-filed.pdf",
-              "sourceForm": null,
-              "filingDate": null,
-              "metricMode": null,
-              "supportLines": null,
-              "supportLinesZh": null,
-              "provenance": {
-                "adapterId": "generic_ir_pdf",
-                "label": "Generic IR PDF parser",
-                "score": 96.26,
-                "sourceUrl": "https://s2.q4cdn.com/470004039/files/doc_earnings/2026/q1/filing/10Q-Q1-2026-as-filed.pdf"
-              }
-            },
-            {
-              "taxonomyId": "other_opex",
-              "name": "Other opex",
-              "nameZh": "其他经营费用",
-              "memberKey": "otheropex",
-              "valueBn": 2.67,
-              "provenance": {
-                "adapterId": "derived_residual",
-                "label": "Residual after explicit categories",
-                "score": 30
-              }
+              "name": "Selling, general and administrative",
+              "nameZh": null,
+              "memberKey": "sellinggeneralandadministrative",
+              "valueBn": 7.477,
+              "yoyPct": null,
+              "qoqPct": null,
+              "mixPct": null,
+              "mixYoyDeltaPp": null,
+              "sourceUrl": "https://www.apple.com/newsroom/pdfs/fy2026q2/FY26_Q2_Consolidated_Financial_Statements.pdf",
+              "sourceForm": "FY2026 Q2 earnings release",
+              "filingDate": "2026-04-30"
             }
           ],
           "fieldSources": {
             "revenueBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 120,
-              "sourceUrl": null
-            },
-            "costOfRevenueBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 120,
-              "sourceUrl": null
-            },
-            "grossProfitBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 118,
-              "sourceUrl": null
-            },
-            "sgnaBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 112,
-              "sourceUrl": null
-            },
-            "rndBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 112,
-              "sourceUrl": null
-            },
-            "operatingExpensesBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 118,
-              "sourceUrl": null
-            },
-            "operatingIncomeBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 118,
-              "sourceUrl": null
-            },
-            "nonOperatingBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 110,
-              "sourceUrl": null
-            },
-            "pretaxIncomeBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 118,
-              "sourceUrl": null
-            },
-            "taxBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 112,
-              "sourceUrl": null
-            },
-            "netIncomeBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 118,
-              "sourceUrl": null
-            },
-            "costBreakdownProfile": {
-              "adapterId": "supplemental_components",
-              "label": "Supplemental structured components",
-              "score": 94,
-              "sourceUrl": null
-            },
-            "opexBreakdown": [
-              {
-                "adapterId": "generic_ir_pdf",
-                "label": "Generic IR PDF parser",
-                "score": 96.26,
-                "itemCount": 3
-              }
-            ],
-            "statementMeta": {
-              "adapterId": "generic_filing_tables",
-              "label": "Generic official filing table parser",
-              "score": 13.5,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000114036125044561/ef20060722_8k.htm"
-            },
-            "officialRevenueSegments": {
-              "adapterId": "official_revenue_structures",
-              "label": "Official filing revenue structure",
-              "score": 114,
-              "sourceUrl": null
-            },
-            "officialRevenueDetailGroups": {
-              "adapterId": "official_revenue_structures",
-              "label": "Official filing revenue structure",
-              "score": 112,
-              "sourceUrl": null
+              "adapterId": "apple_earnings_release_supplement",
+              "label": "Apple FY2026 Q2 earnings release",
+              "score": 170,
+              "sourceUrl": "https://www.apple.com/newsroom/pdfs/fy2026q2/FY26_Q2_Consolidated_Financial_Statements.pdf"
             }
-          },
-          "extractionDiagnostics": {
-            "qualityScore": 100,
-            "availableRequiredFieldCount": 3,
-            "requiredFieldCount": 3,
-            "sourceFieldCount": 16,
-            "hasCostBreakdownProfile": true,
-            "costBreakdownMode": "profile-assisted",
-            "opexBreakdownMode": "explicit",
-            "revenueSegmentCoveragePct": 100,
-            "costBreakdownCoveragePct": null,
-            "opexBreakdownCoveragePct": 100,
-            "revenueSegmentResidualBn": 0,
-            "costBreakdownResidualBn": null,
-            "opexBreakdownResidualBn": 0,
-            "statementSource": "generic-official-filing-table",
-            "statementValueMode": "direct",
-            "statementSpanQuarters": 1,
-            "statementQualityFlags": [],
-            "issues": []
           }
         }
       },
       "statementPresets": {},
-      "officialRevenueStructureHistory": {
-        "source": "official-segment-cache-hierarchy",
-        "quarters": {
-          "2025Q4": {
-            "segments": [
-              {
-                "name": "Products",
-                "nameZh": null,
-                "memberKey": "products",
-                "valueBn": 113.743,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000006/aapl-20251227_htm.xml",
-                "sourceForm": "10-Q",
-                "filingDate": "2026-01-30",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": null,
-                "validationNotes": null
-              },
-              {
-                "name": "Services",
-                "nameZh": null,
-                "memberKey": "services",
-                "valueBn": 30.013,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000006/aapl-20251227_htm.xml",
-                "sourceForm": "10-Q",
-                "filingDate": "2026-01-30",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": null,
-                "validationNotes": null
-              }
-            ],
-            "detailGroups": [
-              {
-                "name": "iPhone",
-                "memberKey": "iphone",
-                "valueBn": 85.269,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000006/aapl-20251227_htm.xml",
-                "sourceForm": "10-Q",
-                "filingDate": "2026-01-30",
-                "targetName": "Products"
-              },
-              {
-                "name": "Wearables",
-                "memberKey": "wearables",
-                "valueBn": 11.493,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000006/aapl-20251227_htm.xml",
-                "sourceForm": "10-Q",
-                "filingDate": "2026-01-30",
-                "targetName": "Products"
-              },
-              {
-                "name": "iPad",
-                "memberKey": "ipad",
-                "valueBn": 8.595,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000006/aapl-20251227_htm.xml",
-                "sourceForm": "10-Q",
-                "filingDate": "2026-01-30",
-                "targetName": "Products"
-              },
-              {
-                "name": "Mac",
-                "memberKey": "mac",
-                "valueBn": 8.386,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000006/aapl-20251227_htm.xml",
-                "sourceForm": "10-Q",
-                "filingDate": "2026-01-30",
-                "targetName": "Products"
-              }
-            ]
-          }
-        },
-        "filingsUsed": [
-          {
-            "form": "10-Q",
-            "filingDate": "2026-01-30",
-            "accession": "0000320193-26-000006",
-            "primaryDocument": "aapl-20251227.htm",
-            "instance": "aapl-20251227_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2025-10-31",
-            "accession": "0000320193-25-000079",
-            "primaryDocument": "aapl-20250927.htm",
-            "instance": "aapl-20250927_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2025-08-01",
-            "accession": "0000320193-25-000073",
-            "primaryDocument": "aapl-20250628.htm",
-            "instance": "aapl-20250628_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2025-05-02",
-            "accession": "0000320193-25-000057",
-            "primaryDocument": "aapl-20250329.htm",
-            "instance": "aapl-20250329_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2025-01-31",
-            "accession": "0000320193-25-000008",
-            "primaryDocument": "aapl-20241228.htm",
-            "instance": "aapl-20241228_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2024-11-01",
-            "accession": "0000320193-24-000123",
-            "primaryDocument": "aapl-20240928.htm",
-            "instance": "aapl-20240928_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2024-08-02",
-            "accession": "0000320193-24-000081",
-            "primaryDocument": "aapl-20240629.htm",
-            "instance": "aapl-20240629_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2024-05-03",
-            "accession": "0000320193-24-000069",
-            "primaryDocument": "aapl-20240330.htm",
-            "instance": "aapl-20240330_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2024-02-02",
-            "accession": "0000320193-24-000006",
-            "primaryDocument": "aapl-20231230.htm",
-            "instance": "aapl-20231230_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2023-11-03",
-            "accession": "0000320193-23-000106",
-            "primaryDocument": "aapl-20230930.htm",
-            "instance": "aapl-20230930_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2023-08-04",
-            "accession": "0000320193-23-000077",
-            "primaryDocument": "aapl-20230701.htm",
-            "instance": "aapl-20230701_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2023-05-05",
-            "accession": "0000320193-23-000064",
-            "primaryDocument": "aapl-20230401.htm",
-            "instance": "aapl-20230401_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2023-02-03",
-            "accession": "0000320193-23-000006",
-            "primaryDocument": "aapl-20221231.htm",
-            "instance": "aapl-20221231_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2022-10-28",
-            "accession": "0000320193-22-000108",
-            "primaryDocument": "aapl-20220924.htm",
-            "instance": "aapl-20220924_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2022-07-29",
-            "accession": "0000320193-22-000070",
-            "primaryDocument": "aapl-20220625.htm",
-            "instance": "aapl-20220625_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2022-04-29",
-            "accession": "0000320193-22-000059",
-            "primaryDocument": "aapl-20220326.htm",
-            "instance": "aapl-20220326_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2022-01-28",
-            "accession": "0000320193-22-000007",
-            "primaryDocument": "aapl-20211225.htm",
-            "instance": "aapl-20211225_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2021-10-29",
-            "accession": "0000320193-21-000105",
-            "primaryDocument": "aapl-20210925.htm",
-            "instance": "aapl-20210925_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2021-07-28",
-            "accession": "0000320193-21-000065",
-            "primaryDocument": "aapl-20210626.htm",
-            "instance": "aapl-20210626_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2021-04-29",
-            "accession": "0000320193-21-000056",
-            "primaryDocument": "aapl-20210327.htm",
-            "instance": "aapl-20210327_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2021-01-28",
-            "accession": "0000320193-21-000010",
-            "primaryDocument": "aapl-20201226.htm",
-            "instance": "aapl-20201226_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2020-10-30",
-            "accession": "0000320193-20-000096",
-            "primaryDocument": "aapl-20200926.htm",
-            "instance": "aapl-20200926_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2020-07-31",
-            "accession": "0000320193-20-000062",
-            "primaryDocument": "aapl-20200627.htm",
-            "instance": "aapl-20200627_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2020-05-01",
-            "accession": "0000320193-20-000052",
-            "primaryDocument": "a10-qq220203282020.htm",
-            "instance": "a10-qq220203282020_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2020-01-29",
-            "accession": "0000320193-20-000010",
-            "primaryDocument": "a10-qq1202012282019.htm",
-            "instance": "a10-qq1202012282019_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2019-10-31",
-            "accession": "0000320193-19-000119",
-            "primaryDocument": "a10-k20199282019.htm",
-            "instance": "a10-k20199282019_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2019-07-31",
-            "accession": "0000320193-19-000076",
-            "primaryDocument": "a10-qq320196292019.htm",
-            "instance": "a10-qq320196292019_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2019-05-01",
-            "accession": "0000320193-19-000066",
-            "primaryDocument": "a10-qq220193302019.htm",
-            "instance": "a10-qq220193302019_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2019-01-30",
-            "accession": "0000320193-19-000010",
-            "primaryDocument": "a10-qq1201912292018.htm",
-            "instance": "aapl-20181229.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2018-11-05",
-            "accession": "0000320193-18-000145",
-            "primaryDocument": "a10-k20189292018.htm",
-            "instance": "aapl-20180929.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2018-08-01",
-            "accession": "0000320193-18-000100",
-            "primaryDocument": "a10-qq320186302018.htm",
-            "instance": "aapl-20180630.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2018-05-02",
-            "accession": "0000320193-18-000070",
-            "primaryDocument": "a10-qq220183312018.htm",
-            "instance": "aapl-20180331.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2018-02-02",
-            "accession": "0000320193-18-000007",
-            "primaryDocument": "a10-qq1201812302017.htm",
-            "instance": "aapl-20171230.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2017-11-03",
-            "accession": "0000320193-17-000070",
-            "primaryDocument": "a10-k20179302017.htm",
-            "instance": "aapl-20170930.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2017-08-02",
-            "accession": "0000320193-17-000009",
-            "primaryDocument": "a10-qq32017712017.htm",
-            "instance": "aapl-20170701.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2017-05-03",
-            "accession": "0001628280-17-004790",
-            "primaryDocument": "a10-qq22017412017.htm",
-            "instance": "aapl-20170401.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2017-02-01",
-            "accession": "0001628280-17-000717",
-            "primaryDocument": "a10-qq1201712312016.htm",
-            "instance": "aapl-20161231.xml"
-          }
-        ],
-        "errors": []
-      },
+      "officialRevenueStructureHistory": {},
       "officialSegmentHistory": {}
     },
     {
@@ -5493,7 +4907,8 @@
         "2025Q1",
         "2025Q2",
         "2025Q3",
-        "2025Q4"
+        "2025Q4",
+        "2026Q1"
       ],
       "statementSource": "official-sec-companyfacts+field-reconciled",
       "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001067983.json",
@@ -5501,21 +4916,21 @@
       "cik": 1067983,
       "errors": [],
       "coverage": {
-        "quarterCount": 32,
+        "quarterCount": 33,
         "pixelReplicaQuarterCount": 0,
         "hasPixelReplica": false,
-        "officialFinancialQuarterCount": 32,
-        "officialSegmentQuarterCount": 32,
+        "officialFinancialQuarterCount": 33,
+        "officialSegmentQuarterCount": 33,
         "officialExpenseQuarterCount": 0,
         "classification": {
           "status": "ok",
-          "latestQuarter": "2025Q4",
+          "latestQuarter": "2026Q1",
           "latestQuarterHasRevenueClassification": true,
           "latestQuarterHasExpenseClassification": false,
-          "latestRevenueClassificationQuarter": "2025Q4",
+          "latestRevenueClassificationQuarter": "2026Q1",
           "latestExpenseClassificationQuarter": null,
-          "latestStructureHistoryQuarter": "2025Q4",
-          "revenueClassificationQuarterCount": 32,
+          "latestStructureHistoryQuarter": "2026Q1",
+          "revenueClassificationQuarterCount": 33,
           "expenseClassificationQuarterCount": 0,
           "revenueClassificationCoverageRatio": 1.0,
           "expenseClassificationCoverageRatio": 0.0,
@@ -5564,7 +4979,7 @@
             "structuralConfidenceScore": 0.75,
             "revenueSegmentChecks": 0,
             "revenueSegmentMismatchCount": 0,
-            "revenueSegmentSkippedChecks": 32,
+            "revenueSegmentSkippedChecks": 33,
             "detailGroupChecks": 0,
             "detailGroupMismatchCount": 0,
             "detailGroupSkippedChecks": 0,
@@ -5577,569 +4992,388 @@
         }
       },
       "dataLoadMode": "latest-only",
-      "latestQuarter": "2025Q4",
+      "latestQuarter": "2026Q1",
       "financials": {
-        "2025Q4": {
-          "calendarQuarter": "2025Q4",
-          "periodEnd": "2025-12-31",
-          "fiscalYear": "2025",
-          "fiscalQuarter": "Q4",
-          "fiscalLabel": "FY2025 Q4",
+        "2026Q1": {
+          "calendarQuarter": "2026Q1",
+          "periodEnd": "2026-03-31",
+          "fiscalYear": "2026",
+          "fiscalQuarter": "Q1",
+          "fiscalLabel": "FY2026 Q1",
           "statementCurrency": "USD",
-          "revenueBn": 62.734,
-          "revenueYoyPct": -0.194,
-          "costOfRevenueBn": 67.006,
-          "grossProfitBn": 27.226,
-          "sgnaBn": 7.838,
+          "revenueBn": 93.675,
+          "revenueYoyPct": 57.816,
+          "costOfRevenueBn": 66.697,
+          "grossProfitBn": 26.978,
+          "sgnaBn": 6.556,
           "rndBn": 0.0,
-          "otherOpexBn": 81.685,
-          "operatingExpensesBn": 81.685,
-          "operatingIncomeBn": 13.845,
-          "nonOperatingBn": 10.611,
-          "pretaxIncomeBn": 24.456,
-          "taxBn": 5.189,
-          "netIncomeBn": 19.199,
-          "netIncomeYoyPct": -2.51,
-          "grossMarginPct": 28.89,
-          "operatingMarginPct": 14.69,
-          "profitMarginPct": 30.6,
-          "effectiveTaxRatePct": 21.22,
-          "revenueQoqPct": -1.589,
-          "grossMarginYoyDeltaPp": -4.26,
-          "operatingMarginYoyDeltaPp": -4.32,
-          "profitMarginYoyDeltaPp": -0.73,
-          "statementFilingDate": "2025-12-31",
-          "statementSourceUrl": "https://stockanalysis.com/stocks/brk.b/financials/?p=quarterly",
-          "parserFinancialFieldSources": {
-            "revenueBn": "official",
-            "revenueYoyPct": "official",
-            "revenueQoqPct": "official",
-            "costOfRevenueBn": "stockanalysis",
-            "grossProfitBn": "stockanalysis",
-            "grossMarginPct": "stockanalysis",
-            "grossMarginYoyDeltaPp": "stockanalysis",
-            "sgnaBn": "stockanalysis",
-            "otherOpexBn": "official",
-            "operatingExpensesBn": "official",
-            "operatingIncomeBn": "stockanalysis",
-            "operatingMarginPct": "stockanalysis",
-            "operatingMarginYoyDeltaPp": "stockanalysis",
-            "nonOperatingBn": "stockanalysis",
-            "pretaxIncomeBn": "official",
-            "taxBn": "official",
-            "netIncomeBn": "official",
-            "netIncomeYoyPct": "official",
-            "profitMarginPct": "official",
-            "profitMarginYoyDeltaPp": "official",
-            "effectiveTaxRatePct": "official",
-            "calendarQuarter": "official",
-            "periodEnd": "official",
-            "fiscalYear": "official",
-            "fiscalQuarter": "official",
-            "fiscalLabel": "official",
-            "statementCurrency": "official",
-            "statementFilingDate": "stockanalysis",
-            "statementSourceUrl": "stockanalysis"
-          },
-          "parserFinancialCandidateCounts": {
-            "revenueBn": 2,
-            "revenueYoyPct": 2,
-            "revenueQoqPct": 2,
-            "costOfRevenueBn": 1,
-            "grossProfitBn": 1,
-            "grossMarginPct": 1,
-            "grossMarginYoyDeltaPp": 1,
-            "sgnaBn": 1,
-            "rndBn": 0,
-            "otherOpexBn": 2,
-            "operatingExpensesBn": 2,
-            "operatingIncomeBn": 1,
-            "operatingMarginPct": 1,
-            "operatingMarginYoyDeltaPp": 1,
-            "nonOperatingBn": 1,
-            "pretaxIncomeBn": 2,
-            "taxBn": 2,
-            "netIncomeBn": 2,
-            "netIncomeYoyPct": 2,
-            "profitMarginPct": 2,
-            "profitMarginYoyDeltaPp": 2,
-            "effectiveTaxRatePct": 2
-          },
-          "parserFinancialValidation": {
-            "version": "financial-validation-v1",
-            "status": "medium",
-            "confidenceScore": 0.775,
-            "completenessScore": 1.0,
-            "consistencyScore": 0.5,
-            "checksRun": 8,
-            "checksPassed": 4,
-            "issueCount": 4,
-            "issues": [
-              {
-                "code": "revenue-minus-cost-equals-gross",
-                "severity": "warning",
-                "message": "grossProfitBn does not reconcile with revenueBn and costOfRevenueBn.",
-                "expected": 27.226,
-                "derived": -4.272,
-                "delta": 31.498,
-                "tolerance": 0.817
-              },
-              {
-                "code": "gross-minus-opex-equals-operating",
-                "severity": "warning",
-                "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
-                "expected": 13.845,
-                "derived": -54.459,
-                "delta": 68.304,
-                "tolerance": 0.415
-              },
-              {
-                "code": "gross-margin-check",
-                "severity": "warning",
-                "message": "grossMarginPct does not reconcile with grossProfitBn and revenueBn.",
-                "expected": 28.89,
-                "derived": 43.399,
-                "delta": -14.509,
-                "tolerance": 0.867
-              },
-              {
-                "code": "operating-margin-check",
-                "severity": "warning",
-                "message": "operatingMarginPct does not reconcile with operatingIncomeBn and revenueBn.",
-                "expected": 14.69,
-                "derived": 22.069,
-                "delta": -7.379,
-                "tolerance": 0.441
-              }
-            ]
-          },
+          "otherOpexBn": 5.373,
+          "operatingExpensesBn": 11.929,
+          "operatingIncomeBn": 15.049,
+          "nonOperatingBn": -2.73,
+          "pretaxIncomeBn": 12.319,
+          "taxBn": 2.14,
+          "netIncomeBn": 10.106,
+          "netIncomeYoyPct": 119.552,
+          "grossMarginPct": 28.8,
+          "operatingMarginPct": 16.065,
+          "profitMarginPct": 10.788,
+          "effectiveTaxRatePct": 17.372,
+          "revenueQoqPct": 49.321,
+          "grossMarginYoyDeltaPp": 0.26,
+          "operatingMarginYoyDeltaPp": 1.895,
+          "profitMarginYoyDeltaPp": 3.038,
+          "statementSource": "berkshire-earnings-release",
+          "statementSourceUrl": "https://www.berkshirehathaway.com/news/may0226.pdf",
+          "statementFilingDate": "2026-05-02",
+          "statementValueMode": "reported",
+          "statementSpanQuarters": 1,
           "officialRevenueSegments": [
             {
               "name": "Insurance, Corporate & Other",
               "nameZh": "保险、企业及其他",
               "memberKey": "insurancecorporateother",
-              "valueBn": 27.507,
-              "yoyPct": -2.71,
-              "qoqPct": 0.97,
-              "mixPct": 43.8,
-              "mixYoyDeltaPp": -1.1,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231_htm.xml",
-              "sourceForm": "10-K",
-              "filingDate": "2026-03-02",
+              "valueBn": 26.178,
+              "yoyPct": 0.14,
+              "qoqPct": null,
+              "suppressQoQGrowth": true,
+              "mixPct": 27.9,
+              "mixYoyDeltaPp": -16.5,
+              "sourceUrl": "https://www.berkshirehathaway.com/qtrly/1stqtr26.pdf",
+              "sourceForm": "FY2026 Q1 Form 10-Q",
+              "filingDate": "2026-05-02",
               "supportLines": null,
               "supportLinesZh": null,
               "metricMode": null,
               "validationEligible": false,
               "validationNotes": [
                 "operating-business-bucket-disclosure",
-                "berkshire-stable-operating-business-taxonomy"
+                "berkshire-stable-operating-business-taxonomy",
+                "berkshire-fy2026-q1-official-report-supplement"
               ]
             },
             {
               "name": "Pilot Travel Centers",
               "nameZh": "Pilot 旅行中心",
               "memberKey": "pilottravelcentersllc",
-              "valueBn": 10.693,
-              "yoyPct": -75.9,
-              "qoqPct": -0.71,
-              "mixPct": 17.0,
-              "mixYoyDeltaPp": -53.5,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231_htm.xml",
-              "sourceForm": "10-K",
-              "filingDate": "2026-03-02",
+              "valueBn": 11.245,
+              "yoyPct": 7.81,
+              "qoqPct": null,
+              "suppressQoQGrowth": true,
+              "mixPct": 12.0,
+              "mixYoyDeltaPp": -5.1,
+              "sourceUrl": "https://www.berkshirehathaway.com/qtrly/1stqtr26.pdf",
+              "sourceForm": "FY2026 Q1 Form 10-Q",
+              "filingDate": "2026-05-02",
               "supportLines": null,
               "supportLinesZh": null,
               "metricMode": null,
               "validationEligible": false,
               "validationNotes": [
                 "operating-business-bucket-disclosure",
-                "berkshire-stable-operating-business-taxonomy"
+                "berkshire-stable-operating-business-taxonomy",
+                "berkshire-fy2026-q1-official-report-supplement"
               ]
             },
             {
               "name": "McLane Company",
               "nameZh": "麦克莱恩公司",
               "memberKey": "mclanecompany",
-              "valueBn": 7.855,
-              "yoyPct": -11.31,
-              "qoqPct": -0.37,
-              "mixPct": 12.5,
-              "mixYoyDeltaPp": -1.6,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231_htm.xml",
-              "sourceForm": "10-K",
-              "filingDate": "2026-03-02",
+              "valueBn": 11.936,
+              "yoyPct": -1.96,
+              "qoqPct": null,
+              "suppressQoQGrowth": true,
+              "mixPct": 12.7,
+              "mixYoyDeltaPp": 0.2,
+              "sourceUrl": "https://www.berkshirehathaway.com/qtrly/1stqtr26.pdf",
+              "sourceForm": "FY2026 Q1 Form 10-Q",
+              "filingDate": "2026-05-02",
               "supportLines": null,
               "supportLinesZh": null,
               "metricMode": null,
               "validationEligible": false,
               "validationNotes": [
                 "operating-business-bucket-disclosure",
-                "berkshire-stable-operating-business-taxonomy"
+                "berkshire-stable-operating-business-taxonomy",
+                "berkshire-fy2026-q1-official-report-supplement"
               ]
             },
             {
               "name": "Manufacturing businesses",
               "nameZh": "制造业务",
               "memberKey": "manufacturingbusinesses",
-              "valueBn": 7.46,
-              "yoyPct": 5.77,
-              "qoqPct": -2.23,
-              "mixPct": 11.9,
-              "mixYoyDeltaPp": 0.7,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231_htm.xml",
-              "sourceForm": "10-K",
-              "filingDate": "2026-03-02",
+              "valueBn": 20.672,
+              "yoyPct": 10.16,
+              "qoqPct": null,
+              "suppressQoQGrowth": true,
+              "mixPct": 22.1,
+              "mixYoyDeltaPp": 9.7,
+              "sourceUrl": "https://www.berkshirehathaway.com/qtrly/1stqtr26.pdf",
+              "sourceForm": "FY2026 Q1 Form 10-Q",
+              "filingDate": "2026-05-02",
               "supportLines": null,
               "supportLinesZh": null,
               "metricMode": null,
               "validationEligible": false,
               "validationNotes": [
                 "operating-business-bucket-disclosure",
-                "berkshire-stable-operating-business-taxonomy"
+                "berkshire-stable-operating-business-taxonomy",
+                "berkshire-fy2026-q1-official-report-supplement"
               ]
             },
             {
               "name": "BNSF Railway",
               "nameZh": "伯灵顿北方圣太菲铁路",
               "memberKey": "burlingtonnorthernsantafecorporation",
-              "valueBn": 5.937,
-              "yoyPct": -2.61,
-              "qoqPct": -0.49,
-              "mixPct": 9.5,
-              "mixYoyDeltaPp": -0.2,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231_htm.xml",
-              "sourceForm": "10-K",
-              "filingDate": "2026-03-02",
+              "valueBn": 5.994,
+              "yoyPct": 4.79,
+              "qoqPct": null,
+              "suppressQoQGrowth": true,
+              "mixPct": 6.4,
+              "mixYoyDeltaPp": -3.1,
+              "sourceUrl": "https://www.berkshirehathaway.com/qtrly/1stqtr26.pdf",
+              "sourceForm": "FY2026 Q1 Form 10-Q",
+              "filingDate": "2026-05-02",
               "supportLines": null,
               "supportLinesZh": null,
               "metricMode": null,
               "validationEligible": false,
               "validationNotes": [
                 "operating-business-bucket-disclosure",
-                "berkshire-stable-operating-business-taxonomy"
+                "berkshire-stable-operating-business-taxonomy",
+                "berkshire-fy2026-q1-official-report-supplement"
               ]
             },
             {
               "name": "Berkshire Hathaway Energy",
               "nameZh": "伯克希尔哈撒韦能源",
               "memberKey": "berkshirehathawayenergycompany",
-              "valueBn": 0.943,
-              "yoyPct": -0.84,
-              "qoqPct": -14.58,
-              "mixPct": 1.5,
-              "mixYoyDeltaPp": -0.0,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231_htm.xml",
-              "sourceForm": "10-K",
-              "filingDate": "2026-03-02",
+              "valueBn": 6.661,
+              "yoyPct": 4.8,
+              "qoqPct": null,
+              "suppressQoQGrowth": true,
+              "mixPct": 7.1,
+              "mixYoyDeltaPp": 5.8,
+              "sourceUrl": "https://www.berkshirehathaway.com/qtrly/1stqtr26.pdf",
+              "sourceForm": "FY2026 Q1 Form 10-Q",
+              "filingDate": "2026-05-02",
               "supportLines": null,
               "supportLinesZh": null,
               "metricMode": null,
               "validationEligible": false,
               "validationNotes": [
                 "operating-business-bucket-disclosure",
-                "berkshire-stable-operating-business-taxonomy"
+                "berkshire-stable-operating-business-taxonomy",
+                "berkshire-fy2026-q1-official-report-supplement"
               ]
             },
             {
               "name": "Service & Retail businesses",
               "nameZh": "服务与零售业务",
               "memberKey": "serviceretailbusinesses",
-              "valueBn": 0.039,
-              "yoyPct": -27.78,
-              "qoqPct": 14.71,
-              "mixPct": 0.1,
-              "mixYoyDeltaPp": -0.0,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231_htm.xml",
-              "sourceForm": "10-K",
-              "filingDate": "2026-03-02",
+              "valueBn": 10.989,
+              "yoyPct": 8.4,
+              "qoqPct": null,
+              "suppressQoQGrowth": true,
+              "mixPct": 11.7,
+              "mixYoyDeltaPp": 11.6,
+              "sourceUrl": "https://www.berkshirehathaway.com/qtrly/1stqtr26.pdf",
+              "sourceForm": "FY2026 Q1 Form 10-Q",
+              "filingDate": "2026-05-02",
               "supportLines": null,
               "supportLinesZh": null,
               "metricMode": null,
               "validationEligible": false,
               "validationNotes": [
                 "operating-business-bucket-disclosure",
-                "berkshire-stable-operating-business-taxonomy"
+                "berkshire-stable-operating-business-taxonomy",
+                "berkshire-fy2026-q1-official-report-supplement"
               ]
             }
           ],
-          "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-          "officialSegmentSource": "official-filings",
-          "displayCurrency": "USD",
-          "displayScaleFactor": 1,
-          "statementMeta": {
-            "statementSource": "generic-official-filing-table",
-            "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231.htm",
-            "statementValueMode": "direct",
-            "statementSpanQuarters": 1,
-            "qualityFlags": [],
-            "adapterId": "generic_filing_tables"
-          },
+          "officialRevenueStyle": "berkshire-operating-businesses",
           "fieldSources": {
             "revenueBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 120.0,
-              "sourceUrl": null
-            },
-            "costOfRevenueBn": {
-              "adapterId": "generic_filing_tables",
-              "label": "Generic official filing table parser",
-              "score": 87.0,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231.htm"
-            },
-            "grossProfitBn": {
-              "adapterId": "generic_filing_tables",
-              "label": "Generic official filing table parser",
-              "score": 87.0,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231.htm"
-            },
-            "sgnaBn": {
-              "adapterId": "generic_filing_tables",
-              "label": "Generic official filing table parser",
-              "score": 85.0,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231.htm"
-            },
-            "rndBn": {
-              "adapterId": "generic_filing_tables",
-              "label": "Generic official filing table parser",
-              "score": 85.0,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231.htm"
-            },
-            "otherOpexBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 110.0,
-              "sourceUrl": null
-            },
-            "operatingExpensesBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 118.0,
-              "sourceUrl": null
-            },
-            "operatingIncomeBn": {
-              "adapterId": "generic_filing_tables",
-              "label": "Generic official filing table parser",
-              "score": 87.0,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231.htm"
-            },
-            "nonOperatingBn": {
-              "adapterId": "generic_filing_tables",
-              "label": "Generic official filing table parser",
-              "score": 83.0,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231.htm"
-            },
-            "pretaxIncomeBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 118.0,
-              "sourceUrl": null
-            },
-            "taxBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 112.0,
-              "sourceUrl": null
-            },
-            "netIncomeBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 118.0,
-              "sourceUrl": null
-            },
-            "statementMeta": {
-              "adapterId": "generic_filing_tables",
-              "label": "Generic official filing table parser",
-              "score": 13.5,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231.htm"
-            },
-            "officialRevenueSegments": {
-              "adapterId": "official_revenue_structures",
-              "label": "Official filing revenue structure",
-              "score": 114.0,
-              "sourceUrl": null
+              "adapterId": "berkshire_earnings_release_supplement",
+              "label": "Berkshire Hathaway FY2026 Q1 Form 10-Q",
+              "score": 170,
+              "sourceUrl": "https://www.berkshirehathaway.com/qtrly/1stqtr26.pdf"
             }
-          },
-          "extractionDiagnostics": {
-            "qualityScore": 93,
-            "availableRequiredFieldCount": 3,
-            "requiredFieldCount": 3,
-            "sourceFieldCount": 14,
-            "hasCostBreakdownProfile": false,
-            "costBreakdownMode": "none",
-            "opexBreakdownMode": "none",
-            "revenueSegmentCoveragePct": 100.0,
-            "costBreakdownCoveragePct": null,
-            "opexBreakdownCoveragePct": 0,
-            "revenueSegmentResidualBn": 0,
-            "costBreakdownResidualBn": null,
-            "opexBreakdownResidualBn": null,
-            "statementSource": "generic-official-filing-table",
-            "statementValueMode": "direct",
-            "statementSpanQuarters": 1,
-            "statementQualityFlags": [],
-            "issues": [
-              "opex-breakdown-coverage-low"
-            ]
-          },
-          "officialRevenueStyle": "berkshire-operating-businesses"
+          }
         }
       },
       "statementPresets": {},
       "officialRevenueStructureHistory": {
         "source": "official-segment-cache",
         "quarters": {
-          "2025Q4": {
+          "2026Q1": {
             "segments": [
               {
                 "name": "Insurance, Corporate & Other",
                 "nameZh": "保险、企业及其他",
                 "memberKey": "insurancecorporateother",
-                "valueBn": 27.507,
-                "yoyPct": -2.71,
-                "qoqPct": 0.97,
-                "mixPct": 43.8,
-                "mixYoyDeltaPp": -1.1,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231_htm.xml",
-                "sourceForm": "10-K",
-                "filingDate": "2026-03-02",
+                "valueBn": 26.178,
+                "yoyPct": 0.14,
+                "qoqPct": null,
+                "suppressQoQGrowth": true,
+                "mixPct": 27.9,
+                "mixYoyDeltaPp": -16.5,
+                "sourceUrl": "https://www.berkshirehathaway.com/qtrly/1stqtr26.pdf",
+                "sourceForm": "FY2026 Q1 Form 10-Q",
+                "filingDate": "2026-05-02",
                 "supportLines": null,
                 "supportLinesZh": null,
                 "metricMode": null,
                 "validationEligible": false,
                 "validationNotes": [
                   "operating-business-bucket-disclosure",
-                  "berkshire-stable-operating-business-taxonomy"
+                  "berkshire-stable-operating-business-taxonomy",
+                  "berkshire-fy2026-q1-official-report-supplement"
                 ]
               },
               {
                 "name": "Pilot Travel Centers",
                 "nameZh": "Pilot 旅行中心",
                 "memberKey": "pilottravelcentersllc",
-                "valueBn": 10.693,
-                "yoyPct": -75.9,
-                "qoqPct": -0.71,
-                "mixPct": 17.0,
-                "mixYoyDeltaPp": -53.5,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231_htm.xml",
-                "sourceForm": "10-K",
-                "filingDate": "2026-03-02",
+                "valueBn": 11.245,
+                "yoyPct": 7.81,
+                "qoqPct": null,
+                "suppressQoQGrowth": true,
+                "mixPct": 12.0,
+                "mixYoyDeltaPp": -5.1,
+                "sourceUrl": "https://www.berkshirehathaway.com/qtrly/1stqtr26.pdf",
+                "sourceForm": "FY2026 Q1 Form 10-Q",
+                "filingDate": "2026-05-02",
                 "supportLines": null,
                 "supportLinesZh": null,
                 "metricMode": null,
                 "validationEligible": false,
                 "validationNotes": [
                   "operating-business-bucket-disclosure",
-                  "berkshire-stable-operating-business-taxonomy"
+                  "berkshire-stable-operating-business-taxonomy",
+                  "berkshire-fy2026-q1-official-report-supplement"
                 ]
               },
               {
                 "name": "McLane Company",
                 "nameZh": "麦克莱恩公司",
                 "memberKey": "mclanecompany",
-                "valueBn": 7.855,
-                "yoyPct": -11.31,
-                "qoqPct": -0.37,
-                "mixPct": 12.5,
-                "mixYoyDeltaPp": -1.6,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231_htm.xml",
-                "sourceForm": "10-K",
-                "filingDate": "2026-03-02",
+                "valueBn": 11.936,
+                "yoyPct": -1.96,
+                "qoqPct": null,
+                "suppressQoQGrowth": true,
+                "mixPct": 12.7,
+                "mixYoyDeltaPp": 0.2,
+                "sourceUrl": "https://www.berkshirehathaway.com/qtrly/1stqtr26.pdf",
+                "sourceForm": "FY2026 Q1 Form 10-Q",
+                "filingDate": "2026-05-02",
                 "supportLines": null,
                 "supportLinesZh": null,
                 "metricMode": null,
                 "validationEligible": false,
                 "validationNotes": [
                   "operating-business-bucket-disclosure",
-                  "berkshire-stable-operating-business-taxonomy"
+                  "berkshire-stable-operating-business-taxonomy",
+                  "berkshire-fy2026-q1-official-report-supplement"
                 ]
               },
               {
                 "name": "Manufacturing businesses",
                 "nameZh": "制造业务",
                 "memberKey": "manufacturingbusinesses",
-                "valueBn": 7.46,
-                "yoyPct": 5.77,
-                "qoqPct": -2.23,
-                "mixPct": 11.9,
-                "mixYoyDeltaPp": 0.7,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231_htm.xml",
-                "sourceForm": "10-K",
-                "filingDate": "2026-03-02",
+                "valueBn": 20.672,
+                "yoyPct": 10.16,
+                "qoqPct": null,
+                "suppressQoQGrowth": true,
+                "mixPct": 22.1,
+                "mixYoyDeltaPp": 9.7,
+                "sourceUrl": "https://www.berkshirehathaway.com/qtrly/1stqtr26.pdf",
+                "sourceForm": "FY2026 Q1 Form 10-Q",
+                "filingDate": "2026-05-02",
                 "supportLines": null,
                 "supportLinesZh": null,
                 "metricMode": null,
                 "validationEligible": false,
                 "validationNotes": [
                   "operating-business-bucket-disclosure",
-                  "berkshire-stable-operating-business-taxonomy"
+                  "berkshire-stable-operating-business-taxonomy",
+                  "berkshire-fy2026-q1-official-report-supplement"
                 ]
               },
               {
                 "name": "BNSF Railway",
                 "nameZh": "伯灵顿北方圣太菲铁路",
                 "memberKey": "burlingtonnorthernsantafecorporation",
-                "valueBn": 5.937,
-                "yoyPct": -2.61,
-                "qoqPct": -0.49,
-                "mixPct": 9.5,
-                "mixYoyDeltaPp": -0.2,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231_htm.xml",
-                "sourceForm": "10-K",
-                "filingDate": "2026-03-02",
+                "valueBn": 5.994,
+                "yoyPct": 4.79,
+                "qoqPct": null,
+                "suppressQoQGrowth": true,
+                "mixPct": 6.4,
+                "mixYoyDeltaPp": -3.1,
+                "sourceUrl": "https://www.berkshirehathaway.com/qtrly/1stqtr26.pdf",
+                "sourceForm": "FY2026 Q1 Form 10-Q",
+                "filingDate": "2026-05-02",
                 "supportLines": null,
                 "supportLinesZh": null,
                 "metricMode": null,
                 "validationEligible": false,
                 "validationNotes": [
                   "operating-business-bucket-disclosure",
-                  "berkshire-stable-operating-business-taxonomy"
+                  "berkshire-stable-operating-business-taxonomy",
+                  "berkshire-fy2026-q1-official-report-supplement"
                 ]
               },
               {
                 "name": "Berkshire Hathaway Energy",
                 "nameZh": "伯克希尔哈撒韦能源",
                 "memberKey": "berkshirehathawayenergycompany",
-                "valueBn": 0.943,
-                "yoyPct": -0.84,
-                "qoqPct": -14.58,
-                "mixPct": 1.5,
-                "mixYoyDeltaPp": -0.0,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231_htm.xml",
-                "sourceForm": "10-K",
-                "filingDate": "2026-03-02",
+                "valueBn": 6.661,
+                "yoyPct": 4.8,
+                "qoqPct": null,
+                "suppressQoQGrowth": true,
+                "mixPct": 7.1,
+                "mixYoyDeltaPp": 5.8,
+                "sourceUrl": "https://www.berkshirehathaway.com/qtrly/1stqtr26.pdf",
+                "sourceForm": "FY2026 Q1 Form 10-Q",
+                "filingDate": "2026-05-02",
                 "supportLines": null,
                 "supportLinesZh": null,
                 "metricMode": null,
                 "validationEligible": false,
                 "validationNotes": [
                   "operating-business-bucket-disclosure",
-                  "berkshire-stable-operating-business-taxonomy"
+                  "berkshire-stable-operating-business-taxonomy",
+                  "berkshire-fy2026-q1-official-report-supplement"
                 ]
               },
               {
                 "name": "Service & Retail businesses",
                 "nameZh": "服务与零售业务",
                 "memberKey": "serviceretailbusinesses",
-                "valueBn": 0.039,
-                "yoyPct": -27.78,
-                "qoqPct": 14.71,
-                "mixPct": 0.1,
-                "mixYoyDeltaPp": -0.0,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231_htm.xml",
-                "sourceForm": "10-K",
-                "filingDate": "2026-03-02",
+                "valueBn": 10.989,
+                "yoyPct": 8.4,
+                "qoqPct": null,
+                "suppressQoQGrowth": true,
+                "mixPct": 11.7,
+                "mixYoyDeltaPp": 11.6,
+                "sourceUrl": "https://www.berkshirehathaway.com/qtrly/1stqtr26.pdf",
+                "sourceForm": "FY2026 Q1 Form 10-Q",
+                "filingDate": "2026-05-02",
                 "supportLines": null,
                 "supportLinesZh": null,
                 "metricMode": null,
                 "validationEligible": false,
                 "validationNotes": [
                   "operating-business-bucket-disclosure",
-                  "berkshire-stable-operating-business-taxonomy"
+                  "berkshire-stable-operating-business-taxonomy",
+                  "berkshire-fy2026-q1-official-report-supplement"
                 ]
               }
             ],
-            "style": "berkshire-operating-businesses"
+            "style": "berkshire-operating-businesses",
+            "sourceUrl": "https://www.berkshirehathaway.com/qtrly/1stqtr26.pdf",
+            "sourceForm": "FY2026 Q1 Form 10-Q",
+            "filingDate": "2026-05-02"
           }
         },
         "filingsUsed": [
@@ -6338,6 +5572,12 @@
             "accession": "0001193125-19-137433",
             "primaryDocument": "d728539d10q.htm",
             "instance": "brka-20190331.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2026-05-02",
+            "periodEnd": "2026-03-31",
+            "sourceUrl": "https://www.berkshirehathaway.com/qtrly/1stqtr26.pdf"
           }
         ],
         "errors": []
