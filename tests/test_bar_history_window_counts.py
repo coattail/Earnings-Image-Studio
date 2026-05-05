@@ -106,7 +106,7 @@ class BarHistoryWindowCountTests(unittest.TestCase):
     def test_segment_colors_stay_stable_when_anchor_quarter_changes(self) -> None:
         company = load_dataset_company("amd")
         early_colors = legend_color_by_label(render_bar_svg(company, "amd-early-window", "2022Q3"))
-        latest_colors = legend_color_by_label(render_bar_svg(company, "amd-latest-window", "2025Q4"))
+        latest_colors = legend_color_by_label(render_bar_svg(company, "amd-latest-window", "2026Q1"))
 
         for label in ["数据中心", "客户端", "游戏", "嵌入式"]:
             self.assertIn(label, early_colors)

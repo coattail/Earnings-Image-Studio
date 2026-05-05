@@ -31,7 +31,7 @@ class AmdCompanyUniverseTests(unittest.TestCase):
         amd = next((company for company in dataset["companies"] if company["id"] == "amd"), None)
 
         self.assertIsNotNone(amd)
-        self.assertIn("2025Q4", amd["quarters"])
+        self.assertIn("2026Q1", amd["quarters"])
         self.assertGreaterEqual(len(amd["quarters"]), 30)
         segmented_quarters = [
             quarter
@@ -39,10 +39,10 @@ class AmdCompanyUniverseTests(unittest.TestCase):
             if amd["financials"].get(quarter, {}).get("officialRevenueSegments")
         ]
         self.assertGreaterEqual(len(segmented_quarters), 30)
-        self.assertEqual(segmented_quarters[-1], "2025Q4")
+        self.assertEqual(segmented_quarters[-1], "2026Q1")
         self.assertGreaterEqual(len(amd["financials"]["2018Q3"]["officialRevenueSegments"]), 2)
         self.assertEqual(
-            {row["memberKey"] for row in amd["financials"]["2025Q4"]["officialRevenueSegments"]},
+            {row["memberKey"] for row in amd["financials"]["2026Q1"]["officialRevenueSegments"]},
             {"datacenter", "client", "gaming", "embedded"},
         )
         for quarter in segmented_quarters:
