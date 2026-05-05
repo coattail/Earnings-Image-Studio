@@ -646,19 +646,37 @@ function renderPixelReplicaSvg(snapshot) {
   const profitRiseBaseY = scaleY(safeNumber(snapshot.layout?.profitRiseBaseY, usesHeroLockups ? 16 : 12));
   const profitRiseMinY = scaleY(safeNumber(snapshot.layout?.profitRiseMinY, usesHeroLockups ? 40 : 34));
   const profitRiseMaxY = scaleY(safeNumber(snapshot.layout?.profitRiseMaxY, usesHeroLockups ? 106 : 92));
-  const profitRiseY = clamp(
+  const operatingRetentionRatio = grossHeight > 0.5 ? opHeight / grossHeight : 0;
+  const profitRiseDamping = clamp(
+    safeNumber(
+      snapshot.layout?.profitRiseDamping,
+      1 - clamp(
+        (operatingRetentionRatio - safeNumber(snapshot.layout?.profitRiseDampingStartRatio, 0.38)) *
+          safeNumber(snapshot.layout?.profitRiseDampingSlope, 1.28),
+        0,
+        safeNumber(snapshot.layout?.profitRiseDampingMax, 0.34)
+      )
+    ),
+    0.56,
+    1
+  );
+  const profitRiseRawY =
     Math.max(grossHeight - opHeight, 0) * profitRiseRatio +
-      profitRiseBaseY +
-      positiveFlowRiseBoostY * 0.7 +
-      lowerRightPressureY *
-        safeNumber(
-          snapshot.layout?.profitRiseLowerRightPressureFactor,
-          costBreakdownNearOpexColumn ? 0.82 : rawCostBreakdown.length >= 2 ? 0.7 : 0.54
-        ),
-    profitRiseMinY,
+    profitRiseBaseY +
+    positiveFlowRiseBoostY * 0.7 +
+    lowerRightPressureY *
+      safeNumber(
+        snapshot.layout?.profitRiseLowerRightPressureFactor,
+        costBreakdownNearOpexColumn ? 0.82 : rawCostBreakdown.length >= 2 ? 0.7 : 0.54
+      );
+  const profitRiseCeilingY =
     profitRiseMaxY +
-      positiveFlowRiseBoostY +
-      lowerRightPressureY * safeNumber(snapshot.layout?.profitRiseLowerRightPressureMaxFactor, 0.94)
+    positiveFlowRiseBoostY +
+    lowerRightPressureY * safeNumber(snapshot.layout?.profitRiseLowerRightPressureMaxFactor, 0.94);
+  const profitRiseY = clamp(
+    profitRiseRawY * profitRiseDamping,
+    profitRiseMinY,
+    Math.max(profitRiseMinY, profitRiseCeilingY * profitRiseDamping)
   );
   const costMinGapFromGross = scaleY(safeNumber(snapshot.layout?.costMinGapFromGross, usesHeroLockups ? 20 : 18));
   const costGapRatio = safeNumber(snapshot.layout?.costGapRatio, 0.018);
@@ -8797,9 +8815,15 @@ function renderPixelReplicaSvg(snapshot) {
           positiveLabelBacktrackMinX,
           width - 56 - positiveLabelWidthPadding
         );
+        const singlePositivePrefersLeftLabel =
+          positiveAdjustments.length === 1 &&
+          leftCorridor >= labelBlockWidth + safeNumber(snapshot.layout?.positiveSingleLabelMinLeftCorridorX, 34);
         const positiveLabelCandidatePriority = (type, variant = null) => {
           if (type === "left") {
             if (variant === "extreme-left") return -2.4;
+            if (singlePositivePrefersLeftLabel) {
+              return safeNumber(snapshot.layout?.positiveSingleLeftLabelPriority, -0.55);
+            }
             return leftCorridor >= labelBlockWidth + safeNumber(snapshot.layout?.positiveLabelMinCorridorX, 72) ? 1.2 : 3.2;
           }
           let priority = type === "above" ? 0 : 0.1;
@@ -8900,6 +8924,12 @@ function renderPixelReplicaSvg(snapshot) {
         };
         const evaluatePlacement = (candidate) => {
           const baseRect = labelBoundsRect(candidate.anchor, candidate.x, candidate.centerY);
+          const positiveNodeObstacleRect = {
+            left: positiveNodeX,
+            right: positiveNodeX + positiveNodeWidth,
+            top: positiveSourceTop,
+            bottom: positiveSourceBottom,
+          };
           const effectiveRibbonClearance =
             candidate.variant === "branch-follow" &&
             candidate.type === "below" &&
@@ -8919,6 +8949,7 @@ function renderPixelReplicaSvg(snapshot) {
           const resolvedCenterY = clamp(candidate.centerY, minCenterY, maxCenterY);
           const rect = labelBoundsRect(candidate.anchor, candidate.x, resolvedCenterY);
           if (!labelRectIsValid(rect)) return null;
+          if (rectsOverlap(rect, positiveNodeObstacleRect, positiveLabelObstaclePadding * 0.5)) return null;
           if (rect.top < hardUpperBoundary) return null;
           if (Number.isFinite(hardLowerBoundaryTop) && rect.bottom > hardLowerBoundaryTop - effectiveRibbonClearance) return null;
           const collision = collisionPenalty(rect);

@@ -2661,6 +2661,10 @@ const BAR_SEGMENT_CANONICAL_BY_COMPANY = Object.freeze({
     freshfood: "freshfoods",
   }),
   palantir: Object.freeze({
+    government: "governmentoperating",
+    governmentoperating: "governmentoperating",
+    governmental: "governmentoperating",
+    commercial: "commercial",
     commercialoperating: "commercial",
   }),
   walmart: Object.freeze({
@@ -2736,6 +2740,8 @@ const BAR_SEGMENT_LABEL_OVERRIDES = Object.freeze({
   ipad: Object.freeze({ name: "iPad", nameZh: "iPad" }),
   wearables: Object.freeze({ name: "Wearables", nameZh: "可穿戴设备" }),
   samsclub: Object.freeze({ name: "Sam's Club", nameZh: "山姆会员店" }),
+  governmentoperating: Object.freeze({ name: "Government Operating", nameZh: "政府业务" }),
+  commercial: Object.freeze({ name: "Commercial", nameZh: "商业" }),
   auto: Object.freeze({ name: "Automotive", nameZh: "汽车业务" }),
   energygenerationstorage: Object.freeze({ name: "Energy generation & storage", nameZh: "能源发电与储能" }),
   computinggraphics: Object.freeze({ name: "Computing & Graphics", nameZh: "计算与图形" }),

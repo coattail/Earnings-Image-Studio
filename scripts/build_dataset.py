@@ -164,6 +164,13 @@ BAR_SEGMENT_CANONICAL_BY_COMPANY: dict[str, dict[str, str]] = {
     "amazon": {
         "advertising": "advertisingservices",
     },
+    "palantir": {
+        "government": "governmentoperating",
+        "governmentoperating": "governmentoperating",
+        "governmental": "governmentoperating",
+        "commercial": "commercial",
+        "commercialoperating": "commercial",
+    },
     "visa": {
         "servicerevenue": "servicerevenues",
         "servicerevenues": "servicerevenues",
