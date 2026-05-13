@@ -3027,9 +3027,18 @@ function companyBrandBarPalette(companyId, minCount = 8) {
   const overridePalette = BAR_COMPANY_PALETTE_OVERRIDES[companyKey];
   if (Array.isArray(overridePalette) && overridePalette.length) {
     const mergedOverride = uniqueBarPalette([...overridePalette, ...BAR_SEGMENT_COLOR_POOL]);
-    while (mergedOverride.length < minCount) {
-      const idx = mergedOverride.length % BAR_SEGMENT_COLOR_POOL.length;
+    let attempts = 0;
+    while (mergedOverride.length < minCount && attempts < minCount * BAR_SEGMENT_COLOR_POOL.length * 2) {
+      const idx = attempts % BAR_SEGMENT_COLOR_POOL.length;
+      const before = mergedOverride.length;
       pushPaletteColorWithContrast(mergedOverride, BAR_SEGMENT_COLOR_POOL[idx], 10, 0.03);
+      if (mergedOverride.length === before) {
+        pushPaletteColorWithContrast(mergedOverride, rotateColorHue(BAR_SEGMENT_COLOR_POOL[idx], attempts * 17), 6, 0.015);
+      }
+      attempts += 1;
+    }
+    for (let index = 0; mergedOverride.length < minCount; index += 1) {
+      mergedOverride.push(rotateColorHue(BAR_SEGMENT_COLOR_POOL[index % BAR_SEGMENT_COLOR_POOL.length], index * 23));
     }
     return mergedOverride;
   }
@@ -3053,12 +3062,21 @@ function companyBrandBarPalette(companyId, minCount = 8) {
   [primary, secondary, accent, complementary, splitA, splitB, warmCompanion, coolCompanion, neutralCompanion, punchCompanion, bridgeCompanion, ...rotatingPool].forEach(
     (color) => pushPaletteColorWithContrast(palette, color, 18, 0.06)
   );
-  while (palette.length < minCount) {
-    const idx = palette.length % BAR_SEGMENT_COLOR_POOL.length;
+  let attempts = 0;
+  while (palette.length < minCount && attempts < minCount * BAR_SEGMENT_COLOR_POOL.length * 2) {
+    const idx = attempts % BAR_SEGMENT_COLOR_POOL.length;
+    const before = palette.length;
     pushPaletteColorWithContrast(palette, BAR_SEGMENT_COLOR_POOL[idx], 10, 0.03);
     if (palette.length < minCount) {
       pushPaletteColorWithContrast(palette, mixHex(BAR_SEGMENT_COLOR_POOL[idx], "#FFFFFF", 0.12), 10, 0.03);
     }
+    if (palette.length === before) {
+      pushPaletteColorWithContrast(palette, rotateColorHue(BAR_SEGMENT_COLOR_POOL[idx], attempts * 17), 6, 0.015);
+    }
+    attempts += 1;
+  }
+  for (let index = 0; palette.length < minCount; index += 1) {
+    palette.push(rotateColorHue(BAR_SEGMENT_COLOR_POOL[index % BAR_SEGMENT_COLOR_POOL.length], index * 23));
   }
   return palette;
 }
