@@ -3712,7 +3712,20 @@ function selectQuarterBarSource(company, entry, structurePayload = null) {
       : entryForNormalization;
     let normalizedRows = normalizeBarSourceRows(entryWithCompanyId, sourceRows);
     if (!normalizedRows.length) return;
-    if (entry) {
+    if (String(company?.id || "").toLowerCase() === "alibaba") {
+      const comparableRows = buildAlibabaComparableBarRows(entryWithCompanyId, normalizedRows);
+      if (comparableRows.length >= 2) {
+        normalizedRows = comparableRows.map((item) => ({
+          id: item.id || item.memberKey,
+          memberKey: item.id || item.memberKey,
+          name: item.name,
+          nameZh: item.nameZh,
+          valueBn: item.valueBn,
+          filingDate: item.filingDate || null,
+          periodEnd: item.periodEnd || entry?.periodEnd || null,
+        }));
+      }
+    } else if (entry) {
       normalizedRows = expandBarDetailRows(company, entry, normalizedRows);
     }
     if (!normalizedRows.length) return;
@@ -3823,6 +3836,28 @@ function selectQuarterBarSource(company, entry, structurePayload = null) {
       valueBn: Number(item.valueBn.toFixed(3)),
     }))
     .sort((left, right) => safeNumber(right.valueBn) - safeNumber(left.valueBn));
+  if (String(company?.id || "").toLowerCase() === "alibaba") {
+    const comparableRows = buildAlibabaComparableBarRows(entryForNormalization, normalizedMergedRows);
+    if (comparableRows.length >= 2) {
+      return {
+        rows: comparableRows
+          .map((item) => ({
+            key: item.id || item.memberKey,
+            name: item.name,
+            nameZh: item.nameZh,
+            valueBn: item.valueBn,
+            filingDate: item.filingDate || null,
+            periodEnd: item.periodEnd || null,
+          }))
+          .filter((item) => item.key && safeNumber(item.valueBn) > 0.02),
+        source: selectedCandidate?.source || "alibaba-comparable-groups",
+        score: selectedCandidate?.score ?? null,
+        coverageRatio: selectedCandidate?.coverageRatio ?? null,
+        topShare: selectedCandidate?.topShare ?? null,
+        lagMedianDays: selectedCandidate?.lagMedianDays ?? null,
+      };
+    }
+  }
   return {
     rows: normalizedMergedRows,
     source: selectedCandidate?.source || (normalizedMergedRows.length === 1 && normalizedMergedRows[0]?.key === "reportedrevenue" ? "fallback-reported" : "none"),
@@ -4244,9 +4279,8 @@ function buildRevenueSegmentBarHistory(company, anchorQuarterKey, maxQuarters = 
         }
       });
     });
-    const sortedSegmentKeys = [...totals.entries()]
-      .sort((left, right) => right[1] - left[1])
-      .map(([key]) => key);
+    const comparableOrder = ALIBABA_BAR_COMPARABLE_SEGMENTS.map((item) => item.key);
+    const sortedSegmentKeys = comparableOrder.filter((key) => totals.has(key));
     const colorBySegment = stableBarColorMap(company?.id, sortedSegmentKeys);
     const segmentStats = sortedSegmentKeys.map((segmentKey) => ({
       key: segmentKey,

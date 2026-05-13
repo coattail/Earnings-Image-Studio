@@ -636,6 +636,32 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
   const fxNoteY = hasConvertedCurrency ? height - 34 : chartTop - 10;
   const fxNoteX = hasConvertedCurrency ? 38 : plotLeft;
   const fxNoteFontSize = hasConvertedCurrency ? 20 : 18;
+  const taxonomyBreakAnnotation =
+    String(company?.id || "").toLowerCase() === "alibaba"
+      ? (() => {
+          const breakIndex = history.quarters.findIndex(
+            (quarter) => quarter?.quarterKey === "2023Q2" || String(quarter?.label || "").trim().toUpperCase() === "Q1 FY24"
+          );
+          if (breakIndex < 0) return "";
+          const markerX = barStartX + breakIndex * (barWidth + barGap) - Math.max(4, barGap / 2);
+          const label = currentChartLanguage() === "en" ? "Segment taxonomy changed from Q1 FY24" : "Q1 FY24 起分部口径调整";
+          const labelFontSize = currentChartLanguage() === "en" ? 18 : 20;
+          const labelWidth = approximateTextWidth(label, labelFontSize) + 28;
+          const labelX = clamp(markerX + 12, plotLeft + 10, plotRight - labelWidth - 6);
+          const labelY = chartTop + 18;
+          return `
+            <g data-bar-taxonomy-break="alibaba-fy24" opacity="0.92">
+              <line x1="${markerX.toFixed(2)}" y1="${(chartTop + 6).toFixed(2)}" x2="${markerX.toFixed(2)}" y2="${baselineY}" stroke="#5C7FA8" stroke-width="2" stroke-dasharray="8 8"></line>
+              <rect x="${labelX.toFixed(2)}" y="${(labelY - labelFontSize - 12).toFixed(2)}" width="${labelWidth.toFixed(
+                2
+              )}" height="${(labelFontSize + 18).toFixed(2)}" rx="7" fill="#E8EEF5" stroke="#CAD6E3" stroke-width="1"></rect>
+              <text x="${(labelX + 14).toFixed(2)}" y="${(labelY - 4).toFixed(
+                2
+              )}" text-anchor="start" font-size="${labelFontSize}" font-weight="700" fill="#4E6684">${escapeHtml(label)}</text>
+            </g>
+          `;
+        })()
+      : "";
 
   let svg = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="${escapeHtml(chartTitle)}" data-chart-mode="bars">
@@ -701,6 +727,7 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
     )}</text>`;
   });
   svg += `<line x1="${plotLeft}" y1="${baselineY}" x2="${plotRight}" y2="${baselineY}" stroke="#C9CED6" stroke-width="2.2" data-bar-axis="true"></line>`;
+  svg += taxonomyBreakAnnotation;
   svg += `
     <g opacity="0.98" data-bar-chart-logo="true" data-logo-zone-left="${chartLogoZone.left.toFixed(2)}" data-logo-zone-top="${chartLogoZone.top.toFixed(
       2

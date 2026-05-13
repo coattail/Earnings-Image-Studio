@@ -1,4 +1,5 @@
 import json
+import re
 import subprocess
 import tempfile
 import unittest
@@ -81,13 +82,21 @@ def render_bar_svg(company_payload: dict[str, object], basename: str, quarter: s
 
 
 def legend_color_by_label(svg_markup: str) -> dict[str, str]:
-    import re
-
     matches = re.findall(
         r'<rect x="[^"]+" y="[^"]+" width="(?:24|28)" height="(?:24|28)"[^>]* fill="([^"]+)"></rect><text[^>]*>([^<]+)</text>',
         svg_markup,
     )
     return {label: color for color, label in matches}
+
+
+def legend_labels(svg_markup: str) -> list[str]:
+    return [
+        label
+        for _color, label in re.findall(
+            r'<rect x="[^"]+" y="[^"]+" width="(?:24|28)" height="(?:24|28)"[^>]* fill="([^"]+)"></rect><text[^>]*>([^<]+)</text>',
+            svg_markup,
+        )
+    ]
 
 
 class BarHistoryWindowCountTests(unittest.TestCase):
@@ -116,6 +125,20 @@ class BarHistoryWindowCountTests(unittest.TestCase):
                 latest_colors[label],
                 f"{label} should keep the same bar color regardless of the selected quarter.",
             )
+
+    def test_alibaba_bar_history_uses_four_comparable_business_groups(self) -> None:
+        labels = legend_labels(render_bar_svg(load_dataset_company("alibaba"), "alibaba-bar-taxonomy"))
+
+        self.assertEqual(
+            labels,
+            ["阿里巴巴中国电商集团", "其他业务", "云智能集团", "阿里巴巴数字商业集团"],
+        )
+
+    def test_alibaba_bar_history_marks_fy24_taxonomy_break(self) -> None:
+        svg_markup = render_bar_svg(load_dataset_company("alibaba"), "alibaba-bar-taxonomy-break")
+
+        self.assertIn('data-bar-taxonomy-break="alibaba-fy24"', svg_markup)
+        self.assertIn("Q1 FY24 起分部口径调整", svg_markup)
 
     def test_visa_sankey_revenue_groups_match_bar_taxonomy(self) -> None:
         script = r"""

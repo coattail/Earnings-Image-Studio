@@ -30,7 +30,7 @@ const state = {
   },
 };
 
-const BUILD_ASSET_VERSION = "20260514-alibaba-bar-taxonomy-v165";
+const BUILD_ASSET_VERSION = "20260514-alibaba-bar-taxonomy-v168";
 const CORPORATE_LOGO_AREA_MULTIPLIER = 1.728;
 const CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER = Math.sqrt(CORPORATE_LOGO_AREA_MULTIPLIER);
 const CORPORATE_LOGO_REVENUE_GAP_MULTIPLIER = 1.2;
@@ -1411,7 +1411,7 @@ const CHART_LABEL_TRANSLATIONS_ZH_EXACT = {
   "international games": "国际游戏",
   "social networks": "社交网络",
   "alibaba china e-commerce group": "阿里巴巴中国电商集团",
-  "alibaba international digital commerce group": "阿里国际数字商业集团",
+  "alibaba international digital commerce group": "阿里巴巴数字商业集团",
   commerce: "商业",
   "cloud computing": "云计算",
   cloud: "云业务",
@@ -2575,9 +2575,9 @@ const ALIBABA_SEGMENT_PHASE_KEYS = {
 // Keep Alibaba bar buckets aligned with the Sankey's official segment taxonomy.
 const ALIBABA_BAR_COMPARABLE_SEGMENTS = Object.freeze([
   Object.freeze({ key: "alibabachinaecommercegroup", name: "Alibaba China E-commerce Group", nameZh: "阿里巴巴中国电商集团" }),
-  Object.freeze({ key: "alidcg", name: "Alibaba International Digital Commerce Group", nameZh: "阿里国际数字商业集团" }),
-  Object.freeze({ key: "cloudintelligencegroup", name: "Cloud Intelligence Group", nameZh: "云业务" }),
   Object.freeze({ key: "allothers", name: "All others", nameZh: "其他业务" }),
+  Object.freeze({ key: "cloudintelligencegroup", name: "Cloud Intelligence Group", nameZh: "云智能集团" }),
+  Object.freeze({ key: "alidcg", name: "Alibaba International Digital Commerce Group", nameZh: "阿里巴巴数字商业集团" }),
 ]);
 
 const ALIBABA_BAR_PHASE_KEYS = {
@@ -2711,8 +2711,8 @@ function alibabaComparableKeys(memberKey, comparisonRows = []) {
 }
 
 function alibabaBarComparablePhase(rows = []) {
-  const memberKeys = new Set([...(rows || [])].map((item) => normalizeLabelKey(item?.memberKey || item?.id || item?.name)));
-  if ([...ALIBABA_BAR_PHASE_KEYS.comparable].some((key) => memberKeys.has(key))) {
+  const memberKeys = new Set([...(rows || [])].map((item) => normalizeLabelKey(item?.memberKey || item?.key || item?.id || item?.name)));
+  if ([...ALIBABA_BAR_PHASE_KEYS.comparable].some((key) => memberKeys.has(key)) && memberKeys.has("alibabachinaecommercegroup")) {
     return "comparable";
   }
   if ([...ALIBABA_BAR_PHASE_KEYS.condensedCurrent].some((key) => memberKeys.has(key)) && memberKeys.has("alibabachinaecommercegroup")) {
@@ -2746,7 +2746,7 @@ function buildAlibabaComparableBarRows(entry, rows = []) {
       const memberKeys = new Set(comparableKeysByPhase[segment.key] || []);
       if (!memberKeys.size) return null;
       const matchedRows = normalizedRows.filter((item) => {
-        const itemKey = normalizeLabelKey(item?.memberKey || item?.id || item?.name);
+        const itemKey = normalizeLabelKey(item?.memberKey || item?.key || item?.id || item?.name);
         return memberKeys.has(itemKey);
       });
       const valueBn = matchedRows.reduce((sum, item) => sum + safeNumber(item?.valueBn), 0);
