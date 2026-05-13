@@ -3465,10 +3465,6 @@ function normalizeBarSourceRows(entry, rows = []) {
   if (String(entry?.companyId || "").toLowerCase() === "micron") {
     return normalizeMicronBarRows(entry, rolledUpRows);
   }
-  if (String(entry?.companyId || "").toLowerCase() === "alibaba") {
-    const comparableRows = buildAlibabaComparableBarRows(entry, rolledUpRows);
-    if (comparableRows.length >= 2) return comparableRows;
-  }
   return rolledUpRows;
 }
 
@@ -4209,6 +4205,60 @@ function buildRevenueSegmentBarHistory(company, anchorQuarterKey, maxQuarters = 
       rawSegmentSourceScore: sourceSelection.score,
     };
   });
+
+  if (String(company?.id || "").toLowerCase() === "alibaba") {
+    const visibleQuarterKeySet = new Set(includeAllQuarters ? allValidQuarterKeys : selectedQuarterKeys);
+    const visibleQuarters = quarters.filter((quarter) => visibleQuarterKeySet.has(quarter.quarterKey));
+    if (!visibleQuarters.length) return null;
+    const totals = new Map();
+    const nameRegistry = new Map();
+    quarters.forEach((quarter) => {
+      quarter.segmentRows.forEach((item) => {
+        if (!item?.key) return;
+        if (item.key === "otherrevenue") return;
+        totals.set(item.key, (totals.get(item.key) || 0) + safeNumber(item.valueBn));
+        if (!nameRegistry.has(item.key)) {
+          const canonicalMeta = canonicalBarSegmentMeta(company?.id, item.key, item.name || "Segment", item.nameZh || "");
+          nameRegistry.set(item.key, {
+            name: canonicalMeta.name || item.name || "Segment",
+            nameZh: canonicalMeta.nameZh || item.nameZh || translateBusinessLabelToZh(item.name || "Segment"),
+          });
+        }
+      });
+    });
+    const sortedSegmentKeys = [...totals.entries()]
+      .sort((left, right) => right[1] - left[1])
+      .map(([key]) => key);
+    const colorBySegment = stableBarColorMap(company?.id, sortedSegmentKeys);
+    const segmentStats = sortedSegmentKeys.map((segmentKey) => ({
+      key: segmentKey,
+      totalValueBn: Number(safeNumber(totals.get(segmentKey)).toFixed(3)),
+      name: nameRegistry.get(segmentKey)?.name || "Segment",
+      nameZh: nameRegistry.get(segmentKey)?.nameZh || translateBusinessLabelToZh(nameRegistry.get(segmentKey)?.name || "Segment"),
+      color: colorBySegment[segmentKey],
+    }));
+    const displayCurrencySet = [...new Set(visibleQuarters.map((item) => item.displayCurrency).filter(Boolean))];
+    const sourceCurrencySet = [...new Set(visibleQuarters.map((item) => item.sourceCurrency).filter(Boolean))];
+    return {
+      quarters: visibleQuarters,
+      segmentStats,
+      colorBySegment,
+      stackOrder: segmentStats.slice().sort((left, right) => left.totalValueBn - right.totalValueBn).map((item) => item.key),
+      maxRevenueBn: Math.max(...visibleQuarters.map((item) => safeNumber(item.totalRevenueBn)), 1),
+      anchorQuarterKey: selectedQuarterKeys[selectedQuarterKeys.length - 1] || null,
+      requestedQuarterCount: requestedWindowCount,
+      availableQuarterCount: visibleQuarters.length,
+      missingQuarterCount: 0,
+      imputedQuarterCount: 0,
+      smoothedQuarterCount: 0,
+      reportedSegmentQuarterCount: visibleQuarters.length,
+      displayCurrency: displayCurrencySet.length === 1 ? displayCurrencySet[0] : "MIXED",
+      sourceCurrencies: sourceCurrencySet,
+      convertedQuarterCount: visibleQuarters.filter((item) => Math.abs(safeNumber(item.displayScaleFactor, 1) - 1) > 0.000001).length,
+      windowUnitLabel,
+      windowUnitLabelZh,
+    };
+  }
 
   if (String(company?.id || "").toLowerCase() === "visa") {
     const visibleQuarterKeySet = new Set(includeAllQuarters ? allValidQuarterKeys : selectedQuarterKeys);
