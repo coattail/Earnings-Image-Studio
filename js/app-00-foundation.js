@@ -30,7 +30,7 @@ const state = {
   },
 };
 
-const BUILD_ASSET_VERSION = "20260503-berkshire-q1-v162";
+const BUILD_ASSET_VERSION = "20260514-alibaba-bar-taxonomy-v163";
 const CORPORATE_LOGO_AREA_MULTIPLIER = 1.728;
 const CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER = Math.sqrt(CORPORATE_LOGO_AREA_MULTIPLIER);
 const CORPORATE_LOGO_REVENUE_GAP_MULTIPLIER = 1.2;
@@ -2572,16 +2572,16 @@ const ALIBABA_SEGMENT_PHASE_KEYS = {
   ]),
 };
 
-// For bars we bridge Alibaba to the coarsest fully disclosed quarterly taxonomy,
-// so the full history stays comparable without inventing pre-split subsegments.
+// Keep Alibaba bar buckets aligned with the Sankey's official segment taxonomy.
 const ALIBABA_BAR_COMPARABLE_SEGMENTS = Object.freeze([
-  Object.freeze({ key: "alibabacommerce", name: "Commerce", nameZh: "商业" }),
-  Object.freeze({ key: "alibabacloud", name: "Cloud", nameZh: "云业务" }),
-  Object.freeze({ key: "alibabaothers", name: "All others", nameZh: "其他业务" }),
+  Object.freeze({ key: "alibabachinaecommercegroup", name: "Alibaba China E-commerce Group", nameZh: "阿里巴巴中国电商集团" }),
+  Object.freeze({ key: "alidcg", name: "Alibaba International Digital Commerce Group", nameZh: "阿里国际数字商业集团" }),
+  Object.freeze({ key: "cloudintelligencegroup", name: "Cloud Intelligence Group", nameZh: "云业务" }),
+  Object.freeze({ key: "allothers", name: "All others", nameZh: "其他业务" }),
 ]);
 
 const ALIBABA_BAR_PHASE_KEYS = {
-  comparable: new Set(["alibabacommerce", "alibabacloud", "alibabaothers"]),
+  comparable: new Set(["alibabachinaecommercegroup", "alidcg", "cloudintelligencegroup", "allothers"]),
   condensedCurrent: new Set(["alibabachinaecommercegroup", "alidcg", "cloudintelligencegroup", "allothers"]),
   stagedCurrent: new Set(["taobaoandtmallgroup", "alidcg", "cloudintelligencegroup", "cainiao", "localservicesgroup", "dmeg", "allothers"]),
   legacyDetailed: new Set([
@@ -2600,29 +2600,33 @@ const ALIBABA_BAR_PHASE_KEYS = {
 
 const ALIBABA_BAR_COMPARABLE_KEYS_BY_PHASE = {
   comparable: {
-    alibabacommerce: ["alibabacommerce"],
-    alibabacloud: ["alibabacloud"],
-    alibabaothers: ["alibabaothers"],
+    alibabachinaecommercegroup: ["alibabachinaecommercegroup"],
+    alidcg: ["alidcg"],
+    cloudintelligencegroup: ["cloudintelligencegroup"],
+    allothers: ["allothers"],
   },
   condensedCurrent: {
-    alibabacommerce: ["alibabachinaecommercegroup", "alidcg"],
-    alibabacloud: ["cloudintelligencegroup"],
-    alibabaothers: ["allothers"],
+    alibabachinaecommercegroup: ["alibabachinaecommercegroup"],
+    alidcg: ["alidcg"],
+    cloudintelligencegroup: ["cloudintelligencegroup"],
+    allothers: ["allothers"],
   },
   stagedCurrent: {
-    alibabacommerce: ["taobaoandtmallgroup", "alidcg", "cainiao", "localservicesgroup"],
-    alibabacloud: ["cloudintelligencegroup"],
-    alibabaothers: ["allothers", "dmeg"],
+    alibabachinaecommercegroup: ["taobaoandtmallgroup", "cainiao", "localservicesgroup"],
+    alidcg: ["alidcg"],
+    cloudintelligencegroup: ["cloudintelligencegroup"],
+    allothers: ["allothers", "dmeg"],
   },
   legacyDetailed: {
-    alibabacommerce: ["chinacommerce", "internationalcommerce", "localconsumerservices", "localconsumerservicesandothers", "cainiao"],
-    alibabacloud: ["cloudbusiness", "cloud"],
-    alibabaothers: ["digitalmediaandentertainment", "innovationinitiativesandothers"],
+    alibabachinaecommercegroup: ["chinacommerce", "localconsumerservices", "localconsumerservicesandothers", "cainiao"],
+    alidcg: ["internationalcommerce"],
+    cloudintelligencegroup: ["cloudbusiness", "cloud"],
+    allothers: ["digitalmediaandentertainment", "innovationinitiativesandothers"],
   },
   legacyCoarse: {
-    alibabacommerce: ["corecommerce", "commerce"],
-    alibabacloud: ["cloudcomputing"],
-    alibabaothers: ["digitalmediaandentertainment", "innovationinitiativesandothers"],
+    alibabachinaecommercegroup: ["corecommerce", "commerce"],
+    cloudintelligencegroup: ["cloudcomputing"],
+    allothers: ["digitalmediaandentertainment", "innovationinitiativesandothers"],
   },
 };
 
