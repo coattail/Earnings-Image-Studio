@@ -1274,10 +1274,10 @@ def _extract_tencent_quarter_discussion(pdf_text: str, quarter: str) -> str:
 def _extract_tencent_growth_metrics(text: str, label: str, *, prefix: str | None = None) -> tuple[float | None, float | None]:
     label_pattern = rf"{_pdf_fuzzy_phrase_pattern(label)}\s*\d*"
     prefix_pattern = rf"{re.escape(prefix)}\s+" if prefix else ""
-    yoy_pattern = r"year\s*-\s*on\s*-\s*year|year-on-year"
+    yoy_pattern = r"year\s*-\s*on\s*-\s*year|year-on-year|YoY"
     patterns = [
         re.compile(
-            rf"{prefix_pattern}{label_pattern}\s+(?:revenues?\s+)?(?:increased|grew|rose|declined|decreased)\s+by\s+"
+            rf"{prefix_pattern}{label_pattern}\s+(?:revenues?\s+)?(?P<verb>increased|grew|rose|declined|decreased)\s+by\s+"
             rf"(?P<yoy>[+-]?\d+(?:\.\d+)?)%\s+(?:{yoy_pattern})\s+to\s+RMB\s*(?P<value>[\d.]+)\s+billion",
             re.IGNORECASE,
         ),
@@ -1303,8 +1303,8 @@ def _extract_tencent_growth_metrics(text: str, label: str, *, prefix: str | None
             continue
         value = _parse_number_token(match.group("value"))
         yoy = _parse_number_token(match.group("yoy"))
-        direction = match.groupdict().get("direction", "").lower()
-        if direction in {"down", "decrease"} and yoy is not None:
+        direction = (match.groupdict().get("direction") or match.groupdict().get("verb") or "").lower()
+        if direction in {"down", "decrease", "decreased", "declined"} and yoy is not None:
             yoy = -abs(float(yoy))
         return value, yoy
     return None, None

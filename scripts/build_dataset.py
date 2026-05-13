@@ -2398,11 +2398,13 @@ def _extract_tencent_row_values(lines: list[str], label: str) -> list[float]:
             continue
         normalized_line = re.sub(r"\s+", " ", str(line or "")).strip()
         score = 0
-        if len(amount_values) == 4:
+        if len(amount_values) == 3:
+            score += 14
+        elif len(amount_values) == 4:
             score += 12
         elif len(amount_values) == 2:
             score += 8
-        elif len(amount_values) >= 3:
+        elif len(amount_values) > 4:
             score += 4
         if re.search(r"\b(?:was|were|up|down|year-on-year|yoy|quarter)\b|for the year ended|for the fourth quarter", normalized_line, re.IGNORECASE):
             score -= 12
