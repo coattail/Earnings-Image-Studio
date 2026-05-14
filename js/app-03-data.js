@@ -3356,6 +3356,67 @@ function scaleBarSegmentRows(rows = [], scaleFactor = 1) {
   }));
 }
 
+function applyIncrementalHalfYearBarPeriods(company, quarters = []) {
+  const policy = company?.classificationPolicy || {};
+  if (String(policy.displayPeriodValueMode || "").trim().toLowerCase() !== "incremental-half-year") {
+    return quarters;
+  }
+  const halfYearByYear = new Map();
+  quarters.forEach((quarter) => {
+    const parsed = parseQuarterKey(quarter?.quarterKey);
+    if (!parsed || parsed.quarter !== 2) return;
+    halfYearByYear.set(parsed.year, quarter);
+  });
+  quarters.forEach((quarter) => {
+    const parsed = parseQuarterKey(quarter?.quarterKey);
+    if (!parsed || parsed.quarter !== 4) return;
+    const firstHalf = halfYearByYear.get(parsed.year);
+    if (!firstHalf) return;
+    const periodTotal = safeNumber(quarter.totalRevenueBn, 0) - safeNumber(firstHalf.totalRevenueBn, 0);
+    if (!(periodTotal > 0.02)) return;
+    const rowMeta = new Map();
+    [...(firstHalf.segmentRows || []), ...(quarter.segmentRows || [])].forEach((row) => {
+      if (!row?.key || rowMeta.has(row.key)) return;
+      rowMeta.set(row.key, row);
+    });
+    const rowKeys = [...new Set([...Object.keys(quarter.segmentMap || {}), ...Object.keys(firstHalf.segmentMap || {})])];
+    const periodRows = rowKeys
+      .map((key) => {
+        const valueBn = safeNumber(quarter.segmentMap?.[key], 0) - safeNumber(firstHalf.segmentMap?.[key], 0);
+        if (!(valueBn > 0.02)) return null;
+        const meta = rowMeta.get(key) || {};
+        const canonicalMeta = canonicalBarSegmentMeta(company?.id, key, meta.name || "Segment", meta.nameZh || "");
+        return {
+          ...meta,
+          key,
+          name: canonicalMeta.name || meta.name || "Segment",
+          nameZh: canonicalMeta.nameZh || meta.nameZh || translateBusinessLabelToZh(meta.name || "Segment"),
+          valueBn: Number(valueBn.toFixed(3)),
+        };
+      })
+      .filter(Boolean)
+      .sort((left, right) => safeNumber(right.valueBn) - safeNumber(left.valueBn));
+    if (!periodRows.length) return;
+    const periodRowTotal = periodRows.reduce((sum, row) => sum + safeNumber(row.valueBn), 0);
+    const residual = Number((periodTotal - periodRowTotal).toFixed(3));
+    if (Math.abs(residual) > 0.004) {
+      periodRows[0].valueBn = Number((safeNumber(periodRows[0].valueBn) + residual).toFixed(3));
+    }
+    quarter.segmentRows = periodRows;
+    quarter.segmentMap = Object.fromEntries(periodRows.map((row) => [row.key, safeNumber(row.valueBn)]));
+    quarter.totalRevenueBn = Number(periodTotal.toFixed(3));
+    quarter.label = `${parsed.year} H2`;
+    quarter.isDerivedIncrementalPeriod = true;
+    quarter.incrementalPeriodSource = "annual-minus-half-year";
+    if (quarter.reconciliationMode === "none") {
+      quarter.reconciliationMode = "cumulative-to-incremental-period";
+    } else if (!String(quarter.reconciliationMode || "").includes("cumulative-to-incremental-period")) {
+      quarter.reconciliationMode = `${quarter.reconciliationMode}+cumulative-to-incremental-period`;
+    }
+  });
+  return quarters;
+}
+
 function parseIsoDateToUtcMs(value) {
   const text = String(value || "").trim();
   if (!/^\d{4}-\d{2}-\d{2}$/.test(text)) return null;
@@ -3872,10 +3933,153 @@ function normalizeQuarterSegmentsForBar(company, entry, structurePayload = null)
   return selectQuarterBarSource(company, entry, structurePayload).rows;
 }
 
+const BAR_TAXONOMY_BREAK_OVERRIDES = Object.freeze({
+  alibaba: Object.freeze([
+    Object.freeze({
+      quarterKey: "2023Q2",
+      labelZh: "Q1 FY24 起分部口径调整",
+      labelEn: "Segment taxonomy changed from Q1 FY24",
+      id: "alibaba-fy24",
+    }),
+  ]),
+});
+
 function isBarTaxonomyOptionalRow(row) {
   const key = normalizeLabelKey(row?.key || row?.memberKey || row?.id || row?.name);
   if (!key || key === "reportedrevenue" || key === "otherrevenue") return true;
   return isAggregateLikeSegmentLabel(row?.name || "");
+}
+
+function barTaxonomyBreakSignature(quarter) {
+  return [...new Set((quarter?.segmentRows || [])
+    .map((item) => normalizeLabelKey(item?.key || item?.memberKey || item?.id || item?.name))
+    .filter((key) => key && key !== "reportedrevenue" && key !== "otherrevenue" && key !== "__other_segments__"))]
+    .sort();
+}
+
+function barTaxonomyBreakRowMap(quarter) {
+  const totalRevenueBn = Math.max(safeNumber(quarter?.totalRevenueBn, 0), 0.001);
+  return new Map((quarter?.segmentRows || [])
+    .map((item) => {
+      const key = normalizeLabelKey(item?.key || item?.memberKey || item?.id || item?.name);
+      if (!key || key === "reportedrevenue" || key === "otherrevenue" || key === "__other_segments__") return null;
+      return [key, {
+        key,
+        name: item?.name || item?.nameZh || key,
+        share: safeNumber(item?.valueBn) / totalRevenueBn,
+      }];
+    })
+    .filter(Boolean));
+}
+
+function taxonomySignatureDistance(leftKeys = [], rightKeys = []) {
+  const leftSet = new Set(leftKeys);
+  const rightSet = new Set(rightKeys);
+  const union = new Set([...leftSet, ...rightSet]);
+  const commonCount = [...leftSet].filter((key) => rightSet.has(key)).length;
+  return {
+    commonCount,
+    unionCount: union.size,
+    jaccard: union.size ? commonCount / union.size : 1,
+    diffCount: [...union].filter((key) => leftSet.has(key) !== rightSet.has(key)).length,
+  };
+}
+
+function buildBarTaxonomyBreaks(company, visibleQuarters = []) {
+  const normalizedCompanyId = String(company?.id || "").trim().toLowerCase();
+  const breaks = [];
+  const seenQuarterKeys = new Set();
+  (BAR_TAXONOMY_BREAK_OVERRIDES[normalizedCompanyId] || []).forEach((item) => {
+    const quarterIndex = visibleQuarters.findIndex((quarter) => quarter?.quarterKey === item.quarterKey);
+    if (quarterIndex < 0) return;
+    const quarter = visibleQuarters[quarterIndex];
+    breaks.push({
+      id: item.id || `${normalizedCompanyId}-${item.quarterKey}`,
+      quarterKey: item.quarterKey,
+      quarterIndex,
+      label: quarter?.label || item.quarterKey,
+      labelZh: item.labelZh || `${quarter?.label || item.quarterKey} 起分部口径调整`,
+      labelEn: item.labelEn || `${quarter?.label || item.quarterKey} taxonomy change`,
+      manual: true,
+    });
+    seenQuarterKeys.add(item.quarterKey);
+  });
+  if (normalizedCompanyId === "alibaba") {
+    return breaks;
+  }
+  const maxAutomaticBreaks = new Set(["netease"]).has(normalizedCompanyId) ? 1 : 4;
+
+  for (let index = 1; index < visibleQuarters.length; index += 1) {
+    const previousQuarter = visibleQuarters[index - 1];
+    const quarter = visibleQuarters[index];
+    if (!quarter?.quarterKey || seenQuarterKeys.has(quarter.quarterKey)) continue;
+    const source = String(quarter?.rawSegmentSource || "");
+    const usesTopLevelOfficialSource =
+      source === "official-segments" ||
+      source === "structure-history";
+    if (!usesTopLevelOfficialSource) continue;
+
+    const previousKeys = barTaxonomyBreakSignature(previousQuarter);
+    const currentKeys = barTaxonomyBreakSignature(quarter);
+    if (previousKeys.length < 2 || currentKeys.length < 2) continue;
+    if (previousKeys.join("|") === currentKeys.join("|")) continue;
+
+    const nextQuarter = visibleQuarters[index + 1] || null;
+    const nextKeys = barTaxonomyBreakSignature(nextQuarter);
+    if (nextKeys.length && nextKeys.join("|") === previousKeys.join("|")) {
+      continue;
+    }
+
+    const distance = taxonomySignatureDistance(previousKeys, currentKeys);
+    const previousMap = barTaxonomyBreakRowMap(previousQuarter);
+    const currentMap = barTaxonomyBreakRowMap(quarter);
+    const changedKeys = [...new Set([...previousKeys, ...currentKeys])]
+      .filter((key) => previousMap.has(key) !== currentMap.has(key));
+    const largestChangedShare = changedKeys.reduce(
+      (maxShare, key) => Math.max(maxShare, safeNumber(previousMap.get(key)?.share), safeNumber(currentMap.get(key)?.share)),
+      0
+    );
+    const looksLikeOtherBucketRename =
+      changedKeys.length === 2 &&
+      previousKeys.length === currentKeys.length &&
+      changedKeys.every((key) => {
+        const label = normalizeSegmentLabel(previousMap.get(key)?.name || currentMap.get(key)?.name || key);
+        return label.includes("other") || label.includes("others") || label.includes("innovative");
+      });
+    if (looksLikeOtherBucketRename) continue;
+    if (largestChangedShare < 0.12) continue;
+
+    const phaseChanged =
+      previousQuarter?.taxonomyPhaseId !== null &&
+      previousQuarter?.taxonomyPhaseId !== undefined &&
+      quarter?.taxonomyPhaseId !== null &&
+      quarter?.taxonomyPhaseId !== undefined &&
+      previousQuarter.taxonomyPhaseId !== quarter.taxonomyPhaseId;
+    const styleChanged =
+      String(previousQuarter?.bridgeStyle || "") &&
+      String(quarter?.bridgeStyle || "") &&
+      String(previousQuarter.bridgeStyle) !== String(quarter.bridgeStyle);
+    const schemaTagChanged = String(previousQuarter?.segmentSchemaTag || "") !== String(quarter?.segmentSchemaTag || "");
+    const significantBreak =
+      phaseChanged ||
+      styleChanged ||
+      (schemaTagChanged && distance.jaccard <= 0.86) ||
+      distance.jaccard <= 0.82;
+    if (!significantBreak) continue;
+
+    breaks.push({
+      id: `${normalizedCompanyId}-${quarter.quarterKey}`,
+      quarterKey: quarter.quarterKey,
+      quarterIndex: index,
+      label: quarter.label || quarter.quarterKey,
+      labelZh: `${quarter.label || quarter.quarterKey} 起分部口径调整`,
+      labelEn: `${quarter.label || quarter.quarterKey} taxonomy change`,
+      manual: false,
+    });
+    seenQuarterKeys.add(quarter.quarterKey);
+    if (breaks.length >= maxAutomaticBreaks) break;
+  }
+  return breaks;
 }
 
 function comparableTaxonomyRows(rows = []) {
@@ -4259,6 +4463,8 @@ function buildRevenueSegmentBarHistory(company, anchorQuarterKey, maxQuarters = 
     };
   });
 
+  applyIncrementalHalfYearBarPeriods(company, quarters);
+
   if (String(company?.id || "").toLowerCase() === "alibaba") {
     const visibleQuarterKeySet = new Set(includeAllQuarters ? allValidQuarterKeys : selectedQuarterKeys);
     const visibleQuarters = quarters.filter((quarter) => visibleQuarterKeySet.has(quarter.quarterKey));
@@ -4307,6 +4513,7 @@ function buildRevenueSegmentBarHistory(company, anchorQuarterKey, maxQuarters = 
       displayCurrency: displayCurrencySet.length === 1 ? displayCurrencySet[0] : "MIXED",
       sourceCurrencies: sourceCurrencySet,
       convertedQuarterCount: visibleQuarters.filter((item) => Math.abs(safeNumber(item.displayScaleFactor, 1) - 1) > 0.000001).length,
+      taxonomyBreaks: buildBarTaxonomyBreaks(company, visibleQuarters),
       windowUnitLabel,
       windowUnitLabelZh,
     };
@@ -4360,6 +4567,7 @@ function buildRevenueSegmentBarHistory(company, anchorQuarterKey, maxQuarters = 
       displayCurrency: displayCurrencySet.length === 1 ? displayCurrencySet[0] : "MIXED",
       sourceCurrencies: sourceCurrencySet,
       convertedQuarterCount: visibleQuarters.filter((item) => Math.abs(safeNumber(item.displayScaleFactor, 1) - 1) > 0.000001).length,
+      taxonomyBreaks: buildBarTaxonomyBreaks(company, visibleQuarters),
       windowUnitLabel,
       windowUnitLabelZh,
     };
@@ -5266,6 +5474,7 @@ function buildRevenueSegmentBarHistory(company, anchorQuarterKey, maxQuarters = 
     imputedQuarterCount,
     smoothedQuarterCount,
     convertedQuarterCount,
+    taxonomyBreaks: buildBarTaxonomyBreaks(company, visibleQuarters),
     windowUnitLabel,
     windowUnitLabelZh,
     displayCurrencySet,

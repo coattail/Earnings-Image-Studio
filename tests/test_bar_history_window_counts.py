@@ -112,6 +112,15 @@ class BarHistoryWindowCountTests(unittest.TestCase):
 
         self.assertEqual(summary["outputs"]["bars"]["quarterCount"], expected_quarter_count)
 
+    def test_byd_annual_bars_are_rendered_as_second_half_incremental_periods(self) -> None:
+        svg_markup = render_bar_svg(load_dataset_company("byd"), "byd-incremental-half-year", "2025Q4")
+
+        self.assertIn(">2023 H2</text>", svg_markup)
+        self.assertIn(">2024 H2</text>", svg_markup)
+        self.assertIn(">2025 H2</text>", svg_markup)
+        self.assertNotIn(">FY 2025</text>", svg_markup)
+        self.assertNotIn(">94</text>", svg_markup)
+
     def test_segment_colors_stay_stable_when_anchor_quarter_changes(self) -> None:
         company = load_dataset_company("amd")
         early_colors = legend_color_by_label(render_bar_svg(company, "amd-early-window", "2022Q3"))
@@ -139,6 +148,40 @@ class BarHistoryWindowCountTests(unittest.TestCase):
 
         self.assertIn('data-bar-taxonomy-break="alibaba-fy24"', svg_markup)
         self.assertIn("Q1 FY24 起分部口径调整", svg_markup)
+
+    def test_amd_bar_history_marks_segment_taxonomy_break(self) -> None:
+        svg_markup = render_bar_svg(load_dataset_company("amd"), "amd-bar-taxonomy-break", "2026Q1")
+
+        self.assertIn('data-bar-taxonomy-break="amd-2022q1"', svg_markup)
+        self.assertIn("Q1 FY22 起分部口径调整", svg_markup)
+
+    def test_broadcom_bar_history_does_not_mark_tiny_ip_licensing_flips(self) -> None:
+        svg_markup = render_bar_svg(load_dataset_company("broadcom"), "broadcom-bar-taxonomy-break", "2026Q1")
+
+        self.assertNotIn("data-bar-taxonomy-break", svg_markup)
+
+    def test_tencent_taxonomy_break_note_avoids_fx_note(self) -> None:
+        svg_markup = render_bar_svg(load_dataset_company("tencent"), "tencent-bar-taxonomy-break", "2026Q1")
+        match = re.search(r'<text x="([^"]+)"[^>]*>Q1 FY19 起分部口径调整</text>', svg_markup)
+
+        self.assertIsNotNone(match)
+        self.assertGreater(float(match.group(1)), 300)
+
+    def test_tencent_taxonomy_break_connector_avoids_logo(self) -> None:
+        svg_markup = render_bar_svg(load_dataset_company("tencent"), "tencent-bar-taxonomy-break", "2026Q1")
+        match = re.search(
+            r'data-bar-taxonomy-break="tencent-2019q1"[\s\S]*?<path d="M [0-9.]+ ([0-9.]+) V',
+            svg_markup,
+        )
+
+        self.assertIsNotNone(match)
+        self.assertGreater(float(match.group(1)), 360)
+
+    def test_netease_bar_history_keeps_only_main_taxonomy_break(self) -> None:
+        svg_markup = render_bar_svg(load_dataset_company("netease"), "netease-bar-taxonomy-break", "2025Q4")
+
+        self.assertEqual(svg_markup.count("data-bar-taxonomy-break"), 1)
+        self.assertIn("Q3 FY19 起分部口径调整", svg_markup)
 
     def test_visa_sankey_revenue_groups_match_bar_taxonomy(self) -> None:
         script = r"""

@@ -158,6 +158,10 @@ function resolveBarChartLogoPlacement({
             scale,
             x: visibleX - offsetX,
             y: visibleY - offsetY,
+            visibleLeft: visibleRect.left,
+            visibleTop: visibleRect.top,
+            visibleRight: visibleRect.right,
+            visibleBottom: visibleRect.bottom,
           };
         }
       });
@@ -173,6 +177,10 @@ function resolveBarChartLogoPlacement({
     scale: safeNumber(bestPlacement?.scale, baseScale),
     x: safeNumber(bestPlacement?.x, area.x),
     y: safeNumber(bestPlacement?.y, area.y),
+    visibleLeft: safeNumber(bestPlacement?.visibleLeft, area.x),
+    visibleTop: safeNumber(bestPlacement?.visibleTop, area.y),
+    visibleRight: safeNumber(bestPlacement?.visibleRight, area.x + area.width),
+    visibleBottom: safeNumber(bestPlacement?.visibleBottom, area.y + area.height),
   };
 }
 
@@ -633,35 +641,107 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
     history,
     reservedRects,
   });
+  const taxonomyConnectorStartY = (markerX) => {
+    const horizontalPad = 16;
+    const verticalPad = 18;
+    const rects = [
+      {
+        left: safeNumber(chartLogoPlacement.visibleLeft, NaN),
+        top: safeNumber(chartLogoPlacement.visibleTop, NaN),
+        right: safeNumber(chartLogoPlacement.visibleRight, NaN),
+        bottom: safeNumber(chartLogoPlacement.visibleBottom, NaN),
+      },
+      chartLogoZone,
+    ].filter(
+      (rect) =>
+        rect &&
+        Number.isFinite(rect.left) &&
+        Number.isFinite(rect.top) &&
+        Number.isFinite(rect.right) &&
+        Number.isFinite(rect.bottom) &&
+        rect.right > rect.left &&
+        rect.bottom > rect.top
+    );
+    return rects.reduce((startY, rect) => {
+      if (markerX < rect.left - horizontalPad || markerX > rect.right + horizontalPad) return startY;
+      const candidateY = rect.bottom + verticalPad;
+      if (candidateY >= baselineY - 80) return startY;
+      return Math.max(startY, candidateY);
+    }, chartTop + 6);
+  };
   const fxNoteY = hasConvertedCurrency ? height - 34 : chartTop - 10;
   const fxNoteX = hasConvertedCurrency ? 38 : plotLeft;
   const fxNoteFontSize = hasConvertedCurrency ? 20 : 18;
-  const taxonomyBreakAnnotation =
-    String(company?.id || "").toLowerCase() === "alibaba"
-      ? (() => {
-          const breakIndex = history.quarters.findIndex(
-            (quarter) => quarter?.quarterKey === "2023Q2" || String(quarter?.label || "").trim().toUpperCase() === "Q1 FY24"
+  const taxonomyBreakAnnotations = (() => {
+    const breaks = Array.isArray(history?.taxonomyBreaks) ? history.taxonomyBreaks.slice(0, 4) : [];
+    if (!breaks.length) return "";
+    const labelFontSize = currentChartLanguage() === "en" ? 18 : 20;
+    const labelHeight = labelFontSize + 18;
+    const placedLabels = [];
+    const rowLabelYs = [baselineY + 106, baselineY + 144];
+    const bottomNoteSafeRight = hasConvertedCurrency ? fxNoteX + approximateTextWidth(
+      currentChartLanguage() === "en" ? "Converted to USD by filing-date FX rates." : "已按申报日汇率折算为美元。",
+      fxNoteFontSize
+    ) + 26 : plotLeft + 10;
+    return breaks
+      .map((item) => {
+        const breakIndex = Number.isInteger(item?.quarterIndex)
+          ? item.quarterIndex
+          : history.quarters.findIndex((quarter) => quarter?.quarterKey === item?.quarterKey);
+        if (breakIndex < 0 || breakIndex >= history.quarters.length) return "";
+        const markerX = barStartX + breakIndex * (barWidth + barGap) - Math.max(4, barGap / 2);
+        const label = currentChartLanguage() === "en" ? item.labelEn || `${item.label || item.quarterKey} taxonomy change` : item.labelZh || `${item.label || item.quarterKey} 起分部口径调整`;
+        const labelWidth = approximateTextWidth(label, labelFontSize) + 28;
+        const preferredX = Math.max(markerX + 8, bottomNoteSafeRight);
+        let bestPlacement = null;
+        rowLabelYs.forEach((labelY, rowIndex) => {
+          const labelX = clamp(preferredX, plotLeft + 10, plotRight - labelWidth - 6);
+          const overlaps = placedLabels.some(
+            (placed) => placed.rowIndex === rowIndex && labelX < placed.right + 12 && labelX + labelWidth > placed.left - 12
           );
-          if (breakIndex < 0) return "";
-          const markerX = barStartX + breakIndex * (barWidth + barGap) - Math.max(4, barGap / 2);
-          const label = currentChartLanguage() === "en" ? "Segment taxonomy changed from Q1 FY24" : "Q1 FY24 起分部口径调整";
-          const labelFontSize = currentChartLanguage() === "en" ? 18 : 20;
-          const labelWidth = approximateTextWidth(label, labelFontSize) + 28;
-          const labelX = clamp(markerX + 12, plotLeft + 10, plotRight - labelWidth - 6);
-          const labelY = chartTop + 18;
-          return `
-            <g data-bar-taxonomy-break="alibaba-fy24" opacity="0.92">
-              <line x1="${markerX.toFixed(2)}" y1="${(chartTop + 6).toFixed(2)}" x2="${markerX.toFixed(2)}" y2="${baselineY}" stroke="#5C7FA8" stroke-width="2" stroke-dasharray="8 8"></line>
-              <rect x="${labelX.toFixed(2)}" y="${(labelY - labelFontSize - 12).toFixed(2)}" width="${labelWidth.toFixed(
-                2
-              )}" height="${(labelFontSize + 18).toFixed(2)}" rx="7" fill="#E8EEF5" stroke="#CAD6E3" stroke-width="1"></rect>
-              <text x="${(labelX + 14).toFixed(2)}" y="${(labelY - 4).toFixed(
-                2
-              )}" text-anchor="start" font-size="${labelFontSize}" font-weight="700" fill="#4E6684">${escapeHtml(label)}</text>
-            </g>
-          `;
-        })()
-      : "";
+          if (!overlaps && !bestPlacement) {
+            bestPlacement = { labelX, labelY, rowIndex };
+          }
+        });
+        if (!bestPlacement) {
+          const rowIndex = placedLabels.length % rowLabelYs.length;
+          bestPlacement = {
+            labelX: clamp(preferredX, plotLeft + 10, plotRight - labelWidth - 6),
+            labelY: rowLabelYs[rowIndex],
+            rowIndex,
+          };
+        }
+        const labelRectY = bestPlacement.labelY - labelFontSize - 12;
+        const connectorY = labelRectY + labelHeight / 2;
+        const labelEdgeX = bestPlacement.labelX >= markerX ? bestPlacement.labelX : bestPlacement.labelX + labelWidth;
+        const connectorStartY = taxonomyConnectorStartY(markerX);
+        placedLabels.push({
+          rowIndex: bestPlacement.rowIndex,
+          left: bestPlacement.labelX,
+          right: bestPlacement.labelX + labelWidth,
+        });
+        const breakId =
+          String(item?.id || `${company?.id || "company"}-${item?.quarterKey || breakIndex}`)
+            .trim()
+            .toLowerCase()
+            .replace(/[^a-z0-9_-]+/g, "-")
+            .replace(/^-+|-+$/g, "") || `break-${breakIndex}`;
+        return `
+          <g data-bar-taxonomy-break="${escapeHtml(breakId)}" opacity="0.92">
+            <path d="M ${markerX.toFixed(2)} ${connectorStartY.toFixed(2)} V ${connectorY.toFixed(2)} H ${labelEdgeX.toFixed(
+              2
+            )}" fill="none" stroke="#5C7FA8" stroke-width="2" stroke-dasharray="8 8"></path>
+            <rect x="${bestPlacement.labelX.toFixed(2)}" y="${labelRectY.toFixed(2)}" width="${labelWidth.toFixed(
+              2
+            )}" height="${labelHeight.toFixed(2)}" rx="7" fill="#E8EEF5" stroke="#CAD6E3" stroke-width="1"></rect>
+            <text x="${(bestPlacement.labelX + 14).toFixed(2)}" y="${(bestPlacement.labelY - 4).toFixed(
+              2
+            )}" text-anchor="start" font-size="${labelFontSize}" font-weight="700" fill="#4E6684">${escapeHtml(label)}</text>
+          </g>
+        `;
+      })
+      .join("");
+  })();
 
   let svg = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="${escapeHtml(chartTitle)}" data-chart-mode="bars">
@@ -727,7 +807,7 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
     )}</text>`;
   });
   svg += `<line x1="${plotLeft}" y1="${baselineY}" x2="${plotRight}" y2="${baselineY}" stroke="#C9CED6" stroke-width="2.2" data-bar-axis="true"></line>`;
-  svg += taxonomyBreakAnnotation;
+  svg += taxonomyBreakAnnotations;
   svg += `
     <g opacity="0.98" data-bar-chart-logo="true" data-logo-zone-left="${chartLogoZone.left.toFixed(2)}" data-logo-zone-top="${chartLogoZone.top.toFixed(
       2
