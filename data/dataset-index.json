@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-13T16:07:47Z",
+  "generatedAt": "2026-05-20T21:50:28Z",
   "companyCount": 38,
   "companies": [
     {
@@ -48,7 +48,8 @@
         "2025Q2",
         "2025Q3",
         "2025Q4",
-        "2026Q1"
+        "2026Q1",
+        "2026Q2"
       ],
       "statementSource": "official-sec-companyfacts",
       "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
@@ -56,169 +57,112 @@
       "cik": 1045810,
       "errors": [],
       "coverage": {
-        "quarterCount": 33,
-        "pixelReplicaQuarterCount": 1,
-        "hasPixelReplica": true,
-        "officialFinancialQuarterCount": 33,
-        "officialSegmentQuarterCount": 33,
-        "officialExpenseQuarterCount": 2,
-        "classification": {
-          "status": "ok",
-          "latestQuarter": "2026Q1",
-          "latestQuarterHasRevenueClassification": true,
-          "latestQuarterHasExpenseClassification": false,
-          "latestRevenueClassificationQuarter": "2026Q1",
-          "latestExpenseClassificationQuarter": "2024Q4",
-          "latestStructureHistoryQuarter": "2026Q1",
-          "revenueClassificationQuarterCount": 33,
-          "expenseClassificationQuarterCount": 2,
-          "revenueClassificationCoverageRatio": 1,
-          "expenseClassificationCoverageRatio": 0.0606,
-          "latestRevenueClassificationLagQuarters": 0,
-          "latestExpenseClassificationLagQuarters": 5,
-          "warnings": [],
-          "blockers": [],
-          "policy": {}
-        },
-        "parser": {
-          "version": "universal-parser-v4",
-          "selectedFinancialSource": "official",
-          "selectedSegmentSource": "official-segments",
-          "selectedRevenueStructureSource": "official-revenue-structures",
-          "financialAttemptCount": 2,
-          "financialReconciliation": {
-            "version": "financial-reconciler-v1",
-            "primarySource": "official",
-            "quarterCount": 33,
-            "fieldOverrideCount": 0,
-            "derivedFieldCount": 0,
-            "mixedSourceQuarterCount": 0,
-            "sourceUsageCounts": {
-              "official": 673,
-              "stockanalysis": 0
-            }
-          },
-          "financialValidation": {
-            "version": "financial-validation-v1",
-            "status": "high",
-            "quarterCount": 33,
-            "validatedQuarterCount": 33,
-            "issueCount": 0,
-            "mismatchQuarterCount": 0,
-            "highConfidenceQuarterCount": 33,
-            "averageConfidenceScore": 1,
-            "latestQuarter": "2026Q1",
-            "latestQuarterConfidenceScore": 1,
-            "latestQuarterIssueCount": 0
-          },
-          "validation": {
-            "version": "parser-validation-v1",
-            "status": "high",
-            "overallConfidenceScore": 1,
-            "financialConfidenceScore": 1,
-            "structuralConfidenceScore": 1,
-            "revenueSegmentChecks": 33,
-            "revenueSegmentMismatchCount": 0,
-            "revenueSegmentSkippedChecks": 0,
-            "detailGroupChecks": 0,
-            "detailGroupMismatchCount": 0,
-            "detailGroupSkippedChecks": 0,
-            "opexChecks": 2,
-            "opexSkippedChecks": 0,
-            "opexOverflowMismatchCount": 0,
-            "warningCount": 0,
-            "warnings": []
-          }
-        }
+        "status": "ok",
+        "latestQuarter": "2026Q2",
+        "latestQuarterHasRevenueClassification": true,
+        "latestQuarterHasExpenseClassification": false,
+        "latestRevenueClassificationQuarter": "2026Q2",
+        "latestExpenseClassificationQuarter": "2024Q4",
+        "latestStructureHistoryQuarter": "2026Q2",
+        "revenueClassificationQuarterCount": 34,
+        "expenseClassificationQuarterCount": 2,
+        "revenueClassificationCoverageRatio": 1,
+        "expenseClassificationCoverageRatio": 0.0588,
+        "latestRevenueClassificationLagQuarters": 0,
+        "latestExpenseClassificationLagQuarters": 6,
+        "warnings": [],
+        "blockers": [],
+        "policy": {}
       },
       "dataLoadMode": "latest-only",
-      "latestQuarter": "2026Q1",
+      "latestQuarter": "2026Q2",
       "financials": {
-        "2026Q1": {
-          "calendarQuarter": "2026Q1",
-          "periodEnd": "2026-01-25",
-          "fiscalYear": "2026",
-          "fiscalQuarter": "Q4",
-          "fiscalLabel": "FY2026 Q4",
+        "2026Q2": {
+          "calendarQuarter": "2026Q2",
+          "periodEnd": "2026-04-26",
+          "fiscalYear": "2027",
+          "fiscalQuarter": "Q1",
+          "fiscalLabel": "FY2027 Q1",
           "statementCurrency": "USD",
-          "revenueBn": 68.127,
-          "revenueYoyPct": 73.215,
-          "costOfRevenueBn": 17.034,
-          "grossProfitBn": 51.093,
-          "sgnaBn": 1.282,
-          "rndBn": 5.512,
+          "revenueBn": 81.615,
+          "revenueYoyPct": 85.23,
+          "costOfRevenueBn": 20.458,
+          "grossProfitBn": 61.157,
+          "sgnaBn": 1.3,
+          "rndBn": 6.321,
           "otherOpexBn": null,
-          "operatingExpensesBn": 6.794,
-          "operatingIncomeBn": 44.299,
-          "nonOperatingBn": 6.099,
-          "pretaxIncomeBn": 50.398,
-          "taxBn": 7.438,
-          "netIncomeBn": 42.96,
-          "netIncomeYoyPct": 94.47,
-          "grossMarginPct": 75,
-          "operatingMarginPct": 65.02,
-          "profitMarginPct": 63.06,
-          "effectiveTaxRatePct": 14.76,
-          "revenueQoqPct": 19.508,
-          "grossMarginYoyDeltaPp": 1.97,
-          "operatingMarginYoyDeltaPp": 3.92,
-          "profitMarginYoyDeltaPp": 6.89,
-          "statementFilingDate": "2026-01-25",
-          "statementSourceUrl": "https://stockanalysis.com/stocks/nvda/financials/?p=quarterly",
+          "operatingExpensesBn": 7.621,
+          "operatingIncomeBn": 53.536,
+          "nonOperatingBn": 16.367,
+          "pretaxIncomeBn": 69.903,
+          "taxBn": 11.582,
+          "netIncomeBn": 58.321,
+          "netIncomeYoyPct": 210.63,
+          "grossMarginPct": 74.93,
+          "operatingMarginPct": 65.6,
+          "profitMarginPct": 71.46,
+          "effectiveTaxRatePct": 16.57,
+          "revenueQoqPct": 19.8,
+          "grossMarginYoyDeltaPp": 14.41,
+          "operatingMarginYoyDeltaPp": 16.49,
+          "profitMarginYoyDeltaPp": 28.85,
+          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426_htm.xml",
+          "statementFilingDate": "2026-05-20",
           "parserFinancialFieldSources": {
-            "revenueBn": "official",
-            "revenueYoyPct": "official",
-            "revenueQoqPct": "official",
-            "costOfRevenueBn": "official",
-            "grossProfitBn": "official",
-            "grossMarginPct": "official",
-            "grossMarginYoyDeltaPp": "official",
-            "sgnaBn": "official",
-            "rndBn": "official",
-            "operatingExpensesBn": "official",
-            "operatingIncomeBn": "official",
-            "operatingMarginPct": "official",
-            "operatingMarginYoyDeltaPp": "official",
-            "nonOperatingBn": "official",
-            "pretaxIncomeBn": "official",
-            "taxBn": "official",
-            "netIncomeBn": "official",
-            "netIncomeYoyPct": "official",
-            "profitMarginPct": "official",
-            "profitMarginYoyDeltaPp": "official",
-            "effectiveTaxRatePct": "official",
-            "calendarQuarter": "official",
-            "periodEnd": "official",
-            "fiscalYear": "official",
-            "fiscalQuarter": "official",
-            "fiscalLabel": "official",
-            "statementCurrency": "official",
-            "statementFilingDate": "stockanalysis",
-            "statementSourceUrl": "stockanalysis"
+            "periodEnd": "sec-10-q",
+            "statementCurrency": "sec-10-q",
+            "statementSourceUrl": "sec-10-q",
+            "costOfRevenueBn": "sec-10-q",
+            "fiscalLabel": "sec-10-q",
+            "operatingExpensesBn": "sec-10-q",
+            "sgnaBn": "sec-10-q",
+            "nonOperatingBn": "sec-10-q",
+            "grossProfitBn": "sec-10-q",
+            "operatingIncomeBn": "sec-10-q",
+            "fiscalYear": "sec-10-q",
+            "grossMarginPct": "sec-10-q",
+            "profitMarginPct": "sec-10-q",
+            "netIncomeBn": "sec-10-q",
+            "rndBn": "sec-10-q",
+            "statementForm": "sec-10-q",
+            "calendarQuarter": "sec-10-q",
+            "revenueBn": "sec-10-q",
+            "pretaxIncomeBn": "sec-10-q",
+            "taxBn": "sec-10-q",
+            "fiscalQuarter": "sec-10-q",
+            "statementFilingDate": "sec-10-q",
+            "operatingMarginPct": "sec-10-q",
+            "effectiveTaxRatePct": "sec-10-q",
+            "revenueYoyPct": "derived",
+            "revenueQoqPct": "derived",
+            "netIncomeYoyPct": "derived",
+            "grossMarginYoyDeltaPp": "derived",
+            "operatingMarginYoyDeltaPp": "derived",
+            "profitMarginYoyDeltaPp": "derived"
           },
           "parserFinancialCandidateCounts": {
-            "revenueBn": 2,
-            "revenueYoyPct": 2,
-            "revenueQoqPct": 2,
-            "costOfRevenueBn": 2,
-            "grossProfitBn": 2,
-            "grossMarginPct": 2,
-            "grossMarginYoyDeltaPp": 2,
-            "sgnaBn": 2,
-            "rndBn": 2,
+            "revenueBn": 1,
+            "revenueYoyPct": 1,
+            "revenueQoqPct": 1,
+            "costOfRevenueBn": 1,
+            "grossProfitBn": 1,
+            "grossMarginPct": 1,
+            "grossMarginYoyDeltaPp": 1,
+            "sgnaBn": 1,
+            "rndBn": 1,
             "otherOpexBn": 0,
-            "operatingExpensesBn": 2,
-            "operatingIncomeBn": 2,
-            "operatingMarginPct": 2,
-            "operatingMarginYoyDeltaPp": 2,
-            "nonOperatingBn": 2,
-            "pretaxIncomeBn": 2,
-            "taxBn": 2,
-            "netIncomeBn": 2,
-            "netIncomeYoyPct": 2,
-            "profitMarginPct": 2,
-            "profitMarginYoyDeltaPp": 2,
-            "effectiveTaxRatePct": 2
+            "operatingExpensesBn": 1,
+            "operatingIncomeBn": 1,
+            "operatingMarginPct": 1,
+            "operatingMarginYoyDeltaPp": 1,
+            "nonOperatingBn": 1,
+            "pretaxIncomeBn": 1,
+            "taxBn": 1,
+            "netIncomeBn": 1,
+            "netIncomeYoyPct": 1,
+            "profitMarginPct": 1,
+            "profitMarginYoyDeltaPp": 1,
+            "effectiveTaxRatePct": 1
           },
           "parserFinancialValidation": {
             "version": "financial-validation-v1",
@@ -231,335 +175,230 @@
             "issueCount": 0,
             "issues": []
           },
+          "displayCurrency": "USD",
+          "displayScaleFactor": 1,
+          "statementForm": "10-Q",
+          "fieldSources": {
+            "periodEnd": "sec-10-q",
+            "statementCurrency": "sec-10-q",
+            "statementSourceUrl": "sec-10-q",
+            "costOfRevenueBn": "sec-10-q",
+            "fiscalLabel": "sec-10-q",
+            "operatingExpensesBn": "sec-10-q",
+            "sgnaBn": "sec-10-q",
+            "nonOperatingBn": "sec-10-q",
+            "grossProfitBn": "sec-10-q",
+            "operatingIncomeBn": "sec-10-q",
+            "fiscalYear": "sec-10-q",
+            "grossMarginPct": "sec-10-q",
+            "profitMarginPct": "sec-10-q",
+            "netIncomeBn": "sec-10-q",
+            "rndBn": "sec-10-q",
+            "statementForm": "sec-10-q",
+            "calendarQuarter": "sec-10-q",
+            "revenueBn": "sec-10-q",
+            "pretaxIncomeBn": "sec-10-q",
+            "taxBn": "sec-10-q",
+            "fiscalQuarter": "sec-10-q",
+            "statementFilingDate": "sec-10-q",
+            "operatingMarginPct": "sec-10-q",
+            "effectiveTaxRatePct": "sec-10-q",
+            "revenueYoyPct": "derived",
+            "revenueQoqPct": "derived",
+            "netIncomeYoyPct": "derived",
+            "grossMarginYoyDeltaPp": "derived",
+            "operatingMarginYoyDeltaPp": "derived",
+            "profitMarginYoyDeltaPp": "derived"
+          },
+          "extractionDiagnostics": {
+            "source": "manual-sec-10-q-update",
+            "filingDate": "2026-05-20",
+            "accession": "0001045810-26-000052",
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426_htm.xml",
+            "note": "Latest FY2027 Q1 values verified against NVIDIA 2026-05-20 Form 10-Q XBRL; market-platform revenue presentation changed this quarter."
+          },
           "officialRevenueSegments": [
             {
               "name": "Data Center",
               "nameZh": null,
               "memberKey": "datacenter",
-              "valueBn": 62.314,
-              "yoyPct": 75.14,
-              "qoqPct": 21.67,
-              "mixPct": 91.5,
-              "mixYoyDeltaPp": 1,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125_htm.xml",
-              "sourceForm": "10-K",
-              "filingDate": "2026-02-25",
+              "valueBn": 75.246,
+              "yoyPct": 92.39,
+              "qoqPct": 20.75,
+              "mixPct": 92.2,
+              "mixYoyDeltaPp": 3.43,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426_htm.xml",
+              "sourceForm": "10-Q",
+              "filingDate": "2026-05-20",
+              "periodStart": "2026-01-26",
+              "periodEnd": "2026-04-26",
               "supportLines": [
                 "AI · cloud · DGX"
               ],
               "supportLinesZh": null,
               "metricMode": null,
               "validationEligible": null,
-              "validationNotes": null
+              "validationNotes": "NVIDIA changed revenue by market platform presentation in FY2027 Q1; comparable FY2026 Q1 values are recast in the 2026-05-20 Form 10-Q."
             },
             {
-              "name": "Gaming",
+              "name": "Edge Computing",
               "nameZh": null,
-              "memberKey": "gaming",
-              "valueBn": 3.727,
-              "yoyPct": 46.5,
-              "qoqPct": -12.61,
-              "mixPct": 5.5,
-              "mixYoyDeltaPp": -1,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125_htm.xml",
-              "sourceForm": "10-K",
-              "filingDate": "2026-02-25",
+              "memberKey": "edgecomputing",
+              "valueBn": 6.369,
+              "yoyPct": 28.67,
+              "qoqPct": 9.56,
+              "mixPct": 7.8,
+              "mixYoyDeltaPp": -3.43,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426_htm.xml",
+              "sourceForm": "10-Q",
+              "filingDate": "2026-05-20",
+              "periodStart": "2026-01-26",
+              "periodEnd": "2026-04-26",
               "supportLines": [
-                "GeForce · gaming GPUs"
+                "Gaming · RTX workstation · automotive edge"
               ],
               "supportLinesZh": null,
               "metricMode": null,
               "validationEligible": null,
-              "validationNotes": null
-            },
-            {
-              "name": "Professional Visualization",
-              "nameZh": null,
-              "memberKey": "professionalvisualization",
-              "valueBn": 1.321,
-              "yoyPct": 158.51,
-              "qoqPct": 73.82,
-              "mixPct": 1.9,
-              "mixYoyDeltaPp": 0.6,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125_htm.xml",
-              "sourceForm": "10-K",
-              "filingDate": "2026-02-25",
-              "supportLines": [
-                "RTX workstation"
-              ],
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": null,
-              "validationNotes": null
-            },
-            {
-              "name": "Automotive",
-              "nameZh": null,
-              "memberKey": "automotive",
-              "valueBn": 0.604,
-              "yoyPct": 5.96,
-              "qoqPct": 2.03,
-              "mixPct": 0.9,
-              "mixYoyDeltaPp": -0.6,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125_htm.xml",
-              "sourceForm": "10-K",
-              "filingDate": "2026-02-25",
-              "supportLines": [
-                "Drive platform"
-              ],
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": null,
-              "validationNotes": null
-            },
-            {
-              "name": "OEM & Other",
-              "nameZh": null,
-              "memberKey": "oemother",
-              "valueBn": 0.161,
-              "yoyPct": 27.78,
-              "qoqPct": -7.47,
-              "mixPct": 0.2,
-              "mixYoyDeltaPp": -0.1,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125_htm.xml",
-              "sourceForm": "10-K",
-              "filingDate": "2026-02-25",
-              "supportLines": [
-                "OEM · legacy"
-              ],
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": null,
-              "validationNotes": null
+              "validationNotes": "NVIDIA changed revenue by market platform presentation in FY2027 Q1; comparable FY2026 Q1 values are recast in the 2026-05-20 Form 10-Q."
             }
           ],
-          "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-          "officialSegmentSource": "official-filings",
-          "displayCurrency": "USD",
-          "displayScaleFactor": 1,
-          "statementMeta": {
-            "statementSource": "generic-official-filing-table",
-            "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
-            "statementValueMode": "direct",
-            "statementSpanQuarters": 1,
-            "qualityFlags": [],
-            "adapterId": "generic_filing_tables"
-          },
-          "fieldSources": {
-            "revenueBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 120,
-              "sourceUrl": null
+          "officialRevenueStyle": "nvidia-fy2027-market-platform",
+          "officialRevenueDetailGroups": [
+            {
+              "name": "Hyperscale",
+              "nameZh": null,
+              "memberKey": "hyperscale",
+              "valueBn": 37.869,
+              "yoyPct": 115.18,
+              "qoqPct": 12,
+              "mixPct": 46.4,
+              "mixYoyDeltaPp": 6.46,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426_htm.xml",
+              "sourceForm": "10-Q",
+              "filingDate": "2026-05-20",
+              "periodStart": "2026-01-26",
+              "periodEnd": "2026-04-26",
+              "targetName": "Data Center",
+              "targetMemberKey": "datacenter"
             },
-            "costOfRevenueBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 120,
-              "sourceUrl": null
-            },
-            "grossProfitBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 118,
-              "sourceUrl": null
-            },
-            "sgnaBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 112,
-              "sourceUrl": null
-            },
-            "rndBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 112,
-              "sourceUrl": null
-            },
-            "operatingExpensesBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 118,
-              "sourceUrl": null
-            },
-            "operatingIncomeBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 118,
-              "sourceUrl": null
-            },
-            "nonOperatingBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 110,
-              "sourceUrl": null
-            },
-            "pretaxIncomeBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 118,
-              "sourceUrl": null
-            },
-            "taxBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 112,
-              "sourceUrl": null
-            },
-            "netIncomeBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 118,
-              "sourceUrl": null
-            },
-            "statementMeta": {
-              "adapterId": "generic_filing_tables",
-              "label": "Generic official filing table parser",
-              "score": 13.5,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm"
-            },
-            "officialRevenueSegments": {
-              "adapterId": "official_revenue_structures",
-              "label": "Official filing revenue structure",
-              "score": 114,
-              "sourceUrl": null
+            {
+              "name": "AI Clouds, Industrial, & Enterprise",
+              "nameZh": null,
+              "memberKey": "aicloudsindustrialenterprise",
+              "valueBn": 37.377,
+              "yoyPct": 73.74,
+              "qoqPct": 31,
+              "mixPct": 45.8,
+              "mixYoyDeltaPp": -3.02,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426_htm.xml",
+              "sourceForm": "10-Q",
+              "filingDate": "2026-05-20",
+              "periodStart": "2026-01-26",
+              "periodEnd": "2026-04-26",
+              "targetName": "Data Center",
+              "targetMemberKey": "datacenter"
             }
-          },
-          "extractionDiagnostics": {
-            "qualityScore": 80,
-            "availableRequiredFieldCount": 3,
-            "requiredFieldCount": 3,
-            "sourceFieldCount": 13,
-            "hasCostBreakdownProfile": false,
-            "costBreakdownMode": "none",
-            "opexBreakdownMode": "none",
-            "revenueSegmentCoveragePct": 100,
-            "costBreakdownCoveragePct": 0,
-            "opexBreakdownCoveragePct": 0,
-            "revenueSegmentResidualBn": 0,
-            "costBreakdownResidualBn": null,
-            "opexBreakdownResidualBn": null,
-            "statementSource": "generic-official-filing-table",
-            "statementValueMode": "direct",
-            "statementSpanQuarters": 1,
-            "statementQualityFlags": [],
-            "issues": [
-              "cost-breakdown-coverage-low",
-              "opex-breakdown-coverage-low"
-            ]
-          }
+          ]
         }
       },
       "statementPresets": {},
       "officialRevenueStructureHistory": {
         "source": "official-filings-xbrl-axis",
         "quarters": {
-          "2026Q1": {
+          "2026Q2": {
             "segments": [
               {
                 "name": "Data Center",
                 "nameZh": null,
                 "memberKey": "datacenter",
-                "valueBn": 62.314,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125_htm.xml",
-                "sourceForm": "10-K",
-                "filingDate": "2026-02-25",
+                "valueBn": 75.246,
+                "yoyPct": 92.39,
+                "qoqPct": 20.75,
+                "mixPct": 92.2,
+                "mixYoyDeltaPp": 3.43,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426_htm.xml",
+                "sourceForm": "10-Q",
+                "filingDate": "2026-05-20",
+                "periodStart": "2026-01-26",
+                "periodEnd": "2026-04-26",
                 "supportLines": [
                   "AI · cloud · DGX"
                 ],
                 "supportLinesZh": null,
                 "metricMode": null,
                 "validationEligible": null,
-                "validationNotes": null
+                "validationNotes": "NVIDIA changed revenue by market platform presentation in FY2027 Q1; comparable FY2026 Q1 values are recast in the 2026-05-20 Form 10-Q."
               },
               {
-                "name": "Gaming",
+                "name": "Edge Computing",
                 "nameZh": null,
-                "memberKey": "gaming",
-                "valueBn": 3.727,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125_htm.xml",
-                "sourceForm": "10-K",
-                "filingDate": "2026-02-25",
+                "memberKey": "edgecomputing",
+                "valueBn": 6.369,
+                "yoyPct": 28.67,
+                "qoqPct": 9.56,
+                "mixPct": 7.8,
+                "mixYoyDeltaPp": -3.43,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426_htm.xml",
+                "sourceForm": "10-Q",
+                "filingDate": "2026-05-20",
+                "periodStart": "2026-01-26",
+                "periodEnd": "2026-04-26",
                 "supportLines": [
-                  "GeForce · gaming GPUs"
+                  "Gaming · RTX workstation · automotive edge"
                 ],
                 "supportLinesZh": null,
                 "metricMode": null,
                 "validationEligible": null,
-                "validationNotes": null
-              },
-              {
-                "name": "Professional Visualization",
-                "nameZh": null,
-                "memberKey": "professionalvisualization",
-                "valueBn": 1.321,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125_htm.xml",
-                "sourceForm": "10-K",
-                "filingDate": "2026-02-25",
-                "supportLines": [
-                  "RTX workstation"
-                ],
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": null,
-                "validationNotes": null
-              },
-              {
-                "name": "Automotive",
-                "nameZh": null,
-                "memberKey": "automotive",
-                "valueBn": 0.604,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125_htm.xml",
-                "sourceForm": "10-K",
-                "filingDate": "2026-02-25",
-                "supportLines": [
-                  "Drive platform"
-                ],
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": null,
-                "validationNotes": null
-              },
-              {
-                "name": "OEM & Other",
-                "nameZh": null,
-                "memberKey": "oemother",
-                "valueBn": 0.161,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125_htm.xml",
-                "sourceForm": "10-K",
-                "filingDate": "2026-02-25",
-                "supportLines": [
-                  "OEM · legacy"
-                ],
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": null,
-                "validationNotes": null
+                "validationNotes": "NVIDIA changed revenue by market platform presentation in FY2027 Q1; comparable FY2026 Q1 values are recast in the 2026-05-20 Form 10-Q."
               }
-            ]
+            ],
+            "detailGroups": [
+              {
+                "name": "Hyperscale",
+                "nameZh": null,
+                "memberKey": "hyperscale",
+                "valueBn": 37.869,
+                "yoyPct": 115.18,
+                "qoqPct": 12,
+                "mixPct": 46.4,
+                "mixYoyDeltaPp": 6.46,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426_htm.xml",
+                "sourceForm": "10-Q",
+                "filingDate": "2026-05-20",
+                "periodStart": "2026-01-26",
+                "periodEnd": "2026-04-26",
+                "targetName": "Data Center",
+                "targetMemberKey": "datacenter"
+              },
+              {
+                "name": "AI Clouds, Industrial, & Enterprise",
+                "nameZh": null,
+                "memberKey": "aicloudsindustrialenterprise",
+                "valueBn": 37.377,
+                "yoyPct": 73.74,
+                "qoqPct": 31,
+                "mixPct": 45.8,
+                "mixYoyDeltaPp": -3.02,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426_htm.xml",
+                "sourceForm": "10-Q",
+                "filingDate": "2026-05-20",
+                "periodStart": "2026-01-26",
+                "periodEnd": "2026-04-26",
+                "targetName": "Data Center",
+                "targetMemberKey": "datacenter"
+              }
+            ],
+            "style": "nvidia-fy2027-market-platform"
           }
         },
         "filingsUsed": [
+          {
+            "form": "10-Q",
+            "filingDate": "2026-05-20",
+            "accession": "0001045810-26-000052",
+            "instance": "nvda-20260426_htm.xml"
+          },
           {
             "form": "10-K",
             "filingDate": "2026-02-25",
@@ -713,7 +552,268 @@
         ],
         "errors": []
       },
-      "officialSegmentHistory": {}
+      "officialSegmentHistory": {
+        "source": "official-filings",
+        "axis": "StatementBusinessSegmentsAxis",
+        "filingsUsed": [
+          {
+            "form": "10-Q",
+            "filingDate": "2026-05-20",
+            "accession": "0001045810-26-000052",
+            "instance": "nvda-20260426_htm.xml",
+            "primaryDocument": "nvda-20260426.htm"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2026-02-25",
+            "accession": "0001045810-26-000021",
+            "primaryDocument": "nvda-20260125.htm",
+            "instance": "nvda-20260125_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2025-11-19",
+            "accession": "0001045810-25-000230",
+            "primaryDocument": "nvda-20251026.htm",
+            "instance": "nvda-20251026_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2025-08-27",
+            "accession": "0001045810-25-000209",
+            "primaryDocument": "nvda-20250727.htm",
+            "instance": "nvda-20250727_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2025-05-28",
+            "accession": "0001045810-25-000116",
+            "primaryDocument": "nvda-20250427.htm",
+            "instance": "nvda-20250427_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2025-02-26",
+            "accession": "0001045810-25-000023",
+            "primaryDocument": "nvda-20250126.htm",
+            "instance": "nvda-20250126_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2024-11-20",
+            "accession": "0001045810-24-000316",
+            "primaryDocument": "nvda-20241027.htm",
+            "instance": "nvda-20241027_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2024-08-28",
+            "accession": "0001045810-24-000264",
+            "primaryDocument": "nvda-20240728.htm",
+            "instance": "nvda-20240728_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2024-05-29",
+            "accession": "0001045810-24-000124",
+            "primaryDocument": "nvda-20240428.htm",
+            "instance": "nvda-20240428_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2024-02-21",
+            "accession": "0001045810-24-000029",
+            "primaryDocument": "nvda-20240128.htm",
+            "instance": "nvda-20240128_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2023-11-21",
+            "accession": "0001045810-23-000227",
+            "primaryDocument": "nvda-20231029.htm",
+            "instance": "nvda-20231029_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2023-08-28",
+            "accession": "0001045810-23-000175",
+            "primaryDocument": "nvda-20230730.htm",
+            "instance": "nvda-20230730_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2023-05-26",
+            "accession": "0001045810-23-000093",
+            "primaryDocument": "nvda-20230430.htm",
+            "instance": "nvda-20230430_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2023-02-24",
+            "accession": "0001045810-23-000017",
+            "primaryDocument": "nvda-20230129.htm",
+            "instance": "nvda-20230129_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2022-11-18",
+            "accession": "0001045810-22-000166",
+            "primaryDocument": "nvda-20221030.htm",
+            "instance": "nvda-20221030_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2022-08-31",
+            "accession": "0001045810-22-000147",
+            "primaryDocument": "nvda-20220731.htm",
+            "instance": "nvda-20220731_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2022-05-27",
+            "accession": "0001045810-22-000079",
+            "primaryDocument": "nvda-20220501.htm",
+            "instance": "nvda-20220501_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2022-03-18",
+            "accession": "0001045810-22-000036",
+            "primaryDocument": "nvda-20220130.htm",
+            "instance": "nvda-20220130_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2021-11-22",
+            "accession": "0001045810-21-000163",
+            "primaryDocument": "nvda-20211031.htm",
+            "instance": "nvda-20211031_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2021-08-20",
+            "accession": "0001045810-21-000131",
+            "primaryDocument": "nvda-20210801.htm",
+            "instance": "nvda-20210801_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2021-05-26",
+            "accession": "0001045810-21-000064",
+            "primaryDocument": "nvda-20210502.htm",
+            "instance": "nvda-20210502_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2021-02-26",
+            "accession": "0001045810-21-000010",
+            "primaryDocument": "nvda-20210131.htm",
+            "instance": "nvda-20210131_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2020-11-18",
+            "accession": "0001045810-20-000189",
+            "primaryDocument": "nvda-20201025.htm",
+            "instance": "nvda-20201025_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2020-08-19",
+            "accession": "0001045810-20-000147",
+            "primaryDocument": "nvda-20200726.htm",
+            "instance": "nvda-20200726_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2020-05-21",
+            "accession": "0001045810-20-000065",
+            "primaryDocument": "nvda-20200426.htm",
+            "instance": "nvda-20200426_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2020-02-20",
+            "accession": "0001045810-20-000010",
+            "primaryDocument": "nvda-2020x10k.htm",
+            "instance": "nvda-2020x10k_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2019-11-14",
+            "accession": "0001045810-19-000170",
+            "primaryDocument": "nvda2020q310q.htm",
+            "instance": "nvda2020q310q_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2019-08-15",
+            "accession": "0001045810-19-000144",
+            "primaryDocument": "nvda2020q210q.htm",
+            "instance": "nvda2020q210q_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2019-05-16",
+            "accession": "0001045810-19-000079",
+            "primaryDocument": "nvda2020q110q.htm",
+            "instance": "nvda-20190428.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2019-02-21",
+            "accession": "0001045810-19-000023",
+            "primaryDocument": "nvda-2019x10k.htm",
+            "instance": "nvda-20190127.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2018-11-15",
+            "accession": "0001045810-18-000150",
+            "primaryDocument": "nvda2019q310q.htm",
+            "instance": "nvda-20181028.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2018-08-16",
+            "accession": "0001045810-18-000114",
+            "primaryDocument": "nvda2019q210q.htm",
+            "instance": "nvda-20180729.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2018-05-22",
+            "accession": "0001045810-18-000080",
+            "primaryDocument": "nvda2019q110q.htm",
+            "instance": "nvda-20180429.xml"
+          }
+        ],
+        "errors": [],
+        "quarters": {
+          "2026Q2": [
+            {
+              "name": "Compute & Networking",
+              "memberKey": "computenetworking",
+              "valueBn": 74.55,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426_htm.xml",
+              "sourceForm": "10-Q",
+              "filingDate": "2026-05-20",
+              "periodStart": "2026-01-26",
+              "periodEnd": "2026-04-26"
+            },
+            {
+              "name": "Graphics",
+              "memberKey": "graphics",
+              "valueBn": 7.065,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426_htm.xml",
+              "sourceForm": "10-Q",
+              "filingDate": "2026-05-20",
+              "periodStart": "2026-01-26",
+              "periodEnd": "2026-04-26"
+            }
+          ]
+        }
+      }
     },
     {
       "id": "apple",
@@ -784,7 +884,7 @@
           "latestStructureHistoryQuarter": "2025Q4",
           "revenueClassificationQuarterCount": 32,
           "expenseClassificationQuarterCount": 9,
-          "revenueClassificationCoverageRatio": 1.0,
+          "revenueClassificationCoverageRatio": 1,
           "expenseClassificationCoverageRatio": 0.2812,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": 0,
@@ -826,9 +926,9 @@
           "validation": {
             "version": "parser-validation-v1",
             "status": "high",
-            "overallConfidenceScore": 1.0,
-            "financialConfidenceScore": 1.0,
-            "structuralConfidenceScore": 1.0,
+            "overallConfidenceScore": 1,
+            "financialConfidenceScore": 1,
+            "structuralConfidenceScore": 1,
             "revenueSegmentChecks": 32,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
@@ -942,7 +1042,7 @@
               "nameZh": null,
               "memberKey": "ipad",
               "valueBn": 6.914,
-              "yoyPct": 8.0,
+              "yoyPct": 8,
               "qoqPct": -19.56,
               "mixPct": 6.2,
               "mixYoyDeltaPp": -0.5,
@@ -1106,7 +1206,7 @@
           "latestStructureHistoryQuarter": "2025Q4",
           "revenueClassificationQuarterCount": 32,
           "expenseClassificationQuarterCount": 5,
-          "revenueClassificationCoverageRatio": 1.0,
+          "revenueClassificationCoverageRatio": 1,
           "expenseClassificationCoverageRatio": 0.1562,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": 0,
@@ -1150,7 +1250,7 @@
             "status": "high",
             "overallConfidenceScore": 0.9635,
             "financialConfidenceScore": 0.9438,
-            "structuralConfidenceScore": 1.0,
+            "structuralConfidenceScore": 1,
             "revenueSegmentChecks": 20,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 12,
@@ -1259,7 +1359,7 @@
             "version": "financial-validation-v1",
             "status": "high",
             "confidenceScore": 0.9438,
-            "completenessScore": 1.0,
+            "completenessScore": 1,
             "consistencyScore": 0.875,
             "checksRun": 8,
             "checksPassed": 7,
@@ -1360,7 +1460,7 @@
               "valueBn": 60.399,
               "yoyPct": 19.13,
               "qoqPct": -4.24,
-              "mixPct": 55.0,
+              "mixPct": 55,
               "mixYoyDeltaPp": -1.2,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000043/googexhibit991q12026.htm",
               "sourceForm": "8-K",
@@ -1379,7 +1479,7 @@
               "valueBn": 9.883,
               "yoyPct": 10.71,
               "qoqPct": -13.18,
-              "mixPct": 9.0,
+              "mixPct": 9,
               "mixYoyDeltaPp": -0.9,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000043/googexhibit991q12026.htm",
               "sourceForm": "8-K",
@@ -1438,7 +1538,7 @@
               "provenance": {
                 "adapterId": "official_manual_update",
                 "label": "Official earnings release",
-                "score": 130.0,
+                "score": 130,
                 "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000043/googexhibit991q12026.htm"
               }
             },
@@ -1457,7 +1557,7 @@
               "provenance": {
                 "adapterId": "official_manual_update",
                 "label": "Official earnings release",
-                "score": 130.0,
+                "score": 130,
                 "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000043/googexhibit991q12026.htm"
               }
             }
@@ -1466,98 +1566,98 @@
             "revenueBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000043/googexhibit991q12026.htm"
             },
             "costOfRevenueBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000043/googexhibit991q12026.htm"
             },
             "grossProfitBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000043/googexhibit991q12026.htm"
             },
             "sgnaBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000043/googexhibit991q12026.htm"
             },
             "rndBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000043/googexhibit991q12026.htm"
             },
             "otherOpexBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000043/googexhibit991q12026.htm"
             },
             "operatingExpensesBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000043/googexhibit991q12026.htm"
             },
             "operatingIncomeBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000043/googexhibit991q12026.htm"
             },
             "nonOperatingBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000043/googexhibit991q12026.htm"
             },
             "pretaxIncomeBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000043/googexhibit991q12026.htm"
             },
             "taxBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000043/googexhibit991q12026.htm"
             },
             "netIncomeBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000043/googexhibit991q12026.htm"
             },
             "statementMeta": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000043/googexhibit991q12026.htm"
             },
             "officialRevenueSegments": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000043/googexhibit991q12026.htm"
             },
             "officialRevenueDetailGroups": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000043/googexhibit991q12026.htm"
             },
             "costBreakdown": [
               {
                 "adapterId": "official_manual_update",
                 "label": "Official earnings release",
-                "score": 130.0,
+                "score": 130,
                 "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000043/googexhibit991q12026.htm"
               }
             ]
@@ -1643,8 +1743,8 @@
           "latestStructureHistoryQuarter": "2025Q4",
           "revenueClassificationQuarterCount": 32,
           "expenseClassificationQuarterCount": 0,
-          "revenueClassificationCoverageRatio": 1.0,
-          "expenseClassificationCoverageRatio": 0.0,
+          "revenueClassificationCoverageRatio": 1,
+          "expenseClassificationCoverageRatio": 0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
@@ -1677,17 +1777,17 @@
             "issueCount": 0,
             "mismatchQuarterCount": 0,
             "highConfidenceQuarterCount": 32,
-            "averageConfidenceScore": 1.0,
+            "averageConfidenceScore": 1,
             "latestQuarter": "2025Q4",
-            "latestQuarterConfidenceScore": 1.0,
+            "latestQuarterConfidenceScore": 1,
             "latestQuarterIssueCount": 0
           },
           "validation": {
             "version": "parser-validation-v1",
             "status": "high",
-            "overallConfidenceScore": 1.0,
-            "financialConfidenceScore": 1.0,
-            "structuralConfidenceScore": 1.0,
+            "overallConfidenceScore": 1,
+            "financialConfidenceScore": 1,
+            "structuralConfidenceScore": 1,
             "revenueSegmentChecks": 32,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
@@ -1794,9 +1894,9 @@
           "parserFinancialValidation": {
             "version": "financial-validation-v1",
             "status": "high",
-            "confidenceScore": 1.0,
-            "completenessScore": 1.0,
-            "consistencyScore": 1.0,
+            "confidenceScore": 1,
+            "completenessScore": 1,
+            "consistencyScore": 1,
             "checksRun": 8,
             "checksPassed": 8,
             "issueCount": 0,
@@ -1874,79 +1974,79 @@
             "revenueBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q3/income-statements"
             },
             "costOfRevenueBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q3/income-statements"
             },
             "grossProfitBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q3/income-statements"
             },
             "sgnaBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q3/income-statements"
             },
             "rndBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q3/income-statements"
             },
             "operatingExpensesBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q3/income-statements"
             },
             "operatingIncomeBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q3/income-statements"
             },
             "nonOperatingBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q3/income-statements"
             },
             "pretaxIncomeBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q3/income-statements"
             },
             "taxBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q3/income-statements"
             },
             "netIncomeBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q3/income-statements"
             },
             "statementMeta": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q3/income-statements"
             },
             "officialRevenueSegments": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q3/segment-revenues"
             }
           },
@@ -2031,8 +2131,8 @@
           "latestStructureHistoryQuarter": "2025Q4",
           "revenueClassificationQuarterCount": 32,
           "expenseClassificationQuarterCount": 0,
-          "revenueClassificationCoverageRatio": 1.0,
-          "expenseClassificationCoverageRatio": 0.0,
+          "revenueClassificationCoverageRatio": 1,
+          "expenseClassificationCoverageRatio": 0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
@@ -2117,7 +2217,7 @@
           "grossMarginPct": 51.82,
           "operatingMarginPct": 13.14,
           "profitMarginPct": 16.67,
-          "effectiveTaxRatePct": 24.0,
+          "effectiveTaxRatePct": 24,
           "revenueQoqPct": -14.934,
           "grossMarginYoyDeltaPp": 1.27,
           "operatingMarginYoyDeltaPp": 1.32,
@@ -2184,7 +2284,7 @@
             "version": "financial-validation-v1",
             "status": "high",
             "confidenceScore": 0.9438,
-            "completenessScore": 1.0,
+            "completenessScore": 1,
             "consistencyScore": 0.875,
             "checksRun": 8,
             "checksPassed": 7,
@@ -2345,85 +2445,85 @@
             "revenueBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000012/amzn-20260331xex991.htm"
             },
             "costOfRevenueBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000012/amzn-20260331xex991.htm"
             },
             "grossProfitBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000012/amzn-20260331xex991.htm"
             },
             "sgnaBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000012/amzn-20260331xex991.htm"
             },
             "rndBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000012/amzn-20260331xex991.htm"
             },
             "otherOpexBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000012/amzn-20260331xex991.htm"
             },
             "operatingExpensesBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000012/amzn-20260331xex991.htm"
             },
             "operatingIncomeBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000012/amzn-20260331xex991.htm"
             },
             "nonOperatingBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000012/amzn-20260331xex991.htm"
             },
             "pretaxIncomeBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000012/amzn-20260331xex991.htm"
             },
             "taxBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000012/amzn-20260331xex991.htm"
             },
             "netIncomeBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000012/amzn-20260331xex991.htm"
             },
             "statementMeta": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000012/amzn-20260331xex991.htm"
             },
             "officialRevenueSegments": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000012/amzn-20260331xex991.htm"
             }
           },
@@ -3154,7 +3254,7 @@
             "status": "high",
             "overallConfidenceScore": 0.9635,
             "financialConfidenceScore": 0.9438,
-            "structuralConfidenceScore": 1.0,
+            "structuralConfidenceScore": 1,
             "revenueSegmentChecks": 20,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
@@ -3263,7 +3363,7 @@
             "version": "financial-validation-v1",
             "status": "high",
             "confidenceScore": 0.9438,
-            "completenessScore": 1.0,
+            "completenessScore": 1,
             "consistencyScore": 0.875,
             "checksRun": 8,
             "checksPassed": 7,
@@ -3386,7 +3486,7 @@
               "provenance": {
                 "adapterId": "official_manual_update",
                 "label": "Official earnings release",
-                "score": 130.0,
+                "score": 130,
                 "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026028364/meta-03312026xexhibit991.htm"
               }
             },
@@ -3405,7 +3505,7 @@
               "provenance": {
                 "adapterId": "official_manual_update",
                 "label": "Official earnings release",
-                "score": 130.0,
+                "score": 130,
                 "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026028364/meta-03312026xexhibit991.htm"
               }
             },
@@ -3424,7 +3524,7 @@
               "provenance": {
                 "adapterId": "official_manual_update",
                 "label": "Official earnings release",
-                "score": 130.0,
+                "score": 130,
                 "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026028364/meta-03312026xexhibit991.htm"
               }
             },
@@ -3443,7 +3543,7 @@
               "provenance": {
                 "adapterId": "official_manual_update",
                 "label": "Official earnings release",
-                "score": 130.0,
+                "score": 130,
                 "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026028364/meta-03312026xexhibit991.htm"
               }
             }
@@ -3452,98 +3552,98 @@
             "revenueBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026028364/meta-03312026xexhibit991.htm"
             },
             "costOfRevenueBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026028364/meta-03312026xexhibit991.htm"
             },
             "grossProfitBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026028364/meta-03312026xexhibit991.htm"
             },
             "sgnaBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026028364/meta-03312026xexhibit991.htm"
             },
             "rndBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026028364/meta-03312026xexhibit991.htm"
             },
             "otherOpexBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026028364/meta-03312026xexhibit991.htm"
             },
             "operatingExpensesBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026028364/meta-03312026xexhibit991.htm"
             },
             "operatingIncomeBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026028364/meta-03312026xexhibit991.htm"
             },
             "nonOperatingBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026028364/meta-03312026xexhibit991.htm"
             },
             "pretaxIncomeBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026028364/meta-03312026xexhibit991.htm"
             },
             "taxBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026028364/meta-03312026xexhibit991.htm"
             },
             "netIncomeBn": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026028364/meta-03312026xexhibit991.htm"
             },
             "statementMeta": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026028364/meta-03312026xexhibit991.htm"
             },
             "officialRevenueSegments": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026028364/meta-03312026xexhibit991.htm"
             },
             "officialRevenueDetailGroups": {
               "adapterId": "official_manual_update",
               "label": "Official earnings release",
-              "score": 130.0,
+              "score": 130,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026028364/meta-03312026xexhibit991.htm"
             },
             "opexBreakdown": [
               {
                 "adapterId": "official_manual_update",
                 "label": "Official earnings release",
-                "score": 130.0,
+                "score": 130,
                 "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026028364/meta-03312026xexhibit991.htm"
               }
             ]
@@ -4932,8 +5032,8 @@
           "latestStructureHistoryQuarter": "2026Q1",
           "revenueClassificationQuarterCount": 33,
           "expenseClassificationQuarterCount": 0,
-          "revenueClassificationCoverageRatio": 1.0,
-          "expenseClassificationCoverageRatio": 0.0,
+          "revenueClassificationCoverageRatio": 1,
+          "expenseClassificationCoverageRatio": 0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
@@ -5006,7 +5106,7 @@
           "costOfRevenueBn": 66.697,
           "grossProfitBn": 26.978,
           "sgnaBn": 6.556,
-          "rndBn": 0.0,
+          "rndBn": 0,
           "otherOpexBn": 5.373,
           "operatingExpensesBn": 11.929,
           "operatingIncomeBn": 15.049,
@@ -5060,7 +5160,7 @@
               "yoyPct": 7.81,
               "qoqPct": null,
               "suppressQoQGrowth": true,
-              "mixPct": 12.0,
+              "mixPct": 12,
               "mixYoyDeltaPp": -5.1,
               "sourceUrl": "https://www.berkshirehathaway.com/qtrly/1stqtr26.pdf",
               "sourceForm": "FY2026 Q1 Form 10-Q",
@@ -5239,7 +5339,7 @@
                 "yoyPct": 7.81,
                 "qoqPct": null,
                 "suppressQoQGrowth": true,
-                "mixPct": 12.0,
+                "mixPct": 12,
                 "mixYoyDeltaPp": -5.1,
                 "sourceUrl": "https://www.berkshirehathaway.com/qtrly/1stqtr26.pdf",
                 "sourceForm": "FY2026 Q1 Form 10-Q",
@@ -8642,7 +8742,7 @@
           "revenueClassificationQuarterCount": 31,
           "expenseClassificationQuarterCount": 0,
           "revenueClassificationCoverageRatio": 0.9394,
-          "expenseClassificationCoverageRatio": 0.0,
+          "expenseClassificationCoverageRatio": 0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
@@ -8711,7 +8811,7 @@
           "fiscalLabel": "FY2026 Q2",
           "statementCurrency": "USD",
           "revenueBn": 11.23,
-          "revenueYoyPct": 17.0,
+          "revenueYoyPct": 17,
           "costOfRevenueBn": 0.26,
           "grossProfitBn": 10.97,
           "sgnaBn": 3.074,
@@ -8723,7 +8823,7 @@
           "pretaxIncomeBn": 7.174,
           "taxBn": 1.153,
           "netIncomeBn": 6.021,
-          "netIncomeYoyPct": 32.0,
+          "netIncomeYoyPct": 32,
           "grossMarginPct": 97.685,
           "operatingMarginPct": 64.417,
           "profitMarginPct": 53.615,
@@ -8795,9 +8895,9 @@
           "parserFinancialValidation": {
             "version": "financial-validation-v1",
             "status": "high",
-            "confidenceScore": 1.0,
-            "completenessScore": 1.0,
-            "consistencyScore": 1.0,
+            "confidenceScore": 1,
+            "completenessScore": 1,
+            "consistencyScore": 1,
             "checksRun": 8,
             "checksPassed": 8,
             "issueCount": 0,
@@ -11844,8 +11944,8 @@
           "latestStructureHistoryQuarter": "2025Q4",
           "revenueClassificationQuarterCount": 33,
           "expenseClassificationQuarterCount": 0,
-          "revenueClassificationCoverageRatio": 1.0,
-          "expenseClassificationCoverageRatio": 0.0,
+          "revenueClassificationCoverageRatio": 1,
+          "expenseClassificationCoverageRatio": 0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
@@ -11891,7 +11991,7 @@
             "status": "high",
             "overallConfidenceScore": 0.9611,
             "financialConfidenceScore": 0.9401,
-            "structuralConfidenceScore": 1.0,
+            "structuralConfidenceScore": 1,
             "revenueSegmentChecks": 33,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
@@ -11983,7 +12083,7 @@
               "valueBn": 0.72,
               "yoyPct": 11.28,
               "qoqPct": -14.59,
-              "mixPct": 7.0,
+              "mixPct": 7,
               "mixYoyDeltaPp": -1.7,
               "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1284/amd-reports-first-quarter-2026-financial-results",
               "sourceForm": "QuarterlyResultsRelease",
@@ -14619,7 +14719,7 @@
           "revenueClassificationQuarterCount": 29,
           "expenseClassificationQuarterCount": 0,
           "revenueClassificationCoverageRatio": 0.8788,
-          "expenseClassificationCoverageRatio": 0.0,
+          "expenseClassificationCoverageRatio": 0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
@@ -14654,7 +14754,7 @@
             "highConfidenceQuarterCount": 32,
             "averageConfidenceScore": 0.9965,
             "latestQuarter": "2025Q4",
-            "latestQuarterConfidenceScore": 1.0,
+            "latestQuarterConfidenceScore": 1,
             "latestQuarterIssueCount": 0
           },
           "validation": {
@@ -14662,7 +14762,7 @@
             "status": "high",
             "overallConfidenceScore": 0.9977,
             "financialConfidenceScore": 0.9965,
-            "structuralConfidenceScore": 1.0,
+            "structuralConfidenceScore": 1,
             "revenueSegmentChecks": 26,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 3,
@@ -14718,7 +14818,7 @@
               "yoyPct": 13.6,
               "qoqPct": -1.76,
               "mixPct": 42.8,
-              "mixYoyDeltaPp": -1.0,
+              "mixYoyDeltaPp": -1,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000137/ex991_q126.htm",
               "sourceForm": "8-K",
               "filingDate": "2026-04-16",
@@ -15931,7 +16031,7 @@
           "revenueClassificationQuarterCount": 21,
           "expenseClassificationQuarterCount": 0,
           "revenueClassificationCoverageRatio": 0.7241,
-          "expenseClassificationCoverageRatio": 0.0,
+          "expenseClassificationCoverageRatio": 0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
@@ -15966,7 +16066,7 @@
             "highConfidenceQuarterCount": 26,
             "averageConfidenceScore": 0.9176,
             "latestQuarter": "2026Q1",
-            "latestQuarterConfidenceScore": 1.0,
+            "latestQuarterConfidenceScore": 1,
             "latestQuarterIssueCount": 0
           },
           "validation": {
@@ -15974,7 +16074,7 @@
             "status": "high",
             "overallConfidenceScore": 0.9464,
             "financialConfidenceScore": 0.9176,
-            "structuralConfidenceScore": 1.0,
+            "structuralConfidenceScore": 1,
             "revenueSegmentChecks": 16,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
@@ -16081,9 +16181,9 @@
           "parserFinancialValidation": {
             "version": "financial-validation-v1",
             "status": "high",
-            "confidenceScore": 1.0,
-            "completenessScore": 1.0,
-            "consistencyScore": 1.0,
+            "confidenceScore": 1,
+            "completenessScore": 1,
+            "consistencyScore": 1,
             "checksRun": 8,
             "checksPassed": 8,
             "issueCount": 0,
@@ -16095,8 +16195,8 @@
               "nameZh": "政府业务",
               "memberKey": "governmentoperating",
               "valueBn": 0.858,
-              "yoyPct": 76.0,
-              "qoqPct": 18.0,
+              "yoyPct": 76,
+              "qoqPct": 18,
               "mixPct": 52.6,
               "mixYoyDeltaPp": -2.5,
               "sourceUrl": "https://www.fool.com/earnings/call-transcripts/2026/05/04/palantir-pltr-q1-2026-earnings-transcript/",
@@ -16110,8 +16210,8 @@
               "nameZh": null,
               "memberKey": "commercial",
               "valueBn": 0.774,
-              "yoyPct": 95.0,
-              "qoqPct": 14.0,
+              "yoyPct": 95,
+              "qoqPct": 14,
               "mixPct": 47.4,
               "mixYoyDeltaPp": 2.5,
               "sourceUrl": "https://www.fool.com/earnings/call-transcripts/2026/05/04/palantir-pltr-q1-2026-earnings-transcript/",
@@ -16140,8 +16240,8 @@
                 "sourceUrl": "https://www.fool.com/earnings/call-transcripts/2026/05/04/palantir-pltr-q1-2026-earnings-transcript/",
                 "sourceForm": "earnings-call-transcript",
                 "filingDate": "2026-05-04",
-                "yoyPct": 76.0,
-                "qoqPct": 18.0
+                "yoyPct": 76,
+                "qoqPct": 18
               },
               {
                 "name": "Commercial",
@@ -16150,8 +16250,8 @@
                 "sourceUrl": "https://www.fool.com/earnings/call-transcripts/2026/05/04/palantir-pltr-q1-2026-earnings-transcript/",
                 "sourceForm": "earnings-call-transcript",
                 "filingDate": "2026-05-04",
-                "yoyPct": 95.0,
-                "qoqPct": 14.0
+                "yoyPct": 95,
+                "qoqPct": 14
               }
             ]
           }
@@ -16413,8 +16513,8 @@
               "nameZh": "政府业务",
               "memberKey": "governmentoperating",
               "valueBn": 0.858,
-              "yoyPct": 76.0,
-              "qoqPct": 18.0,
+              "yoyPct": 76,
+              "qoqPct": 18,
               "mixPct": 52.6,
               "mixYoyDeltaPp": -2.5,
               "sourceUrl": "https://www.fool.com/earnings/call-transcripts/2026/05/04/palantir-pltr-q1-2026-earnings-transcript/",
@@ -16428,8 +16528,8 @@
               "nameZh": null,
               "memberKey": "commercial",
               "valueBn": 0.774,
-              "yoyPct": 95.0,
-              "qoqPct": 14.0,
+              "yoyPct": 95,
+              "qoqPct": 14,
               "mixPct": 47.4,
               "mixYoyDeltaPp": 2.5,
               "sourceUrl": "https://www.fool.com/earnings/call-transcripts/2026/05/04/palantir-pltr-q1-2026-earnings-transcript/",
@@ -18022,7 +18122,7 @@
           "revenueClassificationQuarterCount": 27,
           "expenseClassificationQuarterCount": 0,
           "revenueClassificationCoverageRatio": 0.8438,
-          "expenseClassificationCoverageRatio": 0.0,
+          "expenseClassificationCoverageRatio": 0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
@@ -18057,7 +18157,7 @@
             "highConfidenceQuarterCount": 30,
             "averageConfidenceScore": 0.9963,
             "latestQuarter": "2025Q4",
-            "latestQuarterConfidenceScore": 1.0,
+            "latestQuarterConfidenceScore": 1,
             "latestQuarterIssueCount": 0
           },
           "validation": {
@@ -18163,7 +18263,7 @@
               "yoyPct": 12.2,
               "qoqPct": null,
               "mixPct": 39.2,
-              "mixYoyDeltaPp": 0.0,
+              "mixYoyDeltaPp": 0,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026027723/a2026q1earningsreleaseex-9.htm",
               "sourceForm": "8-K",
               "filingDate": "2026-04-28",
@@ -18203,7 +18303,7 @@
               "yoyPct": 12.1,
               "qoqPct": null,
               "mixPct": 13.1,
-              "mixYoyDeltaPp": 0.0,
+              "mixYoyDeltaPp": 0,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026027723/a2026q1earningsreleaseex-9.htm",
               "sourceForm": "8-K",
               "filingDate": "2026-04-28",
@@ -18216,7 +18316,7 @@
               ]
             }
           ],
-          "displayScaleFactor": 1.0
+          "displayScaleFactor": 1
         }
       },
       "statementPresets": {},

@@ -1652,9 +1652,100 @@
           ]
         }
       ]
+    },
+    "2026Q2": {
+      "segments": [
+        {
+          "name": "Data Center",
+          "nameZh": null,
+          "memberKey": "datacenter",
+          "valueBn": 75.246,
+          "yoyPct": 92.39,
+          "qoqPct": 20.75,
+          "mixPct": 92.2,
+          "mixYoyDeltaPp": 3.43,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-05-20",
+          "periodStart": "2026-01-26",
+          "periodEnd": "2026-04-26",
+          "supportLines": [
+            "AI · cloud · DGX"
+          ],
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": "NVIDIA changed revenue by market platform presentation in FY2027 Q1; comparable FY2026 Q1 values are recast in the 2026-05-20 Form 10-Q."
+        },
+        {
+          "name": "Edge Computing",
+          "nameZh": null,
+          "memberKey": "edgecomputing",
+          "valueBn": 6.369,
+          "yoyPct": 28.67,
+          "qoqPct": 9.56,
+          "mixPct": 7.8,
+          "mixYoyDeltaPp": -3.43,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-05-20",
+          "periodStart": "2026-01-26",
+          "periodEnd": "2026-04-26",
+          "supportLines": [
+            "Gaming · RTX workstation · automotive edge"
+          ],
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": "NVIDIA changed revenue by market platform presentation in FY2027 Q1; comparable FY2026 Q1 values are recast in the 2026-05-20 Form 10-Q."
+        }
+      ],
+      "detailGroups": [
+        {
+          "name": "Hyperscale",
+          "nameZh": null,
+          "memberKey": "hyperscale",
+          "valueBn": 37.869,
+          "yoyPct": 115.18,
+          "qoqPct": 12,
+          "mixPct": 46.4,
+          "mixYoyDeltaPp": 6.46,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-05-20",
+          "periodStart": "2026-01-26",
+          "periodEnd": "2026-04-26",
+          "targetName": "Data Center",
+          "targetMemberKey": "datacenter"
+        },
+        {
+          "name": "AI Clouds, Industrial, & Enterprise",
+          "nameZh": null,
+          "memberKey": "aicloudsindustrialenterprise",
+          "valueBn": 37.377,
+          "yoyPct": 73.74,
+          "qoqPct": 31,
+          "mixPct": 45.8,
+          "mixYoyDeltaPp": -3.02,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-05-20",
+          "periodStart": "2026-01-26",
+          "periodEnd": "2026-04-26",
+          "targetName": "Data Center",
+          "targetMemberKey": "datacenter"
+        }
+      ],
+      "style": "nvidia-fy2027-market-platform"
     }
   },
   "filingsUsed": [
+    {
+      "form": "10-Q",
+      "filingDate": "2026-05-20",
+      "accession": "0001045810-26-000052",
+      "instance": "nvda-20260426_htm.xml"
+    },
     {
       "form": "10-K",
       "filingDate": "2026-02-25",

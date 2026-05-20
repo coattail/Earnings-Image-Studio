@@ -2714,7 +2714,20 @@ const BAR_SEGMENT_ROLLUPS_BY_COMPANY = Object.freeze({
   }),
 });
 
+const NVIDIA_EDGE_COMPUTING_LEGACY_BAR_KEYS = Object.freeze(new Set([
+  "edgecomputing",
+  "gaming",
+  "professionalvisualization",
+  "automotive",
+  "oemother",
+  "oemandother",
+  "oemothers",
+  "graphics",
+]));
+
 const BAR_SEGMENT_LABEL_OVERRIDES = Object.freeze({
+  datacenter: Object.freeze({ name: "Data Center", nameZh: "数据中心" }),
+  edgecomputing: Object.freeze({ name: "Edge Computing", nameZh: "边缘计算" }),
   googleservices: Object.freeze({ name: "Google Services", nameZh: "Google 服务" }),
   othersegments: Object.freeze({ name: "Other segments", nameZh: "其他分部" }),
   otherrevenue: Object.freeze({ name: "Other revenue", nameZh: "其他营收" }),
@@ -2815,11 +2828,21 @@ const BAR_SEGMENT_COLOR_SLOT_OVERRIDES = Object.freeze({
 });
 
 const BAR_SEGMENT_COLOR_SLOT_OVERRIDES_BY_COMPANY = Object.freeze({
+  nvidia: Object.freeze({
+    edgecomputing: 9,
+  }),
   visa: Object.freeze({
     servicerevenues: 0,
     dataprocessingrevenues: 1,
     internationaltransactionrevenues: 2,
     otherrevenues: 3,
+  }),
+});
+
+const BAR_SEGMENT_COLOR_OVERRIDES_BY_COMPANY = Object.freeze({
+  nvidia: Object.freeze({
+    datacenter: "#73AE0B",
+    edgecomputing: "#2D9CDB",
   }),
 });
 
@@ -3087,13 +3110,21 @@ function stableBarColorMap(companyId, segmentKeys = []) {
   const colorMap = {};
   const orderedKeys = [...new Set(segmentKeys.filter(Boolean))];
   const brandPalette = companyBrandBarPalette(normalizedCompanyId, Math.max(orderedKeys.length + 2, 8));
+  const companyColorOverrides = BAR_SEGMENT_COLOR_OVERRIDES_BY_COMPANY[normalizedCompanyId] || null;
   const companySlotOverrides = BAR_SEGMENT_COLOR_SLOT_OVERRIDES_BY_COMPANY[normalizedCompanyId] || null;
   const canUseCandidateColor = (candidateColor) =>
     !!candidateColor &&
     !usedColors.includes(candidateColor) &&
     !usedColors.some((existingColor) => barColorsAreTooSimilar(candidateColor, existingColor));
   orderedKeys.forEach((segmentKey) => {
+    const overrideColor = normalizeBarPaletteColor(companyColorOverrides?.[segmentKey] || "");
+    if (!overrideColor) return;
+    colorMap[segmentKey] = overrideColor;
+    usedColors.push(overrideColor);
+  });
+  orderedKeys.forEach((segmentKey) => {
     const preferredSlot = companySlotOverrides?.[segmentKey] ?? BAR_SEGMENT_COLOR_SLOT_OVERRIDES[segmentKey];
+    if (colorMap[segmentKey]) return;
     if (preferredSlot === null || preferredSlot === undefined) return;
     const candidate = brandPalette[preferredSlot % brandPalette.length];
     if (!canUseCandidateColor(candidate)) return;
@@ -3459,8 +3490,57 @@ function barSourceRowKey(item) {
   return normalizeLabelKey(item?.id || item?.memberKey || item?.name);
 }
 
+function applyNvidiaCurrentMarketPlatformRollup(entry, rows = []) {
+  if (!Array.isArray(rows) || rows.length < 2) return rows;
+  const dataCenterRows = [];
+  const edgeRows = [];
+  const retainedRows = [];
+
+  rows.forEach((item) => {
+    const key = canonicalBarSegmentKey("nvidia", barSourceRowKey(item), item?.name || "");
+    if (key === "datacenter") {
+      dataCenterRows.push(item);
+      return;
+    }
+    if (NVIDIA_EDGE_COMPUTING_LEGACY_BAR_KEYS.has(key)) {
+      edgeRows.push(item);
+      return;
+    }
+    retainedRows.push(item);
+  });
+
+  if (!dataCenterRows.length || !edgeRows.length) return rows;
+
+  const aggregateRows = (items, key, fallbackName, fallbackNameZh = "") => {
+    const valueBn = items.reduce((sum, item) => sum + safeNumber(item?.valueBn), 0);
+    if (!(valueBn > 0.02)) return null;
+    const preferredSourceRow = items.reduce(
+      (selected, item) => (selected && !preferCanonicalBarSegmentRow(selected, item) ? selected : item),
+      null
+    );
+    const labelMeta = canonicalBarSegmentMeta("nvidia", key, fallbackName, fallbackNameZh);
+    return {
+      id: key,
+      name: labelMeta.name,
+      nameZh: labelMeta.nameZh,
+      valueBn: Number(valueBn.toFixed(3)),
+      filingDate: preferredSourceRow?.filingDate || null,
+      periodEnd: preferredSourceRow?.periodEnd || entry?.periodEnd || null,
+    };
+  };
+
+  return [
+    aggregateRows(dataCenterRows, "datacenter", "Data Center", "数据中心"),
+    aggregateRows(edgeRows, "edgecomputing", "Edge Computing", "边缘计算"),
+    ...retainedRows,
+  ].filter(Boolean);
+}
+
 function applyCompanyBarSegmentRollups(entry, rows = []) {
   const companyId = String(entry?.companyId || "").trim().toLowerCase();
+  if (companyId === "nvidia") {
+    rows = applyNvidiaCurrentMarketPlatformRollup(entry, rows);
+  }
   const rollups = BAR_SEGMENT_ROLLUPS_BY_COMPANY[companyId];
   if (!rollups || !Array.isArray(rows) || !rows.length) return rows;
 

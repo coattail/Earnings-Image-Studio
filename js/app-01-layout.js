@@ -867,11 +867,19 @@ function snapshotCanvasSize(snapshot) {
   const regularSourceRankMap = new Map(leadEligibleSourceIndexes.map((sourceIndex, orderIndex) => [sourceIndex, orderIndex]));
   const sourceLabelLeftEdges = sources.map((item, sourceIndex) => {
     const compactMode = compactSources || item.compactLabel;
-    const labelLines = resolveSourceLabelLines(item, {
-      compactMode,
-      fontSize: sourceLabelTitleSize,
-      maxWidth: currentChartLanguage() === "zh" ? 166 : 198,
-    });
+    const labelWidth = Math.max(
+      ...["zh", "en"].map((language) =>
+        approximateTextBlockWidth(
+          resolveSourceLabelLines(item, {
+            compactMode,
+            fontSize: sourceLabelTitleSize,
+            maxWidth: language === "zh" ? 166 : 198,
+            language,
+          }),
+          sourceLabelTitleSize
+        )
+      )
+    );
     const leadOffsetX =
       preDetailLeadEnabled && regularSourceRankMap.has(sourceIndex)
         ? resolvePreDetailRegularSourceLeadDistance(snapshot, {
@@ -881,16 +889,24 @@ function snapshotCanvasSize(snapshot) {
             detailRightX: baseLeftDetailX + leftDetailWidth,
           })
         : 0;
-    return baseSourceLabelX - leadOffsetX - approximateTextBlockWidth(labelLines, sourceLabelTitleSize) - 12;
+    return baseSourceLabelX - leadOffsetX - labelWidth - 12;
   });
   const detailLabelLeftEdges = detailGroups.map((item) => {
     const compactMode = compactSources || item.compactLabel;
-    const labelLines = resolveSourceLabelLines(item, {
-      compactMode,
-      fontSize: detailLabelTitleSize,
-      maxWidth: currentChartLanguage() === "zh" ? 166 : 198,
-    });
-    return baseDetailLabelX - approximateTextBlockWidth(labelLines, detailLabelTitleSize) - 12;
+    const labelWidth = Math.max(
+      ...["zh", "en"].map((language) =>
+        approximateTextBlockWidth(
+          resolveSourceLabelLines(item, {
+            compactMode,
+            fontSize: detailLabelTitleSize,
+            maxWidth: language === "zh" ? 166 : 198,
+            language,
+          }),
+          detailLabelTitleSize
+        )
+      )
+    );
+    return baseDetailLabelX - labelWidth - 12;
   });
   const leftCanvasPadding = safeNumber(snapshot?.layout?.leftCanvasPadding, 44);
   const minLabelLeftEdge = Math.min(...sourceLabelLeftEdges, ...detailLabelLeftEdges, leftCanvasPadding);

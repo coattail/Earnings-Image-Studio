@@ -30,7 +30,7 @@ const state = {
   },
 };
 
-const BUILD_ASSET_VERSION = "20260514-byd-incremental-bars-v173";
+const BUILD_ASSET_VERSION = "20260521-nvda-fy2027-q1-v174";
 const CORPORATE_LOGO_AREA_MULTIPLIER = 1.728;
 const CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER = Math.sqrt(CORPORATE_LOGO_AREA_MULTIPLIER);
 const CORPORATE_LOGO_REVENUE_GAP_MULTIPLIER = 1.2;
@@ -1121,6 +1121,10 @@ const CHART_TEXT_TRANSLATIONS_ZH = {
   "oem · legacy": "OEM · 旧平台",
   "rtx workstation": "RTX 工作站",
   "ai · accelerator · server": "AI · 加速器 · 服务器",
+  hyperscale: "超大规模",
+  "ai clouds, industrial, & enterprise": "AI云、工业与企业",
+  "ai clouds industrial enterprise": "AI云、工业与企业",
+  "edge computing": "边缘计算",
   apac: "亚太",
   emea: "欧洲、中东和非洲",
   latam: "拉丁美洲",
@@ -1168,6 +1172,10 @@ const CHART_LABEL_TRANSLATIONS_ZH_EXACT = {
   "cross-border volume fees": "跨境交易量费用",
   "data center": "数据中心",
   "data processing revenues": "数据处理营收",
+  hyperscale: "超大规模",
+  "ai clouds, industrial, & enterprise": "AI云、工业与企业",
+  "ai clouds industrial enterprise": "AI云、工业与企业",
+  "edge computing": "边缘计算",
   diabetes: "糖尿病",
   "diabetes & obesity": "糖尿病与肥胖",
   "digital consumer electronics": "数字消费电子",
@@ -1681,6 +1689,10 @@ const CHART_LABEL_TRANSLATIONS_ZH_TOKENS = {
   applications: "应用",
   application: "应用",
   infrastructure: "基础设施",
+  hyperscale: "超大规模",
+  industrial: "工业",
+  enterprise: "企业",
+  edge: "边缘",
   systems: "系统",
   net: "净",
   government: "政府",
@@ -1730,6 +1742,7 @@ const CHART_LABEL_TRANSLATIONS_ZH_BY_KEY = Object.freeze(
       ["restofworld", "世界其他地区"],
       ["international", "国际业务"],
       ["gamesandrelatedvalueaddedservices", "游戏及相关增值服务"],
+      ["aicloudsindustrialenterprise", "AI云、工业与企业"],
     ].forEach(([source, target]) => registerTranslation(source, target));
     return translations;
   })()
@@ -2008,11 +2021,23 @@ function wrapLabelWithMaxWidth(text, fontSize, maxWidth, options = {}) {
 
 function resolveSourceLabelLines(item, options = {}) {
   const compactMode = !!options.compactMode;
+  const language = options.language === "en" || options.language === "zh" ? options.language : currentChartLanguage();
   const fontSize = safeNumber(options.fontSize, compactMode ? 24 : 26);
-  const maxWidth = safeNumber(options.maxWidth, currentChartLanguage() === "zh" ? 166 : 198);
-  const maxLines = safeNumber(options.maxLines, currentChartLanguage() === "zh" ? 2 : 3);
-  if (currentChartLanguage() === "zh") {
-    return wrapLabelWithMaxWidth(localizeChartItemName(item), fontSize, maxWidth, { maxLines });
+  const maxWidth = safeNumber(options.maxWidth, language === "zh" ? 166 : 198);
+  const maxLines = safeNumber(options.maxLines, language === "zh" ? 2 : 3);
+  if (language === "zh") {
+    const explicitZh = String(item?.nameZh || "").trim();
+    const localized = explicitZh && hasChineseGlyph(explicitZh)
+      ? explicitZh
+      : translateBusinessLabelToZh(explicitZh || item?.name || "", {
+          translationKey: item?.memberKey || item?.key || item?.id || item?.name || "",
+          memberKey: item?.memberKey,
+          key: item?.key,
+          id: item?.id,
+        }) ||
+        explicitZh ||
+        String(item?.name || "");
+    return wrapLabelWithMaxWidth(localized, fontSize, maxWidth, { maxLines });
   }
   const preferred = item?.displayLines?.length ? item.displayLines.join(" ") : item?.name || "";
   return wrapLabelWithMaxWidth(preferred, fontSize, maxWidth, { maxLines });
