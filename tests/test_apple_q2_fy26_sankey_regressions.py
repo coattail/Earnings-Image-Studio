@@ -17,7 +17,7 @@ def load_apple() -> dict:
     return json.loads(APPLE_PAYLOAD.read_text(encoding="utf-8"))
 
 
-def render_apple_q2_svg() -> tuple[str, ET.Element]:
+def render_apple_q2_svg(language: str = "zh") -> tuple[str, ET.Element]:
     with tempfile.TemporaryDirectory(prefix="apple-q2-fy26-sankey-") as temp_dir:
         output_dir = Path(temp_dir)
         result = subprocess.run(
@@ -29,13 +29,13 @@ def render_apple_q2_svg() -> tuple[str, ET.Element]:
                 "--quarter",
                 "2026Q1",
                 "--language",
-                "zh",
+                language,
                 "--modes",
                 "sankey",
                 "--output-dir",
                 str(output_dir),
                 "--basename",
-                "apple-q2-fy26",
+                f"apple-q2-fy26-{language}",
             ],
             cwd=ROOT_DIR,
             check=True,
@@ -75,6 +75,10 @@ def text_y(svg_root: ET.Element, label: str, *, min_x: float | None = None, min_
     if not candidates:
         raise AssertionError(f"Missing label {label}")
     return min(candidates)
+
+
+def all_text(svg_root: ET.Element) -> list[tuple[dict[str, str], str]]:
+    return [(text.attrib, "".join(text.itertext())) for text in svg_root.findall(".//svg:text", SVG_NS)]
 
 
 class AppleQ2FY26SankeyRegressionTests(unittest.TestCase):
@@ -121,6 +125,48 @@ class AppleQ2FY26SankeyRegressionTests(unittest.TestCase):
 
         self.assertGreater(cost_product["height"], 200)
         self.assertGreater(cost_product["height"], cost_services["height"] * 4)
+
+    def test_profit_trunk_lifts_operating_node_for_smooth_upward_split(self) -> None:
+        _svg_text, svg_root = render_apple_q2_svg()
+
+        gross = visible_rect(svg_root, "gross")
+        operating = visible_rect(svg_root, "operating")
+
+        self.assertGreaterEqual(
+            gross["y"] - operating["y"],
+            24,
+            "operating profit should sit visibly above gross profit so the green trunk fans upward after gross profit",
+        )
+
+    def test_long_right_branch_labels_wrap_before_colliding_with_ribbons(self) -> None:
+        _svg_text, svg_root = render_apple_q2_svg("en")
+
+        right_side_text = [
+            label
+            for attrs, label in all_text(svg_root)
+            if float(attrs.get("x", 0)) > 2450 and 1260 < float(attrs.get("y", 0)) < 1385
+        ]
+
+        self.assertIn("Selling,", right_side_text)
+        self.assertIn("administrative", right_side_text)
+        self.assertNotIn(
+            "general and administrative",
+            right_side_text,
+            "SG&A should wrap into shorter lines instead of leaving a long line that collides with the node/ribbon area",
+        )
+
+    def test_cost_summary_label_wraps_compactly_away_from_outbound_cost_ribbon(self) -> None:
+        _svg_text, svg_root = render_apple_q2_svg("en")
+
+        cost_summary_text = [
+            label
+            for attrs, label in all_text(svg_root)
+            if 1550 < float(attrs.get("x", 0)) < 1660 and 1320 < float(attrs.get("y", 0)) < 1450
+        ]
+
+        self.assertIn("Cost of", cost_summary_text)
+        self.assertIn("revenue", cost_summary_text)
+        self.assertNotIn("Cost of revenue", cost_summary_text)
 
 
 if __name__ == "__main__":

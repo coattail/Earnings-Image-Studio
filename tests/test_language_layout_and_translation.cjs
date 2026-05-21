@@ -202,6 +202,10 @@ test("positive-heavy NVDA Sankey layout lifts operating and net nodes and keeps 
   assert.ok(operating.y <= 560, `operating node should move upward in positive-heavy layouts, got y=${operating.y}`);
   assert.ok(net.y <= 350, `net node should move upward with operating profit, got y=${net.y}`);
   assert.ok(net.x - (positive.x + positive.width) <= 120, "positive adjustment node should stay close to the net-income merge");
+  assert.ok(
+    net.y - positive.y <= 105,
+    `positive adjustment node should stay visually attached above net income, got vertical gap=${net.y - positive.y}`
+  );
   assert.ok(rAndD.y - (tax.y + tax.height) >= 55, "tax and R&D branches should stay visually separated");
   assert.ok(sgAndA.y - (rAndD.y + rAndD.height) >= 120, "R&D and SG&A branches should remain fanned out");
 });

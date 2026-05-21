@@ -613,14 +613,86 @@ function renderPixelReplicaSvg(snapshot) {
   );
   const hasExplicitGrossNodeTop = snapshot.layout?.grossNodeTop !== null && snapshot.layout?.grossNodeTop !== undefined;
   const hasExplicitCostNodeTop = snapshot.layout?.costNodeTop !== null && snapshot.layout?.costNodeTop !== undefined;
+  const hasExpandedPreDetailRevenueStack =
+    usesPreDetailRevenueLayout &&
+    rawSources.length >= 4 &&
+    rawLeftDetailGroups.length >= 2;
+  const preDetailProfitContinuityStrength = clamp(
+    safeNumber(
+      snapshot.layout?.preDetailProfitContinuityStrength,
+      hasExpandedPreDetailRevenueStack && hasDenseRightStage
+        ? 0.42 +
+          positiveAdjustmentScaleStrength * 0.34 +
+          rightStageCrowdingStrength * 0.18 +
+          Math.max(rawCostBreakdown.length - 1, 0) * 0.05
+        : 0
+    ),
+    0,
+    1
+  );
+  const preDetailRevenueLiftUnits =
+    preDetailProfitContinuityStrength > 0
+      ? clamp(
+          safeNumber(
+            snapshot.layout?.preDetailRevenueLiftY,
+            30 + preDetailProfitContinuityStrength * 42
+          ),
+          0,
+          safeNumber(snapshot.layout?.preDetailRevenueLiftMaxY, usesHeroLockups ? 68 : 60)
+        )
+      : 0;
+  const preDetailRevenueLiftY =
+    preDetailProfitContinuityStrength > 0
+      ? scaleY(preDetailRevenueLiftUnits)
+      : 0;
+  const preDetailGrossLiftY =
+    preDetailProfitContinuityStrength > 0
+      ? scaleY(
+          clamp(
+            safeNumber(
+              snapshot.layout?.preDetailGrossLiftY,
+              preDetailRevenueLiftUnits + 42 + positiveAdjustmentScaleStrength * 22
+            ),
+            0,
+            safeNumber(snapshot.layout?.preDetailGrossLiftMaxY, usesHeroLockups ? 112 : 98)
+          )
+        )
+      : 0;
+  const preDetailNetLiftY =
+    preDetailProfitContinuityStrength > 0
+      ? scaleY(
+          clamp(
+            safeNumber(
+              snapshot.layout?.preDetailNetLiftY,
+              30 + preDetailProfitContinuityStrength * 26 + positiveAdjustmentScaleStrength * 10
+            ),
+            0,
+            safeNumber(snapshot.layout?.preDetailNetLiftMaxY, usesHeroLockups ? 72 : 64)
+          )
+        )
+      : 0;
+  const preDetailOperatingRelaxY =
+    preDetailProfitContinuityStrength > 0
+      ? scaleY(
+          clamp(
+            safeNumber(
+              snapshot.layout?.preDetailOperatingRelaxY,
+              16 + preDetailProfitContinuityStrength * 26
+            ),
+            0,
+            safeNumber(snapshot.layout?.preDetailOperatingRelaxMaxY, usesHeroLockups ? 48 : 40)
+          )
+        )
+      : 0;
   const revenueTopBase = clamp(
-    scaleY(baseRevenueTop) + stageCenteringShiftY * safeNumber(snapshot.layout?.revenueStageShiftFactor, 0.82),
+    scaleY(baseRevenueTop) + stageCenteringShiftY * safeNumber(snapshot.layout?.revenueStageShiftFactor, 0.82) - preDetailRevenueLiftY,
     scaleY(244),
     chartBottomLimit - revenueHeight
   );
   const grossTopBase = clamp(
     layoutY(snapshot.layout?.grossNodeTop, baseRevenueTop + (usesHeroLockups ? 74 : 46)) +
-      stageCenteringShiftY * safeNumber(snapshot.layout?.grossStageShiftFactor, 0.98),
+      stageCenteringShiftY * safeNumber(snapshot.layout?.grossStageShiftFactor, 0.98) -
+      preDetailGrossLiftY,
     scaleY(236),
     chartBottomLimit - grossHeight
   );
@@ -697,6 +769,27 @@ function renderPixelReplicaSvg(snapshot) {
     profitRiseMinY,
     Math.max(profitRiseMinY, profitRiseCeilingY * profitRiseDamping)
   );
+  const profitFlowContinuityLiftY =
+    !hasExplicitOpNodeTop &&
+    !hasOperatingLoss &&
+    operatingProfitBn > 0.02 &&
+    grossProfitBn > 0.02 &&
+    rawCostBreakdown.length >= 2 &&
+    rawOpexItems.length >= 2
+      ? scaleY(
+          clamp(
+            safeNumber(
+              snapshot.layout?.profitFlowContinuityLiftY,
+              18 +
+                rightStageCrowdingStrength * 20 +
+                Math.max(operatingRetentionRatio - 0.42, 0) * 54 +
+                Math.max(rawBelowOperatingItems.length - 1, 0) * 4
+            ),
+            0,
+            safeNumber(snapshot.layout?.profitFlowContinuityLiftMaxY, usesHeroLockups ? 58 : 50)
+          )
+        )
+      : 0;
   const costMinGapFromGross = scaleY(safeNumber(snapshot.layout?.costMinGapFromGross, usesHeroLockups ? 20 : 18));
   const costGapRatio = safeNumber(snapshot.layout?.costGapRatio, 0.018);
   const costGapBaseY = scaleY(safeNumber(snapshot.layout?.costGapBaseY, usesHeroLockups ? 14 : 12));
@@ -756,7 +849,9 @@ function renderPixelReplicaSvg(snapshot) {
       )
     : chartBottomLimit - scaleY(8);
   const profitOpTopBase = clamp(
-    (hasExplicitOpNodeTop ? layoutY(snapshot.layout?.opNodeTop) : grossTopBase - profitRiseY) +
+    (hasExplicitOpNodeTop
+      ? layoutY(snapshot.layout?.opNodeTop)
+      : grossTopBase - profitRiseY - profitFlowContinuityLiftY + preDetailOperatingRelaxY) +
       stageCenteringShiftY * safeNumber(snapshot.layout?.operatingStageShiftFactor, 1),
     scaleY(220),
     chartBottomLimit - opHeight
@@ -917,7 +1012,7 @@ function renderPixelReplicaSvg(snapshot) {
       ? layoutY(snapshot.layout?.netNodeTop)
       : netLoss && rawPositiveAdjustments.length
       ? opTopBase + opHeight + netLossPositiveOffsetY
-      : opTopBase - netRiseY) +
+      : opTopBase - netRiseY - preDetailNetLiftY) +
     stageCenteringShiftY * safeNumber(snapshot.layout?.netStageShiftFactor, netLoss && rawPositiveAdjustments.length ? 0.62 : 0.36);
   const netTopMinY = scaleY(
     safeNumber(
@@ -938,8 +1033,21 @@ function renderPixelReplicaSvg(snapshot) {
             scaleY(safeNumber(snapshot.layout?.netAdaptiveLiftCrowdingY, 26)) * rightStageCrowdingStrength +
             positiveBridgeCoreTargetLiftY * 0.28
         );
+  const preDetailNetPostLiftY =
+    preDetailProfitContinuityStrength > 0
+      ? scaleY(
+          clamp(
+            safeNumber(
+              snapshot.layout?.preDetailNetPostLiftY,
+              12 + preDetailProfitContinuityStrength * 14
+            ),
+            0,
+            safeNumber(snapshot.layout?.preDetailNetPostLiftMaxY, usesHeroLockups ? 34 : 28)
+          )
+        )
+      : 0;
   const netTopBase = clamp(
-    netBaseCandidate - netAdaptiveLiftY,
+    netBaseCandidate - netAdaptiveLiftY - preDetailNetPostLiftY,
     netTopMinY,
     chartBottomLimit - netHeight
   );
@@ -955,7 +1063,16 @@ function renderPixelReplicaSvg(snapshot) {
   const stageRecenteringDownYDesired = stageRecenteringEligibility
     ? Math.max(stageCenterTargetY - (preliminaryStageTop + preliminaryStageBottom) / 2, 0)
     : 0;
-  const netRecenteringFactor = safeNumber(snapshot.layout?.netRecenteringShiftFactor, 0.44);
+  const netRecenteringFactorBase = safeNumber(snapshot.layout?.netRecenteringShiftFactor, 0.44);
+  const netRecenteringContinuityRelease = clamp(
+    safeNumber(
+      snapshot.layout?.netRecenteringContinuityRelease,
+      preDetailProfitContinuityStrength * 0.36
+    ),
+    0,
+    0.42
+  );
+  const netRecenteringFactor = netRecenteringFactorBase * (1 - netRecenteringContinuityRelease);
   const positiveBridgeStageLiftY = scaleY(
     clamp(
       safeNumber(
@@ -1060,8 +1177,21 @@ function renderPixelReplicaSvg(snapshot) {
       24
     )
   );
+  const preDetailOperatingLanePushdownY =
+    preDetailProfitContinuityStrength > 0
+      ? scaleY(
+          clamp(
+            safeNumber(
+              snapshot.layout?.preDetailOperatingLanePushdownY,
+              14 + preDetailProfitContinuityStrength * 14
+            ),
+            0,
+            safeNumber(snapshot.layout?.preDetailOperatingLanePushdownMaxY, usesHeroLockups ? 34 : 28)
+          )
+        )
+      : 0;
   const opLanePushdownY =
-    usesExtremePositiveTopLane
+    (usesExtremePositiveTopLane
       ? Math.max(
           scaleY(safeNumber(snapshot.layout?.extremePositiveOperatingLanePushdownY, 0)),
           Math.max(
@@ -1073,7 +1203,8 @@ function renderPixelReplicaSvg(snapshot) {
           ) +
             scaleY(safeNumber(snapshot.layout?.extremePositiveOperatingLaneExtraGapY, 16))
         )
-      : 0;
+      : 0) +
+    preDetailOperatingLanePushdownY;
   const operatingLaneTop = opTop + opLanePushdownY;
   const operatingLaneBottom = opBottom + opLanePushdownY;
   const explicitBelowOperatingBn = belowOperatingItems.reduce((sum, item) => sum + Math.max(safeNumber(item.valueBn), 0), 0);
@@ -1114,7 +1245,7 @@ function renderPixelReplicaSvg(snapshot) {
   const expenseSummaryTitleSize = 41;
   const costLabelLines = snapshot.costLabelLines?.length
     ? localizeChartLines(snapshot.costLabelLines)
-    : wrapLabelWithMaxWidth(localizeChartPhrase(snapshot.costLabel || "Cost of revenue"), expenseSummaryTitleSize, currentChartLanguage() === "zh" ? 280 : 360, {
+    : wrapLabelWithMaxWidth(localizeChartPhrase(snapshot.costLabel || "Cost of revenue"), expenseSummaryTitleSize, currentChartLanguage() === "zh" ? 280 : 212, {
         maxLines: 2,
       });
   const operatingOutcomeLabel = resolvedOperatingOutcomeLabel(snapshot);
@@ -1556,18 +1687,57 @@ function renderPixelReplicaSvg(snapshot) {
         return leftCenter - rightCenter;
       });
     const detailRightX = leftDetailX + leftDetailWidth;
+    const alignRegularLeadColumn =
+      regularLeadIndexes.length >= 3 &&
+      snapshot.layout?.alignPreDetailRegularSourceColumn !== false;
+    const sharedRegularLeadDistance = alignRegularLeadColumn
+      ? resolvePreDetailRegularSourceLeadDistance(snapshot, {
+          regularCount: regularLeadIndexes.length,
+          orderIndex: 0,
+          leftX,
+          detailRightX,
+        })
+      : null;
+    const shiftRegularSourceEntryDown = (sourceIndex, deltaY) => {
+      if (!(deltaY > 0.5)) return;
+      const slice = sourceSlices[sourceIndex];
+      const box = leftBoxes[sourceIndex];
+      if (!slice || !box) return;
+      slice.top += deltaY;
+      slice.bottom += deltaY;
+      slice.center += deltaY;
+      box.top += deltaY;
+      box.bottom += deltaY;
+      box.center += deltaY;
+    };
     regularLeadIndexes.forEach((sourceIndex, orderIndex) => {
       const slice = sourceSlices[sourceIndex];
-      const leadDistanceX = resolvePreDetailRegularSourceLeadDistance(snapshot, {
-        regularCount: regularLeadIndexes.length,
-        orderIndex,
-        leftX,
-        detailRightX,
-      });
+      const leadDistanceX =
+        sharedRegularLeadDistance !== null
+          ? sharedRegularLeadDistance
+          : resolvePreDetailRegularSourceLeadDistance(snapshot, {
+              regularCount: regularLeadIndexes.length,
+              orderIndex,
+              leftX,
+              detailRightX,
+            });
       const nodeX = leftX - leadDistanceX;
       slice.nodeX = nodeX;
       slice.labelX = nodeX - sourceSummaryLabelGapX;
       slice.metricX = sourceTemplateMetricX + (nodeX - leftX);
+      if (alignRegularLeadColumn && orderIndex === 0 && snapshot.layout?.balanceFirstPreDetailRegularSourceEntry !== false) {
+        const targetCenterY = (safeNumber(slice.revenueTop, slice.center) + safeNumber(slice.revenueBottom, slice.center)) / 2;
+        const entryToleranceY = scaleY(safeNumber(snapshot.layout?.firstPreDetailRegularSourceEntryToleranceY, 6));
+        const requestedShiftY = targetCenterY - entryToleranceY - slice.center;
+        const nextSourceIndex = regularLeadIndexes[orderIndex + 1];
+        const nextBox = nextSourceIndex !== undefined ? leftBoxes[nextSourceIndex] : null;
+        const minGapToNextY = scaleY(safeNumber(snapshot.layout?.firstPreDetailRegularSourceMinGapToNextY, 40));
+        const availableShiftY = nextBox
+          ? Math.max(nextBox.top - (slice.bottom + minGapToNextY), 0)
+          : Math.max(sourceNodeMaxY - slice.bottom, 0);
+        const maxShiftY = scaleY(safeNumber(snapshot.layout?.firstPreDetailRegularSourceEntryBalanceMaxY, 46));
+        shiftRegularSourceEntryDown(sourceIndex, Math.min(Math.max(requestedShiftY, 0), availableShiftY, maxShiftY));
+      }
     });
   }
   const deductionSlices = stackValueSlices(belowOperatingItems, deductionTop, scale, { minHeight: 4, targetBottom: deductionBottom });
@@ -7391,6 +7561,33 @@ function renderPixelReplicaSvg(snapshot) {
     }
   };
   rebalanceNegativeTerminalLabelClearance();
+  const compactTwoItemOpexTerminalFan = () => {
+    if (
+      opexBoxes.length !== 2 ||
+      !rawBelowOperatingItems.length ||
+      rawCostBreakdown.length < 2 ||
+      snapshot.layout?.compactTwoItemOpexTerminalFan === false
+    ) {
+      return;
+    }
+    const upper = opexBoxes[0];
+    const lower = opexBoxes[1];
+    if (!upper || !lower) return;
+    const currentGapY = lower.top - upper.bottom;
+    const maxGapY = scaleY(
+      safeNumber(
+        snapshot.layout?.twoItemOpexTerminalFanMaxGapY,
+        hasExpandedPreDetailRevenueStack ? 142 : 164
+      )
+    );
+    if (!(currentGapY > maxGapY + 0.5)) return;
+    const availableLiftY = Math.max(lower.top - (upper.bottom + maxGapY), 0);
+    const minLowerCenterY = upper.bottom + maxGapY + lower.height / 2;
+    const nextCenterY = Math.max(lower.center - availableLiftY, minLowerCenterY);
+    if (!(lower.center - nextCenterY > 0.5)) return;
+    opexBoxes[1] = shiftBoxCenter(lower, nextCenterY);
+  };
+  compactTwoItemOpexTerminalFan();
   repelCostBreakdownFromOpexSummary();
   refreshEditableNodeFrames();
   const revenueGrossBand = shiftedInterval(revenueGrossSourceBand.top, revenueGrossSourceBand.bottom, "revenue");
@@ -8451,6 +8648,32 @@ function renderPixelReplicaSvg(snapshot) {
     if (snapshot.layout?.positiveForceTopY !== null && snapshot.layout?.positiveForceTopY !== undefined) {
       positiveTop = clamp(
         layoutY(snapshot.layout?.positiveForceTopY),
+        positiveTopMin,
+        positiveTopMax
+      );
+    }
+    if (positiveUpperLane && preDetailProfitContinuityStrength > 0) {
+      const preDetailPositiveSyncLiftY = scaleY(
+        clamp(
+          safeNumber(
+            snapshot.layout?.preDetailPositiveSyncLiftY,
+            8 + preDetailProfitContinuityStrength * 6
+          ),
+          0,
+          safeNumber(snapshot.layout?.preDetailPositiveSyncLiftMaxY, 18)
+        )
+      );
+      positiveTop = clamp(positiveTop - preDetailPositiveSyncLiftY, positiveTopMin, positiveTopMax);
+    }
+    if (positiveUpperLane && positiveNetAffinityStrength > 0) {
+      const attachedTopMin = netTop - scaleY(
+        safeNumber(
+          snapshot.layout?.positiveMaxRiseAboveNetTopY,
+          usesExtremePositiveTopLane ? 92 : 86
+        )
+      );
+      positiveTop = clamp(
+        Math.max(positiveTop, attachedTopMin),
         positiveTopMin,
         positiveTopMax
       );

@@ -2048,8 +2048,12 @@ function resolveBranchTitleLines(item, defaultMode, fontSize, maxWidth) {
   const valueLabel = formatItemBillions(item, defaultMode);
   const singleLine = `${localizedName} ${valueLabel}`.trim();
   if (approximateTextWidth(singleLine, fontSize) <= maxWidth) return [singleLine];
+  const shouldAllowExtraEnglishNameLine =
+    currentChartLanguage() !== "zh" &&
+    approximateTextWidth(localizedName, fontSize) > maxWidth * 1.34 &&
+    /\s/.test(localizedName);
   const nameLines = wrapLabelWithMaxWidth(localizedName, fontSize, maxWidth, {
-    maxLines: currentChartLanguage() === "zh" ? 2 : 2,
+    maxLines: currentChartLanguage() === "zh" ? 2 : shouldAllowExtraEnglishNameLine ? 3 : 2,
   });
   return [...nameLines, valueLabel];
 }
