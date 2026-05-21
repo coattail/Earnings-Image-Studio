@@ -135,9 +135,10 @@ function resolveBarChartLogoPlacement({
         let collisionArea = 0;
         let collisionCount = 0;
         obstacleRects.forEach((obstacleRect) => {
-          if (!barChartRectsOverlap(visibleRect, obstacleRect, 10)) return;
+          const obstaclePadding = safeNumber(obstacleRect.logoPadding, 10);
+          if (!barChartRectsOverlap(visibleRect, obstacleRect, obstaclePadding)) return;
           collisionCount += 1;
-          collisionArea += barChartRectIntersectionArea(visibleRect, obstacleRect, 10);
+          collisionArea += barChartRectIntersectionArea(visibleRect, obstacleRect, obstaclePadding);
         });
         const cornerDistancePenalty =
           Math.max(visibleRect.left - area.x, 0) * 180 +
@@ -572,12 +573,14 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
       top: titleY - titleFontSize * 0.96,
       right: titleX + titleHalfWidth + 28,
       bottom: titleY + titleFontSize * 0.22,
+      logoPadding: 22,
     },
     {
       left: unitLabelX - 10,
       top: legendTop - 2,
       right: unitLabelX + unitLabelWidth + 14,
       bottom: legendTop + 58,
+      logoPadding: 24,
     },
   ];
   if (latestFiscalLabel) {
@@ -587,6 +590,7 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
       top: topQuarterDisplayY - topQuarterFontSize * 0.92,
       right: topInfoX + 10,
       bottom: topQuarterDisplayY + topQuarterFontSize * 0.16,
+      logoPadding: 22,
     });
   }
   if (latestPeriodEnd) {
@@ -596,6 +600,7 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
       top: topPeriodY - periodEndFontSize * 0.92,
       right: topInfoX + 10,
       bottom: topPeriodY + periodEndFontSize * 0.18,
+      logoPadding: 18,
     });
   }
   gridValues.forEach((gridValue) => {
@@ -620,6 +625,7 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
       top: rowY - 10,
       right: rowStartX + rowWidth + 12,
       bottom: rowY + legendLineHeight + 10,
+      logoPadding: 24,
     });
   });
   const chartLogoKey = snapshot?.companyLogoKey || company?.id || "";
