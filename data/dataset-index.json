@@ -3705,7 +3705,8 @@
         "2025Q2",
         "2025Q3",
         "2025Q4",
-        "2026Q1"
+        "2026Q1",
+        "2026Q2"
       ],
       "statementSource": "official-sec-companyfacts",
       "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001730168.json",
@@ -3713,26 +3714,26 @@
       "cik": 1730168,
       "errors": [],
       "coverage": {
-        "quarterCount": 33,
+        "quarterCount": 34,
         "pixelReplicaQuarterCount": 0,
         "hasPixelReplica": false,
-        "officialFinancialQuarterCount": 33,
-        "officialSegmentQuarterCount": 33,
-        "officialExpenseQuarterCount": 4,
+        "officialFinancialQuarterCount": 34,
+        "officialSegmentQuarterCount": 34,
+        "officialExpenseQuarterCount": 5,
         "classification": {
           "status": "ok",
-          "latestQuarter": "2026Q1",
+          "latestQuarter": "2026Q2",
           "latestQuarterHasRevenueClassification": true,
-          "latestQuarterHasExpenseClassification": false,
-          "latestRevenueClassificationQuarter": "2026Q1",
-          "latestExpenseClassificationQuarter": "2025Q4",
-          "latestStructureHistoryQuarter": "2026Q1",
-          "revenueClassificationQuarterCount": 33,
-          "expenseClassificationQuarterCount": 4,
+          "latestQuarterHasExpenseClassification": true,
+          "latestRevenueClassificationQuarter": "2026Q2",
+          "latestExpenseClassificationQuarter": "2026Q2",
+          "latestStructureHistoryQuarter": "2026Q2",
+          "revenueClassificationQuarterCount": 34,
+          "expenseClassificationQuarterCount": 5,
           "revenueClassificationCoverageRatio": 1,
-          "expenseClassificationCoverageRatio": 0.1212,
+          "expenseClassificationCoverageRatio": 0.1471,
           "latestRevenueClassificationLagQuarters": 0,
-          "latestExpenseClassificationLagQuarters": 1,
+          "latestExpenseClassificationLagQuarters": 0,
           "warnings": [],
           "blockers": [],
           "policy": {}
@@ -3771,137 +3772,73 @@
           "validation": {
             "version": "parser-validation-v1",
             "status": "high",
-            "overallConfidenceScore": 0.9989,
+            "overallConfidenceScore": 0.8822,
             "financialConfidenceScore": 0.9983,
-            "structuralConfidenceScore": 1,
-            "revenueSegmentChecks": 33,
+            "structuralConfidenceScore": 0.6667,
+            "revenueSegmentChecks": 34,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
-            "detailGroupChecks": 0,
-            "detailGroupMismatchCount": 0,
+            "detailGroupChecks": 1,
+            "detailGroupMismatchCount": 1,
             "detailGroupSkippedChecks": 0,
-            "opexChecks": 4,
+            "opexChecks": 5,
             "opexSkippedChecks": 0,
             "opexOverflowMismatchCount": 0,
-            "warningCount": 0,
-            "warnings": []
+            "warningCount": 1,
+            "warnings": [
+              "2026Q2: detail groups under Semiconductor Solutions sum to 10.8Bn vs parent 15.009Bn."
+            ]
           }
         }
       },
       "dataLoadMode": "latest-only",
-      "latestQuarter": "2026Q1",
+      "latestQuarter": "2026Q2",
       "financials": {
-        "2026Q1": {
-          "calendarQuarter": "2026Q1",
-          "periodEnd": "2026-02-01",
+        "2026Q2": {
+          "calendarQuarter": "2026Q2",
+          "periodEnd": "2026-05-03",
           "fiscalYear": "2026",
-          "fiscalQuarter": "Q1",
-          "fiscalLabel": "FY2026 Q1",
+          "fiscalQuarter": "Q2",
+          "fiscalLabel": "FY2026 Q2",
           "statementCurrency": "USD",
-          "revenueBn": 19.311,
-          "revenueYoyPct": 29.465,
-          "costOfRevenueBn": 6.154,
-          "grossProfitBn": 13.157,
-          "sgnaBn": 1.019,
-          "rndBn": 2.965,
-          "otherOpexBn": 0.61,
-          "operatingExpensesBn": 4.594,
-          "operatingIncomeBn": 8.563,
-          "nonOperatingBn": -0.368,
-          "pretaxIncomeBn": 8.195,
-          "taxBn": 0.846,
-          "netIncomeBn": 7.349,
-          "netIncomeYoyPct": 33.55,
-          "grossMarginPct": 68.13,
-          "operatingMarginPct": 44.34,
-          "profitMarginPct": 38.06,
-          "effectiveTaxRatePct": 10.32,
-          "revenueQoqPct": 7.194,
-          "grossMarginYoyDeltaPp": 0.12,
-          "operatingMarginYoyDeltaPp": 2.37,
-          "profitMarginYoyDeltaPp": 1.17,
-          "statementFilingDate": "2026-02-01",
-          "statementSourceUrl": "https://stockanalysis.com/stocks/avgo/financials/?p=quarterly",
-          "parserFinancialFieldSources": {
-            "revenueBn": "official",
-            "revenueYoyPct": "official",
-            "revenueQoqPct": "official",
-            "costOfRevenueBn": "official",
-            "grossProfitBn": "official",
-            "grossMarginPct": "official",
-            "grossMarginYoyDeltaPp": "official",
-            "sgnaBn": "official",
-            "rndBn": "official",
-            "otherOpexBn": "official",
-            "operatingExpensesBn": "official",
-            "operatingIncomeBn": "official",
-            "operatingMarginPct": "official",
-            "operatingMarginYoyDeltaPp": "official",
-            "nonOperatingBn": "official",
-            "pretaxIncomeBn": "official",
-            "taxBn": "official",
-            "netIncomeBn": "official",
-            "netIncomeYoyPct": "official",
-            "profitMarginPct": "official",
-            "profitMarginYoyDeltaPp": "official",
-            "effectiveTaxRatePct": "official",
-            "calendarQuarter": "official",
-            "periodEnd": "official",
-            "fiscalYear": "official",
-            "fiscalQuarter": "official",
-            "fiscalLabel": "official",
-            "statementCurrency": "official",
-            "statementFilingDate": "stockanalysis",
-            "statementSourceUrl": "stockanalysis"
-          },
-          "parserFinancialCandidateCounts": {
-            "revenueBn": 2,
-            "revenueYoyPct": 2,
-            "revenueQoqPct": 2,
-            "costOfRevenueBn": 2,
-            "grossProfitBn": 2,
-            "grossMarginPct": 2,
-            "grossMarginYoyDeltaPp": 2,
-            "sgnaBn": 2,
-            "rndBn": 2,
-            "otherOpexBn": 2,
-            "operatingExpensesBn": 2,
-            "operatingIncomeBn": 2,
-            "operatingMarginPct": 2,
-            "operatingMarginYoyDeltaPp": 2,
-            "nonOperatingBn": 2,
-            "pretaxIncomeBn": 2,
-            "taxBn": 2,
-            "netIncomeBn": 2,
-            "netIncomeYoyPct": 2,
-            "profitMarginPct": 2,
-            "profitMarginYoyDeltaPp": 2,
-            "effectiveTaxRatePct": 2
-          },
-          "parserFinancialValidation": {
-            "version": "financial-validation-v1",
-            "status": "high",
-            "confidenceScore": 1,
-            "completenessScore": 1,
-            "consistencyScore": 1,
-            "checksRun": 8,
-            "checksPassed": 8,
-            "issueCount": 0,
-            "issues": []
-          },
+          "revenueBn": 22.187,
+          "revenueYoyPct": 47.874,
+          "costOfRevenueBn": 6.772,
+          "grossProfitBn": 15.415,
+          "sgnaBn": 1.055,
+          "rndBn": 2.995,
+          "otherOpexBn": 0.577,
+          "operatingExpensesBn": 4.627,
+          "operatingIncomeBn": 10.788,
+          "nonOperatingBn": -0.658,
+          "pretaxIncomeBn": 10.13,
+          "taxBn": 0.82,
+          "netIncomeBn": 9.31,
+          "netIncomeYoyPct": 87.513,
+          "grossMarginPct": 69.478,
+          "operatingMarginPct": 48.623,
+          "profitMarginPct": 41.962,
+          "effectiveTaxRatePct": 8.095,
+          "revenueQoqPct": 14.893,
+          "grossMarginYoyDeltaPp": 1.516,
+          "operatingMarginYoyDeltaPp": 9.773,
+          "profitMarginYoyDeltaPp": 8.87,
+          "statementSource": "manual-broadcom-official",
+          "statementSourceUrl": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-second-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302790698.html",
+          "statementFilingDate": "2026-06-03",
           "officialRevenueSegments": [
             {
               "name": "Semiconductor Solutions",
-              "nameZh": null,
+              "nameZh": "半导体解决方案",
               "memberKey": "semiconductorsolutions",
-              "valueBn": 12.515,
-              "yoyPct": 52.4,
-              "qoqPct": 13.03,
-              "mixPct": 64.8,
-              "mixYoyDeltaPp": 9.8,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000016/avgo-20260201_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-03-11",
+              "valueBn": 15.009,
+              "yoyPct": 78.51,
+              "qoqPct": 19.93,
+              "mixPct": 67.6,
+              "mixYoyDeltaPp": 11.6,
+              "sourceUrl": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-second-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302790698.html",
+              "sourceForm": "QuarterlyResultsRelease",
+              "filingDate": "2026-06-03",
               "supportLines": null,
               "supportLinesZh": null,
               "metricMode": null,
@@ -3910,16 +3847,16 @@
             },
             {
               "name": "Infrastructure Software",
-              "nameZh": null,
+              "nameZh": "基础设施软件",
               "memberKey": "infrastructuresoftware",
-              "valueBn": 6.796,
-              "yoyPct": 1.37,
-              "qoqPct": -2.12,
-              "mixPct": 35.2,
-              "mixYoyDeltaPp": -9.8,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000016/avgo-20260201_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-03-11",
+              "valueBn": 7.178,
+              "yoyPct": 8.82,
+              "qoqPct": 5.62,
+              "mixPct": 32.4,
+              "mixYoyDeltaPp": -11.6,
+              "sourceUrl": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-second-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302790698.html",
+              "sourceForm": "QuarterlyResultsRelease",
+              "filingDate": "2026-06-03",
               "supportLines": null,
               "supportLinesZh": null,
               "metricMode": null,
@@ -3927,147 +3864,103 @@
               "validationNotes": null
             }
           ],
-          "officialSegmentAxis": "StatementBusinessSegmentsAxis",
-          "officialSegmentSource": "official-filings",
-          "displayCurrency": "USD",
-          "displayScaleFactor": 1,
-          "statementMeta": {
-            "statementSource": null,
-            "statementSourceUrl": null,
-            "statementValueMode": null,
-            "statementSpanQuarters": null,
-            "qualityFlags": [],
-            "adapterId": "official_financials"
-          },
-          "fieldSources": {
-            "revenueBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 120,
-              "sourceUrl": null
+          "officialCostBreakdown": [
+            {
+              "name": "Cost of revenue",
+              "nameZh": "收入成本",
+              "memberKey": "costofrevenue",
+              "valueBn": 5.301,
+              "sourceUrl": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-second-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302790698.html",
+              "sourceForm": "QuarterlyResultsRelease",
+              "filingDate": "2026-06-03"
             },
-            "costOfRevenueBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 120,
-              "sourceUrl": null
+            {
+              "name": "Amortization of acquisition-related intangible assets",
+              "nameZh": "收购相关无形资产摊销",
+              "memberKey": "acquisitionrelatedintangibleamortization",
+              "valueBn": 1.461,
+              "sourceUrl": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-second-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302790698.html",
+              "sourceForm": "QuarterlyResultsRelease",
+              "filingDate": "2026-06-03"
             },
-            "grossProfitBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 118,
-              "sourceUrl": null
-            },
-            "sgnaBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 112,
-              "sourceUrl": null
-            },
-            "rndBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 112,
-              "sourceUrl": null
-            },
-            "otherOpexBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 110,
-              "sourceUrl": null
-            },
-            "operatingExpensesBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 118,
-              "sourceUrl": null
-            },
-            "operatingIncomeBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 118,
-              "sourceUrl": null
-            },
-            "nonOperatingBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 110,
-              "sourceUrl": null
-            },
-            "pretaxIncomeBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 118,
-              "sourceUrl": null
-            },
-            "taxBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 112,
-              "sourceUrl": null
-            },
-            "netIncomeBn": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 118,
-              "sourceUrl": null
-            },
-            "statementMeta": {
-              "adapterId": "official_financials",
-              "label": "SEC companyfacts / filings",
-              "score": 13.1,
-              "sourceUrl": null
-            },
-            "officialRevenueSegments": {
-              "adapterId": "official_revenue_structures",
-              "label": "Official filing revenue structure",
-              "score": 114,
-              "sourceUrl": null
+            {
+              "name": "Restructuring charges",
+              "nameZh": "重组费用",
+              "memberKey": "restructuringcharges",
+              "valueBn": 0.01,
+              "sourceUrl": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-second-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302790698.html",
+              "sourceForm": "QuarterlyResultsRelease",
+              "filingDate": "2026-06-03"
             }
-          },
-          "extractionDiagnostics": {
-            "qualityScore": 80,
-            "availableRequiredFieldCount": 3,
-            "requiredFieldCount": 3,
-            "sourceFieldCount": 14,
-            "hasCostBreakdownProfile": false,
-            "costBreakdownMode": "none",
-            "opexBreakdownMode": "none",
-            "revenueSegmentCoveragePct": 100,
-            "costBreakdownCoveragePct": 0,
-            "opexBreakdownCoveragePct": 0,
-            "revenueSegmentResidualBn": 0,
-            "costBreakdownResidualBn": null,
-            "opexBreakdownResidualBn": null,
-            "statementSource": null,
-            "statementValueMode": null,
-            "statementSpanQuarters": null,
-            "statementQualityFlags": [],
-            "issues": [
-              "cost-breakdown-coverage-low",
-              "opex-breakdown-coverage-low"
-            ]
-          }
+          ],
+          "officialOpexBreakdown": [
+            {
+              "name": "Research and development",
+              "nameZh": "研发费用",
+              "memberKey": "researchanddevelopment",
+              "valueBn": 2.995,
+              "sourceUrl": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-second-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302790698.html",
+              "sourceForm": "QuarterlyResultsRelease",
+              "filingDate": "2026-06-03",
+              "validationEligible": null,
+              "validationNotes": null
+            },
+            {
+              "name": "Selling, general and administrative",
+              "nameZh": "销售、一般及行政费用",
+              "memberKey": "sellinggeneralandadministrative",
+              "valueBn": 1.055,
+              "sourceUrl": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-second-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302790698.html",
+              "sourceForm": "QuarterlyResultsRelease",
+              "filingDate": "2026-06-03",
+              "validationEligible": null,
+              "validationNotes": null
+            },
+            {
+              "name": "Amortization of acquisition-related intangible assets",
+              "nameZh": "收购相关无形资产摊销",
+              "memberKey": "acquisitionrelatedintangibleamortization",
+              "valueBn": 0.506,
+              "sourceUrl": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-second-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302790698.html",
+              "sourceForm": "QuarterlyResultsRelease",
+              "filingDate": "2026-06-03",
+              "validationEligible": null,
+              "validationNotes": null
+            },
+            {
+              "name": "Restructuring and other charges",
+              "nameZh": "重组及其他费用",
+              "memberKey": "restructuringandothercharges",
+              "valueBn": 0.071,
+              "sourceUrl": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-second-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302790698.html",
+              "sourceForm": "QuarterlyResultsRelease",
+              "filingDate": "2026-06-03",
+              "validationEligible": null,
+              "validationNotes": null
+            }
+          ],
+          "displayCurrency": "USD",
+          "displayScaleFactor": 1
         }
       },
       "statementPresets": {},
       "officialRevenueStructureHistory": {
-        "source": "official-segment-cache",
+        "source": "manual-broadcom-official-quarterly-results",
         "quarters": {
-          "2026Q1": {
+          "2026Q2": {
             "segments": [
               {
                 "name": "Semiconductor Solutions",
-                "nameZh": null,
+                "nameZh": "半导体解决方案",
                 "memberKey": "semiconductorsolutions",
-                "valueBn": 12.515,
+                "valueBn": 15.009,
                 "yoyPct": null,
                 "qoqPct": null,
                 "mixPct": null,
                 "mixYoyDeltaPp": null,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000016/avgo-20260201_htm.xml",
-                "sourceForm": "10-Q",
-                "filingDate": "2026-03-11",
+                "sourceUrl": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-second-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302790698.html",
+                "sourceForm": "QuarterlyResultsRelease",
+                "filingDate": "2026-06-03",
                 "supportLines": null,
                 "supportLinesZh": null,
                 "metricMode": null,
@@ -4076,21 +3969,88 @@
               },
               {
                 "name": "Infrastructure Software",
-                "nameZh": null,
+                "nameZh": "基础设施软件",
                 "memberKey": "infrastructuresoftware",
-                "valueBn": 6.796,
+                "valueBn": 7.178,
                 "yoyPct": null,
                 "qoqPct": null,
                 "mixPct": null,
                 "mixYoyDeltaPp": null,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000016/avgo-20260201_htm.xml",
-                "sourceForm": "10-Q",
-                "filingDate": "2026-03-11",
+                "sourceUrl": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-second-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302790698.html",
+                "sourceForm": "QuarterlyResultsRelease",
+                "filingDate": "2026-06-03",
                 "supportLines": null,
                 "supportLinesZh": null,
                 "metricMode": null,
                 "validationEligible": null,
                 "validationNotes": null
+              }
+            ],
+            "costBreakdown": [
+              {
+                "name": "Cost of revenue",
+                "nameZh": "收入成本",
+                "memberKey": "costofrevenue",
+                "valueBn": 5.301,
+                "filingDate": "2026-06-03",
+                "sourceUrl": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-second-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302790698.html",
+                "sourceForm": "QuarterlyResultsRelease"
+              },
+              {
+                "name": "Amortization of acquisition-related intangible assets",
+                "nameZh": "收购相关无形资产摊销",
+                "memberKey": "acquisitionrelatedintangibleamortization",
+                "valueBn": 1.461,
+                "filingDate": "2026-06-03",
+                "sourceUrl": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-second-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302790698.html",
+                "sourceForm": "QuarterlyResultsRelease"
+              },
+              {
+                "name": "Restructuring charges",
+                "nameZh": "重组费用",
+                "memberKey": "restructuringcharges",
+                "valueBn": 0.01,
+                "filingDate": "2026-06-03",
+                "sourceUrl": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-second-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302790698.html",
+                "sourceForm": "QuarterlyResultsRelease"
+              }
+            ],
+            "opexBreakdown": [
+              {
+                "name": "Research and development",
+                "nameZh": "研发费用",
+                "memberKey": "researchanddevelopment",
+                "valueBn": 2.995,
+                "filingDate": "2026-06-03",
+                "sourceUrl": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-second-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302790698.html",
+                "sourceForm": "QuarterlyResultsRelease"
+              },
+              {
+                "name": "Selling, general and administrative",
+                "nameZh": "销售、一般及行政费用",
+                "memberKey": "sellinggeneralandadministrative",
+                "valueBn": 1.055,
+                "filingDate": "2026-06-03",
+                "sourceUrl": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-second-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302790698.html",
+                "sourceForm": "QuarterlyResultsRelease"
+              },
+              {
+                "name": "Amortization of acquisition-related intangible assets",
+                "nameZh": "收购相关无形资产摊销",
+                "memberKey": "acquisitionrelatedintangibleamortization",
+                "valueBn": 0.506,
+                "filingDate": "2026-06-03",
+                "sourceUrl": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-second-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302790698.html",
+                "sourceForm": "QuarterlyResultsRelease"
+              },
+              {
+                "name": "Restructuring and other charges",
+                "nameZh": "重组及其他费用",
+                "memberKey": "restructuringandothercharges",
+                "valueBn": 0.071,
+                "filingDate": "2026-06-03",
+                "sourceUrl": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-second-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302790698.html",
+                "sourceForm": "QuarterlyResultsRelease"
               }
             ]
           }
@@ -4298,6 +4258,12 @@
             "accession": "0001730168-19-000036",
             "primaryDocument": "avgo-02032019x10q.htm",
             "instance": "avgo-20190203.xml"
+          },
+          {
+            "title": "Broadcom Second Quarter Fiscal Year 2026 Financial Results",
+            "quarter": "2026Q2",
+            "filingDate": "2026-06-03",
+            "url": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-second-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302790698.html"
           }
         ],
         "errors": []

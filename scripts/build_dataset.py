@@ -2199,6 +2199,22 @@ def apply_visa_display_normalizations(payload: dict[str, Any]) -> dict[str, Any]
     return payload
 
 
+def apply_broadcom_display_normalizations(payload: dict[str, Any]) -> dict[str, Any]:
+    financials = payload.get("financials")
+    if not isinstance(financials, dict):
+        return payload
+    for entry in financials.values():
+        if isinstance(entry, dict):
+            entry.pop("officialRevenueDetailGroups", None)
+    history = payload.get("officialRevenueStructureHistory")
+    history_quarters = history.get("quarters") if isinstance(history, dict) else {}
+    if isinstance(history_quarters, dict):
+        for structure_payload in history_quarters.values():
+            if isinstance(structure_payload, dict):
+                structure_payload.pop("detailGroups", None)
+    return payload
+
+
 def apply_company_rendering_preferences(company: dict[str, Any], payload: dict[str, Any]) -> dict[str, Any]:
     company_id = str(company.get("id") or payload.get("id") or "").strip().lower()
     financials = payload.get("financials")
@@ -2206,6 +2222,8 @@ def apply_company_rendering_preferences(company: dict[str, Any], payload: dict[s
         return payload
     if company_id == "berkshire":
         return apply_berkshire_display_normalizations(payload)
+    if company_id == "broadcom":
+        return apply_broadcom_display_normalizations(payload)
     if company_id != "visa":
         return payload
     apply_visa_display_normalizations(payload)

@@ -1369,12 +1369,18 @@ function curatedOfficialSegments(company, entry, rows, detailGroups = []) {
   return finalizeCuratedOfficialSegments(best.selected, revenueBn);
 }
 
+function shouldSuppressRevenueDetailGroups(company) {
+  return String(company?.id || "").toLowerCase() === "broadcom";
+}
+
 function buildOfficialBusinessGroups(company, entry, options = {}) {
   const revenueBn = safeNumber(entry?.revenueBn);
   const quarterKey = entryQuarterKey(company, entry);
   const official = resolveRenderableOfficialRevenueRows(company, entry, options);
-  const detailGroups = sanitizeOfficialStructureRows(entry, entry.officialRevenueDetailGroups || [])
-    .filter((item) => safeNumber(item.valueBn) > 0.02);
+  const detailGroups = shouldSuppressRevenueDetailGroups(company)
+    ? []
+    : sanitizeOfficialStructureRows(entry, entry.officialRevenueDetailGroups || [])
+      .filter((item) => safeNumber(item.valueBn) > 0.02);
   if (!official.length) return null;
   const style = inferredOfficialRevenueStyle(company, entry, official);
   if (style === "alibaba-commerce-staged") {
@@ -1439,6 +1445,7 @@ function buildOfficialBusinessGroups(company, entry, options = {}) {
 }
 
 function buildOfficialDetailGroups(company, entry, businessGroups = null) {
+  if (shouldSuppressRevenueDetailGroups(company)) return null;
   const quarterKey = entryQuarterKey(company, entry);
   const style = inferredOfficialRevenueStyle(company, entry, entry.officialRevenueSegments || []);
   const rawDetailGroups = sanitizeOfficialStructureRows(entry, entry.officialRevenueDetailGroups || [])
@@ -5471,6 +5478,41 @@ function buildRevenueSegmentBarHistory(company, anchorQuarterKey, maxQuarters = 
       }
     });
   });
+
+  const visibleRevenueTotalBn = visibleQuarters.reduce((sum, quarter) => sum + safeNumber(quarter?.totalRevenueBn), 0);
+  const maxValueBySegment = new Map();
+  visibleQuarters.forEach((quarter) => {
+    Object.entries(quarter.segmentMap || {}).forEach(([key, value]) => {
+      maxValueBySegment.set(key, Math.max(maxValueBySegment.get(key) || 0, safeNumber(value)));
+    });
+  });
+  const minVisibleSegmentTotalBn = safeNumber(company?.classificationPolicy?.minVisibleBarSegmentTotalBn, 0.08);
+  const minVisibleSegmentMaxBn = safeNumber(company?.classificationPolicy?.minVisibleBarSegmentMaxBn, 0.05);
+  const minVisibleSegmentShare = safeNumber(company?.classificationPolicy?.minVisibleBarSegmentShare, 0.003);
+  const visibleBarSegmentKeys = new Set(
+    [...totals.keys()].filter((key) => {
+      const totalValue = safeNumber(totals.get(key));
+      const maxValue = safeNumber(maxValueBySegment.get(key));
+      if (totalValue <= 0.005) return false;
+      if (key === "reportedrevenue" || key === "otherrevenue" || key === "__other_segments__") return true;
+      return (
+        totalValue >= minVisibleSegmentTotalBn ||
+        maxValue >= minVisibleSegmentMaxBn ||
+        (visibleRevenueTotalBn > 0.02 && totalValue / visibleRevenueTotalBn >= minVisibleSegmentShare)
+      );
+    })
+  );
+  if (visibleBarSegmentKeys.size && visibleBarSegmentKeys.size < totals.size) {
+    visibleQuarters.forEach((quarter) => {
+      quarter.segmentMap = Object.fromEntries(
+        Object.entries(quarter.segmentMap || {}).filter(([key]) => visibleBarSegmentKeys.has(key))
+      );
+      quarter.segmentRows = (quarter.segmentRows || []).filter((item) => visibleBarSegmentKeys.has(item.key));
+    });
+    [...totals.keys()].forEach((key) => {
+      if (!visibleBarSegmentKeys.has(key)) totals.delete(key);
+    });
+  }
 
   let sortedSegmentKeys = [...totals.entries()]
     .sort((left, right) => right[1] - left[1])
