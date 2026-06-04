@@ -124,7 +124,7 @@ function loadRuntime(rootDir) {
     vm.runInContext(source, context, { filename: scriptPath });
   });
   const bindings = vm.runInContext(
-    "({ state, EarningsVizRuntime, buildSnapshot, normalizeLoadedCompany })",
+    "({ state, EarningsVizRuntime, buildSnapshot, normalizeLoadedCompany, currentResolvedEditorOverrides })",
     context
   );
   return {
@@ -154,8 +154,12 @@ function initializeRuntimeForQuarter(rootDir, companyPayload, quarterKey, langua
   state.uiLanguage = language;
   state.logoCatalog = loadJson(path.join(rootDir, "data", "logo-catalog.json")).logos || {};
   state.supplementalComponents = loadJson(path.join(rootDir, "data", "supplemental-components.json")) || {};
+  state.learnedSankeyLayouts = loadJson(path.join(rootDir, "data", "learned-sankey-layouts.json")) || {};
   state.normalizedLogoKeys = {};
   state.logoNormalizationJobs = {};
+  state.selectedCompanyId = normalizedCompany.id;
+  state.selectedQuarter = quarterKey;
+  state.chartViewMode = "sankey";
 
   const snapshot = buildSnapshot(normalizedCompany, quarterKey);
   if (!snapshot) {
@@ -163,7 +167,8 @@ function initializeRuntimeForQuarter(rootDir, companyPayload, quarterKey, langua
   }
   snapshot.companyNameZh = normalizedCompany.nameZh;
   snapshot.companyNameEn = normalizedCompany.nameEn;
-  snapshot.editorNodeOverrides = {};
+  snapshot.editorNodeOverrides =
+    typeof runtime.currentResolvedEditorOverrides === "function" ? runtime.currentResolvedEditorOverrides() : {};
   snapshot.editorSelectedNodeId = null;
   snapshot.editModeEnabled = false;
   state.currentSnapshot = snapshot;

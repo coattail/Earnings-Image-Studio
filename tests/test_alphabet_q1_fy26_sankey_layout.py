@@ -103,13 +103,13 @@ class AlphabetQ1FY26SankeyLayoutTests(unittest.TestCase):
 
         self.assertLessEqual(
             revenue["y"],
-            590,
-            "Alphabet's revenue node should lift enough for a smoother revenue-to-gross bridge.",
+            596,
+            "Alphabet's learned manual revenue placement should remain high enough for a smoother revenue-to-gross bridge.",
         )
         self.assertLessEqual(
             gross["y"],
-            625,
-            "Gross profit should lift with revenue instead of forcing a late sharp upward bend.",
+            642,
+            "Gross profit should follow the learned manual placement without forcing a late sharp upward bend.",
         )
         self.assertLessEqual(
             net["y"],

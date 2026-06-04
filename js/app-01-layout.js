@@ -2805,6 +2805,73 @@ function currentEditorOverrides() {
   return state.editor.overridesBySession[currentEditorSessionKey()] || {};
 }
 
+function sanitizeEditorNodeOverrides(overrides, options = {}) {
+  if (!isPlainObject(overrides)) return {};
+  const includeDx = options.includeDx !== false;
+  const normalized = {};
+  Object.entries(overrides).forEach(([nodeId, override]) => {
+    if (!nodeId || !isPlainObject(override)) return;
+    const dx = includeDx ? safeNumber(override.dx, 0) : 0;
+    const dy = safeNumber(override.dy, 0);
+    if (Math.abs(dx) <= 0.01 && Math.abs(dy) <= 0.01) return;
+    normalized[nodeId] = { dx, dy };
+  });
+  return normalized;
+}
+
+function mergeEditorNodeOffsets(baseOverrides = {}, additiveOverrides = {}) {
+  const merged = {};
+  const nodeIds = new Set([...Object.keys(baseOverrides || {}), ...Object.keys(additiveOverrides || {})]);
+  nodeIds.forEach((nodeId) => {
+    const base = baseOverrides?.[nodeId] || {};
+    const additive = additiveOverrides?.[nodeId] || {};
+    const dx = safeNumber(base.dx, 0) + safeNumber(additive.dx, 0);
+    const dy = safeNumber(base.dy, 0) + safeNumber(additive.dy, 0);
+    if (Math.abs(dx) <= 0.01 && Math.abs(dy) <= 0.01) return;
+    merged[nodeId] = { dx, dy };
+  });
+  return merged;
+}
+
+function resolveLearnedSankeyLayoutSessionKey(sessionKey = currentEditorSessionKey()) {
+  const learnedSessions = state.learnedSankeyLayouts?.overridesBySession || {};
+  if (learnedSessions[sessionKey]) return sessionKey;
+  const match = /^(.+)::(\d{4}Q[1-4])::sankey$/.exec(String(sessionKey || ""));
+  if (!match) return null;
+  const [, companyId, quarterKey] = match;
+  const targetSort = quarterSortValue(quarterKey);
+  const candidates = Object.keys(learnedSessions)
+    .map((key) => {
+      const candidate = /^(.+)::(\d{4}Q[1-4])::sankey$/.exec(String(key || ""));
+      if (!candidate || candidate[1] !== companyId) return null;
+      const sortValue = quarterSortValue(candidate[2]);
+      return {
+        key,
+        sortValue,
+        distance: Math.abs(sortValue - targetSort),
+        isPriorOrSame: sortValue <= targetSort,
+      };
+    })
+    .filter(Boolean)
+    .sort((left, right) => {
+      if (left.isPriorOrSame !== right.isPriorOrSame) return left.isPriorOrSame ? -1 : 1;
+      return left.distance - right.distance || right.sortValue - left.sortValue;
+    });
+  return candidates[0]?.key || null;
+}
+
+function learnedSankeyLayoutOverridesForSession(sessionKey = currentEditorSessionKey()) {
+  const learnedKey = resolveLearnedSankeyLayoutSessionKey(sessionKey);
+  const learned = learnedKey ? state.learnedSankeyLayouts?.overridesBySession?.[learnedKey] : null;
+  return sanitizeEditorNodeOverrides(learned, {
+    includeDx: false,
+  });
+}
+
+function currentResolvedEditorOverrides() {
+  return mergeEditorNodeOffsets(learnedSankeyLayoutOverridesForSession(), sanitizeEditorNodeOverrides(currentEditorOverrides()));
+}
+
 function clearCurrentEditorOverrides() {
   const key = currentEditorSessionKey();
   delete state.editor.overridesBySession[key];

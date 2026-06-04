@@ -1,6 +1,7 @@
 const state = {
   dataset: null,
   supplementalComponents: {},
+  learnedSankeyLayouts: {},
   logoCatalog: {},
   normalizedLogoKeys: {},
   logoNormalizationJobs: {},
@@ -30,7 +31,7 @@ const state = {
   },
 };
 
-const BUILD_ASSET_VERSION = "20260521-nvda-fy2027-q1-v174";
+const BUILD_ASSET_VERSION = "20260604-learned-sankey-layouts-v175";
 const CORPORATE_LOGO_AREA_MULTIPLIER = 1.728;
 const CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER = Math.sqrt(CORPORATE_LOGO_AREA_MULTIPLIER);
 const CORPORATE_LOGO_REVENUE_GAP_MULTIPLIER = 1.2;

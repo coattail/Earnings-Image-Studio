@@ -1576,7 +1576,7 @@ async function renderCurrent() {
     }
     snapshot.companyNameZh = company.nameZh;
     snapshot.companyNameEn = company.nameEn;
-    snapshot.editorNodeOverrides = currentEditorOverrides();
+    snapshot.editorNodeOverrides = currentResolvedEditorOverrides();
     snapshot.editorSelectedNodeId = state.editor.selectedNodeId;
     snapshot.editModeEnabled = state.editor.enabled;
     state.currentSnapshot = snapshot;
@@ -1919,6 +1919,17 @@ async function loadSupplementalComponents() {
   }
 }
 
+async function loadLearnedSankeyLayouts() {
+  state.learnedSankeyLayouts = {};
+  try {
+    const payload = await loadJsonAsset(`./data/learned-sankey-layouts.json?v=${BUILD_ASSET_VERSION}`);
+    if (!isPlainObject(payload)) return;
+    state.learnedSankeyLayouts = payload;
+  } catch (_error) {
+    state.learnedSankeyLayouts = {};
+  }
+}
+
 async function loadJsonAsset(url) {
   const response = await fetchJson(url);
   return safeParseJsonAssetResponse(response);
@@ -2060,7 +2071,7 @@ async function boot() {
   bindEvents();
   syncChartModeToggleUi();
   try {
-    await Promise.all([loadDataset(), loadLogoCatalog(), loadSupplementalComponents()]);
+    await Promise.all([loadDataset(), loadLogoCatalog(), loadSupplementalComponents(), loadLearnedSankeyLayouts()]);
   } catch (error) {
     setStatus(error.message || "数据加载失败。");
     markAutomationBootFailure(error);
