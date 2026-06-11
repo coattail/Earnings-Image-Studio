@@ -1827,7 +1827,52 @@ function buildGenericSnapshot(company, entry, quarterKey) {
       color: "#D92D20",
     });
   }
-  if (hasRenderableGrossStage && inferredNonOperatingBn) {
+  const taxBn = entry.taxBn !== null && entry.taxBn !== undefined ? safeNumber(entry.taxBn) : null;
+  const hasMaterialNonOperating = inferredNonOperatingBn !== null && inferredNonOperatingBn !== undefined && Math.abs(safeNumber(inferredNonOperatingBn)) > 0.05;
+  const hasMaterialTax = taxBn !== null && taxBn !== undefined && Math.abs(taxBn) > 0.05;
+  const netTaxWithNonOperating =
+    hasRenderableGrossStage &&
+    hasMaterialNonOperating &&
+    hasMaterialTax &&
+    String(company?.id || "").toLowerCase() === "jd";
+  if (netTaxWithNonOperating) {
+    const netNonOperatingAfterTaxBn = safeNumber(inferredNonOperatingBn) - taxBn;
+    if (Math.abs(netNonOperatingAfterTaxBn) > 0.05) {
+      const netPositiveLabel = normalizedEntry.usePretaxResidualLabel
+        ? {
+            name: "Net other pretax gain",
+            nameZh: "税后其他税前收益",
+          }
+        : {
+            name: "Net non-operating gain",
+            nameZh: "税后营业外收益",
+          };
+      const netNegativeLabel = normalizedEntry.usePretaxResidualLabel
+        ? {
+            name: "Net other pretax expense",
+            nameZh: "税后其他税前费用",
+          }
+        : {
+            name: "Net non-operating expense",
+            nameZh: "税后营业外费用",
+          };
+      if (netNonOperatingAfterTaxBn > 0) {
+        positiveAdjustments.push({
+          name: netPositiveLabel.name,
+          nameZh: netPositiveLabel.nameZh,
+          valueBn: Math.abs(netNonOperatingAfterTaxBn),
+          color: "#16A34A",
+        });
+      } else {
+        belowOperatingItems.push({
+          name: netNegativeLabel.name,
+          nameZh: netNegativeLabel.nameZh,
+          valueBn: Math.abs(netNonOperatingAfterTaxBn),
+          color: "#D92D20",
+        });
+      }
+    }
+  } else if (hasRenderableGrossStage && inferredNonOperatingBn) {
     const residualPositiveLabel = {
       name: "Other pretax gain",
       nameZh: "其他税前收益",
@@ -1862,17 +1907,17 @@ function buildGenericSnapshot(company, entry, quarterKey) {
       });
     }
   }
-  if (hasRenderableGrossStage && entry.taxBn && entry.taxBn > 0.05) {
+  if (!netTaxWithNonOperating && hasRenderableGrossStage && taxBn && taxBn > 0.05) {
     belowOperatingItems.push({
       name: "Tax",
-      valueBn: Math.abs(entry.taxBn),
+      valueBn: Math.abs(taxBn),
       color: "#D92D20",
     });
-  } else if (hasRenderableGrossStage && entry.taxBn && entry.taxBn < -0.05) {
+  } else if (!netTaxWithNonOperating && hasRenderableGrossStage && taxBn && taxBn < -0.05) {
     positiveAdjustments.push({
       name: "Tax benefit",
       nameZh: "税项收益",
-      valueBn: Math.abs(entry.taxBn),
+      valueBn: Math.abs(taxBn),
       color: "#16A34A",
     });
   }

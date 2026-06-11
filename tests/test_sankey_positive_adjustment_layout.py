@@ -15,6 +15,7 @@ ASML_PAYLOAD = ROOT_DIR / "data" / "cache" / "asml.json"
 ALPHABET_PAYLOAD = ROOT_DIR / "data" / "cache" / "alphabet.json"
 BERKSHIRE_PAYLOAD = ROOT_DIR / "data" / "cache" / "berkshire.json"
 ORACLE_PAYLOAD = ROOT_DIR / "data" / "cache" / "oracle.json"
+JD_PAYLOAD = ROOT_DIR / "data" / "cache" / "jd.json"
 SVG_NS = {"svg": "http://www.w3.org/2000/svg"}
 
 
@@ -194,6 +195,21 @@ def viewbox_height(svg_root: ET.Element) -> float:
 
 
 class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
+    def test_jd_non_operating_gain_and_tax_are_not_drawn_as_operating_deduction(self) -> None:
+        svg_root = render_sankey_svg(JD_PAYLOAD, "en", "jd-q1-fy26-tax-source", quarter="2026Q1")
+        text = svg_text_content(svg_root)
+
+        self.assertIn(
+            "Net non-operating gain",
+            text,
+            "JD Q1 FY26 should net tax against the non-operating gain when the chart has no pretax node.",
+        )
+        self.assertNotIn(
+            "Tax ($0.2B)",
+            text,
+            "Tax should not be drawn as a direct deduction from operating profit when non-operating gain bridges to pretax income.",
+        )
+
     def test_oracle_small_regular_sources_share_column(self) -> None:
         svg_root = render_sankey_svg(ORACLE_PAYLOAD, "zh", "oracle-latest-zh", quarter="latest")
 
