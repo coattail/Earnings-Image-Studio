@@ -865,6 +865,15 @@ function snapshotCanvasSize(snapshot) {
   const preDetailLeadEnabled = autoStackRegularSourcesBelowDetails;
   const leadEligibleSourceIndexes = collectPreDetailLeadEligibleSourceIndexes(detailTargetKeys, sources);
   const regularSourceRankMap = new Map(leadEligibleSourceIndexes.map((sourceIndex, orderIndex) => [sourceIndex, orderIndex]));
+  const alignRegularLeadColumn = shouldAlignPreDetailRegularSourceColumn(snapshot, leadEligibleSourceIndexes.length);
+  const sharedRegularLeadDistance = alignRegularLeadColumn
+    ? resolvePreDetailRegularSourceLeadDistance(snapshot, {
+        regularCount: leadEligibleSourceIndexes.length,
+        orderIndex: 0,
+        leftX: baseLeftX,
+        detailRightX: baseLeftDetailX + leftDetailWidth,
+      })
+    : null;
   const sourceLabelLeftEdges = sources.map((item, sourceIndex) => {
     const compactMode = compactSources || item.compactLabel;
     const labelWidth = Math.max(
@@ -882,12 +891,14 @@ function snapshotCanvasSize(snapshot) {
     );
     const leadOffsetX =
       preDetailLeadEnabled && regularSourceRankMap.has(sourceIndex)
-        ? resolvePreDetailRegularSourceLeadDistance(snapshot, {
-            regularCount: leadEligibleSourceIndexes.length,
-            orderIndex: regularSourceRankMap.get(sourceIndex),
-            leftX: baseLeftX,
-            detailRightX: baseLeftDetailX + leftDetailWidth,
-          })
+        ? sharedRegularLeadDistance !== null
+          ? sharedRegularLeadDistance
+          : resolvePreDetailRegularSourceLeadDistance(snapshot, {
+              regularCount: leadEligibleSourceIndexes.length,
+              orderIndex: regularSourceRankMap.get(sourceIndex),
+              leftX: baseLeftX,
+              detailRightX: baseLeftDetailX + leftDetailWidth,
+            })
         : 0;
     return baseSourceLabelX - leadOffsetX - labelWidth - 12;
   });
@@ -1282,6 +1293,11 @@ function resolvePreDetailRegularSourceLeadDistance(snapshot, options = {}) {
   const positionNorm = regularCount <= 1 ? 1 : orderIndex / Math.max(regularCount - 1, 1);
   const leadFactor = minLeadFactor + (1 - minLeadFactor) * Math.pow(positionNorm, leadExponent);
   return maxLeadX * clamp(leadFactor, 0, 1);
+}
+
+function shouldAlignPreDetailRegularSourceColumn(snapshot, regularCount) {
+  const minimumCount = Math.max(Math.round(safeNumber(snapshot?.layout?.minRegularSourceColumnAlignCount, 2)), 2);
+  return Math.max(safeNumber(regularCount), 0) >= minimumCount && snapshot?.layout?.alignPreDetailRegularSourceColumn !== false;
 }
 
 function collectPreDetailLeadEligibleSourceIndexes(detailTargetKeys = new Set(), sourceItems = []) {

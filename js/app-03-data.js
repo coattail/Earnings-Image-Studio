@@ -2851,6 +2851,15 @@ const BAR_SEGMENT_COLOR_OVERRIDES_BY_COMPANY = Object.freeze({
     datacenter: "#73AE0B",
     edgecomputing: "#2D9CDB",
   }),
+  oracle: Object.freeze({
+    cloud: "#2563EB",
+    software: "#7C3AED",
+    services: "#059669",
+    hardware: "#F97316",
+    cloudlicensebusiness: "#E11D48",
+    hardwarebusiness: "#92400E",
+    servicesbusiness: "#64748B",
+  }),
 });
 
 const BAR_RESIDUAL_INFERENCE_CONFLICTS = Object.freeze({
@@ -4027,6 +4036,14 @@ const BAR_TAXONOMY_BREAK_OVERRIDES = Object.freeze({
       labelZh: "Q1 FY24 起分部口径调整",
       labelEn: "Segment taxonomy changed from Q1 FY24",
       id: "alibaba-fy24",
+    }),
+  ]),
+  oracle: Object.freeze([
+    Object.freeze({
+      quarterKey: "2025Q3",
+      labelZh: "Q1 FY26 起分部口径调整",
+      labelEn: "Segment taxonomy changed from Q1 FY26",
+      id: "oracle-fy26",
     }),
   ]),
 });

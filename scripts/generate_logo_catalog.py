@@ -193,7 +193,9 @@ OVERRIDE_LOGO_SOURCES: dict[str, dict[str, Any]] = {
         "url": "https://cdn.worldvectorlogo.com/logos/the-home-depot.svg",
     },
     "oracle": {
-        "url": "https://cdn.worldvectorlogo.com/logos/oracle.svg",
+        "local_path": "assets/logos/oracle-uploaded-transparent.png",
+        "source_type": "user-uploaded",
+        "skip_normalization": True,
     },
     "tsmc": {
         "url": "https://cdn.worldvectorlogo.com/logos/tsmc.svg",

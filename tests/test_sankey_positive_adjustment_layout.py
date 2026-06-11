@@ -14,6 +14,7 @@ WALMART_PAYLOAD = ROOT_DIR / "data" / "cache" / "walmart.json"
 ASML_PAYLOAD = ROOT_DIR / "data" / "cache" / "asml.json"
 ALPHABET_PAYLOAD = ROOT_DIR / "data" / "cache" / "alphabet.json"
 BERKSHIRE_PAYLOAD = ROOT_DIR / "data" / "cache" / "berkshire.json"
+ORACLE_PAYLOAD = ROOT_DIR / "data" / "cache" / "oracle.json"
 SVG_NS = {"svg": "http://www.w3.org/2000/svg"}
 
 
@@ -193,6 +194,19 @@ def viewbox_height(svg_root: ET.Element) -> float:
 
 
 class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
+    def test_oracle_small_regular_sources_share_column(self) -> None:
+        svg_root = render_sankey_svg(ORACLE_PAYLOAD, "zh", "oracle-latest-zh", quarter="latest")
+
+        services_rect = visible_rect_attrs(svg_root, "source-2")
+        hardware_rect = visible_rect_attrs(svg_root, "source-3")
+
+        self.assertAlmostEqual(
+            services_rect["x"],
+            hardware_rect["x"],
+            delta=0.1,
+            msg="Oracle 服务 and 硬件 source nodes should start from the same x column.",
+        )
+
     def test_apple_english_positive_adjustment_stays_above_net_profit(self) -> None:
         svg_root = render_sankey_svg(APPLE_PAYLOAD, "en", "apple-en")
 

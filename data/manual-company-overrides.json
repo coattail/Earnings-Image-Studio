@@ -1959,5 +1959,442 @@
       ],
       "errors": []
     }
+  },
+  "oracle": {
+    "financials": {
+      "2026Q2": {
+        "calendarQuarter": "2026Q2",
+        "periodEnd": "2026-05-31",
+        "fiscalYear": "2026",
+        "fiscalQuarter": "Q4",
+        "fiscalLabel": "FY2026 Q4",
+        "statementCurrency": "USD",
+        "revenueBn": 19.184,
+        "revenueYoyPct": 20.631,
+        "costOfRevenueBn": 6.672,
+        "grossProfitBn": 12.512,
+        "sgnaBn": 2.512,
+        "rndBn": 2.613,
+        "otherOpexBn": 7.926,
+        "operatingExpensesBn": 13.051,
+        "operatingIncomeBn": 6.133,
+        "nonOperatingBn": -0.763,
+        "pretaxIncomeBn": 5.37,
+        "taxBn": 1.066,
+        "netIncomeBn": 4.304,
+        "netIncomeYoyPct": 25.593,
+        "grossMarginPct": 65.221,
+        "operatingMarginPct": 31.969,
+        "profitMarginPct": 22.435,
+        "effectiveTaxRatePct": 19.851,
+        "revenueQoqPct": 11.6,
+        "grossMarginYoyDeltaPp": -4.968,
+        "operatingMarginYoyDeltaPp": -0.161,
+        "profitMarginYoyDeltaPp": 0.89,
+        "statementSource": "manual-oracle-official",
+        "statementSourceUrl": "https://www.oracle.com/news/announcement/q4fy26-earnings-release-2026-06-10/",
+        "statementFilingDate": "2026-06-10",
+        "officialRevenueSegments": [
+          {
+            "name": "Cloud",
+            "nameZh": "云业务",
+            "memberKey": "cloud",
+            "valueBn": 9.913,
+            "yoyPct": 47.143,
+            "qoqPct": 11.207,
+            "mixPct": 51.673,
+            "mixYoyDeltaPp": 9.31,
+            "sourceUrl": "https://www.oracle.com/news/announcement/q4fy26-earnings-release-2026-06-10/",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-06-10"
+          },
+          {
+            "name": "Software",
+            "nameZh": "软件",
+            "memberKey": "software",
+            "valueBn": 6.824,
+            "yoyPct": -2.067,
+            "qoqPct": 11.521,
+            "mixPct": 35.571,
+            "mixYoyDeltaPp": -8.244,
+            "sourceUrl": "https://www.oracle.com/news/announcement/q4fy26-earnings-release-2026-06-10/",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-06-10"
+          },
+          {
+            "name": "Hardware",
+            "nameZh": "硬件",
+            "memberKey": "hardware",
+            "valueBn": 0.924,
+            "yoyPct": 8.706,
+            "qoqPct": 29.412,
+            "mixPct": 4.817,
+            "mixYoyDeltaPp": -0.528,
+            "sourceUrl": "https://www.oracle.com/news/announcement/q4fy26-earnings-release-2026-06-10/",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-06-10"
+          },
+          {
+            "name": "Services",
+            "nameZh": "服务",
+            "memberKey": "services",
+            "valueBn": 1.523,
+            "yoyPct": 12.982,
+            "qoqPct": 5.544,
+            "mixPct": 7.939,
+            "mixYoyDeltaPp": -0.537,
+            "sourceUrl": "https://www.oracle.com/news/announcement/q4fy26-earnings-release-2026-06-10/",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-06-10"
+          }
+        ],
+        "officialRevenueDetailGroups": [
+          {
+            "name": "Cloud infrastructure",
+            "nameZh": "云基础设施",
+            "memberKey": "cloudinfrastructure",
+            "valueBn": 5.8,
+            "yoyPct": 93,
+            "qoqPct": 18.657,
+            "mixPct": 30.233,
+            "mixYoyDeltaPp": null,
+            "targetName": "Cloud",
+            "sourceUrl": "https://www.oracle.com/news/announcement/q4fy26-earnings-release-2026-06-10/",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-06-10"
+          },
+          {
+            "name": "Cloud applications",
+            "nameZh": "云应用",
+            "memberKey": "cloudapplications",
+            "valueBn": 4.1,
+            "yoyPct": 10,
+            "qoqPct": 1.838,
+            "mixPct": 21.372,
+            "mixYoyDeltaPp": null,
+            "targetName": "Cloud",
+            "sourceUrl": "https://www.oracle.com/news/announcement/q4fy26-earnings-release-2026-06-10/",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-06-10"
+          },
+          {
+            "name": "Software license",
+            "nameZh": "软件许可",
+            "memberKey": "softwarelicense",
+            "valueBn": 1.881,
+            "yoyPct": -6.278,
+            "qoqPct": 63.565,
+            "mixPct": 9.805,
+            "mixYoyDeltaPp": null,
+            "targetName": "Software",
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526265848/orcl-ex99_1.htm",
+            "sourceForm": "8-K Exhibit 99.1",
+            "filingDate": "2026-06-10"
+          },
+          {
+            "name": "Software support",
+            "nameZh": "软件支持",
+            "memberKey": "softwaresupport",
+            "valueBn": 4.943,
+            "yoyPct": -0.363,
+            "qoqPct": -0.523,
+            "mixPct": 25.766,
+            "mixYoyDeltaPp": null,
+            "targetName": "Software",
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526265848/orcl-ex99_1.htm",
+            "sourceForm": "8-K Exhibit 99.1",
+            "filingDate": "2026-06-10"
+          }
+        ],
+        "officialCostBreakdown": [
+          {
+            "name": "Cloud and software",
+            "nameZh": "云及软件成本",
+            "memberKey": "cloudandsoftware",
+            "valueBn": 5.224,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526265848/orcl-ex99_1.htm",
+            "sourceForm": "8-K Exhibit 99.1",
+            "filingDate": "2026-06-10"
+          },
+          {
+            "name": "Hardware",
+            "nameZh": "硬件成本",
+            "memberKey": "hardware",
+            "valueBn": 0.293,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526265848/orcl-ex99_1.htm",
+            "sourceForm": "8-K Exhibit 99.1",
+            "filingDate": "2026-06-10"
+          },
+          {
+            "name": "Services",
+            "nameZh": "服务成本",
+            "memberKey": "services",
+            "valueBn": 1.155,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526265848/orcl-ex99_1.htm",
+            "sourceForm": "8-K Exhibit 99.1",
+            "filingDate": "2026-06-10"
+          }
+        ],
+        "officialOpexBreakdown": [
+          {
+            "name": "Sales and marketing",
+            "nameZh": "销售及营销",
+            "memberKey": "salesandmarketing",
+            "valueBn": 2.068,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526265848/orcl-ex99_1.htm",
+            "sourceForm": "8-K Exhibit 99.1",
+            "filingDate": "2026-06-10"
+          },
+          {
+            "name": "Research and development",
+            "nameZh": "研发",
+            "memberKey": "researchanddevelopment",
+            "valueBn": 2.613,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526265848/orcl-ex99_1.htm",
+            "sourceForm": "8-K Exhibit 99.1",
+            "filingDate": "2026-06-10"
+          },
+          {
+            "name": "General and administrative",
+            "nameZh": "一般及行政",
+            "memberKey": "generalandadministrative",
+            "valueBn": 0.444,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526265848/orcl-ex99_1.htm",
+            "sourceForm": "8-K Exhibit 99.1",
+            "filingDate": "2026-06-10"
+          },
+          {
+            "name": "Amortization of intangible assets",
+            "nameZh": "无形资产摊销",
+            "memberKey": "amortizationofintangibleassets",
+            "valueBn": 0.431,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526265848/orcl-ex99_1.htm",
+            "sourceForm": "8-K Exhibit 99.1",
+            "filingDate": "2026-06-10"
+          },
+          {
+            "name": "Restructuring and other",
+            "nameZh": "重组及其他",
+            "memberKey": "restructuringandother",
+            "valueBn": 0.823,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526265848/orcl-ex99_1.htm",
+            "sourceForm": "8-K Exhibit 99.1",
+            "filingDate": "2026-06-10"
+          }
+        ],
+        "officialRevenueStyle": "oracle-revenue-bridge"
+      }
+    },
+    "officialRevenueStructureHistory": {
+      "source": "manual-oracle-official-quarterly-results",
+      "quarters": {
+        "2026Q2": {
+          "segments": [
+            {
+              "name": "Cloud",
+              "nameZh": "云业务",
+              "memberKey": "cloud",
+              "valueBn": 9.913,
+              "yoyPct": 47.143,
+              "qoqPct": 11.207,
+              "mixPct": 51.673,
+              "mixYoyDeltaPp": 9.31,
+              "filingDate": "2026-06-10",
+              "sourceUrl": "https://www.oracle.com/news/announcement/q4fy26-earnings-release-2026-06-10/",
+              "sourceForm": "QuarterlyResultsRelease"
+            },
+            {
+              "name": "Software",
+              "nameZh": "软件",
+              "memberKey": "software",
+              "valueBn": 6.824,
+              "yoyPct": -2.067,
+              "qoqPct": 11.521,
+              "mixPct": 35.571,
+              "mixYoyDeltaPp": -8.244,
+              "filingDate": "2026-06-10",
+              "sourceUrl": "https://www.oracle.com/news/announcement/q4fy26-earnings-release-2026-06-10/",
+              "sourceForm": "QuarterlyResultsRelease"
+            },
+            {
+              "name": "Hardware",
+              "nameZh": "硬件",
+              "memberKey": "hardware",
+              "valueBn": 0.924,
+              "yoyPct": 8.706,
+              "qoqPct": 29.412,
+              "mixPct": 4.817,
+              "mixYoyDeltaPp": -0.528,
+              "filingDate": "2026-06-10",
+              "sourceUrl": "https://www.oracle.com/news/announcement/q4fy26-earnings-release-2026-06-10/",
+              "sourceForm": "QuarterlyResultsRelease"
+            },
+            {
+              "name": "Services",
+              "nameZh": "服务",
+              "memberKey": "services",
+              "valueBn": 1.523,
+              "yoyPct": 12.982,
+              "qoqPct": 5.544,
+              "mixPct": 7.939,
+              "mixYoyDeltaPp": -0.537,
+              "filingDate": "2026-06-10",
+              "sourceUrl": "https://www.oracle.com/news/announcement/q4fy26-earnings-release-2026-06-10/",
+              "sourceForm": "QuarterlyResultsRelease"
+            }
+          ],
+          "detailGroups": [
+            {
+              "name": "Cloud infrastructure",
+              "nameZh": "云基础设施",
+              "memberKey": "cloudinfrastructure",
+              "valueBn": 5.8,
+              "yoyPct": 93,
+              "qoqPct": 18.657,
+              "mixPct": 30.233,
+              "mixYoyDeltaPp": null,
+              "targetName": "Cloud",
+              "filingDate": "2026-06-10",
+              "sourceUrl": "https://www.oracle.com/news/announcement/q4fy26-earnings-release-2026-06-10/",
+              "sourceForm": "QuarterlyResultsRelease"
+            },
+            {
+              "name": "Cloud applications",
+              "nameZh": "云应用",
+              "memberKey": "cloudapplications",
+              "valueBn": 4.1,
+              "yoyPct": 10,
+              "qoqPct": 1.838,
+              "mixPct": 21.372,
+              "mixYoyDeltaPp": null,
+              "targetName": "Cloud",
+              "filingDate": "2026-06-10",
+              "sourceUrl": "https://www.oracle.com/news/announcement/q4fy26-earnings-release-2026-06-10/",
+              "sourceForm": "QuarterlyResultsRelease"
+            },
+            {
+              "name": "Software license",
+              "nameZh": "软件许可",
+              "memberKey": "softwarelicense",
+              "valueBn": 1.881,
+              "yoyPct": -6.278,
+              "qoqPct": 63.565,
+              "mixPct": 9.805,
+              "mixYoyDeltaPp": null,
+              "targetName": "Software",
+              "filingDate": "2026-06-10",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526265848/orcl-ex99_1.htm",
+              "sourceForm": "8-K Exhibit 99.1"
+            },
+            {
+              "name": "Software support",
+              "nameZh": "软件支持",
+              "memberKey": "softwaresupport",
+              "valueBn": 4.943,
+              "yoyPct": -0.363,
+              "qoqPct": -0.523,
+              "mixPct": 25.766,
+              "mixYoyDeltaPp": null,
+              "targetName": "Software",
+              "filingDate": "2026-06-10",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526265848/orcl-ex99_1.htm",
+              "sourceForm": "8-K Exhibit 99.1"
+            }
+          ],
+          "costBreakdown": [
+            {
+              "name": "Cloud and software",
+              "nameZh": "云及软件成本",
+              "memberKey": "cloudandsoftware",
+              "valueBn": 5.224,
+              "filingDate": "2026-06-10",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526265848/orcl-ex99_1.htm",
+              "sourceForm": "8-K Exhibit 99.1"
+            },
+            {
+              "name": "Hardware",
+              "nameZh": "硬件成本",
+              "memberKey": "hardware",
+              "valueBn": 0.293,
+              "filingDate": "2026-06-10",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526265848/orcl-ex99_1.htm",
+              "sourceForm": "8-K Exhibit 99.1"
+            },
+            {
+              "name": "Services",
+              "nameZh": "服务成本",
+              "memberKey": "services",
+              "valueBn": 1.155,
+              "filingDate": "2026-06-10",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526265848/orcl-ex99_1.htm",
+              "sourceForm": "8-K Exhibit 99.1"
+            }
+          ],
+          "opexBreakdown": [
+            {
+              "name": "Sales and marketing",
+              "nameZh": "销售及营销",
+              "memberKey": "salesandmarketing",
+              "valueBn": 2.068,
+              "filingDate": "2026-06-10",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526265848/orcl-ex99_1.htm",
+              "sourceForm": "8-K Exhibit 99.1"
+            },
+            {
+              "name": "Research and development",
+              "nameZh": "研发",
+              "memberKey": "researchanddevelopment",
+              "valueBn": 2.613,
+              "filingDate": "2026-06-10",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526265848/orcl-ex99_1.htm",
+              "sourceForm": "8-K Exhibit 99.1"
+            },
+            {
+              "name": "General and administrative",
+              "nameZh": "一般及行政",
+              "memberKey": "generalandadministrative",
+              "valueBn": 0.444,
+              "filingDate": "2026-06-10",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526265848/orcl-ex99_1.htm",
+              "sourceForm": "8-K Exhibit 99.1"
+            },
+            {
+              "name": "Amortization of intangible assets",
+              "nameZh": "无形资产摊销",
+              "memberKey": "amortizationofintangibleassets",
+              "valueBn": 0.431,
+              "filingDate": "2026-06-10",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526265848/orcl-ex99_1.htm",
+              "sourceForm": "8-K Exhibit 99.1"
+            },
+            {
+              "name": "Restructuring and other",
+              "nameZh": "重组及其他",
+              "memberKey": "restructuringandother",
+              "valueBn": 0.823,
+              "filingDate": "2026-06-10",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526265848/orcl-ex99_1.htm",
+              "sourceForm": "8-K Exhibit 99.1"
+            }
+          ],
+          "style": "oracle-revenue-bridge"
+        }
+      },
+      "filingsUsed": [
+        {
+          "title": "Oracle Q4 FY2026 Earnings Release",
+          "quarter": "2026Q2",
+          "filingDate": "2026-06-10",
+          "url": "https://www.oracle.com/news/announcement/q4fy26-earnings-release-2026-06-10/"
+        },
+        {
+          "title": "Oracle 8-K Exhibit 99.1",
+          "quarter": "2026Q2",
+          "filingDate": "2026-06-10",
+          "url": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526265848/orcl-ex99_1.htm"
+        }
+      ],
+      "errors": []
+    }
   }
 }

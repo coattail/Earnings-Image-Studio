@@ -155,6 +155,21 @@ class BarHistoryWindowCountTests(unittest.TestCase):
         self.assertIn('data-bar-taxonomy-break="amd-2022q1"', svg_markup)
         self.assertIn("Q1 FY22 起分部口径调整", svg_markup)
 
+    def test_oracle_bar_history_marks_fy26_taxonomy_break(self) -> None:
+        svg_markup = render_bar_svg(load_dataset_company("oracle"), "oracle-bar-taxonomy-break", "2026Q2")
+
+        self.assertIn('data-bar-taxonomy-break="oracle-fy26"', svg_markup)
+        self.assertIn("Q1 FY26 起分部口径调整", svg_markup)
+
+    def test_oracle_bar_history_uses_high_contrast_segment_colors(self) -> None:
+        colors = legend_color_by_label(render_bar_svg(load_dataset_company("oracle"), "oracle-bar-colors", "2026Q2"))
+
+        self.assertEqual(colors["云业务"], "#2563eb")
+        self.assertEqual(colors["软件"], "#7c3aed")
+        self.assertEqual(colors["服务"], "#099267")
+        self.assertEqual(colors["硬件"], "#f1751e")
+        self.assertEqual(colors["云与 许可证业务"], "#e11d48")
+
     def test_broadcom_bar_history_does_not_mark_tiny_ip_licensing_flips(self) -> None:
         svg_markup = render_bar_svg(load_dataset_company("broadcom"), "broadcom-bar-taxonomy-break", "2026Q1")
 

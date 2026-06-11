@@ -1687,9 +1687,7 @@ function renderPixelReplicaSvg(snapshot) {
         return leftCenter - rightCenter;
       });
     const detailRightX = leftDetailX + leftDetailWidth;
-    const alignRegularLeadColumn =
-      regularLeadIndexes.length >= 3 &&
-      snapshot.layout?.alignPreDetailRegularSourceColumn !== false;
+    const alignRegularLeadColumn = shouldAlignPreDetailRegularSourceColumn(snapshot, regularLeadIndexes.length);
     const sharedRegularLeadDistance = alignRegularLeadColumn
       ? resolvePreDetailRegularSourceLeadDistance(snapshot, {
           regularCount: regularLeadIndexes.length,
@@ -1725,7 +1723,7 @@ function renderPixelReplicaSvg(snapshot) {
       slice.nodeX = nodeX;
       slice.labelX = nodeX - sourceSummaryLabelGapX;
       slice.metricX = sourceTemplateMetricX + (nodeX - leftX);
-      if (alignRegularLeadColumn && orderIndex === 0 && snapshot.layout?.balanceFirstPreDetailRegularSourceEntry !== false) {
+      if (alignRegularLeadColumn && regularLeadIndexes.length >= 3 && orderIndex === 0 && snapshot.layout?.balanceFirstPreDetailRegularSourceEntry !== false) {
         const targetCenterY = (safeNumber(slice.revenueTop, slice.center) + safeNumber(slice.revenueBottom, slice.center)) / 2;
         const entryToleranceY = scaleY(safeNumber(snapshot.layout?.firstPreDetailRegularSourceEntryToleranceY, 6));
         const requestedShiftY = targetCenterY - entryToleranceY - slice.center;
