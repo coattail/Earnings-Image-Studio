@@ -43,7 +43,8 @@
     "2025Q1",
     "2025Q2",
     "2025Q3",
-    "2025Q4"
+    "2025Q4",
+    "2026Q1"
   ],
   "financials": {
     "2021Q1": {
@@ -4117,7 +4118,7 @@
           "name": "Research and development",
           "nameZh": "研发费用",
           "memberKey": "researchanddevelopment",
-          "valueBn": 5.0,
+          "valueBn": 5,
           "sourceUrl": "https://media-meituan.todayir.com/202406061707351762491804_en.pdf",
           "sourceForm": "IR PDF income statement",
           "filingDate": "2024-06-06",
@@ -8387,6 +8388,117 @@
           "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
         ]
       }
+    },
+    "2026Q1": {
+      "calendarQuarter": "2026Q1",
+      "periodEnd": "2026-03-31",
+      "fiscalYear": "2026",
+      "fiscalQuarter": "Q1",
+      "fiscalLabel": "FY2026 Q1",
+      "statementCurrency": "CNY",
+      "revenueBn": 91.039,
+      "costOfRevenueBn": 65.069,
+      "grossProfitBn": 25.97,
+      "sgnaBn": 25.907,
+      "rndBn": 7.043,
+      "otherOpexBn": null,
+      "operatingExpensesBn": 32.44,
+      "operatingIncomeBn": -6.47,
+      "nonOperatingBn": -0.807,
+      "pretaxIncomeBn": -7.277,
+      "taxBn": -0.45,
+      "netIncomeBn": -6.827,
+      "statementSource": "manual-meituan-official",
+      "statementSourceUrl": "https://media-meituan.todayir.com/202606011753301715997254_en.pdf",
+      "statementFilingDate": "2026-06-01",
+      "officialRevenueSegments": [
+        {
+          "name": "Core local commerce",
+          "nameZh": "核心本地商业",
+          "memberKey": "corelocalcommerce",
+          "valueBn": 64.063,
+          "yoyPct": -0.41,
+          "qoqPct": null,
+          "mixPct": 70.4,
+          "mixYoyDeltaPp": -3.9,
+          "sourceUrl": "https://media-meituan.todayir.com/202606011753301715997254_en.pdf",
+          "sourceForm": null,
+          "filingDate": "2026-06-01",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "New initiatives",
+          "nameZh": "新业务",
+          "memberKey": "newinitiatives",
+          "valueBn": 26.976,
+          "yoyPct": 21.34,
+          "qoqPct": null,
+          "mixPct": 29.6,
+          "mixYoyDeltaPp": 3.9,
+          "sourceUrl": "https://media-meituan.todayir.com/202606011753301715997254_en.pdf",
+          "sourceForm": null,
+          "filingDate": "2026-06-01",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        }
+      ],
+      "officialOpexBreakdown": [
+        {
+          "name": "Selling and marketing",
+          "nameZh": "销售及市场费用",
+          "memberKey": "sellingandmarketing",
+          "valueBn": 22.969,
+          "sourceUrl": "https://media-meituan.todayir.com/202606011753301715997254_en.pdf",
+          "sourceForm": "QuarterlyResultsPDF",
+          "filingDate": "2026-06-01",
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "Research and development",
+          "nameZh": "研发费用",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 7.043,
+          "sourceUrl": "https://media-meituan.todayir.com/202606011753301715997254_en.pdf",
+          "sourceForm": "QuarterlyResultsPDF",
+          "filingDate": "2026-06-01",
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "General and administrative",
+          "nameZh": "管理费用",
+          "memberKey": "generalandadministrative",
+          "valueBn": 2.938,
+          "sourceUrl": "https://media-meituan.todayir.com/202606011753301715997254_en.pdf",
+          "sourceForm": "QuarterlyResultsPDF",
+          "filingDate": "2026-06-01",
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "Impairment losses",
+          "nameZh": "减值损失",
+          "memberKey": "impairmentlosses",
+          "valueBn": 0.481,
+          "sourceUrl": "https://media-meituan.todayir.com/202606011753301715997254_en.pdf",
+          "sourceForm": "QuarterlyResultsPDF",
+          "filingDate": "2026-06-01",
+          "validationEligible": null,
+          "validationNotes": null
+        }
+      ],
+      "revenueQoqPct": -1.148,
+      "revenueYoyPct": 5.178,
+      "displayCurrency": "USD",
+      "displayScaleFactor": 0.14782
     }
   },
   "statementSource": "stockanalysis-financials",
@@ -8400,7 +8512,7 @@
     "errors": []
   },
   "officialRevenueStructureHistory": {
-    "source": "official-ir-results",
+    "source": "manual-official-quarterly-results",
     "quarters": {
       "2018Q3": {
         "segments": [
@@ -10837,7 +10949,7 @@
           {
             "name": "Research and development",
             "memberKey": "researchanddevelopment",
-            "valueBn": 5.0,
+            "valueBn": 5,
             "sourceUrl": "https://media-meituan.todayir.com/202406061707351762491804_en.pdf",
             "sourceForm": "IR PDF income statement",
             "filingDate": "2024-06-06",
@@ -11438,6 +11550,84 @@
             "nameZh": "减值损失"
           }
         ]
+      },
+      "2026Q1": {
+        "segments": [
+          {
+            "name": "Core local commerce",
+            "nameZh": "核心本地商业",
+            "memberKey": "corelocalcommerce",
+            "valueBn": 64.063,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://media-meituan.todayir.com/202606011753301715997254_en.pdf",
+            "sourceForm": null,
+            "filingDate": "2026-06-01",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          },
+          {
+            "name": "New initiatives",
+            "nameZh": "新业务",
+            "memberKey": "newinitiatives",
+            "valueBn": 26.976,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://media-meituan.todayir.com/202606011753301715997254_en.pdf",
+            "sourceForm": null,
+            "filingDate": "2026-06-01",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          }
+        ],
+        "opexBreakdown": [
+          {
+            "name": "Selling and marketing",
+            "nameZh": "销售及市场费用",
+            "memberKey": "sellingandmarketing",
+            "valueBn": 22.969,
+            "filingDate": "2026-06-01",
+            "sourceUrl": "https://media-meituan.todayir.com/202606011753301715997254_en.pdf",
+            "sourceForm": "QuarterlyResultsPDF"
+          },
+          {
+            "name": "Research and development",
+            "nameZh": "研发费用",
+            "memberKey": "researchanddevelopment",
+            "valueBn": 7.043,
+            "filingDate": "2026-06-01",
+            "sourceUrl": "https://media-meituan.todayir.com/202606011753301715997254_en.pdf",
+            "sourceForm": "QuarterlyResultsPDF"
+          },
+          {
+            "name": "General and administrative",
+            "nameZh": "管理费用",
+            "memberKey": "generalandadministrative",
+            "valueBn": 2.938,
+            "filingDate": "2026-06-01",
+            "sourceUrl": "https://media-meituan.todayir.com/202606011753301715997254_en.pdf",
+            "sourceForm": "QuarterlyResultsPDF"
+          },
+          {
+            "name": "Impairment losses",
+            "nameZh": "减值损失",
+            "memberKey": "impairmentlosses",
+            "valueBn": 0.481,
+            "filingDate": "2026-06-01",
+            "sourceUrl": "https://media-meituan.todayir.com/202606011753301715997254_en.pdf",
+            "sourceForm": "QuarterlyResultsPDF"
+          }
+        ]
       }
     },
     "filingsUsed": [
@@ -11614,6 +11804,12 @@
         "quarter": "2025Q3",
         "filingDate": "2025-11-28",
         "pdf": "https://media-meituan.todayir.com/202511281719181795180056_en.pdf"
+      },
+      {
+        "title": "Meituan First Quarter 2026 Results",
+        "quarter": "2026Q1",
+        "filingDate": "2026-06-01",
+        "pdf": "https://media-meituan.todayir.com/202606011753301715997254_en.pdf"
       }
     ],
     "errors": []
@@ -11715,20 +11911,22 @@
     "validation": {
       "version": "parser-validation-v1",
       "status": "high",
-      "overallConfidenceScore": 1.0,
+      "overallConfidenceScore": 0.8833,
       "financialConfidenceScore": 1.0,
-      "structuralConfidenceScore": 1.0,
-      "revenueSegmentChecks": 29,
+      "structuralConfidenceScore": 0.6667,
+      "revenueSegmentChecks": 30,
       "revenueSegmentMismatchCount": 0,
       "revenueSegmentSkippedChecks": 0,
       "detailGroupChecks": 30,
       "detailGroupMismatchCount": 0,
       "detailGroupSkippedChecks": 0,
-      "opexChecks": 0,
+      "opexChecks": 1,
       "opexSkippedChecks": 19,
-      "opexOverflowMismatchCount": 0,
-      "warningCount": 0,
-      "warnings": []
+      "opexOverflowMismatchCount": 1,
+      "warningCount": 1,
+      "warnings": [
+        "2026Q1: opex breakdown sums to 33.431Bn vs operating expenses 32.44Bn."
+      ]
     }
   },
   "classificationPolicy": {
@@ -14264,29 +14462,27 @@
   },
   "statementPresets": {},
   "coverage": {
-    "quarterCount": 30,
+    "quarterCount": 31,
     "pixelReplicaQuarterCount": 0,
     "hasPixelReplica": false,
-    "officialFinancialQuarterCount": 30,
-    "officialSegmentQuarterCount": 29,
-    "officialExpenseQuarterCount": 29,
+    "officialFinancialQuarterCount": 31,
+    "officialSegmentQuarterCount": 30,
+    "officialExpenseQuarterCount": 30,
     "classification": {
-      "status": "exception",
-      "latestQuarter": "2025Q4",
-      "latestQuarterHasRevenueClassification": false,
-      "latestQuarterHasExpenseClassification": false,
-      "latestRevenueClassificationQuarter": "2025Q3",
-      "latestExpenseClassificationQuarter": "2025Q3",
-      "latestStructureHistoryQuarter": "2025Q3",
-      "revenueClassificationQuarterCount": 29,
-      "expenseClassificationQuarterCount": 29,
-      "revenueClassificationCoverageRatio": 0.9667,
-      "expenseClassificationCoverageRatio": 0.9667,
-      "latestRevenueClassificationLagQuarters": 1,
-      "latestExpenseClassificationLagQuarters": 1,
-      "warnings": [
-        "Latest revenue classification is unavailable for 2025Q4; using 2025Q3 as the newest official disclosed structure. As of 2026-03-27, Meituan's official investor results page exposes parseable segment disclosure through 2025Q3 only. The 2025Q4 financial statement trunk is now available from Stock Analysis's Hong Kong listing page, and the latest official segment split currently available to the parser remains 2025Q3."
-      ],
+      "status": "ok",
+      "latestQuarter": "2026Q1",
+      "latestQuarterHasRevenueClassification": true,
+      "latestQuarterHasExpenseClassification": true,
+      "latestRevenueClassificationQuarter": "2026Q1",
+      "latestExpenseClassificationQuarter": "2026Q1",
+      "latestStructureHistoryQuarter": "2026Q1",
+      "revenueClassificationQuarterCount": 30,
+      "expenseClassificationQuarterCount": 30,
+      "revenueClassificationCoverageRatio": 0.9677,
+      "expenseClassificationCoverageRatio": 0.9677,
+      "latestRevenueClassificationLagQuarters": 0,
+      "latestExpenseClassificationLagQuarters": 0,
+      "warnings": [],
       "blockers": [],
       "policy": {
         "allowLatestRevenueGap": true,
@@ -14327,20 +14523,22 @@
       "validation": {
         "version": "parser-validation-v1",
         "status": "high",
-        "overallConfidenceScore": 1.0,
+        "overallConfidenceScore": 0.8833,
         "financialConfidenceScore": 1.0,
-        "structuralConfidenceScore": 1.0,
-        "revenueSegmentChecks": 29,
+        "structuralConfidenceScore": 0.6667,
+        "revenueSegmentChecks": 30,
         "revenueSegmentMismatchCount": 0,
         "revenueSegmentSkippedChecks": 0,
         "detailGroupChecks": 30,
         "detailGroupMismatchCount": 0,
         "detailGroupSkippedChecks": 0,
-        "opexChecks": 0,
+        "opexChecks": 1,
         "opexSkippedChecks": 19,
-        "opexOverflowMismatchCount": 0,
-        "warningCount": 0,
-        "warnings": []
+        "opexOverflowMismatchCount": 1,
+        "warningCount": 1,
+        "warnings": [
+          "2026Q1: opex breakdown sums to 33.431Bn vs operating expenses 32.44Bn."
+        ]
       }
     }
   }

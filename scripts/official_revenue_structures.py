@@ -5662,7 +5662,7 @@ def fetch_official_revenue_structure_history(company: dict[str, Any], refresh: b
             supplemented_payload = _supplement_cached_custom_history(company, cached_payload)
             before_post_process_payload = deepcopy(supplemented_payload)
             processed_payload = _post_process_result(company, supplemented_payload)
-            if processed_payload != before_post_process_payload:
+            if processed_payload != cached_payload or supplemented_payload != cached_payload:
                 supplemented_payload = processed_payload
                 supplemented_payload["_cacheVersion"] = CACHE_VERSION
                 _write_cached_json(path, supplemented_payload)

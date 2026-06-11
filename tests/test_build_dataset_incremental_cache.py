@@ -131,6 +131,101 @@ class BuildDatasetIncrementalCacheTests(unittest.TestCase):
         self.assertEqual(stale_entry["parserDiagnostics"]["version"], "universal-parser-v4")
         self.assertIn("unifiedExtraction", stale_entry)
 
+    def test_selected_no_refresh_build_reuses_compatible_cache(self) -> None:
+        selected_company = _company("selected", "SEL")
+        cached_payload = _payload("selected", "universal-parser-v4", with_unified=True)
+        cached_payload["financials"]["2025Q4"]["revenueBn"] = 10
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            tmp_path = Path(tmp_dir)
+            cache_dir = tmp_path / "cache"
+            output_path = tmp_path / "earnings-dataset.json"
+            dataset_index_path = tmp_path / "dataset-index.json"
+
+            with (
+                patch.object(build_dataset, "TOP30_COMPANIES", [selected_company]),
+                patch.object(build_dataset, "COMPANY_CACHE_DIR", cache_dir),
+                patch.object(build_dataset, "OUTPUT_PATH", output_path),
+                patch.object(build_dataset, "DATASET_INDEX_PATH", dataset_index_path),
+                patch.object(build_dataset, "parse_args", return_value=Namespace(refresh=False, companies="selected")),
+                patch.object(build_dataset, "load_manual_presets", return_value={}),
+                patch.object(build_dataset, "load_manual_company_overrides", return_value={}),
+                patch.object(build_dataset, "load_fx_cache", return_value={}),
+                patch.object(build_dataset, "save_fx_cache"),
+                patch.object(build_dataset, "time") as mock_time,
+                patch.object(build_dataset, "load_cached_company_payload", return_value=json.loads(json.dumps(cached_payload))),
+                patch.object(
+                    build_dataset,
+                    "build_company_payload_with_universal_parser",
+                    side_effect=AssertionError("compatible selected cache should be reused when refresh=False"),
+                ),
+                patch.object(build_dataset, "merge_official_revenue_structure_history", side_effect=lambda payload, company, refresh: payload),
+                patch.object(build_dataset, "apply_manual_company_override", side_effect=lambda payload, company, overrides: payload),
+                patch.object(build_dataset, "apply_usd_display_fields", side_effect=lambda payload, cache: payload),
+                patch.object(build_dataset, "finalize_company_payload", side_effect=lambda company, payload, presets: payload),
+                patch.object(build_dataset, "build_dataset_classification_audit", return_value={"blockingIssues": []}),
+            ):
+                mock_time.sleep.return_value = None
+                mock_time.strftime.return_value = "2026-03-29T00:00:00Z"
+                mock_time.gmtime.return_value = object()
+
+                exit_code = build_dataset.main()
+                dataset = json.loads(output_path.read_text(encoding="utf-8"))
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(dataset["failures"], [])
+        self.assertEqual(dataset["companies"][0]["financials"]["2025Q4"]["revenueBn"], 10)
+
+    def test_cache_supplement_only_keeps_unselected_incompatible_cache(self) -> None:
+        selected_company = _company("selected", "SEL")
+        stale_company = _company("stale", "STL")
+        selected_payload = _payload("selected", "universal-parser-v3", with_unified=False)
+        stale_cached_payload = _payload("stale", "universal-parser-v3", with_unified=False)
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            tmp_path = Path(tmp_dir)
+            cache_dir = tmp_path / "cache"
+            output_path = tmp_path / "earnings-dataset.json"
+            dataset_index_path = tmp_path / "dataset-index.json"
+
+            with (
+                patch.object(build_dataset, "TOP30_COMPANIES", [selected_company, stale_company]),
+                patch.object(build_dataset, "COMPANY_CACHE_DIR", cache_dir),
+                patch.object(build_dataset, "OUTPUT_PATH", output_path),
+                patch.object(build_dataset, "DATASET_INDEX_PATH", dataset_index_path),
+                patch.object(build_dataset, "parse_args", return_value=Namespace(refresh=False, companies="selected", cache_supplement_only=True)),
+                patch.object(build_dataset, "load_manual_presets", return_value={}),
+                patch.object(build_dataset, "load_manual_company_overrides", return_value={}),
+                patch.object(build_dataset, "load_fx_cache", return_value={}),
+                patch.object(build_dataset, "save_fx_cache"),
+                patch.object(build_dataset, "time") as mock_time,
+                patch.object(
+                    build_dataset,
+                    "load_cached_company_payload",
+                    side_effect=lambda company_id: json.loads(json.dumps(selected_payload if company_id == "selected" else stale_cached_payload)),
+                ),
+                patch.object(
+                    build_dataset,
+                    "build_company_payload_with_universal_parser",
+                    side_effect=AssertionError("cache supplement mode should not rebuild unselected incompatible caches"),
+                ),
+                patch.object(build_dataset, "merge_official_revenue_structure_history", side_effect=lambda payload, company, refresh: payload),
+                patch.object(build_dataset, "apply_manual_company_override", side_effect=lambda payload, company, overrides: payload),
+                patch.object(build_dataset, "apply_usd_display_fields", side_effect=lambda payload, cache: payload),
+                patch.object(build_dataset, "finalize_company_payload", side_effect=lambda company, payload, presets: payload),
+                patch.object(build_dataset, "build_dataset_classification_audit", return_value={"blockingIssues": []}),
+            ):
+                mock_time.sleep.return_value = None
+                mock_time.strftime.return_value = "2026-03-29T00:00:00Z"
+                mock_time.gmtime.return_value = object()
+
+                exit_code = build_dataset.main()
+                dataset = json.loads(output_path.read_text(encoding="utf-8"))
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(dataset["failures"], [])
+        self.assertEqual([company["id"] for company in dataset["companies"]], ["selected", "stale"])
+
     def test_incremental_build_logs_stale_unified_engine_version_on_rebuild(self) -> None:
         selected_company = _company("selected", "SEL")
         stale_company = _company("stale", "STL")

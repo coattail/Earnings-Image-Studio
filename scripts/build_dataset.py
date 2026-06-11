@@ -355,6 +355,11 @@ def parse_args() -> argparse.Namespace:
         default="",
         help="Optional comma-separated company ids, tickers, or slugs to refresh. Unspecified companies are kept from local cache when available.",
     )
+    parser.add_argument(
+        "--cache-supplement-only",
+        action="store_true",
+        help="For selected companies, reuse local company caches and apply cache/manual supplements without rebuilding unrelated incompatible caches.",
+    )
     return parser.parse_args()
 
 
@@ -3265,17 +3270,33 @@ def main() -> int:
     failures: list[str] = []
     for company in selected_companies:
         print(f"[build] {company['ticker']} ...", flush=True)
-        try:
-            payload = build_company_payload_for_dataset(
-                company,
-                refresh=args.refresh,
-                manual_company_overrides=manual_company_overrides,
-                fx_cache=fx_cache,
-            )
-        except Exception as exc:  # noqa: BLE001
-            failures.append(f"{company['ticker']}: {exc}")
-            print(f"  failed: {exc}", file=sys.stderr, flush=True)
-            continue
+        payload: dict[str, Any] | None = None
+        if not args.refresh:
+            cached_payload = load_cached_company_payload(company["id"])
+            if isinstance(cached_payload, dict):
+                payload = deepcopy(cached_payload)
+                try:
+                    payload = merge_official_revenue_structure_history(payload, company, refresh=False)
+                except Exception as exc:  # noqa: BLE001
+                    diagnostics = payload.get("parserDiagnostics")
+                    if not isinstance(diagnostics, dict):
+                        diagnostics = {}
+                    diagnostics["revenueStructureCacheSupplementError"] = str(exc)
+                    payload["parserDiagnostics"] = diagnostics
+                payload = apply_manual_company_override(payload, company, manual_company_overrides)
+                payload = apply_usd_display_fields(payload, fx_cache)
+        if payload is None:
+            try:
+                payload = build_company_payload_for_dataset(
+                    company,
+                    refresh=args.refresh,
+                    manual_company_overrides=manual_company_overrides,
+                    fx_cache=fx_cache,
+                )
+            except Exception as exc:  # noqa: BLE001
+                failures.append(f"{company['ticker']}: {exc}")
+                print(f"  failed: {exc}", file=sys.stderr, flush=True)
+                continue
         payload = preserve_existing_company_history(payload, existing_companies_by_id.get(str(company["id"])))
         presets = manual_presets.get(str(company["id"])) or {}
         payload = finalize_company_payload(company, payload, presets)
@@ -3289,6 +3310,13 @@ def main() -> int:
             if company["id"] in results_by_company_id:
                 continue
             cached_payload = load_cached_company_payload(company["id"])
+            if getattr(args, "cache_supplement_only", False):
+                existing_payload = existing_companies_by_id.get(str(company["id"]))
+                if isinstance(existing_payload, dict):
+                    results_by_company_id[company["id"]] = existing_payload
+                elif isinstance(cached_payload, dict):
+                    results_by_company_id[company["id"]] = cached_payload
+                continue
             if is_company_payload_cache_compatible(cached_payload):
                 presets = manual_presets.get(str(company["id"])) or {}
                 cached_payload = preserve_existing_company_history(cached_payload, existing_companies_by_id.get(str(company["id"])))

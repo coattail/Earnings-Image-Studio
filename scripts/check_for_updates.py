@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+from concurrent.futures import ThreadPoolExecutor, TimeoutError
 import json
 import subprocess
 import sys
@@ -9,11 +10,13 @@ from typing import Any
 
 from build_dataset import ROOT_DIR, TOP30_COMPANIES, company_matches_selection, parse_company_selection, parse_period
 from official_segments import ALLOWED_FORMS, MIN_FILING_DATE, _request_json, _resolve_cik, _submission_records
+from official_revenue_structures import CUSTOM_INCREMENTAL_HISTORY_COMPANIES, _available_custom_history_items
 from stockanalysis_financials import fetch_stockanalysis_financial_history
 
 
 DATASET_PATH = ROOT_DIR / "data" / "earnings-dataset.json"
 COMPANY_CACHE_DIR = ROOT_DIR / "data" / "cache"
+OFFICIAL_IR_LOOKUP_TIMEOUT_SECONDS = 25
 
 
 def parse_args() -> argparse.Namespace:
@@ -82,6 +85,17 @@ def latest_local_filing_marker(payload: dict[str, Any]) -> tuple[str, str]:
     return latest_date, latest_accession
 
 
+def latest_local_revenue_structure_quarter(payload: dict[str, Any]) -> str:
+    history = payload.get("officialRevenueStructureHistory")
+    quarters = history.get("quarters") if isinstance(history, dict) else None
+    if not isinstance(quarters, dict):
+        return ""
+    quarter_keys = [str(item) for item in quarters.keys() if str(item)]
+    if not quarter_keys:
+        return ""
+    return max(quarter_keys, key=parse_period)
+
+
 def latest_remote_sec_filing(company: dict[str, Any]) -> dict[str, str] | None:
     cik = _resolve_cik(str(company.get("ticker") or ""), refresh=False)
     if cik is None:
@@ -119,6 +133,38 @@ def latest_remote_stockanalysis(company: dict[str, Any]) -> dict[str, str] | Non
     }
 
 
+def latest_remote_official_revenue_structure(company: dict[str, Any]) -> dict[str, str] | None:
+    company_id = str(company.get("id") or "").strip().lower()
+    if company_id not in CUSTOM_INCREMENTAL_HISTORY_COMPANIES:
+        return None
+
+    executor = ThreadPoolExecutor(max_workers=1)
+    future = executor.submit(_available_custom_history_items, company_id)
+    try:
+        items = future.result(timeout=OFFICIAL_IR_LOOKUP_TIMEOUT_SECONDS)
+    except TimeoutError:
+        future.cancel()
+        executor.shutdown(wait=False, cancel_futures=True)
+        return None
+    except Exception:
+        executor.shutdown(wait=False, cancel_futures=True)
+        return None
+    executor.shutdown(wait=False)
+
+    if not items:
+        return None
+    latest_quarter = max((str(quarter) for quarter in items.keys() if str(quarter)), key=parse_period)
+    item = items.get(latest_quarter)
+    if not isinstance(item, dict):
+        return None
+    return {
+        "quarter": latest_quarter,
+        "filingDate": str(item.get("filingDate") or ""),
+        "sourceUrl": str(item.get("sourceUrl") or ""),
+        "title": str(item.get("title") or ""),
+    }
+
+
 def detect_company_update(company: dict[str, Any]) -> dict[str, Any]:
     payload = load_local_company_payload(str(company["id"]))
     if payload is None:
@@ -131,31 +177,53 @@ def detect_company_update(company: dict[str, Any]) -> dict[str, Any]:
 
     local_quarter = latest_local_quarter(payload)
     local_filing_date, local_accession = latest_local_filing_marker(payload)
+    local_revenue_structure_quarter = latest_local_revenue_structure_quarter(payload)
 
     if company.get("financialSource") == "stockanalysis":
         remote = latest_remote_stockanalysis(company)
-        if remote is None:
+        remote_official = latest_remote_official_revenue_structure(company)
+        if remote is None and remote_official is None:
             return {
                 "companyId": company["id"],
                 "ticker": company["ticker"],
                 "needsUpdate": False,
                 "reason": "no-remote-data",
             }
-        remote_quarter = str(remote.get("quarter") or "")
-        remote_filing_date = str(remote.get("filingDate") or "")
-        needs_update = (
-            parse_period(remote_quarter) > parse_period(local_quarter)
-            or remote_filing_date > local_filing_date
+        remote_quarter = str((remote or {}).get("quarter") or "")
+        remote_filing_date = str((remote or {}).get("filingDate") or "")
+        remote_official_quarter = str((remote_official or {}).get("quarter") or "")
+        remote_official_filing_date = str((remote_official or {}).get("filingDate") or "")
+        official_has_newer_quarter = (
+            remote_official_quarter
+            and parse_period(remote_official_quarter) > parse_period(local_revenue_structure_quarter or local_quarter)
         )
+        needs_update = official_has_newer_quarter or (
+            bool(remote_quarter)
+            and (
+                parse_period(remote_quarter) > parse_period(local_quarter)
+                or remote_filing_date > local_filing_date
+            )
+        )
+        reason = "up-to-date"
+        if official_has_newer_quarter:
+            reason = "new-official-ir-quarter-detected"
+        elif needs_update and parse_period(remote_quarter) > parse_period(local_quarter):
+            reason = "new-quarter-detected"
+        elif needs_update:
+            reason = "new-filing-detected"
         return {
             "companyId": company["id"],
             "ticker": company["ticker"],
             "needsUpdate": needs_update,
-            "reason": "new-quarter-detected" if parse_period(remote_quarter) > parse_period(local_quarter) else ("new-filing-detected" if needs_update else "up-to-date"),
+            "reason": reason,
             "localQuarter": local_quarter,
             "remoteQuarter": remote_quarter,
+            "localRevenueStructureQuarter": local_revenue_structure_quarter,
+            "remoteOfficialRevenueQuarter": remote_official_quarter,
             "localFilingDate": local_filing_date,
             "remoteFilingDate": remote_filing_date,
+            "remoteOfficialFilingDate": remote_official_filing_date,
+            "buildRefreshMode": "cache-supplement" if official_has_newer_quarter else "refresh",
         }
 
     remote = latest_remote_sec_filing(company)
@@ -186,14 +254,18 @@ def detect_company_update(company: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def build_refresh_command(company_ids: list[str]) -> list[str]:
-    return [
+def build_refresh_command(company_ids: list[str], *, refresh: bool = True) -> list[str]:
+    command = [
         sys.executable,
         str(ROOT_DIR / "scripts" / "build_dataset.py"),
-        "--refresh",
         "--companies",
         ",".join(company_ids),
     ]
+    if refresh:
+        command.insert(2, "--refresh")
+    else:
+        command.insert(2, "--cache-supplement-only")
+    return command
 
 
 def main() -> int:
@@ -211,6 +283,7 @@ def main() -> int:
 
     report: list[dict[str, Any]] = []
     stale_company_ids: list[str] = []
+    stale_items: list[dict[str, Any]] = []
     for company in companies:
         print(f"[check] {company['ticker']} ...", flush=True)
         try:
@@ -226,21 +299,43 @@ def main() -> int:
         report.append(item)
         if item.get("needsUpdate"):
             stale_company_ids.append(company["id"])
+            stale_items.append(item)
 
     build_result = {
         "ran": False,
         "updated": False,
         "exitCode": 0,
         "command": [],
+        "commands": [],
     }
     if stale_company_ids and not args.dry_run:
-        command = build_refresh_command(stale_company_ids)
+        cache_supplement_ids = [
+            str(item.get("companyId") or "")
+            for item in stale_items
+            if item.get("buildRefreshMode") == "cache-supplement" and str(item.get("companyId") or "")
+        ]
+        refresh_ids = [
+            str(item.get("companyId") or "")
+            for item in stale_items
+            if item.get("buildRefreshMode") != "cache-supplement" and str(item.get("companyId") or "")
+        ]
+        commands: list[list[str]] = []
+        if refresh_ids:
+            commands.append(build_refresh_command(refresh_ids, refresh=True))
+        if cache_supplement_ids:
+            commands.append(build_refresh_command(cache_supplement_ids, refresh=False))
         build_result["ran"] = True
-        build_result["command"] = command
-        completed = subprocess.run(command, cwd=str(ROOT_DIR))
-        build_result["exitCode"] = int(completed.returncode)
-        build_result["updated"] = completed.returncode == 0
-        if completed.returncode != 0:
+        build_result["commands"] = commands
+        build_result["command"] = commands[0] if len(commands) == 1 else []
+        exit_code = 0
+        for command in commands:
+            completed = subprocess.run(command, cwd=str(ROOT_DIR))
+            if completed.returncode != 0:
+                exit_code = int(completed.returncode)
+                break
+        build_result["exitCode"] = exit_code
+        build_result["updated"] = exit_code == 0
+        if exit_code != 0:
             if args.json:
                 summary = {
                     "checked": len(report),

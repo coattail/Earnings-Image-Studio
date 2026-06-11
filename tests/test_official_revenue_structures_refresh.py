@@ -192,6 +192,67 @@ class OfficialRevenueStructuresRefreshTests(unittest.TestCase):
         self.assertEqual(set(result["quarters"].keys()), {"2026Q1"})
         self.assertNotIn("2025Q4", result["quarters"])
 
+    def test_cached_custom_history_supplement_is_written_back_to_cache(self) -> None:
+        cached_payload = {
+            "_cacheVersion": official_revenue_structures.CACHE_VERSION,
+            "source": "official-ir-release",
+            "quarters": {
+                "2025Q4": _quarter_payload("2025Q4", "legacy-quarter"),
+            },
+            "filingsUsed": [],
+            "errors": [],
+            "errorDetails": [],
+        }
+        new_item = {
+            "quarter": "2026Q1",
+            "title": "JD.com First Quarter 2026 Results",
+            "sourceUrl": "https://example.com/jd-q1.pdf",
+            "filingDate": "2026-05-12",
+        }
+        parsed_payload = {
+            "segments": [
+                {
+                    "name": "Net product revenues",
+                    "memberKey": "netproductrevenues",
+                    "valueBn": 244.819,
+                }
+            ]
+        }
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            cache_path = Path(tmp_dir) / "jd.json"
+            cache_path.write_text(json.dumps(cached_payload), encoding="utf-8")
+            company = {
+                "id": "jd",
+                "ticker": "JD",
+                "slug": "jd",
+                "nameEn": "JD.com",
+                "nameZh": "京东集团",
+            }
+
+            with (
+                patch.object(official_revenue_structures, "_cache_path", return_value=cache_path),
+                patch.object(
+                    official_revenue_structures,
+                    "_available_custom_history_items",
+                    return_value={
+                        "2025Q4": {"quarter": "2025Q4"},
+                        "2026Q1": new_item,
+                    },
+                ),
+                patch.object(
+                    official_revenue_structures,
+                    "_parse_custom_history_item",
+                    return_value=("2026Q1", parsed_payload, {"quarter": "2026Q1", "pdf": new_item["sourceUrl"]}),
+                ),
+            ):
+                result = official_revenue_structures.fetch_official_revenue_structure_history(company, refresh=False)
+
+            cached_after = json.loads(cache_path.read_text(encoding="utf-8"))
+
+        self.assertIn("2026Q1", result["quarters"])
+        self.assertIn("2026Q1", cached_after["quarters"])
+
     def test_fallback_keeps_primary_parse_errors_when_generic_cache_supplies_quarters(self) -> None:
         primary_result = {
             "source": "official-revenue-structures",
