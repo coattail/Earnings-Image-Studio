@@ -4083,6 +4083,14 @@ const BAR_TAXONOMY_BREAK_OVERRIDES = Object.freeze({
       id: "alibaba-fy24",
     }),
   ]),
+  amazon: Object.freeze([
+    Object.freeze({
+      quarterKey: "2021Q4",
+      labelZh: "Q4 FY21 起分部口径调整",
+      labelEn: "Segment taxonomy changed from Q4 FY21",
+      id: "amazon-fy21-q4",
+    }),
+  ]),
   oracle: Object.freeze([
     Object.freeze({
       quarterKey: "2025Q3",

@@ -149,6 +149,12 @@ class BarHistoryWindowCountTests(unittest.TestCase):
         self.assertIn('data-bar-taxonomy-break="alibaba-fy24"', svg_markup)
         self.assertIn("Q1 FY24 起分部口径调整", svg_markup)
 
+    def test_amazon_bar_history_marks_q4_fy21_taxonomy_break(self) -> None:
+        svg_markup = render_bar_svg(load_dataset_company("amazon"), "amazon-bar-taxonomy-break", "2026Q1")
+
+        self.assertIn('data-bar-taxonomy-break="amazon-fy21-q4"', svg_markup)
+        self.assertIn("Q4 FY21 起分部口径调整", svg_markup)
+
     def test_amd_bar_history_marks_segment_taxonomy_break(self) -> None:
         svg_markup = render_bar_svg(load_dataset_company("amd"), "amd-bar-taxonomy-break", "2026Q1")
 
