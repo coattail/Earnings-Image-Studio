@@ -89,6 +89,37 @@ class PagesDatasetIndexTests(unittest.TestCase):
 
         self.assertEqual(written_payload, expected_payload)
 
+    def test_copy_public_data_files_includes_learned_sankey_layouts(self) -> None:
+        original_data_dir = prepare_pages_artifact.DATA_DIR
+        original_dist_dir = prepare_pages_artifact.DIST_DIR
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            tmp_path = Path(tmp_dir)
+            data_dir = tmp_path / "data"
+            dist_dir = tmp_path / "dist"
+            (data_dir / "cache").mkdir(parents=True)
+            data_payload = {
+                "generatedAt": "2026-06-04T00:00:00Z",
+                "companyCount": 0,
+                "companies": [],
+            }
+            (data_dir / "earnings-dataset.json").write_text(json.dumps(data_payload), encoding="utf-8")
+            (data_dir / "logo-catalog.json").write_text('{"logos": {}}', encoding="utf-8")
+            (data_dir / "supplemental-components.json").write_text("{}", encoding="utf-8")
+            (data_dir / "learned-sankey-layouts.json").write_text('{"version": "test"}', encoding="utf-8")
+
+            try:
+                prepare_pages_artifact.DATA_DIR = data_dir
+                prepare_pages_artifact.DIST_DIR = dist_dir
+
+                prepare_pages_artifact.copy_public_data_files()
+            finally:
+                prepare_pages_artifact.DATA_DIR = original_data_dir
+                prepare_pages_artifact.DIST_DIR = original_dist_dir
+
+            learned_layouts_path = dist_dir / "data" / "learned-sankey-layouts.json"
+            self.assertEqual(learned_layouts_path.read_text(encoding="utf-8"), '{"version": "test"}')
+
 
 if __name__ == "__main__":
     unittest.main()

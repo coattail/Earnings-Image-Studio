@@ -10,7 +10,12 @@ DIST_DIR = ROOT_DIR / "dist"
 DATA_DIR = ROOT_DIR / "data"
 JS_DIR = ROOT_DIR / "js"
 PUBLIC_FILES = ("index.html", "style.css", "favicon.svg")
-PUBLIC_DATA_FILES = ("earnings-dataset.json", "logo-catalog.json", "supplemental-components.json")
+PUBLIC_DATA_FILES = (
+    "earnings-dataset.json",
+    "logo-catalog.json",
+    "supplemental-components.json",
+    "learned-sankey-layouts.json",
+)
 DATASET_INDEX_FILENAME = "dataset-index.json"
 
 
