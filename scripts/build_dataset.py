@@ -85,7 +85,7 @@ FX_LOOKUP_MISS_KEYS: set[str] = set()
 UNIVERSE_SOURCE = {
     "label": "StockTitan US market cap ranking",
     "url": "https://www.stocktitan.net/market-cap/us-stocks/",
-    "as_of": "2026-03-14",
+    "as_of": "2026-06-25",
     "note": "Base universe follows the US top-30 list, with Tencent, Alibaba, JD.com, NetEase, Xiaomi, BYD, and Meituan added as international expansion samples.",
 }
 
@@ -96,38 +96,38 @@ TOP30_COMPANIES: list[dict[str, Any]] = [
     {"id": "microsoft", "ticker": "MSFT", "nameZh": "微软", "nameEn": "Microsoft", "slug": "msft", "rank": 4, "isAdr": False, "brand": {"primary": "#0078D4", "secondary": "#107C10", "accent": "#DCEFFD"}},
     {"id": "amazon", "ticker": "AMZN", "nameZh": "亚马逊", "nameEn": "Amazon", "slug": "amzn", "rank": 5, "isAdr": False, "brand": {"primary": "#111827", "secondary": "#F59E0B", "accent": "#FEF3C7"}},
     {"id": "tsmc", "ticker": "TSM", "nameZh": "台积电", "nameEn": "TSMC", "slug": "tsm", "rank": 6, "isAdr": True, "brand": {"primary": "#B91C1C", "secondary": "#111827", "accent": "#FEE2E2"}},
-    {"id": "meta", "ticker": "META", "nameZh": "Meta", "nameEn": "Meta", "slug": "meta", "rank": 7, "isAdr": False, "brand": {"primary": "#0866FF", "secondary": "#111827", "accent": "#DCEAFE"}},
-    {"id": "broadcom", "ticker": "AVGO", "nameZh": "博通", "nameEn": "Broadcom", "slug": "avgo", "rank": 8, "isAdr": False, "brand": {"primary": "#C62828", "secondary": "#12263F", "accent": "#FCE7E7"}},
+    {"id": "broadcom", "ticker": "AVGO", "nameZh": "博通", "nameEn": "Broadcom", "slug": "avgo", "rank": 7, "isAdr": False, "brand": {"primary": "#C62828", "secondary": "#12263F", "accent": "#FCE7E7"}},
+    {"id": "meta", "ticker": "META", "nameZh": "Meta", "nameEn": "Meta", "slug": "meta", "rank": 8, "isAdr": False, "brand": {"primary": "#0866FF", "secondary": "#111827", "accent": "#DCEAFE"}},
     {"id": "tesla", "ticker": "TSLA", "nameZh": "特斯拉", "nameEn": "Tesla", "slug": "tsla", "rank": 9, "isAdr": False, "brand": {"primary": "#DC2626", "secondary": "#111827", "accent": "#FEE2E2"}},
-    {"id": "berkshire", "ticker": "BRK.B", "nameZh": "伯克希尔哈撒韦", "nameEn": "Berkshire Hathaway", "slug": "brk.b", "rank": 10, "isAdr": False, "brand": {"primary": "#4B5563", "secondary": "#111827", "accent": "#E5E7EB"}},
-    {"id": "walmart", "ticker": "WMT", "nameZh": "沃尔玛", "nameEn": "Walmart", "slug": "wmt", "rank": 11, "isAdr": False, "brand": {"primary": "#0F6CBD", "secondary": "#F3B700", "accent": "#E0F2FE"}},
+    {"id": "micron", "ticker": "MU", "nameZh": "美光科技", "nameEn": "Micron Technology", "slug": "mu", "rank": 10, "isAdr": False, "brand": {"primary": "#005EB8", "secondary": "#111827", "accent": "#DBEAFE"}, "parserFinancialSources": ["official"], "fusedExtractionAdapters": ["official_financials", "official_segments", "official_revenue_structures"]},
+    {"id": "berkshire", "ticker": "BRK.B", "nameZh": "伯克希尔哈撒韦", "nameEn": "Berkshire Hathaway", "slug": "brk.b", "rank": 11, "isAdr": False, "brand": {"primary": "#4B5563", "secondary": "#111827", "accent": "#E5E7EB"}},
     {"id": "eli-lilly", "ticker": "LLY", "nameZh": "礼来", "nameEn": "Eli Lilly", "slug": "lly", "rank": 12, "isAdr": False, "brand": {"primary": "#D62828", "secondary": "#111827", "accent": "#FEE2E2"}},
-    {"id": "jpmorgan", "ticker": "JPM", "nameZh": "摩根大通", "nameEn": "JPMorgan Chase", "slug": "jpm", "rank": 13, "isAdr": False, "brand": {"primary": "#1F3C88", "secondary": "#111827", "accent": "#DBEAFE"}},
-    {"id": "exxon", "ticker": "XOM", "nameZh": "埃克森美孚", "nameEn": "Exxon Mobil", "slug": "xom", "rank": 14, "isAdr": False, "brand": {"primary": "#E51636", "secondary": "#111827", "accent": "#FCE7F3"}},
-    {"id": "visa", "ticker": "V", "nameZh": "Visa", "nameEn": "Visa", "slug": "v", "rank": 15, "isAdr": False, "brand": {"primary": "#1434CB", "secondary": "#F7B600", "accent": "#DBEAFE"}},
-    {"id": "jnj", "ticker": "JNJ", "nameZh": "强生", "nameEn": "Johnson & Johnson", "slug": "jnj", "rank": 16, "isAdr": False, "brand": {"primary": "#D61F2C", "secondary": "#111827", "accent": "#FEE2E2"}},
-    {"id": "asml", "ticker": "ASML", "nameZh": "阿斯麦", "nameEn": "ASML", "slug": "asml", "rank": 17, "isAdr": True, "brand": {"primary": "#009FE3", "secondary": "#111827", "accent": "#E0F2FE"}},
-    {"id": "oracle", "ticker": "ORCL", "nameZh": "甲骨文", "nameEn": "Oracle", "slug": "orcl", "rank": 18, "isAdr": False, "brand": {"primary": "#F80000", "secondary": "#111827", "accent": "#FEE2E2"}},
-    {"id": "micron", "ticker": "MU", "nameZh": "美光科技", "nameEn": "Micron Technology", "slug": "mu", "rank": 19, "isAdr": False, "brand": {"primary": "#005EB8", "secondary": "#111827", "accent": "#DBEAFE"}},
-    {"id": "amd", "ticker": "AMD", "nameZh": "超威半导体", "nameEn": "AMD", "slug": "amd", "rank": 19.5, "isAdr": False, "brand": {"primary": "#111827", "secondary": "#ED1C24", "accent": "#E5E7EB"}, "financialSource": "stockanalysis"},
-    {"id": "costco", "ticker": "COST", "nameZh": "好市多", "nameEn": "Costco", "slug": "cost", "rank": 20, "isAdr": False, "brand": {"primary": "#E31837", "secondary": "#005DAA", "accent": "#FCE7F3"}},
-    {"id": "mastercard", "ticker": "MA", "nameZh": "万事达卡", "nameEn": "Mastercard", "slug": "ma", "rank": 21, "isAdr": False, "brand": {"primary": "#EB001B", "secondary": "#F79E1B", "accent": "#FDF2D8"}},
-    {"id": "abbvie", "ticker": "ABBV", "nameZh": "艾伯维", "nameEn": "AbbVie", "slug": "abbv", "rank": 22, "isAdr": False, "brand": {"primary": "#071D49", "secondary": "#3AB6C1", "accent": "#D9F5F6"}},
-    {"id": "netflix", "ticker": "NFLX", "nameZh": "奈飞", "nameEn": "Netflix", "slug": "nflx", "rank": 23, "isAdr": False, "brand": {"primary": "#E50914", "secondary": "#111827", "accent": "#FEE2E2"}},
-    {"id": "chevron", "ticker": "CVX", "nameZh": "雪佛龙", "nameEn": "Chevron", "slug": "cvx", "rank": 24, "isAdr": False, "brand": {"primary": "#005AAA", "secondary": "#D52B1E", "accent": "#DBEAFE"}},
-    {"id": "palantir", "ticker": "PLTR", "nameZh": "Palantir", "nameEn": "Palantir", "slug": "pltr", "rank": 25, "isAdr": False, "brand": {"primary": "#111827", "secondary": "#64748B", "accent": "#E2E8F0"}},
-    {"id": "procter-gamble", "ticker": "PG", "nameZh": "宝洁", "nameEn": "Procter & Gamble", "slug": "pg", "rank": 26, "isAdr": False, "brand": {"primary": "#0056A7", "secondary": "#111827", "accent": "#DBEAFE"}},
-    {"id": "bank-of-america", "ticker": "BAC", "nameZh": "美国银行", "nameEn": "Bank of America", "slug": "bac", "rank": 27, "isAdr": False, "brand": {"primary": "#C41230", "secondary": "#1B365D", "accent": "#FCE7F3"}},
-    {"id": "home-depot", "ticker": "HD", "nameZh": "家得宝", "nameEn": "Home Depot", "slug": "hd", "rank": 28, "isAdr": False, "brand": {"primary": "#F96302", "secondary": "#111827", "accent": "#FFEDD5"}},
-    {"id": "coca-cola", "ticker": "KO", "nameZh": "可口可乐", "nameEn": "Coca-Cola", "slug": "ko", "rank": 29, "isAdr": False, "brand": {"primary": "#F40009", "secondary": "#111827", "accent": "#FEE2E2"}},
-    {"id": "caterpillar", "ticker": "CAT", "nameZh": "卡特彼勒", "nameEn": "Caterpillar", "slug": "cat", "rank": 30, "isAdr": False, "brand": {"primary": "#FFCD11", "secondary": "#111827", "accent": "#FEF3C7"}},
-    {"id": "tencent", "ticker": "TCEHY", "nameZh": "腾讯控股", "nameEn": "Tencent", "slug": "tcehy", "rank": 14.5, "isAdr": True, "brand": {"primary": "#1D9BF0", "secondary": "#111827", "accent": "#DBEEFF"}, "financialSource": "stockanalysis"},
-    {"id": "alibaba", "ticker": "BABA", "nameZh": "阿里巴巴", "nameEn": "Alibaba", "slug": "baba", "rank": 30.5, "isAdr": True, "brand": {"primary": "#FF6A00", "secondary": "#111827", "accent": "#FFE7D1"}, "financialSource": "stockanalysis"},
-    {"id": "jd", "ticker": "JD", "nameZh": "京东集团", "nameEn": "JD.com", "slug": "jd", "rank": 31, "isAdr": True, "brand": {"primary": "#D70A0A", "secondary": "#111827", "accent": "#FEE2E2"}, "financialSource": "stockanalysis"},
-    {"id": "netease", "ticker": "NTES", "nameZh": "网易", "nameEn": "NetEase", "slug": "ntes", "rank": 32, "isAdr": True, "brand": {"primary": "#D71920", "secondary": "#111827", "accent": "#FEE2E2"}, "financialSource": "stockanalysis"},
-    {"id": "xiaomi", "ticker": "XIACY", "nameZh": "小米集团", "nameEn": "Xiaomi", "slug": "xiacy", "rank": 33, "isAdr": True, "brand": {"primary": "#FF6900", "secondary": "#111827", "accent": "#FFE7D6"}, "financialSource": "stockanalysis", "financialPath": "quote/hkg/1810"},
+    {"id": "walmart", "ticker": "WMT", "nameZh": "沃尔玛", "nameEn": "Walmart", "slug": "wmt", "rank": 13, "isAdr": False, "brand": {"primary": "#0F6CBD", "secondary": "#F3B700", "accent": "#E0F2FE"}},
+    {"id": "jpmorgan", "ticker": "JPM", "nameZh": "摩根大通", "nameEn": "JPMorgan Chase", "slug": "jpm", "rank": 14, "isAdr": False, "brand": {"primary": "#1F3C88", "secondary": "#111827", "accent": "#DBEAFE"}},
+    {"id": "amd", "ticker": "AMD", "nameZh": "超威半导体", "nameEn": "AMD", "slug": "amd", "rank": 15, "isAdr": False, "brand": {"primary": "#111827", "secondary": "#ED1C24", "accent": "#E5E7EB"}, "financialSource": "stockanalysis"},
+    {"id": "asml", "ticker": "ASML", "nameZh": "阿斯麦", "nameEn": "ASML", "slug": "asml", "rank": 16, "isAdr": True, "brand": {"primary": "#009FE3", "secondary": "#111827", "accent": "#E0F2FE"}},
+    {"id": "visa", "ticker": "V", "nameZh": "Visa", "nameEn": "Visa", "slug": "v", "rank": 17, "isAdr": False, "brand": {"primary": "#1434CB", "secondary": "#F7B600", "accent": "#DBEAFE"}},
+    {"id": "jnj", "ticker": "JNJ", "nameZh": "强生", "nameEn": "Johnson & Johnson", "slug": "jnj", "rank": 18, "isAdr": False, "brand": {"primary": "#D61F2C", "secondary": "#111827", "accent": "#FEE2E2"}},
+    {"id": "exxon", "ticker": "XOM", "nameZh": "埃克森美孚", "nameEn": "Exxon Mobil", "slug": "xom", "rank": 19, "isAdr": False, "brand": {"primary": "#E51636", "secondary": "#111827", "accent": "#FCE7F3"}},
+    {"id": "tencent", "ticker": "TCEHY", "nameZh": "腾讯控股", "nameEn": "Tencent", "slug": "tcehy", "rank": 20, "isAdr": True, "brand": {"primary": "#1D9BF0", "secondary": "#111827", "accent": "#DBEEFF"}, "financialSource": "stockanalysis"},
+    {"id": "caterpillar", "ticker": "CAT", "nameZh": "卡特彼勒", "nameEn": "Caterpillar", "slug": "cat", "rank": 21, "isAdr": False, "brand": {"primary": "#FFCD11", "secondary": "#111827", "accent": "#FEF3C7"}},
+    {"id": "oracle", "ticker": "ORCL", "nameZh": "甲骨文", "nameEn": "Oracle", "slug": "orcl", "rank": 22, "isAdr": False, "brand": {"primary": "#F80000", "secondary": "#111827", "accent": "#FEE2E2"}},
+    {"id": "mastercard", "ticker": "MA", "nameZh": "万事达卡", "nameEn": "Mastercard", "slug": "ma", "rank": 23, "isAdr": False, "brand": {"primary": "#EB001B", "secondary": "#F79E1B", "accent": "#FDF2D8"}},
+    {"id": "costco", "ticker": "COST", "nameZh": "好市多", "nameEn": "Costco", "slug": "cost", "rank": 24, "isAdr": False, "brand": {"primary": "#E31837", "secondary": "#005DAA", "accent": "#FCE7F3"}},
+    {"id": "abbvie", "ticker": "ABBV", "nameZh": "艾伯维", "nameEn": "AbbVie", "slug": "abbv", "rank": 25, "isAdr": False, "brand": {"primary": "#071D49", "secondary": "#3AB6C1", "accent": "#D9F5F6"}},
+    {"id": "bank-of-america", "ticker": "BAC", "nameZh": "美国银行", "nameEn": "Bank of America", "slug": "bac", "rank": 26, "isAdr": False, "brand": {"primary": "#C41230", "secondary": "#1B365D", "accent": "#FCE7F3"}},
+    {"id": "procter-gamble", "ticker": "PG", "nameZh": "宝洁", "nameEn": "Procter & Gamble", "slug": "pg", "rank": 27, "isAdr": False, "brand": {"primary": "#0056A7", "secondary": "#111827", "accent": "#DBEAFE"}},
+    {"id": "coca-cola", "ticker": "KO", "nameZh": "可口可乐", "nameEn": "Coca-Cola", "slug": "ko", "rank": 28, "isAdr": False, "brand": {"primary": "#F40009", "secondary": "#111827", "accent": "#FEE2E2"}},
+    {"id": "chevron", "ticker": "CVX", "nameZh": "雪佛龙", "nameEn": "Chevron", "slug": "cvx", "rank": 29, "isAdr": False, "brand": {"primary": "#005AAA", "secondary": "#D52B1E", "accent": "#DBEAFE"}},
+    {"id": "home-depot", "ticker": "HD", "nameZh": "家得宝", "nameEn": "Home Depot", "slug": "hd", "rank": 30, "isAdr": False, "brand": {"primary": "#F96302", "secondary": "#111827", "accent": "#FFEDD5"}},
+    {"id": "netflix", "ticker": "NFLX", "nameZh": "奈飞", "nameEn": "Netflix", "slug": "nflx", "rank": 31, "isAdr": False, "brand": {"primary": "#E50914", "secondary": "#111827", "accent": "#FEE2E2"}},
+    {"id": "palantir", "ticker": "PLTR", "nameZh": "Palantir", "nameEn": "Palantir", "slug": "pltr", "rank": 32, "isAdr": False, "brand": {"primary": "#111827", "secondary": "#64748B", "accent": "#E2E8F0"}},
+    {"id": "alibaba", "ticker": "BABA", "nameZh": "阿里巴巴", "nameEn": "Alibaba", "slug": "baba", "rank": 33, "isAdr": True, "brand": {"primary": "#FF6A00", "secondary": "#111827", "accent": "#FFE7D1"}, "financialSource": "stockanalysis"},
     {"id": "byd", "ticker": "BYDDY", "nameZh": "比亚迪", "nameEn": "BYD", "slug": "byddy", "rank": 34, "isAdr": True, "brand": {"primary": "#D71920", "secondary": "#111827", "accent": "#FEE2E2"}, "financialSource": "stockanalysis", "financialPath": "quote/hkg/1211"},
-    {"id": "meituan", "ticker": "MPNGY", "nameZh": "美团", "nameEn": "Meituan", "slug": "mpngy", "rank": 35, "isAdr": True, "brand": {"primary": "#FFD100", "secondary": "#111827", "accent": "#FEF3C7"}, "financialSource": "stockanalysis", "financialPath": "quote/hkg/3690"},
+    {"id": "xiaomi", "ticker": "XIACY", "nameZh": "小米集团", "nameEn": "Xiaomi", "slug": "xiacy", "rank": 35, "isAdr": True, "brand": {"primary": "#FF6900", "secondary": "#111827", "accent": "#FFE7D6"}, "financialSource": "stockanalysis", "financialPath": "quote/hkg/1810"},
+    {"id": "netease", "ticker": "NTES", "nameZh": "网易", "nameEn": "NetEase", "slug": "ntes", "rank": 36, "isAdr": True, "brand": {"primary": "#D71920", "secondary": "#111827", "accent": "#FEE2E2"}, "financialSource": "stockanalysis"},
+    {"id": "meituan", "ticker": "MPNGY", "nameZh": "美团", "nameEn": "Meituan", "slug": "mpngy", "rank": 37, "isAdr": True, "brand": {"primary": "#FFD100", "secondary": "#111827", "accent": "#FEF3C7"}, "financialSource": "stockanalysis", "financialPath": "quote/hkg/3690"},
+    {"id": "jd", "ticker": "JD", "nameZh": "京东集团", "nameEn": "JD.com", "slug": "jd", "rank": 38, "isAdr": True, "brand": {"primary": "#D70A0A", "secondary": "#111827", "accent": "#FEE2E2"}, "financialSource": "stockanalysis"},
 ]
 
 BAR_SEGMENT_CANONICAL_BY_COMPANY: dict[str, dict[str, str]] = {
@@ -489,6 +489,14 @@ def is_company_payload_cache_compatible(payload: dict[str, Any] | None) -> bool:
     if not isinstance(unified_extraction, dict):
         return False
     return unified_extraction.get("engineVersion") == UNIFIED_EXTRACTION_ENGINE_VERSION
+
+
+def sync_company_metadata(payload: dict[str, Any], company: dict[str, Any]) -> dict[str, Any]:
+    result = payload
+    for key in ("id", "ticker", "nameZh", "nameEn", "slug", "rank", "isAdr", "brand"):
+        if key in company:
+            result[key] = deepcopy(company[key])
+    return result
 
 
 def build_company_payload_for_dataset(
@@ -3298,6 +3306,7 @@ def main() -> int:
                 print(f"  failed: {exc}", file=sys.stderr, flush=True)
                 continue
         payload = preserve_existing_company_history(payload, existing_companies_by_id.get(str(company["id"])))
+        payload = sync_company_metadata(payload, company)
         presets = manual_presets.get(str(company["id"])) or {}
         payload = finalize_company_payload(company, payload, presets)
         COMPANY_CACHE_DIR.mkdir(parents=True, exist_ok=True)
@@ -3313,13 +3322,14 @@ def main() -> int:
             if getattr(args, "cache_supplement_only", False):
                 existing_payload = existing_companies_by_id.get(str(company["id"]))
                 if isinstance(existing_payload, dict):
-                    results_by_company_id[company["id"]] = existing_payload
+                    results_by_company_id[company["id"]] = sync_company_metadata(existing_payload, company)
                 elif isinstance(cached_payload, dict):
-                    results_by_company_id[company["id"]] = cached_payload
+                    results_by_company_id[company["id"]] = sync_company_metadata(cached_payload, company)
                 continue
             if is_company_payload_cache_compatible(cached_payload):
                 presets = manual_presets.get(str(company["id"])) or {}
                 cached_payload = preserve_existing_company_history(cached_payload, existing_companies_by_id.get(str(company["id"])))
+                cached_payload = sync_company_metadata(cached_payload, company)
                 cached_payload = finalize_company_payload(company, cached_payload, presets)
                 results_by_company_id[company["id"]] = cached_payload
                 COMPANY_CACHE_DIR.mkdir(parents=True, exist_ok=True)
@@ -3353,6 +3363,7 @@ def main() -> int:
                 print(f"  failed: {exc}", file=sys.stderr, flush=True)
                 continue
             payload = preserve_existing_company_history(payload, existing_companies_by_id.get(str(company["id"])))
+            payload = sync_company_metadata(payload, company)
             presets = manual_presets.get(str(company["id"])) or {}
             payload = finalize_company_payload(company, payload, presets)
             COMPANY_CACHE_DIR.mkdir(parents=True, exist_ok=True)
@@ -3364,7 +3375,8 @@ def main() -> int:
         if company["id"] not in results_by_company_id:
             continue
         presets = manual_presets.get(str(company["id"])) or {}
-        results_by_company_id[company["id"]] = finalize_company_payload(company, results_by_company_id[company["id"]], presets)
+        payload = sync_company_metadata(results_by_company_id[company["id"]], company)
+        results_by_company_id[company["id"]] = finalize_company_payload(company, payload, presets)
     companies = [results_by_company_id[company["id"]] for company in TOP30_COMPANIES if company["id"] in results_by_company_id]
     classification_audit = build_dataset_classification_audit(companies)
 

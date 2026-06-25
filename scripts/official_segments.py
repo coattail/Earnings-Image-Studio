@@ -9,12 +9,15 @@ import urllib.request
 from http.client import IncompleteRead, RemoteDisconnected
 import xml.etree.ElementTree as ET
 from collections import defaultdict
+from copy import deepcopy
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
 import requests
+
+import micron_ir
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
@@ -210,6 +213,65 @@ def _load_cached_json(path: Path) -> Any:
 
 def _write_cached_json(path: Path, payload: Any) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def _load_micron_revenue_structure_segment_quarters() -> dict[str, list[dict[str, Any]]]:
+    path = CACHE_DIR.parent / "official-revenue-structures" / "micron.json"
+    if not path.exists():
+        return {}
+    try:
+        payload = _load_cached_json(path)
+    except Exception:
+        return {}
+    quarters = payload.get("quarters") if isinstance(payload, dict) else None
+    if not isinstance(quarters, dict):
+        return {}
+    result: dict[str, list[dict[str, Any]]] = {}
+    for quarter, quarter_payload in quarters.items():
+        if not isinstance(quarter_payload, dict):
+            continue
+        segments = quarter_payload.get("segments")
+        if isinstance(segments, list) and segments:
+            result[str(quarter)] = deepcopy(segments)
+    return result
+
+
+def _fetch_micron_ir_segment_history(company: dict[str, Any], cached_payload: Any = None) -> dict[str, Any]:
+    parsed = micron_ir.fetch_latest_release()
+    quarter = str(parsed.get("quarter") or "")
+    segments = deepcopy(parsed.get("segments") or [])
+    if not quarter or not segments:
+        raise RuntimeError("Micron IR release did not include business unit revenue segments.")
+
+    result = deepcopy(cached_payload) if isinstance(cached_payload, dict) and cached_payload.get("_cacheVersion") == CACHE_VERSION else {
+        "quarters": {},
+        "filingsUsed": [],
+        "errors": [],
+        "errorDetails": [],
+    }
+    result.update(
+        {
+            "_cacheVersion": CACHE_VERSION,
+            "source": micron_ir.MICRON_IR_SOURCE,
+            "ticker": company.get("ticker"),
+            "axis": "MicronBusinessUnit",
+        }
+    )
+    result.setdefault("quarters", {})
+    result["quarters"].update(_load_micron_revenue_structure_segment_quarters())
+    result["quarters"][quarter] = segments
+    result["quarters"] = {period: result["quarters"][period] for period in sorted(result["quarters"], key=_period_key)}
+    filing = {
+        "form": "MicronQuarterlyResultsRelease",
+        "filingDate": parsed.get("filingDate"),
+        "sourceUrl": parsed.get("sourceUrl"),
+    }
+    filings_used = result.setdefault("filingsUsed", [])
+    if filing not in filings_used:
+        filings_used.append(filing)
+    result.setdefault("errors", [])
+    result.setdefault("errorDetails", [])
+    return result
 
 
 def _append_error_detail(
@@ -943,10 +1005,19 @@ def _submission_records(
 def fetch_official_segment_history(company: dict[str, Any], refresh: bool = False) -> dict[str, Any]:
     cache_name = f"{company['id']}.json"
     path = _cache_path(cache_name)
+    cached_payload = _load_cached_json(path) if path.exists() else None
     if path.exists() and not refresh:
-        cached_payload = _load_cached_json(path)
         if isinstance(cached_payload, dict) and cached_payload.get("_cacheVersion") == CACHE_VERSION:
             return cached_payload
+
+    if str(company.get("id") or "") == "micron":
+        try:
+            result = _fetch_micron_ir_segment_history(company, cached_payload)
+            _write_cached_json(path, result)
+            return result
+        except Exception:
+            if isinstance(cached_payload, dict) and cached_payload.get("_cacheVersion") == CACHE_VERSION:
+                return cached_payload
 
     cik = _resolve_cik(str(company.get("ticker", "")), refresh=refresh)
     result = {

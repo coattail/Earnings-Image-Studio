@@ -14,6 +14,28 @@ from source_adapters import AdapterResult  # noqa: E402
 
 
 class UnifiedExtractionSourceErrorsTests(unittest.TestCase):
+    def test_adapter_results_honors_company_adapter_allowlist(self) -> None:
+        adapter = AdapterResult(
+            adapter_id="official_financials",
+            kind="statement",
+            label="SEC companyfacts / filings",
+            priority=110,
+            payload={"financials": {}},
+        )
+
+        with (
+            patch.object(extraction_engine, "run_official_financials_adapter", return_value=adapter),
+            patch.object(extraction_engine, "run_generic_filing_tables_adapter", side_effect=AssertionError("generic filing adapter should not run")),
+            patch.object(extraction_engine, "run_generic_ir_pdf_adapter", side_effect=AssertionError("generic PDF adapter should not run")),
+        ):
+            results = extraction_engine._adapter_results(
+                {"id": "micron", "fusedExtractionAdapters": ["official_financials"]},
+                refresh=True,
+                base_payload={"financials": {}},
+            )
+
+        self.assertEqual([result.adapter_id for result in results], ["official_financials"])
+
     def test_build_unified_extraction_keeps_adapter_error_details(self) -> None:
         adapter = AdapterResult(
             adapter_id="official_financials",

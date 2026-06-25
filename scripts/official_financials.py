@@ -5,6 +5,7 @@ import json
 import math
 import re
 import requests
+from copy import deepcopy
 from dataclasses import dataclass
 from datetime import date, timedelta
 from html import unescape
@@ -13,6 +14,8 @@ from typing import Any
 
 from official_segments import ALLOWED_FORMS, _calendar_quarter, _period_key, _request, _request_json, _resolve_cik, _submission_records
 from pypdf import PdfReader
+
+import micron_ir
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
@@ -744,6 +747,63 @@ def _finalize_financials(financials: dict[str, Any]) -> tuple[list[str], dict[st
     return (ordered_periods, {period: financials[period] for period in ordered_periods})
 
 
+def _build_company_shell(company: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "_cacheVersion": OFFICIAL_FINANCIALS_CACHE_VERSION,
+        "id": company.get("id"),
+        "ticker": company.get("ticker"),
+        "nameZh": company.get("nameZh"),
+        "nameEn": company.get("nameEn"),
+        "slug": company.get("slug"),
+        "rank": company.get("rank"),
+        "isAdr": bool(company.get("isAdr")),
+        "brand": company.get("brand") or {},
+        "quarters": [],
+        "financials": {},
+        "statementSource": "official-sec-companyfacts",
+        "statementSourceUrl": None,
+        "reportingCurrency": None,
+        "errors": [],
+        "errorDetails": [],
+    }
+
+
+def _fetch_micron_ir_financial_history(company: dict[str, Any], cached_payload: Any = None) -> dict[str, Any]:
+    parsed = micron_ir.fetch_latest_release()
+    quarter = str(parsed.get("quarter") or "")
+    if not quarter:
+        raise RuntimeError("Micron IR release did not include a calendar quarter.")
+    financial_entry = deepcopy(parsed.get("financial") or {})
+    if not financial_entry:
+        raise RuntimeError("Micron IR release did not include financials.")
+
+    result = deepcopy(cached_payload) if _is_current_official_financials_cache(cached_payload) else _build_company_shell(company)
+    result.update(
+        {
+            "_cacheVersion": OFFICIAL_FINANCIALS_CACHE_VERSION,
+            "id": company.get("id"),
+            "ticker": company.get("ticker"),
+            "nameZh": company.get("nameZh"),
+            "nameEn": company.get("nameEn"),
+            "slug": company.get("slug"),
+            "rank": company.get("rank"),
+            "isAdr": bool(company.get("isAdr")),
+            "brand": company.get("brand") or {},
+            "statementSource": micron_ir.MICRON_IR_SOURCE,
+            "statementSourceUrl": parsed.get("sourceUrl"),
+            "reportingCurrency": "USD",
+        }
+    )
+    financials = deepcopy(result.get("financials") or {})
+    financials[quarter] = financial_entry
+    ordered_periods, ordered_financials = _finalize_financials(financials)
+    result["quarters"] = ordered_periods
+    result["financials"] = ordered_financials
+    result.setdefault("errors", [])
+    result.setdefault("errorDetails", [])
+    return result
+
+
 def _parse_tsm_release(html_text: str, filing_date: str, source_url: str, currency: str) -> tuple[str, dict[str, Any]] | None:
     tables = _extract_html_tables(html_text)
     all_rows = [row for table in tables for row in table if row]
@@ -1332,10 +1392,19 @@ def _load_html_fallback_financials(company: dict[str, Any], cik: int, currency: 
 
 def fetch_official_financial_history(company: dict[str, Any], refresh: bool = False) -> dict[str, Any]:
     path = _cache_path(str(company["id"]))
+    cached_payload = _load_cached_json(path) if path.exists() else None
     if path.exists() and not refresh:
-        cached_payload = _load_cached_json(path)
         if _is_current_official_financials_cache(cached_payload):
             return cached_payload
+
+    if str(company.get("id") or "") == "micron":
+        try:
+            result = _fetch_micron_ir_financial_history(company, cached_payload)
+            _write_cached_json(path, result)
+            return result
+        except Exception:
+            if _is_current_official_financials_cache(cached_payload):
+                return cached_payload
 
     cik: int | None = None
     cik_lookup_error: Exception | None = None

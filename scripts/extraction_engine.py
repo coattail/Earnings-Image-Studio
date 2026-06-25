@@ -50,17 +50,27 @@ def parse_period(period: str) -> tuple[int, int]:
 
 
 def _adapter_results(company: dict[str, Any], refresh: bool = False, base_payload: dict[str, Any] | None = None) -> list[AdapterResult]:
-    return [
-        run_manual_financials_adapter(company, refresh=refresh, base_payload=base_payload),
-        run_manual_revenue_structures_adapter(company, refresh=refresh, base_payload=base_payload),
-        run_official_financials_adapter(company, refresh=refresh, base_payload=base_payload),
-        run_generic_filing_tables_adapter(company, refresh=refresh, base_payload=base_payload),
-        run_generic_ir_pdf_adapter(company, refresh=refresh, base_payload=base_payload),
-        run_stockanalysis_financials_adapter(company, refresh=refresh, base_payload=base_payload),
-        run_supplemental_components_adapter(company, refresh=refresh, base_payload=base_payload),
-        run_official_segments_adapter(company, refresh=refresh, base_payload=base_payload),
-        run_official_revenue_structures_adapter(company, refresh=refresh, base_payload=base_payload),
+    runners = [
+        ("manual_financials", run_manual_financials_adapter),
+        ("manual_revenue_structures", run_manual_revenue_structures_adapter),
+        ("official_financials", run_official_financials_adapter),
+        ("generic_filing_tables", run_generic_filing_tables_adapter),
+        ("generic_ir_pdf", run_generic_ir_pdf_adapter),
+        ("stockanalysis_financials", run_stockanalysis_financials_adapter),
+        ("supplemental_components", run_supplemental_components_adapter),
+        ("official_segments", run_official_segments_adapter),
+        ("official_revenue_structures", run_official_revenue_structures_adapter),
     ]
+    configured_adapters = company.get("fusedExtractionAdapters")
+    allowed_adapters = None
+    if isinstance(configured_adapters, list):
+        allowed_adapters = {str(item).strip() for item in configured_adapters if str(item).strip()}
+    results: list[AdapterResult] = []
+    for adapter_id, runner in runners:
+        if allowed_adapters is not None and adapter_id not in allowed_adapters:
+            continue
+        results.append(runner(company, refresh=refresh, base_payload=base_payload))
+    return results
 
 
 def _statement_score(adapter: AdapterResult, field_name: str, entry: dict[str, Any]) -> float:

@@ -16,7 +16,7 @@ class MicronBusinessUnitRestatementTests(unittest.TestCase):
         dataset_path = ROOT_DIR / "data" / "earnings-dataset.json"
         dataset = __import__("json").loads(dataset_path.read_text(encoding="utf-8"))
         micron = next(company for company in dataset["companies"] if company["id"] == "micron")
-        recent_quarters = ["2024Q3", "2024Q4", "2025Q1", "2025Q2", "2025Q3", "2025Q4", "2026Q1"]
+        recent_quarters = ["2024Q3", "2024Q4", "2025Q1", "2025Q2", "2025Q3", "2025Q4", "2026Q1", "2026Q2"]
 
         for quarter_key in recent_quarters:
             rows = [
@@ -185,7 +185,6 @@ class MicronBusinessUnitRestatementTests(unittest.TestCase):
             [(row["memberKey"], row["yoyPct"]) for row in result["financials"]["2026Q1"]["officialRevenueSegments"]],
             [("cmbu", 162.95), ("mcbu", 244.86), ("cdbu", 210.77), ("aebu", 161.9)],
         )
-
 
 if __name__ == "__main__":
     unittest.main()

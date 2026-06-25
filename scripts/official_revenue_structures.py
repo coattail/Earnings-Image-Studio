@@ -15,6 +15,7 @@ from typing import Any
 
 from pypdf import PdfReader
 
+import micron_ir
 from document_parser import (
     OCRObservation,
     ensure_vision_ocr_binary as _shared_ensure_vision_ocr_binary,
@@ -559,6 +560,19 @@ def _merge_revenue_structure_results(base: dict[str, Any] | None, supplement: di
                 merged["errorDetails"].append(copied_detail)
     merged["quarters"] = _sorted_quarter_payloads(merged.get("quarters"))
     return merged
+
+
+def _fetch_micron_ir_revenue_structure_history(company: dict[str, Any], cached_payload: Any = None) -> dict[str, Any]:
+    parsed = micron_ir.fetch_latest_release()
+    supplement = micron_ir.build_revenue_structure_payload(parsed)
+    if not supplement.get("quarters"):
+        raise RuntimeError("Micron IR release did not include business unit revenue segments.")
+    base = cached_payload if _is_current_revenue_structure_cache(cached_payload) else None
+    result = _merge_revenue_structure_results(base, supplement)
+    result["source"] = micron_ir.MICRON_IR_SOURCE
+    result = _post_process_result(company, result)
+    result["_cacheVersion"] = CACHE_VERSION
+    return result
 
 
 def _preserve_missing_cached_revenue_structure_quarters(
@@ -5668,6 +5682,15 @@ def fetch_official_revenue_structure_history(company: dict[str, Any], refresh: b
                 _write_cached_json(path, supplemented_payload)
                 return supplemented_payload
             return processed_payload
+
+    if company_id == "micron":
+        try:
+            result = _fetch_micron_ir_revenue_structure_history(company, cached_payload)
+            _write_cached_json(path, result)
+            return result
+        except Exception:
+            if _is_current_revenue_structure_cache(cached_payload):
+                return cached_payload
 
     result = empty_result
     cik: int | None = None

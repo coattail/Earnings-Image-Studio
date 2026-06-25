@@ -77,6 +77,19 @@ class BuildDatasetIncrementalCacheTests(unittest.TestCase):
         self.assertFalse(build_dataset.is_company_payload_cache_compatible(legacy_payload))
         self.assertFalse(build_dataset.is_company_payload_cache_compatible(stale_unified_payload))
 
+    def test_sync_company_metadata_updates_cached_rank(self) -> None:
+        company = _company("demo", "DMO")
+        company["rank"] = 7
+        company["brand"] = {"primary": "#123456"}
+        cached_payload = _payload("demo", "universal-parser-v4", with_unified=True)
+        cached_payload["rank"] = 99
+        cached_payload["brand"] = {"primary": "#ffffff"}
+
+        result = build_dataset.sync_company_metadata(cached_payload, company)
+
+        self.assertEqual(result["rank"], 7)
+        self.assertEqual(result["brand"], {"primary": "#123456"})
+
     def test_incremental_build_rebuilds_unselected_incompatible_cache(self) -> None:
         selected_company = _company("selected", "SEL")
         stale_company = _company("stale", "STL")
