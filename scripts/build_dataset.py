@@ -186,7 +186,8 @@ BAR_SEGMENT_CANONICAL_BY_COMPANY: dict[str, dict[str, str]] = {
 }
 
 MICRON_LEGACY_SEGMENT_KEYS = {"cnbu", "mbu", "sbu", "ebu", "allothersegments"}
-MICRON_CURRENT_SEGMENT_KEYS = {"cmbu", "mcbu", "cdbu", "aebu"}
+MICRON_CURRENT_SEGMENT_ORDER = ("cmbu", "cdbu", "mcbu", "aebu")
+MICRON_CURRENT_SEGMENT_KEYS = set(MICRON_CURRENT_SEGMENT_ORDER)
 MICRON_SCHEMA_CHANGE_QUARTER = "2025Q3"
 
 MICRON_BU_LABELS: dict[str, tuple[str, str]] = {
@@ -760,6 +761,36 @@ def _micron_restatement_rows_for_quarter(quarter_key: str) -> list[dict[str, Any
     return _micron_official_bu_rows(correction) if isinstance(correction, dict) else []
 
 
+def _normalize_micron_current_schema_rows(quarter_key: str, rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    try:
+        if parse_period(str(quarter_key)) < parse_period(MICRON_SCHEMA_CHANGE_QUARTER):
+            return rows
+    except Exception:
+        return rows
+    order = {member_key: index for index, member_key in enumerate(MICRON_CURRENT_SEGMENT_ORDER)}
+    has_current_rows = False
+    normalized_rows: list[dict[str, Any]] = []
+    for raw_row in rows:
+        row = dict(raw_row)
+        member_key = normalize_segment_label_key(row.get("memberKey") or row.get("name"))
+        if member_key in MICRON_CURRENT_SEGMENT_KEYS:
+            has_current_rows = True
+            name, name_zh = MICRON_BU_LABELS[member_key]
+            row["memberKey"] = member_key
+            row["name"] = name
+            row["nameZh"] = name_zh
+        normalized_rows.append(row)
+    if not has_current_rows:
+        return normalized_rows
+    return sorted(
+        normalized_rows,
+        key=lambda row: (
+            order.get(normalize_segment_label_key((row or {}).get("memberKey") or (row or {}).get("name")), len(order)),
+            str((row or {}).get("memberKey") or (row or {}).get("name") or ""),
+        ),
+    )
+
+
 def _micron_growth_baseline_rows(financials: dict[str, Any], quarter_key: str) -> list[dict[str, Any]]:
     entry = financials.get(quarter_key)
     rows = entry.get("officialRevenueSegments") if isinstance(entry, dict) else None
@@ -850,6 +881,24 @@ def apply_micron_official_business_unit_restatements(company_payload: dict[str, 
         if isinstance(field_sources, dict):
             field_sources["officialRevenueSegments"] = "micron-official-bu-restatement"
             field_sources["officialRevenueStyle"] = "micron-official-bu-restatement"
+    for quarter_key, entry in financials.items():
+        if not isinstance(entry, dict):
+            continue
+        rows = entry.get("officialRevenueSegments")
+        if not isinstance(rows, list) or not rows:
+            continue
+        normalized_rows = normalize_official_revenue_segments("micron", str(quarter_key), rows)
+        if not any(
+            normalize_segment_label_key((row or {}).get("memberKey") or (row or {}).get("name")) in MICRON_CURRENT_SEGMENT_KEYS
+            for row in normalized_rows
+        ):
+            continue
+        entry["officialRevenueSegments"] = normalized_rows
+        entry["officialRevenueStyle"] = "micron-business-unit-bridge"
+        history_payload = history_quarters.get(str(quarter_key))
+        if isinstance(history_payload, dict):
+            history_payload["segments"] = deepcopy(normalized_rows)
+            history_payload["style"] = "micron-business-unit-bridge"
     enrich_growth_rows(financials, "officialRevenueSegments")
     apply_micron_restatement_growth_metrics(financials)
     return company_payload
@@ -894,6 +943,7 @@ def normalize_official_revenue_segments(company_id: str, quarter_key: str, rows:
             for row in normalized_rows
             if normalize_segment_label_key((row or {}).get("memberKey") or (row or {}).get("name")) != "allothersegments"
         ]
+        normalized_rows = _normalize_micron_current_schema_rows(quarter_key, normalized_rows)
 
     normalized_rows = dedupe_revenue_segment_rows(normalized_company_id, normalized_rows)
     validation_note = infer_segment_validation_exception(normalized_rows)

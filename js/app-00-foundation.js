@@ -1335,7 +1335,7 @@ const CHART_LABEL_TRANSLATIONS_ZH_EXACT = {
   "other platforms": "其他平台",
   iot: "物联网",
   dce: "数字消费电子",
-  cdbu: "云与数据中心业务单元",
+  cdbu: "核心数据中心业务单元",
   "extreme ultraviolet": "极紫外光刻",
   "argon fluoride dry": "氩氟干式光刻",
   "argon fluoride immersion": "氩氟浸润式光刻",
@@ -2568,8 +2568,14 @@ function inferredOfficialRevenueStyle(company, entry, rows = []) {
       memberKeys.has("cdbu") ||
       memberKeys.has("aebu") ||
       memberKeys.has("microncomputedatacenter") ||
+      memberKeys.has("microncomputenetworking") ||
+      memberKeys.has("microncoredatacenter") ||
+      memberKeys.has("microncloudmemory") ||
+      memberKeys.has("micronstorage") ||
+      memberKeys.has("micronmobile") ||
       memberKeys.has("micronmobileclient") ||
       memberKeys.has("micronstoragecloudmemory") ||
+      memberKeys.has("micronembedded") ||
       memberKeys.has("micronautoembedded"))
   ) {
     return "micron-business-unit-bridge";
@@ -2803,7 +2809,7 @@ function buildAlibabaComparableBarRows(entry, rows = []) {
 // Micron switched from legacy end-market BUs to a new BU taxonomy in FY26.
 // For bars we stabilize both schemas into comparable buckets and discard mixed future-filing contamination.
 const MICRON_LEGACY_SEGMENT_KEYS = new Set(["cnbu", "mbu", "sbu", "ebu", "allothersegments"]);
-const MICRON_CURRENT_SEGMENT_KEYS = new Set(["cmbu", "mcbu", "cdbu", "aebu"]);
+const MICRON_CURRENT_SEGMENT_KEYS = new Set(["cmbu", "cdbu", "mcbu", "aebu"]);
 const MICRON_SCHEMA_CHANGE_QUARTER = "2025Q3";
 
 function micronSegmentPhase(rows = []) {

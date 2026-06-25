@@ -26,6 +26,14 @@ SEC_TICKER_CACHE: dict[str, int] | None = None
 MIN_FILING_DATE = "2017-01-01"
 MIN_CALENDAR_QUARTER = (2018, 1)
 CACHE_VERSION = "20260327-v3"
+MICRON_SCHEMA_CHANGE_QUARTER = "2025Q3"
+MICRON_BU_ORDER = ("cmbu", "cdbu", "mcbu", "aebu")
+MICRON_BU_LABELS = {
+    "cmbu": ("CMBU", "云内存业务单元"),
+    "cdbu": ("CDBU", "核心数据中心业务单元"),
+    "mcbu": ("MCBU", "移动与客户端业务单元"),
+    "aebu": ("AEBU", "汽车与嵌入式业务单元"),
+}
 
 SEC_HEADERS = {
     "User-Agent": "Codex/official-segments yuwan@example.com",
@@ -232,7 +240,7 @@ def _load_micron_revenue_structure_segment_quarters() -> dict[str, list[dict[str
             continue
         segments = quarter_payload.get("segments")
         if isinstance(segments, list) and segments:
-            result[str(quarter)] = deepcopy(segments)
+            result[str(quarter)] = _normalize_micron_business_unit_rows(str(quarter), segments)
     return result
 
 
@@ -259,8 +267,8 @@ def _fetch_micron_ir_segment_history(company: dict[str, Any], cached_payload: An
     )
     result.setdefault("quarters", {})
     result["quarters"].update(_load_micron_revenue_structure_segment_quarters())
-    result["quarters"][quarter] = segments
-    result["quarters"] = {period: result["quarters"][period] for period in sorted(result["quarters"], key=_period_key)}
+    result["quarters"][quarter] = _normalize_micron_business_unit_rows(quarter, segments)
+    result["quarters"] = _normalize_micron_business_unit_quarter_map(result["quarters"])
     filing = {
         "form": "MicronQuarterlyResultsRelease",
         "filingDate": parsed.get("filingDate"),
@@ -379,6 +387,60 @@ def _period_key(period: str) -> tuple[int, int]:
     if not match:
         return (0, 0)
     return (int(match.group(1)), int(match.group(2)))
+
+
+def _normalize_micron_member_key(value: Any) -> str:
+    return re.sub(r"[^a-z0-9]+", "", str(value or "").lower())
+
+
+def _normalize_micron_business_unit_rows(quarter: str, rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    try:
+        if _period_key(str(quarter)) < _period_key(MICRON_SCHEMA_CHANGE_QUARTER):
+            return deepcopy(rows)
+    except Exception:
+        return deepcopy(rows)
+    order = {member_key: index for index, member_key in enumerate(MICRON_BU_ORDER)}
+    normalized_rows: list[dict[str, Any]] = []
+    has_current_business_unit = False
+    for raw_row in rows:
+        if not isinstance(raw_row, dict):
+            continue
+        row = dict(raw_row)
+        member_key = _normalize_micron_member_key(row.get("memberKey") or row.get("name"))
+        if member_key == "allothersegments":
+            continue
+        if member_key in MICRON_BU_LABELS:
+            has_current_business_unit = True
+            name, name_zh = MICRON_BU_LABELS[member_key]
+            row["memberKey"] = member_key
+            row["name"] = name
+            row["nameZh"] = name_zh
+        normalized_rows.append(row)
+    if not has_current_business_unit:
+        return normalized_rows
+    return sorted(
+        normalized_rows,
+        key=lambda row: (
+            order.get(_normalize_micron_member_key(row.get("memberKey") or row.get("name")), len(order)),
+            str(row.get("memberKey") or row.get("name") or ""),
+        ),
+    )
+
+
+def _normalize_micron_business_unit_quarter_map(quarters: Any) -> dict[str, list[dict[str, Any]]]:
+    if not isinstance(quarters, dict):
+        return {}
+    normalized: dict[str, list[dict[str, Any]]] = {}
+    for quarter, rows in quarters.items():
+        if isinstance(rows, list):
+            normalized[str(quarter)] = _normalize_micron_business_unit_rows(str(quarter), rows)
+    return {period: normalized[period] for period in sorted(normalized, key=_period_key)}
+
+
+def _normalize_micron_segment_cache_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    normalized_payload = deepcopy(payload)
+    normalized_payload["quarters"] = _normalize_micron_business_unit_quarter_map(normalized_payload.get("quarters"))
+    return normalized_payload
 
 
 def _expected_period_span(first_period: str, last_period: str) -> int:
@@ -1008,6 +1070,11 @@ def fetch_official_segment_history(company: dict[str, Any], refresh: bool = Fals
     cached_payload = _load_cached_json(path) if path.exists() else None
     if path.exists() and not refresh:
         if isinstance(cached_payload, dict) and cached_payload.get("_cacheVersion") == CACHE_VERSION:
+            if str(company.get("id") or "") == "micron":
+                normalized_payload = _normalize_micron_segment_cache_payload(cached_payload)
+                if normalized_payload != cached_payload:
+                    _write_cached_json(path, normalized_payload)
+                return normalized_payload
             return cached_payload
 
     if str(company.get("id") or "") == "micron":
@@ -1017,7 +1084,7 @@ def fetch_official_segment_history(company: dict[str, Any], refresh: bool = Fals
             return result
         except Exception:
             if isinstance(cached_payload, dict) and cached_payload.get("_cacheVersion") == CACHE_VERSION:
-                return cached_payload
+                return _normalize_micron_segment_cache_payload(cached_payload)
 
     cik = _resolve_cik(str(company.get("ticker", "")), refresh=refresh)
     result = {

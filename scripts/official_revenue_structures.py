@@ -59,6 +59,14 @@ CACHE_VERSION = "20260327-v17"
 STOCKANALYSIS_FINANCIAL_PAYLOAD_CACHE_VERSION = "20260329-v1"
 STOCKANALYSIS_FINANCIAL_CACHE: dict[str, dict[str, Any]] = {}
 CUSTOM_HIERARCHY_COST_SUPPLEMENT_WINDOW_QUARTERS = 12
+MICRON_SCHEMA_CHANGE_QUARTER = "2025Q3"
+MICRON_BU_ORDER = ("cmbu", "cdbu", "mcbu", "aebu")
+MICRON_BU_LABELS = {
+    "cmbu": ("CMBU", "云内存业务单元"),
+    "cdbu": ("CDBU", "核心数据中心业务单元"),
+    "mcbu": ("MCBU", "移动与客户端业务单元"),
+    "aebu": ("AEBU", "汽车与嵌入式业务单元"),
+}
 
 COST_TAG_PRIORITY = {
     "CostOfRevenue": 120,
@@ -5556,8 +5564,55 @@ def _supplement_custom_hierarchy_cost_breakdowns(company: dict[str, Any], result
     return result
 
 
+def _normalize_micron_business_unit_quarters(result: dict[str, Any]) -> dict[str, Any]:
+    quarters = result.get("quarters")
+    if not isinstance(quarters, dict):
+        return result
+    order = {member_key: index for index, member_key in enumerate(MICRON_BU_ORDER)}
+    for quarter, payload in quarters.items():
+        try:
+            if _period_key(str(quarter)) < _period_key(MICRON_SCHEMA_CHANGE_QUARTER):
+                continue
+        except Exception:
+            continue
+        if not isinstance(payload, dict):
+            continue
+        segments = payload.get("segments")
+        if not isinstance(segments, list) or not segments:
+            continue
+        normalized_segments: list[dict[str, Any]] = []
+        has_current_business_unit = False
+        for raw_segment in segments:
+            if not isinstance(raw_segment, dict):
+                continue
+            segment = dict(raw_segment)
+            member_key = _normalize_member_key(segment.get("memberKey") or segment.get("name") or "")
+            if member_key == "allothersegments":
+                continue
+            if member_key in MICRON_BU_LABELS:
+                has_current_business_unit = True
+                name, name_zh = MICRON_BU_LABELS[member_key]
+                segment["memberKey"] = member_key
+                segment["name"] = name
+                segment["nameZh"] = name_zh
+            normalized_segments.append(segment)
+        if not has_current_business_unit:
+            continue
+        payload["segments"] = sorted(
+            normalized_segments,
+            key=lambda segment: (
+                order.get(_normalize_member_key(segment.get("memberKey") or segment.get("name") or ""), len(order)),
+                str(segment.get("memberKey") or segment.get("name") or ""),
+            ),
+        )
+        payload["style"] = "micron-business-unit-bridge"
+    return result
+
+
 def _post_process_result(company: dict[str, Any], result: dict[str, Any]) -> dict[str, Any]:
     result["quarters"] = result.get("quarters", {})
+    if str(company.get("id") or "").strip().lower() == "micron":
+        result = _normalize_micron_business_unit_quarters(result)
     result = _supplement_custom_hierarchy_cost_breakdowns(company, result)
     return result
 
@@ -5673,10 +5728,9 @@ def fetch_official_revenue_structure_history(company: dict[str, Any], refresh: b
     cached_payload = _load_cached_json(path) if path.exists() else None
     if path.exists() and not refresh:
         if _is_current_revenue_structure_cache(cached_payload):
-            supplemented_payload = _supplement_cached_custom_history(company, cached_payload)
-            before_post_process_payload = deepcopy(supplemented_payload)
+            supplemented_payload = _supplement_cached_custom_history(company, deepcopy(cached_payload))
             processed_payload = _post_process_result(company, supplemented_payload)
-            if processed_payload != cached_payload or supplemented_payload != cached_payload:
+            if processed_payload != cached_payload:
                 supplemented_payload = processed_payload
                 supplemented_payload["_cacheVersion"] = CACHE_VERSION
                 _write_cached_json(path, supplemented_payload)

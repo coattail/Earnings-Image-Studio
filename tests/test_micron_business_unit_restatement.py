@@ -116,6 +116,36 @@ class MicronBusinessUnitRestatementTests(unittest.TestCase):
 
         self.assertEqual([row["memberKey"] for row in filtered], ["cmbu", "cdbu", "mcbu", "aebu"])
 
+    def test_micron_current_schema_rows_use_consistent_order_and_labels(self) -> None:
+        rows = [
+            {"name": "CMBU", "memberKey": "cmbu", "valueBn": 7.749},
+            {"name": "MCBU", "memberKey": "mcbu", "valueBn": 7.711},
+            {"name": "CDBU", "memberKey": "cdbu", "valueBn": 5.687},
+            {"name": "AEBU", "memberKey": "aebu", "valueBn": 2.708},
+        ]
+
+        normalized = build_dataset.normalize_official_revenue_segments("micron", "2026Q1", rows)
+
+        self.assertEqual(
+            [(row["memberKey"], row["name"], row["nameZh"]) for row in normalized],
+            [
+                ("cmbu", "CMBU", "云内存业务单元"),
+                ("cdbu", "CDBU", "核心数据中心业务单元"),
+                ("mcbu", "MCBU", "移动与客户端业务单元"),
+                ("aebu", "AEBU", "汽车与嵌入式业务单元"),
+            ],
+        )
+
+    def test_frontend_micron_current_schema_uses_current_business_unit_labels(self) -> None:
+        app_data_js = (ROOT_DIR / "js" / "app-03-data.js").read_text(encoding="utf-8")
+
+        self.assertIn('cdbu: "microncoredatacenter"', app_data_js)
+        self.assertIn('cmbu: "microncloudmemory"', app_data_js)
+        self.assertIn('microncoredatacenter: Object.freeze({ name: "Core Data Center", nameZh: "核心数据中心" })', app_data_js)
+        self.assertIn('microncloudmemory: Object.freeze({ name: "Cloud Memory", nameZh: "云内存" })', app_data_js)
+        self.assertNotIn('cdbu: "microncomputedatacenter"', app_data_js)
+        self.assertNotIn('cmbu: "micronstoragecloudmemory"', app_data_js)
+
     def test_finalize_computes_yoy_for_recent_fy26_bu_quarters(self) -> None:
         company = {"id": "micron", "ticker": "MU"}
         payload = {
@@ -179,11 +209,16 @@ class MicronBusinessUnitRestatementTests(unittest.TestCase):
         )
         self.assertEqual(
             [(row["memberKey"], row["yoyPct"]) for row in result["financials"]["2025Q4"]["officialRevenueSegments"]],
-            [("cmbu", 99.55), ("mcbu", 63.15), ("cdbu", 3.8), ("aebu", 48.53)],
+            [("cmbu", 99.55), ("cdbu", 3.8), ("mcbu", 63.15), ("aebu", 48.53)],
         )
         self.assertEqual(
             [(row["memberKey"], row["yoyPct"]) for row in result["financials"]["2026Q1"]["officialRevenueSegments"]],
-            [("cmbu", 162.95), ("mcbu", 244.86), ("cdbu", 210.77), ("aebu", 161.9)],
+            [("cmbu", 162.95), ("cdbu", 210.77), ("mcbu", 244.86), ("aebu", 161.9)],
+        )
+        self.assertEqual(result["financials"]["2026Q1"]["officialRevenueStyle"], "micron-business-unit-bridge")
+        self.assertEqual(
+            [row["nameZh"] for row in result["financials"]["2026Q1"]["officialRevenueSegments"]],
+            ["云内存业务单元", "核心数据中心业务单元", "移动与客户端业务单元", "汽车与嵌入式业务单元"],
         )
 
 if __name__ == "__main__":

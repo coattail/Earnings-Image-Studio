@@ -165,6 +165,46 @@ class MicronIrParserTests(unittest.TestCase):
             [("cmbu", 13.769), ("cdbu", 11.524), ("mcbu", 11.521), ("aebu", 4.634)],
         )
 
+    def test_revenue_structure_micron_cache_normalizes_current_business_unit_schema(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            cache_path = Path(tmp_dir) / "micron.json"
+            cached_payload = {
+                "_cacheVersion": official_revenue_structures.CACHE_VERSION,
+                "source": "official-filings-xbrl-axis",
+                "quarters": {
+                    "2026Q1": {
+                        "segments": [
+                            {"name": "CMBU", "memberKey": "cmbu", "valueBn": 7.749},
+                            {"name": "MCBU", "memberKey": "mcbu", "valueBn": 7.711},
+                            {"name": "CDBU", "memberKey": "cdbu", "valueBn": 5.687},
+                            {"name": "AEBU", "memberKey": "aebu", "valueBn": 2.708},
+                        ],
+                    }
+                },
+                "filingsUsed": [],
+                "errors": [],
+            }
+            cache_path.write_text(__import__("json").dumps(cached_payload), encoding="utf-8")
+            with patch.object(official_revenue_structures, "CACHE_DIR", Path(tmp_dir)):
+                payload = official_revenue_structures.fetch_official_revenue_structure_history(self._micron_company(), refresh=False)
+            cached_after = __import__("json").loads(cache_path.read_text(encoding="utf-8"))
+
+        quarter_payload = payload["quarters"]["2026Q1"]
+        self.assertEqual(quarter_payload["style"], "micron-business-unit-bridge")
+        self.assertEqual(
+            [(row["memberKey"], row["nameZh"]) for row in quarter_payload["segments"]],
+            [
+                ("cmbu", "云内存业务单元"),
+                ("cdbu", "核心数据中心业务单元"),
+                ("mcbu", "移动与客户端业务单元"),
+                ("aebu", "汽车与嵌入式业务单元"),
+            ],
+        )
+        self.assertEqual(
+            [row["memberKey"] for row in cached_after["quarters"]["2026Q1"]["segments"]],
+            ["cmbu", "cdbu", "mcbu", "aebu"],
+        )
+
     def test_official_segments_micron_refresh_uses_ir_release_without_sec_filings(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_dir:
             with (
@@ -180,6 +220,44 @@ class MicronIrParserTests(unittest.TestCase):
         self.assertEqual(
             [(row["memberKey"], row["valueBn"]) for row in segments],
             [("cmbu", 13.769), ("cdbu", 11.524), ("mcbu", 11.521), ("aebu", 4.634)],
+        )
+
+    def test_official_segments_micron_cache_normalizes_current_business_unit_schema(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            cache_path = Path(tmp_dir) / "micron.json"
+            cached_payload = {
+                "_cacheVersion": official_segments.CACHE_VERSION,
+                "source": "official-filings",
+                "ticker": "MU",
+                "axis": "MicronBusinessUnit",
+                "quarters": {
+                    "2026Q1": [
+                        {"name": "CMBU", "memberKey": "cmbu", "valueBn": 7.749},
+                        {"name": "MCBU", "memberKey": "mcbu", "valueBn": 7.711},
+                        {"name": "CDBU", "memberKey": "cdbu", "valueBn": 5.687},
+                        {"name": "AEBU", "memberKey": "aebu", "valueBn": 2.708},
+                    ]
+                },
+                "filingsUsed": [],
+                "errors": [],
+            }
+            cache_path.write_text(__import__("json").dumps(cached_payload), encoding="utf-8")
+            with patch.object(official_segments, "CACHE_DIR", Path(tmp_dir)):
+                payload = official_segments.fetch_official_segment_history(self._micron_company(), refresh=False)
+            cached_after = __import__("json").loads(cache_path.read_text(encoding="utf-8"))
+
+        self.assertEqual(
+            [(row["memberKey"], row["nameZh"]) for row in payload["quarters"]["2026Q1"]],
+            [
+                ("cmbu", "云内存业务单元"),
+                ("cdbu", "核心数据中心业务单元"),
+                ("mcbu", "移动与客户端业务单元"),
+                ("aebu", "汽车与嵌入式业务单元"),
+            ],
+        )
+        self.assertEqual(
+            [row["memberKey"] for row in cached_after["quarters"]["2026Q1"]],
+            ["cmbu", "cdbu", "mcbu", "aebu"],
         )
 
 
