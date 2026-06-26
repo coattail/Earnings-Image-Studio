@@ -146,6 +146,22 @@ class MicronBusinessUnitRestatementTests(unittest.TestCase):
         self.assertNotIn('cdbu: "microncomputedatacenter"', app_data_js)
         self.assertNotIn('cmbu: "micronstoragecloudmemory"', app_data_js)
 
+    def test_frontend_micron_bar_palette_uses_cohesive_business_unit_colors(self) -> None:
+        app_data_js = (ROOT_DIR / "js" / "app-03-data.js").read_text(encoding="utf-8")
+
+        expected_colors = {
+            "microncloudmemory": "#0B63B6",
+            "microncoredatacenter": "#3454A4",
+            "micronmobileclient": "#009A9A",
+            "micronautoembedded": "#D9911B",
+            "micronstorage": "#6AADE8",
+            "microncomputenetworking": "#6F83C2",
+            "micronmobile": "#58BFB7",
+            "micronembedded": "#E5B356",
+        }
+        for segment_key, color in expected_colors.items():
+            self.assertIn(f'{segment_key}: "{color}"', app_data_js)
+
     def test_finalize_computes_yoy_for_recent_fy26_bu_quarters(self) -> None:
         company = {"id": "micron", "ticker": "MU"}
         payload = {

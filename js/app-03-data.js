@@ -2904,6 +2904,18 @@ const BAR_SEGMENT_COLOR_SLOT_OVERRIDES_BY_COMPANY = Object.freeze({
 });
 
 const BAR_SEGMENT_COLOR_OVERRIDES_BY_COMPANY = Object.freeze({
+  micron: Object.freeze({
+    microncloudmemory: "#0B63B6",
+    microncoredatacenter: "#3454A4",
+    micronmobileclient: "#009A9A",
+    micronautoembedded: "#D9911B",
+    micronstorage: "#6AADE8",
+    microncomputenetworking: "#6F83C2",
+    micronmobile: "#58BFB7",
+    micronembedded: "#E5B356",
+    micronstoragecloudmemory: "#6AADE8",
+    microncomputedatacenter: "#6F83C2",
+  }),
   nvidia: Object.freeze({
     datacenter: "#73AE0B",
     edgecomputing: "#2D9CDB",
