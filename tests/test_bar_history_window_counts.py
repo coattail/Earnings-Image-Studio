@@ -105,12 +105,37 @@ class BarHistoryWindowCountTests(unittest.TestCase):
 
         self.assertEqual(summary["outputs"]["bars"]["quarterCount"], 30)
 
+    def test_korean_company_windows_show_extended_history(self) -> None:
+        for company_id in ("samsung", "sk-hynix"):
+            with self.subTest(company_id=company_id):
+                summary = render_bar_summary(load_dataset_company(company_id), f"{company_id}-extended-window")
+                self.assertEqual(summary["outputs"]["bars"]["quarterCount"], 33)
+
     def test_byd_latest_bar_window_uses_all_available_quarters(self) -> None:
         company = load_dataset_company("byd")
         expected_quarter_count = min(30, len(company.get("quarters") or []))
         summary = render_bar_summary(company, "byd-window")
 
         self.assertEqual(summary["outputs"]["bars"]["quarterCount"], expected_quarter_count)
+
+    def test_samsung_gross_segment_stack_stays_below_legend(self) -> None:
+        svg_markup = render_bar_svg(load_dataset_company("samsung"), "samsung-gross-segment-headroom", "2026Q1")
+        group = re.search(
+            r'<g data-bar-series="true" data-bar-plot-top="([\d.]+)"[^>]*>([\s\S]*?)</g>',
+            svg_markup,
+        )
+
+        self.assertIsNotNone(group)
+        plot_top = float(group.group(1))
+        series_markup = group.group(2)
+        top_values = [float(value) for value in re.findall(r'<rect[^>]* y="([\d.]+)"', series_markup)]
+        top_values.extend(float(value) for value in re.findall(r'<path d="M [\d.]+ ([\d.]+)', series_markup))
+        self.assertTrue(top_values)
+        self.assertGreaterEqual(
+            min(top_values),
+            plot_top + 20,
+            "Gross business-unit stacks should retain visible headroom below the legend.",
+        )
 
     def test_byd_annual_bars_are_rendered_as_second_half_incremental_periods(self) -> None:
         svg_markup = render_bar_svg(load_dataset_company("byd"), "byd-incremental-half-year", "2025Q4")

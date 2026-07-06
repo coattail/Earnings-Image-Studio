@@ -20,7 +20,7 @@ from official_revenue_structures import (
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 CACHE_DIR = ROOT_DIR / "data" / "cache" / "stockanalysis-financials"
-STOCKANALYSIS_CACHE_VERSION = "20260329-v1"
+STOCKANALYSIS_CACHE_VERSION = "20260706-v2"
 FINANCIAL_TABLE_LABELS = ("Fiscal Quarter", "Fiscal Year", "Period Ending")
 
 REQUEST_HEADERS = {
@@ -314,6 +314,90 @@ def _load_table(url: str) -> tuple[str, Any]:
     return html_text, tables[0]
 
 
+def _compact_metric_to_billions(raw: str) -> float | None:
+    text = str(raw or "").strip().replace(",", "")
+    if not text or text in {"-", "—", "N/A"}:
+        return None
+    negative = text.startswith("(") and text.endswith(")")
+    if negative:
+        text = text[1:-1].strip()
+    match = re.fullmatch(r"([-+]?\d+(?:\.\d+)?)\s*([TtBbMmKk]?)", text)
+    if not match:
+        return None
+    value = float(match.group(1))
+    multiplier = {
+        "t": 1000.0,
+        "b": 1.0,
+        "m": 0.001,
+        "k": 0.000001,
+        "": 0.000000001,
+    }[match.group(2).lower()]
+    resolved = value * multiplier
+    return round(-resolved if negative else resolved, 3)
+
+
+def _supplement_configured_revenue_metrics(result: dict[str, Any], company: dict[str, Any], financial_path: str) -> None:
+    configured_rows = company.get("financialMetricsRevenueRows")
+    if not isinstance(configured_rows, list) or not configured_rows:
+        return
+    source_url = f"https://stockanalysis.com/{financial_path}/financials/metrics/?{urlencode({'p': 'quarterly'})}"
+    try:
+        html_text = _request_text(source_url)
+    except Exception as exc:  # noqa: BLE001
+        result.setdefault("errors", []).append(f"business metrics: {exc}")
+        return
+    soup = BeautifulSoup(html_text, "html.parser")
+    rows_by_quarter: dict[str, dict[str, dict[str, Any]]] = {}
+    for table in soup.find_all("table"):
+        row_map_value = _row_map(table)
+        headers = row_map_value.get("Fiscal Quarter") or row_map_value.get("Fiscal Year")
+        period_ends = row_map_value.get("Period Ending") or []
+        if not headers or not period_ends:
+            continue
+        column_count = min(len(headers), len(period_ends))
+        for index in range(column_count):
+            period_end = _extract_period_end(period_ends[index])
+            if not period_end:
+                continue
+            fiscal_year, fiscal_quarter, _fiscal_label = _normalize_fiscal_header(headers[index])
+            quarter_key = _stockanalysis_quarter_key(company, period_end, fiscal_year, fiscal_quarter)
+            for config in configured_rows:
+                if not isinstance(config, dict):
+                    continue
+                source_row = row_map_value.get(str(config.get("row") or ""))
+                if not source_row or index >= len(source_row):
+                    continue
+                value_bn = _compact_metric_to_billions(source_row[index])
+                if value_bn is None or value_bn <= 0:
+                    continue
+                growth_row = row_map_value.get(str(config.get("growthRow") or ""))
+                growth_pct = _clean_number(growth_row[index]) if growth_row and index < len(growth_row) else None
+                member_key = str(config.get("memberKey") or config.get("row") or "").strip()
+                if not member_key:
+                    continue
+                rows_by_quarter.setdefault(quarter_key, {})[member_key] = {
+                    "name": config.get("name") or config.get("row"),
+                    "nameZh": config.get("nameZh"),
+                    "memberKey": member_key,
+                    "valueBn": value_bn,
+                    "yoyPct": _to_pct(growth_pct),
+                    "sourceUrl": source_url,
+                    "sourceForm": "StockAnalysis business metrics",
+                    "filingDate": period_end,
+                    "metricMode": "reported-product-revenue",
+                    "validationEligible": config.get("validationEligible", True),
+                }
+    for quarter_key, row_map_value in rows_by_quarter.items():
+        entry = result.get("financials", {}).get(quarter_key)
+        rows = list(row_map_value.values())
+        if not isinstance(entry, dict) or len(rows) < 2:
+            continue
+        entry["officialRevenueSegments"] = rows
+        entry["officialRevenueStyle"] = company.get("financialMetricsRevenueStyle") or ""
+        entry["revenueClassificationSource"] = "stockanalysis-business-metrics"
+        entry["revenueClassificationSourceUrl"] = source_url
+
+
 def fetch_stockanalysis_financial_history(company: dict[str, Any], refresh: bool = False) -> dict[str, Any]:
     cache_path = _cache_path(company["id"])
     if cache_path.exists() and not refresh:
@@ -428,6 +512,7 @@ def fetch_stockanalysis_financial_history(company: dict[str, Any], refresh: bool
                 if entry.get(field) is not None and prior_year.get(field) is not None:
                     entry[delta_field] = round(entry[field] - prior_year[field], 3)
 
+    _supplement_configured_revenue_metrics(result, company, financial_path)
     result["quarters"] = ordered_quarters
     _write_cached_json(cache_path, result)
     return result

@@ -18,6 +18,7 @@ from build_dataset import (
     DATA_DIR,
     TOP30_COMPANIES,
     apply_fused_extraction,
+    apply_korean_revenue_history,
     apply_manual_company_override,
     apply_usd_display_fields,
     build_company_payload_with_universal_parser,
@@ -316,6 +317,7 @@ def build_company_payload(company: dict[str, Any], refresh: bool) -> dict[str, A
         payload = apply_usd_display_fields(payload, fx_cache)
         payload = apply_fused_extraction(payload, company, refresh=refresh)
         save_fx_cache(fx_cache)
+    payload = apply_korean_revenue_history(payload, company)
     payload = finalize_company_payload(company, payload, manual_presets.get(str(company["id"])) or {})
     COMPANY_CACHE_DIR.mkdir(parents=True, exist_ok=True)
     (COMPANY_CACHE_DIR / f"{company['id']}.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")

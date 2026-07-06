@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import base64
 import html
 import json
@@ -58,6 +59,8 @@ COMPANY_DOMAINS: dict[str, str] = {
     "xiaomi": "xiaomi.com",
     "byd": "byd.com",
     "meituan": "meituan.com",
+    "samsung": "samsung.com",
+    "sk-hynix": "skhynix.com",
 }
 
 OFFICIAL_HOST_ALIASES: dict[str, tuple[str, ...]] = {
@@ -96,6 +99,16 @@ OVERRIDE_LOGO_SOURCES: dict[str, dict[str, Any]] = {
     "apple": {
         "url": SIMPLE_ICON_URL.format(slug="apple"),
         "fill": "#6B7280",
+    },
+    "samsung": {
+        "url": "https://www.samsung.com/etc.clientlibs/samsung/clientlibs/consumer/global/clientlib-common/resources/images/global-samsung-logo.svg",
+        "official": True,
+        "skip_browser_normalization": True,
+        "exclusive": True,
+    },
+    "sk-hynix": {
+        "url": "https://cdn.worldvectorlogo.com/logos/sk-hynix.svg",
+        "exclusive": True,
     },
     "asml": {
         "url": "https://cdn.worldvectorlogo.com/logos/asml.svg",
@@ -962,6 +975,7 @@ def _resolve_logo_source(
     fill: str | None = None,
     official_override: bool | None = None,
     skip_normalization: bool = False,
+    skip_browser_normalization: bool = False,
     source_type: str,
 ) -> dict[str, Any] | None:
     payload, content_type = _request_bytes(url)
@@ -994,6 +1008,7 @@ def _resolve_logo_source(
         "visualStats": png_visual_stats or {},
         "containsEmbeddedRaster": _svg_contains_embedded_raster(payload) if mime == "image/svg+xml" else False,
         "normalization": normalization,
+        "skipBrowserNormalization": skip_browser_normalization,
     }
 
 
@@ -1001,6 +1016,7 @@ def _resolve_local_logo_source(
     relative_path: str,
     *,
     skip_normalization: bool = False,
+    skip_browser_normalization: bool = False,
     source_type: str,
 ) -> dict[str, Any] | None:
     normalized_path = relative_path.lstrip("/").replace("\\", "/")
@@ -1035,6 +1051,7 @@ def _resolve_local_logo_source(
         "visualStats": png_visual_stats or {},
         "containsEmbeddedRaster": _svg_contains_embedded_raster(payload) if mime == "image/svg+xml" else False,
         "normalization": normalization,
+        "skipBrowserNormalization": skip_browser_normalization,
     }
 
 
@@ -1142,6 +1159,7 @@ def _select_logo(company_id: str, domain: str) -> dict[str, Any]:
                 {
                     "local_path": override_source["local_path"],
                     "skip_normalization": bool(override_source.get("skip_normalization")),
+                    "skip_browser_normalization": bool(override_source.get("skip_browser_normalization")),
                     "source_type": override_source_type,
                 }
             )
@@ -1161,18 +1179,20 @@ def _select_logo(company_id: str, domain: str) -> dict[str, Any]:
                     "fill": override_source.get("fill"),
                     "official_override": override_source.get("official"),
                     "skip_normalization": bool(override_source.get("skip_normalization")),
+                    "skip_browser_normalization": bool(override_source.get("skip_browser_normalization")),
                     "source_type": override_source_type,
                 }
             )
 
-    candidate_specs.extend(
-        {"url": url, "source_type": "discovered"}
-        for url in _extract_official_logo_urls(company_id, domain)
-    )
-    candidate_specs.extend(
-        {"url": template.format(domain=domain), "source_type": "discovered"}
-        for template in OFFICIAL_CANDIDATE_URLS
-    )
+    if not (override_source or {}).get("exclusive"):
+        candidate_specs.extend(
+            {"url": url, "source_type": "discovered"}
+            for url in _extract_official_logo_urls(company_id, domain)
+        )
+        candidate_specs.extend(
+            {"url": template.format(domain=domain), "source_type": "discovered"}
+            for template in OFFICIAL_CANDIDATE_URLS
+        )
     seen_sources: set[str] = set()
     for spec in candidate_specs:
         source_key = spec.get("url") or spec.get("local_path") or f"{spec.get('page_url')}#symbol:{spec.get('symbol_id')}"
@@ -1184,6 +1204,7 @@ def _select_logo(company_id: str, domain: str) -> dict[str, Any]:
                 resolved = _resolve_local_logo_source(
                     spec["local_path"],
                     skip_normalization=bool(spec.get("skip_normalization")),
+                    skip_browser_normalization=bool(spec.get("skip_browser_normalization")),
                     source_type=spec["source_type"],
                 )
             elif spec.get("page_url") and spec.get("symbol_id"):
@@ -1203,6 +1224,7 @@ def _select_logo(company_id: str, domain: str) -> dict[str, Any]:
                     fill=spec.get("fill"),
                     official_override=spec.get("official_override"),
                     skip_normalization=bool(spec.get("skip_normalization")),
+                    skip_browser_normalization=bool(spec.get("skip_browser_normalization")),
                     source_type=spec["source_type"],
                 )
         except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError, subprocess.CalledProcessError) as exc:
@@ -1223,19 +1245,41 @@ def _select_logo(company_id: str, domain: str) -> dict[str, Any]:
     return best_candidate
 
 
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Generate embedded company logo assets.")
+    parser.add_argument(
+        "--companies",
+        default="",
+        help="Optional comma-separated company ids to refresh while preserving all other cached logo assets.",
+    )
+    return parser.parse_args()
+
+
 def main() -> int:
+    args = parse_args()
+    selected_company_ids = {
+        item.strip().lower()
+        for item in str(args.companies or "").split(",")
+        if item.strip()
+    }
     brand_colors = _load_brand_colors()
     existing_catalog: dict[str, Any] = {}
+    existing_failures: dict[str, str] = {}
     if OUTPUT_PATH.exists():
         try:
             existing_payload = json.loads(OUTPUT_PATH.read_text(encoding="utf-8"))
             if isinstance(existing_payload.get("logos"), dict):
                 existing_catalog = existing_payload["logos"]
+            if isinstance(existing_payload.get("failures"), dict):
+                existing_failures = existing_payload["failures"]
         except Exception:
             existing_catalog = {}
-    catalog: dict[str, Any] = {}
-    failures: dict[str, str] = {}
+            existing_failures = {}
+    catalog: dict[str, Any] = dict(existing_catalog) if selected_company_ids else {}
+    failures: dict[str, str] = dict(existing_failures) if selected_company_ids else {}
     for company_id, domain in COMPANY_DOMAINS.items():
+        if selected_company_ids and company_id not in selected_company_ids:
+            continue
         try:
             if company_id in OVERRIDE_LOGO_SOURCES and "fill_from_brand" in OVERRIDE_LOGO_SOURCES[company_id]:
                 OVERRIDE_LOGO_SOURCES[company_id]["fill"] = brand_colors.get(company_id, "#111827")
@@ -1243,6 +1287,7 @@ def main() -> int:
                 "domain": domain,
                 **_select_logo(company_id, domain),
             }
+            failures.pop(company_id, None)
             print(f"[ok] {company_id} <- {catalog[company_id]['sourceUrl']}", flush=True)
         except Exception as exc:  # noqa: BLE001
             if company_id in existing_catalog:
@@ -1252,6 +1297,10 @@ def main() -> int:
             else:
                 failures[company_id] = str(exc)
                 print(f"[warn] {company_id}: {exc}", flush=True)
+
+    unknown_company_ids = selected_company_ids - set(COMPANY_DOMAINS)
+    if unknown_company_ids:
+        print(f"[warn] unknown company ids: {', '.join(sorted(unknown_company_ids))}", flush=True)
 
     payload = {
         "generatedAt": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
