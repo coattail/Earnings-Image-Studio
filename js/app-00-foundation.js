@@ -31,7 +31,7 @@ const state = {
   },
 };
 
-const BUILD_ASSET_VERSION = "20260706-korean-layout-polish-v179";
+const BUILD_ASSET_VERSION = "20260706-sk-hynix-productmix-logo-v180";
 const CORPORATE_LOGO_AREA_MULTIPLIER = 1.728;
 const CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER = Math.sqrt(CORPORATE_LOGO_AREA_MULTIPLIER);
 const CORPORATE_LOGO_REVENUE_GAP_MULTIPLIER = 1.2;
@@ -376,8 +376,10 @@ const STRUCTURAL_PROTOTYPES = {
       layout: {
         structuralNodeOffsets: {
           revenue: { dy: -90 },
-          "source-0": { dy: -72 },
-          "source-1": { dy: -72 },
+          "source-0": { dy: -168 },
+          "source-1": { dy: -152 },
+          "source-2": { dy: -76 },
+          gross: { dy: -32 },
           net: { dy: -44 },
           "operating-expenses": { dy: 78 },
         },
@@ -522,6 +524,7 @@ const STRUCTURAL_PROTOTYPES = {
         belowLabelX: 1774,
         sourceSummaryX: 620,
         leftDetailGap: 36,
+        leftDetailMiddleHorizontalEntryStrength: 1,
         revenueLabelX: 946,
         revenueLabelY: 546,
         revenueLabelTitleSize: 34,
