@@ -76,6 +76,16 @@ def edge_alpha_stats(asset: dict) -> dict[str, float]:
 
 
 class LogoCatalogTransparencyTests(unittest.TestCase):
+    def test_samsung_uses_official_blue_vector_wordmark(self) -> None:
+        asset = load_logo_catalog()["samsung"]
+        svg_markup = decode_data_url_payload(asset).decode("utf-8")
+
+        self.assertTrue(asset["officialSource"])
+        self.assertEqual(asset["mime"], "image/svg+xml")
+        self.assertGreater(asset["width"] / asset["height"], 6)
+        self.assertIn('fill="#1428A0"', svg_markup)
+        self.assertNotIn('fill="#000"', svg_markup)
+
     def test_logo_catalog_has_no_unresolved_logo_failures(self) -> None:
         payload = load_logo_catalog_payload()
 

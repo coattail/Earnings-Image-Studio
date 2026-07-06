@@ -137,6 +137,16 @@ class BarHistoryWindowCountTests(unittest.TestCase):
             "Gross business-unit stacks should retain visible headroom below the legend.",
         )
 
+    def test_samsung_logo_sits_below_the_legend_row(self) -> None:
+        svg_markup = render_bar_svg(load_dataset_company("samsung"), "samsung-logo-spacing", "2026Q1")
+        wrapper = re.search(
+            r'<g opacity="[^"]+" data-bar-chart-logo="true"[\s\S]*?<g transform="translate\([\d.]+, ([\d.]+)\)',
+            svg_markup,
+        )
+
+        self.assertIsNotNone(wrapper)
+        self.assertGreaterEqual(float(wrapper.group(1)), 290)
+
     def test_byd_annual_bars_are_rendered_as_second_half_incremental_periods(self) -> None:
         svg_markup = render_bar_svg(load_dataset_company("byd"), "byd-incremental-half-year", "2025Q4")
 

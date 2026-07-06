@@ -4088,6 +4088,16 @@ function renderPixelReplicaSvg(snapshot) {
   const opexSummaryY = layoutY(snapshot.layout?.opexSummaryY, Math.min(opexBottom / verticalScale + 56, 904));
   const opexSummaryAnchor = snapshot.layout?.opexSummaryAnchor || "middle";
   const autoLayoutNodeOffsets = Object.create(null);
+  const structuralNodeOffsets = snapshot.layout?.structuralNodeOffsets;
+  if (structuralNodeOffsets && typeof structuralNodeOffsets === "object") {
+    Object.entries(structuralNodeOffsets).forEach(([nodeId, offset]) => {
+      if (!nodeId || !offset || typeof offset !== "object") return;
+      autoLayoutNodeOffsets[nodeId] = {
+        dx: safeNumber(offset.dx, 0),
+        dy: scaleY(safeNumber(offset.dy, 0)),
+      };
+    });
+  }
   const autoLayoutOffsetForNode = (nodeId) => {
     const offset = autoLayoutNodeOffsets?.[nodeId] || {};
     return {
@@ -7586,6 +7596,22 @@ function renderPixelReplicaSvg(snapshot) {
     opexBoxes[1] = shiftBoxCenter(lower, nextCenterY);
   };
   compactTwoItemOpexTerminalFan();
+  const requestedOpexTerminalGroupShiftY = scaleY(
+    Math.max(safeNumber(snapshot.layout?.opexTerminalGroupShiftY, 0), 0)
+  );
+  if (requestedOpexTerminalGroupShiftY > 0.5 && opexBoxes.length) {
+    const opexTerminalBottomLimit = height - scaleY(
+      safeNumber(snapshot.layout?.opexTerminalBottomClearanceY, 56)
+    );
+    const availableOpexTerminalShiftY = maxActualBoxGroupShiftDown(
+      opexBoxes,
+      opexTerminalBottomLimit
+    );
+    shiftBoxSetBy(
+      opexBoxes,
+      Math.min(requestedOpexTerminalGroupShiftY, availableOpexTerminalShiftY)
+    );
+  }
   repelCostBreakdownFromOpexSummary();
   refreshEditableNodeFrames();
   const revenueGrossBand = shiftedInterval(revenueGrossSourceBand.top, revenueGrossSourceBand.bottom, "revenue");

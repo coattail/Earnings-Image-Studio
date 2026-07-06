@@ -103,6 +103,8 @@ OVERRIDE_LOGO_SOURCES: dict[str, dict[str, Any]] = {
     "samsung": {
         "url": "https://www.samsung.com/etc.clientlibs/samsung/clientlibs/consumer/global/clientlib-common/resources/images/global-samsung-logo.svg",
         "official": True,
+        "fill": "#1428A0",
+        "force_fill": True,
         "skip_browser_normalization": True,
         "exclusive": True,
     },
@@ -403,12 +405,14 @@ def _png_chunks(payload: bytes) -> list[tuple[bytes, bytes]]:
     return chunks
 
 
-def _apply_svg_fill(payload: bytes, fill: str | None) -> bytes:
+def _apply_svg_fill(payload: bytes, fill: str | None, *, force: bool = False) -> bytes:
     if not fill:
         return payload
     text = payload.decode("utf-8", errors="ignore")
     if "<svg" not in text:
         return payload
+    if force:
+        text = re.sub(r'fill="(?!none\b)[^"]+"', f'fill="{fill}"', text, flags=re.IGNORECASE)
     if re.search(r"<svg[^>]+fill=", text):
         return payload
     text = re.sub(r"<svg(\s+)", f'<svg fill="{fill}"\\1', text, count=1)
@@ -973,6 +977,7 @@ def _resolve_logo_source(
     domain: str,
     *,
     fill: str | None = None,
+    force_fill: bool = False,
     official_override: bool | None = None,
     skip_normalization: bool = False,
     skip_browser_normalization: bool = False,
@@ -982,7 +987,7 @@ def _resolve_logo_source(
     mime = _normalize_mime(content_type, payload)
     if mime == "text/html":
         return None
-    payload = _apply_svg_fill(payload, fill)
+    payload = _apply_svg_fill(payload, fill, force=force_fill)
     is_official = _is_official_host(url, domain, _extra_official_hosts(company_id, domain)) if official_override is None else official_override
     if mime not in ("image/svg+xml", "image/png"):
         return None
@@ -1177,6 +1182,7 @@ def _select_logo(company_id: str, domain: str) -> dict[str, Any]:
                 {
                     "url": override_source["url"],
                     "fill": override_source.get("fill"),
+                    "force_fill": bool(override_source.get("force_fill")),
                     "official_override": override_source.get("official"),
                     "skip_normalization": bool(override_source.get("skip_normalization")),
                     "skip_browser_normalization": bool(override_source.get("skip_browser_normalization")),
@@ -1222,6 +1228,7 @@ def _select_logo(company_id: str, domain: str) -> dict[str, Any]:
                     company_id,
                     domain,
                     fill=spec.get("fill"),
+                    force_fill=bool(spec.get("force_fill")),
                     official_override=spec.get("official_override"),
                     skip_normalization=bool(spec.get("skip_normalization")),
                     skip_browser_normalization=bool(spec.get("skip_browser_normalization")),

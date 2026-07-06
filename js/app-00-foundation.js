@@ -31,7 +31,7 @@ const state = {
   },
 };
 
-const BUILD_ASSET_VERSION = "20260604-learned-sankey-layouts-v175";
+const BUILD_ASSET_VERSION = "20260706-korean-layout-polish-v179";
 const CORPORATE_LOGO_AREA_MULTIPLIER = 1.728;
 const CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER = Math.sqrt(CORPORATE_LOGO_AREA_MULTIPLIER);
 const CORPORATE_LOGO_REVENUE_GAP_MULTIPLIER = 1.2;
@@ -370,6 +370,25 @@ const STRUCTURAL_PROTOTYPES = {
       revenueLabelMode: "left",
     },
   },
+  "product-mix-fanout-bridge": {
+    label: "Product mix with expense fan-out",
+    tokens: {
+      layout: {
+        structuralNodeOffsets: {
+          revenue: { dy: -90 },
+          "source-0": { dy: -72 },
+          "source-1": { dy: -72 },
+          net: { dy: -44 },
+          "operating-expenses": { dy: 78 },
+        },
+        opexTerminalGroupShiftY: 68,
+      },
+    },
+    flags: {
+      directionalExpenseFanout: true,
+    },
+    defaults: {},
+  },
   "hierarchical-detail-bridge": {
     label: "Hierarchical detail bridge",
     tokenPresetKey: "asml-technology-bridge",
@@ -689,6 +708,7 @@ const OFFICIAL_STYLE_TO_PROTOTYPE = {
   "asml-technology-bridge": "hierarchical-detail-bridge",
   "commerce-service-bridge": "commerce-service-bridge",
   "semiconductor-segments": "semiconductor-segments-bridge",
+  "semiconductor-product-mix": "product-mix-fanout-bridge",
   "tsmc-platform-mix": "share-platform-mix",
 };
 

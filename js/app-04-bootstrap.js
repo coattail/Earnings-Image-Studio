@@ -1,4 +1,7 @@
 const BAR_CHART_LOGO_LAYOUT_OVERRIDES = Object.freeze({
+  samsung: Object.freeze({
+    dy: 22,
+  }),
   alibaba: Object.freeze({
     dx: 36,
     dy: -96,
