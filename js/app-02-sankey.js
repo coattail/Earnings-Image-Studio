@@ -3858,9 +3858,12 @@ function renderPixelReplicaSvg(snapshot) {
   const netDisplayTargetBand = {
     ...netCoreTargetBand,
   };
+  const netRibbonLeavesOperatingFork = belowOperatingItems.length > 0;
   const netRibbonOptions = positiveAdjustments.length
     ? {
         ...mergeOutflowRibbonOptions(),
+        curveProfile: netRibbonLeavesOperatingFork ? "smootherstep" : "cubic",
+        smootherStepSegments: 4,
         startCurveFactor: clamp(safeNumber(outflowRibbonOptions.startCurveFactor, 0.2) - (positiveAbove ? 0.03 : 0.01), 0.1, 0.22),
         endCurveFactor: clamp(safeNumber(outflowRibbonOptions.endCurveFactor, 0.22) + (positiveAbove ? 0.05 : 0.04), 0.18, 0.32),
         minStartCurveFactor: clamp(safeNumber(outflowRibbonOptions.minStartCurveFactor, 0.12) - 0.01, 0.08, 0.16),
@@ -3870,29 +3873,29 @@ function renderPixelReplicaSvg(snapshot) {
         sourceHoldFactor: clamp(
           safeNumber(
             snapshot.layout?.netSourceHoldFactor,
-            belowOperatingItems.length ? (positiveAbove ? 0.22 : 0.19) : safeNumber(outflowRibbonOptions.sourceHoldFactor, 0.05)
+            netRibbonLeavesOperatingFork ? 0.012 : safeNumber(outflowRibbonOptions.sourceHoldFactor, 0.05)
           ),
-          0.04,
+          netRibbonLeavesOperatingFork ? 0.002 : 0.04,
           0.28
         ),
         minSourceHoldLength: Math.max(
           safeNumber(
             snapshot.layout?.netMinSourceHoldLength,
-            belowOperatingItems.length ? (positiveAbove ? 54 : 42) : safeNumber(outflowRibbonOptions.minSourceHoldLength, 6)
+            netRibbonLeavesOperatingFork ? 3 : safeNumber(outflowRibbonOptions.minSourceHoldLength, 6)
           ),
-          4
+          netRibbonLeavesOperatingFork ? 2 : 4
         ),
         maxSourceHoldLength: Math.max(
           safeNumber(
             snapshot.layout?.netMaxSourceHoldLength,
-            belowOperatingItems.length ? (positiveAbove ? 156 : 132) : safeNumber(outflowRibbonOptions.maxSourceHoldLength, 18)
+            netRibbonLeavesOperatingFork ? 10 : safeNumber(outflowRibbonOptions.maxSourceHoldLength, 18)
           ),
-          10
+          netRibbonLeavesOperatingFork ? 4 : 10
         ),
         sourceHoldDeltaReduction: clamp(
           safeNumber(
             snapshot.layout?.netSourceHoldDeltaReduction,
-            belowOperatingItems.length ? 0.22 : safeNumber(outflowRibbonOptions.sourceHoldDeltaReduction, 0.56)
+            netRibbonLeavesOperatingFork ? 0.58 : safeNumber(outflowRibbonOptions.sourceHoldDeltaReduction, 0.56)
           ),
           0,
           0.88
@@ -3900,9 +3903,9 @@ function renderPixelReplicaSvg(snapshot) {
         minAdaptiveSourceHoldLength: Math.max(
           safeNumber(
             snapshot.layout?.netMinAdaptiveSourceHoldLength,
-            belowOperatingItems.length ? (positiveAbove ? 38 : 28) : safeNumber(outflowRibbonOptions.minAdaptiveSourceHoldLength, 2)
+            netRibbonLeavesOperatingFork ? 2.5 : safeNumber(outflowRibbonOptions.minAdaptiveSourceHoldLength, 2)
           ),
-          1
+          netRibbonLeavesOperatingFork ? 2 : 1
         ),
       }
     : mergeOutflowRibbonOptions();
