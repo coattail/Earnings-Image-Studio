@@ -10,6 +10,9 @@ ROOT_DIR = Path(__file__).resolve().parents[1]
 NODE_RENDERER = ROOT_DIR / "scripts" / "direct_chart_render.cjs"
 APPLE_PAYLOAD = ROOT_DIR / "data" / "cache" / "apple.json"
 AMAZON_PAYLOAD = ROOT_DIR / "data" / "cache" / "amazon.json"
+META_PAYLOAD = ROOT_DIR / "data" / "cache" / "meta.json"
+MICROSOFT_PAYLOAD = ROOT_DIR / "data" / "cache" / "microsoft.json"
+SAMSUNG_PAYLOAD = ROOT_DIR / "data" / "cache" / "samsung.json"
 WALMART_PAYLOAD = ROOT_DIR / "data" / "cache" / "walmart.json"
 ASML_PAYLOAD = ROOT_DIR / "data" / "cache" / "asml.json"
 ALPHABET_PAYLOAD = ROOT_DIR / "data" / "cache" / "alphabet.json"
@@ -118,7 +121,16 @@ def red_path_numbers(svg_root: ET.Element) -> list[list[float]]:
 
 
 def colored_paths_between(svg_root: ET.Element, source: dict[str, float], target: dict[str, float], color: str) -> list[list[float]]:
-    paths: list[list[float]] = []
+    return [path_numbers(path.attrib.get("d", "")) for path in colored_path_elements_between(svg_root, source, target, color)]
+
+
+def colored_path_elements_between(
+    svg_root: ET.Element,
+    source: dict[str, float],
+    target: dict[str, float],
+    color: str,
+) -> list[ET.Element]:
+    paths: list[ET.Element] = []
     source_right = source["x"] + source["width"]
     target_left = target["x"]
     for path in svg_root.findall(".//svg:path", SVG_NS):
@@ -131,7 +143,7 @@ def colored_paths_between(svg_root: ET.Element, source: dict[str, float], target
         start_x = numbers[0]
         reaches_target = any(abs(value - (target_left + 12)) <= 18 for index, value in enumerate(numbers) if index % 2 == 0)
         if abs(start_x - (source_right - 12)) <= 24 and reaches_target:
-            paths.append(numbers)
+            paths.append(path)
     return paths
 
 
@@ -195,6 +207,34 @@ def viewbox_height(svg_root: ET.Element) -> float:
 
 
 class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
+    def test_operating_profit_fork_starts_curving_without_a_long_shared_runway(self) -> None:
+        for company, payload in (
+            ("amazon", AMAZON_PAYLOAD),
+            ("meta", META_PAYLOAD),
+            ("microsoft", MICROSOFT_PAYLOAD),
+            ("samsung", SAMSUNG_PAYLOAD),
+        ):
+            with self.subTest(company=company):
+                svg_root = render_sankey_svg(payload, "zh", f"{company}-smooth-operating-fork", quarter="2026Q1")
+                operating = rect_attrs(svg_root, "operating")
+                net = rect_attrs(svg_root, "net")
+                main_profit_paths = green_paths_between(svg_root, operating, net)
+
+                self.assertEqual(1, len(main_profit_paths), "Expected one green operating-profit to net-profit ribbon.")
+                path = main_profit_paths[0]
+                self.assertLessEqual(
+                    path[2] - path[0],
+                    10,
+                    "The main profit ribbon should open away from the red deduction branch immediately after the operating-profit node.",
+                )
+                path_elements = colored_path_elements_between(svg_root, operating, net, "#ACDBA3")
+                self.assertEqual(1, len(path_elements))
+                self.assertGreaterEqual(
+                    path_elements[0].attrib.get("d", "").count("C "),
+                    8,
+                    "The operating-profit ribbon should use a multi-segment smootherstep profile on both boundaries.",
+                )
+
     def test_jd_non_operating_gain_and_tax_are_not_drawn_as_operating_deduction(self) -> None:
         svg_root = render_sankey_svg(JD_PAYLOAD, "en", "jd-q1-fy26-tax-source", quarter="2026Q1")
         text = svg_text_content(svg_root)

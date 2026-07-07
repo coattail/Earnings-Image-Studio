@@ -1484,6 +1484,36 @@ function smoothBoundaryCurve(x0, x1, y0, y1, geometry = {}) {
   return `C ${cp1x} ${y0}, ${cp2x} ${y1}, ${x1} ${y1}`;
 }
 
+function smootherStepValue(t) {
+  const clampedT = clamp(t, 0, 1);
+  return clampedT * clampedT * clampedT * (clampedT * (clampedT * 6 - 15) + 10);
+}
+
+function smootherStepDerivative(t) {
+  const clampedT = clamp(t, 0, 1);
+  return 30 * clampedT * clampedT * (clampedT - 1) * (clampedT - 1);
+}
+
+function smootherStepBoundaryCurve(x0, x1, y0, y1, geometry = {}) {
+  const segmentCount = Math.round(clamp(safeNumber(geometry.segments, 4), 2, 6));
+  const deltaX = x1 - x0;
+  const deltaY = y1 - y0;
+  return Array.from({ length: segmentCount }, (_value, index) => {
+    const t0 = index / segmentCount;
+    const t1 = (index + 1) / segmentCount;
+    const stepT = t1 - t0;
+    const startX = x0 + deltaX * t0;
+    const endX = x0 + deltaX * t1;
+    const startY = y0 + deltaY * smootherStepValue(t0);
+    const endY = y0 + deltaY * smootherStepValue(t1);
+    const cp1x = startX + (endX - startX) / 3;
+    const cp2x = endX - (endX - startX) / 3;
+    const cp1y = startY + deltaY * smootherStepDerivative(t0) * stepT / 3;
+    const cp2y = endY - deltaY * smootherStepDerivative(t1) * stepT / 3;
+    return `C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${endX} ${endY}`;
+  }).join(" ");
+}
+
 function cubicBezierValue(p0, p1, p2, p3, t) {
   const oneMinusT = 1 - t;
   return (
@@ -1597,6 +1627,15 @@ function flowEnvelopeAtX(targetX, x0, y0Top, y0Bottom, x1, y1Top, y1Bottom, opti
   const resolveBoundaryY = (startY, endY, startCurve, endCurve) => {
     if ((direction > 0 && targetX <= sourceJoinX) || (direction < 0 && targetX >= sourceJoinX)) return startY;
     if ((direction > 0 && targetX >= targetJoinX) || (direction < 0 && targetX <= targetJoinX)) return endY;
+    if (options.curveProfile === "smootherstep") {
+      const curveDx = targetJoinX - sourceJoinX;
+      const progress = clamp(
+        Math.abs(curveDx) > 0.0001 ? (targetX - sourceJoinX) / curveDx : 1,
+        0,
+        1
+      );
+      return startY + (endY - startY) * smootherStepValue(progress);
+    }
     const cp1x = sourceJoinX + direction * Math.abs(targetJoinX - sourceJoinX) * startCurve;
     const cp2x = targetJoinX - direction * Math.abs(targetJoinX - sourceJoinX) * endCurve;
     return cubicBezierYForX(targetX, sourceJoinX, cp1x, cp2x, targetJoinX, startY, startY, endY, endY);
@@ -1618,17 +1657,24 @@ function flowPath(x0, y0Top, y0Bottom, x1, y1Top, y1Bottom, options = {}) {
   } = resolveFlowCurveGeometry(x0, y0Top, y0Bottom, x1, y1Top, y1Bottom, options, {
     directionAware: false,
   });
+  const boundaryCurve =
+    options.curveProfile === "smootherstep"
+      ? (startX, endX, startY, endY) =>
+          smootherStepBoundaryCurve(startX, endX, startY, endY, {
+            segments: options.smootherStepSegments,
+          })
+      : (startX, endX, startY, endY, geometry) => smoothBoundaryCurve(startX, endX, startY, endY, geometry);
   return [
     `M ${x0} ${y0Top}`,
     `L ${sourceJoinX} ${y0Top}`,
-    smoothBoundaryCurve(sourceJoinX, targetJoinX, y0Top, y1Top, {
+    boundaryCurve(sourceJoinX, targetJoinX, y0Top, y1Top, {
       startCurve: topStartCurve,
       endCurve: topEndCurve,
     }),
     `L ${x1} ${y1Top}`,
     `L ${x1} ${y1Bottom}`,
     `L ${targetJoinX} ${y1Bottom}`,
-    smoothBoundaryCurve(targetJoinX, sourceJoinX, y1Bottom, y0Bottom, {
+    boundaryCurve(targetJoinX, sourceJoinX, y1Bottom, y0Bottom, {
       startCurve: bottomEndCurve,
       endCurve: bottomStartCurve,
     }),
