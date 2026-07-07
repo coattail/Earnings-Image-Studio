@@ -1364,6 +1364,11 @@ function renderPixelReplicaSvg(snapshot) {
   const sourceSliceMap = new Map(sourceSlices.map((slice) => [slice.item.id || slice.item.name, slice]));
   const leftDetailSlices = [];
   const isAdFunnelDetailLayout = snapshot.prototypeKey === "ad-funnel-bridge";
+  const resolvedPreLayoutNodeOffsetY = (nodeId) => {
+    const structuralOffset = snapshot.layout?.structuralNodeOffsets?.[nodeId] || {};
+    const manualOffset = snapshot.editorNodeOverrides?.[nodeId] || {};
+    return scaleY(safeNumber(structuralOffset.dy, 0)) + safeNumber(manualOffset.dy, 0);
+  };
   const leftDetailTargetKeys = new Set(
     leftDetailGroups
       .map((item) => normalizeLabelKey(item.targetId || item.targetName || item.target || item.groupName))
@@ -1417,6 +1422,17 @@ function renderPixelReplicaSvg(snapshot) {
       const groupCenterIndex = (groupSlices.length - 1) / 2;
       const groupStackHeight = groupSlices.reduce((sum, slice) => sum + slice.height, 0);
       const groupLaunchGapY = scaleY(safeNumber(snapshot.layout?.leftDetailLaunchGapY, 14));
+      const targetSourceIndex = sourceSlices.indexOf(targetSlice);
+      const targetSourceOffsetY = targetSourceIndex >= 0 ? resolvedPreLayoutNodeOffsetY(`source-${targetSourceIndex}`) : 0;
+      const middleHorizontalEntryStrength = clamp(
+        safeNumber(snapshot.layout?.leftDetailMiddleHorizontalEntryStrength, 0),
+        0,
+        1
+      );
+      const middleHorizontalEntryMaxPosition = Math.max(
+        safeNumber(snapshot.layout?.leftDetailMiddleHorizontalEntryMaxPosition, 0.01),
+        0
+      );
       const groupLaunchSpan = Math.max(
         targetSlice.height * safeNumber(snapshot.layout?.leftDetailLaunchTargetHeightRatio, 0.36),
         groupStackHeight * safeNumber(snapshot.layout?.leftDetailLaunchStackHeightRatio, 0.62),
@@ -1430,11 +1446,18 @@ function renderPixelReplicaSvg(snapshot) {
           groupPosition * launchStepY +
           Math.sign(groupPosition || 0) * groupNorm * groupLaunchGapY +
           Math.sign(groupPosition || 0) * slice.height * safeNumber(snapshot.layout?.leftDetailLaunchThicknessRatio, 0.14);
+        const launchCenter = targetSlice.center + launchOffsetY;
+        const shouldAlignMiddleEntry =
+          middleHorizontalEntryStrength > 0 &&
+          groupSlices.length >= 3 &&
+          Math.abs(groupPosition) <= middleHorizontalEntryMaxPosition;
         slice.groupIndex = index;
         slice.groupCount = groupSlices.length;
         slice.groupPosition = groupPosition;
         slice.groupNorm = groupNorm;
-        slice.launchCenter = targetSlice.center + launchOffsetY;
+        slice.launchCenter = shouldAlignMiddleEntry
+          ? launchCenter * (1 - middleHorizontalEntryStrength) + (slice.center + targetSourceOffsetY) * middleHorizontalEntryStrength
+          : launchCenter;
       });
       groupSlices.forEach((groupSlice) => leftDetailSlices.push(groupSlice));
     });
@@ -4057,6 +4080,20 @@ function renderPixelReplicaSvg(snapshot) {
       24 + positiveAdjustmentExtremeStrength * 14
     )
   );
+  const nodeOffsetForLogoReference = (nodeId) => {
+    const structuralOffset = snapshot.layout?.structuralNodeOffsets?.[nodeId] || {};
+    const manualOffset = snapshot.editorNodeOverrides?.[nodeId] || {};
+    return {
+      dx: safeNumber(structuralOffset.dx, 0) + safeNumber(manualOffset.dx, 0),
+      dy: scaleY(safeNumber(structuralOffset.dy, 0)) + safeNumber(manualOffset.dy, 0),
+    };
+  };
+  const revenueLogoReferenceOffset =
+    snapshot.layout?.logoFollowRevenueOffset === false
+      ? { dx: 0, dy: 0 }
+      : nodeOffsetForLogoReference("revenue");
+  const logoRevenueReferenceCenterX = revenueX + revenueLogoReferenceOffset.dx + nodeWidth / 2;
+  const logoRevenueReferenceTop = revenueTop + revenueLogoReferenceOffset.dy;
   const hasExplicitLogoPosition =
     snapshot.layout?.logoPositionMode === "manual" &&
     snapshot.layout?.logoX !== null &&
@@ -4067,10 +4104,10 @@ function renderPixelReplicaSvg(snapshot) {
   const renderedLogoMetrics = corporateLogoRenderedMetrics(snapshot.companyLogoKey, logoScale);
   const logoX = hasExplicitLogoPosition
     ? safeNumber(snapshot.layout?.logoX) + leftShiftX
-    : revenueX + nodeWidth / 2 - renderedLogoMetrics.width / 2;
+    : logoRevenueReferenceCenterX - renderedLogoMetrics.width / 2;
   const logoHeight = renderedLogoMetrics.height;
   const logoDefaultY =
-    revenueTop -
+    logoRevenueReferenceTop -
     logoHeight -
     scaleY(safeNumber(snapshot.layout?.logoGapAboveRevenueY, 42) * CORPORATE_LOGO_REVENUE_GAP_MULTIPLIER);
   const logoMinY = layoutY(snapshot.layout?.logoMinY, 134);
@@ -4079,7 +4116,7 @@ function renderPixelReplicaSvg(snapshot) {
     : clamp(
         logoDefaultY,
         logoMinY,
-        revenueTop - logoHeight - scaleY(safeNumber(snapshot.layout?.logoBottomClearanceY, 16))
+        logoRevenueReferenceTop - logoHeight - scaleY(safeNumber(snapshot.layout?.logoBottomClearanceY, 16))
       );
   const opexSummaryX =
     snapshot.layout?.opexSummaryX !== null && snapshot.layout?.opexSummaryX !== undefined
@@ -4088,6 +4125,16 @@ function renderPixelReplicaSvg(snapshot) {
   const opexSummaryY = layoutY(snapshot.layout?.opexSummaryY, Math.min(opexBottom / verticalScale + 56, 904));
   const opexSummaryAnchor = snapshot.layout?.opexSummaryAnchor || "middle";
   const autoLayoutNodeOffsets = Object.create(null);
+  const structuralNodeOffsets = snapshot.layout?.structuralNodeOffsets;
+  if (structuralNodeOffsets && typeof structuralNodeOffsets === "object") {
+    Object.entries(structuralNodeOffsets).forEach(([nodeId, offset]) => {
+      if (!nodeId || !offset || typeof offset !== "object") return;
+      autoLayoutNodeOffsets[nodeId] = {
+        dx: safeNumber(offset.dx, 0),
+        dy: scaleY(safeNumber(offset.dy, 0)),
+      };
+    });
+  }
   const autoLayoutOffsetForNode = (nodeId) => {
     const offset = autoLayoutNodeOffsets?.[nodeId] || {};
     return {
@@ -7586,6 +7633,22 @@ function renderPixelReplicaSvg(snapshot) {
     opexBoxes[1] = shiftBoxCenter(lower, nextCenterY);
   };
   compactTwoItemOpexTerminalFan();
+  const requestedOpexTerminalGroupShiftY = scaleY(
+    Math.max(safeNumber(snapshot.layout?.opexTerminalGroupShiftY, 0), 0)
+  );
+  if (requestedOpexTerminalGroupShiftY > 0.5 && opexBoxes.length) {
+    const opexTerminalBottomLimit = height - scaleY(
+      safeNumber(snapshot.layout?.opexTerminalBottomClearanceY, 56)
+    );
+    const availableOpexTerminalShiftY = maxActualBoxGroupShiftDown(
+      opexBoxes,
+      opexTerminalBottomLimit
+    );
+    shiftBoxSetBy(
+      opexBoxes,
+      Math.min(requestedOpexTerminalGroupShiftY, availableOpexTerminalShiftY)
+    );
+  }
   repelCostBreakdownFromOpexSummary();
   refreshEditableNodeFrames();
   const revenueGrossBand = shiftedInterval(revenueGrossSourceBand.top, revenueGrossSourceBand.bottom, "revenue");

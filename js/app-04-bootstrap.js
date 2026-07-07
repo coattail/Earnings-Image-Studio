@@ -1,4 +1,7 @@
 const BAR_CHART_LOGO_LAYOUT_OVERRIDES = Object.freeze({
+  samsung: Object.freeze({
+    dy: 22,
+  }),
   alibaba: Object.freeze({
     dx: 36,
     dy: -96,
@@ -382,7 +385,12 @@ function formatBarAxisTick(value, step) {
 function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
   const width = 2048;
   const height = 1325;
-  const history = buildRevenueSegmentBarHistory(company, snapshot?.quarterKey, safeNumber(options.maxQuarters, 30));
+  const configuredMaxQuarters = safeNumber(company?.classificationPolicy?.maxBarQuarters, 30);
+  const history = buildRevenueSegmentBarHistory(
+    company,
+    snapshot?.quarterKey,
+    safeNumber(options.maxQuarters, configuredMaxQuarters)
+  );
   const chartTitle =
     currentChartLanguage() === "en"
       ? `${displayChartTitle(company?.nameEn || "")} Revenue by Segment`
@@ -532,7 +540,11 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
   const barsTotalWidth = barWidth * barCount + barGap * Math.max(barCount - 1, 0);
   const barStartX = plotLeft + Math.max((plotRight - plotLeft - barsTotalWidth) / 2, 0);
   const chartHeight = Math.max(baselineY - chartTop, 120);
-  const valueScale = chartHeight / Math.max(history.maxRevenueBn, 1);
+  // Samsung and a few other issuers report business-unit sales before intersegment
+  // eliminations, so the stacked total can exceed consolidated revenue. Scale against
+  // the actual stack and keep explicit headroom below the legend.
+  const scaleMaxRevenueBn = Math.max(history.maxRevenueBn, history.maxStackRevenueBn || 0, 1) * 1.06;
+  const valueScale = chartHeight / scaleMaxRevenueBn;
   const barCornerRadius = Math.min(14, Math.max(6, barWidth * 0.24));
   const topQuarterFontSize = currentChartLanguage() === "en" ? 58 : 56;
   const periodEndFontSize = currentChartLanguage() === "en" ? 28 : 26;
@@ -824,6 +836,7 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
     </g>
   `;
 
+  svg += `<g data-bar-series="true" data-bar-plot-top="${chartTop.toFixed(2)}" data-bar-scale-max="${scaleMaxRevenueBn.toFixed(3)}">`;
   history.quarters.forEach((quarter, quarterIndex) => {
     const x = barStartX + quarterIndex * (barWidth + barGap);
     const activeKeys = history.stackOrder.filter((segmentKey) => safeNumber(quarter.segmentMap?.[segmentKey]) > 0.005);
@@ -873,6 +886,7 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
       )}</text>`;
     }
   });
+  svg += `</g>`;
 
   svg += "</g></svg>";
   return {
@@ -1583,7 +1597,7 @@ async function renderCurrent() {
     let barHistory = null;
     const isBarsMode = currentChartViewMode() === "bars";
     if (isBarsMode) {
-      const barRenderResult = EarningsVizRuntime.render.renderRevenueSegmentBarsSvg(snapshot, company, { maxQuarters: 30 });
+      const barRenderResult = EarningsVizRuntime.render.renderRevenueSegmentBarsSvg(snapshot, company);
       refs.chartOutput.innerHTML = barRenderResult.svg;
       refs.chartOutput.style.aspectRatio = `${barRenderResult.width} / ${barRenderResult.height}`;
       refineRenderedBarChartLogoPlacement(refs.chartOutput?.querySelector("svg"));

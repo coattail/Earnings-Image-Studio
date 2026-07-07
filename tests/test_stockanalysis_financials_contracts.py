@@ -59,6 +59,37 @@ def _coca_cola_early_april_table():
     return BeautifulSoup(html, "html.parser").find("table")
 
 
+def _configured_metrics_company() -> dict[str, object]:
+    company = _company()
+    company.update(
+        {
+            "id": "memory-co",
+            "financialPath": "quote/krx/000000",
+            "financialMetricsRevenueStyle": "semiconductor-product-mix",
+            "financialMetricsRevenueRows": [
+                {"row": "DRAM Revenue", "growthRow": "DRAM Revenue Growth", "name": "DRAM", "nameZh": "DRAM", "memberKey": "dram"},
+                {"row": "NAND Revenue", "growthRow": "NAND Revenue Growth", "name": "NAND", "nameZh": "NAND", "memberKey": "nand"},
+                {"row": "Other Revenue", "name": "Other", "nameZh": "其他", "memberKey": "other"},
+            ],
+        }
+    )
+    return company
+
+
+def _business_metrics_html() -> str:
+    return """
+    <table>
+      <tr><th>Fiscal Quarter</th><th>Q1 2026</th></tr>
+      <tr><th>Period Ending</th><td>Mar 31, 2026</td></tr>
+      <tr><th>DRAM Revenue</th><td>40.66T</td></tr>
+      <tr><th>DRAM Revenue Growth</th><td>189.66%</td></tr>
+      <tr><th>NAND Revenue</th><td>11.57T</td></tr>
+      <tr><th>NAND Revenue Growth</th><td>258.46%</td></tr>
+      <tr><th>Other Revenue</th><td>343.42B</td></tr>
+    </table>
+    """
+
+
 class StockAnalysisFinancialContractsTests(unittest.TestCase):
     def test_load_table_prefers_financial_table_over_first_table(self) -> None:
         html = """
@@ -130,6 +161,25 @@ class StockAnalysisFinancialContractsTests(unittest.TestCase):
         self.assertIn("2026Q1", result["financials"])
         self.assertNotIn("2026Q2", result["financials"])
         self.assertEqual(result["financials"]["2026Q1"]["periodEnd"], "2026-04-03")
+
+    def test_configured_business_metrics_add_product_revenue_segments(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            with (
+                patch.object(stockanalysis_financials, "CACHE_DIR", Path(tmp_dir)),
+                patch.object(stockanalysis_financials, "_load_table", return_value=("Financials in millions KRW", _single_quarter_table())),
+                patch.object(stockanalysis_financials, "_request_text", return_value=_business_metrics_html()),
+            ):
+                result = stockanalysis_financials.fetch_stockanalysis_financial_history(_configured_metrics_company(), refresh=True)
+
+        entry = result["financials"]["2026Q1"]
+        segments = {row["memberKey"]: row for row in entry["officialRevenueSegments"]}
+        self.assertEqual(entry["officialRevenueStyle"], "semiconductor-product-mix")
+        self.assertEqual(set(segments), {"dram", "nand", "other"})
+        self.assertEqual(segments["dram"]["valueBn"], 40660.0)
+        self.assertEqual(segments["nand"]["valueBn"], 11570.0)
+        self.assertEqual(segments["other"]["valueBn"], 343.42)
+        self.assertEqual(segments["dram"]["yoyPct"], 189.66)
+        self.assertIn("/financials/metrics/?p=quarterly", segments["dram"]["sourceUrl"])
 
 
 if __name__ == "__main__":

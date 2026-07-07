@@ -74,6 +74,8 @@ OUTPUT_PATH = DATA_DIR / "earnings-dataset.json"
 DATASET_INDEX_PATH = DATA_DIR / "dataset-index.json"
 MANUAL_PRESETS_PATH = DATA_DIR / "manual-presets.json"
 MANUAL_COMPANY_OVERRIDES_PATH = DATA_DIR / "manual-company-overrides.json"
+KOREAN_REVENUE_HISTORY_PATH = DATA_DIR / "korean-revenue-history.json"
+COMPANY_MARKET_CAPS_PATH = DATA_DIR / "company-market-caps.json"
 OFFICIAL_SEGMENT_CACHE_DIR = DATA_DIR / "cache" / "official-segments"
 OFFICIAL_REVENUE_STRUCTURE_CACHE_DIR = DATA_DIR / "cache" / "official-revenue-structures"
 FX_CACHE_PATH = DATA_DIR / "cache" / "fx-rates.json"
@@ -83,10 +85,10 @@ FX_LOOKUP_TIMEOUT_SECONDS = 4
 FX_LOOKUP_MISS_KEYS: set[str] = set()
 
 UNIVERSE_SOURCE = {
-    "label": "StockTitan US market cap ranking",
-    "url": "https://www.stocktitan.net/market-cap/us-stocks/",
-    "as_of": "2026-06-25",
-    "note": "Base universe follows the US top-30 list, with Tencent, Alibaba, JD.com, NetEase, Xiaomi, BYD, and Meituan added as international expansion samples.",
+    "label": "CompaniesMarketCap point-in-time ranking",
+    "url": "https://companiesmarketcap.com/",
+    "as_of": "2026-07-06",
+    "note": "The configured 40-company universe is sorted by a single USD market-cap snapshot; international listings and ADRs use the source's comparable company-level values.",
 }
 
 TOP30_COMPANIES: list[dict[str, Any]] = [
@@ -128,7 +130,58 @@ TOP30_COMPANIES: list[dict[str, Any]] = [
     {"id": "netease", "ticker": "NTES", "nameZh": "网易", "nameEn": "NetEase", "slug": "ntes", "rank": 36, "isAdr": True, "brand": {"primary": "#D71920", "secondary": "#111827", "accent": "#FEE2E2"}, "financialSource": "stockanalysis"},
     {"id": "meituan", "ticker": "MPNGY", "nameZh": "美团", "nameEn": "Meituan", "slug": "mpngy", "rank": 37, "isAdr": True, "brand": {"primary": "#FFD100", "secondary": "#111827", "accent": "#FEF3C7"}, "financialSource": "stockanalysis", "financialPath": "quote/hkg/3690"},
     {"id": "jd", "ticker": "JD", "nameZh": "京东集团", "nameEn": "JD.com", "slug": "jd", "rank": 38, "isAdr": True, "brand": {"primary": "#D70A0A", "secondary": "#111827", "accent": "#FEE2E2"}, "financialSource": "stockanalysis"},
+    {
+        "id": "samsung", "ticker": "005930", "nameZh": "三星电子", "nameEn": "Samsung Electronics", "slug": "005930", "rank": 39, "isAdr": False,
+        "brand": {"primary": "#1428A0", "secondary": "#111827", "accent": "#E8EDFF"},
+        "financialSource": "stockanalysis", "financialPath": "quote/krx/005930", "financialMetricsRevenueStyle": "samsung-business-unit-bridge",
+        "financialMetricsRevenueRows": [
+            {"row": "DX Revenue", "growthRow": "DX Revenue Growth", "name": "Device eXperience (DX)", "nameZh": "DX 设备体验", "memberKey": "dx", "validationEligible": False},
+            {"row": "DS Revenue", "growthRow": "DS Revenue Growth", "name": "Device Solutions (DS)", "nameZh": "DS 设备解决方案", "memberKey": "ds", "validationEligible": False},
+            {"row": "SDC Revenue", "growthRow": "SDC Revenue Growth", "name": "Samsung Display (SDC)", "nameZh": "SDC 三星显示", "memberKey": "sdc", "validationEligible": False},
+            {"row": "Harman Revenue", "growthRow": "Harman Revenue Growth", "name": "Harman", "nameZh": "哈曼", "memberKey": "harman", "validationEligible": False},
+        ],
+    },
+    {
+        "id": "sk-hynix", "ticker": "000660", "nameZh": "SK海力士", "nameEn": "SK hynix", "slug": "000660", "rank": 40, "isAdr": False,
+        "brand": {"primary": "#E0002A", "secondary": "#F58220", "accent": "#FDE7EC"},
+        "financialSource": "stockanalysis", "financialPath": "quote/krx/000660", "financialMetricsRevenueStyle": "semiconductor-product-mix",
+        "financialMetricsRevenueRows": [
+            {"row": "DRAM Revenue", "growthRow": "DRAM Revenue Growth", "name": "DRAM", "nameZh": "DRAM（含 HBM）", "memberKey": "dram"},
+            {"row": "NAND Flash Revenue", "growthRow": "NAND Flash Revenue Growth", "name": "NAND Flash / Storage", "nameZh": "NAND 闪存与存储", "memberKey": "nand"},
+            {"row": "Other Product & Service Revenue", "growthRow": "Other Product & Service Revenue Growth", "name": "Other products and services", "nameZh": "其他产品与服务", "memberKey": "otherproductsservices"},
+        ],
+    },
 ]
+
+
+def apply_company_market_cap_snapshot(companies: list[dict[str, Any]]) -> None:
+    """Attach one comparable USD snapshot and rank the configured universe by it."""
+    if not COMPANY_MARKET_CAPS_PATH.exists():
+        return
+    snapshot = json.loads(COMPANY_MARKET_CAPS_PATH.read_text(encoding="utf-8"))
+    entries = snapshot.get("companies") if isinstance(snapshot, dict) else None
+    if not isinstance(entries, dict):
+        return
+    source = snapshot.get("source") if isinstance(snapshot.get("source"), dict) else {}
+    as_of = str(source.get("asOf") or "").strip()
+    for company in companies:
+        entry = entries.get(company.get("id"))
+        if not isinstance(entry, dict):
+            continue
+        market_cap_usd = entry.get("marketCapUsd")
+        if not isinstance(market_cap_usd, (int, float)) or market_cap_usd <= 0:
+            continue
+        company["marketCapUsd"] = int(market_cap_usd)
+        company["marketCapAsOf"] = as_of
+        company["marketCapSourceRank"] = entry.get("sourceRank")
+        company["marketCapSource"] = source.get("label")
+        company["marketCapSourceUrl"] = entry.get("sourceUrl") or source.get("url")
+    companies.sort(key=lambda item: (-float(item.get("marketCapUsd") or 0), str(item.get("id") or "")))
+    for rank, company in enumerate(companies, start=1):
+        company["rank"] = rank
+
+
+apply_company_market_cap_snapshot(TOP30_COMPANIES)
 
 BAR_SEGMENT_CANONICAL_BY_COMPANY: dict[str, dict[str, str]] = {
     "alphabet": {
@@ -452,6 +505,9 @@ def preserve_existing_company_history(payload: dict[str, Any], existing_payload:
         "officialOpexBreakdown",
         "officialCostBreakdown",
         "officialRevenueStyle",
+        "officialRevenueReconciliation",
+        "revenueClassificationSource",
+        "revenueClassificationSourceUrl",
     )
     for quarter, existing_entry in existing_financials.items():
         if not isinstance(existing_entry, dict):
@@ -494,7 +550,10 @@ def is_company_payload_cache_compatible(payload: dict[str, Any] | None) -> bool:
 
 def sync_company_metadata(payload: dict[str, Any], company: dict[str, Any]) -> dict[str, Any]:
     result = payload
-    for key in ("id", "ticker", "nameZh", "nameEn", "slug", "rank", "isAdr", "brand"):
+    for key in (
+        "id", "ticker", "nameZh", "nameEn", "slug", "rank", "isAdr", "brand",
+        "marketCapUsd", "marketCapAsOf", "marketCapSourceRank", "marketCapSource", "marketCapSourceUrl",
+    ):
         if key in company:
             result[key] = deepcopy(company[key])
     return result
@@ -513,6 +572,7 @@ def build_company_payload_for_dataset(
     payload = supplement_tencent_official_financials(payload)
     payload = sanitize_implausible_q4_revenue_aligned_statements(payload)
     payload = apply_manual_company_override(payload, company, manual_company_overrides)
+    payload = apply_korean_revenue_history(payload, company)
     payload = apply_usd_display_fields(payload, fx_cache)
     payload = apply_fused_extraction(payload, company, refresh=refresh)
     payload = apply_amd_official_segment_revenue_corrections(payload)
@@ -1807,6 +1867,255 @@ def load_manual_company_overrides() -> dict[str, Any]:
     except Exception:
         return {}
     return payload if isinstance(payload, dict) else {}
+
+
+def load_korean_revenue_history() -> dict[str, Any]:
+    if not KOREAN_REVENUE_HISTORY_PATH.exists():
+        return {}
+    try:
+        payload = json.loads(KOREAN_REVENUE_HISTORY_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    return payload if isinstance(payload, dict) else {}
+
+
+SAMSUNG_REVENUE_SCHEMAS: dict[str, list[dict[str, Any]]] = {
+    "legacy": [
+        {"memberKey": "ce", "name": "Consumer Electronics (CE)", "nameZh": "CE 消费电子", "supportLinesZh": ["电视 · 家电"]},
+        {"memberKey": "im", "name": "IT & Mobile Communications (IM)", "nameZh": "IM IT 与移动通信", "supportLinesZh": ["手机 · 网络设备"]},
+        {"memberKey": "ds", "name": "Device Solutions — Semiconductor", "nameZh": "DS 半导体", "supportLinesZh": ["存储 · System LSI · 晶圆代工"]},
+        {"memberKey": "dp", "name": "Display Panel (DP)", "nameZh": "DP 显示面板", "supportLinesZh": ["显示面板"]},
+        {"memberKey": "harman", "name": "Harman", "nameZh": "哈曼", "supportLinesZh": ["车载电子 · 音响 · 互联服务"]},
+    ],
+    "current": [
+        {"memberKey": "dx", "name": "Device eXperience (DX)", "nameZh": "DX 设备体验", "supportLinesZh": ["手机 · 电视 · 家电 · 网络设备"]},
+        {"memberKey": "ds", "name": "Device Solutions (DS)", "nameZh": "DS 设备解决方案", "supportLinesZh": ["存储 · System LSI · 晶圆代工"]},
+        {"memberKey": "sdc", "name": "Samsung Display (SDC)", "nameZh": "SDC 三星显示", "supportLinesZh": ["OLED 显示面板"]},
+        {"memberKey": "harman", "name": "Harman", "nameZh": "哈曼", "supportLinesZh": ["车载电子 · 音响 · 互联服务"]},
+    ],
+}
+
+
+SK_HYNIX_REVENUE_PRODUCTS: list[dict[str, Any]] = [
+    {"memberKey": "dram", "name": "DRAM", "nameZh": "DRAM（含 HBM）", "supportLinesZh": ["HBM · 服务器 DRAM · 移动 DRAM"]},
+    {"memberKey": "nand", "name": "NAND Flash / Storage", "nameZh": "NAND 闪存与存储", "supportLinesZh": ["NAND · SSD · 企业级 SSD"]},
+    {"memberKey": "otherproductsservices", "name": "Other Products & Services", "nameZh": "其他产品与服务", "supportLinesZh": ["CIS · 晶圆代工及其他"]},
+]
+
+
+def _quarter_source_url(template: str, quarter_key: str) -> str:
+    match = re.fullmatch(r"(\d{4})Q([1-4])", str(quarter_key))
+    if not match:
+        return template
+    return template.format(year=match.group(1), quarter=match.group(2))
+
+
+def _quarter_period_end(quarter_key: str) -> str | None:
+    match = re.fullmatch(r"(\d{4})Q([1-4])", str(quarter_key))
+    if not match:
+        return None
+    month_day = {"1": "03-31", "2": "06-30", "3": "09-30", "4": "12-31"}[match.group(2)]
+    return f"{match.group(1)}-{month_day}"
+
+
+def _build_korean_history_statement(
+    company_id: str,
+    quarter_key: str,
+    historical_entry: dict[str, Any],
+    source_url: str,
+) -> dict[str, Any] | None:
+    if company_id == "samsung":
+        raw_values = historical_entry.get("statementTrillion")
+        if not isinstance(raw_values, list) or len(raw_values) != 12:
+            return None
+        values = [round(float(value) * 1000, 3) for value in raw_values]
+        revenue, cogs, gross, total_sga, rnd, operating, other, equity, finance, pretax, tax, net = values
+        sgna = round(total_sga - rnd, 3)
+        non_operating = round(pretax - operating, 3)
+        source_name = "samsung-official-earnings-presentation"
+    else:
+        raw_values = historical_entry.get("statementBn")
+        if not isinstance(raw_values, list) or len(raw_values) != 8:
+            return None
+        revenue, cogs, gross, total_sga, operating, pretax, tax, net = [round(float(value), 3) for value in raw_values]
+        sgna = total_sga
+        rnd = None
+        non_operating = round(pretax - operating, 3)
+        source_name = "sk-hynix-official-earnings-presentation"
+
+    fiscal_year, fiscal_quarter = quarter_key.split("Q", 1)
+    margin = lambda numerator: round(float(numerator) / revenue * 100, 3) if revenue else None
+    return {
+        "calendarQuarter": quarter_key,
+        "periodEnd": _quarter_period_end(quarter_key),
+        "fiscalYear": fiscal_year,
+        "fiscalQuarter": f"Q{fiscal_quarter}",
+        "fiscalLabel": f"FY{fiscal_year} Q{fiscal_quarter}",
+        "statementCurrency": "KRW",
+        "revenueBn": revenue,
+        "revenueYoyPct": None,
+        "costOfRevenueBn": cogs,
+        "grossProfitBn": gross,
+        "sgnaBn": sgna,
+        "rndBn": rnd,
+        "otherOpexBn": None,
+        "operatingExpensesBn": round(gross - operating, 3),
+        "operatingIncomeBn": operating,
+        "nonOperatingBn": non_operating,
+        "pretaxIncomeBn": pretax,
+        "taxBn": tax,
+        "netIncomeBn": net,
+        "netIncomeYoyPct": None,
+        "grossMarginPct": margin(gross),
+        "operatingMarginPct": margin(operating),
+        "profitMarginPct": margin(net),
+        "effectiveTaxRatePct": round(tax / pretax * 100, 3) if pretax else None,
+        "revenueQoqPct": None,
+        "grossMarginYoyDeltaPp": None,
+        "operatingMarginYoyDeltaPp": None,
+        "profitMarginYoyDeltaPp": None,
+        "statementSource": source_name,
+        "statementSourceUrl": source_url,
+        "statementMeta": {
+            "statementSource": source_name,
+            "statementSourceUrl": source_url,
+            "statementValueMode": "quarterly",
+            "statementSpanQuarters": 1,
+            "qualityFlags": [],
+            "adapterId": "korean-revenue-history",
+        },
+    }
+
+
+def apply_korean_revenue_history(payload: dict[str, Any], company: dict[str, Any]) -> dict[str, Any]:
+    company_id = str(company.get("id") or payload.get("id") or "").strip().lower()
+    if company_id not in {"samsung", "sk-hynix"}:
+        return payload
+    history = load_korean_revenue_history().get(company_id)
+    if not isinstance(history, dict):
+        return payload
+    financials = payload.get("financials")
+    quarters = history.get("quarters")
+    if not isinstance(financials, dict) or not isinstance(quarters, dict):
+        return payload
+    classification_policy = payload.get("classificationPolicy")
+    if not isinstance(classification_policy, dict):
+        classification_policy = {}
+    if company_id == "sk-hynix":
+        classification_policy.pop("allowLatestRevenueGap", None)
+        classification_policy.pop("latestRevenueGapReason", None)
+    classification_policy["maxBarQuarters"] = 36
+    payload["classificationPolicy"] = classification_policy
+
+    source_template = str(history.get("sourceUrlTemplate") or "")
+    source_form = str(history.get("sourceForm") or "official quarterly earnings presentation")
+    for quarter_key, historical_entry in quarters.items():
+        if not isinstance(historical_entry, dict):
+            continue
+        source_quarter = str(historical_entry.get("sourceQuarter") or quarter_key)
+        source_url = str(historical_entry.get("sourceUrl") or _quarter_source_url(source_template, source_quarter))
+        entry = financials.get(quarter_key)
+        if not isinstance(entry, dict):
+            entry = _build_korean_history_statement(company_id, quarter_key, historical_entry, source_url)
+            if not isinstance(entry, dict):
+                continue
+            financials[quarter_key] = entry
+        if company_id == "samsung":
+            schema = SAMSUNG_REVENUE_SCHEMAS.get(str(historical_entry.get("schema") or ""))
+            values = historical_entry.get("valuesTrillion")
+            if not schema or not isinstance(values, list) or len(schema) != len(values):
+                continue
+            rows = []
+            for definition, value_trillion in zip(schema, values):
+                row = deepcopy(definition)
+                row.update(
+                    {
+                        "valueBn": round(float(value_trillion) * 1000, 3),
+                        "sourceUrl": source_url,
+                        "sourceForm": source_form,
+                        "metricMode": "official-business-unit-sales",
+                        "validationEligible": False,
+                        "validationNotes": "Business-unit sales include intersegment transactions; use the reconciliation bridge to consolidated revenue.",
+                    }
+                )
+                rows.append(row)
+            segment_total = sum(float(row["valueBn"]) for row in rows)
+            consolidated_revenue = float(entry.get("revenueBn") or 0)
+            entry["officialRevenueSegments"] = rows
+            entry["officialRevenueStyle"] = "samsung-business-unit-bridge"
+            entry["revenueClassificationSource"] = "samsung-official-earnings-presentation"
+            entry["revenueClassificationSourceUrl"] = source_url
+            if consolidated_revenue > 0:
+                entry["officialRevenueReconciliation"] = {
+                    "name": "Intersegment eliminations and other reconciliation",
+                    "nameZh": "分部间内部交易抵销及其他调节",
+                    "valueBn": round(consolidated_revenue - segment_total, 3),
+                    "sourceUrl": source_url,
+                    "sourceForm": source_form,
+                }
+        else:
+            mix_pct = historical_entry.get("mixPct")
+            if not isinstance(mix_pct, list) or len(mix_pct) != len(SK_HYNIX_REVENUE_PRODUCTS):
+                continue
+            consolidated_revenue = float(entry.get("revenueBn") or 0)
+            if consolidated_revenue <= 0:
+                continue
+            metric_mode = str(historical_entry.get("metricMode") or "official-product-mix-derived")
+            notes = str(historical_entry.get("notes") or "Amounts are derived from the officially disclosed KRW product revenue mix and consolidated revenue.")
+            rows = []
+            allocated = 0.0
+            for index, (definition, pct) in enumerate(zip(SK_HYNIX_REVENUE_PRODUCTS, mix_pct)):
+                value_bn = round(consolidated_revenue * float(pct) / 100, 3)
+                if index == len(SK_HYNIX_REVENUE_PRODUCTS) - 1:
+                    value_bn = round(consolidated_revenue - allocated, 3)
+                allocated += value_bn
+                row = deepcopy(definition)
+                row.update(
+                    {
+                        "valueBn": value_bn,
+                        "mixPct": float(pct),
+                        "sourceUrl": source_url,
+                        "sourceForm": source_form,
+                        "metricMode": metric_mode,
+                        "validationEligible": True,
+                        "validationNotes": notes,
+                    }
+                )
+                rows.append(row)
+            entry["officialRevenueSegments"] = rows
+            entry["officialRevenueStyle"] = "semiconductor-product-mix"
+            entry["revenueClassificationSource"] = (
+                "sk-hynix-fy-product-mix-proxy" if metric_mode == "annual-mix-proxy" else "sk-hynix-official-product-mix"
+            )
+            entry["revenueClassificationSourceUrl"] = source_url
+            entry["revenueClassificationMetricMode"] = metric_mode
+
+    if company_id == "sk-hynix":
+        for entry in financials.values():
+            if not isinstance(entry, dict):
+                continue
+            rows = entry.get("officialRevenueSegments")
+            consolidated_revenue = float(entry.get("revenueBn") or 0)
+            if not isinstance(rows, list) or not rows or consolidated_revenue <= 0:
+                continue
+            classified_revenue = sum(float(row.get("valueBn") or 0) for row in rows if isinstance(row, dict))
+            difference = round(consolidated_revenue - classified_revenue, 3)
+            if abs(difference) > 0.001:
+                source_url = str(entry.get("revenueClassificationSourceUrl") or entry.get("statementSourceUrl") or "")
+                entry["officialRevenueReconciliation"] = {
+                    "name": "Product classification reconciliation",
+                    "nameZh": "产品分类口径调节",
+                    "valueBn": difference,
+                    "sourceUrl": source_url,
+                    "sourceForm": "reconciliation to consolidated revenue",
+                }
+            else:
+                entry.pop("officialRevenueReconciliation", None)
+
+    enrich_growth_rows(financials, "officialRevenueSegments")
+    recompute_revenue_growth_metrics(financials)
+    payload["quarters"] = sorted(financials.keys(), key=parse_period)
+    return payload
 
 
 def deep_merge_dicts(base: dict[str, Any], override: dict[str, Any]) -> dict[str, Any]:
@@ -3342,6 +3651,7 @@ def main() -> int:
                     diagnostics["revenueStructureCacheSupplementError"] = str(exc)
                     payload["parserDiagnostics"] = diagnostics
                 payload = apply_manual_company_override(payload, company, manual_company_overrides)
+                payload = apply_korean_revenue_history(payload, company)
                 payload = apply_usd_display_fields(payload, fx_cache)
         if payload is None:
             try:
@@ -3356,6 +3666,7 @@ def main() -> int:
                 print(f"  failed: {exc}", file=sys.stderr, flush=True)
                 continue
         payload = preserve_existing_company_history(payload, existing_companies_by_id.get(str(company["id"])))
+        payload = apply_korean_revenue_history(payload, company)
         payload = sync_company_metadata(payload, company)
         presets = manual_presets.get(str(company["id"])) or {}
         payload = finalize_company_payload(company, payload, presets)
@@ -3379,6 +3690,7 @@ def main() -> int:
             if is_company_payload_cache_compatible(cached_payload):
                 presets = manual_presets.get(str(company["id"])) or {}
                 cached_payload = preserve_existing_company_history(cached_payload, existing_companies_by_id.get(str(company["id"])))
+                cached_payload = apply_korean_revenue_history(cached_payload, company)
                 cached_payload = sync_company_metadata(cached_payload, company)
                 cached_payload = finalize_company_payload(company, cached_payload, presets)
                 results_by_company_id[company["id"]] = cached_payload
@@ -3413,6 +3725,7 @@ def main() -> int:
                 print(f"  failed: {exc}", file=sys.stderr, flush=True)
                 continue
             payload = preserve_existing_company_history(payload, existing_companies_by_id.get(str(company["id"])))
+            payload = apply_korean_revenue_history(payload, company)
             payload = sync_company_metadata(payload, company)
             presets = manual_presets.get(str(company["id"])) or {}
             payload = finalize_company_payload(company, payload, presets)
@@ -3426,6 +3739,7 @@ def main() -> int:
             continue
         presets = manual_presets.get(str(company["id"])) or {}
         payload = sync_company_metadata(results_by_company_id[company["id"]], company)
+        payload = apply_korean_revenue_history(payload, company)
         results_by_company_id[company["id"]] = finalize_company_payload(company, payload, presets)
     companies = [results_by_company_id[company["id"]] for company in TOP30_COMPANIES if company["id"] in results_by_company_id]
     classification_audit = build_dataset_classification_audit(companies)

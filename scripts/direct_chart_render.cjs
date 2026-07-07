@@ -238,7 +238,7 @@ function main() {
   if (modes.includes("bars")) {
     debug("rendering bars");
     const { normalizedCompany: barCompany, snapshot, EarningsVizRuntime } = initializeRuntimeForQuarter(rootDir, companyPayload, quarterKey, requestedLanguage);
-    const barRender = EarningsVizRuntime.render.renderRevenueSegmentBarsSvg(snapshot, barCompany, { maxQuarters: 30 });
+    const barRender = EarningsVizRuntime.render.renderRevenueSegmentBarsSvg(snapshot, barCompany);
     const barsPath = path.join(outputDir, `${safeBaseName}-bars.svg`);
     writeSvg(barsPath, barRender.svg);
     debug(`wrote bars svg ${barsPath}`);

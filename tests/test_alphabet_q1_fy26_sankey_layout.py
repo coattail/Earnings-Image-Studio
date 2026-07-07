@@ -69,6 +69,19 @@ def source_revenue_path_by_fill(svg_root: ET.Element, fill: str) -> list[float]:
     raise AssertionError(f"Missing source-to-revenue path with fill {fill}")
 
 
+def left_detail_path_by_index(svg_root: ET.Element, index: int) -> list[float]:
+    detail = visible_rect(svg_root, f"left-detail-{index}")
+    detail_right = detail["x"] + detail["width"]
+    candidates = []
+    for path in svg_root.findall(".//svg:path", SVG_NS):
+        numbers = path_numbers(path.attrib.get("d", ""))
+        if len(numbers) >= 14 and abs(numbers[0] - detail_right) <= 1.5:
+            candidates.append(numbers)
+    if index >= len(candidates):
+        raise AssertionError(f"Missing left detail path for index {index}")
+    return candidates[index]
+
+
 def path_start_center(numbers: list[float]) -> float:
     return (numbers[1] + numbers[-1]) / 2
 
@@ -143,6 +156,18 @@ class AlphabetQ1FY26SankeyLayoutTests(unittest.TestCase):
             path_start_center(other_path),
             path_target_center(other_path) + 120,
             "Tiny lower non-ad revenue sources should keep an upward entry, preserving the lower fan.",
+        )
+
+    def test_middle_ad_detail_enters_parent_revenue_horizontally(self) -> None:
+        svg_root = render_alphabet_svg()
+
+        youtube_ads_path = left_detail_path_by_index(svg_root, 1)
+
+        self.assertAlmostEqual(
+            path_start_center(youtube_ads_path),
+            path_target_center(youtube_ads_path),
+            delta=12,
+            msg="The middle YouTube Ads detail should enter the ad revenue parent nearly horizontally.",
         )
 
     def test_right_expense_terminals_form_a_compact_fan(self) -> None:

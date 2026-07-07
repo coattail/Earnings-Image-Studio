@@ -5675,13 +5675,24 @@ function buildRevenueSegmentBarHistory(company, anchorQuarterKey, maxQuarters = 
   const smoothedQuarterCount = visibleQuarters.filter((item) => item.isSmoothedSegments).length;
   const reportedSegmentQuarterCount = visibleQuarters.filter((item) => item.hasRawSegments && !item.wasReportedOnlyRaw && !item.insufficientSegments).length;
   const primaryDisplayCurrency = displayCurrencySet.length === 1 ? displayCurrencySet[0] : "MIXED";
+  const maxStackRevenueBn = Math.max(
+    ...visibleQuarters.map((item) =>
+      Object.values(item.segmentMap || {}).reduce((sum, value) => sum + safeNumber(value), 0)
+    ),
+    1
+  );
 
   return {
     quarters: visibleQuarters,
     segmentStats,
     colorBySegment,
     stackOrder: segmentStats.slice().sort((left, right) => left.totalValueBn - right.totalValueBn).map((item) => item.key),
-    maxRevenueBn: Math.max(...visibleQuarters.map((item) => safeNumber(item.totalRevenueBn)), 1),
+    maxRevenueBn: Math.max(
+      ...visibleQuarters.map((item) => safeNumber(item.totalRevenueBn)),
+      maxStackRevenueBn,
+      1
+    ),
+    maxStackRevenueBn,
     anchorQuarterKey: selectedQuarterKeys[selectedQuarterKeys.length - 1] || null,
     requestedQuarterCount: requestedWindowCount,
     availableQuarterCount,
