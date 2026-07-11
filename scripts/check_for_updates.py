@@ -29,7 +29,26 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--dry-run", action="store_true", help="Only report stale companies; do not rebuild the dataset.")
     parser.add_argument("--json", action="store_true", help="Print the final report as JSON.")
+    parser.add_argument(
+        "--report-path",
+        type=Path,
+        default=None,
+        help="Optional path for a machine-readable JSON report.",
+    )
+    parser.add_argument(
+        "--fail-on-check-errors",
+        action="store_true",
+        help="Return a non-zero exit code when one or more company checks fail.",
+    )
     return parser.parse_args()
+
+
+def write_report(path: Path | None, payload: dict[str, Any]) -> None:
+    if path is None:
+        return
+    report_path = path if path.is_absolute() else ROOT_DIR / path
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    report_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
 def load_local_company_payload(company_id: str) -> dict[str, Any] | None:
@@ -275,6 +294,7 @@ def main() -> int:
 
     if not companies:
         message = {"checked": 0, "updated": 0, "staleCompanies": [], "report": [], "message": "No companies matched the selection."}
+        write_report(args.report_path, message)
         if args.json:
             print(json.dumps(message, ensure_ascii=False, indent=2))
         else:
@@ -284,6 +304,7 @@ def main() -> int:
     report: list[dict[str, Any]] = []
     stale_company_ids: list[str] = []
     stale_items: list[dict[str, Any]] = []
+    failed_company_ids: list[str] = []
     for company in companies:
         print(f"[check] {company['ticker']} ...", flush=True)
         try:
@@ -297,6 +318,8 @@ def main() -> int:
                 "error": str(exc),
             }
         report.append(item)
+        if item.get("reason") == "check-failed":
+            failed_company_ids.append(str(item.get("companyId") or ""))
         if item.get("needsUpdate"):
             stale_company_ids.append(company["id"])
             stale_items.append(item)
@@ -308,6 +331,22 @@ def main() -> int:
         "command": [],
         "commands": [],
     }
+    if failed_company_ids and args.fail_on_check_errors:
+        summary = {
+            "checked": len(report),
+            "updated": 0,
+            "staleCompanies": stale_company_ids,
+            "failedCompanies": failed_company_ids,
+            "report": report,
+            "build": build_result,
+        }
+        write_report(args.report_path, summary)
+        if args.json:
+            print(json.dumps(summary, ensure_ascii=False, indent=2))
+        else:
+            print(f"[error] update checks failed: {', '.join(failed_company_ids)}", flush=True)
+        return 2
+
     if stale_company_ids and not args.dry_run:
         cache_supplement_ids = [
             str(item.get("companyId") or "")
@@ -336,14 +375,16 @@ def main() -> int:
         build_result["exitCode"] = exit_code
         build_result["updated"] = exit_code == 0
         if exit_code != 0:
+            summary = {
+                "checked": len(report),
+                "updated": 0,
+                "staleCompanies": stale_company_ids,
+                "failedCompanies": failed_company_ids,
+                "report": report,
+                "build": build_result,
+            }
+            write_report(args.report_path, summary)
             if args.json:
-                summary = {
-                    "checked": len(report),
-                    "updated": 0,
-                    "staleCompanies": stale_company_ids,
-                    "report": report,
-                    "build": build_result,
-                }
                 print(json.dumps(summary, ensure_ascii=False, indent=2))
             return completed.returncode
 
@@ -351,9 +392,11 @@ def main() -> int:
         "checked": len(report),
         "updated": len(stale_company_ids) if build_result["updated"] or args.dry_run else 0,
         "staleCompanies": stale_company_ids,
+        "failedCompanies": failed_company_ids,
         "report": report,
         "build": build_result,
     }
+    write_report(args.report_path, summary)
 
     if args.json:
         print(json.dumps(summary, ensure_ascii=False, indent=2))
