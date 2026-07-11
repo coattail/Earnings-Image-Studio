@@ -13,7 +13,7 @@ DATASET_PATH = ROOT_DIR / "data" / "earnings-dataset.json"
 SVG_NS = {"svg": "http://www.w3.org/2000/svg"}
 
 
-def render_sk_hynix_markup() -> str:
+def render_sk_hynix_markup(quarter: str = "2026Q1") -> str:
     dataset = json.loads(DATASET_PATH.read_text(encoding="utf-8"))
     company = next(item for item in dataset["companies"] if item["id"] == "sk-hynix")
     with tempfile.TemporaryDirectory(prefix="sk-hynix-layout-") as temp_dir:
@@ -23,7 +23,7 @@ def render_sk_hynix_markup() -> str:
         result = subprocess.run(
             [
                 "node", str(NODE_RENDERER), "--payload", str(payload_path),
-                "--quarter", "2026Q1", "--language", "zh", "--modes", "sankey",
+                "--quarter", quarter, "--language", "zh", "--modes", "sankey",
                 "--output-dir", str(output_dir), "--basename", "sk-hynix-layout",
             ],
             cwd=ROOT_DIR,
@@ -116,6 +116,16 @@ class SkHynixSankeyLayoutTests(unittest.TestCase):
 
     def test_net_profit_is_lifted_above_operating_profit(self) -> None:
         self.assertLess(rect(self.svg, "net")["y"], 300)
+
+    def test_historical_product_sources_omit_support_notes(self) -> None:
+        historical_svg = render_sk_hynix_markup("2025Q2")
+
+        for note in (
+            "HBM · 服务器 DRAM · 移动 DRAM",
+            "NAND · SSD · 企业级 SSD",
+            "CIS · 晶圆代工及其他",
+        ):
+            self.assertNotIn(note, historical_svg)
 
 
 if __name__ == "__main__":

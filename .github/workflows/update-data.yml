@@ -2,10 +2,13 @@ name: Update Earnings Data
 
 on:
   schedule:
-    # NYSE close + 1 hour is 17:00 America/New_York.
-    # GitHub cron is UTC, so run both DST and standard-time slots and gate below.
-    - cron: "0 21 * * 1-5"
-    - cron: "0 22 * * 1-5"
+    # Avoid the top of the hour because GitHub documents higher schedule delays
+    # there. During earnings-heavy months, poll hourly from 16:17 through 21:17
+    # New York time; use one daily poll in the remaining months.
+    - cron: "17 16-21 * 1,2,4,5,7,8,10,11 1-5"
+      timezone: "America/New_York"
+    - cron: "17 17 * 3,6,9,12 1-5"
+      timezone: "America/New_York"
   workflow_dispatch:
     inputs:
       mode:
@@ -53,20 +56,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Gate scheduled run to NYSE close + 1 hour
-        id: market-close-gate
-        if: github.event_name == 'schedule'
-        shell: bash
-        run: |
-          if python scripts/should_run_market_close_refresh.py; then
-            echo "should_run=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "should_run=false" >> "$GITHUB_OUTPUT"
-            echo "[workflow] skipping: not NYSE close + 1 hour"
-          fi
-
       - name: Refresh earnings data
-        if: github.event_name != 'schedule' || steps.market-close-gate.outputs.should_run == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -80,7 +70,7 @@ jobs:
           if [[ "$mode_input" == "force-refresh" ]]; then
             cmd=(python scripts/build_dataset.py --refresh)
           else
-            cmd=(python scripts/check_for_updates.py)
+            cmd=(python scripts/check_for_updates.py --report-path output/update-report.json --fail-on-check-errors)
           fi
 
           if [[ -n "$companies_input" ]]; then
@@ -92,9 +82,17 @@ jobs:
           printf '\n'
           "${cmd[@]}"
 
+      - name: Upload update diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: earnings-update-report-${{ github.run_id }}
+          path: output/update-report.json
+          if-no-files-found: ignore
+          retention-days: 30
+
       - name: Detect repository changes
         id: changes
-        if: github.event_name != 'schedule' || steps.market-close-gate.outputs.should_run == 'true'
         run: |
           if git diff --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
@@ -103,7 +101,7 @@ jobs:
           fi
 
       - name: Commit refreshed data
-        if: (github.event_name != 'schedule' || steps.market-close-gate.outputs.should_run == 'true') && steps.changes.outputs.changed == 'true'
+        if: steps.changes.outputs.changed == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -111,5 +109,5 @@ jobs:
           git commit -m "chore: refresh earnings data"
 
       - name: Push refreshed data
-        if: (github.event_name != 'schedule' || steps.market-close-gate.outputs.should_run == 'true') && steps.changes.outputs.changed == 'true'
+        if: steps.changes.outputs.changed == 'true'
         run: git push

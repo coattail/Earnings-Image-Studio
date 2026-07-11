@@ -104,6 +104,21 @@ Dry-run only:
 python3 scripts/check_for_updates.py --dry-run
 ```
 
+GitHub Actions refresh policy:
+
+- Uses the `America/New_York` timezone to avoid DST conversion and exact-hour scheduling issues.
+- Polls hourly from 16:17 through 21:17 on weekdays during earnings-heavy months (Jan, Feb, Apr, May, Jul, Aug, Oct, Nov).
+- Polls once at 17:17 on weekdays during the remaining months.
+- Stores an `update-report.json` diagnostic artifact and fails visibly when any company check errors.
+
+Run a strict local check with a saved report:
+
+```bash
+python3 scripts/check_for_updates.py \
+  --fail-on-check-errors \
+  --report-path output/update-report.json
+```
+
 ## Install as a Codex Skill
 
 `SKILL.md` is the skill entrypoint.

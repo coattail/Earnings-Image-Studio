@@ -1373,6 +1373,10 @@ function shouldSuppressRevenueDetailGroups(company) {
   return String(company?.id || "").toLowerCase() === "broadcom";
 }
 
+function shouldSuppressRevenueSupportLines(company) {
+  return String(company?.id || "").toLowerCase() === "sk-hynix";
+}
+
 function buildOfficialBusinessGroups(company, entry, options = {}) {
   const revenueBn = safeNumber(entry?.revenueBn);
   const quarterKey = entryQuarterKey(company, entry);
@@ -1399,6 +1403,7 @@ function buildOfficialBusinessGroups(company, entry, options = {}) {
   }
   const palette = revenuePaletteForStyle(company, style, curated.length);
   const compactMode = curated.length >= 5;
+  const suppressSupportLines = shouldSuppressRevenueSupportLines(company);
   const groups = curated.map((item, index) => {
     const rawMemberKey = item.memberKey || item.name;
     const memberKey = canonicalBarSegmentKey(company?.id, rawMemberKey, item.name || "");
@@ -1421,8 +1426,8 @@ function buildOfficialBusinessGroups(company, entry, options = {}) {
       flowColor: rgba(color, compactMode ? 0.5 : 0.58),
       labelColor: "#55595F",
       valueColor: "#676C75",
-      supportLines: supportLinesForOfficialRow(style, item),
-      supportLinesZh: item.supportLinesZh || null,
+      supportLines: suppressSupportLines ? null : supportLinesForOfficialRow(style, item),
+      supportLinesZh: suppressSupportLines ? null : item.supportLinesZh || null,
       compactLabel: compactMode,
       sourceUrl: item.sourceUrl || null,
       filingDate: item.filingDate || null,

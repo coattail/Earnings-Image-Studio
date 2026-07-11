@@ -96,6 +96,21 @@ python3 scripts/check_for_updates.py
 python3 scripts/check_for_updates.py --dry-run
 ```
 
+GitHub Actions 自动更新规则：
+
+- 使用 `America/New_York` 时区，避免夏令时换算和整点调度延迟问题。
+- 财报高峰月份（1、2、4、5、7、8、10、11 月）在工作日 16:17–21:17 每小时检查一次。
+- 其他月份在工作日 17:17 检查一次。
+- 自动任务会保存 `update-report.json` 诊断附件；任一公司检查异常时任务明确失败，不再静默显示成功。
+
+本地严格检测并保存报告：
+
+```bash
+python3 scripts/check_for_updates.py \
+  --fail-on-check-errors \
+  --report-path output/update-report.json
+```
+
 ## 安装为 Codex Skill
 
 `SKILL.md` 是 skill 入口文件。
