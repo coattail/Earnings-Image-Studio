@@ -99,8 +99,9 @@ class CheckForUpdatesOfficialIrTests(unittest.TestCase):
         completed = Namespace(returncode=0)
         captured_commands: list[list[str]] = []
 
-        def fake_run(command: list[str], cwd: str) -> Namespace:
+        def fake_run(command: list[str], cwd: str, timeout: int) -> Namespace:
             captured_commands.append(command)
+            self.assertEqual(timeout, check_for_updates.COMPANY_REFRESH_TIMEOUT_SECONDS)
             return completed
 
         with (
@@ -126,6 +127,66 @@ class CheckForUpdatesOfficialIrTests(unittest.TestCase):
         self.assertEqual(len(captured_commands), 1)
         self.assertNotIn("--refresh", captured_commands[0])
         self.assertEqual(captured_commands[0][-2:], ["--companies", "jd"])
+
+    def test_main_refreshes_newest_filing_first_and_continues_after_timeout(self) -> None:
+        older_company = _stockanalysis_company()
+        newer_company = {
+            "id": "asml",
+            "ticker": "ASML",
+            "slug": "asml",
+            "nameEn": "ASML",
+            "nameZh": "阿斯麦",
+        }
+        detected = {
+            "jd": {
+                "companyId": "jd",
+                "ticker": "JD",
+                "needsUpdate": True,
+                "reason": "new-filing-detected",
+                "remoteFilingDate": "2026-05-12",
+            },
+            "asml": {
+                "companyId": "asml",
+                "ticker": "ASML",
+                "needsUpdate": True,
+                "reason": "new-filing-detected",
+                "remoteFilingDate": "2026-07-15",
+            },
+        }
+        captured_company_ids: list[str] = []
+
+        def fake_detect(company: dict[str, object]) -> dict[str, object]:
+            return detected[str(company["id"])]
+
+        def fake_run(command: list[str], cwd: str, timeout: int) -> Namespace:
+            del cwd, timeout
+            company_id = command[-1]
+            captured_company_ids.append(company_id)
+            if company_id == "asml":
+                raise check_for_updates.subprocess.TimeoutExpired(command, 180)
+            return Namespace(returncode=0)
+
+        with (
+            patch.object(check_for_updates, "TOP30_COMPANIES", [older_company, newer_company]),
+            patch.object(
+                check_for_updates,
+                "parse_args",
+                return_value=Namespace(
+                    companies="",
+                    dry_run=False,
+                    json=False,
+                    report_path=None,
+                    fail_on_check_errors=False,
+                ),
+            ),
+            patch.object(check_for_updates, "detect_company_update", side_effect=fake_detect),
+            patch.object(check_for_updates.subprocess, "run", side_effect=fake_run),
+            patch("builtins.print"),
+        ):
+            exit_code = check_for_updates.main()
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(captured_company_ids, ["asml", "jd"])
 
     def test_main_fails_and_writes_report_when_company_check_errors(self) -> None:
         failed = {

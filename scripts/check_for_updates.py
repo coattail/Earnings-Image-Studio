@@ -17,6 +17,7 @@ from stockanalysis_financials import fetch_stockanalysis_financial_history
 DATASET_PATH = ROOT_DIR / "data" / "earnings-dataset.json"
 COMPANY_CACHE_DIR = ROOT_DIR / "data" / "cache"
 OFFICIAL_IR_LOOKUP_TIMEOUT_SECONDS = 25
+COMPANY_REFRESH_TIMEOUT_SECONDS = 120
 
 
 def parse_args() -> argparse.Namespace:
@@ -287,6 +288,15 @@ def build_refresh_command(company_ids: list[str], *, refresh: bool = True) -> li
     return command
 
 
+def stale_item_priority(item: dict[str, Any]) -> tuple[str, str]:
+    """Put the newest detected filing first so same-day releases are not starved."""
+    remote_date = max(
+        str(item.get("remoteFilingDate") or ""),
+        str(item.get("remoteOfficialFilingDate") or ""),
+    )
+    return (remote_date, str(item.get("companyId") or ""))
+
+
 def main() -> int:
     args = parse_args()
     selected_tokens = parse_company_selection(args.companies)
@@ -330,6 +340,8 @@ def main() -> int:
         "exitCode": 0,
         "command": [],
         "commands": [],
+        "updatedCompanies": [],
+        "failedCompanies": [],
     }
     if failed_company_ids and args.fail_on_check_errors:
         summary = {
@@ -348,32 +360,49 @@ def main() -> int:
         return 2
 
     if stale_company_ids and not args.dry_run:
-        cache_supplement_ids = [
-            str(item.get("companyId") or "")
-            for item in stale_items
-            if item.get("buildRefreshMode") == "cache-supplement" and str(item.get("companyId") or "")
-        ]
-        refresh_ids = [
-            str(item.get("companyId") or "")
-            for item in stale_items
-            if item.get("buildRefreshMode") != "cache-supplement" and str(item.get("companyId") or "")
-        ]
+        ordered_stale_items = sorted(stale_items, key=stale_item_priority, reverse=True)
         commands: list[list[str]] = []
-        if refresh_ids:
-            commands.append(build_refresh_command(refresh_ids, refresh=True))
-        if cache_supplement_ids:
-            commands.append(build_refresh_command(cache_supplement_ids, refresh=False))
+        command_company_ids: list[str] = []
+        for item in ordered_stale_items:
+            company_id = str(item.get("companyId") or "")
+            if not company_id:
+                continue
+            commands.append(
+                build_refresh_command(
+                    [company_id],
+                    refresh=item.get("buildRefreshMode") != "cache-supplement",
+                )
+            )
+            command_company_ids.append(company_id)
         build_result["ran"] = True
         build_result["commands"] = commands
         build_result["command"] = commands[0] if len(commands) == 1 else []
-        exit_code = 0
-        for command in commands:
-            completed = subprocess.run(command, cwd=str(ROOT_DIR))
+        updated_company_ids: list[str] = []
+        build_failed_company_ids: list[str] = []
+        for company_id, command in zip(command_company_ids, commands):
+            try:
+                completed = subprocess.run(
+                    command,
+                    cwd=str(ROOT_DIR),
+                    timeout=COMPANY_REFRESH_TIMEOUT_SECONDS,
+                )
+            except subprocess.TimeoutExpired:
+                build_failed_company_ids.append(company_id)
+                print(
+                    f"[timeout] {company_id} exceeded {COMPANY_REFRESH_TIMEOUT_SECONDS}s; continuing with the next company.",
+                    file=sys.stderr,
+                    flush=True,
+                )
+                continue
             if completed.returncode != 0:
-                exit_code = int(completed.returncode)
-                break
+                build_failed_company_ids.append(company_id)
+                continue
+            updated_company_ids.append(company_id)
+        exit_code = 0 if updated_company_ids else 1
         build_result["exitCode"] = exit_code
-        build_result["updated"] = exit_code == 0
+        build_result["updated"] = bool(updated_company_ids)
+        build_result["updatedCompanies"] = updated_company_ids
+        build_result["failedCompanies"] = build_failed_company_ids
         if exit_code != 0:
             summary = {
                 "checked": len(report),
@@ -386,11 +415,11 @@ def main() -> int:
             write_report(args.report_path, summary)
             if args.json:
                 print(json.dumps(summary, ensure_ascii=False, indent=2))
-            return completed.returncode
+            return exit_code
 
     summary = {
         "checked": len(report),
-        "updated": len(stale_company_ids) if build_result["updated"] or args.dry_run else 0,
+        "updated": len(build_result["updatedCompanies"]) if build_result["updated"] else len(stale_company_ids) if args.dry_run else 0,
         "staleCompanies": stale_company_ids,
         "failedCompanies": failed_company_ids,
         "report": report,
@@ -405,7 +434,12 @@ def main() -> int:
             if args.dry_run:
                 print(f"[stale] {', '.join(stale_company_ids)}", flush=True)
             else:
-                print(f"[updated] {', '.join(stale_company_ids)}", flush=True)
+                updated_company_ids = build_result.get("updatedCompanies") or []
+                failed_build_ids = build_result.get("failedCompanies") or []
+                if updated_company_ids:
+                    print(f"[updated] {', '.join(updated_company_ids)}", flush=True)
+                if failed_build_ids:
+                    print(f"[deferred] {', '.join(failed_build_ids)}", flush=True)
         else:
             print("[up-to-date] no new earnings detected in the selected universe.", flush=True)
     return 0
