@@ -7636,6 +7636,137 @@ function renderPixelReplicaSvg(snapshot) {
     opexBoxes[1] = shiftBoxCenter(lower, nextCenterY);
   };
   compactTwoItemOpexTerminalFan();
+  const balanceOperatingStageSplit = () => {
+    if (
+      snapshot.layout?.disableOperatingStageSplitBalance === true ||
+      hasOperatingLoss ||
+      !showOperatingOutcomeBridge ||
+      rawPositiveAdjustments.length > 0 ||
+      !(opexHeight > 0.5)
+    ) {
+      return 0;
+    }
+    const grossShiftY = combinedNodeOffsetFor("gross").dy;
+    const operatingShiftY = combinedNodeOffsetFor("operating").dy;
+    const opexShiftY = combinedNodeOffsetFor("operating-expenses").dy;
+    const visibleGrossTop = grossTop + grossShiftY;
+    const upperOpeningY = visibleGrossTop - (operatingLaneTop + operatingShiftY);
+    const lowerOpeningY = opexTop + opexShiftY - (visibleGrossTop + opHeight);
+    const openingImbalanceY = lowerOpeningY - upperOpeningY;
+    const preferredResidualImbalanceY = scaleY(
+      safeNumber(snapshot.layout?.operatingStageSplitPreferredLowerBiasY, usesHeroLockups ? 20 : 16)
+    );
+    const activationImbalanceY = scaleY(
+      safeNumber(snapshot.layout?.operatingStageSplitBalanceActivationY, usesHeroLockups ? 30 : 26)
+    );
+    const requestedCorrectionY = openingImbalanceY - preferredResidualImbalanceY;
+    if (!(requestedCorrectionY > activationImbalanceY)) return 0;
+
+    const balanceStrength = clamp(
+      safeNumber(snapshot.layout?.operatingStageSplitBalanceStrength, 1),
+      0,
+      1
+    );
+    const profitLiftShare = clamp(
+      safeNumber(snapshot.layout?.operatingStageSplitProfitLiftShare, 0.55),
+      0.35,
+      0.7
+    );
+    const desiredOperatingLiftY = requestedCorrectionY * balanceStrength * profitLiftShare;
+    const desiredOpexLiftY = requestedCorrectionY * balanceStrength * (1 - profitLiftShare);
+    const operatingTopFloorY = scaleY(
+      safeNumber(snapshot.layout?.operatingStageSplitTopFloorY, usesHeroLockups ? 220 : 206)
+    );
+    const availableOperatingLiftY = Math.max(
+      operatingLaneTop + operatingShiftY - operatingTopFloorY,
+      0
+    );
+    const availableOpexLiftY = Math.max(
+      opexTop + opexShiftY - scaleY(safeNumber(snapshot.layout?.operatingStageExpenseTopFloorY, 340)),
+      0
+    );
+    const operatingLiftLimitY = scaleY(
+      safeNumber(snapshot.layout?.operatingStageSplitOperatingMaxLiftY, usesHeroLockups ? 112 : 98)
+    );
+    const opexLiftLimitY = scaleY(
+      safeNumber(snapshot.layout?.operatingStageSplitExpenseMaxLiftY, usesHeroLockups ? 98 : 88)
+    );
+    const appliedOperatingLiftY = Math.min(
+      desiredOperatingLiftY,
+      availableOperatingLiftY,
+      operatingLiftLimitY
+    );
+    const appliedOpexLiftY = Math.min(
+      desiredOpexLiftY,
+      availableOpexLiftY,
+      opexLiftLimitY
+    );
+    if (!(appliedOperatingLiftY > 0.5 || appliedOpexLiftY > 0.5)) return 0;
+
+    const currentOperatingAutoShiftY = autoLayoutOffsetForNode("operating").dy;
+    const currentOpexAutoShiftY = autoLayoutOffsetForNode("operating-expenses").dy;
+    setAutoLayoutNodeOffset("operating", { dy: currentOperatingAutoShiftY - appliedOperatingLiftY });
+    setAutoLayoutNodeOffset("operating-expenses", { dy: currentOpexAutoShiftY - appliedOpexLiftY });
+    return Math.max(appliedOperatingLiftY, appliedOpexLiftY);
+  };
+  const enforceDownwardOpexTerminalFan = () => {
+    if (
+      snapshot.layout?.disableDownwardOpexTerminalFan === true ||
+      rawPositiveAdjustments.length > 0 ||
+      !opexBoxes.length ||
+      !opexSourceSlices.length
+    ) {
+      return;
+    }
+    const sourceShiftY = combinedNodeOffsetFor("operating-expenses").dy;
+    const denseFan = opexBoxes.length >= 4;
+    const firstDropY = scaleY(
+      safeNumber(snapshot.layout?.opexTerminalMinFirstDropY, denseFan ? 24 : 28)
+    );
+    const dropStepY = scaleY(
+      safeNumber(snapshot.layout?.opexTerminalMinDropStepY, denseFan ? 52 : 56)
+    );
+    const dropCurveY = scaleY(
+      safeNumber(snapshot.layout?.opexTerminalMinDropCurveY, denseFan ? 5 : 22)
+    );
+    const terminalGapY = Math.max(
+      rightTerminalSeparationGap,
+      scaleY(safeNumber(snapshot.layout?.opexTerminalDownwardFanMinGapY, denseFan ? 18 : 24))
+    );
+    const terminalBottomLimitY = height - scaleY(
+      safeNumber(snapshot.layout?.opexTerminalBottomClearanceY, 56)
+    );
+    let previousCenterY = null;
+    let previousHeight = 0;
+    opexBoxes.forEach((box, index) => {
+      const sourceSlice = opexSourceSlices[index] || opexSlices[index];
+      if (!box || !sourceSlice) return;
+      const targetShiftY = combinedNodeOffsetFor(`opex-${index}`).dy;
+      const minimumDropY = firstDropY + dropStepY * index + dropCurveY * index * index;
+      const sourceCenterY = safeNumber(sourceSlice.center, box.center) + sourceShiftY;
+      const currentRenderedCenterY = safeNumber(box.center, 0) + targetShiftY;
+      const minimumCenterY = Math.max(
+        sourceCenterY + minimumDropY,
+        previousCenterY === null
+          ? -Infinity
+          : previousCenterY + (previousHeight + box.height) / 2 + terminalGapY
+      );
+      const maximumCenterY = terminalBottomLimitY - box.height / 2 + targetShiftY;
+      const nextRenderedCenterY = clamp(
+        Math.max(currentRenderedCenterY, minimumCenterY),
+        currentRenderedCenterY,
+        Math.max(maximumCenterY, currentRenderedCenterY)
+      );
+      if (nextRenderedCenterY - currentRenderedCenterY > 0.5) {
+        opexBoxes[index] = shiftBoxCenter(box, box.center + nextRenderedCenterY - currentRenderedCenterY);
+      }
+      const resolvedBox = opexBoxes[index] || box;
+      previousCenterY = safeNumber(resolvedBox.center, box.center) + targetShiftY;
+      previousHeight = resolvedBox.height;
+    });
+  };
+  balanceOperatingStageSplit();
+  enforceDownwardOpexTerminalFan();
   const requestedOpexTerminalGroupShiftY = scaleY(
     Math.max(safeNumber(snapshot.layout?.opexTerminalGroupShiftY, 0), 0)
   );
