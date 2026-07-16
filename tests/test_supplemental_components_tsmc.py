@@ -39,6 +39,33 @@ class SupplementalComponentsTsmcTests(unittest.TestCase):
             ["SG&A", "R&D"],
         )
 
+    def test_tsmc_2026q2_includes_rnd_and_sgna_breakdown(self) -> None:
+        company = {
+            "id": "tsmc",
+            "ticker": "TSM",
+            "nameZh": "台积电",
+            "nameEn": "TSMC",
+            "slug": "tsm",
+        }
+
+        result = supplemental_components_adapter.run(
+            company,
+            base_payload={"quarters": ["2026Q2"]},
+        )
+
+        self.assertTrue(result.enabled)
+        quarter = result.payload["financials"]["2026Q2"]
+        self.assertEqual(quarter["sgnaBn"], 25.836)
+        self.assertEqual(quarter["rndBn"], 73.146)
+        self.assertEqual(
+            quarter["statementSourceUrl"],
+            "https://investor.tsmc.com/english/encrypt/files/encrypt_file/reports/2026-07/114aaca0fea2050e96b91fffbab9ed04ba09cd92/FS.pdf",
+        )
+        self.assertEqual(
+            [item["name"] for item in quarter["opexBreakdown"]],
+            ["SG&A", "R&D"],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
