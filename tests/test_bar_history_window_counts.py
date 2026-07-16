@@ -105,6 +105,15 @@ class BarHistoryWindowCountTests(unittest.TestCase):
 
         self.assertEqual(summary["outputs"]["bars"]["quarterCount"], 30)
 
+    def test_asml_latest_bar_window_reaches_back_to_q1_2019(self) -> None:
+        company = load_dataset_company("asml")
+        summary = render_bar_summary(company, "asml-history-window")
+        svg_markup = render_bar_svg(company, "asml-history-window-svg", "2026Q2")
+
+        self.assertEqual(summary["outputs"]["bars"]["quarterCount"], 30)
+        self.assertIn("Q1 FY19", svg_markup)
+        self.assertNotIn("Q4 FY18", svg_markup)
+
     def test_korean_company_windows_show_extended_history(self) -> None:
         for company_id in ("samsung", "sk-hynix"):
             with self.subTest(company_id=company_id):

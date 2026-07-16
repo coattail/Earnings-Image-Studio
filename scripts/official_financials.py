@@ -20,7 +20,7 @@ import micron_ir
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 CACHE_DIR = ROOT_DIR / "data" / "cache" / "official-financials"
-OFFICIAL_FINANCIALS_CACHE_VERSION = "20260415-v2"
+OFFICIAL_FINANCIALS_CACHE_VERSION = "20260716-v3"
 CURRENCY_UNIT_PATTERN = re.compile(r"^[A-Z]{3}$")
 MIN_FILING_DATE = "2017-01-01"
 MIN_CALENDAR_QUARTER = (2018, 1)
@@ -30,9 +30,11 @@ SEC_HEADERS = {
 }
 ASML_FINANCIAL_RESULTS_INDEX_URL = "https://www.asml.com/en/investors/financial-results"
 ASML_RESULTS_PAGE_PATH_PATTERN = re.compile(r'href="(/en/investors/financial-results/q([1-4])-(20\d{2}))"')
-ASML_FINANCIAL_PDF_URL_PATTERN = re.compile(r'href="(https://[^"]*Financial-statements-US-GAAP[^"]+\.pdf[^"]*)"')
+ASML_PDF_URL_PATTERN = re.compile(r'href="([^"]+\.pdf(?:\?[^"]*)?)"', re.IGNORECASE)
 ASML_PUBLISHED_TIME_PATTERN = re.compile(r'property="article:published_time"\s+content="([^"]+)"')
 ASML_SC_PUBLICATION_DATE_PATTERN = re.compile(r'name="sc:publication_date"\s+content="([^"]+)"')
+ASML_ARCHIVE_FIRST_QUARTER = (2018, 1)
+ASML_TARGET_QUARTER_COUNT = 30
 NAMESPACE_PRIORITY = {
     "us-gaap": 20,
     "ifrs-full": 18,
@@ -970,9 +972,33 @@ def _extract_asml_latest_results_page_path(html_text: str) -> str | None:
     return path
 
 
+def _extract_asml_results_page_paths(html_text: str) -> list[tuple[str, str]]:
+    latest_path = _extract_asml_latest_results_page_path(html_text)
+    if not latest_path:
+        return []
+    latest_match = re.search(r"/q([1-4])-(20\d{2})$", latest_path)
+    if not latest_match:
+        return []
+    latest_quarter = int(latest_match.group(1))
+    latest_year = int(latest_match.group(2))
+    first_year, first_quarter = ASML_ARCHIVE_FIRST_QUARTER
+    results: list[tuple[str, str]] = []
+    for year in range(latest_year, first_year - 1, -1):
+        upper_quarter = latest_quarter if year == latest_year else 4
+        lower_quarter = first_quarter if year == first_year else 1
+        for quarter_number in range(upper_quarter, lower_quarter - 1, -1):
+            quarter = f"{year}Q{quarter_number}"
+            results.append((quarter, f"/en/investors/financial-results/q{quarter_number}-{year}"))
+    return results
+
+
 def _extract_asml_financial_pdf_url(html_text: str) -> str | None:
-    match = ASML_FINANCIAL_PDF_URL_PATTERN.search(str(html_text or ""))
-    return match.group(1) if match else None
+    candidates = [unescape(url) for url in ASML_PDF_URL_PATTERN.findall(str(html_text or ""))]
+    for url in candidates:
+        normalized = re.sub(r"[^a-z0-9]+", "-", url.lower())
+        if "us-gaap" in normalized and ("financial-statements" in normalized or "us-gaap-20" in normalized):
+            return url
+    return None
 
 
 def _extract_asml_published_date(html_text: str) -> str | None:
@@ -983,20 +1009,64 @@ def _extract_asml_published_date(html_text: str) -> str | None:
     return published[:10] if len(published) >= 10 else None
 
 
-def _extract_asml_pdf_row_value(lines: list[str], *labels: str) -> float | None:
+def _extract_asml_pdf_row_values(lines: list[str], *labels: str) -> list[float]:
     normalized_labels = [str(label or "").strip().lower() for label in labels if str(label or "").strip()]
-    for line in lines:
+    number_pattern = re.compile(r"\(?[0-9][0-9,]*\.[0-9]+\)?")
+    for index, line in enumerate(lines):
         lowered = line.lower()
-        if not any(lowered.startswith(label) for label in normalized_labels):
+        matching_label = next((label for label in normalized_labels if lowered.startswith(label)), None)
+        if matching_label is None:
             continue
-        matches = re.findall(r"\([0-9,]+\.[0-9]+\)|[0-9,]+\.[0-9]+", line)
-        if len(matches) < 2:
-            continue
-        return _parse_number(matches[-1])
-    return None
+        matches = number_pattern.findall(line[len(matching_label) :])
+        cursor = index + 1
+        while len(matches) < 4 and cursor < len(lines):
+            candidate = lines[cursor].strip()
+            if re.search(r"[A-Za-z]", candidate):
+                break
+            matches.extend(number_pattern.findall(candidate))
+            cursor += 1
+        return [value for token in matches if (value := _parse_number(token)) is not None]
+    return []
 
 
-def _parse_asml_pdf_financial_page(text: str, filing_date: str, source_url: str, currency: str) -> tuple[str, dict[str, Any]] | None:
+def _extract_asml_pdf_row_value(lines: list[str], *labels: str) -> float | None:
+    values = _extract_asml_pdf_row_values(lines, *labels)
+    if not values:
+        return None
+    return values[1] if len(values) >= 2 else values[-1]
+
+
+def _extract_asml_period_end(text: str, quarter: str) -> str:
+    header_text = str(text or "").split("Net system sales", 1)[0]
+    date_labels = re.findall(r"([A-Za-z]{3,9})\s+(\d{1,2}),", header_text)
+    if len(date_labels) >= 2:
+        month_lookup = {
+            "jan": 1,
+            "feb": 2,
+            "mar": 3,
+            "apr": 4,
+            "may": 5,
+            "jun": 6,
+            "jul": 7,
+            "aug": 8,
+            "sep": 9,
+            "oct": 10,
+            "nov": 11,
+            "dec": 12,
+        }
+        month = month_lookup.get(date_labels[1][0].lower()[:3])
+        if month is not None:
+            return f"{int(quarter[:4]):04d}-{month:02d}-{int(date_labels[1][1]):02d}"
+    return _quarter_period_end(int(quarter[:4]), int(quarter[-1]))
+
+
+def _parse_asml_pdf_financial_page(
+    text: str,
+    filing_date: str,
+    source_url: str,
+    currency: str,
+    expected_quarter: str | None = None,
+) -> tuple[str, dict[str, Any]] | None:
     lines = [re.sub(r"\s+", " ", line).strip() for line in str(text or "").splitlines()]
     lines = [line for line in lines if line]
     if not lines:
@@ -1007,33 +1077,19 @@ def _parse_asml_pdf_financial_page(text: str, filing_date: str, source_url: str,
         compact_text,
         re.IGNORECASE | re.DOTALL,
     )
-    if not header_match:
-        return None
-
-    current_label = f"{header_match.group(3)} {header_match.group(4)}, {header_match.group(6)}"
-    date_match = re.search(r"([A-Za-z]{3,9})\s+(\d{1,2}),\s*(\d{4})", current_label)
-    quarter_info = _quarter_from_month_day_year_label(current_label)
-    if quarter_info is None or date_match is None:
-        return None
-    quarter, _ = quarter_info
-    month_lookup = {
-        "jan": 1,
-        "feb": 2,
-        "mar": 3,
-        "apr": 4,
-        "may": 5,
-        "jun": 6,
-        "jul": 7,
-        "aug": 8,
-        "sep": 9,
-        "oct": 10,
-        "nov": 11,
-        "dec": 12,
-    }
-    month = month_lookup.get(date_match.group(1).strip().lower()[:3])
-    if month is None:
-        return None
-    period_end = f"{int(date_match.group(3)):04d}-{month:02d}-{int(date_match.group(2)):02d}"
+    if expected_quarter and re.fullmatch(r"20\d{2}Q[1-4]", expected_quarter):
+        quarter = expected_quarter
+        period_end = _extract_asml_period_end(compact_text, quarter)
+    else:
+        if not header_match:
+            return None
+        current_label = f"{header_match.group(3)} {header_match.group(4)}, {header_match.group(6)}"
+        date_match = re.search(r"([A-Za-z]{3,9})\s+(\d{1,2}),\s*(\d{4})", current_label)
+        quarter_info = _quarter_from_month_day_year_label(current_label)
+        if quarter_info is None or date_match is None:
+            return None
+        quarter, _ = quarter_info
+        period_end = _extract_asml_period_end(compact_text, quarter)
 
     revenue_value = _extract_asml_pdf_row_value(lines, "Total net sales")
     cost_value = _extract_asml_pdf_row_value(lines, "Total cost of sales")
@@ -1045,6 +1101,8 @@ def _parse_asml_pdf_financial_page(text: str, filing_date: str, source_url: str,
     pretax_value = _extract_asml_pdf_row_value(lines, "Income before income taxes")
     tax_value = _extract_asml_pdf_row_value(lines, "Income tax expense", "Benefit from (provision for) income taxes")
     net_income_value = _extract_asml_pdf_row_value(lines, "Net income")
+    net_system_sales_value = _extract_asml_pdf_row_value(lines, "Net system sales")
+    installed_base_value = _extract_asml_pdf_row_value(lines, "Net service and field option sales", "Installed Base Management sales")
     if revenue_value is None or net_income_value is None:
         return None
 
@@ -1068,6 +1126,10 @@ def _parse_asml_pdf_financial_page(text: str, filing_date: str, source_url: str,
     )
     entry["statementSourceUrl"] = source_url
     entry["statementFilingDate"] = filing_date
+    if net_system_sales_value is not None:
+        entry["netSystemSalesBn"] = round(net_system_sales_value / 1000, 3)
+    if installed_base_value is not None:
+        entry["installedBaseManagementBn"] = round(installed_base_value / 1000, 3)
     return (quarter, entry)
 
 
@@ -1080,40 +1142,48 @@ def _request_bytes_resilient(url: str) -> bytes:
         return response.content
 
 
-def _load_asml_website_financials(currency: str) -> dict[str, dict[str, Any]]:
+def _load_asml_website_financials(
+    currency: str,
+    existing_financials: dict[str, dict[str, Any]] | None = None,
+    target_quarter_count: int = ASML_TARGET_QUARTER_COUNT,
+) -> dict[str, dict[str, Any]]:
     try:
         index_html = _request_bytes_resilient(ASML_FINANCIAL_RESULTS_INDEX_URL).decode("utf-8", errors="ignore")
     except Exception:
         return {}
-    page_path = _extract_asml_latest_results_page_path(index_html)
-    if not page_path:
-        return {}
-    page_url = f"https://www.asml.com{page_path}"
-    try:
-        page_html = _request_bytes_resilient(page_url).decode("utf-8", errors="ignore")
-    except Exception:
-        return {}
-    pdf_url = _extract_asml_financial_pdf_url(page_html)
-    if not pdf_url:
-        return {}
-    filing_date = _extract_asml_published_date(page_html) or ""
-    try:
-        pdf_bytes = _request_bytes_resilient(pdf_url)
-    except Exception:
-        return {}
-    try:
-        reader = PdfReader(io.BytesIO(pdf_bytes))
-    except Exception:
-        return {}
-
-    for page in reader.pages:
-        text = page.extract_text() or ""
-        parsed = _parse_asml_pdf_financial_page(text, filing_date, pdf_url, currency)
-        if parsed is None:
+    existing_quarters = set((existing_financials or {}).keys())
+    covered_quarters = set(existing_quarters)
+    results: dict[str, dict[str, Any]] = {}
+    target_count = max(int(target_quarter_count or 0), 1)
+    for expected_quarter, page_path in _extract_asml_results_page_paths(index_html):
+        if expected_quarter in covered_quarters:
             continue
-        quarter, entry = parsed
-        return {quarter: entry}
-    return {}
+        page_url = f"https://www.asml.com{page_path}"
+        try:
+            page_html = _request_bytes_resilient(page_url).decode("utf-8", errors="ignore")
+        except Exception:
+            continue
+        pdf_url = _extract_asml_financial_pdf_url(page_html)
+        if not pdf_url:
+            continue
+        filing_date = _extract_asml_published_date(page_html) or ""
+        try:
+            pdf_bytes = _request_bytes_resilient(pdf_url)
+            reader = PdfReader(io.BytesIO(pdf_bytes))
+        except Exception:
+            continue
+        for page in reader.pages:
+            text = page.extract_text() or ""
+            parsed = _parse_asml_pdf_financial_page(text, filing_date, pdf_url, currency, expected_quarter=expected_quarter)
+            if parsed is None:
+                continue
+            quarter, entry = parsed
+            results[quarter] = entry
+            covered_quarters.add(quarter)
+            break
+        if len(covered_quarters) >= target_count:
+            break
+    return results
 
 
 def _quarter_from_month_day_year_label(label: str) -> tuple[str, str] | None:
@@ -1382,7 +1452,7 @@ def _load_html_fallback_financials(company: dict[str, Any], cik: int, currency: 
                     return results
             break
     if company["id"] == "asml":
-        website_financials = _load_asml_website_financials(currency)
+        website_financials = _load_asml_website_financials(currency, results)
         for quarter, entry in website_financials.items():
             current = results.get(quarter)
             if current is None or str(entry.get("statementFilingDate") or "") > str(current.get("statementFilingDate") or ""):

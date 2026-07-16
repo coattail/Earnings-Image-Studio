@@ -55,7 +55,7 @@ CACHE_DIR = ROOT_DIR / "data" / "cache" / "official-revenue-structures"
 OFFICIAL_SEGMENT_CACHE_DIR = ROOT_DIR / "data" / "cache" / "official-segments"
 OFFICIAL_FINANCIAL_CACHE_DIR = ROOT_DIR / "data" / "cache" / "official-financials"
 STOCKANALYSIS_FINANCIAL_CACHE_DIR = ROOT_DIR / "data" / "cache" / "stockanalysis-financials"
-CACHE_VERSION = "20260327-v17"
+CACHE_VERSION = "20260716-v18"
 STOCKANALYSIS_FINANCIAL_PAYLOAD_CACHE_VERSION = "20260329-v1"
 STOCKANALYSIS_FINANCIAL_CACHE: dict[str, dict[str, Any]] = {}
 CUSTOM_HIERARCHY_COST_SUPPLEMENT_WINDOW_QUARTERS = 12
@@ -4817,6 +4817,42 @@ def _parse_asml_records(company: dict[str, Any], cik: int, refresh: bool = False
     for quarter, entry in _load_cached_financial_entries("asml", refresh=refresh):
         press_release_url = str(entry.get("statementSourceUrl") or "")
         filing_date = str(entry.get("statementFilingDate") or "")
+        net_system_sales_bn = _parse_number(entry.get("netSystemSalesBn"))
+        installed_bn = _parse_number(entry.get("installedBaseManagementBn"))
+        if net_system_sales_bn is not None and installed_bn is not None:
+            result["quarters"][quarter] = {
+                "segments": [
+                    _build_row(
+                        "Net system sales",
+                        net_system_sales_bn,
+                        member_key="netsystemsales",
+                        source_url=press_release_url,
+                        source_form="QuarterlyResultsFinancialStatements",
+                        filing_date=filing_date,
+                    ),
+                    _build_row(
+                        "Installed base management",
+                        installed_bn,
+                        member_key="installedbasemanagement",
+                        source_url=press_release_url,
+                        source_form="QuarterlyResultsFinancialStatements",
+                        filing_date=filing_date,
+                    ),
+                ],
+                "detailGroups": [],
+                "style": "asml-technology-bridge",
+                "displayCurrency": "EUR",
+                "displayScaleFactor": 1,
+                "sourceUrl": press_release_url,
+            }
+            result["filingsUsed"].append(
+                {
+                    "form": "QuarterlyResultsFinancialStatements",
+                    "filingDate": filing_date,
+                    "quarter": quarter,
+                    "url": press_release_url,
+                }
+            )
         if not press_release_url or not filing_date or filing_date < "2020-01-01":
             continue
         try:
@@ -4948,6 +4984,98 @@ def _parse_asml_records(company: dict[str, Any], cik: int, refresh: bool = False
                 url=press_release_url,
             )
     return result
+
+
+def _load_bundled_asml_revenue_structure_history() -> dict[str, Any] | None:
+    path = ROOT_DIR / "data" / "cache" / "asml.json"
+    payload = _load_cached_json(path) if path.exists() else None
+    history = payload.get("officialRevenueStructureHistory") if isinstance(payload, dict) else None
+    return deepcopy(history) if isinstance(history, dict) and history.get("quarters") else None
+
+
+def _asml_basic_revenue_structure_from_entry(quarter: str, entry: dict[str, Any]) -> dict[str, Any] | None:
+    source_url = str(entry.get("statementSourceUrl") or "")
+    filing_date = str(entry.get("statementFilingDate") or "")
+    net_system_sales_bn = _parse_number(entry.get("netSystemSalesBn"))
+    installed_bn = _parse_number(entry.get("installedBaseManagementBn"))
+    source_form = "QuarterlyResultsFinancialStatements"
+    if (net_system_sales_bn is None or installed_bn is None) and source_url:
+        try:
+            html_text = _request(source_url).decode("utf-8", errors="ignore")
+        except Exception:
+            html_text = ""
+        for rows in _extract_html_tables(html_text):
+            if len(rows) < 3 or "Installed Base Management" not in " ".join(" ".join(row) for row in rows[:4]):
+                continue
+            column_index = _find_quarter_column(rows[0], quarter)
+            if column_index is None:
+                continue
+            total_row = _asml_total_sales_row(rows)
+            installed_row = next((row for row in rows if row and "Installed Base Management sales" in row[0]), None)
+            if total_row is None or installed_row is None:
+                continue
+            exact_total = _parse_number(total_row[column_index]) if len(total_row) > column_index else None
+            exact_installed = _parse_number(installed_row[column_index]) if len(installed_row) > column_index else None
+            if exact_total is None or exact_installed is None:
+                continue
+            net_system_sales_bn = round((exact_total - exact_installed) / 1000, 3)
+            installed_bn = round(exact_installed / 1000, 3)
+            source_form = "6-K"
+            break
+    if net_system_sales_bn is None or installed_bn is None:
+        return None
+    return {
+        "segments": [
+            _build_row(
+                "Net system sales",
+                net_system_sales_bn,
+                member_key="netsystemsales",
+                source_url=source_url,
+                source_form=source_form,
+                filing_date=filing_date,
+            ),
+            _build_row(
+                "Installed base management",
+                installed_bn,
+                member_key="installedbasemanagement",
+                source_url=source_url,
+                source_form=source_form,
+                filing_date=filing_date,
+            ),
+        ],
+        "detailGroups": [],
+        "style": "asml-technology-bridge",
+        "displayCurrency": "EUR",
+        "displayScaleFactor": 1,
+        "sourceUrl": source_url,
+    }
+
+
+def _supplement_asml_cached_history(cached_payload: dict[str, Any]) -> dict[str, Any]:
+    supplement = {
+        "source": "official-asml-quarterly-results",
+        "quarters": {},
+        "filingsUsed": [],
+        "errors": [],
+        "errorDetails": [],
+    }
+    existing_quarters = set((cached_payload.get("quarters") or {}).keys())
+    for quarter, entry in _load_cached_financial_entries("asml", refresh=False):
+        if quarter in existing_quarters:
+            continue
+        quarter_payload = _asml_basic_revenue_structure_from_entry(quarter, entry)
+        if quarter_payload is None:
+            continue
+        supplement["quarters"][quarter] = quarter_payload
+        supplement["filingsUsed"].append(
+            {
+                "form": quarter_payload["segments"][0].get("sourceForm") or "QuarterlyResultsFinancialStatements",
+                "filingDate": str(entry.get("statementFilingDate") or ""),
+                "quarter": quarter,
+                "url": str(entry.get("statementSourceUrl") or ""),
+            }
+        )
+    return _merge_revenue_structure_results(cached_payload, supplement) if supplement["quarters"] else cached_payload
 
 
 def _parse_tsmc_records(company: dict[str, Any], cik: int, refresh: bool = False) -> dict[str, Any]:
@@ -5726,9 +5854,18 @@ def fetch_official_revenue_structure_history(company: dict[str, Any], refresh: b
         "errorDetails": [],
     }
     cached_payload = _load_cached_json(path) if path.exists() else None
-    if path.exists() and not refresh:
+    if company_id == "asml":
+        bundled_history = _load_bundled_asml_revenue_structure_history()
+        cached_count = len((cached_payload or {}).get("quarters") or {})
+        bundled_count = len((bundled_history or {}).get("quarters") or {})
+        if bundled_history is not None and bundled_count > cached_count:
+            cached_payload = bundled_history
+            cached_payload["_cacheVersion"] = CACHE_VERSION
+    if isinstance(cached_payload, dict) and not refresh:
         if _is_current_revenue_structure_cache(cached_payload):
             supplemented_payload = _supplement_cached_custom_history(company, deepcopy(cached_payload))
+            if company_id == "asml":
+                supplemented_payload = _supplement_asml_cached_history(supplemented_payload)
             processed_payload = _post_process_result(company, supplemented_payload)
             if processed_payload != cached_payload:
                 supplemented_payload = processed_payload
