@@ -3395,41 +3395,83 @@ def load_official_revenue_structure_history(company: dict[str, Any], refresh: bo
 
 def enrich_growth_rows(financials: dict[str, Any], field_name: str) -> None:
     ordered_quarters = sorted(financials, key=parse_period)
+
+    def rows_by_member(quarter_key: str) -> dict[str, dict[str, Any]]:
+        rows = financials.get(quarter_key, {}).get(field_name) or []
+        return {
+            str(item.get("memberKey") or item.get("name") or ""): item
+            for item in rows
+            if isinstance(item, dict)
+        }
+
+    def prior_quarter_key(quarter_key: str) -> str:
+        if quarter_key.endswith("Q1"):
+            return f"{int(quarter_key[:4]) - 1}Q4"
+        return f"{quarter_key[:4]}Q{int(quarter_key[-1]) - 1}"
+
+    def historical_yoy_growth(quarter_key: str, member_key: str) -> float | None:
+        # Four sequential category ratios are equivalent to dividing the current
+        # category revenue by the same category's revenue one year earlier.
+        current_to_prior_year_ratio = 1.0
+        cursor = quarter_key
+        for _ in range(4):
+            row = rows_by_member(cursor).get(member_key)
+            qoq_pct = row.get("qoqPct") if row else None
+            if qoq_pct is None:
+                return None
+            current_to_prior_year_ratio *= 1 + float(qoq_pct) / 100
+            cursor = prior_quarter_key(cursor)
+        return round((current_to_prior_year_ratio - 1) * 100, 2)
+
+    # Normalize disclosed share rows into chart values before calculating growth.
     for quarter in ordered_quarters:
         rows = financials.get(quarter, {}).get(field_name) or []
         if not rows:
             continue
-        prior_year_quarter = f"{int(quarter[:4]) - 1}{quarter[4:]}"
-        prior_year_rows = financials.get(prior_year_quarter, {}).get(field_name) or []
-        prior_year_map = {str(item.get("memberKey") or item.get("name") or ""): item for item in prior_year_rows}
-        prior_quarter = quarter
-        if quarter.endswith("Q1"):
-            prior_quarter = f"{int(quarter[:4]) - 1}Q4"
-        else:
-            prior_quarter = f"{quarter[:4]}Q{int(quarter[-1]) - 1}"
-        prior_quarter_rows = financials.get(prior_quarter, {}).get(field_name) or []
-        prior_quarter_map = {str(item.get("memberKey") or item.get("name") or ""): item for item in prior_quarter_rows}
         revenue_bn = float(financials.get(quarter, {}).get("revenueBn") or 0)
-        prior_year_revenue_bn = float(financials.get(prior_year_quarter, {}).get("revenueBn") or 0)
         for row in rows:
-            member_key = str(row.get("memberKey") or row.get("name") or "")
             if revenue_bn and row.get("metricMode") == "share":
                 share_pct = float(row.get("mixPct") or row.get("valueBn") or 0)
                 row["valueBn"] = round(share_pct / 100 * revenue_bn, 3)
                 row["mixPct"] = round(share_pct, 1)
             elif revenue_bn and row.get("mixPct") is None:
                 row["mixPct"] = round(float(row.get("valueBn") or 0) / revenue_bn * 100, 1)
-            previous = prior_year_map.get(member_key)
-            previous_value = float(previous.get("valueBn") or 0) if previous else 0
-            if row.get("yoyPct") is None and previous_value:
-                row["yoyPct"] = round((float(row.get("valueBn") or 0) / previous_value - 1) * 100, 2)
+
+    # Preserve reported QoQ growth. Calculate only when the source omitted it.
+    for quarter in ordered_quarters:
+        rows = financials.get(quarter, {}).get(field_name) or []
+        if not rows:
+            continue
+        prior_quarter_map = rows_by_member(prior_quarter_key(quarter))
+        for row in rows:
+            member_key = str(row.get("memberKey") or row.get("name") or "")
             previous = prior_quarter_map.get(member_key)
             previous_value = float(previous.get("valueBn") or 0) if previous else 0
             suppress_qoq = "suppressQoQGrowth" in row and bool(row.get("suppressQoQGrowth"))
             if not suppress_qoq and row.get("qoqPct") is None and previous_value:
                 row["qoqPct"] = round((float(row.get("valueBn") or 0) / previous_value - 1) * 100, 2)
+
+    # Calculate undisclosed YoY growth by dividing current and prior-year category
+    # histories. Share-only disclosures use the sequential category ratios because
+    # their displayed mix percentages are rounded before publication.
+    for quarter in ordered_quarters:
+        rows = financials.get(quarter, {}).get(field_name) or []
+        if not rows:
+            continue
+        prior_year_quarter = f"{int(quarter[:4]) - 1}{quarter[4:]}"
+        prior_year_map = rows_by_member(prior_year_quarter)
+        revenue_bn = float(financials.get(quarter, {}).get("revenueBn") or 0)
+        prior_year_revenue_bn = float(financials.get(prior_year_quarter, {}).get("revenueBn") or 0)
+        for row in rows:
+            member_key = str(row.get("memberKey") or row.get("name") or "")
             previous = prior_year_map.get(member_key)
             previous_value = float(previous.get("valueBn") or 0) if previous else 0
+            if row.get("yoyPct") is None:
+                historical_growth = historical_yoy_growth(quarter, member_key) if row.get("metricMode") == "share" else None
+                if historical_growth is not None:
+                    row["yoyPct"] = historical_growth
+                elif previous_value:
+                    row["yoyPct"] = round((float(row.get("valueBn") or 0) / previous_value - 1) * 100, 2)
             if revenue_bn and prior_year_revenue_bn and previous_value and row.get("mixYoyDeltaPp") is None:
                 current_mix = float(row.get("valueBn") or 0) / revenue_bn * 100
                 prior_mix = previous_value / prior_year_revenue_bn * 100
@@ -3444,6 +3486,19 @@ def apply_revenue_structure_history(
     financials: dict[str, Any] = company_payload.get("financials", {})
     for quarter, payload in (history.get("quarters") or {}).items():
         segments = payload.get("segments") or []
+        growth_overrides = payload.get("growthOverrides") if isinstance(payload.get("growthOverrides"), dict) else {}
+
+        def apply_growth_overrides(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+            for row in rows:
+                member_key = str(row.get("memberKey") or row.get("name") or "")
+                growth_override = growth_overrides.get(member_key)
+                if not isinstance(growth_override, dict):
+                    continue
+                for metric_key in ("yoyPct", "qoqPct"):
+                    if metric_key in growth_override and growth_override.get(metric_key) is not None:
+                        row[metric_key] = growth_override.get(metric_key)
+            return rows
+
         normalized_segments = []
         if segments:
             for row in segments:
@@ -3468,6 +3523,7 @@ def apply_revenue_structure_history(
                     }
                 )
             normalized_segments = normalize_official_revenue_segments(company["id"], quarter, normalized_segments)
+            normalized_segments = apply_growth_overrides(normalized_segments)
             payload["segments"] = normalized_segments
 
         entry = financials.get(quarter)
@@ -3477,6 +3533,9 @@ def apply_revenue_structure_history(
                 continue
             financials[quarter] = synthesized_entry
             entry = synthesized_entry
+        if not normalized_segments and growth_overrides:
+            existing_segments = entry.get("officialRevenueSegments") if isinstance(entry.get("officialRevenueSegments"), list) else []
+            normalized_segments = apply_growth_overrides(deepcopy(existing_segments))
         if normalized_segments:
             entry["officialRevenueSegments"] = normalized_segments
         detail_groups = payload.get("detailGroups") or []

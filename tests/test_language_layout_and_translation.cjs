@@ -74,6 +74,7 @@ function loadRuntime() {
     vm.runInContext(fs.readFileSync(path.join(ROOT, "js", filename), "utf8"), context, { filename });
   });
   context.__nvdaPayload = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "cache", "nvidia.json"), "utf8"));
+  context.__tsmcPayload = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "cache", "tsmc.json"), "utf8"));
   return context;
 }
 
@@ -145,6 +146,20 @@ function nvdaBarHistory(context) {
   );
 }
 
+function tsmcSnapshot(context, quarterKey) {
+  context.__quarterKey = quarterKey;
+  return vm.runInContext(
+    `(() => {
+      const company = normalizeLoadedCompany(__tsmcPayload, 0);
+      state.uiLanguage = "zh";
+      state.logoCatalog = {};
+      state.supplementalComponents = {};
+      return buildSnapshot(company, __quarterKey);
+    })()`,
+    context
+  );
+}
+
 test("Sankey geometry keeps the same horizontal proportions in Chinese and English", () => {
   const context = loadRuntime();
   const zh = renderNvda(context, "zh");
@@ -168,6 +183,25 @@ test("NVDA FY2027 Q1 revenue detail rows include official latest-quarter Q/Q gro
 
   assert.equal(details.Hyperscale.qoqPct, 12);
   assert.equal(details["AI Clouds, Industrial, & Enterprise"].qoqPct, 31);
+});
+
+test("TSMC platform growth is converted into each quarter's displayed USD basis", () => {
+  const q1 = tsmcSnapshot(loadRuntime(), "2026Q1");
+  const q1Dce = q1.businessGroups.find((item) => item.name === "Digital Consumer Electronics");
+  const q1Others = q1.businessGroups.find((item) => item.name === "Others");
+
+  assert.ok(q1Dce && q1Others, JSON.stringify(q1.businessGroups));
+  assertClose(q1Dce.qoqPct, 25.662, 0.001, "Q1 DCE USD QoQ growth");
+  assertClose(q1Others.qoqPct, 14.863, 0.001, "Q1 Others USD QoQ growth");
+
+  const q2 = tsmcSnapshot(loadRuntime(), "2026Q2");
+  const q2Dce = q2.businessGroups.find((item) => item.name === "Digital Consumer Electronics");
+  const q2Others = q2.businessGroups.find((item) => item.name === "Others");
+
+  assert.ok(q2Dce && q2Others, JSON.stringify(q2.businessGroups));
+  assertClose(q2Dce.qoqPct, 4.966, 0.001, "Q2 DCE USD QoQ growth");
+  assertClose(q2Others.qoqPct, 4.966, 0.001, "Q2 Others USD QoQ growth");
+  assert.notEqual(q2Dce.yoyPct, q2Others.yoyPct);
 });
 
 test("NVDA bar history normalizes legacy non-Data Center segments into Edge Computing", () => {

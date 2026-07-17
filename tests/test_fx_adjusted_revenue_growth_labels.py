@@ -46,10 +46,11 @@ class FxAdjustedRevenueGrowthLabelTests(unittest.TestCase):
     def test_tsmc_latest_sankey_uses_display_currency_growth_labels(self) -> None:
         svg = render_latest_tsmc_sankey_svg()
 
-        self.assertIn("同比+40.6%", svg)
-        self.assertIn("环比+6.4%", svg)
-        self.assertNotIn("同比+35.1%", svg)
-        self.assertNotIn("环比+8.4%", svg)
+        self.assertIn("同比+33.7%", svg)
+        self.assertIn("环比+12.0%", svg)
+        self.assertIn("同比-17.6%", svg)
+        self.assertIn("同比+26.6%", svg)
+        self.assertNotIn("同比+36.0%", svg)
 
 
 if __name__ == "__main__":
