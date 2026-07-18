@@ -1171,6 +1171,9 @@ function renderPixelReplicaSvg(snapshot) {
     usesExtremePositiveTopLane ? 74 : 68
   );
   const positiveExtremeTopFloorY = scaleY(160 - positiveAdjustmentExtremeStrength * positiveExtremeTopReleaseY);
+  const positiveSourceTopFloorY = usesExtremePositiveTopLane
+    ? positiveExtremeTopFloorY
+    : scaleY(safeNumber(snapshot.layout?.positiveSourceTopFloorY, 112));
   const extremePositiveTopLaneBottomGapY = scaleY(
     safeNumber(
       snapshot.layout?.extremePositiveTopLaneBottomGapY,
@@ -4164,6 +4167,21 @@ function renderPixelReplicaSvg(snapshot) {
     combinedNodeOffsetFor(nodeId, {
       includeManual: false,
     });
+  const learnedEditorOffsetForNode = (nodeId) => {
+    const override = snapshot.learnedEditorNodeOverrides?.[nodeId] || {};
+    return {
+      dx: safeNumber(override.dx, 0),
+      dy: safeNumber(override.dy, 0),
+    };
+  };
+  const balancedLayoutOffsetForNode = (nodeId) => {
+    const automaticOffset = layoutReferenceOffsetFor(nodeId);
+    const learnedOffset = learnedEditorOffsetForNode(nodeId);
+    return {
+      dx: automaticOffset.dx + learnedOffset.dx,
+      dy: automaticOffset.dy + learnedOffset.dy,
+    };
+  };
   const revenueShift = combinedNodeOffsetFor("revenue");
   const revenueLabelMarkup = (() => {
     const lines = [
@@ -5090,6 +5108,206 @@ function renderPixelReplicaSvg(snapshot) {
     }
     autoLayoutNodeOffsets[nodeId] = resolvedOffset;
   };
+  const balanceHierarchicalRevenueDetailFans = () => {
+    if (
+      snapshot.layout?.disableBalancedHierarchicalRevenueFans === true ||
+      !prototypeFlags.hierarchicalDetails ||
+      !leftDetailRenderSlices.length
+    ) {
+      return;
+    }
+
+    const detailGroupsByTarget = new Map();
+    leftDetailRenderSlices.forEach((slice, index) => {
+      if (!slice?.targetSlice) return;
+      const entries = detailGroupsByTarget.get(slice.targetSlice) || [];
+      entries.push({ index, slice });
+      detailGroupsByTarget.set(slice.targetSlice, entries);
+    });
+
+    detailGroupsByTarget.forEach((entries, targetSlice) => {
+      const targetSourceIndex = sourceSlices.indexOf(targetSlice);
+      if (targetSourceIndex < 0 || !entries.length) return;
+
+      const orderedEntries = [...entries].sort(
+        (left, right) =>
+          safeNumber(left.slice.groupIndex, left.index) -
+          safeNumber(right.slice.groupIndex, right.index)
+      );
+      const detailCount = orderedEntries.length;
+      const configuredMaxGapY = safeNumber(
+        snapshot.layout?.balancedHierarchicalRevenueMaxGapY,
+        detailCount >= 5 ? 72 : detailCount === 4 ? 96 : detailCount === 3 ? 120 : Infinity
+      );
+      const maxGapY = Number.isFinite(configuredMaxGapY)
+        ? scaleY(Math.max(configuredMaxGapY, 0))
+        : Infinity;
+      const minGapY = scaleY(
+        safeNumber(
+          snapshot.layout?.balancedHierarchicalRevenueMinGapY,
+          detailCount >= 5 ? 70 : detailCount === 4 ? 78 : detailCount === 3 ? 90 : 0
+        )
+      );
+      const denseDetailThreshold = Math.max(
+        Math.round(safeNumber(snapshot.layout?.hierarchicalRevenueDenseDetailThreshold, 5)),
+        3
+      );
+      const usesDenseDetailLift = detailCount >= denseDetailThreshold;
+      const groupedDetailHeight = orderedEntries.reduce(
+        (sum, entry) => sum + Math.max(safeNumber(entry.slice.height, 0), 0),
+        0
+      );
+      const dominantDetailIndex = orderedEntries.reduce((bestIndex, entry, index) => {
+        const bestHeight = Math.max(safeNumber(orderedEntries[bestIndex]?.slice?.height, 0), 0);
+        return Math.max(safeNumber(entry.slice.height, 0), 0) > bestHeight ? index : bestIndex;
+      }, 0);
+      const dominantDetailShare =
+        groupedDetailHeight > 0
+          ? Math.max(safeNumber(orderedEntries[dominantDetailIndex]?.slice?.height, 0), 0) / groupedDetailHeight
+          : 0;
+      const outerDominanceMaxShare = safeNumber(
+        snapshot.layout?.hierarchicalRevenueOuterDominanceMaxShare,
+        0.9
+      );
+      const outerDominantDirection =
+        !usesDenseDetailLift && detailCount >= 2 && dominantDetailShare <= outerDominanceMaxShare && dominantDetailIndex === 0
+          ? -1
+          : !usesDenseDetailLift &&
+              detailCount >= 2 &&
+              dominantDetailShare <= outerDominanceMaxShare &&
+              dominantDetailIndex === detailCount - 1
+            ? 1
+            : 0;
+      const outerDominanceStrength = outerDominantDirection
+        ? clamp(
+            (dominantDetailShare - safeNumber(snapshot.layout?.hierarchicalRevenueOuterDominanceThreshold, 0.62)) /
+              Math.max(safeNumber(snapshot.layout?.hierarchicalRevenueOuterDominanceActivationSpan, 0.08), 0.01),
+            0,
+            1
+          )
+        : 0;
+      const outerDominantFanAmplitudeY = outerDominanceStrength > 0
+        ? Math.min(
+            scaleY(safeNumber(snapshot.layout?.hierarchicalRevenueOuterDominantMaxSpreadY, 78)),
+            Math.max(
+              scaleY(safeNumber(snapshot.layout?.hierarchicalRevenueOuterDominantMinSpreadY, 36)),
+              targetSlice.height * safeNumber(snapshot.layout?.hierarchicalRevenueOuterDominantHeightFactor, 0.23)
+            )
+          ) * outerDominanceStrength
+        : 0;
+      const outerDominantFanExponent = Math.max(
+        safeNumber(snapshot.layout?.hierarchicalRevenueOuterDominantSpreadExponent, 1.2),
+        0.25
+      );
+      const currentFrames = orderedEntries.map(({ index, slice }) => {
+        const nodeId = `left-detail-${index}`;
+        const offset = balancedLayoutOffsetForNode(nodeId);
+        return {
+          index,
+          nodeId,
+          slice,
+          autoOffset: autoLayoutOffsetForNode(nodeId),
+          top: slice.top + offset.dy,
+          height: slice.height,
+        };
+      });
+      const balancedFrames = currentFrames.map((frame) => ({ ...frame }));
+      if (usesDenseDetailLift) {
+        const liftProfile = Array.isArray(snapshot.layout?.hierarchicalRevenueDenseLiftProfile)
+          ? snapshot.layout.hierarchicalRevenueDenseLiftProfile
+          : [0, 0.0625, 0.34375, 0.65625, 0.8125, 1];
+        const normalizedLiftProfile = liftProfile
+          .map((value) => clamp(safeNumber(value, 0), 0, 1))
+          .sort((left, right) => left - right);
+        const denseLiftStartY = safeNumber(
+          snapshot.layout?.hierarchicalRevenueDenseLiftStartY,
+          64
+        );
+        const denseLiftEndY = Math.max(
+          safeNumber(snapshot.layout?.hierarchicalRevenueDenseLiftEndY, 192),
+          denseLiftStartY
+        );
+        const sampleLiftProfile = (positionNorm) => {
+          if (normalizedLiftProfile.length < 2) return clamp(positionNorm, 0, 1);
+          const profilePosition = clamp(positionNorm, 0, 1) * (normalizedLiftProfile.length - 1);
+          const leftIndex = Math.floor(profilePosition);
+          const rightIndex = Math.min(leftIndex + 1, normalizedLiftProfile.length - 1);
+          const mix = profilePosition - leftIndex;
+          return normalizedLiftProfile[leftIndex] * (1 - mix) + normalizedLiftProfile[rightIndex] * mix;
+        };
+        balancedFrames.forEach((frame, index) => {
+          const positionNorm = detailCount <= 1 ? 0 : index / (detailCount - 1);
+          const liftWeight = sampleLiftProfile(positionNorm);
+          const liftY = scaleY(
+            denseLiftStartY + (denseLiftEndY - denseLiftStartY) * liftWeight
+          );
+          frame.top -= liftY;
+        });
+      } else {
+        for (let index = 1; index < balancedFrames.length; index += 1) {
+          const previousCurrent = currentFrames[index - 1];
+          const current = currentFrames[index];
+          const previousBalanced = balancedFrames[index - 1];
+          const currentGapY = current.top - (previousCurrent.top + previousCurrent.height);
+          const balancedGapY = clamp(currentGapY, minGapY, maxGapY);
+          balancedFrames[index].top = previousBalanced.top + previousBalanced.height + balancedGapY;
+        }
+      }
+
+      const totalFlowHeight = balancedFrames.reduce((sum, frame) => sum + frame.height, 0);
+      if (!(totalFlowHeight > 0)) return;
+      const detailFlowCenterY =
+        balancedFrames.reduce(
+          (sum, frame) => sum + (frame.top + frame.height / 2) * frame.height,
+          0
+        ) / totalFlowHeight;
+      const targetOffset = balancedLayoutOffsetForNode(`source-${targetSourceIndex}`);
+      const targetFlowCenterY = targetSlice.center + targetOffset.dy;
+      const balanceStrength = clamp(
+        safeNumber(snapshot.layout?.balancedHierarchicalRevenueStrength, 1),
+        0,
+        1
+      );
+      let groupShiftY = usesDenseDetailLift
+        ? 0
+        : (targetFlowCenterY - detailFlowCenterY) * balanceStrength;
+
+      const outerDominantOffsetsY = balancedFrames.map((_frame, index) => {
+        if (!(outerDominantFanAmplitudeY > 0) || detailCount <= 1) return 0;
+        const positionNorm = index / (detailCount - 1);
+        const edgeWeight = outerDominantDirection < 0
+          ? Math.pow(1 - positionNorm, outerDominantFanExponent)
+          : Math.pow(positionNorm, outerDominantFanExponent);
+        return outerDominantDirection * outerDominantFanAmplitudeY * edgeWeight;
+      });
+
+      const groupTopY = Math.min(...balancedFrames.map((frame, index) => frame.top + outerDominantOffsetsY[index]));
+      const groupBottomY = Math.max(
+        ...balancedFrames.map((frame, index) => frame.top + outerDominantOffsetsY[index] + frame.height)
+      );
+      const topLimitY = scaleY(
+        safeNumber(snapshot.layout?.balancedHierarchicalRevenueTopLimitY, 118)
+      );
+      const bottomLimitY = Math.min(
+        height - scaleY(safeNumber(snapshot.layout?.balancedHierarchicalRevenueBottomClearanceY, 72)),
+        scaleY(safeNumber(snapshot.layout?.balancedHierarchicalRevenueBottomLimitY, 1160))
+      );
+      groupShiftY = clamp(
+        groupShiftY,
+        Math.min(topLimitY - groupTopY, 0),
+        Math.max(bottomLimitY - groupBottomY, 0)
+      );
+
+      balancedFrames.forEach((frame, index) => {
+        const requestedRenderedTopY = frame.top + groupShiftY + outerDominantOffsetsY[index];
+        const currentRenderedTopY = frame.slice.top + balancedLayoutOffsetForNode(frame.nodeId).dy;
+        setAutoLayoutNodeOffset(frame.nodeId, {
+          dy: frame.autoOffset.dy + requestedRenderedTopY - currentRenderedTopY,
+        });
+      });
+    });
+  };
+  balanceHierarchicalRevenueDetailFans();
   const editorOffsetForNode = (nodeId, options = {}) => combinedNodeOffsetFor(nodeId, options);
   const editableNodeFrame = (nodeId, x, y, widthValue, heightValue) => {
     const offset = editorOffsetForNode(nodeId);
@@ -8221,6 +8439,12 @@ function renderPixelReplicaSvg(snapshot) {
     const positiveProminentAbove =
       positiveAbove &&
       positiveProminenceRatio >= safeNumber(snapshot.layout?.positiveProminentThresholdRatio, 0.6);
+    const positiveMergeShareOfNet =
+      totalPositiveMergeHeight / Math.max(coreNetTargetHeight + totalPositiveMergeHeight, 1);
+    const positiveMaterialAbove =
+      positiveAbove &&
+      totalPositiveStackHeight >= scaleY(safeNumber(snapshot.layout?.positiveMaterialMinimumHeightY, 36)) &&
+      positiveMergeShareOfNet >= safeNumber(snapshot.layout?.positiveMaterialMinimumNetShare, 0.2);
     const positiveBranchPathOptions = {
       curveFactor: positiveAbove ? 0.68 : 0.7,
       startCurveFactor: positiveAbove ? 0.28 : 0.26,
@@ -8905,6 +9129,44 @@ function renderPixelReplicaSvg(snapshot) {
       positiveNodeX = clamp(positiveNodeX, extremePositiveTopLaneMinX, Math.max(positiveNodeMaxX, extremePositiveTopLaneMinX));
       corridorSampleXs = positiveCorridorSampleXsForNode(positiveNodeX);
     }
+    if (positiveMaterialAbove) {
+      const netShift = editorOffsetForNode("net");
+      const prominentTargetStackCenter = positiveTargetBands.length
+        ? (safeNumber(positiveTargetBands[0]?.top, netTop) +
+            safeNumber(positiveTargetBands[positiveTargetBands.length - 1]?.bottom, netBottom)) /
+            2 +
+          netShift.dy
+        : (safeNumber(netPositiveTop, netTop) + safeNumber(netPositiveTop + totalPositiveHeight, netBottom)) / 2 + netShift.dy;
+      const learnedPositiveStackShiftY = positiveAdjustments.reduce((weightedShift, _item, index) => {
+        const itemHeight = Math.max(safeNumber(positiveHeights[index], 0), 0);
+        return weightedShift + learnedEditorOffsetForNode(`positive-${index}`).dy * itemHeight;
+      }, 0) / Math.max(totalPositiveStackHeight, 1);
+      const prominentMinimumMergeLeadY = Math.max(
+        scaleY(safeNumber(snapshot.layout?.positiveProminentMinimumMergeLeadY, 36)),
+        positiveReferenceHeight * safeNumber(snapshot.layout?.positiveProminentMinimumMergeLeadHeightFactor, 0.42)
+      );
+      const prominentMaximumSourceTop =
+        prominentTargetStackCenter -
+        prominentMinimumMergeLeadY -
+        totalPositiveStackHeight / 2 -
+        learnedPositiveStackShiftY;
+      positiveTop = clamp(
+        Math.min(positiveTop, prominentMaximumSourceTop),
+        positiveTopMin,
+        positiveTopMax
+      );
+
+      const prominentMinimumRunwayX = Math.max(
+        scaleY(safeNumber(snapshot.layout?.positiveProminentMinimumRunwayX, 98)),
+        positiveReferenceHeight * safeNumber(snapshot.layout?.positiveProminentMinimumRunwayHeightFactor, 1.03)
+      );
+      positiveNodeX = clamp(
+        Math.min(positiveNodeX, netX - positiveNodeWidth - prominentMinimumRunwayX),
+        extremePositiveTopLaneMinX,
+        Math.max(positiveNodeMaxX, extremePositiveTopLaneMinX)
+      );
+      corridorSampleXs = positiveCorridorSampleXsForNode(positiveNodeX);
+    }
     const placedPositiveLabelRects = [];
     let netPositiveCursor = netPositiveTop;
     positiveAdjustments.forEach((item, index) => {
@@ -8991,7 +9253,7 @@ function renderPixelReplicaSvg(snapshot) {
       };
       const sourceTopSearchMin = clamp(
         positiveTopMin + positiveSourceDropY,
-        positiveExtremeTopFloorY,
+        positiveMaterialAbove ? positiveSourceTopFloorY : positiveExtremeTopFloorY,
         chartBottomLimit - gainHeight - scaleY(6)
       );
       const sourceTopSearchMax = clamp(

@@ -1590,7 +1590,12 @@ async function renderCurrent() {
     }
     snapshot.companyNameZh = company.nameZh;
     snapshot.companyNameEn = company.nameEn;
-    snapshot.editorNodeOverrides = currentResolvedEditorOverrides();
+    snapshot.learnedEditorNodeOverrides = learnedSankeyLayoutOverridesForSession();
+    snapshot.interactiveEditorNodeOverrides = sanitizeEditorNodeOverrides(currentEditorOverrides());
+    snapshot.editorNodeOverrides = mergeEditorNodeOffsets(
+      snapshot.learnedEditorNodeOverrides,
+      snapshot.interactiveEditorNodeOverrides
+    );
     snapshot.editorSelectedNodeId = state.editor.selectedNodeId;
     snapshot.editModeEnabled = state.editor.enabled;
     state.currentSnapshot = snapshot;

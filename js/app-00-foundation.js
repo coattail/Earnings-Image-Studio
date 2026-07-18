@@ -238,7 +238,7 @@ const BASE_TEMPLATE_TOKENS = {
 
 const TEMPLATE_STYLE_PRESETS = {
   "default-replica": BASE_TEMPLATE_TOKENS,
-  "asml-technology-bridge": {
+  "hierarchical-revenue-bridge": {
     layout: {
       leftX: 372,
       revenueX: 772,
@@ -250,12 +250,6 @@ const TEMPLATE_STYLE_PRESETS = {
       sourceNodeGap: 18,
       sourceNodeMaxY: 1024,
       structuralNodeOffsets: {
-        "left-detail-0": { dy: -64 },
-        "left-detail-1": { dy: -72 },
-        "left-detail-2": { dy: -108 },
-        "left-detail-3": { dy: -148 },
-        "left-detail-4": { dy: -168 },
-        "left-detail-5": { dy: -192 },
         operating: { dy: -50 },
         net: { dy: -94 },
       },
@@ -403,7 +397,7 @@ const STRUCTURAL_PROTOTYPES = {
   },
   "hierarchical-detail-bridge": {
     label: "Hierarchical detail bridge",
-    tokenPresetKey: "asml-technology-bridge",
+    tokenPresetKey: "hierarchical-revenue-bridge",
     flags: {
       hierarchicalDetails: true,
     },

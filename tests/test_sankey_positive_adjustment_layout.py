@@ -19,6 +19,7 @@ ALPHABET_PAYLOAD = ROOT_DIR / "data" / "cache" / "alphabet.json"
 BERKSHIRE_PAYLOAD = ROOT_DIR / "data" / "cache" / "berkshire.json"
 ORACLE_PAYLOAD = ROOT_DIR / "data" / "cache" / "oracle.json"
 JD_PAYLOAD = ROOT_DIR / "data" / "cache" / "jd.json"
+NVIDIA_PAYLOAD = ROOT_DIR / "data" / "cache" / "nvidia.json"
 SVG_NS = {"svg": "http://www.w3.org/2000/svg"}
 
 
@@ -207,6 +208,30 @@ def viewbox_height(svg_root: ET.Element) -> float:
 
 
 class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
+    def test_nvidia_prominent_non_operating_gain_merges_from_a_clear_upper_runway(self) -> None:
+        svg_root = render_sankey_svg(NVIDIA_PAYLOAD, "zh", "nvidia-prominent-positive", quarter="2026Q2")
+
+        positive = visible_rect_attrs(svg_root, "positive-0")
+        net = visible_rect_attrs(svg_root, "net")
+        vertical_lead = net["y"] - positive["y"]
+        horizontal_runway = net["x"] - (positive["x"] + positive["width"])
+
+        self.assertGreaterEqual(
+            vertical_lead,
+            max(36, positive["height"] * 0.4),
+            "A prominent positive adjustment should descend into the net-profit node instead of entering flat or upward.",
+        )
+        self.assertLessEqual(
+            vertical_lead,
+            positive["height"] * 0.75,
+            "The lifted positive adjustment should remain visually attached to its net-profit merge.",
+        )
+        self.assertGreaterEqual(
+            horizontal_runway,
+            max(96, positive["height"]),
+            "A prominent positive adjustment should retain enough horizontal runway for a smooth merge.",
+        )
+
     def test_operating_profit_fork_starts_curving_without_a_long_shared_runway(self) -> None:
         for company, payload in (
             ("amazon", AMAZON_PAYLOAD),

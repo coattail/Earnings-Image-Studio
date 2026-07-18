@@ -138,7 +138,7 @@ function writeSvg(filePath, svg) {
   fs.writeFileSync(filePath, ensureTrailingNewline(svg), "utf8");
 }
 
-function initializeRuntimeForQuarter(rootDir, companyPayload, quarterKey, language) {
+function initializeRuntimeForQuarter(rootDir, companyPayload, quarterKey, language, editorNodeOverrides = {}) {
   debug(`initialize runtime for ${companyPayload.ticker || companyPayload.id} ${quarterKey} (${language})`);
   const runtime = loadRuntime(rootDir);
   const normalizeLoadedCompany = runtime.normalizeLoadedCompany;
@@ -167,8 +167,15 @@ function initializeRuntimeForQuarter(rootDir, companyPayload, quarterKey, langua
   }
   snapshot.companyNameZh = normalizedCompany.nameZh;
   snapshot.companyNameEn = normalizedCompany.nameEn;
-  snapshot.editorNodeOverrides =
+  const resolvedEditorNodeOverrides =
     typeof runtime.currentResolvedEditorOverrides === "function" ? runtime.currentResolvedEditorOverrides() : {};
+  snapshot.learnedEditorNodeOverrides = resolvedEditorNodeOverrides;
+  snapshot.interactiveEditorNodeOverrides =
+    editorNodeOverrides && typeof editorNodeOverrides === "object" ? editorNodeOverrides : {};
+  snapshot.editorNodeOverrides = {
+    ...resolvedEditorNodeOverrides,
+    ...snapshot.interactiveEditorNodeOverrides,
+  };
   snapshot.editorSelectedNodeId = null;
   snapshot.editModeEnabled = false;
   state.currentSnapshot = snapshot;
@@ -191,6 +198,14 @@ function main() {
     .map((value) => value.trim().toLowerCase())
     .filter(Boolean);
   const basename = String(args.basename || "").trim();
+  let editorNodeOverrides = {};
+  if (args["node-overrides"]) {
+    try {
+      editorNodeOverrides = JSON.parse(args["node-overrides"]);
+    } catch (_error) {
+      fail("Invalid --node-overrides JSON.");
+    }
+  }
 
   if (!payloadPath || !fs.existsSync(payloadPath)) {
     fail("Missing --payload JSON path.");
@@ -223,7 +238,13 @@ function main() {
 
   if (modes.includes("sankey")) {
     debug("rendering sankey");
-    const { normalizedCompany: sankeyCompany, snapshot, EarningsVizRuntime } = initializeRuntimeForQuarter(rootDir, companyPayload, quarterKey, requestedLanguage);
+    const { normalizedCompany: sankeyCompany, snapshot, EarningsVizRuntime } = initializeRuntimeForQuarter(
+      rootDir,
+      companyPayload,
+      quarterKey,
+      requestedLanguage,
+      editorNodeOverrides
+    );
     const sankeySvg = EarningsVizRuntime.render.renderIncomeStatementSvg(snapshot, sankeyCompany);
     const sankeyPath = path.join(outputDir, `${safeBaseName}-sankey.svg`);
     writeSvg(sankeyPath, sankeySvg);
