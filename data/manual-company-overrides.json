@@ -1,4 +1,185 @@
 {
+  "alphabet": {
+    "financials": {
+      "2026Q2": {
+        "calendarQuarter": "2026Q2",
+        "periodEnd": "2026-06-30",
+        "fiscalYear": "2026",
+        "fiscalQuarter": "Q2",
+        "fiscalLabel": "FY2026 Q2",
+        "statementCurrency": "USD",
+        "revenueBn": 119.796,
+        "revenueYoyPct": 24.234,
+        "revenueQoqPct": 9.009,
+        "costOfRevenueBn": 45.943,
+        "grossProfitBn": 73.853,
+        "rndBn": 18.219,
+        "sgnaBn": 14.864,
+        "otherOpexBn": null,
+        "operatingExpensesBn": 33.083,
+        "operatingIncomeBn": 40.77,
+        "nonOperatingBn": 97.983,
+        "pretaxIncomeBn": 138.753,
+        "taxBn": 26.56,
+        "netIncomeBn": 112.193,
+        "netIncomeYoyPct": 297.904,
+        "grossMarginPct": 61.649,
+        "operatingMarginPct": 34.033,
+        "profitMarginPct": 93.653,
+        "effectiveTaxRatePct": 19.142,
+        "grossMarginYoyDeltaPp": 2.134,
+        "operatingMarginYoyDeltaPp": 1.604,
+        "profitMarginYoyDeltaPp": 64.413,
+        "statementSource": "manual-alphabet-earnings-release",
+        "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
+        "statementFilingDate": "2026-07-22",
+        "statementMeta": {
+          "statementSource": "manual-alphabet-earnings-release",
+          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
+          "statementValueMode": "quarterly",
+          "statementSpanQuarters": 1,
+          "qualityFlags": [],
+          "adapterId": "manual_financials"
+        }
+      }
+    },
+    "officialRevenueStructureHistory": {
+      "source": "manual-official-quarterly-results",
+      "quarters": {
+        "2026Q2": {
+          "style": "ad-funnel-bridge",
+          "segments": [
+            {
+              "name": "Ad Revenue",
+              "memberKey": "adrevenue",
+              "valueBn": 81.629,
+              "filingDate": "2026-07-22",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
+              "sourceForm": "8-K"
+            },
+            {
+              "name": "Google Cloud",
+              "nameZh": "谷歌云",
+              "memberKey": "googlecloud",
+              "valueBn": 24.768,
+              "filingDate": "2026-07-22",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
+              "sourceForm": "8-K"
+            },
+            {
+              "name": "Google Play",
+              "nameZh": "订阅、平台和设备",
+              "memberKey": "googleplay",
+              "valueBn": 12.911,
+              "filingDate": "2026-07-22",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
+              "sourceForm": "8-K",
+              "supportLines": ["Official: subscriptions, platforms, and devices"]
+            },
+            {
+              "name": "Other",
+              "nameZh": "其他",
+              "memberKey": "otherrevenue",
+              "valueBn": 0.488,
+              "filingDate": "2026-07-22",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
+              "sourceForm": "8-K",
+              "supportLines": ["Other Bets + hedging"]
+            }
+          ],
+          "detailGroups": [
+            {
+              "name": "Google Search",
+              "nameZh": "谷歌搜索",
+              "memberKey": "searchadvertising",
+              "targetName": "Ad Revenue",
+              "valueBn": 63.271,
+              "filingDate": "2026-07-22",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
+              "sourceForm": "8-K"
+            },
+            {
+              "name": "YouTube",
+              "memberKey": "youtube",
+              "targetName": "Ad Revenue",
+              "valueBn": 11.055,
+              "filingDate": "2026-07-22",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
+              "sourceForm": "8-K"
+            },
+            {
+              "name": "Google AdMob",
+              "nameZh": "谷歌广告网络",
+              "memberKey": "admob",
+              "targetName": "Ad Revenue",
+              "valueBn": 7.303,
+              "filingDate": "2026-07-22",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
+              "sourceForm": "8-K"
+            }
+          ],
+          "costBreakdown": [
+            {
+              "name": "TAC",
+              "nameZh": "流量获取成本",
+              "memberKey": "tac",
+              "valueBn": 16.179,
+              "filingDate": "2026-07-22",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
+              "sourceForm": "8-K"
+            },
+            {
+              "name": "Other cost",
+              "nameZh": "其他成本",
+              "memberKey": "othercost",
+              "valueBn": 29.764,
+              "filingDate": "2026-07-22",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
+              "sourceForm": "8-K"
+            }
+          ],
+          "opexBreakdown": [
+            {
+              "name": "Research and development",
+              "nameZh": "研发费用",
+              "memberKey": "researchanddevelopment",
+              "valueBn": 18.219,
+              "filingDate": "2026-07-22",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
+              "sourceForm": "8-K"
+            },
+            {
+              "name": "Sales and marketing",
+              "nameZh": "销售和营销费用",
+              "memberKey": "salesandmarketing",
+              "valueBn": 8.403,
+              "filingDate": "2026-07-22",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
+              "sourceForm": "8-K"
+            },
+            {
+              "name": "General and administrative",
+              "nameZh": "一般及行政费用",
+              "memberKey": "generalandadministrative",
+              "valueBn": 6.461,
+              "filingDate": "2026-07-22",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
+              "sourceForm": "8-K"
+            }
+          ]
+        }
+      },
+      "filingsUsed": [
+        {
+          "title": "Alphabet Q2 2026 Earnings Release",
+          "quarter": "2026Q2",
+          "filingDate": "2026-07-22",
+          "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm"
+        }
+      ],
+      "errors": []
+    }
+  },
   "samsung": {
     "financials": {
       "2026Q1": {
@@ -2107,6 +2288,51 @@
           "qualityFlags": [],
           "adapterId": "manual_financials"
         }
+      },
+      "2026Q2": {
+        "calendarQuarter": "2026Q2",
+        "periodEnd": "2026-06-30",
+        "fiscalYear": "2026",
+        "fiscalQuarter": "Q2",
+        "fiscalLabel": "FY2026 Q2",
+        "statementCurrency": "USD",
+        "revenueBn": 28.236,
+        "revenueYoyPct": 25.516,
+        "revenueQoqPct": 26.127,
+        "costOfRevenueBn": 23.485,
+        "grossProfitBn": 4.751,
+        "rndBn": 2.371,
+        "sgnaBn": 1.982,
+        "otherOpexBn": null,
+        "operatingExpensesBn": 4.353,
+        "operatingIncomeBn": 0.398,
+        "nonOperatingBn": 0.931,
+        "pretaxIncomeBn": 1.329,
+        "taxBn": 0.201,
+        "netIncomeBn": 1.114,
+        "netIncomeYoyPct": -4.949,
+        "grossMarginPct": 16.826,
+        "operatingMarginPct": 1.41,
+        "profitMarginPct": 3.946,
+        "effectiveTaxRatePct": 15.124,
+        "grossMarginYoyDeltaPp": -0.413,
+        "operatingMarginYoyDeltaPp": -2.693,
+        "profitMarginYoyDeltaPp": -1.264,
+        "epsDiluted": 0.32,
+        "operatingCashFlowBn": 4.697,
+        "capitalExpenditureBn": 5.789,
+        "freeCashFlowBn": -1.092,
+        "statementSource": "manual-tesla-ir-pdf",
+        "statementSourceUrl": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q2-2026-Update.pdf",
+        "statementFilingDate": "2026-07-22",
+        "statementMeta": {
+          "statementSource": "manual-tesla-ir-pdf",
+          "statementSourceUrl": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q2-2026-Update.pdf",
+          "statementValueMode": "quarterly",
+          "statementSpanQuarters": 1,
+          "qualityFlags": [],
+          "adapterId": "manual_financials"
+        }
       }
     },
     "officialRevenueStructureHistory": {
@@ -2220,6 +2446,115 @@
               "sourceForm": "QuarterlyResultsPDF"
             }
           ]
+        },
+        "2026Q2": {
+          "segments": [
+            {
+              "name": "Auto",
+              "nameZh": "汽车业务",
+              "memberKey": "auto",
+              "valueBn": 20.516,
+              "filingDate": "2026-07-22",
+              "sourceUrl": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q2-2026-Update.pdf",
+              "sourceForm": "QuarterlyResultsPDF"
+            },
+            {
+              "name": "Energy generation & storage",
+              "nameZh": "储能与发电",
+              "memberKey": "energygenerationstorage",
+              "valueBn": 3.139,
+              "filingDate": "2026-07-22",
+              "sourceUrl": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q2-2026-Update.pdf",
+              "sourceForm": "QuarterlyResultsPDF"
+            },
+            {
+              "name": "Services and other",
+              "nameZh": "服务及其他",
+              "memberKey": "services",
+              "valueBn": 4.581,
+              "filingDate": "2026-07-22",
+              "sourceUrl": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q2-2026-Update.pdf",
+              "sourceForm": "QuarterlyResultsPDF"
+            }
+          ],
+          "detailGroups": [
+            {
+              "name": "Auto sales",
+              "nameZh": "汽车销售",
+              "memberKey": "autosales",
+              "targetName": "Auto",
+              "valueBn": 20.006,
+              "filingDate": "2026-07-22",
+              "sourceUrl": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q2-2026-Update.pdf",
+              "sourceForm": "QuarterlyResultsPDF"
+            },
+            {
+              "name": "Regulatory credits",
+              "nameZh": "监管积分",
+              "memberKey": "regulatorycredits",
+              "targetName": "Auto",
+              "valueBn": 0.146,
+              "filingDate": "2026-07-22",
+              "sourceUrl": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q2-2026-Update.pdf",
+              "sourceForm": "QuarterlyResultsPDF"
+            },
+            {
+              "name": "Leasing",
+              "nameZh": "汽车租赁",
+              "memberKey": "leasing",
+              "targetName": "Auto",
+              "valueBn": 0.364,
+              "filingDate": "2026-07-22",
+              "sourceUrl": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q2-2026-Update.pdf",
+              "sourceForm": "QuarterlyResultsPDF"
+            }
+          ],
+          "costBreakdown": [
+            {
+              "name": "Auto",
+              "nameZh": "汽车业务",
+              "valueBn": 17.053,
+              "filingDate": "2026-07-22",
+              "sourceUrl": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q2-2026-Update.pdf",
+              "sourceForm": "QuarterlyResultsPDF"
+            },
+            {
+              "name": "Energy generation & storage",
+              "nameZh": "储能与发电",
+              "valueBn": 2.499,
+              "filingDate": "2026-07-22",
+              "sourceUrl": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q2-2026-Update.pdf",
+              "sourceForm": "QuarterlyResultsPDF"
+            },
+            {
+              "name": "Services and other",
+              "nameZh": "服务及其他",
+              "valueBn": 3.933,
+              "filingDate": "2026-07-22",
+              "sourceUrl": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q2-2026-Update.pdf",
+              "sourceForm": "QuarterlyResultsPDF"
+            }
+          ],
+          "opexBreakdown": [
+            {
+              "name": "Research and development",
+              "nameZh": "研发费用",
+              "memberKey": "researchanddevelopment",
+              "valueBn": 2.371,
+              "filingDate": "2026-07-22",
+              "sourceUrl": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q2-2026-Update.pdf",
+              "sourceForm": "QuarterlyResultsPDF"
+            },
+            {
+              "name": "Selling, general and administrative",
+              "nameZh": "销售、一般及行政费用",
+              "memberKey": "sellinggeneralandadministrative",
+              "valueBn": 1.982,
+              "filingDate": "2026-07-22",
+              "sourceUrl": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q2-2026-Update.pdf",
+              "sourceForm": "QuarterlyResultsPDF"
+            }
+          ]
         }
       },
       "filingsUsed": [
@@ -2228,6 +2563,12 @@
           "quarter": "2026Q1",
           "filingDate": "2026-04-22",
           "pdf": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q1-2026-Update.pdf"
+        },
+        {
+          "title": "Tesla Q2 2026 Update",
+          "quarter": "2026Q2",
+          "filingDate": "2026-07-22",
+          "pdf": "https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q2-2026-Update.pdf"
         }
       ],
       "errors": []
