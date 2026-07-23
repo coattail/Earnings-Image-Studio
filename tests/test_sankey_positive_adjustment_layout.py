@@ -232,36 +232,53 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
             svg_root.find(".//svg:rect[@data-edit-node-visible-id='pretax']", SVG_NS),
             "The chart should not insert an unexplained pretax node between operating profit and tax.",
         )
-        self.assertGreaterEqual(
+        self.assertAlmostEqual(
             viewbox_height(svg_root),
-            2150,
-            "The exceptional positive bridge should receive a taller canvas instead of compressing the gross-profit split.",
+            1937,
+            delta=2,
+            msg="The quarter-specific layout should remove the unused lower canvas while preserving ribbon scale.",
         )
         self.assertGreaterEqual(
             operating_expenses["y"] - (operating["y"] + operating["height"]),
-            36,
+            130,
             "Gross profit's operating-profit and operating-expense branches must end in visibly separated lanes.",
         )
         self.assertGreaterEqual(
             gross["y"] - revenue["y"],
-            36,
+            90,
             "The main profit ribbon should descend from revenue into gross profit.",
         )
         self.assertGreaterEqual(
             gross["y"] - operating["y"],
-            30,
+            60,
             "Gross profit must remain the low inflection point before the main green ribbon rises into operating profit.",
         )
+        expected_manual_layout_y = {
+            "revenue": 680.6,
+            "gross": 780.3,
+            "operating": 712.2,
+            "operating-expenses": 1066.3,
+            "deduction-0": 852.4,
+            "cost-breakdown-0": 1437.8,
+            "cost-breakdown-1": 1607.3,
+        }
+        for node_id, expected_y in expected_manual_layout_y.items():
+            self.assertAlmostEqual(
+                visible_rect_attrs(svg_root, node_id)["y"],
+                expected_y,
+                delta=1.5,
+                msg=f"Node '{node_id}' should retain the approved hand-tuned Q2 layout.",
+            )
         self.assertGreaterEqual(cost_breakdown_first["y"], cost["y"])
         self.assertGreaterEqual(
             cost_breakdown_second["y"] - (cost_breakdown_first["y"] + cost_breakdown_first["height"]),
-            36,
+            80,
             "The two cost-of-revenue terminals should form a compact, readable downward fan.",
         )
         self.assertLessEqual(
             cost_breakdown_second["y"] + cost_breakdown_second["height"],
-            viewbox_height(svg_root) * 0.75,
-            "The cost-of-revenue terminals should not be pushed into the bottom quarter of the exceptional canvas.",
+            viewbox_height(svg_root) * 0.92,
+            "The cost-of-revenue terminals should retain a deliberate lower margin on the compact canvas.",
         )
         self.assertGreaterEqual(
             net["x"] - (positive["x"] + positive["width"]),
