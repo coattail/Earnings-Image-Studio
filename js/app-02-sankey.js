@@ -7687,10 +7687,49 @@ function renderPixelReplicaSvg(snapshot) {
       rightTerminalSeparationGap,
       scaleY(safeNumber(snapshot.layout?.negativeTerminalSmoothMinGapY, entries.length >= 4 ? 30 : 24))
     );
-    const maxLiftY = scaleY(
+    const deductionMaxLiftY = scaleY(
       safeNumber(snapshot.layout?.negativeTerminalSmoothMaxLiftY, entries.length >= 4 ? 168 : entries.length >= 3 ? 132 : 96)
     );
-    const activationOvershootY = scaleY(safeNumber(snapshot.layout?.negativeTerminalSmoothActivationOvershootY, 32));
+    const opexNeedsElbowLift = entries
+      .filter((entry) => entry.lane === "opex")
+      .some((entry) => {
+        const sourceShift = layoutReferenceOffsetFor(entry.sourceNodeId);
+        const targetShift = layoutReferenceOffsetFor(entry.targetNodeId);
+        const sourceCenterY = safeNumber(entry.sourceSlice.center, entry.box.center) + sourceShift.dy;
+        const renderedCenterY = safeNumber(entry.box.center, 0) + targetShift.dy;
+        const activationDropY = scaleY(
+          safeNumber(
+            snapshot.layout?.negativeTerminalSmoothOpexGroupActivationDropY,
+            opexBoxes.length <= 2 ? 330 : 280
+          )
+        );
+        return renderedCenterY - sourceCenterY > activationDropY;
+      });
+    const opexMaxLiftY = scaleY(
+      safeNumber(
+        snapshot.layout?.negativeTerminalSmoothOpexMaxLiftY,
+        opexNeedsElbowLift
+          ? opexBoxes.length <= 2
+            ? 300
+            : opexBoxes.length >= 4
+              ? 168
+              : 220
+          : entries.length >= 4
+            ? 168
+            : entries.length >= 3
+              ? 132
+              : 96
+      )
+    );
+    const deductionActivationOvershootY = scaleY(
+      safeNumber(snapshot.layout?.negativeTerminalSmoothActivationOvershootY, 32)
+    );
+    const opexActivationOvershootY = scaleY(
+      safeNumber(
+        snapshot.layout?.negativeTerminalSmoothOpexActivationOvershootY,
+        opexNeedsElbowLift ? 14 : 32
+      )
+    );
     let previousCenter = null;
     let previousHeight = 0;
     const nextCenters = entries.map((entry) => {
@@ -7703,7 +7742,9 @@ function renderPixelReplicaSvg(snapshot) {
           ? scaleY(
               safeNumber(
                 snapshot.layout?.negativeTerminalSmoothOpexPreferredDropY,
-                132 + entry.index * (opexBoxes.length <= 2 ? 112 : 88)
+                opexNeedsElbowLift
+                  ? 68 + entry.index * (opexBoxes.length <= 2 ? 124 : 78)
+                  : 132 + entry.index * (opexBoxes.length <= 2 ? 112 : 88)
               )
             )
           : scaleY(
@@ -7713,7 +7754,13 @@ function renderPixelReplicaSvg(snapshot) {
               )
             );
       const overshootY = renderedCenterY - (sourceCenterY + preferredDropY);
-      const requestedLiftY = overshootY > activationOvershootY ? Math.min(overshootY - activationOvershootY * 0.35, maxLiftY) : 0;
+      const maximumLiftY = entry.lane === "opex" ? opexMaxLiftY : deductionMaxLiftY;
+      const activationOvershootY =
+        entry.lane === "opex" ? opexActivationOvershootY : deductionActivationOvershootY;
+      const requestedLiftY =
+        overshootY > activationOvershootY
+          ? Math.min(overshootY - activationOvershootY * 0.35, maximumLiftY)
+          : 0;
       const preferredCenter = entry.box.center - Math.max(requestedLiftY, 0);
       const entryMinCenter = Math.max(
         minTopY + entry.height / 2,
@@ -7740,6 +7787,67 @@ function renderPixelReplicaSvg(snapshot) {
     if (moved && costBreakdownBoxes.length) {
       maintainCostBreakdownNodeGap();
     }
+  };
+  const refineCostBreakdownTerminalFanSmoothness = () => {
+    if (!costBreakdownBoxes.length || !costBreakdownSourceSlices.length) return;
+    const sourceShift = combinedNodeOffsetFor("cost");
+    const minimumGapY = scaleY(
+      safeNumber(snapshot.layout?.costBreakdownTerminalSmoothMinGapY, costBreakdownBoxes.length >= 4 ? 18 : 24)
+    );
+    const activationOvershootY = scaleY(
+      safeNumber(snapshot.layout?.costBreakdownTerminalSmoothActivationOvershootY, 12)
+    );
+    const maximumLiftY = scaleY(
+      safeNumber(snapshot.layout?.costBreakdownTerminalSmoothMaxLiftY, costBreakdownBoxes.length >= 3 ? 184 : 148)
+    );
+    let previousCenter = null;
+    let previousHeight = 0;
+    costBreakdownBoxes.forEach((box, index) => {
+      const sourceSlice = costBreakdownSourceSlices[index] || costBreakdownSlices[index];
+      if (!box || !sourceSlice) return;
+      const targetShift = layoutReferenceOffsetFor(`cost-breakdown-${index}`);
+      const renderedSourceBridge = constantThicknessBridge(
+        sourceSlice,
+        box.center,
+        10,
+        costTop,
+        costBottom
+      );
+      const sourceCenterY =
+        (safeNumber(renderedSourceBridge.sourceTop, 0) +
+          safeNumber(renderedSourceBridge.sourceBottom, 0)) /
+          2 +
+        sourceShift.dy;
+      const renderedCenterY = safeNumber(box.center, 0) + targetShift.dy;
+      const preferredDropY = scaleY(
+        safeNumber(
+          snapshot.layout?.costBreakdownTerminalSmoothPreferredDropY,
+          84 + index * 86 - index * index * 10
+        )
+      );
+      const overshootY = renderedCenterY - (sourceCenterY + preferredDropY);
+      const requestedLiftY =
+        overshootY > activationOvershootY
+          ? Math.min(overshootY - activationOvershootY * 0.35, maximumLiftY)
+          : 0;
+      const preferredCenterY = box.center - Math.max(requestedLiftY, 0);
+      const minimumCenterY = Math.max(
+        costBreakdownTerminalTopFloor + box.height / 2,
+        costBreakdownOpexSummaryBottom + scaleY(12) + box.height / 2,
+        previousCenter === null
+          ? -Infinity
+          : previousCenter + (previousHeight + box.height) / 2 + minimumGapY
+      );
+      if (minimumCenterY <= box.center) {
+        costBreakdownBoxes[index] = shiftBoxCenter(
+          box,
+          clamp(preferredCenterY, minimumCenterY, box.center)
+        );
+      }
+      const resolvedBox = costBreakdownBoxes[index] || box;
+      previousCenter = resolvedBox.center;
+      previousHeight = resolvedBox.height;
+    });
   };
   refineCostStageInboundSmoothness();
   refineCostStageElbowBalance();
@@ -8025,6 +8133,8 @@ function renderPixelReplicaSvg(snapshot) {
       Math.min(requestedOpexTerminalGroupShiftY, availableOpexTerminalShiftY)
     );
   }
+  repelCostBreakdownFromOpexSummary();
+  refineCostBreakdownTerminalFanSmoothness();
   repelCostBreakdownFromOpexSummary();
   if (useExtremePositiveLayout && costBreakdownBoxes.length) {
     const compactTopY = Math.max(
@@ -8482,6 +8592,18 @@ function renderPixelReplicaSvg(snapshot) {
       positiveAbove &&
       totalPositiveStackHeight >= scaleY(safeNumber(snapshot.layout?.positiveMaterialMinimumHeightY, 36)) &&
       positiveMergeShareOfNet >= safeNumber(snapshot.layout?.positiveMaterialMinimumNetShare, 0.2);
+    const positiveNeedsVisibleMergeAngle =
+      positiveUpperLane &&
+      !positiveMaterialAbove &&
+      !useExtremePositiveLayout &&
+      !hasOperatingLoss &&
+      positiveAdjustments.length === 1 &&
+      totalPositiveStackHeight >= scaleY(safeNumber(snapshot.layout?.positiveAngledMinimumHeightY, 6)) &&
+      positiveMergeShareOfNet >= safeNumber(snapshot.layout?.positiveAngledMinimumNetShare, 0.2);
+    const positiveRequiresVisibleMergeLead = positiveMaterialAbove || positiveNeedsVisibleMergeAngle;
+    const positiveAngledSourceTopFloorY = scaleY(
+      safeNumber(snapshot.layout?.positiveAngledSourceTopFloorY, 32)
+    );
     const positiveBranchPathOptions = {
       curveFactor: positiveAbove ? 0.68 : 0.7,
       startCurveFactor: positiveAbove ? 0.28 : 0.26,
@@ -9166,7 +9288,7 @@ function renderPixelReplicaSvg(snapshot) {
       positiveNodeX = clamp(positiveNodeX, extremePositiveTopLaneMinX, Math.max(positiveNodeMaxX, extremePositiveTopLaneMinX));
       corridorSampleXs = positiveCorridorSampleXsForNode(positiveNodeX);
     }
-    if (positiveMaterialAbove) {
+    if (positiveRequiresVisibleMergeLead) {
       const netShift = editorOffsetForNode("net");
       const prominentTargetStackCenter = positiveTargetBands.length
         ? (safeNumber(positiveTargetBands[0]?.top, netTop) +
@@ -9178,8 +9300,18 @@ function renderPixelReplicaSvg(snapshot) {
         const itemHeight = Math.max(safeNumber(positiveHeights[index], 0), 0);
         return weightedShift + learnedEditorOffsetForNode(`positive-${index}`).dy * itemHeight;
       }, 0) / Math.max(totalPositiveStackHeight, 1);
+      if (positiveNeedsVisibleMergeAngle) {
+        positiveTopMin = Math.min(positiveTopMin, positiveAngledSourceTopFloorY);
+      }
       const prominentMinimumMergeLeadY = Math.max(
-        scaleY(safeNumber(snapshot.layout?.positiveProminentMinimumMergeLeadY, 36)),
+        scaleY(
+          safeNumber(
+            positiveNeedsVisibleMergeAngle
+              ? snapshot.layout?.positiveAngledMinimumMergeLeadY
+              : snapshot.layout?.positiveProminentMinimumMergeLeadY,
+            positiveNeedsVisibleMergeAngle ? 44 : 36
+          )
+        ),
         positiveReferenceHeight * safeNumber(snapshot.layout?.positiveProminentMinimumMergeLeadHeightFactor, 0.42)
       );
       const prominentMaximumSourceTop =
@@ -9290,7 +9422,11 @@ function renderPixelReplicaSvg(snapshot) {
       };
       const sourceTopSearchMin = clamp(
         positiveTopMin + positiveSourceDropY,
-        positiveMaterialAbove ? positiveSourceTopFloorY : positiveExtremeTopFloorY,
+        positiveNeedsVisibleMergeAngle
+          ? positiveAngledSourceTopFloorY
+          : positiveMaterialAbove
+            ? positiveSourceTopFloorY
+            : positiveExtremeTopFloorY,
         chartBottomLimit - gainHeight - scaleY(6)
       );
       const sourceTopSearchMax = clamp(
@@ -9997,11 +10133,17 @@ function renderPixelReplicaSvg(snapshot) {
       )}" fill="${greenFlow}" opacity="0.97"></path>`;
       positiveMarkup += renderEditableNodeRect(positiveFrame, greenNode);
       const forceLeftCenteredLabel = snapshot.layout?.positiveLabelPlacement === "left-center";
-      const labelAnchor = forceLeftCenteredLabel ? "end" : chosenPlacement.anchor;
-      const labelX = forceLeftCenteredLabel
+      const alignSingleLeftLabelToNode =
+        positiveNeedsVisibleMergeAngle &&
+        positiveAdjustments.length === 1 &&
+        chosenPlacement.type === "left" &&
+        snapshot.layout?.positiveSingleLeftLabelFollowNodeCenter !== false;
+      const useLeftCenteredLabel = forceLeftCenteredLabel || alignSingleLeftLabelToNode;
+      const labelAnchor = useLeftCenteredLabel ? "end" : chosenPlacement.anchor;
+      const labelX = useLeftCenteredLabel
         ? positiveFrame.x - labelGapX
         : chosenPlacement.x + positiveShift.dx;
-      const labelCenterY = forceLeftCenteredLabel
+      const labelCenterY = useLeftCenteredLabel
         ? positiveFrame.centerY - labelCenterBias
         : chosenPlacement.centerY + positiveShift.dy;
       const chosenLabelRect = labelBoundsRect(labelAnchor, labelX, labelCenterY);

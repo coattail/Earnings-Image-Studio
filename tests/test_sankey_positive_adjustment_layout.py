@@ -318,6 +318,8 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
         svg_root = render_sankey_svg(TESLA_PAYLOAD, "zh", "tesla-q2-conserved-tax", quarter="2026Q2")
         operating = visible_rect_attrs(svg_root, "operating")
         tax = visible_rect_attrs(svg_root, "deduction-0")
+        positive = visible_rect_attrs(svg_root, "positive-0")
+        net = visible_rect_attrs(svg_root, "net")
         tesla_payload = json.loads(TESLA_PAYLOAD.read_text(encoding="utf-8"))
         quarter = tesla_payload["financials"]["2026Q2"]
         expected_tax_height = operating["height"] * quarter["taxBn"] / quarter["operatingIncomeBn"]
@@ -342,6 +344,83 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
         self.assertEqual(1, len(tax_paths))
         self.assertAlmostEqual(path_start_height(tax_paths[0]), tax["height"], delta=0.2)
         self.assertAlmostEqual(path_target_height(tax_paths[0]), tax["height"], delta=0.2)
+        self.assertGreaterEqual(
+            net["y"] - positive["y"],
+            44,
+            "A single material non-operating gain should enter net income at a visible angle.",
+        )
+        positive_label_baseline_center = (
+            text_y(svg_root, "营业外收益") + text_y(svg_root, "$0.9B")
+        ) / 2
+        self.assertEqual("end", text_anchor(svg_root, "营业外收益"))
+        self.assertLess(text_x(svg_root, "营业外收益"), positive["x"])
+        self.assertAlmostEqual(
+            positive_label_baseline_center,
+            positive["y"] + positive["height"] / 2,
+            delta=8,
+            msg="The non-operating-income annotation should stay centered beside its source node.",
+        )
+
+        cost = visible_rect_attrs(svg_root, "cost")
+        cost_terminals = [
+            visible_rect_attrs(svg_root, f"cost-breakdown-{index}")
+            for index in range(3)
+        ]
+        cost_drops = []
+        for target in cost_terminals:
+            target_center = target["y"] + target["height"] / 2
+            paths = [
+                path
+                for path in red_paths_between(svg_root, cost, target)
+                if abs(path_target_center(path) - target_center) <= 1
+            ]
+            self.assertEqual(1, len(paths))
+            cost_drops.append(path_target_center(paths[0]) - path_start_center(paths[0]))
+        self.assertLessEqual(
+            cost_drops[0],
+            150,
+            "The first cost terminal should begin the fan with a gentle downward turn.",
+        )
+        self.assertTrue(
+            all(lower > upper for upper, lower in zip(cost_drops, cost_drops[1:])),
+            "Cost terminals should form an orderly progressively descending fan.",
+        )
+        self.assertLessEqual(
+            max(lower - upper for upper, lower in zip(cost_drops, cost_drops[1:])),
+            150,
+            "Adjacent cost branches should not introduce an abrupt extra elbow.",
+        )
+
+        operating_expenses = visible_rect_attrs(svg_root, "operating-expenses")
+        opex_terminals = [
+            visible_rect_attrs(svg_root, f"opex-{index}")
+            for index in range(2)
+        ]
+        opex_drops = []
+        for target in opex_terminals:
+            target_center = target["y"] + target["height"] / 2
+            paths = [
+                path
+                for path in red_paths_between(svg_root, operating_expenses, target)
+                if abs(path_target_center(path) - target_center) <= 1
+            ]
+            self.assertEqual(1, len(paths))
+            opex_drops.append(path_target_center(paths[0]) - path_start_center(paths[0]))
+        self.assertLessEqual(
+            opex_drops[0],
+            130,
+            "The first operating-expense terminal should leave its source with a shallow curve.",
+        )
+        self.assertGreaterEqual(
+            opex_drops[1] - opex_drops[0],
+            80,
+            "The second operating-expense terminal should descend clearly instead of crowding the first.",
+        )
+        self.assertLessEqual(
+            opex_drops[1],
+            300,
+            "The lower operating-expense terminal should remain part of one smooth fan.",
+        )
 
     def test_nvidia_prominent_non_operating_gain_merges_from_a_clear_upper_runway(self) -> None:
         svg_root = render_sankey_svg(NVIDIA_PAYLOAD, "zh", "nvidia-prominent-positive", quarter="2026Q2")
