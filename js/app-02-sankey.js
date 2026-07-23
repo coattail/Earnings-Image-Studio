@@ -1787,7 +1787,8 @@ function renderPixelReplicaSvg(snapshot) {
       }
     });
   }
-  const deductionSlices = stackValueSlices(belowOperatingItems, deductionTop, scale, { minHeight: 4, targetBottom: deductionBottom });
+  // Deduction ribbons must retain their monetary thickness; label readability is handled by separate packing boxes.
+  const deductionSlices = stackValueSlices(belowOperatingItems, deductionTop, scale, { minHeight: 0, targetBottom: deductionBottom });
   const deductionBand = prototypeBandConfig(templateTokens, "deductions");
   const deductionDensity = deductionSlices.length >= 3 ? "dense" : "regular";
   const deductionEntries = deductionSlices.map((slice, index) => {
@@ -2797,7 +2798,7 @@ function renderPixelReplicaSvg(snapshot) {
     opDeductionSourceBand.top,
     opDeductionSourceBand.bottom,
     {
-      minHeight: scaleY(safeNumber(snapshot.layout?.deductionSourceMinHeight, 4)),
+      minHeight: 0,
     }
   );
   const costBreakdownSourceMinHeight = scaleY(
@@ -5983,7 +5984,7 @@ function renderPixelReplicaSvg(snapshot) {
             index: 0,
             box: deductionBoxes[0],
             sourceSlice: deductionSourceSlices[0] || deductionSlices[0],
-            minHeight: deductionSlices[0]?.item?.name === "Other" ? 6 : 12,
+            minHeight: 0,
             sourceTop: opDeductionSourceBand.top,
             sourceBottom: opDeductionSourceBand.bottom,
             sourceNodeId: "operating",
@@ -6218,7 +6219,7 @@ function renderPixelReplicaSvg(snapshot) {
             index: 0,
             box: deductionBoxes[0],
             sourceSlice: deductionSourceSlices[0] || deductionSlices[0],
-            minHeight: deductionSlices[0]?.item?.name === "Other" ? 6 : 12,
+            minHeight: 0,
             sourceTop: opDeductionSourceBand.top,
             sourceBottom: opDeductionSourceBand.bottom,
             sourceX: operatingFrame.right,
@@ -6255,7 +6256,7 @@ function renderPixelReplicaSvg(snapshot) {
               index,
               box,
               sourceSlice,
-              minHeight: deductionSlices[index]?.item?.name === "Other" ? 6 : 12,
+              minHeight: 0,
               sourceTop: opDeductionSourceBand.top,
               sourceBottom: opDeductionSourceBand.bottom,
               sourceNodeId: "operating",
@@ -7025,7 +7026,7 @@ function renderPixelReplicaSvg(snapshot) {
             index,
             box,
             sourceSlice,
-            minHeight: deductionSlices[index]?.item?.name === "Other" ? 6 : 12,
+            minHeight: 0,
             sourceTop: opDeductionSourceBand.top,
             sourceBottom: opDeductionSourceBand.bottom,
             sourceX: operatingFrame.right,
@@ -8560,7 +8561,7 @@ function renderPixelReplicaSvg(snapshot) {
         const bridge = constantThicknessBridge(
           adjustedSourceSlice,
           box.center,
-          slice.item.name === "Other" ? 6 : 12,
+          0,
           opDeductionSourceBand.top,
           opDeductionSourceBand.bottom
         );
@@ -8640,7 +8641,7 @@ function renderPixelReplicaSvg(snapshot) {
         const bridge = constantThicknessBridge(
           deductionSourceSlice,
           box.center,
-          slice.item.name === "Other" ? 6 : 12,
+          0,
           opDeductionSourceBand.top,
           opDeductionSourceBand.bottom
         );
@@ -10038,7 +10039,7 @@ function renderPixelReplicaSvg(snapshot) {
     const bridge = constantThicknessBridge(
       deductionSourceSlice,
       box.center,
-      slice.item.name === "Other" ? 6 : 12,
+      0,
       opDeductionSourceBand.top,
       opDeductionSourceBand.bottom
     );

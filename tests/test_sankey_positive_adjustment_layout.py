@@ -16,6 +16,7 @@ SAMSUNG_PAYLOAD = ROOT_DIR / "data" / "cache" / "samsung.json"
 WALMART_PAYLOAD = ROOT_DIR / "data" / "cache" / "walmart.json"
 ASML_PAYLOAD = ROOT_DIR / "data" / "cache" / "asml.json"
 ALPHABET_PAYLOAD = ROOT_DIR / "data" / "cache" / "alphabet.json"
+TESLA_PAYLOAD = ROOT_DIR / "data" / "cache" / "tesla.json"
 BERKSHIRE_PAYLOAD = ROOT_DIR / "data" / "cache" / "berkshire.json"
 ORACLE_PAYLOAD = ROOT_DIR / "data" / "cache" / "oracle.json"
 JD_PAYLOAD = ROOT_DIR / "data" / "cache" / "jd.json"
@@ -312,6 +313,35 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
         ]
         self.assertEqual(1, len(tax_paths), "Tax must branch directly from the operating-profit node.")
         self.assertEqual(1, len(green_paths_between(svg_root, positive, net)))
+
+    def test_tesla_q2_tax_branch_never_exceeds_its_operating_profit_source(self) -> None:
+        svg_root = render_sankey_svg(TESLA_PAYLOAD, "zh", "tesla-q2-conserved-tax", quarter="2026Q2")
+        operating = visible_rect_attrs(svg_root, "operating")
+        tax = visible_rect_attrs(svg_root, "deduction-0")
+        tesla_payload = json.loads(TESLA_PAYLOAD.read_text(encoding="utf-8"))
+        quarter = tesla_payload["financials"]["2026Q2"]
+        expected_tax_height = operating["height"] * quarter["taxBn"] / quarter["operatingIncomeBn"]
+
+        self.assertLess(
+            tax["height"],
+            operating["height"],
+            "A tax deduction smaller than operating profit must not render thicker than its source node.",
+        )
+        self.assertAlmostEqual(
+            tax["height"],
+            expected_tax_height,
+            delta=0.2,
+            msg="Tax node thickness should remain proportional to the reported tax amount.",
+        )
+        tax_paths = [
+            path
+            for path in red_paths_between(svg_root, operating, tax)
+            if path_start_top(path) >= operating["y"] - 1
+            and path_start_bottom(path) <= operating["y"] + operating["height"] + 1
+        ]
+        self.assertEqual(1, len(tax_paths))
+        self.assertAlmostEqual(path_start_height(tax_paths[0]), tax["height"], delta=0.2)
+        self.assertAlmostEqual(path_target_height(tax_paths[0]), tax["height"], delta=0.2)
 
     def test_nvidia_prominent_non_operating_gain_merges_from_a_clear_upper_runway(self) -> None:
         svg_root = render_sankey_svg(NVIDIA_PAYLOAD, "zh", "nvidia-prominent-positive", quarter="2026Q2")
