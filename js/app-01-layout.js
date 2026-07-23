@@ -1020,11 +1020,11 @@ function snapshotCanvasSize(snapshot) {
     Math.max(costBreakdownSpanRequired - costBreakdownSpanAvailable, 0) * 0.85 +
     (positiveCount ? 26 + Math.max(positiveCount - 1, 0) * 18 : 0);
   const detailLayoutExtraScale = usesPreDetailRevenueLayout ? 0.68 : 1;
-  const pretaxForkCanvasExtraY = snapshot?.layout?.usePretaxFork
-    ? safeNumber(snapshot?.layout?.pretaxForkCanvasExtraY, 220)
+  const extremePositiveCanvasExtraY = snapshot?.layout?.useExtremePositiveLayout
+    ? safeNumber(snapshot?.layout?.extremePositiveCanvasExtraY, 220)
     : 0;
-  const pretaxForkDesignExtraY = snapshot?.layout?.usePretaxFork
-    ? safeNumber(snapshot?.layout?.pretaxForkDesignExtraY, 180)
+  const extremePositiveDesignExtraY = snapshot?.layout?.useExtremePositiveLayout
+    ? safeNumber(snapshot?.layout?.extremePositiveDesignExtraY, 180)
     : 0;
   const extraHeight =
     sourceExtra +
@@ -1034,7 +1034,7 @@ function snapshotCanvasSize(snapshot) {
     hierarchyExtra * detailLayoutExtraScale +
     structuralOverflow * (usesPreDetailRevenueLayout ? 0.58 : 0.78) +
     positiveBridgeStrength.extremeStrength * safeNumber(snapshot?.layout?.positiveBridgeExtremeCanvasExtraY, 300) +
-    pretaxForkCanvasExtraY;
+    extremePositiveCanvasExtraY;
   const height = baseHeight + extraHeight;
   const revenueBn = Math.max(safeNumber(snapshot?.revenueBn), safeNumber(snapshot?.layout?.ratioRevenueFloorBn, 0.25));
   const opexRatio = Math.max(safeNumber(snapshot?.operatingExpensesBn) / revenueBn, 0);
@@ -1046,7 +1046,7 @@ function snapshotCanvasSize(snapshot) {
     structuralOverflow * (usesPreDetailRevenueLayout ? 0.48 : 1.05) +
     Math.max(detailCount - 2, 0) * 22 +
     positiveBridgeStrength.extremeStrength * safeNumber(snapshot?.layout?.positiveBridgeExtremeDesignExtraY, 172) +
-    pretaxForkDesignExtraY;
+    extremePositiveDesignExtraY;
   return {
     width: Math.max(Math.round(baseWidth + leftShiftX + safeNumber(stageLayout.rightExpansion, 0)), 1),
     height: Math.max(Math.round(height + bottomCanvasPadding), 1),

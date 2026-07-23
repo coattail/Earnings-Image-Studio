@@ -1098,14 +1098,14 @@ function renderPixelReplicaSvg(snapshot) {
       )
     )
   );
-  const revenueTop = revenueTopBase + stageRecenteringDownY;
-  const revenueBottom = revenueTop + revenueHeight;
-  const revenueGrossBottom = revenueTop + grossHeight;
-  const revenueCostTop = revenueGrossBottom;
-  const grossTop = grossTopBase + stageRecenteringDownY;
-  const grossBottom = grossTop + grossHeight;
-  const costTop = costTopBase + stageRecenteringDownY;
-  const costBottom = costTop + costHeight;
+  let revenueTop = revenueTopBase + stageRecenteringDownY;
+  let revenueBottom = revenueTop + revenueHeight;
+  let revenueGrossBottom = revenueTop + grossHeight;
+  let revenueCostTop = revenueGrossBottom;
+  let grossTop = grossTopBase + stageRecenteringDownY;
+  let grossBottom = grossTop + grossHeight;
+  let costTop = costTopBase + stageRecenteringDownY;
+  let costBottom = costTop + costHeight;
   const opTop = opTopBase + stageRecenteringDownY;
   const opBottom = opTop + opHeight;
   let opexTop = opexTopBase + stageRecenteringDownY;
@@ -1134,13 +1134,7 @@ function renderPixelReplicaSvg(snapshot) {
   const operatingProfitBreakdown = [...(snapshot.operatingProfitBreakdown || [])].filter((item) => safeNumber(item.valueBn) > 0.02);
   const belowOperatingItems = rawBelowOperatingItems;
   const positiveAdjustments = rawPositiveAdjustments;
-  const pretaxForkTaxIndex = belowOperatingItems.findIndex((item) => normalizeLabelKey(item?.name) === "tax");
-  const usePretaxFork =
-    Boolean(snapshot.layout?.usePretaxFork) &&
-    !netLoss &&
-    positiveAdjustments.length === 1 &&
-    belowOperatingItems.length === 1 &&
-    pretaxForkTaxIndex === 0;
+  const useExtremePositiveLayout = Boolean(snapshot.layout?.useExtremePositiveLayout);
   const usesExtremePositiveTopLane =
     positiveAdjustments.length === 1 &&
     positiveAdjustmentExtremeStrength >= safeNumber(snapshot.layout?.extremePositiveTopLaneThreshold, 0.72);
@@ -1217,14 +1211,28 @@ function renderPixelReplicaSvg(snapshot) {
     preDetailOperatingLanePushdownY;
   const operatingLaneTop = opTop + opLanePushdownY;
   const operatingLaneBottom = opBottom + opLanePushdownY;
-  const pretaxForkGrossBranchGapY = usePretaxFork
-    ? scaleY(safeNumber(snapshot.layout?.pretaxForkGrossBranchGapY, 30))
+  const extremePositiveCoreStagePushdownY = useExtremePositiveLayout
+    ? Math.max(
+        operatingLaneTop + scaleY(safeNumber(snapshot.layout?.extremePositiveGrossRiseY, 42)) - grossTop,
+        0
+      )
     : 0;
-  const pretaxForkExpenseLanePushdownY = usePretaxFork
-    ? Math.max(operatingLaneBottom + pretaxForkGrossBranchGapY - opexTop, 0)
+  revenueTop += extremePositiveCoreStagePushdownY;
+  revenueBottom += extremePositiveCoreStagePushdownY;
+  revenueGrossBottom += extremePositiveCoreStagePushdownY;
+  revenueCostTop += extremePositiveCoreStagePushdownY;
+  grossTop += extremePositiveCoreStagePushdownY;
+  grossBottom += extremePositiveCoreStagePushdownY;
+  costTop += extremePositiveCoreStagePushdownY;
+  costBottom += extremePositiveCoreStagePushdownY;
+  const extremePositiveGrossBranchGapY = useExtremePositiveLayout
+    ? scaleY(safeNumber(snapshot.layout?.extremePositiveGrossBranchGapY, 30))
     : 0;
-  opexTop += pretaxForkExpenseLanePushdownY;
-  opexBottom += pretaxForkExpenseLanePushdownY;
+  const extremePositiveExpenseLanePushdownY = useExtremePositiveLayout
+    ? Math.max(operatingLaneBottom + extremePositiveGrossBranchGapY - opexTop, 0)
+    : 0;
+  opexTop += extremePositiveExpenseLanePushdownY;
+  opexBottom += extremePositiveExpenseLanePushdownY;
   const explicitBelowOperatingBn = belowOperatingItems.reduce((sum, item) => sum + Math.max(safeNumber(item.valueBn), 0), 0);
   const explicitCoreNetHeight = Math.max((operatingProfitBn - explicitBelowOperatingBn) * scale, 0);
   const zeroNetRibbonHeight =
@@ -6997,9 +7005,6 @@ function renderPixelReplicaSvg(snapshot) {
   let operatingFrame;
   let operatingExpenseFrame;
   let netFrame;
-  let pretaxForkPositiveFrame = null;
-  let pretaxForkFrame = null;
-  let pretaxForkTaxGeometry = null;
   const refreshEditableNodeFrames = () => {
     revenueFrame = editableNodeFrame("revenue", revenueX, revenueTop, nodeWidth, revenueHeight);
     grossFrame = editableNodeFrame("gross", grossX, grossTop, nodeWidth, grossHeight);
@@ -8020,6 +8025,19 @@ function renderPixelReplicaSvg(snapshot) {
     );
   }
   repelCostBreakdownFromOpexSummary();
+  if (useExtremePositiveLayout && costBreakdownBoxes.length) {
+    const compactTopY = Math.max(
+      costTop + scaleY(safeNumber(snapshot.layout?.extremePositiveCostBreakdownSourceGapY, 18)),
+      opexBottom + scaleY(safeNumber(snapshot.layout?.extremePositiveCostBreakdownOpexGapY, 42))
+    );
+    const compactGapY = scaleY(safeNumber(snapshot.layout?.extremePositiveCostBreakdownGapY, 38));
+    let compactCursorY = compactTopY;
+    costBreakdownBoxes.forEach((box, index) => {
+      if (!box) return;
+      costBreakdownBoxes[index] = shiftBoxCenter(box, compactCursorY + box.height / 2);
+      compactCursorY += box.height + compactGapY;
+    });
+  }
   refreshEditableNodeFrames();
   const revenueGrossBand = shiftedInterval(revenueGrossSourceBand.top, revenueGrossSourceBand.bottom, "revenue");
   const revenueCostBand = revenueCostSourceBand ? shiftedInterval(revenueCostSourceBand.top, revenueCostSourceBand.bottom, "revenue") : null;
@@ -8317,8 +8335,6 @@ function renderPixelReplicaSvg(snapshot) {
       ${
         hasOperatingLoss
           ? ""
-          : usePretaxFork
-            ? ""
           : renderMetricCluster(
               operatingFrame.centerX,
               operatingMetricYShifted,
@@ -9187,19 +9203,6 @@ function renderPixelReplicaSvg(snapshot) {
       );
       corridorSampleXs = positiveCorridorSampleXsForNode(positiveNodeX);
     }
-    if (usePretaxFork) {
-      const pretaxForkX = operatingFrame.right + (netFrame.x - operatingFrame.right) * 0.58;
-      const forkInboundRunwayX = Math.max(
-        scaleY(safeNumber(snapshot.layout?.pretaxForkPositiveRunwayX, 132)),
-        positiveReferenceHeight * safeNumber(snapshot.layout?.pretaxForkPositiveRunwayHeightFactor, 0.24)
-      );
-      positiveNodeX = clamp(
-        Math.min(positiveNodeX, pretaxForkX - positiveNodeWidth - forkInboundRunwayX),
-        Math.max(opX - positiveNodeWidth * 0.18, grossX + nodeWidth + scaleY(44)),
-        Math.max(positiveNodeMaxX, extremePositiveTopLaneMinX)
-      );
-      corridorSampleXs = positiveCorridorSampleXsForNode(positiveNodeX);
-    }
     const placedPositiveLabelRects = [];
     let netPositiveCursor = netPositiveTop;
     positiveAdjustments.forEach((item, index) => {
@@ -9982,19 +9985,15 @@ function renderPixelReplicaSvg(snapshot) {
       const positiveNodeId = `positive-${index}`;
       const positiveFrame = editableNodeFrame(positiveNodeId, positiveNodeX, finalSourceTop, positiveNodeWidth, gainHeight);
       const positiveShift = editorOffsetForNode(positiveNodeId);
-      if (usePretaxFork) {
-        pretaxForkPositiveFrame = positiveFrame;
-      } else {
-        positiveMarkup += `<path d="${flowPath(
-          positiveFrame.right,
-          positiveFrame.top,
-          positiveFrame.bottom,
-          netFrame.x + positiveTargetInsetX,
-          adjustedTargetTop,
-          adjustedTargetTop + adjustedTargetHeight,
-          positiveBranchPathOptions
-        )}" fill="${greenFlow}" opacity="0.97"></path>`;
-      }
+      positiveMarkup += `<path d="${flowPath(
+        positiveFrame.right,
+        positiveFrame.top,
+        positiveFrame.bottom,
+        netFrame.x + positiveTargetInsetX,
+        adjustedTargetTop,
+        adjustedTargetTop + adjustedTargetHeight,
+        positiveBranchPathOptions
+      )}" fill="${greenFlow}" opacity="0.97"></path>`;
       positiveMarkup += renderEditableNodeRect(positiveFrame, greenNode);
       const labelAnchor = chosenPlacement.anchor;
       const labelX = chosenPlacement.x + positiveShift.dx;
@@ -10008,118 +10007,7 @@ function renderPixelReplicaSvg(snapshot) {
     });
   }
 
-  if (usePretaxFork && pretaxForkPositiveFrame) {
-    const taxSlice = deductionSlices[pretaxForkTaxIndex];
-    const taxBox = deductionBoxes[pretaxForkTaxIndex];
-    const pretaxPositiveHeight = Math.max(safeNumber(positiveMergeHeights[0], pretaxForkPositiveFrame.height), 0);
-    const pretaxOperatingHeight = Math.max(operatingFrame.height, 0);
-    const pretaxHeight = pretaxPositiveHeight + pretaxOperatingHeight;
-    const pretaxTaxHeight = Math.max(pretaxHeight - netFrame.height, 0);
-    const pretaxWidth = safeNumber(snapshot.layout?.pretaxForkNodeWidth, 42);
-    const pretaxX = clamp(
-      operatingFrame.right + (netFrame.x - operatingFrame.right) * safeNumber(snapshot.layout?.pretaxForkStageFactor, 0.58),
-      operatingFrame.right + scaleY(safeNumber(snapshot.layout?.pretaxForkMinOperatingRunwayX, 118)),
-      netFrame.x - pretaxWidth - scaleY(safeNumber(snapshot.layout?.pretaxForkMinNetRunwayX, 86))
-    );
-    const pretaxTop = clamp(
-      Math.min(pretaxForkPositiveFrame.top, netFrame.top),
-      positiveSourceTopFloorY,
-      Math.max(chartBottomLimit - pretaxHeight, positiveSourceTopFloorY)
-    );
-    pretaxForkFrame = editableNodeFrame("pretax", pretaxX, pretaxTop, pretaxWidth, pretaxHeight);
-
-    const taxSourceSlice = deductionSourceSlices[pretaxForkTaxIndex] || taxSlice;
-    const taxBridge = constantThicknessBridge(
-      taxSourceSlice,
-      taxBox.center,
-      taxSlice?.item?.name === "Other" ? 6 : 12,
-      opDeductionSourceBand.top,
-      opDeductionSourceBand.bottom
-    );
-    const taxFrame = editableNodeFrame(
-      `deduction-${pretaxForkTaxIndex}`,
-      rightTerminalNodeX,
-      taxBridge.targetTop,
-      nodeWidth,
-      taxBridge.targetHeight
-    );
-    const forkRibbonOptions = {
-      ...mergeOutflowRibbonOptions(),
-      curveProfile: "smootherstep",
-      smootherStepSegments: 6,
-      startCurveFactor: 0.18,
-      endCurveFactor: 0.24,
-      minStartCurveFactor: 0.12,
-      maxStartCurveFactor: 0.26,
-      minEndCurveFactor: 0.16,
-      maxEndCurveFactor: 0.3,
-      sourceHoldFactor: 0.012,
-      minSourceHoldLength: 2,
-      maxSourceHoldLength: 7,
-      targetHoldFactor: 0.025,
-      minTargetHoldLength: 3,
-      maxTargetHoldLength: 10,
-      deltaScale: 0.86,
-      deltaInfluence: 0.065,
-    };
-    const positiveTargetTop = pretaxForkFrame.top;
-    const positiveTargetBottom = positiveTargetTop + pretaxPositiveHeight;
-    const operatingTargetTop = positiveTargetBottom;
-    const operatingTargetBottom = pretaxForkFrame.bottom;
-    const pretaxNetBottom = pretaxForkFrame.top + netFrame.height;
-    const pretaxTaxTop = pretaxNetBottom;
-    const pretaxForkUnderlay = `
-      <path data-flow-role="pretax-positive-input" d="${flowPath(
-        pretaxForkPositiveFrame.right,
-        pretaxForkPositiveFrame.top,
-        pretaxForkPositiveFrame.bottom,
-        pretaxForkFrame.x,
-        positiveTargetTop,
-        positiveTargetBottom,
-        forkRibbonOptions
-      )}" fill="${greenFlow}" opacity="0.97"></path>
-      <path data-flow-role="pretax-operating-input" d="${flowPath(
-        operatingFrame.right,
-        operatingFrame.top,
-        operatingFrame.bottom,
-        pretaxForkFrame.x,
-        operatingTargetTop,
-        operatingTargetBottom,
-        forkRibbonOptions
-      )}" fill="${greenFlow}" opacity="0.97"></path>
-      <path data-flow-role="pretax-net-output" d="${flowPath(
-        pretaxForkFrame.right,
-        pretaxForkFrame.top,
-        pretaxNetBottom,
-        netFrame.x,
-        netFrame.top,
-        netFrame.bottom,
-        forkRibbonOptions
-      )}" fill="${greenFlow}" opacity="0.97"></path>
-      <path data-flow-role="pretax-tax-output" d="${flowPath(
-        pretaxForkFrame.right,
-        pretaxTaxTop,
-        pretaxForkFrame.bottom,
-        taxFrame.x,
-        taxFrame.top,
-        taxFrame.bottom,
-        forkRibbonOptions
-      )}" fill="${redFlow}" opacity="0.97"></path>
-    `;
-    const pretaxForkNode = `
-      ${renderEditableNodeRect(pretaxForkFrame, greenNode)}
-      <rect x="${pretaxForkFrame.x.toFixed(1)}" y="${pretaxTaxTop.toFixed(1)}" width="${pretaxForkFrame.width.toFixed(1)}" height="${pretaxTaxHeight.toFixed(1)}" fill="${redNode}" pointer-events="none" data-edit-node-visible-id="pretax-tax"></rect>
-    `;
-    positiveMarkup = pretaxForkUnderlay + positiveMarkup + pretaxForkNode;
-    pretaxForkTaxGeometry = {
-      frame: taxFrame,
-      sourceTop: pretaxTaxTop,
-      sourceBottom: pretaxForkFrame.bottom,
-      branchOptions: forkRibbonOptions,
-    };
-  }
-
-  if (!usePretaxFork && coreNetHeight > 0 && coreNetTargetHeight > 0) {
+  if (coreNetHeight > 0 && coreNetTargetHeight > 0) {
     svg += `<path d="${netBridgePath(
       operatingFrame.right,
       opNetBand.top,
@@ -10130,18 +10018,6 @@ function renderPixelReplicaSvg(snapshot) {
     )}" fill="${netLoss ? redFlow : greenFlow}" opacity="0.97"></path>`;
   }
   svg += positiveMarkup;
-  if (usePretaxFork && !hasOperatingLoss) {
-    svg += renderMetricCluster(
-      operatingFrame.centerX,
-      operatingMetricYShifted,
-      localizeChartPhrase(operatingOutcomeLabel),
-      operatingOutcomeValueText,
-      snapshot.operatingMarginPct !== null && snapshot.operatingMarginPct !== undefined ? `${formatPct(snapshot.operatingMarginPct)} ${marginLabel()}` : "",
-      snapshot.operatingMarginYoyDeltaPp !== null && snapshot.operatingMarginYoyDeltaPp !== undefined ? formatPp(snapshot.operatingMarginYoyDeltaPp) : "",
-      operatingOutcomeTextColor,
-      operatingMetricLayout
-    );
-  }
   svg += renderNetLossDriverBridge();
   svg += `
       ${renderEditableNodeRect(netFrame, netLoss ? redNode : greenNode)}
@@ -10162,27 +10038,6 @@ function renderPixelReplicaSvg(snapshot) {
       opDeductionSourceBand.bottom
     );
     const deductionFrame = editableNodeFrame(`deduction-${index}`, rightTerminalNodeX, bridge.targetTop, nodeWidth, bridge.targetHeight);
-    if (usePretaxFork && index === pretaxForkTaxIndex && pretaxForkTaxGeometry && pretaxForkFrame) {
-      const forkTaxFrame = pretaxForkTaxGeometry.frame;
-      svg += renderEditableNodeRect(forkTaxFrame, redNode);
-      svg += renderRightBranchLabel(slice.item, box, forkTaxFrame.x, nodeWidth, redText, {
-        density: "regular",
-        defaultMode: "negative-parentheses",
-        labelX: negativeTerminalLabelX,
-        lockLabelCenterY: true,
-        labelCenterY: forkTaxFrame.centerY,
-        avoidFlowModel: {
-          x0: pretaxForkFrame.right,
-          x1: forkTaxFrame.x,
-          sourceTop: pretaxForkTaxGeometry.sourceTop,
-          sourceBottom: pretaxForkTaxGeometry.sourceBottom,
-          targetTop: forkTaxFrame.top,
-          targetHeight: forkTaxFrame.height,
-          options: pretaxForkTaxGeometry.branchOptions,
-        },
-      });
-      return;
-    }
     const operatingShift = editorOffsetForNode("operating");
     const deductionBranchOptions = resolveAdaptiveNegativeTerminalBranchOptions(
       resolveDeductionTerminalBranchOptions(index),

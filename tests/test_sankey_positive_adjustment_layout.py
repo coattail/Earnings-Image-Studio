@@ -199,13 +199,6 @@ def text_count(svg_root: ET.Element, text: str) -> int:
     return sum(1 for element in svg_root.findall(".//svg:text", SVG_NS) if "".join(element.itertext()).strip() == text)
 
 
-def flow_path(svg_root: ET.Element, role: str) -> ET.Element:
-    path = svg_root.find(f".//svg:path[@data-flow-role='{role}']", SVG_NS)
-    if path is None:
-        raise AssertionError(f"Expected SVG flow path with role '{role}'.")
-    return path
-
-
 def viewbox_height(svg_root: ET.Element) -> float:
     viewbox = svg_root.attrib.get("viewBox", "")
     parts = viewbox.split()
@@ -215,34 +208,34 @@ def viewbox_height(svg_root: ET.Element) -> float:
 
 
 class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
-    def test_alphabet_q2_extreme_gain_uses_one_smooth_pretax_merge_and_fork(self) -> None:
-        svg_root = render_sankey_svg(ALPHABET_PAYLOAD, "zh", "alphabet-q2-pretax-fork", quarter="2026Q2")
+    def test_alphabet_q2_extreme_gain_preserves_main_inflection_and_direct_tax_fork(self) -> None:
+        svg_root = render_sankey_svg(ALPHABET_PAYLOAD, "zh", "alphabet-q2-extreme-positive", quarter="2026Q2")
 
         operating = visible_rect_attrs(svg_root, "operating")
         operating_expenses = visible_rect_attrs(svg_root, "operating-expenses")
+        revenue = visible_rect_attrs(svg_root, "revenue")
+        gross = visible_rect_attrs(svg_root, "gross")
+        cost = visible_rect_attrs(svg_root, "cost")
+        cost_breakdown_first = visible_rect_attrs(svg_root, "cost-breakdown-0")
+        cost_breakdown_second = visible_rect_attrs(svg_root, "cost-breakdown-1")
         positive = visible_rect_attrs(svg_root, "positive-0")
-        pretax = visible_rect_attrs(svg_root, "pretax")
-        pretax_tax = visible_rect_attrs(svg_root, "pretax-tax")
         net = visible_rect_attrs(svg_root, "net")
         tax = visible_rect_attrs(svg_root, "deduction-0")
 
         self.assertAlmostEqual(
-            pretax["height"],
             operating["height"] + positive["height"],
-            delta=0.2,
-            msg="The pretax merge node must conserve the operating-profit and positive-adjustment inflows.",
-        )
-        self.assertAlmostEqual(
-            pretax["height"],
             net["height"] + tax["height"],
             delta=0.2,
-            msg="The pretax fork must split exactly into net income and tax.",
+            msg="Operating profit plus the positive adjustment must conserve into net income plus tax.",
         )
-        self.assertAlmostEqual(pretax_tax["height"], tax["height"], delta=0.2)
+        self.assertIsNone(
+            svg_root.find(".//svg:rect[@data-edit-node-visible-id='pretax']", SVG_NS),
+            "The chart should not insert an unexplained pretax node between operating profit and tax.",
+        )
         self.assertGreaterEqual(
             viewbox_height(svg_root),
             2150,
-            "The exceptional pretax bridge should receive a taller canvas instead of compressing the gross-profit split.",
+            "The exceptional positive bridge should receive a taller canvas instead of compressing the gross-profit split.",
         )
         self.assertGreaterEqual(
             operating_expenses["y"] - (operating["y"] + operating["height"]),
@@ -250,39 +243,45 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
             "Gross profit's operating-profit and operating-expense branches must end in visibly separated lanes.",
         )
         self.assertGreaterEqual(
-            pretax["x"] - (positive["x"] + positive["width"]),
-            110,
-            "The large positive ribbon needs enough runway to merge smoothly into pretax income.",
+            gross["y"] - revenue["y"],
+            36,
+            "The main profit ribbon should descend from revenue into gross profit.",
         )
         self.assertGreaterEqual(
-            pretax["x"] - (operating["x"] + operating["width"]),
-            110,
-            "The operating-profit ribbon needs enough runway to rise naturally into the common pretax node.",
+            gross["y"] - operating["y"],
+            30,
+            "Gross profit must remain the low inflection point before the main green ribbon rises into operating profit.",
+        )
+        self.assertGreaterEqual(cost_breakdown_first["y"], cost["y"])
+        self.assertGreaterEqual(
+            cost_breakdown_second["y"] - (cost_breakdown_first["y"] + cost_breakdown_first["height"]),
+            36,
+            "The two cost-of-revenue terminals should form a compact, readable downward fan.",
+        )
+        self.assertLessEqual(
+            cost_breakdown_second["y"] + cost_breakdown_second["height"],
+            viewbox_height(svg_root) * 0.75,
+            "The cost-of-revenue terminals should not be pushed into the bottom quarter of the exceptional canvas.",
         )
         self.assertGreaterEqual(
-            net["x"] - (pretax["x"] + pretax["width"]),
-            80,
-            "The common pretax node needs a visible runway before the net-income and tax fork terminates.",
+            net["x"] - (positive["x"] + positive["width"]),
+            160,
+            "The large positive ribbon needs enough runway to merge smoothly into net income.",
         )
 
-        for role in (
-            "pretax-positive-input",
-            "pretax-operating-input",
-            "pretax-net-output",
-            "pretax-tax-output",
-        ):
-            path = flow_path(svg_root, role)
-            self.assertGreaterEqual(
-                path.attrib.get("d", "").count("C "),
-                10,
-                f"{role} should use a multi-segment smootherstep curve instead of a sharp elbow.",
-            )
-
-        gross = visible_rect_attrs(svg_root, "gross")
         gross_profit_paths = green_paths_between(svg_root, gross, operating)
         gross_expense_paths = red_paths_between(svg_root, gross, operating_expenses)
         self.assertEqual(1, len(gross_profit_paths))
         self.assertGreaterEqual(len(gross_expense_paths), 1)
+        tax_paths = [
+            path
+            for path in red_paths_between(svg_root, operating, tax)
+            if path_start_top(path) >= operating["y"] - 1
+            and path_start_bottom(path) <= operating["y"] + operating["height"] + 1
+            and abs(path_start_height(path) - tax["height"]) <= 0.2
+        ]
+        self.assertEqual(1, len(tax_paths), "Tax must branch directly from the operating-profit node.")
+        self.assertEqual(1, len(green_paths_between(svg_root, positive, net)))
 
     def test_nvidia_prominent_non_operating_gain_merges_from_a_clear_upper_runway(self) -> None:
         svg_root = render_sankey_svg(NVIDIA_PAYLOAD, "zh", "nvidia-prominent-positive", quarter="2026Q2")
