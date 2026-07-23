@@ -5191,7 +5191,7 @@ function renderPixelReplicaSvg(snapshot) {
           : 0;
       const outerDominanceMaxShare = safeNumber(
         snapshot.layout?.hierarchicalRevenueOuterDominanceMaxShare,
-        0.9
+        0.985
       );
       const outerDominantDirection =
         !usesDenseDetailLift && detailCount >= 2 && dominantDetailShare <= outerDominanceMaxShare && dominantDetailIndex === 0

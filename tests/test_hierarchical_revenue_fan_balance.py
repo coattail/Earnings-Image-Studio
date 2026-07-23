@@ -12,7 +12,7 @@ SVG_NS = {"svg": "http://www.w3.org/2000/svg"}
 COMPANY_QUARTERS = {
     "nvidia": "2026Q2",
     "apple": "2026Q1",
-    "tesla": "2026Q1",
+    "tesla": "2026Q2",
     "tencent": "2026Q1",
     "asml": "2026Q2",
 }
@@ -87,7 +87,7 @@ class HierarchicalRevenueFanBalanceTests(unittest.TestCase):
         }
 
     def test_detail_flow_centers_align_with_their_parent_revenue_nodes(self) -> None:
-        for company in ("nvidia", "tesla", "tencent"):
+        for company in ("nvidia", "tencent"):
             svg_root = self.svg_roots[company]
             with self.subTest(company=company):
                 details = detail_rects(svg_root)
@@ -106,6 +106,51 @@ class HierarchicalRevenueFanBalanceTests(unittest.TestCase):
                     delta=1,
                     msg=f"{company} detail revenue should enter its parent without an upward or downward bias",
                 )
+
+    def test_extreme_outer_dominant_fan_enters_tesla_auto_business_symmetrically(self) -> None:
+        svg_root = self.svg_roots["tesla"]
+        details = detail_rects(svg_root)
+        parent = visible_rect(svg_root, "source-0")
+        revenue = visible_rect(svg_root, "revenue")
+
+        self.assertEqual(len(details), 3)
+        self.assertGreater(
+            details[0]["height"] / sum(detail["height"] for detail in details),
+            0.95,
+        )
+
+        target_cursor = parent["y"]
+        merge_deltas = []
+        for detail in details:
+            target_center = target_cursor + detail["height"] / 2
+            source_center = detail["y"] + detail["height"] / 2
+            merge_deltas.append(target_center - source_center)
+            target_cursor += detail["height"]
+
+        self.assertGreaterEqual(
+            merge_deltas[0],
+            parent["height"] * 0.18,
+            "Automotive sales should descend visibly into the Auto business node.",
+        )
+        self.assertLessEqual(
+            merge_deltas[1],
+            -parent["height"] * 0.18,
+            "Automotive leasing should rise visibly into the Auto business node.",
+        )
+        self.assertAlmostEqual(
+            merge_deltas[0],
+            -merge_deltas[1],
+            delta=parent["height"] * 0.06,
+            msg="The two principal Auto detail ribbons should enter from balanced upper and lower angles.",
+        )
+
+        parent_center = parent["y"] + parent["height"] / 2
+        automotive_revenue_target_center = revenue["y"] + parent["height"] / 2
+        self.assertGreater(
+            automotive_revenue_target_center - parent_center,
+            0,
+            "The Auto business outflow should continue descending after the balanced detail merge.",
+        )
 
     def test_outer_dominant_sparse_fan_uses_a_progressive_merge_angle(self) -> None:
         svg_root = self.svg_roots["apple"]
