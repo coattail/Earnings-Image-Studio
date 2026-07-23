@@ -219,6 +219,7 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
         svg_root = render_sankey_svg(ALPHABET_PAYLOAD, "zh", "alphabet-q2-pretax-fork", quarter="2026Q2")
 
         operating = visible_rect_attrs(svg_root, "operating")
+        operating_expenses = visible_rect_attrs(svg_root, "operating-expenses")
         positive = visible_rect_attrs(svg_root, "positive-0")
         pretax = visible_rect_attrs(svg_root, "pretax")
         pretax_tax = visible_rect_attrs(svg_root, "pretax-tax")
@@ -238,6 +239,16 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
             msg="The pretax fork must split exactly into net income and tax.",
         )
         self.assertAlmostEqual(pretax_tax["height"], tax["height"], delta=0.2)
+        self.assertGreaterEqual(
+            viewbox_height(svg_root),
+            2150,
+            "The exceptional pretax bridge should receive a taller canvas instead of compressing the gross-profit split.",
+        )
+        self.assertGreaterEqual(
+            operating_expenses["y"] - (operating["y"] + operating["height"]),
+            36,
+            "Gross profit's operating-profit and operating-expense branches must end in visibly separated lanes.",
+        )
         self.assertGreaterEqual(
             pretax["x"] - (positive["x"] + positive["width"]),
             110,
@@ -266,6 +277,12 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
                 10,
                 f"{role} should use a multi-segment smootherstep curve instead of a sharp elbow.",
             )
+
+        gross = visible_rect_attrs(svg_root, "gross")
+        gross_profit_paths = green_paths_between(svg_root, gross, operating)
+        gross_expense_paths = red_paths_between(svg_root, gross, operating_expenses)
+        self.assertEqual(1, len(gross_profit_paths))
+        self.assertGreaterEqual(len(gross_expense_paths), 1)
 
     def test_nvidia_prominent_non_operating_gain_merges_from_a_clear_upper_runway(self) -> None:
         svg_root = render_sankey_svg(NVIDIA_PAYLOAD, "zh", "nvidia-prominent-positive", quarter="2026Q2")

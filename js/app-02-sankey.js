@@ -1108,8 +1108,8 @@ function renderPixelReplicaSvg(snapshot) {
   const costBottom = costTop + costHeight;
   const opTop = opTopBase + stageRecenteringDownY;
   const opBottom = opTop + opHeight;
-  const opexTop = opexTopBase + stageRecenteringDownY;
-  const opexBottom = opexTop + opexHeight;
+  let opexTop = opexTopBase + stageRecenteringDownY;
+  let opexBottom = opexTop + opexHeight;
   const netTop = netTopBase + stageRecenteringDownY * netRecenteringFactor;
   const netBottom = netTop + netHeight;
   const sourceDensity = rawSources.length >= 11 ? "ultra" : rawSources.length >= 8 ? "dense" : rawSources.length >= 6 ? "compact" : "regular";
@@ -1217,6 +1217,14 @@ function renderPixelReplicaSvg(snapshot) {
     preDetailOperatingLanePushdownY;
   const operatingLaneTop = opTop + opLanePushdownY;
   const operatingLaneBottom = opBottom + opLanePushdownY;
+  const pretaxForkGrossBranchGapY = usePretaxFork
+    ? scaleY(safeNumber(snapshot.layout?.pretaxForkGrossBranchGapY, 30))
+    : 0;
+  const pretaxForkExpenseLanePushdownY = usePretaxFork
+    ? Math.max(operatingLaneBottom + pretaxForkGrossBranchGapY - opexTop, 0)
+    : 0;
+  opexTop += pretaxForkExpenseLanePushdownY;
+  opexBottom += pretaxForkExpenseLanePushdownY;
   const explicitBelowOperatingBn = belowOperatingItems.reduce((sum, item) => sum + Math.max(safeNumber(item.valueBn), 0), 0);
   const explicitCoreNetHeight = Math.max((operatingProfitBn - explicitBelowOperatingBn) * scale, 0);
   const zeroNetRibbonHeight =
@@ -8309,6 +8317,8 @@ function renderPixelReplicaSvg(snapshot) {
       ${
         hasOperatingLoss
           ? ""
+          : usePretaxFork
+            ? ""
           : renderMetricCluster(
               operatingFrame.centerX,
               operatingMetricYShifted,
@@ -10120,6 +10130,18 @@ function renderPixelReplicaSvg(snapshot) {
     )}" fill="${netLoss ? redFlow : greenFlow}" opacity="0.97"></path>`;
   }
   svg += positiveMarkup;
+  if (usePretaxFork && !hasOperatingLoss) {
+    svg += renderMetricCluster(
+      operatingFrame.centerX,
+      operatingMetricYShifted,
+      localizeChartPhrase(operatingOutcomeLabel),
+      operatingOutcomeValueText,
+      snapshot.operatingMarginPct !== null && snapshot.operatingMarginPct !== undefined ? `${formatPct(snapshot.operatingMarginPct)} ${marginLabel()}` : "",
+      snapshot.operatingMarginYoyDeltaPp !== null && snapshot.operatingMarginYoyDeltaPp !== undefined ? formatPp(snapshot.operatingMarginYoyDeltaPp) : "",
+      operatingOutcomeTextColor,
+      operatingMetricLayout
+    );
+  }
   svg += renderNetLossDriverBridge();
   svg += `
       ${renderEditableNodeRect(netFrame, netLoss ? redNode : greenNode)}
