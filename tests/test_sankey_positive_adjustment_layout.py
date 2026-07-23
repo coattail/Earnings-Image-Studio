@@ -269,6 +269,19 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
                 delta=1.5,
                 msg=f"Node '{node_id}' should retain the approved hand-tuned Q2 layout.",
             )
+        positive_label_name = "营业外收益"
+        positive_label_value = "$98.0B"
+        positive_label_baseline_center = (
+            text_y(svg_root, positive_label_name) + text_y(svg_root, positive_label_value)
+        ) / 2
+        self.assertEqual("end", text_anchor(svg_root, positive_label_name))
+        self.assertLess(text_x(svg_root, positive_label_name), positive["x"])
+        self.assertAlmostEqual(
+            positive_label_baseline_center,
+            positive["y"] + positive["height"] / 2,
+            delta=8,
+            msg="The non-operating-income label should sit to the left and remain vertically centered on its node.",
+        )
         self.assertGreaterEqual(cost_breakdown_first["y"], cost["y"])
         self.assertGreaterEqual(
             cost_breakdown_second["y"] - (cost_breakdown_first["y"] + cost_breakdown_first["height"]),

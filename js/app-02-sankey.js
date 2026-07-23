@@ -9995,9 +9995,14 @@ function renderPixelReplicaSvg(snapshot) {
         positiveBranchPathOptions
       )}" fill="${greenFlow}" opacity="0.97"></path>`;
       positiveMarkup += renderEditableNodeRect(positiveFrame, greenNode);
-      const labelAnchor = chosenPlacement.anchor;
-      const labelX = chosenPlacement.x + positiveShift.dx;
-      const labelCenterY = chosenPlacement.centerY + positiveShift.dy;
+      const forceLeftCenteredLabel = snapshot.layout?.positiveLabelPlacement === "left-center";
+      const labelAnchor = forceLeftCenteredLabel ? "end" : chosenPlacement.anchor;
+      const labelX = forceLeftCenteredLabel
+        ? positiveFrame.x - labelGapX
+        : chosenPlacement.x + positiveShift.dx;
+      const labelCenterY = forceLeftCenteredLabel
+        ? positiveFrame.centerY - labelCenterBias
+        : chosenPlacement.centerY + positiveShift.dy;
       const chosenLabelRect = labelBoundsRect(labelAnchor, labelX, labelCenterY);
       placedPositiveLabelRects.push(chosenLabelRect);
       positiveMarkup += `<text x="${labelX}" y="${labelCenterY - twoLineGap}" text-anchor="${labelAnchor}" font-size="${positiveNameSize}" font-weight="700" fill="${greenText}" paint-order="stroke fill" stroke="${background}" stroke-width="7" stroke-linejoin="round">${escapeHtml(localizedPositiveName)}</text>`;
