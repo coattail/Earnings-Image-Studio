@@ -199,6 +199,13 @@ def text_count(svg_root: ET.Element, text: str) -> int:
     return sum(1 for element in svg_root.findall(".//svg:text", SVG_NS) if "".join(element.itertext()).strip() == text)
 
 
+def flow_path(svg_root: ET.Element, role: str) -> ET.Element:
+    path = svg_root.find(f".//svg:path[@data-flow-role='{role}']", SVG_NS)
+    if path is None:
+        raise AssertionError(f"Expected SVG flow path with role '{role}'.")
+    return path
+
+
 def viewbox_height(svg_root: ET.Element) -> float:
     viewbox = svg_root.attrib.get("viewBox", "")
     parts = viewbox.split()
@@ -208,6 +215,58 @@ def viewbox_height(svg_root: ET.Element) -> float:
 
 
 class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
+    def test_alphabet_q2_extreme_gain_uses_one_smooth_pretax_merge_and_fork(self) -> None:
+        svg_root = render_sankey_svg(ALPHABET_PAYLOAD, "zh", "alphabet-q2-pretax-fork", quarter="2026Q2")
+
+        operating = visible_rect_attrs(svg_root, "operating")
+        positive = visible_rect_attrs(svg_root, "positive-0")
+        pretax = visible_rect_attrs(svg_root, "pretax")
+        pretax_tax = visible_rect_attrs(svg_root, "pretax-tax")
+        net = visible_rect_attrs(svg_root, "net")
+        tax = visible_rect_attrs(svg_root, "deduction-0")
+
+        self.assertAlmostEqual(
+            pretax["height"],
+            operating["height"] + positive["height"],
+            delta=0.2,
+            msg="The pretax merge node must conserve the operating-profit and positive-adjustment inflows.",
+        )
+        self.assertAlmostEqual(
+            pretax["height"],
+            net["height"] + tax["height"],
+            delta=0.2,
+            msg="The pretax fork must split exactly into net income and tax.",
+        )
+        self.assertAlmostEqual(pretax_tax["height"], tax["height"], delta=0.2)
+        self.assertGreaterEqual(
+            pretax["x"] - (positive["x"] + positive["width"]),
+            110,
+            "The large positive ribbon needs enough runway to merge smoothly into pretax income.",
+        )
+        self.assertGreaterEqual(
+            pretax["x"] - (operating["x"] + operating["width"]),
+            110,
+            "The operating-profit ribbon needs enough runway to rise naturally into the common pretax node.",
+        )
+        self.assertGreaterEqual(
+            net["x"] - (pretax["x"] + pretax["width"]),
+            80,
+            "The common pretax node needs a visible runway before the net-income and tax fork terminates.",
+        )
+
+        for role in (
+            "pretax-positive-input",
+            "pretax-operating-input",
+            "pretax-net-output",
+            "pretax-tax-output",
+        ):
+            path = flow_path(svg_root, role)
+            self.assertGreaterEqual(
+                path.attrib.get("d", "").count("C "),
+                10,
+                f"{role} should use a multi-segment smootherstep curve instead of a sharp elbow.",
+            )
+
     def test_nvidia_prominent_non_operating_gain_merges_from_a_clear_upper_runway(self) -> None:
         svg_root = render_sankey_svg(NVIDIA_PAYLOAD, "zh", "nvidia-prominent-positive", quarter="2026Q2")
 

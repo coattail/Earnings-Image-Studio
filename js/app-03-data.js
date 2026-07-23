@@ -1965,6 +1965,32 @@ function buildGenericSnapshot(company, entry, quarterKey) {
       valueFormat: "plain",
     });
   }
+  const defaultSankeyLayout = shouldSimplifyOperatingLossPositiveBridge
+    ? {
+        forcePositiveAbove: true,
+        positiveBranchRunwayX: 250,
+        positivePreferredRunwayX: 230,
+        positiveNodeMinOffsetFromNetX: 210,
+        positiveNodeMinOffsetFromOpX: 52,
+        positiveAestheticNudgeStrength: 0,
+        positiveForceTopY: 235,
+        positiveAboveCorridorTopGapY: 0,
+        positiveAboveHardCorridorTopGapY: -16,
+        positiveAboveHardCorridorBottomGapY: 2,
+      }
+    : positiveAdjustments.length
+      ? {
+          forcePositiveAbove: true,
+        }
+      : {};
+  const entrySankeyLayout =
+    entry?.sankeyLayout && typeof entry.sankeyLayout === "object" && !Array.isArray(entry.sankeyLayout)
+      ? entry.sankeyLayout
+      : {};
+  const resolvedSankeyLayout = {
+    ...defaultSankeyLayout,
+    ...entrySankeyLayout,
+  };
   return {
     mode: "template-base",
     modeLabel: "高精复刻版",
@@ -1985,24 +2011,7 @@ function buildGenericSnapshot(company, entry, quarterKey) {
     displayScaleFactor: displayConfig.displayScaleFactor,
     usesFxConversion: displayConfig.usesFxConversion,
     bridgeCoverageMode,
-    layout: shouldSimplifyOperatingLossPositiveBridge
-      ? {
-          forcePositiveAbove: true,
-          positiveBranchRunwayX: 250,
-          positivePreferredRunwayX: 230,
-          positiveNodeMinOffsetFromNetX: 210,
-          positiveNodeMinOffsetFromOpX: 52,
-          positiveAestheticNudgeStrength: 0,
-          positiveForceTopY: 235,
-          positiveAboveCorridorTopGapY: 0,
-          positiveAboveHardCorridorTopGapY: -16,
-          positiveAboveHardCorridorBottomGapY: 2,
-        }
-      : positiveAdjustments.length
-      ? {
-          forcePositiveAbove: true,
-        }
-      : undefined,
+    layout: Object.keys(resolvedSankeyLayout).length ? resolvedSankeyLayout : undefined,
     businessGroups: [
       {
         name: "Reported revenue",
