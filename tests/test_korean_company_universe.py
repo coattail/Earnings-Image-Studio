@@ -49,11 +49,11 @@ class KoreanCompanyUniverseTests(unittest.TestCase):
         sk_hynix = companies["sk-hynix"]
         for company in (samsung, sk_hynix):
             self.assertEqual(company["reportingCurrency"], "KRW")
-            self.assertEqual(company["quarters"][-1], "2026Q1")
             self.assertEqual(company["quarters"][0], "2018Q1")
             self.assertGreaterEqual(len(company["quarters"]), 33)
-            self.assertGreater(company["financials"]["2026Q1"]["revenueBn"], 0)
-            self.assertGreater(company["financials"]["2026Q1"]["operatingIncomeBn"], 0)
+
+        self.assertEqual(samsung["quarters"][-1], "2026Q1")
+        self.assertEqual(sk_hynix["quarters"][-1], "2026Q2")
 
         samsung_latest = samsung["financials"]["2026Q1"]
         self.assertEqual(samsung_latest["statementSource"], "manual-samsung-official")
@@ -70,15 +70,17 @@ class KoreanCompanyUniverseTests(unittest.TestCase):
             delta=0.1,
         )
 
-        sk_hynix_latest = sk_hynix["financials"]["2026Q1"]
+        sk_hynix_latest = sk_hynix["financials"]["2026Q2"]
         self.assertEqual(sk_hynix_latest["statementSource"], "manual-sk-hynix-official")
-        self.assertAlmostEqual(sk_hynix_latest["revenueBn"], 52576.287, delta=0.1)
-        self.assertAlmostEqual(sk_hynix_latest["operatingIncomeBn"], 37610.283, delta=0.1)
+        self.assertEqual(sk_hynix_latest["statementFilingDate"], "2026-07-29")
+        self.assertAlmostEqual(sk_hynix_latest["revenueBn"], 79318.7, delta=0.1)
+        self.assertAlmostEqual(sk_hynix_latest["operatingIncomeBn"], 60542.6, delta=0.1)
+        self.assertAlmostEqual(sk_hynix_latest["netIncomeBn"], 93922.6, delta=0.1)
         sk_hynix_segments = {row["memberKey"]: row for row in sk_hynix_latest["officialRevenueSegments"]}
         self.assertEqual(set(sk_hynix_segments), {"dram", "nand", "otherproductsservices"})
-        self.assertAlmostEqual(sk_hynix_segments["dram"]["valueBn"], 40660.0, delta=0.1)
-        self.assertAlmostEqual(sk_hynix_segments["nand"]["valueBn"], 11570.0, delta=0.1)
-        self.assertEqual(sk_hynix_latest["revenueClassificationSource"], "stockanalysis-business-metrics")
+        self.assertAlmostEqual(sk_hynix_segments["dram"]["valueBn"], 57902.651, delta=0.1)
+        self.assertAlmostEqual(sk_hynix_segments["nand"]["valueBn"], 21416.049, delta=0.1)
+        self.assertEqual(sk_hynix_latest["revenueClassificationSource"], "sk-hynix-official-product-mix")
         self.assertEqual(sk_hynix["coverage"]["classification"]["status"], "ok")
         self.assertFalse(sk_hynix["coverage"]["classification"]["blockers"])
 

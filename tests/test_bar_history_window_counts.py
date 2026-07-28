@@ -117,8 +117,9 @@ class BarHistoryWindowCountTests(unittest.TestCase):
     def test_korean_company_windows_show_extended_history(self) -> None:
         for company_id in ("samsung", "sk-hynix"):
             with self.subTest(company_id=company_id):
-                summary = render_bar_summary(load_dataset_company(company_id), f"{company_id}-extended-window")
-                self.assertEqual(summary["outputs"]["bars"]["quarterCount"], 33)
+                company = load_dataset_company(company_id)
+                summary = render_bar_summary(company, f"{company_id}-extended-window")
+                self.assertEqual(summary["outputs"]["bars"]["quarterCount"], len(company["quarters"]))
 
     def test_byd_latest_bar_window_uses_all_available_quarters(self) -> None:
         company = load_dataset_company("byd")

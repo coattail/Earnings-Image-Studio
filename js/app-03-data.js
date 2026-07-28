@@ -1822,8 +1822,25 @@ function buildGenericSnapshot(company, entry, quarterKey) {
       : operatingLossOverflowBn > 0
       ? `${financialFootnote} 当前季度实际营业费用为 ${formatSnapshotBillions(operatingExpensesBn)}；其中 ${formatSnapshotBillions(displayOperatingExpensesBn)} 由毛利覆盖，超出的 ${formatSnapshotBillions(operatingLossOverflowBn)} 会在净利桥中单列为营业亏损。`
       : financialFootnote;
-  const positiveAdjustments = [];
-  const belowOperatingItems = [];
+  const explicitPositiveAdjustments = Array.isArray(entry.positiveAdjustments)
+    ? entry.positiveAdjustments
+        .filter((item) => safeNumber(item?.valueBn) > 0.05)
+        .map((item) => ({
+          ...item,
+          color: item?.color || "#16A34A",
+        }))
+    : null;
+  const explicitBelowOperatingItems = Array.isArray(entry.belowOperatingItems)
+    ? entry.belowOperatingItems
+        .filter((item) => safeNumber(item?.valueBn) > 0.05)
+        .map((item) => ({
+          ...item,
+          color: item?.color || "#D92D20",
+        }))
+    : null;
+  const hasExplicitNetBridge = explicitPositiveAdjustments !== null || explicitBelowOperatingItems !== null;
+  const positiveAdjustments = explicitPositiveAdjustments || [];
+  const belowOperatingItems = explicitBelowOperatingItems || [];
   if (hasRenderableGrossStage && operatingLossOverflowBn > 0.05 && !shouldSimplifyOperatingLossPositiveBridge) {
     belowOperatingItems.push({
       name: "Operating loss overflow",
@@ -1840,7 +1857,11 @@ function buildGenericSnapshot(company, entry, quarterKey) {
     hasMaterialNonOperating &&
     hasMaterialTax &&
     String(company?.id || "").toLowerCase() === "jd";
-  if (netTaxWithNonOperating) {
+  if (hasExplicitNetBridge) {
+    // The source provides a complete, named operating-profit-to-net-profit bridge.
+    // Preserve those official classifications instead of replacing them with an
+    // inferred aggregate non-operating line.
+  } else if (netTaxWithNonOperating) {
     const netNonOperatingAfterTaxBn = safeNumber(inferredNonOperatingBn) - taxBn;
     if (Math.abs(netNonOperatingAfterTaxBn) > 0.05) {
       const netPositiveLabel = normalizedEntry.usePretaxResidualLabel
@@ -1912,13 +1933,13 @@ function buildGenericSnapshot(company, entry, quarterKey) {
       });
     }
   }
-  if (!netTaxWithNonOperating && hasRenderableGrossStage && taxBn && taxBn > 0.05) {
+  if (!hasExplicitNetBridge && !netTaxWithNonOperating && hasRenderableGrossStage && taxBn && taxBn > 0.05) {
     belowOperatingItems.push({
       name: "Tax",
       valueBn: Math.abs(taxBn),
       color: "#D92D20",
     });
-  } else if (!netTaxWithNonOperating && hasRenderableGrossStage && taxBn && taxBn < -0.05) {
+  } else if (!hasExplicitNetBridge && !netTaxWithNonOperating && hasRenderableGrossStage && taxBn && taxBn < -0.05) {
     positiveAdjustments.push({
       name: "Tax benefit",
       nameZh: "税项收益",
@@ -2049,6 +2070,10 @@ function buildGenericSnapshot(company, entry, quarterKey) {
           operatingExpensesBn: displayOperatingExpensesBn,
         })
       : [],
+    operatingExpensesLabel:
+      currentChartLanguage() === "zh"
+        ? entry.operatingExpensesLabelZh || entry.operatingExpensesLabel
+        : entry.operatingExpensesLabel,
     positiveAdjustments,
     belowOperatingItems,
     footnote: resolvedFinancialFootnote,

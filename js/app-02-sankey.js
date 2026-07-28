@@ -9338,6 +9338,7 @@ function renderPixelReplicaSvg(snapshot) {
     }
     const placedPositiveLabelRects = [];
     let netPositiveCursor = netPositiveTop;
+    const positiveStackStartY = positiveTop;
     positiveAdjustments.forEach((item, index) => {
       if (useNetLossBalanceBridge) return;
       const gainHeight = positiveHeights[index];
@@ -9420,8 +9421,9 @@ function renderPixelReplicaSvg(snapshot) {
           bottom: centerY + labelBottomOffset,
         };
       };
+      const positiveStackOffsetY = positiveTop - positiveStackStartY;
       const sourceTopSearchMin = clamp(
-        positiveTopMin + positiveSourceDropY,
+        positiveTopMin + positiveStackOffsetY + positiveSourceDropY,
         positiveNeedsVisibleMergeAngle
           ? positiveAngledSourceTopFloorY
           : positiveMaterialAbove
@@ -9430,7 +9432,7 @@ function renderPixelReplicaSvg(snapshot) {
         chartBottomLimit - gainHeight - scaleY(6)
       );
       const sourceTopSearchMax = clamp(
-        positiveTopMax + positiveSourceDropY,
+        positiveTopMax + positiveStackOffsetY + positiveSourceDropY,
         sourceTopSearchMin,
         chartBottomLimit - gainHeight - scaleY(6)
       );
@@ -10143,10 +10145,26 @@ function renderPixelReplicaSvg(snapshot) {
       const labelX = useLeftCenteredLabel
         ? positiveFrame.x - labelGapX
         : chosenPlacement.x + positiveShift.dx;
-      const labelCenterY = useLeftCenteredLabel
+      let labelCenterY = useLeftCenteredLabel
         ? positiveFrame.centerY - labelCenterBias
         : chosenPlacement.centerY + positiveShift.dy;
-      const chosenLabelRect = labelBoundsRect(labelAnchor, labelX, labelCenterY);
+      let chosenLabelRect = labelBoundsRect(labelAnchor, labelX, labelCenterY);
+      placedPositiveLabelRects.forEach((placedRect) => {
+        const overlapsHorizontally =
+          chosenLabelRect.left < placedRect.right + positiveLabelInterLabelPadding &&
+          chosenLabelRect.right > placedRect.left - positiveLabelInterLabelPadding;
+        const overlapsVertically =
+          chosenLabelRect.top < placedRect.bottom + positiveLabelInterLabelPadding &&
+          chosenLabelRect.bottom > placedRect.top - positiveLabelInterLabelPadding;
+        if (!overlapsHorizontally || !overlapsVertically) return;
+        const shiftDownY = placedRect.bottom + positiveLabelInterLabelPadding - chosenLabelRect.top;
+        labelCenterY = clamp(
+          labelCenterY + shiftDownY,
+          positiveHeaderLabelClearanceBottom - labelTopOffset,
+          chartBottomLimit - scaleY(6) - labelBottomOffset
+        );
+        chosenLabelRect = labelBoundsRect(labelAnchor, labelX, labelCenterY);
+      });
       placedPositiveLabelRects.push(chosenLabelRect);
       positiveMarkup += `<text x="${labelX}" y="${labelCenterY - twoLineGap}" text-anchor="${labelAnchor}" font-size="${positiveNameSize}" font-weight="700" fill="${greenText}" paint-order="stroke fill" stroke="${background}" stroke-width="7" stroke-linejoin="round">${escapeHtml(localizedPositiveName)}</text>`;
       positiveMarkup += `<text x="${labelX}" y="${labelCenterY + valueYOffset}" text-anchor="${labelAnchor}" font-size="${positiveValueSize}" font-weight="700" fill="${greenText}" paint-order="stroke fill" stroke="${background}" stroke-width="6" stroke-linejoin="round">${escapeHtml(labelValue)}</text>`;

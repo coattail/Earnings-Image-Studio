@@ -127,6 +127,80 @@ class SkHynixSankeyLayoutTests(unittest.TestCase):
         ):
             self.assertNotIn(note, historical_svg)
 
+    def test_latest_quarter_uses_official_product_and_expense_taxonomy(self) -> None:
+        dataset = json.loads(DATASET_PATH.read_text(encoding="utf-8"))
+        company = next(item for item in dataset["companies"] if item["id"] == "sk-hynix")
+        latest = company["financials"]["2026Q2"]
+
+        self.assertEqual(
+            [(item["name"], item["mixPct"]) for item in latest["officialRevenueSegments"]],
+            [
+                ("DRAM", 73.0),
+                ("NAND Flash / Storage", 27.0),
+                ("Other Products & Services", 0.0),
+            ],
+        )
+        self.assertIsNone(latest["sgnaBn"])
+        self.assertIsNone(latest["rndBn"])
+        self.assertEqual(latest["operatingExpensesLabelZh"], "销售、一般及管理费用（合并披露）")
+        self.assertIsNone(latest["officialOpexBreakdown"])
+
+    def test_latest_quarter_uses_the_official_net_profit_bridge_components(self) -> None:
+        dataset = json.loads(DATASET_PATH.read_text(encoding="utf-8"))
+        company = next(item for item in dataset["companies"] if item["id"] == "sk-hynix")
+        latest = company["financials"]["2026Q2"]
+
+        self.assertEqual(
+            [(item["nameZh"], item["valueBn"]) for item in latest["positiveAdjustments"]],
+            [
+                ("财务净收益", 150),
+                ("汇兑净收益", 1147),
+                ("其他营业外收益", 60889),
+            ],
+        )
+        self.assertEqual(
+            [(item["nameZh"], item["valueBn"]) for item in latest["belowOperatingItems"]],
+            [
+                ("合营及联营企业损失", 20),
+                ("所得税费用", 28786),
+            ],
+        )
+        bridged_net_profit = (
+            latest["operatingIncomeBn"]
+            + sum(item["valueBn"] for item in latest["positiveAdjustments"])
+            - sum(item["valueBn"] for item in latest["belowOperatingItems"])
+        )
+        self.assertAlmostEqual(bridged_net_profit, latest["netIncomeBn"], places=3)
+
+    def test_latest_sankey_renders_official_bridge_labels_without_inferred_residuals(self) -> None:
+        latest_svg = render_sk_hynix_markup("2026Q2")
+
+        for label in (
+            "销售、一般及管理费用",
+            "（合并披露）",
+            "财务净收益",
+            "汇兑净收益",
+            "其他营业外收益",
+            "合营及联营",
+            "企业损失",
+            "所得税费用",
+        ):
+            self.assertIn(label, latest_svg)
+        self.assertNotIn("其他净收益", latest_svg)
+
+        latest_root = ET.fromstring(latest_svg)
+        positive_nodes = [rect(latest_root, f"positive-{index}") for index in range(3)]
+        for previous, current in zip(positive_nodes, positive_nodes[1:]):
+            self.assertGreaterEqual(current["y"], previous["y"] + previous["height"] + 20)
+
+        positive_label_y = []
+        for label in ("财务净收益", "汇兑净收益", "其他营业外收益"):
+            match = re.search(rf'<text x="[-\d.]+" y="([-\d.]+)"[^>]*>{label}</text>', latest_svg)
+            self.assertIsNotNone(match)
+            positive_label_y.append(float(match.group(1)))
+        for previous_y, current_y in zip(positive_label_y, positive_label_y[1:]):
+            self.assertGreaterEqual(current_y - previous_y, 50)
+
 
 if __name__ == "__main__":
     unittest.main()
