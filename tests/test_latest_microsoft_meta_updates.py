@@ -2,6 +2,8 @@ import json
 import unittest
 from pathlib import Path
 
+from scripts import build_dataset
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DATASET_PATH = ROOT / "data" / "earnings-dataset.json"
@@ -35,16 +37,10 @@ class LatestMicrosoftMetaUpdatesTest(unittest.TestCase):
             },
         )
         self.assertAlmostEqual(sum(segments.values()), entry["revenueBn"], places=9)
-        self.assertAlmostEqual(
-            sum(row["valueBn"] for row in entry["officialCostBreakdown"]),
-            entry["costOfRevenueBn"],
-            places=9,
-        )
-        self.assertAlmostEqual(
-            sum(row["valueBn"] for row in entry["officialOpexBreakdown"]),
-            entry["operatingExpensesBn"],
-            places=9,
-        )
+        self.assertFalse(entry.get("officialCostBreakdown"))
+        self.assertFalse(entry.get("officialOpexBreakdown"))
+        self.assertFalse(company["financials"]["2026Q1"].get("officialCostBreakdown"))
+        self.assertFalse(company["financials"]["2026Q1"].get("officialOpexBreakdown"))
 
     def test_meta_q2_2026_official_results(self) -> None:
         company = self.companies["meta"]
@@ -64,16 +60,33 @@ class LatestMicrosoftMetaUpdatesTest(unittest.TestCase):
         self.assertEqual(details, {"advertising": 59.363, "other": 1.007})
         self.assertAlmostEqual(sum(segments.values()), entry["revenueBn"], places=9)
         self.assertAlmostEqual(sum(details.values()), segments["familyofapps"], places=9)
-        self.assertAlmostEqual(
-            sum(row["valueBn"] for row in entry["officialCostBreakdown"]),
-            entry["costOfRevenueBn"],
-            places=9,
-        )
-        self.assertAlmostEqual(
-            sum(row["valueBn"] for row in entry["officialOpexBreakdown"]),
-            entry["operatingExpensesBn"],
-            places=9,
-        )
+        self.assertFalse(entry.get("officialCostBreakdown"))
+        self.assertFalse(entry.get("officialOpexBreakdown"))
+        self.assertFalse(company["financials"]["2026Q1"].get("officialCostBreakdown"))
+        self.assertFalse(company["financials"]["2026Q1"].get("officialOpexBreakdown"))
+
+    def test_explicit_null_breakdowns_are_not_restored_from_previous_dataset(self) -> None:
+        current = {
+            "financials": {
+                "2026Q2": {
+                    "officialCostBreakdown": None,
+                    "officialOpexBreakdown": None,
+                }
+            }
+        }
+        previous = {
+            "financials": {
+                "2026Q2": {
+                    "officialCostBreakdown": [{"name": "Cost detail"}],
+                    "officialOpexBreakdown": [{"name": "Opex detail"}],
+                }
+            }
+        }
+
+        result = build_dataset.preserve_existing_company_history(current, previous)
+
+        self.assertIsNone(result["financials"]["2026Q2"]["officialCostBreakdown"])
+        self.assertIsNone(result["financials"]["2026Q2"]["officialOpexBreakdown"])
 
 
 if __name__ == "__main__":

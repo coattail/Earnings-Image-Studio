@@ -517,7 +517,7 @@ def preserve_existing_company_history(payload: dict[str, Any], existing_payload:
             financials[quarter] = deepcopy(existing_entry)
             continue
         for field_name in preserved_fields:
-            if existing_entry.get(field_name) and not current_entry.get(field_name):
+            if existing_entry.get(field_name) and field_name not in current_entry:
                 current_entry[field_name] = deepcopy(existing_entry[field_name])
     existing_history = existing_payload.get("officialRevenueStructureHistory")
     current_history = payload.get("officialRevenueStructureHistory")
