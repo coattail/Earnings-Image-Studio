@@ -1047,11 +1047,16 @@ function snapshotCanvasSize(snapshot) {
     Math.max(detailCount - 2, 0) * 22 +
     positiveBridgeStrength.extremeStrength * safeNumber(snapshot?.layout?.positiveBridgeExtremeDesignExtraY, 172) +
     extremePositiveDesignExtraY;
+  const topCanvasPaddingY = Math.max(
+    safeNumber(snapshot?.layout?.topCanvasPaddingY, 0),
+    0
+  );
   return {
     width: Math.max(Math.round(baseWidth + leftShiftX + safeNumber(stageLayout.rightExpansion, 0)), 1),
-    height: Math.max(Math.round(height + bottomCanvasPadding), 1),
+    height: Math.max(Math.round(height + bottomCanvasPadding + topCanvasPaddingY), 1),
     designHeight: Math.max(Math.round(designHeight + bottomCanvasPadding), 1),
     leftShiftX: Math.max(Math.round(leftShiftX), 0),
+    topCanvasPaddingY: Math.max(Math.round(topCanvasPaddingY), 0),
   };
 }
 

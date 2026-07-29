@@ -145,7 +145,7 @@ class SkHynixSankeyLayoutTests(unittest.TestCase):
         self.assertEqual(latest["operatingExpensesLabelZh"], "销售、一般及管理费用（合并披露）")
         self.assertIsNone(latest["officialOpexBreakdown"])
 
-    def test_latest_quarter_uses_the_official_net_profit_bridge_components(self) -> None:
+    def test_latest_quarter_aggregates_the_non_operating_bridge(self) -> None:
         dataset = json.loads(DATASET_PATH.read_text(encoding="utf-8"))
         company = next(item for item in dataset["companies"] if item["id"] == "sk-hynix")
         latest = company["financials"]["2026Q2"]
@@ -153,15 +153,12 @@ class SkHynixSankeyLayoutTests(unittest.TestCase):
         self.assertEqual(
             [(item["nameZh"], item["valueBn"]) for item in latest["positiveAdjustments"]],
             [
-                ("财务净收益", 150),
-                ("汇兑净收益", 1147),
-                ("其他营业外收益", 60889),
+                ("营业外收益", 62166),
             ],
         )
         self.assertEqual(
             [(item["nameZh"], item["valueBn"]) for item in latest["belowOperatingItems"]],
             [
-                ("合营及联营企业损失", 20),
                 ("所得税费用", 28786),
             ],
         )
@@ -178,28 +175,60 @@ class SkHynixSankeyLayoutTests(unittest.TestCase):
         for label in (
             "销售、一般及管理费用",
             "（合并披露）",
-            "财务净收益",
-            "汇兑净收益",
-            "其他营业外收益",
-            "合营及联营",
-            "企业损失",
+            "营业外收益",
             "所得税费用",
         ):
             self.assertIn(label, latest_svg)
         self.assertNotIn("其他净收益", latest_svg)
+        self.assertNotIn("财务净收益", latest_svg)
+        self.assertNotIn("汇兑净收益", latest_svg)
+        self.assertNotIn("其他营业外收益", latest_svg)
 
         latest_root = ET.fromstring(latest_svg)
-        positive_nodes = [rect(latest_root, f"positive-{index}") for index in range(3)]
-        for previous, current in zip(positive_nodes, positive_nodes[1:]):
-            self.assertGreaterEqual(current["y"], previous["y"] + previous["height"] + 20)
+        positive = rect(latest_root, "positive-0")
+        operating = rect(latest_root, "operating")
+        self.assertLessEqual(
+            positive["y"] + positive["height"] + 30,
+            operating["y"],
+        )
+        self.assertIsNone(latest_root.find(".//svg:rect[@data-edit-node-visible-id='positive-1']", SVG_NS))
+        self.assertIsNotNone(latest_root.find(".//svg:rect[@data-edit-node-visible-id='deduction-0']", SVG_NS))
+        self.assertIsNone(latest_root.find(".//svg:rect[@data-edit-node-visible-id='deduction-1']", SVG_NS))
 
-        positive_label_y = []
-        for label in ("财务净收益", "汇兑净收益", "其他营业外收益"):
-            match = re.search(rf'<text x="[-\d.]+" y="([-\d.]+)"[^>]*>{label}</text>', latest_svg)
-            self.assertIsNotNone(match)
-            positive_label_y.append(float(match.group(1)))
-        for previous_y, current_y in zip(positive_label_y, positive_label_y[1:]):
-            self.assertGreaterEqual(current_y - previous_y, 50)
+        chart_content = latest_root.find(".//svg:g[@id='chartContent']", SVG_NS)
+        self.assertIsNotNone(chart_content)
+        self.assertEqual(chart_content.attrib.get("transform"), "translate(0 80)")
+        self.assertGreaterEqual(positive["y"] + 80, 120)
+
+        source = rect(latest_root, "source-0")
+        nand_source = rect(latest_root, "source-1")
+        revenue = rect(latest_root, "revenue")
+        deduction = rect(latest_root, "deduction-0")
+        self.assertAlmostEqual(source["x"], 304, delta=1)
+        self.assertAlmostEqual(source["y"] + 80, 418, delta=3)
+        self.assertAlmostEqual(nand_source["x"], 304, delta=1)
+        self.assertAlmostEqual(nand_source["y"] + 80, 1227, delta=4)
+        self.assertIsNone(latest_root.find(".//svg:rect[@data-edit-node-visible-id='source-2']", SVG_NS))
+        self.assertNotIn("其他产品与服务", latest_svg)
+        self.assertNotIn("官方披露占比 0%", latest_svg)
+        self.assertAlmostEqual(revenue["x"], 813, delta=1)
+        self.assertAlmostEqual(revenue["y"] + 80, 681, delta=3)
+        self.assertAlmostEqual(operating["x"], 1860, delta=1)
+        self.assertAlmostEqual(operating["y"] + 80, 714, delta=3)
+        self.assertAlmostEqual(positive["x"], 2101, delta=1)
+        self.assertAlmostEqual(positive["y"] + 80, 134, delta=3)
+        self.assertAlmostEqual(rect(latest_root, "net")["x"], 2377, delta=1)
+        self.assertAlmostEqual(deduction["y"] + 80, 1147, delta=4)
+
+        tax_label = re.search(
+            r'<text x="([-\d.]+)" y="[-\d.]+"[^>]*>所得税费用</text>',
+            latest_svg,
+        )
+        self.assertIsNotNone(tax_label)
+        self.assertGreater(float(tax_label.group(1)), deduction["x"] + deduction["width"] + 70)
+
+        view_box = [float(value) for value in latest_root.attrib["viewBox"].split()]
+        self.assertGreaterEqual(view_box[3], 1750)
 
 
 if __name__ == "__main__":

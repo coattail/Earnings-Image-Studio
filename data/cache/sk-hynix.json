@@ -5460,47 +5460,68 @@
       "displayCurrency": "USD",
       "displayScaleFactor": 0.00069,
       "sankeyLayout": {
-        "useExtremePositiveLayout": false,
+        "useExtremePositiveLayout": true,
         "forcePositiveAbove": true,
         "positiveForceTopY": 270,
         "positiveGapY": 64,
-        "positiveLabelPlacement": "auto"
+        "positiveLabelPlacement": "left-center",
+        "extremePositiveCanvasExtraY": 240,
+        "extremePositiveDesignExtraY": 200,
+        "extremePositiveTopLaneThreshold": 0,
+        "topCanvasPaddingY": 80,
+        "structuralNodeOffsets": {
+          "positive-0": {
+            "dy": -114,
+            "dx": 46
+          },
+          "source-0": {
+            "dx": -64,
+            "dy": -140
+          },
+          "source-1": {
+            "dx": -64,
+            "dy": -22
+          },
+          "revenue": {
+            "dx": -35,
+            "dy": -35
+          },
+          "cost": {
+            "dy": 116
+          },
+          "operating": {
+            "dx": 40,
+            "dy": -10
+          },
+          "operating-expenses": {
+            "dx": 40,
+            "dy": 109
+          },
+          "net": {
+            "dx": 71,
+            "dy": -49
+          },
+          "deduction-0": {
+            "dx": 70,
+            "dy": 274
+          },
+          "source-2": {
+            "dx": -64,
+            "dy": 60
+          }
+        }
       },
       "positiveAdjustments": [
         {
-          "name": "Net financial profit",
-          "nameZh": "财务净收益",
-          "memberKey": "net_financial_profit",
-          "valueBn": 150,
+          "name": "Non-operating gain",
+          "nameZh": "营业外收益",
+          "memberKey": "non_operating_gain",
+          "valueBn": 62166,
           "color": "#16A34A",
-          "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q2_eng.pdf?1="
-        },
-        {
-          "name": "Net FX gain",
-          "nameZh": "汇兑净收益",
-          "memberKey": "net_fx_gain",
-          "valueBn": 1147,
-          "color": "#22C55E",
-          "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q2_eng.pdf?1="
-        },
-        {
-          "name": "Other non-operating profit",
-          "nameZh": "其他营业外收益",
-          "memberKey": "other_non_operating_profit",
-          "valueBn": 60889,
-          "color": "#15803D",
           "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q2_eng.pdf?1="
         }
       ],
       "belowOperatingItems": [
-        {
-          "name": "Loss from JVs & associates",
-          "nameZh": "合营及联营企业损失",
-          "memberKey": "jv_associate_loss",
-          "valueBn": 20,
-          "color": "#D92D20",
-          "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q2_eng.pdf?1="
-        },
         {
           "name": "Tax expense",
           "nameZh": "所得税费用",

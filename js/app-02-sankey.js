@@ -3,7 +3,8 @@ function renderRevenueOnlyReplicaSvg(snapshot) {
   const width = canvas.width;
   const height = canvas.height;
   const leftShiftX = safeNumber(canvas.leftShiftX, 0);
-  const verticalScale = height / canvas.designHeight;
+  const topCanvasPaddingY = safeNumber(canvas.topCanvasPaddingY, 0);
+  const verticalScale = Math.max(height - topCanvasPaddingY, 1) / canvas.designHeight;
   const scaleY = (value) => value * verticalScale;
   const shiftCanvasX = (value, fallback) => safeNumber(value, fallback) + leftShiftX;
   const background = "#F6F5F2";
@@ -130,7 +131,7 @@ function renderRevenueOnlyReplicaSvg(snapshot) {
   let svg = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="${escapeHtml(titleText)}" font-family="Aptos, Segoe UI, Arial, Helvetica, sans-serif" data-editor-bounds-left="0" data-editor-bounds-top="0" data-editor-bounds-right="${width}" data-editor-bounds-bottom="${height}">
       <rect x="0" y="0" width="${width}" height="${height}" fill="${background}"></rect>
-      <g id="chartContent">
+      <g id="chartContent"${topCanvasPaddingY > 0 ? ` transform="translate(0 ${topCanvasPaddingY})"` : ""}>
         <text x="${titleX}" y="${titleY}" text-anchor="middle" font-size="${safeNumber(snapshot.layout?.limitedTitleFontSize, 70)}" font-weight="800" fill="${titleColor}" letter-spacing="0.3">${escapeHtml(
     titleText
   )}</text>
@@ -204,7 +205,8 @@ function renderPixelReplicaSvg(snapshot) {
   const width = canvas.width;
   const height = canvas.height;
   const leftShiftX = safeNumber(canvas.leftShiftX, 0);
-  const verticalScale = height / canvas.designHeight;
+  const topCanvasPaddingY = safeNumber(canvas.topCanvasPaddingY, 0);
+  const verticalScale = Math.max(height - topCanvasPaddingY, 1) / canvas.designHeight;
   const scaleY = (value) => value * verticalScale;
   const layoutY = (value, fallback) => scaleY(safeNumber(value, fallback));
   const shiftCanvasX = (value, fallback) => safeNumber(value, fallback) + leftShiftX;
@@ -8374,7 +8376,7 @@ function renderPixelReplicaSvg(snapshot) {
   let svg = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="${escapeHtml(titleText)}" font-family="Aptos, Segoe UI, Arial, Helvetica, sans-serif" data-editor-bounds-left="0" data-editor-bounds-top="0" data-editor-bounds-right="${width}" data-editor-bounds-bottom="${height}">
       <rect x="0" y="0" width="${width}" height="${height}" fill="${background}"></rect>
-      <g id="chartContent">
+      <g id="chartContent"${topCanvasPaddingY > 0 ? ` transform="translate(0 ${topCanvasPaddingY})"` : ""}>
       <text x="${titleX}" y="${titleY}" text-anchor="${titleAnchor}" font-size="${titleFontSize}" font-weight="800" fill="${titleColor}" letter-spacing="0.3">${escapeHtml(titleText)}</text>
       ${snapshot.periodEndLabel ? `<text x="${periodEndX}" y="${periodEndY}" text-anchor="start" font-size="${periodEndFontSize}" fill="${muted}">${escapeHtml(localizePeriodEndLabel(snapshot.periodEndLabel || ""))}</text>` : ""}
     `;
@@ -10233,7 +10235,7 @@ function renderPixelReplicaSvg(snapshot) {
     svg += renderRightBranchLabel(slice.item, box, deductionFrame.x, nodeWidth, redText, {
       density: deductionSlices.length >= 3 ? "dense" : "regular",
       defaultMode: "negative-parentheses",
-      labelX: negativeTerminalLabelX,
+      labelX: Math.max(negativeTerminalLabelX, deductionFrame.right + rightBranchLabelGapX),
       lockLabelCenterY: true,
       labelCenterY: deductionFrame.centerY,
       avoidFlowModel: {
