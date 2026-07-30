@@ -8,6 +8,7 @@ import re
 import sys
 import time
 from datetime import date, timedelta
+from functools import partial
 from pathlib import Path
 from typing import Any
 
@@ -2935,9 +2936,22 @@ def _parse_tencent_pdf_financial_entry(quarter_key: str, source_url: str, filing
 
 APPLE_FY2026_Q2_RELEASE_URL = "https://www.apple.com/newsroom/2026/04/apple-reports-second-quarter-results/"
 APPLE_FY2026_Q2_PDF_URL = "https://www.apple.com/newsroom/pdfs/fy2026q2/FY26_Q2_Consolidated_Financial_Statements.pdf"
+APPLE_FY2026_Q3_SEC_URL = (
+    "https://www.sec.gov/Archives/edgar/data/320193/"
+    "000032019326000018/a8-kex991q3202606272026.htm"
+)
 
 
-def _apple_release_row(name: str, member_key: str, value_bn: float, *, target_name: str | None = None) -> dict[str, Any]:
+def _apple_release_row(
+    name: str,
+    member_key: str,
+    value_bn: float,
+    *,
+    target_name: str | None = None,
+    source_url: str = APPLE_FY2026_Q2_PDF_URL,
+    source_form: str = "FY2026 Q2 earnings release",
+    filing_date: str = "2026-04-30",
+) -> dict[str, Any]:
     row = {
         "name": name,
         "nameZh": None,
@@ -2947,9 +2961,9 @@ def _apple_release_row(name: str, member_key: str, value_bn: float, *, target_na
         "qoqPct": None,
         "mixPct": None,
         "mixYoyDeltaPp": None,
-        "sourceUrl": APPLE_FY2026_Q2_PDF_URL,
-        "sourceForm": "FY2026 Q2 earnings release",
-        "filingDate": "2026-04-30",
+        "sourceUrl": source_url,
+        "sourceForm": source_form,
+        "filingDate": filing_date,
     }
     if target_name:
         row["targetName"] = target_name
@@ -3021,6 +3035,73 @@ def supplement_apple_earnings_release_financials(company_payload: dict[str, Any]
                 "label": "Apple FY2026 Q2 earnings release",
                 "score": 170,
                 "sourceUrl": APPLE_FY2026_Q2_PDF_URL,
+            }
+        },
+    }
+    q3_row = partial(
+        _apple_release_row,
+        source_url=APPLE_FY2026_Q3_SEC_URL,
+        source_form="FY2026 Q3 earnings release",
+        filing_date="2026-07-30",
+    )
+    financials["2026Q2"] = {
+        "calendarQuarter": "2026Q2",
+        "periodEnd": "2026-06-27",
+        "fiscalYear": "2026",
+        "fiscalQuarter": "Q3",
+        "fiscalLabel": "FY2026 Q3",
+        "statementCurrency": "USD",
+        "revenueBn": 109.417,
+        "revenueYoyPct": 16.357,
+        "costOfRevenueBn": 54.647,
+        "grossProfitBn": 54.770,
+        "sgnaBn": 7.346,
+        "rndBn": 11.729,
+        "otherOpexBn": None,
+        "operatingExpensesBn": 19.075,
+        "operatingIncomeBn": 35.695,
+        "nonOperatingBn": 0.572,
+        "pretaxIncomeBn": 36.267,
+        "taxBn": 6.478,
+        "netIncomeBn": 29.789,
+        "netIncomeYoyPct": 27.119,
+        "grossMarginPct": 50.056,
+        "operatingMarginPct": 32.623,
+        "profitMarginPct": 27.225,
+        "effectiveTaxRatePct": 17.862,
+        "revenueQoqPct": -1.589,
+        "grossMarginYoyDeltaPp": 3.566,
+        "operatingMarginYoyDeltaPp": 2.632,
+        "profitMarginYoyDeltaPp": 2.305,
+        "statementSource": "apple-q3-2026-earnings-release",
+        "statementSourceUrl": APPLE_FY2026_Q3_SEC_URL,
+        "statementFilingDate": "2026-07-30",
+        "statementValueMode": "reported",
+        "statementSpanQuarters": 1,
+        "officialRevenueSegments": [
+            q3_row("Products", "products", 78.678),
+            q3_row("Services", "services", 30.739),
+        ],
+        "officialRevenueDetailGroups": [
+            q3_row("iPhone", "iphone", 54.252, target_name="Products"),
+            q3_row("Mac", "mac", 10.352, target_name="Products"),
+            q3_row("iPad", "ipad", 6.191, target_name="Products"),
+            q3_row("Wearables, Home and Accessories", "wearables", 7.883, target_name="Products"),
+        ],
+        "officialCostBreakdown": [
+            q3_row("Products cost of sales", "products", 47.153),
+            q3_row("Services cost of sales", "services", 7.494),
+        ],
+        "officialOpexBreakdown": [
+            q3_row("Research and development", "researchanddevelopment", 11.729),
+            q3_row("Selling, general and administrative", "sellinggeneralandadministrative", 7.346),
+        ],
+        "fieldSources": {
+            "revenueBn": {
+                "adapterId": "apple_earnings_release_supplement",
+                "label": "Apple FY2026 Q3 earnings release",
+                "score": 170,
+                "sourceUrl": APPLE_FY2026_Q3_SEC_URL,
             }
         },
     }
@@ -3701,6 +3782,7 @@ def main() -> int:
             cached_payload = load_cached_company_payload(company["id"])
             if isinstance(cached_payload, dict):
                 payload = deepcopy(cached_payload)
+                payload = supplement_apple_earnings_release_financials(payload)
                 try:
                     payload = merge_official_revenue_structure_history(payload, company, refresh=False)
                 except Exception as exc:  # noqa: BLE001
