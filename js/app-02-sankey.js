@@ -534,6 +534,26 @@ function renderPixelReplicaSvg(snapshot) {
   const positiveAdjustmentOpRatio = positiveBridgeStrength.opRatio;
   const positiveAdjustmentScaleStrength = positiveBridgeStrength.scaleStrength;
   const positiveAdjustmentExtremeStrength = positiveBridgeStrength.extremeStrength;
+  // A dominant one-off gain plus a dense expense tree reads best as two lanes:
+  // profit and the gain bridge above, cost and operating expenses below.
+  const dominantPositiveBridgeLaneStrength =
+    snapshot.layout?.useExtremePositiveLayout !== true &&
+    rawPositiveAdjustments.length === 1 &&
+    rawOpexItems.length + rawBelowOperatingItems.length >= 4 &&
+    operatingProfitBn > 0.02 &&
+    netProfitBn > 0.02
+      ? clamp(
+          ((positiveAdjustmentOpRatio - 0.95) / 1.25) *
+            clamp(
+              (rawOpexItems.length + rawBelowOperatingItems.length - 1) / 4,
+              0.35,
+              1
+            ) *
+            (0.55 + positiveAdjustmentScaleStrength * 0.45),
+          0,
+          1
+        )
+      : 0;
   const leftBranchCount = rawSources.length + rawLeftDetailGroups.length * 0.92;
   const rightBranchCount =
     rawOpexItems.length +
@@ -1196,6 +1216,16 @@ function renderPixelReplicaSvg(snapshot) {
           )
         )
       : 0;
+  const dominantPositiveOperatingLanePushdownY = scaleY(
+    clamp(
+      safeNumber(
+        snapshot.layout?.dominantPositiveOperatingLanePushdownY,
+        dominantPositiveBridgeLaneStrength * 62
+      ),
+      0,
+      76
+    )
+  );
   const opLanePushdownY =
     (usesExtremePositiveTopLane
       ? Math.max(
@@ -1210,7 +1240,8 @@ function renderPixelReplicaSvg(snapshot) {
             scaleY(safeNumber(snapshot.layout?.extremePositiveOperatingLaneExtraGapY, 16))
         )
       : 0) +
-    preDetailOperatingLanePushdownY;
+    preDetailOperatingLanePushdownY +
+    dominantPositiveOperatingLanePushdownY;
   const operatingLaneTop = opTop + opLanePushdownY;
   const operatingLaneBottom = opBottom + opLanePushdownY;
   const extremePositiveCoreStagePushdownY = useExtremePositiveLayout
@@ -1227,14 +1258,35 @@ function renderPixelReplicaSvg(snapshot) {
   grossBottom += extremePositiveCoreStagePushdownY;
   costTop += extremePositiveCoreStagePushdownY;
   costBottom += extremePositiveCoreStagePushdownY;
+  const dominantPositiveLowerLanePushdownY = scaleY(
+    clamp(
+      safeNumber(
+        snapshot.layout?.dominantPositiveLowerLanePushdownY,
+        dominantPositiveBridgeLaneStrength *
+          (104 + Math.max(rawOpexItems.length - 4, 0) * 4)
+      ),
+      0,
+      128
+    )
+  );
+  const dominantPositiveCostLanePushdownY = Math.min(
+    dominantPositiveLowerLanePushdownY,
+    Math.max(chartBottomLimit - costBottom, 0)
+  );
+  costTop += dominantPositiveCostLanePushdownY;
+  costBottom += dominantPositiveCostLanePushdownY;
   const extremePositiveGrossBranchGapY = useExtremePositiveLayout
     ? scaleY(safeNumber(snapshot.layout?.extremePositiveGrossBranchGapY, 30))
     : 0;
   const extremePositiveExpenseLanePushdownY = useExtremePositiveLayout
     ? Math.max(operatingLaneBottom + extremePositiveGrossBranchGapY - opexTop, 0)
     : 0;
-  opexTop += extremePositiveExpenseLanePushdownY;
-  opexBottom += extremePositiveExpenseLanePushdownY;
+  const dominantPositiveExpenseLanePushdownY = Math.min(
+    dominantPositiveLowerLanePushdownY,
+    Math.max(chartBottomLimit - opexBottom, 0)
+  );
+  opexTop += extremePositiveExpenseLanePushdownY + dominantPositiveExpenseLanePushdownY;
+  opexBottom += extremePositiveExpenseLanePushdownY + dominantPositiveExpenseLanePushdownY;
   const explicitBelowOperatingBn = belowOperatingItems.reduce((sum, item) => sum + Math.max(safeNumber(item.valueBn), 0), 0);
   const explicitCoreNetHeight = Math.max((operatingProfitBn - explicitBelowOperatingBn) * scale, 0);
   const zeroNetRibbonHeight =
@@ -1822,7 +1874,7 @@ function renderPixelReplicaSvg(snapshot) {
   const opexSlices = stackValueSlices(opexItems, opexTop, scale, { minHeight: 12, targetBottom: opexBottom });
   const opexBand = prototypeBandConfig(templateTokens, "opex", opexItems.length);
   const opexDensity = opexBand.densityKey === "dense" ? "dense" : "regular";
-  const positiveBridgeTerminalLiftY =
+  const positiveBridgeTerminalLiftYBase =
     rawPositiveAdjustments.length && opexItems.length
       ? scaleY(
           clamp(
@@ -1835,9 +1887,27 @@ function renderPixelReplicaSvg(snapshot) {
           )
         )
       : 0;
+  const positiveBridgeTerminalLiftY =
+    positiveBridgeTerminalLiftYBase *
+    (1 - dominantPositiveBridgeLaneStrength * 0.86);
+  const dominantPositiveOpexFanTopFloorY =
+    dominantPositiveBridgeLaneStrength > 0
+      ? opexTop -
+        scaleY(
+          clamp(
+            safeNumber(
+              snapshot.layout?.dominantPositiveOpexFanLeadY,
+              74 - dominantPositiveBridgeLaneStrength * 24
+            ),
+            42,
+            78
+          )
+        )
+      : 0;
   const opexMinY = Math.max(
     scaleY(safeNumber(snapshot.layout?.opexPositiveBridgeMinClampY, opexItems.length >= 5 ? 642 : 662)),
-    scaleY(safeNumber(opexBand.minY, opexItems.length >= 5 ? 680 : 700)) - positiveBridgeTerminalLiftY
+    scaleY(safeNumber(opexBand.minY, opexItems.length >= 5 ? 680 : 700)) - positiveBridgeTerminalLiftY,
+    dominantPositiveOpexFanTopFloorY
   );
   const rightBandBottomPaddingBase = scaleY(safeNumber(snapshot.layout?.rightBandBottomPadding, 122));
   const rightBandBottomReleaseY =
@@ -8117,7 +8187,156 @@ function renderPixelReplicaSvg(snapshot) {
       previousHeight = resolvedBox.height;
     });
   };
+  const enforceDominantPositiveOpexTerminalFan = () => {
+    if (
+      dominantPositiveBridgeLaneStrength <= 0.12 ||
+      opexBoxes.length < 3 ||
+      !opexSourceSlices.length
+    ) {
+      return;
+    }
+    const sourceShiftY = combinedNodeOffsetFor("operating-expenses").dy;
+    const firstBox = opexBoxes[0];
+    const lastBox = opexBoxes[opexBoxes.length - 1];
+    if (!firstBox || !lastBox) return;
+    const terminalGapY = Math.max(
+      rightTerminalSeparationGap,
+      scaleY(safeNumber(snapshot.layout?.dominantPositiveOpexTerminalGapY, 18))
+    );
+    const firstCenterFloorY =
+      opexTop +
+      sourceShiftY -
+      scaleY(
+        safeNumber(
+          snapshot.layout?.dominantPositiveOpexFirstTerminalRiseY,
+          8
+        )
+      );
+    const terminalBottomLimitY =
+      height -
+      scaleY(
+        safeNumber(
+          snapshot.layout?.dominantPositiveOpexTerminalBottomClearanceY,
+          56
+        )
+      );
+    const lastCenterTargetY = Math.min(
+      terminalBottomLimitY - lastBox.height / 2,
+      Math.max(
+        lastBox.center,
+        lastBox.center +
+          scaleY(
+            safeNumber(
+              snapshot.layout?.dominantPositiveOpexLastTerminalDropY,
+              dominantPositiveBridgeLaneStrength * 76
+            )
+          )
+      )
+    );
+    const firstCenterTargetY = Math.max(firstBox.center, firstCenterFloorY);
+    let previousCenterY = null;
+    let previousHeight = 0;
+    opexBoxes.forEach((box, index) => {
+      if (!box) return;
+      const progress =
+        opexBoxes.length <= 1
+          ? 0
+          : Math.pow(
+              index / (opexBoxes.length - 1),
+              safeNumber(
+                snapshot.layout?.dominantPositiveOpexFanSpreadExponent,
+                0.94
+              )
+            );
+      const interpolatedCenterY =
+        firstCenterTargetY +
+        (lastCenterTargetY - firstCenterTargetY) * progress;
+      const separatedCenterY =
+        previousCenterY === null
+          ? interpolatedCenterY
+          : Math.max(
+              interpolatedCenterY,
+              previousCenterY +
+                (previousHeight + box.height) / 2 +
+                terminalGapY
+            );
+      const maximumCenterY =
+        terminalBottomLimitY - box.height / 2;
+      const nextCenterY = clamp(
+        separatedCenterY,
+        box.center,
+        Math.max(maximumCenterY, box.center)
+      );
+      opexBoxes[index] = shiftBoxCenter(box, nextCenterY);
+      previousCenterY = nextCenterY;
+      previousHeight = box.height;
+    });
+  };
+  const enforceDominantPositiveDeductionDownflow = () => {
+    if (
+      dominantPositiveBridgeLaneStrength <= 0.12 ||
+      !deductionBoxes.length ||
+      !deductionSourceSlices.length
+    ) {
+      return;
+    }
+    const sourceShiftY = combinedNodeOffsetFor("operating").dy;
+    const minimumFirstDropY = scaleY(
+      safeNumber(snapshot.layout?.dominantPositiveDeductionMinDropY, 24)
+    );
+    const dropStepY = scaleY(
+      safeNumber(snapshot.layout?.dominantPositiveDeductionDropStepY, 18)
+    );
+    const firstOpexTopY = opexBoxes.length
+      ? Math.min(...opexBoxes.filter(Boolean).map((box) => box.top))
+      : height;
+    const deductionBottomLimitY =
+      firstOpexTopY -
+      scaleY(
+        safeNumber(
+          snapshot.layout?.dominantPositiveDeductionToOpexGapY,
+          34
+        )
+      );
+    let previousBottomY = -Infinity;
+    deductionBoxes.forEach((box, index) => {
+      const sourceSlice = deductionSourceSlices[index] || deductionSlices[index];
+      if (!box || !sourceSlice) return;
+      const targetShiftY = combinedNodeOffsetFor(`deduction-${index}`).dy;
+      const sourceCenterY = safeNumber(sourceSlice.center, box.center) + sourceShiftY;
+      const currentRenderedCenterY = box.center + targetShiftY;
+      const minimumRenderedCenterY = Math.max(
+        sourceCenterY + minimumFirstDropY + dropStepY * index,
+        previousBottomY +
+          scaleY(
+            safeNumber(
+              snapshot.layout?.dominantPositiveDeductionTerminalGapY,
+              18
+            )
+          ) +
+          box.height / 2
+      );
+      const maximumRenderedCenterY =
+        deductionBottomLimitY - box.height / 2 + targetShiftY;
+      const nextRenderedCenterY = clamp(
+        Math.max(currentRenderedCenterY, minimumRenderedCenterY),
+        currentRenderedCenterY,
+        Math.max(maximumRenderedCenterY, currentRenderedCenterY)
+      );
+      if (nextRenderedCenterY - currentRenderedCenterY > 0.5) {
+        deductionBoxes[index] = shiftBoxCenter(
+          box,
+          box.center + nextRenderedCenterY - currentRenderedCenterY
+        );
+      }
+      const resolvedBox = deductionBoxes[index] || box;
+      previousBottomY =
+        resolvedBox.center + targetShiftY + resolvedBox.height / 2;
+    });
+  };
   balanceOperatingStageSplit();
+  enforceDominantPositiveDeductionDownflow();
+  enforceDominantPositiveOpexTerminalFan();
   enforceDownwardOpexTerminalFan();
   const requestedOpexTerminalGroupShiftY = scaleY(
     Math.max(safeNumber(snapshot.layout?.opexTerminalGroupShiftY, 0), 0)

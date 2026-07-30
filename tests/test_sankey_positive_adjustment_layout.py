@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import json
 import subprocess
 import tempfile
@@ -524,6 +526,74 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
             rect_bottom(positive_rect),
             rect_top(net_rect),
             "Amazon English positive adjustment branch should remain above the net-profit main ribbon.",
+        )
+
+    def test_amazon_dominant_positive_bridge_uses_separate_profit_and_expense_lanes(self) -> None:
+        svg_root = render_sankey_svg(
+            AMAZON_PAYLOAD,
+            "zh",
+            "amazon-q2-dominant-positive-lanes",
+            quarter="2026Q2",
+        )
+
+        gross = visible_rect_attrs(svg_root, "gross")
+        operating = visible_rect_attrs(svg_root, "operating")
+        operating_expenses = visible_rect_attrs(svg_root, "operating-expenses")
+        cost = visible_rect_attrs(svg_root, "cost")
+        tax = visible_rect_attrs(svg_root, "deduction-0")
+        positive = visible_rect_attrs(svg_root, "positive-0")
+        net = visible_rect_attrs(svg_root, "net")
+        opex_terminals = [
+            visible_rect_attrs(svg_root, f"opex-{index}")
+            for index in range(5)
+        ]
+
+        operating_center = operating["y"] + operating["height"] / 2
+        self.assertLessEqual(
+            gross["y"] - operating_center,
+            150,
+            "A dominant positive bridge should not pull operating profit too far above gross profit.",
+        )
+        self.assertGreaterEqual(
+            cost["y"] - (gross["y"] + gross["height"]),
+            150,
+            "The lower cost lane should open clearly below the gross-profit node.",
+        )
+        self.assertGreaterEqual(
+            operating_expenses["y"] - (gross["y"] + gross["height"]),
+            -150,
+            "Operating expenses should occupy the lower lane instead of overlapping most of gross profit.",
+        )
+        self.assertLessEqual(
+            positive["y"] + positive["height"],
+            net["y"] + net["height"] * 0.55,
+            "The positive adjustment must remain in the upper profit lane.",
+        )
+        tax_center = tax["y"] + tax["height"] / 2
+        tax_paths = [
+            path
+            for path in red_paths_between(svg_root, operating, tax)
+            if abs(path_target_center(path) - tax_center) <= 1
+        ]
+        self.assertEqual(1, len(tax_paths))
+        self.assertGreaterEqual(
+            path_target_center(tax_paths[0]),
+            path_start_center(tax_paths[0]) + 8,
+            "Tax should flow downward from operating profit instead of turning upward.",
+        )
+
+        terminal_centers = [
+            terminal["y"] + terminal["height"] / 2
+            for terminal in opex_terminals
+        ]
+        self.assertGreaterEqual(
+            terminal_centers[0],
+            operating_expenses["y"] - 48,
+            "The first expense terminal should leave the source almost level instead of rising sharply.",
+        )
+        self.assertTrue(
+            all(lower > upper for upper, lower in zip(terminal_centers, terminal_centers[1:])),
+            "Dense operating-expense terminals should form one orderly descending fan.",
         )
 
     def test_walmart_english_positive_adjustment_stays_above_net_profit(self) -> None:

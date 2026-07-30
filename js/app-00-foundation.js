@@ -31,7 +31,7 @@ const state = {
   },
 };
 
-const BUILD_ASSET_VERSION = "20260707-smootherstep-operating-fork-v182";
+const BUILD_ASSET_VERSION = "20260730-dominant-positive-lane-separation-v183";
 const CORPORATE_LOGO_AREA_MULTIPLIER = 1.728;
 const CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER = Math.sqrt(CORPORATE_LOGO_AREA_MULTIPLIER);
 const CORPORATE_LOGO_REVENUE_GAP_MULTIPLIER = 1.2;
