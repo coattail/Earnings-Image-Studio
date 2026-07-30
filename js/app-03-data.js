@@ -2446,15 +2446,34 @@ function applyLoadedCompaniesToState(companiesPayload = [], dataLoadMode = null)
 
 function mergeCompanyHistoricalPayload(company, fallbackCompany) {
   const mergedFinancialCompany = mergeCompanyFinancialFallback(company, fallbackCompany);
+  const mergeQuarterHistory = (primaryHistory, fallbackHistory) => ({
+    ...(fallbackHistory || {}),
+    ...(primaryHistory || {}),
+    quarters: {
+      ...(fallbackHistory?.quarters || {}),
+      ...(primaryHistory?.quarters || {}),
+    },
+  });
   return {
-    ...company,
     ...fallbackCompany,
+    ...company,
     quarters: mergedFinancialCompany.quarters || fallbackCompany?.quarters || company?.quarters || [],
-    financials: mergedFinancialCompany.financials || fallbackCompany?.financials || company?.financials || {},
-    statementPresets: fallbackCompany?.statementPresets || company?.statementPresets || {},
-    officialRevenueStructureHistory:
-      fallbackCompany?.officialRevenueStructureHistory || company?.officialRevenueStructureHistory || {},
-    officialSegmentHistory: fallbackCompany?.officialSegmentHistory || company?.officialSegmentHistory || {},
+    financials: {
+      ...(mergedFinancialCompany.financials || fallbackCompany?.financials || {}),
+      ...(company?.financials || {}),
+    },
+    statementPresets: {
+      ...(fallbackCompany?.statementPresets || {}),
+      ...(company?.statementPresets || {}),
+    },
+    officialRevenueStructureHistory: mergeQuarterHistory(
+      company?.officialRevenueStructureHistory,
+      fallbackCompany?.officialRevenueStructureHistory
+    ),
+    officialSegmentHistory: mergeQuarterHistory(
+      company?.officialSegmentHistory,
+      fallbackCompany?.officialSegmentHistory
+    ),
     dataLoadMode: "full",
   };
 }
