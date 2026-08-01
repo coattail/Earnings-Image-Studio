@@ -361,6 +361,44 @@ class RevenueStructureCostBreakdownMergeTests(unittest.TestCase):
         self.assertEqual(entry["officialCostBreakdown"][0]["memberKey"], "auto")
         self.assertEqual(entry["officialCostBreakdown"][0]["valueBn"], 14.08)
 
+    def test_corrected_segment_cache_repairs_isolated_revenue_outliers(self) -> None:
+        financials = {}
+        segment_totals = [121.63, 127.059, 123.897, 137.743, 122.949, 129.388, 140.608]
+        reported_revenues = [4.8, 5.2, 123.897, 137.743, 122.949, 129.388, 232.051]
+        for index, (segment_total, revenue) in enumerate(zip(segment_totals, reported_revenues), start=1):
+            quarter_key = f"2020Q{((index - 1) % 4) + 1}" if index <= 4 else f"2021Q{index - 4}"
+            financials[quarter_key] = {
+                "revenueBn": revenue,
+                "officialRevenueSegments": [
+                    {"name": "Primary", "memberKey": "primary", "valueBn": round(segment_total * 0.7, 3)},
+                    {"name": "Secondary", "memberKey": "secondary", "valueBn": round(segment_total * 0.3, 3)},
+                ],
+            }
+
+        build_dataset.normalize_revenue_outliers_after_segment_refresh(financials, "official-segment-cache")
+
+        self.assertEqual(financials["2020Q1"]["revenueBn"], 121.63)
+        self.assertEqual(financials["2020Q2"]["revenueBn"], 127.059)
+        self.assertEqual(financials["2021Q3"]["revenueBn"], 140.608)
+        self.assertEqual(financials["2020Q3"]["revenueBn"], 123.897)
+        self.assertIn("revenue-aligned-to-corrected-segment-sum", financials["2020Q1"]["qualityFlags"])
+
+    def test_segment_refresh_keeps_consistent_intersegment_reconciliation(self) -> None:
+        financials = {}
+        for quarter in range(1, 6):
+            financials[f"202{quarter}Q1"] = {
+                "revenueBn": 100 + quarter,
+                "officialRevenueSegments": [
+                    {"name": "Primary", "memberKey": "primary", "valueBn": 140 + quarter},
+                    {"name": "Secondary", "memberKey": "secondary", "valueBn": 62 + quarter},
+                ],
+            }
+        original_revenues = {quarter: entry["revenueBn"] for quarter, entry in financials.items()}
+
+        build_dataset.normalize_revenue_outliers_after_segment_refresh(financials, "official-segment-cache")
+
+        self.assertEqual({quarter: entry["revenueBn"] for quarter, entry in financials.items()}, original_revenues)
+
 
 if __name__ == "__main__":
     unittest.main()

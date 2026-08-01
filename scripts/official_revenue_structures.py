@@ -55,7 +55,7 @@ CACHE_DIR = ROOT_DIR / "data" / "cache" / "official-revenue-structures"
 OFFICIAL_SEGMENT_CACHE_DIR = ROOT_DIR / "data" / "cache" / "official-segments"
 OFFICIAL_FINANCIAL_CACHE_DIR = ROOT_DIR / "data" / "cache" / "official-financials"
 STOCKANALYSIS_FINANCIAL_CACHE_DIR = ROOT_DIR / "data" / "cache" / "stockanalysis-financials"
-CACHE_VERSION = "20260716-v18"
+CACHE_VERSION = "20260801-v19"
 STOCKANALYSIS_FINANCIAL_PAYLOAD_CACHE_VERSION = "20260329-v1"
 STOCKANALYSIS_FINANCIAL_CACHE: dict[str, dict[str, Any]] = {}
 CUSTOM_HIERARCHY_COST_SUPPLEMENT_WINDOW_QUARTERS = 12
@@ -3516,6 +3516,7 @@ def _collect_custom_hierarchy_facts_from_root(
                 axis_priority=120,
                 member_key=str(row.get("memberKey") or row.get("name") or ""),
                 label=str(row.get("name") or ""),
+                context_scope_priority=3,
                 start_date=start_date,
                 end_date=end_date,
                 value=value,

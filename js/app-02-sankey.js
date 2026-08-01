@@ -1029,6 +1029,42 @@ function renderPixelReplicaSvg(snapshot) {
           Math.min(rawPositiveAdjustments.reduce((sum, item) => sum + Math.max(safeNumber(item?.valueBn), 0), 0) * scale * 0.28, scaleY(76))
         )
       : 0;
+  const netOperatingRetentionRatio = opHeight > 0.5 ? Math.min(netHeight / opHeight, 1) : 0;
+  const highRetentionNetFinishStrength = clamp(
+    (netOperatingRetentionRatio - safeNumber(snapshot.layout?.highRetentionNetFinishStartRatio, 0.72)) /
+      Math.max(
+        safeNumber(snapshot.layout?.highRetentionNetFinishFullRatio, 0.9) -
+          safeNumber(snapshot.layout?.highRetentionNetFinishStartRatio, 0.72),
+        0.01
+      ),
+    0,
+    1
+  );
+  const highRetentionNetFinishDensityStrength = clamp(
+    (rawOpexItems.length + rawBelowOperatingItems.length - 2) / 3,
+    0,
+    1
+  );
+  const highRetentionNetFinishLiftY =
+    !hasExplicitNetNodeTop &&
+    !netLoss &&
+    !rawPositiveAdjustments.length &&
+    rawBelowOperatingItems.length &&
+    operatingProfitBn > 0.02 &&
+    netProfitBn > 0.02 &&
+    netProfitBn < operatingProfitBn
+      ? scaleY(
+          clamp(
+            safeNumber(
+              snapshot.layout?.highRetentionNetFinishLiftY,
+              highRetentionNetFinishStrength *
+                (14 + highRetentionNetFinishDensityStrength * 8)
+            ),
+            0,
+            safeNumber(snapshot.layout?.highRetentionNetFinishLiftMaxY, usesHeroLockups ? 24 : 21)
+          )
+        )
+      : 0;
   const netBaseCandidate =
     (hasExplicitNetNodeTop
       ? layoutY(snapshot.layout?.netNodeTop)
@@ -8209,6 +8245,14 @@ function renderPixelReplicaSvg(snapshot) {
     });
     return appliedLiftY;
   };
+  const liftHighRetentionNetFinish = () => {
+    if (!(highRetentionNetFinishLiftY > 0.5)) return 0;
+    const currentNetAutoShiftY = autoLayoutOffsetForNode("net").dy;
+    setAutoLayoutNodeOffset("net", {
+      dy: currentNetAutoShiftY - highRetentionNetFinishLiftY,
+    });
+    return highRetentionNetFinishLiftY;
+  };
   const enforceDownwardOpexTerminalFan = () => {
     if (
       snapshot.layout?.disableDownwardOpexTerminalFan === true ||
@@ -8421,6 +8465,7 @@ function renderPixelReplicaSvg(snapshot) {
   };
   balanceOperatingStageSplit();
   smoothMainProfitChainTurn();
+  liftHighRetentionNetFinish();
   enforceDownwardDeductionTerminalFan();
   enforceDominantPositiveOpexTerminalFan();
   enforceDownwardOpexTerminalFan();

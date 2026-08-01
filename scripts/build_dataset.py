@@ -1751,6 +1751,47 @@ def normalize_q4_annualized_outliers(financials: dict[str, Any]) -> None:
         quarter_entry["qualityFlags"] = quality_flags
 
 
+def normalize_revenue_outliers_after_segment_refresh(
+    financials: dict[str, Any],
+    history_source: Any,
+) -> None:
+    if str(history_source or "") != "official-segment-cache" or not financials:
+        return
+
+    samples: list[tuple[str, dict[str, Any], float, float, float]] = []
+    for quarter_key in sorted(financials.keys(), key=parse_period):
+        entry = financials.get(quarter_key)
+        if not isinstance(entry, dict):
+            continue
+        revenue_bn = float(entry.get("revenueBn") or 0)
+        rows = [row for row in (entry.get("officialRevenueSegments") or []) if isinstance(row, dict)]
+        segment_sum_bn = round(sum(float(row.get("valueBn") or 0) for row in rows if float(row.get("valueBn") or 0) > 0), 3)
+        if revenue_bn <= 0 or segment_sum_bn <= 0 or len(rows) < 2:
+            continue
+        samples.append((quarter_key, entry, revenue_bn, segment_sum_bn, revenue_bn / segment_sum_bn))
+
+    if len(samples) < 5:
+        return
+    baseline_ratio = _median([sample[4] for sample in samples])
+    if baseline_ratio < 0.8 or baseline_ratio > 1.25:
+        return
+    baseline_segment_sum = _median([sample[3] for sample in samples])
+
+    for _quarter_key, entry, revenue_bn, segment_sum_bn, revenue_to_segment_ratio in samples:
+        relative_ratio = revenue_to_segment_ratio / baseline_ratio
+        if 0.7 <= relative_ratio <= 1.45:
+            continue
+        if baseline_segment_sum <= 0 or not (0.3 <= segment_sum_bn / baseline_segment_sum <= 3.2):
+            continue
+        entry["revenueBn"] = round(segment_sum_bn, 3)
+        quality_flags = entry.get("qualityFlags")
+        if not isinstance(quality_flags, list):
+            quality_flags = []
+        if "revenue-aligned-to-corrected-segment-sum" not in quality_flags:
+            quality_flags.append("revenue-aligned-to-corrected-segment-sum")
+        entry["qualityFlags"] = quality_flags
+
+
 def recompute_revenue_growth_metrics(financials: dict[str, Any]) -> None:
     ordered_quarters = sorted(financials.keys(), key=parse_period)
     for quarter_key in ordered_quarters:
@@ -3698,6 +3739,7 @@ def apply_revenue_structure_history(
         elif payload.get("displayRevenueBn") and entry.get("revenueBn"):
             entry["displayScaleFactor"] = round(float(payload["displayRevenueBn"]) / float(entry["revenueBn"]), 6)
 
+    normalize_revenue_outliers_after_segment_refresh(financials, history.get("source"))
     normalize_q4_annualized_outliers(financials)
     for quarter_key, entry in financials.items():
         if not isinstance(entry, dict):

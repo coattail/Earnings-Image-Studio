@@ -112,6 +112,69 @@ class OfficialSegmentsTests(unittest.TestCase):
             headers=self.module.SEC_HEADERS,
         )
 
+    def test_segment_total_context_beats_higher_priority_product_detail(self):
+        def fact(*, concept: str, concept_priority: int, scope_priority: int, value: float):
+            return self.module.SegmentFact(
+                accession="test",
+                filing_date="2018-06-04",
+                form="10-Q",
+                concept=concept,
+                concept_priority=concept_priority,
+                axis_key="StatementBusinessSegmentsAxis",
+                axis_priority=100,
+                member_key="WalmartUSMember",
+                label="Walmart US",
+                context_scope_priority=scope_priority,
+                start_date="2018-02-01",
+                end_date="2018-04-30",
+                value=value,
+                source_url="https://example.com/filing.xml",
+            )
+
+        rows = self.module._build_quarterly_series(
+            [
+                fact(
+                    concept="RevenueFromContractWithCustomerExcludingAssessedTax",
+                    concept_priority=120,
+                    scope_priority=0,
+                    value=3_200_000_000,
+                ),
+                fact(
+                    concept="SalesRevenueNet",
+                    concept_priority=112,
+                    scope_priority=3,
+                    value=77_748_000_000,
+                ),
+            ]
+        )
+
+        self.assertEqual(rows["2018Q2"][0]["valueBn"], 77.748)
+
+    def test_context_scope_prefers_segment_only_then_aggregate_extra_dimension(self):
+        segment_axis = ("us-gaap:StatementBusinessSegmentsAxis", "wmt:WalmartUSMember")
+
+        self.assertEqual(self.module._context_scope_priority([segment_axis], "StatementBusinessSegmentsAxis"), 3)
+        self.assertEqual(
+            self.module._context_scope_priority(
+                [
+                    ("us-gaap:ProductOrServiceAxis", "wmt:ProductandservicesTotalMember"),
+                    segment_axis,
+                ],
+                "StatementBusinessSegmentsAxis",
+            ),
+            2,
+        )
+        self.assertEqual(
+            self.module._context_scope_priority(
+                [
+                    ("us-gaap:MajorCustomersAxis", "wmt:ECommerceMember"),
+                    segment_axis,
+                ],
+                "StatementBusinessSegmentsAxis",
+            ),
+            0,
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

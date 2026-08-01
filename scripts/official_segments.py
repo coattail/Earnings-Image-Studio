@@ -25,7 +25,7 @@ CACHE_DIR = ROOT_DIR / "data" / "cache" / "official-segments"
 SEC_TICKER_CACHE: dict[str, int] | None = None
 MIN_FILING_DATE = "2017-01-01"
 MIN_CALENDAR_QUARTER = (2018, 1)
-CACHE_VERSION = "20260327-v3"
+CACHE_VERSION = "20260801-v4"
 MICRON_SCHEMA_CHANGE_QUARTER = "2025Q3"
 MICRON_BU_ORDER = ("cmbu", "cdbu", "mcbu", "aebu")
 MICRON_BU_LABELS = {
@@ -165,6 +165,7 @@ class SegmentFact:
     axis_priority: int
     member_key: str
     label: str
+    context_scope_priority: int
     start_date: str
     end_date: str
     value: float
@@ -531,6 +532,36 @@ def _is_geographic_member(member_key: str) -> bool:
     return bool(tokens) and tokens.issubset(GEOGRAPHIC_TOKENS)
 
 
+def _is_aggregate_context_member(member_key: str) -> bool:
+    normalized = re.sub(r"[^a-z0-9]+", "", _local_name(str(member_key or "")).lower())
+    if not normalized:
+        return False
+    return (
+        normalized in {
+            "allmember",
+            "consolidatedentitiesmember",
+            "productsandservicestotalmember",
+            "productandservicestotalmember",
+            "totalmember",
+        }
+        or normalized.startswith("total")
+        or normalized.endswith("totalmember")
+    )
+
+
+def _context_scope_priority(members: list[tuple[str, str]], selected_axis_key: str) -> int:
+    extra_members = [
+        member
+        for dimension, member in members
+        if _local_name(dimension) != selected_axis_key and _local_name(dimension).lower() not in IGNORED_DIMENSIONS
+    ]
+    if not extra_members:
+        return 3
+    if all(_is_aggregate_context_member(member) for member in extra_members):
+        return 2
+    return 0
+
+
 def _should_drop_generic_member(member_key: str, all_members: set[str]) -> bool:
     lowered = str(member_key or "").lower()
     normalized_members = {str(item or "").lower() for item in all_members}
@@ -674,6 +705,7 @@ def _parse_instance_facts(cik: int, accession: str, filing_date: str, form: str,
                 axis_priority=axis_priority,
                 member_key=member_key,
                 label=_prettify_member_name(member_key),
+                context_scope_priority=_context_scope_priority(members, axis_key),
                 start_date=start_date,
                 end_date=end_date,
                 value=value,
@@ -819,7 +851,7 @@ def _form_preference(form: str, day_span: int) -> int:
     return 1
 
 
-def _fact_quality_tuple(fact: SegmentFact) -> tuple[int, int, int, int, int, str]:
+def _fact_quality_tuple(fact: SegmentFact) -> tuple[int, int, int, int, int, int, str]:
     lag_days = _filing_lag_days(fact.filing_date, fact.end_date)
     if lag_days is None:
         lag_bucket = 1
@@ -840,6 +872,7 @@ def _fact_quality_tuple(fact: SegmentFact) -> tuple[int, int, int, int, int, str
         lag_bucket = 2
         lag_closeness = -abs(lag_days - 360)
     return (
+        int(fact.context_scope_priority),
         int(fact.concept_priority),
         int(_form_preference(fact.form, fact.day_span)),
         lag_bucket,
@@ -925,6 +958,7 @@ def _build_quarterly_series(facts: list[SegmentFact]) -> dict[str, list[dict[str
                     axis_priority=fact.axis_priority,
                     member_key=fact.member_key,
                     label=fact.label,
+                    context_scope_priority=fact.context_scope_priority,
                     start_date=derived_start.isoformat(),
                     end_date=fact.end_date,
                     value=derived_value,
