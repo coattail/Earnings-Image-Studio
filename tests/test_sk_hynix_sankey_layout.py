@@ -127,7 +127,7 @@ class SkHynixSankeyLayoutTests(unittest.TestCase):
         ):
             self.assertNotIn(note, historical_svg)
 
-    def test_latest_quarter_uses_official_product_and_expense_taxonomy(self) -> None:
+    def test_latest_quarter_preserves_the_official_expense_total_with_an_explicit_q1_mix_proxy(self) -> None:
         dataset = json.loads(DATASET_PATH.read_text(encoding="utf-8"))
         company = next(item for item in dataset["companies"] if item["id"] == "sk-hynix")
         latest = company["financials"]["2026Q2"]
@@ -142,8 +142,26 @@ class SkHynixSankeyLayoutTests(unittest.TestCase):
         )
         self.assertIsNone(latest["sgnaBn"])
         self.assertIsNone(latest["rndBn"])
-        self.assertEqual(latest["operatingExpensesLabelZh"], "销售、一般及管理费用（合并披露）")
+        self.assertEqual(latest["operatingExpensesLabelZh"], "营业费用")
         self.assertIsNone(latest["officialOpexBreakdown"])
+        self.assertEqual(latest["opexBreakdownMethod"], "prior-quarter-mix-proxy")
+        self.assertEqual(latest["opexBreakdownSourceQuarter"], "2026Q1")
+        self.assertEqual(
+            [(item["nameZh"], item["valueBn"]) for item in latest["opexBreakdown"]],
+            [
+                ("研发费用", 3282.405),
+                ("销售、一般及行政费用", 1855.218),
+                ("其他营业费用", 57.694),
+                ("其余营业费用", 253.083),
+            ],
+        )
+        self.assertAlmostEqual(
+            sum(item["valueBn"] for item in latest["opexBreakdown"]),
+            latest["operatingExpensesBn"],
+            places=3,
+        )
+        self.assertTrue(all(item["metricMode"] == "prior-quarter-mix-proxy" for item in latest["opexBreakdown"]))
+        self.assertTrue(all(item["validationEligible"] is False for item in latest["opexBreakdown"]))
 
     def test_latest_quarter_aggregates_the_non_operating_bridge(self) -> None:
         dataset = json.loads(DATASET_PATH.read_text(encoding="utf-8"))
@@ -169,16 +187,21 @@ class SkHynixSankeyLayoutTests(unittest.TestCase):
         )
         self.assertAlmostEqual(bridged_net_profit, latest["netIncomeBn"], places=3)
 
-    def test_latest_sankey_renders_official_bridge_labels_without_inferred_residuals(self) -> None:
+    def test_latest_sankey_restores_the_historical_expense_fan_and_keeps_official_bridge_labels(self) -> None:
         latest_svg = render_sk_hynix_markup("2026Q2")
 
         for label in (
-            "销售、一般及管理费用",
-            "（合并披露）",
+            "营业费用",
+            "研发费用",
+            "销售、一般及",
+            "行政费用",
+            "其余营业费用",
+            "其他营业费用",
             "营业外收益",
             "所得税费用",
         ):
             self.assertIn(label, latest_svg)
+        self.assertNotIn("构成比例拆分", latest_svg)
         self.assertNotIn("其他净收益", latest_svg)
         self.assertNotIn("财务净收益", latest_svg)
         self.assertNotIn("汇兑净收益", latest_svg)
@@ -205,20 +228,32 @@ class SkHynixSankeyLayoutTests(unittest.TestCase):
         revenue = rect(latest_root, "revenue")
         deduction = rect(latest_root, "deduction-0")
         self.assertAlmostEqual(source["x"], 304, delta=1)
-        self.assertAlmostEqual(source["y"] + 80, 418, delta=3)
+        self.assertAlmostEqual(source["y"] + 80, 426, delta=5)
         self.assertAlmostEqual(nand_source["x"], 304, delta=1)
-        self.assertAlmostEqual(nand_source["y"] + 80, 1227, delta=4)
+        self.assertGreater(nand_source["y"], source["y"] + source["height"] + 300)
         self.assertIsNone(latest_root.find(".//svg:rect[@data-edit-node-visible-id='source-2']", SVG_NS))
         self.assertNotIn("其他产品与服务", latest_svg)
         self.assertNotIn("官方披露占比 0%", latest_svg)
         self.assertAlmostEqual(revenue["x"], 813, delta=1)
-        self.assertAlmostEqual(revenue["y"] + 80, 681, delta=3)
         self.assertAlmostEqual(operating["x"], 1860, delta=1)
-        self.assertAlmostEqual(operating["y"] + 80, 714, delta=3)
-        self.assertAlmostEqual(positive["x"], 2101, delta=1)
-        self.assertAlmostEqual(positive["y"] + 80, 134, delta=3)
+        self.assertAlmostEqual(positive["x"], 2097, delta=2)
+        self.assertAlmostEqual(positive["y"] + 80, 135, delta=3)
         self.assertAlmostEqual(rect(latest_root, "net")["x"], 2377, delta=1)
-        self.assertAlmostEqual(deduction["y"] + 80, 1147, delta=4)
+
+        expense_nodes = [rect(latest_root, f"opex-{index}") for index in range(4)]
+        self.assertIsNone(latest_root.find(".//svg:rect[@data-edit-node-visible-id='opex-4']", SVG_NS))
+        deduction_center_y = deduction["y"] + deduction["height"] / 2
+        operating_bottom_y = operating["y"] + operating["height"]
+        self.assertGreater(deduction_center_y, operating_bottom_y + 40)
+        self.assertLess(deduction_center_y, operating_bottom_y + 140)
+        self.assertGreater(expense_nodes[0]["y"], deduction["y"] + deduction["height"] + 70)
+        self.assertLess(expense_nodes[0]["y"], 1400)
+        self.assertLess(expense_nodes[-1]["y"], 1825)
+        self.assertEqual(
+            [item["y"] for item in expense_nodes],
+            sorted(item["y"] for item in expense_nodes),
+        )
+        self.assertTrue(all(item["x"] < deduction["x"] for item in expense_nodes))
 
         tax_label = re.search(
             r'<text x="([-\d.]+)" y="[-\d.]+"[^>]*>所得税费用</text>',
@@ -228,7 +263,7 @@ class SkHynixSankeyLayoutTests(unittest.TestCase):
         self.assertGreater(float(tax_label.group(1)), deduction["x"] + deduction["width"] + 70)
 
         view_box = [float(value) for value in latest_root.attrib["viewBox"].split()]
-        self.assertGreaterEqual(view_box[3], 1750)
+        self.assertGreaterEqual(view_box[3], 2050)
 
 
 if __name__ == "__main__":

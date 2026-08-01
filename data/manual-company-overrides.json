@@ -810,9 +810,72 @@
         "statementSource": "manual-sk-hynix-official",
         "statementSourceUrl": "https://news.skhynix.com/q2-2026-business-results/",
         "statementFilingDate": "2026-07-29",
-        "officialOpexBreakdown": null,
-        "operatingExpensesLabel": "SG&A Expenses (aggregate disclosure)",
-        "operatingExpensesLabelZh": "销售、一般及管理费用（合并披露）",
+        "opexBreakdownMethod": "prior-quarter-mix-proxy",
+        "opexBreakdownSourceQuarter": "2026Q1",
+        "opexBreakdown": [
+          {
+            "name": "Research and development",
+            "nameZh": "研发费用",
+            "memberKey": "rnd",
+            "valueBn": 3282.405,
+            "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q2_eng.pdf?1=",
+            "sourceForm": "Q2 2026 preliminary results; allocated using Q1 2026 expense mix",
+            "filingDate": "2026-07-29",
+            "metricMode": "prior-quarter-mix-proxy",
+            "validationEligible": false,
+            "validationNotes": [
+              "Q2 2026 discloses aggregate SG&A expenses only",
+              "Allocated from the official Q2 aggregate using the Q1 2026 expense mix"
+            ]
+          },
+          {
+            "name": "Selling, general and administrative",
+            "nameZh": "销售、一般及行政费用",
+            "memberKey": "sgna",
+            "valueBn": 1855.218,
+            "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q2_eng.pdf?1=",
+            "sourceForm": "Q2 2026 preliminary results; allocated using Q1 2026 expense mix",
+            "filingDate": "2026-07-29",
+            "metricMode": "prior-quarter-mix-proxy",
+            "validationEligible": false,
+            "validationNotes": [
+              "Q2 2026 discloses aggregate SG&A expenses only",
+              "Allocated from the official Q2 aggregate using the Q1 2026 expense mix"
+            ]
+          },
+          {
+            "name": "Other operating expenses",
+            "nameZh": "其他营业费用",
+            "memberKey": "other_opex",
+            "valueBn": 57.694,
+            "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q2_eng.pdf?1=",
+            "sourceForm": "Q2 2026 preliminary results; allocated using Q1 2026 expense mix",
+            "filingDate": "2026-07-29",
+            "metricMode": "prior-quarter-mix-proxy",
+            "validationEligible": false,
+            "validationNotes": [
+              "Q2 2026 discloses aggregate SG&A expenses only",
+              "Allocated from the official Q2 aggregate using the Q1 2026 expense mix"
+            ]
+          },
+          {
+            "name": "Residual operating expenses",
+            "nameZh": "其余营业费用",
+            "memberKey": "residual_opex",
+            "valueBn": 253.083,
+            "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q2_eng.pdf?1=",
+            "sourceForm": "Q2 2026 preliminary results; allocated using Q1 2026 expense mix",
+            "filingDate": "2026-07-29",
+            "metricMode": "prior-quarter-mix-proxy",
+            "validationEligible": false,
+            "validationNotes": [
+              "Q2 2026 discloses aggregate SG&A expenses only",
+              "Allocated from the official Q2 aggregate using the Q1 2026 expense mix"
+            ]
+          }
+        ],
+        "operatingExpensesLabel": "Operating expenses",
+        "operatingExpensesLabelZh": "营业费用",
         "positiveAdjustments": [
           {
             "name": "Non-operating gain",
@@ -835,13 +898,14 @@
         ],
         "sankeyLayout": {
           "useExtremePositiveLayout": true,
-          "extremePositiveCanvasExtraY": 240,
-          "extremePositiveDesignExtraY": 200,
+          "extremePositiveCanvasExtraY": 440,
+          "extremePositiveDesignExtraY": 400,
           "topCanvasPaddingY": 80,
           "extremePositiveTopLaneThreshold": 0,
           "forcePositiveAbove": true,
           "positiveForceTopY": 270,
           "positiveLabelPlacement": "left-center",
+          "opexTerminalGroupShiftY": 80,
           "structuralNodeOffsets": {
             "source-0": {
               "dx": -64,
@@ -876,7 +940,7 @@
             },
             "deduction-0": {
               "dx": 70,
-              "dy": 274
+              "dy": 160
             }
           }
         },

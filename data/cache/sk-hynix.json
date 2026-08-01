@@ -5465,8 +5465,8 @@
         "positiveForceTopY": 270,
         "positiveGapY": 64,
         "positiveLabelPlacement": "left-center",
-        "extremePositiveCanvasExtraY": 240,
-        "extremePositiveDesignExtraY": 200,
+        "extremePositiveCanvasExtraY": 440,
+        "extremePositiveDesignExtraY": 400,
         "extremePositiveTopLaneThreshold": 0,
         "topCanvasPaddingY": 80,
         "structuralNodeOffsets": {
@@ -5503,13 +5503,14 @@
           },
           "deduction-0": {
             "dx": 70,
-            "dy": 274
+            "dy": 160
           },
           "source-2": {
             "dx": -64,
             "dy": 60
           }
-        }
+        },
+        "opexTerminalGroupShiftY": 80
       },
       "positiveAdjustments": [
         {
@@ -5531,9 +5532,73 @@
           "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q2_eng.pdf?1="
         }
       ],
-      "operatingExpensesLabel": "SG&A Expenses (aggregate disclosure)",
-      "operatingExpensesLabelZh": "销售、一般及管理费用（合并披露）",
-      "officialOpexBreakdown": null
+      "operatingExpensesLabel": "Operating expenses",
+      "operatingExpensesLabelZh": "营业费用",
+      "officialOpexBreakdown": null,
+      "opexBreakdownMethod": "prior-quarter-mix-proxy",
+      "opexBreakdownSourceQuarter": "2026Q1",
+      "opexBreakdown": [
+        {
+          "name": "Research and development",
+          "nameZh": "研发费用",
+          "memberKey": "rnd",
+          "valueBn": 3282.405,
+          "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q2_eng.pdf?1=",
+          "sourceForm": "Q2 2026 preliminary results; allocated using Q1 2026 expense mix",
+          "filingDate": "2026-07-29",
+          "metricMode": "prior-quarter-mix-proxy",
+          "validationEligible": false,
+          "validationNotes": [
+            "Q2 2026 discloses aggregate SG&A expenses only",
+            "Allocated from the official Q2 aggregate using the Q1 2026 expense mix"
+          ]
+        },
+        {
+          "name": "Selling, general and administrative",
+          "nameZh": "销售、一般及行政费用",
+          "memberKey": "sgna",
+          "valueBn": 1855.218,
+          "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q2_eng.pdf?1=",
+          "sourceForm": "Q2 2026 preliminary results; allocated using Q1 2026 expense mix",
+          "filingDate": "2026-07-29",
+          "metricMode": "prior-quarter-mix-proxy",
+          "validationEligible": false,
+          "validationNotes": [
+            "Q2 2026 discloses aggregate SG&A expenses only",
+            "Allocated from the official Q2 aggregate using the Q1 2026 expense mix"
+          ]
+        },
+        {
+          "name": "Other operating expenses",
+          "nameZh": "其他营业费用",
+          "memberKey": "other_opex",
+          "valueBn": 57.694,
+          "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q2_eng.pdf?1=",
+          "sourceForm": "Q2 2026 preliminary results; allocated using Q1 2026 expense mix",
+          "filingDate": "2026-07-29",
+          "metricMode": "prior-quarter-mix-proxy",
+          "validationEligible": false,
+          "validationNotes": [
+            "Q2 2026 discloses aggregate SG&A expenses only",
+            "Allocated from the official Q2 aggregate using the Q1 2026 expense mix"
+          ]
+        },
+        {
+          "name": "Residual operating expenses",
+          "nameZh": "其余营业费用",
+          "memberKey": "residual_opex",
+          "valueBn": 253.083,
+          "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q2_eng.pdf?1=",
+          "sourceForm": "Q2 2026 preliminary results; allocated using Q1 2026 expense mix",
+          "filingDate": "2026-07-29",
+          "metricMode": "prior-quarter-mix-proxy",
+          "validationEligible": false,
+          "validationNotes": [
+            "Q2 2026 discloses aggregate SG&A expenses only",
+            "Allocated from the official Q2 aggregate using the Q1 2026 expense mix"
+          ]
+        }
+      ]
     }
   },
   "statementSource": "stockanalysis-financials",
@@ -5673,7 +5738,7 @@
       "detailGroupMismatchCount": 0,
       "detailGroupSkippedChecks": 0,
       "opexChecks": 0,
-      "opexSkippedChecks": 0,
+      "opexSkippedChecks": 1,
       "opexOverflowMismatchCount": 0,
       "warningCount": 0,
       "warnings": []
@@ -7763,22 +7828,24 @@
     "hasPixelReplica": false,
     "officialFinancialQuarterCount": 34,
     "officialSegmentQuarterCount": 34,
-    "officialExpenseQuarterCount": 0,
+    "officialExpenseQuarterCount": 1,
     "classification": {
-      "status": "ok",
+      "status": "warning",
       "latestQuarter": "2026Q2",
       "latestQuarterHasRevenueClassification": true,
-      "latestQuarterHasExpenseClassification": false,
+      "latestQuarterHasExpenseClassification": true,
       "latestRevenueClassificationQuarter": "2026Q2",
-      "latestExpenseClassificationQuarter": null,
+      "latestExpenseClassificationQuarter": "2026Q2",
       "latestStructureHistoryQuarter": null,
       "revenueClassificationQuarterCount": 34,
-      "expenseClassificationQuarterCount": 0,
+      "expenseClassificationQuarterCount": 1,
       "revenueClassificationCoverageRatio": 1.0,
-      "expenseClassificationCoverageRatio": 0.0,
+      "expenseClassificationCoverageRatio": 0.0294,
       "latestRevenueClassificationLagQuarters": 0,
-      "latestExpenseClassificationLagQuarters": null,
-      "warnings": [],
+      "latestExpenseClassificationLagQuarters": 0,
+      "warnings": [
+        "Expense classification history is sparse: 1 of 34 quarters have official expense breakdowns."
+      ],
       "blockers": [],
       "policy": {
         "maxBarQuarters": 36
@@ -7827,7 +7894,7 @@
         "detailGroupMismatchCount": 0,
         "detailGroupSkippedChecks": 0,
         "opexChecks": 0,
-        "opexSkippedChecks": 0,
+        "opexSkippedChecks": 1,
         "opexOverflowMismatchCount": 0,
         "warningCount": 0,
         "warnings": []

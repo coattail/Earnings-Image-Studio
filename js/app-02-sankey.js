@@ -8272,9 +8272,10 @@ function renderPixelReplicaSvg(snapshot) {
       previousHeight = box.height;
     });
   };
-  const enforceDominantPositiveDeductionDownflow = () => {
+  const enforceDownwardDeductionTerminalFan = () => {
     if (
-      dominantPositiveBridgeLaneStrength <= 0.12 ||
+      snapshot.layout?.disableDownwardDeductionTerminalFan === true ||
+      (rawPositiveAdjustments.length > 0 && dominantPositiveBridgeLaneStrength <= 0.12) ||
       !deductionBoxes.length ||
       !deductionSourceSlices.length
     ) {
@@ -8282,10 +8283,16 @@ function renderPixelReplicaSvg(snapshot) {
     }
     const sourceShiftY = combinedNodeOffsetFor("operating").dy;
     const minimumFirstDropY = scaleY(
-      safeNumber(snapshot.layout?.dominantPositiveDeductionMinDropY, 24)
+      safeNumber(
+        snapshot.layout?.deductionTerminalMinFirstDropY,
+        safeNumber(snapshot.layout?.dominantPositiveDeductionMinDropY, 24)
+      )
     );
     const dropStepY = scaleY(
-      safeNumber(snapshot.layout?.dominantPositiveDeductionDropStepY, 18)
+      safeNumber(
+        snapshot.layout?.deductionTerminalMinDropStepY,
+        safeNumber(snapshot.layout?.dominantPositiveDeductionDropStepY, 18)
+      )
     );
     const firstOpexTopY = opexBoxes.length
       ? Math.min(...opexBoxes.filter(Boolean).map((box) => box.top))
@@ -8294,8 +8301,8 @@ function renderPixelReplicaSvg(snapshot) {
       firstOpexTopY -
       scaleY(
         safeNumber(
-          snapshot.layout?.dominantPositiveDeductionToOpexGapY,
-          34
+          snapshot.layout?.deductionTerminalToOpexGapY,
+          safeNumber(snapshot.layout?.dominantPositiveDeductionToOpexGapY, 34)
         )
       );
     let previousBottomY = -Infinity;
@@ -8310,8 +8317,8 @@ function renderPixelReplicaSvg(snapshot) {
         previousBottomY +
           scaleY(
             safeNumber(
-              snapshot.layout?.dominantPositiveDeductionTerminalGapY,
-              18
+              snapshot.layout?.deductionTerminalDownwardFanMinGapY,
+              safeNumber(snapshot.layout?.dominantPositiveDeductionTerminalGapY, 18)
             )
           ) +
           box.height / 2
@@ -8335,7 +8342,7 @@ function renderPixelReplicaSvg(snapshot) {
     });
   };
   balanceOperatingStageSplit();
-  enforceDominantPositiveDeductionDownflow();
+  enforceDownwardDeductionTerminalFan();
   enforceDominantPositiveOpexTerminalFan();
   enforceDownwardOpexTerminalFan();
   const requestedOpexTerminalGroupShiftY = scaleY(
