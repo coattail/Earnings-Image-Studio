@@ -8131,6 +8131,84 @@ function renderPixelReplicaSvg(snapshot) {
     setAutoLayoutNodeOffset("operating-expenses", { dy: currentOpexAutoShiftY - appliedOpexLiftY });
     return Math.max(appliedOperatingLiftY, appliedOpexLiftY);
   };
+  const smoothMainProfitChainTurn = () => {
+    if (
+      snapshot.layout?.disableProfitChainTurnSmoothing === true ||
+      hasExplicitOpNodeTop ||
+      hasOperatingLoss ||
+      !showOperatingOutcomeBridge ||
+      !(grossProfitSourceBand.height > 0.5) ||
+      !(opNetSourceBand.height > 0.5) ||
+      !(netDisplayTargetBand.height > 0.5)
+    ) {
+      return 0;
+    }
+
+    const grossOffset = balancedLayoutOffsetForNode("gross");
+    const operatingOffset = balancedLayoutOffsetForNode("operating");
+    const netOffset = balancedLayoutOffsetForNode("net");
+    const grossBoundaryTopY = grossProfitSourceBand.top + grossOffset.dy;
+    const operatingBoundaryTopY = opNetSourceBand.top + operatingOffset.dy;
+    const netBoundaryTopY = netDisplayTargetBand.top + netOffset.dy;
+    const minimumChainRiseY = scaleY(
+      safeNumber(snapshot.layout?.profitChainTurnMinRiseY, usesHeroLockups ? 34 : 30)
+    );
+    if (!(grossBoundaryTopY - netBoundaryTopY > minimumChainRiseY)) return 0;
+
+    const incomingRunX = Math.max(
+      opX + operatingOffset.dx - (grossX + grossOffset.dx + nodeWidth),
+      1
+    );
+    const outgoingRunX = Math.max(
+      netX + netOffset.dx - (opX + operatingOffset.dx + nodeWidth),
+      1
+    );
+    const straightChainOperatingTopY =
+      (grossBoundaryTopY * outgoingRunX + netBoundaryTopY * incomingRunX) /
+      (incomingRunX + outgoingRunX);
+    const turnExcessY = operatingBoundaryTopY - straightChainOperatingTopY;
+    const preferredTurnResidualY = scaleY(
+      safeNumber(snapshot.layout?.profitChainTurnResidualY, usesHeroLockups ? 22 : 20)
+    );
+    const turnActivationY = scaleY(
+      safeNumber(snapshot.layout?.profitChainTurnActivationY, usesHeroLockups ? 50 : 48)
+    );
+    if (!(turnExcessY > turnActivationY + 0.5)) return 0;
+    const fullStrengthTurnY = Math.max(
+      scaleY(
+        safeNumber(snapshot.layout?.profitChainTurnFullStrengthY, usesHeroLockups ? 70 : 66)
+      ),
+      turnActivationY + 1
+    );
+    const turnSeverity = clamp(
+      (turnExcessY - turnActivationY) / (fullStrengthTurnY - turnActivationY),
+      0,
+      1
+    );
+
+    const smoothingStrength = clamp(
+      safeNumber(snapshot.layout?.profitChainTurnSmoothingStrength, 1),
+      0,
+      1
+    );
+    const requestedLiftY =
+      (turnExcessY - preferredTurnResidualY) * smoothingStrength * turnSeverity;
+    const operatingTopFloorY = scaleY(
+      safeNumber(snapshot.layout?.profitChainTurnTopFloorY, usesHeroLockups ? 220 : 206)
+    );
+    const availableLiftY = Math.max(operatingBoundaryTopY - operatingTopFloorY, 0);
+    const maximumLiftY = scaleY(
+      safeNumber(snapshot.layout?.profitChainTurnMaxLiftY, usesHeroLockups ? 96 : 86)
+    );
+    const appliedLiftY = Math.min(requestedLiftY, availableLiftY, maximumLiftY);
+    if (!(appliedLiftY > 0.5)) return 0;
+
+    const currentOperatingAutoShiftY = autoLayoutOffsetForNode("operating").dy;
+    setAutoLayoutNodeOffset("operating", {
+      dy: currentOperatingAutoShiftY - appliedLiftY,
+    });
+    return appliedLiftY;
+  };
   const enforceDownwardOpexTerminalFan = () => {
     if (
       snapshot.layout?.disableDownwardOpexTerminalFan === true ||
@@ -8342,6 +8420,7 @@ function renderPixelReplicaSvg(snapshot) {
     });
   };
   balanceOperatingStageSplit();
+  smoothMainProfitChainTurn();
   enforceDownwardDeductionTerminalFan();
   enforceDominantPositiveOpexTerminalFan();
   enforceDownwardOpexTerminalFan();
