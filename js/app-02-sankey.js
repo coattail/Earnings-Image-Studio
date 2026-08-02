@@ -1058,10 +1058,10 @@ function renderPixelReplicaSvg(snapshot) {
             safeNumber(
               snapshot.layout?.highRetentionNetFinishLiftY,
               highRetentionNetFinishStrength *
-                (14 + highRetentionNetFinishDensityStrength * 8)
+                (34 + highRetentionNetFinishDensityStrength * 11)
             ),
             0,
-            safeNumber(snapshot.layout?.highRetentionNetFinishLiftMaxY, usesHeroLockups ? 24 : 21)
+            safeNumber(snapshot.layout?.highRetentionNetFinishLiftMaxY, usesHeroLockups ? 40 : 36)
           )
         )
       : 0;
@@ -8245,8 +8245,20 @@ function renderPixelReplicaSvg(snapshot) {
     });
     return appliedLiftY;
   };
-  const liftHighRetentionNetFinish = () => {
+  const liftHighRetentionProfitFinish = () => {
     if (!(highRetentionNetFinishLiftY > 0.5)) return 0;
+    const operatingFinishLiftY = hasExplicitOpNodeTop
+      ? 0
+      : Math.min(
+          highRetentionNetFinishLiftY * safeNumber(snapshot.layout?.highRetentionOperatingFinishLiftRatio, 0.32),
+          scaleY(safeNumber(snapshot.layout?.highRetentionOperatingFinishLiftMaxY, 12))
+        );
+    if (operatingFinishLiftY > 0.5) {
+      const currentOperatingAutoShiftY = autoLayoutOffsetForNode("operating").dy;
+      setAutoLayoutNodeOffset("operating", {
+        dy: currentOperatingAutoShiftY - operatingFinishLiftY,
+      });
+    }
     const currentNetAutoShiftY = autoLayoutOffsetForNode("net").dy;
     setAutoLayoutNodeOffset("net", {
       dy: currentNetAutoShiftY - highRetentionNetFinishLiftY,
@@ -8465,7 +8477,7 @@ function renderPixelReplicaSvg(snapshot) {
   };
   balanceOperatingStageSplit();
   smoothMainProfitChainTurn();
-  liftHighRetentionNetFinish();
+  liftHighRetentionProfitFinish();
   enforceDownwardDeductionTerminalFan();
   enforceDominantPositiveOpexTerminalFan();
   enforceDownwardOpexTerminalFan();
