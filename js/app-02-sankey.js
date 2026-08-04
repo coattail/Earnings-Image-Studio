@@ -371,7 +371,10 @@ function renderPixelReplicaSvg(snapshot) {
   );
   const rawCostBreakdown = [...(snapshot.costBreakdown || [])].filter((item) => safeNumber(item.valueBn) > 0.02);
   const rawOpexTerminalCount = [...(snapshot.opexBreakdown || [])].filter((item) => safeNumber(item?.valueBn) > 0.02).length;
-  const rawBelowTerminalCount = [...(snapshot.belowOperatingItems || [])].filter((item) => safeNumber(item?.valueBn) > 0.02).length;
+  const bridgeMaterialityThresholdBn = financialBridgeMaterialityThreshold(snapshot);
+  const rawBelowTerminalCount = [...(snapshot.belowOperatingItems || [])].filter(
+    (item) => safeNumber(item?.valueBn) > bridgeMaterialityThresholdBn
+  ).length;
   const alignCostBreakdownWithOperatingStage =
     rawCostBreakdown.length > 0 &&
     safeNumber(
@@ -521,8 +524,12 @@ function renderPixelReplicaSvg(snapshot) {
     relativeToleranceFactor: 0.01,
   });
   const rawOpexItems = collapsedOpexItem ? [] : rawOpexItemsSource;
-  const rawBelowOperatingItems = [...(snapshot.belowOperatingItems || [])].filter((item) => safeNumber(item.valueBn) > 0.02);
-  const rawPositiveAdjustments = [...(snapshot.positiveAdjustments || [])].filter((item) => safeNumber(item.valueBn) > 0.02);
+  const rawBelowOperatingItems = [...(snapshot.belowOperatingItems || [])].filter(
+    (item) => safeNumber(item.valueBn) > bridgeMaterialityThresholdBn
+  );
+  const rawPositiveAdjustments = [...(snapshot.positiveAdjustments || [])].filter(
+    (item) => safeNumber(item.valueBn) > bridgeMaterialityThresholdBn
+  );
   const positiveBridgeStrength = resolvePositiveAdjustmentBridgeStrengths(snapshot, {
     positiveAdjustments: rawPositiveAdjustments,
     operatingProfitBn,
@@ -8104,9 +8111,9 @@ function renderPixelReplicaSvg(snapshot) {
     ) {
       return 0;
     }
-    const grossShiftY = combinedNodeOffsetFor("gross").dy;
-    const operatingShiftY = combinedNodeOffsetFor("operating").dy;
-    const opexShiftY = combinedNodeOffsetFor("operating-expenses").dy;
+    const grossShiftY = balancedLayoutOffsetForNode("gross").dy;
+    const operatingShiftY = balancedLayoutOffsetForNode("operating").dy;
+    const opexShiftY = balancedLayoutOffsetForNode("operating-expenses").dy;
     const visibleGrossTop = grossTop + grossShiftY;
     const upperOpeningY = visibleGrossTop - (operatingLaneTop + operatingShiftY);
     const lowerOpeningY = opexTop + opexShiftY - (visibleGrossTop + opHeight);
@@ -8203,6 +8210,44 @@ function renderPixelReplicaSvg(snapshot) {
       (grossBoundaryTopY * outgoingRunX + netBoundaryTopY * incomingRunX) /
       (incomingRunX + outgoingRunX);
     const turnExcessY = operatingBoundaryTopY - straightChainOperatingTopY;
+    const preferredUpwardFlowBiasY = scaleY(
+      safeNumber(snapshot.layout?.profitChainPreferredUpwardFlowBiasY, usesHeroLockups ? 12 : 10)
+    );
+    const preferredOperatingTopY = clamp(
+      straightChainOperatingTopY + preferredUpwardFlowBiasY,
+      netBoundaryTopY + minimumChainRiseY,
+      grossBoundaryTopY - minimumChainRiseY
+    );
+    const downwardCorrectionY = preferredOperatingTopY - operatingBoundaryTopY;
+    const downwardActivationY = scaleY(
+      safeNumber(snapshot.layout?.profitChainDownwardSmoothingActivationY, 4)
+    );
+    if (
+      netProfitBn > operatingProfitBn &&
+      positiveAdjustmentOpRatio < 0.8 &&
+      downwardCorrectionY > downwardActivationY + 0.5
+    ) {
+      const downwardStrength = clamp(
+        safeNumber(snapshot.layout?.profitChainDownwardSmoothingStrength, 0.88),
+        0,
+        1
+      );
+      const maximumDropY = scaleY(
+        safeNumber(snapshot.layout?.profitChainDownwardSmoothingMaxDropY, usesHeroLockups ? 14 : 12)
+      );
+      const appliedDropY = Math.min(
+        downwardCorrectionY * downwardStrength,
+        maximumDropY,
+        Math.max(grossBoundaryTopY - minimumChainRiseY - operatingBoundaryTopY, 0)
+      );
+      if (appliedDropY > 0.5) {
+        const currentOperatingAutoShiftY = autoLayoutOffsetForNode("operating").dy;
+        setAutoLayoutNodeOffset("operating", {
+          dy: currentOperatingAutoShiftY + appliedDropY,
+        });
+        return appliedDropY;
+      }
+    }
     const preferredTurnResidualY = scaleY(
       safeNumber(snapshot.layout?.profitChainTurnResidualY, usesHeroLockups ? 22 : 20)
     );

@@ -694,6 +694,29 @@ function firstResolvedBreakdownNumber(...values) {
   return null;
 }
 
+function financialBridgeMaterialityThreshold(entry = {}) {
+  const revenueBn = Math.max(safeNumber(entry?.revenueBn), 0);
+  const operatingOutcomeBn = Math.abs(
+    safeNumber(
+      entry?.operatingIncomeBn !== null && entry?.operatingIncomeBn !== undefined
+        ? entry.operatingIncomeBn
+        : entry?.operatingProfitBn
+    )
+  );
+  const netOutcomeBn = Math.abs(
+    safeNumber(
+      entry?.netIncomeBn !== null && entry?.netIncomeBn !== undefined
+        ? entry.netIncomeBn
+        : entry?.netProfitBn
+    )
+  );
+  return clamp(
+    Math.max(revenueBn * 0.0015, Math.max(operatingOutcomeBn, netOutcomeBn) * 0.01),
+    0.02,
+    0.05
+  );
+}
+
 function resolveOperatingExpenseBreakdown(snapshot, company, entry) {
   if (String(company?.id || "").toLowerCase() === "visa") {
     return [];
@@ -1741,8 +1764,11 @@ function buildGenericSnapshot(company, entry, quarterKey) {
         usePretaxResidualLabel: false,
       };
   const inferredNonOperatingBnRaw = hasRenderableGrossStage ? nonOperatingResolution.value : null;
+  const bridgeMaterialityThresholdBn = financialBridgeMaterialityThreshold(entry);
   const inferredNonOperatingBn =
-    inferredNonOperatingBnRaw !== null && inferredNonOperatingBnRaw !== undefined && Math.abs(safeNumber(inferredNonOperatingBnRaw)) > 0.05
+    inferredNonOperatingBnRaw !== null &&
+    inferredNonOperatingBnRaw !== undefined &&
+    Math.abs(safeNumber(inferredNonOperatingBnRaw)) > bridgeMaterialityThresholdBn
       ? Number(safeNumber(inferredNonOperatingBnRaw).toFixed(3))
       : null;
   const grossMarginPct =
@@ -1824,7 +1850,7 @@ function buildGenericSnapshot(company, entry, quarterKey) {
       : financialFootnote;
   const explicitPositiveAdjustments = Array.isArray(entry.positiveAdjustments)
     ? entry.positiveAdjustments
-        .filter((item) => safeNumber(item?.valueBn) > 0.05)
+        .filter((item) => safeNumber(item?.valueBn) > bridgeMaterialityThresholdBn)
         .map((item) => ({
           ...item,
           color: item?.color || "#16A34A",
@@ -1832,7 +1858,7 @@ function buildGenericSnapshot(company, entry, quarterKey) {
     : null;
   const explicitBelowOperatingItems = Array.isArray(entry.belowOperatingItems)
     ? entry.belowOperatingItems
-        .filter((item) => safeNumber(item?.valueBn) > 0.05)
+        .filter((item) => safeNumber(item?.valueBn) > bridgeMaterialityThresholdBn)
         .map((item) => ({
           ...item,
           color: item?.color || "#D92D20",
@@ -1850,8 +1876,12 @@ function buildGenericSnapshot(company, entry, quarterKey) {
     });
   }
   const taxBn = entry.taxBn !== null && entry.taxBn !== undefined ? safeNumber(entry.taxBn) : null;
-  const hasMaterialNonOperating = inferredNonOperatingBn !== null && inferredNonOperatingBn !== undefined && Math.abs(safeNumber(inferredNonOperatingBn)) > 0.05;
-  const hasMaterialTax = taxBn !== null && taxBn !== undefined && Math.abs(taxBn) > 0.05;
+  const hasMaterialNonOperating =
+    inferredNonOperatingBn !== null &&
+    inferredNonOperatingBn !== undefined &&
+    Math.abs(safeNumber(inferredNonOperatingBn)) > bridgeMaterialityThresholdBn;
+  const hasMaterialTax =
+    taxBn !== null && taxBn !== undefined && Math.abs(taxBn) > bridgeMaterialityThresholdBn;
   const netTaxWithNonOperating =
     hasRenderableGrossStage &&
     hasMaterialNonOperating &&
@@ -1863,7 +1893,7 @@ function buildGenericSnapshot(company, entry, quarterKey) {
     // inferred aggregate non-operating line.
   } else if (netTaxWithNonOperating) {
     const netNonOperatingAfterTaxBn = safeNumber(inferredNonOperatingBn) - taxBn;
-    if (Math.abs(netNonOperatingAfterTaxBn) > 0.05) {
+    if (Math.abs(netNonOperatingAfterTaxBn) > bridgeMaterialityThresholdBn) {
       const netPositiveLabel = normalizedEntry.usePretaxResidualLabel
         ? {
             name: "Net other pretax gain",
@@ -1917,14 +1947,14 @@ function buildGenericSnapshot(company, entry, quarterKey) {
     };
     const positiveLabel = normalizedEntry.usePretaxResidualLabel ? residualPositiveLabel : standardPositiveLabel;
     const negativeLabel = normalizedEntry.usePretaxResidualLabel ? residualNegativeLabel : standardNegativeLabel;
-    if (inferredNonOperatingBn > 0.05) {
+    if (inferredNonOperatingBn > bridgeMaterialityThresholdBn) {
       positiveAdjustments.push({
         name: positiveLabel.name,
         nameZh: positiveLabel.nameZh,
         valueBn: Math.abs(inferredNonOperatingBn),
         color: "#16A34A",
       });
-    } else if (inferredNonOperatingBn < -0.05) {
+    } else if (inferredNonOperatingBn < -bridgeMaterialityThresholdBn) {
       belowOperatingItems.push({
         name: negativeLabel.name,
         nameZh: negativeLabel.nameZh,
@@ -1933,13 +1963,13 @@ function buildGenericSnapshot(company, entry, quarterKey) {
       });
     }
   }
-  if (!hasExplicitNetBridge && !netTaxWithNonOperating && hasRenderableGrossStage && taxBn && taxBn > 0.05) {
+  if (!hasExplicitNetBridge && !netTaxWithNonOperating && hasRenderableGrossStage && taxBn && taxBn > bridgeMaterialityThresholdBn) {
     belowOperatingItems.push({
       name: "Tax",
       valueBn: Math.abs(taxBn),
       color: "#D92D20",
     });
-  } else if (!hasExplicitNetBridge && !netTaxWithNonOperating && hasRenderableGrossStage && taxBn && taxBn < -0.05) {
+  } else if (!hasExplicitNetBridge && !netTaxWithNonOperating && hasRenderableGrossStage && taxBn && taxBn < -bridgeMaterialityThresholdBn) {
     positiveAdjustments.push({
       name: "Tax benefit",
       nameZh: "税项收益",
@@ -1955,7 +1985,9 @@ function buildGenericSnapshot(company, entry, quarterKey) {
   const netBridgeResidualBn =
     targetNetBridgeBn !== null && targetNetBridgeBn !== undefined ? Number((targetNetBridgeBn - accountedNetBridgeBn).toFixed(3)) : null;
   const netBridgeResidualTolerance =
-    targetNetBridgeBn !== null && targetNetBridgeBn !== undefined ? Math.max(0.045, Math.abs(targetNetBridgeBn) * 0.005) : 0;
+    targetNetBridgeBn !== null && targetNetBridgeBn !== undefined
+      ? Math.max(bridgeMaterialityThresholdBn, Math.abs(targetNetBridgeBn) * 0.005)
+      : 0;
   if (hasRenderableGrossStage && netBridgeResidualBn !== null && Math.abs(netBridgeResidualBn) > netBridgeResidualTolerance) {
     if (netBridgeResidualBn > 0) {
       positiveAdjustments.push({

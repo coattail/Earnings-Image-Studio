@@ -943,8 +943,13 @@ function renderIncomeStatementSvg(snapshot, company) {
   const netProfit = netLoss ? Math.abs(netOutcome) : Math.max(netOutcome, 0);
   const sources = [...(snapshot.businessGroups || [])].filter((item) => Number(item.valueBn || 0) > 0.02);
   const opexItems = [...(snapshot.opexBreakdown || [])].filter((item) => Number(item.valueBn || 0) > 0.02);
-  const positiveAdjustments = [...(snapshot.positiveAdjustments || [])].filter((item) => Number(item.valueBn || 0) > 0.02);
-  const belowOperatingItems = [...(snapshot.belowOperatingItems || [])].filter((item) => Number(item.valueBn || 0) > 0.02);
+  const bridgeMaterialityThresholdBn = financialBridgeMaterialityThreshold(snapshot);
+  const positiveAdjustments = [...(snapshot.positiveAdjustments || [])].filter(
+    (item) => Number(item.valueBn || 0) > bridgeMaterialityThresholdBn
+  );
+  const belowOperatingItems = [...(snapshot.belowOperatingItems || [])].filter(
+    (item) => Number(item.valueBn || 0) > bridgeMaterialityThresholdBn
+  );
 
   const titleColor = snapshot.mode === "pixel-replica" ? "#145B8E" : "#17496D";
   const background = snapshot.mode === "pixel-replica" ? "#F6F5F2" : "#F7FBFF";

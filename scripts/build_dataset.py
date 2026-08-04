@@ -3773,6 +3773,27 @@ def merge_official_revenue_structure_history(company_payload: dict[str, Any], co
     return apply_revenue_structure_history(company_payload, company, history)
 
 
+def merge_official_financial_breakdowns(company_payload: dict[str, Any], company: dict[str, Any]) -> dict[str, Any]:
+    official_payload = fetch_official_financial_history(company, refresh=False)
+    official_financials = official_payload.get("financials") if isinstance(official_payload, dict) else None
+    financials = company_payload.get("financials") if isinstance(company_payload, dict) else None
+    if not isinstance(official_financials, dict) or not isinstance(financials, dict):
+        return company_payload
+    for quarter, official_entry in official_financials.items():
+        entry = financials.get(quarter)
+        if not isinstance(entry, dict) or not isinstance(official_entry, dict):
+            continue
+        if not entry.get("officialOpexBreakdown"):
+            opex_breakdown = official_entry.get("officialOpexBreakdown")
+            if isinstance(opex_breakdown, list) and opex_breakdown:
+                entry["officialOpexBreakdown"] = deepcopy(opex_breakdown)
+        if not entry.get("officialCostBreakdown"):
+            cost_breakdown = official_entry.get("officialCostBreakdown")
+            if isinstance(cost_breakdown, list) and cost_breakdown:
+                entry["officialCostBreakdown"] = deepcopy(cost_breakdown)
+    return company_payload
+
+
 def build_company_payload_with_universal_parser(company: dict[str, Any], refresh: bool) -> dict[str, Any]:
     parse_result = run_universal_company_parser(company, refresh=refresh)
     payload = deepcopy(parse_result.get("financialPayload") or {})
@@ -3833,6 +3854,7 @@ def main() -> int:
                         diagnostics = {}
                     diagnostics["revenueStructureCacheSupplementError"] = str(exc)
                     payload["parserDiagnostics"] = diagnostics
+                payload = merge_official_financial_breakdowns(payload, company)
                 payload = apply_manual_company_override(payload, company, manual_company_overrides)
                 payload = apply_korean_revenue_history(payload, company)
                 payload = apply_usd_display_fields(payload, fx_cache)

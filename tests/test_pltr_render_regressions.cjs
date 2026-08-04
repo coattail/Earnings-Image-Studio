@@ -78,19 +78,22 @@ function loadRuntime() {
   return context;
 }
 
-function renderPltr(context, overrides = {}) {
+function renderPltr(context, overrides = {}, quarter = "2026Q1", snapshotPatch = {}) {
   context.__overrides = overrides;
+  context.__quarter = quarter;
+  context.__snapshotPatch = snapshotPatch;
   return vm.runInContext(
     `(() => {
       const company = normalizeLoadedCompany(__pltrPayload, 0);
       state.uiLanguage = "zh";
       state.logoCatalog = {};
       state.supplementalComponents = {};
-      const snapshot = buildSnapshot(company, "2026Q1");
+      const snapshot = buildSnapshot(company, __quarter);
+      Object.assign(snapshot, __snapshotPatch);
       snapshot.editorNodeOverrides = __overrides;
-      const history = buildRevenueSegmentBarHistory(company, "2026Q1", 30);
+      const history = buildRevenueSegmentBarHistory(company, __quarter, 30);
       const svg = EarningsVizRuntime.render.renderIncomeStatementSvg(snapshot, company);
-      return { history, svg };
+      return { history, snapshot, svg };
     })()`,
     context
   );
@@ -121,17 +124,6 @@ function nodeRect(svg, nodeId) {
   };
 }
 
-function positiveLabel(svg) {
-  const titleTag = [...svg.matchAll(/<text\b[^>]*>(营业外收益)<\/text>/g)].at(-1)?.[0];
-  assert.ok(titleTag, "missing positive adjustment title label");
-  const attrs = parseAttrs(titleTag);
-  return {
-    x: Number(attrs.x),
-    y: Number(attrs.y),
-    anchor: attrs["text-anchor"],
-  };
-}
-
 test("PLTR bar chart keeps government and commercial in stable comparable buckets", () => {
   const { history } = renderPltr(loadRuntime());
 
@@ -139,19 +131,82 @@ test("PLTR bar chart keeps government and commercial in stable comparable bucket
   assert.deepEqual(Array.from(history.quarters.at(-1).segmentRows, (item) => item.key), ["governmentoperating", "commercial"]);
 });
 
-test("PLTR Sankey keeps operating profit close enough to gross profit for a smoother upward bridge", () => {
-  const { svg } = renderPltr(loadRuntime());
-  const gross = nodeRect(svg, "gross");
-  const operating = nodeRect(svg, "operating");
-
-  assert.ok(gross.top - operating.top <= 118, `operating node is lifted too far: ${gross.top - operating.top}`);
+test("PLTR uses the three official operating-expense categories across history and latest", () => {
+  const context = loadRuntime();
+  for (const quarter of ["2023Q4", "2026Q1", "2026Q2"]) {
+    const { snapshot } = renderPltr(context, {}, quarter);
+    assert.deepEqual(
+      Array.from(snapshot.opexBreakdown, (item) => item.memberKey),
+      ["salesandmarketing", "researchanddevelopment", "generalandadministrative"],
+      `${quarter} should preserve the official three-line expense taxonomy`
+    );
+    const detailTotal = Array.from(snapshot.opexBreakdown).reduce((sum, item) => sum + Number(item.valueBn || 0), 0);
+    assert.ok(
+      Math.abs(detailTotal - snapshot.operatingExpensesBn) <= 0.002,
+      `${quarter} opex detail should reconcile: ${detailTotal} vs ${snapshot.operatingExpensesBn}`
+    );
+  }
 });
 
-test("PLTR positive adjustment label remains left-attached when operating profit is dragged down", () => {
-  const { svg } = renderPltr(loadRuntime(), { operating: { dy: 120 } });
-  const positiveNode = nodeRect(svg, "positive-0");
-  const label = positiveLabel(svg);
+test("PLTR historical profit chain follows a smooth upward line with a small downward bias", () => {
+  const { svg } = renderPltr(loadRuntime(), {}, "2023Q4");
+  const gross = nodeRect(svg, "gross");
+  const operating = nodeRect(svg, "operating");
+  const net = nodeRect(svg, "net");
+  const incomingRun = operating.left - gross.right;
+  const outgoingRun = net.left - operating.right;
+  const straightOperatingTop =
+    (gross.top * outgoingRun + net.top * incomingRun) / (incomingRun + outgoingRun);
 
-  assert.equal(label.anchor, "end");
-  assert.ok(label.x < positiveNode.left - 8, `label should stay left of positive node: ${label.x} >= ${positiveNode.left - 8}`);
+  assert.ok(gross.top > operating.top && operating.top > net.top, "profit chain should rise at every stage");
+  assert.ok(
+    operating.top - straightOperatingTop >= 6 && operating.top - straightOperatingTop <= 18,
+    `operating node should sit just below the straight interpolation: ${operating.top - straightOperatingTop}`
+  );
+});
+
+test("dragging PLTR operating profit does not move any sibling or downstream node", () => {
+  const context = loadRuntime();
+  const noPositiveBridge = {
+    positiveAdjustments: [],
+    belowOperatingItems: [],
+    netProfitBn: 0.066,
+  };
+  const base = renderPltr(context, {}, "2023Q4", noPositiveBridge).svg;
+  const dragged = renderPltr(
+    context,
+    { operating: { dy: 120 } },
+    "2023Q4",
+    noPositiveBridge
+  ).svg;
+
+  assert.ok(
+    Math.abs(nodeRect(dragged, "operating").top - nodeRect(base, "operating").top - 120) <= 0.001,
+    "the dragged node should move by exactly the requested offset"
+  );
+  for (const nodeId of [
+    "gross",
+    "operating-expenses",
+    "net",
+    "opex-0",
+    "opex-1",
+    "opex-2",
+  ]) {
+    assert.equal(
+      nodeRect(dragged, nodeId).top,
+      nodeRect(base, nodeId).top,
+      `${nodeId} should remain fixed when operating profit is dragged`
+    );
+  }
+});
+
+test("PLTR historical net-profit thickness is explained by explicit bridge flows", () => {
+  const { snapshot, svg } = renderPltr(loadRuntime(), {}, "2023Q4");
+  const operating = nodeRect(svg, "operating");
+  const net = nodeRect(svg, "net");
+  const positive = nodeRect(svg, "positive-0");
+
+  assert.ok(net.height > operating.height, "the historical net node is expected to be thicker");
+  assert.ok(positive.height > 0, "the positive bridge inflow must be visible");
+  assert.equal(Number(snapshot.positiveAdjustments[0].valueBn.toFixed(3)), 0.04);
 });

@@ -20,7 +20,7 @@ import micron_ir
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 CACHE_DIR = ROOT_DIR / "data" / "cache" / "official-financials"
-OFFICIAL_FINANCIALS_CACHE_VERSION = "20260716-v3"
+OFFICIAL_FINANCIALS_CACHE_VERSION = "20260803-v4"
 CURRENCY_UNIT_PATTERN = re.compile(r"^[A-Z]{3}$")
 MIN_FILING_DATE = "2017-01-01"
 MIN_CALENDAR_QUARTER = (2018, 1)
@@ -667,6 +667,8 @@ def _build_financial_entry(
     cost_value: float | None = None,
     gross_value: float | None = None,
     sgna_value: float | None = None,
+    sales_and_marketing_value: float | None = None,
+    general_and_administrative_value: float | None = None,
     rnd_value: float | None = None,
     other_opex_value: float | None = None,
     operating_expenses_value: float | None = None,
@@ -694,7 +696,7 @@ def _build_financial_entry(
         if residual > 0.01:
             other_opex_value = residual
 
-    return {
+    entry = {
         "calendarQuarter": quarter,
         "periodEnd": period_end,
         "fiscalYear": fiscal_year,
@@ -724,6 +726,37 @@ def _build_financial_entry(
         "operatingMarginYoyDeltaPp": None,
         "profitMarginYoyDeltaPp": None,
     }
+    detailed_opex_values = (
+        sales_and_marketing_value,
+        rnd_value,
+        general_and_administrative_value,
+    )
+    if all(value is not None and value > 0 for value in detailed_opex_values):
+        detailed_opex_total = sum(float(value) for value in detailed_opex_values if value is not None)
+        reconciliation_target = operating_expenses_value
+        tolerance = max(1.0, abs(float(reconciliation_target or 0)) * 0.025)
+        if reconciliation_target is None or abs(detailed_opex_total - reconciliation_target) <= tolerance:
+            entry["officialOpexBreakdown"] = [
+                {
+                    "name": "Sales and Marketing",
+                    "nameZh": "销售与营销",
+                    "memberKey": "salesandmarketing",
+                    "valueBn": _money_to_bn(sales_and_marketing_value),
+                },
+                {
+                    "name": "Research and Development",
+                    "nameZh": "研发",
+                    "memberKey": "researchanddevelopment",
+                    "valueBn": _money_to_bn(rnd_value),
+                },
+                {
+                    "name": "General and Administrative",
+                    "nameZh": "一般及行政",
+                    "memberKey": "generalandadministrative",
+                    "valueBn": _money_to_bn(general_and_administrative_value),
+                },
+            ]
+    return entry
 
 
 def _finalize_financials(financials: dict[str, Any]) -> tuple[list[str], dict[str, Any]]:
@@ -1599,11 +1632,17 @@ def fetch_official_financial_history(company: dict[str, Any], refresh: bool = Fa
         revenue_fact = _pick_field_fact_with_fallback(concept_series, field_series, "revenue", quarter)
         cost_fact = _pick_field_fact_with_fallback(concept_series, field_series, "costOfRevenue", quarter)
         gross_fact = _pick_field_fact_with_fallback(concept_series, field_series, "grossProfit", quarter)
+        sales_and_marketing_fact = _pick_field_fact_with_fallback(
+            concept_series, field_series, "salesAndMarketing", quarter
+        )
+        general_and_administrative_fact = _pick_field_fact_with_fallback(
+            concept_series, field_series, "generalAndAdministrative", quarter
+        )
         sgna_fact = _pick_field_fact_with_fallback(concept_series, field_series, "sgna", quarter)
         if sgna_fact is None:
             sgna_fact = _sum_facts(
-                _pick_field_fact_with_fallback(concept_series, field_series, "salesAndMarketing", quarter),
-                _pick_field_fact_with_fallback(concept_series, field_series, "generalAndAdministrative", quarter),
+                sales_and_marketing_fact,
+                general_and_administrative_fact,
             )
         rnd_fact = _pick_field_fact_with_fallback(concept_series, field_series, "rnd", quarter)
         operating_expenses_fact = _pick_field_fact_with_fallback(concept_series, field_series, "operatingExpenses", quarter)
@@ -1669,6 +1708,10 @@ def fetch_official_financial_history(company: dict[str, Any], refresh: bool = Fa
             cost_value=cost_value,
             gross_value=gross_value,
             sgna_value=sgna_fact.value if sgna_fact else None,
+            sales_and_marketing_value=sales_and_marketing_fact.value if sales_and_marketing_fact else None,
+            general_and_administrative_value=(
+                general_and_administrative_fact.value if general_and_administrative_fact else None
+            ),
             rnd_value=rnd_fact.value if rnd_fact else None,
             other_opex_value=other_opex_value,
             operating_expenses_value=operating_expenses_value,
