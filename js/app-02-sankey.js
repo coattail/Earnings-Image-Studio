@@ -371,9 +371,8 @@ function renderPixelReplicaSvg(snapshot) {
   );
   const rawCostBreakdown = [...(snapshot.costBreakdown || [])].filter((item) => safeNumber(item.valueBn) > 0.02);
   const rawOpexTerminalCount = [...(snapshot.opexBreakdown || [])].filter((item) => safeNumber(item?.valueBn) > 0.02).length;
-  const bridgeMaterialityThresholdBn = financialBridgeMaterialityThreshold(snapshot);
   const rawBelowTerminalCount = [...(snapshot.belowOperatingItems || [])].filter(
-    (item) => safeNumber(item?.valueBn) > bridgeMaterialityThresholdBn
+    (item) => isRenderableFinancialBridgeItem(item, snapshot)
   ).length;
   const alignCostBreakdownWithOperatingStage =
     rawCostBreakdown.length > 0 &&
@@ -513,7 +512,7 @@ function renderPixelReplicaSvg(snapshot) {
   const costHeight = costOfRevenueBn > 0.05 ? Math.max(costOfRevenueBn * scale, 4) : 0;
   const opHeight = hasOperatingLoss ? 0 : Math.max(operatingProfitBn * scale, 4);
   const opexHeight = Math.max(operatingExpensesBn * scale, 4);
-  const netHeight = Math.max(netProfitBn * scale, nearZeroNet ? scaleY(4.5) : 4);
+  const netHeight = netProfitBn * scale;
   const showCostBridge = costHeight > 0;
   const baseChartBottomLimit = layoutY(snapshot.layout?.chartBottomLimit, 1004);
   const rawSources = sortBusinessGroupsByValue(snapshot.businessGroups || []).filter((item) => safeNumber(item.valueBn) > 0.02);
@@ -525,10 +524,10 @@ function renderPixelReplicaSvg(snapshot) {
   });
   const rawOpexItems = collapsedOpexItem ? [] : rawOpexItemsSource;
   const rawBelowOperatingItems = [...(snapshot.belowOperatingItems || [])].filter(
-    (item) => safeNumber(item.valueBn) > bridgeMaterialityThresholdBn
+    (item) => isRenderableFinancialBridgeItem(item, snapshot)
   );
   const rawPositiveAdjustments = [...(snapshot.positiveAdjustments || [])].filter(
-    (item) => safeNumber(item.valueBn) > bridgeMaterialityThresholdBn
+    (item) => isRenderableFinancialBridgeItem(item, snapshot)
   );
   const positiveBridgeStrength = resolvePositiveAdjustmentBridgeStrengths(snapshot, {
     positiveAdjustments: rawPositiveAdjustments,
@@ -8643,17 +8642,17 @@ function renderPixelReplicaSvg(snapshot) {
           0
         )
       : -1;
-  const useNetLossBalanceBridge = netLossDriverIndex >= 0 && belowOperatingItems.length && positiveAdjustments.length;
+  const useNetLossBalanceBridge = netLossDriverIndex >= 0 && belowOperatingItems.length > 0;
   const renderNetLossDriverBridge = () => {
     if (netLossDriverIndex < 0) return "";
     const driverItem = belowOperatingItems[netLossDriverIndex];
     const driverValueBn = useNetLossBalanceBridge
       ? belowOperatingItems.reduce((sum, item) => sum + Math.max(safeNumber(item?.valueBn), 0), 0)
       : Math.max(safeNumber(driverItem?.valueBn), 0);
-    if (!(driverValueBn > 0.05)) return "";
+    if (!(driverValueBn > 0.002)) return "";
     const primaryDriverValueBn = Math.max(safeNumber(driverItem?.valueBn), 0);
     const otherLossDriversBn = Math.max(driverValueBn - primaryDriverValueBn, 0);
-    const driverHeight = Math.max(driverValueBn * scale, scaleY(12));
+    const driverHeight = driverValueBn * scale;
     const targetHeight = Math.min(driverHeight, netFrame.height);
     const driverWidth = Math.max(nodeWidth, scaleY(safeNumber(snapshot.layout?.netLossDriverWidth, 72)));
     const driverGapX = scaleY(safeNumber(snapshot.layout?.netLossDriverGapX, 78));
@@ -8714,11 +8713,11 @@ function renderPixelReplicaSvg(snapshot) {
     const offsetLabelY = driverFrame.top + Math.max(offsetHeight * 0.5, scaleY(34));
     const residualLabelY = sourceTop + targetHeight / 2;
     const manualPositiveMarkup = (() => {
-      if (!useNetLossBalanceBridge || !(positiveOffsetHeight > scaleY(4))) return "";
+      if (!useNetLossBalanceBridge || !(positiveOffsetHeight > 0)) return "";
       const item = positiveAdjustments[0] || {};
       const positiveWidth = Math.max(nodeWidth, scaleY(64));
       const positiveGapX = scaleY(34);
-      const positiveFrameHeight = Math.max(positiveOffsetHeight, scaleY(12));
+      const positiveFrameHeight = positiveOffsetHeight;
       const positiveFrame = editableNodeFrame(
         "positive-0",
         driverFrame.x - positiveGapX - positiveWidth,
@@ -8738,7 +8737,7 @@ function renderPixelReplicaSvg(snapshot) {
       `;
     })();
     const operatingOffsetMarkup =
-      useNetLossBalanceBridge && operatingOffsetHeight > scaleY(4)
+      useNetLossBalanceBridge && operatingOffsetHeight > 0
         ? (() => {
             const operatingSourceHeight = Math.min(operatingOffsetHeight, operatingFrame.height);
             const operatingSourceTop = clamp(

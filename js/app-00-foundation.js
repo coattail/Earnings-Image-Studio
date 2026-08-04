@@ -31,7 +31,7 @@ const state = {
   },
 };
 
-const BUILD_ASSET_VERSION = "20260803-palantir-layout-v188";
+const BUILD_ASSET_VERSION = "20260803-palantir-loss-conservation-v189";
 const CORPORATE_LOGO_AREA_MULTIPLIER = 1.728;
 const CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER = Math.sqrt(CORPORATE_LOGO_AREA_MULTIPLIER);
 const CORPORATE_LOGO_REVENUE_GAP_MULTIPLIER = 1.2;
@@ -841,6 +841,17 @@ function formatBillions(value, wrapNegative = false) {
   const absolute = Math.abs(Number(value) * activeDisplayScaleFactor()).toFixed(1);
   const currencySymbol = CURRENCY_SYMBOLS[activeDisplayCurrency()] || `${activeDisplayCurrency()} `;
   const label = `${currencySymbol}${absolute}B`;
+  if (!wrapNegative || Number(value) >= 0) return label;
+  return `(${label})`;
+}
+
+function formatBillionsPrecise(value, wrapNegative = false) {
+  if (value === null || value === undefined || Number.isNaN(Number(value))) return "-";
+  const scaledValue = Number(value) * activeDisplayScaleFactor();
+  const absoluteValue = Math.abs(scaledValue);
+  const decimals = absoluteValue < 0.01 ? 3 : absoluteValue < 0.1 ? 2 : 1;
+  const currencySymbol = CURRENCY_SYMBOLS[activeDisplayCurrency()] || `${activeDisplayCurrency()} `;
+  const label = `${currencySymbol}${absoluteValue.toFixed(decimals)}B`;
   if (!wrapNegative || Number(value) >= 0) return label;
   return `(${label})`;
 }

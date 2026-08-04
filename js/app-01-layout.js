@@ -301,6 +301,15 @@ function adaptPrototypeDerivedFields(snapshot, company, entry, prototypeKey) {
 }
 
 function formatBillionsByMode(value, mode = "plain") {
+  if (mode === "negative-parentheses-precise" || mode === "cost-precise") {
+    return formatBillionsPrecise(-Math.abs(safeNumber(value)), true);
+  }
+  if (mode === "positive-plus-precise") {
+    return `+${formatBillionsPrecise(Math.abs(safeNumber(value)))}`;
+  }
+  if (mode === "plain-precise") {
+    return formatBillionsPrecise(value);
+  }
   if (mode === "negative-parentheses" || mode === "cost") {
     return formatBillions(-Math.abs(safeNumber(value)), true);
   }
@@ -795,13 +804,12 @@ function snapshotCanvasSize(snapshot) {
   const sources = Array.isArray(snapshot?.businessGroups) ? snapshot.businessGroups.filter((item) => safeNumber(item?.valueBn) > 0.02) : [];
   const detailGroups = Array.isArray(snapshot?.leftDetailGroups) ? snapshot.leftDetailGroups.filter((item) => safeNumber(item?.valueBn) > 0.02) : [];
   const opexItems = Array.isArray(snapshot?.opexBreakdown) ? snapshot.opexBreakdown.filter((item) => safeNumber(item?.valueBn) > 0.02) : [];
-  const bridgeMaterialityThresholdBn = financialBridgeMaterialityThreshold(snapshot);
   const deductionItems = Array.isArray(snapshot?.belowOperatingItems)
-    ? snapshot.belowOperatingItems.filter((item) => safeNumber(item?.valueBn) > bridgeMaterialityThresholdBn)
+    ? snapshot.belowOperatingItems.filter((item) => isRenderableFinancialBridgeItem(item, snapshot))
     : [];
   const costBreakdownItems = Array.isArray(snapshot?.costBreakdown) ? snapshot.costBreakdown.filter((item) => safeNumber(item?.valueBn) > 0.02) : [];
   const positiveItems = Array.isArray(snapshot?.positiveAdjustments)
-    ? snapshot.positiveAdjustments.filter((item) => safeNumber(item?.valueBn) > bridgeMaterialityThresholdBn)
+    ? snapshot.positiveAdjustments.filter((item) => isRenderableFinancialBridgeItem(item, snapshot))
     : [];
   const positiveBridgeStrength = resolvePositiveAdjustmentBridgeStrengths(snapshot, {
     positiveAdjustments: positiveItems,
@@ -1076,11 +1084,10 @@ function warmVisibleLogoAssets() {
 }
 
 function resolvePositiveAdjustmentBridgeStrengths(snapshot, options = {}) {
-  const bridgeMaterialityThresholdBn = financialBridgeMaterialityThreshold(snapshot);
   const rawPositiveAdjustments = Array.isArray(options.positiveAdjustments)
     ? options.positiveAdjustments
     : Array.isArray(snapshot?.positiveAdjustments)
-      ? snapshot.positiveAdjustments.filter((item) => safeNumber(item?.valueBn) > bridgeMaterialityThresholdBn)
+      ? snapshot.positiveAdjustments.filter((item) => isRenderableFinancialBridgeItem(item, snapshot))
       : [];
   const operatingProfitBn =
     options.operatingProfitBn !== null && options.operatingProfitBn !== undefined

@@ -210,3 +210,66 @@ test("PLTR historical net-profit thickness is explained by explicit bridge flows
   assert.ok(positive.height > 0, "the positive bridge inflow must be visible");
   assert.equal(Number(snapshot.positiveAdjustments[0].valueBn.toFixed(3)), 0.04);
 });
+
+test("PLTR 2020Q4 loss contraction is exactly offset by a visible small gain", () => {
+  const { snapshot, svg } = renderPltr(loadRuntime(), {}, "2020Q4");
+  const lossDriver = nodeRect(svg, "net-loss-driver-0");
+  const positive = nodeRect(svg, "positive-0");
+  const net = nodeRect(svg, "net");
+  const positiveTotal = Array.from(snapshot.positiveAdjustments).reduce(
+    (sum, item) => sum + Number(item.valueBn || 0),
+    0
+  );
+  const negativeTotal = Array.from(snapshot.belowOperatingItems).reduce(
+    (sum, item) => sum + Number(item.valueBn || 0),
+    0
+  );
+
+  assert.ok(Math.abs(positiveTotal - 0.009) <= 0.001);
+  assert.ok(Math.abs(positive.height - (lossDriver.height - net.height)) <= 0.2);
+  assert.ok(Math.abs(positiveTotal - negativeTotal - snapshot.netProfitBn) <= 0.001);
+  assert.match(svg, /\+\$0\.009B/);
+});
+
+test("PLTR 2021Q4 aggregates every loss source before the net-loss node", () => {
+  const { snapshot, svg } = renderPltr(loadRuntime(), {}, "2021Q4");
+  const lossDriver = nodeRect(svg, "net-loss-driver-1");
+  const net = nodeRect(svg, "net");
+  const negativeTotal = Array.from(snapshot.belowOperatingItems).reduce(
+    (sum, item) => sum + Number(item.valueBn || 0),
+    0
+  );
+
+  assert.ok(Math.abs(negativeTotal - Math.abs(snapshot.netProfitBn)) <= 0.001);
+  assert.ok(Math.abs(lossDriver.height - net.height) <= 0.1);
+  assert.match(svg, /另含其他净费用/);
+  assert.doesNotMatch(svg, /data-edit-node-visible-id="deduction-[0-9]+"/);
+});
+
+test("PLTR early quarters render complete conserved Sankey trunks", () => {
+  const context = loadRuntime();
+  for (const quarter of ["2019Q1", "2019Q2", "2019Q4"]) {
+    const { snapshot, svg } = renderPltr(context, {}, quarter);
+    const lossDriver = nodeRect(svg, "net-loss-driver-0");
+    const net = nodeRect(svg, "net");
+    const negativeTotal = Array.from(snapshot.belowOperatingItems).reduce(
+      (sum, item) => sum + Number(item.valueBn || 0),
+      0
+    );
+    const positiveTotal = Array.from(snapshot.positiveAdjustments).reduce(
+      (sum, item) => sum + Number(item.valueBn || 0),
+      0
+    );
+
+    nodeRect(svg, "gross");
+    nodeRect(svg, "operating-expenses");
+    nodeRect(svg, "opex-0");
+    nodeRect(svg, "opex-1");
+    nodeRect(svg, "opex-2");
+    assert.ok(
+      Math.abs(negativeTotal - positiveTotal - Math.abs(snapshot.netProfitBn)) <= 0.001,
+      `${quarter} below-operating flows should reconcile to net loss`
+    );
+    assert.ok(lossDriver.height >= net.height - 0.1, `${quarter} loss bridge must not expand without an inflow`);
+  }
+});

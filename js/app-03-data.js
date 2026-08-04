@@ -717,6 +717,12 @@ function financialBridgeMaterialityThreshold(entry = {}) {
   );
 }
 
+function isRenderableFinancialBridgeItem(item, entry = {}) {
+  const valueBn = Math.max(safeNumber(item?.valueBn), 0);
+  if (valueBn > financialBridgeMaterialityThreshold(entry)) return true;
+  return item?.preserveForFlowConservation === true && valueBn > 0.0005;
+}
+
 function resolveOperatingExpenseBreakdown(snapshot, company, entry) {
   if (String(company?.id || "").toLowerCase() === "visa") {
     return [];
@@ -1984,9 +1990,13 @@ function buildGenericSnapshot(company, entry, quarterKey) {
   const targetNetBridgeBn = safeNumber(entry.netIncomeBn, null);
   const netBridgeResidualBn =
     targetNetBridgeBn !== null && targetNetBridgeBn !== undefined ? Number((targetNetBridgeBn - accountedNetBridgeBn).toFixed(3)) : null;
+  const requiresNetLossFlowConservation =
+    targetNetBridgeBn !== null && targetNetBridgeBn !== undefined && targetNetBridgeBn < -0.02;
   const netBridgeResidualTolerance =
     targetNetBridgeBn !== null && targetNetBridgeBn !== undefined
-      ? Math.max(bridgeMaterialityThresholdBn, Math.abs(targetNetBridgeBn) * 0.005)
+      ? requiresNetLossFlowConservation
+        ? Math.max(0.0005, Math.abs(targetNetBridgeBn) * 0.002)
+        : Math.max(bridgeMaterialityThresholdBn, Math.abs(targetNetBridgeBn) * 0.005)
       : 0;
   if (hasRenderableGrossStage && netBridgeResidualBn !== null && Math.abs(netBridgeResidualBn) > netBridgeResidualTolerance) {
     if (netBridgeResidualBn > 0) {
@@ -1995,6 +2005,8 @@ function buildGenericSnapshot(company, entry, quarterKey) {
         nameZh: "其他净收益",
         valueBn: Math.abs(netBridgeResidualBn),
         color: "#16A34A",
+        preserveForFlowConservation: requiresNetLossFlowConservation,
+        valueFormat: requiresNetLossFlowConservation ? "positive-plus-precise" : "positive-plus",
       });
     } else {
       belowOperatingItems.push({
@@ -2002,6 +2014,8 @@ function buildGenericSnapshot(company, entry, quarterKey) {
         nameZh: "其他净费用",
         valueBn: Math.abs(netBridgeResidualBn),
         color: "#D92D20",
+        preserveForFlowConservation: requiresNetLossFlowConservation,
+        valueFormat: requiresNetLossFlowConservation ? "negative-parentheses-precise" : "negative-parentheses",
       });
     }
   }
