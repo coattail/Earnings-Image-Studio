@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-04T01:31:32Z",
+  "generatedAt": "2026-08-04T21:07:39Z",
   "companyCount": 40,
   "companies": [
     {
@@ -8953,7 +8953,8 @@
         "2025Q2",
         "2025Q3",
         "2025Q4",
-        "2026Q1"
+        "2026Q1",
+        "2026Q2"
       ],
       "statementSource": "stockanalysis-financials+field-reconciled",
       "statementSourceUrl": "https://stockanalysis.com/stocks/amd/financials/?p=quarterly",
@@ -8964,27 +8965,29 @@
         "latestRevenueGapReason": "AMD's latest statement-level financials are available from the normalized quarterly table source, while the local SEC segment taxonomy scan timed out on recent archive index requests. Keep AMD selectable with statement-level data until a parseable official segment split is added."
       },
       "coverage": {
-        "quarterCount": 33,
+        "quarterCount": 34,
         "pixelReplicaQuarterCount": 0,
         "hasPixelReplica": false,
-        "officialFinancialQuarterCount": 33,
-        "officialSegmentQuarterCount": 33,
-        "officialExpenseQuarterCount": 0,
+        "officialFinancialQuarterCount": 34,
+        "officialSegmentQuarterCount": 34,
+        "officialExpenseQuarterCount": 1,
         "classification": {
-          "status": "ok",
-          "latestQuarter": "2026Q1",
+          "status": "warning",
+          "latestQuarter": "2026Q2",
           "latestQuarterHasRevenueClassification": true,
-          "latestQuarterHasExpenseClassification": false,
-          "latestRevenueClassificationQuarter": "2026Q1",
-          "latestExpenseClassificationQuarter": null,
-          "latestStructureHistoryQuarter": "2025Q4",
-          "revenueClassificationQuarterCount": 33,
-          "expenseClassificationQuarterCount": 0,
+          "latestQuarterHasExpenseClassification": true,
+          "latestRevenueClassificationQuarter": "2026Q2",
+          "latestExpenseClassificationQuarter": "2026Q2",
+          "latestStructureHistoryQuarter": "2026Q2",
+          "revenueClassificationQuarterCount": 34,
+          "expenseClassificationQuarterCount": 1,
           "revenueClassificationCoverageRatio": 1.0,
-          "expenseClassificationCoverageRatio": 0.0,
+          "expenseClassificationCoverageRatio": 0.0294,
           "latestRevenueClassificationLagQuarters": 0,
-          "latestExpenseClassificationLagQuarters": null,
-          "warnings": [],
+          "latestExpenseClassificationLagQuarters": 0,
+          "warnings": [
+            "Expense classification history is sparse: 1 of 34 quarters have official expense breakdowns."
+          ],
           "blockers": [],
           "policy": {
             "allowLatestRevenueGap": true,
@@ -9028,13 +9031,13 @@
             "overallConfidenceScore": 0.9611,
             "financialConfidenceScore": 0.9401,
             "structuralConfidenceScore": 1.0,
-            "revenueSegmentChecks": 33,
+            "revenueSegmentChecks": 34,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
             "detailGroupChecks": 0,
             "detailGroupMismatchCount": 0,
             "detailGroupSkippedChecks": 0,
-            "opexChecks": 0,
+            "opexChecks": 1,
             "opexSkippedChecks": 0,
             "opexOverflowMismatchCount": 0,
             "warningCount": 0,
@@ -9048,53 +9051,77 @@
       "marketCapSource": "CompaniesMarketCap",
       "marketCapSourceUrl": "https://companiesmarketcap.com/",
       "dataLoadMode": "latest-only",
-      "latestQuarter": "2026Q1",
+      "latestQuarter": "2026Q2",
       "financials": {
-        "2026Q1": {
-          "calendarQuarter": "2026Q1",
-          "periodEnd": "2026-03-28",
+        "2026Q2": {
+          "calendarQuarter": "2026Q2",
+          "periodEnd": "2026-06-27",
           "fiscalYear": "2026",
-          "fiscalQuarter": "Q1",
-          "fiscalLabel": "FY2026 Q1",
+          "fiscalQuarter": "Q2",
+          "fiscalLabel": "FY2026 Q2",
           "statementCurrency": "USD",
-          "revenueBn": 10.253,
-          "revenueYoyPct": 37.846,
-          "costOfRevenueBn": 4.837,
-          "grossProfitBn": 5.416,
-          "sgnaBn": 1.253,
-          "rndBn": 2.397,
-          "otherOpexBn": 0.29,
-          "operatingExpensesBn": 3.94,
-          "operatingIncomeBn": 1.476,
-          "pretaxIncomeBn": 1.604,
-          "taxBn": 0.238,
-          "netIncomeBn": 1.383,
-          "netIncomeYoyPct": 95.064,
-          "nonOperatingBn": 0.128,
-          "grossMarginPct": 52.824,
-          "operatingMarginPct": 14.396,
-          "profitMarginPct": 13.489,
-          "effectiveTaxRatePct": 14.838,
-          "revenueQoqPct": -0.166,
-          "grossMarginYoyDeltaPp": 2.596,
-          "operatingMarginYoyDeltaPp": 3.56,
-          "profitMarginYoyDeltaPp": 3.958,
+          "displayCurrency": "USD",
+          "displayScaleFactor": 1,
+          "revenueBn": 11.536,
+          "revenueYoyPct": 50.111,
+          "costOfRevenueBn": 5.333,
+          "grossProfitBn": 6.203,
+          "sgnaBn": 1.401,
+          "rndBn": 2.528,
+          "otherOpexBn": 0.284,
+          "operatingExpensesBn": 4.213,
+          "operatingIncomeBn": 1.99,
+          "pretaxIncomeBn": 2.551,
+          "taxBn": 0.252,
+          "netIncomeBn": 2.297,
+          "equityIncomeBn": 0.006,
+          "discontinuedOperationsBn": -0.008,
+          "netIncomeYoyPct": 163.417,
+          "nonOperatingBn": 0.561,
+          "grossMarginPct": 53.771,
+          "operatingMarginPct": 17.25,
+          "profitMarginPct": 19.912,
+          "effectiveTaxRatePct": 9.878,
+          "revenueQoqPct": 12.513,
+          "grossMarginYoyDeltaPp": 13.966,
+          "operatingMarginYoyDeltaPp": 18.994,
+          "profitMarginYoyDeltaPp": 8.565,
           "statementSource": "manual-amd-official",
-          "statementSourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1284/amd-reports-first-quarter-2026-financial-results",
-          "statementFilingDate": "2026-05-05",
+          "statementSourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+          "statementFilingDate": "2026-08-04",
+          "officialOpexBreakdown": [
+            {
+              "name": "Research and Development",
+              "nameZh": "研发",
+              "memberKey": "researchanddevelopment",
+              "valueBn": 2.528
+            },
+            {
+              "name": "Marketing, General and Administrative",
+              "nameZh": "营销、一般及行政",
+              "memberKey": "marketinggeneralandadministrative",
+              "valueBn": 1.401
+            },
+            {
+              "name": "Amortization of Acquisition-related Intangibles",
+              "nameZh": "收购相关无形资产摊销",
+              "memberKey": "amortizationofacquisitionrelatedintangibles",
+              "valueBn": 0.284
+            }
+          ],
           "officialRevenueSegments": [
             {
               "name": "Data Center",
               "nameZh": "数据中心",
               "memberKey": "datacenter",
-              "valueBn": 5.775,
-              "yoyPct": 57.19,
-              "qoqPct": 7.34,
-              "mixPct": 56.3,
-              "mixYoyDeltaPp": 6.9,
-              "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1284/amd-reports-first-quarter-2026-financial-results",
+              "valueBn": 6.718,
+              "yoyPct": 107.35,
+              "qoqPct": 16.33,
+              "mixPct": 58.2,
+              "mixYoyDeltaPp": 16.1,
+              "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
               "sourceForm": "QuarterlyResultsRelease",
-              "filingDate": "2026-05-05",
+              "filingDate": "2026-08-04",
               "metricMode": "flow",
               "validationNotes": [
                 "amd-official-restated-segment-table"
@@ -9104,14 +9131,14 @@
               "name": "Client",
               "nameZh": "客户端",
               "memberKey": "client",
-              "valueBn": 2.885,
-              "yoyPct": 25.76,
-              "qoqPct": -6.85,
-              "mixPct": 28.1,
-              "mixYoyDeltaPp": -2.7,
-              "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1284/amd-reports-first-quarter-2026-financial-results",
+              "valueBn": 3.062,
+              "yoyPct": 22.53,
+              "qoqPct": 6.14,
+              "mixPct": 26.5,
+              "mixYoyDeltaPp": -6.0,
+              "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
               "sourceForm": "QuarterlyResultsRelease",
-              "filingDate": "2026-05-05",
+              "filingDate": "2026-08-04",
               "metricMode": "flow",
               "validationNotes": [
                 "amd-official-restated-segment-table"
@@ -9121,14 +9148,14 @@
               "name": "Gaming",
               "nameZh": "游戏",
               "memberKey": "gaming",
-              "valueBn": 0.72,
-              "yoyPct": 11.28,
-              "qoqPct": -14.59,
-              "mixPct": 7,
-              "mixYoyDeltaPp": -1.7,
-              "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1284/amd-reports-first-quarter-2026-financial-results",
+              "valueBn": 0.779,
+              "yoyPct": -30.57,
+              "qoqPct": 8.19,
+              "mixPct": 6.8,
+              "mixYoyDeltaPp": -7.8,
+              "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
               "sourceForm": "QuarterlyResultsRelease",
-              "filingDate": "2026-05-05",
+              "filingDate": "2026-08-04",
               "metricMode": "flow",
               "validationNotes": [
                 "amd-official-restated-segment-table"
@@ -9138,14 +9165,14 @@
               "name": "Embedded",
               "nameZh": "嵌入式",
               "memberKey": "embedded",
-              "valueBn": 0.873,
-              "yoyPct": 6.08,
-              "qoqPct": -8.11,
+              "valueBn": 0.977,
+              "yoyPct": 18.57,
+              "qoqPct": 11.91,
               "mixPct": 8.5,
-              "mixYoyDeltaPp": -2.6,
-              "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1284/amd-reports-first-quarter-2026-financial-results",
+              "mixYoyDeltaPp": -2.3,
+              "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
               "sourceForm": "QuarterlyResultsRelease",
-              "filingDate": "2026-05-05",
+              "filingDate": "2026-08-04",
               "metricMode": "flow",
               "validationNotes": [
                 "amd-official-restated-segment-table"
@@ -9159,7 +9186,329 @@
         }
       },
       "statementPresets": {},
-      "officialRevenueStructureHistory": {},
+      "officialRevenueStructureHistory": {
+        "source": "manual-official-quarterly-results",
+        "quarters": {
+          "2026Q2": {
+            "segments": [
+              {
+                "name": "Data Center",
+                "nameZh": "数据中心",
+                "memberKey": "datacenter",
+                "valueBn": 6.718,
+                "yoyPct": 107.35,
+                "qoqPct": null,
+                "mixPct": 58.2,
+                "mixYoyDeltaPp": 16.1,
+                "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+                "sourceForm": "QuarterlyResultsRelease",
+                "filingDate": "2026-08-04",
+                "metricMode": "flow",
+                "validationNotes": [
+                  "amd-official-restated-segment-table"
+                ]
+              },
+              {
+                "name": "Client",
+                "nameZh": "客户端",
+                "memberKey": "client",
+                "valueBn": 3.062,
+                "yoyPct": 22.53,
+                "qoqPct": null,
+                "mixPct": 26.5,
+                "mixYoyDeltaPp": -6.0,
+                "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+                "sourceForm": "QuarterlyResultsRelease",
+                "filingDate": "2026-08-04",
+                "metricMode": "flow",
+                "validationNotes": [
+                  "amd-official-restated-segment-table"
+                ]
+              },
+              {
+                "name": "Gaming",
+                "nameZh": "游戏",
+                "memberKey": "gaming",
+                "valueBn": 0.779,
+                "yoyPct": -30.57,
+                "qoqPct": null,
+                "mixPct": 6.8,
+                "mixYoyDeltaPp": -7.8,
+                "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+                "sourceForm": "QuarterlyResultsRelease",
+                "filingDate": "2026-08-04",
+                "metricMode": "flow",
+                "validationNotes": [
+                  "amd-official-restated-segment-table"
+                ]
+              },
+              {
+                "name": "Embedded",
+                "nameZh": "嵌入式",
+                "memberKey": "embedded",
+                "valueBn": 0.977,
+                "yoyPct": 18.57,
+                "qoqPct": null,
+                "mixPct": 8.5,
+                "mixYoyDeltaPp": -2.3,
+                "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+                "sourceForm": "QuarterlyResultsRelease",
+                "filingDate": "2026-08-04",
+                "metricMode": "flow",
+                "validationNotes": [
+                  "amd-official-restated-segment-table"
+                ]
+              }
+            ]
+          }
+        },
+        "filingsUsed": [
+          {
+            "form": "10-K",
+            "filingDate": "2026-02-04",
+            "accession": "0000002488-26-000018",
+            "primaryDocument": "amd-20251227.htm",
+            "instance": "amd-20251227_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2025-11-05",
+            "accession": "0000002488-25-000166",
+            "primaryDocument": "amd-20250927.htm",
+            "instance": "amd-20250927_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2025-08-06",
+            "accession": "0000002488-25-000108",
+            "primaryDocument": "amd-20250628.htm",
+            "instance": "amd-20250628_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2025-05-07",
+            "accession": "0000002488-25-000047",
+            "primaryDocument": "amd-20250329.htm",
+            "instance": "amd-20250329_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2025-02-05",
+            "accession": "0000002488-25-000012",
+            "primaryDocument": "amd-20241228.htm",
+            "instance": "amd-20241228_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2024-10-30",
+            "accession": "0000002488-24-000163",
+            "primaryDocument": "amd-20240928.htm",
+            "instance": "amd-20240928_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2024-07-31",
+            "accession": "0000002488-24-000123",
+            "primaryDocument": "amd-20240629.htm",
+            "instance": "amd-20240629_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2024-05-01",
+            "accession": "0000002488-24-000056",
+            "primaryDocument": "amd-20240330.htm",
+            "instance": "amd-20240330_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2024-01-31",
+            "accession": "0000002488-24-000012",
+            "primaryDocument": "amd-20231230.htm",
+            "instance": "amd-20231230_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2023-11-01",
+            "accession": "0000002488-23-000195",
+            "primaryDocument": "amd-20230930.htm",
+            "instance": "amd-20230930_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2023-08-02",
+            "accession": "0000002488-23-000139",
+            "primaryDocument": "amd-20230701.htm",
+            "instance": "amd-20230701_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2023-05-03",
+            "accession": "0000002488-23-000076",
+            "primaryDocument": "amd-20230401.htm",
+            "instance": "amd-20230401_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2023-02-27",
+            "accession": "0000002488-23-000047",
+            "primaryDocument": "amd-20221231.htm",
+            "instance": "amd-20221231_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2022-11-02",
+            "accession": "0000002488-22-000170",
+            "primaryDocument": "amd-20220924.htm",
+            "instance": "amd-20220924_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2022-08-03",
+            "accession": "0000002488-22-000123",
+            "primaryDocument": "amd-20220625.htm",
+            "instance": "amd-20220625_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2022-05-04",
+            "accession": "0000002488-22-000078",
+            "primaryDocument": "amd-20220326.htm",
+            "instance": "amd-20220326_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2022-02-03",
+            "accession": "0000002488-22-000016",
+            "primaryDocument": "amd-20211225.htm",
+            "instance": "amd-20211225_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2021-10-27",
+            "accession": "0000002488-21-000178",
+            "primaryDocument": "amd-20210925.htm",
+            "instance": "amd-20210925_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2021-07-28",
+            "accession": "0000002488-21-000116",
+            "primaryDocument": "amd-20210626.htm",
+            "instance": "amd-20210626_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2021-04-28",
+            "accession": "0000002488-21-000056",
+            "primaryDocument": "amd-20210327.htm",
+            "instance": "amd-20210327_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2021-01-29",
+            "accession": "0001628280-21-001185",
+            "primaryDocument": "amd-20201226.htm",
+            "instance": "amd-20201226_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2020-10-28",
+            "accession": "0000002488-20-000164",
+            "primaryDocument": "amd-20200926.htm",
+            "instance": "amd-20200926_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2020-07-29",
+            "accession": "0000002488-20-000103",
+            "primaryDocument": "amd-20200627.htm",
+            "instance": "amd-20200627_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2020-04-29",
+            "accession": "0000002488-20-000051",
+            "primaryDocument": "amdq1fy2010q.htm",
+            "instance": "amdq1fy2010q_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2020-02-04",
+            "accession": "0000002488-20-000008",
+            "primaryDocument": "amdform10-kfy2019.htm",
+            "instance": "amdform10-kfy2019_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2019-10-30",
+            "accession": "0000002488-19-000159",
+            "primaryDocument": "amd0928201910q.htm",
+            "instance": "amd0928201910q_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2019-07-31",
+            "accession": "0000002488-19-000104",
+            "primaryDocument": "amd0629201910q.htm",
+            "instance": "amd0629201910q_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2019-05-01",
+            "accession": "0000002488-19-000045",
+            "primaryDocument": "amd0330201910q.htm",
+            "instance": "amd-20190330.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2019-02-08",
+            "accession": "0000002488-19-000011",
+            "primaryDocument": "amd-12292018x10k.htm",
+            "instance": "amd-20181229.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2018-10-31",
+            "accession": "0000002488-18-000189",
+            "primaryDocument": "amd0929201810q.htm",
+            "instance": "amd-20180929.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2018-08-02",
+            "accession": "0000002488-18-000128",
+            "primaryDocument": "amd0630201810q.htm",
+            "instance": "amd-20180630.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2018-05-03",
+            "accession": "0000002488-18-000068",
+            "primaryDocument": "amd0331201810q.htm",
+            "instance": "amd-20180331.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2018-02-27",
+            "accession": "0000002488-18-000042",
+            "primaryDocument": "amd-12302017x10k.htm",
+            "instance": "amd-20171230.xml"
+          },
+          {
+            "title": "AMD Fourth Quarter and Full Year 2025 Financial Results",
+            "quarter": "2025Q4",
+            "filingDate": "2026-02-03",
+            "url": "https://www.amd.com/en/newsroom/press-releases/2026-2-3-amd-reports-fourth-quarter-and-full-year-2025-fina.html"
+          },
+          {
+            "title": "AMD Second Quarter 2026 Financial Results",
+            "quarter": "2026Q2",
+            "filingDate": "2026-08-04",
+            "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
+          }
+        ],
+        "errors": []
+      },
       "officialSegmentHistory": {}
     },
     {

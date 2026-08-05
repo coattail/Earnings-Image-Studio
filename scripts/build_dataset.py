@@ -337,6 +337,13 @@ AMD_OFFICIAL_SEGMENT_REVENUE_CORRECTIONS: dict[str, dict[str, Any]] = {
         "filingDate": "2026-05-05",
         "segments": {"datacenter": 5.775, "client": 2.885, "gaming": 0.720, "embedded": 0.873},
     },
+    "2026Q2": {
+        "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+        "filingDate": "2026-08-04",
+        "segments": {"datacenter": 6.718, "client": 3.062, "gaming": 0.779, "embedded": 0.977},
+        "yoyPct": {"datacenter": 107.35, "client": 22.53, "gaming": -30.57, "embedded": 18.57},
+        "mixYoyDeltaPp": {"datacenter": 16.1, "client": -6.0, "gaming": -7.8, "embedded": -2.3},
+    },
 }
 
 AMD_OFFICIAL_FINANCIAL_ENTRY_CORRECTIONS: dict[str, dict[str, Any]] = {
@@ -397,6 +404,63 @@ AMD_OFFICIAL_FINANCIAL_ENTRY_CORRECTIONS: dict[str, dict[str, Any]] = {
         "statementSource": "manual-amd-official",
         "statementSourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1284/amd-reports-first-quarter-2026-financial-results",
         "statementFilingDate": "2026-05-05",
+    },
+    "2026Q2": {
+        "calendarQuarter": "2026Q2",
+        "periodEnd": "2026-06-27",
+        "fiscalYear": "2026",
+        "fiscalQuarter": "Q2",
+        "fiscalLabel": "FY2026 Q2",
+        "statementCurrency": "USD",
+        "displayCurrency": "USD",
+        "displayScaleFactor": 1,
+        "revenueBn": 11.536,
+        "revenueYoyPct": 50.111,
+        "costOfRevenueBn": 5.333,
+        "grossProfitBn": 6.203,
+        "sgnaBn": 1.401,
+        "rndBn": 2.528,
+        "otherOpexBn": 0.284,
+        "operatingExpensesBn": 4.213,
+        "operatingIncomeBn": 1.990,
+        "pretaxIncomeBn": 2.551,
+        "taxBn": 0.252,
+        "netIncomeBn": 2.297,
+        "equityIncomeBn": 0.006,
+        "discontinuedOperationsBn": -0.008,
+        "netIncomeYoyPct": 163.417,
+        "nonOperatingBn": 0.561,
+        "grossMarginPct": 53.771,
+        "operatingMarginPct": 17.250,
+        "profitMarginPct": 19.912,
+        "effectiveTaxRatePct": 9.878,
+        "revenueQoqPct": 12.513,
+        "grossMarginYoyDeltaPp": 13.966,
+        "operatingMarginYoyDeltaPp": 18.994,
+        "profitMarginYoyDeltaPp": 8.565,
+        "statementSource": "manual-amd-official",
+        "statementSourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+        "statementFilingDate": "2026-08-04",
+        "officialOpexBreakdown": [
+            {
+                "name": "Research and Development",
+                "nameZh": "研发",
+                "memberKey": "researchanddevelopment",
+                "valueBn": 2.528,
+            },
+            {
+                "name": "Marketing, General and Administrative",
+                "nameZh": "营销、一般及行政",
+                "memberKey": "marketinggeneralandadministrative",
+                "valueBn": 1.401,
+            },
+            {
+                "name": "Amortization of Acquisition-related Intangibles",
+                "nameZh": "收购相关无形资产摊销",
+                "memberKey": "amortizationofacquisitionrelatedintangibles",
+                "valueBn": 0.284,
+            },
+        ],
     },
 }
 
@@ -1048,6 +1112,12 @@ def apply_amd_official_segment_revenue_corrections(company_payload: dict[str, An
         source_url = str(correction.get("sourceUrl") or "")
         filing_date = str(correction.get("filingDate") or "")
         segments = correction.get("segments")
+        segment_yoy = correction.get("yoyPct") if isinstance(correction.get("yoyPct"), dict) else {}
+        mix_yoy_delta = (
+            correction.get("mixYoyDeltaPp")
+            if isinstance(correction.get("mixYoyDeltaPp"), dict)
+            else {}
+        )
         if not isinstance(segments, dict):
             continue
         rows: list[dict[str, Any]] = []
@@ -1063,10 +1133,10 @@ def apply_amd_official_segment_revenue_corrections(company_payload: dict[str, An
                     "nameZh": name_zh,
                     "memberKey": member_key,
                     "valueBn": round(value_bn, 3),
-                    "yoyPct": None,
+                    "yoyPct": _safe_float(segment_yoy.get(member_key)),
                     "qoqPct": None,
                     "mixPct": round(value_bn / revenue_bn * 100, 1) if revenue_bn and revenue_bn > 0 else None,
-                    "mixYoyDeltaPp": None,
+                    "mixYoyDeltaPp": _safe_float(mix_yoy_delta.get(member_key)),
                     "sourceUrl": source_url,
                     "sourceForm": "QuarterlyResultsRelease",
                     "filingDate": filing_date,
@@ -1083,9 +1153,86 @@ def apply_amd_official_segment_revenue_corrections(company_payload: dict[str, An
             if "amd-official-segment-label-correction" not in flags:
                 flags.append("amd-official-segment-label-correction")
             entry["qualityFlags"] = flags
+            if quarter_key == "2026Q2":
+                history = company_payload.get("officialRevenueStructureHistory")
+                if not isinstance(history, dict):
+                    history = {
+                        "source": "manual-official-quarterly-results",
+                        "quarters": {},
+                        "filingsUsed": [],
+                        "errors": [],
+                    }
+                    company_payload["officialRevenueStructureHistory"] = history
+                history_quarters = history.setdefault("quarters", {})
+                if isinstance(history_quarters, dict):
+                    history_quarters[quarter_key] = {"segments": deepcopy(rows)}
+                filings_used = history.setdefault("filingsUsed", [])
+                if isinstance(filings_used, list) and not any(
+                    str(row.get("quarter") or "") == quarter_key
+                    for row in filings_used
+                    if isinstance(row, dict)
+                ):
+                    filings_used.append(
+                        {
+                            "title": "AMD Second Quarter 2026 Financial Results",
+                            "quarter": quarter_key,
+                            "filingDate": filing_date,
+                            "url": source_url,
+                        }
+                    )
 
     enrich_growth_rows(financials, "officialRevenueSegments")
     company_payload["quarters"] = sorted(financials.keys(), key=parse_period)
+    return company_payload
+
+
+def apply_amd_latest_official_correction(company_payload: dict[str, Any]) -> dict[str, Any]:
+    if str(company_payload.get("id") or "").strip().lower() != "amd":
+        return company_payload
+    financials = company_payload.get("financials")
+    if not isinstance(financials, dict):
+        return company_payload
+
+    existing_financials = deepcopy(financials)
+    existing_history = deepcopy(company_payload.get("officialRevenueStructureHistory"))
+    corrected = apply_amd_official_segment_revenue_corrections(deepcopy(company_payload))
+    latest_entry = (corrected.get("financials") or {}).get("2026Q2")
+    if not isinstance(latest_entry, dict):
+        return company_payload
+
+    existing_financials["2026Q2"] = deepcopy(latest_entry)
+    company_payload["financials"] = existing_financials
+    corrected_history = corrected.get("officialRevenueStructureHistory")
+    corrected_history_quarters = (
+        corrected_history.get("quarters") if isinstance(corrected_history, dict) else None
+    )
+    if isinstance(corrected_history_quarters, dict) and isinstance(
+        corrected_history_quarters.get("2026Q2"), dict
+    ):
+        if not isinstance(existing_history, dict):
+            existing_history = {
+                "source": "manual-official-quarterly-results",
+                "quarters": {},
+                "filingsUsed": [],
+                "errors": [],
+            }
+        history_quarters = existing_history.setdefault("quarters", {})
+        if isinstance(history_quarters, dict):
+            history_quarters["2026Q2"] = deepcopy(corrected_history_quarters["2026Q2"])
+        corrected_filings = corrected_history.get("filingsUsed")
+        filings_used = existing_history.setdefault("filingsUsed", [])
+        if isinstance(corrected_filings, list) and isinstance(filings_used, list):
+            for filing in corrected_filings:
+                if not isinstance(filing, dict) or filing.get("quarter") != "2026Q2":
+                    continue
+                if not any(
+                    isinstance(row, dict) and row.get("quarter") == "2026Q2"
+                    for row in filings_used
+                ):
+                    filings_used.append(deepcopy(filing))
+        company_payload["officialRevenueStructureHistory"] = existing_history
+
+    company_payload["quarters"] = sorted(existing_financials.keys(), key=parse_period)
     return company_payload
 
 
@@ -3842,22 +3989,30 @@ def main() -> int:
         print(f"[build] {company['ticker']} ...", flush=True)
         payload: dict[str, Any] | None = None
         if not args.refresh:
-            cached_payload = load_cached_company_payload(company["id"])
+            existing_payload = existing_companies_by_id.get(str(company["id"]))
+            cached_payload = (
+                existing_payload
+                if getattr(args, "cache_supplement_only", False) and isinstance(existing_payload, dict)
+                else load_cached_company_payload(company["id"])
+            )
             if isinstance(cached_payload, dict):
                 payload = deepcopy(cached_payload)
                 payload = supplement_apple_earnings_release_financials(payload)
-                try:
-                    payload = merge_official_revenue_structure_history(payload, company, refresh=False)
-                except Exception as exc:  # noqa: BLE001
-                    diagnostics = payload.get("parserDiagnostics")
-                    if not isinstance(diagnostics, dict):
-                        diagnostics = {}
-                    diagnostics["revenueStructureCacheSupplementError"] = str(exc)
-                    payload["parserDiagnostics"] = diagnostics
-                payload = merge_official_financial_breakdowns(payload, company)
-                payload = apply_manual_company_override(payload, company, manual_company_overrides)
-                payload = apply_korean_revenue_history(payload, company)
-                payload = apply_usd_display_fields(payload, fx_cache)
+                if not getattr(args, "cache_supplement_only", False):
+                    try:
+                        payload = merge_official_revenue_structure_history(payload, company, refresh=False)
+                    except Exception as exc:  # noqa: BLE001
+                        diagnostics = payload.get("parserDiagnostics")
+                        if not isinstance(diagnostics, dict):
+                            diagnostics = {}
+                        diagnostics["revenueStructureCacheSupplementError"] = str(exc)
+                        payload["parserDiagnostics"] = diagnostics
+                    payload = merge_official_financial_breakdowns(payload, company)
+                payload = apply_amd_latest_official_correction(payload)
+                if not getattr(args, "cache_supplement_only", False):
+                    payload = apply_manual_company_override(payload, company, manual_company_overrides)
+                    payload = apply_korean_revenue_history(payload, company)
+                    payload = apply_usd_display_fields(payload, fx_cache)
         if payload is None:
             try:
                 payload = build_company_payload_for_dataset(
@@ -3871,10 +4026,15 @@ def main() -> int:
                 print(f"  failed: {exc}", file=sys.stderr, flush=True)
                 continue
         payload = preserve_existing_company_history(payload, existing_companies_by_id.get(str(company["id"])))
-        payload = apply_korean_revenue_history(payload, company)
-        payload = sync_company_metadata(payload, company)
-        presets = manual_presets.get(str(company["id"])) or {}
-        payload = finalize_company_payload(company, payload, presets)
+        if getattr(args, "cache_supplement_only", False):
+            financials = payload.get("financials")
+            if isinstance(financials, dict):
+                payload["quarters"] = sorted(financials.keys(), key=parse_period)
+        else:
+            payload = apply_korean_revenue_history(payload, company)
+            payload = sync_company_metadata(payload, company)
+            presets = manual_presets.get(str(company["id"])) or {}
+            payload = finalize_company_payload(company, payload, presets)
         COMPANY_CACHE_DIR.mkdir(parents=True, exist_ok=True)
         (COMPANY_CACHE_DIR / f"{company['id']}.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
         results_by_company_id[company["id"]] = payload
@@ -3888,9 +4048,9 @@ def main() -> int:
             if getattr(args, "cache_supplement_only", False):
                 existing_payload = existing_companies_by_id.get(str(company["id"]))
                 if isinstance(existing_payload, dict):
-                    results_by_company_id[company["id"]] = sync_company_metadata(existing_payload, company)
+                    results_by_company_id[company["id"]] = deepcopy(existing_payload)
                 elif isinstance(cached_payload, dict):
-                    results_by_company_id[company["id"]] = sync_company_metadata(cached_payload, company)
+                    results_by_company_id[company["id"]] = deepcopy(cached_payload)
                 continue
             if is_company_payload_cache_compatible(cached_payload):
                 presets = manual_presets.get(str(company["id"])) or {}
