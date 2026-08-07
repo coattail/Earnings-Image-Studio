@@ -148,7 +148,7 @@ test("PLTR uses the three official operating-expense categories across history a
   }
 });
 
-test("PLTR historical profit chain follows a smooth upward line with a small downward bias", () => {
+test("PLTR historical profit chain stays smooth after sub-display bridges are omitted", () => {
   const { svg } = renderPltr(loadRuntime(), {}, "2023Q4");
   const gross = nodeRect(svg, "gross");
   const operating = nodeRect(svg, "operating");
@@ -160,7 +160,7 @@ test("PLTR historical profit chain follows a smooth upward line with a small dow
 
   assert.ok(gross.top > operating.top && operating.top > net.top, "profit chain should rise at every stage");
   assert.ok(
-    operating.top - straightOperatingTop >= 6 && operating.top - straightOperatingTop <= 18,
+    operating.top - straightOperatingTop >= 18 && operating.top - straightOperatingTop <= 32,
     `operating node should sit just below the straight interpolation: ${operating.top - straightOperatingTop}`
   );
 });
@@ -200,15 +200,15 @@ test("dragging PLTR operating profit does not move any sibling or downstream nod
   }
 });
 
-test("PLTR historical net-profit thickness is explained by explicit bridge flows", () => {
+test("PLTR historical sub-display bridge remains implicit instead of showing 0.0B", () => {
   const { snapshot, svg } = renderPltr(loadRuntime(), {}, "2023Q4");
   const operating = nodeRect(svg, "operating");
   const net = nodeRect(svg, "net");
-  const positive = nodeRect(svg, "positive-0");
 
   assert.ok(net.height > operating.height, "the historical net node is expected to be thicker");
-  assert.ok(positive.height > 0, "the positive bridge inflow must be visible");
-  assert.equal(Number(snapshot.positiveAdjustments[0].valueBn.toFixed(3)), 0.04);
+  assert.equal(snapshot.positiveAdjustments.length, 0);
+  assert.doesNotMatch(svg, /data-edit-node-visible-id="positive-0"/);
+  assert.doesNotMatch(svg, /\$0\.0B/);
 });
 
 test("PLTR 2020Q4 loss contraction is exactly offset by a visible small gain", () => {

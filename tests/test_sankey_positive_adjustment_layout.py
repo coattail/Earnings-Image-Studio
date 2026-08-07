@@ -211,6 +211,14 @@ def viewbox_height(svg_root: ET.Element) -> float:
 
 
 class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
+    def test_nvidia_q4_fy23_omits_non_operating_bridge_that_displays_as_zero(self) -> None:
+        svg_root = render_sankey_svg(NVIDIA_PAYLOAD, "zh", "nvidia-q4-fy23-zero-bridge", quarter="2023Q1")
+        svg_text = svg_text_content(svg_root)
+
+        self.assertNotIn("营业外收益", svg_text)
+        self.assertNotIn("$0.0B", svg_text)
+        self.assertIn("税项收益", svg_text)
+
     def test_alphabet_q2_extreme_gain_preserves_main_inflection_and_direct_tax_fork(self) -> None:
         svg_root = render_sankey_svg(ALPHABET_PAYLOAD, "zh", "alphabet-q2-extreme-positive", quarter="2026Q2")
 

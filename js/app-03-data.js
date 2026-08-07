@@ -717,10 +717,28 @@ function financialBridgeMaterialityThreshold(entry = {}) {
   );
 }
 
+function financialBridgeValueRoundsToDisplayedZero(value, entry = {}) {
+  const rawScaleFactor = safeNumber(entry?.displayScaleFactor, 1);
+  const displayScaleFactor = rawScaleFactor > 0 ? rawScaleFactor : 1;
+  const displayedMagnitudeBn = Math.abs(safeNumber(value)) * displayScaleFactor;
+  // Bridge labels use one decimal by default. A node must not survive the
+  // materiality filter only to be presented as 0.0B after currency conversion.
+  return Number(displayedMagnitudeBn.toFixed(1)) === 0;
+}
+
+function isMaterialFinancialBridgeValue(value, entry = {}) {
+  const magnitudeBn = Math.abs(safeNumber(value));
+  return (
+    magnitudeBn > financialBridgeMaterialityThreshold(entry) &&
+    !financialBridgeValueRoundsToDisplayedZero(magnitudeBn, entry)
+  );
+}
+
 function isRenderableFinancialBridgeItem(item, entry = {}) {
   const valueBn = Math.max(safeNumber(item?.valueBn), 0);
-  if (valueBn > financialBridgeMaterialityThreshold(entry)) return true;
-  return item?.preserveForFlowConservation === true && valueBn > 0.0005;
+  if (isMaterialFinancialBridgeValue(valueBn, entry)) return true;
+  const usesPreciseValueLabel = String(item?.valueFormat || "").includes("precise");
+  return item?.preserveForFlowConservation === true && usesPreciseValueLabel && valueBn > 0.0005;
 }
 
 function resolveOperatingExpenseBreakdown(snapshot, company, entry) {
@@ -1770,11 +1788,15 @@ function buildGenericSnapshot(company, entry, quarterKey) {
         usePretaxResidualLabel: false,
       };
   const inferredNonOperatingBnRaw = hasRenderableGrossStage ? nonOperatingResolution.value : null;
-  const bridgeMaterialityThresholdBn = financialBridgeMaterialityThreshold(entry);
+  const bridgeVisibilityEntry = {
+    ...entry,
+    displayScaleFactor: displayConfig.displayScaleFactor,
+  };
+  const bridgeMaterialityThresholdBn = financialBridgeMaterialityThreshold(bridgeVisibilityEntry);
   const inferredNonOperatingBn =
     inferredNonOperatingBnRaw !== null &&
     inferredNonOperatingBnRaw !== undefined &&
-    Math.abs(safeNumber(inferredNonOperatingBnRaw)) > bridgeMaterialityThresholdBn
+    isMaterialFinancialBridgeValue(inferredNonOperatingBnRaw, bridgeVisibilityEntry)
       ? Number(safeNumber(inferredNonOperatingBnRaw).toFixed(3))
       : null;
   const grossMarginPct =
@@ -1856,7 +1878,7 @@ function buildGenericSnapshot(company, entry, quarterKey) {
       : financialFootnote;
   const explicitPositiveAdjustments = Array.isArray(entry.positiveAdjustments)
     ? entry.positiveAdjustments
-        .filter((item) => safeNumber(item?.valueBn) > bridgeMaterialityThresholdBn)
+        .filter((item) => isRenderableFinancialBridgeItem(item, bridgeVisibilityEntry))
         .map((item) => ({
           ...item,
           color: item?.color || "#16A34A",
@@ -1864,7 +1886,7 @@ function buildGenericSnapshot(company, entry, quarterKey) {
     : null;
   const explicitBelowOperatingItems = Array.isArray(entry.belowOperatingItems)
     ? entry.belowOperatingItems
-        .filter((item) => safeNumber(item?.valueBn) > bridgeMaterialityThresholdBn)
+        .filter((item) => isRenderableFinancialBridgeItem(item, bridgeVisibilityEntry))
         .map((item) => ({
           ...item,
           color: item?.color || "#D92D20",
@@ -1885,9 +1907,9 @@ function buildGenericSnapshot(company, entry, quarterKey) {
   const hasMaterialNonOperating =
     inferredNonOperatingBn !== null &&
     inferredNonOperatingBn !== undefined &&
-    Math.abs(safeNumber(inferredNonOperatingBn)) > bridgeMaterialityThresholdBn;
+    isMaterialFinancialBridgeValue(inferredNonOperatingBn, bridgeVisibilityEntry);
   const hasMaterialTax =
-    taxBn !== null && taxBn !== undefined && Math.abs(taxBn) > bridgeMaterialityThresholdBn;
+    taxBn !== null && taxBn !== undefined && isMaterialFinancialBridgeValue(taxBn, bridgeVisibilityEntry);
   const netTaxWithNonOperating =
     hasRenderableGrossStage &&
     hasMaterialNonOperating &&
@@ -1899,7 +1921,7 @@ function buildGenericSnapshot(company, entry, quarterKey) {
     // inferred aggregate non-operating line.
   } else if (netTaxWithNonOperating) {
     const netNonOperatingAfterTaxBn = safeNumber(inferredNonOperatingBn) - taxBn;
-    if (Math.abs(netNonOperatingAfterTaxBn) > bridgeMaterialityThresholdBn) {
+    if (isMaterialFinancialBridgeValue(netNonOperatingAfterTaxBn, bridgeVisibilityEntry)) {
       const netPositiveLabel = normalizedEntry.usePretaxResidualLabel
         ? {
             name: "Net other pretax gain",
@@ -1953,14 +1975,14 @@ function buildGenericSnapshot(company, entry, quarterKey) {
     };
     const positiveLabel = normalizedEntry.usePretaxResidualLabel ? residualPositiveLabel : standardPositiveLabel;
     const negativeLabel = normalizedEntry.usePretaxResidualLabel ? residualNegativeLabel : standardNegativeLabel;
-    if (inferredNonOperatingBn > bridgeMaterialityThresholdBn) {
+    if (inferredNonOperatingBn > 0 && isMaterialFinancialBridgeValue(inferredNonOperatingBn, bridgeVisibilityEntry)) {
       positiveAdjustments.push({
         name: positiveLabel.name,
         nameZh: positiveLabel.nameZh,
         valueBn: Math.abs(inferredNonOperatingBn),
         color: "#16A34A",
       });
-    } else if (inferredNonOperatingBn < -bridgeMaterialityThresholdBn) {
+    } else if (inferredNonOperatingBn < 0 && isMaterialFinancialBridgeValue(inferredNonOperatingBn, bridgeVisibilityEntry)) {
       belowOperatingItems.push({
         name: negativeLabel.name,
         nameZh: negativeLabel.nameZh,
@@ -1969,13 +1991,25 @@ function buildGenericSnapshot(company, entry, quarterKey) {
       });
     }
   }
-  if (!hasExplicitNetBridge && !netTaxWithNonOperating && hasRenderableGrossStage && taxBn && taxBn > bridgeMaterialityThresholdBn) {
+  if (
+    !hasExplicitNetBridge &&
+    !netTaxWithNonOperating &&
+    hasRenderableGrossStage &&
+    taxBn > 0 &&
+    isMaterialFinancialBridgeValue(taxBn, bridgeVisibilityEntry)
+  ) {
     belowOperatingItems.push({
       name: "Tax",
       valueBn: Math.abs(taxBn),
       color: "#D92D20",
     });
-  } else if (!hasExplicitNetBridge && !netTaxWithNonOperating && hasRenderableGrossStage && taxBn && taxBn < -bridgeMaterialityThresholdBn) {
+  } else if (
+    !hasExplicitNetBridge &&
+    !netTaxWithNonOperating &&
+    hasRenderableGrossStage &&
+    taxBn < 0 &&
+    isMaterialFinancialBridgeValue(taxBn, bridgeVisibilityEntry)
+  ) {
     positiveAdjustments.push({
       name: "Tax benefit",
       nameZh: "税项收益",
@@ -1998,7 +2032,12 @@ function buildGenericSnapshot(company, entry, quarterKey) {
         ? Math.max(0.0005, Math.abs(targetNetBridgeBn) * 0.002)
         : Math.max(bridgeMaterialityThresholdBn, Math.abs(targetNetBridgeBn) * 0.005)
       : 0;
-  if (hasRenderableGrossStage && netBridgeResidualBn !== null && Math.abs(netBridgeResidualBn) > netBridgeResidualTolerance) {
+  if (
+    hasRenderableGrossStage &&
+    netBridgeResidualBn !== null &&
+    Math.abs(netBridgeResidualBn) > netBridgeResidualTolerance &&
+    (requiresNetLossFlowConservation || isMaterialFinancialBridgeValue(netBridgeResidualBn, bridgeVisibilityEntry))
+  ) {
     if (netBridgeResidualBn > 0) {
       positiveAdjustments.push({
         name: "Other net gain",
