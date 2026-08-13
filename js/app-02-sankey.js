@@ -5410,6 +5410,41 @@ function renderPixelReplicaSvg(snapshot) {
         ? 0
         : (targetFlowCenterY - detailFlowCenterY) * balanceStrength;
 
+      // A centered detail fan can still form a visible corner when the parent
+      // immediately continues toward a higher or lower revenue band. Extend
+      // that downstream direction through the parent so the incoming and
+      // outgoing ribbons read as one continuous trajectory.
+      if (!usesDenseDetailLift && detailCount >= 2 && outerDominanceStrength <= 0) {
+        const revenueOffset = balancedLayoutOffsetForNode("revenue");
+        const revenueBandCenterY =
+          (safeNumber(targetSlice.revenueTop, targetSlice.center) +
+            safeNumber(targetSlice.revenueBottom, targetSlice.center)) /
+            2 +
+          revenueOffset.dy;
+        const downstreamDeltaY = revenueBandCenterY - targetFlowCenterY;
+        const targetNodeX = safeNumber(targetSlice.nodeX, leftX) + targetOffset.dx;
+        const detailExitX = leftDetailX + leftDetailWidth;
+        const targetExitX = targetNodeX + sourceNodeWidth;
+        const revenueEntryX = revenueX + revenueOffset.dx;
+        const incomingRunX = Math.max(targetNodeX - detailExitX, 1);
+        const outgoingRunX = Math.max(revenueEntryX - targetExitX, 1);
+        const continuityStrength = clamp(
+          safeNumber(snapshot.layout?.hierarchicalRevenueFlowContinuityStrength, 0.46),
+          0,
+          1
+        );
+        const continuityMaxShiftY = Math.min(
+          scaleY(safeNumber(snapshot.layout?.hierarchicalRevenueFlowContinuityMaxShiftY, 84)),
+          targetSlice.height * safeNumber(snapshot.layout?.hierarchicalRevenueFlowContinuityHeightFactor, 0.3)
+        );
+        const continuityShiftY = clamp(
+          -downstreamDeltaY * (incomingRunX / outgoingRunX) * continuityStrength,
+          -continuityMaxShiftY,
+          continuityMaxShiftY
+        );
+        groupShiftY += continuityShiftY;
+      }
+
       const outerDominantOffsetsY = balancedFrames.map((_frame, index) => {
         if (!(outerDominantFanAmplitudeY > 0) || detailCount <= 1) return 0;
         const positionNorm = index / (detailCount - 1);
@@ -8996,6 +9031,27 @@ function renderPixelReplicaSvg(snapshot) {
       positiveProminenceRatio >= safeNumber(snapshot.layout?.positiveProminentThresholdRatio, 0.6);
     const positiveMergeShareOfNet =
       totalPositiveMergeHeight / Math.max(coreNetTargetHeight + totalPositiveMergeHeight, 1);
+    const positiveSmallAdjustmentStrength =
+      positiveUpperLane &&
+      !useExtremePositiveLayout &&
+      !usesExtremePositiveTopLane &&
+      positiveAdjustments.length === 1
+        ? clamp(
+            (safeNumber(snapshot.layout?.positiveSmallAdjustmentThresholdRatio, 0.16) -
+              positiveMergeShareOfNet) /
+              Math.max(safeNumber(snapshot.layout?.positiveSmallAdjustmentActivationSpan, 0.12), 0.01),
+            0,
+            1
+          )
+        : 0;
+    const positiveSmallAdjustmentLabelLiftY =
+      positiveSmallAdjustmentStrength > 0
+        ? Math.max(
+            scaleY(safeNumber(snapshot.layout?.positiveSmallAdjustmentMinLiftY, 42)),
+            positiveLabelBlockHeight *
+              safeNumber(snapshot.layout?.positiveSmallAdjustmentLabelLiftFactor, 0.62)
+          ) * positiveSmallAdjustmentStrength
+        : 0;
     const positiveMaterialAbove =
       positiveAbove &&
       totalPositiveStackHeight >= scaleY(safeNumber(snapshot.layout?.positiveMaterialMinimumHeightY, 36)) &&
@@ -9387,7 +9443,7 @@ function renderPixelReplicaSvg(snapshot) {
           desiredLiftY * (positiveAbove ? 1 - positiveNetAffinityStrength * 0.44 : 1)
         );
         const desiredCenter = positiveAbove
-          ? positiveTargetStackCenter - netAffinityAdjustedLiftY
+          ? positiveTargetStackCenter - netAffinityAdjustedLiftY - positiveSmallAdjustmentLabelLiftY
           : positiveTargetStackCenter + netAffinityAdjustedLiftY;
         const positiveProminentMaxMergeDeltaY = positiveProminentAbove
           ? Math.max(
@@ -9482,17 +9538,18 @@ function renderPixelReplicaSvg(snapshot) {
           const branchDirectionDelta = positiveAbove
             ? positiveTargetStackCenter - sourceCenter
             : sourceCenter - positiveTargetStackCenter;
-          const preferredDirectionDelta = Math.max(
-            scaleY(safeNumber(snapshot.layout?.positiveBranchPreferredDeltaY, 30)),
-            preferredVisualGapY * safeNumber(snapshot.layout?.positiveBranchPreferredDeltaGapFactor, positiveAbove ? 0.92 : 0.72),
-            positiveReferenceHeight *
-              safeNumber(
-                snapshot.layout?.positiveBranchPreferredDeltaHeightFactor,
-                positiveAbove
-                  ? Math.max(1.08, 2.15 - positiveAdjustmentExtremeStrength * 0.84 - positiveNetAffinityStrength * 0.38)
-                  : 1.28
-              )
-          );
+          const preferredDirectionDelta =
+            Math.max(
+              scaleY(safeNumber(snapshot.layout?.positiveBranchPreferredDeltaY, 30)),
+              preferredVisualGapY * safeNumber(snapshot.layout?.positiveBranchPreferredDeltaGapFactor, positiveAbove ? 0.92 : 0.72),
+              positiveReferenceHeight *
+                safeNumber(
+                  snapshot.layout?.positiveBranchPreferredDeltaHeightFactor,
+                  positiveAbove
+                    ? Math.max(1.08, 2.15 - positiveAdjustmentExtremeStrength * 0.84 - positiveNetAffinityStrength * 0.38)
+                    : 1.28
+                )
+            ) + positiveSmallAdjustmentLabelLiftY;
           const branchDirectionShortfall = Math.max(preferredDirectionDelta - branchDirectionDelta, 0);
           const excessiveBranchDirectionAllowance = preferredDirectionDelta * safeNumber(
             snapshot.layout?.positiveBranchExcessiveDeltaAllowanceFactor,
@@ -9619,7 +9676,8 @@ function renderPixelReplicaSvg(snapshot) {
         const positiveAestheticNudgeY =
           scaleY(safeNumber(snapshot.layout?.positiveAestheticNudgeY, positiveAbove ? 40 : 0)) *
           positiveAestheticNudgeStrength *
-          (1 - positiveAdjustmentExtremeStrength);
+          (1 - positiveAdjustmentExtremeStrength) *
+          (1 - positiveSmallAdjustmentStrength);
         positiveNodeX = clamp(
           bestNodePlacement.nodeX + positiveAestheticNudgeX,
           extremePositiveTopLaneMinX,
@@ -9744,6 +9802,46 @@ function renderPixelReplicaSvg(snapshot) {
       );
       corridorSampleXs = positiveCorridorSampleXsForNode(positiveNodeX);
     }
+    if (positiveUpperLane && positiveSmallAdjustmentStrength > 0 && periodEndObstacle) {
+      const smallAdjustmentLabelGapX = safeNumber(snapshot.layout?.positiveLabelGapX, 14);
+      const smallAdjustmentLabelLeftX =
+        positiveNodeX - smallAdjustmentLabelGapX - maxPositiveLabelBlockWidth;
+      const smallAdjustmentDateClearanceX = scaleY(
+        safeNumber(snapshot.layout?.positiveSmallAdjustmentDateClearanceX, 24)
+      );
+      const requiredDateClearanceShiftX =
+        periodEndObstacle.right + smallAdjustmentDateClearanceX - smallAdjustmentLabelLeftX;
+      const smallAdjustmentMaxRightShiftX = scaleY(
+        safeNumber(snapshot.layout?.positiveSmallAdjustmentMaxRightShiftX, 48)
+      );
+      const smallAdjustmentRightShiftX =
+        clamp(requiredDateClearanceShiftX, 0, smallAdjustmentMaxRightShiftX) *
+        positiveSmallAdjustmentStrength;
+      positiveNodeX = clamp(
+        positiveNodeX + smallAdjustmentRightShiftX,
+        extremePositiveTopLaneMinX,
+        Math.max(positiveNodeMaxX, extremePositiveTopLaneMinX)
+      );
+      corridorSampleXs = positiveCorridorSampleXsForNode(positiveNodeX);
+    }
+    if (positiveUpperLane && positiveSmallAdjustmentStrength > 0) {
+      const smallAdjustmentSourceTopFloorY =
+        positiveExtremeTopFloorY +
+        (scaleY(safeNumber(snapshot.layout?.positiveSmallAdjustmentSourceTopFloorY, 100)) -
+          positiveExtremeTopFloorY) *
+          positiveSmallAdjustmentStrength;
+      const smallAdjustmentPreferredTopY = Math.max(
+        netFrame.top -
+          positiveSmallAdjustmentLabelLiftY -
+          scaleY(safeNumber(snapshot.layout?.positiveSmallAdjustmentNetClearanceY, 8)),
+        smallAdjustmentSourceTopFloorY
+      );
+      positiveTop = clamp(
+        Math.min(positiveTop, smallAdjustmentPreferredTopY),
+        Math.min(positiveTopMin, smallAdjustmentSourceTopFloorY),
+        positiveTopMax
+      );
+    }
     const placedPositiveLabelRects = [];
     let netPositiveCursor = netPositiveTop;
     const positiveStackStartY = positiveTop;
@@ -9836,7 +9934,12 @@ function renderPixelReplicaSvg(snapshot) {
           ? positiveAngledSourceTopFloorY
           : positiveMaterialAbove
             ? positiveSourceTopFloorY
-            : positiveExtremeTopFloorY,
+            : positiveSmallAdjustmentStrength > 0
+              ? positiveExtremeTopFloorY +
+                (scaleY(safeNumber(snapshot.layout?.positiveSmallAdjustmentSourceTopFloorY, 100)) -
+                  positiveExtremeTopFloorY) *
+                  positiveSmallAdjustmentStrength
+              : positiveExtremeTopFloorY,
         chartBottomLimit - gainHeight - scaleY(6)
       );
       const sourceTopSearchMax = clamp(
@@ -10544,7 +10647,7 @@ function renderPixelReplicaSvg(snapshot) {
       positiveMarkup += renderEditableNodeRect(positiveFrame, greenNode);
       const forceLeftCenteredLabel = snapshot.layout?.positiveLabelPlacement === "left-center";
       const alignSingleLeftLabelToNode =
-        positiveNeedsVisibleMergeAngle &&
+        (positiveNeedsVisibleMergeAngle || positiveSmallAdjustmentStrength > 0) &&
         positiveAdjustments.length === 1 &&
         chosenPlacement.type === "left" &&
         snapshot.layout?.positiveSingleLeftLabelFollowNodeCenter !== false;

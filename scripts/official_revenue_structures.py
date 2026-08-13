@@ -1257,6 +1257,107 @@ def _quarter_from_tencent_title(title: str) -> tuple[str, str] | tuple[None, Non
     return None, None
 
 
+def _extract_tencent_result_links(html_text: str) -> list[dict[str, str]]:
+    """Extract Tencent earnings-release links from both legacy and 2026+ IR pages."""
+    records: list[dict[str, str]] = []
+    seen_urls: set[str] = set()
+
+    legacy_link_pattern = re.compile(
+        r'<a\b[^>]*class="[^"]*ten_finance_item[^"]*"[^>]*>(?P<body>.*?)</a>',
+        re.IGNORECASE | re.DOTALL,
+    )
+    for match in legacy_link_pattern.finditer(html_text):
+        anchor_html = match.group(0)
+        body_html = match.group("body")
+        url_match = re.search(r'href="(?P<url>https?://[^"]+?\.pdf(?:\?[^"]*)?)"', anchor_html, re.IGNORECASE)
+        if not url_match:
+            continue
+        pdf_url = unescape(url_match.group("url")).strip()
+        body_text = re.sub(r"<br\s*/?>", "\n", body_html, flags=re.IGNORECASE)
+        body_text = re.sub(r"<[^>]+>", " ", body_text)
+        body_lines = [
+            _normalize_text_space(unescape(line))
+            for line in body_text.split("\n")
+            if _normalize_text_space(unescape(line))
+        ]
+        if not body_lines:
+            continue
+        date_text = body_lines[0]
+        title = " ".join(body_lines[1:]) if len(body_lines) > 1 else body_lines[0]
+        title = re.sub(r"\s+PDF$", "", title, flags=re.IGNORECASE).strip()
+        if pdf_url in seen_urls or not title.lower().startswith("tencent announces"):
+            continue
+        seen_urls.add(pdf_url)
+        records.append({"title": title, "dateText": date_text, "pdfUrl": pdf_url})
+
+    heading_pattern = re.compile(
+        r'<h[23]\b[^>]*>\s*(?P<title>Tencent\s+Announces\s+[^<]*?Results)\s*</h[23]>',
+        re.IGNORECASE | re.DOTALL,
+    )
+    heading_matches = list(heading_pattern.finditer(html_text))
+    anchor_pattern = re.compile(
+        r'<a\b[^>]*href="(?P<url>https?://[^"]+?\.pdf(?:\?[^"]*)?)"[^>]*>(?P<body>.*?)</a>',
+        re.IGNORECASE | re.DOTALL,
+    )
+    for index, heading_match in enumerate(heading_matches):
+        title = _normalize_text_space(unescape(heading_match.group("title")))
+        body_end = heading_matches[index + 1].start() if index + 1 < len(heading_matches) else len(html_text)
+        body_html = html_text[heading_match.end():body_end]
+        for anchor_match in anchor_pattern.finditer(body_html):
+            anchor_text = _normalize_text_space(
+                unescape(re.sub(r"<[^>]+>", " ", anchor_match.group("body")))
+            )
+            if "earnings releases" not in anchor_text.lower():
+                continue
+            pdf_url = unescape(anchor_match.group("url")).strip()
+            if pdf_url in seen_urls:
+                break
+            seen_urls.add(pdf_url)
+            records.append({"title": title, "dateText": "", "pdfUrl": pdf_url})
+            break
+    return records
+
+
+def _extract_tencent_filing_date(date_text: str, pdf_url: str, pdf_text: str = "") -> str:
+    numeric_match = re.search(r"(\d{4})[./-](\d{2})[./-](\d{2})", date_text)
+    if not numeric_match:
+        numeric_match = re.search(r"/(\d{4})/(\d{2})/(\d{2})/", pdf_url)
+    if numeric_match:
+        return f"{numeric_match.group(1)}-{numeric_match.group(2)}-{numeric_match.group(3)}"
+
+    month_names = {
+        "january": 1,
+        "february": 2,
+        "march": 3,
+        "april": 4,
+        "may": 5,
+        "june": 6,
+        "july": 7,
+        "august": 8,
+        "september": 9,
+        "october": 10,
+        "november": 11,
+        "december": 12,
+    }
+    textual_match = re.search(
+        r"\b(" + "|".join(month_names) + r")\s+(\d{1,2}),\s+(\d{4})\b",
+        f"{date_text}\n{pdf_text[:5000]}",
+        re.IGNORECASE,
+    )
+    if textual_match:
+        month = month_names[textual_match.group(1).lower()]
+        return f"{int(textual_match.group(3)):04d}-{month:02d}-{int(textual_match.group(2)):02d}"
+    day_first_match = re.search(
+        r"\b(\d{1,2})\s+(" + "|".join(month_names) + r")\s+(\d{4})\b",
+        f"{date_text}\n{pdf_text[:5000]}",
+        re.IGNORECASE,
+    )
+    if not day_first_match:
+        return ""
+    month = month_names[day_first_match.group(2).lower()]
+    return f"{int(day_first_match.group(3)):04d}-{month:02d}-{int(day_first_match.group(1)):02d}"
+
+
 def _select_tencent_quarter_value(values: list[float], mode: str) -> float | None:
     cleaned = [float(item) for item in values if item is not None and float(item) > 0]
     if not cleaned:
@@ -3048,47 +3149,17 @@ def _parse_generic_segment_cache_records(company: dict[str, Any], refresh: bool 
 
 def _parse_tencent_records(company: dict[str, Any]) -> dict[str, Any]:
     result = {"source": "official-ir-pdf", "quarters": {}, "filingsUsed": [], "errors": [], "errorDetails": []}
-    html_text = _request("https://www.tencent.com/en-us/investors/financial-news").decode("utf-8", errors="ignore")
-    link_pattern = re.compile(
-        r'<a\b[^>]*class="[^"]*ten_finance_item[^"]*"[^>]*>(?P<body>.*?)</a>',
-        re.IGNORECASE | re.DOTALL,
-    )
-    seen_urls: set[str] = set()
-    for match in link_pattern.finditer(html_text):
-        anchor_html = match.group(0)
-        body_html = match.group("body")
-        url_match = re.search(r'href="(?P<url>https?://[^"]+?\.pdf(?:\?[^"]*)?)"', anchor_html, re.IGNORECASE)
-        if not url_match:
-            continue
-        pdf_url = unescape(url_match.group("url")).strip()
-        body_text = re.sub(r"<br\s*/?>", "\n", body_html, flags=re.IGNORECASE)
-        body_text = re.sub(r"<[^>]+>", " ", body_text)
-        body_lines = [
-            _normalize_text_space(unescape(line))
-            for line in body_text.split("\n")
-            if _normalize_text_space(unescape(line))
-        ]
-        if not body_lines:
-            continue
-        date_text = body_lines[0]
-        title = " ".join(body_lines[1:]) if len(body_lines) > 1 else body_lines[0]
-        title = re.sub(r"\s+PDF$", "", title, flags=re.IGNORECASE).strip()
-        if pdf_url in seen_urls or not title.lower().startswith("tencent announces"):
-            continue
-        seen_urls.add(pdf_url)
+    html_text = _request("https://www.tencent.com/investors/results/").decode("utf-8", errors="ignore")
+    for release in _extract_tencent_result_links(html_text):
+        pdf_url = release["pdfUrl"]
+        date_text = release["dateText"]
+        title = release["title"]
         quarter, mode = _quarter_from_tencent_title(title)
         if not quarter or not mode:
             continue
-        filing_date_match = re.search(r"(\d{4})[./-](\d{2})[./-](\d{2})", date_text)
-        if not filing_date_match:
-            filing_date_match = re.search(r"/(\d{4})/(\d{2})/(\d{2})/", pdf_url)
-        filing_date = (
-            f"{filing_date_match.group(1)}-{filing_date_match.group(2)}-{filing_date_match.group(3)}"
-            if filing_date_match
-            else ""
-        )
         try:
             raw_pdf_text = _extract_pdf_text(pdf_url)
+            filing_date = _extract_tencent_filing_date(date_text, pdf_url, raw_pdf_text)
             pdf_text = _normalize_text_space(raw_pdf_text)
             quarter_discussion = _extract_tencent_quarter_discussion(raw_pdf_text, quarter)
             top_level_rows = [
@@ -5934,9 +6005,12 @@ def fetch_official_revenue_structure_history(company: dict[str, Any], refresh: b
             result["errors"] = fallback_result.get("errors", [])
             result["errorDetails"] = deepcopy(fallback_result.get("errorDetails") or [])
 
+    reusable_cached_history = _is_current_revenue_structure_cache(cached_payload) or (
+        company_id == "tencent" and isinstance(cached_payload, dict)
+    )
     can_preserve_cached_quarters = (
-        not refresh
-        and _is_current_revenue_structure_cache(cached_payload)
+        (not refresh or company_id == "tencent")
+        and reusable_cached_history
         and isinstance(cached_payload, dict)
         and cached_payload.get("quarters")
     )

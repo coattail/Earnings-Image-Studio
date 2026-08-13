@@ -23,6 +23,7 @@ BERKSHIRE_PAYLOAD = ROOT_DIR / "data" / "cache" / "berkshire.json"
 ORACLE_PAYLOAD = ROOT_DIR / "data" / "cache" / "oracle.json"
 JD_PAYLOAD = ROOT_DIR / "data" / "cache" / "jd.json"
 NVIDIA_PAYLOAD = ROOT_DIR / "data" / "cache" / "nvidia.json"
+TENCENT_PAYLOAD = ROOT_DIR / "data" / "cache" / "tencent.json"
 SVG_NS = {"svg": "http://www.w3.org/2000/svg"}
 
 
@@ -202,6 +203,26 @@ def text_count(svg_root: ET.Element, text: str) -> int:
     return sum(1 for element in svg_root.findall(".//svg:text", SVG_NS) if "".join(element.itertext()).strip() == text)
 
 
+def approximate_text_width(text: str, font_size: float) -> float:
+    em_width = 0.0
+    for char in text:
+        if char.isspace():
+            em_width += 0.34
+        elif "\u3400" <= char <= "\u9fff":
+            em_width += 1.0
+        elif char in "MW@#%&":
+            em_width += 0.84
+        elif char.isascii() and (char.isupper() or char.isdigit() or char == "$"):
+            em_width += 0.66
+        elif char in "ilI1.,:;|!'":
+            em_width += 0.32
+        elif char in "()[]/\\_-":
+            em_width += 0.42
+        else:
+            em_width += 0.56
+    return em_width * font_size
+
+
 def viewbox_height(svg_root: ET.Element) -> float:
     viewbox = svg_root.attrib.get("viewBox", "")
     parts = viewbox.split()
@@ -211,6 +232,57 @@ def viewbox_height(svg_root: ET.Element) -> float:
 
 
 class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
+    def test_tencent_small_positive_adjustment_uses_lifted_label_lane(self) -> None:
+        svg_root = render_sankey_svg(
+            TENCENT_PAYLOAD,
+            "zh",
+            "tencent-q2-small-positive-lane",
+            quarter="2026Q2",
+        )
+        positive = visible_rect_attrs(svg_root, "positive-0")
+        net = visible_rect_attrs(svg_root, "net")
+        positive_label = find_text(svg_root, "营业外收益")
+        positive_label_y = float(positive_label.attrib["y"])
+        period_label = find_text(svg_root, "截至 2026年6月30日")
+        positive_value_candidates = [
+            element
+            for element in svg_root.findall(".//svg:text", SVG_NS)
+            if "".join(element.itertext()).strip() == "$0.4B" and float(element.attrib.get("x", 0)) > 1500
+        ]
+        self.assertEqual(len(positive_value_candidates), 1)
+        positive_value_y = float(positive_value_candidates[0].attrib["y"])
+
+        self.assertGreaterEqual(
+            net["y"] - (positive["y"] + positive["height"]),
+            48,
+            "A small gain node should keep a distinct upper lane instead of sitting flat against net profit.",
+        )
+        self.assertAlmostEqual(
+            positive_label_y,
+            positive["y"],
+            delta=14,
+            msg="The small gain label should follow the lifted node rather than remain in the crowded merge corridor.",
+        )
+        self.assertGreater(positive_value_y, positive_label_y)
+        period_label_right = float(period_label.attrib["x"]) + approximate_text_width(
+            "截至 2026年6月30日",
+            float(period_label.attrib["font-size"]),
+        )
+        positive_label_left = float(positive_label.attrib["x"]) - approximate_text_width(
+            "营业外收益",
+            float(positive_label.attrib["font-size"]),
+        )
+        self.assertGreaterEqual(
+            positive_label_left - period_label_right,
+            28,
+            "The small gain node should shift right until its label has visible horizontal clearance from the period date.",
+        )
+        self.assertGreaterEqual(
+            net["x"] - (positive["x"] + positive["width"]),
+            72,
+            "The date-avoidance shift should remain small enough to preserve a smooth merge runway into net profit.",
+        )
+
     def test_nvidia_q4_fy23_omits_non_operating_bridge_that_displays_as_zero(self) -> None:
         svg_root = render_sankey_svg(NVIDIA_PAYLOAD, "zh", "nvidia-q4-fy23-zero-bridge", quarter="2023Q1")
         svg_text = svg_text_content(svg_root)

@@ -27,6 +27,19 @@ def _company() -> dict[str, object]:
     }
 
 
+def _tencent_company() -> dict[str, object]:
+    return {
+        "id": "tencent",
+        "ticker": "TCEHY",
+        "slug": "tcehy",
+        "nameEn": "Tencent",
+        "nameZh": "腾讯控股",
+        "rank": 14.5,
+        "isAdr": True,
+        "brand": {},
+    }
+
+
 def _quarter_payload(quarter: str, member_key: str) -> dict[str, object]:
     return {
         "calendarQuarter": quarter,
@@ -156,6 +169,39 @@ class OfficialRevenueStructuresRefreshTests(unittest.TestCase):
 
         self.assertEqual(set(result["quarters"].keys()), {"2026Q1"})
         self.assertNotIn("2025Q4", result["quarters"])
+
+    def test_tencent_refresh_preserves_history_omitted_by_redesigned_results_page(self) -> None:
+        cached_payload = {
+            "_cacheVersion": "legacy-tencent-cache",
+            "source": "official-ir-pdf",
+            "quarters": {
+                "2024Q4": _quarter_payload("2024Q4", "legacy-quarter"),
+            },
+            "filingsUsed": [],
+            "errors": [],
+        }
+        fresh_result = {
+            "source": "official-ir-pdf",
+            "quarters": {
+                "2026Q2": _quarter_payload("2026Q2", "fresh-quarter"),
+            },
+            "filingsUsed": [],
+            "errors": [],
+        }
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            cache_path = Path(tmp_dir) / "tencent.json"
+            cache_path.write_text(json.dumps(cached_payload), encoding="utf-8")
+
+            with (
+                patch.object(official_revenue_structures, "_cache_path", return_value=cache_path),
+                patch.object(official_revenue_structures, "_parse_tencent_records", return_value=fresh_result),
+            ):
+                result = official_revenue_structures.fetch_official_revenue_structure_history(
+                    _tencent_company(), refresh=True
+                )
+
+        self.assertEqual(set(result["quarters"].keys()), {"2024Q4", "2026Q2"})
 
     def test_rebuild_from_stale_cache_does_not_preserve_legacy_quarters(self) -> None:
         stale_cached_payload = {

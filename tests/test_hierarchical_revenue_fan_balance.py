@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import json
 import subprocess
 import tempfile
@@ -13,7 +15,7 @@ COMPANY_QUARTERS = {
     "nvidia": "2026Q2",
     "apple": "2026Q1",
     "tesla": "2026Q2",
-    "tencent": "2026Q1",
+    "tencent": "2026Q2",
     "asml": "2026Q2",
 }
 
@@ -59,7 +61,9 @@ def visible_rect(svg_root: ET.Element, node_id: str) -> dict[str, float]:
     if rect is None:
         raise AssertionError(f"Missing visible rect for {node_id}")
     return {
+        "x": float(rect.attrib["x"]),
         "y": float(rect.attrib["y"]),
+        "width": float(rect.attrib["width"]),
         "height": float(rect.attrib["height"]),
     }
 
@@ -74,7 +78,14 @@ def detail_rects(svg_root: ET.Element) -> list[dict[str, float]]:
         )
         if rect is None:
             return details
-        details.append({"y": float(rect.attrib["y"]), "height": float(rect.attrib["height"])})
+        details.append(
+            {
+                "x": float(rect.attrib["x"]),
+                "y": float(rect.attrib["y"]),
+                "width": float(rect.attrib["width"]),
+                "height": float(rect.attrib["height"]),
+            }
+        )
         index += 1
 
 
@@ -86,26 +97,32 @@ class HierarchicalRevenueFanBalanceTests(unittest.TestCase):
             for company, quarter in COMPANY_QUARTERS.items()
         }
 
-    def test_detail_flow_centers_align_with_their_parent_revenue_nodes(self) -> None:
-        for company in ("nvidia", "tencent"):
-            svg_root = self.svg_roots[company]
-            with self.subTest(company=company):
-                details = detail_rects(svg_root)
-                parent = visible_rect(svg_root, "source-0")
-                self.assertGreaterEqual(len(details), 2)
+    def test_sparse_detail_fan_continues_parent_outflow_direction(self) -> None:
+        svg_root = self.svg_roots["tencent"]
+        details = detail_rects(svg_root)
+        parent = visible_rect(svg_root, "source-0")
+        revenue = visible_rect(svg_root, "revenue")
+        self.assertEqual(len(details), 3)
 
-                detail_flow_center = sum(
-                    (detail["y"] + detail["height"] / 2) * detail["height"]
-                    for detail in details
-                ) / sum(detail["height"] for detail in details)
-                parent_center = parent["y"] + parent["height"] / 2
+        detail_flow_center = sum(
+            (detail["y"] + detail["height"] / 2) * detail["height"]
+            for detail in details
+        ) / sum(detail["height"] for detail in details)
+        parent_center = parent["y"] + parent["height"] / 2
+        parent_revenue_band_center = revenue["y"] + parent["height"] / 2
+        incoming_run = parent["x"] - (details[0]["x"] + details[0]["width"])
+        outgoing_run = revenue["x"] - (parent["x"] + parent["width"])
+        incoming_slope = (parent_center - detail_flow_center) / incoming_run
+        outgoing_slope = (parent_revenue_band_center - parent_center) / outgoing_run
 
-                self.assertAlmostEqual(
-                    detail_flow_center,
-                    parent_center,
-                    delta=1,
-                    msg=f"{company} detail revenue should enter its parent without an upward or downward bias",
-                )
+        self.assertGreater(incoming_slope, 0)
+        self.assertGreater(outgoing_slope, 0)
+        self.assertAlmostEqual(
+            incoming_slope / outgoing_slope,
+            0.46,
+            delta=0.08,
+            msg="The incoming detail fan should inherit the parent's downstream direction instead of forming a centered elbow.",
+        )
 
     def test_extreme_outer_dominant_fan_enters_tesla_auto_business_symmetrically(self) -> None:
         svg_root = self.svg_roots["tesla"]
