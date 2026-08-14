@@ -70,6 +70,15 @@ class SankeyExpenseSanitizationTests(unittest.TestCase):
         self.assertNotIn("履约", svg)
         self.assertNotIn("税金及附加", svg)
 
+    def test_broadcom_q4_2024_drops_tiny_repeated_parser_placeholders(self) -> None:
+        svg = render_sankey_svg(load_dataset_company("broadcom"), "2024Q4", "broadcom-q4-opex")
+
+        self.assertIn("其他经营费用", svg)
+        self.assertNotIn("财务费用", svg)
+        self.assertNotIn("履约", svg)
+        self.assertNotIn("销售与营销", svg)
+        self.assertNotIn("税金及附加", svg)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -11,6 +11,13 @@
     "secondary": "#12263F",
     "accent": "#FCE7E7"
   },
+  "sankeyPresentation": {
+    "costBreakdownMode": "collapsed",
+    "opexBreakdownMode": "largest-plus-other",
+    "opexMaxBranches": 2,
+    "opexOtherName": "Selling, administrative and other expenses",
+    "opexOtherNameZh": "销售、管理及其他费用"
+  },
   "quarters": [
     "2018Q1",
     "2018Q2",
@@ -144,7 +151,7 @@
           "valueBn": 4.955,
           "yoyPct": null,
           "qoqPct": null,
-          "mixPct": 93,
+          "mixPct": 93.0,
           "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1730168/000173016819000036/avgo-20190203.xml",
           "sourceForm": "10-Q",
@@ -963,7 +970,7 @@
           "valueBn": 0.057,
           "yoyPct": null,
           "qoqPct": null,
-          "mixPct": 1,
+          "mixPct": 1.0,
           "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1730168/000173016819000144/avgo-11032019x10k_htm.xml",
           "sourceForm": "10-K",
@@ -1726,7 +1733,7 @@
           "yoyPct": 131.71,
           "qoqPct": -19.32,
           "mixPct": 20.7,
-          "mixYoyDeltaPp": 11,
+          "mixYoyDeltaPp": 11.0,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1730168/000173016819000118/avgo-08042019x10q_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2019-09-13",
@@ -2252,7 +2259,7 @@
           "yoyPct": -4.18,
           "qoqPct": -7.95,
           "mixPct": 71.5,
-          "mixYoyDeltaPp": -4,
+          "mixYoyDeltaPp": -4.0,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1730168/000173016820000045/avgo-02022020x10q_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2020-03-13",
@@ -2506,7 +2513,7 @@
           "yoyPct": -1.49,
           "qoqPct": -3.91,
           "mixPct": 70.1,
-          "mixYoyDeltaPp": -4,
+          "mixYoyDeltaPp": -4.0,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1730168/000173016820000109/avgo-20200503_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2020-06-12",
@@ -4558,7 +4565,7 @@
           "yoyPct": 29.23,
           "qoqPct": 6.06,
           "mixPct": 76.9,
-          "mixYoyDeltaPp": 4,
+          "mixYoyDeltaPp": 4.0,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1730168/000173016822000081/avgo-20220501_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2022-06-09",
@@ -4576,7 +4583,7 @@
           "yoyPct": 4.69,
           "qoqPct": 2.24,
           "mixPct": 23.1,
-          "mixYoyDeltaPp": -4,
+          "mixYoyDeltaPp": -4.0,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1730168/000173016822000081/avgo-20220501_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2022-06-09",
@@ -5589,7 +5596,7 @@
           "valueBn": 6.808,
           "yoyPct": 9.3,
           "qoqPct": -4.21,
-          "mixPct": 78,
+          "mixPct": 78.0,
           "mixYoyDeltaPp": 1.1,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1730168/000173016823000064/avgo-20230430_htm.xml",
           "sourceForm": "10-Q",
@@ -5607,7 +5614,7 @@
           "valueBn": 1.925,
           "yoyPct": 2.72,
           "qoqPct": 6.47,
-          "mixPct": 22,
+          "mixPct": 22.0,
           "mixYoyDeltaPp": -1.1,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1730168/000173016823000064/avgo-20230430_htm.xml",
           "sourceForm": "10-Q",
@@ -6421,8 +6428,8 @@
       "grossMarginYoyDeltaPp": -5.69,
       "operatingMarginYoyDeltaPp": -28.61,
       "profitMarginYoyDeltaPp": -31.25,
-      "statementFilingDate": "2024-02-04",
-      "statementSourceUrl": "https://stockanalysis.com/stocks/avgo/financials/?p=quarterly",
+      "statementFilingDate": "2025-03-06",
+      "statementSourceUrl": "https://investors.broadcom.com/news-releases/news-release-details/broadcom-inc-announces-first-quarter-fiscal-year-2025-financial",
       "parserFinancialFieldSources": {
         "revenueBn": "official",
         "revenueYoyPct": "official",
@@ -6648,7 +6655,54 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "statementSource": "manual-broadcom-official-classification",
+      "officialCostBreakdown": [
+        {
+          "name": "Cost of revenue",
+          "nameZh": "收入成本",
+          "memberKey": "costofrevenue",
+          "valueBn": 3.114
+        },
+        {
+          "name": "Amortization of acquisition-related intangible assets",
+          "nameZh": "收购相关无形资产摊销",
+          "memberKey": "acquisitionrelatedintangibleamortization",
+          "valueBn": 1.38
+        },
+        {
+          "name": "Restructuring charges",
+          "nameZh": "重组费用",
+          "memberKey": "restructuringcharges",
+          "valueBn": 0.092
+        }
+      ],
+      "officialOpexBreakdown": [
+        {
+          "name": "Research and development",
+          "nameZh": "研发费用",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 2.308
+        },
+        {
+          "name": "Selling, general and administrative",
+          "nameZh": "销售、一般及行政费用",
+          "memberKey": "sellinggeneralandadministrative",
+          "valueBn": 1.572
+        },
+        {
+          "name": "Amortization of acquisition-related intangible assets",
+          "nameZh": "收购相关无形资产摊销",
+          "memberKey": "acquisitionrelatedintangibleamortization",
+          "valueBn": 0.792
+        },
+        {
+          "name": "Restructuring and other charges",
+          "nameZh": "重组及其他费用",
+          "memberKey": "restructuringandothercharges",
+          "valueBn": 0.62
+        }
+      ]
     },
     "2024Q2": {
       "calendarQuarter": "2024Q2",
@@ -6679,8 +6733,8 @@
       "grossMarginYoyDeltaPp": -7.75,
       "operatingMarginYoyDeltaPp": -22.15,
       "profitMarginYoyDeltaPp": -22.87,
-      "statementFilingDate": "2024-05-05",
-      "statementSourceUrl": "https://stockanalysis.com/stocks/avgo/financials/?p=quarterly",
+      "statementFilingDate": "2025-06-05",
+      "statementSourceUrl": "https://investors.broadcom.com/news-releases/news-release-details/broadcom-inc-announces-second-quarter-fiscal-year-2025-financial",
       "parserFinancialFieldSources": {
         "revenueBn": "official",
         "revenueYoyPct": "official",
@@ -6906,7 +6960,54 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "statementSource": "manual-broadcom-official-classification",
+      "officialCostBreakdown": [
+        {
+          "name": "Cost of revenue",
+          "nameZh": "收入成本",
+          "memberKey": "costofrevenue",
+          "valueBn": 3.142
+        },
+        {
+          "name": "Amortization of acquisition-related intangible assets",
+          "nameZh": "收购相关无形资产摊销",
+          "memberKey": "acquisitionrelatedintangibleamortization",
+          "valueBn": 1.516
+        },
+        {
+          "name": "Restructuring charges",
+          "nameZh": "重组费用",
+          "memberKey": "restructuringcharges",
+          "valueBn": 0.053
+        }
+      ],
+      "officialOpexBreakdown": [
+        {
+          "name": "Research and development",
+          "nameZh": "研发费用",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 2.415
+        },
+        {
+          "name": "Selling, general and administrative",
+          "nameZh": "销售、一般及行政费用",
+          "memberKey": "sellinggeneralandadministrative",
+          "valueBn": 1.277
+        },
+        {
+          "name": "Amortization of acquisition-related intangible assets",
+          "nameZh": "收购相关无形资产摊销",
+          "memberKey": "acquisitionrelatedintangibleamortization",
+          "valueBn": 0.827
+        },
+        {
+          "name": "Restructuring and other charges",
+          "nameZh": "重组及其他费用",
+          "memberKey": "restructuringandothercharges",
+          "valueBn": 0.292
+        }
+      ]
     },
     "2024Q3": {
       "calendarQuarter": "2024Q3",
@@ -6937,8 +7038,8 @@
       "grossMarginYoyDeltaPp": -5.53,
       "operatingMarginYoyDeltaPp": -14.46,
       "profitMarginYoyDeltaPp": -51.55,
-      "statementFilingDate": "2024-08-04",
-      "statementSourceUrl": "https://stockanalysis.com/stocks/avgo/financials/?p=quarterly",
+      "statementFilingDate": "2024-12-12",
+      "statementSourceUrl": "https://investors.broadcom.com/news-releases/news-release-details/broadcom-inc-announces-fourth-quarter-and-fiscal-year-2024",
       "parserFinancialFieldSources": {
         "revenueBn": "official",
         "revenueYoyPct": "official",
@@ -7023,7 +7124,7 @@
           "memberKey": "semiconductorsolutions",
           "valueBn": 7.274,
           "yoyPct": 4.8,
-          "qoqPct": 1,
+          "qoqPct": 1.0,
           "mixPct": 55.6,
           "mixYoyDeltaPp": -22.6,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1730168/000173016824000099/avgo-20240804_htm.xml",
@@ -7174,7 +7275,54 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "statementSource": "manual-broadcom-official-classification",
+      "officialCostBreakdown": [
+        {
+          "name": "Cost of revenue",
+          "nameZh": "收入成本",
+          "memberKey": "costofrevenue",
+          "valueBn": 3.133
+        },
+        {
+          "name": "Amortization of acquisition-related intangible assets",
+          "nameZh": "收购相关无形资产摊销",
+          "memberKey": "acquisitionrelatedintangibleamortization",
+          "valueBn": 1.525
+        },
+        {
+          "name": "Restructuring charges",
+          "nameZh": "重组费用",
+          "memberKey": "restructuringcharges",
+          "valueBn": 0.058
+        }
+      ],
+      "officialOpexBreakdown": [
+        {
+          "name": "Research and development",
+          "nameZh": "研发费用",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 2.353
+        },
+        {
+          "name": "Selling, general and administrative",
+          "nameZh": "销售、一般及行政费用",
+          "memberKey": "sellinggeneralandadministrative",
+          "valueBn": 1.1
+        },
+        {
+          "name": "Amortization of acquisition-related intangible assets",
+          "nameZh": "收购相关无形资产摊销",
+          "memberKey": "acquisitionrelatedintangibleamortization",
+          "valueBn": 0.812
+        },
+        {
+          "name": "Restructuring and other charges",
+          "nameZh": "重组及其他费用",
+          "memberKey": "restructuringandothercharges",
+          "valueBn": 0.303
+        }
+      ]
     },
     "2024Q4": {
       "calendarQuarter": "2024Q4",
@@ -7205,8 +7353,8 @@
       "grossMarginYoyDeltaPp": -4.88,
       "operatingMarginYoyDeltaPp": -12.7,
       "profitMarginYoyDeltaPp": -7.14,
-      "statementFilingDate": "2024-11-03",
-      "statementSourceUrl": "https://stockanalysis.com/stocks/avgo/financials/?p=quarterly",
+      "statementFilingDate": "2024-12-12",
+      "statementSourceUrl": "https://investors.broadcom.com/news-releases/news-release-details/broadcom-inc-announces-fourth-quarter-and-fiscal-year-2024",
       "parserFinancialFieldSources": {
         "revenueBn": "official",
         "revenueYoyPct": "official",
@@ -7567,7 +7715,54 @@
         "issues": [
           "cost-breakdown-coverage-low"
         ]
-      }
+      },
+      "statementSource": "manual-broadcom-official-classification",
+      "officialCostBreakdown": [
+        {
+          "name": "Cost of revenue",
+          "nameZh": "收入成本",
+          "memberKey": "costofrevenue",
+          "valueBn": 3.399
+        },
+        {
+          "name": "Amortization of acquisition-related intangible assets",
+          "nameZh": "收购相关无形资产摊销",
+          "memberKey": "acquisitionrelatedintangibleamortization",
+          "valueBn": 1.602
+        },
+        {
+          "name": "Restructuring charges",
+          "nameZh": "重组费用",
+          "memberKey": "restructuringcharges",
+          "valueBn": 0.051
+        }
+      ],
+      "officialOpexBreakdown": [
+        {
+          "name": "Research and development",
+          "nameZh": "研发费用",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 2.234
+        },
+        {
+          "name": "Selling, general and administrative",
+          "nameZh": "销售、一般及行政费用",
+          "memberKey": "sellinggeneralandadministrative",
+          "valueBn": 1.01
+        },
+        {
+          "name": "Amortization of acquisition-related intangible assets",
+          "nameZh": "收购相关无形资产摊销",
+          "memberKey": "acquisitionrelatedintangibleamortization",
+          "valueBn": 0.813
+        },
+        {
+          "name": "Restructuring and other charges",
+          "nameZh": "重组及其他费用",
+          "memberKey": "restructuringandothercharges",
+          "valueBn": 0.318
+        }
+      ]
     },
     "2025Q1": {
       "calendarQuarter": "2025Q1",
@@ -7598,8 +7793,8 @@
       "grossMarginYoyDeltaPp": 6.35,
       "operatingMarginYoyDeltaPp": 24.56,
       "profitMarginYoyDeltaPp": 25.81,
-      "statementFilingDate": "2025-02-02",
-      "statementSourceUrl": "https://stockanalysis.com/stocks/avgo/financials/?p=quarterly",
+      "statementFilingDate": "2025-06-05",
+      "statementSourceUrl": "https://investors.broadcom.com/news-releases/news-release-details/broadcom-inc-announces-second-quarter-fiscal-year-2025-financial",
       "parserFinancialFieldSources": {
         "revenueBn": "official",
         "revenueYoyPct": "official",
@@ -7825,7 +8020,54 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "statementSource": "manual-broadcom-official-classification",
+      "officialCostBreakdown": [
+        {
+          "name": "Cost of revenue",
+          "nameZh": "收入成本",
+          "memberKey": "costofrevenue",
+          "valueBn": 3.273
+        },
+        {
+          "name": "Amortization of acquisition-related intangible assets",
+          "nameZh": "收购相关无形资产摊销",
+          "memberKey": "acquisitionrelatedintangibleamortization",
+          "valueBn": 1.484
+        },
+        {
+          "name": "Restructuring charges",
+          "nameZh": "重组费用",
+          "memberKey": "restructuringcharges",
+          "valueBn": 0.014
+        }
+      ],
+      "officialOpexBreakdown": [
+        {
+          "name": "Research and development",
+          "nameZh": "研发费用",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 2.253
+        },
+        {
+          "name": "Selling, general and administrative",
+          "nameZh": "销售、一般及行政费用",
+          "memberKey": "sellinggeneralandadministrative",
+          "valueBn": 0.949
+        },
+        {
+          "name": "Amortization of acquisition-related intangible assets",
+          "nameZh": "收购相关无形资产摊销",
+          "memberKey": "acquisitionrelatedintangibleamortization",
+          "valueBn": 0.511
+        },
+        {
+          "name": "Restructuring and other charges",
+          "nameZh": "重组及其他费用",
+          "memberKey": "restructuringandothercharges",
+          "valueBn": 0.172
+        }
+      ]
     },
     "2025Q2": {
       "calendarQuarter": "2025Q2",
@@ -7856,8 +8098,8 @@
       "grossMarginYoyDeltaPp": 5.69,
       "operatingMarginYoyDeltaPp": 15.11,
       "profitMarginYoyDeltaPp": 16.1,
-      "statementFilingDate": "2025-05-04",
-      "statementSourceUrl": "https://stockanalysis.com/stocks/avgo/financials/?p=quarterly",
+      "statementFilingDate": "2025-06-05",
+      "statementSourceUrl": "https://investors.broadcom.com/news-releases/news-release-details/broadcom-inc-announces-second-quarter-fiscal-year-2025-financial",
       "parserFinancialFieldSources": {
         "revenueBn": "official",
         "revenueYoyPct": "official",
@@ -7933,7 +8175,7 @@
           "valueBn": 8.408,
           "yoyPct": 16.75,
           "qoqPct": 2.39,
-          "mixPct": 56,
+          "mixPct": 56.0,
           "mixYoyDeltaPp": -1.6,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1730168/000173016825000064/avgo-20250504_htm.xml",
           "sourceForm": "10-Q",
@@ -7951,7 +8193,7 @@
           "valueBn": 6.596,
           "yoyPct": 24.81,
           "qoqPct": -1.61,
-          "mixPct": 44,
+          "mixPct": 44.0,
           "mixYoyDeltaPp": 1.6,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1730168/000173016825000064/avgo-20250504_htm.xml",
           "sourceForm": "10-Q",
@@ -8218,7 +8460,54 @@
         "issues": [
           "cost-breakdown-coverage-low"
         ]
-      }
+      },
+      "statementSource": "manual-broadcom-official-classification",
+      "officialCostBreakdown": [
+        {
+          "name": "Cost of revenue",
+          "nameZh": "收入成本",
+          "memberKey": "costofrevenue",
+          "valueBn": 3.296
+        },
+        {
+          "name": "Amortization of acquisition-related intangible assets",
+          "nameZh": "收购相关无形资产摊销",
+          "memberKey": "acquisitionrelatedintangibleamortization",
+          "valueBn": 1.483
+        },
+        {
+          "name": "Restructuring charges",
+          "nameZh": "重组费用",
+          "memberKey": "restructuringcharges",
+          "valueBn": 0.028
+        }
+      ],
+      "officialOpexBreakdown": [
+        {
+          "name": "Research and development",
+          "nameZh": "研发费用",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 2.693
+        },
+        {
+          "name": "Selling, general and administrative",
+          "nameZh": "销售、一般及行政费用",
+          "memberKey": "sellinggeneralandadministrative",
+          "valueBn": 1.083
+        },
+        {
+          "name": "Amortization of acquisition-related intangible assets",
+          "nameZh": "收购相关无形资产摊销",
+          "memberKey": "acquisitionrelatedintangibleamortization",
+          "valueBn": 0.506
+        },
+        {
+          "name": "Restructuring and other charges",
+          "nameZh": "重组及其他费用",
+          "memberKey": "restructuringandothercharges",
+          "valueBn": 0.086
+        }
+      ]
     },
     "2025Q3": {
       "calendarQuarter": "2025Q3",
@@ -8249,8 +8538,8 @@
       "grossMarginYoyDeltaPp": 3.18,
       "operatingMarginYoyDeltaPp": 7.92,
       "profitMarginYoyDeltaPp": 40.29,
-      "statementFilingDate": "2025-08-03",
-      "statementSourceUrl": "https://stockanalysis.com/stocks/avgo/financials/?p=quarterly",
+      "statementFilingDate": "2025-12-11",
+      "statementSourceUrl": "https://investors.broadcom.com/news-releases/news-release-details/broadcom-inc-announces-fourth-quarter-and-fiscal-year-2025",
       "parserFinancialFieldSources": {
         "revenueBn": "official",
         "revenueYoyPct": "official",
@@ -8476,7 +8765,54 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "statementSource": "manual-broadcom-official-classification",
+      "officialCostBreakdown": [
+        {
+          "name": "Cost of revenue",
+          "nameZh": "收入成本",
+          "memberKey": "costofrevenue",
+          "valueBn": 3.704
+        },
+        {
+          "name": "Amortization of acquisition-related intangible assets",
+          "nameZh": "收购相关无形资产摊销",
+          "memberKey": "acquisitionrelatedintangibleamortization",
+          "valueBn": 1.519
+        },
+        {
+          "name": "Restructuring charges",
+          "nameZh": "重组费用",
+          "memberKey": "restructuringcharges",
+          "valueBn": 0.026
+        }
+      ],
+      "officialOpexBreakdown": [
+        {
+          "name": "Research and development",
+          "nameZh": "研发费用",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 3.05
+        },
+        {
+          "name": "Selling, general and administrative",
+          "nameZh": "销售、一般及行政费用",
+          "memberKey": "sellinggeneralandadministrative",
+          "valueBn": 1.072
+        },
+        {
+          "name": "Amortization of acquisition-related intangible assets",
+          "nameZh": "收购相关无形资产摊销",
+          "memberKey": "acquisitionrelatedintangibleamortization",
+          "valueBn": 0.507
+        },
+        {
+          "name": "Restructuring and other charges",
+          "nameZh": "重组及其他费用",
+          "memberKey": "restructuringandothercharges",
+          "valueBn": 0.187
+        }
+      ]
     },
     "2025Q4": {
       "calendarQuarter": "2025Q4",
@@ -8507,8 +8843,8 @@
       "grossMarginYoyDeltaPp": 3.94,
       "operatingMarginYoyDeltaPp": 8.76,
       "profitMarginYoyDeltaPp": 16.51,
-      "statementFilingDate": "2025-11-02",
-      "statementSourceUrl": "https://stockanalysis.com/stocks/avgo/financials/?p=quarterly",
+      "statementFilingDate": "2025-12-11",
+      "statementSourceUrl": "https://investors.broadcom.com/news-releases/news-release-details/broadcom-inc-announces-fourth-quarter-and-fiscal-year-2025",
       "parserFinancialFieldSources": {
         "revenueBn": "official",
         "revenueYoyPct": "official",
@@ -8869,7 +9205,54 @@
         "issues": [
           "cost-breakdown-coverage-low"
         ]
-      }
+      },
+      "statementSource": "manual-broadcom-official-classification",
+      "officialCostBreakdown": [
+        {
+          "name": "Cost of revenue",
+          "nameZh": "收入成本",
+          "memberKey": "costofrevenue",
+          "valueBn": 4.213
+        },
+        {
+          "name": "Amortization of acquisition-related intangible assets",
+          "nameZh": "收购相关无形资产摊销",
+          "memberKey": "acquisitionrelatedintangibleamortization",
+          "valueBn": 1.545
+        },
+        {
+          "name": "Restructuring charges",
+          "nameZh": "重组费用",
+          "memberKey": "restructuringcharges",
+          "valueBn": 0.008
+        }
+      ],
+      "officialOpexBreakdown": [
+        {
+          "name": "Research and development",
+          "nameZh": "研发费用",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 2.981
+        },
+        {
+          "name": "Selling, general and administrative",
+          "nameZh": "销售、一般及行政费用",
+          "memberKey": "sellinggeneralandadministrative",
+          "valueBn": 1.107
+        },
+        {
+          "name": "Amortization of acquisition-related intangible assets",
+          "nameZh": "收购相关无形资产摊销",
+          "memberKey": "acquisitionrelatedintangibleamortization",
+          "valueBn": 0.507
+        },
+        {
+          "name": "Restructuring and other charges",
+          "nameZh": "重组及其他费用",
+          "memberKey": "restructuringandothercharges",
+          "valueBn": 0.146
+        }
+      ]
     },
     "2026Q1": {
       "calendarQuarter": "2026Q1",
@@ -8900,8 +9283,8 @@
       "grossMarginYoyDeltaPp": 0.12,
       "operatingMarginYoyDeltaPp": 2.37,
       "profitMarginYoyDeltaPp": 1.17,
-      "statementFilingDate": "2026-02-01",
-      "statementSourceUrl": "https://stockanalysis.com/stocks/avgo/financials/?p=quarterly",
+      "statementFilingDate": "2026-06-03",
+      "statementSourceUrl": "https://investors.broadcom.com/news-releases/news-release-details/broadcom-inc-announces-second-quarter-fiscal-year-2026-financial",
       "parserFinancialFieldSources": {
         "revenueBn": "official",
         "revenueYoyPct": "official",
@@ -9127,7 +9510,54 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "statementSource": "manual-broadcom-official-classification",
+      "officialCostBreakdown": [
+        {
+          "name": "Cost of revenue",
+          "nameZh": "收入成本",
+          "memberKey": "costofrevenue",
+          "valueBn": 4.679
+        },
+        {
+          "name": "Amortization of acquisition-related intangible assets",
+          "nameZh": "收购相关无形资产摊销",
+          "memberKey": "acquisitionrelatedintangibleamortization",
+          "valueBn": 1.462
+        },
+        {
+          "name": "Restructuring charges",
+          "nameZh": "重组费用",
+          "memberKey": "restructuringcharges",
+          "valueBn": 0.013
+        }
+      ],
+      "officialOpexBreakdown": [
+        {
+          "name": "Research and development",
+          "nameZh": "研发费用",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 2.965
+        },
+        {
+          "name": "Selling, general and administrative",
+          "nameZh": "销售、一般及行政费用",
+          "memberKey": "sellinggeneralandadministrative",
+          "valueBn": 1.019
+        },
+        {
+          "name": "Amortization of acquisition-related intangible assets",
+          "nameZh": "收购相关无形资产摊销",
+          "memberKey": "acquisitionrelatedintangibleamortization",
+          "valueBn": 0.507
+        },
+        {
+          "name": "Restructuring and other charges",
+          "nameZh": "重组及其他费用",
+          "memberKey": "restructuringandothercharges",
+          "valueBn": 0.103
+        }
+      ]
     },
     "2026Q2": {
       "calendarQuarter": "2026Q2",
@@ -11334,7 +11764,7 @@
       "detailGroupChecks": 0,
       "detailGroupMismatchCount": 0,
       "detailGroupSkippedChecks": 0,
-      "opexChecks": 5,
+      "opexChecks": 11,
       "opexSkippedChecks": 0,
       "opexOverflowMismatchCount": 0,
       "warningCount": 0,
@@ -15054,7 +15484,7 @@
     "hasPixelReplica": false,
     "officialFinancialQuarterCount": 34,
     "officialSegmentQuarterCount": 34,
-    "officialExpenseQuarterCount": 5,
+    "officialExpenseQuarterCount": 11,
     "classification": {
       "status": "ok",
       "latestQuarter": "2026Q2",
@@ -15064,9 +15494,9 @@
       "latestExpenseClassificationQuarter": "2026Q2",
       "latestStructureHistoryQuarter": "2026Q2",
       "revenueClassificationQuarterCount": 34,
-      "expenseClassificationQuarterCount": 5,
+      "expenseClassificationQuarterCount": 11,
       "revenueClassificationCoverageRatio": 1.0,
-      "expenseClassificationCoverageRatio": 0.1471,
+      "expenseClassificationCoverageRatio": 0.3235,
       "latestRevenueClassificationLagQuarters": 0,
       "latestExpenseClassificationLagQuarters": 0,
       "warnings": [],
@@ -15116,7 +15546,7 @@
         "detailGroupChecks": 0,
         "detailGroupMismatchCount": 0,
         "detailGroupSkippedChecks": 0,
-        "opexChecks": 5,
+        "opexChecks": 11,
         "opexSkippedChecks": 0,
         "opexOverflowMismatchCount": 0,
         "warningCount": 0,

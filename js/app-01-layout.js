@@ -96,6 +96,11 @@ function reconcileBreakdownItemsToTarget(items, totalValueBn, options = {}) {
 }
 
 function resolveDirectCostBreakdown(snapshot, company, entry) {
+  const presentation = {
+    ...(company?.sankeyPresentation || {}),
+    ...(entry?.sankeyPresentation || {}),
+  };
+  if (presentation.costBreakdownMode === "collapsed") return [];
   if (snapshot?.costBreakdown?.length) {
     const targetCostBn =
       snapshot?.costOfRevenueBn !== null && snapshot?.costOfRevenueBn !== undefined

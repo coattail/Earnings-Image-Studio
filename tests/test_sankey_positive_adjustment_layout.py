@@ -283,6 +283,43 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
             "The date-avoidance shift should remain small enough to preserve a smooth merge runway into net profit.",
         )
 
+    def test_tencent_negative_ribbons_keep_cross_source_fan_separation(self) -> None:
+        svg_root = render_sankey_svg(
+            TENCENT_PAYLOAD,
+            "zh",
+            "tencent-q2-negative-ribbon-fan",
+            quarter="2026Q2",
+        )
+        operating = visible_rect_attrs(svg_root, "operating")
+        operating_expenses = visible_rect_attrs(svg_root, "operating-expenses")
+        net = visible_rect_attrs(svg_root, "net")
+        tax = visible_rect_attrs(svg_root, "deduction-0")
+        other_net_expense = visible_rect_attrs(svg_root, "deduction-1")
+        first_opex = visible_rect_attrs(svg_root, "opex-0")
+
+        source_lane_gap = operating_expenses["y"] - (operating["y"] + operating["height"])
+        cross_source_target_gap = first_opex["y"] - (
+            other_net_expense["y"] + other_net_expense["height"]
+        )
+        deduction_internal_gap = other_net_expense["y"] - (tax["y"] + tax["height"])
+        net_to_deduction_gap = tax["y"] - (net["y"] + net["height"])
+
+        self.assertGreaterEqual(
+            cross_source_target_gap,
+            source_lane_gap * 0.85,
+            "Red ribbons from different source nodes should preserve the upstream lane separation through their terminal fan.",
+        )
+        self.assertGreaterEqual(
+            deduction_internal_gap,
+            100,
+            "Adjacent deductions from the same source should retain a deliberate visible split.",
+        )
+        self.assertGreaterEqual(
+            net_to_deduction_gap,
+            cross_source_target_gap * 0.9,
+            "The net-profit node should balance downward while leaving the lifted deduction fan an uncluttered lane.",
+        )
+
     def test_nvidia_q4_fy23_omits_non_operating_bridge_that_displays_as_zero(self) -> None:
         svg_root = render_sankey_svg(NVIDIA_PAYLOAD, "zh", "nvidia-q4-fy23-zero-bridge", quarter="2023Q1")
         svg_text = svg_text_content(svg_root)

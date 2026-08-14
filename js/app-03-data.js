@@ -170,7 +170,9 @@ function looksLikePlaceholderEchoExpenseCluster(items, repeatedValue) {
 function isSuspiciousExpenseBreakdown(items, totalValueBn, entry = null) {
   const normalizedItems = normalizeBreakdownItems(items, null, "negative-parentheses");
   if (normalizedItems.length < 2) return false;
-  const values = normalizedItems.map((item) => Number(Math.max(safeNumber(item?.valueBn), 0).toFixed(3))).filter((value) => value > 0.02);
+  const values = normalizedItems
+    .map((item) => Number(Math.max(safeNumber(item?.valueBn), 0).toFixed(3)))
+    .filter((value) => value > 0.0005);
   if (values.length < 2) return false;
   const targetTotalBn = Math.max(safeNumber(totalValueBn, entry?.operatingExpensesBn), 0);
   const rawSumBn = values.reduce((sum, value) => sum + value, 0);
@@ -741,15 +743,55 @@ function isRenderableFinancialBridgeItem(item, entry = {}) {
   return item?.preserveForFlowConservation === true && usesPreciseValueLabel && valueBn > 0.0005;
 }
 
+function applyOpexPresentationMode(items, company, entry) {
+  const normalizedItems = Array.isArray(items) ? items.filter((item) => safeNumber(item?.valueBn) > 0.02) : [];
+  const presentation = {
+    ...(company?.sankeyPresentation || {}),
+    ...(entry?.sankeyPresentation || {}),
+  };
+  if (presentation.opexBreakdownMode !== "largest-plus-other") return normalizedItems;
+  const maxBranches = Math.max(Math.round(safeNumber(presentation.opexMaxBranches, 2)), 1);
+  if (normalizedItems.length <= maxBranches) return normalizedItems;
+
+  const retainedCount = Math.max(maxBranches - 1, 0);
+  const retainedIndexes = new Set(
+    normalizedItems
+      .map((item, index) => ({ index, valueBn: safeNumber(item?.valueBn) }))
+      .sort((left, right) => right.valueBn - left.valueBn)
+      .slice(0, retainedCount)
+      .map(({ index }) => index)
+  );
+  const retainedItems = normalizedItems.filter((_item, index) => retainedIndexes.has(index));
+  const groupedItems = normalizedItems.filter((_item, index) => !retainedIndexes.has(index));
+  const groupedValueBn = groupedItems.reduce((sum, item) => sum + Math.max(safeNumber(item?.valueBn), 0), 0);
+
+  return [
+    ...retainedItems,
+    {
+      name: presentation.opexOtherName || "Other operating expenses",
+      nameZh: presentation.opexOtherNameZh || "其他经营费用",
+      memberKey: "compactotheroperatingexpenses",
+      valueBn: Number(groupedValueBn.toFixed(3)),
+      valueFormat: "negative-parentheses",
+      sourceUrl: groupedItems.find((item) => item?.sourceUrl)?.sourceUrl || null,
+      groupedMemberKeys: groupedItems.map((item) => item?.memberKey).filter(Boolean),
+    },
+  ].filter((item) => safeNumber(item?.valueBn) > 0.02);
+}
+
 function resolveOperatingExpenseBreakdown(snapshot, company, entry) {
   if (String(company?.id || "").toLowerCase() === "visa") {
     return [];
   }
   if (snapshot?.opexBreakdown?.length && !isSuspiciousExpenseBreakdown(snapshot.opexBreakdown, snapshot?.operatingExpensesBn, snapshot)) {
-    return reconcileExpenseBreakdownToTarget(snapshot.opexBreakdown, snapshot?.operatingExpensesBn, {
-      fallbackSourceUrl: snapshot?.sourceUrl || null,
-      revenueBn: snapshot?.revenueBn ?? entry?.revenueBn,
-    });
+    return applyOpexPresentationMode(
+      reconcileExpenseBreakdownToTarget(snapshot.opexBreakdown, snapshot?.operatingExpensesBn, {
+        fallbackSourceUrl: snapshot?.sourceUrl || null,
+        revenueBn: snapshot?.revenueBn ?? entry?.revenueBn,
+      }),
+      company,
+      entry
+    );
   }
   const supplemental = supplementalComponentsFor(company, snapshot?.quarterKey || entry?.quarterKey);
   const entrySupplemental = entry?.supplementalComponents || {};
@@ -772,10 +814,14 @@ function resolveOperatingExpenseBreakdown(snapshot, company, entry) {
     (candidate) => !isSuspiciousExpenseBreakdown(candidate, targetOperatingExpensesBn, entry)
   );
   if (directBreakdown) {
-    return reconcileExpenseBreakdownToTarget(directBreakdown, targetOperatingExpensesBn, {
-      fallbackSourceUrl: sourceUrl,
-      revenueBn: firstResolvedBreakdownNumber(snapshot?.revenueBn, entry?.revenueBn, entrySupplemental?.revenueBn, supplemental?.revenueBn),
-    });
+    return applyOpexPresentationMode(
+      reconcileExpenseBreakdownToTarget(directBreakdown, targetOperatingExpensesBn, {
+        fallbackSourceUrl: sourceUrl,
+        revenueBn: firstResolvedBreakdownNumber(snapshot?.revenueBn, entry?.revenueBn, entrySupplemental?.revenueBn, supplemental?.revenueBn),
+      }),
+      company,
+      entry
+    );
   }
   const resolvedEntry = {
     ...entry,
@@ -788,10 +834,14 @@ function resolveOperatingExpenseBreakdown(snapshot, company, entry) {
       supplemental?.operatingExpensesBn
     ),
   };
-  return buildGenericBreakdown(resolvedEntry).map((item) => ({
-    ...item,
-    sourceUrl: item?.sourceUrl || sourceUrl || null,
-  }));
+  return applyOpexPresentationMode(
+    buildGenericBreakdown(resolvedEntry).map((item) => ({
+      ...item,
+      sourceUrl: item?.sourceUrl || sourceUrl || null,
+    })),
+    company,
+    entry
+  );
 }
 
 function resolveCollapsedSingleExpenseBreakdown(items, totalValueBn, options = {}) {

@@ -8347,7 +8347,6 @@ function renderPixelReplicaSvg(snapshot) {
   const enforceDownwardOpexTerminalFan = () => {
     if (
       snapshot.layout?.disableDownwardOpexTerminalFan === true ||
-      rawPositiveAdjustments.length > 0 ||
       !opexBoxes.length ||
       !opexSourceSlices.length
     ) {
@@ -8554,12 +8553,158 @@ function renderPixelReplicaSvg(snapshot) {
         resolvedBox.center + targetShiftY + resolvedBox.height / 2;
     });
   };
+  const refineCrossSourceNegativeRibbonSeparation = () => {
+    if (
+      snapshot.layout?.disableCrossSourceNegativeRibbonSeparation === true ||
+      netLoss ||
+      !positiveAdjustments.length ||
+      !positiveAbove ||
+      hasExplicitNetNodeTop ||
+      useExtremePositiveLayout ||
+      usesExtremePositiveTopLane ||
+      dominantPositiveBridgeLaneStrength > 0.12 ||
+      deductionBoxes.length < 2 ||
+      deductionSlices.length < 2 ||
+      !opexBoxes.length
+    ) {
+      return;
+    }
+    const deductionGeometries = deductionBoxes.map((box, index) => {
+      const sourceSlice = deductionSourceSlices[index] || deductionSlices[index];
+      if (!box || !sourceSlice) return null;
+      return resolveNegativeTerminalGeometry({
+        lane: "deduction",
+        index,
+        box,
+        sourceSlice,
+        minHeight: 0,
+        sourceTop: opDeductionSourceBand.top,
+        sourceBottom: opDeductionSourceBand.bottom,
+        sourceNodeId: "operating",
+        targetNodeId: `deduction-${index}`,
+      });
+    });
+    const firstOpexGeometry = resolveNegativeTerminalGeometry({
+      lane: "opex",
+      index: 0,
+      box: opexBoxes[0],
+      sourceSlice: opexSourceSlices[0] || opexSlices[0],
+      minHeight: 14,
+      sourceTop: opexTop,
+      sourceBottom: opexBottom,
+      sourceNodeId: "operating-expenses",
+      targetNodeId: "opex-0",
+    });
+    const validDeductionGeometries = deductionGeometries.filter(Boolean);
+    const firstDeductionGeometry = validDeductionGeometries[0];
+    const lastDeductionGeometry = validDeductionGeometries[validDeductionGeometries.length - 1];
+    if (!firstDeductionGeometry || !lastDeductionGeometry || !firstOpexGeometry) return;
+
+    const sourceLaneGapY = Math.max(
+      firstOpexGeometry.sourceTop - lastDeductionGeometry.sourceBottom,
+      0
+    );
+    const currentTargetGapY =
+      firstOpexGeometry.targetTop - lastDeductionGeometry.targetBottom;
+    const preferredTargetGapY = clamp(
+      sourceLaneGapY *
+        safeNumber(snapshot.layout?.crossSourceNegativeRibbonSourceGapFactor, 0.88) +
+        (lastDeductionGeometry.targetHeight + firstOpexGeometry.targetHeight) *
+          safeNumber(snapshot.layout?.crossSourceNegativeRibbonThicknessFactor, 0.18),
+      scaleY(safeNumber(snapshot.layout?.crossSourceNegativeRibbonMinTargetGapY, 126)),
+      scaleY(safeNumber(snapshot.layout?.crossSourceNegativeRibbonMaxTargetGapY, 228))
+    );
+    const requestedLiftY = Math.max(preferredTargetGapY - currentTargetGapY, 0) *
+      clamp(
+        safeNumber(snapshot.layout?.crossSourceNegativeRibbonSeparationStrength, 0.94),
+        0,
+        1
+      );
+    if (!(requestedLiftY > 0.5)) return;
+
+    const minimumDeductionTopY = Math.max(
+      rightTerminalSummaryObstacleBottom +
+        scaleY(safeNumber(snapshot.layout?.crossSourceNegativeRibbonSummaryGapY, 18)),
+      netFrame.bottom +
+        scaleY(safeNumber(snapshot.layout?.crossSourceNegativeRibbonMinNetGapY, 34))
+    );
+    const availableTopLiftY = Math.max(
+      safeNumber(deductionBoxes[0]?.top, minimumDeductionTopY) - minimumDeductionTopY,
+      0
+    );
+    const availableDownwardFanLiftY = validDeductionGeometries.reduce(
+      (availableLiftY, geometry, index) => {
+        const sourceCenterY = (geometry.sourceTop + geometry.sourceBottom) / 2;
+        const minimumDropY = scaleY(
+          safeNumber(snapshot.layout?.crossSourceNegativeRibbonMinDropY, 24) +
+            index * safeNumber(snapshot.layout?.crossSourceNegativeRibbonMinDropStepY, 18)
+        );
+        return Math.min(
+          availableLiftY,
+          Math.max(geometry.targetCenter - sourceCenterY - minimumDropY, 0)
+        );
+      },
+      Infinity
+    );
+    const appliedLiftY = Math.min(
+      requestedLiftY,
+      availableTopLiftY,
+      availableDownwardFanLiftY,
+      scaleY(safeNumber(snapshot.layout?.crossSourceNegativeRibbonMaxLiftY, 152))
+    );
+    if (!(appliedLiftY > 0.5)) return;
+
+    deductionBoxes = deductionBoxes.map((box) =>
+      box ? shiftBoxCenter(box, box.center - appliedLiftY) : box
+    );
+
+    const separationPressure = clamp(
+      (preferredTargetGapY - currentTargetGapY) / Math.max(preferredTargetGapY, 1),
+      0,
+      1
+    );
+    const firstLiftedDeductionGeometry = resolveNegativeTerminalGeometry({
+      lane: "deduction",
+      index: 0,
+      box: deductionBoxes[0],
+      sourceSlice: deductionSourceSlices[0] || deductionSlices[0],
+      minHeight: 0,
+      sourceTop: opDeductionSourceBand.top,
+      sourceBottom: opDeductionSourceBand.bottom,
+      sourceNodeId: "operating",
+      targetNodeId: "deduction-0",
+    });
+    if (!firstLiftedDeductionGeometry) return;
+    const requestedNetDropY =
+      scaleY(safeNumber(snapshot.layout?.crossSourceNegativeRibbonNetDropBaseY, 18)) *
+        separationPressure +
+      appliedLiftY *
+        safeNumber(snapshot.layout?.crossSourceNegativeRibbonNetDropFollowFactor, 0.2);
+    const availableNetDropY = Math.max(
+      firstLiftedDeductionGeometry.targetTop -
+        netFrame.bottom -
+        scaleY(safeNumber(snapshot.layout?.crossSourceNegativeRibbonNetToDeductionGapY, 96)),
+      0
+    );
+    const appliedNetDropY = Math.min(
+      requestedNetDropY,
+      availableNetDropY,
+      scaleY(safeNumber(snapshot.layout?.crossSourceNegativeRibbonNetDropMaxY, 46))
+    );
+    if (appliedNetDropY > 0.5) {
+      const currentNetOffset = autoLayoutOffsetForNode("net");
+      setAutoLayoutNodeOffset("net", {
+        dy: currentNetOffset.dy + appliedNetDropY,
+      });
+    }
+  };
   balanceOperatingStageSplit();
   smoothMainProfitChainTurn();
   liftHighRetentionProfitFinish();
   enforceDownwardDeductionTerminalFan();
   enforceDominantPositiveOpexTerminalFan();
   enforceDownwardOpexTerminalFan();
+  refineCrossSourceNegativeRibbonSeparation();
   const requestedOpexTerminalGroupShiftY = scaleY(
     Math.max(safeNumber(snapshot.layout?.opexTerminalGroupShiftY, 0), 0)
   );
