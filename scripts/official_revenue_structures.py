@@ -55,7 +55,7 @@ CACHE_DIR = ROOT_DIR / "data" / "cache" / "official-revenue-structures"
 OFFICIAL_SEGMENT_CACHE_DIR = ROOT_DIR / "data" / "cache" / "official-segments"
 OFFICIAL_FINANCIAL_CACHE_DIR = ROOT_DIR / "data" / "cache" / "official-financials"
 STOCKANALYSIS_FINANCIAL_CACHE_DIR = ROOT_DIR / "data" / "cache" / "stockanalysis-financials"
-CACHE_VERSION = "20260801-v19"
+CACHE_VERSION = "20260814-v20"
 STOCKANALYSIS_FINANCIAL_PAYLOAD_CACHE_VERSION = "20260329-v1"
 STOCKANALYSIS_FINANCIAL_CACHE: dict[str, dict[str, Any]] = {}
 CUSTOM_HIERARCHY_COST_SUPPLEMENT_WINDOW_QUARTERS = 12
@@ -1452,6 +1452,30 @@ def _extract_current_million_row_value(text: str, label: str) -> float | None:
     return value_bn
 
 
+def _extract_jd_current_table_million_value(text: str, label: str) -> float | None:
+    """Read the current-period RMB million column from JD's revenue table."""
+    normalized = _normalize_text_space(text)
+    label_pattern = _pdf_fuzzy_phrase_pattern(label)
+    number_pattern = r"\(?-?[\d,]+(?:\.\d+)?\)?"
+    matches = list(re.finditer(
+        rf"{label_pattern}\s+(?P<prior>{number_pattern})\s+(?P<current>{number_pattern})(?:\s+{number_pattern})?",
+        normalized,
+        re.IGNORECASE,
+    ))
+    if not matches:
+        return _extract_current_million_row_value(text, label)
+    current_values = [
+        float(value)
+        for match in matches
+        if (value := _parse_number_token(match.group("current"))) is not None and float(value) > 0
+    ]
+    if not current_values:
+        return None
+    current_value = min(current_values)
+    divisor = 1_000_000 if abs(current_value) >= 1_000_000 else 1000
+    return round(current_value / divisor, 3)
+
+
 def _extract_jd_narrative_billion_value(text: str, label: str) -> float | None:
     normalized = _normalize_text_space(text)
     label_pattern = _pdf_fuzzy_phrase_pattern(label)
@@ -1530,7 +1554,16 @@ def _load_jd_quarterly_items() -> list[dict[str, str]]:
                 "filingDate": _extract_date_from_url(source_url),
             }
         )
-    return sorted(items, key=lambda item: _period_key(str(item.get("quarter") or "")))[-32:]
+    legacy_items = [
+        {
+            "quarter": "2018Q1",
+            "title": "JD.com Inc First Quarter 2018 Results",
+            "sourceUrl": "http://ir.jd.com/static-files/0c2fe0e1-974c-4492-8062-7461664479f1",
+            "filingDate": "",
+        }
+    ]
+    merged = {str(item["quarter"]): item for item in [*legacy_items, *items]}
+    return sorted(merged.values(), key=lambda item: _period_key(str(item.get("quarter") or "")))
 
 
 def _parse_jd_quarter_item(item: dict[str, Any]) -> tuple[str, dict[str, Any], dict[str, Any]] | None:
@@ -1541,14 +1574,14 @@ def _parse_jd_quarter_item(item: dict[str, Any]) -> tuple[str, dict[str, Any], d
         return None
 
     revenue_rows = [
-        ("Net product revenues", "Net product revenues", "netproductrevenues"),
-        ("Net service revenues", "Net service revenues", "netservicerevenues"),
+        ("Net product revenues", "Net product revenues", "商品收入", "netproductrevenues"),
+        ("Net service revenues", "Net service revenues", "服务收入", "netservicerevenues"),
     ]
     detail_rows = [
-        ("Electronics and home appliances revenues", "Electronics and home appliances revenues", "electronicsandhomeappliancesrevenues", "Net product revenues"),
-        ("General merchandise revenues", "General merchandise revenues", "generalmerchandiserevenues", "Net product revenues"),
-        ("Marketplace and marketing revenues", "Marketplace and marketing revenues", "marketplaceandmarketingrevenues", "Net service revenues"),
-        ("Logistics and other service revenues", "Logistics and other service revenues", "logisticsandotherservicerevenues", "Net service revenues"),
+        ("Electronics and home appliances revenues", "Electronics and home appliances revenues", "电子产品及家电收入", "electronicsandhomeappliancesrevenues", "Net product revenues"),
+        ("General merchandise revenues", "General merchandise revenues", "日用百货收入", "generalmerchandiserevenues", "Net product revenues"),
+        ("Marketplace and marketing revenues", "Marketplace and marketing revenues", "平台及营销收入", "marketplaceandmarketingrevenues", "Net service revenues"),
+        ("Logistics and other service revenues", "Logistics and other service revenues", "物流及其他服务收入", "logisticsandotherservicerevenues", "Net service revenues"),
     ]
     opex_rows = [
         ("Fulfillment Expenses", "Fulfillment", "fulfillment"),
@@ -1558,20 +1591,20 @@ def _parse_jd_quarter_item(item: dict[str, Any]) -> tuple[str, dict[str, Any], d
     ]
     text = _extract_pdf_text_fast(source_url)
     segments = []
-    for source_label, display_name, member_key in revenue_rows:
-        value_bn = _extract_current_million_row_value(text, source_label)
+    for source_label, display_name, name_zh, member_key in revenue_rows:
+        value_bn = _extract_jd_current_table_million_value(text, source_label)
         if value_bn is None:
             continue
-        segments.append(
-            _build_row(
-                display_name,
-                value_bn,
-                member_key=member_key,
-                source_url=source_url,
-                source_form="IR PDF",
-                filing_date=filing_date,
-            )
+        row = _build_row(
+            display_name,
+            value_bn,
+            member_key=member_key,
+            source_url=source_url,
+            source_form="IR PDF",
+            filing_date=filing_date,
         )
+        row["nameZh"] = name_zh
+        segments.append(row)
     if len(segments) < 2:
         narrative_values = {
             "netproductrevenues": _extract_jd_narrative_billion_value(text, "Net product revenues"),
@@ -1583,39 +1616,80 @@ def _parse_jd_quarter_item(item: dict[str, Any]) -> tuple[str, dict[str, Any], d
             if derived_product_bn > 0.02:
                 narrative_values["netproductrevenues"] = derived_product_bn
         segments = []
-        for _source_label, display_name, member_key in revenue_rows:
+        for _source_label, display_name, name_zh, member_key in revenue_rows:
             value_bn = narrative_values.get(member_key)
             if value_bn is None:
                 continue
-            segments.append(
-                _build_row(
-                    display_name,
-                    value_bn,
-                    member_key=member_key,
-                    source_url=source_url,
-                    source_form="IR PDF narrative",
-                    filing_date=filing_date,
-                )
-            )
-    if len(segments) < 2:
-        return None
-
-    detail_groups = []
-    for source_label, display_name, member_key, target_name in detail_rows:
-        value_bn = _extract_current_million_row_value(text, source_label)
-        if value_bn is None:
-            continue
-        detail_groups.append(
-            _build_row(
+            row = _build_row(
                 display_name,
                 value_bn,
                 member_key=member_key,
                 source_url=source_url,
-                source_form="IR PDF",
+                source_form="IR PDF narrative",
                 filing_date=filing_date,
-                target_name=target_name,
             )
+            row["nameZh"] = name_zh
+            segments.append(row)
+    if len(segments) < 2:
+        return None
+
+    detail_groups = []
+    for source_label, display_name, name_zh, member_key, target_name in detail_rows:
+        value_bn = _extract_jd_current_table_million_value(text, source_label)
+        if value_bn is None:
+            continue
+        row = _build_row(
+            display_name,
+            value_bn,
+            member_key=member_key,
+            source_url=source_url,
+            source_form="IR PDF",
+            filing_date=filing_date,
+            target_name=target_name,
         )
+        row["nameZh"] = name_zh
+        detail_groups.append(row)
+
+    segment_values = {str(row.get("memberKey") or ""): float(row.get("valueBn") or 0) for row in segments}
+    detail_values = {str(row.get("memberKey") or ""): float(row.get("valueBn") or 0) for row in detail_groups}
+    residual_details = [
+        (
+            "electronicsandhomeappliancesrevenues",
+            "Electronics and home appliances revenues",
+            "电子产品及家电收入",
+            "Net product revenues",
+            "netproductrevenues",
+            "generalmerchandiserevenues",
+        ),
+        (
+            "marketplaceandmarketingrevenues",
+            "Marketplace and marketing revenues",
+            "平台及营销收入",
+            "Net service revenues",
+            "netservicerevenues",
+            "logisticsandotherservicerevenues",
+        ),
+    ]
+    for member_key, display_name, name_zh, target_name, parent_key, sibling_key in residual_details:
+        if member_key in detail_values or sibling_key not in detail_values:
+            continue
+        residual_value = round(segment_values.get(parent_key, 0) - detail_values[sibling_key], 3)
+        if residual_value <= 0.02:
+            continue
+        row = _build_row(
+            display_name,
+            residual_value,
+            member_key=member_key,
+            source_url=source_url,
+            source_form="IR PDF derived residual",
+            filing_date=filing_date,
+            target_name=target_name,
+        )
+        row["nameZh"] = name_zh
+        detail_groups.append(row)
+
+    detail_order = {row[3]: index for index, row in enumerate(detail_rows)}
+    detail_groups.sort(key=lambda row: detail_order.get(str(row.get("memberKey") or ""), len(detail_order)))
 
     opex_breakdown = []
     for source_label, display_name, member_key in opex_rows:
@@ -1648,6 +1722,105 @@ def _parse_jd_quarter_item(item: dict[str, Any]) -> tuple[str, dict[str, Any], d
     return quarter, quarter_payload, filing_meta
 
 
+def _normalize_jd_quarterly_detail_history(result: dict[str, Any]) -> dict[str, Any]:
+    """Convert JD's older cumulative detail disclosures into quarterly values."""
+    quarters = result.get("quarters")
+    if not isinstance(quarters, dict):
+        return result
+
+    # JD did not publish the current four-way quarterly revenue detail for 2018.
+    for quarter in ("2018Q1", "2018Q2", "2018Q3", "2018Q4"):
+        payload = quarters.get(quarter)
+        if isinstance(payload, dict):
+            payload.pop("detailGroups", None)
+
+    adjusted_quarters = {
+        "2019Q2": ("2019Q1",),
+        "2019Q4": ("2019Q1", "2019Q2", "2019Q3"),
+        "2020Q2": ("2020Q1",),
+    }
+    explicit_keys = ("generalmerchandiserevenues", "logisticsandotherservicerevenues")
+    for quarter, prior_quarters in adjusted_quarters.items():
+        payload = quarters.get(quarter)
+        if not isinstance(payload, dict):
+            continue
+        rows = [row for row in (payload.get("detailGroups") or []) if isinstance(row, dict)]
+        rows_by_key = {str(row.get("memberKey") or ""): row for row in rows}
+        for member_key in explicit_keys:
+            row = rows_by_key.get(member_key)
+            if not isinstance(row, dict):
+                continue
+            prior_value = 0.0
+            for prior_quarter in prior_quarters:
+                prior_payload = quarters.get(prior_quarter)
+                prior_rows = prior_payload.get("detailGroups") if isinstance(prior_payload, dict) else []
+                prior_row = next(
+                    (
+                        candidate
+                        for candidate in (prior_rows or [])
+                        if isinstance(candidate, dict) and candidate.get("memberKey") == member_key
+                    ),
+                    None,
+                )
+                prior_value += float((prior_row or {}).get("valueBn") or 0)
+            quarterly_value = round(float(row.get("valueBn") or 0) - prior_value, 3)
+            if quarterly_value > 0.02:
+                row["valueBn"] = quarterly_value
+                row["sourceForm"] = "IR PDF cumulative-to-quarter derived"
+
+        rows = [row for row in rows if row.get("sourceForm") != "IR PDF derived residual"]
+        segment_values = {
+            str(row.get("memberKey") or ""): float(row.get("valueBn") or 0)
+            for row in (payload.get("segments") or [])
+            if isinstance(row, dict)
+        }
+        rows_by_key = {str(row.get("memberKey") or ""): row for row in rows}
+        residual_specs = (
+            (
+                "electronicsandhomeappliancesrevenues",
+                "Electronics and home appliances revenues",
+                "电子产品及家电收入",
+                "Net product revenues",
+                "netproductrevenues",
+                "generalmerchandiserevenues",
+            ),
+            (
+                "marketplaceandmarketingrevenues",
+                "Marketplace and marketing revenues",
+                "平台及营销收入",
+                "Net service revenues",
+                "netservicerevenues",
+                "logisticsandotherservicerevenues",
+            ),
+        )
+        for member_key, name, name_zh, target_name, parent_key, sibling_key in residual_specs:
+            if member_key in rows_by_key or sibling_key not in rows_by_key:
+                continue
+            value_bn = round(segment_values.get(parent_key, 0) - float(rows_by_key[sibling_key].get("valueBn") or 0), 3)
+            if value_bn <= 0.02:
+                continue
+            sibling = rows_by_key[sibling_key]
+            row = _build_row(
+                name,
+                value_bn,
+                member_key=member_key,
+                source_url=str(sibling.get("sourceUrl") or ""),
+                source_form="IR PDF derived residual",
+                filing_date=str(sibling.get("filingDate") or ""),
+                target_name=target_name,
+            )
+            row["nameZh"] = name_zh
+            rows.append(row)
+        order = {
+            "electronicsandhomeappliancesrevenues": 0,
+            "generalmerchandiserevenues": 1,
+            "marketplaceandmarketingrevenues": 2,
+            "logisticsandotherservicerevenues": 3,
+        }
+        payload["detailGroups"] = sorted(rows, key=lambda row: order.get(str(row.get("memberKey") or ""), 99))
+    return result
+
+
 def _parse_jd_records(company: dict[str, Any]) -> dict[str, Any]:
     result = {"source": "official-ir-release", "quarters": {}, "filingsUsed": [], "errors": [], "errorDetails": []}
     for item in _load_jd_quarterly_items():
@@ -1669,7 +1842,7 @@ def _parse_jd_records(company: dict[str, Any]) -> dict[str, Any]:
                 quarter=quarter,
                 sourceUrl=item.get("sourceUrl"),
             )
-    return result
+    return _normalize_jd_quarterly_detail_history(result)
 
 
 def _load_netease_quarterly_items() -> list[dict[str, str]]:
@@ -5817,7 +5990,7 @@ def _post_process_result(company: dict[str, Any], result: dict[str, Any]) -> dic
     return result
 
 
-CUSTOM_HISTORY_WINDOW_QUARTERS = 30
+CUSTOM_HISTORY_WINDOW_QUARTERS = 40
 CUSTOM_INCREMENTAL_HISTORY_COMPANIES = {"jd", "netease", "xiaomi", "meituan"}
 
 

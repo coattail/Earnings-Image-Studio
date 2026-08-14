@@ -40,6 +40,40 @@ class LatestJdUpdateTests(unittest.TestCase):
         self.assertEqual(payload["quarters"][-1], "2026Q2")
         self.assertAlmostEqual(payload["financials"]["2026Q2"]["revenueBn"], 346.401)
 
+    def test_official_four_way_revenue_hierarchy_is_consistent_since_2019(self) -> None:
+        payload = json.loads((ROOT_DIR / "data" / "cache" / "jd.json").read_text(encoding="utf-8"))
+        expected_keys = [
+            "electronicsandhomeappliancesrevenues",
+            "generalmerchandiserevenues",
+            "marketplaceandmarketingrevenues",
+            "logisticsandotherservicerevenues",
+        ]
+
+        for quarter in payload["quarters"]:
+            financial = payload["financials"][quarter]
+            details = financial.get("officialRevenueDetailGroups") or []
+            if quarter < "2019Q1":
+                self.assertEqual(details, [], quarter)
+                continue
+
+            self.assertEqual([row["memberKey"] for row in details], expected_keys, quarter)
+            segments = {row["name"]: row["valueBn"] for row in financial["officialRevenueSegments"]}
+            detail_totals = {}
+            for row in details:
+                detail_totals[row["targetName"]] = detail_totals.get(row["targetName"], 0) + row["valueBn"]
+            self.assertAlmostEqual(
+                detail_totals["Net product revenues"],
+                segments["Net product revenues"],
+                places=2,
+                msg=quarter,
+            )
+            self.assertAlmostEqual(
+                detail_totals["Net service revenues"],
+                segments["Net service revenues"],
+                places=2,
+                msg=quarter,
+            )
+
 
 if __name__ == "__main__":
     unittest.main()

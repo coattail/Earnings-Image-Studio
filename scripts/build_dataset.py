@@ -3925,6 +3925,10 @@ def apply_revenue_structure_history(
                 )
             normalized_detail_groups = mark_detail_groups_validation_ineligible(normalized_detail_groups)
             entry["officialRevenueDetailGroups"] = normalized_detail_groups
+        elif str(company.get("id") or "").strip().lower() == "jd":
+            # Do not retain stale or cumulative JD detail rows for quarters in
+            # which the official release does not disclose quarterly detail.
+            entry.pop("officialRevenueDetailGroups", None)
         opex_breakdown = payload.get("opexBreakdown") or payload.get("officialOpexBreakdown") or []
         if opex_breakdown:
             normalized_opex_breakdown = []

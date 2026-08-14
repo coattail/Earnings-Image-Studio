@@ -75,6 +75,7 @@ function loadRuntime() {
   });
   context.__nvdaPayload = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "cache", "nvidia.json"), "utf8"));
   context.__tsmcPayload = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "cache", "tsmc.json"), "utf8"));
+  context.__jdPayload = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "cache", "jd.json"), "utf8"));
   return context;
 }
 
@@ -160,6 +161,26 @@ function tsmcSnapshot(context, quarterKey) {
   );
 }
 
+function renderJd(context, quarterKey) {
+  context.__quarterKey = quarterKey;
+  return vm.runInContext(
+    `(() => {
+      const company = normalizeLoadedCompany(__jdPayload, 0);
+      state.uiLanguage = "zh";
+      state.logoCatalog = {};
+      state.supplementalComponents = {};
+      state.companyById = { [company.id]: company };
+      state.selectedCompanyId = company.id;
+      const snapshot = buildSnapshot(company, __quarterKey);
+      return {
+        svg: EarningsVizRuntime.render.renderIncomeStatementSvg(snapshot, company),
+        detailCount: snapshot.leftDetailGroups.length,
+      };
+    })()`,
+    context
+  );
+}
+
 test("Sankey geometry keeps the same horizontal proportions in Chinese and English", () => {
   const context = loadRuntime();
   const zh = renderNvda(context, "zh");
@@ -202,6 +223,17 @@ test("TSMC platform growth is converted into each quarter's displayed USD basis"
   assertClose(q2Dce.qoqPct, 4.966, 0.001, "Q2 DCE USD QoQ growth");
   assertClose(q2Others.qoqPct, 4.966, 0.001, "Q2 Others USD QoQ growth");
   assert.notEqual(q2Dce.yoyPct, q2Others.yoyPct);
+});
+
+test("JD historical revenue-only Sankey renders the official four-category hierarchy", () => {
+  const { svg, detailCount } = renderJd(loadRuntime(), "2019Q2");
+
+  assert.equal(detailCount, 4);
+  for (const label of ["电子产品及家电收入", "日用百货收入", "平台及营销收入", "物流及其他服务收入"]) {
+    assert.match(svg, new RegExp(label));
+  }
+  assert.match(svg, />商品收入<\/text>/);
+  assert.match(svg, />服务收入<\/text>/);
 });
 
 test("NVDA bar history normalizes legacy non-Data Center segments into Edge Computing", () => {

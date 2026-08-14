@@ -55,6 +55,8 @@ function renderRevenueOnlyReplicaSvg(snapshot) {
     },
   ];
   const sources = sortBusinessGroupsByValue(snapshot.businessGroups || []).filter((item) => safeNumber(item?.valueBn) > 0.02);
+  const detailGroups = [...(snapshot.leftDetailGroups || [])].filter((item) => safeNumber(item?.valueBn) > 0.02);
+  const hasDetailHierarchy = sources.length > 0 && detailGroups.length > 0;
   const resolvedSources = sources.length ? sources : fallbackSources;
   const revenueSlices = fitSlicesToBand(
     stackValueSlices(resolvedSources, revenueTop, revenueScale, {
@@ -69,7 +71,7 @@ function renderRevenueOnlyReplicaSvg(snapshot) {
       minHeight: scaleY(14),
     }
   );
-  const sourceX = shiftCanvasX(snapshot.layout?.limitedSourceX, 356);
+  const sourceX = shiftCanvasX(snapshot.layout?.limitedSourceX, hasDetailHierarchy ? 662 : 356);
   const sourceWidth = safeNumber(snapshot.layout?.limitedSourceWidth, 52);
   const sourceBoxes = resolveVerticalBoxesVariableGap(
     revenueSlices.map((slice) => ({
@@ -90,6 +92,59 @@ function renderRevenueOnlyReplicaSvg(snapshot) {
     center: sourceBoxes[index].center,
     height: sourceBoxes[index].height,
   }));
+  const detailX = shiftCanvasX(snapshot.layout?.limitedDetailSourceX, 258);
+  const detailWidth = safeNumber(snapshot.layout?.limitedDetailSourceWidth, 48);
+  const detailSlices = [];
+  if (hasDetailHierarchy) {
+    const targetSliceFor = (item) => {
+      const targetKey = normalizeLabelKey(item.targetId || item.targetName || item.target || item.groupName);
+      return sourceSlices.find((slice) => {
+        const sourceKeys = [slice.item?.id, slice.item?.memberKey, slice.item?.name].map((value) => normalizeLabelKey(value));
+        return targetKey && sourceKeys.includes(targetKey);
+      });
+    };
+    sourceSlices.forEach((targetSlice) => {
+      const rows = detailGroups.filter((item) => targetSliceFor(item) === targetSlice);
+      const totalValue = rows.reduce((sum, item) => sum + safeNumber(item?.valueBn), 0);
+      if (!(totalValue > 0.02)) return;
+      let cursor = targetSlice.top;
+      rows.forEach((item, index) => {
+        const targetTop = cursor;
+        const targetBottom = index === rows.length - 1
+          ? targetSlice.bottom
+          : targetTop + (safeNumber(item.valueBn) / totalValue) * targetSlice.height;
+        detailSlices.push({
+          item,
+          targetSlice,
+          targetTop,
+          targetBottom,
+          top: targetTop,
+          bottom: targetBottom,
+          center: (targetTop + targetBottom) / 2,
+          height: targetBottom - targetTop,
+        });
+        cursor = targetBottom;
+      });
+    });
+
+    const detailBoxes = resolveVerticalBoxesVariableGap(
+      detailSlices.map((slice) => ({
+        center: slice.center,
+        height: Math.max(slice.height, scaleY(14)),
+        gapAbove: 0,
+      })),
+      scaleY(safeNumber(snapshot.layout?.limitedDetailSourceMinY, 250)),
+      scaleY(safeNumber(snapshot.layout?.limitedDetailSourceMaxY, 1055)),
+      scaleY(safeNumber(snapshot.layout?.limitedDetailSourceGapY, 64))
+    );
+    detailSlices.forEach((slice, index) => {
+      const box = detailBoxes[index];
+      slice.top = box.top;
+      slice.bottom = box.bottom;
+      slice.center = box.center;
+      slice.height = box.height;
+    });
+  }
   const revenueFrame = {
     x: revenueX,
     y: revenueTop,
@@ -145,6 +200,24 @@ function renderRevenueOnlyReplicaSvg(snapshot) {
         ${renderCorporateLogo(snapshot.companyLogoKey, logoX, logoY, { scale: logoScale })}
   `;
 
+  detailSlices.forEach((slice) => {
+    const item = slice.item || {};
+    const fillColor = item.nodeColor || brand.primary;
+    const flowColor = item.flowColor || rgba(fillColor, 0.62);
+    const localizedName = currentChartLanguage() === "en" ? item.name || "Category" : item.nameZh || translateBusinessLabelToZh(item.name || "Category");
+    const labelLines = wrapLines(localizedName, 11);
+    const labelX = detailX - 18;
+    const labelStartY = slice.center - (labelLines.length - 1) * 16 - 10;
+    svg += `<path d="${hornFlowPath(detailX + detailWidth, slice.top, slice.bottom, sourceX, slice.targetTop, slice.targetBottom, sourceFlowOptions)}" fill="${flowColor}" opacity="0.96"></path>`;
+    svg += `<rect x="${detailX}" y="${slice.top}" width="${detailWidth}" height="${Math.max(slice.height, 2)}" rx="3" fill="${fillColor}"></rect>`;
+    labelLines.forEach((line, lineIndex) => {
+      svg += `<text x="${labelX}" y="${labelStartY + lineIndex * 30}" text-anchor="end" font-size="22" font-weight="700" fill="${fillColor}">${escapeHtml(line)}</text>`;
+    });
+    svg += `<text x="${labelX}" y="${labelStartY + labelLines.length * 30 + 2}" text-anchor="end" font-size="18" font-weight="600" fill="${muted}">${escapeHtml(
+      formatBillions(item.valueBn)
+    )}</text>`;
+  });
+
   sourceSlices.forEach((slice) => {
     const item = slice.item || {};
     const fillColor = item.nodeColor || brand.primary;
@@ -152,14 +225,15 @@ function renderRevenueOnlyReplicaSvg(snapshot) {
     const localizedName = currentChartLanguage() === "en" ? item.name || "Segment" : item.nameZh || translateBusinessLabelToZh(item.name || "Segment");
     const labelLines = wrapLines(localizedName, 14);
     const valueText = formatBillions(item.valueBn);
-    const labelX = sourceX - 18;
+    const labelX = hasDetailHierarchy ? revenueX - 20 : sourceX - 18;
+    const labelAnchor = "end";
     const labelStartY = slice.center - (labelLines.length - 1) * 16 - 10;
     svg += `<path d="${hornFlowPath(sourceX + sourceWidth, slice.top, slice.bottom, revenueFrame.left, slice.revenueTop, slice.revenueBottom, sourceFlowOptions)}" fill="${flowColor}" opacity="0.98"></path>`;
     svg += `<rect x="${sourceX}" y="${slice.top}" width="${sourceWidth}" height="${slice.height}" rx="4" fill="${fillColor}"></rect>`;
     labelLines.forEach((line, lineIndex) => {
-      svg += `<text x="${labelX}" y="${labelStartY + lineIndex * 32}" text-anchor="end" font-size="24" font-weight="700" fill="${dark}">${escapeHtml(line)}</text>`;
+      svg += `<text x="${labelX}" y="${labelStartY + lineIndex * 32}" text-anchor="${labelAnchor}" font-size="24" font-weight="700" fill="${dark}" paint-order="stroke fill" stroke="${background}" stroke-width="6" stroke-linejoin="round">${escapeHtml(line)}</text>`;
     });
-    svg += `<text x="${labelX}" y="${labelStartY + labelLines.length * 32 + 4}" text-anchor="end" font-size="20" font-weight="600" fill="${muted}">${escapeHtml(
+    svg += `<text x="${labelX}" y="${labelStartY + labelLines.length * 32 + 4}" text-anchor="${labelAnchor}" font-size="20" font-weight="600" fill="${muted}" paint-order="stroke fill" stroke="${background}" stroke-width="5" stroke-linejoin="round">${escapeHtml(
       valueText
     )}</text>`;
   });

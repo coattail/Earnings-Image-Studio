@@ -55,6 +55,70 @@ def _quarter_payload(quarter: str, member_key: str) -> dict[str, object]:
 
 
 class OfficialRevenueStructuresRefreshTests(unittest.TestCase):
+    def test_jd_current_period_table_value_handles_parenthesized_decline(self) -> None:
+        text = (
+            "Electronics and home appliances revenues "
+            "174,149 153,267 21,917 (12.0)%"
+        )
+
+        value = official_revenue_structures._extract_jd_current_table_million_value(
+            text,
+            "Electronics and home appliances revenues",
+        )
+
+        self.assertAlmostEqual(value, 153.267)
+
+    def test_jd_current_period_table_value_prefers_quarter_over_cumulative_total(self) -> None:
+        text = " ".join(
+            [
+                "Net product revenues 155,211,462 201,986,857 30,524,982",
+                "Net product revenues 85,386,013 110,488,781 16,697,463 155,211,462 201,986,857 30,524,982",
+            ]
+        )
+
+        value = official_revenue_structures._extract_jd_current_table_million_value(
+            text,
+            "Net product revenues",
+        )
+
+        self.assertAlmostEqual(value, 110.489)
+
+    def test_jd_quarter_parser_keeps_official_product_service_hierarchy(self) -> None:
+        text = " ".join(
+            [
+                "Electronics and home appliances revenues 174,149 153,267 21,917 (12.0)%",
+                "General merchandise revenues 106,829 119,720 17,120 12.1%",
+                "Net product revenues 280,978 272,987 39,037 (2.8)%",
+                "Marketplace and marketing revenues 26,634 30,616 4,378 15.0%",
+                "Logistics and other service revenues 39,374 48,681 6,961 23.6%",
+                "Net service revenues 66,008 79,297 11,339 20.1%",
+            ]
+        )
+        item = {
+            "quarter": "2025Q4",
+            "title": "JD.com Fourth Quarter 2025 Results",
+            "sourceUrl": "https://example.com/jd-q4.pdf",
+            "filingDate": "2026-03-05",
+        }
+
+        with patch.object(official_revenue_structures, "_extract_pdf_text_fast", return_value=text):
+            parsed = official_revenue_structures._parse_jd_quarter_item(item)
+
+        self.assertIsNotNone(parsed)
+        quarter, payload, _filing = parsed
+        self.assertEqual(quarter, "2025Q4")
+        self.assertEqual(
+            [row["memberKey"] for row in payload["detailGroups"]],
+            [
+                "electronicsandhomeappliancesrevenues",
+                "generalmerchandiserevenues",
+                "marketplaceandmarketingrevenues",
+                "logisticsandotherservicerevenues",
+            ],
+        )
+        self.assertAlmostEqual(payload["segments"][0]["valueBn"], 272.987)
+        self.assertAlmostEqual(payload["detailGroups"][3]["valueBn"], 48.681)
+
     def test_merged_filing_entries_prefers_fresh_submission_fields(self) -> None:
         fresh_filing = {
             "form": "10-Q",
