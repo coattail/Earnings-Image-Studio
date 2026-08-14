@@ -607,6 +607,11 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
             text,
             "Tax should not be drawn as a direct deduction from operating profit when non-operating gain bridges to pretax income.",
         )
+        self.assertEqual(
+            [],
+            svg_root.findall(".//svg:path[@data-bridge-label-leader]", SVG_NS),
+            "Non-conflicting bridge labels should remain unadorned instead of receiving automatic arrows.",
+        )
 
     def test_jd_small_net_loss_bridge_labels_use_separated_colored_callouts(self) -> None:
         svg_root = render_sankey_svg(JD_PAYLOAD, "zh", "jd-2021q3-small-bridge-callouts", quarter="2021Q3")

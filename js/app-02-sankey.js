@@ -8904,16 +8904,18 @@ function renderPixelReplicaSvg(snapshot) {
       grossMetricLayout,
       scaleY(10)
     ),
-    metricClusterObstacleRect(
-      operatingFrame.centerX,
-      operatingMetricYShifted,
-      operatingOutcomeLabel,
-      operatingOutcomeValueText,
-      snapshot.operatingMarginPct !== null && snapshot.operatingMarginPct !== undefined ? `${formatPct(snapshot.operatingMarginPct)} ${marginLabel()}` : "",
-      snapshot.operatingMarginYoyDeltaPp !== null && snapshot.operatingMarginYoyDeltaPp !== undefined ? formatPp(snapshot.operatingMarginYoyDeltaPp) : "",
-      operatingMetricLayout,
-      scaleY(10)
-    ),
+    hasOperatingLoss
+      ? null
+      : metricClusterObstacleRect(
+          operatingFrame.centerX,
+          operatingMetricYShifted,
+          operatingOutcomeLabel,
+          operatingOutcomeValueText,
+          snapshot.operatingMarginPct !== null && snapshot.operatingMarginPct !== undefined ? `${formatPct(snapshot.operatingMarginPct)} ${marginLabel()}` : "",
+          snapshot.operatingMarginYoyDeltaPp !== null && snapshot.operatingMarginYoyDeltaPp !== undefined ? formatPp(snapshot.operatingMarginYoyDeltaPp) : "",
+          operatingMetricLayout,
+          scaleY(10)
+        ),
     rightSummaryObstacleRect(
       netSummaryLines,
       netFrame.x + nodeWidth + rightPrimaryLabelGapX,
@@ -9074,11 +9076,12 @@ function renderPixelReplicaSvg(snapshot) {
     const positiveOffsetBottom = positiveOffsetTop + positiveOffsetHeight;
     const operatingOffsetTop = positiveOffsetBottom;
     const operatingOffsetBottom = sourceTop;
-    const useSeparatedSmallBridgeCallouts =
+    const smallBridgeCalloutEligible =
       useNetLossBalanceBridge &&
       positiveOffsetHeight > 0 &&
       (driverHeight <= scaleY(safeNumber(snapshot.layout?.smallBridgeCalloutMaxDriverHeightY, 34)) ||
         positiveOffsetHeight <= scaleY(safeNumber(snapshot.layout?.smallBridgeCalloutMaxPositiveHeightY, 12)));
+    let useSeparatedSmallBridgeCallouts = false;
     const branchOptions = {
       ...mergeOutflowRibbonOptions(),
       curveFactor: 0.42,
@@ -9125,6 +9128,57 @@ function renderPixelReplicaSvg(snapshot) {
       const positiveValue = formatItemBillions(item, "positive-plus");
       const positiveLabelX = positiveFrame.x - scaleY(12);
       const positiveLabelY = positiveFrame.centerY;
+      const naturalTextRect = (anchor, x, rows) => {
+        const width = Math.max(...rows.map((row) => approximateTextWidth(row.text, row.size)), 1);
+        const left = anchor === "end" ? x - width : anchor === "middle" ? x - width / 2 : x;
+        return {
+          left,
+          right: left + width,
+          top: Math.min(...rows.map((row) => row.y - row.size * 0.9)),
+          bottom: Math.max(...rows.map((row) => row.y + row.size * 0.36)),
+        };
+      };
+      if (smallBridgeCalloutEligible) {
+        const naturalPositiveRect = naturalTextRect("end", positiveLabelX, [
+          { text: positiveLabel, size: 20, y: positiveLabelY - scaleY(8) },
+          { text: positiveValue, size: 18, y: positiveLabelY + scaleY(18) },
+        ]);
+        const naturalDriverRows = [
+          {
+            text: driverLabel,
+            size: 22,
+            y: residualLabelY - scaleY(otherLossDriversBn > 0.05 ? 24 : 12),
+          },
+          {
+            text: driverValue,
+            size: 20,
+            y: residualLabelY + scaleY(otherLossDriversBn > 0.05 ? 4 : 20),
+          },
+          ...(otherLossDriversBn > 0.05
+            ? [
+                {
+                  text: `${otherLossDriverLabel} ${formatBillionsByMode(otherLossDriversBn, "negative-parentheses")}`,
+                  size: 15,
+                  y: residualLabelY + scaleY(30),
+                },
+              ]
+            : []),
+        ];
+        const naturalDriverRect = naturalTextRect("end", labelX, naturalDriverRows);
+        const naturalObstacles = [
+          ...smallBridgeCalloutObstacles,
+          operatingFrame,
+          netFrame,
+        ].filter(Boolean);
+        const labelPadding = scaleY(safeNumber(snapshot.layout?.smallBridgeNaturalLabelPaddingY, 7));
+        useSeparatedSmallBridgeCallouts =
+          rectsOverlap(naturalPositiveRect, naturalDriverRect, labelPadding) ||
+          naturalObstacles.some(
+            (obstacle) =>
+              rectsOverlap(naturalPositiveRect, obstacle, labelPadding) ||
+              rectsOverlap(naturalDriverRect, obstacle, labelPadding)
+          );
+      }
       const positiveCallout = useSeparatedSmallBridgeCallouts
         ? renderSmallBridgeCallout({
             nodeId: "positive-0",
