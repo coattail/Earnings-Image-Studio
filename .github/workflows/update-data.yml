@@ -62,9 +62,13 @@ jobs:
           set -euo pipefail
           companies_input="${{ github.event.inputs.companies || '' }}"
           mode_input="${{ github.event.inputs.mode || 'detect-and-refresh' }}"
+          scheduled_update_limit="0"
 
           if [[ "${{ github.event_name }}" != "workflow_dispatch" ]]; then
             mode_input="detect-and-refresh"
+            # Keep each scheduled run comfortably below the job timeout. The
+            # detector sorts newest filings first, and hourly runs drain the rest.
+            scheduled_update_limit="3"
           fi
 
           if [[ "$mode_input" == "force-refresh" ]]; then
@@ -75,6 +79,10 @@ jobs:
 
           if [[ -n "$companies_input" ]]; then
             cmd+=(--companies "$companies_input")
+          fi
+
+          if [[ "$scheduled_update_limit" != "0" ]]; then
+            cmd+=(--max-updates "$scheduled_update_limit")
           fi
 
           printf '[workflow] running:'

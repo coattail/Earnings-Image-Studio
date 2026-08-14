@@ -41,6 +41,12 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Return a non-zero exit code when one or more company checks fail.",
     )
+    parser.add_argument(
+        "--max-updates",
+        type=int,
+        default=0,
+        help="Maximum number of stale companies to refresh in this run; 0 means no limit.",
+    )
     return parser.parse_args()
 
 
@@ -342,6 +348,7 @@ def main() -> int:
         "commands": [],
         "updatedCompanies": [],
         "failedCompanies": [],
+        "deferredCompanies": [],
     }
     if failed_company_ids and args.fail_on_check_errors:
         summary = {
@@ -361,6 +368,15 @@ def main() -> int:
 
     if stale_company_ids and not args.dry_run:
         ordered_stale_items = sorted(stale_items, key=stale_item_priority, reverse=True)
+        max_updates = max(0, int(getattr(args, "max_updates", 0) or 0))
+        if max_updates:
+            deferred_items = ordered_stale_items[max_updates:]
+            ordered_stale_items = ordered_stale_items[:max_updates]
+            build_result["deferredCompanies"] = [
+                str(item.get("companyId") or "")
+                for item in deferred_items
+                if str(item.get("companyId") or "")
+            ]
         commands: list[list[str]] = []
         command_company_ids: list[str] = []
         for item in ordered_stale_items:

@@ -4100,10 +4100,13 @@ def main() -> int:
                         payload["parserDiagnostics"] = diagnostics
                     payload = merge_official_financial_breakdowns(payload, company)
                 payload = apply_amd_latest_official_correction(payload)
+                # Incremental IR updates still need authoritative manual
+                # financial overrides. Skipping them can add a newly detected
+                # quarter with only a date and no statement values.
+                payload = apply_manual_company_override(payload, company, manual_company_overrides)
+                payload = apply_usd_display_fields(payload, fx_cache)
                 if not getattr(args, "cache_supplement_only", False):
-                    payload = apply_manual_company_override(payload, company, manual_company_overrides)
                     payload = apply_korean_revenue_history(payload, company)
-                    payload = apply_usd_display_fields(payload, fx_cache)
         if payload is None:
             try:
                 payload = build_company_payload_for_dataset(

@@ -188,6 +188,62 @@ class CheckForUpdatesOfficialIrTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertEqual(captured_company_ids, ["asml", "jd"])
 
+    def test_main_limits_scheduled_refreshes_and_reports_deferred_companies(self) -> None:
+        companies = [
+            {"id": "older", "ticker": "OLD", "slug": "older"},
+            {"id": "newest", "ticker": "NEW", "slug": "newest"},
+            {"id": "middle", "ticker": "MID", "slug": "middle"},
+        ]
+        dates = {
+            "older": "2026-08-11",
+            "newest": "2026-08-13",
+            "middle": "2026-08-12",
+        }
+        captured_company_ids: list[str] = []
+
+        def fake_detect(company: dict[str, object]) -> dict[str, object]:
+            company_id = str(company["id"])
+            return {
+                "companyId": company_id,
+                "ticker": company["ticker"],
+                "needsUpdate": True,
+                "reason": "new-filing-detected",
+                "remoteFilingDate": dates[company_id],
+            }
+
+        def fake_run(command: list[str], cwd: str, timeout: int) -> Namespace:
+            del cwd, timeout
+            captured_company_ids.append(command[-1])
+            return Namespace(returncode=0)
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            report_path = Path(temp_dir) / "update-report.json"
+            with (
+                patch.object(check_for_updates, "TOP30_COMPANIES", companies),
+                patch.object(
+                    check_for_updates,
+                    "parse_args",
+                    return_value=Namespace(
+                        companies="",
+                        dry_run=False,
+                        json=False,
+                        report_path=report_path,
+                        fail_on_check_errors=False,
+                        max_updates=2,
+                    ),
+                ),
+                patch.object(check_for_updates, "detect_company_update", side_effect=fake_detect),
+                patch.object(check_for_updates.subprocess, "run", side_effect=fake_run),
+                patch("builtins.print"),
+            ):
+                exit_code = check_for_updates.main()
+
+            report = check_for_updates.json.loads(report_path.read_text(encoding="utf-8"))
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(captured_company_ids, ["newest", "middle"])
+        self.assertEqual(report["build"]["deferredCompanies"], ["older"])
+
     def test_main_fails_and_writes_report_when_company_check_errors(self) -> None:
         failed = {
             "companyId": "jd",
