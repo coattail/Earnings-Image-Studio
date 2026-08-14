@@ -1235,6 +1235,7 @@ const CHART_LABEL_TRANSLATIONS_ZH_EXACT = {
   "foods & sundries": "食品与杂货",
   "fresh food": "生鲜食品",
   "fresh foods": "生鲜食品",
+  fulfillment: "履约",
   gaming: "游戏",
   "global banking": "全球银行",
   "global markets": "全球市场",

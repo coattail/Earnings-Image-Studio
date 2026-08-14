@@ -608,6 +608,30 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
             "Tax should not be drawn as a direct deduction from operating profit when non-operating gain bridges to pretax income.",
         )
 
+    def test_jd_small_net_loss_bridge_labels_use_separated_colored_callouts(self) -> None:
+        svg_root = render_sankey_svg(JD_PAYLOAD, "zh", "jd-2021q3-small-bridge-callouts", quarter="2021Q3")
+        text = svg_text_content(svg_root)
+
+        self.assertIn("履约", text)
+        self.assertNotIn("Fulfillment", text)
+
+        positive_labels = svg_root.findall(".//svg:text[@data-bridge-label-callout='positive-0']", SVG_NS)
+        loss_labels = svg_root.findall(".//svg:text[@data-bridge-label-callout='net-loss-driver-0']", SVG_NS)
+        positive_leaders = svg_root.findall(".//svg:path[@data-bridge-label-leader='positive-0']", SVG_NS)
+        loss_leaders = svg_root.findall(".//svg:path[@data-bridge-label-leader='net-loss-driver-0']", SVG_NS)
+
+        self.assertEqual(["其他净收益", "+$0.07B"], ["".join(item.itertext()).strip() for item in positive_labels])
+        self.assertEqual(["税后营业外费用", "($0.9B)"], ["".join(item.itertext()).strip() for item in loss_labels])
+        self.assertEqual(1, len(positive_leaders))
+        self.assertEqual(1, len(loss_leaders))
+        self.assertEqual(positive_labels[0].attrib["fill"], positive_leaders[0].attrib["stroke"])
+        self.assertEqual(loss_labels[0].attrib["fill"], loss_leaders[0].attrib["stroke"])
+        self.assertGreaterEqual(
+            min(float(item.attrib["y"]) for item in loss_labels) - max(float(item.attrib["y"]) for item in positive_labels),
+            120,
+            "Small positive and negative bridge labels should occupy separate callout lanes.",
+        )
+
     def test_oracle_small_regular_sources_share_column(self) -> None:
         svg_root = render_sankey_svg(ORACLE_PAYLOAD, "zh", "oracle-latest-zh", quarter="latest")
 

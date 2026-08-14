@@ -8888,6 +8888,141 @@ function renderPixelReplicaSvg(snapshot) {
       netDisplayBand.bottom,
       netRibbonOptions
     );
+  // Tiny gain/loss bridge nodes cannot safely carry adjacent labels. Place
+  // those labels in collision-tested callout lanes and point back to the node.
+  const smallBridgeCalloutRects = [];
+  const smallBridgeCalloutObstacles = [
+    titleObstacle,
+    periodEndObstacle,
+    metricClusterObstacleRect(
+      grossFrame.centerX,
+      grossMetricYShifted,
+      snapshot.grossProfitLabel || "Gross profit",
+      formatBillions(grossProfitBn),
+      snapshot.grossMarginPct !== null && snapshot.grossMarginPct !== undefined ? `${formatPct(snapshot.grossMarginPct)} ${marginLabel()}` : "",
+      snapshot.grossMarginYoyDeltaPp !== null && snapshot.grossMarginYoyDeltaPp !== undefined ? formatPp(snapshot.grossMarginYoyDeltaPp) : "",
+      grossMetricLayout,
+      scaleY(10)
+    ),
+    metricClusterObstacleRect(
+      operatingFrame.centerX,
+      operatingMetricYShifted,
+      operatingOutcomeLabel,
+      operatingOutcomeValueText,
+      snapshot.operatingMarginPct !== null && snapshot.operatingMarginPct !== undefined ? `${formatPct(snapshot.operatingMarginPct)} ${marginLabel()}` : "",
+      snapshot.operatingMarginYoyDeltaPp !== null && snapshot.operatingMarginYoyDeltaPp !== undefined ? formatPp(snapshot.operatingMarginYoyDeltaPp) : "",
+      operatingMetricLayout,
+      scaleY(10)
+    ),
+    rightSummaryObstacleRect(
+      netSummaryLines,
+      netFrame.x + nodeWidth + rightPrimaryLabelGapX,
+      netFrame.centerY,
+      scaleY(10)
+    ),
+  ].filter(Boolean);
+  const renderSmallBridgeCallout = ({ nodeId, frame, lines, color, candidateFactory, obstacles = [] }) => {
+    const paddingX = scaleY(7);
+    const paddingY = scaleY(5);
+    const lineGap = scaleY(4);
+    const contentWidth = Math.max(
+      ...lines.map((line) => approximateTextWidth(line.text, line.size)),
+      scaleY(24)
+    );
+    const contentHeight = lines.reduce(
+      (sum, line, index) => sum + line.size + (index < lines.length - 1 ? lineGap : 0),
+      0
+    );
+    const blockWidth = contentWidth + paddingX * 2;
+    const blockHeight = contentHeight + paddingY * 2;
+    const rectForCandidate = (candidate) => {
+      const left =
+        candidate.anchor === "end"
+          ? candidate.x - blockWidth
+          : candidate.anchor === "middle"
+            ? candidate.x - blockWidth / 2
+            : candidate.x;
+      return {
+        left,
+        right: left + blockWidth,
+        top: candidate.centerY - blockHeight / 2,
+        bottom: candidate.centerY + blockHeight / 2,
+      };
+    };
+    const collisionObstacles = [...smallBridgeCalloutObstacles, ...obstacles, ...smallBridgeCalloutRects].filter(Boolean);
+    const candidates = candidateFactory({ width: blockWidth, height: blockHeight });
+    let best = null;
+    candidates.forEach((candidate, index) => {
+      const rect = rectForCandidate(candidate);
+      const collisionCount = collisionObstacles.reduce(
+        (count, obstacle) => count + (rectsOverlap(rect, obstacle, scaleY(7)) ? 1 : 0),
+        0
+      );
+      const boundaryPenalty =
+        Math.max(scaleY(22) - rect.left, 0) +
+        Math.max(rect.right - (width - scaleY(22)), 0) +
+        Math.max(scaleY(18) - rect.top, 0) +
+        Math.max(rect.bottom - (chartBottomLimit - scaleY(8)), 0);
+      const score = collisionCount * 100000 + boundaryPenalty * 1000 + safeNumber(candidate.priority, index) * 100 + index;
+      if (!best || score < best.score) best = { ...candidate, rect, score };
+    });
+    const placement = best || {
+      anchor: "end",
+      x: frame.left - scaleY(12),
+      centerY: frame.centerY,
+      side: "left",
+      rect: {
+        left: frame.left - scaleY(12) - blockWidth,
+        right: frame.left - scaleY(12),
+        top: frame.centerY - blockHeight / 2,
+        bottom: frame.centerY + blockHeight / 2,
+      },
+    };
+    smallBridgeCalloutRects.push(placement.rect);
+
+    let startX = placement.rect.right;
+    let startY = clamp(frame.centerY, placement.rect.top + scaleY(6), placement.rect.bottom - scaleY(6));
+    let targetX = frame.left;
+    let targetY = frame.centerY;
+    if (placement.side === "right") {
+      startX = placement.rect.left;
+      targetX = frame.right;
+    } else if (placement.side === "above") {
+      startX = clamp(frame.centerX, placement.rect.left + scaleY(6), placement.rect.right - scaleY(6));
+      startY = placement.rect.bottom;
+      targetX = frame.centerX;
+      targetY = frame.top;
+    } else if (placement.side === "below") {
+      startX = clamp(frame.centerX, placement.rect.left + scaleY(6), placement.rect.right - scaleY(6));
+      startY = placement.rect.top;
+      targetX = frame.centerX;
+      targetY = frame.bottom;
+    }
+    const dx = targetX - startX;
+    const dy = targetY - startY;
+    const distance = Math.max(Math.hypot(dx, dy), 1);
+    const ux = dx / distance;
+    const uy = dy / distance;
+    const arrowLength = scaleY(7);
+    const arrowHalfWidth = scaleY(3.5);
+    const arrowBaseX = targetX - ux * arrowLength;
+    const arrowBaseY = targetY - uy * arrowLength;
+    const perpendicularX = -uy * arrowHalfWidth;
+    const perpendicularY = ux * arrowHalfWidth;
+    const leaderPath = `M ${startX} ${startY} L ${targetX} ${targetY}`;
+    let markup = `
+      <path d="${leaderPath}" fill="none" stroke="${background}" stroke-width="6" stroke-linecap="round"></path>
+      <path data-bridge-label-leader="${escapeHtml(nodeId)}" d="${leaderPath}" fill="none" stroke="${color}" stroke-width="2.5" stroke-linecap="round"></path>
+      <path d="M ${targetX} ${targetY} L ${arrowBaseX + perpendicularX} ${arrowBaseY + perpendicularY} L ${arrowBaseX - perpendicularX} ${arrowBaseY - perpendicularY} Z" fill="${color}" stroke="${background}" stroke-width="1.5" paint-order="stroke fill"></path>
+    `;
+    let cursorY = placement.rect.top + paddingY;
+    lines.forEach((line) => {
+      cursorY += line.size * 0.86;
+      markup += `<text data-bridge-label-callout="${escapeHtml(nodeId)}" x="${placement.x}" y="${cursorY}" text-anchor="${placement.anchor}" font-size="${line.size}" font-weight="${line.weight || 700}" fill="${line.color || color}" paint-order="stroke fill" stroke="${background}" stroke-width="${line.strokeWidth || 6}" stroke-linejoin="round">${escapeHtml(line.text)}</text>`;
+      cursorY += line.size * 0.14 + lineGap;
+    });
+    return { markup, placement };
+  };
   const netLossDriverIndex =
     netLoss && belowOperatingItems.length
       ? belowOperatingItems.reduce(
@@ -8939,6 +9074,11 @@ function renderPixelReplicaSvg(snapshot) {
     const positiveOffsetBottom = positiveOffsetTop + positiveOffsetHeight;
     const operatingOffsetTop = positiveOffsetBottom;
     const operatingOffsetBottom = sourceTop;
+    const useSeparatedSmallBridgeCallouts =
+      useNetLossBalanceBridge &&
+      positiveOffsetHeight > 0 &&
+      (driverHeight <= scaleY(safeNumber(snapshot.layout?.smallBridgeCalloutMaxDriverHeightY, 34)) ||
+        positiveOffsetHeight <= scaleY(safeNumber(snapshot.layout?.smallBridgeCalloutMaxPositiveHeightY, 12)));
     const branchOptions = {
       ...mergeOutflowRibbonOptions(),
       curveFactor: 0.42,
@@ -8966,6 +9106,7 @@ function renderPixelReplicaSvg(snapshot) {
     const labelX = driverFrame.x - scaleY(14);
     const offsetLabelY = driverFrame.top + Math.max(offsetHeight * 0.5, scaleY(34));
     const residualLabelY = sourceTop + targetHeight / 2;
+    let manualPositiveFrame = null;
     const manualPositiveMarkup = (() => {
       if (!useNetLossBalanceBridge || !(positiveOffsetHeight > 0)) return "";
       const item = positiveAdjustments[0] || {};
@@ -8979,15 +9120,68 @@ function renderPixelReplicaSvg(snapshot) {
         positiveWidth,
         positiveFrameHeight
       );
+      manualPositiveFrame = positiveFrame;
       const positiveLabel = localizeChartItemName(item);
       const positiveValue = formatItemBillions(item, "positive-plus");
       const positiveLabelX = positiveFrame.x - scaleY(12);
       const positiveLabelY = positiveFrame.centerY;
+      const positiveCallout = useSeparatedSmallBridgeCallouts
+        ? renderSmallBridgeCallout({
+            nodeId: "positive-0",
+            frame: positiveFrame,
+            color: greenText,
+            lines: [
+              { text: positiveLabel, size: 20, weight: 700, strokeWidth: 7 },
+              { text: positiveValue, size: 18, weight: 700, strokeWidth: 6 },
+            ],
+            obstacles: [driverFrame, operatingFrame, netFrame],
+            candidateFactory: ({ height }) => [
+              {
+                anchor: "start",
+                x: positiveFrame.right + scaleY(18),
+                centerY: Math.max(
+                  positiveHeaderLabelClearanceBottom + height / 2,
+                  positiveFrame.top - height / 2 - scaleY(34)
+                ),
+                side: "above",
+                priority: 0,
+              },
+              {
+                anchor: "middle",
+                x: positiveFrame.centerX,
+                centerY: Math.max(
+                  positiveHeaderLabelClearanceBottom + height / 2,
+                  positiveFrame.top - height / 2 - scaleY(30)
+                ),
+                side: "above",
+                priority: 1,
+              },
+              {
+                anchor: "start",
+                x: positiveFrame.right + scaleY(18),
+                centerY: positiveFrame.centerY,
+                side: "right",
+                priority: 2,
+              },
+              {
+                anchor: "end",
+                x: positiveFrame.left - scaleY(18),
+                centerY: positiveFrame.centerY,
+                side: "left",
+                priority: 3,
+              },
+            ],
+          })
+        : null;
       return `
       <path d="${flowPath(positiveFrame.right, positiveFrame.top, positiveFrame.bottom, driverFrame.x, positiveOffsetTop, positiveOffsetBottom, branchOptions)}" fill="${greenFlow}" opacity="0.97"></path>
       ${renderEditableNodeRect(positiveFrame, greenNode)}
-      <text x="${positiveLabelX}" y="${positiveLabelY - scaleY(8)}" text-anchor="end" font-size="20" font-weight="700" fill="${greenText}" paint-order="stroke fill" stroke="${background}" stroke-width="7" stroke-linejoin="round">${escapeHtml(positiveLabel)}</text>
-      <text x="${positiveLabelX}" y="${positiveLabelY + scaleY(18)}" text-anchor="end" font-size="18" font-weight="700" fill="${greenText}" paint-order="stroke fill" stroke="${background}" stroke-width="6" stroke-linejoin="round">${escapeHtml(positiveValue)}</text>
+      ${
+        positiveCallout
+          ? positiveCallout.markup
+          : `<text x="${positiveLabelX}" y="${positiveLabelY - scaleY(8)}" text-anchor="end" font-size="20" font-weight="700" fill="${greenText}" paint-order="stroke fill" stroke="${background}" stroke-width="7" stroke-linejoin="round">${escapeHtml(positiveLabel)}</text>
+      <text x="${positiveLabelX}" y="${positiveLabelY + scaleY(18)}" text-anchor="end" font-size="18" font-weight="700" fill="${greenText}" paint-order="stroke fill" stroke="${background}" stroke-width="6" stroke-linejoin="round">${escapeHtml(positiveValue)}</text>`
+      }
       `;
     })();
     const operatingOffsetMarkup =
@@ -9010,6 +9204,58 @@ function renderPixelReplicaSvg(snapshot) {
             )}" fill="${greenFlow}" opacity="0.95"></path>`;
           })()
         : "";
+    const driverCallout = useSeparatedSmallBridgeCallouts
+      ? renderSmallBridgeCallout({
+          nodeId: `net-loss-driver-${netLossDriverIndex}`,
+          frame: driverFrame,
+          color: redText,
+          lines: [
+            { text: driverLabel, size: 22, weight: 700, strokeWidth: 7 },
+            { text: driverValue, size: 20, weight: 700, strokeWidth: 6 },
+            ...(otherLossDriversBn > 0.05
+              ? [
+                  {
+                    text: `${otherLossDriverLabel} ${formatBillionsByMode(otherLossDriversBn, "negative-parentheses")}`,
+                    size: 15,
+                    weight: 700,
+                    strokeWidth: 5,
+                  },
+                ]
+              : []),
+          ],
+          obstacles: [operatingFrame, netFrame, manualPositiveFrame].filter(Boolean),
+          candidateFactory: ({ height }) => [
+            {
+              anchor: "middle",
+              x: driverFrame.centerX,
+              centerY: driverFrame.bottom + height / 2 + scaleY(32),
+              side: "below",
+              priority: 0,
+            },
+            {
+              anchor: "start",
+              x: driverFrame.left,
+              centerY: driverFrame.bottom + height / 2 + scaleY(32),
+              side: "below",
+              priority: 1,
+            },
+            {
+              anchor: "middle",
+              x: driverFrame.centerX,
+              centerY: driverFrame.top - height / 2 - scaleY(30),
+              side: "above",
+              priority: 2,
+            },
+            {
+              anchor: "end",
+              x: driverFrame.left - scaleY(18),
+              centerY: driverFrame.centerY,
+              side: "left",
+              priority: 3,
+            },
+          ],
+        })
+      : null;
     return `
       ${operatingOffsetMarkup}
       ${manualPositiveMarkup}
@@ -9024,12 +9270,16 @@ function renderPixelReplicaSvg(snapshot) {
       `
           : ""
       }
-      <text x="${labelX}" y="${residualLabelY - scaleY(otherLossDriversBn > 0.05 ? 24 : 12)}" text-anchor="end" font-size="22" font-weight="700" fill="${redText}" paint-order="stroke fill" stroke="${background}" stroke-width="7" stroke-linejoin="round">${escapeHtml(driverLabel)}</text>
+      ${
+        driverCallout
+          ? driverCallout.markup
+          : `<text x="${labelX}" y="${residualLabelY - scaleY(otherLossDriversBn > 0.05 ? 24 : 12)}" text-anchor="end" font-size="22" font-weight="700" fill="${redText}" paint-order="stroke fill" stroke="${background}" stroke-width="7" stroke-linejoin="round">${escapeHtml(driverLabel)}</text>
       <text x="${labelX}" y="${residualLabelY + scaleY(otherLossDriversBn > 0.05 ? 4 : 20)}" text-anchor="end" font-size="20" font-weight="700" fill="${redText}" paint-order="stroke fill" stroke="${background}" stroke-width="6" stroke-linejoin="round">${escapeHtml(driverValue)}</text>
       ${
         otherLossDriversBn > 0.05
           ? `<text x="${labelX}" y="${residualLabelY + scaleY(30)}" text-anchor="end" font-size="15" font-weight="700" fill="${redText}" paint-order="stroke fill" stroke="${background}" stroke-width="5" stroke-linejoin="round">${escapeHtml(otherLossDriverLabel)} ${escapeHtml(formatBillionsByMode(otherLossDriversBn, "negative-parentheses"))}</text>`
           : ""
+      }`
       }
     `;
   };
