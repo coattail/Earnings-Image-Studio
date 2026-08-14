@@ -116,6 +116,22 @@ class BroadcomOfficialClassificationTests(unittest.TestCase):
         for placeholder_label in ("财务费用", "履约", "销售与营销", "税金及附加"):
             self.assertNotIn(placeholder_label, svg)
 
+    def test_every_disclosed_nonzero_tax_quarter_renders_a_tax_line(self) -> None:
+        tax_quarters = [
+            quarter
+            for quarter, entry in self.payload["financials"].items()
+            if entry.get("taxBn") is not None and abs(float(entry["taxBn"])) > 0.0005
+        ]
+        for quarter in tax_quarters:
+            with self.subTest(quarter=quarter):
+                self.assertIn("税项", render_broadcom_svg(quarter))
+
+    def test_tiny_tax_benefit_uses_a_precise_label_instead_of_disappearing(self) -> None:
+        svg = render_broadcom_svg("2025Q1")
+
+        self.assertIn("税项收益", svg)
+        self.assertIn("+$0.01B", svg)
+
 
 if __name__ == "__main__":
     unittest.main()

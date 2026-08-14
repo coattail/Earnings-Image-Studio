@@ -648,6 +648,96 @@ def normalize_segment_label_key(value: Any) -> str:
     return re.sub(r"[^a-z0-9]+", "", str(value or "").strip().lower())
 
 
+SankeyStructureFieldGroups = tuple[tuple[str, ...], ...]
+SANKEY_STRUCTURE_FIELD_GROUPS: SankeyStructureFieldGroups = (
+    ("officialRevenueSegments",),
+    ("officialRevenueDetailGroups",),
+    ("officialCostBreakdown", "costBreakdown"),
+    ("officialOpexBreakdown", "opexBreakdown"),
+)
+
+
+def sankey_structure_row_key(row: dict[str, Any]) -> str:
+    return normalize_segment_label_key(
+        row.get("memberKey")
+        or row.get("key")
+        or row.get("id")
+        or row.get("lockupKey")
+        or row.get("name")
+        or row.get("nameZh")
+    )
+
+
+def harmonize_unchanged_sankey_rows(current_rows: Any, previous_rows: Any) -> tuple[Any, bool]:
+    if not isinstance(current_rows, list) or not isinstance(previous_rows, list):
+        return current_rows, False
+    current = [row for row in current_rows if isinstance(row, dict)]
+    previous = [row for row in previous_rows if isinstance(row, dict)]
+    if not current or len(current) != len(current_rows) or len(current) != len(previous):
+        return current_rows, False
+    current_by_key = {sankey_structure_row_key(row): row for row in current}
+    previous_keys = [sankey_structure_row_key(row) for row in previous]
+    if (
+        any(not key or key not in current_by_key for key in previous_keys)
+        or len(current_by_key) != len(current)
+        or len(set(previous_keys)) != len(previous_keys)
+    ):
+        return current_rows, False
+    harmonized: list[dict[str, Any]] = []
+    for previous_row, key in zip(previous, previous_keys):
+        current_row = deepcopy(current_by_key[key])
+        for label_field in ("name", "nameZh", "displayLines", "lockupKey"):
+            if previous_row.get(label_field) not in (None, "", []):
+                current_row[label_field] = deepcopy(previous_row[label_field])
+        harmonized.append(current_row)
+    return harmonized, True
+
+
+def first_sankey_structure_field(entry: dict[str, Any], field_group: tuple[str, ...]) -> tuple[str | None, Any]:
+    for field_name in field_group:
+        if isinstance(entry.get(field_name), list) and entry[field_name]:
+            return field_name, entry[field_name]
+    return None, None
+
+
+def preserve_previous_quarter_sankey_structure(payload: dict[str, Any]) -> dict[str, Any]:
+    """Keep the prior layout taxonomy when the official category key set is unchanged."""
+    financials = payload.get("financials")
+    if not isinstance(financials, dict):
+        return payload
+    previous_quarter: str | None = None
+    for quarter_key in sorted(financials, key=parse_period):
+        entry = financials.get(quarter_key)
+        previous_entry = financials.get(previous_quarter) if previous_quarter else None
+        if not isinstance(entry, dict):
+            continue
+        if isinstance(previous_entry, dict):
+            continuity_fields: list[str] = []
+            for field_group in SANKEY_STRUCTURE_FIELD_GROUPS:
+                current_field, current_rows = first_sankey_structure_field(entry, field_group)
+                _, previous_rows = first_sankey_structure_field(previous_entry, field_group)
+                if not current_field:
+                    continue
+                harmonized, matched = harmonize_unchanged_sankey_rows(
+                    current_rows,
+                    previous_rows,
+                )
+                if matched:
+                    entry[current_field] = harmonized
+                    continuity_fields.append(current_field)
+            if continuity_fields and not entry.get("sankeyPresentation") and previous_entry.get("sankeyPresentation"):
+                entry["sankeyPresentation"] = deepcopy(previous_entry["sankeyPresentation"])
+                continuity_fields.append("sankeyPresentation")
+            if continuity_fields:
+                entry["sankeyStructureContinuity"] = {
+                    "sourceQuarter": previous_quarter,
+                    "fields": continuity_fields,
+                    "rule": "same-normalized-category-set",
+                }
+        previous_quarter = quarter_key
+    return payload
+
+
 def canonical_revenue_segment_member_key(company_id: str, member_key: Any, name: Any) -> str:
     normalized_company_id = str(company_id or "").strip().lower()
     normalized_key = normalize_segment_label_key(member_key or name)
@@ -2582,6 +2672,7 @@ def finalize_company_payload(
     payload["statementPresets"] = presets
     apply_micron_official_business_unit_restatements(payload)
     sync_revenue_structure_history_into_financial_entries(payload, company)
+    preserve_previous_quarter_sankey_structure(payload)
     segment_quarter_count = sum(1 for item in payload["financials"].values() if item.get("officialRevenueSegments"))
     expense_quarter_count = sum(1 for item in payload["financials"].values() if item.get("officialOpexBreakdown") or item.get("opexBreakdown"))
     classification_coverage = build_company_classification_coverage(company, payload)

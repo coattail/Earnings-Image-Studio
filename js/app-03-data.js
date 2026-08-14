@@ -743,6 +743,24 @@ function isRenderableFinancialBridgeItem(item, entry = {}) {
   return item?.preserveForFlowConservation === true && usesPreciseValueLabel && valueBn > 0.0005;
 }
 
+function isRenderableCoreTaxValue(value) {
+  return value !== null && value !== undefined && Math.abs(safeNumber(value)) > 0.0005;
+}
+
+function coreTaxDisplayOptions(value, entry = {}, positive = false) {
+  const usesPreciseValue = financialBridgeValueRoundsToDisplayedZero(value, entry);
+  return {
+    preserveForFlowConservation: usesPreciseValue,
+    valueFormat: usesPreciseValue
+      ? positive
+        ? "positive-plus-precise"
+        : "negative-parentheses-precise"
+      : positive
+        ? "positive-plus"
+        : "negative-parentheses",
+  };
+}
+
 function applyOpexPresentationMode(items, company, entry) {
   const normalizedItems = Array.isArray(items) ? items.filter((item) => safeNumber(item?.valueBn) > 0.02) : [];
   const presentation = {
@@ -1958,12 +1976,11 @@ function buildGenericSnapshot(company, entry, quarterKey) {
     inferredNonOperatingBn !== null &&
     inferredNonOperatingBn !== undefined &&
     isMaterialFinancialBridgeValue(inferredNonOperatingBn, bridgeVisibilityEntry);
-  const hasMaterialTax =
-    taxBn !== null && taxBn !== undefined && isMaterialFinancialBridgeValue(taxBn, bridgeVisibilityEntry);
+  const hasRenderableTax = isRenderableCoreTaxValue(taxBn);
   const netTaxWithNonOperating =
     hasRenderableGrossStage &&
     hasMaterialNonOperating &&
-    hasMaterialTax &&
+    hasRenderableTax &&
     String(company?.id || "").toLowerCase() === "jd";
   if (hasExplicitNetBridge) {
     // The source provides a complete, named operating-profit-to-net-profit bridge.
@@ -2046,25 +2063,28 @@ function buildGenericSnapshot(company, entry, quarterKey) {
     !netTaxWithNonOperating &&
     hasRenderableGrossStage &&
     taxBn > 0 &&
-    isMaterialFinancialBridgeValue(taxBn, bridgeVisibilityEntry)
+    hasRenderableTax
   ) {
     belowOperatingItems.push({
       name: "Tax",
+      nameZh: "税项",
       valueBn: Math.abs(taxBn),
       color: "#D92D20",
+      ...coreTaxDisplayOptions(taxBn, bridgeVisibilityEntry, false),
     });
   } else if (
     !hasExplicitNetBridge &&
     !netTaxWithNonOperating &&
     hasRenderableGrossStage &&
     taxBn < 0 &&
-    isMaterialFinancialBridgeValue(taxBn, bridgeVisibilityEntry)
+    hasRenderableTax
   ) {
     positiveAdjustments.push({
       name: "Tax benefit",
       nameZh: "税项收益",
       valueBn: Math.abs(taxBn),
       color: "#16A34A",
+      ...coreTaxDisplayOptions(taxBn, bridgeVisibilityEntry, true),
     });
   }
   const explicitPositiveBridgeBn = positiveAdjustments.reduce((sum, item) => sum + Math.max(safeNumber(item?.valueBn), 0), 0);
