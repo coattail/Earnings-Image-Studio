@@ -51,6 +51,83 @@ def _local_payload() -> dict[str, object]:
 
 
 class CheckForUpdatesOfficialIrTests(unittest.TestCase):
+    def test_latest_remote_sec_filing_includes_reporting_quarter(self) -> None:
+        company = {"id": "apple", "ticker": "AAPL"}
+        submissions = {
+            "filings": {
+                "recent": {
+                    "form": ["10-Q"],
+                    "accessionNumber": ["0000320193-26-000020"],
+                    "filingDate": ["2026-07-31"],
+                    "reportDate": ["2026-06-27"],
+                    "primaryDocument": ["aapl-20260627.htm"],
+                },
+                "files": [],
+            }
+        }
+        with (
+            patch.object(check_for_updates, "_resolve_cik", return_value=320193),
+            patch.object(check_for_updates, "_request_json", return_value=submissions),
+        ):
+            result = check_for_updates.latest_remote_sec_filing(company)
+
+        self.assertIsNotNone(result)
+        assert result is not None
+        self.assertEqual(result["reportDate"], "2026-06-27")
+        self.assertEqual(result["quarter"], "2026Q2")
+
+    def test_sec_filing_for_existing_quarter_does_not_trigger_refresh(self) -> None:
+        company = {"id": "apple", "ticker": "AAPL"}
+        local_payload = {
+            "id": "apple",
+            "quarters": ["2026Q2"],
+            "financials": {
+                "2026Q2": {
+                    "calendarQuarter": "2026Q2",
+                    "statementFilingDate": "2026-07-30",
+                }
+            },
+        }
+        remote = {
+            "filingDate": "2026-07-31",
+            "accession": "0000320193-26-000020",
+            "form": "10-Q",
+            "reportDate": "2026-06-27",
+            "quarter": "2026Q2",
+        }
+        with (
+            patch.object(check_for_updates, "load_local_company_payload", return_value=local_payload),
+            patch.object(check_for_updates, "latest_remote_sec_filing", return_value=remote),
+        ):
+            result = check_for_updates.detect_company_update(company)
+
+        self.assertFalse(result["needsUpdate"])
+        self.assertEqual(result["reason"], "up-to-date")
+        self.assertEqual(result["remoteQuarter"], "2026Q2")
+
+    def test_sec_filing_for_new_quarter_triggers_refresh(self) -> None:
+        company = {"id": "berkshire", "ticker": "BRK.B"}
+        local_payload = {
+            "id": "berkshire",
+            "quarters": ["2026Q1"],
+            "financials": {"2026Q1": {"statementFilingDate": "2026-05-02"}},
+        }
+        remote = {
+            "filingDate": "2026-08-10",
+            "accession": "0001193125-26-341032",
+            "form": "10-Q",
+            "reportDate": "2026-06-30",
+            "quarter": "2026Q2",
+        }
+        with (
+            patch.object(check_for_updates, "load_local_company_payload", return_value=local_payload),
+            patch.object(check_for_updates, "latest_remote_sec_filing", return_value=remote),
+        ):
+            result = check_for_updates.detect_company_update(company)
+
+        self.assertTrue(result["needsUpdate"])
+        self.assertEqual(result["reason"], "new-quarter-detected")
+
     def test_stockanalysis_company_is_stale_when_official_ir_has_newer_quarter(self) -> None:
         with (
             patch.object(check_for_updates, "load_local_company_payload", return_value=_local_payload()),

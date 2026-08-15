@@ -66,9 +66,10 @@ jobs:
 
           if [[ "${{ github.event_name }}" != "workflow_dispatch" ]]; then
             mode_input="detect-and-refresh"
-            # Keep each scheduled run comfortably below the job timeout. The
-            # detector sorts newest filings first, and hourly runs drain the rest.
-            scheduled_update_limit="3"
+            # A full official-filings refresh can take several minutes. Process
+            # one company per hourly run so it can use the 30-minute per-company
+            # budget while remaining below the 45-minute job timeout.
+            scheduled_update_limit="1"
           fi
 
           if [[ "$mode_input" == "force-refresh" ]]; then
@@ -92,7 +93,7 @@ jobs:
 
       - name: Upload update diagnostics
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: earnings-update-report-${{ github.run_id }}
           path: output/update-report.json

@@ -19,7 +19,8 @@ class MarketCloseRefreshScheduleTests(unittest.TestCase):
 
         self.assertIn("--report-path output/update-report.json", workflow)
         self.assertIn("--fail-on-check-errors", workflow)
-        self.assertIn("actions/upload-artifact@v4", workflow)
+        self.assertIn('scheduled_update_limit="1"', workflow)
+        self.assertIn("actions/upload-artifact@v7", workflow)
 
 
 if __name__ == "__main__":

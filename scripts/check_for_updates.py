@@ -17,7 +17,10 @@ from stockanalysis_financials import fetch_stockanalysis_financial_history
 DATASET_PATH = ROOT_DIR / "data" / "earnings-dataset.json"
 COMPANY_CACHE_DIR = ROOT_DIR / "data" / "cache"
 OFFICIAL_IR_LOOKUP_TIMEOUT_SECONDS = 25
-COMPANY_REFRESH_TIMEOUT_SECONDS = 120
+# A full official-filings refresh can legitimately take several minutes. Keep
+# one company below the workflow's 45-minute job limit instead of killing every
+# heavy refresh after two minutes.
+COMPANY_REFRESH_TIMEOUT_SECONDS = 30 * 60
 
 
 def parse_args() -> argparse.Namespace:
@@ -122,25 +125,51 @@ def latest_local_revenue_structure_quarter(payload: dict[str, Any]) -> str:
     return max(quarter_keys, key=parse_period)
 
 
+def calendar_quarter_from_date(value: str) -> str:
+    try:
+        year = int(value[:4])
+        month = int(value[5:7])
+    except (TypeError, ValueError):
+        return ""
+    if year <= 0 or month < 1 or month > 12:
+        return ""
+    return f"{year}Q{((month - 1) // 3) + 1}"
+
+
 def latest_remote_sec_filing(company: dict[str, Any]) -> dict[str, str] | None:
     cik = _resolve_cik(str(company.get("ticker") or ""), refresh=False)
     if cik is None:
         return None
     submissions = _request_json(f"https://data.sec.gov/submissions/CIK{cik:010d}.json")
-    best_record: tuple[str, str, str] | None = None
+    recent = submissions.get("filings", {}).get("recent", {})
+    report_date_by_accession = {
+        str(accession): str(report_date)
+        for accession, report_date in zip(
+            recent.get("accessionNumber", []),
+            recent.get("reportDate", []),
+        )
+    }
+    best_record: tuple[str, str, str, str] | None = None
     for form, accession, filing_date, _primary_document in _submission_records(submissions):
         if form not in ALLOWED_FORMS or filing_date < MIN_FILING_DATE:
             continue
-        candidate = (str(filing_date), str(accession), str(form))
+        candidate = (
+            str(filing_date),
+            str(accession),
+            str(form),
+            report_date_by_accession.get(str(accession), ""),
+        )
         if best_record is None or candidate > best_record:
             best_record = candidate
     if best_record is None:
         return None
-    filing_date, accession, form = best_record
+    filing_date, accession, form, report_date = best_record
     return {
         "filingDate": filing_date,
         "accession": accession,
         "form": form,
+        "reportDate": report_date,
+        "quarter": calendar_quarter_from_date(report_date),
     }
 
 
@@ -262,18 +291,31 @@ def detect_company_update(company: dict[str, Any]) -> dict[str, Any]:
         }
     remote_filing_date = str(remote.get("filingDate") or "")
     remote_accession = str(remote.get("accession") or "")
-    needs_update = (
-        remote_filing_date > local_filing_date
-        or (remote_filing_date == local_filing_date and remote_accession and remote_accession != local_accession)
-    )
+    remote_report_date = str(remote.get("reportDate") or "")
+    remote_quarter = str(remote.get("quarter") or "")
+    if parse_period(remote_quarter) != (0, 0):
+        # Earnings releases (often filed as 8-K exhibits) can precede the 10-Q
+        # by a day or two. Once that reporting quarter is already present, the
+        # later filing is not a new earnings period and must not trigger an
+        # endless rebuild loop.
+        needs_update = parse_period(remote_quarter) > parse_period(local_quarter)
+        reason = "new-quarter-detected" if needs_update else "up-to-date"
+    else:
+        needs_update = (
+            remote_filing_date > local_filing_date
+            or (remote_filing_date == local_filing_date and remote_accession and remote_accession != local_accession)
+        )
+        reason = "new-filing-detected" if needs_update else "up-to-date"
     return {
         "companyId": company["id"],
         "ticker": company["ticker"],
         "needsUpdate": needs_update,
-        "reason": "new-filing-detected" if needs_update else "up-to-date",
+        "reason": reason,
         "localQuarter": local_quarter,
+        "remoteQuarter": remote_quarter,
         "localFilingDate": local_filing_date,
         "remoteFilingDate": remote_filing_date,
+        "remoteReportDate": remote_report_date,
         "localAccession": local_accession,
         "remoteAccession": remote_accession,
         "remoteForm": str(remote.get("form") or ""),
