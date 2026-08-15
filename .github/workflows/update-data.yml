@@ -66,9 +66,8 @@ jobs:
 
           if [[ "${{ github.event_name }}" != "workflow_dispatch" ]]; then
             mode_input="detect-and-refresh"
-            # A full official-filings refresh can take several minutes. Process
-            # one company per hourly run so it can use the 30-minute per-company
-            # budget while remaining below the 45-minute job timeout.
+            # Process one company per hourly run. External-source stalls are
+            # recorded in the diagnostic report and retried on the next run.
             scheduled_update_limit="1"
           fi
 
@@ -84,6 +83,7 @@ jobs:
 
           if [[ "$scheduled_update_limit" != "0" ]]; then
             cmd+=(--max-updates "$scheduled_update_limit")
+            cmd+=(--defer-refresh-failures)
           fi
 
           printf '[workflow] running:'

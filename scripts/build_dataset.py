@@ -469,6 +469,11 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build the standalone earnings dataset from official filings.")
     parser.add_argument("--refresh", action="store_true", help="Ignore cached SEC responses.")
     parser.add_argument(
+        "--incremental-refresh",
+        action="store_true",
+        help="Refresh the selected companies' primary financial source while reusing cached enrichment histories.",
+    )
+    parser.add_argument(
         "--companies",
         type=str,
         default="",
@@ -642,6 +647,26 @@ def build_company_payload_for_dataset(
     payload = apply_fused_extraction(payload, company, refresh=refresh)
     payload = apply_amd_official_segment_revenue_corrections(payload)
     return payload
+
+
+def build_incremental_company_payload_for_dataset(
+    company: dict[str, Any],
+    *,
+    manual_company_overrides: dict[str, Any],
+    fx_cache: dict[str, float],
+) -> dict[str, Any]:
+    # Refresh the normalized financial-table source, which is bounded and
+    # available for the whole tracked universe, then reconcile it with cached
+    # official statements and segment/revenue enrichment. Full SEC companyfacts
+    # and filing-history refreshes remain available through manual --refresh;
+    # large issuers can otherwise consume the entire scheduled-job budget.
+    fetch_stockanalysis_financial_history(company, refresh=True)
+    return build_company_payload_for_dataset(
+        company,
+        refresh=False,
+        manual_company_overrides=manual_company_overrides,
+        fx_cache=fx_cache,
+    )
 
 
 def normalize_segment_label_key(value: Any) -> str:
@@ -4113,12 +4138,19 @@ def main() -> int:
                     payload = apply_korean_revenue_history(payload, company)
         if payload is None:
             try:
-                payload = build_company_payload_for_dataset(
-                    company,
-                    refresh=args.refresh,
-                    manual_company_overrides=manual_company_overrides,
-                    fx_cache=fx_cache,
-                )
+                if getattr(args, "incremental_refresh", False):
+                    payload = build_incremental_company_payload_for_dataset(
+                        company,
+                        manual_company_overrides=manual_company_overrides,
+                        fx_cache=fx_cache,
+                    )
+                else:
+                    payload = build_company_payload_for_dataset(
+                        company,
+                        refresh=args.refresh,
+                        manual_company_overrides=manual_company_overrides,
+                        fx_cache=fx_cache,
+                    )
             except Exception as exc:  # noqa: BLE001
                 failures.append(f"{company['ticker']}: {exc}")
                 print(f"  failed: {exc}", file=sys.stderr, flush=True)
@@ -4143,7 +4175,10 @@ def main() -> int:
             if company["id"] in results_by_company_id:
                 continue
             cached_payload = load_cached_company_payload(company["id"])
-            if getattr(args, "cache_supplement_only", False):
+            if (
+                getattr(args, "cache_supplement_only", False)
+                or getattr(args, "incremental_refresh", False)
+            ):
                 existing_payload = existing_companies_by_id.get(str(company["id"]))
                 if isinstance(existing_payload, dict):
                     results_by_company_id[company["id"]] = deepcopy(existing_payload)

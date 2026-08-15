@@ -1102,6 +1102,10 @@ def fetch_official_segment_history(company: dict[str, Any], refresh: bool = Fals
     cache_name = f"{company['id']}.json"
     path = _cache_path(cache_name)
     cached_payload = _load_cached_json(path) if path.exists() else None
+    cached_payload_is_current = (
+        isinstance(cached_payload, dict)
+        and cached_payload.get("_cacheVersion") == CACHE_VERSION
+    )
     if path.exists() and not refresh:
         if isinstance(cached_payload, dict) and cached_payload.get("_cacheVersion") == CACHE_VERSION:
             if str(company.get("id") or "") == "micron":
@@ -1120,8 +1124,12 @@ def fetch_official_segment_history(company: dict[str, Any], refresh: bool = Fals
             if isinstance(cached_payload, dict) and cached_payload.get("_cacheVersion") == CACHE_VERSION:
                 return _normalize_micron_segment_cache_payload(cached_payload)
 
-    cik = _resolve_cik(str(company.get("ticker", "")), refresh=refresh)
-    result = {
+    incremental_refresh = bool(refresh and cached_payload_is_current)
+    cik = _resolve_cik(
+        str(company.get("ticker", "")),
+        refresh=bool(refresh and not incremental_refresh),
+    )
+    result = deepcopy(cached_payload) if incremental_refresh else {
         "_cacheVersion": CACHE_VERSION,
         "source": "official-filings",
         "ticker": company.get("ticker"),
@@ -1132,6 +1140,11 @@ def fetch_official_segment_history(company: dict[str, Any], refresh: bool = Fals
         "errors": [],
         "errorDetails": [],
     }
+    result["cik"] = cik
+    result.setdefault("quarters", {})
+    result.setdefault("filingsUsed", [])
+    result.setdefault("errors", [])
+    result.setdefault("errorDetails", [])
     if cik is None:
         _write_cached_json(path, result)
         return result
@@ -1152,8 +1165,24 @@ def fetch_official_segment_history(company: dict[str, Any], refresh: bool = Fals
         return result
 
     facts: list[SegmentFact] = []
-    records = _submission_records(submissions, result["errors"], result["errorDetails"])
-    seen_accessions: set[str] = set()
+    if incremental_refresh:
+        recent = submissions.get("filings", {}).get("recent", {})
+        records = [
+            (str(form), str(accession), str(filing_date), str(primary_document))
+            for form, accession, filing_date, primary_document in zip(
+                recent.get("form", []),
+                recent.get("accessionNumber", []),
+                recent.get("filingDate", []),
+                recent.get("primaryDocument", []),
+            )
+        ]
+    else:
+        records = _submission_records(submissions, result["errors"], result["errorDetails"])
+    seen_accessions: set[str] = {
+        str(item.get("accession") or "").replace("-", "")
+        for item in result.get("filingsUsed") or []
+        if isinstance(item, dict) and item.get("accession")
+    }
     for form, accession, filing_date, primary_document in records:
         if form not in ALLOWED_FORMS or filing_date < MIN_FILING_DATE:
             continue
@@ -1217,6 +1246,10 @@ def fetch_official_segment_history(company: dict[str, Any], refresh: bool = Fals
 
     selected_facts = [fact for fact in facts if fact.axis_key == best_axis]
     result["axis"] = best_axis
-    result["quarters"] = _build_quarterly_series(selected_facts)
+    refreshed_quarters = _build_quarterly_series(selected_facts)
+    if incremental_refresh:
+        result["quarters"].update(refreshed_quarters)
+    else:
+        result["quarters"] = refreshed_quarters
     _write_cached_json(path, result)
     return result

@@ -112,6 +112,90 @@ class OfficialSegmentsTests(unittest.TestCase):
             headers=self.module.SEC_HEADERS,
         )
 
+    def test_refresh_parses_only_accessions_missing_from_current_cache(self):
+        old_accession = "0000000001-26-000001"
+        new_accession = "0000000001-26-000002"
+        cached_payload = {
+            "_cacheVersion": self.module.CACHE_VERSION,
+            "source": "official-filings",
+            "ticker": "DMO",
+            "cik": 1,
+            "axis": "StatementBusinessSegmentsAxis",
+            "quarters": {"2026Q1": [{"memberKey": "demo", "valueBn": 1.0}]},
+            "filingsUsed": [
+                {
+                    "form": "10-Q",
+                    "filingDate": "2026-05-01",
+                    "accession": old_accession,
+                    "primaryDocument": "old.htm",
+                    "instance": "old.xml",
+                }
+            ],
+            "errors": [],
+            "errorDetails": [],
+        }
+        submissions = {
+            "filings": {
+                "recent": {
+                    "form": ["10-Q", "10-Q"],
+                    "accessionNumber": [new_accession, old_accession],
+                    "filingDate": ["2026-08-01", "2026-05-01"],
+                    "primaryDocument": ["new.htm", "old.htm"],
+                },
+                "files": [{"name": "should-not-be-read.json"}],
+            }
+        }
+        new_fact = self.module.SegmentFact(
+            accession=new_accession,
+            filing_date="2026-08-01",
+            form="10-Q",
+            concept="RevenueFromContractWithCustomerExcludingAssessedTax",
+            concept_priority=120,
+            axis_key="StatementBusinessSegmentsAxis",
+            axis_priority=100,
+            member_key="DemoMember",
+            label="Demo",
+            context_scope_priority=3,
+            start_date="2026-04-01",
+            end_date="2026-06-30",
+            value=2_000_000_000,
+            source_url="https://example.com/new.xml",
+        )
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            cache_path = Path(temp_dir) / "demo.json"
+            cache_path.write_text(json.dumps(cached_payload), encoding="utf-8")
+
+            def fake_request_json(url: str):
+                if url.endswith("CIK0000000001.json"):
+                    return submissions
+                if new_accession.replace("-", "") in url:
+                    return {"directory": {"item": []}}
+                raise AssertionError(f"unexpected request: {url}")
+
+            with (
+                patch.object(self.module, "CACHE_DIR", Path(temp_dir)),
+                patch.object(self.module, "_resolve_cik", return_value=1) as resolve_cik,
+                patch.object(self.module, "_request_json", side_effect=fake_request_json),
+                patch.object(self.module, "_choose_instance_name", return_value="new.xml"),
+                patch.object(self.module, "_parse_instance_facts", return_value=[new_fact]) as parse_facts,
+                patch.object(self.module.time, "sleep"),
+            ):
+                result = self.module.fetch_official_segment_history(
+                    {"id": "demo", "ticker": "DMO"},
+                    refresh=True,
+                )
+
+        resolve_cik.assert_called_once_with("DMO", refresh=False)
+        parse_facts.assert_called_once()
+        self.assertIn("2026Q1", result["quarters"])
+        self.assertIn("2026Q2", result["quarters"])
+        self.assertEqual(result["quarters"]["2026Q2"][0]["valueBn"], 2.0)
+        self.assertEqual(
+            [item["accession"] for item in result["filingsUsed"]],
+            [old_accession, new_accession],
+        )
+
     def test_segment_total_context_beats_higher_priority_product_detail(self):
         def fact(*, concept: str, concept_priority: int, scope_priority: int, value: float):
             return self.module.SegmentFact(

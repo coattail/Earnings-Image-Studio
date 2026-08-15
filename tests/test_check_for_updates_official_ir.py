@@ -165,6 +165,13 @@ class CheckForUpdatesOfficialIrTests(unittest.TestCase):
         self.assertNotIn("--refresh", command)
         self.assertEqual(command[-2:], ["--companies", "jd,netease"])
 
+    def test_scheduled_refresh_command_uses_incremental_primary_source_mode(self) -> None:
+        command = check_for_updates.build_refresh_command(["berkshire"], refresh=True)
+
+        self.assertIn("--incremental-refresh", command)
+        self.assertNotIn("--refresh", command)
+        self.assertEqual(command[-2:], ["--companies", "berkshire"])
+
     def test_main_uses_cache_supplement_command_for_official_ir_updates(self) -> None:
         detected = {
             "companyId": "jd",
@@ -320,6 +327,45 @@ class CheckForUpdatesOfficialIrTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertEqual(captured_company_ids, ["newest", "middle"])
         self.assertEqual(report["build"]["deferredCompanies"], ["older"])
+
+    def test_main_defers_scheduled_refresh_failure_without_hiding_report_status(self) -> None:
+        company = {"id": "berkshire", "ticker": "BRK.B", "slug": "brk.b"}
+        detected = {
+            "companyId": "berkshire",
+            "ticker": "BRK.B",
+            "needsUpdate": True,
+            "reason": "new-quarter-detected",
+            "remoteFilingDate": "2026-08-10",
+        }
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            report_path = Path(temp_dir) / "update-report.json"
+            with (
+                patch.object(check_for_updates, "TOP30_COMPANIES", [company]),
+                patch.object(
+                    check_for_updates,
+                    "parse_args",
+                    return_value=Namespace(
+                        companies="",
+                        dry_run=False,
+                        json=False,
+                        report_path=report_path,
+                        fail_on_check_errors=False,
+                        max_updates=1,
+                        defer_refresh_failures=True,
+                    ),
+                ),
+                patch.object(check_for_updates, "detect_company_update", return_value=detected),
+                patch.object(check_for_updates.subprocess, "run", return_value=Namespace(returncode=1)),
+                patch("builtins.print"),
+            ):
+                exit_code = check_for_updates.main()
+
+            report = check_for_updates.json.loads(report_path.read_text(encoding="utf-8"))
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(report["build"]["exitCode"], 1)
+        self.assertEqual(report["build"]["failedCompanies"], ["berkshire"])
 
     def test_main_fails_and_writes_report_when_company_check_errors(self) -> None:
         failed = {

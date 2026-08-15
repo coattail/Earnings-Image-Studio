@@ -65,9 +65,30 @@ def _adapter_results(company: dict[str, Any], refresh: bool = False, base_payloa
     allowed_adapters = None
     if isinstance(configured_adapters, list):
         allowed_adapters = {str(item).strip() for item in configured_adapters if str(item).strip()}
+    base_financials = base_payload.get("financials") if isinstance(base_payload, dict) else None
+    latest_base_entry: dict[str, Any] = {}
+    if isinstance(base_financials, dict) and base_financials:
+        latest_quarter = max((str(quarter) for quarter in base_financials), key=parse_period)
+        candidate = base_financials.get(latest_quarter)
+        if isinstance(candidate, dict):
+            latest_base_entry = candidate
+    base_has_core_statement = all(
+        latest_base_entry.get(field_name) is not None
+        for field_name in ("revenueBn", "operatingIncomeBn", "netIncomeBn")
+    )
     results: list[AdapterResult] = []
     for adapter_id, runner in runners:
         if allowed_adapters is not None and adapter_id not in allowed_adapters:
+            continue
+        if (
+            allowed_adapters is None
+            and base_has_core_statement
+            and adapter_id in {"generic_filing_tables", "generic_ir_pdf"}
+        ):
+            # These broad fallback scanners may walk dozens of historical
+            # filings. Once the primary parser already produced a complete
+            # latest statement, rerunning them adds no fields but can consume
+            # the entire scheduled-job budget.
             continue
         results.append(runner(company, refresh=refresh, base_payload=base_payload))
     return results

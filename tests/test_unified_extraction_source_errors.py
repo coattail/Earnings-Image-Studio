@@ -14,6 +14,44 @@ from source_adapters import AdapterResult  # noqa: E402
 
 
 class UnifiedExtractionSourceErrorsTests(unittest.TestCase):
+    def test_complete_base_statement_skips_broad_fallback_scanners(self) -> None:
+        adapter = AdapterResult(
+            adapter_id="official_financials",
+            kind="statement",
+            label="SEC companyfacts / filings",
+            priority=110,
+            payload={"financials": {}},
+        )
+        base_payload = {
+            "financials": {
+                "2026Q2": {
+                    "revenueBn": 100,
+                    "operatingIncomeBn": 20,
+                    "netIncomeBn": 15,
+                }
+            }
+        }
+
+        with (
+            patch.object(extraction_engine, "run_manual_financials_adapter", return_value=adapter),
+            patch.object(extraction_engine, "run_manual_revenue_structures_adapter", return_value=adapter),
+            patch.object(extraction_engine, "run_official_financials_adapter", return_value=adapter),
+            patch.object(extraction_engine, "run_generic_filing_tables_adapter", side_effect=AssertionError("generic filing adapter should not run")),
+            patch.object(extraction_engine, "run_generic_ir_pdf_adapter", side_effect=AssertionError("generic PDF adapter should not run")),
+            patch.object(extraction_engine, "run_stockanalysis_financials_adapter", return_value=adapter),
+            patch.object(extraction_engine, "run_supplemental_components_adapter", return_value=adapter),
+            patch.object(extraction_engine, "run_official_segments_adapter", return_value=adapter),
+            patch.object(extraction_engine, "run_official_revenue_structures_adapter", return_value=adapter),
+        ):
+            results = extraction_engine._adapter_results(
+                {"id": "demo"},
+                refresh=True,
+                base_payload=base_payload,
+            )
+
+        self.assertNotIn("generic_filing_tables", [result.adapter_id for result in results])
+        self.assertNotIn("generic_ir_pdf", [result.adapter_id for result in results])
+
     def test_adapter_results_honors_company_adapter_allowlist(self) -> None:
         adapter = AdapterResult(
             adapter_id="official_financials",

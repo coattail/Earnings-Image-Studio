@@ -1512,7 +1512,10 @@ def fetch_official_financial_history(company: dict[str, Any], refresh: bool = Fa
     cik: int | None = None
     cik_lookup_error: Exception | None = None
     try:
-        cik = _resolve_cik(str(company.get("ticker") or ""), refresh=refresh)
+        # Refreshing company financials should not redownload the full SEC
+        # ticker directory. The tracked universe already has a cached mapping;
+        # refreshing that unrelated 10+ MB file adds latency and noisy diffs.
+        cik = _resolve_cik(str(company.get("ticker") or ""), refresh=False)
     except Exception as exc:  # noqa: BLE001
         cik_lookup_error = exc
     result = {

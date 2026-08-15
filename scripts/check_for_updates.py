@@ -17,10 +17,9 @@ from stockanalysis_financials import fetch_stockanalysis_financial_history
 DATASET_PATH = ROOT_DIR / "data" / "earnings-dataset.json"
 COMPANY_CACHE_DIR = ROOT_DIR / "data" / "cache"
 OFFICIAL_IR_LOOKUP_TIMEOUT_SECONDS = 25
-# A full official-filings refresh can legitimately take several minutes. Keep
-# one company below the workflow's 45-minute job limit instead of killing every
-# heavy refresh after two minutes.
-COMPANY_REFRESH_TIMEOUT_SECONDS = 30 * 60
+# The scheduled path refreshes one normalized primary source. Ten minutes is a
+# generous network budget; longer stalls are deferred to the next hourly run.
+COMPANY_REFRESH_TIMEOUT_SECONDS = 10 * 60
 
 
 def parse_args() -> argparse.Namespace:
@@ -49,6 +48,11 @@ def parse_args() -> argparse.Namespace:
         type=int,
         default=0,
         help="Maximum number of stale companies to refresh in this run; 0 means no limit.",
+    )
+    parser.add_argument(
+        "--defer-refresh-failures",
+        action="store_true",
+        help="Record refresh failures in the report but return success so a later scheduled run can retry.",
     )
     return parser.parse_args()
 
@@ -330,7 +334,7 @@ def build_refresh_command(company_ids: list[str], *, refresh: bool = True) -> li
         ",".join(company_ids),
     ]
     if refresh:
-        command.insert(2, "--refresh")
+        command.insert(2, "--incremental-refresh")
     else:
         command.insert(2, "--cache-supplement-only")
     return command
@@ -473,7 +477,7 @@ def main() -> int:
             write_report(args.report_path, summary)
             if args.json:
                 print(json.dumps(summary, ensure_ascii=False, indent=2))
-            return exit_code
+            return 0 if getattr(args, "defer_refresh_failures", False) else exit_code
 
     summary = {
         "checked": len(report),
