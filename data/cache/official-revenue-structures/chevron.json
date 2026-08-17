@@ -224,9 +224,77 @@
           "filingDate": "2026-02-24"
         }
       ]
+    },
+    "2026Q1": {
+      "segments": [
+        {
+          "name": "Downstream",
+          "memberKey": "downstream",
+          "valueBn": 34.363,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/93410/000009341026000113/cvx-20260331_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-05-07"
+        },
+        {
+          "name": "Upstream",
+          "memberKey": "upstream",
+          "valueBn": 13.179,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/93410/000009341026000113/cvx-20260331_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-05-07"
+        },
+        {
+          "name": "All Other Segments",
+          "memberKey": "allothersegments",
+          "valueBn": 0.014,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/93410/000009341026000113/cvx-20260331_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-05-07"
+        }
+      ]
+    },
+    "2026Q2": {
+      "segments": [
+        {
+          "name": "Downstream",
+          "memberKey": "downstream",
+          "valueBn": 49.646,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/93410/000009341026000167/cvx-20260630_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-08-06"
+        },
+        {
+          "name": "Upstream",
+          "memberKey": "upstream",
+          "valueBn": 17.528,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/93410/000009341026000167/cvx-20260630_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-08-06"
+        },
+        {
+          "name": "All Other Segments",
+          "memberKey": "allothersegments",
+          "valueBn": 0.025,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/93410/000009341026000167/cvx-20260630_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-08-06"
+        }
+      ]
     }
   },
   "filingsUsed": [
+    {
+      "form": "10-Q",
+      "filingDate": "2026-08-06",
+      "accession": "0000093410-26-000167",
+      "instance": "cvx-20260630_htm.xml"
+    },
+    {
+      "form": "10-Q",
+      "filingDate": "2026-05-07",
+      "accession": "0000093410-26-000113",
+      "instance": "cvx-20260331_htm.xml"
+    },
     {
       "form": "10-K",
       "filingDate": "2026-02-24",
@@ -379,5 +447,6 @@
     }
   ],
   "errors": [],
-  "_cacheVersion": "20260327-v17"
+  "errorDetails": [],
+  "_cacheVersion": "20260814-v20"
 }
