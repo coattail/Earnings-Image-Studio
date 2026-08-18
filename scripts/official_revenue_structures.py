@@ -158,6 +158,7 @@ XIAOMI_QUARTERLY_PDF_URLS: dict[str, str] = {
     "2025Q3": "https://ir.mi.com/static-files/e4830480-8ce9-45f8-a09d-64e40b2bdfac",
     "2025Q4": "https://ir.mi.com/system/files-encrypted/nasdaq_kms/assets/2026/03/24/5-35-03/25Q4%20EN%20AC%20Xiaomi.pdf",
     "2026Q1": "https://ir.mi.com/static-files/098acc43-1b58-4d1b-b375-9ea25f35477b",
+    "2026Q2": "https://ir.mi.com/static-files/4a85fc36-8a6d-4c24-b45b-b18d5d162e6c",
 }
 
 SEGMENT_CACHE_HIERARCHY_CONFIGS: dict[str, dict[str, Any]] = {
