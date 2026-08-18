@@ -564,6 +564,14 @@
     "2025Q1": {
       "segments": [
         {
+          "name": "Machinery Power Energy",
+          "memberKey": "machinerypowerenergy",
+          "valueBn": 13.378,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000021/cat-20260331_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-05-06"
+        },
+        {
           "name": "Machinery Energy Transportation",
           "memberKey": "machineryenergytransportation",
           "valueBn": 13.378,
@@ -583,6 +591,14 @@
     },
     "2025Q2": {
       "segments": [
+        {
+          "name": "Machinery Power Energy",
+          "memberKey": "machinerypowerenergy",
+          "valueBn": 15.674,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000046/cat-20260630_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-08-05"
+        },
         {
           "name": "Machinery Energy Transportation",
           "memberKey": "machineryenergytransportation",
@@ -620,9 +636,63 @@
           "filingDate": "2025-11-03"
         }
       ]
+    },
+    "2026Q1": {
+      "segments": [
+        {
+          "name": "Machinery Power Energy",
+          "memberKey": "machinerypowerenergy",
+          "valueBn": 16.473,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000021/cat-20260331_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-05-06"
+        },
+        {
+          "name": "Financial Products",
+          "memberKey": "financialproducts",
+          "valueBn": 0.942,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000021/cat-20260331_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-05-06"
+        }
+      ]
+    },
+    "2026Q2": {
+      "segments": [
+        {
+          "name": "Machinery Power Energy",
+          "memberKey": "machinerypowerenergy",
+          "valueBn": 19.581,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000046/cat-20260630_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-08-05"
+        },
+        {
+          "name": "Financial Products",
+          "memberKey": "financialproducts",
+          "valueBn": 0.962,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000046/cat-20260630_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-08-05"
+        }
+      ]
     }
   },
   "filingsUsed": [
+    {
+      "form": "10-Q",
+      "filingDate": "2026-08-05",
+      "accession": "0000018230-26-000046",
+      "primaryDocument": "cat-20260630.htm",
+      "instance": "cat-20260630_htm.xml"
+    },
+    {
+      "form": "10-Q",
+      "filingDate": "2026-05-06",
+      "accession": "0000018230-26-000021",
+      "primaryDocument": "cat-20260331.htm",
+      "instance": "cat-20260331_htm.xml"
+    },
     {
       "form": "10-K",
       "filingDate": "2026-02-13",
@@ -800,5 +870,6 @@
     }
   ],
   "errors": [],
-  "_cacheVersion": "20260325-v16"
+  "errorDetails": [],
+  "_cacheVersion": "20260814-v20"
 }

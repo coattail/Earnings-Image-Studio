@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-17T23:41:53Z",
+  "generatedAt": "2026-08-18T01:54:24Z",
   "companyCount": 40,
   "companies": [
     {
@@ -14968,7 +14968,9 @@
         "2025Q1",
         "2025Q2",
         "2025Q3",
-        "2025Q4"
+        "2025Q4",
+        "2026Q1",
+        "2026Q2"
       ],
       "statementSource": "official-sec-companyfacts",
       "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000018230.json",
@@ -14976,21 +14978,21 @@
       "cik": 18230,
       "errors": [],
       "coverage": {
-        "quarterCount": 32,
+        "quarterCount": 34,
         "pixelReplicaQuarterCount": 0,
         "hasPixelReplica": false,
-        "officialFinancialQuarterCount": 32,
-        "officialSegmentQuarterCount": 32,
+        "officialFinancialQuarterCount": 34,
+        "officialSegmentQuarterCount": 34,
         "officialExpenseQuarterCount": 0,
         "classification": {
           "status": "ok",
-          "latestQuarter": "2025Q4",
+          "latestQuarter": "2026Q2",
           "latestQuarterHasRevenueClassification": true,
           "latestQuarterHasExpenseClassification": false,
-          "latestRevenueClassificationQuarter": "2025Q4",
+          "latestRevenueClassificationQuarter": "2026Q2",
           "latestExpenseClassificationQuarter": null,
-          "latestStructureHistoryQuarter": "2025Q3",
-          "revenueClassificationQuarterCount": 32,
+          "latestStructureHistoryQuarter": "2026Q2",
+          "revenueClassificationQuarterCount": 34,
           "expenseClassificationQuarterCount": 0,
           "revenueClassificationCoverageRatio": 1.0,
           "expenseClassificationCoverageRatio": 0.0,
@@ -15034,12 +15036,12 @@
           "validation": {
             "version": "parser-validation-v1",
             "status": "high",
-            "overallConfidenceScore": 0.8645,
+            "overallConfidenceScore": 0.952,
             "financialConfidenceScore": 0.9262,
-            "structuralConfidenceScore": 0.75,
-            "revenueSegmentChecks": 0,
+            "structuralConfidenceScore": 1.0,
+            "revenueSegmentChecks": 4,
             "revenueSegmentMismatchCount": 0,
-            "revenueSegmentSkippedChecks": 31,
+            "revenueSegmentSkippedChecks": 29,
             "detailGroupChecks": 0,
             "detailGroupMismatchCount": 0,
             "detailGroupSkippedChecks": 0,
@@ -15057,139 +15059,327 @@
       "marketCapSource": "CompaniesMarketCap",
       "marketCapSourceUrl": "https://companiesmarketcap.com/",
       "dataLoadMode": "latest-only",
-      "latestQuarter": "2025Q4",
+      "latestQuarter": "2026Q2",
       "financials": {
-        "2025Q4": {
-          "calendarQuarter": "2025Q4",
-          "periodEnd": "2025-12-31",
-          "fiscalYear": "2025",
-          "fiscalQuarter": "Q4",
-          "fiscalLabel": "FY2025 Q4",
+        "2026Q2": {
+          "calendarQuarter": "2026Q2",
+          "periodEnd": "2026-06-30",
+          "fiscalYear": "2026",
+          "fiscalQuarter": "Q2",
+          "fiscalLabel": "FY2026 Q2",
           "statementCurrency": "USD",
-          "revenueBn": 19.133,
-          "revenueYoyPct": 17.996,
-          "costOfRevenueBn": 13.307,
-          "grossProfitBn": 5.826,
-          "sgnaBn": 1.876,
-          "rndBn": 0.562,
-          "otherOpexBn": 14.035,
-          "operatingExpensesBn": 16.473,
-          "operatingIncomeBn": 2.66,
-          "nonOperatingBn": 0.366,
-          "pretaxIncomeBn": 3.026,
-          "taxBn": 0.712,
-          "netIncomeBn": 2.401,
-          "netIncomeYoyPct": -13.94,
-          "grossMarginPct": 30.45,
-          "operatingMarginPct": 13.9,
-          "profitMarginPct": 12.55,
-          "effectiveTaxRatePct": 23.53,
-          "revenueQoqPct": 8.476,
-          "grossMarginYoyDeltaPp": -5.9,
-          "operatingMarginYoyDeltaPp": -4.13,
-          "profitMarginYoyDeltaPp": -4.66,
-          "statementFilingDate": "2025-12-31",
-          "statementSourceUrl": "https://stockanalysis.com/stocks/cat/financials/?p=quarterly",
-          "parserFinancialFieldSources": {
-            "revenueBn": "official",
-            "revenueYoyPct": "official",
-            "revenueQoqPct": "official",
-            "costOfRevenueBn": "official",
-            "grossProfitBn": "official",
-            "grossMarginPct": "official",
-            "grossMarginYoyDeltaPp": "official",
-            "sgnaBn": "official",
-            "rndBn": "official",
-            "otherOpexBn": "official",
-            "operatingExpensesBn": "official",
-            "operatingIncomeBn": "official",
-            "operatingMarginPct": "official",
-            "operatingMarginYoyDeltaPp": "official",
-            "nonOperatingBn": "official",
-            "pretaxIncomeBn": "official",
-            "taxBn": "official",
-            "netIncomeBn": "official",
-            "netIncomeYoyPct": "official",
-            "profitMarginPct": "official",
-            "profitMarginYoyDeltaPp": "official",
-            "effectiveTaxRatePct": "official",
-            "calendarQuarter": "official",
-            "periodEnd": "official",
-            "fiscalYear": "official",
-            "fiscalQuarter": "official",
-            "fiscalLabel": "official",
-            "statementCurrency": "official",
-            "statementFilingDate": "stockanalysis",
-            "statementSourceUrl": "stockanalysis"
-          },
-          "parserFinancialCandidateCounts": {
-            "revenueBn": 2,
-            "revenueYoyPct": 2,
-            "revenueQoqPct": 2,
-            "costOfRevenueBn": 2,
-            "grossProfitBn": 2,
-            "grossMarginPct": 2,
-            "grossMarginYoyDeltaPp": 2,
-            "sgnaBn": 2,
-            "rndBn": 2,
-            "otherOpexBn": 2,
-            "operatingExpensesBn": 2,
-            "operatingIncomeBn": 2,
-            "operatingMarginPct": 2,
-            "operatingMarginYoyDeltaPp": 2,
-            "nonOperatingBn": 2,
-            "pretaxIncomeBn": 2,
-            "taxBn": 2,
-            "netIncomeBn": 2,
-            "netIncomeYoyPct": 2,
-            "profitMarginPct": 2,
-            "profitMarginYoyDeltaPp": 2,
-            "effectiveTaxRatePct": 2
-          },
-          "parserFinancialValidation": {
-            "version": "financial-validation-v1",
-            "status": "high",
-            "confidenceScore": 0.9438,
-            "completenessScore": 1,
-            "consistencyScore": 0.875,
-            "checksRun": 8,
-            "checksPassed": 7,
-            "issueCount": 1,
-            "issues": [
-              {
-                "code": "gross-minus-opex-equals-operating",
-                "severity": "warning",
-                "message": "operatingIncomeBn does not reconcile with grossProfitBn and operatingExpensesBn.",
-                "expected": 2.66,
-                "derived": -10.647,
-                "delta": 13.307,
-                "tolerance": 0.12
-              }
-            ]
-          },
+          "revenueBn": 20.543,
+          "revenueYoyPct": -36.287,
+          "costOfRevenueBn": null,
+          "grossProfitBn": null,
+          "sgnaBn": null,
+          "rndBn": null,
+          "otherOpexBn": null,
+          "operatingExpensesBn": null,
+          "operatingIncomeBn": null,
+          "nonOperatingBn": null,
+          "pretaxIncomeBn": null,
+          "taxBn": null,
+          "netIncomeBn": null,
+          "netIncomeYoyPct": null,
+          "grossMarginPct": null,
+          "operatingMarginPct": null,
+          "profitMarginPct": null,
+          "effectiveTaxRatePct": null,
+          "revenueQoqPct": 17.962,
+          "grossMarginYoyDeltaPp": null,
+          "operatingMarginYoyDeltaPp": null,
+          "profitMarginYoyDeltaPp": null,
+          "statementSource": "official-revenue-structure",
+          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000046/cat-20260630_htm.xml",
+          "statementFilingDate": "2026-08-05",
           "officialRevenueSegments": [
+            {
+              "name": "Machinery Power Energy",
+              "nameZh": null,
+              "memberKey": "machinerypowerenergy",
+              "valueBn": 19.581,
+              "yoyPct": 24.93,
+              "qoqPct": 18.87,
+              "mixPct": 95.3,
+              "mixYoyDeltaPp": 46.7,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000046/cat-20260630_htm.xml",
+              "sourceForm": "10-Q",
+              "filingDate": "2026-08-05",
+              "supportLines": null,
+              "supportLinesZh": null,
+              "metricMode": null,
+              "validationEligible": null,
+              "validationNotes": null
+            },
             {
               "name": "Financial Products",
               "nameZh": null,
               "memberKey": "financialproducts",
-              "valueBn": 0.931,
-              "yoyPct": 5.44,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000008/cat-20251231_htm.xml",
-              "sourceForm": "10-K",
-              "filingDate": "2026-02-13",
-              "periodStart": "2025-10-01",
-              "periodEnd": "2025-12-31",
-              "mixPct": 4.9,
-              "qoqPct": 2.08,
-              "mixYoyDeltaPp": -0.6
+              "valueBn": 0.962,
+              "yoyPct": 7.49,
+              "qoqPct": 2.12,
+              "mixPct": 4.7,
+              "mixYoyDeltaPp": 1.9,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000046/cat-20260630_htm.xml",
+              "sourceForm": "10-Q",
+              "filingDate": "2026-08-05",
+              "supportLines": null,
+              "supportLinesZh": null,
+              "metricMode": null,
+              "validationEligible": null,
+              "validationNotes": null
             }
           ],
-          "officialSegmentAxis": "ProductOrServiceAxis",
-          "officialSegmentSource": "official-filings"
+          "displayCurrency": "USD",
+          "displayScaleFactor": 1,
+          "sankeyStructureContinuity": {
+            "sourceQuarter": "2026Q1",
+            "fields": [
+              "officialRevenueSegments"
+            ],
+            "rule": "same-normalized-category-set"
+          }
         }
       },
       "statementPresets": {},
-      "officialRevenueStructureHistory": {},
+      "officialRevenueStructureHistory": {
+        "source": "official-segment-cache",
+        "quarters": {
+          "2026Q2": {
+            "segments": [
+              {
+                "name": "Machinery Power Energy",
+                "nameZh": null,
+                "memberKey": "machinerypowerenergy",
+                "valueBn": 19.581,
+                "yoyPct": null,
+                "qoqPct": null,
+                "mixPct": null,
+                "mixYoyDeltaPp": null,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000046/cat-20260630_htm.xml",
+                "sourceForm": "10-Q",
+                "filingDate": "2026-08-05",
+                "supportLines": null,
+                "supportLinesZh": null,
+                "metricMode": null,
+                "validationEligible": null,
+                "validationNotes": null
+              },
+              {
+                "name": "Financial Products",
+                "nameZh": null,
+                "memberKey": "financialproducts",
+                "valueBn": 0.962,
+                "yoyPct": null,
+                "qoqPct": null,
+                "mixPct": null,
+                "mixYoyDeltaPp": null,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000046/cat-20260630_htm.xml",
+                "sourceForm": "10-Q",
+                "filingDate": "2026-08-05",
+                "supportLines": null,
+                "supportLinesZh": null,
+                "metricMode": null,
+                "validationEligible": null,
+                "validationNotes": null
+              }
+            ]
+          }
+        },
+        "filingsUsed": [
+          {
+            "form": "10-Q",
+            "filingDate": "2026-08-05",
+            "accession": "0000018230-26-000046",
+            "primaryDocument": "cat-20260630.htm",
+            "instance": "cat-20260630_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2026-05-06",
+            "accession": "0000018230-26-000021",
+            "primaryDocument": "cat-20260331.htm",
+            "instance": "cat-20260331_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2026-02-13",
+            "accession": "0000018230-26-000008",
+            "primaryDocument": "cat-20251231.htm",
+            "instance": "cat-20251231_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2025-11-03",
+            "accession": "0000018230-25-000048",
+            "primaryDocument": "cat-20250930.htm",
+            "instance": "cat-20250930_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2025-08-06",
+            "accession": "0000018230-25-000040",
+            "primaryDocument": "cat-20250630.htm",
+            "instance": "cat-20250630_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2025-05-07",
+            "accession": "0000018230-25-000016",
+            "primaryDocument": "cat-20250331.htm",
+            "instance": "cat-20250331_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2025-02-14",
+            "accession": "0000018230-25-000008",
+            "primaryDocument": "cat-20241231.htm",
+            "instance": "cat-20241231_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2024-11-06",
+            "accession": "0000018230-24-000053",
+            "primaryDocument": "cat-20240930.htm",
+            "instance": "cat-20240930_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2024-08-07",
+            "accession": "0000018230-24-000045",
+            "primaryDocument": "cat-20240630.htm",
+            "instance": "cat-20240630_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2024-05-01",
+            "accession": "0000018230-24-000020",
+            "primaryDocument": "cat-20240331.htm",
+            "instance": "cat-20240331_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2024-02-16",
+            "accession": "0000018230-24-000009",
+            "primaryDocument": "cat-20231231.htm",
+            "instance": "cat-20231231_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2023-11-01",
+            "accession": "0000018230-23-000056",
+            "primaryDocument": "cat-20230930.htm",
+            "instance": "cat-20230930_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2023-08-02",
+            "accession": "0000018230-23-000047",
+            "primaryDocument": "cat-20230630.htm",
+            "instance": "cat-20230630_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2023-05-03",
+            "accession": "0000018230-23-000022",
+            "primaryDocument": "cat-20230331.htm",
+            "instance": "cat-20230331_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2023-02-15",
+            "accession": "0000018230-23-000011",
+            "primaryDocument": "cat-20221231.htm",
+            "instance": "cat-20221231_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2022-11-02",
+            "accession": "0000018230-22-000223",
+            "primaryDocument": "cat-20220930.htm",
+            "instance": "cat-20220930_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2022-08-03",
+            "accession": "0000018230-22-000183",
+            "primaryDocument": "cat-20220630.htm",
+            "instance": "cat-20220630_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2022-05-04",
+            "accession": "0000018230-22-000112",
+            "primaryDocument": "cat-20220331.htm",
+            "instance": "cat-20220331_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2022-02-16",
+            "accession": "0000018230-22-000050",
+            "primaryDocument": "cat-20211231.htm",
+            "instance": "cat-20211231_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2021-11-03",
+            "accession": "0000018230-21-000260",
+            "primaryDocument": "cat-20210930.htm",
+            "instance": "cat-20210930_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2021-08-04",
+            "accession": "0000018230-21-000221",
+            "primaryDocument": "cat-20210630.htm",
+            "instance": "cat-20210630_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2021-05-05",
+            "accession": "0000018230-21-000151",
+            "primaryDocument": "cat-20210331.htm",
+            "instance": "cat-20210331_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2021-02-17",
+            "accession": "0000018230-21-000063",
+            "primaryDocument": "cat-20201231.htm",
+            "instance": "cat-20201231_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2020-11-04",
+            "accession": "0000018230-20-000297",
+            "primaryDocument": "cat-20200930.htm",
+            "instance": "cat-20200930_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2020-08-05",
+            "accession": "0000018230-20-000214",
+            "primaryDocument": "cat10q6302020.htm",
+            "instance": "cat10q6302020_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2020-05-06",
+            "accession": "0000018230-20-000155",
+            "primaryDocument": "cat10q3312020.htm",
+            "instance": "cat10q3312020_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2020-02-19",
+            "accession": "0000018230-20-000056",
+            "primaryDocument": "cat10-k12312019.htm",
+            "instance": "cat10-k12312019_htm.xml"
+          }
+        ],
+        "errors": []
+      },
       "officialSegmentHistory": {}
     },
     {

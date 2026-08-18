@@ -4,7 +4,7 @@
   "nameZh": "卡特彼勒",
   "nameEn": "Caterpillar",
   "slug": "cat",
-  "rank": 30,
+  "rank": 25,
   "isAdr": false,
   "brand": {
     "primary": "#FFCD11",
@@ -43,7 +43,9 @@
     "2025Q1",
     "2025Q2",
     "2025Q3",
-    "2025Q4"
+    "2025Q4",
+    "2026Q1",
+    "2026Q2"
   ],
   "financials": {
     "2018Q1": {
@@ -187,7 +189,9 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1
     },
     "2018Q2": {
       "calendarQuarter": "2018Q2",
@@ -331,7 +335,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2018Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2018Q3": {
       "calendarQuarter": "2018Q3",
@@ -484,7 +497,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2018Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2018Q4": {
       "calendarQuarter": "2018Q4",
@@ -637,7 +659,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2018Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2019Q1": {
       "calendarQuarter": "2019Q1",
@@ -795,7 +826,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2018Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2019Q2": {
       "calendarQuarter": "2019Q2",
@@ -953,7 +993,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2019Q3": {
       "calendarQuarter": "2019Q3",
@@ -1111,7 +1160,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2019Q4": {
       "calendarQuarter": "2019Q4",
@@ -1269,7 +1327,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2020Q1": {
       "calendarQuarter": "2020Q1",
@@ -1427,7 +1494,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2020Q2": {
       "calendarQuarter": "2020Q2",
@@ -1585,7 +1661,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2020Q3": {
       "calendarQuarter": "2020Q3",
@@ -1743,7 +1828,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2020Q4": {
       "calendarQuarter": "2020Q4",
@@ -1901,7 +1995,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2021Q1": {
       "calendarQuarter": "2021Q1",
@@ -2054,7 +2157,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2021Q2": {
       "calendarQuarter": "2021Q2",
@@ -2207,7 +2319,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2021Q3": {
       "calendarQuarter": "2021Q3",
@@ -2360,7 +2481,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2021Q4": {
       "calendarQuarter": "2021Q4",
@@ -2513,7 +2643,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2022Q1": {
       "calendarQuarter": "2022Q1",
@@ -2666,7 +2805,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2022Q2": {
       "calendarQuarter": "2022Q2",
@@ -2819,7 +2967,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2022Q3": {
       "calendarQuarter": "2022Q3",
@@ -2972,7 +3129,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2022Q4": {
       "calendarQuarter": "2022Q4",
@@ -3125,7 +3291,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2023Q1": {
       "calendarQuarter": "2023Q1",
@@ -3278,7 +3453,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2023Q2": {
       "calendarQuarter": "2023Q2",
@@ -3431,7 +3615,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2023Q3": {
       "calendarQuarter": "2023Q3",
@@ -3584,7 +3777,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2023Q4": {
       "calendarQuarter": "2023Q4",
@@ -3737,7 +3939,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2024Q1": {
       "calendarQuarter": "2024Q1",
@@ -3890,7 +4101,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2024Q2": {
       "calendarQuarter": "2024Q2",
@@ -4043,7 +4263,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2024Q3": {
       "calendarQuarter": "2024Q3",
@@ -4196,7 +4425,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2024Q4": {
       "calendarQuarter": "2024Q4",
@@ -4349,7 +4587,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2025Q1": {
       "calendarQuarter": "2025Q1",
@@ -4358,8 +4605,8 @@
       "fiscalQuarter": "Q1",
       "fiscalLabel": "FY2025 Q1",
       "statementCurrency": "USD",
-      "revenueBn": 14.249,
-      "revenueYoyPct": -9.811,
+      "revenueBn": 27.627,
+      "revenueYoyPct": 74.865,
       "costOfRevenueBn": 8.965,
       "grossProfitBn": 5.284,
       "sgnaBn": 1.593,
@@ -4376,7 +4623,7 @@
       "operatingMarginPct": 18.1,
       "profitMarginPct": 14.06,
       "effectiveTaxRatePct": 22.33,
-      "revenueQoqPct": -12.125,
+      "revenueQoqPct": 70.379,
       "grossMarginYoyDeltaPp": -1.76,
       "operatingMarginYoyDeltaPp": -4.17,
       "profitMarginYoyDeltaPp": -4.0,
@@ -4461,24 +4708,40 @@
       },
       "officialRevenueSegments": [
         {
+          "name": "Machinery Power Energy",
+          "nameZh": null,
+          "memberKey": "machinerypowerenergy",
+          "valueBn": 13.378,
+          "yoyPct": null,
+          "qoqPct": null,
+          "mixPct": 48.4,
+          "mixYoyDeltaPp": null,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000021/cat-20260331_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-05-06",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
           "name": "Machinery Energy Transportation",
           "nameZh": null,
           "memberKey": "machineryenergytransportation",
           "valueBn": 13.378,
           "yoyPct": -10.57,
           "qoqPct": -12.74,
-          "mixPct": 93.9,
-          "mixYoyDeltaPp": -0.8,
+          "mixPct": 48.4,
+          "mixYoyDeltaPp": -46.3,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823025000016/cat-20250331_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2025-05-07",
           "supportLines": null,
           "supportLinesZh": null,
           "metricMode": null,
-          "validationEligible": false,
-          "validationNotes": [
-            "industrial-plus-financial-products-disclosure"
-          ]
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Financial Products",
@@ -4487,22 +4750,25 @@
           "valueBn": 0.871,
           "yoyPct": 3.81,
           "qoqPct": -1.36,
-          "mixPct": 6.1,
-          "mixYoyDeltaPp": 0.8,
+          "mixPct": 3.2,
+          "mixYoyDeltaPp": -2.2,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823025000016/cat-20250331_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2025-05-07",
           "supportLines": null,
           "supportLinesZh": null,
           "metricMode": null,
-          "validationEligible": false,
-          "validationNotes": [
-            "industrial-plus-financial-products-disclosure"
-          ]
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "qualityFlags": [
+        "revenue-aligned-to-corrected-segment-sum"
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1
     },
     "2025Q2": {
       "calendarQuarter": "2025Q2",
@@ -4511,8 +4777,8 @@
       "fiscalQuarter": "Q2",
       "fiscalLabel": "FY2025 Q2",
       "statementCurrency": "USD",
-      "revenueBn": 16.569,
-      "revenueYoyPct": -0.719,
+      "revenueBn": 32.243,
+      "revenueYoyPct": 93.199,
       "costOfRevenueBn": 10.807,
       "grossProfitBn": 5.762,
       "sgnaBn": 1.694,
@@ -4529,7 +4795,7 @@
       "operatingMarginPct": 17.26,
       "profitMarginPct": 13.15,
       "effectiveTaxRatePct": 22.92,
-      "revenueQoqPct": 16.282,
+      "revenueQoqPct": 16.708,
       "grossMarginYoyDeltaPp": -4.4,
       "operatingMarginYoyDeltaPp": -3.6,
       "profitMarginYoyDeltaPp": -2.91,
@@ -4614,24 +4880,40 @@
       },
       "officialRevenueSegments": [
         {
+          "name": "Machinery Power Energy",
+          "nameZh": null,
+          "memberKey": "machinerypowerenergy",
+          "valueBn": 15.674,
+          "yoyPct": null,
+          "qoqPct": 17.16,
+          "mixPct": 48.6,
+          "mixYoyDeltaPp": null,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000046/cat-20260630_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-08-05",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
           "name": "Machinery Energy Transportation",
           "nameZh": null,
           "memberKey": "machineryenergytransportation",
           "valueBn": 15.674,
           "yoyPct": -1.05,
           "qoqPct": 17.16,
-          "mixPct": 94.6,
-          "mixYoyDeltaPp": -0.3,
+          "mixPct": 48.6,
+          "mixYoyDeltaPp": -46.3,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823025000040/cat-20250630_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2025-08-06",
           "supportLines": null,
           "supportLinesZh": null,
           "metricMode": null,
-          "validationEligible": false,
-          "validationNotes": [
-            "industrial-plus-financial-products-disclosure"
-          ]
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "Financial Products",
@@ -4640,22 +4922,32 @@
           "valueBn": 0.895,
           "yoyPct": 5.42,
           "qoqPct": 2.76,
-          "mixPct": 5.4,
-          "mixYoyDeltaPp": 0.3,
+          "mixPct": 2.8,
+          "mixYoyDeltaPp": -2.3,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823025000040/cat-20250630_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2025-08-06",
           "supportLines": null,
           "supportLinesZh": null,
           "metricMode": null,
-          "validationEligible": false,
-          "validationNotes": [
-            "industrial-plus-financial-products-disclosure"
-          ]
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "qualityFlags": [
+        "revenue-aligned-to-corrected-segment-sum"
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2025Q3": {
       "calendarQuarter": "2025Q3",
@@ -4682,7 +4974,7 @@
       "operatingMarginPct": 17.3,
       "profitMarginPct": 13.03,
       "effectiveTaxRatePct": 26.73,
-      "revenueQoqPct": 6.452,
+      "revenueQoqPct": -45.297,
       "grossMarginYoyDeltaPp": -3.68,
       "operatingMarginYoyDeltaPp": -2.24,
       "profitMarginYoyDeltaPp": -2.26,
@@ -4808,7 +5100,9 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1
     },
     "2025Q4": {
       "calendarQuarter": "2025Q4",
@@ -4936,7 +5230,162 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1
+    },
+    "2026Q1": {
+      "calendarQuarter": "2026Q1",
+      "periodEnd": "2026-03-31",
+      "fiscalYear": "2026",
+      "fiscalQuarter": "Q1",
+      "fiscalLabel": "FY2026 Q1",
+      "statementCurrency": "USD",
+      "revenueBn": 17.415,
+      "revenueYoyPct": -36.964,
+      "costOfRevenueBn": null,
+      "grossProfitBn": null,
+      "sgnaBn": null,
+      "rndBn": null,
+      "otherOpexBn": null,
+      "operatingExpensesBn": null,
+      "operatingIncomeBn": null,
+      "nonOperatingBn": null,
+      "pretaxIncomeBn": null,
+      "taxBn": null,
+      "netIncomeBn": null,
+      "netIncomeYoyPct": null,
+      "grossMarginPct": null,
+      "operatingMarginPct": null,
+      "profitMarginPct": null,
+      "effectiveTaxRatePct": null,
+      "revenueQoqPct": -8.979,
+      "grossMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": null,
+      "profitMarginYoyDeltaPp": null,
+      "statementSource": "official-revenue-structure",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000021/cat-20260331_htm.xml",
+      "statementFilingDate": "2026-05-06",
+      "officialRevenueSegments": [
+        {
+          "name": "Machinery Power Energy",
+          "nameZh": null,
+          "memberKey": "machinerypowerenergy",
+          "valueBn": 16.473,
+          "yoyPct": 23.13,
+          "qoqPct": null,
+          "mixPct": 94.6,
+          "mixYoyDeltaPp": 46.2,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000021/cat-20260331_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-05-06",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "Financial Products",
+          "nameZh": null,
+          "memberKey": "financialproducts",
+          "valueBn": 0.942,
+          "yoyPct": 8.15,
+          "qoqPct": 1.18,
+          "mixPct": 5.4,
+          "mixYoyDeltaPp": 2.3,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000021/cat-20260331_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-05-06",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1
+    },
+    "2026Q2": {
+      "calendarQuarter": "2026Q2",
+      "periodEnd": "2026-06-30",
+      "fiscalYear": "2026",
+      "fiscalQuarter": "Q2",
+      "fiscalLabel": "FY2026 Q2",
+      "statementCurrency": "USD",
+      "revenueBn": 20.543,
+      "revenueYoyPct": -36.287,
+      "costOfRevenueBn": null,
+      "grossProfitBn": null,
+      "sgnaBn": null,
+      "rndBn": null,
+      "otherOpexBn": null,
+      "operatingExpensesBn": null,
+      "operatingIncomeBn": null,
+      "nonOperatingBn": null,
+      "pretaxIncomeBn": null,
+      "taxBn": null,
+      "netIncomeBn": null,
+      "netIncomeYoyPct": null,
+      "grossMarginPct": null,
+      "operatingMarginPct": null,
+      "profitMarginPct": null,
+      "effectiveTaxRatePct": null,
+      "revenueQoqPct": 17.962,
+      "grossMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": null,
+      "profitMarginYoyDeltaPp": null,
+      "statementSource": "official-revenue-structure",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000046/cat-20260630_htm.xml",
+      "statementFilingDate": "2026-08-05",
+      "officialRevenueSegments": [
+        {
+          "name": "Machinery Power Energy",
+          "nameZh": null,
+          "memberKey": "machinerypowerenergy",
+          "valueBn": 19.581,
+          "yoyPct": 24.93,
+          "qoqPct": 18.87,
+          "mixPct": 95.3,
+          "mixYoyDeltaPp": 46.7,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000046/cat-20260630_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-08-05",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "Financial Products",
+          "nameZh": null,
+          "memberKey": "financialproducts",
+          "valueBn": 0.962,
+          "yoyPct": 7.49,
+          "qoqPct": 2.12,
+          "mixPct": 4.7,
+          "mixYoyDeltaPp": 1.9,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000046/cat-20260630_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-08-05",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2026Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     }
   },
   "statementSource": "official-sec-companyfacts",
@@ -6364,6 +6813,24 @@
       "2025Q1": {
         "segments": [
           {
+            "name": "Machinery Power Energy",
+            "nameZh": null,
+            "memberKey": "machinerypowerenergy",
+            "valueBn": 13.378,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000021/cat-20260331_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-05-06",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          },
+          {
             "name": "Machinery Energy Transportation",
             "nameZh": null,
             "memberKey": "machineryenergytransportation",
@@ -6378,10 +6845,8 @@
             "supportLines": null,
             "supportLinesZh": null,
             "metricMode": null,
-            "validationEligible": false,
-            "validationNotes": [
-              "industrial-plus-financial-products-disclosure"
-            ]
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Financial Products",
@@ -6398,15 +6863,31 @@
             "supportLines": null,
             "supportLinesZh": null,
             "metricMode": null,
-            "validationEligible": false,
-            "validationNotes": [
-              "industrial-plus-financial-products-disclosure"
-            ]
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
       "2025Q2": {
         "segments": [
+          {
+            "name": "Machinery Power Energy",
+            "nameZh": null,
+            "memberKey": "machinerypowerenergy",
+            "valueBn": 15.674,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000046/cat-20260630_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-08-05",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          },
           {
             "name": "Machinery Energy Transportation",
             "nameZh": null,
@@ -6422,10 +6903,8 @@
             "supportLines": null,
             "supportLinesZh": null,
             "metricMode": null,
-            "validationEligible": false,
-            "validationNotes": [
-              "industrial-plus-financial-products-disclosure"
-            ]
+            "validationEligible": null,
+            "validationNotes": null
           },
           {
             "name": "Financial Products",
@@ -6442,10 +6921,8 @@
             "supportLines": null,
             "supportLinesZh": null,
             "metricMode": null,
-            "validationEligible": false,
-            "validationNotes": [
-              "industrial-plus-financial-products-disclosure"
-            ]
+            "validationEligible": null,
+            "validationNotes": null
           }
         ]
       },
@@ -6492,9 +6969,103 @@
             ]
           }
         ]
+      },
+      "2026Q1": {
+        "segments": [
+          {
+            "name": "Machinery Power Energy",
+            "nameZh": null,
+            "memberKey": "machinerypowerenergy",
+            "valueBn": 16.473,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000021/cat-20260331_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-05-06",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          },
+          {
+            "name": "Financial Products",
+            "nameZh": null,
+            "memberKey": "financialproducts",
+            "valueBn": 0.942,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000021/cat-20260331_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-05-06",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          }
+        ]
+      },
+      "2026Q2": {
+        "segments": [
+          {
+            "name": "Machinery Power Energy",
+            "nameZh": null,
+            "memberKey": "machinerypowerenergy",
+            "valueBn": 19.581,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000046/cat-20260630_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-08-05",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          },
+          {
+            "name": "Financial Products",
+            "nameZh": null,
+            "memberKey": "financialproducts",
+            "valueBn": 0.962,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000046/cat-20260630_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-08-05",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          }
+        ]
       }
     },
     "filingsUsed": [
+      {
+        "form": "10-Q",
+        "filingDate": "2026-08-05",
+        "accession": "0000018230-26-000046",
+        "primaryDocument": "cat-20260630.htm",
+        "instance": "cat-20260630_htm.xml"
+      },
+      {
+        "form": "10-Q",
+        "filingDate": "2026-05-06",
+        "accession": "0000018230-26-000021",
+        "primaryDocument": "cat-20260331.htm",
+        "instance": "cat-20260331_htm.xml"
+      },
       {
         "form": "10-K",
         "filingDate": "2026-02-13",
@@ -6771,12 +7342,12 @@
     "validation": {
       "version": "parser-validation-v1",
       "status": "high",
-      "overallConfidenceScore": 0.8645,
+      "overallConfidenceScore": 0.952,
       "financialConfidenceScore": 0.9262,
-      "structuralConfidenceScore": 0.75,
-      "revenueSegmentChecks": 0,
+      "structuralConfidenceScore": 1.0,
+      "revenueSegmentChecks": 4,
       "revenueSegmentMismatchCount": 0,
-      "revenueSegmentSkippedChecks": 31,
+      "revenueSegmentSkippedChecks": 29,
       "detailGroupChecks": 0,
       "detailGroupMismatchCount": 0,
       "detailGroupSkippedChecks": 0,
@@ -6789,21 +7360,21 @@
   },
   "statementPresets": {},
   "coverage": {
-    "quarterCount": 32,
+    "quarterCount": 34,
     "pixelReplicaQuarterCount": 0,
     "hasPixelReplica": false,
-    "officialFinancialQuarterCount": 32,
-    "officialSegmentQuarterCount": 32,
+    "officialFinancialQuarterCount": 34,
+    "officialSegmentQuarterCount": 34,
     "officialExpenseQuarterCount": 0,
     "classification": {
       "status": "ok",
-      "latestQuarter": "2025Q4",
+      "latestQuarter": "2026Q2",
       "latestQuarterHasRevenueClassification": true,
       "latestQuarterHasExpenseClassification": false,
-      "latestRevenueClassificationQuarter": "2025Q4",
+      "latestRevenueClassificationQuarter": "2026Q2",
       "latestExpenseClassificationQuarter": null,
-      "latestStructureHistoryQuarter": "2025Q3",
-      "revenueClassificationQuarterCount": 32,
+      "latestStructureHistoryQuarter": "2026Q2",
+      "revenueClassificationQuarterCount": 34,
       "expenseClassificationQuarterCount": 0,
       "revenueClassificationCoverageRatio": 1.0,
       "expenseClassificationCoverageRatio": 0.0,
@@ -6847,12 +7418,12 @@
       "validation": {
         "version": "parser-validation-v1",
         "status": "high",
-        "overallConfidenceScore": 0.8645,
+        "overallConfidenceScore": 0.952,
         "financialConfidenceScore": 0.9262,
-        "structuralConfidenceScore": 0.75,
-        "revenueSegmentChecks": 0,
+        "structuralConfidenceScore": 1.0,
+        "revenueSegmentChecks": 4,
         "revenueSegmentMismatchCount": 0,
-        "revenueSegmentSkippedChecks": 31,
+        "revenueSegmentSkippedChecks": 29,
         "detailGroupChecks": 0,
         "detailGroupMismatchCount": 0,
         "detailGroupSkippedChecks": 0,
@@ -6863,5 +7434,10 @@
         "warnings": []
       }
     }
-  }
+  },
+  "marketCapUsd": 443794194432,
+  "marketCapAsOf": "2026-07-06",
+  "marketCapSourceRank": 30,
+  "marketCapSource": "CompaniesMarketCap",
+  "marketCapSourceUrl": "https://companiesmarketcap.com/"
 }
