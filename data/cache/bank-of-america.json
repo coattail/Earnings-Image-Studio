@@ -43,7 +43,9 @@
     "2025Q1",
     "2025Q2",
     "2025Q3",
-    "2025Q4"
+    "2025Q4",
+    "2026Q1",
+    "2026Q2"
   ],
   "financials": {
     "2018Q1": {
@@ -391,7 +393,14 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2018Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2018Q3": {
       "calendarQuarter": "2018Q3",
@@ -565,7 +574,14 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2018Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2018Q4": {
       "calendarQuarter": "2018Q4",
@@ -739,7 +755,14 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2018Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2019Q1": {
       "calendarQuarter": "2019Q1",
@@ -918,7 +941,14 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2018Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2019Q2": {
       "calendarQuarter": "2019Q2",
@@ -1097,7 +1127,14 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2019Q3": {
       "calendarQuarter": "2019Q3",
@@ -1276,7 +1313,14 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2019Q4": {
       "calendarQuarter": "2019Q4",
@@ -1455,7 +1499,14 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2020Q1": {
       "calendarQuarter": "2020Q1",
@@ -1563,14 +1614,14 @@
           ]
         },
         {
-          "name": "Global Markets",
+          "name": "Global Banking",
           "nameZh": null,
-          "memberKey": "globalmarkets",
-          "valueBn": 5.225,
-          "yoyPct": 24.97,
-          "qoqPct": 52.6,
-          "mixPct": 22.9,
-          "mixYoyDeltaPp": 4.8,
+          "memberKey": "globalbanking",
+          "valueBn": 4.6,
+          "yoyPct": -10.77,
+          "qoqPct": -10.52,
+          "mixPct": 20.2,
+          "mixYoyDeltaPp": -2.2,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085820000023/bac-0331202010xq_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2020-05-01",
@@ -1603,14 +1654,14 @@
           ]
         },
         {
-          "name": "Global Banking",
+          "name": "Global Markets",
           "nameZh": null,
-          "memberKey": "globalbanking",
-          "valueBn": 4.6,
-          "yoyPct": -10.77,
-          "qoqPct": -10.52,
-          "mixPct": 20.2,
-          "mixYoyDeltaPp": -2.2,
+          "memberKey": "globalmarkets",
+          "valueBn": 5.225,
+          "yoyPct": 24.97,
+          "qoqPct": 52.6,
+          "mixPct": 22.9,
+          "mixYoyDeltaPp": 4.8,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085820000023/bac-0331202010xq_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2020-05-01",
@@ -1626,7 +1677,14 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2020Q2": {
       "calendarQuarter": "2020Q2",
@@ -1734,26 +1792,6 @@
           ]
         },
         {
-          "name": "Global Markets",
-          "nameZh": null,
-          "memberKey": "globalmarkets",
-          "valueBn": 5.349,
-          "yoyPct": 29.05,
-          "qoqPct": 2.37,
-          "mixPct": 24.0,
-          "mixYoyDeltaPp": 6.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085820000040/bac-0630202010xq_htm.xml",
-          "sourceForm": "10-Q",
-          "filingDate": "2020-07-31",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": false,
-          "validationNotes": [
-            "business-line-revenue-disclosure"
-          ]
-        },
-        {
           "name": "Global Banking",
           "nameZh": null,
           "memberKey": "globalbanking",
@@ -1792,12 +1830,39 @@
           "validationNotes": [
             "business-line-revenue-disclosure"
           ]
+        },
+        {
+          "name": "Global Markets",
+          "nameZh": null,
+          "memberKey": "globalmarkets",
+          "valueBn": 5.349,
+          "yoyPct": 29.05,
+          "qoqPct": 2.37,
+          "mixPct": 24.0,
+          "mixYoyDeltaPp": 6.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085820000040/bac-0630202010xq_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2020-07-31",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2020Q3": {
       "calendarQuarter": "2020Q3",
@@ -1913,14 +1978,14 @@
           ]
         },
         {
-          "name": "Global Wealth & Investment Management",
+          "name": "Global Banking",
           "nameZh": null,
-          "memberKey": "globalwealthinvestmentmanagement",
-          "valueBn": 4.546,
-          "yoyPct": -7.3,
-          "qoqPct": 2.73,
-          "mixPct": 22.4,
-          "mixYoyDeltaPp": 0.9,
+          "memberKey": "globalbanking",
+          "valueBn": 4.517,
+          "yoyPct": -13.33,
+          "qoqPct": -11.27,
+          "mixPct": 22.2,
+          "mixYoyDeltaPp": -0.6,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085820000071/bac-20200930_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2020-10-30",
@@ -1933,14 +1998,14 @@
           ]
         },
         {
-          "name": "Global Banking",
+          "name": "Global Wealth & Investment Management",
           "nameZh": null,
-          "memberKey": "globalbanking",
-          "valueBn": 4.517,
-          "yoyPct": -13.33,
-          "qoqPct": -11.27,
-          "mixPct": 22.2,
-          "mixYoyDeltaPp": -0.6,
+          "memberKey": "globalwealthinvestmentmanagement",
+          "valueBn": 4.546,
+          "yoyPct": -7.3,
+          "qoqPct": 2.73,
+          "mixPct": 22.4,
+          "mixYoyDeltaPp": 0.9,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085820000071/bac-20200930_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2020-10-30",
@@ -1976,7 +2041,14 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2020Q4": {
       "calendarQuarter": "2020Q4",
@@ -2155,7 +2227,14 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2021Q1": {
       "calendarQuarter": "2021Q1",
@@ -2274,14 +2353,14 @@
           ]
         },
         {
-          "name": "Global Markets",
+          "name": "Global Banking",
           "nameZh": null,
-          "memberKey": "globalmarkets",
-          "valueBn": 6.198,
-          "yoyPct": 18.62,
-          "qoqPct": 58.56,
-          "mixPct": 27.2,
-          "mixYoyDeltaPp": 4.2,
+          "memberKey": "globalbanking",
+          "valueBn": 4.633,
+          "yoyPct": 0.72,
+          "qoqPct": -3.06,
+          "mixPct": 20.3,
+          "mixYoyDeltaPp": 0.1,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085821000063/bac-20210331_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2021-04-29",
@@ -2314,14 +2393,14 @@
           ]
         },
         {
-          "name": "Global Banking",
+          "name": "Global Markets",
           "nameZh": null,
-          "memberKey": "globalbanking",
-          "valueBn": 4.633,
-          "yoyPct": 0.72,
-          "qoqPct": -3.06,
-          "mixPct": 20.3,
-          "mixYoyDeltaPp": 0.1,
+          "memberKey": "globalmarkets",
+          "valueBn": 6.198,
+          "yoyPct": 18.62,
+          "qoqPct": 58.56,
+          "mixPct": 27.2,
+          "mixYoyDeltaPp": 4.2,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085821000063/bac-20210331_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2021-04-29",
@@ -2337,7 +2416,14 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2021Q2": {
       "calendarQuarter": "2021Q2",
@@ -2519,7 +2605,14 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2021Q3": {
       "calendarQuarter": "2021Q3",
@@ -2640,14 +2733,14 @@
           ]
         },
         {
-          "name": "Global Wealth & Investment Management",
+          "name": "Global Banking",
           "nameZh": null,
-          "memberKey": "globalwealthinvestmentmanagement",
-          "valueBn": 5.31,
-          "yoyPct": 16.81,
-          "qoqPct": 4.84,
-          "mixPct": 23.3,
-          "mixYoyDeltaPp": 1.0,
+          "memberKey": "globalbanking",
+          "valueBn": 5.244,
+          "yoyPct": 16.09,
+          "qoqPct": 3.05,
+          "mixPct": 23.0,
+          "mixYoyDeltaPp": 0.8,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085821000107/bac-20210930_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2021-10-29",
@@ -2660,14 +2753,14 @@
           ]
         },
         {
-          "name": "Global Banking",
+          "name": "Global Wealth & Investment Management",
           "nameZh": null,
-          "memberKey": "globalbanking",
-          "valueBn": 5.244,
-          "yoyPct": 16.09,
-          "qoqPct": 3.05,
-          "mixPct": 23.0,
-          "mixYoyDeltaPp": 0.8,
+          "memberKey": "globalwealthinvestmentmanagement",
+          "valueBn": 5.31,
+          "yoyPct": 16.81,
+          "qoqPct": 4.84,
+          "mixPct": 23.3,
+          "mixYoyDeltaPp": 1.0,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085821000107/bac-20210930_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2021-10-29",
@@ -2703,7 +2796,14 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2021Q4": {
       "calendarQuarter": "2021Q4",
@@ -2887,7 +2987,14 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2022Q1": {
       "calendarQuarter": "2022Q1",
@@ -3008,6 +3115,26 @@
           ]
         },
         {
+          "name": "Global Banking",
+          "nameZh": null,
+          "memberKey": "globalbanking",
+          "valueBn": 5.194,
+          "yoyPct": 12.11,
+          "qoqPct": -12.1,
+          "mixPct": 22.4,
+          "mixYoyDeltaPp": 2.1,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085822000088/bac-20220331_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2022-04-29",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
+        },
+        {
           "name": "Global Wealth & Investment Management",
           "nameZh": null,
           "memberKey": "globalwealthinvestmentmanagement",
@@ -3046,32 +3173,19 @@
           "validationNotes": [
             "business-line-revenue-disclosure"
           ]
-        },
-        {
-          "name": "Global Banking",
-          "nameZh": null,
-          "memberKey": "globalbanking",
-          "valueBn": 5.194,
-          "yoyPct": 12.11,
-          "qoqPct": -12.1,
-          "mixPct": 22.4,
-          "mixYoyDeltaPp": 2.1,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085822000088/bac-20220331_htm.xml",
-          "sourceForm": "10-Q",
-          "filingDate": "2022-04-29",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": false,
-          "validationNotes": [
-            "business-line-revenue-disclosure"
-          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2022Q2": {
       "calendarQuarter": "2022Q2",
@@ -3192,14 +3306,14 @@
           ]
         },
         {
-          "name": "Global Wealth & Investment Management",
+          "name": "Global Banking",
           "nameZh": null,
-          "memberKey": "globalwealthinvestmentmanagement",
-          "valueBn": 5.433,
-          "yoyPct": 7.27,
-          "qoqPct": -0.79,
-          "mixPct": 23.9,
-          "mixYoyDeltaPp": 0.4,
+          "memberKey": "globalbanking",
+          "valueBn": 5.006,
+          "yoyPct": -1.63,
+          "qoqPct": -3.62,
+          "mixPct": 22.1,
+          "mixYoyDeltaPp": -1.6,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085822000112/bac-20220630_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2022-07-29",
@@ -3212,14 +3326,14 @@
           ]
         },
         {
-          "name": "Global Banking",
+          "name": "Global Wealth & Investment Management",
           "nameZh": null,
-          "memberKey": "globalbanking",
-          "valueBn": 5.006,
-          "yoyPct": -1.63,
-          "qoqPct": -3.62,
-          "mixPct": 22.1,
-          "mixYoyDeltaPp": -1.6,
+          "memberKey": "globalwealthinvestmentmanagement",
+          "valueBn": 5.433,
+          "yoyPct": 7.27,
+          "qoqPct": -0.79,
+          "mixPct": 23.9,
+          "mixYoyDeltaPp": 0.4,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085822000112/bac-20220630_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2022-07-29",
@@ -3255,7 +3369,14 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2022Q3": {
       "calendarQuarter": "2022Q3",
@@ -3439,7 +3560,14 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2022Q4": {
       "calendarQuarter": "2022Q4",
@@ -3623,7 +3751,14 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2023Q1": {
       "calendarQuarter": "2023Q1",
@@ -3764,26 +3899,6 @@
           ]
         },
         {
-          "name": "Global Markets",
-          "nameZh": null,
-          "memberKey": "globalmarkets",
-          "valueBn": 5.626,
-          "yoyPct": 6.31,
-          "qoqPct": 45.71,
-          "mixPct": 21.4,
-          "mixYoyDeltaPp": -1.4,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085823000142/bac-20230331_htm.xml",
-          "sourceForm": "10-Q",
-          "filingDate": "2023-05-01",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": false,
-          "validationNotes": [
-            "business-line-revenue-disclosure"
-          ]
-        },
-        {
           "name": "Global Wealth & Investment Management",
           "nameZh": null,
           "memberKey": "globalwealthinvestmentmanagement",
@@ -3802,12 +3917,39 @@
           "validationNotes": [
             "business-line-revenue-disclosure"
           ]
+        },
+        {
+          "name": "Global Markets",
+          "nameZh": null,
+          "memberKey": "globalmarkets",
+          "valueBn": 5.626,
+          "yoyPct": 6.31,
+          "qoqPct": 45.71,
+          "mixPct": 21.4,
+          "mixYoyDeltaPp": -1.4,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085823000142/bac-20230331_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2023-05-01",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2023Q2": {
       "calendarQuarter": "2023Q2",
@@ -3991,7 +4133,14 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2023Q3": {
       "calendarQuarter": "2023Q3",
@@ -4175,7 +4324,14 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2023Q4": {
       "calendarQuarter": "2023Q4",
@@ -4359,7 +4515,14 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2024Q1": {
       "calendarQuarter": "2024Q1",
@@ -4500,26 +4663,6 @@
           ]
         },
         {
-          "name": "Global Markets",
-          "nameZh": null,
-          "memberKey": "globalmarkets",
-          "valueBn": 5.883,
-          "yoyPct": 4.57,
-          "qoqPct": 43.91,
-          "mixPct": 22.8,
-          "mixYoyDeltaPp": 1.4,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085824000156/bac-20240331_htm.xml",
-          "sourceForm": "10-Q",
-          "filingDate": "2024-04-30",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": false,
-          "validationNotes": [
-            "business-line-revenue-disclosure"
-          ]
-        },
-        {
           "name": "Global Wealth & Investment Management",
           "nameZh": null,
           "memberKey": "globalwealthinvestmentmanagement",
@@ -4538,12 +4681,39 @@
           "validationNotes": [
             "business-line-revenue-disclosure"
           ]
+        },
+        {
+          "name": "Global Markets",
+          "nameZh": null,
+          "memberKey": "globalmarkets",
+          "valueBn": 5.883,
+          "yoyPct": 4.57,
+          "qoqPct": 43.91,
+          "mixPct": 22.8,
+          "mixYoyDeltaPp": 1.4,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085824000156/bac-20240331_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2024-04-30",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2024Q2": {
       "calendarQuarter": "2024Q2",
@@ -4727,7 +4897,14 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2024Q3": {
       "calendarQuarter": "2024Q3",
@@ -4911,7 +5088,14 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2024Q4": {
       "calendarQuarter": "2024Q4",
@@ -5095,7 +5279,14 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2025Q1": {
       "calendarQuarter": "2025Q1",
@@ -5216,14 +5407,14 @@
           ]
         },
         {
-          "name": "Global Markets",
+          "name": "Global Banking",
           "nameZh": null,
-          "memberKey": "globalmarkets",
-          "valueBn": 6.584,
-          "yoyPct": 11.92,
-          "qoqPct": 36.03,
-          "mixPct": 24.1,
-          "mixYoyDeltaPp": 1.3,
+          "memberKey": "globalbanking",
+          "valueBn": 5.977,
+          "yoyPct": -0.05,
+          "qoqPct": -1.87,
+          "mixPct": 21.8,
+          "mixYoyDeltaPp": -1.3,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085825000200/bac-20250331_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2025-04-30",
@@ -5256,14 +5447,14 @@
           ]
         },
         {
-          "name": "Global Banking",
+          "name": "Global Markets",
           "nameZh": null,
-          "memberKey": "globalbanking",
-          "valueBn": 5.977,
-          "yoyPct": -0.05,
-          "qoqPct": -1.87,
-          "mixPct": 21.8,
-          "mixYoyDeltaPp": -1.3,
+          "memberKey": "globalmarkets",
+          "valueBn": 6.584,
+          "yoyPct": 11.92,
+          "qoqPct": 36.03,
+          "mixPct": 24.1,
+          "mixYoyDeltaPp": 1.3,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085825000200/bac-20250331_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2025-04-30",
@@ -5279,7 +5470,14 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2025Q2": {
       "calendarQuarter": "2025Q2",
@@ -5400,14 +5598,14 @@
           ]
         },
         {
-          "name": "Global Markets",
+          "name": "Global Banking",
           "nameZh": null,
-          "memberKey": "globalmarkets",
-          "valueBn": 5.98,
-          "yoyPct": 9.54,
-          "qoqPct": -9.17,
-          "mixPct": 22.6,
-          "mixYoyDeltaPp": 1.1,
+          "memberKey": "globalbanking",
+          "valueBn": 5.69,
+          "yoyPct": -6.0,
+          "qoqPct": -4.8,
+          "mixPct": 21.5,
+          "mixYoyDeltaPp": -2.4,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085825000268/bac-20250630_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2025-07-31",
@@ -5440,14 +5638,14 @@
           ]
         },
         {
-          "name": "Global Banking",
+          "name": "Global Markets",
           "nameZh": null,
-          "memberKey": "globalbanking",
-          "valueBn": 5.69,
-          "yoyPct": -6.0,
-          "qoqPct": -4.8,
-          "mixPct": 21.5,
-          "mixYoyDeltaPp": -2.4,
+          "memberKey": "globalmarkets",
+          "valueBn": 5.98,
+          "yoyPct": 9.54,
+          "qoqPct": -9.17,
+          "mixPct": 22.6,
+          "mixYoyDeltaPp": 1.1,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085825000268/bac-20250630_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2025-07-31",
@@ -5463,7 +5661,14 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2025Q3": {
       "calendarQuarter": "2025Q3",
@@ -5584,14 +5789,14 @@
           ]
         },
         {
-          "name": "Global Wealth & Investment Management",
+          "name": "Global Banking",
           "nameZh": null,
-          "memberKey": "globalwealthinvestmentmanagement",
-          "valueBn": 6.312,
-          "yoyPct": 9.55,
-          "qoqPct": 6.32,
-          "mixPct": 22.5,
-          "mixYoyDeltaPp": -0.3,
+          "memberKey": "globalbanking",
+          "valueBn": 6.245,
+          "yoyPct": 7.04,
+          "qoqPct": 9.75,
+          "mixPct": 22.2,
+          "mixYoyDeltaPp": -0.8,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085825000405/bac-20250930_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2025-10-31",
@@ -5604,14 +5809,14 @@
           ]
         },
         {
-          "name": "Global Banking",
+          "name": "Global Wealth & Investment Management",
           "nameZh": null,
-          "memberKey": "globalbanking",
-          "valueBn": 6.245,
-          "yoyPct": 7.04,
-          "qoqPct": 9.75,
-          "mixPct": 22.2,
-          "mixYoyDeltaPp": -0.8,
+          "memberKey": "globalwealthinvestmentmanagement",
+          "valueBn": 6.312,
+          "yoyPct": 9.55,
+          "qoqPct": 6.32,
+          "mixPct": 22.5,
+          "mixYoyDeltaPp": -0.3,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085825000405/bac-20250930_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2025-10-31",
@@ -5647,7 +5852,14 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2025Q4": {
       "calendarQuarter": "2025Q4",
@@ -5768,14 +5980,14 @@
           ]
         },
         {
-          "name": "Global Wealth & Investment Management",
+          "name": "Global Banking",
           "nameZh": null,
-          "memberKey": "globalwealthinvestmentmanagement",
-          "valueBn": 6.618,
-          "yoyPct": 10.26,
-          "qoqPct": 4.85,
-          "mixPct": 21.2,
-          "mixYoyDeltaPp": -2.5,
+          "memberKey": "globalbanking",
+          "valueBn": 6.196,
+          "yoyPct": 1.72,
+          "qoqPct": -0.78,
+          "mixPct": 19.9,
+          "mixYoyDeltaPp": -4.2,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000157/bac-20251231_htm.xml",
           "sourceForm": "10-K",
           "filingDate": "2026-02-25",
@@ -5788,14 +6000,14 @@
           ]
         },
         {
-          "name": "Global Banking",
+          "name": "Global Wealth & Investment Management",
           "nameZh": null,
-          "memberKey": "globalbanking",
-          "valueBn": 6.196,
-          "yoyPct": 1.72,
-          "qoqPct": -0.78,
-          "mixPct": 19.9,
-          "mixYoyDeltaPp": -4.2,
+          "memberKey": "globalwealthinvestmentmanagement",
+          "valueBn": 6.618,
+          "yoyPct": 10.26,
+          "qoqPct": 4.85,
+          "mixPct": 21.2,
+          "mixYoyDeltaPp": -2.5,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000157/bac-20251231_htm.xml",
           "sourceForm": "10-K",
           "filingDate": "2026-02-25",
@@ -5831,7 +6043,262 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
+    },
+    "2026Q1": {
+      "calendarQuarter": "2026Q1",
+      "periodEnd": "2026-03-31",
+      "fiscalYear": "2026",
+      "fiscalQuarter": "Q1",
+      "fiscalLabel": "FY2026 Q1",
+      "statementCurrency": "USD",
+      "revenueBn": 31.157,
+      "revenueYoyPct": 13.853,
+      "costOfRevenueBn": null,
+      "grossProfitBn": null,
+      "sgnaBn": null,
+      "rndBn": null,
+      "otherOpexBn": null,
+      "operatingExpensesBn": null,
+      "operatingIncomeBn": null,
+      "nonOperatingBn": null,
+      "pretaxIncomeBn": null,
+      "taxBn": null,
+      "netIncomeBn": null,
+      "netIncomeYoyPct": null,
+      "grossMarginPct": null,
+      "operatingMarginPct": null,
+      "profitMarginPct": null,
+      "effectiveTaxRatePct": null,
+      "revenueQoqPct": -0.074,
+      "grossMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": null,
+      "profitMarginYoyDeltaPp": null,
+      "statementSource": "official-revenue-structure",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000249/bac-20260331_htm.xml",
+      "statementFilingDate": "2026-05-01",
+      "officialRevenueSegments": [
+        {
+          "name": "Consumer Banking",
+          "nameZh": null,
+          "memberKey": "consumerbanking",
+          "valueBn": 11.049,
+          "yoyPct": 5.3,
+          "qoqPct": -1.36,
+          "mixPct": 35.5,
+          "mixYoyDeltaPp": -2.9,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000249/bac-20260331_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-05-01",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
+        },
+        {
+          "name": "Global Banking",
+          "nameZh": null,
+          "memberKey": "globalbanking",
+          "valueBn": 6.287,
+          "yoyPct": 5.19,
+          "qoqPct": 1.47,
+          "mixPct": 20.2,
+          "mixYoyDeltaPp": -1.7,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000249/bac-20260331_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-05-01",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
+        },
+        {
+          "name": "Global Wealth & Investment Management",
+          "nameZh": null,
+          "memberKey": "globalwealthinvestmentmanagement",
+          "valueBn": 6.712,
+          "yoyPct": 11.57,
+          "qoqPct": 1.42,
+          "mixPct": 21.5,
+          "mixYoyDeltaPp": -0.4,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000249/bac-20260331_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-05-01",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
+        },
+        {
+          "name": "Global Markets",
+          "nameZh": null,
+          "memberKey": "globalmarkets",
+          "valueBn": 7.109,
+          "yoyPct": 7.97,
+          "qoqPct": 33.93,
+          "mixPct": 22.8,
+          "mixYoyDeltaPp": -1.2,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000249/bac-20260331_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-05-01",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
+    },
+    "2026Q2": {
+      "calendarQuarter": "2026Q2",
+      "periodEnd": "2026-06-30",
+      "fiscalYear": "2026",
+      "fiscalQuarter": "Q2",
+      "fiscalLabel": "FY2026 Q2",
+      "statementCurrency": "USD",
+      "revenueBn": 32.465,
+      "revenueYoyPct": 22.681,
+      "costOfRevenueBn": null,
+      "grossProfitBn": null,
+      "sgnaBn": null,
+      "rndBn": null,
+      "otherOpexBn": null,
+      "operatingExpensesBn": null,
+      "operatingIncomeBn": null,
+      "nonOperatingBn": null,
+      "pretaxIncomeBn": null,
+      "taxBn": null,
+      "netIncomeBn": null,
+      "netIncomeYoyPct": null,
+      "grossMarginPct": null,
+      "operatingMarginPct": null,
+      "profitMarginPct": null,
+      "effectiveTaxRatePct": null,
+      "revenueQoqPct": 4.198,
+      "grossMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": null,
+      "profitMarginYoyDeltaPp": null,
+      "statementSource": "official-revenue-structure",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000394/bac-20260630_htm.xml",
+      "statementFilingDate": "2026-07-31",
+      "officialRevenueSegments": [
+        {
+          "name": "Consumer Banking",
+          "nameZh": null,
+          "memberKey": "consumerbanking",
+          "valueBn": 11.336,
+          "yoyPct": 4.84,
+          "qoqPct": 2.6,
+          "mixPct": 34.9,
+          "mixYoyDeltaPp": -5.9,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000394/bac-20260630_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-07-31",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
+        },
+        {
+          "name": "Global Banking",
+          "nameZh": null,
+          "memberKey": "globalbanking",
+          "valueBn": 6.236,
+          "yoyPct": 9.6,
+          "qoqPct": -0.81,
+          "mixPct": 19.2,
+          "mixYoyDeltaPp": -2.3,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000394/bac-20260630_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-07-31",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
+        },
+        {
+          "name": "Global Wealth & Investment Management",
+          "nameZh": null,
+          "memberKey": "globalwealthinvestmentmanagement",
+          "valueBn": 6.871,
+          "yoyPct": 15.73,
+          "qoqPct": 2.37,
+          "mixPct": 21.2,
+          "mixYoyDeltaPp": -1.3,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000394/bac-20260630_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-07-31",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
+        },
+        {
+          "name": "Global Markets",
+          "nameZh": null,
+          "memberKey": "globalmarkets",
+          "valueBn": 8.022,
+          "yoyPct": 34.15,
+          "qoqPct": 12.84,
+          "mixPct": 24.7,
+          "mixYoyDeltaPp": 2.1,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000394/bac-20260630_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-07-31",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "business-line-revenue-disclosure"
+          ]
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2026Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     }
   },
   "statementSource": "official-sec-companyfacts+field-reconciled",
@@ -8732,9 +9199,191 @@
             ]
           }
         ]
+      },
+      "2026Q1": {
+        "segments": [
+          {
+            "name": "Consumer Banking",
+            "nameZh": null,
+            "memberKey": "consumerbanking",
+            "valueBn": 11.049,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000249/bac-20260331_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-05-01",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
+          },
+          {
+            "name": "Global Markets",
+            "nameZh": null,
+            "memberKey": "globalmarkets",
+            "valueBn": 7.109,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000249/bac-20260331_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-05-01",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
+          },
+          {
+            "name": "Global Wealth & Investment Management",
+            "nameZh": null,
+            "memberKey": "globalwealthinvestmentmanagement",
+            "valueBn": 6.712,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000249/bac-20260331_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-05-01",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
+          },
+          {
+            "name": "Global Banking",
+            "nameZh": null,
+            "memberKey": "globalbanking",
+            "valueBn": 6.287,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000249/bac-20260331_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-05-01",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
+          }
+        ]
+      },
+      "2026Q2": {
+        "segments": [
+          {
+            "name": "Consumer Banking",
+            "nameZh": null,
+            "memberKey": "consumerbanking",
+            "valueBn": 11.336,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000394/bac-20260630_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-07-31",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
+          },
+          {
+            "name": "Global Markets",
+            "nameZh": null,
+            "memberKey": "globalmarkets",
+            "valueBn": 8.022,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000394/bac-20260630_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-07-31",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
+          },
+          {
+            "name": "Global Wealth & Investment Management",
+            "nameZh": null,
+            "memberKey": "globalwealthinvestmentmanagement",
+            "valueBn": 6.871,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000394/bac-20260630_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-07-31",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
+          },
+          {
+            "name": "Global Banking",
+            "nameZh": null,
+            "memberKey": "globalbanking",
+            "valueBn": 6.236,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000394/bac-20260630_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-07-31",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "business-line-revenue-disclosure"
+            ]
+          }
+        ]
       }
     },
     "filingsUsed": [
+      {
+        "form": "10-Q",
+        "filingDate": "2026-07-31",
+        "accession": "0000070858-26-000394",
+        "primaryDocument": "bac-20260630.htm",
+        "instance": "bac-20260630_htm.xml"
+      },
+      {
+        "form": "10-Q",
+        "filingDate": "2026-05-01",
+        "accession": "0000070858-26-000249",
+        "primaryDocument": "bac-20260331.htm",
+        "instance": "bac-20260331_htm.xml"
+      },
       {
         "form": "10-K",
         "filingDate": "2026-02-25",
@@ -9037,7 +9686,7 @@
       "structuralConfidenceScore": 0.75,
       "revenueSegmentChecks": 0,
       "revenueSegmentMismatchCount": 0,
-      "revenueSegmentSkippedChecks": 32,
+      "revenueSegmentSkippedChecks": 34,
       "detailGroupChecks": 0,
       "detailGroupMismatchCount": 0,
       "detailGroupSkippedChecks": 0,
@@ -9050,21 +9699,21 @@
   },
   "statementPresets": {},
   "coverage": {
-    "quarterCount": 32,
+    "quarterCount": 34,
     "pixelReplicaQuarterCount": 0,
     "hasPixelReplica": false,
-    "officialFinancialQuarterCount": 32,
-    "officialSegmentQuarterCount": 32,
+    "officialFinancialQuarterCount": 34,
+    "officialSegmentQuarterCount": 34,
     "officialExpenseQuarterCount": 0,
     "classification": {
       "status": "ok",
-      "latestQuarter": "2025Q4",
+      "latestQuarter": "2026Q2",
       "latestQuarterHasRevenueClassification": true,
       "latestQuarterHasExpenseClassification": false,
-      "latestRevenueClassificationQuarter": "2025Q4",
+      "latestRevenueClassificationQuarter": "2026Q2",
       "latestExpenseClassificationQuarter": null,
-      "latestStructureHistoryQuarter": "2025Q4",
-      "revenueClassificationQuarterCount": 32,
+      "latestStructureHistoryQuarter": "2026Q2",
+      "revenueClassificationQuarterCount": 34,
       "expenseClassificationQuarterCount": 0,
       "revenueClassificationCoverageRatio": 1.0,
       "expenseClassificationCoverageRatio": 0.0,
@@ -9113,7 +9762,7 @@
         "structuralConfidenceScore": 0.75,
         "revenueSegmentChecks": 0,
         "revenueSegmentMismatchCount": 0,
-        "revenueSegmentSkippedChecks": 32,
+        "revenueSegmentSkippedChecks": 34,
         "detailGroupChecks": 0,
         "detailGroupMismatchCount": 0,
         "detailGroupSkippedChecks": 0,
@@ -9124,5 +9773,10 @@
         "warnings": []
       }
     }
-  }
+  },
+  "marketCapUsd": 416782778368,
+  "marketCapAsOf": "2026-07-06",
+  "marketCapSourceRank": 33,
+  "marketCapSource": "CompaniesMarketCap",
+  "marketCapSourceUrl": "https://companiesmarketcap.com/"
 }
