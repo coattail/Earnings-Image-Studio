@@ -4,7 +4,7 @@
   "nameZh": "埃克森美孚",
   "nameEn": "Exxon Mobil",
   "slug": "xom",
-  "rank": 14,
+  "rank": 21,
   "isAdr": false,
   "brand": {
     "primary": "#E51636",
@@ -43,7 +43,9 @@
     "2025Q1",
     "2025Q2",
     "2025Q3",
-    "2025Q4"
+    "2025Q4",
+    "2026Q1",
+    "2026Q2"
   ],
   "financials": {
     "2018Q1": {
@@ -3082,6 +3084,13 @@
           "missing-required:operatingIncomeBn",
           "revenue-segment-coverage-low"
         ]
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
       }
     },
     "2022Q3": {
@@ -4139,13 +4148,13 @@
           ]
         },
         {
-          "name": "Chemical Products",
+          "name": "Upstream",
           "nameZh": null,
-          "memberKey": "chemicalproducts",
-          "valueBn": 5.67,
+          "memberKey": "upstream",
+          "valueBn": 5.412,
           "yoyPct": null,
-          "qoqPct": -0.89,
-          "mixPct": 7.0,
+          "qoqPct": -33.65,
+          "mixPct": 6.7,
           "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408824000050/xom-20240630_htm.xml",
           "sourceForm": "10-Q",
@@ -4159,13 +4168,13 @@
           ]
         },
         {
-          "name": "Upstream",
+          "name": "Chemical Products",
           "nameZh": null,
-          "memberKey": "upstream",
-          "valueBn": 5.412,
+          "memberKey": "chemicalproducts",
+          "valueBn": 5.67,
           "yoyPct": null,
-          "qoqPct": -33.65,
-          "mixPct": 6.7,
+          "qoqPct": -0.89,
+          "mixPct": 7.0,
           "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408824000050/xom-20240630_htm.xml",
           "sourceForm": "10-Q",
@@ -4276,6 +4285,13 @@
         "issues": [
           "missing-required:operatingIncomeBn"
         ]
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
       }
     },
     "2023Q3": {
@@ -4711,6 +4727,13 @@
         "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": []
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
       }
     },
     "2023Q4": {
@@ -5157,6 +5180,14 @@
         "issues": [
           "cost-breakdown-coverage-low"
         ]
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q3",
+        "fields": [
+          "officialRevenueSegments",
+          "opexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
       }
     },
     "2024Q1": {
@@ -5315,14 +5346,14 @@
           ]
         },
         {
-          "name": "Chemical Products",
+          "name": "Upstream",
           "nameZh": null,
-          "memberKey": "chemicalproducts",
-          "valueBn": 5.84,
-          "yoyPct": 2.08,
-          "qoqPct": 8.29,
-          "mixPct": 7.0,
-          "mixYoyDeltaPp": 0.2,
+          "memberKey": "upstream",
+          "valueBn": 5.716,
+          "yoyPct": -29.93,
+          "qoqPct": -4.64,
+          "mixPct": 6.9,
+          "mixYoyDeltaPp": -2.9,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408824000029/xom-20240331_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2024-04-29",
@@ -5335,14 +5366,14 @@
           ]
         },
         {
-          "name": "Upstream",
+          "name": "Chemical Products",
           "nameZh": null,
-          "memberKey": "upstream",
-          "valueBn": 5.716,
-          "yoyPct": -29.93,
-          "qoqPct": -4.64,
-          "mixPct": 6.9,
-          "mixYoyDeltaPp": -2.9,
+          "memberKey": "chemicalproducts",
+          "valueBn": 5.84,
+          "yoyPct": 2.08,
+          "qoqPct": 8.29,
+          "mixPct": 7.0,
+          "mixYoyDeltaPp": 0.2,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408824000029/xom-20240331_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2024-04-29",
@@ -5452,6 +5483,13 @@
         "issues": [
           "missing-required:operatingIncomeBn"
         ]
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
       }
     },
     "2024Q2": {
@@ -5905,6 +5943,13 @@
         "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": []
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
       }
     },
     "2024Q3": {
@@ -6342,6 +6387,14 @@
         "issues": [
           "cost-breakdown-coverage-low"
         ]
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q2",
+        "fields": [
+          "officialRevenueSegments",
+          "opexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
       }
     },
     "2024Q4": {
@@ -6788,6 +6841,14 @@
         "issues": [
           "cost-breakdown-coverage-low"
         ]
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q3",
+        "fields": [
+          "officialRevenueSegments",
+          "opexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
       }
     },
     "2025Q1": {
@@ -7225,6 +7286,14 @@
         "issues": [
           "cost-breakdown-coverage-low"
         ]
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q4",
+        "fields": [
+          "officialRevenueSegments",
+          "opexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
       }
     },
     "2025Q2": {
@@ -7662,6 +7731,14 @@
         "issues": [
           "cost-breakdown-coverage-low"
         ]
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q1",
+        "fields": [
+          "officialRevenueSegments",
+          "opexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
       }
     },
     "2025Q3": {
@@ -8090,6 +8167,14 @@
         "issues": [
           "cost-breakdown-coverage-low"
         ]
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q2",
+        "fields": [
+          "officialRevenueSegments",
+          "opexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
       }
     },
     "2025Q4": {
@@ -8527,6 +8612,262 @@
         "issues": [
           "cost-breakdown-coverage-low"
         ]
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q3",
+        "fields": [
+          "officialRevenueSegments",
+          "opexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      }
+    },
+    "2026Q1": {
+      "calendarQuarter": "2026Q1",
+      "periodEnd": "2026-03-31",
+      "fiscalYear": "2026",
+      "fiscalQuarter": "Q1",
+      "fiscalLabel": "FY2026 Q1",
+      "statementCurrency": "USD",
+      "revenueBn": 83.136,
+      "revenueYoyPct": 0.007,
+      "costOfRevenueBn": null,
+      "grossProfitBn": null,
+      "sgnaBn": null,
+      "rndBn": null,
+      "otherOpexBn": null,
+      "operatingExpensesBn": null,
+      "operatingIncomeBn": null,
+      "nonOperatingBn": null,
+      "pretaxIncomeBn": null,
+      "taxBn": null,
+      "netIncomeBn": null,
+      "netIncomeYoyPct": null,
+      "grossMarginPct": null,
+      "operatingMarginPct": null,
+      "profitMarginPct": null,
+      "effectiveTaxRatePct": null,
+      "revenueQoqPct": 1.006,
+      "grossMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": null,
+      "profitMarginYoyDeltaPp": null,
+      "statementSource": "official-revenue-structure",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000067/xom-20260331_htm.xml",
+      "statementFilingDate": "2026-05-04",
+      "officialRevenueSegments": [
+        {
+          "name": "Energy Products",
+          "nameZh": null,
+          "memberKey": "energyproducts",
+          "valueBn": 63.194,
+          "yoyPct": 5.39,
+          "qoqPct": 2.27,
+          "mixPct": 76.0,
+          "mixYoyDeltaPp": 3.9,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000067/xom-20260331_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-05-04",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-product-disclosure"
+          ]
+        },
+        {
+          "name": "Upstream",
+          "nameZh": null,
+          "memberKey": "upstream",
+          "valueBn": 10.078,
+          "yoyPct": -10.64,
+          "qoqPct": 19.28,
+          "mixPct": 12.1,
+          "mixYoyDeltaPp": -1.4,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000067/xom-20260331_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-05-04",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-product-disclosure"
+          ]
+        },
+        {
+          "name": "Chemical Products",
+          "nameZh": null,
+          "memberKey": "chemicalproducts",
+          "valueBn": 5.474,
+          "yoyPct": 1.24,
+          "qoqPct": 0.87,
+          "mixPct": 6.6,
+          "mixYoyDeltaPp": 0.1,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000067/xom-20260331_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-05-04",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-product-disclosure"
+          ]
+        },
+        {
+          "name": "Specialty Products",
+          "nameZh": null,
+          "memberKey": "specialtyproducts",
+          "valueBn": 4.39,
+          "yoyPct": -0.05,
+          "qoqPct": 1.01,
+          "mixPct": 5.3,
+          "mixYoyDeltaPp": -0.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000067/xom-20260331_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-05-04",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-product-disclosure"
+          ]
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
+    },
+    "2026Q2": {
+      "calendarQuarter": "2026Q2",
+      "periodEnd": "2026-06-30",
+      "fiscalYear": "2026",
+      "fiscalQuarter": "Q2",
+      "fiscalLabel": "FY2026 Q2",
+      "statementCurrency": "USD",
+      "revenueBn": 114.503,
+      "revenueYoyPct": 40.484,
+      "costOfRevenueBn": null,
+      "grossProfitBn": null,
+      "sgnaBn": null,
+      "rndBn": null,
+      "otherOpexBn": null,
+      "operatingExpensesBn": null,
+      "operatingIncomeBn": null,
+      "nonOperatingBn": null,
+      "pretaxIncomeBn": null,
+      "taxBn": null,
+      "netIncomeBn": null,
+      "netIncomeYoyPct": null,
+      "grossMarginPct": null,
+      "operatingMarginPct": null,
+      "profitMarginPct": null,
+      "effectiveTaxRatePct": null,
+      "revenueQoqPct": 37.73,
+      "grossMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": null,
+      "profitMarginYoyDeltaPp": null,
+      "statementSource": "official-revenue-structure",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630_htm.xml",
+      "statementFilingDate": "2026-08-03",
+      "officialRevenueSegments": [
+        {
+          "name": "Energy Products",
+          "nameZh": null,
+          "memberKey": "energyproducts",
+          "valueBn": 89.608,
+          "yoyPct": 49.37,
+          "qoqPct": 41.8,
+          "mixPct": 78.3,
+          "mixYoyDeltaPp": 4.7,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-08-03",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-product-disclosure"
+          ]
+        },
+        {
+          "name": "Upstream",
+          "nameZh": null,
+          "memberKey": "upstream",
+          "valueBn": 12.68,
+          "yoyPct": 37.45,
+          "qoqPct": 25.82,
+          "mixPct": 11.1,
+          "mixYoyDeltaPp": -0.2,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-08-03",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-product-disclosure"
+          ]
+        },
+        {
+          "name": "Chemical Products",
+          "nameZh": null,
+          "memberKey": "chemicalproducts",
+          "valueBn": 6.887,
+          "yoyPct": 21.46,
+          "qoqPct": 25.81,
+          "mixPct": 6.0,
+          "mixYoyDeltaPp": -0.9,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-08-03",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-product-disclosure"
+          ]
+        },
+        {
+          "name": "Specialty Products",
+          "nameZh": null,
+          "memberKey": "specialtyproducts",
+          "valueBn": 5.328,
+          "yoyPct": 16.54,
+          "qoqPct": 21.37,
+          "mixPct": 4.7,
+          "mixYoyDeltaPp": -1.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-08-03",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-energy-product-disclosure"
+          ]
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2026Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
       }
     }
   },
@@ -9874,9 +10215,189 @@
             ]
           }
         ]
+      },
+      "2026Q1": {
+        "segments": [
+          {
+            "name": "Energy Products",
+            "nameZh": null,
+            "memberKey": "energyproducts",
+            "valueBn": 63.194,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000067/xom-20260331_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-05-04",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-product-disclosure"
+            ]
+          },
+          {
+            "name": "Upstream",
+            "nameZh": null,
+            "memberKey": "upstream",
+            "valueBn": 10.078,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000067/xom-20260331_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-05-04",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-product-disclosure"
+            ]
+          },
+          {
+            "name": "Chemical Products",
+            "nameZh": null,
+            "memberKey": "chemicalproducts",
+            "valueBn": 5.474,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000067/xom-20260331_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-05-04",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-product-disclosure"
+            ]
+          },
+          {
+            "name": "Specialty Products",
+            "nameZh": null,
+            "memberKey": "specialtyproducts",
+            "valueBn": 4.39,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000067/xom-20260331_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-05-04",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-product-disclosure"
+            ]
+          }
+        ]
+      },
+      "2026Q2": {
+        "segments": [
+          {
+            "name": "Energy Products",
+            "nameZh": null,
+            "memberKey": "energyproducts",
+            "valueBn": 89.608,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-08-03",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-product-disclosure"
+            ]
+          },
+          {
+            "name": "Upstream",
+            "nameZh": null,
+            "memberKey": "upstream",
+            "valueBn": 12.68,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-08-03",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-product-disclosure"
+            ]
+          },
+          {
+            "name": "Chemical Products",
+            "nameZh": null,
+            "memberKey": "chemicalproducts",
+            "valueBn": 6.887,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-08-03",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-product-disclosure"
+            ]
+          },
+          {
+            "name": "Specialty Products",
+            "nameZh": null,
+            "memberKey": "specialtyproducts",
+            "valueBn": 5.328,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-08-03",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-energy-product-disclosure"
+            ]
+          }
+        ]
       }
     },
     "filingsUsed": [
+      {
+        "form": "10-Q",
+        "filingDate": "2026-08-03",
+        "accession": "0000034088-26-000093",
+        "instance": "xom-20260630_htm.xml"
+      },
+      {
+        "form": "10-Q",
+        "filingDate": "2026-05-04",
+        "accession": "0000034088-26-000067",
+        "instance": "xom-20260331_htm.xml"
+      },
       {
         "form": "10-K",
         "filingDate": "2026-02-18",
@@ -10133,7 +10654,7 @@
       "structuralConfidenceScore": 1.0,
       "revenueSegmentChecks": 0,
       "revenueSegmentMismatchCount": 0,
-      "revenueSegmentSkippedChecks": 16,
+      "revenueSegmentSkippedChecks": 18,
       "detailGroupChecks": 0,
       "detailGroupMismatchCount": 0,
       "detailGroupSkippedChecks": 0,
@@ -12698,26 +13219,26 @@
   },
   "statementPresets": {},
   "coverage": {
-    "quarterCount": 32,
+    "quarterCount": 34,
     "pixelReplicaQuarterCount": 0,
     "hasPixelReplica": false,
-    "officialFinancialQuarterCount": 32,
-    "officialSegmentQuarterCount": 16,
+    "officialFinancialQuarterCount": 34,
+    "officialSegmentQuarterCount": 18,
     "officialExpenseQuarterCount": 10,
     "classification": {
       "status": "ok",
-      "latestQuarter": "2025Q4",
+      "latestQuarter": "2026Q2",
       "latestQuarterHasRevenueClassification": true,
-      "latestQuarterHasExpenseClassification": true,
-      "latestRevenueClassificationQuarter": "2025Q4",
+      "latestQuarterHasExpenseClassification": false,
+      "latestRevenueClassificationQuarter": "2026Q2",
       "latestExpenseClassificationQuarter": "2025Q4",
-      "latestStructureHistoryQuarter": "2025Q4",
-      "revenueClassificationQuarterCount": 16,
+      "latestStructureHistoryQuarter": "2026Q2",
+      "revenueClassificationQuarterCount": 18,
       "expenseClassificationQuarterCount": 10,
-      "revenueClassificationCoverageRatio": 0.5,
-      "expenseClassificationCoverageRatio": 0.3125,
+      "revenueClassificationCoverageRatio": 0.5294,
+      "expenseClassificationCoverageRatio": 0.2941,
       "latestRevenueClassificationLagQuarters": 0,
-      "latestExpenseClassificationLagQuarters": 0,
+      "latestExpenseClassificationLagQuarters": 2,
       "warnings": [],
       "blockers": [],
       "policy": {}
@@ -12761,7 +13282,7 @@
         "structuralConfidenceScore": 1.0,
         "revenueSegmentChecks": 0,
         "revenueSegmentMismatchCount": 0,
-        "revenueSegmentSkippedChecks": 16,
+        "revenueSegmentSkippedChecks": 18,
         "detailGroupChecks": 0,
         "detailGroupMismatchCount": 0,
         "detailGroupSkippedChecks": 0,
@@ -12772,5 +13293,10 @@
         "warnings": []
       }
     }
-  }
+  },
+  "marketCapUsd": 568230805504,
+  "marketCapAsOf": "2026-07-06",
+  "marketCapSourceRank": 24,
+  "marketCapSource": "CompaniesMarketCap",
+  "marketCapSourceUrl": "https://companiesmarketcap.com/"
 }
