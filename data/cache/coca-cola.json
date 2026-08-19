@@ -43,7 +43,8 @@
     "2025Q2",
     "2025Q3",
     "2025Q4",
-    "2026Q1"
+    "2026Q1",
+    "2026Q3"
   ],
   "financials": {
     "2018Q1": {
@@ -132,7 +133,9 @@
         "checksPassed": 8,
         "issueCount": 0,
         "issues": []
-      }
+      },
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1
     },
     "2018Q2": {
       "calendarQuarter": "2018Q2",
@@ -221,7 +224,9 @@
         "checksPassed": 8,
         "issueCount": 0,
         "issues": []
-      }
+      },
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1
     },
     "2018Q3": {
       "calendarQuarter": "2018Q3",
@@ -320,7 +325,9 @@
             "tolerance": 0.12
           }
         ]
-      }
+      },
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1
     },
     "2018Q4": {
       "calendarQuarter": "2018Q4",
@@ -419,7 +426,9 @@
             "tolerance": 0.13
           }
         ]
-      }
+      },
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1
     },
     "2019Q1": {
       "calendarQuarter": "2019Q1",
@@ -533,7 +542,9 @@
           "validationEligible": null,
           "validationNotes": null
         }
-      ]
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1
     },
     "2019Q2": {
       "calendarQuarter": "2019Q2",
@@ -647,7 +658,16 @@
           "validationEligible": null,
           "validationNotes": null
         }
-      ]
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2019Q3": {
       "calendarQuarter": "2019Q3",
@@ -761,7 +781,16 @@
           "validationEligible": null,
           "validationNotes": null
         }
-      ]
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2019Q4": {
       "calendarQuarter": "2019Q4",
@@ -875,7 +904,16 @@
           "validationEligible": null,
           "validationNotes": null
         }
-      ]
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2020Q1": {
       "calendarQuarter": "2020Q1",
@@ -1071,7 +1109,9 @@
             "partial-geographic-segment-disclosure"
           ]
         }
-      ]
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1
     },
     "2020Q2": {
       "calendarQuarter": "2020Q2",
@@ -1188,26 +1228,6 @@
           ]
         },
         {
-          "name": "Bottling Investments",
-          "nameZh": null,
-          "memberKey": "bottlinginvestments",
-          "valueBn": 1.263,
-          "yoyPct": -37.66,
-          "qoqPct": -23.82,
-          "mixPct": 17.7,
-          "mixYoyDeltaPp": -2.6,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134420000041/ko-20200626_htm.xml",
-          "sourceForm": "10-Q",
-          "filingDate": "2020-07-22",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": false,
-          "validationNotes": [
-            "partial-geographic-segment-disclosure"
-          ]
-        },
-        {
           "name": "EMEA",
           "nameZh": null,
           "memberKey": "emea",
@@ -1219,6 +1239,26 @@
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134421000024/ko-20210702_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2021-07-26",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-geographic-segment-disclosure"
+          ]
+        },
+        {
+          "name": "Bottling Investments",
+          "nameZh": null,
+          "memberKey": "bottlinginvestments",
+          "valueBn": 1.263,
+          "yoyPct": -37.66,
+          "qoqPct": -23.82,
+          "mixPct": 17.7,
+          "mixYoyDeltaPp": -2.6,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134420000041/ko-20200626_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2020-07-22",
           "supportLines": null,
           "supportLinesZh": null,
           "metricMode": null,
@@ -1267,7 +1307,16 @@
             "partial-geographic-segment-disclosure"
           ]
         }
-      ]
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2020Q3": {
       "calendarQuarter": "2020Q3",
@@ -1463,7 +1512,16 @@
             "partial-geographic-segment-disclosure"
           ]
         }
-      ]
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2020Q4": {
       "calendarQuarter": "2020Q4",
@@ -1580,14 +1638,14 @@
           ]
         },
         {
-          "name": "Bottling Investments",
+          "name": "EMEA",
           "nameZh": null,
-          "memberKey": "bottlinginvestments",
-          "valueBn": 1.869,
-          "yoyPct": -2.66,
-          "qoqPct": 26.71,
-          "mixPct": 21.7,
-          "mixYoyDeltaPp": 2.0,
+          "memberKey": "emea",
+          "valueBn": 1.429,
+          "yoyPct": null,
+          "qoqPct": -15.59,
+          "mixPct": 16.6,
+          "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134421000008/ko-20201231_htm.xml",
           "sourceForm": "10-K",
           "filingDate": "2021-02-25",
@@ -1600,14 +1658,14 @@
           ]
         },
         {
-          "name": "EMEA",
+          "name": "Bottling Investments",
           "nameZh": null,
-          "memberKey": "emea",
-          "valueBn": 1.429,
-          "yoyPct": null,
-          "qoqPct": -15.59,
-          "mixPct": 16.6,
-          "mixYoyDeltaPp": null,
+          "memberKey": "bottlinginvestments",
+          "valueBn": 1.869,
+          "yoyPct": -2.66,
+          "qoqPct": 26.71,
+          "mixPct": 21.7,
+          "mixYoyDeltaPp": 2.0,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134421000008/ko-20201231_htm.xml",
           "sourceForm": "10-K",
           "filingDate": "2021-02-25",
@@ -1659,7 +1717,16 @@
             "partial-geographic-segment-disclosure"
           ]
         }
-      ]
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2021Q2": {
       "calendarQuarter": "2021Q2",
@@ -1780,14 +1847,14 @@
           ]
         },
         {
-          "name": "Bottling Investments",
+          "name": "EMEA",
           "nameZh": null,
-          "memberKey": "bottlinginvestments",
-          "valueBn": 1.896,
-          "yoyPct": 50.12,
+          "memberKey": "emea",
+          "valueBn": 1.623,
+          "yoyPct": 34.13,
           "qoqPct": null,
-          "mixPct": 21.0,
-          "mixYoyDeltaPp": 3.4,
+          "mixPct": 18.0,
+          "mixYoyDeltaPp": 1.1,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134421000014/ko-20210402_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2021-04-27",
@@ -1800,14 +1867,14 @@
           ]
         },
         {
-          "name": "EMEA",
+          "name": "Bottling Investments",
           "nameZh": null,
-          "memberKey": "emea",
-          "valueBn": 1.623,
-          "yoyPct": 34.13,
+          "memberKey": "bottlinginvestments",
+          "valueBn": 1.896,
+          "yoyPct": 50.12,
           "qoqPct": null,
-          "mixPct": 18.0,
-          "mixYoyDeltaPp": 1.1,
+          "mixPct": 21.0,
+          "mixYoyDeltaPp": 3.4,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134421000014/ko-20210402_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2021-04-27",
@@ -1861,7 +1928,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2021Q3": {
       "calendarQuarter": "2021Q3",
@@ -2063,7 +2139,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2021Q4": {
       "calendarQuarter": "2021Q4",
@@ -2265,7 +2350,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2022Q2": {
       "calendarQuarter": "2022Q2",
@@ -2467,7 +2561,9 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1
     },
     "2022Q3": {
       "calendarQuarter": "2022Q3",
@@ -2588,14 +2684,14 @@
           ]
         },
         {
-          "name": "EMEA",
+          "name": "Bottling Investments",
           "nameZh": null,
-          "memberKey": "emea",
-          "valueBn": 1.987,
-          "yoyPct": -1.49,
-          "qoqPct": 8.4,
-          "mixPct": 18.0,
-          "mixYoyDeltaPp": -2.0,
+          "memberKey": "bottlinginvestments",
+          "valueBn": 1.786,
+          "yoyPct": 2.76,
+          "qoqPct": -12.62,
+          "mixPct": 16.1,
+          "mixYoyDeltaPp": -1.0,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134422000042/ko-20220930_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2022-10-26",
@@ -2608,14 +2704,14 @@
           ]
         },
         {
-          "name": "Bottling Investments",
+          "name": "EMEA",
           "nameZh": null,
-          "memberKey": "bottlinginvestments",
-          "valueBn": 1.786,
-          "yoyPct": 2.76,
-          "qoqPct": -12.62,
-          "mixPct": 16.1,
-          "mixYoyDeltaPp": -1.0,
+          "memberKey": "emea",
+          "valueBn": 1.987,
+          "yoyPct": -1.49,
+          "qoqPct": 8.4,
+          "mixPct": 18.0,
+          "mixYoyDeltaPp": -2.0,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134422000042/ko-20220930_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2022-10-26",
@@ -2669,7 +2765,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2022Q4": {
       "calendarQuarter": "2022Q4",
@@ -2830,26 +2935,6 @@
           ]
         },
         {
-          "name": "Latin America",
-          "nameZh": null,
-          "memberKey": "latinamerica",
-          "valueBn": 1.289,
-          "yoyPct": 13.37,
-          "qoqPct": 1.74,
-          "mixPct": 12.7,
-          "mixYoyDeltaPp": 1.4,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134423000011/ko-20221231_htm.xml",
-          "sourceForm": "10-K",
-          "filingDate": "2023-02-21",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": false,
-          "validationNotes": [
-            "partial-geographic-segment-disclosure"
-          ]
-        },
-        {
           "name": "Pacific",
           "nameZh": null,
           "memberKey": "pacific",
@@ -2868,10 +2953,39 @@
           "validationNotes": [
             "partial-geographic-segment-disclosure"
           ]
+        },
+        {
+          "name": "Latin America",
+          "nameZh": null,
+          "memberKey": "latinamerica",
+          "valueBn": 1.289,
+          "yoyPct": 13.37,
+          "qoqPct": 1.74,
+          "mixPct": 12.7,
+          "mixYoyDeltaPp": 1.4,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134423000011/ko-20221231_htm.xml",
+          "sourceForm": "10-K",
+          "filingDate": "2023-02-21",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-geographic-segment-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2023Q1": {
       "calendarQuarter": "2023Q1",
@@ -2992,26 +3106,6 @@
           ]
         },
         {
-          "name": "EMEA",
-          "nameZh": null,
-          "memberKey": "emea",
-          "valueBn": 2.024,
-          "yoyPct": null,
-          "qoqPct": 33.25,
-          "mixPct": 18.4,
-          "mixYoyDeltaPp": null,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134423000024/ko-20230331_htm.xml",
-          "sourceForm": "10-Q",
-          "filingDate": "2023-04-26",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": false,
-          "validationNotes": [
-            "partial-geographic-segment-disclosure"
-          ]
-        },
-        {
           "name": "Bottling Investments",
           "nameZh": null,
           "memberKey": "bottlinginvestments",
@@ -3032,13 +3126,13 @@
           ]
         },
         {
-          "name": "Latin America",
+          "name": "EMEA",
           "nameZh": null,
-          "memberKey": "latinamerica",
-          "valueBn": 1.386,
+          "memberKey": "emea",
+          "valueBn": 2.024,
           "yoyPct": null,
-          "qoqPct": 7.53,
-          "mixPct": 12.6,
+          "qoqPct": 33.25,
+          "mixPct": 18.4,
           "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134423000024/ko-20230331_htm.xml",
           "sourceForm": "10-Q",
@@ -3070,10 +3164,39 @@
           "validationNotes": [
             "partial-geographic-segment-disclosure"
           ]
+        },
+        {
+          "name": "Latin America",
+          "nameZh": null,
+          "memberKey": "latinamerica",
+          "valueBn": 1.386,
+          "yoyPct": null,
+          "qoqPct": 7.53,
+          "mixPct": 12.6,
+          "mixYoyDeltaPp": null,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134423000024/ko-20230331_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2023-04-26",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-geographic-segment-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2023Q2": {
       "calendarQuarter": "2023Q2",
@@ -3194,14 +3317,14 @@
           ]
         },
         {
-          "name": "EMEA",
+          "name": "Bottling Investments",
           "nameZh": null,
-          "memberKey": "emea",
-          "valueBn": 2.188,
-          "yoyPct": 19.37,
-          "qoqPct": 8.1,
-          "mixPct": 18.3,
-          "mixYoyDeltaPp": 0.8,
+          "memberKey": "bottlinginvestments",
+          "valueBn": 2.042,
+          "yoyPct": -0.1,
+          "qoqPct": 4.93,
+          "mixPct": 17.1,
+          "mixYoyDeltaPp": -2.4,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134423000048/ko-20230630_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2023-07-27",
@@ -3214,14 +3337,14 @@
           ]
         },
         {
-          "name": "Bottling Investments",
+          "name": "EMEA",
           "nameZh": null,
-          "memberKey": "bottlinginvestments",
-          "valueBn": 2.042,
-          "yoyPct": -0.1,
-          "qoqPct": 4.93,
-          "mixPct": 17.1,
-          "mixYoyDeltaPp": -2.4,
+          "memberKey": "emea",
+          "valueBn": 2.188,
+          "yoyPct": 19.37,
+          "qoqPct": 8.1,
+          "mixPct": 18.3,
+          "mixYoyDeltaPp": 0.8,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134423000048/ko-20230630_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2023-07-27",
@@ -3275,7 +3398,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2023Q3": {
       "calendarQuarter": "2023Q3",
@@ -3396,26 +3528,6 @@
           ]
         },
         {
-          "name": "EMEA",
-          "nameZh": null,
-          "memberKey": "emea",
-          "valueBn": 2.176,
-          "yoyPct": 9.51,
-          "qoqPct": -0.55,
-          "mixPct": 18.2,
-          "mixYoyDeltaPp": 0.2,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134423000060/ko-20230929_htm.xml",
-          "sourceForm": "10-Q",
-          "filingDate": "2023-10-24",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": false,
-          "validationNotes": [
-            "partial-geographic-segment-disclosure"
-          ]
-        },
-        {
           "name": "Bottling Investments",
           "nameZh": null,
           "memberKey": "bottlinginvestments",
@@ -3436,14 +3548,14 @@
           ]
         },
         {
-          "name": "Latin America",
+          "name": "EMEA",
           "nameZh": null,
-          "memberKey": "latinamerica",
-          "valueBn": 1.574,
-          "yoyPct": 24.23,
-          "qoqPct": 14.22,
-          "mixPct": 13.2,
-          "mixYoyDeltaPp": 1.7,
+          "memberKey": "emea",
+          "valueBn": 2.176,
+          "yoyPct": 9.51,
+          "qoqPct": -0.55,
+          "mixPct": 18.2,
+          "mixYoyDeltaPp": 0.2,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134423000060/ko-20230929_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2023-10-24",
@@ -3474,10 +3586,39 @@
           "validationNotes": [
             "partial-geographic-segment-disclosure"
           ]
+        },
+        {
+          "name": "Latin America",
+          "nameZh": null,
+          "memberKey": "latinamerica",
+          "valueBn": 1.574,
+          "yoyPct": 24.23,
+          "qoqPct": 14.22,
+          "mixPct": 13.2,
+          "mixYoyDeltaPp": 1.7,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134423000060/ko-20230929_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2023-10-24",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-geographic-segment-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2023Q4": {
       "calendarQuarter": "2023Q4",
@@ -3638,26 +3779,6 @@
           ]
         },
         {
-          "name": "Latin America",
-          "nameZh": null,
-          "memberKey": "latinamerica",
-          "valueBn": 1.492,
-          "yoyPct": 15.75,
-          "qoqPct": -5.21,
-          "mixPct": 13.8,
-          "mixYoyDeltaPp": 1.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134424000009/ko-20231231_htm.xml",
-          "sourceForm": "10-K",
-          "filingDate": "2024-02-20",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": false,
-          "validationNotes": [
-            "partial-geographic-segment-disclosure"
-          ]
-        },
-        {
           "name": "Pacific",
           "nameZh": null,
           "memberKey": "pacific",
@@ -3676,10 +3797,39 @@
           "validationNotes": [
             "partial-geographic-segment-disclosure"
           ]
+        },
+        {
+          "name": "Latin America",
+          "nameZh": null,
+          "memberKey": "latinamerica",
+          "valueBn": 1.492,
+          "yoyPct": 15.75,
+          "qoqPct": -5.21,
+          "mixPct": 13.8,
+          "mixYoyDeltaPp": 1.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134424000009/ko-20231231_htm.xml",
+          "sourceForm": "10-K",
+          "filingDate": "2024-02-20",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-geographic-segment-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2024Q1": {
       "calendarQuarter": "2024Q1",
@@ -3800,26 +3950,6 @@
           ]
         },
         {
-          "name": "EMEA",
-          "nameZh": null,
-          "memberKey": "emea",
-          "valueBn": 1.973,
-          "yoyPct": -2.52,
-          "qoqPct": 16.75,
-          "mixPct": 17.5,
-          "mixYoyDeltaPp": -1.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134424000017/ko-20240329_htm.xml",
-          "sourceForm": "10-Q",
-          "filingDate": "2024-05-02",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": false,
-          "validationNotes": [
-            "partial-geographic-segment-disclosure"
-          ]
-        },
-        {
           "name": "Bottling Investments",
           "nameZh": null,
           "memberKey": "bottlinginvestments",
@@ -3840,14 +3970,14 @@
           ]
         },
         {
-          "name": "Latin America",
+          "name": "EMEA",
           "nameZh": null,
-          "memberKey": "latinamerica",
-          "valueBn": 1.527,
-          "yoyPct": 10.17,
-          "qoqPct": 2.35,
-          "mixPct": 13.5,
-          "mixYoyDeltaPp": 0.9,
+          "memberKey": "emea",
+          "valueBn": 1.973,
+          "yoyPct": -2.52,
+          "qoqPct": 16.75,
+          "mixPct": 17.5,
+          "mixYoyDeltaPp": -1.0,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134424000017/ko-20240329_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2024-05-02",
@@ -3878,10 +4008,39 @@
           "validationNotes": [
             "partial-geographic-segment-disclosure"
           ]
+        },
+        {
+          "name": "Latin America",
+          "nameZh": null,
+          "memberKey": "latinamerica",
+          "valueBn": 1.527,
+          "yoyPct": 10.17,
+          "qoqPct": 2.35,
+          "mixPct": 13.5,
+          "mixYoyDeltaPp": 0.9,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134424000017/ko-20240329_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2024-05-02",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-geographic-segment-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2024Q2": {
       "calendarQuarter": "2024Q2",
@@ -4002,46 +4161,6 @@
           ]
         },
         {
-          "name": "EMEA",
-          "nameZh": null,
-          "memberKey": "emea",
-          "valueBn": 2.339,
-          "yoyPct": 6.9,
-          "qoqPct": 18.55,
-          "mixPct": 18.9,
-          "mixYoyDeltaPp": 0.6,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134424000044/ko-20240628_htm.xml",
-          "sourceForm": "10-Q",
-          "filingDate": "2024-07-29",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": false,
-          "validationNotes": [
-            "partial-geographic-segment-disclosure"
-          ]
-        },
-        {
-          "name": "Latin America",
-          "nameZh": null,
-          "memberKey": "latinamerica",
-          "valueBn": 1.65,
-          "yoyPct": 19.74,
-          "qoqPct": 8.06,
-          "mixPct": 13.3,
-          "mixYoyDeltaPp": 1.8,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134424000044/ko-20240628_htm.xml",
-          "sourceForm": "10-Q",
-          "filingDate": "2024-07-29",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": false,
-          "validationNotes": [
-            "partial-geographic-segment-disclosure"
-          ]
-        },
-        {
           "name": "Bottling Investments",
           "nameZh": null,
           "memberKey": "bottlinginvestments",
@@ -4050,6 +4169,26 @@
           "qoqPct": -15.3,
           "mixPct": 12.4,
           "mixYoyDeltaPp": -4.6,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134424000044/ko-20240628_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2024-07-29",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-geographic-segment-disclosure"
+          ]
+        },
+        {
+          "name": "EMEA",
+          "nameZh": null,
+          "memberKey": "emea",
+          "valueBn": 2.339,
+          "yoyPct": 6.9,
+          "qoqPct": 18.55,
+          "mixPct": 18.9,
+          "mixYoyDeltaPp": 0.6,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134424000044/ko-20240628_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2024-07-29",
@@ -4080,10 +4219,39 @@
           "validationNotes": [
             "partial-geographic-segment-disclosure"
           ]
+        },
+        {
+          "name": "Latin America",
+          "nameZh": null,
+          "memberKey": "latinamerica",
+          "valueBn": 1.65,
+          "yoyPct": 19.74,
+          "qoqPct": 8.06,
+          "mixPct": 13.3,
+          "mixYoyDeltaPp": 1.8,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134424000044/ko-20240628_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2024-07-29",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-geographic-segment-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2024Q3": {
       "calendarQuarter": "2024Q3",
@@ -4204,14 +4372,14 @@
           ]
         },
         {
-          "name": "EMEA",
+          "name": "Bottling Investments",
           "nameZh": null,
-          "memberKey": "emea",
-          "valueBn": 2.019,
-          "yoyPct": -7.22,
-          "qoqPct": -13.68,
-          "mixPct": 17.0,
-          "mixYoyDeltaPp": -1.2,
+          "memberKey": "bottlinginvestments",
+          "valueBn": 1.316,
+          "yoyPct": -29.21,
+          "qoqPct": -14.49,
+          "mixPct": 11.1,
+          "mixYoyDeltaPp": -4.5,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134424000060/ko-20240927_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2024-10-24",
@@ -4224,14 +4392,14 @@
           ]
         },
         {
-          "name": "Latin America",
+          "name": "EMEA",
           "nameZh": null,
-          "memberKey": "latinamerica",
-          "valueBn": 1.639,
-          "yoyPct": 4.13,
-          "qoqPct": -0.67,
-          "mixPct": 13.8,
-          "mixYoyDeltaPp": 0.7,
+          "memberKey": "emea",
+          "valueBn": 2.019,
+          "yoyPct": -7.22,
+          "qoqPct": -13.68,
+          "mixPct": 17.0,
+          "mixYoyDeltaPp": -1.2,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134424000060/ko-20240927_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2024-10-24",
@@ -4264,14 +4432,14 @@
           ]
         },
         {
-          "name": "Bottling Investments",
+          "name": "Latin America",
           "nameZh": null,
-          "memberKey": "bottlinginvestments",
-          "valueBn": 1.316,
-          "yoyPct": -29.21,
-          "qoqPct": -14.49,
-          "mixPct": 11.1,
-          "mixYoyDeltaPp": -4.5,
+          "memberKey": "latinamerica",
+          "valueBn": 1.639,
+          "yoyPct": 4.13,
+          "qoqPct": -0.67,
+          "mixPct": 13.8,
+          "mixYoyDeltaPp": 0.7,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134424000060/ko-20240927_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2024-10-24",
@@ -4285,7 +4453,16 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2024Q4": {
       "calendarQuarter": "2024Q4",
@@ -4467,7 +4644,9 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1
     },
     "2025Q1": {
       "calendarQuarter": "2025Q1",
@@ -4669,7 +4848,9 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1
     },
     "2025Q2": {
       "calendarQuarter": "2025Q2",
@@ -4830,26 +5011,6 @@
           ]
         },
         {
-          "name": "Pacific",
-          "nameZh": null,
-          "memberKey": "pacific",
-          "valueBn": 1.572,
-          "yoyPct": 3.97,
-          "qoqPct": 10.63,
-          "mixPct": 12.5,
-          "mixYoyDeltaPp": 0.3,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134425000061/ko-20250627_htm.xml",
-          "sourceForm": "10-Q",
-          "filingDate": "2025-07-24",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": false,
-          "validationNotes": [
-            "partial-geographic-segment-disclosure"
-          ]
-        },
-        {
           "name": "Bottling Investments",
           "nameZh": null,
           "memberKey": "bottlinginvestments",
@@ -4868,10 +5029,39 @@
           "validationNotes": [
             "partial-geographic-segment-disclosure"
           ]
+        },
+        {
+          "name": "Pacific",
+          "nameZh": null,
+          "memberKey": "pacific",
+          "valueBn": 1.572,
+          "yoyPct": 3.97,
+          "qoqPct": 10.63,
+          "mixPct": 12.5,
+          "mixYoyDeltaPp": 0.3,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000002134425000061/ko-20250627_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2025-07-24",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-geographic-segment-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2025Q3": {
       "calendarQuarter": "2025Q3",
@@ -5032,26 +5222,6 @@
           ]
         },
         {
-          "name": "Pacific",
-          "nameZh": null,
-          "memberKey": "pacific",
-          "valueBn": 1.506,
-          "yoyPct": 11.64,
-          "qoqPct": -4.2,
-          "mixPct": 12.1,
-          "mixYoyDeltaPp": 0.7,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828025046054/ko-20250926_htm.xml",
-          "sourceForm": "10-Q",
-          "filingDate": "2025-10-23",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": false,
-          "validationNotes": [
-            "partial-geographic-segment-disclosure"
-          ]
-        },
-        {
           "name": "Bottling Investments",
           "nameZh": null,
           "memberKey": "bottlinginvestments",
@@ -5070,10 +5240,39 @@
           "validationNotes": [
             "partial-geographic-segment-disclosure"
           ]
+        },
+        {
+          "name": "Pacific",
+          "nameZh": null,
+          "memberKey": "pacific",
+          "valueBn": 1.506,
+          "yoyPct": 11.64,
+          "qoqPct": -4.2,
+          "mixPct": 12.1,
+          "mixYoyDeltaPp": 0.7,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828025046054/ko-20250926_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2025-10-23",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-geographic-segment-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2025Q4": {
       "calendarQuarter": "2025Q4",
@@ -5174,42 +5373,117 @@
       },
       "officialRevenueSegments": [
         {
-          "name": "Finished Product Operations",
+          "name": "North America",
           "nameZh": null,
-          "memberKey": "finishedproductoperations",
-          "valueBn": 2.435,
-          "yoyPct": null,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231_htm.xml",
-          "sourceForm": "10-K",
-          "filingDate": "2026-02-20",
-          "periodStart": "2025-09-27",
-          "periodEnd": "2025-12-31",
+          "memberKey": "northamerica",
+          "valueBn": 19.586,
+          "yoyPct": 318.59,
+          "qoqPct": 272.85,
+          "mixPct": 165.7,
+          "mixYoyDeltaPp": 125.1,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026006642/a2025q4earningsreleaseex-9.htm",
+          "sourceForm": "8-K",
+          "filingDate": "2026-02-10",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
           "validationEligible": false,
           "validationNotes": [
-            "partial-operation-model-disclosure"
-          ],
-          "mixPct": 20.6
+            "partial-geographic-segment-disclosure"
+          ]
         },
         {
-          "name": "Concentrate Operations",
+          "name": "EMEA",
           "nameZh": null,
-          "memberKey": "concentrateoperations",
-          "valueBn": 2.386,
-          "yoyPct": null,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231_htm.xml",
-          "sourceForm": "10-K",
-          "filingDate": "2026-02-20",
-          "periodStart": "2025-09-27",
-          "periodEnd": "2025-12-31",
+          "memberKey": "emea",
+          "valueBn": 11.513,
+          "yoyPct": 542.83,
+          "qoqPct": 284.28,
+          "mixPct": 97.4,
+          "mixYoyDeltaPp": 81.9,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026006642/a2025q4earningsreleaseex-9.htm",
+          "sourceForm": "8-K",
+          "filingDate": "2026-02-10",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
           "validationEligible": false,
           "validationNotes": [
-            "partial-operation-model-disclosure"
-          ],
-          "mixPct": 20.2
+            "partial-geographic-segment-disclosure"
+          ]
+        },
+        {
+          "name": "Latin America",
+          "nameZh": null,
+          "memberKey": "latinamerica",
+          "valueBn": 6.334,
+          "yoyPct": 285.51,
+          "qoqPct": 302.67,
+          "mixPct": 53.6,
+          "mixYoyDeltaPp": 39.3,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026006642/a2025q4earningsreleaseex-9.htm",
+          "sourceForm": "8-K",
+          "filingDate": "2026-02-10",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-geographic-segment-disclosure"
+          ]
+        },
+        {
+          "name": "Bottling Investments",
+          "nameZh": null,
+          "memberKey": "bottlinginvestments",
+          "valueBn": 5.735,
+          "yoyPct": 269.76,
+          "qoqPct": 326.08,
+          "mixPct": 48.5,
+          "mixYoyDeltaPp": 35.1,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026006642/a2025q4earningsreleaseex-9.htm",
+          "sourceForm": "8-K",
+          "filingDate": "2026-02-10",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-geographic-segment-disclosure"
+          ]
+        },
+        {
+          "name": "Pacific",
+          "nameZh": null,
+          "memberKey": "pacific",
+          "valueBn": 5.638,
+          "yoyPct": null,
+          "qoqPct": 274.37,
+          "mixPct": 47.7,
+          "mixYoyDeltaPp": null,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026006642/a2025q4earningsreleaseex-9.htm",
+          "sourceForm": "8-K",
+          "filingDate": "2026-02-10",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-geographic-segment-disclosure"
+          ]
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "displayScaleFactor": 4.055236,
+      "displayCurrency": "USD",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2026Q1": {
       "calendarQuarter": "2026Q1",
@@ -5244,12 +5518,32 @@
       "statementFilingDate": "2026-04-03",
       "officialRevenueSegments": [
         {
+          "name": "North America",
+          "nameZh": null,
+          "memberKey": "northamerica",
+          "valueBn": 4.893,
+          "yoyPct": 12.2,
+          "qoqPct": -75.02,
+          "mixPct": 39.2,
+          "mixYoyDeltaPp": 0.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026027723/a2026q1earningsreleaseex-9.htm",
+          "sourceForm": "8-K",
+          "filingDate": "2026-04-28",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-geographic-segment-disclosure"
+          ]
+        },
+        {
           "name": "EMEA",
           "nameZh": null,
           "memberKey": "emea",
           "valueBn": 3.012,
           "yoyPct": 13.36,
-          "qoqPct": null,
+          "qoqPct": -73.84,
           "mixPct": 24.2,
           "mixYoyDeltaPp": 0.3,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026027723/a2026q1earningsreleaseex-9.htm",
@@ -5269,49 +5563,9 @@
           "memberKey": "latinamerica",
           "valueBn": 1.678,
           "yoyPct": 13.61,
-          "qoqPct": null,
+          "qoqPct": -73.51,
           "mixPct": 13.5,
           "mixYoyDeltaPp": 0.2,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026027723/a2026q1earningsreleaseex-9.htm",
-          "sourceForm": "8-K",
-          "filingDate": "2026-04-28",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": false,
-          "validationNotes": [
-            "partial-geographic-segment-disclosure"
-          ]
-        },
-        {
-          "name": "North America",
-          "nameZh": null,
-          "memberKey": "northamerica",
-          "valueBn": 4.893,
-          "yoyPct": 12.2,
-          "qoqPct": null,
-          "mixPct": 39.2,
-          "mixYoyDeltaPp": 0.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026027723/a2026q1earningsreleaseex-9.htm",
-          "sourceForm": "8-K",
-          "filingDate": "2026-04-28",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": false,
-          "validationNotes": [
-            "partial-geographic-segment-disclosure"
-          ]
-        },
-        {
-          "name": "Asia Pacific",
-          "nameZh": null,
-          "memberKey": "pacific",
-          "valueBn": 1.508,
-          "yoyPct": 6.12,
-          "qoqPct": null,
-          "mixPct": 12.1,
-          "mixYoyDeltaPp": -0.7,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026027723/a2026q1earningsreleaseex-9.htm",
           "sourceForm": "8-K",
           "filingDate": "2026-04-28",
@@ -5329,7 +5583,7 @@
           "memberKey": "bottlinginvestments",
           "valueBn": 1.64,
           "yoyPct": 12.1,
-          "qoqPct": null,
+          "qoqPct": -71.4,
           "mixPct": 13.1,
           "mixYoyDeltaPp": 0.0,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026027723/a2026q1earningsreleaseex-9.htm",
@@ -5342,9 +5596,37 @@
           "validationNotes": [
             "partial-geographic-segment-disclosure"
           ]
+        },
+        {
+          "name": "Pacific",
+          "nameZh": null,
+          "memberKey": "pacific",
+          "valueBn": 1.508,
+          "yoyPct": 6.12,
+          "qoqPct": -73.25,
+          "mixPct": 12.1,
+          "mixYoyDeltaPp": -0.7,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026027723/a2026q1earningsreleaseex-9.htm",
+          "sourceForm": "8-K",
+          "filingDate": "2026-04-28",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-geographic-segment-disclosure"
+          ]
         }
       ],
-      "displayScaleFactor": 1.0
+      "displayScaleFactor": 1.0,
+      "displayCurrency": "USD",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2022Q1": {
       "calendarQuarter": "2022Q1",
@@ -5376,7 +5658,153 @@
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
       "statementSourceUrl": "https://stockanalysis.com/stocks/ko/financials/?p=quarterly",
-      "statementFilingDate": "2022-04-01"
+      "statementFilingDate": "2022-04-01",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1
+    },
+    "2026Q3": {
+      "calendarQuarter": "2026Q3",
+      "periodEnd": "2026-09-30",
+      "fiscalYear": "2026",
+      "fiscalQuarter": "Q3",
+      "fiscalLabel": "FY2026 Q3",
+      "statementCurrency": "USD",
+      "revenueBn": 25.852,
+      "revenueYoyPct": 107.563,
+      "costOfRevenueBn": null,
+      "grossProfitBn": null,
+      "sgnaBn": null,
+      "rndBn": null,
+      "otherOpexBn": null,
+      "operatingExpensesBn": null,
+      "operatingIncomeBn": null,
+      "nonOperatingBn": null,
+      "pretaxIncomeBn": null,
+      "taxBn": null,
+      "netIncomeBn": null,
+      "netIncomeYoyPct": null,
+      "grossMarginPct": null,
+      "operatingMarginPct": null,
+      "profitMarginPct": null,
+      "effectiveTaxRatePct": null,
+      "revenueQoqPct": null,
+      "grossMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": null,
+      "profitMarginYoyDeltaPp": null,
+      "statementSource": "official-revenue-structure",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
+      "statementFilingDate": "2026-07-28",
+      "officialRevenueSegments": [
+        {
+          "name": "North America",
+          "nameZh": null,
+          "memberKey": "northamerica",
+          "valueBn": 10.301,
+          "yoyPct": 96.1,
+          "qoqPct": null,
+          "mixPct": 39.8,
+          "mixYoyDeltaPp": -2.3,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
+          "sourceForm": "8-K",
+          "filingDate": "2026-07-28",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-geographic-segment-disclosure"
+          ]
+        },
+        {
+          "name": "EMEA",
+          "nameZh": null,
+          "memberKey": "emea",
+          "valueBn": 6.252,
+          "yoyPct": 108.68,
+          "qoqPct": null,
+          "mixPct": 24.2,
+          "mixYoyDeltaPp": 0.1,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
+          "sourceForm": "8-K",
+          "filingDate": "2026-07-28",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-geographic-segment-disclosure"
+          ]
+        },
+        {
+          "name": "Latin America",
+          "nameZh": null,
+          "memberKey": "latinamerica",
+          "valueBn": 3.517,
+          "yoyPct": 123.59,
+          "qoqPct": null,
+          "mixPct": 13.6,
+          "mixYoyDeltaPp": 1.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
+          "sourceForm": "8-K",
+          "filingDate": "2026-07-28",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-geographic-segment-disclosure"
+          ]
+        },
+        {
+          "name": "Bottling Investments",
+          "nameZh": null,
+          "memberKey": "bottlinginvestments",
+          "valueBn": 3.167,
+          "yoyPct": 135.29,
+          "qoqPct": null,
+          "mixPct": 12.3,
+          "mixYoyDeltaPp": 1.4,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
+          "sourceForm": "8-K",
+          "filingDate": "2026-07-28",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-geographic-segment-disclosure"
+          ]
+        },
+        {
+          "name": "Pacific",
+          "nameZh": null,
+          "memberKey": "pacific",
+          "valueBn": 3.089,
+          "yoyPct": 105.11,
+          "qoqPct": null,
+          "mixPct": 11.9,
+          "mixYoyDeltaPp": -0.1,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
+          "sourceForm": "8-K",
+          "filingDate": "2026-07-28",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-geographic-segment-disclosure"
+          ]
+        }
+      ],
+      "displayScaleFactor": 1.0,
+      "displayCurrency": "USD",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2026Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     }
   },
   "statementSource": "official-sec-companyfacts",
@@ -5581,7 +6009,7 @@
     "errors": []
   },
   "officialRevenueStructureHistory": {
-    "source": "official-filings-xbrl-hierarchy",
+    "source": "official-filing-tables",
     "quarters": {
       "2019Q1": {
         "segments": [
@@ -7835,8 +8263,133 @@
           }
         ]
       },
+      "2025Q4": {
+        "segments": [
+          {
+            "name": "North America",
+            "nameZh": null,
+            "memberKey": "northamerica",
+            "valueBn": 19.586,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026006642/a2025q4earningsreleaseex-9.htm",
+            "sourceForm": "8-K",
+            "filingDate": "2026-02-10",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-geographic-segment-disclosure"
+            ]
+          },
+          {
+            "name": "EMEA",
+            "nameZh": null,
+            "memberKey": "emea",
+            "valueBn": 11.513,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026006642/a2025q4earningsreleaseex-9.htm",
+            "sourceForm": "8-K",
+            "filingDate": "2026-02-10",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-geographic-segment-disclosure"
+            ]
+          },
+          {
+            "name": "Latin America",
+            "nameZh": null,
+            "memberKey": "latinamerica",
+            "valueBn": 6.334,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026006642/a2025q4earningsreleaseex-9.htm",
+            "sourceForm": "8-K",
+            "filingDate": "2026-02-10",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-geographic-segment-disclosure"
+            ]
+          },
+          {
+            "name": "Bottling Investments",
+            "nameZh": null,
+            "memberKey": "bottlinginvestments",
+            "valueBn": 5.735,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026006642/a2025q4earningsreleaseex-9.htm",
+            "sourceForm": "8-K",
+            "filingDate": "2026-02-10",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-geographic-segment-disclosure"
+            ]
+          },
+          {
+            "name": "Asia Pacific",
+            "nameZh": null,
+            "memberKey": "pacific",
+            "valueBn": 5.638,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026006642/a2025q4earningsreleaseex-9.htm",
+            "sourceForm": "8-K",
+            "filingDate": "2026-02-10",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-geographic-segment-disclosure"
+            ]
+          }
+        ],
+        "displayRevenueBn": 47.941
+      },
       "2026Q1": {
         "segments": [
+          {
+            "name": "North America",
+            "nameZh": null,
+            "memberKey": "northamerica",
+            "valueBn": 4.893,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026027723/a2026q1earningsreleaseex-9.htm",
+            "sourceForm": "8-K",
+            "filingDate": "2026-04-28",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-geographic-segment-disclosure"
+            ]
+          },
           {
             "name": "EMEA",
             "nameZh": null,
@@ -7878,10 +8431,10 @@
             ]
           },
           {
-            "name": "North America",
+            "name": "Bottling Investments",
             "nameZh": null,
-            "memberKey": "northamerica",
-            "valueBn": 4.893,
+            "memberKey": "bottlinginvestments",
+            "valueBn": 1.64,
             "yoyPct": null,
             "qoqPct": null,
             "mixPct": null,
@@ -7916,19 +8469,104 @@
             "validationNotes": [
               "partial-geographic-segment-disclosure"
             ]
+          }
+        ],
+        "displayRevenueBn": 12.472
+      },
+      "2026Q3": {
+        "segments": [
+          {
+            "name": "North America",
+            "nameZh": null,
+            "memberKey": "northamerica",
+            "valueBn": 10.301,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
+            "sourceForm": "8-K",
+            "filingDate": "2026-07-28",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-geographic-segment-disclosure"
+            ]
+          },
+          {
+            "name": "EMEA",
+            "nameZh": null,
+            "memberKey": "emea",
+            "valueBn": 6.252,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
+            "sourceForm": "8-K",
+            "filingDate": "2026-07-28",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-geographic-segment-disclosure"
+            ]
+          },
+          {
+            "name": "Latin America",
+            "nameZh": null,
+            "memberKey": "latinamerica",
+            "valueBn": 3.517,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
+            "sourceForm": "8-K",
+            "filingDate": "2026-07-28",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-geographic-segment-disclosure"
+            ]
           },
           {
             "name": "Bottling Investments",
             "nameZh": null,
             "memberKey": "bottlinginvestments",
-            "valueBn": 1.64,
+            "valueBn": 3.167,
             "yoyPct": null,
             "qoqPct": null,
             "mixPct": null,
             "mixYoyDeltaPp": null,
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026027723/a2026q1earningsreleaseex-9.htm",
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
             "sourceForm": "8-K",
-            "filingDate": "2026-04-28",
+            "filingDate": "2026-07-28",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": false,
+            "validationNotes": [
+              "partial-geographic-segment-disclosure"
+            ]
+          },
+          {
+            "name": "Asia Pacific",
+            "nameZh": null,
+            "memberKey": "pacific",
+            "valueBn": 3.089,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
+            "sourceForm": "8-K",
+            "filingDate": "2026-07-28",
             "supportLines": null,
             "supportLinesZh": null,
             "metricMode": null,
@@ -7938,16 +8576,21 @@
             ]
           }
         ],
-        "displayRevenueBn": 12.472
+        "displayRevenueBn": 25.852
       }
     },
     "filingsUsed": [
       {
-        "form": "8-K",
-        "filingDate": "2026-04-28",
-        "accession": "0001628280-26-027723",
-        "primaryDocument": "ko-20260428.htm",
-        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026027723/a2026q1earningsreleaseex-9.htm"
+        "form": "10-Q",
+        "filingDate": "2026-07-29",
+        "accession": "0001628280-26-050503",
+        "instance": "ko-20260703_htm.xml"
+      },
+      {
+        "form": "10-Q",
+        "filingDate": "2026-04-30",
+        "accession": "0001628280-26-028802",
+        "instance": "ko-20260403_htm.xml"
       },
       {
         "form": "10-K",
@@ -8098,6 +8741,27 @@
         "filingDate": "2020-02-24",
         "accession": "0000021344-20-000006",
         "instance": "a2019123110-k_htm.xml"
+      },
+      {
+        "form": "8-K",
+        "filingDate": "2026-07-28",
+        "accession": "0001628280-26-049922",
+        "primaryDocument": "ko-20260728.htm",
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm"
+      },
+      {
+        "form": "8-K",
+        "filingDate": "2026-04-28",
+        "accession": "0001628280-26-027723",
+        "primaryDocument": "ko-20260428.htm",
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026027723/a2026q1earningsreleaseex-9.htm"
+      },
+      {
+        "form": "8-K",
+        "filingDate": "2026-02-10",
+        "accession": "0001628280-26-006642",
+        "primaryDocument": "ko-20260210.htm",
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026006642/a2025q4earningsreleaseex-9.htm"
       }
     ],
     "errors": []
@@ -8205,7 +8869,7 @@
       "structuralConfidenceScore": 0.75,
       "revenueSegmentChecks": 0,
       "revenueSegmentMismatchCount": 0,
-      "revenueSegmentSkippedChecks": 23,
+      "revenueSegmentSkippedChecks": 24,
       "detailGroupChecks": 0,
       "detailGroupMismatchCount": 0,
       "detailGroupSkippedChecks": 0,
@@ -8218,23 +8882,23 @@
   },
   "statementPresets": {},
   "coverage": {
-    "quarterCount": 32,
+    "quarterCount": 33,
     "pixelReplicaQuarterCount": 0,
     "hasPixelReplica": false,
-    "officialFinancialQuarterCount": 32,
-    "officialSegmentQuarterCount": 27,
+    "officialFinancialQuarterCount": 33,
+    "officialSegmentQuarterCount": 28,
     "officialExpenseQuarterCount": 0,
     "classification": {
       "status": "ok",
-      "latestQuarter": "2026Q1",
+      "latestQuarter": "2026Q3",
       "latestQuarterHasRevenueClassification": true,
       "latestQuarterHasExpenseClassification": false,
-      "latestRevenueClassificationQuarter": "2026Q1",
+      "latestRevenueClassificationQuarter": "2026Q3",
       "latestExpenseClassificationQuarter": null,
-      "latestStructureHistoryQuarter": "2026Q1",
-      "revenueClassificationQuarterCount": 27,
+      "latestStructureHistoryQuarter": "2026Q3",
+      "revenueClassificationQuarterCount": 28,
       "expenseClassificationQuarterCount": 0,
-      "revenueClassificationCoverageRatio": 0.8438,
+      "revenueClassificationCoverageRatio": 0.8485,
       "expenseClassificationCoverageRatio": 0.0,
       "latestRevenueClassificationLagQuarters": 0,
       "latestExpenseClassificationLagQuarters": null,
@@ -8281,7 +8945,7 @@
         "structuralConfidenceScore": 0.75,
         "revenueSegmentChecks": 0,
         "revenueSegmentMismatchCount": 0,
-        "revenueSegmentSkippedChecks": 23,
+        "revenueSegmentSkippedChecks": 24,
         "detailGroupChecks": 0,
         "detailGroupMismatchCount": 0,
         "detailGroupSkippedChecks": 0,
@@ -8292,5 +8956,10 @@
         "warnings": []
       }
     }
-  }
+  },
+  "marketCapUsd": 362010869760,
+  "marketCapAsOf": "2026-07-06",
+  "marketCapSourceRank": 38,
+  "marketCapSource": "CompaniesMarketCap",
+  "marketCapSourceUrl": "https://companiesmarketcap.com/"
 }
