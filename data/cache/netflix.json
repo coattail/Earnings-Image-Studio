@@ -4,7 +4,7 @@
   "nameZh": "奈飞",
   "nameEn": "Netflix",
   "slug": "nflx",
-  "rank": 23,
+  "rank": 33,
   "isAdr": false,
   "brand": {
     "primary": "#E50914",
@@ -44,7 +44,8 @@
     "2025Q2",
     "2025Q3",
     "2025Q4",
-    "2026Q1"
+    "2026Q1",
+    "2026Q2"
   ],
   "financials": {
     "2018Q1": {
@@ -133,7 +134,9 @@
         "checksPassed": 8,
         "issueCount": 0,
         "issues": []
-      }
+      },
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1
     },
     "2018Q2": {
       "calendarQuarter": "2018Q2",
@@ -222,7 +225,9 @@
         "checksPassed": 8,
         "issueCount": 0,
         "issues": []
-      }
+      },
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1
     },
     "2018Q3": {
       "calendarQuarter": "2018Q3",
@@ -311,7 +316,9 @@
         "checksPassed": 8,
         "issueCount": 0,
         "issues": []
-      }
+      },
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1
     },
     "2018Q4": {
       "calendarQuarter": "2018Q4",
@@ -420,7 +427,9 @@
             "tolerance": 0.365
           }
         ]
-      }
+      },
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1
     },
     "2019Q1": {
       "calendarQuarter": "2019Q1",
@@ -552,7 +561,29 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 0.617
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 0.373
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.202
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1
     },
     "2019Q2": {
       "calendarQuarter": "2019Q2",
@@ -686,7 +717,37 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 0.603
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 0.383
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.225
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q1",
+        "fields": [
+          "officialRevenueSegments",
+          "officialOpexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2019Q3": {
       "calendarQuarter": "2019Q3",
@@ -820,7 +881,37 @@
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
-      "officialSegmentSource": "official-filings"
+      "officialSegmentSource": "official-filings",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 0.554
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 0.38
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.233
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q2",
+        "fields": [
+          "officialRevenueSegments",
+          "officialOpexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2019Q4": {
       "calendarQuarter": "2019Q4",
@@ -991,7 +1082,9 @@
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
-      "officialRevenueStyle": "netflix-regional-revenue"
+      "officialRevenueStyle": "netflix-regional-revenue",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1
     },
     "2020Q1": {
       "calendarQuarter": "2020Q1",
@@ -1162,7 +1255,36 @@
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
-      "officialRevenueStyle": "netflix-regional-revenue"
+      "officialRevenueStyle": "netflix-regional-revenue",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 0.504
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 0.454
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.252
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2020Q2": {
       "calendarQuarter": "2020Q2",
@@ -1333,7 +1455,37 @@
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
-      "officialRevenueStyle": "netflix-regional-revenue"
+      "officialRevenueStyle": "netflix-regional-revenue",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 0.434
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 0.435
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.277
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q1",
+        "fields": [
+          "officialRevenueSegments",
+          "officialOpexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2020Q3": {
       "calendarQuarter": "2020Q3",
@@ -1504,7 +1656,37 @@
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
-      "officialRevenueStyle": "netflix-regional-revenue"
+      "officialRevenueStyle": "netflix-regional-revenue",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 0.528
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 0.454
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.272
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q2",
+        "fields": [
+          "officialRevenueSegments",
+          "officialOpexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2020Q4": {
       "calendarQuarter": "2020Q4",
@@ -1675,7 +1857,16 @@
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
-      "officialRevenueStyle": "netflix-regional-revenue"
+      "officialRevenueStyle": "netflix-regional-revenue",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2021Q1": {
       "calendarQuarter": "2021Q1",
@@ -1850,7 +2041,36 @@
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
-      "officialRevenueStyle": "netflix-regional-revenue"
+      "officialRevenueStyle": "netflix-regional-revenue",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 0.513
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 0.525
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.297
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2021Q2": {
       "calendarQuarter": "2021Q2",
@@ -2025,7 +2245,37 @@
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
-      "officialRevenueStyle": "netflix-regional-revenue"
+      "officialRevenueStyle": "netflix-regional-revenue",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 0.604
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 0.537
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.335
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q1",
+        "fields": [
+          "officialRevenueSegments",
+          "officialOpexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2021Q3": {
       "calendarQuarter": "2021Q3",
@@ -2200,7 +2450,37 @@
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
-      "officialRevenueStyle": "netflix-regional-revenue"
+      "officialRevenueStyle": "netflix-regional-revenue",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 0.636
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 0.564
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.322
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q2",
+        "fields": [
+          "officialRevenueSegments",
+          "officialOpexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2021Q4": {
       "calendarQuarter": "2021Q4",
@@ -2375,7 +2655,37 @@
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
-      "officialRevenueStyle": "netflix-regional-revenue"
+      "officialRevenueStyle": "netflix-regional-revenue",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 0.793
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 0.647
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.398
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q3",
+        "fields": [
+          "officialRevenueSegments",
+          "officialOpexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2022Q1": {
       "calendarQuarter": "2022Q1",
@@ -2550,7 +2860,37 @@
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
-      "officialRevenueStyle": "netflix-regional-revenue"
+      "officialRevenueStyle": "netflix-regional-revenue",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 0.556
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 0.658
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.398
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q4",
+        "fields": [
+          "officialRevenueSegments",
+          "officialOpexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2022Q2": {
       "calendarQuarter": "2022Q2",
@@ -2725,7 +3065,37 @@
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
-      "officialRevenueStyle": "netflix-regional-revenue"
+      "officialRevenueStyle": "netflix-regional-revenue",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 0.575
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 0.717
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.409
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q1",
+        "fields": [
+          "officialRevenueSegments",
+          "officialOpexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2022Q3": {
       "calendarQuarter": "2022Q3",
@@ -2900,7 +3270,37 @@
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
-      "officialRevenueStyle": "netflix-regional-revenue"
+      "officialRevenueStyle": "netflix-regional-revenue",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 0.568
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 0.663
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.373
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q2",
+        "fields": [
+          "officialRevenueSegments",
+          "officialOpexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2022Q4": {
       "calendarQuarter": "2022Q4",
@@ -3075,7 +3475,37 @@
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
-      "officialRevenueStyle": "netflix-regional-revenue"
+      "officialRevenueStyle": "netflix-regional-revenue",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 0.832
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 0.674
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.392
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q3",
+        "fields": [
+          "officialRevenueSegments",
+          "officialOpexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2023Q1": {
       "calendarQuarter": "2023Q1",
@@ -3250,7 +3680,37 @@
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
-      "officialRevenueStyle": "netflix-regional-revenue"
+      "officialRevenueStyle": "netflix-regional-revenue",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 0.555
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 0.687
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.401
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q4",
+        "fields": [
+          "officialRevenueSegments",
+          "officialOpexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2023Q2": {
       "calendarQuarter": "2023Q2",
@@ -3425,7 +3885,37 @@
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
-      "officialRevenueStyle": "netflix-regional-revenue"
+      "officialRevenueStyle": "netflix-regional-revenue",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 0.627
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 0.658
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.401
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q1",
+        "fields": [
+          "officialRevenueSegments",
+          "officialOpexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2023Q3": {
       "calendarQuarter": "2023Q3",
@@ -3600,7 +4090,37 @@
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
-      "officialRevenueStyle": "netflix-regional-revenue"
+      "officialRevenueStyle": "netflix-regional-revenue",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 0.559
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 0.657
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.479
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q2",
+        "fields": [
+          "officialRevenueSegments",
+          "officialOpexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2023Q4": {
       "calendarQuarter": "2023Q4",
@@ -3775,7 +4295,37 @@
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
-      "officialRevenueStyle": "netflix-regional-revenue"
+      "officialRevenueStyle": "netflix-regional-revenue",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 0.917
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 0.673
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.439
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q3",
+        "fields": [
+          "officialRevenueSegments",
+          "officialOpexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2024Q1": {
       "calendarQuarter": "2024Q1",
@@ -3950,7 +4500,37 @@
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
-      "officialRevenueStyle": "netflix-regional-revenue"
+      "officialRevenueStyle": "netflix-regional-revenue",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 0.654
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 0.702
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.404
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q4",
+        "fields": [
+          "officialRevenueSegments",
+          "officialOpexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2024Q2": {
       "calendarQuarter": "2024Q2",
@@ -4125,7 +4705,37 @@
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
-      "officialRevenueStyle": "netflix-regional-revenue"
+      "officialRevenueStyle": "netflix-regional-revenue",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 0.644
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 0.711
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.427
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q1",
+        "fields": [
+          "officialRevenueSegments",
+          "officialOpexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2024Q3": {
       "calendarQuarter": "2024Q3",
@@ -4300,7 +4910,37 @@
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
-      "officialRevenueStyle": "netflix-regional-revenue"
+      "officialRevenueStyle": "netflix-regional-revenue",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 0.643
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 0.735
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.417
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q2",
+        "fields": [
+          "officialRevenueSegments",
+          "officialOpexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2024Q4": {
       "calendarQuarter": "2024Q4",
@@ -4475,7 +5115,37 @@
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
-      "officialRevenueStyle": "netflix-regional-revenue"
+      "officialRevenueStyle": "netflix-regional-revenue",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 0.976
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 0.777
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.454
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q3",
+        "fields": [
+          "officialRevenueSegments",
+          "officialOpexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2025Q1": {
       "calendarQuarter": "2025Q1",
@@ -4650,7 +5320,37 @@
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
-      "officialRevenueStyle": "netflix-regional-revenue"
+      "officialRevenueStyle": "netflix-regional-revenue",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 0.688
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 0.823
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.421
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q4",
+        "fields": [
+          "officialRevenueSegments",
+          "officialOpexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2025Q2": {
       "calendarQuarter": "2025Q2",
@@ -4825,7 +5525,37 @@
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
-      "officialRevenueStyle": "netflix-regional-revenue"
+      "officialRevenueStyle": "netflix-regional-revenue",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 0.713
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 0.825
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.441
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q1",
+        "fields": [
+          "officialRevenueSegments",
+          "officialOpexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2025Q3": {
       "calendarQuarter": "2025Q3",
@@ -5000,7 +5730,37 @@
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
-      "officialRevenueStyle": "netflix-regional-revenue"
+      "officialRevenueStyle": "netflix-regional-revenue",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 0.786
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 0.854
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.458
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q2",
+        "fields": [
+          "officialRevenueSegments",
+          "officialOpexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2025Q4": {
       "calendarQuarter": "2025Q4",
@@ -5137,24 +5897,6 @@
           "validationNotes": null
         },
         {
-          "name": "APAC",
-          "nameZh": null,
-          "memberKey": "apac",
-          "valueBn": 1.421,
-          "yoyPct": 17.24,
-          "qoqPct": 3.8,
-          "mixPct": 11.8,
-          "mixYoyDeltaPp": -0.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000033/ex991_q425.htm",
-          "sourceForm": "8-K",
-          "filingDate": "2026-01-20",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": null,
-          "validationNotes": null
-        },
-        {
           "name": "LATAM",
           "nameZh": null,
           "memberKey": "latam",
@@ -5171,11 +5913,59 @@
           "metricMode": null,
           "validationEligible": null,
           "validationNotes": null
+        },
+        {
+          "name": "APAC",
+          "nameZh": null,
+          "memberKey": "apac",
+          "valueBn": 1.421,
+          "yoyPct": 17.24,
+          "qoqPct": 3.8,
+          "mixPct": 11.8,
+          "mixYoyDeltaPp": -0.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000033/ex991_q425.htm",
+          "sourceForm": "8-K",
+          "filingDate": "2026-01-20",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
-      "officialRevenueStyle": "netflix-regional-revenue"
+      "officialRevenueStyle": "netflix-regional-revenue",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 1.113
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 0.89
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.568
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q3",
+        "fields": [
+          "officialRevenueSegments",
+          "officialOpexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2026Q1": {
       "calendarQuarter": "2026Q1",
@@ -5244,24 +6034,6 @@
           "validationNotes": null
         },
         {
-          "name": "APAC",
-          "nameZh": null,
-          "memberKey": "apac",
-          "valueBn": 1.509,
-          "yoyPct": 19.86,
-          "qoqPct": 6.19,
-          "mixPct": 12.3,
-          "mixYoyDeltaPp": 0.4,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000137/ex991_q126.htm",
-          "sourceForm": "8-K",
-          "filingDate": "2026-04-16",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": null,
-          "validationNotes": null
-        },
-        {
           "name": "LATAM",
           "nameZh": null,
           "memberKey": "latam",
@@ -5278,9 +6050,195 @@
           "metricMode": null,
           "validationEligible": null,
           "validationNotes": null
+        },
+        {
+          "name": "APAC",
+          "nameZh": null,
+          "memberKey": "apac",
+          "valueBn": 1.509,
+          "yoyPct": 19.86,
+          "qoqPct": 6.19,
+          "mixPct": 12.3,
+          "mixYoyDeltaPp": 0.4,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000137/ex991_q126.htm",
+          "sourceForm": "8-K",
+          "filingDate": "2026-04-16",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
-      "officialRevenueStyle": "netflix-regional-revenue"
+      "officialRevenueStyle": "netflix-regional-revenue",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 0.842
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 0.96
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.603
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q4",
+        "fields": [
+          "officialRevenueSegments",
+          "officialOpexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      }
+    },
+    "2026Q2": {
+      "calendarQuarter": "2026Q2",
+      "periodEnd": "2026-06-30",
+      "fiscalYear": "2026",
+      "fiscalQuarter": "Q2",
+      "fiscalLabel": "FY2026 Q2",
+      "statementCurrency": "USD",
+      "revenueBn": 12.56,
+      "revenueYoyPct": 13.368,
+      "costOfRevenueBn": null,
+      "grossProfitBn": null,
+      "sgnaBn": null,
+      "rndBn": null,
+      "otherOpexBn": null,
+      "operatingExpensesBn": null,
+      "operatingIncomeBn": null,
+      "nonOperatingBn": null,
+      "pretaxIncomeBn": null,
+      "taxBn": null,
+      "netIncomeBn": null,
+      "netIncomeYoyPct": null,
+      "grossMarginPct": null,
+      "operatingMarginPct": null,
+      "profitMarginPct": null,
+      "effectiveTaxRatePct": null,
+      "revenueQoqPct": 2.531,
+      "grossMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": null,
+      "profitMarginYoyDeltaPp": null,
+      "statementSource": "official-revenue-structure",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000211/ex991_q226.htm",
+      "statementFilingDate": "2026-07-16",
+      "officialRevenueSegments": [
+        {
+          "name": "UCAN",
+          "nameZh": null,
+          "memberKey": "ucan",
+          "valueBn": 5.432,
+          "yoyPct": 10.2,
+          "qoqPct": 3.57,
+          "mixPct": 43.2,
+          "mixYoyDeltaPp": -1.2,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000211/ex991_q226.htm",
+          "sourceForm": "8-K",
+          "filingDate": "2026-07-16",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "EMEA",
+          "nameZh": null,
+          "memberKey": "emea",
+          "valueBn": 4.034,
+          "yoyPct": 14.02,
+          "qoqPct": 0.9,
+          "mixPct": 32.1,
+          "mixYoyDeltaPp": 0.2,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000211/ex991_q226.htm",
+          "sourceForm": "8-K",
+          "filingDate": "2026-07-16",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "LATAM",
+          "nameZh": null,
+          "memberKey": "latam",
+          "valueBn": 1.584,
+          "yoyPct": 21.19,
+          "qoqPct": 5.81,
+          "mixPct": 12.6,
+          "mixYoyDeltaPp": 0.8,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000211/ex991_q226.htm",
+          "sourceForm": "8-K",
+          "filingDate": "2026-07-16",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "APAC",
+          "nameZh": null,
+          "memberKey": "apac",
+          "valueBn": 1.51,
+          "yoyPct": 15.71,
+          "qoqPct": 0.07,
+          "mixPct": 12.0,
+          "mixYoyDeltaPp": 0.2,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000211/ex991_q226.htm",
+          "sourceForm": "8-K",
+          "filingDate": "2026-07-16",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        }
+      ],
+      "officialRevenueStyle": "netflix-regional-revenue",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 0.824
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 1.008
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.499
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2026Q1",
+        "fields": [
+          "officialRevenueSegments",
+          "officialOpexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     }
   },
   "statementSource": "official-sec-companyfacts",
@@ -7488,9 +8446,100 @@
           }
         ],
         "style": "netflix-regional-revenue"
+      },
+      "2026Q2": {
+        "segments": [
+          {
+            "name": "UCAN",
+            "nameZh": null,
+            "memberKey": "ucan",
+            "valueBn": 5.432,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000211/ex991_q226.htm",
+            "sourceForm": "8-K",
+            "filingDate": "2026-07-16",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          },
+          {
+            "name": "EMEA",
+            "nameZh": null,
+            "memberKey": "emea",
+            "valueBn": 4.034,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000211/ex991_q226.htm",
+            "sourceForm": "8-K",
+            "filingDate": "2026-07-16",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          },
+          {
+            "name": "LATAM",
+            "nameZh": null,
+            "memberKey": "latam",
+            "valueBn": 1.584,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000211/ex991_q226.htm",
+            "sourceForm": "8-K",
+            "filingDate": "2026-07-16",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          },
+          {
+            "name": "APAC",
+            "nameZh": null,
+            "memberKey": "apac",
+            "valueBn": 1.51,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000211/ex991_q226.htm",
+            "sourceForm": "8-K",
+            "filingDate": "2026-07-16",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          }
+        ],
+        "style": "netflix-regional-revenue"
       }
     },
     "filingsUsed": [
+      {
+        "form": "10-Q",
+        "filingDate": "2026-07-17",
+        "accession": "0001065280-26-000212",
+        "primaryDocument": "nflx-20260630.htm",
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000212/nflx-20260630.htm"
+      },
+      {
+        "form": "8-K",
+        "filingDate": "2026-07-16",
+        "accession": "0001065280-26-000211",
+        "primaryDocument": "nflx-20260716.htm",
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000211/ex991_q226.htm"
+      },
       {
         "form": "10-Q",
         "filingDate": "2026-04-17",
@@ -7812,13 +8861,13 @@
       "overallConfidenceScore": 0.9977,
       "financialConfidenceScore": 0.9965,
       "structuralConfidenceScore": 1.0,
-      "revenueSegmentChecks": 26,
+      "revenueSegmentChecks": 27,
       "revenueSegmentMismatchCount": 0,
       "revenueSegmentSkippedChecks": 3,
       "detailGroupChecks": 0,
       "detailGroupMismatchCount": 0,
       "detailGroupSkippedChecks": 0,
-      "opexChecks": 0,
+      "opexChecks": 27,
       "opexSkippedChecks": 0,
       "opexOverflowMismatchCount": 0,
       "warningCount": 0,
@@ -7827,26 +8876,26 @@
   },
   "statementPresets": {},
   "coverage": {
-    "quarterCount": 33,
+    "quarterCount": 34,
     "pixelReplicaQuarterCount": 0,
     "hasPixelReplica": false,
-    "officialFinancialQuarterCount": 33,
-    "officialSegmentQuarterCount": 29,
-    "officialExpenseQuarterCount": 0,
+    "officialFinancialQuarterCount": 34,
+    "officialSegmentQuarterCount": 30,
+    "officialExpenseQuarterCount": 28,
     "classification": {
       "status": "ok",
-      "latestQuarter": "2026Q1",
+      "latestQuarter": "2026Q2",
       "latestQuarterHasRevenueClassification": true,
-      "latestQuarterHasExpenseClassification": false,
-      "latestRevenueClassificationQuarter": "2026Q1",
-      "latestExpenseClassificationQuarter": null,
-      "latestStructureHistoryQuarter": "2026Q1",
-      "revenueClassificationQuarterCount": 29,
-      "expenseClassificationQuarterCount": 0,
-      "revenueClassificationCoverageRatio": 0.8788,
-      "expenseClassificationCoverageRatio": 0.0,
+      "latestQuarterHasExpenseClassification": true,
+      "latestRevenueClassificationQuarter": "2026Q2",
+      "latestExpenseClassificationQuarter": "2026Q2",
+      "latestStructureHistoryQuarter": "2026Q2",
+      "revenueClassificationQuarterCount": 30,
+      "expenseClassificationQuarterCount": 28,
+      "revenueClassificationCoverageRatio": 0.8824,
+      "expenseClassificationCoverageRatio": 0.8235,
       "latestRevenueClassificationLagQuarters": 0,
-      "latestExpenseClassificationLagQuarters": null,
+      "latestExpenseClassificationLagQuarters": 0,
       "warnings": [],
       "blockers": [],
       "policy": {}
@@ -7888,18 +8937,23 @@
         "overallConfidenceScore": 0.9977,
         "financialConfidenceScore": 0.9965,
         "structuralConfidenceScore": 1.0,
-        "revenueSegmentChecks": 26,
+        "revenueSegmentChecks": 27,
         "revenueSegmentMismatchCount": 0,
         "revenueSegmentSkippedChecks": 3,
         "detailGroupChecks": 0,
         "detailGroupMismatchCount": 0,
         "detailGroupSkippedChecks": 0,
-        "opexChecks": 0,
+        "opexChecks": 27,
         "opexSkippedChecks": 0,
         "opexOverflowMismatchCount": 0,
         "warningCount": 0,
         "warnings": []
       }
     }
-  }
+  },
+  "marketCapUsd": 326968508416,
+  "marketCapAsOf": "2026-07-06",
+  "marketCapSourceRank": 46,
+  "marketCapSource": "CompaniesMarketCap",
+  "marketCapSourceUrl": "https://companiesmarketcap.com/"
 }
