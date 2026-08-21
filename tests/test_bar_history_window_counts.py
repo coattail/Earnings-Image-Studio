@@ -180,19 +180,30 @@ class BarHistoryWindowCountTests(unittest.TestCase):
                 f"{label} should keep the same bar color regardless of the selected quarter.",
             )
 
-    def test_alibaba_bar_history_uses_four_comparable_business_groups(self) -> None:
+    def test_alibaba_latest_bar_history_uses_the_fy27_business_groups(self) -> None:
         labels = legend_labels(render_bar_svg(load_dataset_company("alibaba"), "alibaba-bar-taxonomy"))
 
         self.assertEqual(
             labels,
-            ["阿里巴巴中国电商集团", "其他业务", "云智能集团", "阿里巴巴数字商业集团"],
+            ["阿里巴巴电商集团", "AI 云与计算服务", "AI 实验室与应用", "其他业务"],
         )
 
+    def test_alibaba_latest_bar_history_keeps_the_full_thirty_quarter_window(self) -> None:
+        summary = render_bar_summary(load_dataset_company("alibaba"), "alibaba-bar-history-window")
+
+        self.assertEqual(summary["outputs"]["bars"]["quarterCount"], 30)
+
     def test_alibaba_bar_history_marks_fy24_taxonomy_break(self) -> None:
-        svg_markup = render_bar_svg(load_dataset_company("alibaba"), "alibaba-bar-taxonomy-break")
+        svg_markup = render_bar_svg(load_dataset_company("alibaba"), "alibaba-bar-taxonomy-break", "2026Q1")
 
         self.assertIn('data-bar-taxonomy-break="alibaba-fy24"', svg_markup)
         self.assertIn("Q1 FY24 起分部口径调整", svg_markup)
+
+    def test_alibaba_latest_bar_history_marks_fy27_taxonomy_break(self) -> None:
+        svg_markup = render_bar_svg(load_dataset_company("alibaba"), "alibaba-bar-taxonomy-break")
+
+        self.assertIn('data-bar-taxonomy-break="alibaba-fy27"', svg_markup)
+        self.assertIn("Q1 FY27 起分部口径调整", svg_markup)
 
     def test_amazon_bar_history_marks_q4_fy21_taxonomy_break(self) -> None:
         svg_markup = render_bar_svg(load_dataset_company("amazon"), "amazon-bar-taxonomy-break", "2026Q1")

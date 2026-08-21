@@ -3789,6 +3789,14 @@ def enrich_growth_rows(financials: dict[str, Any], field_name: str) -> None:
             if isinstance(item, dict)
         }
 
+    def taxonomy_signature(quarter_key: str) -> frozenset[str]:
+        return frozenset(rows_by_member(quarter_key))
+
+    def has_matching_taxonomy(left_quarter_key: str, right_quarter_key: str) -> bool:
+        left_signature = taxonomy_signature(left_quarter_key)
+        right_signature = taxonomy_signature(right_quarter_key)
+        return bool(left_signature) and left_signature == right_signature
+
     def prior_quarter_key(quarter_key: str) -> str:
         if quarter_key.endswith("Q1"):
             return f"{int(quarter_key[:4]) - 1}Q4"
@@ -3827,13 +3835,22 @@ def enrich_growth_rows(financials: dict[str, Any], field_name: str) -> None:
         rows = financials.get(quarter, {}).get(field_name) or []
         if not rows:
             continue
-        prior_quarter_map = rows_by_member(prior_quarter_key(quarter))
+        previous_quarter = prior_quarter_key(quarter)
+        prior_quarter_map = rows_by_member(previous_quarter)
+        comparable_to_prior_quarter = has_matching_taxonomy(quarter, previous_quarter)
+        prior_quarter_has_taxonomy = bool(taxonomy_signature(previous_quarter))
+        taxonomy_flag = (
+            "officialRevenueTaxonomyChangedFromPreviousQuarter"
+            if field_name == "officialRevenueSegments"
+            else "officialRevenueDetailTaxonomyChangedFromPreviousQuarter"
+        )
+        financials[quarter][taxonomy_flag] = bool(prior_quarter_has_taxonomy and not comparable_to_prior_quarter)
         for row in rows:
             member_key = str(row.get("memberKey") or row.get("name") or "")
             previous = prior_quarter_map.get(member_key)
             previous_value = float(previous.get("valueBn") or 0) if previous else 0
             suppress_qoq = "suppressQoQGrowth" in row and bool(row.get("suppressQoQGrowth"))
-            if not suppress_qoq and row.get("qoqPct") is None and previous_value:
+            if not suppress_qoq and comparable_to_prior_quarter and row.get("qoqPct") is None and previous_value:
                 row["qoqPct"] = round((float(row.get("valueBn") or 0) / previous_value - 1) * 100, 2)
 
     # Calculate undisclosed YoY growth by dividing current and prior-year category
@@ -3845,6 +3862,14 @@ def enrich_growth_rows(financials: dict[str, Any], field_name: str) -> None:
             continue
         prior_year_quarter = f"{int(quarter[:4]) - 1}{quarter[4:]}"
         prior_year_map = rows_by_member(prior_year_quarter)
+        comparable_to_prior_year = has_matching_taxonomy(quarter, prior_year_quarter)
+        prior_year_has_taxonomy = bool(taxonomy_signature(prior_year_quarter))
+        prior_year_taxonomy_flag = (
+            "officialRevenueTaxonomyChangedFromPriorYear"
+            if field_name == "officialRevenueSegments"
+            else "officialRevenueDetailTaxonomyChangedFromPriorYear"
+        )
+        financials[quarter][prior_year_taxonomy_flag] = bool(prior_year_has_taxonomy and not comparable_to_prior_year)
         revenue_bn = float(financials.get(quarter, {}).get("revenueBn") or 0)
         prior_year_revenue_bn = float(financials.get(prior_year_quarter, {}).get("revenueBn") or 0)
         for row in rows:
@@ -3855,9 +3880,9 @@ def enrich_growth_rows(financials: dict[str, Any], field_name: str) -> None:
                 historical_growth = historical_yoy_growth(quarter, member_key) if row.get("metricMode") == "share" else None
                 if historical_growth is not None:
                     row["yoyPct"] = historical_growth
-                elif previous_value:
+                elif comparable_to_prior_year and previous_value:
                     row["yoyPct"] = round((float(row.get("valueBn") or 0) / previous_value - 1) * 100, 2)
-            if revenue_bn and prior_year_revenue_bn and previous_value and row.get("mixYoyDeltaPp") is None:
+            if comparable_to_prior_year and revenue_bn and prior_year_revenue_bn and previous_value and row.get("mixYoyDeltaPp") is None:
                 current_mix = float(row.get("valueBn") or 0) / revenue_bn * 100
                 prior_mix = previous_value / prior_year_revenue_bn * 100
                 row["mixYoyDeltaPp"] = round(current_mix - prior_mix, 1)

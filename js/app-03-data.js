@@ -1609,6 +1609,11 @@ function buildOfficialDetailGroups(company, entry, businessGroups = null) {
   const detailGroups = rawDetailGroups.filter((item) => !suppressedTargetKeys.has(revenueTargetCanonicalKey(company, item)));
   if (!detailGroups.length) return null;
   if (style === "alibaba-commerce-staged") {
+    const taxonomyChangedFromPriorQuarter = officialRevenueTaxonomyChangedSincePreviousQuarter(
+      company,
+      entry,
+      "officialRevenueDetailGroups"
+    );
     const targetGroupMap = new Map();
     resolvedBusinessGroups.forEach((group, index) => {
       [
@@ -1658,7 +1663,7 @@ function buildOfficialDetailGroups(company, entry, businessGroups = null) {
           displayLines: wrapLines(item.name, 14),
           valueBn: item.valueBn,
           yoyPct: resolvedDisplayAdjustedGrowthPct(company, quarterKey, item.yoyPct, "yoy"),
-          qoqPct: resolvedDisplayAdjustedGrowthPct(company, quarterKey, item.qoqPct, "qoq"),
+          qoqPct: taxonomyChangedFromPriorQuarter ? null : resolvedDisplayAdjustedGrowthPct(company, quarterKey, item.qoqPct, "qoq"),
           nodeColor: color,
           flowColor: rgba(color, 0.72),
           labelColor: color,
@@ -2279,11 +2284,27 @@ function buildHistoryHarmonizedBusinessGroups(company, quarterKey) {
   });
 }
 
+function officialRevenueTaxonomyChangeNote(company, entry) {
+  if (String(company?.id || "").toLowerCase() !== "alibaba") return "";
+  if (!officialRevenueTaxonomyChangedSincePreviousQuarter(company, entry)) return "";
+  return currentChartLanguage() === "zh"
+    ? "本季度官方调整了分部报告口径；左侧保留当期官方结构，跨口径环比不展示。"
+    : "Alibaba changed its official segment reporting taxonomy this quarter; the chart preserves the current official structure and suppresses non-comparable quarter-over-quarter segment growth.";
+}
+
+function appendFootnoteOnce(baseText, extraText) {
+  const base = String(baseText || "").trim();
+  const extra = String(extraText || "").trim();
+  if (!extra || base.includes(extra)) return base;
+  return `${base}${base ? " " : ""}${extra}`;
+}
+
 function buildReplicaTemplateSnapshot(company, entry, quarterKey) {
   const companyBrand = resolvedCompanyBrand(company);
   const snapshot = buildGenericSnapshot(company, entry, quarterKey);
   const officialBusinessGroups = buildOfficialBusinessGroups(company, entry);
   const officialDetailGroups = buildOfficialDetailGroups(company, entry, officialBusinessGroups);
+  const taxonomyChangeNote = officialBusinessGroups ? officialRevenueTaxonomyChangeNote(company, entry) : "";
   const historyHarmonizedBusinessGroups = !officialBusinessGroups ? buildHistoryHarmonizedBusinessGroups(company, quarterKey) : null;
   const resolvedBusinessGroups = officialBusinessGroups || historyHarmonizedBusinessGroups;
   const fallbackSourceLabel = entry.statementSource === "stockanalysis-financials" ? "Stock Analysis financials fallback" : "Replica-style auto template";
@@ -2295,11 +2316,12 @@ function buildReplicaTemplateSnapshot(company, entry, quarterKey) {
     entry.statementSource === "stockanalysis-financials"
       ? "统一模板会复用模板集的版式语言，并以 Stock Analysis 财务表后备数据生成非 SEC 公司的利润桥。"
       : "统一模板会复用模板集的版式语言，并按当前公司的真实季度财务数据自动排版。";
-  const structureFootnote = officialBusinessGroups
+  const baseStructureFootnote = officialBusinessGroups
     ? "统一模板会复用模板集的版式语言，并优先使用官方财报披露的营收结构数据自动排版。"
     : historyHarmonizedBusinessGroups
       ? `${fallbackFootnote} 当前季度的左侧营收分类由历史分部口径统一回填，以避免同一季度因观察窗口变化而丢失分类。`
       : fallbackFootnote;
+  const structureFootnote = appendFootnoteOnce(baseStructureFootnote, taxonomyChangeNote);
   return {
     ...snapshot,
     businessGroups: resolvedBusinessGroups || snapshot.businessGroups.map((item) => ({
@@ -2331,6 +2353,7 @@ function mergeOfficialRevenueStructureIntoSnapshot(snapshot, company, entry) {
   if (!entry) return snapshot;
   const officialBusinessGroups = buildOfficialBusinessGroups(company, entry);
   const officialDetailGroups = buildOfficialDetailGroups(company, entry, officialBusinessGroups);
+  const taxonomyChangeNote = officialBusinessGroups ? officialRevenueTaxonomyChangeNote(company, entry) : "";
   const historyHarmonizedBusinessGroups = !officialBusinessGroups ? buildHistoryHarmonizedBusinessGroups(company, snapshot?.quarterKey || entryQuarterKey(company, entry)) : null;
   if (!officialBusinessGroups && !officialDetailGroups && !historyHarmonizedBusinessGroups) return snapshot;
   return {
@@ -2347,7 +2370,7 @@ function mergeOfficialRevenueStructureIntoSnapshot(snapshot, company, entry) {
     usesFxConversion: snapshot.usesFxConversion,
     sourceLabel: officialBusinessGroups ? "Official filings segment data" : "History-harmonized revenue structure",
     coverageLabel: "结构原型 + 高精模板",
-    footnote: snapshot.bridgeCoverageMode === "revenue-only"
+    footnote: appendFootnoteOnce(snapshot.bridgeCoverageMode === "revenue-only"
       ? officialBusinessGroups
         ? `${snapshot.footnote} 该季度左侧营收结构直接取自官方财报分部披露。`
         : snapshot.footnote?.includes("历史分部口径统一回填")
@@ -2355,7 +2378,7 @@ function mergeOfficialRevenueStructureIntoSnapshot(snapshot, company, entry) {
           : `${snapshot.footnote} 当前季度的左侧营收分类由历史分部口径统一回填，以避免同一季度因观察窗口变化而丢失分类。`
       : officialBusinessGroups || snapshot.footnote?.includes("历史分部口径统一回填")
         ? snapshot.footnote
-        : `${snapshot.footnote} 当前季度的左侧营收分类由历史分部口径统一回填，以避免同一季度因观察窗口变化而丢失分类。`,
+        : `${snapshot.footnote} 当前季度的左侧营收分类由历史分部口径统一回填，以避免同一季度因观察窗口变化而丢失分类。`, taxonomyChangeNote),
   };
 }
 
@@ -4319,6 +4342,12 @@ const BAR_TAXONOMY_BREAK_OVERRIDES = Object.freeze({
       labelEn: "Segment taxonomy changed from Q1 FY24",
       id: "alibaba-fy24",
     }),
+    Object.freeze({
+      quarterKey: "2026Q2",
+      labelZh: "Q1 FY27 起分部口径调整",
+      labelEn: "Segment taxonomy changed from Q1 FY27",
+      id: "alibaba-fy27",
+    }),
   ]),
   amazon: Object.freeze([
     Object.freeze({
@@ -4861,11 +4890,50 @@ function buildRevenueSegmentBarHistory(company, anchorQuarterKey, maxQuarters = 
 
   if (String(company?.id || "").toLowerCase() === "alibaba") {
     const visibleQuarterKeySet = new Set(includeAllQuarters ? allValidQuarterKeys : selectedQuarterKeys);
-    const visibleQuarters = quarters.filter((quarter) => visibleQuarterKeySet.has(quarter.quarterKey));
+    let visibleQuarters = quarters.filter((quarter) => visibleQuarterKeySet.has(quarter.quarterKey));
+    if (!visibleQuarters.length) return null;
+    const anchorQuarterKey = selectedQuarterKeys[selectedQuarterKeys.length - 1] || null;
+    const anchorQuarter = quarters.find((quarter) => quarter.quarterKey === anchorQuarterKey) || visibleQuarters[visibleQuarters.length - 1];
+    const usesFy27Taxonomy = usesAlibabaFy27BarTaxonomy(anchorQuarter?.segmentRows || []);
+    if (usesFy27Taxonomy) {
+      const fy27HistoryKeys = {
+        alibabaecommercegroup: ["alibabaecommercegroup", "alibabachinaecommercegroup", "alidcg"],
+        aicloudandcomputeservices: ["aicloudandcomputeservices", "cloudintelligencegroup"],
+        ailabsandapplications: ["ailabsandapplications"],
+        allothers: ["allothers"],
+      };
+      visibleQuarters = visibleQuarters.map((quarter) => {
+        const rowMap = new Map((quarter.segmentRows || []).map((item) => [normalizeLabelKey(item?.key), item]));
+        const segmentRows = ALIBABA_BAR_FY27_SEGMENTS
+          .map((segment) => {
+            const matchedRows = (fy27HistoryKeys[segment.key] || [])
+              .map((key) => rowMap.get(key))
+              .filter(Boolean);
+            const valueBn = matchedRows.reduce((sum, item) => sum + safeNumber(item?.valueBn), 0);
+            if (!(valueBn > 0.02)) return null;
+            return {
+              key: segment.key,
+              name: segment.name,
+              nameZh: segment.nameZh,
+              valueBn: Number(valueBn.toFixed(3)),
+              filingDate: matchedRows.map((item) => item?.filingDate).filter(Boolean).sort(compareIsoDateStrings).pop() || null,
+              periodEnd: matchedRows.map((item) => item?.periodEnd).find(Boolean) || quarter?.entry?.periodEnd || null,
+              historicalTaxonomyBridge: !usesAlibabaFy27BarTaxonomy(quarter.segmentRows || []),
+            };
+          })
+          .filter(Boolean);
+        return {
+          ...quarter,
+          segmentRows,
+          segmentMap: Object.fromEntries(segmentRows.map((item) => [item.key, safeNumber(item.valueBn)])),
+        };
+      });
+    }
     if (!visibleQuarters.length) return null;
     const totals = new Map();
     const nameRegistry = new Map();
-    quarters.forEach((quarter) => {
+    const aggregationQuarters = usesFy27Taxonomy ? visibleQuarters : quarters;
+    aggregationQuarters.forEach((quarter) => {
       quarter.segmentRows.forEach((item) => {
         if (!item?.key) return;
         if (item.key === "otherrevenue") return;
@@ -4879,7 +4947,7 @@ function buildRevenueSegmentBarHistory(company, anchorQuarterKey, maxQuarters = 
         }
       });
     });
-    const comparableOrder = ALIBABA_BAR_COMPARABLE_SEGMENTS.map((item) => item.key);
+    const comparableOrder = (usesFy27Taxonomy ? ALIBABA_BAR_FY27_SEGMENTS : ALIBABA_BAR_COMPARABLE_SEGMENTS).map((item) => item.key);
     const sortedSegmentKeys = comparableOrder.filter((key) => totals.has(key));
     const colorBySegment = stableBarColorMap(company?.id, sortedSegmentKeys);
     const segmentStats = sortedSegmentKeys.map((segmentKey) => ({
@@ -4897,7 +4965,7 @@ function buildRevenueSegmentBarHistory(company, anchorQuarterKey, maxQuarters = 
       colorBySegment,
       stackOrder: segmentStats.slice().sort((left, right) => left.totalValueBn - right.totalValueBn).map((item) => item.key),
       maxRevenueBn: Math.max(...visibleQuarters.map((item) => safeNumber(item.totalRevenueBn)), 1),
-      anchorQuarterKey: selectedQuarterKeys[selectedQuarterKeys.length - 1] || null,
+      anchorQuarterKey,
       requestedQuarterCount: requestedWindowCount,
       availableQuarterCount: visibleQuarters.length,
       missingQuarterCount: 0,

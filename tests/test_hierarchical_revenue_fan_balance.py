@@ -17,6 +17,7 @@ COMPANY_QUARTERS = {
     "tesla": "2026Q2",
     "tencent": "2026Q2",
     "asml": "2026Q2",
+    "alibaba": "2025Q4",
 }
 
 
@@ -89,12 +90,37 @@ def detail_rects(svg_root: ET.Element) -> list[dict[str, float]]:
         index += 1
 
 
+def source_rects(svg_root: ET.Element) -> list[dict[str, float]]:
+    sources = []
+    index = 0
+    while True:
+        rect = svg_root.find(
+            f".//svg:rect[@data-edit-node-visible-id='source-{index}']",
+            SVG_NS,
+        )
+        if rect is None:
+            return sources
+        sources.append(
+            {
+                "x": float(rect.attrib["x"]),
+                "y": float(rect.attrib["y"]),
+                "width": float(rect.attrib["width"]),
+                "height": float(rect.attrib["height"]),
+            }
+        )
+        index += 1
+
+
 class HierarchicalRevenueFanBalanceTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.svg_roots = {
             company: render_company_svg(company, quarter)
             for company, quarter in COMPANY_QUARTERS.items()
+        }
+        cls.alibaba_dense_source_roots = {
+            quarter: render_company_svg("alibaba", quarter)
+            for quarter in ("2021Q4", "2022Q4", "2024Q4", "2025Q1")
         }
 
     def test_sparse_detail_fan_continues_parent_outflow_direction(self) -> None:
@@ -203,6 +229,73 @@ class HierarchicalRevenueFanBalanceTests(unittest.TestCase):
                 details = detail_rects(svg_root)
                 for current, following in zip(details, details[1:]):
                     self.assertGreaterEqual(following["y"], current["y"] + current["height"])
+
+    def test_every_revenue_source_keeps_the_same_vertical_order_as_its_target_band(self) -> None:
+        for company, svg_root in self.svg_roots.items():
+            with self.subTest(company=company):
+                sources = source_rects(svg_root)
+                for current, following in zip(sources, sources[1:]):
+                    self.assertGreaterEqual(
+                        following["y"],
+                        current["y"] + current["height"],
+                        "Revenue source nodes must not reverse order before entering the revenue stack.",
+                    )
+
+    def test_alibaba_q3_fy26_detail_groups_cannot_cross_between_parent_segments(self) -> None:
+        details = detail_rects(self.svg_roots["alibaba"])
+        self.assertEqual(len(details), 6)
+        self.assertGreaterEqual(
+            details[4]["y"],
+            details[3]["y"] + details[3]["height"],
+            "International commerce must stay below the final China-commerce detail so the two ribbons cannot cross.",
+        )
+
+    def test_alibaba_q3_fy26_dense_detail_fan_uses_the_full_left_canvas(self) -> None:
+        svg_root = self.svg_roots["alibaba"]
+        details = detail_rects(svg_root)
+        sources = source_rects(svg_root)
+        gaps = [
+            following["y"] - (current["y"] + current["height"])
+            for current, following in zip(details, details[1:])
+        ]
+
+        self.assertLess(
+            details[0]["y"],
+            sources[0]["y"] - sources[0]["height"] * 0.6,
+            "The first detail should launch high enough to create a broad, readable fan.",
+        )
+        self.assertGreater(
+            details[-1]["y"],
+            sources[1]["y"] + sources[1]["height"],
+            "The final detail should finish below International Commerce instead of collapsing into the China cluster.",
+        )
+        self.assertGreater(min(gaps), 60)
+        self.assertLess(
+            max(gaps) / min(gaps),
+            2,
+            "Dense hierarchical detail rows should have a deliberate visual rhythm instead of one oversized dead zone.",
+        )
+
+        net = visible_rect(svg_root, "net")
+        operating = visible_rect(svg_root, "operating")
+        gross = visible_rect(svg_root, "gross")
+        self.assertLess(net["y"] + net["height"], operating["y"])
+        self.assertLess(operating["y"] + operating["height"], gross["y"])
+
+    def test_alibaba_legacy_seven_business_ribbons_keep_readable_source_gaps(self) -> None:
+        for quarter, svg_root in self.alibaba_dense_source_roots.items():
+            with self.subTest(quarter=quarter):
+                sources = source_rects(svg_root)
+                self.assertEqual(len(sources), 7)
+                gaps = [
+                    following["y"] - (current["y"] + current["height"])
+                    for current, following in zip(sources, sources[1:])
+                ]
+                self.assertGreaterEqual(
+                    min(gaps),
+                    70,
+                    "Small historical business ribbons need enough whitespace to remain visually distinct.",
+                )
 
     def test_dragging_parent_and_detail_nodes_keeps_every_other_node_fixed(self) -> None:
         base_root = self.svg_roots["asml"]

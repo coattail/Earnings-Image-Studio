@@ -409,6 +409,12 @@ function normalizeGroupFlowTotalsToRevenue(groups = [], revenueBn = null) {
 
 function sortBusinessGroupsByValue(groups) {
   return [...(groups || [])].sort((left, right) => {
+    const leftOrder = Number(left?.layoutOrder);
+    const rightOrder = Number(right?.layoutOrder);
+    const leftHasOrder = Number.isFinite(leftOrder);
+    const rightHasOrder = Number.isFinite(rightOrder);
+    if (leftHasOrder && rightHasOrder && leftOrder !== rightOrder) return leftOrder - rightOrder;
+    if (leftHasOrder !== rightHasOrder) return leftHasOrder ? -1 : 1;
     const rightValue = safeNumber(right?.valueBn, safeNumber(right?.flowValueBn));
     const leftValue = safeNumber(left?.valueBn, safeNumber(left?.flowValueBn));
     return rightValue - leftValue;
@@ -2201,6 +2207,62 @@ function resolveVerticalBoxesVariableGap(entries, minY, maxY, gap = 24) {
       bottom: box.top + box.height,
       center: box.top + box.height / 2,
     }));
+}
+
+function resolveOrderedVerticalBoxes(entries, minY, maxY, gap = 0) {
+  if (!entries.length) return [];
+  const boxes = entries.map((entry) => {
+    const height = Math.max(safeNumber(entry.height, 0), 1);
+    const preferredTop =
+      entry.top !== null && entry.top !== undefined
+        ? safeNumber(entry.top, minY)
+        : safeNumber(entry.center, minY + height / 2) - height / 2;
+    return {
+      ...entry,
+      height,
+      top: clamp(preferredTop, minY, maxY - height),
+    };
+  });
+  const requestedGap = Math.max(safeNumber(gap, 0), 0);
+  const totalHeight = boxes.reduce((sum, box) => sum + box.height, 0);
+  const gapBudget = Math.max(maxY - minY - totalHeight, 0);
+  const resolvedGap = boxes.length > 1
+    ? Math.min(requestedGap, gapBudget / (boxes.length - 1))
+    : 0;
+
+  boxes[0].top = Math.max(boxes[0].top, minY);
+  for (let index = 1; index < boxes.length; index += 1) {
+    const previous = boxes[index - 1];
+    boxes[index].top = Math.max(
+      boxes[index].top,
+      previous.top + previous.height + resolvedGap
+    );
+  }
+
+  const overflow = boxes[boxes.length - 1].top + boxes[boxes.length - 1].height - maxY;
+  if (overflow > 0) {
+    boxes[boxes.length - 1].top -= overflow;
+    for (let index = boxes.length - 2; index >= 0; index -= 1) {
+      const following = boxes[index + 1];
+      boxes[index].top = Math.min(
+        boxes[index].top,
+        following.top - resolvedGap - boxes[index].height
+      );
+    }
+  }
+
+  if (boxes[0].top < minY) {
+    const shift = minY - boxes[0].top;
+    boxes.forEach((box) => {
+      box.top += shift;
+    });
+  }
+
+  return boxes.map((box) => ({
+    ...box,
+    bottom: box.top + box.height,
+    center: box.top + box.height / 2,
+  }));
 }
 
 const LOCKUP_LAYOUT_PROFILES = {

@@ -76,6 +76,10 @@ function loadRuntime() {
   context.__nvdaPayload = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "cache", "nvidia.json"), "utf8"));
   context.__tsmcPayload = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "cache", "tsmc.json"), "utf8"));
   context.__jdPayload = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "cache", "jd.json"), "utf8"));
+  context.__alibabaPayload = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "dataset-index.json"), "utf8")).companies.find(
+    (company) => company.id === "alibaba"
+  );
+  context.__alibabaHistoryPayload = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "cache", "alibaba.json"), "utf8"));
   return context;
 }
 
@@ -274,4 +278,75 @@ test("positive-heavy NVDA Sankey layout lifts operating and net nodes and keeps 
   );
   assert.ok(rAndD.y - (tax.y + tax.height) >= 55, "tax and R&D branches should stay visually separated");
   assert.ok(sgAndA.y - (rAndD.y + rAndD.height) >= 120, "R&D and SG&A branches should remain fanned out");
+});
+
+test("Alibaba latest-only payload suppresses cross-taxonomy QoQ metrics and explains the reporting break", () => {
+  const context = loadRuntime();
+  const result = vm.runInContext(
+    `(() => {
+      const company = normalizeLoadedCompany(__alibabaPayload, 0);
+      state.uiLanguage = "zh";
+      state.logoCatalog = {};
+      state.supplementalComponents = {};
+      const snapshot = buildSnapshot(company, "2026Q2");
+      snapshot.companyNameZh = company.nameZh;
+      snapshot.companyNameEn = company.nameEn;
+      const svg = EarningsVizRuntime.render.renderIncomeStatementSvg(snapshot, company);
+      return {
+        businessQoq: snapshot.businessGroups.map((item) => item.qoqPct),
+        detailQoq: snapshot.leftDetailGroups.map((item) => item.qoqPct),
+        footnote: snapshot.footnote,
+        svg,
+      };
+    })()`,
+    context
+  );
+
+  assert.ok(result.businessQoq.every((value) => value === null));
+  assert.ok(result.detailQoq.every((value) => value === null));
+  assert.match(result.footnote, /本季度官方调整了分部报告口径/);
+  assert.doesNotMatch(result.svg, /环比[+-]0\.0%|环比-56\.0%/);
+});
+
+test("Alibaba Sankey taxonomy changes exactly when the official segment structure changes", () => {
+  const context = loadRuntime();
+  const result = vm.runInContext(
+    `(() => {
+      const company = normalizeLoadedCompany(__alibabaHistoryPayload, 0);
+      state.uiLanguage = "zh";
+      state.logoCatalog = {};
+      state.supplementalComponents = {};
+      const expectedTransitionQuarters = [];
+      const renderedTransitionQuarters = [];
+      const mismatches = [];
+      let previousOfficialSignature = "";
+      let previousRenderedSignature = "";
+      for (const quarterKey of company.quarters) {
+        const entry = company.financials[quarterKey];
+        const snapshot = buildSnapshot(company, quarterKey);
+        const officialSegments = (entry.officialRevenueSegments || []).map((item) => item.memberKey);
+        const renderedSegments = (snapshot.businessGroups || []).map((item) => item.memberKey || item.id);
+        const officialDetails = (entry.officialRevenueDetailGroups || []).map(
+          (item) => item.memberKey + ">" + normalizeLabelKey(item.targetName || item.targetId || "")
+        );
+        const renderedDetails = (snapshot.leftDetailGroups || []).map(
+          (item) => (item.id || item.memberKey) + ">" + normalizeLabelKey(item.targetName || item.targetId || "")
+        );
+        const officialSignature = officialSegments.join("|") + "//" + officialDetails.join("|");
+        const renderedSignature = renderedSegments.join("|") + "//" + renderedDetails.join("|");
+        if (officialSignature !== previousOfficialSignature) expectedTransitionQuarters.push(quarterKey);
+        if (renderedSignature !== previousRenderedSignature) renderedTransitionQuarters.push(quarterKey);
+        if (officialSignature !== renderedSignature) mismatches.push(quarterKey);
+        previousOfficialSignature = officialSignature;
+        previousRenderedSignature = renderedSignature;
+      }
+      return { expectedTransitionQuarters, renderedTransitionQuarters, mismatches };
+    })()`,
+    context
+  );
+
+  const expected = ["2016Q2", "2021Q2", "2021Q4", "2023Q2", "2025Q2", "2026Q2"];
+  assert.deepEqual([...result.expectedTransitionQuarters], expected);
+  assert.deepEqual([...result.renderedTransitionQuarters], expected);
+  assert.deepEqual([...result.mismatches], []);
 });

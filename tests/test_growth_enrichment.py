@@ -92,6 +92,40 @@ class GrowthEnrichmentTests(unittest.TestCase):
         row = result["financials"]["2026Q1"]["officialRevenueSegments"][0]
         self.assertEqual(row["qoqPct"], 28)
 
+    def test_schema_change_does_not_infer_growth_for_an_overlapping_key(self) -> None:
+        financials = {
+            "2025Q2": {
+                "revenueBn": 100,
+                "officialRevenueSegments": [
+                    {"name": "Legacy", "memberKey": "legacy", "valueBn": 70, "yoyPct": None, "qoqPct": None},
+                    {"name": "All others", "memberKey": "allothers", "valueBn": 30, "yoyPct": None, "qoqPct": None},
+                ],
+            },
+            "2026Q1": {
+                "revenueBn": 120,
+                "officialRevenueSegments": [
+                    {"name": "Legacy", "memberKey": "legacy", "valueBn": 75, "yoyPct": None, "qoqPct": None},
+                    {"name": "All others", "memberKey": "allothers", "valueBn": 45, "yoyPct": None, "qoqPct": None},
+                ],
+            },
+            "2026Q2": {
+                "revenueBn": 150,
+                "officialRevenueSegments": [
+                    {"name": "New segment", "memberKey": "newsegment", "valueBn": 110, "yoyPct": 10, "qoqPct": None},
+                    {"name": "All others", "memberKey": "allothers", "valueBn": 40, "yoyPct": 5, "qoqPct": None},
+                ],
+            },
+        }
+
+        enrich_growth_rows(financials, "officialRevenueSegments")
+
+        latest_rows = {row["memberKey"]: row for row in financials["2026Q2"]["officialRevenueSegments"]}
+        self.assertIsNone(latest_rows["allothers"]["qoqPct"])
+        self.assertIsNone(latest_rows["allothers"].get("mixYoyDeltaPp"))
+        self.assertEqual(latest_rows["allothers"]["yoyPct"], 5)
+        self.assertTrue(financials["2026Q2"]["officialRevenueTaxonomyChangedFromPreviousQuarter"])
+        self.assertTrue(financials["2026Q2"]["officialRevenueTaxonomyChangedFromPriorYear"])
+
 
 if __name__ == "__main__":
     unittest.main()

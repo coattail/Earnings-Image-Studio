@@ -15,6 +15,7 @@ from official_revenue_structures import (
     _load_alibaba_quarterly_items,
     _normalize_text_space,
     _quarter_from_alibaba_title,
+    _timestamp_ms_to_iso_date,
 )
 
 
@@ -198,7 +199,14 @@ def _extract_first_billion_value(pattern: str, text: str) -> float | None:
         return None
 
 
-def _parse_alibaba_pdf_financial_entry(pdf_text: str, quarter_key: str, fiscal_label: str, source_url: str, period_end: str) -> dict[str, Any] | None:
+def _parse_alibaba_pdf_financial_entry(
+    pdf_text: str,
+    quarter_key: str,
+    fiscal_label: str,
+    source_url: str,
+    period_end: str,
+    filing_date: str,
+) -> dict[str, Any] | None:
     normalized = _normalize_text_space(pdf_text)
     quarter_end_label = {
         "Q1": f"March 31, {quarter_key[:4]}",
@@ -213,6 +221,10 @@ def _parse_alibaba_pdf_financial_entry(pdf_text: str, quarter_key: str, fiscal_l
     )
     operating_income_bn = _extract_first_billion_value(r"Income from operations was RMB([\d,]+)\s+million", normalized)
     net_income_bn = _extract_first_billion_value(r"net income was RMB([\d,]+)\s+million", normalized)
+    pretax_income_bn = _extract_first_billion_value(
+        r"Income before income tax and share of results of equity method investees\s+\(?([\d,]+)\)?",
+        normalized,
+    )
     tax_bn = _extract_first_billion_value(
         rf"Income tax expenses\s*Income tax expenses in the quarter ended {re.escape(quarter_end_label)} (?:was|were) RMB([\d,]+)\s+million",
         normalized,
@@ -241,22 +253,22 @@ def _parse_alibaba_pdf_financial_entry(pdf_text: str, quarter_key: str, fiscal_l
         "otherOpexBn": None,
         "operatingExpensesBn": round(gross_profit_bn - operating_income_bn, 3) if gross_profit_bn is not None else None,
         "operatingIncomeBn": operating_income_bn,
-        "nonOperatingBn": None,
-        "pretaxIncomeBn": round(net_income_bn + tax_bn, 3) if tax_bn is not None else None,
+        "nonOperatingBn": round(pretax_income_bn - operating_income_bn, 3) if pretax_income_bn is not None else None,
+        "pretaxIncomeBn": pretax_income_bn if pretax_income_bn is not None else (round(net_income_bn + tax_bn, 3) if tax_bn is not None else None),
         "taxBn": tax_bn,
         "netIncomeBn": net_income_bn,
         "netIncomeYoyPct": None,
         "grossMarginPct": gross_margin_pct,
         "operatingMarginPct": operating_margin_pct,
         "profitMarginPct": profit_margin_pct,
-        "effectiveTaxRatePct": round((tax_bn / (net_income_bn + tax_bn)) * 100, 3) if tax_bn not in (None, 0) and net_income_bn is not None else None,
+        "effectiveTaxRatePct": round((tax_bn / pretax_income_bn) * 100, 3) if tax_bn not in (None, 0) and pretax_income_bn not in (None, 0) else None,
         "revenueQoqPct": None,
         "grossMarginYoyDeltaPp": None,
         "operatingMarginYoyDeltaPp": None,
         "profitMarginYoyDeltaPp": None,
         "statementSource": "alibaba-ir-pdf",
         "statementSourceUrl": source_url,
-        "statementFilingDate": period_end,
+        "statementFilingDate": filing_date,
     }
 
 
@@ -284,16 +296,30 @@ def _supplement_alibaba_missing_quarters(result: dict[str, Any]) -> None:
         title_field = item.get("documentTitle")
         title = str((title_field or {}).get("en_US") if isinstance(title_field, dict) else title_field or "")
         quarter_key = _quarter_from_alibaba_title(title)
-        if not quarter_key or quarter_key in result["financials"]:
+        if not quarter_key:
+            continue
+        existing_entry = (result.get("financials") or {}).get(quarter_key)
+        if isinstance(existing_entry, dict) and all(
+            existing_entry.get(field) is not None
+            for field in ("revenueBn", "costOfRevenueBn", "operatingIncomeBn", "netIncomeBn")
+        ):
             continue
         fiscal_label, period_end = _fiscal_label_from_calendar_quarter(quarter_key)
         if not fiscal_label or not period_end:
             continue
+        filing_date = _timestamp_ms_to_iso_date(item.get("eventDate") or item.get("documentPublishTime"))
         pdf_url, _page_url = _load_alibaba_press_release_pdf(item)
         if not pdf_url:
             continue
         pdf_text = _extract_pdf_text(pdf_url)
-        entry = _parse_alibaba_pdf_financial_entry(pdf_text, quarter_key, fiscal_label, pdf_url, period_end)
+        entry = _parse_alibaba_pdf_financial_entry(
+            pdf_text,
+            quarter_key,
+            fiscal_label,
+            pdf_url,
+            period_end,
+            filing_date,
+        )
         if not entry:
             continue
         result["financials"][quarter_key] = entry

@@ -1469,8 +1469,8 @@ function updateMeta(snapshot, company, viewPayload = null) {
     refs.detailSegmentCount.textContent = currentChartLanguage() === "en" ? `${segmentCount} segments` : `${segmentCount} 个`;
     refs.detailSegmentNote.textContent =
       currentChartLanguage() === "en"
-        ? `Each bar shows quarterly revenue split by segment; categories follow each filing period's official taxonomy.`
-        : `每个柱子代表一个季度，并按分部营收堆叠；分类严格遵循各期官方披露口径。`;
+        ? `Each bar shows quarterly revenue based on official segment disclosures; taxonomy changes are harmonized into comparable high-level groups.`
+        : `每个柱子均基于当期官方分部披露；遇到口径变化时，历史分类会归并为可比较的高层业务组。`;
     refs.detailStatementSummary.textContent = `${formatBillionsInCurrency(earliestRevenue, primaryDisplayCurrency)} → ${formatBillionsInCurrency(
       latestRevenue,
       primaryDisplayCurrency

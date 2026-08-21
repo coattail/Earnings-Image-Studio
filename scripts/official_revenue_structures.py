@@ -3467,7 +3467,21 @@ def _load_alibaba_quarterly_items() -> list[dict[str, Any]]:
 
 def _parse_alibaba_quarter_rows(text: str, quarter: str, filing_date: str, source_url: str) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     normalized = _normalize_text_space(text)
-    if "Total Alibaba China E-commerce Group" in normalized:
+    if "Total Alibaba E-commerce Group" in normalized:
+        top_level_rows = [
+            ("Total Alibaba E-commerce Group", "Alibaba E-commerce Group", "alibabaecommercegroup"),
+            ("AI Cloud and Compute Services", "AI Cloud and Compute Services", "aicloudandcomputeservices"),
+            ("AI Labs and Applications", "AI Labs and Applications", "ailabsandapplications"),
+            ("All others", "All others", "allothers"),
+        ]
+        detail_rows = [
+            ("Customer management", "Alibaba E-commerce Group"),
+            ("Direct sales, logistics and others", "Alibaba E-commerce Group"),
+            ("China Quick Commerce", "Alibaba E-commerce Group"),
+            ("International E-commerce", "Alibaba E-commerce Group"),
+            ("Global Wholesale", "Alibaba E-commerce Group"),
+        ]
+    elif "Total Alibaba China E-commerce Group" in normalized:
         top_level_rows = [
             ("Total Alibaba China E-commerce Group", "Alibaba China E-commerce Group", "alibabachinaecommercegroup"),
             ("Total Alibaba International Digital Commerce Group", "Alibaba International Digital Commerce Group", "alidcg"),
@@ -3787,6 +3801,22 @@ def _collect_custom_hierarchy_facts_from_root(
 
 def _enrich_growth(financials: dict[str, Any], field_name: str) -> None:
     ordered_quarters = sorted(financials, key=_period_key)
+
+    def taxonomy_signature(quarter_key: str) -> frozenset[str]:
+        rows = financials.get(quarter_key, {}).get(field_name) or []
+        return frozenset(
+            str(item.get("memberKey") or item.get("name") or "")
+            for item in rows
+            if isinstance(item, dict) and str(item.get("memberKey") or item.get("name") or "")
+        )
+
+    def has_matching_taxonomy(left_quarter_key: str, right_quarter_key: str | None) -> bool:
+        if not right_quarter_key:
+            return False
+        left_signature = taxonomy_signature(left_quarter_key)
+        right_signature = taxonomy_signature(right_quarter_key)
+        return bool(left_signature) and left_signature == right_signature
+
     for quarter in ordered_quarters:
         rows = financials.get(quarter, {}).get(field_name) or []
         if not rows:
@@ -3797,6 +3827,22 @@ def _enrich_growth(financials: dict[str, Any], field_name: str) -> None:
         prior_quarter = _previous_quarter(quarter)
         prior_quarter_rows = financials.get(prior_quarter, {}).get(field_name) or [] if prior_quarter else []
         prior_quarter_map = {str(item.get("memberKey") or item.get("name") or ""): item for item in prior_quarter_rows}
+        comparable_to_prior_quarter = has_matching_taxonomy(quarter, prior_quarter)
+        comparable_to_prior_year = has_matching_taxonomy(quarter, prior_year_quarter)
+        prior_quarter_has_taxonomy = bool(taxonomy_signature(prior_quarter)) if prior_quarter else False
+        prior_year_has_taxonomy = bool(taxonomy_signature(prior_year_quarter))
+        taxonomy_flag = (
+            "officialRevenueTaxonomyChangedFromPreviousQuarter"
+            if field_name == "officialRevenueSegments"
+            else "officialRevenueDetailTaxonomyChangedFromPreviousQuarter"
+        )
+        prior_year_taxonomy_flag = (
+            "officialRevenueTaxonomyChangedFromPriorYear"
+            if field_name == "officialRevenueSegments"
+            else "officialRevenueDetailTaxonomyChangedFromPriorYear"
+        )
+        financials[quarter][taxonomy_flag] = bool(prior_quarter_has_taxonomy and not comparable_to_prior_quarter)
+        financials[quarter][prior_year_taxonomy_flag] = bool(prior_year_has_taxonomy and not comparable_to_prior_year)
         revenue_bn = float(financials.get(quarter, {}).get("revenueBn") or 0)
         prior_year_revenue_bn = float(financials.get(prior_year_quarter, {}).get("revenueBn") or 0)
         for row in rows:
@@ -3804,18 +3850,18 @@ def _enrich_growth(financials: dict[str, Any], field_name: str) -> None:
             if row.get("yoyPct") is None:
                 previous = prior_year_map.get(member_key)
                 previous_value = float(previous.get("valueBn") or 0) if previous else 0
-                if previous_value:
+                if comparable_to_prior_year and previous_value:
                     row["yoyPct"] = round((float(row.get("valueBn") or 0) / previous_value - 1) * 100, 2)
             if row.get("qoqPct") is None:
                 previous = prior_quarter_map.get(member_key)
                 previous_value = float(previous.get("valueBn") or 0) if previous else 0
-                if previous_value:
+                if comparable_to_prior_quarter and previous_value:
                     row["qoqPct"] = round((float(row.get("valueBn") or 0) / previous_value - 1) * 100, 2)
             if revenue_bn and row.get("mixPct") is None:
                 row["mixPct"] = round(float(row.get("valueBn") or 0) / revenue_bn * 100, 1)
             previous = prior_year_map.get(member_key)
             previous_value = float(previous.get("valueBn") or 0) if previous else 0
-            if revenue_bn and prior_year_revenue_bn and previous_value and row.get("mixYoyDeltaPp") is None:
+            if comparable_to_prior_year and revenue_bn and prior_year_revenue_bn and previous_value and row.get("mixYoyDeltaPp") is None:
                 current_mix = float(row.get("valueBn") or 0) / revenue_bn * 100
                 prior_mix = previous_value / prior_year_revenue_bn * 100
                 row["mixYoyDeltaPp"] = round(current_mix - prior_mix, 1)

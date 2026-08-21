@@ -1586,8 +1586,26 @@ function renderPixelReplicaSvg(snapshot) {
       list.push(item);
       targetGroups.set(key, list);
     });
-    targetGroups.forEach((items, key) => {
-      const targetSlice = sourceSliceMap.get(key) || sourceSlices.find((slice) => slice.item.name === key);
+    const orderedTargetGroups = [...targetGroups.entries()]
+      .map(([key, items], originalIndex) => {
+        const normalizedKey = normalizeLabelKey(key);
+        const targetSlice =
+          sourceSliceMap.get(key) ||
+          sourceSlices.find((slice) =>
+            [slice.item?.id, slice.item?.memberKey, slice.item?.name]
+              .map((value) => normalizeLabelKey(value))
+              .includes(normalizedKey)
+          );
+        return {
+          items,
+          originalIndex,
+          targetSlice,
+          targetIndex: sourceSlices.indexOf(targetSlice),
+        };
+      })
+      .filter((group) => group.targetIndex >= 0)
+      .sort((left, right) => left.targetIndex - right.targetIndex || left.originalIndex - right.originalIndex);
+    orderedTargetGroups.forEach(({ items, targetSlice }) => {
       if (!targetSlice) return;
       const totalValue = items.reduce((sum, item) => sum + safeNumber(item.valueBn), 0);
       const detailScale = totalValue > 0 ? targetSlice.height / totalValue : 0;
@@ -5337,6 +5355,101 @@ function renderPixelReplicaSvg(snapshot) {
       detailGroupsByTarget.set(slice.targetSlice, entries);
     });
 
+    // When several published detail rows feed more than one parent segment,
+    // balancing each parent independently produces two disconnected clusters.
+    // The later order guard then has no choice but to keep pushing the lower
+    // cluster down. Lay out the entire published sequence as one fan first so
+    // it keeps a deliberate top-to-bottom rhythm while remaining non-crossing.
+    const denseFanThreshold = Math.max(
+      Math.round(safeNumber(snapshot.layout?.hierarchicalRevenueGlobalDenseDetailThreshold, 5)),
+      4
+    );
+    const orderedTargetSlices = [...detailGroupsByTarget.keys()].sort(
+      (left, right) => sourceSlices.indexOf(left) - sourceSlices.indexOf(right)
+    );
+    const hasLearnedDetailPlacement = leftDetailRenderSlices.some((_slice, index) => {
+      const learnedOffset = learnedEditorOffsetForNode(`left-detail-${index}`);
+      return Math.abs(learnedOffset.dx) > 0.01 || Math.abs(learnedOffset.dy) > 0.01;
+    });
+    const usesGlobalDenseFan =
+      leftDetailRenderSlices.length >= denseFanThreshold &&
+      orderedTargetSlices.length >= 2 &&
+      !hasLearnedDetailPlacement;
+
+    if (usesGlobalDenseFan) {
+      const firstTargetSlice = orderedTargetSlices[0];
+      const lastTargetSlice = orderedTargetSlices[orderedTargetSlices.length - 1];
+      const firstTargetIndex = sourceSlices.indexOf(firstTargetSlice);
+      const lastTargetIndex = sourceSlices.indexOf(lastTargetSlice);
+      const firstTargetOffset = balancedLayoutOffsetForNode(`source-${firstTargetIndex}`);
+      const lastTargetOffset = balancedLayoutOffsetForNode(`source-${lastTargetIndex}`);
+      const totalDetailHeight = leftDetailRenderSlices.reduce(
+        (sum, slice) => sum + Math.max(safeNumber(slice.height, 0), 0),
+        0
+      );
+      const desiredTopY = clamp(
+        firstTargetSlice.top + firstTargetOffset.dy -
+          firstTargetSlice.height *
+            safeNumber(snapshot.layout?.hierarchicalRevenueGlobalDenseTopSpreadFactor, 0.72),
+        leftDetailNodeMinY,
+        leftDetailNodeMaxY
+      );
+      const desiredBottomY = clamp(
+        lastTargetSlice.top + lastTargetSlice.height + lastTargetOffset.dy +
+          lastTargetSlice.height *
+            safeNumber(snapshot.layout?.hierarchicalRevenueGlobalDenseBottomSpreadFactor, 1.45),
+        desiredTopY + totalDetailHeight,
+        leftDetailNodeMaxY
+      );
+      const gapCount = Math.max(leftDetailRenderSlices.length - 1, 0);
+      const minimumGapY = scaleY(
+        safeNumber(snapshot.layout?.hierarchicalRevenueGlobalDenseMinGapY, 64)
+      );
+      const availableGapBudget = Math.max(
+        desiredBottomY - desiredTopY - totalDetailHeight,
+        0
+      );
+      const maximumGapBudget = Math.max(
+        leftDetailNodeMaxY - desiredTopY - totalDetailHeight,
+        0
+      );
+      const gapBudget = Math.min(
+        Math.max(availableGapBudget, minimumGapY * gapCount),
+        maximumGapBudget
+      );
+      const configuredGapProfile = Array.isArray(snapshot.layout?.hierarchicalRevenueGlobalDenseGapProfile)
+        ? snapshot.layout.hierarchicalRevenueGlobalDenseGapProfile
+        : [1.49, 0.78, 0.95, 0.96, 1.13];
+      const gapProfile = configuredGapProfile
+        .map((value) => Math.max(safeNumber(value, 1), 0.1));
+      const sampleGapWeight = (positionNorm) => {
+        if (gapProfile.length < 2) return gapProfile[0] || 1;
+        const profilePosition = clamp(positionNorm, 0, 1) * (gapProfile.length - 1);
+        const leftIndex = Math.floor(profilePosition);
+        const rightIndex = Math.min(leftIndex + 1, gapProfile.length - 1);
+        const mix = profilePosition - leftIndex;
+        return gapProfile[leftIndex] * (1 - mix) + gapProfile[rightIndex] * mix;
+      };
+      const gapWeights = Array.from({ length: gapCount }, (_value, index) =>
+        sampleGapWeight(gapCount <= 1 ? 0 : index / (gapCount - 1))
+      );
+      const gapWeightTotal = gapWeights.reduce((sum, value) => sum + value, 0) || 1;
+      let detailCursorY = desiredTopY;
+      leftDetailRenderSlices.forEach((slice, index) => {
+        const nodeId = `left-detail-${index}`;
+        const automaticOffset = autoLayoutOffsetForNode(nodeId);
+        const currentRenderedTopY = slice.top + balancedLayoutOffsetForNode(nodeId).dy;
+        setAutoLayoutNodeOffset(nodeId, {
+          dy: automaticOffset.dy + detailCursorY - currentRenderedTopY,
+        });
+        detailCursorY += slice.height;
+        if (index < gapWeights.length) {
+          detailCursorY += gapBudget * (gapWeights[index] / gapWeightTotal);
+        }
+      });
+      return;
+    }
+
     detailGroupsByTarget.forEach((entries, targetSlice) => {
       const targetSourceIndex = sourceSlices.indexOf(targetSlice);
       if (targetSourceIndex < 0 || !entries.length) return;
@@ -5555,6 +5668,56 @@ function renderPixelReplicaSvg(snapshot) {
     });
   };
   balanceHierarchicalRevenueDetailFans();
+  const enforceOrderedRevenueRibbonSources = () => {
+    if (snapshot.layout?.disableRevenueRibbonOrderGuard === true) return;
+    const packSlices = (slices, nodeIdForIndex, minTop, maxBottom, minimumGapY) => {
+      if (slices.length < 2) return;
+      const packed = resolveOrderedVerticalBoxes(
+        slices.map((slice, index) => {
+          const nodeId = nodeIdForIndex(index);
+          const offset = balancedLayoutOffsetForNode(nodeId);
+          return {
+            top: slice.top + offset.dy,
+            height: slice.height,
+          };
+        }),
+        minTop,
+        maxBottom,
+        minimumGapY
+      );
+      packed.forEach((box, index) => {
+        const nodeId = nodeIdForIndex(index);
+        const automaticOffset = autoLayoutOffsetForNode(nodeId);
+        const currentRenderedTop = slices[index].top + balancedLayoutOffsetForNode(nodeId).dy;
+        setAutoLayoutNodeOffset(nodeId, {
+          dy: automaticOffset.dy + box.top - currentRenderedTop,
+        });
+      });
+    };
+
+    packSlices(
+      sourceSlices,
+      (index) => `source-${index}`,
+      sourceNodeMinY,
+      sourceNodeMaxY,
+      scaleY(
+        safeNumber(
+          snapshot.layout?.sourceRibbonOrderMinGapY,
+          sourceSlices.length >= 6 ? 64 : sourceSlices.length >= 5 ? 36 : 4
+        )
+      )
+    );
+    if (prototypeFlags.hierarchicalDetails && leftDetailRenderSlices.length) {
+      packSlices(
+        leftDetailRenderSlices,
+        (index) => `left-detail-${index}`,
+        leftDetailNodeMinY,
+        leftDetailNodeMaxY,
+        scaleY(safeNumber(snapshot.layout?.hierarchicalRevenueRibbonOrderMinGapY, 64))
+      );
+    }
+  };
+  enforceOrderedRevenueRibbonSources();
   const editorOffsetForNode = (nodeId, options = {}) => combinedNodeOffsetFor(nodeId, options);
   const editableNodeFrame = (nodeId, x, y, widthValue, heightValue) => {
     const offset = editorOffsetForNode(nodeId);

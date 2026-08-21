@@ -31,7 +31,7 @@ const state = {
   },
 };
 
-const BUILD_ASSET_VERSION = "20260803-palantir-loss-conservation-v189";
+const BUILD_ASSET_VERSION = "20260821-alibaba-history-ribbon-spacing-v198";
 const CORPORATE_LOGO_AREA_MULTIPLIER = 1.728;
 const CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER = Math.sqrt(CORPORATE_LOGO_AREA_MULTIPLIER);
 const CORPORATE_LOGO_REVENUE_GAP_MULTIPLIER = 1.2;
@@ -1447,6 +1447,7 @@ const CHART_LABEL_TRANSLATIONS_ZH_EXACT = {
   "value added services": "增值服务",
   "value-added services and solutions": "增值服务与解决方案",
   "marketing services": "营销服务",
+  "customer management": "客户管理",
   "marketplace and marketing revenues": "平台与营销收入",
   "selling and marketing": "销售与营销",
   "selling and marketing expenses": "销售与营销费用",
@@ -1459,7 +1460,10 @@ const CHART_LABEL_TRANSLATIONS_ZH_EXACT = {
   "international games": "国际游戏",
   "social networks": "社交网络",
   "alibaba china e-commerce group": "阿里巴巴中国电商集团",
+  "alibaba e-commerce group": "阿里巴巴电商集团",
   "alibaba international digital commerce group": "阿里巴巴数字商业集团",
+  "ai cloud and compute services": "AI 云与计算服务",
+  "ai labs and applications": "AI 实验室与应用",
   commerce: "商业",
   "cloud computing": "云计算",
   cloud: "云业务",
@@ -1470,6 +1474,9 @@ const CHART_LABEL_TRANSLATIONS_ZH_EXACT = {
   "cloud intelligence group": "云智能集团",
   "all others": "其他业务",
   "quick commerce": "即时零售",
+  "china quick commerce": "中国即时零售",
+  "international e-commerce": "国际电商",
+  "global wholesale": "全球批发",
   "china commerce wholesale": "中国批发商业",
   "local consumer services": "本地消费者服务",
   "local consumer services and others": "本地消费者服务及其他",
@@ -2555,8 +2562,14 @@ function inferredOfficialRevenueStyle(company, entry, rows = []) {
     company?.id === "alibaba" &&
     (memberKeys.has("taobaoandtmallgroup") ||
       memberKeys.has("alibabachinaecommercegroup") ||
+      memberKeys.has("alibabaecommercegroup") ||
+      memberKeys.has("corecommerce") ||
+      memberKeys.has("commerce") ||
+      memberKeys.has("chinacommerce") ||
       memberKeys.has("alidcg") ||
-      memberKeys.has("cloudintelligencegroup"))
+      memberKeys.has("cloudintelligencegroup") ||
+      memberKeys.has("aicloudandcomputeservices") ||
+      memberKeys.has("ailabsandapplications"))
   ) {
     return "alibaba-commerce-staged";
   }
@@ -2655,6 +2668,18 @@ const ALIBABA_BAR_COMPARABLE_SEGMENTS = Object.freeze([
   Object.freeze({ key: "alidcg", name: "Alibaba International Digital Commerce Group", nameZh: "阿里巴巴数字商业集团" }),
 ]);
 
+const ALIBABA_BAR_FY27_SEGMENTS = Object.freeze([
+  Object.freeze({ key: "alibabaecommercegroup", name: "Alibaba E-commerce Group", nameZh: "阿里巴巴电商集团" }),
+  Object.freeze({ key: "aicloudandcomputeservices", name: "AI Cloud and Compute Services", nameZh: "AI 云与计算服务" }),
+  Object.freeze({ key: "ailabsandapplications", name: "AI Labs and Applications", nameZh: "AI 实验室与应用" }),
+  Object.freeze({ key: "allothers", name: "All others", nameZh: "其他业务" }),
+]);
+
+function usesAlibabaFy27BarTaxonomy(rows = []) {
+  const memberKeys = new Set([...(rows || [])].map((item) => normalizeLabelKey(item?.key || item?.memberKey || item?.id || item?.name)));
+  return memberKeys.has("alibabaecommercegroup") && memberKeys.has("aicloudandcomputeservices") && memberKeys.has("ailabsandapplications");
+}
+
 const ALIBABA_BAR_PHASE_KEYS = {
   comparable: new Set(["alibabachinaecommercegroup", "alidcg", "cloudintelligencegroup", "allothers"]),
   condensedCurrent: new Set(["alibabachinaecommercegroup", "alidcg", "cloudintelligencegroup", "allothers"]),
@@ -2739,9 +2764,12 @@ const ALIBABA_DETAIL_ORDER = {
   directsalesandothers: 1,
   directsaleslogisticsandothers: 1,
   quickcommerce: 2,
+  chinaquickcommerce: 2,
   chinacommercewholesale: 3,
   internationalcommerceretail: 0,
   internationalcommercewholesale: 1,
+  internationalecommerce: 3,
+  globalwholesale: 4,
 };
 
 function detectQuarterKeyForEntry(company, entry) {
@@ -2763,6 +2791,45 @@ function previousQuarterKey(quarterKey) {
 function priorYearQuarterKey(quarterKey) {
   if (!quarterKey || !/^\d{4}Q[1-4]$/.test(quarterKey)) return null;
   return `${Number(quarterKey.slice(0, 4)) - 1}${quarterKey.slice(4)}`;
+}
+
+function officialRevenueTaxonomySignature(entry, fieldName = "officialRevenueSegments") {
+  return [...(entry?.[fieldName] || [])]
+    .map((item) => normalizeLabelKey(item?.memberKey || item?.id || item?.name))
+    .filter(Boolean)
+    .sort()
+    .join("|");
+}
+
+function officialRevenueTaxonomyMatches(company, entry, fieldName, comparisonQuarterKey) {
+  if (!company?.financials || !entry || !comparisonQuarterKey) return false;
+  const currentSignature = officialRevenueTaxonomySignature(entry, fieldName);
+  const comparisonSignature = officialRevenueTaxonomySignature(company.financials[comparisonQuarterKey], fieldName);
+  return !!currentSignature && currentSignature === comparisonSignature;
+}
+
+function officialRevenueTaxonomyChangedSincePreviousQuarter(company, entry, fieldName = "officialRevenueSegments") {
+  const explicitFlag =
+    fieldName === "officialRevenueSegments"
+      ? entry?.officialRevenueTaxonomyChangedFromPreviousQuarter
+      : entry?.officialRevenueDetailTaxonomyChangedFromPreviousQuarter;
+  if (explicitFlag !== null && explicitFlag !== undefined) return explicitFlag === true;
+  const quarterKey = detectQuarterKeyForEntry(company, entry);
+  const comparisonQuarterKey = previousQuarterKey(quarterKey);
+  if (!comparisonQuarterKey || !company?.financials?.[comparisonQuarterKey]) return false;
+  return !officialRevenueTaxonomyMatches(company, entry, fieldName, comparisonQuarterKey);
+}
+
+function officialRevenueTaxonomyChangedSincePriorYear(company, entry, fieldName = "officialRevenueSegments") {
+  const explicitFlag =
+    fieldName === "officialRevenueSegments"
+      ? entry?.officialRevenueTaxonomyChangedFromPriorYear
+      : entry?.officialRevenueDetailTaxonomyChangedFromPriorYear;
+  if (explicitFlag !== null && explicitFlag !== undefined) return explicitFlag === true;
+  const quarterKey = detectQuarterKeyForEntry(company, entry);
+  const comparisonQuarterKey = priorYearQuarterKey(quarterKey);
+  if (!comparisonQuarterKey || !company?.financials?.[comparisonQuarterKey]) return false;
+  return !officialRevenueTaxonomyMatches(company, entry, fieldName, comparisonQuarterKey);
 }
 
 function alibabaSegmentPhase(rows = []) {
@@ -2897,9 +2964,13 @@ function buildAlibabaStagedBusinessGroups(company, entry) {
   if (!official.length) return null;
   const revenueBn = safeNumber(entry?.revenueBn);
   if (revenueBn <= 0) return null;
-  const rows = official.slice().sort((left, right) => safeNumber(right.valueBn) - safeNumber(left.valueBn));
+  // Alibaba's segment table order is semantic. Keep that official order stable
+  // instead of reshuffling the Sankey whenever two segments cross in revenue.
+  const rows = official.slice();
   const palette = revenuePaletteForStyle(company, "alibaba-commerce-staged", rows.length);
   const compactMode = rows.length >= 5;
+  const taxonomyChangedFromPriorQuarter = officialRevenueTaxonomyChangedSincePreviousQuarter(company, entry);
+  const taxonomyChangedFromPriorYear = officialRevenueTaxonomyChangedSincePriorYear(company, entry);
   const groups = rows.map((item, index) => {
     const memberKey = item.memberKey || item.name;
     const currentValue = safeNumber(item.valueBn);
@@ -2913,9 +2984,9 @@ function buildAlibabaStagedBusinessGroups(company, entry) {
       valueBn: Number(currentValue.toFixed(3)),
       flowValueBn: Number(safeNumber(item.flowValueBn ?? currentValue).toFixed(3)),
       yoyPct: item.yoyPct ?? null,
-      qoqPct: item.qoqPct ?? null,
+      qoqPct: taxonomyChangedFromPriorQuarter ? null : item.qoqPct ?? null,
       mixPct,
-      mixYoyDeltaPp: item.mixYoyDeltaPp ?? null,
+      mixYoyDeltaPp: taxonomyChangedFromPriorYear ? null : item.mixYoyDeltaPp ?? null,
       metricMode: item.metricMode || null,
       operatingMarginPct: null,
       nodeColor: color,
@@ -2927,6 +2998,7 @@ function buildAlibabaStagedBusinessGroups(company, entry) {
       compactLabel: compactMode,
       sourceUrl: item.sourceUrl || null,
       memberKey,
+      layoutOrder: index,
     };
   });
   return normalizeGroupFlowTotalsToRevenue(groups, revenueBn);
