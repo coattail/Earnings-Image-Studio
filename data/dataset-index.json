@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-21T06:51:48Z",
+  "generatedAt": "2026-08-21T20:44:22Z",
   "companyCount": 40,
   "companies": [
     {
@@ -73,7 +73,7 @@
           "latestStructureHistoryQuarter": "2026Q2",
           "revenueClassificationQuarterCount": 34,
           "expenseClassificationQuarterCount": 2,
-          "revenueClassificationCoverageRatio": 1,
+          "revenueClassificationCoverageRatio": 1.0,
           "expenseClassificationCoverageRatio": 0.0588,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": 6,
@@ -115,9 +115,9 @@
           "validation": {
             "version": "parser-validation-v1",
             "status": "high",
-            "overallConfidenceScore": 1,
-            "financialConfidenceScore": 1,
-            "structuralConfidenceScore": 1,
+            "overallConfidenceScore": 1.0,
+            "financialConfidenceScore": 1.0,
+            "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 34,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
@@ -362,7 +362,11 @@
               "targetName": "Data Center",
               "targetMemberKey": "datacenter"
             }
-          ]
+          ],
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+          "officialRevenueTaxonomyChangedFromPriorYear": true,
+          "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueDetailTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -948,7 +952,7 @@
           "latestStructureHistoryQuarter": "2025Q4",
           "revenueClassificationQuarterCount": 33,
           "expenseClassificationQuarterCount": 10,
-          "revenueClassificationCoverageRatio": 1,
+          "revenueClassificationCoverageRatio": 1.0,
           "expenseClassificationCoverageRatio": 0.303,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": 0,
@@ -990,9 +994,9 @@
           "validation": {
             "version": "parser-validation-v1",
             "status": "high",
-            "overallConfidenceScore": 1,
-            "financialConfidenceScore": 1,
-            "structuralConfidenceScore": 1,
+            "overallConfidenceScore": 1.0,
+            "financialConfidenceScore": 1.0,
+            "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 33,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
@@ -1210,7 +1214,11 @@
               "officialOpexBreakdown"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueDetailTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -1288,7 +1296,7 @@
           "latestStructureHistoryQuarter": "2026Q2",
           "revenueClassificationQuarterCount": 34,
           "expenseClassificationQuarterCount": 6,
-          "revenueClassificationCoverageRatio": 1,
+          "revenueClassificationCoverageRatio": 1.0,
           "expenseClassificationCoverageRatio": 0.1765,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": 0,
@@ -1332,7 +1340,7 @@
             "status": "high",
             "overallConfidenceScore": 0.9635,
             "financialConfidenceScore": 0.9438,
-            "structuralConfidenceScore": 1,
+            "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 22,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 12,
@@ -1636,7 +1644,11 @@
               "officialCostBreakdown"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueDetailTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -2014,8 +2026,8 @@
           "latestStructureHistoryQuarter": "2025Q4",
           "revenueClassificationQuarterCount": 34,
           "expenseClassificationQuarterCount": 0,
-          "revenueClassificationCoverageRatio": 1,
-          "expenseClassificationCoverageRatio": 0,
+          "revenueClassificationCoverageRatio": 1.0,
+          "expenseClassificationCoverageRatio": 0.0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
@@ -2056,9 +2068,9 @@
           "validation": {
             "version": "parser-validation-v1",
             "status": "high",
-            "overallConfidenceScore": 1,
-            "financialConfidenceScore": 1,
-            "structuralConfidenceScore": 1,
+            "overallConfidenceScore": 1.0,
+            "financialConfidenceScore": 1.0,
+            "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 34,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
@@ -2166,7 +2178,9 @@
               "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -2244,7 +2258,7 @@
           "latestStructureHistoryQuarter": "2025Q4",
           "revenueClassificationQuarterCount": 34,
           "expenseClassificationQuarterCount": 1,
-          "revenueClassificationCoverageRatio": 1,
+          "revenueClassificationCoverageRatio": 1.0,
           "expenseClassificationCoverageRatio": 0.0294,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": 0,
@@ -2288,7 +2302,7 @@
             "status": "high",
             "overallConfidenceScore": 0.9635,
             "financialConfidenceScore": 0.9438,
-            "structuralConfidenceScore": 1,
+            "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 2,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 32,
@@ -2479,7 +2493,9 @@
               "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -2602,7 +2618,7 @@
             "version": "parser-validation-v1",
             "status": "high",
             "overallConfidenceScore": 0.9944,
-            "financialConfidenceScore": 1,
+            "financialConfidenceScore": 1.0,
             "structuralConfidenceScore": 0.9839,
             "revenueSegmentChecks": 27,
             "revenueSegmentMismatchCount": 0,
@@ -2694,7 +2710,7 @@
               "valueBn": 838.451,
               "yoyPct": 91.81,
               "qoqPct": 20,
-              "mixPct": 66,
+              "mixPct": 66.0,
               "mixYoyDeltaPp": 6,
               "sourceUrl": "https://investor.tsmc.com/english/encrypt/files/encrypt_file/reports/2026-07/6f49632674bd2d0fd48cb65aaf89ec6ab510b559/2Q26%20ManagementReport.pdf",
               "sourceForm": "QuarterlyManagementReport",
@@ -2714,7 +2730,7 @@
               "valueBn": 279.484,
               "yoyPct": 5.74,
               "qoqPct": -4,
-              "mixPct": 22,
+              "mixPct": 22.0,
               "mixYoyDeltaPp": -5,
               "sourceUrl": "https://investor.tsmc.com/english/encrypt/files/encrypt_file/reports/2026-07/6f49632674bd2d0fd48cb65aaf89ec6ab510b559/2Q26%20ManagementReport.pdf",
               "sourceForm": "QuarterlyManagementReport",
@@ -2734,7 +2750,7 @@
               "valueBn": 63.519,
               "yoyPct": 41.57,
               "qoqPct": 4,
-              "mixPct": 5,
+              "mixPct": 5.0,
               "mixYoyDeltaPp": 0,
               "sourceUrl": "https://investor.tsmc.com/english/encrypt/files/encrypt_file/reports/2026-07/6f49632674bd2d0fd48cb65aaf89ec6ab510b559/2Q26%20ManagementReport.pdf",
               "sourceForm": "QuarterlyManagementReport",
@@ -2754,7 +2770,7 @@
               "valueBn": 50.815,
               "yoyPct": 5.88,
               "qoqPct": 15,
-              "mixPct": 4,
+              "mixPct": 4.0,
               "mixYoyDeltaPp": -1,
               "sourceUrl": "https://investor.tsmc.com/english/encrypt/files/encrypt_file/reports/2026-07/6f49632674bd2d0fd48cb65aaf89ec6ab510b559/2Q26%20ManagementReport.pdf",
               "sourceForm": "QuarterlyManagementReport",
@@ -2774,7 +2790,7 @@
               "valueBn": 12.704,
               "yoyPct": -16.13,
               "qoqPct": 5,
-              "mixPct": 1,
+              "mixPct": 1.0,
               "mixYoyDeltaPp": 0,
               "sourceUrl": "https://investor.tsmc.com/english/encrypt/files/encrypt_file/reports/2026-07/6f49632674bd2d0fd48cb65aaf89ec6ab510b559/2Q26%20ManagementReport.pdf",
               "sourceForm": "QuarterlyManagementReport",
@@ -2794,7 +2810,7 @@
               "valueBn": 25.408,
               "yoyPct": 28.85,
               "qoqPct": 5,
-              "mixPct": 2,
+              "mixPct": 2.0,
               "mixYoyDeltaPp": 0,
               "sourceUrl": "https://investor.tsmc.com/english/encrypt/files/encrypt_file/reports/2026-07/6f49632674bd2d0fd48cb65aaf89ec6ab510b559/2Q26%20ManagementReport.pdf",
               "sourceForm": "QuarterlyManagementReport",
@@ -2816,7 +2832,9 @@
               "officialOpexBreakdown"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -3069,7 +3087,7 @@
           "latestStructureHistoryQuarter": "2026Q2",
           "revenueClassificationQuarterCount": 34,
           "expenseClassificationQuarterCount": 5,
-          "revenueClassificationCoverageRatio": 1,
+          "revenueClassificationCoverageRatio": 1.0,
           "expenseClassificationCoverageRatio": 0.1471,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": 0,
@@ -3113,7 +3131,7 @@
             "status": "high",
             "overallConfidenceScore": 0.9989,
             "financialConfidenceScore": 0.9983,
-            "structuralConfidenceScore": 1,
+            "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 34,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
@@ -3289,7 +3307,9 @@
               "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -3734,7 +3754,7 @@
             "status": "high",
             "overallConfidenceScore": 0.9635,
             "financialConfidenceScore": 0.9438,
-            "structuralConfidenceScore": 1,
+            "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 22,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
@@ -3860,7 +3880,11 @@
               "officialRevenueDetailGroups"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueDetailTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -3940,7 +3964,7 @@
           "latestStructureHistoryQuarter": "2026Q2",
           "revenueClassificationQuarterCount": 34,
           "expenseClassificationQuarterCount": 2,
-          "revenueClassificationCoverageRatio": 1,
+          "revenueClassificationCoverageRatio": 1.0,
           "expenseClassificationCoverageRatio": 0.0588,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": 0,
@@ -3982,9 +4006,9 @@
           "validation": {
             "version": "parser-validation-v1",
             "status": "high",
-            "overallConfidenceScore": 1,
-            "financialConfidenceScore": 1,
-            "structuralConfidenceScore": 1,
+            "overallConfidenceScore": 1.0,
+            "financialConfidenceScore": 1.0,
+            "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 0,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 34,
@@ -4236,7 +4260,11 @@
               "officialOpexBreakdown"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueDetailTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -4667,8 +4695,8 @@
           "latestStructureHistoryQuarter": null,
           "revenueClassificationQuarterCount": 33,
           "expenseClassificationQuarterCount": 0,
-          "revenueClassificationCoverageRatio": 1,
-          "expenseClassificationCoverageRatio": 0,
+          "revenueClassificationCoverageRatio": 1.0,
+          "expenseClassificationCoverageRatio": 0.0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
@@ -4965,7 +4993,9 @@
               "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -5088,7 +5118,7 @@
             "status": "high",
             "overallConfidenceScore": 0.9979,
             "financialConfidenceScore": 0.9967,
-            "structuralConfidenceScore": 1,
+            "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 31,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
@@ -5355,7 +5385,9 @@
               "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": true
         }
       },
       "statementPresets": {},
@@ -5713,8 +5745,8 @@
           "latestStructureHistoryQuarter": "2026Q2",
           "revenueClassificationQuarterCount": 34,
           "expenseClassificationQuarterCount": 0,
-          "revenueClassificationCoverageRatio": 1,
-          "expenseClassificationCoverageRatio": 0,
+          "revenueClassificationCoverageRatio": 1.0,
+          "expenseClassificationCoverageRatio": 0.0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
@@ -5970,7 +6002,9 @@
             ],
             "rule": "same-normalized-category-set"
           },
-          "officialRevenueStyle": "berkshire-operating-businesses"
+          "officialRevenueStyle": "berkshire-operating-businesses",
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -6419,7 +6453,7 @@
           "latestStructureHistoryQuarter": null,
           "revenueClassificationQuarterCount": 34,
           "expenseClassificationQuarterCount": 1,
-          "revenueClassificationCoverageRatio": 1,
+          "revenueClassificationCoverageRatio": 1.0,
           "expenseClassificationCoverageRatio": 0.0294,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": 0,
@@ -6464,9 +6498,9 @@
           "validation": {
             "version": "parser-validation-v1",
             "status": "high",
-            "overallConfidenceScore": 1,
-            "financialConfidenceScore": 1,
-            "structuralConfidenceScore": 1,
+            "overallConfidenceScore": 1.0,
+            "financialConfidenceScore": 1.0,
+            "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 34,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
@@ -6543,7 +6577,7 @@
                 "HBM · 服务器 DRAM · 移动 DRAM"
               ],
               "valueBn": 57902.651,
-              "mixPct": 73,
+              "mixPct": 73.0,
               "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q2_eng.pdf?1=",
               "sourceForm": "SK hynix quarterly earnings presentation — Revenue by Product",
               "metricMode": "rounded-official-mix",
@@ -6551,7 +6585,7 @@
               "validationNotes": "The official product chart reports DRAM at 73% and NAND at 27%; Others remains part of the product taxonomy but has no separately disclosed non-zero percentage because the chart is rounded.",
               "qoqPct": 42.41,
               "yoyPct": 238.24,
-              "mixYoyDeltaPp": -4
+              "mixYoyDeltaPp": -4.0
             },
             {
               "memberKey": "nand",
@@ -6561,7 +6595,7 @@
                 "NAND · SSD · 企业级 SSD"
               ],
               "valueBn": 21416.049,
-              "mixPct": 27,
+              "mixPct": 27.0,
               "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q2_eng.pdf?1=",
               "sourceForm": "SK hynix quarterly earnings presentation — Revenue by Product",
               "metricMode": "rounded-official-mix",
@@ -6569,7 +6603,7 @@
               "validationNotes": "The official product chart reports DRAM at 73% and NAND at 27%; Others remains part of the product taxonomy but has no separately disclosed non-zero percentage because the chart is rounded.",
               "qoqPct": 85.1,
               "yoyPct": 358.71,
-              "mixYoyDeltaPp": 6
+              "mixYoyDeltaPp": 6.0
             },
             {
               "memberKey": "otherproductsservices",
@@ -6578,16 +6612,16 @@
               "supportLinesZh": [
                 "CIS · 晶圆代工及其他"
               ],
-              "valueBn": 0,
-              "mixPct": 0,
+              "valueBn": 0.0,
+              "mixPct": 0.0,
               "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q2_eng.pdf?1=",
               "sourceForm": "SK hynix quarterly earnings presentation — Revenue by Product",
               "metricMode": "rounded-official-mix",
               "validationEligible": true,
               "validationNotes": "The official product chart reports DRAM at 73% and NAND at 27%; Others remains part of the product taxonomy but has no separately disclosed non-zero percentage because the chart is rounded.",
-              "qoqPct": -100,
-              "yoyPct": -100,
-              "mixYoyDeltaPp": -2
+              "qoqPct": -100.0,
+              "yoyPct": -100.0,
+              "mixYoyDeltaPp": -2.0
             }
           ],
           "officialRevenueStyle": "semiconductor-product-mix",
@@ -6742,7 +6776,9 @@
               "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -6820,8 +6856,8 @@
           "latestStructureHistoryQuarter": "2026Q2",
           "revenueClassificationQuarterCount": 34,
           "expenseClassificationQuarterCount": 0,
-          "revenueClassificationCoverageRatio": 1,
-          "expenseClassificationCoverageRatio": 0,
+          "revenueClassificationCoverageRatio": 1.0,
+          "expenseClassificationCoverageRatio": 0.0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
@@ -6863,7 +6899,7 @@
             "status": "low",
             "overallConfidenceScore": 0.6482,
             "financialConfidenceScore": 0.9972,
-            "structuralConfidenceScore": 0,
+            "structuralConfidenceScore": 0.0,
             "revenueSegmentChecks": 8,
             "revenueSegmentMismatchCount": 8,
             "revenueSegmentSkippedChecks": 26,
@@ -7237,7 +7273,9 @@
               "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": true
         }
       },
       "statementPresets": {},
@@ -7836,8 +7874,8 @@
           "latestStructureHistoryQuarter": "2026Q2",
           "revenueClassificationQuarterCount": 34,
           "expenseClassificationQuarterCount": 0,
-          "revenueClassificationCoverageRatio": 1,
-          "expenseClassificationCoverageRatio": 0,
+          "revenueClassificationCoverageRatio": 1.0,
+          "expenseClassificationCoverageRatio": 0.0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
@@ -8004,7 +8042,9 @@
               "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -8362,8 +8402,8 @@
           "latestStructureHistoryQuarter": "2026Q1",
           "revenueClassificationQuarterCount": 33,
           "expenseClassificationQuarterCount": 0,
-          "revenueClassificationCoverageRatio": 1,
-          "expenseClassificationCoverageRatio": 0,
+          "revenueClassificationCoverageRatio": 1.0,
+          "expenseClassificationCoverageRatio": 0.0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
@@ -8406,7 +8446,7 @@
             "status": "high",
             "overallConfidenceScore": 0.9845,
             "financialConfidenceScore": 0.9762,
-            "structuralConfidenceScore": 1,
+            "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 33,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
@@ -8601,7 +8641,9 @@
               "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -8979,7 +9021,7 @@
           "latestStructureHistoryQuarter": "2026Q2",
           "revenueClassificationQuarterCount": 34,
           "expenseClassificationQuarterCount": 1,
-          "revenueClassificationCoverageRatio": 1,
+          "revenueClassificationCoverageRatio": 1.0,
           "expenseClassificationCoverageRatio": 0.0294,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": 0,
@@ -9028,7 +9070,7 @@
             "status": "high",
             "overallConfidenceScore": 0.9611,
             "financialConfidenceScore": 0.9401,
-            "structuralConfidenceScore": 1,
+            "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 34,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
@@ -9187,7 +9229,9 @@
               "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -9589,8 +9633,8 @@
           "latestStructureHistoryQuarter": "2026Q2",
           "revenueClassificationQuarterCount": 34,
           "expenseClassificationQuarterCount": 0,
-          "revenueClassificationCoverageRatio": 1,
-          "expenseClassificationCoverageRatio": 0,
+          "revenueClassificationCoverageRatio": 1.0,
+          "expenseClassificationCoverageRatio": 0.0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
@@ -9795,7 +9839,9 @@
               "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -9995,8 +10041,8 @@
           "latestStructureHistoryQuarter": "2026Q2",
           "revenueClassificationQuarterCount": 34,
           "expenseClassificationQuarterCount": 0,
-          "revenueClassificationCoverageRatio": 1,
-          "expenseClassificationCoverageRatio": 0,
+          "revenueClassificationCoverageRatio": 1.0,
+          "expenseClassificationCoverageRatio": 0.0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
@@ -10267,7 +10313,11 @@
               "officialRevenueDetailGroups"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueDetailTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -10684,8 +10734,8 @@
           "latestStructureHistoryQuarter": "2026Q2",
           "revenueClassificationQuarterCount": 32,
           "expenseClassificationQuarterCount": 0,
-          "revenueClassificationCoverageRatio": 1,
-          "expenseClassificationCoverageRatio": 0,
+          "revenueClassificationCoverageRatio": 1.0,
+          "expenseClassificationCoverageRatio": 0.0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
@@ -10728,7 +10778,7 @@
             "status": "high",
             "overallConfidenceScore": 0.9496,
             "financialConfidenceScore": 0.9225,
-            "structuralConfidenceScore": 1,
+            "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 11,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 21,
@@ -10829,7 +10879,9 @@
               "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -11160,7 +11212,7 @@
             "status": "high",
             "overallConfidenceScore": 0.8865,
             "financialConfidenceScore": 0.8254,
-            "structuralConfidenceScore": 1,
+            "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 0,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 18,
@@ -11305,7 +11357,9 @@
               "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -11686,8 +11740,8 @@
           "latestStructureHistoryQuarter": "2026Q2",
           "revenueClassificationQuarterCount": 84,
           "expenseClassificationQuarterCount": 0,
-          "revenueClassificationCoverageRatio": 1,
-          "expenseClassificationCoverageRatio": 0,
+          "revenueClassificationCoverageRatio": 1.0,
+          "expenseClassificationCoverageRatio": 0.0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
@@ -12007,7 +12061,11 @@
               "officialRevenueDetailGroups"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueDetailTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -12705,7 +12763,7 @@
           "revenueClassificationQuarterCount": 30,
           "expenseClassificationQuarterCount": 0,
           "revenueClassificationCoverageRatio": 0.8824,
-          "expenseClassificationCoverageRatio": 0,
+          "expenseClassificationCoverageRatio": 0.0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
@@ -12748,7 +12806,7 @@
             "status": "high",
             "overallConfidenceScore": 0.9585,
             "financialConfidenceScore": 0.9361,
-            "structuralConfidenceScore": 1,
+            "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 30,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
@@ -12850,7 +12908,9 @@
               "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -13194,8 +13254,8 @@
           "latestStructureHistoryQuarter": "2026Q2",
           "revenueClassificationQuarterCount": 34,
           "expenseClassificationQuarterCount": 0,
-          "revenueClassificationCoverageRatio": 1,
-          "expenseClassificationCoverageRatio": 0,
+          "revenueClassificationCoverageRatio": 1.0,
+          "expenseClassificationCoverageRatio": 0.0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
@@ -13723,7 +13783,9 @@
               "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": true
         }
       },
       "statementPresets": {},
@@ -14442,8 +14504,8 @@
           "latestStructureHistoryQuarter": "2026Q2",
           "revenueClassificationQuarterCount": 34,
           "expenseClassificationQuarterCount": 0,
-          "revenueClassificationCoverageRatio": 1,
-          "expenseClassificationCoverageRatio": 0,
+          "revenueClassificationCoverageRatio": 1.0,
+          "expenseClassificationCoverageRatio": 0.0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
@@ -14486,7 +14548,7 @@
             "status": "high",
             "overallConfidenceScore": 0.952,
             "financialConfidenceScore": 0.9262,
-            "structuralConfidenceScore": 1,
+            "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 4,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 29,
@@ -14587,7 +14649,9 @@
               "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": true
         }
       },
       "statementPresets": {},
@@ -14900,8 +14964,8 @@
           "latestStructureHistoryQuarter": "2026Q1",
           "revenueClassificationQuarterCount": 33,
           "expenseClassificationQuarterCount": 0,
-          "revenueClassificationCoverageRatio": 1,
-          "expenseClassificationCoverageRatio": 0,
+          "revenueClassificationCoverageRatio": 1.0,
+          "expenseClassificationCoverageRatio": 0.0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
@@ -14944,7 +15008,7 @@
             "status": "high",
             "overallConfidenceScore": 0.9956,
             "financialConfidenceScore": 0.9932,
-            "structuralConfidenceScore": 1,
+            "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 30,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
@@ -15165,7 +15229,9 @@
               "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -15533,8 +15599,8 @@
           "latestStructureHistoryQuarter": "2026Q2",
           "revenueClassificationQuarterCount": 34,
           "expenseClassificationQuarterCount": 0,
-          "revenueClassificationCoverageRatio": 1,
-          "expenseClassificationCoverageRatio": 0,
+          "revenueClassificationCoverageRatio": 1.0,
+          "expenseClassificationCoverageRatio": 0.0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
@@ -15722,7 +15788,9 @@
               "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -16145,7 +16213,7 @@
             "status": "high",
             "overallConfidenceScore": 0.9317,
             "financialConfidenceScore": 0.8949,
-            "structuralConfidenceScore": 1,
+            "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 32,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
@@ -16446,7 +16514,11 @@
               "officialRevenueDetailGroups"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueDetailTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -16957,7 +17029,7 @@
           "revenueClassificationQuarterCount": 28,
           "expenseClassificationQuarterCount": 0,
           "revenueClassificationCoverageRatio": 0.8485,
-          "expenseClassificationCoverageRatio": 0,
+          "expenseClassificationCoverageRatio": 0.0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
@@ -17165,7 +17237,9 @@
               "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -17538,7 +17612,7 @@
           "revenueClassificationQuarterCount": 30,
           "expenseClassificationQuarterCount": 0,
           "revenueClassificationCoverageRatio": 0.9091,
-          "expenseClassificationCoverageRatio": 0,
+          "expenseClassificationCoverageRatio": 0.0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
@@ -17580,7 +17654,7 @@
             "version": "parser-validation-v1",
             "status": "high",
             "overallConfidenceScore": 0.9125,
-            "financialConfidenceScore": 1,
+            "financialConfidenceScore": 1.0,
             "structuralConfidenceScore": 0.75,
             "revenueSegmentChecks": 0,
             "revenueSegmentMismatchCount": 0,
@@ -17728,7 +17802,9 @@
               "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -17806,8 +17882,8 @@
           "latestStructureHistoryQuarter": "2026Q2",
           "revenueClassificationQuarterCount": 34,
           "expenseClassificationQuarterCount": 0,
-          "revenueClassificationCoverageRatio": 1,
-          "expenseClassificationCoverageRatio": 0,
+          "revenueClassificationCoverageRatio": 1.0,
+          "expenseClassificationCoverageRatio": 0.0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
@@ -17850,7 +17926,7 @@
             "status": "high",
             "overallConfidenceScore": 0.9832,
             "financialConfidenceScore": 0.9742,
-            "structuralConfidenceScore": 1,
+            "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 34,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
@@ -18005,7 +18081,9 @@
               "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -18408,7 +18486,7 @@
           "latestStructureHistoryQuarter": "2026Q2",
           "revenueClassificationQuarterCount": 34,
           "expenseClassificationQuarterCount": 8,
-          "revenueClassificationCoverageRatio": 1,
+          "revenueClassificationCoverageRatio": 1.0,
           "expenseClassificationCoverageRatio": 0.2353,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": 2,
@@ -18450,9 +18528,9 @@
           "validation": {
             "version": "parser-validation-v1",
             "status": "high",
-            "overallConfidenceScore": 1,
-            "financialConfidenceScore": 1,
-            "structuralConfidenceScore": 1,
+            "overallConfidenceScore": 1.0,
+            "financialConfidenceScore": 1.0,
+            "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 0,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 34,
@@ -18577,7 +18655,9 @@
               "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -18932,7 +19012,7 @@
             "status": "high",
             "overallConfidenceScore": 0.9977,
             "financialConfidenceScore": 0.9965,
-            "structuralConfidenceScore": 1,
+            "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 27,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 3,
@@ -19091,7 +19171,9 @@
               "officialOpexBreakdown"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -19481,7 +19563,7 @@
           "revenueClassificationQuarterCount": 22,
           "expenseClassificationQuarterCount": 30,
           "revenueClassificationCoverageRatio": 0.7333,
-          "expenseClassificationCoverageRatio": 1,
+          "expenseClassificationCoverageRatio": 1.0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": 0,
           "warnings": [],
@@ -19524,7 +19606,7 @@
             "status": "high",
             "overallConfidenceScore": 0.9464,
             "financialConfidenceScore": 0.9176,
-            "structuralConfidenceScore": 1,
+            "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 18,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
@@ -19643,7 +19725,9 @@
               "officialOpexBreakdown"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -19728,8 +19812,8 @@
           "latestStructureHistoryQuarter": "2026Q2",
           "revenueClassificationQuarterCount": 41,
           "expenseClassificationQuarterCount": 0,
-          "revenueClassificationCoverageRatio": 1,
-          "expenseClassificationCoverageRatio": 0,
+          "revenueClassificationCoverageRatio": 1.0,
+          "expenseClassificationCoverageRatio": 0.0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
@@ -19771,7 +19855,7 @@
             "status": "high",
             "overallConfidenceScore": 0.9664,
             "financialConfidenceScore": 0.9483,
-            "structuralConfidenceScore": 1,
+            "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 28,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 13,
@@ -20781,7 +20865,9 @@
               "officialOpexBreakdown"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -20961,7 +21047,7 @@
           "latestStructureHistoryQuarter": "2026Q1",
           "revenueClassificationQuarterCount": 33,
           "expenseClassificationQuarterCount": 28,
-          "revenueClassificationCoverageRatio": 1,
+          "revenueClassificationCoverageRatio": 1.0,
           "expenseClassificationCoverageRatio": 0.8485,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": 0,
@@ -21004,7 +21090,7 @@
             "status": "high",
             "overallConfidenceScore": 0.9854,
             "financialConfidenceScore": 0.9775,
-            "structuralConfidenceScore": 1,
+            "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 33,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
@@ -21059,7 +21145,7 @@
               "valueBn": 25.7,
               "yoyPct": 7.08,
               "qoqPct": 16.82,
-              "mixPct": 84,
+              "mixPct": 84.0,
               "mixYoyDeltaPp": 0.8,
               "sourceUrl": "https://ir.netease.com/static-files/93a788ed-25f4-452a-9d1d-97bc3aca0a24",
               "sourceForm": null,
@@ -21076,7 +21162,7 @@
               "memberKey": "innovativebusinessesandothers",
               "valueBn": 1.5,
               "yoyPct": -7.64,
-              "qoqPct": -25,
+              "qoqPct": -25.0,
               "mixPct": 4.9,
               "mixYoyDeltaPp": -0.7,
               "sourceUrl": "https://ir.netease.com/static-files/93a788ed-25f4-452a-9d1d-97bc3aca0a24",
@@ -21094,7 +21180,7 @@
               "memberKey": "cloudmusic",
               "valueBn": 2,
               "yoyPct": 5.26,
-              "qoqPct": 0,
+              "qoqPct": 0.0,
               "mixPct": 6.5,
               "mixYoyDeltaPp": -0.1,
               "sourceUrl": "https://ir.netease.com/static-files/93a788ed-25f4-452a-9d1d-97bc3aca0a24",
@@ -21169,7 +21255,9 @@
               "officialOpexBreakdown"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -21564,7 +21652,7 @@
           "latestStructureHistoryQuarter": "2026Q2",
           "revenueClassificationQuarterCount": 33,
           "expenseClassificationQuarterCount": 32,
-          "revenueClassificationCoverageRatio": 1,
+          "revenueClassificationCoverageRatio": 1.0,
           "expenseClassificationCoverageRatio": 0.9697,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": 0,
@@ -21606,7 +21694,7 @@
             "version": "parser-validation-v1",
             "status": "high",
             "overallConfidenceScore": 0.991,
-            "financialConfidenceScore": 1,
+            "financialConfidenceScore": 1.0,
             "structuralConfidenceScore": 0.9744,
             "revenueSegmentChecks": 9,
             "revenueSegmentMismatchCount": 0,
@@ -21873,7 +21961,11 @@
               "officialOpexBreakdown"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueDetailTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -22391,7 +22483,7 @@
             "version": "parser-validation-v1",
             "status": "high",
             "overallConfidenceScore": 0.8833,
-            "financialConfidenceScore": 1,
+            "financialConfidenceScore": 1.0,
             "structuralConfidenceScore": 0.6667,
             "revenueSegmentChecks": 30,
             "revenueSegmentMismatchCount": 0,
@@ -22526,7 +22618,9 @@
           "revenueQoqPct": -1.148,
           "revenueYoyPct": 5.178,
           "displayCurrency": "USD",
-          "displayScaleFactor": 0.14782
+          "displayScaleFactor": 0.14782,
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
@@ -22869,8 +22963,8 @@
           "latestStructureHistoryQuarter": "2026Q2",
           "revenueClassificationQuarterCount": 34,
           "expenseClassificationQuarterCount": 34,
-          "revenueClassificationCoverageRatio": 1,
-          "expenseClassificationCoverageRatio": 1,
+          "revenueClassificationCoverageRatio": 1.0,
+          "expenseClassificationCoverageRatio": 1.0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": 0,
           "warnings": [],
@@ -22912,7 +23006,7 @@
             "status": "high",
             "overallConfidenceScore": 0.9635,
             "financialConfidenceScore": 0.9438,
-            "structuralConfidenceScore": 1,
+            "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 0,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 34,
@@ -23143,7 +23237,11 @@
               "officialOpexBreakdown"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueDetailTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
