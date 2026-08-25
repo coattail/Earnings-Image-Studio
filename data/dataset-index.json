@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-25T01:56:08Z",
+  "generatedAt": "2026-08-25T20:56:03Z",
   "companyCount": 40,
   "companies": [
     {
@@ -2609,9 +2609,9 @@
             "issueCount": 0,
             "mismatchQuarterCount": 0,
             "highConfidenceQuarterCount": 33,
-            "averageConfidenceScore": 1,
+            "averageConfidenceScore": 1.0,
             "latestQuarter": "2026Q1",
-            "latestQuarterConfidenceScore": 1,
+            "latestQuarterConfidenceScore": 1.0,
             "latestQuarterIssueCount": 0
           },
           "validation": {
@@ -2711,7 +2711,7 @@
               "yoyPct": 91.81,
               "qoqPct": 20,
               "mixPct": 66.0,
-              "mixYoyDeltaPp": 6,
+              "mixYoyDeltaPp": 6.0,
               "sourceUrl": "https://investor.tsmc.com/english/encrypt/files/encrypt_file/reports/2026-07/6f49632674bd2d0fd48cb65aaf89ec6ab510b559/2Q26%20ManagementReport.pdf",
               "sourceForm": "QuarterlyManagementReport",
               "filingDate": "2026-07-16",
@@ -2731,7 +2731,7 @@
               "yoyPct": 5.74,
               "qoqPct": -4,
               "mixPct": 22.0,
-              "mixYoyDeltaPp": -5,
+              "mixYoyDeltaPp": -5.0,
               "sourceUrl": "https://investor.tsmc.com/english/encrypt/files/encrypt_file/reports/2026-07/6f49632674bd2d0fd48cb65aaf89ec6ab510b559/2Q26%20ManagementReport.pdf",
               "sourceForm": "QuarterlyManagementReport",
               "filingDate": "2026-07-16",
@@ -2751,7 +2751,7 @@
               "yoyPct": 41.57,
               "qoqPct": 4,
               "mixPct": 5.0,
-              "mixYoyDeltaPp": 0,
+              "mixYoyDeltaPp": -0.0,
               "sourceUrl": "https://investor.tsmc.com/english/encrypt/files/encrypt_file/reports/2026-07/6f49632674bd2d0fd48cb65aaf89ec6ab510b559/2Q26%20ManagementReport.pdf",
               "sourceForm": "QuarterlyManagementReport",
               "filingDate": "2026-07-16",
@@ -2771,7 +2771,7 @@
               "yoyPct": 5.88,
               "qoqPct": 15,
               "mixPct": 4.0,
-              "mixYoyDeltaPp": -1,
+              "mixYoyDeltaPp": -1.0,
               "sourceUrl": "https://investor.tsmc.com/english/encrypt/files/encrypt_file/reports/2026-07/6f49632674bd2d0fd48cb65aaf89ec6ab510b559/2Q26%20ManagementReport.pdf",
               "sourceForm": "QuarterlyManagementReport",
               "filingDate": "2026-07-16",
@@ -2791,7 +2791,7 @@
               "yoyPct": -16.13,
               "qoqPct": 5,
               "mixPct": 1.0,
-              "mixYoyDeltaPp": 0,
+              "mixYoyDeltaPp": 0.0,
               "sourceUrl": "https://investor.tsmc.com/english/encrypt/files/encrypt_file/reports/2026-07/6f49632674bd2d0fd48cb65aaf89ec6ab510b559/2Q26%20ManagementReport.pdf",
               "sourceForm": "QuarterlyManagementReport",
               "filingDate": "2026-07-16",
@@ -2811,7 +2811,7 @@
               "yoyPct": 28.85,
               "qoqPct": 5,
               "mixPct": 2.0,
-              "mixYoyDeltaPp": 0,
+              "mixYoyDeltaPp": 0.0,
               "sourceUrl": "https://investor.tsmc.com/english/encrypt/files/encrypt_file/reports/2026-07/6f49632674bd2d0fd48cb65aaf89ec6ab510b559/2Q26%20ManagementReport.pdf",
               "sourceForm": "QuarterlyManagementReport",
               "filingDate": "2026-07-16",
@@ -2825,6 +2825,8 @@
             }
           ],
           "officialRevenueStyle": "tsmc-platform-mix",
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
           "sankeyStructureContinuity": {
             "sourceQuarter": "2026Q1",
             "fields": [
@@ -2832,9 +2834,7 @@
               "officialOpexBreakdown"
             ],
             "rule": "same-normalized-category-set"
-          },
-          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueTaxonomyChangedFromPriorYear": false
+          }
         }
       },
       "statementPresets": {},
@@ -2992,20 +2992,15 @@
         },
         "filingsUsed": [
           {
-            "form": "6-K",
-            "filingDate": "2026-04-16",
-            "accession": "000104617926000199",
-            "presentation": "a1q26presentatione.htm",
-            "pressRelease": "a1q26e_withguidancexfinal.htm"
-          },
-          {
             "title": "TSMC 2026 Q2 Quarterly Results",
             "quarter": "2026Q2",
             "filingDate": "2026-07-16",
             "url": "https://investor.tsmc.com/english/quarterly-results/2026/q2"
           }
         ],
-        "errors": []
+        "errors": [
+          "segment-cache-missing"
+        ]
       },
       "officialSegmentHistory": {}
     },
