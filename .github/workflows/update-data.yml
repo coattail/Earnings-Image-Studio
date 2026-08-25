@@ -74,7 +74,13 @@ jobs:
           if [[ "$mode_input" == "force-refresh" ]]; then
             cmd=(python scripts/build_dataset.py --refresh)
           else
-            cmd=(python scripts/check_for_updates.py --report-path output/update-report.json --fail-on-check-errors)
+            cmd=(python scripts/check_for_updates.py --report-path output/update-report.json)
+            # Manual runs should surface source-check failures immediately.
+            # Scheduled runs retain the diagnostic artifact and retry transient
+            # source throttling on the next hourly poll without a false alarm.
+            if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+              cmd+=(--fail-on-check-errors)
+            fi
           fi
 
           if [[ -n "$companies_input" ]]; then

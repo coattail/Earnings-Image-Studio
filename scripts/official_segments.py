@@ -3,8 +3,10 @@ from __future__ import annotations
 import json
 import re
 import socket
+import threading
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 from http.client import IncompleteRead, RemoteDisconnected
 import xml.etree.ElementTree as ET
@@ -41,6 +43,16 @@ SEC_HEADERS = {
     "Accept-Language": "en-US,en;q=0.9",
     "Cache-Control": "no-cache",
 }
+
+# SEC fair-access guidance caps automated traffic at 10 requests per second.
+# Stay comfortably below that limit and coordinate all SEC fetches in this
+# process so concurrent parser work cannot create short request bursts.
+SEC_MIN_REQUEST_INTERVAL_SECONDS = 0.2
+SEC_RATE_LIMIT_COOLDOWN_SECONDS = 30.0
+SEC_RATE_LIMIT_MAX_COOLDOWN_SECONDS = 120.0
+SEC_RATE_LIMIT_MAX_ATTEMPTS = 2
+_SEC_REQUEST_LOCK = threading.Lock()
+_SEC_NEXT_REQUEST_AT = 0.0
 
 ALLOWED_FORMS = {"10-Q", "10-K", "20-F", "6-K"}
 REVENUE_TAG_PRIORITY = {
@@ -178,17 +190,61 @@ class SegmentFact:
         return (end - start).days + 1
 
 
+def _is_sec_url(url: str) -> bool:
+    try:
+        hostname = urllib.parse.urlparse(url).hostname or ""
+    except ValueError:
+        return False
+    return hostname == "sec.gov" or hostname.endswith(".sec.gov")
+
+
+def _wait_for_sec_request_slot() -> None:
+    global _SEC_NEXT_REQUEST_AT
+    with _SEC_REQUEST_LOCK:
+        delay = _SEC_NEXT_REQUEST_AT - time.monotonic()
+        if delay > 0:
+            time.sleep(delay)
+        _SEC_NEXT_REQUEST_AT = time.monotonic() + SEC_MIN_REQUEST_INTERVAL_SECONDS
+
+
+def _apply_sec_rate_limit_cooldown(error: urllib.error.HTTPError) -> None:
+    global _SEC_NEXT_REQUEST_AT
+    retry_after = error.headers.get("Retry-After") if error.headers else None
+    try:
+        requested_delay = float(retry_after or 0)
+    except (TypeError, ValueError):
+        requested_delay = 0.0
+    cooldown = min(
+        SEC_RATE_LIMIT_MAX_COOLDOWN_SECONDS,
+        max(SEC_RATE_LIMIT_COOLDOWN_SECONDS, requested_delay),
+    )
+    with _SEC_REQUEST_LOCK:
+        _SEC_NEXT_REQUEST_AT = max(_SEC_NEXT_REQUEST_AT, time.monotonic() + cooldown)
+
+
 def _request(url: str) -> bytes:
     last_error: Exception | None = None
+    sec_url = _is_sec_url(url)
+    sec_rate_limit_attempts = 0
     for attempt in range(5):
+        if sec_url:
+            _wait_for_sec_request_slot()
         request = urllib.request.Request(url, headers=SEC_HEADERS)
         try:
             with urllib.request.urlopen(request, timeout=25) as response:
                 return response.read()
+        except urllib.error.HTTPError as exc:
+            last_error = exc
+            if sec_url and exc.code == 429:
+                sec_rate_limit_attempts += 1
+                _apply_sec_rate_limit_cooldown(exc)
+                if sec_rate_limit_attempts >= SEC_RATE_LIMIT_MAX_ATTEMPTS:
+                    break
+                continue
+            time.sleep(0.8 * (attempt + 1))
         except (
             IncompleteRead,
             RemoteDisconnected,
-            urllib.error.HTTPError,
             urllib.error.URLError,
             TimeoutError,
             ConnectionResetError,
@@ -196,7 +252,12 @@ def _request(url: str) -> bytes:
         ) as exc:
             last_error = exc
             time.sleep(0.8 * (attempt + 1))
+    if sec_url and sec_rate_limit_attempts:
+        assert last_error is not None
+        raise last_error
     try:
+        if sec_url:
+            _wait_for_sec_request_slot()
         response = requests.get(url, timeout=60, headers=SEC_HEADERS)
         response.raise_for_status()
         return response.content
