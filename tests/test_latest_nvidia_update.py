@@ -40,8 +40,19 @@ class LatestNvidiaUpdateTests(unittest.TestCase):
         }
         self.assertEqual(previous_details["hyperscale"]["valueBn"], 43.05)
         self.assertEqual(previous_details["aicloudsindustrialenterprise"]["valueBn"], 32.196)
+        self.assertEqual(previous_details["hyperscale"]["yoyPct"], 144.62)
+        self.assertEqual(previous_details["aicloudsindustrialenterprise"]["yoyPct"], 49.66)
         self.assertIsNone(previous_details["hyperscale"]["qoqPct"])
         self.assertIsNone(previous_details["aicloudsindustrialenterprise"]["qoqPct"])
+
+        previous_segments = {
+            row["memberKey"]: row
+            for row in nvidia["financials"]["2026Q2"]["officialRevenueSegments"]
+        }
+        self.assertEqual(previous_segments["datacenter"]["yoyPct"], 92.39)
+        self.assertEqual(previous_segments["datacenter"]["qoqPct"], 20.75)
+        self.assertEqual(previous_segments["edgecomputing"]["yoyPct"], 28.67)
+        self.assertEqual(previous_segments["edgecomputing"]["qoqPct"], 9.56)
         self.assertEqual(details["hyperscale"]["valueBn"], 48.71)
         self.assertEqual(details["hyperscale"]["yoyPct"], 101.55)
         self.assertAlmostEqual(details["hyperscale"]["qoqPct"], 13.1475, places=4)

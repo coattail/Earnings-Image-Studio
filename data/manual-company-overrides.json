@@ -2,6 +2,42 @@
   "nvidia": {
     "financials": {
       "2026Q2": {
+        "officialRevenueSegments": [
+          {
+            "name": "Data Center",
+            "nameZh": "数据中心",
+            "memberKey": "datacenter",
+            "valueBn": 75.246,
+            "yoyPct": 92.39,
+            "qoqPct": 20.75,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426.htm",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-05-20",
+            "supportLines": [
+              "AI · cloud · DGX"
+            ],
+            "validationNotes": [
+              "recast-in-fy2027-q1-filing"
+            ]
+          },
+          {
+            "name": "Edge Computing",
+            "nameZh": "边缘计算",
+            "memberKey": "edgecomputing",
+            "valueBn": 6.369,
+            "yoyPct": 28.67,
+            "qoqPct": 9.56,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426.htm",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-05-20",
+            "supportLines": [
+              "Gaming · RTX workstation · automotive edge"
+            ],
+            "validationNotes": [
+              "recast-in-fy2027-q1-filing"
+            ]
+          }
+        ],
         "officialRevenueDetailGroups": [
           {
             "name": "Hyperscale",
@@ -9,14 +45,15 @@
             "memberKey": "hyperscale",
             "targetName": "Data Center",
             "valueBn": 43.05,
-            "yoyPct": null,
+            "yoyPct": 144.62,
             "qoqPct": null,
             "suppressQoQGrowth": true,
             "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
             "sourceForm": "10-Q",
             "filingDate": "2026-08-26",
             "validationNotes": [
-              "recast-in-fy2027-q2-after-customer-reclassification"
+              "recast-in-fy2027-q2-after-customer-reclassification",
+              "yoy-derived-from-recast-value-and-fy2026-q1-comparable-base"
             ]
           },
           {
@@ -25,14 +62,15 @@
             "memberKey": "aicloudsindustrialenterprise",
             "targetName": "Data Center",
             "valueBn": 32.196,
-            "yoyPct": null,
+            "yoyPct": 49.66,
             "qoqPct": null,
             "suppressQoQGrowth": true,
             "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
             "sourceForm": "10-Q",
             "filingDate": "2026-08-26",
             "validationNotes": [
-              "recast-in-fy2027-q2-after-customer-reclassification"
+              "recast-in-fy2027-q2-after-customer-reclassification",
+              "yoy-derived-from-recast-value-and-fy2026-q1-comparable-base"
             ]
           }
         ],
@@ -118,6 +156,42 @@
       "quarters": {
         "2026Q2": {
           "style": "nvidia-fy2027-market-platform",
+          "segments": [
+            {
+              "name": "Data Center",
+              "nameZh": "数据中心",
+              "memberKey": "datacenter",
+              "valueBn": 75.246,
+              "yoyPct": 92.39,
+              "qoqPct": 20.75,
+              "sourceForm": "10-Q",
+              "filingDate": "2026-05-20",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426.htm",
+              "supportLines": [
+                "AI · cloud · DGX"
+              ],
+              "validationNotes": [
+                "recast-in-fy2027-q1-filing"
+              ]
+            },
+            {
+              "name": "Edge Computing",
+              "nameZh": "边缘计算",
+              "memberKey": "edgecomputing",
+              "valueBn": 6.369,
+              "yoyPct": 28.67,
+              "qoqPct": 9.56,
+              "sourceForm": "10-Q",
+              "filingDate": "2026-05-20",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426.htm",
+              "supportLines": [
+                "Gaming · RTX workstation · automotive edge"
+              ],
+              "validationNotes": [
+                "recast-in-fy2027-q1-filing"
+              ]
+            }
+          ],
           "detailGroups": [
             {
               "name": "Hyperscale",
@@ -125,13 +199,14 @@
               "memberKey": "hyperscale",
               "targetName": "Data Center",
               "valueBn": 43.05,
-              "yoyPct": null,
+              "yoyPct": 144.62,
               "qoqPct": null,
               "suppressQoQGrowth": true,
               "filingDate": "2026-08-26",
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
               "validationNotes": [
-                "recast-in-fy2027-q2-after-customer-reclassification"
+                "recast-in-fy2027-q2-after-customer-reclassification",
+                "yoy-derived-from-recast-value-and-fy2026-q1-comparable-base"
               ]
             },
             {
@@ -140,13 +215,14 @@
               "memberKey": "aicloudsindustrialenterprise",
               "targetName": "Data Center",
               "valueBn": 32.196,
-              "yoyPct": null,
+              "yoyPct": 49.66,
               "qoqPct": null,
               "suppressQoQGrowth": true,
               "filingDate": "2026-08-26",
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
               "validationNotes": [
-                "recast-in-fy2027-q2-after-customer-reclassification"
+                "recast-in-fy2027-q2-after-customer-reclassification",
+                "yoy-derived-from-recast-value-and-fy2026-q1-comparable-base"
               ]
             }
           ]
