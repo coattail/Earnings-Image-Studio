@@ -801,6 +801,30 @@ function applyTemplateTokensToSnapshot(snapshot, company) {
   };
 }
 
+function resolvePreDetailRegularSourceLabelLeadAdjustment(snapshot, item, options = {}) {
+  const compactMode = !!options.compactMode;
+  const fontSize = safeNumber(options.fontSize, compactMode ? 24 : 28);
+  const measuredWidth = safeNumber(
+    options.labelWidth,
+    Math.max(
+      ...["zh", "en"].map((language) =>
+        approximateTextBlockWidth(
+          resolveSourceLabelLines(item, {
+            compactMode,
+            fontSize,
+            maxWidth: language === "zh" ? 166 : 198,
+            language,
+          }),
+          fontSize
+        )
+      )
+    )
+  );
+  const referenceWidth = safeNumber(snapshot?.layout?.preDetailRegularSourceLabelReferenceWidth, 88);
+  const maxAdjustment = safeNumber(snapshot?.layout?.preDetailRegularSourceLabelLeadAdjustmentMaxX, 96);
+  return clamp(measuredWidth - referenceWidth, 0, maxAdjustment);
+}
+
 function snapshotCanvasSize(snapshot) {
   const baseWidth = safeNumber(snapshot?.layout?.canvasWidth, 2048);
   const baseHeight = safeNumber(snapshot?.layout?.canvasHeight, 1325);
@@ -922,7 +946,15 @@ function snapshotCanvasSize(snapshot) {
               detailRightX: baseLeftDetailX + leftDetailWidth,
             })
         : 0;
-    return baseSourceLabelX - leadOffsetX - labelWidth - 12;
+    const labelLeadAdjustmentX =
+      preDetailLeadEnabled && regularSourceRankMap.has(sourceIndex)
+        ? resolvePreDetailRegularSourceLabelLeadAdjustment(snapshot, item, {
+            compactMode,
+            fontSize: sourceLabelTitleSize,
+            labelWidth,
+          })
+        : 0;
+    return baseSourceLabelX - Math.max(leadOffsetX - labelLeadAdjustmentX, 0) - labelWidth - 12;
   });
   const detailLabelLeftEdges = detailGroups.map((item) => {
     const compactMode = compactSources || item.compactLabel;

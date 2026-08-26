@@ -83,15 +83,16 @@ function loadRuntime() {
   return context;
 }
 
-function renderNvda(context, language) {
+function renderNvda(context, language, quarterKey = "2026Q2") {
   context.__language = language;
+  context.__quarterKey = quarterKey;
   return vm.runInContext(
     `(() => {
       const company = normalizeLoadedCompany(__nvdaPayload, 0);
       state.uiLanguage = __language;
       state.logoCatalog = {};
       state.supplementalComponents = {};
-      const snapshot = buildSnapshot(company, "2026Q2");
+      const snapshot = buildSnapshot(company, __quarterKey);
       snapshot.companyNameZh = company.nameZh;
       snapshot.companyNameEn = company.nameEn;
       const svg = EarningsVizRuntime.render.renderIncomeStatementSvg(snapshot, company);
@@ -202,12 +203,53 @@ test("NVDA FY2027 Q1 Chinese revenue detail labels are localized", () => {
   assert.deepEqual(Array.from(localizedDetailNames), ["超大规模", "AI云、工业与企业"]);
 });
 
-test("NVDA FY2027 Q1 revenue detail rows include official latest-quarter Q/Q growth", () => {
+test("NVDA FY2027 Q2 keeps the prior quarter label wrapping and Sankey width", () => {
+  const context = loadRuntime();
+  const prior = renderNvda(context, "zh", "2026Q2");
+  const latest = renderNvda(context, "zh", "2026Q3");
+
+  assert.deepEqual(Array.from(latest.localizedDetailNames), ["超大规模", "AI云、工业与企业"]);
+  assert.match(latest.svg, />超大规模<\/text>/);
+  assert.match(latest.svg, />AI云、工业<\/text>/);
+  assert.match(latest.svg, />与企业<\/text>/);
+  assert.doesNotMatch(latest.svg, />AI 云、工业与企业<\/text>/);
+  assert.ok(
+    Math.abs(viewBox(latest.svg)[2] - viewBox(prior.svg)[2]) <= 4,
+    `latest width ${viewBox(latest.svg)[2]} should stay within 4px of prior width ${viewBox(prior.svg)[2]}`
+  );
+  for (const nodeId of ["left-detail-0", "left-detail-1", "source-0", "revenue", "gross", "operating", "net"]) {
+    assert.ok(
+      Math.abs(nodeX(latest.svg, nodeId) - nodeX(prior.svg, nodeId)) <= 4,
+      `${nodeId} x should remain quarter-stable`
+    );
+  }
+});
+
+test("NVDA FY2027 Q1 recast detail rows suppress non-comparable Q/Q growth", () => {
   const { snapshot } = renderNvda(loadRuntime(), "zh");
   const details = Object.fromEntries(snapshot.leftDetailGroups.map((item) => [item.name, item]));
 
-  assert.equal(details.Hyperscale.qoqPct, 12);
-  assert.equal(details["AI Clouds, Industrial, & Enterprise"].qoqPct, 31);
+  assert.equal(details.Hyperscale.valueBn, 43.05);
+  assert.equal(details["AI Clouds, Industrial, & Enterprise"].valueBn, 32.196);
+  assert.equal(details.Hyperscale.qoqPct, null);
+  assert.equal(details["AI Clouds, Industrial, & Enterprise"].qoqPct, null);
+});
+
+test("NVDA FY2027 Q2 detail growth reconciles to the recast prior-quarter values", () => {
+  const context = loadRuntime();
+  const prior = renderNvda(context, "zh", "2026Q2").snapshot;
+  const latest = renderNvda(context, "zh", "2026Q3").snapshot;
+  const priorDetails = Object.fromEntries(prior.leftDetailGroups.map((item) => [item.name, item]));
+  const latestDetails = Object.fromEntries(latest.leftDetailGroups.map((item) => [item.name, item]));
+
+  for (const name of ["Hyperscale", "AI Clouds, Industrial, & Enterprise"]) {
+    const impliedQoq = Number((((latestDetails[name].valueBn / priorDetails[name].valueBn) - 1) * 100).toFixed(2));
+    assert.equal(Number(latestDetails[name].qoqPct.toFixed(2)), impliedQoq);
+  }
+  assert.ok(
+    latestDetails.Hyperscale.valueBn - latestDetails["AI Clouds, Industrial, & Enterprise"].valueBn <
+      priorDetails.Hyperscale.valueBn - priorDetails["AI Clouds, Industrial, & Enterprise"].valueBn
+  );
 });
 
 test("TSMC platform growth is converted into each quarter's displayed USD basis", () => {

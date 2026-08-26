@@ -3676,6 +3676,7 @@ function resolvedRevenueGrowthPct(company, quarterKey, period = "yoy") {
 }
 
 function resolvedDisplayAdjustedGrowthPct(company, quarterKey, rawPct, period = "yoy") {
+  if (rawPct === null || rawPct === undefined || rawPct === "") return null;
   const fallbackPct = safeNumber(rawPct, null);
   if (fallbackPct === null) return null;
   const entry = company?.financials?.[quarterKey];

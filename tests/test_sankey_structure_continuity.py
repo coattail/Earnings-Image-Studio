@@ -21,6 +21,30 @@ class SankeyStructureContinuityTests(unittest.TestCase):
         self.assertEqual([row["nameZh"] for row in harmonized], ["甲", "乙"])
         self.assertEqual([row["valueBn"] for row in harmonized], [12, 23])
 
+    def test_same_taxonomy_preserves_canonical_translation_fallback(self) -> None:
+        previous = [
+            {
+                "memberKey": "aicloudsindustrialenterprise",
+                "name": "AI Clouds, Industrial, & Enterprise",
+                "nameZh": None,
+                "valueBn": 37.377,
+            }
+        ]
+        current = [
+            {
+                "memberKey": "aicloudsindustrialenterprise",
+                "name": "AI Clouds, Industrial, & Enterprise",
+                "nameZh": "AI 云、工业与企业",
+                "valueBn": 40.313,
+            }
+        ]
+
+        harmonized, matched = build_dataset.harmonize_unchanged_sankey_rows(current, previous)
+
+        self.assertTrue(matched)
+        self.assertIsNone(harmonized[0]["nameZh"])
+        self.assertEqual(harmonized[0]["valueBn"], 40.313)
+
     def test_changed_taxonomy_is_treated_as_an_official_structure_change(self) -> None:
         previous = [
             {"memberKey": "alpha", "name": "Alpha", "valueBn": 10},
@@ -70,6 +94,7 @@ class SankeyStructureContinuityTests(unittest.TestCase):
                         {"memberKey": "sga", "name": "Selling and administrative", "valueBn": 3},
                     ],
                     "sankeyPresentation": {"opexBreakdownMode": "largest-plus-other"},
+                    "officialRevenueStyle": "stable-quarter-structure",
                 },
                 "2026Q2": {
                     "officialOpexBreakdown": [
@@ -91,6 +116,8 @@ class SankeyStructureContinuityTests(unittest.TestCase):
             latest["sankeyPresentation"],
             {"opexBreakdownMode": "largest-plus-other"},
         )
+        self.assertEqual(latest["officialRevenueStyle"], "stable-quarter-structure")
+        self.assertIn("officialRevenueStyle", latest["sankeyStructureContinuity"]["fields"])
         self.assertEqual(latest["sankeyStructureContinuity"]["sourceQuarter"], "2026Q1")
 
 

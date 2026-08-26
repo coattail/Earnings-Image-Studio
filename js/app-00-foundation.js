@@ -2074,14 +2074,20 @@ function resolveSourceLabelLines(item, options = {}) {
   const maxLines = safeNumber(options.maxLines, language === "zh" ? 2 : 3);
   if (language === "zh") {
     const explicitZh = String(item?.nameZh || "").trim();
-    const localized = explicitZh && hasChineseGlyph(explicitZh)
-      ? explicitZh
-      : translateBusinessLabelToZh(explicitZh || item?.name || "", {
-          translationKey: item?.memberKey || item?.key || item?.id || item?.name || "",
-          memberKey: item?.memberKey,
-          key: item?.key,
-          id: item?.id,
-        }) ||
+    const translationOptions = {
+      translationKey: item?.memberKey || item?.key || item?.id || item?.name || "",
+      memberKey: item?.memberKey,
+      key: item?.key,
+      id: item?.id,
+    };
+    // Source columns are geometry-sensitive. Prefer the canonical member-key
+    // translation when one exists so a newly supplied nameZh cannot silently
+    // change wrapping, widen the canvas, and shrink the Sankey itself.
+    const canonicalMemberLabel = translateBusinessLabelToZh("", translationOptions);
+    const localized = canonicalMemberLabel ||
+      (explicitZh && hasChineseGlyph(explicitZh)
+        ? explicitZh
+        : translateBusinessLabelToZh(explicitZh || item?.name || "", translationOptions)) ||
         explicitZh ||
         String(item?.name || "");
     return wrapLabelWithMaxWidth(localized, fontSize, maxWidth, { maxLines });

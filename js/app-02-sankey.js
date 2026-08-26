@@ -1956,7 +1956,11 @@ function renderPixelReplicaSvg(snapshot) {
               leftX,
               detailRightX,
             });
-      const nodeX = leftX - leadDistanceX;
+      const labelLeadAdjustmentX = resolvePreDetailRegularSourceLabelLeadAdjustment(snapshot, slice.item, {
+        compactMode: compactSources || slice.item.compactLabel,
+        fontSize: safeNumber(snapshot.layout?.sourceTemplateTitleSize, 28),
+      });
+      const nodeX = leftX - Math.max(leadDistanceX - labelLeadAdjustmentX, 0);
       slice.nodeX = nodeX;
       slice.labelX = nodeX - sourceSummaryLabelGapX;
       slice.metricX = sourceTemplateMetricX + (nodeX - leftX);

@@ -1,8 +1,9 @@
 {
-  "generatedAt": "2026-08-26T02:02:08Z",
+  "generatedAt": "2026-08-26T21:34:18Z",
   "companyCount": 40,
   "companies": [
     {
+      "_cacheVersion": "20260803-v4",
       "id": "nvidia",
       "ticker": "NVDA",
       "nameZh": "英伟达",
@@ -49,34 +50,41 @@
         "2025Q3",
         "2025Q4",
         "2026Q1",
-        "2026Q2"
+        "2026Q2",
+        "2026Q3"
       ],
       "statementSource": "official-sec-companyfacts",
       "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
       "reportingCurrency": "USD",
       "cik": 1045810,
       "errors": [],
+      "errorDetails": [],
+      "marketCapUsd": 4718977351680,
+      "marketCapAsOf": "2026-07-06",
+      "marketCapSourceRank": 1,
+      "marketCapSource": "CompaniesMarketCap",
+      "marketCapSourceUrl": "https://companiesmarketcap.com/",
       "coverage": {
-        "quarterCount": 34,
+        "quarterCount": 35,
         "pixelReplicaQuarterCount": 1,
         "hasPixelReplica": true,
-        "officialFinancialQuarterCount": 34,
-        "officialSegmentQuarterCount": 34,
-        "officialExpenseQuarterCount": 2,
+        "officialFinancialQuarterCount": 35,
+        "officialSegmentQuarterCount": 35,
+        "officialExpenseQuarterCount": 1,
         "classification": {
           "status": "ok",
-          "latestQuarter": "2026Q2",
+          "latestQuarter": "2026Q3",
           "latestQuarterHasRevenueClassification": true,
-          "latestQuarterHasExpenseClassification": false,
-          "latestRevenueClassificationQuarter": "2026Q2",
-          "latestExpenseClassificationQuarter": "2024Q4",
-          "latestStructureHistoryQuarter": "2026Q2",
-          "revenueClassificationQuarterCount": 34,
-          "expenseClassificationQuarterCount": 2,
+          "latestQuarterHasExpenseClassification": true,
+          "latestRevenueClassificationQuarter": "2026Q3",
+          "latestExpenseClassificationQuarter": "2026Q3",
+          "latestStructureHistoryQuarter": "2026Q3",
+          "revenueClassificationQuarterCount": 35,
+          "expenseClassificationQuarterCount": 1,
           "revenueClassificationCoverageRatio": 1.0,
-          "expenseClassificationCoverageRatio": 0.0588,
+          "expenseClassificationCoverageRatio": 0.0286,
           "latestRevenueClassificationLagQuarters": 0,
-          "latestExpenseClassificationLagQuarters": 6,
+          "latestExpenseClassificationLagQuarters": 0,
           "warnings": [],
           "blockers": [],
           "policy": {}
@@ -90,26 +98,26 @@
           "financialReconciliation": {
             "version": "financial-reconciler-v1",
             "primarySource": "official",
-            "quarterCount": 33,
+            "quarterCount": 35,
             "fieldOverrideCount": 0,
             "derivedFieldCount": 0,
             "mixedSourceQuarterCount": 0,
             "sourceUsageCounts": {
-              "official": 673,
+              "official": 715,
               "stockanalysis": 0
             }
           },
           "financialValidation": {
             "version": "financial-validation-v1",
             "status": "high",
-            "quarterCount": 33,
-            "validatedQuarterCount": 33,
+            "quarterCount": 35,
+            "validatedQuarterCount": 35,
             "issueCount": 0,
             "mismatchQuarterCount": 0,
-            "highConfidenceQuarterCount": 33,
-            "averageConfidenceScore": 1,
-            "latestQuarter": "2026Q1",
-            "latestQuarterConfidenceScore": 1,
+            "highConfidenceQuarterCount": 35,
+            "averageConfidenceScore": 1.0,
+            "latestQuarter": "2026Q3",
+            "latestQuarterConfidenceScore": 1.0,
             "latestQuarterIssueCount": 0
           },
           "validation": {
@@ -121,10 +129,10 @@
             "revenueSegmentChecks": 34,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
-            "detailGroupChecks": 1,
+            "detailGroupChecks": 2,
             "detailGroupMismatchCount": 0,
             "detailGroupSkippedChecks": 0,
-            "opexChecks": 2,
+            "opexChecks": 1,
             "opexSkippedChecks": 0,
             "opexOverflowMismatchCount": 0,
             "warningCount": 0,
@@ -132,76 +140,66 @@
           }
         }
       },
-      "marketCapUsd": 4718977351680,
-      "marketCapAsOf": "2026-07-06",
-      "marketCapSourceRank": 1,
-      "marketCapSource": "CompaniesMarketCap",
-      "marketCapSourceUrl": "https://companiesmarketcap.com/",
       "dataLoadMode": "latest-only",
-      "latestQuarter": "2026Q2",
+      "latestQuarter": "2026Q3",
       "financials": {
-        "2026Q2": {
-          "calendarQuarter": "2026Q2",
-          "periodEnd": "2026-04-26",
+        "2026Q3": {
+          "calendarQuarter": "2026Q3",
+          "periodEnd": "2026-07-26",
           "fiscalYear": "2027",
-          "fiscalQuarter": "Q1",
-          "fiscalLabel": "FY2027 Q1",
+          "fiscalQuarter": "Q2",
+          "fiscalLabel": "FY2027 Q2",
           "statementCurrency": "USD",
-          "revenueBn": 81.615,
-          "revenueYoyPct": 85.23,
-          "costOfRevenueBn": 20.458,
-          "grossProfitBn": 61.157,
-          "sgnaBn": 1.3,
-          "rndBn": 6.321,
+          "revenueBn": 96.221,
+          "revenueYoyPct": 105.851,
+          "costOfRevenueBn": 24.079,
+          "grossProfitBn": 72.142,
+          "sgnaBn": 1.354,
+          "rndBn": 7.054,
           "otherOpexBn": null,
-          "operatingExpensesBn": 7.621,
-          "operatingIncomeBn": 53.536,
-          "nonOperatingBn": 16.367,
-          "pretaxIncomeBn": 69.903,
-          "taxBn": 11.582,
-          "netIncomeBn": 58.321,
-          "netIncomeYoyPct": 210.63,
-          "grossMarginPct": 74.93,
-          "operatingMarginPct": 65.6,
-          "profitMarginPct": 71.46,
-          "effectiveTaxRatePct": 16.57,
-          "revenueQoqPct": 19.8,
-          "grossMarginYoyDeltaPp": 14.41,
-          "operatingMarginYoyDeltaPp": 16.49,
-          "profitMarginYoyDeltaPp": 28.85,
-          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426_htm.xml",
-          "statementFilingDate": "2026-05-20",
+          "operatingExpensesBn": 8.408,
+          "operatingIncomeBn": 63.734,
+          "nonOperatingBn": 7.773,
+          "pretaxIncomeBn": 71.507,
+          "taxBn": 11.819,
+          "netIncomeBn": 59.688,
+          "netIncomeYoyPct": 125.9,
+          "grossMarginPct": 74.975,
+          "operatingMarginPct": 66.237,
+          "profitMarginPct": 62.032,
+          "effectiveTaxRatePct": 16.528,
+          "revenueQoqPct": 17.896,
+          "grossMarginYoyDeltaPp": 2.55,
+          "operatingMarginYoyDeltaPp": 5.39,
+          "profitMarginYoyDeltaPp": 5.51,
           "parserFinancialFieldSources": {
-            "periodEnd": "sec-10-q",
-            "statementCurrency": "sec-10-q",
-            "statementSourceUrl": "sec-10-q",
-            "costOfRevenueBn": "sec-10-q",
-            "fiscalLabel": "sec-10-q",
-            "operatingExpensesBn": "sec-10-q",
-            "sgnaBn": "sec-10-q",
-            "nonOperatingBn": "sec-10-q",
-            "grossProfitBn": "sec-10-q",
-            "operatingIncomeBn": "sec-10-q",
-            "fiscalYear": "sec-10-q",
-            "grossMarginPct": "sec-10-q",
-            "profitMarginPct": "sec-10-q",
-            "netIncomeBn": "sec-10-q",
-            "rndBn": "sec-10-q",
-            "statementForm": "sec-10-q",
-            "calendarQuarter": "sec-10-q",
-            "revenueBn": "sec-10-q",
-            "pretaxIncomeBn": "sec-10-q",
-            "taxBn": "sec-10-q",
-            "fiscalQuarter": "sec-10-q",
-            "statementFilingDate": "sec-10-q",
-            "operatingMarginPct": "sec-10-q",
-            "effectiveTaxRatePct": "sec-10-q",
-            "revenueYoyPct": "derived",
-            "revenueQoqPct": "derived",
-            "netIncomeYoyPct": "derived",
-            "grossMarginYoyDeltaPp": "derived",
-            "operatingMarginYoyDeltaPp": "derived",
-            "profitMarginYoyDeltaPp": "derived"
+            "revenueBn": "official",
+            "revenueYoyPct": "official",
+            "revenueQoqPct": "official",
+            "costOfRevenueBn": "official",
+            "grossProfitBn": "official",
+            "grossMarginPct": "official",
+            "grossMarginYoyDeltaPp": "official",
+            "sgnaBn": "official",
+            "rndBn": "official",
+            "operatingExpensesBn": "official",
+            "operatingIncomeBn": "official",
+            "operatingMarginPct": "official",
+            "operatingMarginYoyDeltaPp": "official",
+            "nonOperatingBn": "official",
+            "pretaxIncomeBn": "official",
+            "taxBn": "official",
+            "netIncomeBn": "official",
+            "netIncomeYoyPct": "official",
+            "profitMarginPct": "official",
+            "profitMarginYoyDeltaPp": "official",
+            "effectiveTaxRatePct": "official",
+            "calendarQuarter": "official",
+            "periodEnd": "official",
+            "fiscalYear": "official",
+            "fiscalQuarter": "official",
+            "fiscalLabel": "official",
+            "statementCurrency": "official"
           },
           "parserFinancialCandidateCounts": {
             "revenueBn": 1,
@@ -230,9 +228,9 @@
           "parserFinancialValidation": {
             "version": "financial-validation-v1",
             "status": "high",
-            "confidenceScore": 1,
-            "completenessScore": 1,
-            "consistencyScore": 1,
+            "confidenceScore": 1.0,
+            "completenessScore": 1.0,
+            "consistencyScore": 1.0,
             "checksRun": 8,
             "checksPassed": 8,
             "issueCount": 0,
@@ -240,220 +238,219 @@
           },
           "displayCurrency": "USD",
           "displayScaleFactor": 1,
-          "statementForm": "10-Q",
+          "statementMeta": {
+            "statementSource": null,
+            "statementSourceUrl": null,
+            "statementValueMode": null,
+            "statementSpanQuarters": null,
+            "qualityFlags": [],
+            "adapterId": "official_financials"
+          },
           "fieldSources": {
-            "periodEnd": "sec-10-q",
-            "statementCurrency": "sec-10-q",
-            "statementSourceUrl": "sec-10-q",
-            "costOfRevenueBn": "sec-10-q",
-            "fiscalLabel": "sec-10-q",
-            "operatingExpensesBn": "sec-10-q",
-            "sgnaBn": "sec-10-q",
-            "nonOperatingBn": "sec-10-q",
-            "grossProfitBn": "sec-10-q",
-            "operatingIncomeBn": "sec-10-q",
-            "fiscalYear": "sec-10-q",
-            "grossMarginPct": "sec-10-q",
-            "profitMarginPct": "sec-10-q",
-            "netIncomeBn": "sec-10-q",
-            "rndBn": "sec-10-q",
-            "statementForm": "sec-10-q",
-            "calendarQuarter": "sec-10-q",
-            "revenueBn": "sec-10-q",
-            "pretaxIncomeBn": "sec-10-q",
-            "taxBn": "sec-10-q",
-            "fiscalQuarter": "sec-10-q",
-            "statementFilingDate": "sec-10-q",
-            "operatingMarginPct": "sec-10-q",
-            "effectiveTaxRatePct": "sec-10-q",
-            "revenueYoyPct": "derived",
-            "revenueQoqPct": "derived",
-            "netIncomeYoyPct": "derived",
-            "grossMarginYoyDeltaPp": "derived",
-            "operatingMarginYoyDeltaPp": "derived",
-            "profitMarginYoyDeltaPp": "derived"
+            "statementMeta": {
+              "adapterId": "official_financials",
+              "label": "SEC companyfacts / filings",
+              "score": 12.1,
+              "sourceUrl": null
+            }
           },
           "extractionDiagnostics": {
-            "source": "manual-sec-10-q-update",
-            "filingDate": "2026-05-20",
-            "accession": "0001045810-26-000052",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426_htm.xml",
-            "note": "Latest FY2027 Q1 values verified against NVIDIA 2026-05-20 Form 10-Q XBRL; market-platform revenue presentation changed this quarter."
+            "qualityScore": 60,
+            "availableRequiredFieldCount": 3,
+            "requiredFieldCount": 3,
+            "sourceFieldCount": 12,
+            "hasCostBreakdownProfile": false,
+            "costBreakdownMode": "none",
+            "opexBreakdownMode": "none",
+            "revenueSegmentCoveragePct": 0,
+            "costBreakdownCoveragePct": 0,
+            "opexBreakdownCoveragePct": 0,
+            "revenueSegmentResidualBn": null,
+            "costBreakdownResidualBn": null,
+            "opexBreakdownResidualBn": null,
+            "statementSource": null,
+            "statementValueMode": null,
+            "statementSpanQuarters": null,
+            "statementQualityFlags": [],
+            "issues": [
+              "revenue-segment-coverage-low",
+              "cost-breakdown-coverage-low",
+              "opex-breakdown-coverage-low"
+            ]
           },
+          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+          "statementFilingDate": "2026-08-26",
           "officialRevenueSegments": [
             {
               "name": "Data Center",
-              "nameZh": null,
+              "nameZh": "数据中心",
               "memberKey": "datacenter",
-              "valueBn": 75.246,
-              "yoyPct": 92.39,
-              "qoqPct": 20.75,
-              "mixPct": 92.2,
-              "mixYoyDeltaPp": 3.43,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-05-20",
-              "periodStart": "2026-01-26",
-              "periodEnd": "2026-04-26",
-              "supportLines": [
-                "AI · cloud · DGX"
-              ],
+              "valueBn": 89.023,
+              "yoyPct": 116.62,
+              "qoqPct": 18.31,
+              "mixPct": 92.5,
+              "mixYoyDeltaPp": null,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+              "sourceForm": null,
+              "filingDate": "2026-08-26",
+              "supportLines": null,
               "supportLinesZh": null,
               "metricMode": null,
               "validationEligible": null,
-              "validationNotes": "NVIDIA changed revenue by market platform presentation in FY2027 Q1; comparable FY2026 Q1 values are recast in the 2026-05-20 Form 10-Q."
+              "validationNotes": null
             },
             {
               "name": "Edge Computing",
-              "nameZh": null,
+              "nameZh": "边缘计算",
               "memberKey": "edgecomputing",
-              "valueBn": 6.369,
-              "yoyPct": 28.67,
-              "qoqPct": 9.56,
-              "mixPct": 7.8,
-              "mixYoyDeltaPp": -3.43,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-05-20",
-              "periodStart": "2026-01-26",
-              "periodEnd": "2026-04-26",
-              "supportLines": [
-                "Gaming · RTX workstation · automotive edge"
-              ],
+              "valueBn": 7.198,
+              "yoyPct": 27.47,
+              "qoqPct": 13.0,
+              "mixPct": 7.5,
+              "mixYoyDeltaPp": null,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+              "sourceForm": null,
+              "filingDate": "2026-08-26",
+              "supportLines": null,
               "supportLinesZh": null,
               "metricMode": null,
               "validationEligible": null,
-              "validationNotes": "NVIDIA changed revenue by market platform presentation in FY2027 Q1; comparable FY2026 Q1 values are recast in the 2026-05-20 Form 10-Q."
+              "validationNotes": null
             }
           ],
-          "officialRevenueStyle": "nvidia-fy2027-market-platform",
           "officialRevenueDetailGroups": [
             {
               "name": "Hyperscale",
-              "nameZh": null,
+              "nameZh": "超大规模",
               "memberKey": "hyperscale",
-              "valueBn": 37.869,
-              "yoyPct": 115.18,
-              "qoqPct": 12,
-              "mixPct": 46.4,
-              "mixYoyDeltaPp": 6.46,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-05-20",
-              "periodStart": "2026-01-26",
-              "periodEnd": "2026-04-26",
+              "valueBn": 48.71,
+              "yoyPct": 101.55,
+              "qoqPct": 13.1475,
+              "mixPct": 50.6,
+              "mixYoyDeltaPp": null,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+              "sourceForm": null,
+              "filingDate": "2026-08-26",
+              "supportLines": null,
+              "supportLinesZh": null,
               "targetName": "Data Center",
-              "targetMemberKey": "datacenter"
+              "metricMode": null,
+              "validationEligible": null,
+              "validationNotes": null
             },
             {
               "name": "AI Clouds, Industrial, & Enterprise",
-              "nameZh": null,
+              "nameZh": "AI云、工业与企业",
               "memberKey": "aicloudsindustrialenterprise",
-              "valueBn": 37.377,
-              "yoyPct": 73.74,
-              "qoqPct": 31,
-              "mixPct": 45.8,
-              "mixYoyDeltaPp": -3.02,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-05-20",
-              "periodStart": "2026-01-26",
-              "periodEnd": "2026-04-26",
+              "valueBn": 40.313,
+              "yoyPct": 138.14,
+              "qoqPct": 25.2112,
+              "mixPct": 41.9,
+              "mixYoyDeltaPp": null,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+              "sourceForm": null,
+              "filingDate": "2026-08-26",
+              "supportLines": null,
+              "supportLinesZh": null,
               "targetName": "Data Center",
-              "targetMemberKey": "datacenter"
+              "metricMode": null,
+              "validationEligible": null,
+              "validationNotes": null
+            }
+          ],
+          "officialOpexBreakdown": [
+            {
+              "name": "Research and Development",
+              "nameZh": "研发",
+              "memberKey": "researchanddevelopment",
+              "valueBn": 7.054
+            },
+            {
+              "name": "Sales, General and Administrative",
+              "nameZh": "销售、一般及行政",
+              "memberKey": "salesgeneralandadministrative",
+              "valueBn": 1.354
             }
           ],
           "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
           "officialRevenueTaxonomyChangedFromPriorYear": true,
           "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueDetailTaxonomyChangedFromPriorYear": false
+          "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
+          "sankeyStructureContinuity": {
+            "sourceQuarter": "2026Q2",
+            "fields": [
+              "officialRevenueDetailGroups"
+            ],
+            "rule": "same-normalized-category-set"
+          },
+          "officialRevenueStyle": "nvidia-fy2027-market-platform"
         }
       },
       "statementPresets": {},
       "officialRevenueStructureHistory": {
-        "source": "official-filings-xbrl-axis",
+        "source": "manual-official-sec-10-q",
         "quarters": {
-          "2026Q2": {
+          "2026Q3": {
             "segments": [
               {
                 "name": "Data Center",
-                "nameZh": null,
+                "nameZh": "数据中心",
                 "memberKey": "datacenter",
-                "valueBn": 75.246,
-                "yoyPct": 92.39,
-                "qoqPct": 20.75,
-                "mixPct": 92.2,
-                "mixYoyDeltaPp": 3.43,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426_htm.xml",
-                "sourceForm": "10-Q",
-                "filingDate": "2026-05-20",
-                "periodStart": "2026-01-26",
-                "periodEnd": "2026-04-26",
-                "supportLines": [
-                  "AI · cloud · DGX"
-                ],
+                "valueBn": 89.023,
+                "yoyPct": 116.62,
+                "qoqPct": 18.31,
+                "mixPct": null,
+                "mixYoyDeltaPp": null,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+                "sourceForm": null,
+                "filingDate": "2026-08-26",
+                "supportLines": null,
                 "supportLinesZh": null,
                 "metricMode": null,
                 "validationEligible": null,
-                "validationNotes": "NVIDIA changed revenue by market platform presentation in FY2027 Q1; comparable FY2026 Q1 values are recast in the 2026-05-20 Form 10-Q."
+                "validationNotes": null
               },
               {
                 "name": "Edge Computing",
-                "nameZh": null,
+                "nameZh": "边缘计算",
                 "memberKey": "edgecomputing",
-                "valueBn": 6.369,
-                "yoyPct": 28.67,
-                "qoqPct": 9.56,
-                "mixPct": 7.8,
-                "mixYoyDeltaPp": -3.43,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426_htm.xml",
-                "sourceForm": "10-Q",
-                "filingDate": "2026-05-20",
-                "periodStart": "2026-01-26",
-                "periodEnd": "2026-04-26",
-                "supportLines": [
-                  "Gaming · RTX workstation · automotive edge"
-                ],
+                "valueBn": 7.198,
+                "yoyPct": 27.47,
+                "qoqPct": 13.0,
+                "mixPct": null,
+                "mixYoyDeltaPp": null,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+                "sourceForm": null,
+                "filingDate": "2026-08-26",
+                "supportLines": null,
                 "supportLinesZh": null,
                 "metricMode": null,
                 "validationEligible": null,
-                "validationNotes": "NVIDIA changed revenue by market platform presentation in FY2027 Q1; comparable FY2026 Q1 values are recast in the 2026-05-20 Form 10-Q."
+                "validationNotes": null
               }
             ],
             "detailGroups": [
               {
                 "name": "Hyperscale",
-                "nameZh": null,
+                "nameZh": "超大规模",
                 "memberKey": "hyperscale",
-                "valueBn": 37.869,
-                "yoyPct": 115.18,
-                "qoqPct": 12,
-                "mixPct": 46.4,
-                "mixYoyDeltaPp": 6.46,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426_htm.xml",
-                "sourceForm": "10-Q",
-                "filingDate": "2026-05-20",
-                "periodStart": "2026-01-26",
-                "periodEnd": "2026-04-26",
                 "targetName": "Data Center",
-                "targetMemberKey": "datacenter"
+                "valueBn": 48.71,
+                "yoyPct": 101.55,
+                "qoqPct": 13.1475,
+                "filingDate": "2026-08-26",
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm"
               },
               {
                 "name": "AI Clouds, Industrial, & Enterprise",
-                "nameZh": null,
+                "nameZh": "AI云、工业与企业",
                 "memberKey": "aicloudsindustrialenterprise",
-                "valueBn": 37.377,
-                "yoyPct": 73.74,
-                "qoqPct": 31,
-                "mixPct": 45.8,
-                "mixYoyDeltaPp": -3.02,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426_htm.xml",
-                "sourceForm": "10-Q",
-                "filingDate": "2026-05-20",
-                "periodStart": "2026-01-26",
-                "periodEnd": "2026-04-26",
                 "targetName": "Data Center",
-                "targetMemberKey": "datacenter"
+                "valueBn": 40.313,
+                "yoyPct": 138.14,
+                "qoqPct": 25.2112,
+                "filingDate": "2026-08-26",
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm"
               }
             ],
             "style": "nvidia-fy2027-market-platform"
@@ -467,12 +464,6 @@
             "instance": "nvda-20260426_htm.xml"
           },
           {
-            "form": "10-K",
-            "filingDate": "2026-02-25",
-            "accession": "0001045810-26-000021",
-            "instance": "nvda-20260125_htm.xml"
-          },
-          {
             "form": "10-Q",
             "filingDate": "2025-11-19",
             "accession": "0001045810-25-000230",
@@ -515,12 +506,6 @@
             "instance": "nvda-20240428_htm.xml"
           },
           {
-            "form": "10-K",
-            "filingDate": "2024-02-21",
-            "accession": "0001045810-24-000029",
-            "instance": "nvda-20240128_htm.xml"
-          },
-          {
             "form": "10-Q",
             "filingDate": "2023-11-21",
             "accession": "0001045810-23-000227",
@@ -549,12 +534,6 @@
             "filingDate": "2022-11-18",
             "accession": "0001045810-22-000166",
             "instance": "nvda-20221030_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2022-08-31",
-            "accession": "0001045810-22-000147",
-            "instance": "nvda-20220731_htm.xml"
           },
           {
             "form": "10-Q",
@@ -615,272 +594,17 @@
             "filingDate": "2020-02-20",
             "accession": "0001045810-20-000010",
             "instance": "nvda-2020x10k_htm.xml"
+          },
+          {
+            "title": "NVIDIA Form 10-Q for the quarter ended July 26, 2026",
+            "quarter": "2026Q3",
+            "filingDate": "2026-08-26",
+            "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm"
           }
         ],
         "errors": []
       },
-      "officialSegmentHistory": {
-        "source": "official-filings",
-        "axis": "StatementBusinessSegmentsAxis",
-        "filingsUsed": [
-          {
-            "form": "10-Q",
-            "filingDate": "2026-05-20",
-            "accession": "0001045810-26-000052",
-            "instance": "nvda-20260426_htm.xml",
-            "primaryDocument": "nvda-20260426.htm"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2026-02-25",
-            "accession": "0001045810-26-000021",
-            "primaryDocument": "nvda-20260125.htm",
-            "instance": "nvda-20260125_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2025-11-19",
-            "accession": "0001045810-25-000230",
-            "primaryDocument": "nvda-20251026.htm",
-            "instance": "nvda-20251026_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2025-08-27",
-            "accession": "0001045810-25-000209",
-            "primaryDocument": "nvda-20250727.htm",
-            "instance": "nvda-20250727_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2025-05-28",
-            "accession": "0001045810-25-000116",
-            "primaryDocument": "nvda-20250427.htm",
-            "instance": "nvda-20250427_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2025-02-26",
-            "accession": "0001045810-25-000023",
-            "primaryDocument": "nvda-20250126.htm",
-            "instance": "nvda-20250126_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2024-11-20",
-            "accession": "0001045810-24-000316",
-            "primaryDocument": "nvda-20241027.htm",
-            "instance": "nvda-20241027_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2024-08-28",
-            "accession": "0001045810-24-000264",
-            "primaryDocument": "nvda-20240728.htm",
-            "instance": "nvda-20240728_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2024-05-29",
-            "accession": "0001045810-24-000124",
-            "primaryDocument": "nvda-20240428.htm",
-            "instance": "nvda-20240428_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2024-02-21",
-            "accession": "0001045810-24-000029",
-            "primaryDocument": "nvda-20240128.htm",
-            "instance": "nvda-20240128_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2023-11-21",
-            "accession": "0001045810-23-000227",
-            "primaryDocument": "nvda-20231029.htm",
-            "instance": "nvda-20231029_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2023-08-28",
-            "accession": "0001045810-23-000175",
-            "primaryDocument": "nvda-20230730.htm",
-            "instance": "nvda-20230730_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2023-05-26",
-            "accession": "0001045810-23-000093",
-            "primaryDocument": "nvda-20230430.htm",
-            "instance": "nvda-20230430_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2023-02-24",
-            "accession": "0001045810-23-000017",
-            "primaryDocument": "nvda-20230129.htm",
-            "instance": "nvda-20230129_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2022-11-18",
-            "accession": "0001045810-22-000166",
-            "primaryDocument": "nvda-20221030.htm",
-            "instance": "nvda-20221030_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2022-08-31",
-            "accession": "0001045810-22-000147",
-            "primaryDocument": "nvda-20220731.htm",
-            "instance": "nvda-20220731_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2022-05-27",
-            "accession": "0001045810-22-000079",
-            "primaryDocument": "nvda-20220501.htm",
-            "instance": "nvda-20220501_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2022-03-18",
-            "accession": "0001045810-22-000036",
-            "primaryDocument": "nvda-20220130.htm",
-            "instance": "nvda-20220130_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2021-11-22",
-            "accession": "0001045810-21-000163",
-            "primaryDocument": "nvda-20211031.htm",
-            "instance": "nvda-20211031_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2021-08-20",
-            "accession": "0001045810-21-000131",
-            "primaryDocument": "nvda-20210801.htm",
-            "instance": "nvda-20210801_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2021-05-26",
-            "accession": "0001045810-21-000064",
-            "primaryDocument": "nvda-20210502.htm",
-            "instance": "nvda-20210502_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2021-02-26",
-            "accession": "0001045810-21-000010",
-            "primaryDocument": "nvda-20210131.htm",
-            "instance": "nvda-20210131_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2020-11-18",
-            "accession": "0001045810-20-000189",
-            "primaryDocument": "nvda-20201025.htm",
-            "instance": "nvda-20201025_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2020-08-19",
-            "accession": "0001045810-20-000147",
-            "primaryDocument": "nvda-20200726.htm",
-            "instance": "nvda-20200726_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2020-05-21",
-            "accession": "0001045810-20-000065",
-            "primaryDocument": "nvda-20200426.htm",
-            "instance": "nvda-20200426_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2020-02-20",
-            "accession": "0001045810-20-000010",
-            "primaryDocument": "nvda-2020x10k.htm",
-            "instance": "nvda-2020x10k_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2019-11-14",
-            "accession": "0001045810-19-000170",
-            "primaryDocument": "nvda2020q310q.htm",
-            "instance": "nvda2020q310q_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2019-08-15",
-            "accession": "0001045810-19-000144",
-            "primaryDocument": "nvda2020q210q.htm",
-            "instance": "nvda2020q210q_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2019-05-16",
-            "accession": "0001045810-19-000079",
-            "primaryDocument": "nvda2020q110q.htm",
-            "instance": "nvda-20190428.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2019-02-21",
-            "accession": "0001045810-19-000023",
-            "primaryDocument": "nvda-2019x10k.htm",
-            "instance": "nvda-20190127.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2018-11-15",
-            "accession": "0001045810-18-000150",
-            "primaryDocument": "nvda2019q310q.htm",
-            "instance": "nvda-20181028.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2018-08-16",
-            "accession": "0001045810-18-000114",
-            "primaryDocument": "nvda2019q210q.htm",
-            "instance": "nvda-20180729.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2018-05-22",
-            "accession": "0001045810-18-000080",
-            "primaryDocument": "nvda2019q110q.htm",
-            "instance": "nvda-20180429.xml"
-          }
-        ],
-        "errors": [],
-        "quarters": {
-          "2026Q2": [
-            {
-              "name": "Compute & Networking",
-              "memberKey": "computenetworking",
-              "valueBn": 74.55,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-05-20",
-              "periodStart": "2026-01-26",
-              "periodEnd": "2026-04-26"
-            },
-            {
-              "name": "Graphics",
-              "memberKey": "graphics",
-              "valueBn": 7.065,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-05-20",
-              "periodStart": "2026-01-26",
-              "periodEnd": "2026-04-26"
-            }
-          ]
-        }
-      }
+      "officialSegmentHistory": {}
     },
     {
       "id": "apple",
@@ -1424,7 +1148,7 @@
             },
             {
               "name": "Google Play",
-              "nameZh": "订阅、平台和设备",
+              "nameZh": null,
               "memberKey": "googleplay",
               "valueBn": 12.911,
               "yoyPct": 15.25,
@@ -1444,7 +1168,7 @@
             },
             {
               "name": "Google Cloud",
-              "nameZh": "谷歌云",
+              "nameZh": null,
               "memberKey": "googlecloud",
               "valueBn": 24.768,
               "yoyPct": 81.8,
@@ -1462,7 +1186,7 @@
             },
             {
               "name": "Other",
-              "nameZh": "其他",
+              "nameZh": null,
               "memberKey": "otherrevenue",
               "valueBn": 0.488,
               "yoyPct": 86.97,
@@ -1484,7 +1208,7 @@
           "officialRevenueDetailGroups": [
             {
               "name": "Google Search",
-              "nameZh": "谷歌搜索",
+              "nameZh": null,
               "memberKey": "searchadvertising",
               "valueBn": 63.271,
               "yoyPct": 16.76,
@@ -1503,7 +1227,7 @@
             },
             {
               "name": "Google AdMob",
-              "nameZh": "谷歌广告网络",
+              "nameZh": null,
               "memberKey": "admob",
               "valueBn": 7.303,
               "yoyPct": -0.69,
@@ -2130,7 +1854,7 @@
           "officialRevenueSegments": [
             {
               "name": "More Personal Computing",
-              "nameZh": "更多个人计算",
+              "nameZh": null,
               "memberKey": "morepersonalcomputing",
               "valueBn": 12.854,
               "yoyPct": -4.44,
@@ -2143,7 +1867,7 @@
             },
             {
               "name": "Productivity & Business Processes",
-              "nameZh": "生产力和业务流程",
+              "nameZh": null,
               "memberKey": "productivitybusinessprocesses",
               "valueBn": 37.847,
               "yoyPct": 14.3,
@@ -2156,7 +1880,7 @@
             },
             {
               "name": "Intelligent Cloud",
-              "nameZh": "智能云",
+              "nameZh": null,
               "memberKey": "intelligentcloud",
               "valueBn": 39.306,
               "yoyPct": 31.55,
@@ -2362,7 +2086,7 @@
           "officialRevenueSegments": [
             {
               "name": "Online Stores",
-              "nameZh": "在线商店",
+              "nameZh": null,
               "memberKey": "onlinestores",
               "valueBn": 70.432,
               "yoyPct": 14.55,
@@ -2375,7 +2099,7 @@
             },
             {
               "name": "Third Party Seller Services",
-              "nameZh": "第三方卖家服务",
+              "nameZh": null,
               "memberKey": "thirdpartysellerservices",
               "valueBn": 46.78,
               "yoyPct": 15.94,
@@ -2388,7 +2112,7 @@
             },
             {
               "name": "Amazon Web Services",
-              "nameZh": "亚马逊云服务",
+              "nameZh": null,
               "memberKey": "amazonwebservices",
               "valueBn": 42.232,
               "yoyPct": 36.79,
@@ -2401,7 +2125,7 @@
             },
             {
               "name": "Subscription Services",
-              "nameZh": "订阅服务",
+              "nameZh": null,
               "memberKey": "subscriptionservices",
               "valueBn": 13.73,
               "yoyPct": 12.47,
@@ -2414,7 +2138,7 @@
             },
             {
               "name": "Advertising Services",
-              "nameZh": "广告服务",
+              "nameZh": null,
               "memberKey": "advertisingservices",
               "valueBn": 19.809,
               "yoyPct": 26.22,
@@ -2427,7 +2151,7 @@
             },
             {
               "name": "Physical Stores",
-              "nameZh": "实体店",
+              "nameZh": null,
               "memberKey": "physicalstores",
               "valueBn": 5.794,
               "yoyPct": 3.56,
@@ -2440,7 +2164,7 @@
             },
             {
               "name": "Other Services",
-              "nameZh": "其他服务",
+              "nameZh": null,
               "memberKey": "otherservices",
               "valueBn": 1.829,
               "yoyPct": 22.01,
@@ -3184,7 +2908,7 @@
           "officialRevenueSegments": [
             {
               "name": "Semiconductor Solutions",
-              "nameZh": "半导体解决方案",
+              "nameZh": null,
               "memberKey": "semiconductorsolutions",
               "valueBn": 15.009,
               "yoyPct": 78.51,
@@ -3202,7 +2926,7 @@
             },
             {
               "name": "Infrastructure Software",
-              "nameZh": "基础设施软件",
+              "nameZh": null,
               "memberKey": "infrastructuresoftware",
               "valueBn": 7.178,
               "yoyPct": 8.82,
@@ -3809,7 +3533,7 @@
           "officialRevenueSegments": [
             {
               "name": "Family Of Apps",
-              "nameZh": "应用家族",
+              "nameZh": null,
               "memberKey": "familyofapps",
               "valueBn": 60.37,
               "yoyPct": 28.05,
@@ -3822,7 +3546,7 @@
             },
             {
               "name": "Reality Labs",
-              "nameZh": "现实实验室",
+              "nameZh": null,
               "memberKey": "realitylabs",
               "valueBn": 0.431,
               "yoyPct": 16.49,
@@ -3837,7 +3561,7 @@
           "officialRevenueDetailGroups": [
             {
               "name": "Advertising",
-              "nameZh": "广告",
+              "nameZh": null,
               "memberKey": "advertising",
               "targetName": "Family of Apps",
               "valueBn": 59.363,
@@ -3851,7 +3575,7 @@
             },
             {
               "name": "Other",
-              "nameZh": "其他收入",
+              "nameZh": null,
               "memberKey": "other",
               "targetName": "Family of Apps",
               "valueBn": 1.007,
@@ -4073,7 +3797,7 @@
           "officialRevenueSegments": [
             {
               "name": "Services",
-              "nameZh": "服务及其他",
+              "nameZh": null,
               "memberKey": "services",
               "valueBn": 4.581,
               "yoyPct": 50.39,
@@ -4093,7 +3817,7 @@
             },
             {
               "name": "Energy generation & storage",
-              "nameZh": "储能与发电",
+              "nameZh": null,
               "memberKey": "energygenerationstorage",
               "valueBn": 3.139,
               "yoyPct": 12.55,
@@ -4113,7 +3837,7 @@
             },
             {
               "name": "Auto",
-              "nameZh": "汽车业务",
+              "nameZh": null,
               "memberKey": "auto",
               "valueBn": 20.516,
               "yoyPct": 23.14,
@@ -4135,7 +3859,7 @@
           "officialRevenueDetailGroups": [
             {
               "name": "Auto sales",
-              "nameZh": "汽车销售",
+              "nameZh": null,
               "memberKey": "autosales",
               "valueBn": 20.006,
               "yoyPct": 26.72,
@@ -4154,7 +3878,7 @@
             },
             {
               "name": "Leasing",
-              "nameZh": "汽车租赁",
+              "nameZh": null,
               "memberKey": "leasing",
               "valueBn": 0.364,
               "yoyPct": -16.32,
@@ -4173,7 +3897,7 @@
             },
             {
               "name": "Regulatory credits",
-              "nameZh": "监管积分",
+              "nameZh": null,
               "memberKey": "regulatorycredits",
               "valueBn": 0.146,
               "yoyPct": -66.74,
@@ -16266,7 +15990,7 @@
           "officialRevenueSegments": [
             {
               "name": "Cloud",
-              "nameZh": "云业务",
+              "nameZh": null,
               "memberKey": "cloud",
               "valueBn": 9.913,
               "yoyPct": 47.143,
@@ -16284,7 +16008,7 @@
             },
             {
               "name": "Hardware",
-              "nameZh": "硬件",
+              "nameZh": null,
               "memberKey": "hardware",
               "valueBn": 0.924,
               "yoyPct": 8.706,
@@ -16302,7 +16026,7 @@
             },
             {
               "name": "Software",
-              "nameZh": "软件",
+              "nameZh": null,
               "memberKey": "software",
               "valueBn": 6.824,
               "yoyPct": -2.067,
@@ -16320,7 +16044,7 @@
             },
             {
               "name": "Services",
-              "nameZh": "服务",
+              "nameZh": null,
               "memberKey": "services",
               "valueBn": 1.523,
               "yoyPct": 12.982,
@@ -16340,7 +16064,7 @@
           "officialRevenueDetailGroups": [
             {
               "name": "Software support",
-              "nameZh": "软件支持",
+              "nameZh": null,
               "memberKey": "softwaresupport",
               "valueBn": 4.943,
               "yoyPct": -0.363,
@@ -16359,7 +16083,7 @@
             },
             {
               "name": "Software license",
-              "nameZh": "软件许可",
+              "nameZh": null,
               "memberKey": "softwarelicense",
               "valueBn": 1.881,
               "yoyPct": -6.278,
@@ -16378,7 +16102,7 @@
             },
             {
               "name": "Cloud applications",
-              "nameZh": "云应用",
+              "nameZh": null,
               "memberKey": "cloudapplications",
               "valueBn": 4.1,
               "yoyPct": 10,
@@ -16397,7 +16121,7 @@
             },
             {
               "name": "Cloud infrastructure",
-              "nameZh": "云基础设施",
+              "nameZh": null,
               "memberKey": "cloudinfrastructure",
               "valueBn": 5.8,
               "yoyPct": 93,
@@ -19676,7 +19400,7 @@
             },
             {
               "name": "Commercial",
-              "nameZh": "商业业务",
+              "nameZh": null,
               "memberKey": "commercial",
               "valueBn": 0.945,
               "yoyPct": 110,
@@ -21135,7 +20859,7 @@
           "officialRevenueSegments": [
             {
               "name": "Games and related value-added services",
-              "nameZh": "游戏及相关增值服务",
+              "nameZh": null,
               "memberKey": "gamesandrelatedvalueaddedservices",
               "valueBn": 25.7,
               "yoyPct": 7.08,
@@ -21153,7 +20877,7 @@
             },
             {
               "name": "Innovative businesses and others",
-              "nameZh": "创新业务及其他",
+              "nameZh": null,
               "memberKey": "innovativebusinessesandothers",
               "valueBn": 1.5,
               "yoyPct": -7.64,
@@ -21171,7 +20895,7 @@
             },
             {
               "name": "Cloud Music",
-              "nameZh": "云音乐",
+              "nameZh": null,
               "memberKey": "cloudmusic",
               "valueBn": 2,
               "yoyPct": 5.26,
@@ -21189,7 +20913,7 @@
             },
             {
               "name": "Youdao",
-              "nameZh": "有道",
+              "nameZh": null,
               "memberKey": "youdao",
               "valueBn": 1.348,
               "yoyPct": 3.85,
@@ -21750,7 +21474,7 @@
           "officialRevenueSegments": [
             {
               "name": "Smartphone x AIoT",
-              "nameZh": "手机 x AIoT",
+              "nameZh": null,
               "memberKey": "smartphonexaiot",
               "valueBn": 84.026,
               "yoyPct": -11.3,
@@ -21768,7 +21492,7 @@
             },
             {
               "name": "Smart EV, AI and other new initiatives",
-              "nameZh": "智能电动汽车、AI 及其他新业务",
+              "nameZh": null,
               "memberKey": "smartevaiandothernewinitiatives",
               "valueBn": 24.896,
               "yoyPct": 17.1,
@@ -21788,7 +21512,7 @@
           "officialRevenueDetailGroups": [
             {
               "name": "Smartphones",
-              "nameZh": "智能手机",
+              "nameZh": null,
               "memberKey": "smartphones",
               "valueBn": 42.119,
               "yoyPct": -7.5,
@@ -21807,7 +21531,7 @@
             },
             {
               "name": "IoT and lifestyle products",
-              "nameZh": "IoT 与生活消费产品",
+              "nameZh": null,
               "memberKey": "iotandlifestyleproducts",
               "valueBn": 31.278,
               "yoyPct": -19.2,
@@ -21826,7 +21550,7 @@
             },
             {
               "name": "Internet services",
-              "nameZh": "互联网服务",
+              "nameZh": null,
               "memberKey": "internetservices",
               "valueBn": 9.044,
               "yoyPct": -0.6,
@@ -21845,7 +21569,7 @@
             },
             {
               "name": "Other related businesses",
-              "nameZh": "其他相关业务",
+              "nameZh": null,
               "memberKey": "otherrelatedbusinesses",
               "valueBn": 1.585,
               "yoyPct": 16.3,
@@ -23169,7 +22893,7 @@
           "officialOpexBreakdown": [
             {
               "name": "Fulfillment",
-              "nameZh": "履约费用",
+              "nameZh": null,
               "memberKey": "fulfillment",
               "valueBn": 24.5,
               "sourceUrl": "http://ir.jd.com/system/files-encrypted/nasdaq_kms/assets/2026/08/13/18-03-06/JD.com%20Announces%20Second%20Quarter%20and%20Interim%202026%20Results.pdf",
@@ -23180,7 +22904,7 @@
             },
             {
               "name": "Marketing",
-              "nameZh": "营销费用",
+              "nameZh": null,
               "memberKey": "marketing",
               "valueBn": 20.3,
               "sourceUrl": "http://ir.jd.com/system/files-encrypted/nasdaq_kms/assets/2026/08/13/18-03-06/JD.com%20Announces%20Second%20Quarter%20and%20Interim%202026%20Results.pdf",
@@ -23191,7 +22915,7 @@
             },
             {
               "name": "Research and development",
-              "nameZh": "研发费用",
+              "nameZh": null,
               "memberKey": "researchanddevelopment",
               "valueBn": 7.3,
               "sourceUrl": "http://ir.jd.com/system/files-encrypted/nasdaq_kms/assets/2026/08/13/18-03-06/JD.com%20Announces%20Second%20Quarter%20and%20Interim%202026%20Results.pdf",
@@ -23202,7 +22926,7 @@
             },
             {
               "name": "General and administrative",
-              "nameZh": "管理费用",
+              "nameZh": null,
               "memberKey": "generalandadministrative",
               "valueBn": 3.1,
               "sourceUrl": "http://ir.jd.com/system/files-encrypted/nasdaq_kms/assets/2026/08/13/18-03-06/JD.com%20Announces%20Second%20Quarter%20and%20Interim%202026%20Results.pdf",

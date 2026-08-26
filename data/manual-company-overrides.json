@@ -1,4 +1,217 @@
 {
+  "nvidia": {
+    "financials": {
+      "2026Q2": {
+        "officialRevenueDetailGroups": [
+          {
+            "name": "Hyperscale",
+            "nameZh": "超大规模",
+            "memberKey": "hyperscale",
+            "targetName": "Data Center",
+            "valueBn": 43.05,
+            "yoyPct": null,
+            "qoqPct": null,
+            "suppressQoQGrowth": true,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-08-26",
+            "validationNotes": [
+              "recast-in-fy2027-q2-after-customer-reclassification"
+            ]
+          },
+          {
+            "name": "AI Clouds, Industrial, & Enterprise",
+            "nameZh": "AI云、工业与企业",
+            "memberKey": "aicloudsindustrialenterprise",
+            "targetName": "Data Center",
+            "valueBn": 32.196,
+            "yoyPct": null,
+            "qoqPct": null,
+            "suppressQoQGrowth": true,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-08-26",
+            "validationNotes": [
+              "recast-in-fy2027-q2-after-customer-reclassification"
+            ]
+          }
+        ],
+        "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": true,
+        "officialRevenueStyle": "nvidia-fy2027-market-platform"
+      },
+      "2026Q3": {
+        "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+        "statementFilingDate": "2026-08-26",
+        "officialRevenueSegments": [
+          {
+            "name": "Data Center",
+            "nameZh": "数据中心",
+            "memberKey": "datacenter",
+            "valueBn": 89.023,
+            "yoyPct": 116.62,
+            "qoqPct": 18.31,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-08-26",
+            "supportLines": [
+              "Hyperscale",
+              "AI Clouds, Industrial, & Enterprise"
+            ]
+          },
+          {
+            "name": "Edge Computing",
+            "nameZh": "边缘计算",
+            "memberKey": "edgecomputing",
+            "valueBn": 7.198,
+            "yoyPct": 27.47,
+            "qoqPct": 13.0,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-08-26"
+          }
+        ],
+        "officialRevenueDetailGroups": [
+          {
+            "name": "Hyperscale",
+            "nameZh": "超大规模",
+            "memberKey": "hyperscale",
+            "targetName": "Data Center",
+            "valueBn": 48.71,
+            "yoyPct": 101.55,
+            "qoqPct": 13.1475,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-08-26"
+          },
+          {
+            "name": "AI Clouds, Industrial, & Enterprise",
+            "nameZh": "AI云、工业与企业",
+            "memberKey": "aicloudsindustrialenterprise",
+            "targetName": "Data Center",
+            "valueBn": 40.313,
+            "yoyPct": 138.14,
+            "qoqPct": 25.2112,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-08-26"
+          }
+        ],
+      "officialOpexBreakdown": [
+          {
+            "name": "Research and Development",
+            "nameZh": "研发",
+            "memberKey": "researchanddevelopment",
+            "valueBn": 7.054
+          },
+          {
+            "name": "Sales, General and Administrative",
+            "nameZh": "销售、一般及行政",
+            "memberKey": "salesgeneralandadministrative",
+          "valueBn": 1.354
+        }
+      ],
+      "officialRevenueStyle": "nvidia-fy2027-market-platform"
+      }
+    },
+    "officialRevenueStructureHistory": {
+      "source": "manual-official-sec-10-q",
+      "quarters": {
+        "2026Q2": {
+          "style": "nvidia-fy2027-market-platform",
+          "detailGroups": [
+            {
+              "name": "Hyperscale",
+              "nameZh": "超大规模",
+              "memberKey": "hyperscale",
+              "targetName": "Data Center",
+              "valueBn": 43.05,
+              "yoyPct": null,
+              "qoqPct": null,
+              "suppressQoQGrowth": true,
+              "filingDate": "2026-08-26",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+              "validationNotes": [
+                "recast-in-fy2027-q2-after-customer-reclassification"
+              ]
+            },
+            {
+              "name": "AI Clouds, Industrial, & Enterprise",
+              "nameZh": "AI云、工业与企业",
+              "memberKey": "aicloudsindustrialenterprise",
+              "targetName": "Data Center",
+              "valueBn": 32.196,
+              "yoyPct": null,
+              "qoqPct": null,
+              "suppressQoQGrowth": true,
+              "filingDate": "2026-08-26",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+              "validationNotes": [
+                "recast-in-fy2027-q2-after-customer-reclassification"
+              ]
+            }
+          ]
+        },
+      "2026Q3": {
+        "style": "nvidia-fy2027-market-platform",
+        "segments": [
+            {
+              "name": "Data Center",
+              "nameZh": "数据中心",
+              "memberKey": "datacenter",
+              "valueBn": 89.023,
+              "yoyPct": 116.62,
+              "qoqPct": 18.31,
+              "filingDate": "2026-08-26",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm"
+            },
+            {
+              "name": "Edge Computing",
+              "nameZh": "边缘计算",
+              "memberKey": "edgecomputing",
+              "valueBn": 7.198,
+              "yoyPct": 27.47,
+              "qoqPct": 13.0,
+              "filingDate": "2026-08-26",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm"
+            }
+          ],
+          "detailGroups": [
+            {
+              "name": "Hyperscale",
+              "nameZh": "超大规模",
+              "memberKey": "hyperscale",
+              "targetName": "Data Center",
+              "valueBn": 48.71,
+              "yoyPct": 101.55,
+              "qoqPct": 13.1475,
+              "filingDate": "2026-08-26",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm"
+            },
+            {
+              "name": "AI Clouds, Industrial, & Enterprise",
+              "nameZh": "AI云、工业与企业",
+              "memberKey": "aicloudsindustrialenterprise",
+              "targetName": "Data Center",
+              "valueBn": 40.313,
+              "yoyPct": 138.14,
+              "qoqPct": 25.2112,
+              "filingDate": "2026-08-26",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm"
+            }
+          ]
+        }
+      },
+      "filingsUsed": [
+        {
+          "title": "NVIDIA Form 10-Q for the quarter ended July 26, 2026",
+          "quarter": "2026Q3",
+          "filingDate": "2026-08-26",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm"
+        }
+      ],
+      "errors": []
+    }
+  },
   "microsoft": {
     "financials": {
       "2026Q2": {

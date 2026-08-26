@@ -712,7 +712,12 @@ def harmonize_unchanged_sankey_rows(current_rows: Any, previous_rows: Any) -> tu
     for previous_row, key in zip(previous, previous_keys):
         current_row = deepcopy(current_by_key[key])
         for label_field in ("name", "nameZh", "displayLines", "lockupKey"):
-            if previous_row.get(label_field) not in (None, "", []):
+            if label_field == "nameZh" and label_field in previous_row:
+                # An explicit new translation is also a layout change. Preserve
+                # the prior absence of an override so the renderer continues to
+                # use its canonical member-key translation and line breaks.
+                current_row[label_field] = deepcopy(previous_row.get(label_field))
+            elif previous_row.get(label_field) not in (None, "", []):
                 current_row[label_field] = deepcopy(previous_row[label_field])
         harmonized.append(current_row)
     return harmonized, True
@@ -753,6 +758,9 @@ def preserve_previous_quarter_sankey_structure(payload: dict[str, Any]) -> dict[
             if continuity_fields and not entry.get("sankeyPresentation") and previous_entry.get("sankeyPresentation"):
                 entry["sankeyPresentation"] = deepcopy(previous_entry["sankeyPresentation"])
                 continuity_fields.append("sankeyPresentation")
+            if continuity_fields and not entry.get("officialRevenueStyle") and previous_entry.get("officialRevenueStyle"):
+                entry["officialRevenueStyle"] = deepcopy(previous_entry["officialRevenueStyle"])
+                continuity_fields.append("officialRevenueStyle")
             if continuity_fields:
                 entry["sankeyStructureContinuity"] = {
                     "sourceQuarter": previous_quarter,
