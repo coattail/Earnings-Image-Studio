@@ -9754,7 +9754,16 @@ function renderPixelReplicaSvg(snapshot) {
       positiveAdjustments.length === 1 &&
       totalPositiveStackHeight >= scaleY(safeNumber(snapshot.layout?.positiveAngledMinimumHeightY, 6)) &&
       positiveMergeShareOfNet >= safeNumber(snapshot.layout?.positiveAngledMinimumNetShare, 0.2);
-    const positiveRequiresVisibleMergeLead = positiveMaterialAbove || positiveNeedsVisibleMergeAngle;
+    const positiveNeedsGentleMergeAngle =
+      positiveUpperLane &&
+      !positiveMaterialAbove &&
+      !positiveNeedsVisibleMergeAngle &&
+      !useExtremePositiveLayout &&
+      !hasOperatingLoss &&
+      positiveAdjustments.length === 1 &&
+      totalPositiveStackHeight >= scaleY(safeNumber(snapshot.layout?.positiveGentleAngledMinimumHeightY, 4));
+    const positiveRequiresVisibleMergeLead =
+      positiveMaterialAbove || positiveNeedsVisibleMergeAngle || positiveNeedsGentleMergeAngle;
     const positiveAngledSourceTopFloorY = scaleY(
       safeNumber(snapshot.layout?.positiveAngledSourceTopFloorY, 32)
     );
@@ -10456,19 +10465,27 @@ function renderPixelReplicaSvg(snapshot) {
         const itemHeight = Math.max(safeNumber(positiveHeights[index], 0), 0);
         return weightedShift + learnedEditorOffsetForNode(`positive-${index}`).dy * itemHeight;
       }, 0) / Math.max(totalPositiveStackHeight, 1);
-      if (positiveNeedsVisibleMergeAngle) {
+      if (positiveNeedsVisibleMergeAngle || positiveNeedsGentleMergeAngle) {
         positiveTopMin = Math.min(positiveTopMin, positiveAngledSourceTopFloorY);
       }
       const prominentMinimumMergeLeadY = Math.max(
         scaleY(
           safeNumber(
-            positiveNeedsVisibleMergeAngle
-              ? snapshot.layout?.positiveAngledMinimumMergeLeadY
-              : snapshot.layout?.positiveProminentMinimumMergeLeadY,
-            positiveNeedsVisibleMergeAngle ? 44 : 36
+            positiveNeedsGentleMergeAngle
+              ? snapshot.layout?.positiveGentleAngledMinimumMergeLeadY
+              : positiveNeedsVisibleMergeAngle
+                ? snapshot.layout?.positiveAngledMinimumMergeLeadY
+                : snapshot.layout?.positiveProminentMinimumMergeLeadY,
+            positiveNeedsGentleMergeAngle ? 18 : positiveNeedsVisibleMergeAngle ? 44 : 36
           )
         ),
-        positiveReferenceHeight * safeNumber(snapshot.layout?.positiveProminentMinimumMergeLeadHeightFactor, 0.42)
+        positiveReferenceHeight *
+          safeNumber(
+            positiveNeedsGentleMergeAngle
+              ? snapshot.layout?.positiveGentleMinimumMergeLeadHeightFactor
+              : snapshot.layout?.positiveProminentMinimumMergeLeadHeightFactor,
+            positiveNeedsGentleMergeAngle ? 0.28 : 0.42
+          )
       );
       const prominentMaximumSourceTop =
         prominentTargetStackCenter -
@@ -10481,16 +10498,18 @@ function renderPixelReplicaSvg(snapshot) {
         positiveTopMax
       );
 
-      const prominentMinimumRunwayX = Math.max(
-        scaleY(safeNumber(snapshot.layout?.positiveProminentMinimumRunwayX, 98)),
-        positiveReferenceHeight * safeNumber(snapshot.layout?.positiveProminentMinimumRunwayHeightFactor, 1.03)
-      );
-      positiveNodeX = clamp(
-        Math.min(positiveNodeX, netX - positiveNodeWidth - prominentMinimumRunwayX),
-        extremePositiveTopLaneMinX,
-        Math.max(positiveNodeMaxX, extremePositiveTopLaneMinX)
-      );
-      corridorSampleXs = positiveCorridorSampleXsForNode(positiveNodeX);
+      if (!positiveNeedsGentleMergeAngle) {
+        const prominentMinimumRunwayX = Math.max(
+          scaleY(safeNumber(snapshot.layout?.positiveProminentMinimumRunwayX, 98)),
+          positiveReferenceHeight * safeNumber(snapshot.layout?.positiveProminentMinimumRunwayHeightFactor, 1.03)
+        );
+        positiveNodeX = clamp(
+          Math.min(positiveNodeX, netX - positiveNodeWidth - prominentMinimumRunwayX),
+          extremePositiveTopLaneMinX,
+          Math.max(positiveNodeMaxX, extremePositiveTopLaneMinX)
+        );
+        corridorSampleXs = positiveCorridorSampleXsForNode(positiveNodeX);
+      }
     }
     if (positiveUpperLane && positiveSmallAdjustmentStrength > 0 && periodEndObstacle) {
       const smallAdjustmentLabelGapX = safeNumber(snapshot.layout?.positiveLabelGapX, 14);
@@ -10620,7 +10639,7 @@ function renderPixelReplicaSvg(snapshot) {
       const positiveStackOffsetY = positiveTop - positiveStackStartY;
       const sourceTopSearchMin = clamp(
         positiveTopMin + positiveStackOffsetY + positiveSourceDropY,
-        positiveNeedsVisibleMergeAngle
+        positiveNeedsVisibleMergeAngle || positiveNeedsGentleMergeAngle
           ? positiveAngledSourceTopFloorY
           : positiveMaterialAbove
             ? positiveSourceTopFloorY

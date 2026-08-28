@@ -565,6 +565,25 @@ class SankeyPositiveAdjustmentLayoutTests(unittest.TestCase):
             "A prominent positive adjustment should retain enough horizontal runway for a smooth merge.",
         )
 
+    def test_nvidia_small_non_operating_gain_keeps_a_gentle_merge_angle(self) -> None:
+        svg_root = render_sankey_svg(NVIDIA_PAYLOAD, "zh", "nvidia-gentle-positive", quarter="2026Q3")
+
+        positive = visible_rect_attrs(svg_root, "positive-0")
+        net = visible_rect_attrs(svg_root, "net")
+        positive_paths = green_paths_between(svg_root, positive, net)
+
+        self.assertEqual(1, len(positive_paths))
+        self.assertGreaterEqual(
+            path_target_center(positive_paths[0]) - path_start_center(positive_paths[0]),
+            20,
+            "A small positive adjustment should descend gently into net profit instead of rendering as a horizontal band.",
+        )
+        self.assertGreaterEqual(
+            net["y"] - positive["y"],
+            20,
+            "Learned prior-quarter offsets must not flatten a future quarter's positive merge ribbon.",
+        )
+
     def test_operating_profit_fork_starts_curving_without_a_long_shared_runway(self) -> None:
         for company, payload in (
             ("amazon", AMAZON_PAYLOAD),
