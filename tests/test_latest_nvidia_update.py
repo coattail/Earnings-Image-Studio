@@ -42,8 +42,14 @@ class LatestNvidiaUpdateTests(unittest.TestCase):
         self.assertEqual(previous_details["aicloudsindustrialenterprise"]["valueBn"], 32.196)
         self.assertEqual(previous_details["hyperscale"]["yoyPct"], 144.62)
         self.assertEqual(previous_details["aicloudsindustrialenterprise"]["yoyPct"], 49.66)
-        self.assertIsNone(previous_details["hyperscale"]["qoqPct"])
-        self.assertIsNone(previous_details["aicloudsindustrialenterprise"]["qoqPct"])
+        self.assertEqual(previous_details["hyperscale"]["qoqPct"], 12.0)
+        self.assertEqual(previous_details["aicloudsindustrialenterprise"]["qoqPct"], 31.0)
+        for row in previous_details.values():
+            self.assertNotIn("suppressQoQGrowth", row)
+            self.assertIn(
+                "qoq-from-original-fy2027-q1-filing-before-later-customer-reclassification",
+                row["validationNotes"],
+            )
 
         previous_segments = {
             row["memberKey"]: row

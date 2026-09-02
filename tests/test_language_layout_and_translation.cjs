@@ -225,16 +225,18 @@ test("NVDA FY2027 Q2 keeps the prior quarter label wrapping and Sankey width", (
   }
 });
 
-test("NVDA FY2027 Q1 recast detail rows retain comparable Y/Y growth", () => {
-  const { snapshot } = renderNvda(loadRuntime(), "zh");
+test("NVDA FY2027 Q1 recast detail rows retain official Y/Y and Q/Q growth", () => {
+  const { snapshot, svg } = renderNvda(loadRuntime(), "zh");
   const details = Object.fromEntries(snapshot.leftDetailGroups.map((item) => [item.name, item]));
 
   assert.equal(details.Hyperscale.valueBn, 43.05);
   assert.equal(details["AI Clouds, Industrial, & Enterprise"].valueBn, 32.196);
   assert.equal(details.Hyperscale.yoyPct, 144.62);
   assert.equal(details["AI Clouds, Industrial, & Enterprise"].yoyPct, 49.66);
-  assert.equal(details.Hyperscale.qoqPct, null);
-  assert.equal(details["AI Clouds, Industrial, & Enterprise"].qoqPct, null);
+  assert.equal(details.Hyperscale.qoqPct, 12);
+  assert.equal(details["AI Clouds, Industrial, & Enterprise"].qoqPct, 31);
+  assert.match(svg, />环比\+12\.0%<\/text>/);
+  assert.match(svg, />环比\+31\.0%<\/text>/);
 });
 
 test("NVDA FY2027 Q1 market-platform rows include official Y/Y and Q/Q growth", () => {
