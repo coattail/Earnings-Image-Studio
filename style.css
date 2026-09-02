@@ -198,8 +198,10 @@ select:focus {
 
 .company-list {
   display: grid;
+  align-content: start;
   flex: 1 1 0;
   gap: 8px;
+  grid-auto-rows: max-content;
   min-height: 0;
   max-height: none;
   margin-top: 10px;
