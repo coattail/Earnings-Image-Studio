@@ -150,7 +150,7 @@ process.stdout.write(JSON.stringify(result));
         )
         payload = json.loads(result.stdout)
 
-        self.assertEqual(payload["latestQuarter"], "2026Q2")
+        self.assertEqual(payload["latestQuarter"], "2026Q3")
         self.assertEqual(payload["beforePresentation"], payload["afterPresentation"])
         self.assertEqual(payload["beforeOpex"], payload["afterOpex"])
         self.assertEqual(payload["beforeCost"], payload["afterCost"])
