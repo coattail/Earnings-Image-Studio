@@ -4,7 +4,7 @@
   "nameZh": "甲骨文",
   "nameEn": "Oracle",
   "slug": "orcl",
-  "rank": 18,
+  "rank": 28,
   "isAdr": false,
   "brand": {
     "primary": "#F80000",
@@ -45,7 +45,8 @@
     "2025Q3",
     "2025Q4",
     "2026Q1",
-    "2026Q2"
+    "2026Q2",
+    "2026Q3"
   ],
   "financials": {
     "2018Q1": {
@@ -129,7 +130,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.8875,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.75,
         "checksRun": 8,
         "checksPassed": 6,
@@ -240,7 +241,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.8875,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.75,
         "checksRun": 8,
         "checksPassed": 6,
@@ -351,7 +352,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.9438,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.875,
         "checksRun": 8,
         "checksPassed": 7,
@@ -412,7 +413,9 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2018Q4": {
       "calendarQuarter": "2018Q4",
@@ -491,7 +494,7 @@
         "status": "medium",
         "confidenceScore": 0.7937,
         "completenessScore": 0.625,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 2,
         "checksPassed": 2,
         "issueCount": 0,
@@ -544,7 +547,16 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2018Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2019Q1": {
       "calendarQuarter": "2019Q1",
@@ -627,7 +639,7 @@
         "status": "medium",
         "confidenceScore": 0.7937,
         "completenessScore": 0.625,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 2,
         "checksPassed": 2,
         "issueCount": 0,
@@ -711,7 +723,9 @@
       "officialSegmentSource": "official-filings",
       "officialRevenueStyle": "oracle-revenue-bridge",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2019Q2": {
       "calendarQuarter": "2019Q2",
@@ -794,7 +808,7 @@
         "status": "medium",
         "confidenceScore": 0.7937,
         "completenessScore": 0.625,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 2,
         "checksPassed": 2,
         "issueCount": 0,
@@ -844,7 +858,9 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2019Q3": {
       "calendarQuarter": "2019Q3",
@@ -927,7 +943,7 @@
         "status": "medium",
         "confidenceScore": 0.7937,
         "completenessScore": 0.625,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 2,
         "checksPassed": 2,
         "issueCount": 0,
@@ -1011,7 +1027,9 @@
       "officialSegmentSource": "official-filings",
       "officialRevenueStyle": "oracle-revenue-bridge",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+      "officialRevenueTaxonomyChangedFromPriorYear": true
     },
     "2019Q4": {
       "calendarQuarter": "2019Q4",
@@ -1094,7 +1112,7 @@
         "status": "medium",
         "confidenceScore": 0.7937,
         "completenessScore": 0.625,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 2,
         "checksPassed": 2,
         "issueCount": 0,
@@ -1120,13 +1138,13 @@
           "validationNotes": null
         },
         {
-          "name": "Software",
+          "name": "Hardware",
           "nameZh": null,
-          "memberKey": "software",
-          "valueBn": 1.126,
+          "memberKey": "hardware",
+          "valueBn": 0.871,
           "yoyPct": null,
-          "qoqPct": 38.67,
-          "mixPct": 11.7,
+          "qoqPct": 6.87,
+          "mixPct": 9.1,
           "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459019045966/orcl-10q_20191130.htm",
           "sourceForm": "10-Q",
@@ -1138,13 +1156,13 @@
           "validationNotes": null
         },
         {
-          "name": "Hardware",
+          "name": "Software",
           "nameZh": null,
-          "memberKey": "hardware",
-          "valueBn": 0.871,
+          "memberKey": "software",
+          "valueBn": 1.126,
           "yoyPct": null,
-          "qoqPct": 6.87,
-          "mixPct": 9.1,
+          "qoqPct": 38.67,
+          "mixPct": 11.7,
           "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459019045966/orcl-10q_20191130.htm",
           "sourceForm": "10-Q",
@@ -1178,7 +1196,16 @@
       "officialSegmentSource": "official-filings",
       "officialRevenueStyle": "oracle-revenue-bridge",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true
     },
     "2020Q1": {
       "calendarQuarter": "2020Q1",
@@ -1261,7 +1288,7 @@
         "status": "medium",
         "confidenceScore": 0.7937,
         "completenessScore": 0.625,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 2,
         "checksPassed": 2,
         "issueCount": 0,
@@ -1287,14 +1314,14 @@
           "validationNotes": null
         },
         {
-          "name": "Software",
+          "name": "Hardware",
           "nameZh": null,
-          "memberKey": "software",
-          "valueBn": 1.231,
-          "yoyPct": -1.6,
-          "qoqPct": 9.33,
-          "mixPct": 12.6,
-          "mixYoyDeltaPp": -0.4,
+          "memberKey": "hardware",
+          "valueBn": 0.857,
+          "yoyPct": -6.34,
+          "qoqPct": -1.61,
+          "mixPct": 8.7,
+          "mixYoyDeltaPp": -0.8,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459020010833/orcl-10q_20200229.htm",
           "sourceForm": "10-Q",
           "filingDate": "2020-03-13",
@@ -1305,14 +1332,14 @@
           "validationNotes": null
         },
         {
-          "name": "Hardware",
+          "name": "Software",
           "nameZh": null,
-          "memberKey": "hardware",
-          "valueBn": 0.857,
-          "yoyPct": -6.34,
-          "qoqPct": -1.61,
-          "mixPct": 8.7,
-          "mixYoyDeltaPp": -0.8,
+          "memberKey": "software",
+          "valueBn": 1.231,
+          "yoyPct": -1.6,
+          "qoqPct": 9.33,
+          "mixPct": 12.6,
+          "mixYoyDeltaPp": -0.4,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459020010833/orcl-10q_20200229.htm",
           "sourceForm": "10-Q",
           "filingDate": "2020-03-13",
@@ -1345,7 +1372,16 @@
       "officialSegmentSource": "official-filings",
       "officialRevenueStyle": "oracle-revenue-bridge",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2020Q2": {
       "calendarQuarter": "2020Q2",
@@ -1428,7 +1464,7 @@
         "status": "medium",
         "confidenceScore": 0.7937,
         "completenessScore": 0.625,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 2,
         "checksPassed": 2,
         "issueCount": 0,
@@ -1454,13 +1490,13 @@
           "validationNotes": null
         },
         {
-          "name": "Software",
+          "name": "Hardware",
           "nameZh": null,
-          "memberKey": "software",
-          "valueBn": 1.958,
+          "memberKey": "hardware",
+          "valueBn": 0.9,
           "yoyPct": null,
-          "qoqPct": 59.06,
-          "mixPct": 18.8,
+          "qoqPct": 5.02,
+          "mixPct": 8.6,
           "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459020030125/orcl-10k_20200531.htm",
           "sourceForm": "10-K",
@@ -1472,13 +1508,13 @@
           "validationNotes": null
         },
         {
-          "name": "Hardware",
+          "name": "Software",
           "nameZh": null,
-          "memberKey": "hardware",
-          "valueBn": 0.9,
+          "memberKey": "software",
+          "valueBn": 1.958,
           "yoyPct": null,
-          "qoqPct": 5.02,
-          "mixPct": 8.6,
+          "qoqPct": 59.06,
+          "mixPct": 18.8,
           "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459020030125/orcl-10k_20200531.htm",
           "sourceForm": "10-K",
@@ -1512,7 +1548,16 @@
       "officialSegmentSource": "official-filings",
       "officialRevenueStyle": "oracle-revenue-bridge",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true
     },
     "2020Q3": {
       "calendarQuarter": "2020Q3",
@@ -1595,7 +1640,7 @@
         "status": "medium",
         "confidenceScore": 0.7937,
         "completenessScore": 0.625,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 2,
         "checksPassed": 2,
         "issueCount": 0,
@@ -1621,14 +1666,14 @@
           "validationNotes": null
         },
         {
-          "name": "Software",
+          "name": "Hardware",
           "nameZh": null,
-          "memberKey": "software",
-          "valueBn": 0.886,
-          "yoyPct": 9.11,
-          "qoqPct": -54.75,
-          "mixPct": 9.5,
-          "mixYoyDeltaPp": 0.6,
+          "memberKey": "hardware",
+          "valueBn": 0.814,
+          "yoyPct": -0.12,
+          "qoqPct": -9.56,
+          "mixPct": 8.7,
+          "mixYoyDeltaPp": -0.2,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459020043448/orcl-10q_20200831.htm",
           "sourceForm": "10-Q",
           "filingDate": "2020-09-15",
@@ -1639,14 +1684,14 @@
           "validationNotes": null
         },
         {
-          "name": "Hardware",
+          "name": "Software",
           "nameZh": null,
-          "memberKey": "hardware",
-          "valueBn": 0.814,
-          "yoyPct": -0.12,
-          "qoqPct": -9.56,
-          "mixPct": 8.7,
-          "mixYoyDeltaPp": -0.2,
+          "memberKey": "software",
+          "valueBn": 0.886,
+          "yoyPct": 9.11,
+          "qoqPct": -54.75,
+          "mixPct": 9.5,
+          "mixYoyDeltaPp": 0.6,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459020043448/orcl-10q_20200831.htm",
           "sourceForm": "10-Q",
           "filingDate": "2020-09-15",
@@ -1679,7 +1724,16 @@
       "officialSegmentSource": "official-filings",
       "officialRevenueStyle": "oracle-revenue-bridge",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2020Q4": {
       "calendarQuarter": "2020Q4",
@@ -1762,7 +1816,7 @@
         "status": "medium",
         "confidenceScore": 0.7937,
         "completenessScore": 0.625,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 2,
         "checksPassed": 2,
         "issueCount": 0,
@@ -1788,14 +1842,14 @@
           "validationNotes": null
         },
         {
-          "name": "Software",
+          "name": "Hardware",
           "nameZh": null,
-          "memberKey": "software",
-          "valueBn": 1.092,
-          "yoyPct": -3.02,
-          "qoqPct": 23.25,
-          "mixPct": 11.1,
-          "mixYoyDeltaPp": -0.6,
+          "memberKey": "hardware",
+          "valueBn": 0.844,
+          "yoyPct": -3.1,
+          "qoqPct": 3.69,
+          "mixPct": 8.6,
+          "mixYoyDeltaPp": -0.4,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459020056896/orcl-10q_20201130.htm",
           "sourceForm": "10-Q",
           "filingDate": "2020-12-11",
@@ -1806,14 +1860,14 @@
           "validationNotes": null
         },
         {
-          "name": "Hardware",
+          "name": "Software",
           "nameZh": null,
-          "memberKey": "hardware",
-          "valueBn": 0.844,
-          "yoyPct": -3.1,
-          "qoqPct": 3.69,
-          "mixPct": 8.6,
-          "mixYoyDeltaPp": -0.4,
+          "memberKey": "software",
+          "valueBn": 1.092,
+          "yoyPct": -3.02,
+          "qoqPct": 23.25,
+          "mixPct": 11.1,
+          "mixYoyDeltaPp": -0.6,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459020056896/orcl-10q_20201130.htm",
           "sourceForm": "10-Q",
           "filingDate": "2020-12-11",
@@ -1846,7 +1900,16 @@
       "officialSegmentSource": "official-filings",
       "officialRevenueStyle": "oracle-revenue-bridge",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2021Q1": {
       "calendarQuarter": "2021Q1",
@@ -1929,7 +1992,7 @@
         "status": "medium",
         "confidenceScore": 0.7937,
         "completenessScore": 0.625,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 2,
         "checksPassed": 2,
         "issueCount": 0,
@@ -1955,14 +2018,14 @@
           "validationNotes": null
         },
         {
-          "name": "Software",
+          "name": "Hardware",
           "nameZh": null,
-          "memberKey": "software",
-          "valueBn": 1.276,
-          "yoyPct": 3.66,
-          "qoqPct": 16.85,
-          "mixPct": 12.7,
-          "mixYoyDeltaPp": 0.1,
+          "memberKey": "hardware",
+          "valueBn": 0.82,
+          "yoyPct": -4.32,
+          "qoqPct": -2.84,
+          "mixPct": 8.1,
+          "mixYoyDeltaPp": -0.6,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459021012539/orcl-10q_20210228.htm",
           "sourceForm": "10-Q",
           "filingDate": "2021-03-11",
@@ -1973,14 +2036,14 @@
           "validationNotes": null
         },
         {
-          "name": "Hardware",
+          "name": "Software",
           "nameZh": null,
-          "memberKey": "hardware",
-          "valueBn": 0.82,
-          "yoyPct": -4.32,
-          "qoqPct": -2.84,
-          "mixPct": 8.1,
-          "mixYoyDeltaPp": -0.6,
+          "memberKey": "software",
+          "valueBn": 1.276,
+          "yoyPct": 3.66,
+          "qoqPct": 16.85,
+          "mixPct": 12.7,
+          "mixYoyDeltaPp": 0.1,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459021012539/orcl-10q_20210228.htm",
           "sourceForm": "10-Q",
           "filingDate": "2021-03-11",
@@ -2013,7 +2076,16 @@
       "officialSegmentSource": "official-filings",
       "officialRevenueStyle": "oracle-revenue-bridge",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2021Q2": {
       "calendarQuarter": "2021Q2",
@@ -2105,7 +2177,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.9438,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.875,
         "checksRun": 8,
         "checksPassed": 7,
@@ -2142,14 +2214,14 @@
           "validationNotes": null
         },
         {
-          "name": "Software",
+          "name": "Hardware",
           "nameZh": null,
-          "memberKey": "software",
-          "valueBn": 2.145,
-          "yoyPct": 9.55,
-          "qoqPct": 68.1,
-          "mixPct": 19.1,
-          "mixYoyDeltaPp": 0.4,
+          "memberKey": "hardware",
+          "valueBn": 0.881,
+          "yoyPct": -2.11,
+          "qoqPct": 7.44,
+          "mixPct": 7.8,
+          "mixYoyDeltaPp": -0.8,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459021033616/orcl-10k_20210531.htm",
           "sourceForm": "10-K",
           "filingDate": "2021-06-21",
@@ -2160,14 +2232,14 @@
           "validationNotes": null
         },
         {
-          "name": "Hardware",
+          "name": "Software",
           "nameZh": null,
-          "memberKey": "hardware",
-          "valueBn": 0.881,
-          "yoyPct": -2.11,
-          "qoqPct": 7.44,
-          "mixPct": 7.8,
-          "mixYoyDeltaPp": -0.8,
+          "memberKey": "software",
+          "valueBn": 2.145,
+          "yoyPct": 9.55,
+          "qoqPct": 68.1,
+          "mixPct": 19.1,
+          "mixYoyDeltaPp": 0.4,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459021033616/orcl-10k_20210531.htm",
           "sourceForm": "10-K",
           "filingDate": "2021-06-21",
@@ -2200,7 +2272,16 @@
       "officialSegmentSource": "official-filings",
       "officialRevenueStyle": "oracle-revenue-bridge",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2021Q3": {
       "calendarQuarter": "2021Q3",
@@ -2292,7 +2373,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.9438,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.875,
         "checksRun": 8,
         "checksPassed": 7,
@@ -2329,14 +2410,14 @@
           "validationNotes": null
         },
         {
-          "name": "Software",
+          "name": "Hardware",
           "nameZh": null,
-          "memberKey": "software",
-          "valueBn": 0.813,
-          "yoyPct": -8.24,
-          "qoqPct": -62.1,
-          "mixPct": 8.4,
-          "mixYoyDeltaPp": -1.1,
+          "memberKey": "hardware",
+          "valueBn": 0.763,
+          "yoyPct": -6.27,
+          "qoqPct": -13.39,
+          "mixPct": 7.8,
+          "mixYoyDeltaPp": -0.8,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459021047772/orcl-10q_20210831.htm",
           "sourceForm": "10-Q",
           "filingDate": "2021-09-13",
@@ -2347,14 +2428,14 @@
           "validationNotes": null
         },
         {
-          "name": "Hardware",
+          "name": "Software",
           "nameZh": null,
-          "memberKey": "hardware",
-          "valueBn": 0.763,
-          "yoyPct": -6.27,
-          "qoqPct": -13.39,
-          "mixPct": 7.8,
-          "mixYoyDeltaPp": -0.8,
+          "memberKey": "software",
+          "valueBn": 0.813,
+          "yoyPct": -8.24,
+          "qoqPct": -62.1,
+          "mixPct": 8.4,
+          "mixYoyDeltaPp": -1.1,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459021047772/orcl-10q_20210831.htm",
           "sourceForm": "10-Q",
           "filingDate": "2021-09-13",
@@ -2387,7 +2468,16 @@
       "officialSegmentSource": "official-filings",
       "officialRevenueStyle": "oracle-revenue-bridge",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2021Q4": {
       "calendarQuarter": "2021Q4",
@@ -2479,7 +2569,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.9438,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.875,
         "checksRun": 8,
         "checksPassed": 7,
@@ -2516,14 +2606,14 @@
           "validationNotes": null
         },
         {
-          "name": "Software",
+          "name": "Hardware",
           "nameZh": null,
-          "memberKey": "software",
-          "valueBn": 1.237,
-          "yoyPct": 13.28,
-          "qoqPct": 52.15,
-          "mixPct": 11.9,
-          "mixYoyDeltaPp": 0.8,
+          "memberKey": "hardware",
+          "valueBn": 0.767,
+          "yoyPct": -9.12,
+          "qoqPct": 0.52,
+          "mixPct": 7.4,
+          "mixYoyDeltaPp": -1.2,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459021060022/orcl-10q_20211130.htm",
           "sourceForm": "10-Q",
           "filingDate": "2021-12-10",
@@ -2534,14 +2624,14 @@
           "validationNotes": null
         },
         {
-          "name": "Hardware",
+          "name": "Software",
           "nameZh": null,
-          "memberKey": "hardware",
-          "valueBn": 0.767,
-          "yoyPct": -9.12,
-          "qoqPct": 0.52,
-          "mixPct": 7.4,
-          "mixYoyDeltaPp": -1.2,
+          "memberKey": "software",
+          "valueBn": 1.237,
+          "yoyPct": 13.28,
+          "qoqPct": 52.15,
+          "mixPct": 11.9,
+          "mixYoyDeltaPp": 0.8,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459021060022/orcl-10q_20211130.htm",
           "sourceForm": "10-Q",
           "filingDate": "2021-12-10",
@@ -2574,7 +2664,16 @@
       "officialSegmentSource": "official-filings",
       "officialRevenueStyle": "oracle-revenue-bridge",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2022Q1": {
       "calendarQuarter": "2022Q1",
@@ -2666,7 +2765,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.9438,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.875,
         "checksRun": 8,
         "checksPassed": 7,
@@ -2703,14 +2802,14 @@
           "validationNotes": null
         },
         {
-          "name": "Software",
+          "name": "Hardware",
           "nameZh": null,
-          "memberKey": "software",
-          "valueBn": 1.289,
-          "yoyPct": 1.02,
-          "qoqPct": 4.2,
-          "mixPct": 12.3,
-          "mixYoyDeltaPp": -0.4,
+          "memberKey": "hardware",
+          "valueBn": 0.798,
+          "yoyPct": -2.68,
+          "qoqPct": 4.04,
+          "mixPct": 7.6,
+          "mixYoyDeltaPp": -0.5,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459022009859/orcl-10q_20220228.htm",
           "sourceForm": "10-Q",
           "filingDate": "2022-03-11",
@@ -2721,14 +2820,14 @@
           "validationNotes": null
         },
         {
-          "name": "Hardware",
+          "name": "Software",
           "nameZh": null,
-          "memberKey": "hardware",
-          "valueBn": 0.798,
-          "yoyPct": -2.68,
-          "qoqPct": 4.04,
-          "mixPct": 7.6,
-          "mixYoyDeltaPp": -0.5,
+          "memberKey": "software",
+          "valueBn": 1.289,
+          "yoyPct": 1.02,
+          "qoqPct": 4.2,
+          "mixPct": 12.3,
+          "mixYoyDeltaPp": -0.4,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459022009859/orcl-10q_20220228.htm",
           "sourceForm": "10-Q",
           "filingDate": "2022-03-11",
@@ -2761,7 +2860,16 @@
       "officialSegmentSource": "official-filings",
       "officialRevenueStyle": "oracle-revenue-bridge",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2022Q2": {
       "calendarQuarter": "2022Q2",
@@ -2854,7 +2962,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.9438,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.875,
         "checksRun": 8,
         "checksPassed": 7,
@@ -2891,14 +2999,14 @@
           "validationNotes": null
         },
         {
-          "name": "Software",
+          "name": "Hardware",
           "nameZh": null,
-          "memberKey": "software",
-          "valueBn": 2.539,
-          "yoyPct": 18.37,
-          "qoqPct": 96.97,
-          "mixPct": 21.4,
-          "mixYoyDeltaPp": 2.3,
+          "memberKey": "hardware",
+          "valueBn": 0.855,
+          "yoyPct": -2.95,
+          "qoqPct": 7.14,
+          "mixPct": 7.2,
+          "mixYoyDeltaPp": -0.6,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459022023675/orcl-10k_20220531.htm",
           "sourceForm": "10-K",
           "filingDate": "2022-06-21",
@@ -2909,14 +3017,14 @@
           "validationNotes": null
         },
         {
-          "name": "Hardware",
+          "name": "Software",
           "nameZh": null,
-          "memberKey": "hardware",
-          "valueBn": 0.855,
-          "yoyPct": -2.95,
-          "qoqPct": 7.14,
-          "mixPct": 7.2,
-          "mixYoyDeltaPp": -0.6,
+          "memberKey": "software",
+          "valueBn": 2.539,
+          "yoyPct": 18.37,
+          "qoqPct": 96.97,
+          "mixPct": 21.4,
+          "mixYoyDeltaPp": 2.3,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459022023675/orcl-10k_20220531.htm",
           "sourceForm": "10-K",
           "filingDate": "2022-06-21",
@@ -2949,7 +3057,16 @@
       "officialSegmentSource": "official-filings",
       "officialRevenueStyle": "oracle-revenue-bridge",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2022Q3": {
       "calendarQuarter": "2022Q3",
@@ -2971,7 +3088,7 @@
       "pretaxIncomeBn": 1.656,
       "taxBn": 0.108,
       "netIncomeBn": 1.548,
-      "netIncomeYoyPct": -37.0,
+      "netIncomeYoyPct": -37,
       "grossMarginPct": 73.46,
       "operatingMarginPct": 22.92,
       "profitMarginPct": 13.53,
@@ -3042,7 +3159,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.9438,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.875,
         "checksRun": 8,
         "checksPassed": 7,
@@ -3079,14 +3196,14 @@
           "validationNotes": null
         },
         {
-          "name": "Services",
+          "name": "Hardware",
           "nameZh": null,
-          "memberKey": "services",
-          "valueBn": 1.361,
-          "yoyPct": 111.34,
-          "qoqPct": 92.23,
-          "mixPct": 11.9,
-          "mixYoyDeltaPp": 5.3,
+          "memberKey": "hardware",
+          "valueBn": 0.763,
+          "yoyPct": 0.0,
+          "qoqPct": -10.76,
+          "mixPct": 6.7,
+          "mixYoyDeltaPp": -1.2,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459022031545/orcl-10q_20220831.htm",
           "sourceForm": "10-Q",
           "filingDate": "2022-09-13",
@@ -3115,14 +3232,14 @@
           "validationNotes": null
         },
         {
-          "name": "Hardware",
+          "name": "Services",
           "nameZh": null,
-          "memberKey": "hardware",
-          "valueBn": 0.763,
-          "yoyPct": 0.0,
-          "qoqPct": -10.76,
-          "mixPct": 6.7,
-          "mixYoyDeltaPp": -1.2,
+          "memberKey": "services",
+          "valueBn": 1.361,
+          "yoyPct": 111.34,
+          "qoqPct": 92.23,
+          "mixPct": 11.9,
+          "mixYoyDeltaPp": 5.3,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459022031545/orcl-10q_20220831.htm",
           "sourceForm": "10-Q",
           "filingDate": "2022-09-13",
@@ -3137,7 +3254,16 @@
       "officialSegmentSource": "official-filings",
       "officialRevenueStyle": "oracle-revenue-bridge",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2022Q4": {
       "calendarQuarter": "2022Q4",
@@ -3230,7 +3356,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.9438,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.875,
         "checksRun": 8,
         "checksPassed": 7,
@@ -3257,6 +3383,24 @@
           "qoqPct": 2.15,
           "mixPct": 70.0,
           "mixYoyDeltaPp": -2.9,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459022039278/orcl-10q_20221130.htm",
+          "sourceForm": "10-Q",
+          "filingDate": "2022-12-13",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "Hardware",
+          "nameZh": null,
+          "memberKey": "hardware",
+          "valueBn": 0.85,
+          "yoyPct": 10.82,
+          "qoqPct": 11.4,
+          "mixPct": 6.9,
+          "mixYoyDeltaPp": -0.5,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459022039278/orcl-10q_20221130.htm",
           "sourceForm": "10-Q",
           "filingDate": "2022-12-13",
@@ -3301,31 +3445,22 @@
           "metricMode": null,
           "validationEligible": null,
           "validationNotes": null
-        },
-        {
-          "name": "Hardware",
-          "nameZh": null,
-          "memberKey": "hardware",
-          "valueBn": 0.85,
-          "yoyPct": 10.82,
-          "qoqPct": 11.4,
-          "mixPct": 6.9,
-          "mixYoyDeltaPp": -0.5,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459022039278/orcl-10q_20221130.htm",
-          "sourceForm": "10-Q",
-          "filingDate": "2022-12-13",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": null,
-          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "officialRevenueStyle": "oracle-revenue-bridge",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2023Q1": {
       "calendarQuarter": "2023Q1",
@@ -3418,7 +3553,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.9438,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.875,
         "checksRun": 8,
         "checksPassed": 7,
@@ -3455,14 +3590,14 @@
           "validationNotes": null
         },
         {
-          "name": "Services",
+          "name": "Hardware",
           "nameZh": null,
-          "memberKey": "services",
-          "valueBn": 1.376,
-          "yoyPct": 105.68,
-          "qoqPct": -1.15,
-          "mixPct": 11.1,
-          "mixYoyDeltaPp": 4.7,
+          "memberKey": "hardware",
+          "valueBn": 0.811,
+          "yoyPct": 1.63,
+          "qoqPct": -4.59,
+          "mixPct": 6.5,
+          "mixYoyDeltaPp": -1.0,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459023003413/orcl-10q_20230228.htm",
           "sourceForm": "10-Q",
           "filingDate": "2023-03-10",
@@ -3491,14 +3626,14 @@
           "validationNotes": null
         },
         {
-          "name": "Hardware",
+          "name": "Services",
           "nameZh": null,
-          "memberKey": "hardware",
-          "valueBn": 0.811,
-          "yoyPct": 1.63,
-          "qoqPct": -4.59,
-          "mixPct": 6.5,
-          "mixYoyDeltaPp": -1.0,
+          "memberKey": "services",
+          "valueBn": 1.376,
+          "yoyPct": 105.68,
+          "qoqPct": -1.15,
+          "mixPct": 11.1,
+          "mixYoyDeltaPp": 4.7,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000156459023003413/orcl-10q_20230228.htm",
           "sourceForm": "10-Q",
           "filingDate": "2023-03-10",
@@ -3513,7 +3648,16 @@
       "officialSegmentSource": "official-filings",
       "officialRevenueStyle": "oracle-revenue-bridge",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2023Q2": {
       "calendarQuarter": "2023Q2",
@@ -3606,7 +3750,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.9438,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.875,
         "checksRun": 8,
         "checksPassed": 7,
@@ -3633,6 +3777,24 @@
           "qoqPct": 5.0,
           "mixPct": 67.7,
           "mixYoyDeltaPp": 3.4,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000095017023028914/orcl-20230531.htm",
+          "sourceForm": "10-K",
+          "filingDate": "2023-06-20",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "Hardware",
+          "nameZh": null,
+          "memberKey": "hardware",
+          "valueBn": 0.85,
+          "yoyPct": -0.58,
+          "qoqPct": 4.81,
+          "mixPct": 6.1,
+          "mixYoyDeltaPp": -1.1,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000095017023028914/orcl-20230531.htm",
           "sourceForm": "10-K",
           "filingDate": "2023-06-20",
@@ -3677,31 +3839,22 @@
           "metricMode": null,
           "validationEligible": null,
           "validationNotes": null
-        },
-        {
-          "name": "Hardware",
-          "nameZh": null,
-          "memberKey": "hardware",
-          "valueBn": 0.85,
-          "yoyPct": -0.58,
-          "qoqPct": 4.81,
-          "mixPct": 6.1,
-          "mixYoyDeltaPp": -1.1,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000095017023028914/orcl-20230531.htm",
-          "sourceForm": "10-K",
-          "filingDate": "2023-06-20",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": null,
-          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "officialRevenueStyle": "oracle-revenue-bridge",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2023Q3": {
       "calendarQuarter": "2023Q3",
@@ -3794,7 +3947,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.9438,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.875,
         "checksRun": 8,
         "checksPassed": 7,
@@ -3831,14 +3984,14 @@
           "validationNotes": null
         },
         {
-          "name": "Services",
+          "name": "Hardware",
           "nameZh": null,
-          "memberKey": "services",
-          "valueBn": 1.383,
-          "yoyPct": 1.62,
-          "qoqPct": -5.6,
-          "mixPct": 11.1,
-          "mixYoyDeltaPp": -0.8,
+          "memberKey": "hardware",
+          "valueBn": 0.714,
+          "yoyPct": -6.42,
+          "qoqPct": -16.0,
+          "mixPct": 5.7,
+          "mixYoyDeltaPp": -0.9,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000095017023047713/orcl-20230831.htm",
           "sourceForm": "10-Q",
           "filingDate": "2023-09-12",
@@ -3867,14 +4020,14 @@
           "validationNotes": null
         },
         {
-          "name": "Hardware",
+          "name": "Services",
           "nameZh": null,
-          "memberKey": "hardware",
-          "valueBn": 0.714,
-          "yoyPct": -6.42,
-          "qoqPct": -16.0,
-          "mixPct": 5.7,
-          "mixYoyDeltaPp": -0.9,
+          "memberKey": "services",
+          "valueBn": 1.383,
+          "yoyPct": 1.62,
+          "qoqPct": -5.6,
+          "mixPct": 11.1,
+          "mixYoyDeltaPp": -0.8,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000095017023047713/orcl-20230831.htm",
           "sourceForm": "10-Q",
           "filingDate": "2023-09-12",
@@ -3889,7 +4042,16 @@
       "officialSegmentSource": "official-filings",
       "officialRevenueStyle": "oracle-revenue-bridge",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2023Q4": {
       "calendarQuarter": "2023Q4",
@@ -3982,7 +4144,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.9438,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.875,
         "checksRun": 8,
         "checksPassed": 7,
@@ -4019,14 +4181,14 @@
           "validationNotes": null
         },
         {
-          "name": "Services",
+          "name": "Hardware",
           "nameZh": null,
-          "memberKey": "services",
-          "valueBn": 1.368,
-          "yoyPct": -1.72,
-          "qoqPct": -1.08,
-          "mixPct": 10.6,
-          "mixYoyDeltaPp": -0.8,
+          "memberKey": "hardware",
+          "valueBn": 0.756,
+          "yoyPct": -11.06,
+          "qoqPct": 5.88,
+          "mixPct": 5.8,
+          "mixYoyDeltaPp": -1.1,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000095017023069682/orcl-20231130.htm",
           "sourceForm": "10-Q",
           "filingDate": "2023-12-12",
@@ -4055,14 +4217,14 @@
           "validationNotes": null
         },
         {
-          "name": "Hardware",
+          "name": "Services",
           "nameZh": null,
-          "memberKey": "hardware",
-          "valueBn": 0.756,
-          "yoyPct": -11.06,
-          "qoqPct": 5.88,
-          "mixPct": 5.8,
-          "mixYoyDeltaPp": -1.1,
+          "memberKey": "services",
+          "valueBn": 1.368,
+          "yoyPct": -1.72,
+          "qoqPct": -1.08,
+          "mixPct": 10.6,
+          "mixYoyDeltaPp": -0.8,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000095017023069682/orcl-20231130.htm",
           "sourceForm": "10-Q",
           "filingDate": "2023-12-12",
@@ -4077,7 +4239,16 @@
       "officialSegmentSource": "official-filings",
       "officialRevenueStyle": "oracle-revenue-bridge",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2024Q1": {
       "calendarQuarter": "2024Q1",
@@ -4170,7 +4341,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.9438,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.875,
         "checksRun": 8,
         "checksPassed": 7,
@@ -4207,14 +4378,14 @@
           "validationNotes": null
         },
         {
-          "name": "Services",
+          "name": "Hardware",
           "nameZh": null,
-          "memberKey": "services",
-          "valueBn": 1.307,
-          "yoyPct": -5.01,
-          "qoqPct": -4.46,
-          "mixPct": 9.8,
-          "mixYoyDeltaPp": -1.3,
+          "memberKey": "hardware",
+          "valueBn": 0.754,
+          "yoyPct": -7.03,
+          "qoqPct": -0.26,
+          "mixPct": 5.7,
+          "mixYoyDeltaPp": -0.9,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000095017024029904/orcl-20240229.htm",
           "sourceForm": "10-Q",
           "filingDate": "2024-03-12",
@@ -4243,14 +4414,14 @@
           "validationNotes": null
         },
         {
-          "name": "Hardware",
+          "name": "Services",
           "nameZh": null,
-          "memberKey": "hardware",
-          "valueBn": 0.754,
-          "yoyPct": -7.03,
-          "qoqPct": -0.26,
-          "mixPct": 5.7,
-          "mixYoyDeltaPp": -0.9,
+          "memberKey": "services",
+          "valueBn": 1.307,
+          "yoyPct": -5.01,
+          "qoqPct": -4.46,
+          "mixPct": 9.8,
+          "mixYoyDeltaPp": -1.3,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000095017024029904/orcl-20240229.htm",
           "sourceForm": "10-Q",
           "filingDate": "2024-03-12",
@@ -4265,7 +4436,16 @@
       "officialSegmentSource": "official-filings",
       "officialRevenueStyle": "oracle-revenue-bridge",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2024Q2": {
       "calendarQuarter": "2024Q2",
@@ -4290,7 +4470,7 @@
       "netIncomeYoyPct": -5.27,
       "grossMarginPct": 72.53,
       "operatingMarginPct": 32.79,
-      "profitMarginPct": 22.0,
+      "profitMarginPct": 22,
       "effectiveTaxRatePct": 16.869,
       "revenueQoqPct": 7.583,
       "grossMarginYoyDeltaPp": -0.51,
@@ -4358,7 +4538,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.9438,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.875,
         "checksRun": 8,
         "checksPassed": 7,
@@ -4385,6 +4565,24 @@
           "qoqPct": 2.72,
           "mixPct": 71.6,
           "mixYoyDeltaPp": 3.9,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000095017024075605/orcl-20240531.htm",
+          "sourceForm": "10-K",
+          "filingDate": "2024-06-20",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "Hardware",
+          "nameZh": null,
+          "memberKey": "hardware",
+          "valueBn": 0.842,
+          "yoyPct": -0.94,
+          "qoqPct": 11.67,
+          "mixPct": 5.9,
+          "mixYoyDeltaPp": -0.2,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000095017024075605/orcl-20240531.htm",
           "sourceForm": "10-K",
           "filingDate": "2024-06-20",
@@ -4429,31 +4627,22 @@
           "metricMode": null,
           "validationEligible": null,
           "validationNotes": null
-        },
-        {
-          "name": "Hardware",
-          "nameZh": null,
-          "memberKey": "hardware",
-          "valueBn": 0.842,
-          "yoyPct": -0.94,
-          "qoqPct": 11.67,
-          "mixPct": 5.9,
-          "mixYoyDeltaPp": -0.2,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000095017024075605/orcl-20240531.htm",
-          "sourceForm": "10-K",
-          "filingDate": "2024-06-20",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": null,
-          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "officialRevenueStyle": "oracle-revenue-bridge",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2024Q3": {
       "calendarQuarter": "2024Q3",
@@ -4546,7 +4735,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.9438,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.875,
         "checksRun": 8,
         "checksPassed": 7,
@@ -4583,14 +4772,14 @@
           "validationNotes": null
         },
         {
-          "name": "Services",
+          "name": "Hardware",
           "nameZh": null,
-          "memberKey": "services",
-          "valueBn": 1.263,
-          "yoyPct": -8.68,
-          "qoqPct": -8.01,
-          "mixPct": 9.5,
-          "mixYoyDeltaPp": -1.6,
+          "memberKey": "hardware",
+          "valueBn": 0.655,
+          "yoyPct": -8.26,
+          "qoqPct": -22.21,
+          "mixPct": 4.9,
+          "mixYoyDeltaPp": -0.8,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000095017024104905/orcl-20240831.htm",
           "sourceForm": "10-Q",
           "filingDate": "2024-09-10",
@@ -4619,14 +4808,14 @@
           "validationNotes": null
         },
         {
-          "name": "Hardware",
+          "name": "Services",
           "nameZh": null,
-          "memberKey": "hardware",
-          "valueBn": 0.655,
-          "yoyPct": -8.26,
-          "qoqPct": -22.21,
-          "mixPct": 4.9,
-          "mixYoyDeltaPp": -0.8,
+          "memberKey": "services",
+          "valueBn": 1.263,
+          "yoyPct": -8.68,
+          "qoqPct": -8.01,
+          "mixPct": 9.5,
+          "mixYoyDeltaPp": -1.6,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000095017024104905/orcl-20240831.htm",
           "sourceForm": "10-Q",
           "filingDate": "2024-09-10",
@@ -4641,7 +4830,16 @@
       "officialSegmentSource": "official-filings",
       "officialRevenueStyle": "oracle-revenue-bridge",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2024Q4": {
       "calendarQuarter": "2024Q4",
@@ -4734,7 +4932,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.9438,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.875,
         "checksRun": 8,
         "checksPassed": 7,
@@ -4771,14 +4969,14 @@
           "validationNotes": null
         },
         {
-          "name": "Services",
+          "name": "Hardware",
           "nameZh": null,
-          "memberKey": "services",
-          "valueBn": 1.33,
-          "yoyPct": -2.78,
-          "qoqPct": 5.3,
-          "mixPct": 9.5,
-          "mixYoyDeltaPp": -1.1,
+          "memberKey": "hardware",
+          "valueBn": 0.728,
+          "yoyPct": -3.7,
+          "qoqPct": 11.15,
+          "mixPct": 5.2,
+          "mixYoyDeltaPp": -0.7,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000095017024134973/orcl-20241130.htm",
           "sourceForm": "10-Q",
           "filingDate": "2024-12-10",
@@ -4807,14 +5005,14 @@
           "validationNotes": null
         },
         {
-          "name": "Hardware",
+          "name": "Services",
           "nameZh": null,
-          "memberKey": "hardware",
-          "valueBn": 0.728,
-          "yoyPct": -3.7,
-          "qoqPct": 11.15,
-          "mixPct": 5.2,
-          "mixYoyDeltaPp": -0.7,
+          "memberKey": "services",
+          "valueBn": 1.33,
+          "yoyPct": -2.78,
+          "qoqPct": 5.3,
+          "mixPct": 9.5,
+          "mixYoyDeltaPp": -1.1,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000095017024134973/orcl-20241130.htm",
           "sourceForm": "10-Q",
           "filingDate": "2024-12-10",
@@ -4829,7 +5027,16 @@
       "officialSegmentSource": "official-filings",
       "officialRevenueStyle": "oracle-revenue-bridge",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2025Q1": {
       "calendarQuarter": "2025Q1",
@@ -4922,7 +5129,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.9438,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.875,
         "checksRun": 8,
         "checksPassed": 7,
@@ -4959,13 +5166,13 @@
           "validationNotes": null
         },
         {
-          "name": "Services",
+          "name": "Hardware",
           "nameZh": null,
-          "memberKey": "services",
-          "valueBn": 1.291,
-          "yoyPct": -1.22,
-          "qoqPct": -2.93,
-          "mixPct": 9.1,
+          "memberKey": "hardware",
+          "valueBn": 0.703,
+          "yoyPct": -6.76,
+          "qoqPct": -3.43,
+          "mixPct": 5.0,
           "mixYoyDeltaPp": -0.7,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000095017025037143/orcl-20250228.htm",
           "sourceForm": "10-Q",
@@ -4995,13 +5202,13 @@
           "validationNotes": null
         },
         {
-          "name": "Hardware",
+          "name": "Services",
           "nameZh": null,
-          "memberKey": "hardware",
-          "valueBn": 0.703,
-          "yoyPct": -6.76,
-          "qoqPct": -3.43,
-          "mixPct": 5.0,
+          "memberKey": "services",
+          "valueBn": 1.291,
+          "yoyPct": -1.22,
+          "qoqPct": -2.93,
+          "mixPct": 9.1,
           "mixYoyDeltaPp": -0.7,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000095017025037143/orcl-20250228.htm",
           "sourceForm": "10-Q",
@@ -5017,7 +5224,16 @@
       "officialSegmentSource": "official-filings",
       "officialRevenueStyle": "oracle-revenue-bridge",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2025Q2": {
       "calendarQuarter": "2025Q2",
@@ -5110,7 +5326,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.9438,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.875,
         "checksRun": 8,
         "checksPassed": 7,
@@ -5137,6 +5353,24 @@
           "qoqPct": 6.27,
           "mixPct": 73.6,
           "mixYoyDeltaPp": 1.9,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000095017025087926/orcl-20250531.htm",
+          "sourceForm": "10-K",
+          "filingDate": "2025-06-18",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "Hardware",
+          "nameZh": null,
+          "memberKey": "hardware",
+          "valueBn": 0.85,
+          "yoyPct": 0.95,
+          "qoqPct": 20.91,
+          "mixPct": 5.3,
+          "mixYoyDeltaPp": -0.5,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000095017025087926/orcl-20250531.htm",
           "sourceForm": "10-K",
           "filingDate": "2025-06-18",
@@ -5181,31 +5415,22 @@
           "metricMode": null,
           "validationEligible": null,
           "validationNotes": null
-        },
-        {
-          "name": "Hardware",
-          "nameZh": null,
-          "memberKey": "hardware",
-          "valueBn": 0.85,
-          "yoyPct": 0.95,
-          "qoqPct": 20.91,
-          "mixPct": 5.3,
-          "mixYoyDeltaPp": -0.5,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000095017025087926/orcl-20250531.htm",
-          "sourceForm": "10-K",
-          "filingDate": "2025-06-18",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": null,
-          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "officialRevenueStyle": "oracle-revenue-bridge",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2025Q3": {
       "calendarQuarter": "2025Q3",
@@ -5298,7 +5523,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.9438,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.875,
         "checksRun": 8,
         "checksPassed": 7,
@@ -5335,6 +5560,24 @@
           "validationNotes": null
         },
         {
+          "name": "Hardware",
+          "nameZh": null,
+          "memberKey": "hardware",
+          "valueBn": 0.67,
+          "yoyPct": 2.29,
+          "qoqPct": -21.18,
+          "mixPct": 4.5,
+          "mixYoyDeltaPp": -0.4,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312525200095/orcl-20250831.htm",
+          "sourceForm": "10-Q",
+          "filingDate": "2025-09-10",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
           "name": "Software",
           "nameZh": null,
           "memberKey": "software",
@@ -5361,24 +5604,6 @@
           "qoqPct": 0.0,
           "mixPct": 9.0,
           "mixYoyDeltaPp": -0.5,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312525200095/orcl-20250831.htm",
-          "sourceForm": "10-Q",
-          "filingDate": "2025-09-10",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": null,
-          "validationNotes": null
-        },
-        {
-          "name": "Hardware",
-          "nameZh": null,
-          "memberKey": "hardware",
-          "valueBn": 0.67,
-          "yoyPct": 2.29,
-          "qoqPct": -21.18,
-          "mixPct": 4.5,
-          "mixYoyDeltaPp": -0.4,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312525200095/orcl-20250831.htm",
           "sourceForm": "10-Q",
           "filingDate": "2025-09-10",
@@ -5471,7 +5696,18 @@
       ],
       "officialRevenueStyle": "oracle-revenue-bridge",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueDetailTaxonomyChangedFromPriorYear": false
     },
     "2025Q4": {
       "calendarQuarter": "2025Q4",
@@ -5564,7 +5800,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.9438,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.875,
         "checksRun": 8,
         "checksPassed": 7,
@@ -5601,6 +5837,24 @@
           "validationNotes": null
         },
         {
+          "name": "Hardware",
+          "nameZh": null,
+          "memberKey": "hardware",
+          "valueBn": 0.776,
+          "yoyPct": 6.59,
+          "qoqPct": 15.82,
+          "mixPct": 4.8,
+          "mixYoyDeltaPp": -0.3,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312525315925/orcl-20251130.htm",
+          "sourceForm": "10-Q",
+          "filingDate": "2025-12-11",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
           "name": "Software",
           "nameZh": null,
           "memberKey": "software",
@@ -5627,24 +5881,6 @@
           "qoqPct": 5.86,
           "mixPct": 8.9,
           "mixYoyDeltaPp": -0.6,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312525315925/orcl-20251130.htm",
-          "sourceForm": "10-Q",
-          "filingDate": "2025-12-11",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": null,
-          "validationNotes": null
-        },
-        {
-          "name": "Hardware",
-          "nameZh": null,
-          "memberKey": "hardware",
-          "valueBn": 0.776,
-          "yoyPct": 6.59,
-          "qoqPct": 15.82,
-          "mixPct": 4.8,
-          "mixYoyDeltaPp": -0.3,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312525315925/orcl-20251130.htm",
           "sourceForm": "10-Q",
           "filingDate": "2025-12-11",
@@ -5697,25 +5933,6 @@
           "validationNotes": null
         },
         {
-          "name": "Cloud infrastructure",
-          "nameZh": null,
-          "memberKey": "cloudinfrastructure",
-          "valueBn": 4.079,
-          "yoyPct": null,
-          "qoqPct": 21.87,
-          "mixPct": 25.4,
-          "mixYoyDeltaPp": null,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312525315925/orcl-20251130.htm",
-          "sourceForm": "10-Q",
-          "filingDate": "2025-12-11",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "targetName": "Cloud",
-          "metricMode": null,
-          "validationEligible": null,
-          "validationNotes": null
-        },
-        {
           "name": "Cloud applications",
           "nameZh": null,
           "memberKey": "cloudapplications",
@@ -5733,11 +5950,42 @@
           "metricMode": null,
           "validationEligible": null,
           "validationNotes": null
+        },
+        {
+          "name": "Cloud infrastructure",
+          "nameZh": null,
+          "memberKey": "cloudinfrastructure",
+          "valueBn": 4.079,
+          "yoyPct": null,
+          "qoqPct": 21.87,
+          "mixPct": 25.4,
+          "mixYoyDeltaPp": null,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312525315925/orcl-20251130.htm",
+          "sourceForm": "10-Q",
+          "filingDate": "2025-12-11",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "targetName": "Cloud",
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialRevenueStyle": "oracle-revenue-bridge",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q3",
+        "fields": [
+          "officialRevenueSegments",
+          "officialRevenueDetailGroups"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueDetailTaxonomyChangedFromPriorYear": false
     },
     "2026Q1": {
       "calendarQuarter": "2026Q1",
@@ -5830,7 +6078,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.9438,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.875,
         "checksRun": 8,
         "checksPassed": 7,
@@ -5867,6 +6115,24 @@
           "validationNotes": null
         },
         {
+          "name": "Hardware",
+          "nameZh": null,
+          "memberKey": "hardware",
+          "valueBn": 0.714,
+          "yoyPct": 1.56,
+          "qoqPct": -7.99,
+          "mixPct": 4.2,
+          "mixYoyDeltaPp": -0.8,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526101045/orcl-20260228.htm",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-03-11",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
           "name": "Software",
           "nameZh": null,
           "memberKey": "software",
@@ -5893,24 +6159,6 @@
           "qoqPct": 1.05,
           "mixPct": 8.4,
           "mixYoyDeltaPp": -0.7,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526101045/orcl-20260228.htm",
-          "sourceForm": "10-Q",
-          "filingDate": "2026-03-11",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": null,
-          "validationNotes": null
-        },
-        {
-          "name": "Hardware",
-          "nameZh": null,
-          "memberKey": "hardware",
-          "valueBn": 0.714,
-          "yoyPct": 1.56,
-          "qoqPct": -7.99,
-          "mixPct": 4.2,
-          "mixYoyDeltaPp": -0.8,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526101045/orcl-20260228.htm",
           "sourceForm": "10-Q",
           "filingDate": "2026-03-11",
@@ -5963,25 +6211,6 @@
           "validationNotes": null
         },
         {
-          "name": "Cloud infrastructure",
-          "nameZh": null,
-          "memberKey": "cloudinfrastructure",
-          "valueBn": 4.888,
-          "yoyPct": null,
-          "qoqPct": 19.83,
-          "mixPct": 28.4,
-          "mixYoyDeltaPp": null,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526101045/orcl-20260228.htm",
-          "sourceForm": "10-Q",
-          "filingDate": "2026-03-11",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "targetName": "Cloud",
-          "metricMode": null,
-          "validationEligible": null,
-          "validationNotes": null
-        },
-        {
           "name": "Cloud applications",
           "nameZh": null,
           "memberKey": "cloudapplications",
@@ -5999,11 +6228,42 @@
           "metricMode": null,
           "validationEligible": null,
           "validationNotes": null
+        },
+        {
+          "name": "Cloud infrastructure",
+          "nameZh": null,
+          "memberKey": "cloudinfrastructure",
+          "valueBn": 4.888,
+          "yoyPct": null,
+          "qoqPct": 19.83,
+          "mixPct": 28.4,
+          "mixYoyDeltaPp": null,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526101045/orcl-20260228.htm",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-03-11",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "targetName": "Cloud",
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialRevenueStyle": "oracle-revenue-bridge",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q4",
+        "fields": [
+          "officialRevenueSegments",
+          "officialRevenueDetailGroups"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueDetailTaxonomyChangedFromPriorYear": false
     },
     "2026Q2": {
       "calendarQuarter": "2026Q2",
@@ -6040,7 +6300,7 @@
       "officialRevenueSegments": [
         {
           "name": "Cloud",
-          "nameZh": "云业务",
+          "nameZh": null,
           "memberKey": "cloud",
           "valueBn": 9.913,
           "yoyPct": 47.143,
@@ -6057,26 +6317,8 @@
           "validationNotes": null
         },
         {
-          "name": "Software",
-          "nameZh": "软件",
-          "memberKey": "software",
-          "valueBn": 6.824,
-          "yoyPct": -2.067,
-          "qoqPct": 11.521,
-          "mixPct": 35.571,
-          "mixYoyDeltaPp": -8.244,
-          "sourceUrl": "https://www.oracle.com/news/announcement/q4fy26-earnings-release-2026-06-10/",
-          "sourceForm": "QuarterlyResultsRelease",
-          "filingDate": "2026-06-10",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": null,
-          "validationNotes": null
-        },
-        {
           "name": "Hardware",
-          "nameZh": "硬件",
+          "nameZh": null,
           "memberKey": "hardware",
           "valueBn": 0.924,
           "yoyPct": 8.706,
@@ -6093,8 +6335,26 @@
           "validationNotes": null
         },
         {
+          "name": "Software",
+          "nameZh": null,
+          "memberKey": "software",
+          "valueBn": 6.824,
+          "yoyPct": -2.067,
+          "qoqPct": 11.521,
+          "mixPct": 35.571,
+          "mixYoyDeltaPp": -8.244,
+          "sourceUrl": "https://www.oracle.com/news/announcement/q4fy26-earnings-release-2026-06-10/",
+          "sourceForm": "QuarterlyResultsRelease",
+          "filingDate": "2026-06-10",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
           "name": "Services",
-          "nameZh": "服务",
+          "nameZh": null,
           "memberKey": "services",
           "valueBn": 1.523,
           "yoyPct": 12.982,
@@ -6113,46 +6373,27 @@
       ],
       "officialRevenueDetailGroups": [
         {
-          "name": "Cloud infrastructure",
-          "nameZh": "云基础设施",
-          "memberKey": "cloudinfrastructure",
-          "valueBn": 5.8,
-          "yoyPct": 93,
-          "qoqPct": 18.657,
-          "mixPct": 30.233,
+          "name": "Software support",
+          "nameZh": null,
+          "memberKey": "softwaresupport",
+          "valueBn": 4.943,
+          "yoyPct": -0.363,
+          "qoqPct": -0.523,
+          "mixPct": 25.766,
           "mixYoyDeltaPp": null,
-          "sourceUrl": "https://www.oracle.com/news/announcement/q4fy26-earnings-release-2026-06-10/",
-          "sourceForm": "QuarterlyResultsRelease",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526265848/orcl-ex99_1.htm",
+          "sourceForm": "8-K Exhibit 99.1",
           "filingDate": "2026-06-10",
           "supportLines": null,
           "supportLinesZh": null,
-          "targetName": "Cloud",
-          "metricMode": null,
-          "validationEligible": null,
-          "validationNotes": null
-        },
-        {
-          "name": "Cloud applications",
-          "nameZh": "云应用",
-          "memberKey": "cloudapplications",
-          "valueBn": 4.1,
-          "yoyPct": 10,
-          "qoqPct": 1.838,
-          "mixPct": 21.372,
-          "mixYoyDeltaPp": null,
-          "sourceUrl": "https://www.oracle.com/news/announcement/q4fy26-earnings-release-2026-06-10/",
-          "sourceForm": "QuarterlyResultsRelease",
-          "filingDate": "2026-06-10",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "targetName": "Cloud",
+          "targetName": "Software",
           "metricMode": null,
           "validationEligible": null,
           "validationNotes": null
         },
         {
           "name": "Software license",
-          "nameZh": "软件许可",
+          "nameZh": null,
           "memberKey": "softwarelicense",
           "valueBn": 1.881,
           "yoyPct": -6.278,
@@ -6170,20 +6411,39 @@
           "validationNotes": null
         },
         {
-          "name": "Software support",
-          "nameZh": "软件支持",
-          "memberKey": "softwaresupport",
-          "valueBn": 4.943,
-          "yoyPct": -0.363,
-          "qoqPct": -0.523,
-          "mixPct": 25.766,
+          "name": "Cloud applications",
+          "nameZh": null,
+          "memberKey": "cloudapplications",
+          "valueBn": 4.1,
+          "yoyPct": 10,
+          "qoqPct": 1.838,
+          "mixPct": 21.372,
           "mixYoyDeltaPp": null,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526265848/orcl-ex99_1.htm",
-          "sourceForm": "8-K Exhibit 99.1",
+          "sourceUrl": "https://www.oracle.com/news/announcement/q4fy26-earnings-release-2026-06-10/",
+          "sourceForm": "QuarterlyResultsRelease",
           "filingDate": "2026-06-10",
           "supportLines": null,
           "supportLinesZh": null,
-          "targetName": "Software",
+          "targetName": "Cloud",
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "Cloud infrastructure",
+          "nameZh": null,
+          "memberKey": "cloudinfrastructure",
+          "valueBn": 5.8,
+          "yoyPct": 93,
+          "qoqPct": 18.657,
+          "mixPct": 30.233,
+          "mixYoyDeltaPp": null,
+          "sourceUrl": "https://www.oracle.com/news/announcement/q4fy26-earnings-release-2026-06-10/",
+          "sourceForm": "QuarterlyResultsRelease",
+          "filingDate": "2026-06-10",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "targetName": "Cloud",
           "metricMode": null,
           "validationEligible": null,
           "validationNotes": null
@@ -6275,7 +6535,318 @@
           "validationNotes": null
         }
       ],
-      "officialRevenueStyle": "oracle-revenue-bridge"
+      "officialRevenueStyle": "oracle-revenue-bridge",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2026Q1",
+        "fields": [
+          "officialRevenueSegments",
+          "officialRevenueDetailGroups"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1
+    },
+    "2026Q3": {
+      "calendarQuarter": "2026Q3",
+      "periodEnd": "2026-08-31",
+      "fiscalYear": "2027",
+      "fiscalQuarter": "Q1",
+      "fiscalLabel": "FY2027 Q1",
+      "statementCurrency": "USD",
+      "revenueBn": 19.345,
+      "revenueYoyPct": 29.606,
+      "revenueQoqPct": 0.839,
+      "costOfRevenueBn": 7.733,
+      "grossProfitBn": 11.612,
+      "sgnaBn": 2.187,
+      "rndBn": 2.401,
+      "otherOpexBn": 0.296,
+      "operatingExpensesBn": 4.884,
+      "operatingIncomeBn": 6.728,
+      "nonOperatingBn": -1.121,
+      "pretaxIncomeBn": 5.607,
+      "taxBn": 0.847,
+      "netIncomeBn": 4.76,
+      "netIncomeYoyPct": 62.624,
+      "grossMarginPct": 60.026,
+      "operatingMarginPct": 34.779,
+      "profitMarginPct": 24.606,
+      "effectiveTaxRatePct": 15.106,
+      "statementSource": "manual-oracle-official",
+      "statementSourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+      "statementFilingDate": "2026-09-10",
+      "officialRevenueSegments": [
+        {
+          "name": "Cloud",
+          "nameZh": null,
+          "memberKey": "cloud",
+          "valueBn": 11.607,
+          "yoyPct": 61.522,
+          "qoqPct": 17.089,
+          "mixPct": 60.0,
+          "mixYoyDeltaPp": 11.856,
+          "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+          "sourceForm": "QuarterlyResultsRelease",
+          "filingDate": "2026-09-10",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "Hardware",
+          "nameZh": null,
+          "memberKey": "hardware",
+          "valueBn": 0.774,
+          "yoyPct": 15.522,
+          "qoqPct": -16.234,
+          "mixPct": 4.001,
+          "mixYoyDeltaPp": -0.488,
+          "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+          "sourceForm": "QuarterlyResultsRelease",
+          "filingDate": "2026-09-10",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "Software",
+          "nameZh": null,
+          "memberKey": "software",
+          "valueBn": 5.55,
+          "yoyPct": -2.989,
+          "qoqPct": -18.669,
+          "mixPct": 28.69,
+          "mixYoyDeltaPp": -9.64,
+          "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+          "sourceForm": "QuarterlyResultsRelease",
+          "filingDate": "2026-09-10",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "Services",
+          "nameZh": null,
+          "memberKey": "services",
+          "valueBn": 1.414,
+          "yoyPct": 4.818,
+          "qoqPct": -7.157,
+          "mixPct": 7.309,
+          "mixYoyDeltaPp": -1.729,
+          "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+          "sourceForm": "QuarterlyResultsRelease",
+          "filingDate": "2026-09-10",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        }
+      ],
+      "officialRevenueDetailGroups": [
+        {
+          "name": "Software support",
+          "nameZh": null,
+          "memberKey": "softwaresupport",
+          "valueBn": 4.895,
+          "yoyPct": -1.211,
+          "qoqPct": -0.971,
+          "mixPct": 25.304,
+          "mixYoyDeltaPp": -7.893,
+          "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+          "sourceForm": "QuarterlyResultsRelease",
+          "filingDate": "2026-09-10",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "targetName": "Software",
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "Software license",
+          "nameZh": null,
+          "memberKey": "softwarelicense",
+          "valueBn": 0.655,
+          "yoyPct": -14.491,
+          "qoqPct": -65.178,
+          "mixPct": 3.386,
+          "mixYoyDeltaPp": -1.746,
+          "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+          "sourceForm": "QuarterlyResultsRelease",
+          "filingDate": "2026-09-10",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "targetName": "Software",
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "Cloud applications",
+          "nameZh": null,
+          "memberKey": "cloudapplications",
+          "valueBn": 4.2,
+          "yoyPct": 10,
+          "qoqPct": 2.44,
+          "mixPct": 21.711,
+          "mixYoyDeltaPp": -4.0,
+          "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+          "sourceForm": "QuarterlyResultsRelease",
+          "filingDate": "2026-09-10",
+          "supportLines": [
+            "Rounded to $0.1B"
+          ],
+          "supportLinesZh": [
+            "金额按官方披露取整"
+          ],
+          "targetName": "Cloud",
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": "Oracle reports this component rounded to $0.1 billion; the two cloud components differ from the $11.607 billion cloud total by $0.007 billion due to rounding."
+        },
+        {
+          "name": "Cloud infrastructure",
+          "nameZh": null,
+          "memberKey": "cloudinfrastructure",
+          "valueBn": 7.4,
+          "yoyPct": 121,
+          "qoqPct": 27.59,
+          "mixPct": 38.253,
+          "mixYoyDeltaPp": 15.8,
+          "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+          "sourceForm": "QuarterlyResultsRelease",
+          "filingDate": "2026-09-10",
+          "supportLines": [
+            "Rounded to $0.1B"
+          ],
+          "supportLinesZh": [
+            "金额按官方披露取整"
+          ],
+          "targetName": "Cloud",
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": "Oracle reports this component rounded to $0.1 billion; the two cloud components differ from the $11.607 billion cloud total by $0.007 billion due to rounding."
+        }
+      ],
+      "officialCostBreakdown": [
+        {
+          "name": "Cloud and software",
+          "nameZh": "云及软件成本",
+          "memberKey": "cloudandsoftware",
+          "valueBn": 6.4,
+          "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+          "sourceForm": "QuarterlyResultsRelease",
+          "filingDate": "2026-09-10"
+        },
+        {
+          "name": "Hardware",
+          "nameZh": "硬件成本",
+          "memberKey": "hardware",
+          "valueBn": 0.281,
+          "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+          "sourceForm": "QuarterlyResultsRelease",
+          "filingDate": "2026-09-10"
+        },
+        {
+          "name": "Services",
+          "nameZh": "服务成本",
+          "memberKey": "services",
+          "valueBn": 1.052,
+          "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+          "sourceForm": "QuarterlyResultsRelease",
+          "filingDate": "2026-09-10"
+        }
+      ],
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and marketing",
+          "nameZh": "销售及营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 1.811,
+          "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+          "sourceForm": "QuarterlyResultsRelease",
+          "filingDate": "2026-09-10",
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "Research and development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 2.401,
+          "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+          "sourceForm": "QuarterlyResultsRelease",
+          "filingDate": "2026-09-10",
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "General and administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.376,
+          "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+          "sourceForm": "QuarterlyResultsRelease",
+          "filingDate": "2026-09-10",
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "Amortization of intangible assets",
+          "nameZh": "无形资产摊销",
+          "memberKey": "amortizationofintangibleassets",
+          "valueBn": 0.202,
+          "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+          "sourceForm": "QuarterlyResultsRelease",
+          "filingDate": "2026-09-10",
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "Restructuring and other",
+          "nameZh": "重组及其他",
+          "memberKey": "restructuringandother",
+          "valueBn": 0.094,
+          "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+          "sourceForm": "QuarterlyResultsRelease",
+          "filingDate": "2026-09-10",
+          "validationEligible": null,
+          "validationNotes": null
+        }
+      ],
+      "officialRevenueStyle": "oracle-revenue-bridge",
+      "grossMarginYoyDeltaPp": -7.253,
+      "operatingMarginYoyDeltaPp": 6.124,
+      "profitMarginYoyDeltaPp": 4.996,
+      "statementNotes": "GAAP consolidated net income is $4.760bn; net income available to common shareholders is $4.679bn after $0.081bn preferred dividends. Cost of revenue is $7.733bn and operating expenses excluding cost of revenue are $4.884bn, together reconciling to the reported $12.617bn total operating expenses.",
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2026Q2",
+        "fields": [
+          "officialRevenueSegments",
+          "officialRevenueDetailGroups",
+          "officialCostBreakdown",
+          "officialOpexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     }
   },
   "statementSource": "official-sec-companyfacts+field-reconciled",
@@ -8962,6 +9533,231 @@
           }
         ],
         "style": "oracle-revenue-bridge"
+      },
+      "2026Q3": {
+        "segments": [
+          {
+            "name": "Cloud",
+            "nameZh": "云业务",
+            "memberKey": "cloud",
+            "valueBn": 11.607,
+            "yoyPct": 61.522,
+            "qoqPct": 17.089,
+            "mixPct": 60.0,
+            "mixYoyDeltaPp": 11.856,
+            "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-09-10",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          },
+          {
+            "name": "Software",
+            "nameZh": "软件",
+            "memberKey": "software",
+            "valueBn": 5.55,
+            "yoyPct": -2.989,
+            "qoqPct": -18.669,
+            "mixPct": 28.69,
+            "mixYoyDeltaPp": -9.64,
+            "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-09-10",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          },
+          {
+            "name": "Hardware",
+            "nameZh": "硬件",
+            "memberKey": "hardware",
+            "valueBn": 0.774,
+            "yoyPct": 15.522,
+            "qoqPct": -16.234,
+            "mixPct": 4.001,
+            "mixYoyDeltaPp": -0.488,
+            "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-09-10",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          },
+          {
+            "name": "Services",
+            "nameZh": "服务",
+            "memberKey": "services",
+            "valueBn": 1.414,
+            "yoyPct": 4.818,
+            "qoqPct": -7.157,
+            "mixPct": 7.309,
+            "mixYoyDeltaPp": -1.729,
+            "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-09-10",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          }
+        ],
+        "detailGroups": [
+          {
+            "name": "Cloud infrastructure",
+            "nameZh": "云基础设施",
+            "memberKey": "cloudinfrastructure",
+            "valueBn": 7.4,
+            "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-09-10",
+            "targetName": "Cloud",
+            "yoyPct": 121,
+            "qoqPct": null,
+            "mixPct": 38.253,
+            "mixYoyDeltaPp": null,
+            "validationNotes": "Oracle reports this component rounded to $0.1 billion; the two cloud components differ from the $11.607 billion cloud total by $0.007 billion due to rounding.",
+            "supportLines": [
+              "Rounded to $0.1B"
+            ],
+            "supportLinesZh": [
+              "金额按官方披露取整"
+            ]
+          },
+          {
+            "name": "Cloud applications",
+            "nameZh": "云应用",
+            "memberKey": "cloudapplications",
+            "valueBn": 4.2,
+            "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-09-10",
+            "targetName": "Cloud",
+            "yoyPct": 10,
+            "qoqPct": null,
+            "mixPct": 21.711,
+            "mixYoyDeltaPp": null,
+            "validationNotes": "Oracle reports this component rounded to $0.1 billion; the two cloud components differ from the $11.607 billion cloud total by $0.007 billion due to rounding.",
+            "supportLines": [
+              "Rounded to $0.1B"
+            ],
+            "supportLinesZh": [
+              "金额按官方披露取整"
+            ]
+          },
+          {
+            "name": "Software license",
+            "nameZh": "软件许可",
+            "memberKey": "softwarelicense",
+            "valueBn": 0.655,
+            "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-09-10",
+            "yoyPct": -14.491,
+            "qoqPct": -65.178,
+            "mixPct": 3.386,
+            "mixYoyDeltaPp": -1.746,
+            "targetName": "Software"
+          },
+          {
+            "name": "Software support",
+            "nameZh": "软件支持",
+            "memberKey": "softwaresupport",
+            "valueBn": 4.895,
+            "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-09-10",
+            "yoyPct": -1.211,
+            "qoqPct": -0.971,
+            "mixPct": 25.304,
+            "mixYoyDeltaPp": -7.893,
+            "targetName": "Software"
+          }
+        ],
+        "costBreakdown": [
+          {
+            "name": "Cloud and software",
+            "nameZh": "云及软件成本",
+            "memberKey": "cloudandsoftware",
+            "valueBn": 6.4,
+            "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-09-10"
+          },
+          {
+            "name": "Hardware",
+            "nameZh": "硬件成本",
+            "memberKey": "hardware",
+            "valueBn": 0.281,
+            "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-09-10"
+          },
+          {
+            "name": "Services",
+            "nameZh": "服务成本",
+            "memberKey": "services",
+            "valueBn": 1.052,
+            "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-09-10"
+          }
+        ],
+        "opexBreakdown": [
+          {
+            "name": "Sales and marketing",
+            "nameZh": "销售及营销",
+            "memberKey": "salesandmarketing",
+            "valueBn": 1.811,
+            "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-09-10"
+          },
+          {
+            "name": "Research and development",
+            "nameZh": "研发",
+            "memberKey": "researchanddevelopment",
+            "valueBn": 2.401,
+            "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-09-10"
+          },
+          {
+            "name": "General and administrative",
+            "nameZh": "一般及行政",
+            "memberKey": "generalandadministrative",
+            "valueBn": 0.376,
+            "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-09-10"
+          },
+          {
+            "name": "Amortization of intangible assets",
+            "nameZh": "无形资产摊销",
+            "memberKey": "amortizationofintangibleassets",
+            "valueBn": 0.202,
+            "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-09-10"
+          },
+          {
+            "name": "Restructuring and other",
+            "nameZh": "重组及其他",
+            "memberKey": "restructuringandother",
+            "valueBn": 0.094,
+            "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-09-10"
+          }
+        ],
+        "style": "oracle-revenue-bridge"
       }
     },
     "filingsUsed": [
@@ -9179,6 +9975,12 @@
         "quarter": "2026Q2",
         "filingDate": "2026-06-10",
         "url": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526265848/orcl-ex99_1.htm"
+      },
+      {
+        "title": "Oracle Q1 FY2027 Earnings Release",
+        "quarter": "2026Q3",
+        "filingDate": "2026-09-10",
+        "url": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx"
       }
     ],
     "errors": []
@@ -9284,13 +10086,13 @@
       "overallConfidenceScore": 0.9317,
       "financialConfidenceScore": 0.8949,
       "structuralConfidenceScore": 1.0,
-      "revenueSegmentChecks": 32,
+      "revenueSegmentChecks": 33,
       "revenueSegmentMismatchCount": 0,
       "revenueSegmentSkippedChecks": 0,
-      "detailGroupChecks": 8,
+      "detailGroupChecks": 10,
       "detailGroupMismatchCount": 0,
       "detailGroupSkippedChecks": 0,
-      "opexChecks": 1,
+      "opexChecks": 2,
       "opexSkippedChecks": 0,
       "opexOverflowMismatchCount": 0,
       "warningCount": 0,
@@ -9299,24 +10101,24 @@
   },
   "statementPresets": {},
   "coverage": {
-    "quarterCount": 34,
+    "quarterCount": 35,
     "pixelReplicaQuarterCount": 0,
     "hasPixelReplica": false,
-    "officialFinancialQuarterCount": 34,
-    "officialSegmentQuarterCount": 32,
-    "officialExpenseQuarterCount": 1,
+    "officialFinancialQuarterCount": 35,
+    "officialSegmentQuarterCount": 33,
+    "officialExpenseQuarterCount": 2,
     "classification": {
       "status": "ok",
-      "latestQuarter": "2026Q2",
+      "latestQuarter": "2026Q3",
       "latestQuarterHasRevenueClassification": true,
       "latestQuarterHasExpenseClassification": true,
-      "latestRevenueClassificationQuarter": "2026Q2",
-      "latestExpenseClassificationQuarter": "2026Q2",
-      "latestStructureHistoryQuarter": "2026Q2",
-      "revenueClassificationQuarterCount": 32,
-      "expenseClassificationQuarterCount": 1,
-      "revenueClassificationCoverageRatio": 0.9412,
-      "expenseClassificationCoverageRatio": 0.0294,
+      "latestRevenueClassificationQuarter": "2026Q3",
+      "latestExpenseClassificationQuarter": "2026Q3",
+      "latestStructureHistoryQuarter": "2026Q3",
+      "revenueClassificationQuarterCount": 33,
+      "expenseClassificationQuarterCount": 2,
+      "revenueClassificationCoverageRatio": 0.9429,
+      "expenseClassificationCoverageRatio": 0.0571,
       "latestRevenueClassificationLagQuarters": 0,
       "latestExpenseClassificationLagQuarters": 0,
       "warnings": [],
@@ -9360,18 +10162,23 @@
         "overallConfidenceScore": 0.9317,
         "financialConfidenceScore": 0.8949,
         "structuralConfidenceScore": 1.0,
-        "revenueSegmentChecks": 32,
+        "revenueSegmentChecks": 33,
         "revenueSegmentMismatchCount": 0,
         "revenueSegmentSkippedChecks": 0,
-        "detailGroupChecks": 8,
+        "detailGroupChecks": 10,
         "detailGroupMismatchCount": 0,
         "detailGroupSkippedChecks": 0,
-        "opexChecks": 1,
+        "opexChecks": 2,
         "opexSkippedChecks": 0,
         "opexOverflowMismatchCount": 0,
         "warningCount": 0,
         "warnings": []
       }
     }
-  }
+  },
+  "marketCapUsd": 404043694080,
+  "marketCapAsOf": "2026-07-06",
+  "marketCapSourceRank": 34,
+  "marketCapSource": "CompaniesMarketCap",
+  "marketCapSourceUrl": "https://companiesmarketcap.com/"
 }
