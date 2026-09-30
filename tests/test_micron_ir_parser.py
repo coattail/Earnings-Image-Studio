@@ -78,6 +78,33 @@ RELEASE_HTML = """
 
 
 class MicronIrParserTests(unittest.TestCase):
+    def test_discovers_migrated_ir_release_and_skips_call_announcement(self) -> None:
+        html = '''<a href="/news/press-release/2026/Micron-Technology-to-Report-Fiscal-Fourth-Quarter-Results/default.aspx">Call</a>
+        <a href="/news/press-release/2026/Micron-Technology-Inc--Reports-Record-Fiscal-Fourth-Quarter-and-Full-Year-2026-Results/default.aspx">Release</a>'''
+        self.assertTrue(micron_ir.discover_latest_release_url(html).endswith(
+            'Micron-Technology-Inc--Reports-Record-Fiscal-Fourth-Quarter-and-Full-Year-2026-Results/default.aspx'))
+
+    def test_parses_actual_q4_release_with_new_title_and_eps_label(self) -> None:
+        html = (ROOT_DIR / 'tests/fixtures/micron-fy2026-q4.html').read_text()
+        parsed = micron_ir.parse_release_html(html, 'https://example.com/micron-q4')
+        q = parsed['financial']
+        self.assertEqual(parsed['quarter'], '2026Q3')
+        self.assertEqual(parsed['filingDate'], '2026-09-30')
+        self.assertEqual(q['fiscalLabel'], 'FY2026 Q4')
+        self.assertEqual(q['periodEnd'], '2026-09-03')
+        for field, value in {'revenueBn': 54.229, 'grossProfitBn': 47.047,
+                             'operatingIncomeBn': 43.751, 'netIncomeBn': 37.701,
+                             'dilutedEps': 32.87, 'operatingCashFlowBn': 43.973,
+                             'freeCashFlowBn': 33.199}.items():
+            self.assertEqual(q[field], value, field)
+        self.assertEqual([r['valueBn'] for r in parsed['segments']], [16.283, 18.002, 13.114, 6.824])
+        self.assertAlmostEqual(q['costOfRevenueBn'] + q['grossProfitBn'], q['revenueBn'])
+        self.assertAlmostEqual(q['rndBn'] + q['sgnaBn'] + q['otherOpexBn'] + q['operatingIncomeBn'], q['grossProfitBn'])
+        self.assertAlmostEqual(sum(r['valueBn'] for r in q['officialOpexBreakdown']), q['operatingExpensesBn'])
+        # The equity-method gain follows the tax line in the GAAP statement.
+        self.assertEqual(q['taxBn'], 6.583)
+        self.assertAlmostEqual(q['pretaxIncomeBn'] - q['taxBn'] + q['equityMethodIncomeBn'], q['netIncomeBn'])
+
     def _micron_company(self) -> dict:
         return {
             "id": "micron",

@@ -1,11 +1,11 @@
 {
-  "_cacheVersion": "20260415-v2",
+  "_cacheVersion": "20260803-v4",
   "id": "micron",
   "ticker": "MU",
   "nameZh": "美光科技",
   "nameEn": "Micron Technology",
   "slug": "mu",
-  "rank": 10,
+  "rank": 11,
   "isAdr": false,
   "brand": {
     "primary": "#005EB8",
@@ -46,7 +46,8 @@
     "2025Q3",
     "2025Q4",
     "2026Q1",
-    "2026Q2"
+    "2026Q2",
+    "2026Q3"
   ],
   "financials": {
     "2018Q1": {
@@ -128,9 +129,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -259,9 +260,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -390,9 +391,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -522,9 +523,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -556,7 +557,7 @@
           "valueBn": 2.212,
           "yoyPct": null,
           "qoqPct": null,
-          "mixPct": 28.0,
+          "mixPct": 28,
           "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312519000174/mu-20191128_htm.xml",
           "sourceForm": "10-Q",
@@ -646,7 +647,9 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2019Q1": {
       "calendarQuarter": "2019Q1",
@@ -674,7 +677,7 @@
       "profitMarginPct": 27.746,
       "effectiveTaxRatePct": 14.706,
       "revenueQoqPct": -26.261,
-      "grossMarginYoyDeltaPp": -9.0,
+      "grossMarginYoyDeltaPp": -9,
       "operatingMarginYoyDeltaPp": -14.98,
       "profitMarginYoyDeltaPp": -17.27,
       "parserFinancialFieldSources": {
@@ -734,9 +737,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -858,7 +861,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2018Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2019Q2": {
       "calendarQuarter": "2019Q2",
@@ -946,9 +958,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -998,7 +1010,7 @@
           "valueBn": 0.813,
           "yoyPct": null,
           "qoqPct": -20.45,
-          "mixPct": 17.0,
+          "mixPct": 17,
           "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312520000067/mu-20200528_htm.xml",
           "sourceForm": "10-Q",
@@ -1070,7 +1082,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2019Q3": {
       "calendarQuarter": "2019Q3",
@@ -1157,9 +1178,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -1281,7 +1302,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2019Q4": {
       "calendarQuarter": "2019Q4",
@@ -1368,9 +1398,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -1492,7 +1522,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2020Q1": {
       "calendarQuarter": "2020Q1",
@@ -1580,9 +1619,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -1596,7 +1635,7 @@
           "valueBn": 1.967,
           "yoyPct": -17.42,
           "qoqPct": -0.61,
-          "mixPct": 41.0,
+          "mixPct": 41,
           "mixYoyDeltaPp": 0.2,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312520000034/mu-20200227_htm.xml",
           "sourceForm": "10-Q",
@@ -1704,7 +1743,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2020Q2": {
       "calendarQuarter": "2020Q2",
@@ -1792,9 +1840,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -1826,7 +1874,7 @@
           "valueBn": 1.525,
           "yoyPct": 29.9,
           "qoqPct": 21.22,
-          "mixPct": 28.0,
+          "mixPct": 28,
           "mixYoyDeltaPp": 3.5,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312520000067/mu-20200528_htm.xml",
           "sourceForm": "10-Q",
@@ -1916,7 +1964,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2020Q3": {
       "calendarQuarter": "2020Q3",
@@ -2004,9 +2061,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -2128,7 +2185,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2020Q4": {
       "calendarQuarter": "2020Q4",
@@ -2216,9 +2282,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -2250,7 +2316,7 @@
           "valueBn": 1.501,
           "yoyPct": 3.02,
           "qoqPct": 2.67,
-          "mixPct": 26.0,
+          "mixPct": 26,
           "mixYoyDeltaPp": -2.3,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312521000012/mu-20201203_htm.xml",
           "sourceForm": "10-Q",
@@ -2269,7 +2335,7 @@
           "yoyPct": -5.89,
           "qoqPct": -0.22,
           "mixPct": 15.8,
-          "mixYoyDeltaPp": -3.0,
+          "mixYoyDeltaPp": -3,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312521000012/mu-20201203_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2021-01-08",
@@ -2286,7 +2352,7 @@
           "valueBn": 0.809,
           "yoyPct": 10.22,
           "qoqPct": 23.7,
-          "mixPct": 14.0,
+          "mixPct": 14,
           "mixYoyDeltaPp": -0.3,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312521000012/mu-20201203_htm.xml",
           "sourceForm": "10-Q",
@@ -2340,7 +2406,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2021Q1": {
       "calendarQuarter": "2021Q1",
@@ -2428,9 +2503,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -2462,26 +2537,8 @@
           "valueBn": 1.811,
           "yoyPct": 43.96,
           "qoqPct": 20.65,
-          "mixPct": 29.0,
+          "mixPct": 29,
           "mixYoyDeltaPp": 2.8,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312521000032/mu-20210304_htm.xml",
-          "sourceForm": "10-Q",
-          "filingDate": "2021-04-01",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": null,
-          "validationNotes": null
-        },
-        {
-          "name": "EBU",
-          "nameZh": null,
-          "memberKey": "ebu",
-          "valueBn": 0.935,
-          "yoyPct": 34.34,
-          "qoqPct": 15.57,
-          "mixPct": 15.0,
-          "mixYoyDeltaPp": 0.5,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312521000032/mu-20210304_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2021-04-01",
@@ -2500,6 +2557,24 @@
           "qoqPct": -6.7,
           "mixPct": 13.6,
           "mixYoyDeltaPp": -4.5,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312521000032/mu-20210304_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2021-04-01",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "EBU",
+          "nameZh": null,
+          "memberKey": "ebu",
+          "valueBn": 0.935,
+          "yoyPct": 34.34,
+          "qoqPct": 15.57,
+          "mixPct": 15,
+          "mixYoyDeltaPp": 0.5,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312521000032/mu-20210304_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2021-04-01",
@@ -2552,7 +2627,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2021Q2": {
       "calendarQuarter": "2021Q2",
@@ -2640,9 +2724,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -2686,14 +2770,14 @@
           "validationNotes": null
         },
         {
-          "name": "EBU",
+          "name": "SBU",
           "nameZh": null,
-          "memberKey": "ebu",
-          "valueBn": 1.105,
-          "yoyPct": 63.7,
-          "qoqPct": 18.18,
-          "mixPct": 14.9,
-          "mixYoyDeltaPp": 2.5,
+          "memberKey": "sbu",
+          "valueBn": 1.009,
+          "yoyPct": -0.49,
+          "qoqPct": 18.71,
+          "mixPct": 13.6,
+          "mixYoyDeltaPp": -5.1,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312521000052/mu-20210603_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2021-07-01",
@@ -2704,14 +2788,14 @@
           "validationNotes": null
         },
         {
-          "name": "SBU",
+          "name": "EBU",
           "nameZh": null,
-          "memberKey": "sbu",
-          "valueBn": 1.009,
-          "yoyPct": -0.49,
-          "qoqPct": 18.71,
-          "mixPct": 13.6,
-          "mixYoyDeltaPp": -5.1,
+          "memberKey": "ebu",
+          "valueBn": 1.105,
+          "yoyPct": 63.7,
+          "qoqPct": 18.18,
+          "mixPct": 14.9,
+          "mixYoyDeltaPp": 2.5,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312521000052/mu-20210603_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2021-07-01",
@@ -2764,7 +2848,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2021Q3": {
       "calendarQuarter": "2021Q3",
@@ -2852,9 +2945,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -2869,7 +2962,7 @@
           "yoyPct": 25.63,
           "qoqPct": 14.83,
           "mixPct": 45.9,
-          "mixYoyDeltaPp": -4.0,
+          "mixYoyDeltaPp": -4,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312521000065/mu-20210902_htm.xml",
           "sourceForm": "10-K",
           "filingDate": "2021-10-08",
@@ -2898,14 +2991,14 @@
           "validationNotes": null
         },
         {
-          "name": "EBU",
+          "name": "SBU",
           "nameZh": null,
-          "memberKey": "ebu",
-          "valueBn": 1.36,
-          "yoyPct": 107.95,
-          "qoqPct": 23.08,
-          "mixPct": 16.4,
-          "mixYoyDeltaPp": 5.6,
+          "memberKey": "sbu",
+          "valueBn": 1.203,
+          "yoyPct": 31.76,
+          "qoqPct": 19.23,
+          "mixPct": 14.5,
+          "mixYoyDeltaPp": -0.5,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312521000065/mu-20210902_htm.xml",
           "sourceForm": "10-K",
           "filingDate": "2021-10-08",
@@ -2916,14 +3009,14 @@
           "validationNotes": null
         },
         {
-          "name": "SBU",
+          "name": "EBU",
           "nameZh": null,
-          "memberKey": "sbu",
-          "valueBn": 1.203,
-          "yoyPct": 31.76,
-          "qoqPct": 19.23,
-          "mixPct": 14.5,
-          "mixYoyDeltaPp": -0.5,
+          "memberKey": "ebu",
+          "valueBn": 1.36,
+          "yoyPct": 107.95,
+          "qoqPct": 23.08,
+          "mixPct": 16.4,
+          "mixYoyDeltaPp": 5.6,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312521000065/mu-20210902_htm.xml",
           "sourceForm": "10-K",
           "filingDate": "2021-10-08",
@@ -2976,7 +3069,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2021Q4": {
       "calendarQuarter": "2021Q4",
@@ -3063,9 +3165,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -3109,14 +3211,14 @@
           "validationNotes": null
         },
         {
-          "name": "EBU",
+          "name": "SBU",
           "nameZh": null,
-          "memberKey": "ebu",
-          "valueBn": 1.22,
-          "yoyPct": 50.8,
-          "qoqPct": -10.29,
-          "mixPct": 15.9,
-          "mixYoyDeltaPp": 1.9,
+          "memberKey": "sbu",
+          "valueBn": 1.15,
+          "yoyPct": 26.23,
+          "qoqPct": -4.41,
+          "mixPct": 15,
+          "mixYoyDeltaPp": -0.8,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312522000004/mu-20211202_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2022-01-06",
@@ -3127,14 +3229,14 @@
           "validationNotes": null
         },
         {
-          "name": "SBU",
+          "name": "EBU",
           "nameZh": null,
-          "memberKey": "sbu",
-          "valueBn": 1.15,
-          "yoyPct": 26.23,
-          "qoqPct": -4.41,
-          "mixPct": 15.0,
-          "mixYoyDeltaPp": -0.8,
+          "memberKey": "ebu",
+          "valueBn": 1.22,
+          "yoyPct": 50.8,
+          "qoqPct": -10.29,
+          "mixPct": 15.9,
+          "mixYoyDeltaPp": 1.9,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312522000004/mu-20211202_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2022-01-06",
@@ -3173,7 +3275,7 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.004,
@@ -3187,7 +3289,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2022Q1": {
       "calendarQuarter": "2022Q1",
@@ -3275,9 +3386,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -3310,7 +3421,25 @@
           "yoyPct": 3.53,
           "qoqPct": -1.68,
           "mixPct": 24.1,
-          "mixYoyDeltaPp": -5.0,
+          "mixYoyDeltaPp": -5,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312522000016/mu-20220303_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2022-03-30",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "SBU",
+          "nameZh": null,
+          "memberKey": "sbu",
+          "valueBn": 1.171,
+          "yoyPct": 37.76,
+          "qoqPct": 1.83,
+          "mixPct": 15,
+          "mixYoyDeltaPp": 1.4,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312522000016/mu-20220303_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2022-03-30",
@@ -3328,24 +3457,6 @@
           "yoyPct": 36.58,
           "qoqPct": 4.67,
           "mixPct": 16.4,
-          "mixYoyDeltaPp": 1.4,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312522000016/mu-20220303_htm.xml",
-          "sourceForm": "10-Q",
-          "filingDate": "2022-03-30",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": null,
-          "validationNotes": null
-        },
-        {
-          "name": "SBU",
-          "nameZh": null,
-          "memberKey": "sbu",
-          "valueBn": 1.171,
-          "yoyPct": 37.76,
-          "qoqPct": 1.83,
-          "mixPct": 15.0,
           "mixYoyDeltaPp": 1.4,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312522000016/mu-20220303_htm.xml",
           "sourceForm": "10-Q",
@@ -3385,7 +3496,7 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.002,
@@ -3399,7 +3510,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2022Q2": {
       "calendarQuarter": "2022Q2",
@@ -3486,9 +3606,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -3532,14 +3652,14 @@
           "validationNotes": null
         },
         {
-          "name": "EBU",
+          "name": "SBU",
           "nameZh": null,
-          "memberKey": "ebu",
-          "valueBn": 1.435,
-          "yoyPct": 29.86,
-          "qoqPct": 12.37,
-          "mixPct": 16.6,
-          "mixYoyDeltaPp": 1.7,
+          "memberKey": "sbu",
+          "valueBn": 1.341,
+          "yoyPct": 32.9,
+          "qoqPct": 14.52,
+          "mixPct": 15.5,
+          "mixYoyDeltaPp": 1.9,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312522000036/mu-20220602_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2022-07-01",
@@ -3550,14 +3670,14 @@
           "validationNotes": null
         },
         {
-          "name": "SBU",
+          "name": "EBU",
           "nameZh": null,
-          "memberKey": "sbu",
-          "valueBn": 1.341,
-          "yoyPct": 32.9,
-          "qoqPct": 14.52,
-          "mixPct": 15.5,
-          "mixYoyDeltaPp": 1.9,
+          "memberKey": "ebu",
+          "valueBn": 1.435,
+          "yoyPct": 29.86,
+          "qoqPct": 12.37,
+          "mixPct": 16.6,
+          "mixYoyDeltaPp": 1.7,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312522000036/mu-20220602_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2022-07-01",
@@ -3596,7 +3716,7 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.004,
@@ -3610,7 +3730,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2022Q3": {
       "calendarQuarter": "2022Q3",
@@ -3697,9 +3826,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -3743,14 +3872,14 @@
           "validationNotes": null
         },
         {
-          "name": "EBU",
+          "name": "SBU",
           "nameZh": null,
-          "memberKey": "ebu",
-          "valueBn": 1.303,
-          "yoyPct": -4.19,
-          "qoqPct": -9.2,
-          "mixPct": 19.6,
-          "mixYoyDeltaPp": 3.2,
+          "memberKey": "sbu",
+          "valueBn": 0.891,
+          "yoyPct": -25.94,
+          "qoqPct": -33.56,
+          "mixPct": 13.4,
+          "mixYoyDeltaPp": -1.1,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312522000048/mu-20220901_htm.xml",
           "sourceForm": "10-K",
           "filingDate": "2022-10-07",
@@ -3761,14 +3890,14 @@
           "validationNotes": null
         },
         {
-          "name": "SBU",
+          "name": "EBU",
           "nameZh": null,
-          "memberKey": "sbu",
-          "valueBn": 0.891,
-          "yoyPct": -25.94,
-          "qoqPct": -33.56,
-          "mixPct": 13.4,
-          "mixYoyDeltaPp": -1.1,
+          "memberKey": "ebu",
+          "valueBn": 1.303,
+          "yoyPct": -4.19,
+          "qoqPct": -9.2,
+          "mixPct": 19.6,
+          "mixYoyDeltaPp": 3.2,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312522000048/mu-20220901_htm.xml",
           "sourceForm": "10-K",
           "filingDate": "2022-10-07",
@@ -3821,7 +3950,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2022Q4": {
       "calendarQuarter": "2022Q4",
@@ -3909,9 +4047,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -3937,14 +4075,14 @@
           "validationNotes": null
         },
         {
-          "name": "EBU",
+          "name": "MBU",
           "nameZh": null,
-          "memberKey": "ebu",
-          "valueBn": 1,
-          "yoyPct": -18.03,
-          "qoqPct": -23.25,
-          "mixPct": 24.5,
-          "mixYoyDeltaPp": 8.6,
+          "memberKey": "mbu",
+          "valueBn": 0.655,
+          "yoyPct": -65.65,
+          "qoqPct": -56.65,
+          "mixPct": 16,
+          "mixYoyDeltaPp": -8.8,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312522000072/mu-20221201_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2022-12-22",
@@ -3973,14 +4111,14 @@
           "validationNotes": null
         },
         {
-          "name": "MBU",
+          "name": "EBU",
           "nameZh": null,
-          "memberKey": "mbu",
-          "valueBn": 0.655,
-          "yoyPct": -65.65,
-          "qoqPct": -56.65,
-          "mixPct": 16.0,
-          "mixYoyDeltaPp": -8.8,
+          "memberKey": "ebu",
+          "valueBn": 1,
+          "yoyPct": -18.03,
+          "qoqPct": -23.25,
+          "mixPct": 24.5,
+          "mixYoyDeltaPp": 8.6,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312522000072/mu-20221201_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2022-12-22",
@@ -4033,7 +4171,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2023Q1": {
       "calendarQuarter": "2023Q1",
@@ -4121,9 +4268,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -4167,14 +4314,14 @@
           "validationNotes": null
         },
         {
-          "name": "EBU",
+          "name": "SBU",
           "nameZh": null,
-          "memberKey": "ebu",
-          "valueBn": 0.865,
-          "yoyPct": -32.26,
-          "qoqPct": -13.5,
-          "mixPct": 23.4,
-          "mixYoyDeltaPp": 7.0,
+          "memberKey": "sbu",
+          "valueBn": 0.507,
+          "yoyPct": -56.7,
+          "qoqPct": -25.44,
+          "mixPct": 13.7,
+          "mixYoyDeltaPp": -1.3,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312523000022/mu-20230302_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2023-03-29",
@@ -4185,14 +4332,14 @@
           "validationNotes": null
         },
         {
-          "name": "SBU",
+          "name": "EBU",
           "nameZh": null,
-          "memberKey": "sbu",
-          "valueBn": 0.507,
-          "yoyPct": -56.7,
-          "qoqPct": -25.44,
-          "mixPct": 13.7,
-          "mixYoyDeltaPp": -1.3,
+          "memberKey": "ebu",
+          "valueBn": 0.865,
+          "yoyPct": -32.26,
+          "qoqPct": -13.5,
+          "mixPct": 23.4,
+          "mixYoyDeltaPp": 7,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312523000022/mu-20230302_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2023-03-29",
@@ -4231,7 +4378,7 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.001,
@@ -4245,7 +4392,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2023Q2": {
       "calendarQuarter": "2023Q2",
@@ -4333,9 +4489,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -4349,26 +4505,8 @@
           "valueBn": 1.389,
           "yoyPct": -64.34,
           "qoqPct": 1.02,
-          "mixPct": 37.0,
+          "mixPct": 37,
           "mixYoyDeltaPp": -8.1,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312523000041/mu-20230601_htm.xml",
-          "sourceForm": "10-Q",
-          "filingDate": "2023-06-29",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": null,
-          "validationNotes": null
-        },
-        {
-          "name": "EBU",
-          "nameZh": null,
-          "memberKey": "ebu",
-          "valueBn": 0.912,
-          "yoyPct": -36.45,
-          "qoqPct": 5.43,
-          "mixPct": 24.3,
-          "mixYoyDeltaPp": 7.7,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312523000041/mu-20230601_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2023-06-29",
@@ -4405,6 +4543,24 @@
           "qoqPct": 23.67,
           "mixPct": 16.7,
           "mixYoyDeltaPp": 1.2,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312523000041/mu-20230601_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2023-06-29",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "EBU",
+          "nameZh": null,
+          "memberKey": "ebu",
+          "valueBn": 0.912,
+          "yoyPct": -36.45,
+          "qoqPct": 5.43,
+          "mixPct": 24.3,
+          "mixYoyDeltaPp": 7.7,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312523000041/mu-20230601_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2023-06-29",
@@ -4457,7 +4613,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2023Q3": {
       "calendarQuarter": "2023Q3",
@@ -4545,33 +4710,15 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
         "issues": []
       },
       "officialRevenueSegments": [
-        {
-          "name": "MBU",
-          "nameZh": null,
-          "memberKey": "mbu",
-          "valueBn": 1.211,
-          "yoyPct": -19.85,
-          "qoqPct": 47.86,
-          "mixPct": 30.2,
-          "mixYoyDeltaPp": 7.5,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312523000054/mu-20230831_htm.xml",
-          "sourceForm": "10-K",
-          "filingDate": "2023-10-06",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": null,
-          "validationNotes": null
-        },
         {
           "name": "CNBU",
           "nameZh": null,
@@ -4591,14 +4738,14 @@
           "validationNotes": null
         },
         {
-          "name": "EBU",
+          "name": "MBU",
           "nameZh": null,
-          "memberKey": "ebu",
-          "valueBn": 0.86,
-          "yoyPct": -34.0,
-          "qoqPct": -5.7,
-          "mixPct": 21.4,
-          "mixYoyDeltaPp": 1.8,
+          "memberKey": "mbu",
+          "valueBn": 1.211,
+          "yoyPct": -19.85,
+          "qoqPct": 47.86,
+          "mixPct": 30.2,
+          "mixYoyDeltaPp": 7.5,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312523000054/mu-20230831_htm.xml",
           "sourceForm": "10-K",
           "filingDate": "2023-10-06",
@@ -4616,7 +4763,25 @@
           "yoyPct": -17.06,
           "qoqPct": 17.86,
           "mixPct": 18.4,
-          "mixYoyDeltaPp": 5.0,
+          "mixYoyDeltaPp": 5,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312523000054/mu-20230831_htm.xml",
+          "sourceForm": "10-K",
+          "filingDate": "2023-10-06",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "EBU",
+          "nameZh": null,
+          "memberKey": "ebu",
+          "valueBn": 0.86,
+          "yoyPct": -34,
+          "qoqPct": -5.7,
+          "mixPct": 21.4,
+          "mixYoyDeltaPp": 1.8,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312523000054/mu-20230831_htm.xml",
           "sourceForm": "10-K",
           "filingDate": "2023-10-06",
@@ -4655,10 +4820,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -4669,7 +4834,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2023Q4": {
       "calendarQuarter": "2023Q4",
@@ -4756,9 +4930,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -4773,7 +4947,7 @@
           "yoyPct": -0.52,
           "qoqPct": 44.75,
           "mixPct": 36.8,
-          "mixYoyDeltaPp": -6.0,
+          "mixYoyDeltaPp": -6,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312523000077/mu-20231130_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2023-12-21",
@@ -4802,14 +4976,14 @@
           "validationNotes": null
         },
         {
-          "name": "EBU",
+          "name": "SBU",
           "nameZh": null,
-          "memberKey": "ebu",
-          "valueBn": 1.037,
-          "yoyPct": 3.7,
-          "qoqPct": 20.58,
-          "mixPct": 21.9,
-          "mixYoyDeltaPp": -2.5,
+          "memberKey": "sbu",
+          "valueBn": 0.653,
+          "yoyPct": -3.97,
+          "qoqPct": -11.64,
+          "mixPct": 13.8,
+          "mixYoyDeltaPp": -2.8,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312523000077/mu-20231130_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2023-12-21",
@@ -4820,14 +4994,14 @@
           "validationNotes": null
         },
         {
-          "name": "SBU",
+          "name": "EBU",
           "nameZh": null,
-          "memberKey": "sbu",
-          "valueBn": 0.653,
-          "yoyPct": -3.97,
-          "qoqPct": -11.64,
-          "mixPct": 13.8,
-          "mixYoyDeltaPp": -2.8,
+          "memberKey": "ebu",
+          "valueBn": 1.037,
+          "yoyPct": 3.7,
+          "qoqPct": 20.58,
+          "mixPct": 21.9,
+          "mixYoyDeltaPp": -2.5,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312523000077/mu-20231130_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2023-12-21",
@@ -4880,7 +5054,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2024Q1": {
       "calendarQuarter": "2024Q1",
@@ -4967,9 +5150,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -5013,14 +5196,14 @@
           "validationNotes": null
         },
         {
-          "name": "EBU",
+          "name": "SBU",
           "nameZh": null,
-          "memberKey": "ebu",
-          "valueBn": 1.111,
-          "yoyPct": 28.44,
-          "qoqPct": 7.14,
-          "mixPct": 19.1,
-          "mixYoyDeltaPp": -4.3,
+          "memberKey": "sbu",
+          "valueBn": 0.905,
+          "yoyPct": 78.5,
+          "qoqPct": 38.59,
+          "mixPct": 15.5,
+          "mixYoyDeltaPp": 1.8,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312524000007/mu-20240229_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2024-03-21",
@@ -5031,14 +5214,14 @@
           "validationNotes": null
         },
         {
-          "name": "SBU",
+          "name": "EBU",
           "nameZh": null,
-          "memberKey": "sbu",
-          "valueBn": 0.905,
-          "yoyPct": 78.5,
-          "qoqPct": 38.59,
-          "mixPct": 15.5,
-          "mixYoyDeltaPp": 1.8,
+          "memberKey": "ebu",
+          "valueBn": 1.111,
+          "yoyPct": 28.44,
+          "qoqPct": 7.14,
+          "mixPct": 19.1,
+          "mixYoyDeltaPp": -4.3,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312524000007/mu-20240229_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2024-03-21",
@@ -5091,7 +5274,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2024Q2": {
       "calendarQuarter": "2024Q2",
@@ -5178,9 +5370,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -5248,7 +5440,7 @@
           "valueBn": 1.294,
           "yoyPct": 41.89,
           "qoqPct": 16.47,
-          "mixPct": 19.0,
+          "mixPct": 19,
           "mixYoyDeltaPp": -5.3,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312524000019/mu-20240530_htm.xml",
           "sourceForm": "10-Q",
@@ -5288,7 +5480,7 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.003,
@@ -5302,7 +5494,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2024Q3": {
       "calendarQuarter": "2024Q3",
@@ -5390,9 +5591,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -5407,7 +5608,7 @@
           "yoyPct": 151.5,
           "qoqPct": 17.29,
           "mixPct": 38.9,
-          "mixYoyDeltaPp": 9.0,
+          "mixYoyDeltaPp": 9,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312524000027/mu-20240829_htm.xml",
           "sourceForm": "10-K",
           "filingDate": "2024-10-04",
@@ -5425,7 +5626,7 @@
           "yoyPct": 54.83,
           "qoqPct": 18.07,
           "mixPct": 24.2,
-          "mixYoyDeltaPp": -6.0,
+          "mixYoyDeltaPp": -6,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312524000027/mu-20240829_htm.xml",
           "sourceForm": "10-K",
           "filingDate": "2024-10-04",
@@ -5500,7 +5701,7 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.004,
@@ -5515,7 +5716,16 @@
           "opex-breakdown-coverage-low"
         ]
       },
-      "officialRevenueStyle": "micron-business-unit-bridge"
+      "officialRevenueStyle": "micron-business-unit-bridge",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2024Q4": {
       "calendarQuarter": "2024Q4",
@@ -5602,9 +5812,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -5630,14 +5840,14 @@
           "validationNotes": null
         },
         {
-          "name": "SBU",
+          "name": "MBU",
           "nameZh": null,
-          "memberKey": "sbu",
-          "valueBn": 1.731,
-          "yoyPct": 165.08,
-          "qoqPct": 2.97,
-          "mixPct": 19.9,
-          "mixYoyDeltaPp": 6.1,
+          "memberKey": "mbu",
+          "valueBn": 1.527,
+          "yoyPct": 18.1,
+          "qoqPct": -18.56,
+          "mixPct": 17.5,
+          "mixYoyDeltaPp": -9.8,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312524000047/mu-20241128_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2024-12-19",
@@ -5648,14 +5858,14 @@
           "validationNotes": null
         },
         {
-          "name": "MBU",
+          "name": "SBU",
           "nameZh": null,
-          "memberKey": "mbu",
-          "valueBn": 1.527,
-          "yoyPct": 18.1,
-          "qoqPct": -18.56,
-          "mixPct": 17.5,
-          "mixYoyDeltaPp": -9.8,
+          "memberKey": "sbu",
+          "valueBn": 1.731,
+          "yoyPct": 165.08,
+          "qoqPct": 2.97,
+          "mixPct": 19.9,
+          "mixYoyDeltaPp": 6.1,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312524000047/mu-20241128_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2024-12-19",
@@ -5712,7 +5922,7 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.004,
@@ -5727,7 +5937,16 @@
           "opex-breakdown-coverage-low"
         ]
       },
-      "officialRevenueStyle": "micron-business-unit-bridge"
+      "officialRevenueStyle": "micron-business-unit-bridge",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2025Q1": {
       "calendarQuarter": "2025Q1",
@@ -5815,9 +6034,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -5843,14 +6062,14 @@
           "validationNotes": null
         },
         {
-          "name": "SBU",
+          "name": "MBU",
           "nameZh": null,
-          "memberKey": "sbu",
-          "valueBn": 1.392,
-          "yoyPct": 53.81,
-          "qoqPct": -19.58,
-          "mixPct": 17.3,
-          "mixYoyDeltaPp": 1.7,
+          "memberKey": "mbu",
+          "valueBn": 1.068,
+          "yoyPct": -33.17,
+          "qoqPct": -30.06,
+          "mixPct": 13.3,
+          "mixYoyDeltaPp": -14.2,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312525000009/mu-20250227_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2025-03-21",
@@ -5861,14 +6080,14 @@
           "validationNotes": null
         },
         {
-          "name": "MBU",
+          "name": "SBU",
           "nameZh": null,
-          "memberKey": "mbu",
-          "valueBn": 1.068,
-          "yoyPct": -33.17,
-          "qoqPct": -30.06,
-          "mixPct": 13.3,
-          "mixYoyDeltaPp": -14.2,
+          "memberKey": "sbu",
+          "valueBn": 1.392,
+          "yoyPct": 53.81,
+          "qoqPct": -19.58,
+          "mixPct": 17.3,
+          "mixYoyDeltaPp": 1.7,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312525000009/mu-20250227_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2025-03-21",
@@ -5925,7 +6144,7 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.004,
@@ -5940,7 +6159,16 @@
           "opex-breakdown-coverage-low"
         ]
       },
-      "officialRevenueStyle": "micron-business-unit-bridge"
+      "officialRevenueStyle": "micron-business-unit-bridge",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2025Q2": {
       "calendarQuarter": "2025Q2",
@@ -6028,9 +6256,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -6138,7 +6366,7 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.003,
@@ -6153,7 +6381,16 @@
           "opex-breakdown-coverage-low"
         ]
       },
-      "officialRevenueStyle": "micron-business-unit-bridge"
+      "officialRevenueStyle": "micron-business-unit-bridge",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2025Q3": {
       "calendarQuarter": "2025Q3",
@@ -6163,7 +6400,7 @@
       "fiscalLabel": "FY2025 Q4",
       "statementCurrency": "USD",
       "revenueBn": 11.315,
-      "revenueYoyPct": 46.0,
+      "revenueYoyPct": 46,
       "costOfRevenueBn": 6.261,
       "grossProfitBn": 5.054,
       "sgnaBn": 0.314,
@@ -6243,9 +6480,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -6330,7 +6567,7 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.001,
@@ -6344,7 +6581,9 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+      "officialRevenueTaxonomyChangedFromPriorYear": true
     },
     "2025Q4": {
       "calendarQuarter": "2025Q4",
@@ -6432,9 +6671,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -6542,7 +6781,7 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.005,
@@ -6557,7 +6796,16 @@
           "opex-breakdown-coverage-low"
         ]
       },
-      "officialRevenueStyle": "micron-business-unit-bridge"
+      "officialRevenueStyle": "micron-business-unit-bridge",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true
     },
     "2026Q1": {
       "calendarQuarter": "2026Q1",
@@ -6645,9 +6893,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -6837,19 +7085,28 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "explicit",
         "opexBreakdownMode": "explicit",
-        "revenueSegmentCoveragePct": 100.0,
-        "costBreakdownCoveragePct": 100.0,
-        "opexBreakdownCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
+        "costBreakdownCoveragePct": 100,
+        "opexBreakdownCoveragePct": 100,
         "revenueSegmentResidualBn": 0.005,
-        "costBreakdownResidualBn": 0.0,
-        "opexBreakdownResidualBn": 0.0,
+        "costBreakdownResidualBn": 0,
+        "opexBreakdownResidualBn": 0,
         "statementSource": null,
         "statementValueMode": null,
         "statementSpanQuarters": null,
         "statementQualityFlags": [],
         "issues": []
       },
-      "officialRevenueStyle": "micron-business-unit-bridge"
+      "officialRevenueStyle": "micron-business-unit-bridge",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true
     },
     "2026Q2": {
       "calendarQuarter": "2026Q2",
@@ -6945,7 +7202,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.8875,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.75,
         "checksRun": 8,
         "checksPassed": 6,
@@ -7074,7 +7331,7 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
         "revenueSegmentResidualBn": 0.008,
@@ -7088,13 +7345,271 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2026Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true
+    },
+    "2026Q3": {
+      "calendarQuarter": "2026Q3",
+      "periodEnd": "2026-09-03",
+      "fiscalYear": "2026",
+      "fiscalQuarter": "Q4",
+      "fiscalLabel": "FY2026 Q4",
+      "statementCurrency": "USD",
+      "revenueBn": 54.229,
+      "costOfRevenueBn": 7.182,
+      "grossProfitBn": 47.047,
+      "sgnaBn": 0.859,
+      "rndBn": 1.913,
+      "otherOpexBn": 0.524,
+      "operatingExpensesBn": 3.296,
+      "operatingIncomeBn": 43.751,
+      "nonOperatingBn": 0.487,
+      "pretaxIncomeBn": 44.238,
+      "taxBn": 6.583,
+      "equityMethodIncomeBn": 0.046,
+      "netIncomeBn": 37.701,
+      "dilutedEps": 32.87,
+      "operatingCashFlowBn": 43.973,
+      "freeCashFlowBn": 33.199,
+      "statementSource": "micron-official-ir-release",
+      "statementSourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results",
+      "statementFilingDate": "2026-09-30",
+      "officialOpexBreakdown": [
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 1.913
+        },
+        {
+          "name": "Selling, General and Administrative",
+          "nameZh": "销售及管理",
+          "memberKey": "sellinggeneralandadministrative",
+          "valueBn": 0.859
+        },
+        {
+          "name": "Other Operating Expense, Net",
+          "nameZh": "其他营业费用净额",
+          "memberKey": "otheroperatingexpense",
+          "valueBn": 0.524
+        }
+      ],
+      "grossMarginPct": 86.756,
+      "operatingMarginPct": 80.678,
+      "profitMarginPct": 69.522,
+      "effectiveTaxRatePct": 14.881,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "otherOpexBn": "official",
+        "operatingExpensesBn": "official",
+        "operatingIncomeBn": "official",
+        "operatingMarginPct": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "profitMarginPct": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "official",
+        "statementSourceUrl": "official",
+        "revenueYoyPct": "derived",
+        "netIncomeYoyPct": "derived",
+        "revenueQoqPct": "derived",
+        "grossMarginYoyDeltaPp": "derived",
+        "operatingMarginYoyDeltaPp": "derived",
+        "profitMarginYoyDeltaPp": "derived"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 0,
+        "revenueQoqPct": 0,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 0,
+        "sgnaBn": 1,
+        "rndBn": 1,
+        "otherOpexBn": 1,
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 0,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 0,
+        "effectiveTaxRatePct": 1
+      },
+      "revenueYoyPct": 379.266,
+      "netIncomeYoyPct": 1077.788,
+      "revenueQoqPct": 30.811,
+      "grossMarginYoyDeltaPp": 42.09,
+      "operatingMarginYoyDeltaPp": 48.385,
+      "profitMarginYoyDeltaPp": 41.232,
+      "parserFinancialValidation": {
+        "version": "financial-validation-v1",
+        "status": "high",
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
+      },
+      "officialRevenueSegments": [
+        {
+          "name": "CMBU",
+          "nameZh": "云内存业务单元",
+          "memberKey": "cmbu",
+          "valueBn": 16.283,
+          "yoyPct": 258.42,
+          "qoqPct": 18.26,
+          "mixPct": 30.0,
+          "mixYoyDeltaPp": -10.1,
+          "sourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results",
+          "sourceForm": "Micron quarterly earnings release",
+          "filingDate": "2026-09-30",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "CDBU",
+          "nameZh": "核心数据中心业务单元",
+          "memberKey": "cdbu",
+          "valueBn": 18.002,
+          "yoyPct": 1041.53,
+          "qoqPct": 56.21,
+          "mixPct": 33.2,
+          "mixYoyDeltaPp": 19.3,
+          "sourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results",
+          "sourceForm": "Micron quarterly earnings release",
+          "filingDate": "2026-09-30",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "MCBU",
+          "nameZh": "移动与客户端业务单元",
+          "memberKey": "mcbu",
+          "valueBn": 13.114,
+          "yoyPct": 248.78,
+          "qoqPct": 13.83,
+          "mixPct": 24.2,
+          "mixYoyDeltaPp": -9.0,
+          "sourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results",
+          "sourceForm": "Micron quarterly earnings release",
+          "filingDate": "2026-09-30",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "AEBU",
+          "nameZh": "汽车与嵌入式业务单元",
+          "memberKey": "aebu",
+          "valueBn": 6.824,
+          "yoyPct": 375.87,
+          "qoqPct": 47.26,
+          "mixPct": 12.6,
+          "mixYoyDeltaPp": -0.1,
+          "sourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results",
+          "sourceForm": "Micron quarterly earnings release",
+          "filingDate": "2026-09-30",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        }
+      ],
+      "officialSegmentAxis": "MicronBusinessUnit",
+      "officialSegmentSource": "micron-official-ir-release",
+      "officialRevenueStyle": "micron-business-unit-bridge",
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "statementMeta": {
+        "statementSource": "micron-official-ir-release",
+        "statementSourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results",
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "qualityFlags": [],
+        "adapterId": "official_financials"
+      },
+      "fieldSources": {
+        "statementMeta": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 14.2,
+          "sourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results"
+        }
+      },
+      "extractionDiagnostics": {
+        "qualityScore": 93,
+        "availableRequiredFieldCount": 3,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 16,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "explicit",
+        "revenueSegmentCoveragePct": 100.0,
+        "costBreakdownCoveragePct": 0,
+        "opexBreakdownCoveragePct": 100.0,
+        "revenueSegmentResidualBn": 0.006,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": 0.0,
+        "statementSource": "micron-official-ir-release",
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "cost-breakdown-coverage-low"
+        ]
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2026Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
       }
     }
   },
   "statementSource": "micron-official-ir-release",
-  "statementSourceUrl": "https://investors.micron.com/news-releases/news-release-details/micron-technology-inc-reports-record-results-third-quarter",
+  "statementSourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results",
   "reportingCurrency": "USD",
-  "cik": 723125,
   "errors": [],
   "errorDetails": [],
   "officialSegmentHistory": {
@@ -7103,8 +7618,8 @@
     "filingsUsed": [
       {
         "form": "MicronQuarterlyResultsRelease",
-        "filingDate": "2026-06-24",
-        "sourceUrl": "https://investors.micron.com/news-releases/news-release-details/micron-technology-inc-reports-record-results-third-quarter"
+        "filingDate": "2026-09-30",
+        "sourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results"
       }
     ],
     "errors": []
@@ -9517,201 +10032,93 @@
         "sourceUrl": "https://investors.micron.com/news-releases/news-release-details/micron-technology-inc-reports-record-results-third-quarter",
         "sourceForm": "Micron quarterly earnings release",
         "filingDate": "2026-06-24"
+      },
+      "2026Q3": {
+        "segments": [
+          {
+            "name": "CMBU",
+            "nameZh": "云内存业务单元",
+            "memberKey": "cmbu",
+            "valueBn": 16.283,
+            "yoyPct": 258.42,
+            "qoqPct": 18.26,
+            "mixPct": 30.0,
+            "mixYoyDeltaPp": -10.1,
+            "sourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results",
+            "sourceForm": "Micron quarterly earnings release",
+            "filingDate": "2026-09-30",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          },
+          {
+            "name": "CDBU",
+            "nameZh": "核心数据中心业务单元",
+            "memberKey": "cdbu",
+            "valueBn": 18.002,
+            "yoyPct": 1041.53,
+            "qoqPct": 56.21,
+            "mixPct": 33.2,
+            "mixYoyDeltaPp": 19.3,
+            "sourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results",
+            "sourceForm": "Micron quarterly earnings release",
+            "filingDate": "2026-09-30",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          },
+          {
+            "name": "MCBU",
+            "nameZh": "移动与客户端业务单元",
+            "memberKey": "mcbu",
+            "valueBn": 13.114,
+            "yoyPct": 248.78,
+            "qoqPct": 13.83,
+            "mixPct": 24.2,
+            "mixYoyDeltaPp": -9.0,
+            "sourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results",
+            "sourceForm": "Micron quarterly earnings release",
+            "filingDate": "2026-09-30",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          },
+          {
+            "name": "AEBU",
+            "nameZh": "汽车与嵌入式业务单元",
+            "memberKey": "aebu",
+            "valueBn": 6.824,
+            "yoyPct": 375.87,
+            "qoqPct": 47.26,
+            "mixPct": 12.6,
+            "mixYoyDeltaPp": -0.1,
+            "sourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results",
+            "sourceForm": "Micron quarterly earnings release",
+            "filingDate": "2026-09-30",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          }
+        ],
+        "style": "micron-business-unit-bridge",
+        "sourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results",
+        "sourceForm": "Micron quarterly earnings release",
+        "filingDate": "2026-09-30"
       }
     },
     "filingsUsed": [
       {
-        "form": "10-Q",
-        "filingDate": "2026-03-19",
-        "accession": "0000723125-26-000006",
-        "primaryDocument": "mu-20260226.htm",
-        "instance": "mu-20260226_htm.xml"
-      },
-      {
-        "form": "10-Q",
-        "filingDate": "2025-12-18",
-        "accession": "0000723125-25-000046",
-        "primaryDocument": "mu-20251127.htm",
-        "instance": "mu-20251127_htm.xml"
-      },
-      {
-        "form": "10-K",
-        "filingDate": "2025-10-03",
-        "accession": "0000723125-25-000028",
-        "primaryDocument": "mu-20250828.htm",
-        "instance": "mu-20250828_htm.xml"
-      },
-      {
-        "form": "10-Q",
-        "filingDate": "2025-06-26",
-        "accession": "0000723125-25-000021",
-        "primaryDocument": "mu-20250529.htm",
-        "instance": "mu-20250529_htm.xml"
-      },
-      {
-        "form": "10-Q",
-        "filingDate": "2025-03-21",
-        "accession": "0000723125-25-000009",
-        "primaryDocument": "mu-20250227.htm",
-        "instance": "mu-20250227_htm.xml"
-      },
-      {
-        "form": "10-Q",
-        "filingDate": "2024-12-19",
-        "accession": "0000723125-24-000047",
-        "primaryDocument": "mu-20241128.htm",
-        "instance": "mu-20241128_htm.xml"
-      },
-      {
-        "form": "10-K",
-        "filingDate": "2024-10-04",
-        "accession": "0000723125-24-000027",
-        "primaryDocument": "mu-20240829.htm",
-        "instance": "mu-20240829_htm.xml"
-      },
-      {
-        "form": "10-Q",
-        "filingDate": "2024-06-27",
-        "accession": "0000723125-24-000019",
-        "primaryDocument": "mu-20240530.htm",
-        "instance": "mu-20240530_htm.xml"
-      },
-      {
-        "form": "10-Q",
-        "filingDate": "2024-03-21",
-        "accession": "0000723125-24-000007",
-        "primaryDocument": "mu-20240229.htm",
-        "instance": "mu-20240229_htm.xml"
-      },
-      {
-        "form": "10-Q",
-        "filingDate": "2023-12-21",
-        "accession": "0000723125-23-000077",
-        "primaryDocument": "mu-20231130.htm",
-        "instance": "mu-20231130_htm.xml"
-      },
-      {
-        "form": "10-K",
-        "filingDate": "2023-10-06",
-        "accession": "0000723125-23-000054",
-        "primaryDocument": "mu-20230831.htm",
-        "instance": "mu-20230831_htm.xml"
-      },
-      {
-        "form": "10-Q",
-        "filingDate": "2023-06-29",
-        "accession": "0000723125-23-000041",
-        "primaryDocument": "mu-20230601.htm",
-        "instance": "mu-20230601_htm.xml"
-      },
-      {
-        "form": "10-Q",
-        "filingDate": "2023-03-29",
-        "accession": "0000723125-23-000022",
-        "primaryDocument": "mu-20230302.htm",
-        "instance": "mu-20230302_htm.xml"
-      },
-      {
-        "form": "10-Q",
-        "filingDate": "2022-12-22",
-        "accession": "0000723125-22-000072",
-        "primaryDocument": "mu-20221201.htm",
-        "instance": "mu-20221201_htm.xml"
-      },
-      {
-        "form": "10-K",
-        "filingDate": "2022-10-07",
-        "accession": "0000723125-22-000048",
-        "primaryDocument": "mu-20220901.htm",
-        "instance": "mu-20220901_htm.xml"
-      },
-      {
-        "form": "10-Q",
-        "filingDate": "2022-07-01",
-        "accession": "0000723125-22-000036",
-        "primaryDocument": "mu-20220602.htm",
-        "instance": "mu-20220602_htm.xml"
-      },
-      {
-        "form": "10-Q",
-        "filingDate": "2022-03-30",
-        "accession": "0000723125-22-000016",
-        "primaryDocument": "mu-20220303.htm",
-        "instance": "mu-20220303_htm.xml"
-      },
-      {
-        "form": "10-Q",
-        "filingDate": "2022-01-06",
-        "accession": "0000723125-22-000004",
-        "primaryDocument": "mu-20211202.htm",
-        "instance": "mu-20211202_htm.xml"
-      },
-      {
-        "form": "10-K",
-        "filingDate": "2021-10-08",
-        "accession": "0000723125-21-000065",
-        "primaryDocument": "mu-20210902.htm",
-        "instance": "mu-20210902_htm.xml"
-      },
-      {
-        "form": "10-Q",
-        "filingDate": "2021-07-01",
-        "accession": "0000723125-21-000052",
-        "primaryDocument": "mu-20210603.htm",
-        "instance": "mu-20210603_htm.xml"
-      },
-      {
-        "form": "10-Q",
-        "filingDate": "2021-04-01",
-        "accession": "0000723125-21-000032",
-        "primaryDocument": "mu-20210304.htm",
-        "instance": "mu-20210304_htm.xml"
-      },
-      {
-        "form": "10-Q",
-        "filingDate": "2021-01-08",
-        "accession": "0000723125-21-000012",
-        "primaryDocument": "mu-20201203.htm",
-        "instance": "mu-20201203_htm.xml"
-      },
-      {
-        "form": "10-K",
-        "filingDate": "2020-10-19",
-        "accession": "0000723125-20-000082",
-        "primaryDocument": "mu-20200903.htm",
-        "instance": "mu-20200903_htm.xml"
-      },
-      {
-        "form": "10-Q",
-        "filingDate": "2020-06-29",
-        "accession": "0000723125-20-000067",
-        "primaryDocument": "mu-20200528.htm",
-        "instance": "mu-20200528_htm.xml"
-      },
-      {
-        "form": "10-Q",
-        "filingDate": "2020-03-26",
-        "accession": "0000723125-20-000034",
-        "primaryDocument": "mu-20200227.htm",
-        "instance": "mu-20200227_htm.xml"
-      },
-      {
-        "form": "10-Q",
-        "filingDate": "2019-12-20",
-        "accession": "0000723125-19-000174",
-        "primaryDocument": "mu-20191128.htm",
-        "instance": "mu-20191128_htm.xml"
-      },
-      {
-        "title": "Micron Technology, Inc. Reports Results for the Second Quarter of Fiscal 2026",
-        "quarter": "2026Q1",
-        "filingDate": "2026-03-18",
-        "url": "https://investors.micron.com/news-releases/news-release-details/micron-technology-inc-reports-results-second-quarter-fiscal-2026"
-      },
-      {
         "form": "MicronQuarterlyResultsRelease",
-        "filingDate": "2026-06-24",
-        "sourceUrl": "https://investors.micron.com/news-releases/news-release-details/micron-technology-inc-reports-record-results-third-quarter"
+        "filingDate": "2026-09-30",
+        "sourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results"
       }
     ],
     "errors": []
@@ -9733,8 +10140,8 @@
           "status": "success",
           "selected": true,
           "reason": "",
-          "quarter_count": 34,
-          "latest_quarter": "2026Q2",
+          "quarter_count": 35,
+          "latest_quarter": "2026Q3",
           "error": "",
           "error_details": []
         }
@@ -9742,26 +10149,26 @@
       "reconciliation": {
         "version": "financial-reconciler-v1",
         "primarySource": "official",
-        "quarterCount": 34,
+        "quarterCount": 35,
         "fieldOverrideCount": 0,
         "derivedFieldCount": 0,
         "mixedSourceQuarterCount": 0,
         "sourceUsageCounts": {
-          "official": 715
+          "official": 731
         }
       },
       "validation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "quarterCount": 34,
-        "validatedQuarterCount": 34,
+        "quarterCount": 35,
+        "validatedQuarterCount": 35,
         "issueCount": 2,
         "mismatchQuarterCount": 1,
-        "highConfidenceQuarterCount": 34,
-        "averageConfidenceScore": 0.9967,
-        "latestQuarter": "2026Q2",
-        "latestQuarterConfidenceScore": 0.8875,
-        "latestQuarterIssueCount": 2
+        "highConfidenceQuarterCount": 35,
+        "averageConfidenceScore": 0.9968,
+        "latestQuarter": "2026Q3",
+        "latestQuarterConfidenceScore": 1.0,
+        "latestQuarterIssueCount": 0
       }
     },
     "segments": {
@@ -9773,8 +10180,8 @@
           "status": "success",
           "selected": true,
           "reason": "",
-          "quarter_count": 31,
-          "latest_quarter": "2026Q2",
+          "quarter_count": 32,
+          "latest_quarter": "2026Q3",
           "error": "",
           "error_details": []
         }
@@ -9789,31 +10196,31 @@
           "status": "success",
           "selected": true,
           "reason": "",
-          "quarter_count": 31,
-          "latest_quarter": "2026Q2",
+          "quarter_count": 32,
+          "latest_quarter": "2026Q3",
           "error": "",
           "error_details": []
         }
       ]
     },
     "summary": {
-      "financialQuarterCount": 34,
-      "segmentQuarterCount": 31,
-      "revenueStructureQuarterCount": 31
+      "financialQuarterCount": 35,
+      "segmentQuarterCount": 32,
+      "revenueStructureQuarterCount": 32
     },
     "validation": {
       "version": "parser-validation-v1",
       "status": "high",
       "overallConfidenceScore": 0.9979,
-      "financialConfidenceScore": 0.9967,
+      "financialConfidenceScore": 0.9968,
       "structuralConfidenceScore": 1.0,
-      "revenueSegmentChecks": 31,
+      "revenueSegmentChecks": 32,
       "revenueSegmentMismatchCount": 0,
       "revenueSegmentSkippedChecks": 0,
       "detailGroupChecks": 0,
       "detailGroupMismatchCount": 0,
       "detailGroupSkippedChecks": 0,
-      "opexChecks": 1,
+      "opexChecks": 2,
       "opexSkippedChecks": 0,
       "opexOverflowMismatchCount": 0,
       "warningCount": 0,
@@ -12515,6 +12922,12 @@
           "label": "Official filing revenue structure",
           "score": 114.0,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312525000046/mu-20251127_htm.xml"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312525000046/mu-20251127_htm.xml"
         }
       },
       "2026Q1": {
@@ -12613,6 +13026,12 @@
           "label": "Official filing revenue structure",
           "score": 107.0,
           "sourceUrl": "https://investors.micron.com/news-releases/news-release-details/micron-technology-inc-reports-results-second-quarter-fiscal-2026"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/723125/000072312526000006/mu-20260226_htm.xml"
         }
       },
       "2026Q2": {
@@ -12705,6 +13124,106 @@
           "label": "Official filing revenue structure",
           "score": 106.0,
           "sourceUrl": "https://investors.micron.com/news-releases/news-release-details/micron-technology-inc-reports-record-results-third-quarter"
+        }
+      },
+      "2026Q3": {
+        "revenueBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 123.0,
+          "sourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 123.0,
+          "sourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results"
+        },
+        "grossProfitBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 121.0,
+          "sourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results"
+        },
+        "sgnaBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 115.0,
+          "sourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results"
+        },
+        "rndBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 115.0,
+          "sourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results"
+        },
+        "otherOpexBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 113.0,
+          "sourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 121.0,
+          "sourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 121.0,
+          "sourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 113.0,
+          "sourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 121.0,
+          "sourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results"
+        },
+        "taxBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 115.0,
+          "sourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results"
+        },
+        "netIncomeBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 121.0,
+          "sourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results"
+        },
+        "opexBreakdown": [
+          {
+            "adapterId": "official_financials",
+            "label": "SEC companyfacts / filings",
+            "score": 142.0,
+            "itemCount": 3
+          }
+        ],
+        "statementMeta": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 14.2,
+          "sourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results"
+        },
+        "officialRevenueSegments": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 114.0,
+          "sourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://markets.financialcontent.com/stocks/article/gnwcq-2026-9-30-micron-technology-inc-reports-record-fiscal-fourth-quarter-and-full-year-2026-results"
         }
       }
     },
@@ -13429,7 +13948,7 @@
         "qualityScore": 80,
         "availableRequiredFieldCount": 3,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 14,
+        "sourceFieldCount": 15,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
@@ -13452,7 +13971,7 @@
         "qualityScore": 100,
         "availableRequiredFieldCount": 3,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 16,
+        "sourceFieldCount": 17,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "explicit",
         "opexBreakdownMode": "explicit",
@@ -13490,31 +14009,53 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
+      },
+      "2026Q3": {
+        "qualityScore": 93,
+        "availableRequiredFieldCount": 3,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 16,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "explicit",
+        "revenueSegmentCoveragePct": 100.0,
+        "costBreakdownCoveragePct": 0,
+        "opexBreakdownCoveragePct": 100.0,
+        "revenueSegmentResidualBn": 0.006,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": 0.0,
+        "statementSource": "micron-official-ir-release",
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
+        "statementQualityFlags": [],
+        "issues": [
+          "cost-breakdown-coverage-low"
+        ]
       }
     }
   },
   "statementPresets": {},
   "coverage": {
-    "quarterCount": 34,
+    "quarterCount": 35,
     "pixelReplicaQuarterCount": 0,
     "hasPixelReplica": false,
-    "officialFinancialQuarterCount": 34,
-    "officialSegmentQuarterCount": 31,
-    "officialExpenseQuarterCount": 1,
+    "officialFinancialQuarterCount": 35,
+    "officialSegmentQuarterCount": 32,
+    "officialExpenseQuarterCount": 2,
     "classification": {
       "status": "ok",
-      "latestQuarter": "2026Q2",
+      "latestQuarter": "2026Q3",
       "latestQuarterHasRevenueClassification": true,
-      "latestQuarterHasExpenseClassification": false,
-      "latestRevenueClassificationQuarter": "2026Q2",
-      "latestExpenseClassificationQuarter": "2026Q1",
-      "latestStructureHistoryQuarter": "2026Q2",
-      "revenueClassificationQuarterCount": 31,
-      "expenseClassificationQuarterCount": 1,
-      "revenueClassificationCoverageRatio": 0.9118,
-      "expenseClassificationCoverageRatio": 0.0294,
+      "latestQuarterHasExpenseClassification": true,
+      "latestRevenueClassificationQuarter": "2026Q3",
+      "latestExpenseClassificationQuarter": "2026Q3",
+      "latestStructureHistoryQuarter": "2026Q3",
+      "revenueClassificationQuarterCount": 32,
+      "expenseClassificationQuarterCount": 2,
+      "revenueClassificationCoverageRatio": 0.9143,
+      "expenseClassificationCoverageRatio": 0.0571,
       "latestRevenueClassificationLagQuarters": 0,
-      "latestExpenseClassificationLagQuarters": 1,
+      "latestExpenseClassificationLagQuarters": 0,
       "warnings": [],
       "blockers": [],
       "policy": {}
@@ -13528,45 +14069,51 @@
       "financialReconciliation": {
         "version": "financial-reconciler-v1",
         "primarySource": "official",
-        "quarterCount": 34,
+        "quarterCount": 35,
         "fieldOverrideCount": 0,
         "derivedFieldCount": 0,
         "mixedSourceQuarterCount": 0,
         "sourceUsageCounts": {
-          "official": 715
+          "official": 731
         }
       },
       "financialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "quarterCount": 34,
-        "validatedQuarterCount": 34,
+        "quarterCount": 35,
+        "validatedQuarterCount": 35,
         "issueCount": 2,
         "mismatchQuarterCount": 1,
-        "highConfidenceQuarterCount": 34,
-        "averageConfidenceScore": 0.9967,
-        "latestQuarter": "2026Q2",
-        "latestQuarterConfidenceScore": 0.8875,
-        "latestQuarterIssueCount": 2
+        "highConfidenceQuarterCount": 35,
+        "averageConfidenceScore": 0.9968,
+        "latestQuarter": "2026Q3",
+        "latestQuarterConfidenceScore": 1.0,
+        "latestQuarterIssueCount": 0
       },
       "validation": {
         "version": "parser-validation-v1",
         "status": "high",
         "overallConfidenceScore": 0.9979,
-        "financialConfidenceScore": 0.9967,
+        "financialConfidenceScore": 0.9968,
         "structuralConfidenceScore": 1.0,
-        "revenueSegmentChecks": 31,
+        "revenueSegmentChecks": 32,
         "revenueSegmentMismatchCount": 0,
         "revenueSegmentSkippedChecks": 0,
         "detailGroupChecks": 0,
         "detailGroupMismatchCount": 0,
         "detailGroupSkippedChecks": 0,
-        "opexChecks": 1,
+        "opexChecks": 2,
         "opexSkippedChecks": 0,
         "opexOverflowMismatchCount": 0,
         "warningCount": 0,
         "warnings": []
       }
     }
-  }
+  },
+  "cik": 723125,
+  "marketCapUsd": 1101790838784,
+  "marketCapAsOf": "2026-07-06",
+  "marketCapSource": "CompaniesMarketCap",
+  "marketCapSourceUrl": "https://companiesmarketcap.com/",
+  "marketCapSourceRank": 13
 }
