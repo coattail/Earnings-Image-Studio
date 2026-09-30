@@ -13,7 +13,7 @@ from bs4 import BeautifulSoup
 
 
 MICRON_INVESTOR_BASE_URL = "https://investors.micron.com"
-MICRON_QUARTERLY_RESULTS_URL = f"{MICRON_INVESTOR_BASE_URL}/quarterly-results"
+MICRON_QUARTERLY_RESULTS_URL = f"{MICRON_INVESTOR_BASE_URL}/financials/quarterly-results/default.aspx"
 MICRON_IR_CACHE_VERSION = "micron-ir-v1"
 MICRON_IR_SOURCE = "micron-official-ir-release"
 MICRON_BU_LABELS: dict[str, tuple[str, str, str]] = {
@@ -58,7 +58,9 @@ def discover_latest_release_url(quarterly_results_html: str) -> str | None:
     soup = BeautifulSoup(quarterly_results_html, "html.parser")
     for anchor in soup.find_all("a", href=True):
         href = str(anchor.get("href") or "")
-        if "/news-releases/news-release-details/" not in href:
+        if not any(path in href for path in ("/news-releases/news-release-details/", "/news/press-release/")):
+            continue
+        if "reports" not in href.lower():
             continue
         return urljoin(MICRON_INVESTOR_BASE_URL, unescape(href))
     return None
@@ -138,6 +140,11 @@ def _extract_fiscal_period(soup: BeautifulSoup) -> tuple[int, int]:
         title = title_node.get_text(" ", strip=True) if title_node else ""
     match = re.search(r"\b(first|second|third|fourth)\s+quarter\s+of\s+fiscal\s+(20\d{2})\b", title, re.IGNORECASE)
     if not match:
+        match = re.search(
+            r"\bfiscal\s+(first|second|third|fourth)[\s-]+quarter\s+and\s+full[\s-]+year\s+(20\d{2})\b",
+            title, re.IGNORECASE,
+        )
+    if not match:
         raise RuntimeError("Unable to parse Micron fiscal quarter from release title.")
     return int(match.group(2)), FISCAL_QUARTER_WORDS[match.group(1).lower()]
 
@@ -192,6 +199,8 @@ def _financial_entry(soup: BeautifulSoup, source_url: str, filing_date: str) -> 
         pretax = round(net_income + abs(tax) - equity_income, 3)
         non_operating = round(pretax - operating_income, 3)
     diluted_eps = _first_row_value(summary_rows, "Diluted earnings per share (EPS)")
+    if diluted_eps is None:
+        diluted_eps = _first_row_value(summary_rows, "Diluted earnings per share")
 
     entry: dict[str, Any] = {
         "calendarQuarter": _calendar_quarter(period_end),
@@ -210,7 +219,9 @@ def _financial_entry(soup: BeautifulSoup, source_url: str, filing_date: str) -> 
         "operatingIncomeBn": operating_income,
         "nonOperatingBn": non_operating,
         "pretaxIncomeBn": pretax,
-        "taxBn": tax,
+        # Statement provisions are negative; the earnings bridge stores tax cost.
+        "taxBn": -tax if tax is not None else None,
+        "equityMethodIncomeBn": equity_income,
         "netIncomeBn": net_income,
         "dilutedEps": diluted_eps,
         "operatingCashFlowBn": operating_cash_flow,
@@ -219,6 +230,12 @@ def _financial_entry(soup: BeautifulSoup, source_url: str, filing_date: str) -> 
         "statementSourceUrl": source_url,
         "statementFilingDate": filing_date,
     }
+    if all(value is not None for value in (rnd, sgna, other_opex)):
+        entry["officialOpexBreakdown"] = [
+            {"name": "Research and Development", "nameZh": "研发", "memberKey": "researchanddevelopment", "valueBn": rnd},
+            {"name": "Selling, General and Administrative", "nameZh": "销售及管理", "memberKey": "sellinggeneralandadministrative", "valueBn": sgna},
+            {"name": "Other Operating Expense, Net", "nameZh": "其他营业费用净额", "memberKey": "otheroperatingexpense", "valueBn": other_opex},
+        ]
     if revenue:
         for key, numerator_key in [
             ("grossMarginPct", "grossProfitBn"),
