@@ -4,7 +4,7 @@
   "nameZh": "好市多",
   "nameEn": "Costco",
   "slug": "cost",
-  "rank": 20,
+  "rank": 26,
   "isAdr": false,
   "brand": {
     "primary": "#E31837",
@@ -44,7 +44,9 @@
     "2025Q2",
     "2025Q3",
     "2025Q4",
-    "2026Q1"
+    "2026Q1",
+    "2026Q2",
+    "2026Q3"
   ],
   "financials": {
     "2018Q1": {
@@ -151,7 +153,9 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2018Q2": {
       "calendarQuarter": "2018Q2",
@@ -260,7 +264,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2018Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2018Q3": {
       "calendarQuarter": "2018Q3",
@@ -369,7 +382,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2018Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2018Q4": {
       "calendarQuarter": "2018Q4",
@@ -565,7 +587,7 @@
           "memberKey": "membership",
           "valueBn": 0.758,
           "yoyPct": null,
-          "qoqPct": -23.97,
+          "qoqPct": null,
           "mixPct": 2.2,
           "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983219000033/cost10q112419_htm.xml",
@@ -581,7 +603,9 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2019Q1": {
       "calendarQuarter": "2019Q1",
@@ -781,10 +805,10 @@
           "nameZh": null,
           "memberKey": "membership",
           "valueBn": 0.768,
-          "yoyPct": 7.26,
+          "yoyPct": null,
           "qoqPct": 1.32,
           "mixPct": 2.2,
-          "mixYoyDeltaPp": -0.0,
+          "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983220000004/cost10q21620_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2020-03-12",
@@ -798,7 +822,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2018Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2019Q2": {
       "calendarQuarter": "2019Q2",
@@ -998,10 +1031,10 @@
           "nameZh": null,
           "memberKey": "membership",
           "valueBn": 0.776,
-          "yoyPct": 5.29,
+          "yoyPct": null,
           "qoqPct": 1.04,
           "mixPct": 2.2,
-          "mixYoyDeltaPp": -0.0,
+          "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983219000019/cost-20190901.xml",
           "sourceForm": "10-K",
           "filingDate": "2019-10-11",
@@ -1015,7 +1048,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2019Q3": {
       "calendarQuarter": "2019Q3",
@@ -1215,10 +1257,10 @@
           "nameZh": null,
           "memberKey": "membership",
           "valueBn": 1.05,
-          "yoyPct": 5.32,
+          "yoyPct": null,
           "qoqPct": 35.31,
           "mixPct": 2.2,
-          "mixYoyDeltaPp": -0.0,
+          "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983219000019/cost-20190901.xml",
           "sourceForm": "10-K",
           "filingDate": "2019-10-11",
@@ -1232,7 +1274,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2019Q4": {
       "calendarQuarter": "2019Q4",
@@ -1440,7 +1491,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2020Q1": {
       "calendarQuarter": "2020Q1",
@@ -1648,7 +1708,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2020Q2": {
       "calendarQuarter": "2020Q2",
@@ -1763,6 +1832,24 @@
           "validationNotes": null
         },
         {
+          "name": "Other",
+          "nameZh": null,
+          "memberKey": "other",
+          "valueBn": 5.27,
+          "yoyPct": -22.42,
+          "qoqPct": -23.79,
+          "mixPct": 14.1,
+          "mixYoyDeltaPp": -5.4,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983220000009/cost-20200510_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2020-06-04",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
           "name": "Hardlines",
           "nameZh": null,
           "memberKey": "hardlines",
@@ -1789,24 +1876,6 @@
           "qoqPct": 10.0,
           "mixPct": 15.0,
           "mixYoyDeltaPp": 1.8,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983220000009/cost-20200510_htm.xml",
-          "sourceForm": "10-Q",
-          "filingDate": "2020-06-04",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": null,
-          "validationNotes": null
-        },
-        {
-          "name": "Other",
-          "nameZh": null,
-          "memberKey": "other",
-          "valueBn": 5.27,
-          "yoyPct": -22.42,
-          "qoqPct": -23.79,
-          "mixPct": 14.1,
-          "mixYoyDeltaPp": -5.4,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983220000009/cost-20200510_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2020-06-04",
@@ -1856,7 +1925,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2020Q3": {
       "calendarQuarter": "2020Q3",
@@ -1971,6 +2049,24 @@
           "validationNotes": null
         },
         {
+          "name": "Other",
+          "nameZh": null,
+          "memberKey": "other",
+          "valueBn": 7.377,
+          "yoyPct": -21.4,
+          "qoqPct": 39.98,
+          "mixPct": 13.8,
+          "mixYoyDeltaPp": -5.9,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983220000017/cost-20200830_htm.xml",
+          "sourceForm": "10-K",
+          "filingDate": "2020-10-07",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
           "name": "Hardlines",
           "nameZh": null,
           "memberKey": "hardlines",
@@ -1997,24 +2093,6 @@
           "qoqPct": 42.51,
           "mixPct": 14.9,
           "mixYoyDeltaPp": 1.4,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983220000017/cost-20200830_htm.xml",
-          "sourceForm": "10-K",
-          "filingDate": "2020-10-07",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": null,
-          "validationNotes": null
-        },
-        {
-          "name": "Other",
-          "nameZh": null,
-          "memberKey": "other",
-          "valueBn": 7.377,
-          "yoyPct": -21.4,
-          "qoqPct": 39.98,
-          "mixPct": 13.8,
-          "mixYoyDeltaPp": -5.9,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983220000017/cost-20200830_htm.xml",
           "sourceForm": "10-K",
           "filingDate": "2020-10-07",
@@ -2064,7 +2142,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2020Q4": {
       "calendarQuarter": "2020Q4",
@@ -2165,10 +2252,10 @@
           "nameZh": null,
           "memberKey": "foodssundries",
           "valueBn": 18.019,
-          "yoyPct": 24.0,
-          "qoqPct": -19.0,
+          "yoyPct": null,
+          "qoqPct": null,
           "mixPct": 41.7,
-          "mixYoyDeltaPp": 2.5,
+          "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983220000026/cost-20201122_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2020-12-16",
@@ -2201,10 +2288,10 @@
           "nameZh": null,
           "memberKey": "other",
           "valueBn": 6.081,
-          "yoyPct": -12.98,
-          "qoqPct": -17.57,
+          "yoyPct": null,
+          "qoqPct": null,
           "mixPct": 14.1,
-          "mixYoyDeltaPp": -4.8,
+          "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983220000026/cost-20201122_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2020-12-16",
@@ -2219,10 +2306,10 @@
           "nameZh": null,
           "memberKey": "freshfoods",
           "valueBn": 5.863,
-          "yoyPct": 28.13,
-          "qoqPct": -26.36,
+          "yoyPct": null,
+          "qoqPct": null,
           "mixPct": 13.6,
-          "mixYoyDeltaPp": 1.2,
+          "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983220000026/cost-20201122_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2020-12-16",
@@ -2237,10 +2324,10 @@
           "nameZh": null,
           "memberKey": "membership",
           "valueBn": 0.861,
-          "yoyPct": 7.09,
-          "qoqPct": -22.15,
+          "yoyPct": null,
+          "qoqPct": null,
           "mixPct": 2.0,
-          "mixYoyDeltaPp": -0.2,
+          "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983220000026/cost-20201122_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2020-12-16",
@@ -2254,7 +2341,9 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+      "officialRevenueTaxonomyChangedFromPriorYear": true
     },
     "2021Q1": {
       "calendarQuarter": "2021Q1",
@@ -2355,10 +2444,10 @@
           "nameZh": null,
           "memberKey": "foodssundries",
           "valueBn": 17.624,
-          "yoyPct": 17.62,
+          "yoyPct": null,
           "qoqPct": -2.19,
           "mixPct": 39.4,
-          "mixYoyDeltaPp": 1.0,
+          "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983221000003/cost-20210214_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2021-03-10",
@@ -2391,10 +2480,10 @@
           "nameZh": null,
           "memberKey": "other",
           "valueBn": 6.287,
-          "yoyPct": -9.08,
+          "yoyPct": null,
           "qoqPct": 3.39,
           "mixPct": 14.0,
-          "mixYoyDeltaPp": -3.7,
+          "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983221000003/cost-20210214_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2021-03-10",
@@ -2409,10 +2498,10 @@
           "nameZh": null,
           "memberKey": "freshfoods",
           "valueBn": 6.254,
-          "yoyPct": 23.13,
+          "yoyPct": null,
           "qoqPct": 6.67,
           "mixPct": 14.0,
-          "mixYoyDeltaPp": 1.0,
+          "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983221000003/cost-20210214_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2021-03-10",
@@ -2427,10 +2516,10 @@
           "nameZh": null,
           "memberKey": "membership",
           "valueBn": 0.881,
-          "yoyPct": 7.97,
+          "yoyPct": null,
           "qoqPct": 2.32,
           "mixPct": 2.0,
-          "mixYoyDeltaPp": -0.1,
+          "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983221000003/cost-20210214_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2021-03-10",
@@ -2444,7 +2533,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2021Q2": {
       "calendarQuarter": "2021Q2",
@@ -2549,10 +2647,10 @@
           "nameZh": null,
           "memberKey": "foodssundries",
           "valueBn": 17.551,
-          "yoyPct": 3.87,
+          "yoyPct": null,
           "qoqPct": -0.41,
           "mixPct": 38.8,
-          "mixYoyDeltaPp": -6.6,
+          "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983221000008/cost-20210509_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2021-06-03",
@@ -2585,10 +2683,10 @@
           "nameZh": null,
           "memberKey": "other",
           "valueBn": 7.63,
-          "yoyPct": 44.78,
+          "yoyPct": null,
           "qoqPct": 21.36,
           "mixPct": 16.9,
-          "mixYoyDeltaPp": 2.7,
+          "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983221000008/cost-20210509_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2021-06-03",
@@ -2603,10 +2701,10 @@
           "nameZh": null,
           "memberKey": "freshfoods",
           "valueBn": 6.296,
-          "yoyPct": 12.69,
+          "yoyPct": null,
           "qoqPct": 0.67,
           "mixPct": 13.9,
-          "mixYoyDeltaPp": -1.1,
+          "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983221000008/cost-20210509_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2021-06-03",
@@ -2621,10 +2719,10 @@
           "nameZh": null,
           "memberKey": "membership",
           "valueBn": 0.901,
-          "yoyPct": 10.55,
+          "yoyPct": null,
           "qoqPct": 2.27,
           "mixPct": 2.0,
-          "mixYoyDeltaPp": -0.2,
+          "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983221000008/cost-20210509_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2021-06-03",
@@ -2638,7 +2736,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2021Q3": {
       "calendarQuarter": "2021Q3",
@@ -2743,10 +2850,10 @@
           "nameZh": null,
           "memberKey": "foodssundries",
           "valueBn": 24.083,
-          "yoyPct": 8.26,
+          "yoyPct": null,
           "qoqPct": 37.22,
           "mixPct": 38.4,
-          "mixYoyDeltaPp": -3.2,
+          "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983221000014/cost-20210829_htm.xml",
           "sourceForm": "10-K",
           "filingDate": "2021-10-06",
@@ -2779,10 +2886,10 @@
           "nameZh": null,
           "memberKey": "other",
           "valueBn": 11.628,
-          "yoyPct": 57.63,
+          "yoyPct": null,
           "qoqPct": 52.4,
           "mixPct": 18.6,
-          "mixYoyDeltaPp": 4.7,
+          "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983221000014/cost-20210829_htm.xml",
           "sourceForm": "10-K",
           "filingDate": "2021-10-06",
@@ -2797,10 +2904,10 @@
           "nameZh": null,
           "memberKey": "freshfoods",
           "valueBn": 8.77,
-          "yoyPct": 10.15,
+          "yoyPct": null,
           "qoqPct": 39.29,
           "mixPct": 14.0,
-          "mixYoyDeltaPp": -0.9,
+          "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983221000014/cost-20210829_htm.xml",
           "sourceForm": "10-K",
           "filingDate": "2021-10-06",
@@ -2815,10 +2922,10 @@
           "nameZh": null,
           "memberKey": "membership",
           "valueBn": 1.234,
-          "yoyPct": 11.57,
+          "yoyPct": null,
           "qoqPct": 36.96,
           "mixPct": 2.0,
-          "mixYoyDeltaPp": -0.1,
+          "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983221000014/cost-20210829_htm.xml",
           "sourceForm": "10-K",
           "filingDate": "2021-10-06",
@@ -2832,7 +2939,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2021Q4": {
       "calendarQuarter": "2021Q4",
@@ -3025,7 +3141,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2022Q1": {
       "calendarQuarter": "2022Q1",
@@ -3218,7 +3343,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2022Q2": {
       "calendarQuarter": "2022Q2",
@@ -3411,7 +3545,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2022Q3": {
       "calendarQuarter": "2022Q3",
@@ -3604,7 +3747,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2022Q4": {
       "calendarQuarter": "2022Q4",
@@ -3797,7 +3949,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2023Q1": {
       "calendarQuarter": "2023Q1",
@@ -3990,7 +4151,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2023Q2": {
       "calendarQuarter": "2023Q2",
@@ -4183,7 +4353,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2023Q3": {
       "calendarQuarter": "2023Q3",
@@ -4376,7 +4555,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2023Q4": {
       "calendarQuarter": "2023Q4",
@@ -4569,7 +4757,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2024Q1": {
       "calendarQuarter": "2024Q1",
@@ -4762,7 +4959,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2024Q2": {
       "calendarQuarter": "2024Q2",
@@ -4955,7 +5161,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2024Q3": {
       "calendarQuarter": "2024Q3",
@@ -5148,7 +5363,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2024Q4": {
       "calendarQuarter": "2024Q4",
@@ -5341,7 +5565,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2025Q1": {
       "calendarQuarter": "2025Q1",
@@ -5534,7 +5767,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2025Q2": {
       "calendarQuarter": "2025Q2",
@@ -5727,7 +5969,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2025Q3": {
       "calendarQuarter": "2025Q3",
@@ -5920,7 +6171,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2025Q4": {
       "calendarQuarter": "2025Q4",
@@ -6113,7 +6373,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     },
     "2026Q1": {
       "calendarQuarter": "2026Q1",
@@ -6306,7 +6575,288 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
+    },
+    "2026Q2": {
+      "calendarQuarter": "2026Q2",
+      "periodEnd": "2026-06-30",
+      "fiscalYear": "2026",
+      "fiscalQuarter": "Q2",
+      "fiscalLabel": "FY2026 Q2",
+      "statementCurrency": "USD",
+      "revenueBn": 70.527,
+      "revenueYoyPct": 11.585,
+      "costOfRevenueBn": null,
+      "grossProfitBn": null,
+      "sgnaBn": null,
+      "rndBn": null,
+      "otherOpexBn": null,
+      "operatingExpensesBn": null,
+      "operatingIncomeBn": null,
+      "nonOperatingBn": null,
+      "pretaxIncomeBn": null,
+      "taxBn": null,
+      "netIncomeBn": null,
+      "netIncomeYoyPct": null,
+      "grossMarginPct": null,
+      "operatingMarginPct": null,
+      "profitMarginPct": null,
+      "effectiveTaxRatePct": null,
+      "revenueQoqPct": 1.336,
+      "grossMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": null,
+      "profitMarginYoyDeltaPp": null,
+      "statementSource": "official-revenue-structure",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000051/cost-20260510_htm.xml",
+      "statementFilingDate": "2026-06-03",
+      "officialRevenueSegments": [
+        {
+          "name": "Foods & Sundries",
+          "nameZh": null,
+          "memberKey": "foodssundries",
+          "valueBn": 26.533,
+          "yoyPct": 5.5,
+          "qoqPct": -2.27,
+          "mixPct": 37.6,
+          "mixYoyDeltaPp": -2.2,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000051/cost-20260510_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-06-03",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "Non Foods",
+          "nameZh": null,
+          "memberKey": "nonfoods",
+          "valueBn": 17.529,
+          "yoyPct": 9.01,
+          "qoqPct": -8.48,
+          "mixPct": 24.9,
+          "mixYoyDeltaPp": -0.6,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000051/cost-20260510_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-06-03",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "Other",
+          "nameZh": null,
+          "memberKey": "other",
+          "valueBn": 15.419,
+          "yoyPct": 29.02,
+          "qoqPct": 27.93,
+          "mixPct": 21.9,
+          "mixYoyDeltaPp": 3.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000051/cost-20260510_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-06-03",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "Fresh Foods",
+          "nameZh": null,
+          "memberKey": "freshfoods",
+          "valueBn": 9.673,
+          "yoyPct": 10.11,
+          "qoqPct": -2.16,
+          "mixPct": 13.7,
+          "mixYoyDeltaPp": -0.2,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000051/cost-20260510_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-06-03",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "Membership",
+          "nameZh": null,
+          "memberKey": "membership",
+          "valueBn": 1.373,
+          "yoyPct": 10.73,
+          "qoqPct": 1.33,
+          "mixPct": 1.9,
+          "mixYoyDeltaPp": -0.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000051/cost-20260510_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-06-03",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        }
+      ],
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2026Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
+    },
+    "2026Q3": {
+      "calendarQuarter": "2026Q3",
+      "periodEnd": "2026-09-30",
+      "fiscalYear": "2026",
+      "fiscalQuarter": "Q3",
+      "fiscalLabel": "FY2026 Q3",
+      "statementCurrency": "USD",
+      "revenueBn": 95.723,
+      "revenueYoyPct": 11.104,
+      "costOfRevenueBn": null,
+      "grossProfitBn": null,
+      "sgnaBn": null,
+      "rndBn": null,
+      "otherOpexBn": null,
+      "operatingExpensesBn": null,
+      "operatingIncomeBn": null,
+      "nonOperatingBn": null,
+      "pretaxIncomeBn": null,
+      "taxBn": null,
+      "netIncomeBn": null,
+      "netIncomeYoyPct": null,
+      "grossMarginPct": null,
+      "operatingMarginPct": null,
+      "profitMarginPct": null,
+      "effectiveTaxRatePct": null,
+      "revenueQoqPct": 35.725,
+      "grossMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": null,
+      "profitMarginYoyDeltaPp": null,
+      "statementSource": "official-revenue-structure",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/cost-20260830_htm.xml",
+      "statementFilingDate": "2026-10-07",
+      "officialRevenueSegments": [
+        {
+          "name": "Foods & Sundries",
+          "nameZh": null,
+          "memberKey": "foodssundries",
+          "valueBn": 36.163,
+          "yoyPct": 5.61,
+          "qoqPct": 36.29,
+          "mixPct": 37.8,
+          "mixYoyDeltaPp": -2.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/cost-20260830_htm.xml",
+          "sourceForm": "10-K",
+          "filingDate": "2026-10-07",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "Non Foods",
+          "nameZh": null,
+          "memberKey": "nonfoods",
+          "valueBn": 23.253,
+          "yoyPct": 8.59,
+          "qoqPct": 32.65,
+          "mixPct": 24.3,
+          "mixYoyDeltaPp": -0.6,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/cost-20260830_htm.xml",
+          "sourceForm": "10-K",
+          "filingDate": "2026-10-07",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "Other",
+          "nameZh": null,
+          "memberKey": "other",
+          "valueBn": 21.318,
+          "yoyPct": 28.2,
+          "qoqPct": 38.26,
+          "mixPct": 22.3,
+          "mixYoyDeltaPp": 3.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/cost-20260830_htm.xml",
+          "sourceForm": "10-K",
+          "filingDate": "2026-10-07",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "Fresh Foods",
+          "nameZh": null,
+          "memberKey": "freshfoods",
+          "valueBn": 13.139,
+          "yoyPct": 8.15,
+          "qoqPct": 35.83,
+          "mixPct": 13.7,
+          "mixYoyDeltaPp": -0.4,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/cost-20260830_htm.xml",
+          "sourceForm": "10-K",
+          "filingDate": "2026-10-07",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "Membership",
+          "nameZh": null,
+          "memberKey": "membership",
+          "valueBn": 1.85,
+          "yoyPct": 7.31,
+          "qoqPct": 34.74,
+          "mixPct": 1.9,
+          "mixYoyDeltaPp": -0.1,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/cost-20260830_htm.xml",
+          "sourceForm": "10-K",
+          "filingDate": "2026-10-07",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        }
+      ],
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2026Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      }
     }
   },
   "statementSource": "official-sec-companyfacts+field-reconciled",
@@ -9476,9 +10026,211 @@
             "validationNotes": null
           }
         ]
+      },
+      "2026Q2": {
+        "segments": [
+          {
+            "name": "Foods & Sundries",
+            "nameZh": null,
+            "memberKey": "foodssundries",
+            "valueBn": 26.533,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000051/cost-20260510_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-06-03",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          },
+          {
+            "name": "Non Foods",
+            "nameZh": null,
+            "memberKey": "nonfoods",
+            "valueBn": 17.529,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000051/cost-20260510_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-06-03",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          },
+          {
+            "name": "Other",
+            "nameZh": null,
+            "memberKey": "other",
+            "valueBn": 15.419,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000051/cost-20260510_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-06-03",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          },
+          {
+            "name": "Fresh Foods",
+            "nameZh": null,
+            "memberKey": "freshfoods",
+            "valueBn": 9.673,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000051/cost-20260510_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-06-03",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          },
+          {
+            "name": "Membership",
+            "nameZh": null,
+            "memberKey": "membership",
+            "valueBn": 1.373,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000051/cost-20260510_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-06-03",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          }
+        ]
+      },
+      "2026Q3": {
+        "segments": [
+          {
+            "name": "Foods & Sundries",
+            "nameZh": null,
+            "memberKey": "foodssundries",
+            "valueBn": 36.163,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/cost-20260830_htm.xml",
+            "sourceForm": "10-K",
+            "filingDate": "2026-10-07",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          },
+          {
+            "name": "Non Foods",
+            "nameZh": null,
+            "memberKey": "nonfoods",
+            "valueBn": 23.253,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/cost-20260830_htm.xml",
+            "sourceForm": "10-K",
+            "filingDate": "2026-10-07",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          },
+          {
+            "name": "Other",
+            "nameZh": null,
+            "memberKey": "other",
+            "valueBn": 21.318,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/cost-20260830_htm.xml",
+            "sourceForm": "10-K",
+            "filingDate": "2026-10-07",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          },
+          {
+            "name": "Fresh Foods",
+            "nameZh": null,
+            "memberKey": "freshfoods",
+            "valueBn": 13.139,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/cost-20260830_htm.xml",
+            "sourceForm": "10-K",
+            "filingDate": "2026-10-07",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          },
+          {
+            "name": "Membership",
+            "nameZh": null,
+            "memberKey": "membership",
+            "valueBn": 1.85,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/cost-20260830_htm.xml",
+            "sourceForm": "10-K",
+            "filingDate": "2026-10-07",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          }
+        ]
       }
     },
     "filingsUsed": [
+      {
+        "form": "10-K",
+        "filingDate": "2026-10-07",
+        "accession": "0000909832-26-000093",
+        "primaryDocument": "cost-20260830.htm",
+        "instance": "cost-20260830_htm.xml"
+      },
+      {
+        "form": "10-Q",
+        "filingDate": "2026-06-03",
+        "accession": "0000909832-26-000051",
+        "primaryDocument": "cost-20260510.htm",
+        "instance": "cost-20260510_htm.xml"
+      },
       {
         "form": "10-Q",
         "filingDate": "2026-03-11",
@@ -9772,7 +10524,7 @@
       "overallConfidenceScore": 0.9956,
       "financialConfidenceScore": 0.9932,
       "structuralConfidenceScore": 1.0,
-      "revenueSegmentChecks": 30,
+      "revenueSegmentChecks": 32,
       "revenueSegmentMismatchCount": 0,
       "revenueSegmentSkippedChecks": 0,
       "detailGroupChecks": 0,
@@ -9787,21 +10539,21 @@
   },
   "statementPresets": {},
   "coverage": {
-    "quarterCount": 33,
+    "quarterCount": 35,
     "pixelReplicaQuarterCount": 0,
     "hasPixelReplica": false,
-    "officialFinancialQuarterCount": 33,
-    "officialSegmentQuarterCount": 33,
+    "officialFinancialQuarterCount": 35,
+    "officialSegmentQuarterCount": 35,
     "officialExpenseQuarterCount": 0,
     "classification": {
       "status": "ok",
-      "latestQuarter": "2026Q1",
+      "latestQuarter": "2026Q3",
       "latestQuarterHasRevenueClassification": true,
       "latestQuarterHasExpenseClassification": false,
-      "latestRevenueClassificationQuarter": "2026Q1",
+      "latestRevenueClassificationQuarter": "2026Q3",
       "latestExpenseClassificationQuarter": null,
-      "latestStructureHistoryQuarter": "2026Q1",
-      "revenueClassificationQuarterCount": 33,
+      "latestStructureHistoryQuarter": "2026Q3",
+      "revenueClassificationQuarterCount": 35,
       "expenseClassificationQuarterCount": 0,
       "revenueClassificationCoverageRatio": 1.0,
       "expenseClassificationCoverageRatio": 0.0,
@@ -9848,7 +10600,7 @@
         "overallConfidenceScore": 0.9956,
         "financialConfidenceScore": 0.9932,
         "structuralConfidenceScore": 1.0,
-        "revenueSegmentChecks": 30,
+        "revenueSegmentChecks": 32,
         "revenueSegmentMismatchCount": 0,
         "revenueSegmentSkippedChecks": 0,
         "detailGroupChecks": 0,
@@ -9861,5 +10613,10 @@
         "warnings": []
       }
     }
-  }
+  },
+  "marketCapUsd": 422045483008,
+  "marketCapAsOf": "2026-07-06",
+  "marketCapSourceRank": 32,
+  "marketCapSource": "CompaniesMarketCap",
+  "marketCapSourceUrl": "https://companiesmarketcap.com/"
 }
