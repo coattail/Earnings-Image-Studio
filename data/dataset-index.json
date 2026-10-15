@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-15T16:21:23Z",
+  "generatedAt": "2026-10-15T23:07:12Z",
   "companyCount": 40,
   "companies": [
     {
@@ -7998,6 +7998,7 @@
       "officialSegmentHistory": {}
     },
     {
+      "_cacheVersion": "20260803-v4",
       "id": "walmart",
       "ticker": "WMT",
       "nameZh": "沃尔玛",
@@ -8010,7 +8011,6 @@
         "secondary": "#F3B700",
         "accent": "#E0F2FE"
       },
-      "_cacheVersion": "20260329-v1",
       "quarters": [
         "2018Q1",
         "2018Q2",
@@ -8045,32 +8045,40 @@
         "2025Q3",
         "2025Q4",
         "2026Q1",
-        "2026Q2"
+        "2026Q2",
+        "2026Q3"
       ],
-      "statementSource": "stockanalysis-financials",
-      "statementSourceUrl": "https://stockanalysis.com/stocks/wmt/financials/?p=quarterly",
+      "statementSource": "official-sec-companyfacts",
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000104169.json",
       "reportingCurrency": "USD",
+      "cik": 104169,
       "errors": [],
+      "errorDetails": [],
+      "marketCapUsd": 890031505408,
+      "marketCapAsOf": "2026-07-06",
+      "marketCapSourceRank": 18,
+      "marketCapSource": "CompaniesMarketCap",
+      "marketCapSourceUrl": "https://companiesmarketcap.com/",
       "coverage": {
-        "quarterCount": 34,
+        "quarterCount": 35,
         "pixelReplicaQuarterCount": 0,
         "hasPixelReplica": false,
-        "officialFinancialQuarterCount": 34,
+        "officialFinancialQuarterCount": 35,
         "officialSegmentQuarterCount": 34,
         "officialExpenseQuarterCount": 0,
         "classification": {
           "status": "ok",
-          "latestQuarter": "2026Q2",
-          "latestQuarterHasRevenueClassification": true,
+          "latestQuarter": "2026Q3",
+          "latestQuarterHasRevenueClassification": false,
           "latestQuarterHasExpenseClassification": false,
           "latestRevenueClassificationQuarter": "2026Q2",
           "latestExpenseClassificationQuarter": null,
           "latestStructureHistoryQuarter": "2026Q2",
           "revenueClassificationQuarterCount": 34,
           "expenseClassificationQuarterCount": 0,
-          "revenueClassificationCoverageRatio": 1.0,
+          "revenueClassificationCoverageRatio": 0.9714,
           "expenseClassificationCoverageRatio": 0.0,
-          "latestRevenueClassificationLagQuarters": 0,
+          "latestRevenueClassificationLagQuarters": 1,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
           "blockers": [],
@@ -8078,39 +8086,40 @@
         },
         "parser": {
           "version": "universal-parser-v4",
-          "selectedFinancialSource": "stockanalysis",
+          "selectedFinancialSource": "official",
           "selectedSegmentSource": "official-segments",
           "selectedRevenueStructureSource": "official-revenue-structures",
           "financialAttemptCount": 2,
           "financialReconciliation": {
             "version": "financial-reconciler-v1",
-            "primarySource": "stockanalysis",
-            "quarterCount": 20,
+            "primarySource": "official",
+            "quarterCount": 35,
             "fieldOverrideCount": 0,
             "derivedFieldCount": 0,
             "mixedSourceQuarterCount": 0,
             "sourceUsageCounts": {
-              "stockanalysis": 384
+              "official": 679,
+              "stockanalysis": 0
             }
           },
           "financialValidation": {
             "version": "financial-validation-v1",
             "status": "high",
-            "quarterCount": 20,
-            "validatedQuarterCount": 20,
-            "issueCount": 9,
-            "mismatchQuarterCount": 9,
-            "highConfidenceQuarterCount": 20,
-            "averageConfidenceScore": 0.9747,
-            "latestQuarter": "2026Q1",
-            "latestQuarterConfidenceScore": 0.9438,
-            "latestQuarterIssueCount": 1
+            "quarterCount": 35,
+            "validatedQuarterCount": 35,
+            "issueCount": 15,
+            "mismatchQuarterCount": 15,
+            "highConfidenceQuarterCount": 35,
+            "averageConfidenceScore": 0.9759,
+            "latestQuarter": "2026Q3",
+            "latestQuarterConfidenceScore": 1.0,
+            "latestQuarterIssueCount": 0
           },
           "validation": {
             "version": "parser-validation-v1",
             "status": "high",
-            "overallConfidenceScore": 0.9836,
-            "financialConfidenceScore": 0.9747,
+            "overallConfidenceScore": 0.9843,
+            "financialConfidenceScore": 0.9759,
             "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 34,
             "revenueSegmentMismatchCount": 0,
@@ -8126,413 +8135,151 @@
           }
         }
       },
-      "marketCapUsd": 890031505408,
-      "marketCapAsOf": "2026-07-06",
-      "marketCapSourceRank": 18,
-      "marketCapSource": "CompaniesMarketCap",
-      "marketCapSourceUrl": "https://companiesmarketcap.com/",
       "dataLoadMode": "latest-only",
-      "latestQuarter": "2026Q2",
+      "latestQuarter": "2026Q3",
       "financials": {
-        "2026Q2": {
-          "calendarQuarter": "2026Q2",
-          "periodEnd": "2026-06-30",
-          "fiscalYear": "2026",
+        "2026Q3": {
+          "calendarQuarter": "2026Q3",
+          "periodEnd": "2026-07-31",
+          "fiscalYear": "2027",
           "fiscalQuarter": "Q2",
-          "fiscalLabel": "FY2026 Q2",
+          "fiscalLabel": "FY2027 Q2",
           "statementCurrency": "USD",
-          "revenueBn": 175.684,
-          "revenueYoyPct": 6.084,
-          "costOfRevenueBn": null,
-          "grossProfitBn": null,
-          "sgnaBn": null,
+          "revenueBn": 186.1,
+          "revenueYoyPct": 5.889,
+          "costOfRevenueBn": 138.804,
+          "grossProfitBn": 47.296,
+          "sgnaBn": 39.75,
           "rndBn": null,
           "otherOpexBn": null,
-          "operatingExpensesBn": null,
-          "operatingIncomeBn": null,
-          "nonOperatingBn": null,
-          "pretaxIncomeBn": null,
-          "taxBn": null,
-          "netIncomeBn": null,
-          "netIncomeYoyPct": null,
-          "grossMarginPct": null,
-          "operatingMarginPct": null,
-          "profitMarginPct": null,
-          "effectiveTaxRatePct": null,
-          "revenueQoqPct": -7.853,
-          "grossMarginYoyDeltaPp": null,
-          "operatingMarginYoyDeltaPp": null,
-          "profitMarginYoyDeltaPp": null,
-          "statementSource": "official-revenue-structure",
-          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000102/wmt-20260430_htm.xml",
-          "statementFilingDate": "2026-05-29",
-          "officialRevenueSegments": [
-            {
-              "name": "Walmart US",
-              "nameZh": null,
-              "memberKey": "walmartus",
-              "valueBn": 117.169,
-              "yoyPct": 4.46,
-              "qoqPct": -9.33,
-              "mixPct": 66.7,
-              "mixYoyDeltaPp": -1.0,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000102/wmt-20260430_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-05-29",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": null,
-              "validationNotes": null
-            },
-            {
-              "name": "Walmart International",
-              "nameZh": null,
-              "memberKey": "walmartinternational",
-              "valueBn": 35.11,
-              "yoyPct": 18.0,
-              "qoqPct": -2.27,
-              "mixPct": 20.0,
-              "mixYoyDeltaPp": 2.0,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000102/wmt-20260430_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-05-29",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": null,
-              "validationNotes": null
-            },
-            {
-              "name": "Sams Club US",
-              "nameZh": null,
-              "memberKey": "samsclubus",
-              "valueBn": 23.405,
-              "yoyPct": 6.08,
-              "qoqPct": -1.51,
-              "mixPct": 13.3,
-              "mixYoyDeltaPp": -0.0,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000102/wmt-20260430_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-05-29",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": null,
-              "validationNotes": null
-            }
-          ],
-          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "operatingExpensesBn": 37.913,
+          "operatingIncomeBn": 9.383,
+          "nonOperatingBn": -1.371,
+          "pretaxIncomeBn": 8.012,
+          "taxBn": 1.483,
+          "netIncomeBn": 6.366,
+          "netIncomeYoyPct": -9.39,
+          "grossMarginPct": 25.414,
+          "operatingMarginPct": 5.042,
+          "profitMarginPct": 3.421,
+          "effectiveTaxRatePct": 18.51,
+          "revenueQoqPct": 5.929,
+          "grossMarginYoyDeltaPp": 0.96,
+          "operatingMarginYoyDeltaPp": 0.9,
+          "profitMarginYoyDeltaPp": -0.58,
+          "statementFilingDate": "2026-07-31",
+          "statementSourceUrl": "https://stockanalysis.com/stocks/wmt/financials/?p=quarterly",
+          "parserFinancialFieldSources": {
+            "revenueBn": "official",
+            "revenueYoyPct": "official",
+            "revenueQoqPct": "official",
+            "costOfRevenueBn": "official",
+            "grossProfitBn": "official",
+            "grossMarginPct": "official",
+            "grossMarginYoyDeltaPp": "official",
+            "sgnaBn": "official",
+            "operatingExpensesBn": "official",
+            "operatingIncomeBn": "official",
+            "operatingMarginPct": "official",
+            "operatingMarginYoyDeltaPp": "official",
+            "nonOperatingBn": "official",
+            "pretaxIncomeBn": "official",
+            "taxBn": "official",
+            "netIncomeBn": "official",
+            "netIncomeYoyPct": "official",
+            "profitMarginPct": "official",
+            "profitMarginYoyDeltaPp": "official",
+            "effectiveTaxRatePct": "official",
+            "calendarQuarter": "official",
+            "periodEnd": "official",
+            "fiscalYear": "official",
+            "fiscalQuarter": "official",
+            "fiscalLabel": "official",
+            "statementCurrency": "official",
+            "statementFilingDate": "stockanalysis",
+            "statementSourceUrl": "stockanalysis"
+          },
+          "parserFinancialCandidateCounts": {
+            "revenueBn": 1,
+            "revenueYoyPct": 1,
+            "revenueQoqPct": 1,
+            "costOfRevenueBn": 1,
+            "grossProfitBn": 1,
+            "grossMarginPct": 1,
+            "grossMarginYoyDeltaPp": 1,
+            "sgnaBn": 1,
+            "rndBn": 0,
+            "otherOpexBn": 0,
+            "operatingExpensesBn": 1,
+            "operatingIncomeBn": 1,
+            "operatingMarginPct": 1,
+            "operatingMarginYoyDeltaPp": 1,
+            "nonOperatingBn": 1,
+            "pretaxIncomeBn": 1,
+            "taxBn": 1,
+            "netIncomeBn": 1,
+            "netIncomeYoyPct": 1,
+            "profitMarginPct": 1,
+            "profitMarginYoyDeltaPp": 1,
+            "effectiveTaxRatePct": 1
+          },
+          "parserFinancialValidation": {
+            "version": "financial-validation-v1",
+            "status": "high",
+            "confidenceScore": 1.0,
+            "completenessScore": 1.0,
+            "consistencyScore": 1.0,
+            "checksRun": 8,
+            "checksPassed": 8,
+            "issueCount": 0,
+            "issues": []
+          },
           "displayCurrency": "USD",
           "displayScaleFactor": 1,
-          "sankeyStructureContinuity": {
-            "sourceQuarter": "2026Q1",
-            "fields": [
-              "officialRevenueSegments"
-            ],
-            "rule": "same-normalized-category-set"
+          "statementMeta": {
+            "statementSource": null,
+            "statementSourceUrl": null,
+            "statementValueMode": null,
+            "statementSpanQuarters": null,
+            "qualityFlags": [],
+            "adapterId": "official_financials"
+          },
+          "fieldSources": {
+            "statementMeta": {
+              "adapterId": "official_financials",
+              "label": "SEC companyfacts / filings",
+              "score": 11.1,
+              "sourceUrl": null
+            }
+          },
+          "extractionDiagnostics": {
+            "qualityScore": 60,
+            "availableRequiredFieldCount": 3,
+            "requiredFieldCount": 3,
+            "sourceFieldCount": 11,
+            "hasCostBreakdownProfile": false,
+            "costBreakdownMode": "none",
+            "opexBreakdownMode": "none",
+            "revenueSegmentCoveragePct": 0,
+            "costBreakdownCoveragePct": 0,
+            "opexBreakdownCoveragePct": 0,
+            "revenueSegmentResidualBn": null,
+            "costBreakdownResidualBn": null,
+            "opexBreakdownResidualBn": null,
+            "statementSource": null,
+            "statementValueMode": null,
+            "statementSpanQuarters": null,
+            "statementQualityFlags": [],
+            "issues": [
+              "revenue-segment-coverage-low",
+              "cost-breakdown-coverage-low",
+              "opex-breakdown-coverage-low"
+            ]
           }
         }
       },
       "statementPresets": {},
-      "officialRevenueStructureHistory": {
-        "source": "official-segment-cache",
-        "quarters": {
-          "2026Q2": {
-            "segments": [
-              {
-                "name": "Walmart US",
-                "nameZh": null,
-                "memberKey": "walmartus",
-                "valueBn": 117.169,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000102/wmt-20260430_htm.xml",
-                "sourceForm": "10-Q",
-                "filingDate": "2026-05-29",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": null,
-                "validationNotes": null
-              },
-              {
-                "name": "Walmart International",
-                "nameZh": null,
-                "memberKey": "walmartinternational",
-                "valueBn": 35.11,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000102/wmt-20260430_htm.xml",
-                "sourceForm": "10-Q",
-                "filingDate": "2026-05-29",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": null,
-                "validationNotes": null
-              },
-              {
-                "name": "Sams Club US",
-                "nameZh": null,
-                "memberKey": "samsclubus",
-                "valueBn": 23.405,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000102/wmt-20260430_htm.xml",
-                "sourceForm": "10-Q",
-                "filingDate": "2026-05-29",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": null,
-                "validationNotes": null
-              }
-            ]
-          }
-        },
-        "filingsUsed": [
-          {
-            "form": "10-Q",
-            "filingDate": "2026-05-29",
-            "accession": "0000104169-26-000102",
-            "primaryDocument": "wmt-20260430.htm",
-            "instance": "wmt-20260430_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2026-03-13",
-            "accession": "0000104169-26-000055",
-            "primaryDocument": "wmt-20260131.htm",
-            "instance": "wmt-20260131_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2025-12-03",
-            "accession": "0000104169-25-000191",
-            "primaryDocument": "wmt-20251031.htm",
-            "instance": "wmt-20251031_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2025-08-29",
-            "accession": "0000104169-25-000137",
-            "primaryDocument": "wmt-20250731.htm",
-            "instance": "wmt-20250731_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2025-06-06",
-            "accession": "0000104169-25-000090",
-            "primaryDocument": "wmt-20250430.htm",
-            "instance": "wmt-20250430_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2025-03-14",
-            "accession": "0000104169-25-000021",
-            "primaryDocument": "wmt-20250131.htm",
-            "instance": "wmt-20250131_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2024-12-06",
-            "accession": "0000104169-24-000178",
-            "primaryDocument": "wmt-20241031.htm",
-            "instance": "wmt-20241031_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2024-08-30",
-            "accession": "0000104169-24-000141",
-            "primaryDocument": "wmt-20240731.htm",
-            "instance": "wmt-20240731_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2024-06-07",
-            "accession": "0000104169-24-000105",
-            "primaryDocument": "wmt-20240430.htm",
-            "instance": "wmt-20240430_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2024-03-15",
-            "accession": "0000104169-24-000056",
-            "primaryDocument": "wmt-20240131.htm",
-            "instance": "wmt-20240131_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2023-11-30",
-            "accession": "0000104169-23-000132",
-            "primaryDocument": "wmt-20231031.htm",
-            "instance": "wmt-20231031_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2023-09-01",
-            "accession": "0000104169-23-000097",
-            "primaryDocument": "wmt-20230731.htm",
-            "instance": "wmt-20230731_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2023-06-02",
-            "accession": "0000104169-23-000052",
-            "primaryDocument": "wmt-20230430.htm",
-            "instance": "wmt-20230430_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2023-03-17",
-            "accession": "0000104169-23-000020",
-            "primaryDocument": "wmt-20230131.htm",
-            "instance": "wmt-20230131_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2022-12-01",
-            "accession": "0000104169-22-000083",
-            "primaryDocument": "wmt-20221031.htm",
-            "instance": "wmt-20221031_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2022-09-02",
-            "accession": "0000104169-22-000072",
-            "primaryDocument": "wmt-20220731.htm",
-            "instance": "wmt-20220731_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2022-06-03",
-            "accession": "0000104169-22-000029",
-            "primaryDocument": "wmt-20220430.htm",
-            "instance": "wmt-20220430_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2022-03-18",
-            "accession": "0000104169-22-000012",
-            "primaryDocument": "wmt-20220131.htm",
-            "instance": "wmt-20220131_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2021-12-01",
-            "accession": "0000104169-21-000072",
-            "primaryDocument": "wmt-20211031.htm",
-            "instance": "wmt-20211031_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2021-09-02",
-            "accession": "0000104169-21-000058",
-            "primaryDocument": "wmt-20210731.htm",
-            "instance": "wmt-20210731_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2021-06-04",
-            "accession": "0000104169-21-000042",
-            "primaryDocument": "wmt-20210430.htm",
-            "instance": "wmt-20210430_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2021-03-19",
-            "accession": "0000104169-21-000033",
-            "primaryDocument": "wmt-20210131.htm",
-            "instance": "wmt-20210131_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2020-12-02",
-            "accession": "0000104169-20-000076",
-            "primaryDocument": "wmt-20201031.htm",
-            "instance": "wmt-20201031_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2020-09-02",
-            "accession": "0000104169-20-000042",
-            "primaryDocument": "wmtform10-qx7312020.htm",
-            "instance": "wmtform10-qx7312020_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2020-06-03",
-            "accession": "0000104169-20-000020",
-            "primaryDocument": "wmtform10-qx4302020.htm",
-            "instance": "wmtform10-qx4302020_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2020-03-20",
-            "accession": "0000104169-20-000011",
-            "primaryDocument": "wmtform10-kx1312020.htm",
-            "instance": "wmtform10-kx1312020_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2019-12-04",
-            "accession": "0000104169-19-000088",
-            "primaryDocument": "wmtform10-qx103119.htm",
-            "instance": "wmtform10-qx103119_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2019-09-06",
-            "accession": "0000104169-19-000064",
-            "primaryDocument": "wmtform10-qx7312019.htm",
-            "instance": "wmtform10-qx7312019_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2019-06-07",
-            "accession": "0000104169-19-000024",
-            "primaryDocument": "wmtform10-qx4302019.htm",
-            "instance": "wmt-20190430.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2019-03-28",
-            "accession": "0000104169-19-000016",
-            "primaryDocument": "wmtform10-kx1312019.htm",
-            "instance": "wmt-20190131.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2018-11-30",
-            "accession": "0000104169-18-000110",
-            "primaryDocument": "wmtform10-qx10312018.htm",
-            "instance": "wmt-20181031.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2018-09-06",
-            "accession": "0000104169-18-000086",
-            "primaryDocument": "wmtform10-qx7312018.htm",
-            "instance": "wmt-20180731.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2018-06-04",
-            "accession": "0000104169-18-000054",
-            "primaryDocument": "wmtform10-qx4302018.htm",
-            "instance": "wmt-20180430.xml"
-          }
-        ],
-        "errors": []
-      },
+      "officialRevenueStructureHistory": {},
       "officialSegmentHistory": {}
     },
     {
