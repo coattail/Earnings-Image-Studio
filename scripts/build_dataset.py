@@ -660,7 +660,10 @@ def build_incremental_company_payload_for_dataset(
     # official statements and segment/revenue enrichment. Full SEC companyfacts
     # and filing-history refreshes remain available through manual --refresh;
     # large issuers can otherwise consume the entire scheduled-job budget.
-    fetch_stockanalysis_financial_history(company, refresh=True)
+    if company.get("id") == "asml":
+        fetch_official_financial_history(company, refresh=True)
+    else:
+        fetch_stockanalysis_financial_history(company, refresh=True)
     return build_company_payload_for_dataset(
         company,
         refresh=False,
@@ -4083,6 +4086,10 @@ def merge_official_financial_breakdowns(company_payload: dict[str, Any], company
         entry = financials.get(quarter)
         if not isinstance(entry, dict) or not isinstance(official_entry, dict):
             continue
+        if company.get("id") == "asml":
+            for key, value in official_entry.items():
+                if value is not None:
+                    entry[key] = deepcopy(value)
         if not entry.get("officialOpexBreakdown"):
             opex_breakdown = official_entry.get("officialOpexBreakdown")
             if isinstance(opex_breakdown, list) and opex_breakdown:
@@ -4141,7 +4148,7 @@ def main() -> int:
     for company in selected_companies:
         print(f"[build] {company['ticker']} ...", flush=True)
         payload: dict[str, Any] | None = None
-        if not args.refresh:
+        if not args.refresh and not getattr(args, "incremental_refresh", False):
             existing_payload = existing_companies_by_id.get(str(company["id"]))
             cached_payload = (
                 existing_payload

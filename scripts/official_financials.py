@@ -7,8 +7,10 @@ import re
 import requests
 from copy import deepcopy
 from dataclasses import dataclass
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 from html import unescape
+from urllib.parse import urljoin
+from bs4 import BeautifulSoup
 from pathlib import Path
 from typing import Any
 
@@ -28,6 +30,7 @@ SEC_HEADERS = {
     "User-Agent": "Codex/official-financials yuwan@example.com",
     "Accept-Encoding": "gzip, deflate",
 }
+ASML_IR_RESULTS_URL = "https://investor.asml.com/quarterly-results"
 ASML_FINANCIAL_RESULTS_INDEX_URL = "https://www.asml.com/en/investors/financial-results"
 ASML_RESULTS_PAGE_PATH_PATTERN = re.compile(r'href="(/en/investors/financial-results/q([1-4])-(20\d{2}))"')
 ASML_PDF_URL_PATTERN = re.compile(r'href="([^"]+\.pdf(?:\?[^"]*)?)"', re.IGNORECASE)
@@ -894,6 +897,19 @@ def _parse_asml_release(html_text: str, filing_date: str, source_url: str, curre
         if len(rows) < 4:
             continue
         row_map = {_normalize_table_key(row[0]): row for row in rows[1:] if row}
+        # The full US GAAP exhibit has expenses and actual fiscal dates. Newer
+        # releases label taxes "Income tax expense" instead of the legacy label.
+        if {"totalnetsales", "grossprofit", "incomefromoperations", "netincome"}.issubset(row_map):
+            table_text = "\n".join(" ".join(row) for row in rows)
+            if "three months ended" in table_text.lower() and re.fullmatch(r"20\d{2}-\d{2}-\d{2}", filing_date):
+                filing_year, filing_month = int(filing_date[:4]), int(filing_date[5:7])
+                quarter_number = ((filing_month - 1) // 3) or 4
+                year = filing_year - (1 if filing_month <= 3 else 0)
+                parsed = _parse_asml_pdf_financial_page(
+                    table_text, filing_date, source_url, currency, expected_quarter=f"{year}Q{quarter_number}",
+                )
+                if parsed:
+                    return parsed
         if {
             "totalnetsales",
             "grossprofit",
@@ -1132,6 +1148,9 @@ def _parse_asml_pdf_financial_page(
     operating_income_value = _extract_asml_pdf_row_value(lines, "Income from operations")
     non_operating_value = _extract_asml_pdf_row_value(lines, "Interest and other, net")
     pretax_value = _extract_asml_pdf_row_value(lines, "Income before income taxes")
+    if pretax_value is not None and operating_income_value is not None:
+        non_operating_value = pretax_value - operating_income_value
+    equity_method_value = _extract_asml_pdf_row_value(lines, "Profit related to equity method investments")
     tax_value = _extract_asml_pdf_row_value(lines, "Income tax expense", "Benefit from (provision for) income taxes")
     net_income_value = _extract_asml_pdf_row_value(lines, "Net income")
     net_system_sales_value = _extract_asml_pdf_row_value(lines, "Net system sales")
@@ -1159,6 +1178,8 @@ def _parse_asml_pdf_financial_page(
     )
     entry["statementSourceUrl"] = source_url
     entry["statementFilingDate"] = filing_date
+    if equity_method_value is not None:
+        entry["equityMethodIncomeBn"] = _money_to_bn(equity_method_value * scale)
     if net_system_sales_value is not None:
         entry["netSystemSalesBn"] = round(net_system_sales_value / 1000, 3)
     if installed_base_value is not None:
@@ -1175,11 +1196,68 @@ def _request_bytes_resilient(url: str) -> bytes:
         return response.content
 
 
+def discover_asml_ir_release() -> dict[str, str]:
+    """Discover the current release and extensionless financial PDF download."""
+    try:
+        html = _request_bytes_resilient(ASML_IR_RESULTS_URL).decode("utf-8", errors="ignore")
+        soup = BeautifulSoup(html, "html.parser")
+        heading = soup.find(lambda tag: tag.name in {"h1", "h2", "h3"} and re.fullmatch(
+            r"Q[1-4] 20\d{2} financial results", tag.get_text(" ", strip=True), re.I))
+        if heading is None:
+            return {}
+        match = re.search(r"Q([1-4]) (20\d{2})", heading.get_text(" ", strip=True))
+        quarter = f"{match.group(2)}Q{match.group(1)}"
+        # Limit discovery to the current release, before the historical archive.
+        nodes = []
+        for node in heading.next_elements:
+            if getattr(node, "name", None) in {"h1", "h2", "h3"} and "archive" in node.get_text(" ", strip=True).lower():
+                break
+            nodes.append(node)
+        text = re.sub(r"\s+", " ", " ".join(str(node) for node in nodes if isinstance(node, str)))
+        date_match = re.search(r"([A-Za-z]+ \d{1,2}, 20\d{2})", text)
+        if date_match is None:
+            return {}
+        filing_date = datetime.strptime(date_match.group(1), "%B %d, %Y").date().isoformat()
+        link = next((node for node in nodes if getattr(node, "name", None) == "a"
+                     and "financial statement" in node.get_text(" ", strip=True).lower()
+                     and "pdf" in node.get_text(" ", strip=True).lower()), None)
+        if link is None:
+            return {}
+        pdf_url = urljoin(ASML_IR_RESULTS_URL, link.get("href", ""))
+        return {"quarter": quarter, "filingDate": filing_date, "pdfUrl": pdf_url}
+    except Exception:
+        return {}
+
+
+def _load_asml_ir_financials(currency: str) -> dict[str, dict[str, Any]]:
+    release = discover_asml_ir_release()
+    if not release:
+        return {}
+    quarter, filing_date, pdf_url = release["quarter"], release["filingDate"], release["pdfUrl"]
+    try:
+        reader = PdfReader(io.BytesIO(_request_bytes_resilient(pdf_url)))
+        for page in reader.pages:
+            text = page.extract_text() or ""
+            # A cash flow page also has Net income; require an income statement.
+            if "Total net sales" not in text or "Income from operations" not in text:
+                continue
+            parsed = _parse_asml_pdf_financial_page(text, filing_date, pdf_url, currency, expected_quarter=quarter)
+            if parsed and all(parsed[1].get(key) is not None for key in (
+                "revenueBn", "grossProfitBn", "operatingIncomeBn", "netIncomeBn")):
+                return {parsed[0]: parsed[1]}
+    except Exception:
+        pass
+    return {}
+
+
 def _load_asml_website_financials(
     currency: str,
     existing_financials: dict[str, dict[str, Any]] | None = None,
     target_quarter_count: int = ASML_TARGET_QUARTER_COUNT,
 ) -> dict[str, dict[str, Any]]:
+    ir_financials = _load_asml_ir_financials(currency)
+    if ir_financials:
+        return ir_financials
     try:
         index_html = _request_bytes_resilient(ASML_FINANCIAL_RESULTS_INDEX_URL).decode("utf-8", errors="ignore")
     except Exception:
@@ -1456,7 +1534,7 @@ def _load_html_fallback_financials(company: dict[str, Any], cik: int, currency: 
             ordered_names = sorted(
                 html_names,
                 key=lambda name: (
-                    0 if "pressrelease" in name.lower() else 1 if "financialstatements" in name.lower() else 2 if name == primary_document else 3,
+                    0 if "financial" in name.lower() and "statement" in name.lower() else 1 if "pressrelease" in name.lower() else 2 if name == primary_document else 3,
                     name,
                 ),
             )
@@ -1499,6 +1577,19 @@ def fetch_official_financial_history(company: dict[str, Any], refresh: bool = Fa
     if path.exists() and not refresh:
         if _is_current_official_financials_cache(cached_payload):
             return cached_payload
+
+    if str(company.get("id") or "") == "asml":
+        website_financials = _load_asml_ir_financials("EUR")
+        if website_financials:
+            result = _build_company_shell(company)
+            financials = deepcopy((cached_payload or {}).get("financials") or {})
+            financials.update(website_financials)
+            result["quarters"], result["financials"] = _finalize_financials(financials)
+            result["reportingCurrency"] = "EUR"
+            result["statementSource"] = "official-asml-website"
+            result["statementSourceUrl"] = website_financials[max(website_financials)]["statementSourceUrl"]
+            _write_cached_json(path, result)
+            return result
 
     if str(company.get("id") or "") == "micron":
         try:

@@ -159,6 +159,7 @@ class AsmlOfficialFinancialsSiteFallbackTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp_dir:
             with (
                 patch.object(official_financials, "CACHE_DIR", Path(tmp_dir)),
+                patch.object(official_financials, "_load_asml_ir_financials", return_value={}),
                 patch.object(official_financials, "_resolve_cik", side_effect=RuntimeError("ticker feed timeout")),
                 patch.object(official_financials, "_load_asml_website_financials", return_value={"2026Q1": website_entry}),
             ):
@@ -195,6 +196,7 @@ class AsmlOfficialFinancialsSiteFallbackTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp_dir:
             with (
                 patch.object(official_financials, "CACHE_DIR", Path(tmp_dir)),
+                patch.object(official_financials, "_load_asml_ir_financials", return_value={}),
                 patch.object(official_financials, "_resolve_cik", return_value=937966),
                 patch.object(official_financials, "_request_json", side_effect=RuntimeError("upstream timeout")),
                 patch.object(official_financials, "_load_asml_website_financials", return_value={"2026Q1": website_entry}),

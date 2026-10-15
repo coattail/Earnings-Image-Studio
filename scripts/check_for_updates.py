@@ -12,6 +12,7 @@ from build_dataset import ROOT_DIR, TOP30_COMPANIES, company_matches_selection, 
 from official_segments import ALLOWED_FORMS, MIN_FILING_DATE, _request_json, _resolve_cik, _submission_records
 from official_revenue_structures import CUSTOM_INCREMENTAL_HISTORY_COMPANIES, _available_custom_history_items
 from stockanalysis_financials import fetch_stockanalysis_financial_history
+from official_financials import discover_asml_ir_release
 
 
 DATASET_PATH = ROOT_DIR / "data" / "earnings-dataset.json"
@@ -235,6 +236,15 @@ def detect_company_update(company: dict[str, Any]) -> dict[str, Any]:
         }
 
     local_quarter = latest_local_quarter(payload)
+    latest_entry = (payload.get("financials") or {}).get(local_quarter) or {}
+    if latest_entry.get("revenueBn") is not None and any(
+        latest_entry.get(key) is None for key in ("grossProfitBn", "operatingIncomeBn", "netIncomeBn")
+    ) and company.get("id") == "asml":
+        return {
+            "companyId": company["id"], "ticker": company["ticker"],
+            "needsUpdate": True, "reason": "incomplete-financials",
+            "localQuarter": local_quarter, "buildRefreshMode": "refresh",
+        }
     local_filing_date, local_accession = latest_local_filing_marker(payload)
     local_revenue_structure_quarter = latest_local_revenue_structure_quarter(payload)
 
@@ -285,7 +295,9 @@ def detect_company_update(company: dict[str, Any]) -> dict[str, Any]:
             "buildRefreshMode": "cache-supplement" if official_has_newer_quarter else "refresh",
         }
 
-    remote = latest_remote_sec_filing(company)
+    remote = discover_asml_ir_release() if company.get("id") == "asml" else None
+    if not remote:
+        remote = latest_remote_sec_filing(company)
     if remote is None:
         return {
             "companyId": company["id"],
