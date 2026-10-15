@@ -104,6 +104,6 @@ class LatestAsmlUpdateTests(unittest.TestCase):
         self.assertEqual(q['statementSourceUrl'], SOURCE)
         self.assertAlmostEqual(q['costOfRevenueBn'] + q['grossProfitBn'], q['revenueBn'])
         self.assertAlmostEqual(q['rndBn'] + q['sgnaBn'] + q['operatingIncomeBn'], q['grossProfitBn'])
-        net_bridge = q['operatingIncomeBn'] + sum(r['valueBn'] for r in q['positiveAdjustments']) - sum(r['valueBn'] for r in q['belowOperatingItems'])
+        net_bridge = q['operatingIncomeBn'] + q['nonOperatingBn'] + q['equityMethodIncomeBn'] - q['taxBn']
         self.assertLess(abs(net_bridge - q['netIncomeBn']), .002)
         self.assertEqual(c['coverage']['classification']['blockers'], [])

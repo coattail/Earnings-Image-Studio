@@ -8351,32 +8351,158 @@
       "sankeyStructureContinuity": {
         "sourceQuarter": "2026Q2",
         "fields": [
-          "officialRevenueSegments"
+          "officialRevenueSegments",
+          "officialRevenueDetailGroups"
         ],
         "rule": "same-normalized-category-set"
       },
       "equityMethodIncomeBn": 0.135,
       "netSystemSalesBn": 8.373,
       "installedBaseManagementBn": 3.289,
-      "positiveAdjustments": [
+      "positiveAdjustments": null,
+      "belowOperatingItems": null,
+      "officialRevenueDetailGroups": [
         {
-          "name": "Non-operating gain",
-          "nameZh": "营业外收益",
-          "valueBn": 0.578
+          "name": "EUV",
+          "nameZh": null,
+          "memberKey": "euv",
+          "valueBn": 4.103,
+          "yoyPct": 94.36,
+          "qoqPct": 9.65,
+          "mixPct": 49,
+          "mixYoyDeltaPp": 7.1,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026065813/a2026_10x14xpresentation009.jpg",
+          "sourceForm": "QuarterlyResultsPresentation",
+          "filingDate": "2026-10-14",
+          "supportLines": [
+            "Extreme Ultraviolet"
+          ],
+          "supportLinesZh": null,
+          "targetName": "Net system sales",
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": [
+            "Allocated from official rounded technology shares of net system sales; final category absorbs rounding."
+          ]
         },
         {
-          "name": "Equity method income",
-          "nameZh": "权益法投资收益",
-          "valueBn": 0.135
+          "name": "ArFi",
+          "nameZh": null,
+          "memberKey": "arfi",
+          "valueBn": 3.265,
+          "yoyPct": 13.05,
+          "qoqPct": 71.48,
+          "mixPct": 39,
+          "mixYoyDeltaPp": -10.4,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026065813/a2026_10x14xpresentation009.jpg",
+          "sourceForm": "QuarterlyResultsPresentation",
+          "filingDate": "2026-10-14",
+          "supportLines": [
+            "Argon Fluoride Immersion"
+          ],
+          "supportLinesZh": null,
+          "targetName": "Net system sales",
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": [
+            "Allocated from official rounded technology shares of net system sales; final category absorbs rounding."
+          ]
+        },
+        {
+          "name": "ArF Dry",
+          "nameZh": null,
+          "memberKey": "arfdry",
+          "valueBn": 0.251,
+          "yoyPct": 126.13,
+          "qoqPct": -4.56,
+          "mixPct": 3,
+          "mixYoyDeltaPp": 0.7,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026065813/a2026_10x14xpresentation009.jpg",
+          "sourceForm": "QuarterlyResultsPresentation",
+          "filingDate": "2026-10-14",
+          "supportLines": [
+            "Argon Fluoride Dry"
+          ],
+          "supportLinesZh": null,
+          "targetName": "Net system sales",
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": [
+            "Allocated from official rounded technology shares of net system sales; final category absorbs rounding."
+          ]
+        },
+        {
+          "name": "KrF",
+          "nameZh": null,
+          "memberKey": "krf",
+          "valueBn": 0.419,
+          "yoyPct": 150.9,
+          "qoqPct": 6.35,
+          "mixPct": 5,
+          "mixYoyDeltaPp": 1.4,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026065813/a2026_10x14xpresentation009.jpg",
+          "sourceForm": "QuarterlyResultsPresentation",
+          "filingDate": "2026-10-14",
+          "supportLines": [
+            "Krypton Fluoride"
+          ],
+          "supportLinesZh": null,
+          "targetName": "Net system sales",
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": [
+            "Allocated from official rounded technology shares of net system sales; final category absorbs rounding."
+          ]
+        },
+        {
+          "name": "I-line",
+          "nameZh": null,
+          "memberKey": "iline",
+          "valueBn": 0.084,
+          "yoyPct": 50.0,
+          "qoqPct": 27.27,
+          "mixPct": 1,
+          "mixYoyDeltaPp": -0.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026065813/a2026_10x14xpresentation009.jpg",
+          "sourceForm": "QuarterlyResultsPresentation",
+          "filingDate": "2026-10-14",
+          "supportLines": [
+            "Mercury I-line"
+          ],
+          "supportLinesZh": null,
+          "targetName": "Net system sales",
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": [
+            "Allocated from official rounded technology shares of net system sales; final category absorbs rounding."
+          ]
+        },
+        {
+          "name": "Metrology & Inspection",
+          "nameZh": null,
+          "memberKey": "metrologyinspection",
+          "valueBn": 0.251,
+          "yoyPct": 13.57,
+          "qoqPct": 28.06,
+          "mixPct": 3,
+          "mixYoyDeltaPp": -0.8,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026065813/a2026_10x14xpresentation009.jpg",
+          "sourceForm": "QuarterlyResultsPresentation",
+          "filingDate": "2026-10-14",
+          "supportLines": [
+            "YieldStar · e-beam"
+          ],
+          "supportLinesZh": null,
+          "targetName": "Net system sales",
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": [
+            "Allocated from official rounded technology shares of net system sales; final category absorbs rounding."
+          ]
         }
       ],
-      "belowOperatingItems": [
-        {
-          "name": "Income tax",
-          "nameZh": "所得税",
-          "valueBn": 0.925
-        }
-      ]
+      "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueDetailTaxonomyChangedFromPriorYear": false
     }
   },
   "statementSource": "official-asml-website",
@@ -11869,10 +11995,10 @@
             "nameZh": null,
             "memberKey": "netsystemsales",
             "valueBn": 8.373,
-            "yoyPct": null,
-            "qoqPct": null,
-            "mixPct": null,
-            "mixYoyDeltaPp": null,
+            "yoyPct": 50.76,
+            "qoqPct": 27.54,
+            "mixPct": 71.8,
+            "mixYoyDeltaPp": -2.1,
             "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026065813/pressreleasefinancialresul.htm",
             "sourceForm": "6-K",
             "filingDate": "2026-10-14",
@@ -11887,10 +12013,10 @@
             "nameZh": null,
             "memberKey": "installedbasemanagement",
             "valueBn": 3.289,
-            "yoyPct": null,
-            "qoqPct": null,
-            "mixPct": null,
-            "mixYoyDeltaPp": null,
+            "yoyPct": 67.64,
+            "qoqPct": 19.09,
+            "mixPct": 28.2,
+            "mixYoyDeltaPp": 2.1,
             "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026065813/pressreleasefinancialresul.htm",
             "sourceForm": "6-K",
             "filingDate": "2026-10-14",
@@ -11901,7 +12027,104 @@
             "validationNotes": null
           }
         ],
-        "detailGroups": [],
+        "detailGroups": [
+          {
+            "name": "EUV",
+            "memberKey": "euv",
+            "valueBn": 4.103,
+            "mixPct": 49,
+            "targetName": "Net system sales",
+            "supportLines": [
+              "Extreme Ultraviolet"
+            ],
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026065813/a2026_10x14xpresentation009.jpg",
+            "sourceForm": "QuarterlyResultsPresentation",
+            "filingDate": "2026-10-14",
+            "validationNotes": [
+              "Allocated from official rounded technology shares of net system sales; final category absorbs rounding."
+            ]
+          },
+          {
+            "name": "ArFi",
+            "memberKey": "arfi",
+            "valueBn": 3.265,
+            "mixPct": 39,
+            "targetName": "Net system sales",
+            "supportLines": [
+              "Argon Fluoride Immersion"
+            ],
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026065813/a2026_10x14xpresentation009.jpg",
+            "sourceForm": "QuarterlyResultsPresentation",
+            "filingDate": "2026-10-14",
+            "validationNotes": [
+              "Allocated from official rounded technology shares of net system sales; final category absorbs rounding."
+            ]
+          },
+          {
+            "name": "ArF Dry",
+            "memberKey": "arfdry",
+            "valueBn": 0.251,
+            "mixPct": 3,
+            "targetName": "Net system sales",
+            "supportLines": [
+              "Argon Fluoride Dry"
+            ],
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026065813/a2026_10x14xpresentation009.jpg",
+            "sourceForm": "QuarterlyResultsPresentation",
+            "filingDate": "2026-10-14",
+            "validationNotes": [
+              "Allocated from official rounded technology shares of net system sales; final category absorbs rounding."
+            ]
+          },
+          {
+            "name": "KrF",
+            "memberKey": "krf",
+            "valueBn": 0.419,
+            "mixPct": 5,
+            "targetName": "Net system sales",
+            "supportLines": [
+              "Krypton Fluoride"
+            ],
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026065813/a2026_10x14xpresentation009.jpg",
+            "sourceForm": "QuarterlyResultsPresentation",
+            "filingDate": "2026-10-14",
+            "validationNotes": [
+              "Allocated from official rounded technology shares of net system sales; final category absorbs rounding."
+            ]
+          },
+          {
+            "name": "I-line",
+            "memberKey": "iline",
+            "valueBn": 0.084,
+            "mixPct": 1,
+            "targetName": "Net system sales",
+            "supportLines": [
+              "Mercury I-line"
+            ],
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026065813/a2026_10x14xpresentation009.jpg",
+            "sourceForm": "QuarterlyResultsPresentation",
+            "filingDate": "2026-10-14",
+            "validationNotes": [
+              "Allocated from official rounded technology shares of net system sales; final category absorbs rounding."
+            ]
+          },
+          {
+            "name": "Metrology & Inspection",
+            "memberKey": "metrologyinspection",
+            "valueBn": 0.251,
+            "mixPct": 3,
+            "targetName": "Net system sales",
+            "supportLines": [
+              "YieldStar · e-beam"
+            ],
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026065813/a2026_10x14xpresentation009.jpg",
+            "sourceForm": "QuarterlyResultsPresentation",
+            "filingDate": "2026-10-14",
+            "validationNotes": [
+              "Allocated from official rounded technology shares of net system sales; final category absorbs rounding."
+            ]
+          }
+        ],
         "style": "asml-technology-bridge",
         "displayCurrency": "EUR",
         "displayScaleFactor": 1,
@@ -12044,7 +12267,7 @@
       "revenueSegmentChecks": 35,
       "revenueSegmentMismatchCount": 8,
       "revenueSegmentSkippedChecks": 0,
-      "detailGroupChecks": 26,
+      "detailGroupChecks": 27,
       "detailGroupMismatchCount": 0,
       "detailGroupSkippedChecks": 0,
       "opexChecks": 0,
@@ -13780,7 +14003,7 @@
         "revenueSegmentChecks": 35,
         "revenueSegmentMismatchCount": 8,
         "revenueSegmentSkippedChecks": 0,
-        "detailGroupChecks": 26,
+        "detailGroupChecks": 27,
         "detailGroupMismatchCount": 0,
         "detailGroupSkippedChecks": 0,
         "opexChecks": 0,

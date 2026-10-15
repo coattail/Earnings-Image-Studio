@@ -1173,23 +1173,102 @@
       "netSystemSalesBn": 8.373,
       "installedBaseManagementBn": 3.289,
       "statementSource": "official-asml-website",
-      "positiveAdjustments": [
+      "officialRevenueDetailGroups": [
         {
-          "name": "Non-operating gain",
-          "nameZh": "营业外收益",
-          "valueBn": 0.578
+          "name": "EUV",
+          "memberKey": "euv",
+          "valueBn": 4.103,
+          "mixPct": 49,
+          "targetName": "Net system sales",
+          "supportLines": [
+            "Extreme Ultraviolet"
+          ],
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026065813/a2026_10x14xpresentation009.jpg",
+          "sourceForm": "QuarterlyResultsPresentation",
+          "filingDate": "2026-10-14",
+          "validationNotes": [
+            "Allocated from official rounded technology shares of net system sales; final category absorbs rounding."
+          ]
         },
         {
-          "name": "Equity method income",
-          "nameZh": "权益法投资收益",
-          "valueBn": 0.135
-        }
-      ],
-      "belowOperatingItems": [
+          "name": "ArFi",
+          "memberKey": "arfi",
+          "valueBn": 3.265,
+          "mixPct": 39,
+          "targetName": "Net system sales",
+          "supportLines": [
+            "Argon Fluoride Immersion"
+          ],
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026065813/a2026_10x14xpresentation009.jpg",
+          "sourceForm": "QuarterlyResultsPresentation",
+          "filingDate": "2026-10-14",
+          "validationNotes": [
+            "Allocated from official rounded technology shares of net system sales; final category absorbs rounding."
+          ]
+        },
         {
-          "name": "Income tax",
-          "nameZh": "所得税",
-          "valueBn": 0.925
+          "name": "ArF Dry",
+          "memberKey": "arfdry",
+          "valueBn": 0.251,
+          "mixPct": 3,
+          "targetName": "Net system sales",
+          "supportLines": [
+            "Argon Fluoride Dry"
+          ],
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026065813/a2026_10x14xpresentation009.jpg",
+          "sourceForm": "QuarterlyResultsPresentation",
+          "filingDate": "2026-10-14",
+          "validationNotes": [
+            "Allocated from official rounded technology shares of net system sales; final category absorbs rounding."
+          ]
+        },
+        {
+          "name": "KrF",
+          "memberKey": "krf",
+          "valueBn": 0.419,
+          "mixPct": 5,
+          "targetName": "Net system sales",
+          "supportLines": [
+            "Krypton Fluoride"
+          ],
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026065813/a2026_10x14xpresentation009.jpg",
+          "sourceForm": "QuarterlyResultsPresentation",
+          "filingDate": "2026-10-14",
+          "validationNotes": [
+            "Allocated from official rounded technology shares of net system sales; final category absorbs rounding."
+          ]
+        },
+        {
+          "name": "I-line",
+          "memberKey": "iline",
+          "valueBn": 0.084,
+          "mixPct": 1,
+          "targetName": "Net system sales",
+          "supportLines": [
+            "Mercury I-line"
+          ],
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026065813/a2026_10x14xpresentation009.jpg",
+          "sourceForm": "QuarterlyResultsPresentation",
+          "filingDate": "2026-10-14",
+          "validationNotes": [
+            "Allocated from official rounded technology shares of net system sales; final category absorbs rounding."
+          ]
+        },
+        {
+          "name": "Metrology & Inspection",
+          "memberKey": "metrologyinspection",
+          "valueBn": 0.251,
+          "mixPct": 3,
+          "targetName": "Net system sales",
+          "supportLines": [
+            "YieldStar · e-beam"
+          ],
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/937966/000162828026065813/a2026_10x14xpresentation009.jpg",
+          "sourceForm": "QuarterlyResultsPresentation",
+          "filingDate": "2026-10-14",
+          "validationNotes": [
+            "Allocated from official rounded technology shares of net system sales; final category absorbs rounding."
+          ]
         }
       ]
     }
