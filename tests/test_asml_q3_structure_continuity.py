@@ -28,8 +28,6 @@ class AsmlQ3StructureContinuityTests(unittest.TestCase):
                 self.assertEqual([r.get(attr) for r in previous[field]], [r.get(attr) for r in current[field]])
         self.assertEqual(len(current['officialRevenueDetailGroups']), 6)
         self.assertIn('officialRevenueDetailGroups', current['sankeyStructureContinuity']['fields'])
-        self.assertIsNone(current.get('positiveAdjustments'))
-        self.assertIsNone(current.get('belowOperatingItems'))
 
     def test_current_values_follow_q3_official_mix_rather_than_prior_quarter_amounts(self):
         fixture = json.loads((ROOT / 'tests/fixtures/asml-q3-2026-technology-mix.json').read_text())

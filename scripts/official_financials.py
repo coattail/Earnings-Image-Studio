@@ -1060,7 +1060,7 @@ def _extract_asml_published_date(html_text: str) -> str | None:
 
 def _extract_asml_pdf_row_values(lines: list[str], *labels: str) -> list[float]:
     normalized_labels = [str(label or "").strip().lower() for label in labels if str(label or "").strip()]
-    number_pattern = re.compile(r"\(?[0-9][0-9,]*\.[0-9]+\)?")
+    number_pattern = re.compile(r"\(?[0-9][0-9,]*\.[0-9]+\)?|(?<!\S)[—–-](?!\S)")
     for index, line in enumerate(lines):
         lowered = line.lower()
         matching_label = next((label for label in normalized_labels if lowered.startswith(label)), None)
@@ -1074,7 +1074,12 @@ def _extract_asml_pdf_row_values(lines: list[str], *labels: str) -> list[float]:
                 break
             matches.extend(number_pattern.findall(candidate))
             cursor += 1
-        return [value for token in matches if (value := _parse_number(token)) is not None]
+        values = []
+        for token in matches:
+            value = 0.0 if token in {"—", "–", "-"} else _parse_number(token)
+            if value is not None:
+                values.append(value)
+        return values
     return []
 
 
@@ -1146,7 +1151,9 @@ def _parse_asml_pdf_financial_page(
     rnd_value = _extract_asml_pdf_row_value(lines, "Research and development costs")
     sgna_value = _extract_asml_pdf_row_value(lines, "Selling, general and administrative costs")
     operating_income_value = _extract_asml_pdf_row_value(lines, "Income from operations")
-    non_operating_value = _extract_asml_pdf_row_value(lines, "Interest and other, net")
+    interest_and_other_value = _extract_asml_pdf_row_value(lines, "Interest and other, net")
+    equity_gain_value = _extract_asml_pdf_row_value(lines, "Gain (loss) on equity investments")
+    non_operating_value = interest_and_other_value
     pretax_value = _extract_asml_pdf_row_value(lines, "Income before income taxes")
     if pretax_value is not None and operating_income_value is not None:
         non_operating_value = pretax_value - operating_income_value
@@ -1179,7 +1186,37 @@ def _parse_asml_pdf_financial_page(
     entry["statementSourceUrl"] = source_url
     entry["statementFilingDate"] = filing_date
     if equity_method_value is not None:
-        entry["equityMethodIncomeBn"] = _money_to_bn(equity_method_value * scale)
+        entry["equityMethodIncomeBn"] = round(equity_method_value / 1000, 4)
+    if equity_gain_value is not None:
+        entry["equityInvestmentGainBn"] = round(equity_gain_value / 1000, 4)
+    if interest_and_other_value is not None:
+        entry["interestAndOtherBn"] = round(interest_and_other_value / 1000, 4)
+    # Preserve named statement components when a valuation gain is disclosed.
+    # Equity-method income is added AFTER income tax; it is not part of this gain.
+    if equity_gain_value and all(value is not None for value in (
+        interest_and_other_value, equity_method_value, tax_value,
+    )):
+        positive, negative = [], []
+        for name, name_zh, value, source_field, tax_basis in (
+            ("Equity investment gain", "股权投资估值收益", equity_gain_value, "Gain (loss) on equity investments", "pretax"),
+            ("Interest and other, net", "利息及其他净收益", interest_and_other_value, "Interest and other, net", "pretax"),
+            ("Equity method income", "权益法投资收益", equity_method_value, "Profit related to equity method investments", "posttax"),
+            ("Tax", "税项", -abs(tax_value), "Income tax expense", "tax"),
+        ):
+            if not value:
+                continue
+            (positive if value > 0 else negative).append({
+                "name": name, "nameZh": name_zh, "valueBn": round(abs(value) / 1000, 4),
+                "sourceField": source_field, "sourceUrl": source_url, "taxBasis": tax_basis,
+                "valueFormat": "positive-plus-precise" if value > 0 else "negative-parentheses-precise",
+                "preserveForFlowConservation": True,
+            })
+        entry["positiveAdjustments"] = [{
+            "name": "Other gains", "nameZh": "其他收益",
+            "valueBn": round(sum(item["valueBn"] for item in positive), 4),
+            "components": positive, "sourceUrl": source_url,
+        }] if positive else []
+        entry["belowOperatingItems"] = negative
     if net_system_sales_value is not None:
         entry["netSystemSalesBn"] = round(net_system_sales_value / 1000, 3)
     if installed_base_value is not None:

@@ -27,7 +27,24 @@ class LatestAsmlUpdateTests(unittest.TestCase):
         self.assertEqual(q['operatingIncomeBn'], 5.173)
         self.assertEqual(q['netIncomeBn'], 4.96)
         self.assertEqual(q['nonOperatingBn'], .578)
-        self.assertEqual(q['equityMethodIncomeBn'], .135)
+        self.assertEqual(q['equityMethodIncomeBn'], .1347)
+        self.assertEqual(q['equityInvestmentGainBn'], .5097)
+        self.assertEqual(q['interestAndOtherBn'], .0682)
+
+    def test_zero_placeholders_preserve_current_quarter_equity_gain_column(self):
+        text = TEXT.replace('Gain (loss) on equity investments — 509.7 — 509.7', 'Gain (loss) on equity investments — 509.7 — 900.0')
+        _, q = official._parse_asml_pdf_financial_page(text, '2026-10-14', SOURCE, 'EUR', '2026Q3')
+        self.assertEqual(q['equityInvestmentGainBn'], .5097)
+
+    def test_other_gains_combine_three_source_components_once(self):
+        q = json.loads((ROOT / 'data/cache/asml.json').read_text())['financials']['2026Q3']
+        gains = q['positiveAdjustments']
+        self.assertEqual(len(gains), 1)
+        self.assertEqual(gains[0]['nameZh'], '其他收益')
+        self.assertEqual(gains[0]['valueBn'], .7126)
+        self.assertEqual([r['valueBn'] for r in gains[0]['components']], [.5097, .0682, .1347])
+        self.assertAlmostEqual(sum(r['valueBn'] for r in gains[0]['components']), gains[0]['valueBn'])
+        self.assertLess(abs(q['operatingIncomeBn'] + gains[0]['valueBn'] - q['belowOperatingItems'][0]['valueBn'] - q['netIncomeBn']), .001)
 
     def test_full_sec_statement_accepts_modern_tax_label(self):
         html = '<table>' + ''.join('<tr><td>' + line + '</td></tr>' for line in TEXT.splitlines()) + '</table>'
@@ -91,6 +108,9 @@ class LatestAsmlUpdateTests(unittest.TestCase):
         for node in ('revenue', 'gross', 'operating', 'net'):
             self.assertIn('data-edit-node-visible-id="' + node + '"', svg)
         self.assertNotIn('Revenue structure only', svg)
+        self.assertIn('Other gains', svg)
+        self.assertIn('data-edit-node-visible-id="positive-0"', svg)
+        self.assertNotIn('data-edit-node-visible-id="positive-1"', svg)
 
     def test_published_payloads_have_complete_reconciled_profit_bridge(self):
         dataset = json.loads((ROOT / 'data/earnings-dataset.json').read_text())

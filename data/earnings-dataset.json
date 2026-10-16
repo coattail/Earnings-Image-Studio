@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-16T01:28:11Z",
+  "generatedAt": "2026-10-16T14:46:49Z",
   "universeSource": {
     "label": "CompaniesMarketCap point-in-time ranking",
     "url": "https://companiesmarketcap.com/",
@@ -305197,11 +305197,65 @@
             ],
             "rule": "same-normalized-category-set"
           },
-          "equityMethodIncomeBn": 0.135,
+          "equityMethodIncomeBn": 0.1347,
           "netSystemSalesBn": 8.373,
           "installedBaseManagementBn": 3.289,
-          "positiveAdjustments": null,
-          "belowOperatingItems": null,
+          "positiveAdjustments": [
+            {
+              "name": "Other gains",
+              "nameZh": "其他收益",
+              "valueBn": 0.7126,
+              "components": [
+                {
+                  "name": "Mistral AI valuation gain",
+                  "nameZh": "Mistral AI 估值收益",
+                  "valueBn": 0.5097,
+                  "sourceField": "Gain (loss) on equity investments",
+                  "sourceUrl": "https://investor.asml.com/static-files/d310262b-d037-485d-83b5-92c93cc462f0",
+                  "taxBasis": "pretax",
+                  "valueFormat": "positive-plus-precise",
+                  "preserveForFlowConservation": true,
+                  "validationNotes": [
+                    "Reported equity investment gain; CFO attributes around EUR 0.5 billion to Mistral AI."
+                  ],
+                  "contextSourceUrl": "https://investor.asml.com/static-files/40c56a6b-1460-4f69-9340-6a869560d24b"
+                },
+                {
+                  "name": "Interest and other, net",
+                  "nameZh": "利息及其他净收益",
+                  "valueBn": 0.0682,
+                  "sourceField": "Interest and other, net",
+                  "sourceUrl": "https://investor.asml.com/static-files/d310262b-d037-485d-83b5-92c93cc462f0",
+                  "taxBasis": "pretax",
+                  "valueFormat": "positive-plus-precise",
+                  "preserveForFlowConservation": true
+                },
+                {
+                  "name": "Equity method income",
+                  "nameZh": "权益法投资收益",
+                  "valueBn": 0.1347,
+                  "sourceField": "Profit related to equity method investments",
+                  "sourceUrl": "https://investor.asml.com/static-files/d310262b-d037-485d-83b5-92c93cc462f0",
+                  "taxBasis": "posttax",
+                  "valueFormat": "positive-plus-precise",
+                  "preserveForFlowConservation": true
+                }
+              ],
+              "sourceUrl": "https://investor.asml.com/static-files/d310262b-d037-485d-83b5-92c93cc462f0"
+            }
+          ],
+          "belowOperatingItems": [
+            {
+              "name": "Tax",
+              "nameZh": "税项",
+              "valueBn": 0.925,
+              "sourceField": "Income tax expense",
+              "sourceUrl": "https://investor.asml.com/static-files/d310262b-d037-485d-83b5-92c93cc462f0",
+              "taxBasis": "tax",
+              "valueFormat": "negative-parentheses-precise",
+              "preserveForFlowConservation": true
+            }
+          ],
           "officialRevenueDetailGroups": [
             {
               "name": "EUV",
@@ -305343,7 +305397,10 @@
             }
           ],
           "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueDetailTaxonomyChangedFromPriorYear": false
+          "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
+          "equityInvestmentGainBn": 0.5097,
+          "interestAndOtherBn": 0.0682,
+          "sankeyLayout": null
         }
       },
       "statementSource": "official-asml-website",
