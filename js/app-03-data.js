@@ -292,9 +292,42 @@ function initializeDefaultLandingSelection() {
   state.chartViewMode = "sankey";
 }
 
+function adjacentQuarterKeys() {
+  const quarterKeys = renderableQuarterKeys(getCompany(state.selectedCompanyId))
+    .slice()
+    .sort((left, right) => quarterSortValue(left) - quarterSortValue(right));
+  const index = quarterKeys.indexOf(state.selectedQuarter);
+  return {
+    previous: index > 0 ? quarterKeys[index - 1] : null,
+    next: index >= 0 ? quarterKeys[index + 1] || null : null,
+  };
+}
+
+function syncQuarterNavigation() {
+  const { previous, next } = adjacentQuarterKeys();
+  if (refs.previousQuarterBtn) refs.previousQuarterBtn.disabled = !previous;
+  if (refs.nextQuarterBtn) refs.nextQuarterBtn.disabled = !next;
+}
+
+function selectQuarter(quarterKey) {
+  if (!refs.quarterSelect || !renderableQuarterKeys(getCompany(state.selectedCompanyId)).includes(quarterKey)) return;
+  state.selectedQuarter = quarterKey;
+  refs.quarterSelect.value = quarterKey;
+  syncQuarterNavigation();
+  requestRenderCurrent();
+}
+
+function selectAdjacentQuarter(direction) {
+  const quarterKey = adjacentQuarterKeys()[direction];
+  if (quarterKey) selectQuarter(quarterKey);
+}
+
 function syncQuarterOptions({ preferReplica, preserveSelectedQuarter = true } = { preferReplica: false, preserveSelectedQuarter: true }) {
   const company = getCompany(state.selectedCompanyId);
-  if (!company || !refs.quarterSelect) return;
+  if (!company || !refs.quarterSelect) {
+    syncQuarterNavigation();
+    return;
+  }
   const nextQuarter = preferredQuarter(company, preferReplica, preserveSelectedQuarter);
   state.selectedQuarter = nextQuarter;
   refs.quarterSelect.innerHTML = renderableQuarterKeys(company)
@@ -302,6 +335,7 @@ function syncQuarterOptions({ preferReplica, preserveSelectedQuarter = true } = 
     .sort((left, right) => quarterSortValue(right) - quarterSortValue(left))
     .map((quarterKey) => `<option value="${quarterKey}" ${quarterKey === nextQuarter ? "selected" : ""}>${escapeHtml(quarterOptionLabel(company, quarterKey))}</option>`)
     .join("");
+  syncQuarterNavigation();
 }
 
 function summarizeCoverage(company, snapshot) {

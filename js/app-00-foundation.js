@@ -727,6 +727,8 @@ function queryRefs() {
   refs.companySearch = document.querySelector("#companySearch");
   refs.companyList = document.querySelector("#companyList");
   refs.quarterSelect = document.querySelector("#quarterSelect");
+  refs.previousQuarterBtn = document.querySelector("#previousQuarterBtn");
+  refs.nextQuarterBtn = document.querySelector("#nextQuarterBtn");
   refs.quarterHint = document.querySelector("#quarterHint");
   refs.renderBtn = document.querySelector("#renderBtn");
   refs.downloadSvgBtn = document.querySelector("#downloadSvgBtn");

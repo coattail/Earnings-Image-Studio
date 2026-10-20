@@ -1580,11 +1580,12 @@ async function renderCurrent() {
   if (!company) return;
   const quarterKey = refs.quarterSelect?.value || state.selectedQuarter;
   state.selectedQuarter = quarterKey;
+  syncQuarterNavigation();
   try {
     if (companyNeedsHistoricalData(company, quarterKey, currentChartViewMode())) {
       setStatus(`正在加载 ${company.nameEn} 历史数据...`);
       company = await ensureCompanyHistoricalDataLoaded(company.id, { preferReplica: false });
-      if (!company || state.selectedCompanyId !== company.id) return;
+      if (!company || state.selectedCompanyId !== company.id || state.selectedQuarter !== quarterKey) return;
     }
     const snapshot = buildSnapshot(company, quarterKey);
     if (!snapshot) {
@@ -2017,7 +2018,9 @@ function bindEvents() {
     if (!companyId || companyId === state.selectedCompanyId) return;
     selectCompany(companyId, { preferReplica: false, rerenderList: false });
   });
-  refs.quarterSelect?.addEventListener("change", requestRenderCurrent);
+  refs.quarterSelect?.addEventListener("change", () => selectQuarter(refs.quarterSelect.value));
+  refs.previousQuarterBtn?.addEventListener("click", () => selectAdjacentQuarter("previous"));
+  refs.nextQuarterBtn?.addEventListener("click", () => selectAdjacentQuarter("next"));
   refs.renderBtn?.addEventListener("click", renderCurrent);
   refs.downloadSvgBtn?.addEventListener("click", exportSvg);
   refs.downloadPngBtn?.addEventListener("click", exportPng);

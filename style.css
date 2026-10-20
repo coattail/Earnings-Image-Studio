@@ -310,6 +310,34 @@ select:focus {
   flex: 1 1 120px;
 }
 
+.quarter-navigation {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.quarter-navigation .analysis-btn {
+  min-width: 0;
+  min-height: 44px;
+  padding: 0 8px;
+  font-size: 13px;
+}
+
+.quarter-navigation .analysis-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.quarter-navigation .analysis-btn:disabled {
+  color: var(--muted-soft);
+  background: var(--panel-soft);
+  border-color: var(--line);
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+}
+
 .primary-btn {
   width: 100%;
   border-color: rgba(29, 111, 216, 0.85);

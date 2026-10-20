@@ -22,14 +22,14 @@
         href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700;800&display=swap"
       />
     </noscript>
-    <link rel="stylesheet" href="style.css?v=20261020-mobile" />
+    <link rel="stylesheet" href="style.css?v=20261020-quarter-navigation" />
     <script defer src="js/app-00-http.js?v=20260503-berkshire-q1-v162"></script>
     <script defer src="js/app-00-logo-raster.js?v=20260503-berkshire-q1-v162"></script>
-    <script defer src="js/app-00-foundation.js?v=20260903-nvidia-prior-qoq-v200"></script>
+    <script defer src="js/app-00-foundation.js?v=20261020-quarter-navigation"></script>
     <script defer src="js/app-01-layout.js?v=20260827-nonoperating-gentle-angle-v199"></script>
     <script defer src="js/app-02-sankey.js?v=20260827-nonoperating-gentle-angle-v199"></script>
-    <script defer src="js/app-03-data.js?v=20260827-nonoperating-gentle-angle-v199"></script>
-    <script defer src="js/app-04-bootstrap.js?v=20260827-nonoperating-gentle-angle-v199"></script>
+    <script defer src="js/app-03-data.js?v=20261020-quarter-navigation"></script>
+    <script defer src="js/app-04-bootstrap.js?v=20261020-quarter-navigation"></script>
     <script defer src="./mobile-ui.js?v=20261020-mobile"></script>
   </head>
   <body>
@@ -64,6 +64,10 @@
             <label>
               <select id="quarterSelect" aria-label="季度选择"></select>
             </label>
+            <div class="quarter-navigation" role="group" aria-label="季度切换">
+              <button id="previousQuarterBtn" class="analysis-btn" type="button" disabled><span aria-hidden="true">←</span> 前一季度</button>
+              <button id="nextQuarterBtn" class="analysis-btn" type="button" disabled>后一季度 <span aria-hidden="true">→</span></button>
+            </div>
             <p id="quarterHint" class="analysis-hint">-</p>
           </div>
 
