@@ -150,3 +150,61 @@ test('fan balancing improves the company universe while conserving every node an
   assert.ok(improved >= 8, `independent companies improved: ${improved}`);
   assert.ok(afterError < beforeError * 0.95, `aggregate fan center error: ${beforeError} -> ${afterError}`);
 });
+
+test('joint ascent constraints find a feasible pair instead of rejecting a boundary move', () => {
+  const options = { ...base, operatingMin: 550, operatingMax: 650, netMin: 350, netMax: 380,
+    minOperatingRise: 45, maxOperatingRise: 150, minNetRise: 60, maxNetRise: 160,
+    maxSlopeChange: 0.14, netBalanceTarget: 220, balanceWeight: 10 };
+  const result = solve(options);
+  const first = (options.grossTop - result.operatingTop) / options.operatingRunway;
+  const second = (result.operatingTop - result.netTop - options.positiveMergeHeight) / options.netRunway;
+  assert.ok(result.operatingTop >= 550 && result.operatingTop <= 650);
+  assert.ok(result.netTop >= 350 && result.netTop <= 380);
+  assert.ok(second >= 60 / 340 - 1e-8 && second <= 160 / 340 + 1e-8);
+  assert.ok(Math.abs(first - second) <= 0.14 + 1e-8);
+  const scaled = Object.fromEntries(Object.entries(options).map(([key, value]) =>
+    [key, ['balanceWeight', 'maxSlopeChange'].includes(key) ? value : value * 3]));
+  const large = solve(scaled);
+  assert.ok(Math.abs(result.operatingTop * 3 - large.operatingTop) < 1e-6);
+  assert.ok(Math.abs(result.netTop * 3 - large.netTop) < 1e-6);
+});
+
+test('learned offsets cannot reverse the visible profit spine across companies and older quarters', () => {
+  const ctx = runtime();
+  ctx.payload = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/earnings-dataset.json'), 'utf8'));
+  ctx.supplemental = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/supplemental-components.json'), 'utf8'));
+  ctx.learned = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/learned-sankey-layouts.json'), 'utf8'));
+  const samples = vm.runInContext(`(() => {
+    applyLoadedCompaniesToState(payload.companies, 'full'); state.logoCatalog = {};
+    state.supplementalComponents = supplemental; state.learnedSankeyLayouts = learned;
+    return [['meta','2026Q1'], ['meta','2026Q2'], ['nvidia','2026Q3'], ['tsmc','2026Q3'],
+      ['spacex','2026Q3'], ['tencent','2026Q2'], ['apple','2026Q2'],
+      ['berkshire','2021Q1'], ['alibaba','2020Q2'], ['alibaba','2020Q4']].map(([id,quarter]) => {
+      const company = getCompany(id); state.selectedCompanyId = id; state.selectedQuarter = quarter;
+      const snapshot = buildSnapshot(company, quarter), overrides = currentResolvedEditorOverrides();
+      snapshot.learnedEditorNodeOverrides = overrides; snapshot.editorNodeOverrides = overrides;
+      snapshot.interactiveEditorNodeOverrides = {};
+      const saved = JSON.stringify(snapshot);
+      const render = value => EarningsVizRuntime.render.renderIncomeStatementSvg(value, company);
+      const reference = JSON.parse(saved);
+      reference.layout = { ...reference.layout, disableAutomaticProfitSpine: true };
+      const svg = render(snapshot), before = render(reference);
+      return { id, quarter, svg, before, untouched: saved === JSON.stringify(snapshot) };
+    });
+  })()`, ctx);
+  for (const { id, quarter, svg, before, untouched } of samples) {
+    const label = `${id}/${quarter}`, f = nodeFrames(svg), original = nodeFrames(before);
+    const gainHeight = Object.entries(f).filter(([key]) => key.startsWith('positive-')).reduce((sum, [, n]) => sum + n.height, 0);
+    const first = (f.gross.y - f.operating.y) / (f.operating.x - f.gross.x - f.gross.width);
+    const second = (f.operating.y - f.net.y - gainHeight) / (f.net.x - f.operating.x - f.operating.width);
+    assert.ok(first > 0.08 && first < 0.35, `${label}: first ribbon rises gently (${first})`);
+    assert.ok(second > 0.1 && second < 0.381, `${label}: connected net port rises (${second})`);
+    assert.ok(Math.abs(first - second) < 0.141, `${label}: gradual change in slope`);
+    assert.ok(f['operating-expenses'].y > f.operating.y + f.operating.height, `${label}: expenses remain separate`);
+    for (const [node, frame] of Object.entries(original)) {
+      assert.equal(f[node].height, frame.height, `${label}/${node}: conserve monetary thickness`);
+      assert.equal(f[node].width, frame.width, `${label}/${node}: conserve node width`);
+    }
+    assert.ok(untouched, `${label}: input and saved learned offsets stay intact`);
+  }
+});

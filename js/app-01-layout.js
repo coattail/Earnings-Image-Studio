@@ -35,18 +35,54 @@ function resolveProfitSpinePositions(options) {
   }
   const opBounds = options.pinOperating ? [operatingTop, operatingTop] : [operatingMin, operatingMax];
   const netBounds = options.pinNet ? [netTop, netTop] : [netMin, netMax];
-  let op = clamp(operatingTop, ...opBounds), net = clamp(netTop, ...netBounds);
-  for (let iteration = 0; iteration < 32; iteration += 1) {
-    op = clamp((at - ab * net) / aa, ...opBounds);
-    net = clamp((bt - ab * op) / bb, ...netBounds);
+  // Minimize the same quadratic over the whole feasible polygon. Clamping
+  // one coordinate after the other can make a valid joint move look impossible,
+  // especially after learned offsets move the gross stage upward.
+  const edges = [
+    { a: -1, b: 0, c: -opBounds[0] }, { a: 1, b: 0, c: opBounds[1] },
+    { a: 0, b: -1, c: -netBounds[0] }, { a: 0, b: 1, c: netBounds[1] },
+  ];
+  if (Number.isFinite(options.minOperatingRise) && !options.pinOperating)
+    edges.push({ a: 1, b: 0, c: grossTop - options.minOperatingRise });
+  if (Number.isFinite(options.maxOperatingRise) && !options.pinOperating)
+    edges.push({ a: -1, b: 0, c: options.maxOperatingRise - grossTop });
+  if (Number.isFinite(options.maxNetRise) && !options.pinNet)
+    edges.push({ a: 1, b: -1, c: gainPort + options.maxNetRise });
+  if (Number.isFinite(options.minNetRise) && !options.pinNet)
+    edges.push({ a: -1, b: 1, c: -gainPort - options.minNetRise });
+  if (Number.isFinite(options.maxSlopeChange) && !options.pinOperating && !options.pinNet) {
+    const a = 1 / firstRun + 1 / secondRun, b = -1 / secondRun;
+    const center = grossTop / firstRun + gainPort / secondRun;
+    edges.push({ a, b, c: center + options.maxSlopeChange },
+      { a: -a, b: -b, c: -center + options.maxSlopeChange });
   }
-  if (Number.isFinite(options.maxNetRise) && !options.pinNet) {
-    const linkedMin = Math.max(netBounds[0], op - gainPort - options.maxNetRise);
-    const linkedMax = Math.min(netBounds[1], op - gainPort - unit * 18);
-    if (linkedMin > linkedMax) return { operatingTop, netTop };
-    net = clamp(net, linkedMin, linkedMax);
+  const determinant = aa * bb - ab * ab;
+  const unconstrained = [(at * bb - bt * ab) / determinant, (bt * aa - at * ab) / determinant];
+  const candidates = [unconstrained];
+  for (let i = 0; i < edges.length; i += 1) {
+    const edge = edges[i];
+    const qa = (bb * edge.a - ab * edge.b) / determinant;
+    const qb = (aa * edge.b - ab * edge.a) / determinant;
+    const shift = (edge.a * unconstrained[0] + edge.b * unconstrained[1] - edge.c) /
+      (edge.a * qa + edge.b * qb);
+    candidates.push([unconstrained[0] - shift * qa, unconstrained[1] - shift * qb]);
+    for (const other of edges.slice(i + 1)) {
+      const det = edge.a * other.b - edge.b * other.a;
+      if (Math.abs(det) < 1e-12) continue;
+      candidates.push([(edge.c * other.b - edge.b * other.c) / det,
+        (edge.a * other.c - edge.c * other.a) / det]);
+    }
   }
-  return { operatingTop: op, netTop: net };
+  let best = null, bestLoss = Infinity;
+  for (const [op, net] of candidates) {
+    if (![op, net].every(Number.isFinite) ||
+        edges.some(({ a, b, c }) => a * op + b * net > c + unit * 1e-7)) continue;
+    const loss = constraints.reduce((sum, { a, b, target, weight }) =>
+      sum + weight * (a * op + b * net - target) ** 2, 0);
+    if (loss < bestLoss) { best = { operatingTop: op, netTop: net }; bestLoss = loss; }
+  }
+  // Impossible bounds or intentional pins keep their existing geometry.
+  return best || { operatingTop, netTop };
 }
 
 function sanitizeOfficialStructureRows(entry, rows = []) {

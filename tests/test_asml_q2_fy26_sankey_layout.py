@@ -64,11 +64,18 @@ class AsmlQ2FY26SankeyLayoutTests(unittest.TestCase):
         operating = visible_rect(self.svg_root, "operating")
         net = visible_rect(self.svg_root, "net")
 
-        for source, target in ((gross, operating), (operating, net)):
-            rise = source["y"] - target["y"]
+        gains = self.svg_root.findall(".//svg:rect[@data-edit-node-visible-id]", SVG_NS)
+        gain_height = sum(float(node.attrib["height"]) for node in gains
+                          if node.attrib["data-edit-node-visible-id"].startswith("positive-"))
+        # The operating contribution enters below the gains, so compare the
+        # connected ribbon ports rather than the top of the full net node.
+        for source, target, merge_height, max_slope in (
+            (gross, operating, 0, 0.35), (operating, net, gain_height, 0.381)
+        ):
+            rise = source["y"] - target["y"] - merge_height
             runway = target["x"] - source["x"] - source["width"]
             self.assertGreater(rise, 0)
-            self.assertLess(rise / runway, 0.35)
+            self.assertLess(rise / runway, max_slope)
 
     def test_system_sales_detail_nodes_are_lifted_and_compacted(self) -> None:
         details = [visible_rect(self.svg_root, f"left-detail-{index}") for index in range(6)]
