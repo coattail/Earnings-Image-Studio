@@ -9036,6 +9036,76 @@ function renderPixelReplicaSvg(snapshot) {
       });
     }
   }
+  // Balance the two visible fans only after their packing is complete. Work in
+  // automatic and learned coordinates; keep manual offsets separate from the solution.
+  // A small outcome has less visual weight and must not force a steep profit
+  // climb just to imitate the outline of a much larger revenue fan.
+  let balancedPositiveTop = null;
+  if (hasOrdinaryProfitSpine && snapshot.layout?.disableProfitFanBalance !== true) {
+    const leftFrames = [
+      ...sourceSlices.map((slice, index) => ({ top: slice.top + balancedLayoutOffsetForNode(`source-${index}`).dy,
+        bottom: slice.bottom + balancedLayoutOffsetForNode(`source-${index}`).dy })),
+      ...leftDetailRenderSlices.map((slice, index) => ({ top: slice.top + balancedLayoutOffsetForNode(`left-detail-${index}`).dy,
+        bottom: slice.bottom + balancedLayoutOffsetForNode(`left-detail-${index}`).dy })),
+    ];
+    const terminalBottoms = [
+      ...deductionBoxes.map((box, index) => box.bottom + balancedLayoutOffsetForNode(`deduction-${index}`).dy),
+      ...opexBoxes.map((box, index) => box.bottom + balancedLayoutOffsetForNode(`opex-${index}`).dy),
+      costFrame.bottom - manualNodeOffsetFor("cost").dy + learnedEditorOffsetForNode("cost").dy,
+    ];
+    if (leftFrames.length) {
+      const leftTop = Math.min(...leftFrames.map((frame) => frame.top));
+      const leftBottom = Math.max(...leftFrames.map((frame) => frame.bottom));
+      const terminalBottom = Math.max(...terminalBottoms);
+      const firstRun = Math.max(operatingFrame.left - grossFrame.right, 1);
+      const lastRun = Math.max(netFrame.left - operatingFrame.right, 1);
+      const netShare = clamp(netHeight / Math.max(revenueHeight, 1), 0, 1);
+      const reachLimit = lastRun * 0.9 * netShare ** 2;
+      const currentGrossTop = grossFrame.top - manualNodeOffsetFor("gross").dy + learnedEditorOffsetForNode("gross").dy;
+      const currentOpTop = operatingFrame.top - manualNodeOffsetFor("operating").dy + learnedEditorOffsetForNode("operating").dy;
+      const currentNetTop = netFrame.top - manualNodeOffsetFor("net").dy + learnedEditorOffsetForNode("net").dy;
+      const stackGap = positiveAdjustments.length > 1 ? positiveGap * (positiveAdjustments.length - 1) : 0;
+      const gainStack = totalPositiveHeight + stackGap;
+      const envelopeTop = leftTop + clamp(leftBottom - terminalBottom, -(leftBottom - leftTop) * 0.15, (leftBottom - leftTop) * 0.15);
+      const headerFloor = Math.max(titleObstacle.bottom, periodEndObstacle?.bottom || 0) + scaleY(24);
+      const upperTop = Math.max(envelopeTop, headerFloor);
+      const netTarget = upperTop + (gainStack > 0 ? gainStack + scaleY(30) : 0);
+      if (Math.abs(netTarget - currentNetTop) > lastRun * 0.1) {
+        const lowerOpening = operatingExpenseFrame.top - manualNodeOffsetFor("operating-expenses").dy +
+          learnedEditorOffsetForNode("operating-expenses").dy - currentGrossTop - opHeight;
+        const splitTolerance = Math.min(firstRun * 0.06, scaleY(24));
+        const firstDeductionTop = deductionBoxes.length
+          ? Math.min(...deductionBoxes.map((box, index) => box.top + balancedLayoutOffsetForNode(`deduction-${index}`).dy))
+          : Infinity;
+        const spine = resolveProfitSpinePositions({
+          grossTop: currentGrossTop, operatingTop: currentOpTop, netTop: currentNetTop,
+          operatingRunway: firstRun, netRunway: lastRun, positiveMergeHeight: positiveAbove ? totalPositiveMergeHeight : 0,
+          unit: verticalScale, netBalanceTarget: netTarget, balanceWeight: 10 * netShare ** 2, maxNetRise: lastRun * 0.38,
+          operatingMin: Math.max(currentGrossTop - firstRun * 0.35, currentOpTop - reachLimit * 0.65,
+            currentGrossTop - Math.max(lowerOpening, 0) - splitTolerance, headerFloor + scaleY(100)),
+          operatingMax: Math.min(currentGrossTop - Math.max(lowerOpening - splitTolerance, scaleY(18)), currentOpTop + reachLimit * 0.65),
+          netMin: Math.max(currentNetTop - reachLimit, currentGrossTop - firstRun * 0.35 - lastRun * 0.4 - totalPositiveMergeHeight, headerFloor),
+          netMax: Math.min(currentNetTop + reachLimit, chartBottomLimit - netHeight, firstDeductionTop - netHeight - scaleY(72)),
+          pinOperating: hasExplicitOpNodeTop, pinNet: hasExplicitNetNodeTop,
+        });
+        const improvesBalance = Math.abs(spine.netTop - netTarget) + 0.5 < Math.abs(currentNetTop - netTarget) &&
+          Math.abs(spine.netTop - currentNetTop) > 0.5;
+        if (improvesBalance) {
+          for (const [id, next, current] of [["operating", spine.operatingTop, currentOpTop], ["net", spine.netTop, currentNetTop]]) {
+            const offset = autoLayoutOffsetForNode(id);
+            setAutoLayoutNodeOffset(id, { dy: offset.dy + next - current });
+          }
+          refreshEditableNodeFrames();
+          // Keep a short downward lead into the gain merge, rather than letting
+          // its source sag next to the net node. The corridor search still owns
+          // title, metric and ribbon collision avoidance.
+          if (positiveAdjustments.length > 1 || totalPositiveHeight <= lastRun * 0.25) {
+            balancedPositiveTop = Math.max(upperTop, netFrame.top - manualNodeOffsetFor("net").dy + learnedEditorOffsetForNode("net").dy - gainStack - lastRun * 0.22);
+          }
+        }
+      }
+    }
+  }
   const revenueGrossBand = shiftedInterval(revenueGrossSourceBand.top, revenueGrossSourceBand.bottom, "revenue");
   const revenueCostBand = revenueCostSourceBand ? shiftedInterval(revenueCostSourceBand.top, revenueCostSourceBand.bottom, "revenue") : null;
   const grossProfitBand = shiftedInterval(grossProfitSourceBand.top, grossProfitSourceBand.bottom, "gross");
@@ -10203,7 +10273,8 @@ function renderPixelReplicaSvg(snapshot) {
           desiredLiftY * (positiveAbove ? 1 - positiveNetAffinityStrength * 0.44 : 1)
         );
         const desiredCenter = positiveAbove
-          ? positiveTargetStackCenter - netAffinityAdjustedLiftY - positiveSmallAdjustmentLabelLiftY
+          ? balancedPositiveTop !== null ? balancedPositiveTop + totalPositiveStackHeight / 2
+            : positiveTargetStackCenter - netAffinityAdjustedLiftY - positiveSmallAdjustmentLabelLiftY
           : positiveTargetStackCenter + netAffinityAdjustedLiftY;
         const positiveProminentMaxMergeDeltaY = positiveProminentAbove
           ? Math.max(
@@ -10217,13 +10288,16 @@ function renderPixelReplicaSvg(snapshot) {
           positiveProminentAbove
             ? positiveTargetStackCenter - positiveProminentMaxMergeDeltaY - totalPositiveStackHeight / 2
             : -Infinity,
-          usesExtremePositiveTopLane ? extremePositiveTopLaneMinTop : -Infinity
+          usesExtremePositiveTopLane ? extremePositiveTopLaneMinTop : -Infinity,
+          balancedPositiveTop !== null && positiveAbove
+            ? netFrame.top - totalPositiveStackHeight - (netFrame.left - operatingFrame.right) * 0.24 : -Infinity
         );
         const preferredTopMin = Math.max(preferredCorridorTop, prominentTopFloor);
         // A small group of gains shares one upper lane. Keep its last source
         // above the net node, so later items do not sag into the main spine.
-        const gainGroupTopMax = hasOrdinaryProfitSpine && positiveAbove && positiveAdjustments.length > 1
-          ? netFrame.top - scaleY(8) - totalPositiveStackHeight
+        const gainGroupTopMax = hasOrdinaryProfitSpine && positiveAbove &&
+            (positiveAdjustments.length > 1 || balancedPositiveTop !== null)
+          ? netFrame.top - scaleY(balancedPositiveTop !== null ? 30 : 8) - totalPositiveStackHeight
           : Infinity;
         const laneTopMax = Math.min(
           usesExtremePositiveTopLane ? extremePositiveTopLaneMaxBottom - totalPositiveStackHeight : Infinity,

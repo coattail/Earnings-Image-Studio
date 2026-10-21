@@ -89,3 +89,64 @@ test('real multi-branch charts keep the profit ports shallow across companies', 
     }
   }
 });
+
+test('fan envelope preference is bounded and scales with its geometry', () => {
+  const options = { ...base, netBalanceTarget: 400, balanceWeight: 3 };
+  const a = solve(options), unconstrained = solve(base);
+  assert.ok(Math.abs(a.netTop - options.netBalanceTarget) < Math.abs(unconstrained.netTop - options.netBalanceTarget));
+  const scaled = Object.fromEntries(Object.entries(options).map(([key, value]) => [key, key === 'balanceWeight' ? value : value * 2]));
+  const b = solve(scaled);
+  assert.ok(Math.abs(a.operatingTop * 2 - b.operatingTop) < 1e-6);
+  assert.ok(Math.abs(a.netTop * 2 - b.netTop) < 1e-6);
+  assert.equal(solve({ ...options, pinNet: true }).netTop, options.netTop);
+});
+
+function fanCenterError(frames) {
+  const left = Object.entries(frames).filter(([id]) => /^(source|left-detail)-/.test(id)).map(([, frame]) => frame);
+  const right = Object.entries(frames).filter(([id]) => /^(positive|deduction|opex)-/.test(id) || ['net', 'cost'].includes(id)).map(([, frame]) => frame);
+  const center = nodes => (Math.min(...nodes.map(n => n.y)) + Math.max(...nodes.map(n => n.y + n.height))) / 2;
+  return Math.abs(center(left) - center(right));
+}
+
+test('fan balancing improves the company universe while conserving every node and manual draft', () => {
+  const ctx = runtime();
+  ctx.payload = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/earnings-dataset.json'), 'utf8'));
+  ctx.supplemental = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/supplemental-components.json'), 'utf8'));
+  ctx.learned = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/learned-sankey-layouts.json'), 'utf8'));
+  const pairs = vm.runInContext(`(() => {
+    applyLoadedCompaniesToState(payload.companies, 'full'); state.logoCatalog = {};
+    state.supplementalComponents = supplemental; state.learnedSankeyLayouts = learned;
+    return companies().map(company => {
+      state.selectedCompanyId = company.id; state.selectedQuarter = Object.keys(company.financials).sort().at(-1);
+      const snapshot = buildSnapshot(company, state.selectedQuarter);
+      const overrides = currentResolvedEditorOverrides();
+      snapshot.learnedEditorNodeOverrides = overrides; snapshot.editorNodeOverrides = overrides;
+      snapshot.interactiveEditorNodeOverrides = {};
+      const render = value => EarningsVizRuntime.render.renderIncomeStatementSvg(value, company);
+      const before = JSON.parse(JSON.stringify(snapshot));
+      before.layout = { ...before.layout, disableProfitFanBalance: true };
+      const draft = JSON.parse(JSON.stringify(snapshot));
+      draft.interactiveEditorNodeOverrides = { 'operating': { dx: 0, dy: 36 } };
+      draft.editorNodeOverrides = { ...overrides, ...draft.interactiveEditorNodeOverrides };
+      return { id: company.id, before: render(before), after: render(snapshot), draft: render(draft),
+        learnedOpY: overrides.operating?.dy || 0, requestedDraft: draft.interactiveEditorNodeOverrides };
+    });
+  })()`, ctx);
+  let beforeError = 0, afterError = 0, improved = 0;
+  for (const pair of pairs) {
+    const before = nodeFrames(pair.before), after = nodeFrames(pair.after), draft = nodeFrames(pair.draft);
+    for (const [id, frame] of Object.entries(before)) {
+      assert.equal(after[id]?.height, frame.height, `${pair.id}/${id}: monetary thickness`);
+      assert.equal(after[id]?.width, frame.width, `${pair.id}/${id}: node width`);
+      if (/^(source|left-detail)-/.test(id)) assert.deepEqual(after[id], frame, `${pair.id}: revenue fan stays intact`);
+    }
+    const oldError = fanCenterError(before), newError = fanCenterError(after);
+    beforeError += oldError; afterError += newError;
+    if (oldError - newError > 1) improved++;
+    assert.equal(pair.requestedDraft.operating.dy, 36, `${pair.id}: keep the saved draft intact`);
+    assert.ok(draft.operating.y > after.operating.y - pair.learnedOpY,
+      `${pair.id}: a downward manual edit remains effective while nearby ribbons can reflow`);
+  }
+  assert.ok(improved >= 8, `independent companies improved: ${improved}`);
+  assert.ok(afterError < beforeError * 0.95, `aggregate fan center error: ${beforeError} -> ${afterError}`);
+});

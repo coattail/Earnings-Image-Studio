@@ -24,6 +24,10 @@ function resolveProfitSpinePositions(options) {
     { a: 1, b: 0, target: operatingTop, weight: 0.025 / firstRun ** 2 },
     { a: 0, b: 1, target: netTop, weight: 0.025 / secondRun ** 2 },
   ];
+  if (Number.isFinite(options.netBalanceTarget) && options.balanceWeight > 0) {
+    constraints.push({ a: 0, b: 1, target: options.netBalanceTarget,
+      weight: options.balanceWeight / secondRun ** 2 });
+  }
   let aa = 0, ab = 0, bb = 0, at = 0, bt = 0;
   for (const { a, b, target, weight } of constraints) {
     aa += weight * a * a; ab += weight * a * b; bb += weight * b * b;
@@ -35,6 +39,12 @@ function resolveProfitSpinePositions(options) {
   for (let iteration = 0; iteration < 32; iteration += 1) {
     op = clamp((at - ab * net) / aa, ...opBounds);
     net = clamp((bt - ab * op) / bb, ...netBounds);
+  }
+  if (Number.isFinite(options.maxNetRise) && !options.pinNet) {
+    const linkedMin = Math.max(netBounds[0], op - gainPort - options.maxNetRise);
+    const linkedMax = Math.min(netBounds[1], op - gainPort - unit * 18);
+    if (linkedMin > linkedMax) return { operatingTop, netTop };
+    net = clamp(net, linkedMin, linkedMax);
   }
   return { operatingTop: op, netTop: net };
 }

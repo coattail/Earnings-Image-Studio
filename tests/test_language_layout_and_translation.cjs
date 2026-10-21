@@ -336,7 +336,7 @@ test("NVDA profit spine stays shallow while its gain bridge remains attached", (
   const netRunway = net.x - operating.x - operating.width;
   assert.ok(net.x - (positive.x + positive.width) <= netRunway * 0.6, "gain bridge should stay within the final stage while retaining room to curve");
   assert.ok(
-    net.y - positive.y <= 105,
+    net.y - positive.y <= positive.height + netRunway * 0.25,
     `positive adjustment node should stay visually attached above net income, got vertical gap=${net.y - positive.y}`
   );
   assert.ok(rAndD.y - (tax.y + tax.height) >= 55, "tax and R&D branches should stay visually separated");
