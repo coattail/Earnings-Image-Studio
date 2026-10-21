@@ -15,14 +15,15 @@ function resolveProfitSpinePositions(options) {
   const gainPort = Math.max(options.positiveMergeHeight || 0, 0);
   const firstRise = clamp(firstRun * 0.16, unit * 26, unit * 72);
   const secondRise = clamp(secondRun * 0.22, unit * 34, unit * 92);
+  const positionWeight = Number.isFinite(options.positionWeight) ? Math.max(options.positionWeight, 0) : 0.025;
   const constraints = [
     { a: 1, b: 0, target: grossTop - firstRise, weight: 1 / firstRun ** 2 },
     { a: -1, b: 1, target: -gainPort - secondRise, weight: 1 / secondRun ** 2 },
     // Penalize an abrupt change in direction across the two main ribbons.
     { a: 1 / firstRun + 1 / secondRun, b: -1 / secondRun,
       target: grossTop / firstRun + gainPort / secondRun, weight: 0.16 },
-    { a: 1, b: 0, target: operatingTop, weight: 0.025 / firstRun ** 2 },
-    { a: 0, b: 1, target: netTop, weight: 0.025 / secondRun ** 2 },
+    { a: 1, b: 0, target: operatingTop, weight: positionWeight / firstRun ** 2 },
+    { a: 0, b: 1, target: netTop, weight: positionWeight / secondRun ** 2 },
   ];
   if (Number.isFinite(options.netBalanceTarget) && options.balanceWeight > 0) {
     constraints.push({ a: 0, b: 1, target: options.netBalanceTarget,

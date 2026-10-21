@@ -208,3 +208,48 @@ test('learned offsets cannot reverse the visible profit spine across companies a
     assert.ok(untouched, `${label}: input and saved learned offsets stay intact`);
   }
 });
+
+test('presentation bounds stale additive lifts while keeping editing free and saved drafts intact', () => {
+  const ctx = runtime();
+  ctx.payload = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/earnings-dataset.json'), 'utf8'));
+  ctx.supplemental = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/supplemental-components.json'), 'utf8'));
+  ctx.learned = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/learned-sankey-layouts.json'), 'utf8'));
+  const samples = vm.runInContext(`(() => {
+    applyLoadedCompaniesToState(payload.companies, 'full'); state.logoCatalog = {};
+    state.supplementalComponents = supplemental; state.learnedSankeyLayouts = learned;
+    return [['meta','2026Q1'], ['nvidia','2026Q3'], ['spacex','2026Q3'], ['tsmc','2026Q3']].map(([id,quarter]) => {
+      const company = getCompany(id); state.selectedCompanyId = id; state.selectedQuarter = quarter;
+      const snapshot = buildSnapshot(company, quarter), learned = learnedSankeyLayoutOverridesForSession();
+      const draft = { operating: {dx:0,dy:-120}, net: {dx:0,dy:-156}, 'positive-0': {dx:0,dy:-212} };
+      snapshot.learnedEditorNodeOverrides = learned; snapshot.interactiveEditorNodeOverrides = draft;
+      snapshot.editorNodeOverrides = mergeEditorNodeOffsets(learned, draft);
+      const saved = JSON.stringify(snapshot);
+      const render = value => EarningsVizRuntime.render.renderIncomeStatementSvg(value, company);
+      const zh = render(snapshot); state.uiLanguage = 'en'; const en = render(snapshot); state.uiLanguage = 'zh';
+      const editing = { ...snapshot, editModeEnabled: true };
+      const reference = { ...snapshot, editorNodeOverrides: learned, interactiveEditorNodeOverrides: {} };
+      return { id, zh, en, editing: render(editing), reference: render(reference), untouched: saved === JSON.stringify(snapshot) };
+    });
+  })()`, ctx);
+  for (const { id, zh, en, editing, reference, untouched } of samples) {
+    const f = nodeFrames(zh), english = nodeFrames(en), edited = nodeFrames(editing), original = nodeFrames(reference);
+    const gains = Object.entries(f).filter(([key]) => key.startsWith('positive-')).map(([, cap]) => cap);
+    const gainHeight = gains.reduce((sum, cap) => sum + cap.height, 0);
+    const first = (f.gross.y - f.operating.y) / (f.operating.x - f.gross.x - f.gross.width);
+    const last = (f.operating.y - f.net.y - gainHeight) / (f.net.x - f.operating.x - f.operating.width);
+    assert.ok(first > 0 && first < 0.35, `${id}: final visible first port stays bounded`);
+    assert.ok(last > 0 && last < 0.381, `${id}: final visible net port stays bounded`);
+    assert.ok(Math.abs(first - last) < 0.141, `${id}: no sudden turn after old offsets`);
+    for (const cap of gains) {
+      assert.ok(cap.y > 180, `${id}: gain caps stay below the header`);
+      assert.ok(cap.y + cap.height < f.net.y, `${id}: gain caps keep a downward merge lead`);
+    }
+    for (const [node, frame] of Object.entries(original)) {
+      assert.equal(f[node].height, frame.height, `${id}/${node}: monetary thickness stays intact`);
+    }
+    for (const node of ['revenue', 'gross', 'cost', 'operating', 'operating-expenses', 'net'])
+      assert.deepEqual(english[node], f[node], `${id}/${node}: shared final bilingual geometry`);
+    assert.ok(edited.operating.y < f.operating.y, `${id}: an active editor retains the requested free position`);
+    assert.ok(untouched, `${id}: no destructive migration of the saved draft`);
+  }
+});

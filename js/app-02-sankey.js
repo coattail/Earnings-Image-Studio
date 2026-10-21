@@ -9092,6 +9092,55 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
       }
     }
   }
+  // Saved interactive offsets are additive to the automatic solution. A draft
+  // made against an older layout must not double the new lift in the final
+  // presentation. Validate actual visible ports, not the offset-free baseline.
+  // Keep editing unrestricted and never mutate the user's saved draft.
+  if (hasOrdinaryProfitSpine && !snapshot.editModeEnabled) {
+    const firstRun = Math.max(operatingFrame.left - grossFrame.right, 1);
+    const lastRun = Math.max(netFrame.left - operatingFrame.right, 1);
+    const gainPort = positiveAbove ? totalPositiveMergeHeight : 0;
+    const headerFloor = Math.max(titleObstacle.bottom, periodEndObstacle?.bottom || 0) + scaleY(24);
+    const capSpace = positiveAbove && positiveAdjustments.length
+      ? totalPositiveHeight + Math.max(positiveAdjustments.length - 1, 0) * positiveGap + scaleY(12)
+      : 0;
+    const liftedNodes = ["operating", "net", ...positiveAdjustments.map((_item, index) => `positive-${index}`)];
+    const hasInteractiveLift = liftedNodes.some(id => safeNumber(snapshot.interactiveEditorNodeOverrides?.[id]?.dy, 0) < -1);
+    const hasInteractivePosition = liftedNodes.some(id =>
+      Math.abs(safeNumber(snapshot.interactiveEditorNodeOverrides?.[id]?.dy, 0)) > 1);
+    const netFloor = headerFloor + (hasInteractiveLift ? capSpace : 0);
+    const firstRise = grossFrame.top - operatingFrame.top;
+    const lastRise = operatingFrame.top - netFrame.top - gainPort;
+    const overshoots = firstRise > firstRun * 0.5 + 1 || lastRise > lastRun * 0.5 + 1 ||
+      operatingFrame.top < headerFloor + scaleY(100) || netFrame.top < netFloor;
+    if (overshoots && (!hasInteractivePosition || hasInteractiveLift)) {
+      const room = Math.max(grossFrame.top - netFloor - gainPort, 0);
+      const riseScale = Math.min(room * 0.92 / (firstRun * 0.08 + lastRun * 0.1), 1);
+      const safe = resolveProfitSpinePositions({
+        grossTop: grossFrame.top, operatingTop: operatingFrame.top, netTop: netFrame.top,
+        operatingRunway: firstRun, netRunway: lastRun, positiveMergeHeight: gainPort,
+        unit: verticalScale, positionWeight: 100,
+        minOperatingRise: firstRun * 0.08 * riseScale, maxOperatingRise: firstRun * 0.349,
+        minNetRise: lastRun * 0.1 * riseScale, maxNetRise: lastRun * 0.38, maxSlopeChange: 0.14,
+        operatingMin: headerFloor + scaleY(100),
+        operatingMax: Math.min(chartBottomLimit - opHeight,
+          operatingExpenseFrame.top - opHeight - Math.min(opexMinGapFromOperating, scaleY(24))),
+        netMin: netFloor, netMax: chartBottomLimit - netHeight,
+        pinOperating: hasExplicitOpNodeTop, pinNet: hasExplicitNetNodeTop,
+      });
+      for (const [id, next, frame] of [["operating", safe.operatingTop, operatingFrame], ["net", safe.netTop, netFrame]]) {
+        const offset = autoLayoutOffsetForNode(id);
+        setAutoLayoutNodeOffset(id, { dy: offset.dy + next - frame.top });
+      }
+      refreshEditableNodeFrames();
+      // Rebuild the gain corridor from the corrected final net position.
+      if (positiveAbove) {
+        const gap = positiveAdjustments.length > 1 ? positiveGap * (positiveAdjustments.length - 1) : 0;
+        balancedPositiveTop = Math.max(headerFloor,
+          netFrame.top - totalPositiveHeight - gap - lastRun * 0.22);
+      }
+    }
+  }
   if (hasOrdinaryProfitSpine && deductionBoxes.length >= 2 && opexBoxes.length &&
       !costBreakdownSharesOpexColumn &&
       !Object.keys(snapshot.interactiveEditorNodeOverrides || {}).some((id) => /^(deduction|opex)-/.test(id))) {
@@ -10726,6 +10775,31 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
         Math.min(positiveTopMin, smallAdjustmentSourceTopFloorY),
         positiveTopMax
       );
+    }
+    if (hasOrdinaryProfitSpine && positiveAbove && !snapshot.editModeEnabled) {
+      // Corridor selection runs before interactive offsets are applied. Reserve
+      // the header on the final cap positions as well, including old drafts.
+      const capFloor = Math.max(titleObstacle.bottom, periodEndObstacle?.bottom || 0) + scaleY(24);
+      let cursor = positiveTop;
+      const caps = positiveAdjustments.map((_item, index) => {
+        const top = cursor + editorOffsetForNode(`positive-${index}`).dy;
+        cursor += positiveHeights[index] + positiveGap;
+        return { top, height: positiveHeights[index] };
+      });
+      const capBottom = netFrame.top - scaleY(12);
+      const totalHeight = caps.reduce((sum, cap) => sum + Math.max(cap.height, 1), 0);
+      const maxLead = Math.max((netFrame.left - operatingFrame.right) * 0.32, scaleY(36));
+      const preferredFloor = Math.max(capFloor, capBottom - totalPositiveStackHeight - maxLead);
+      const hasStaleCapOffset = positiveAdjustments.some((_item, index) =>
+        Math.abs(safeNumber(snapshot.interactiveEditorNodeOverrides?.[`positive-${index}`]?.dy, 0)) > 1);
+      if (capBottom - capFloor >= totalHeight &&
+          (caps.some(cap => cap.top < capFloor - 0.5) || hasStaleCapOffset)) {
+        const safeCaps = resolveOrderedVerticalBoxes(caps, Math.min(preferredFloor, capBottom - totalHeight), capBottom, positiveGap);
+        safeCaps.forEach((cap, index) => {
+          const id = `positive-${index}`, offset = autoLayoutOffsetForNode(id);
+          setAutoLayoutNodeOffset(id, { dy: offset.dy + cap.top - caps[index].top });
+        });
+      }
     }
     const placedPositiveLabelRects = [];
     let netPositiveCursor = netPositiveTop;
