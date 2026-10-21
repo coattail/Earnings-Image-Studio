@@ -534,9 +534,14 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
 
   const baselineY = 1166;
   const chartTop = legendTop + legendTotalHeight + 18;
-  const barGap = barCount >= 28 ? 7 : barCount >= 22 ? 9 : 11;
-  let barWidth = Math.floor((plotRight - plotLeft - barGap * Math.max(barCount - 1, 0)) / Math.max(barCount, 1));
+  const defaultBarGap = barCount >= 28 ? 7 : barCount >= 22 ? 9 : 11;
+  let barWidth = Math.floor((plotRight - plotLeft - defaultBarGap * Math.max(barCount - 1, 0)) / Math.max(barCount, 1));
   barWidth = clamp(barWidth, 16, 56);
+  // Short windows keep the original column proportions while spreading across
+  // the plot. The preview independently scales the entire SVG proportionally.
+  const barGap = barCount > 1 && barCount <= 12
+    ? (plotRight - plotLeft - barWidth * barCount) / (barCount - 1)
+    : defaultBarGap;
   const barsTotalWidth = barWidth * barCount + barGap * Math.max(barCount - 1, 0);
   const barStartX = plotLeft + Math.max((plotRight - plotLeft - barsTotalWidth) / 2, 0);
   const chartHeight = Math.max(baselineY - chartTop, 120);
@@ -1576,8 +1581,10 @@ function tightenRenderedSvgViewport() {
 }
 
 async function renderCurrent() {
+  const renderToken = state.renderToken = (state.renderToken || 0) + 1;
+  globalThis.EarningsDesk?.setBusy(true);
   let company = getCompany(state.selectedCompanyId);
-  if (!company) return;
+  if (!company) { globalThis.EarningsDesk?.fail("没有可用的公司数据。"); return; }
   const quarterKey = refs.quarterSelect?.value || state.selectedQuarter;
   state.selectedQuarter = quarterKey;
   syncQuarterNavigation();
@@ -1585,12 +1592,19 @@ async function renderCurrent() {
     if (companyNeedsHistoricalData(company, quarterKey, currentChartViewMode())) {
       setStatus(`正在加载 ${company.nameEn} 历史数据...`);
       company = await ensureCompanyHistoricalDataLoaded(company.id, { preferReplica: false });
-      if (!company || state.selectedCompanyId !== company.id || state.selectedQuarter !== quarterKey) return;
+      if (!company || state.selectedCompanyId !== company.id || renderToken !== state.renderToken) return;
+      // Historical enrichment can narrow the available reporting periods.
+      // Render the newly selected valid period instead of leaving an old chart loading.
+      if (state.selectedQuarter !== quarterKey) {
+        requestRenderCurrent();
+        return;
+      }
     }
     const snapshot = buildSnapshot(company, quarterKey);
     if (!snapshot) {
       refs.chartOutput.innerHTML = "";
       setStatus("当前公司或季度缺少可用数据。");
+      globalThis.EarningsDesk?.fail("当前报告期缺少可用数据，请选择其他报告期。");
       return;
     }
     snapshot.companyNameZh = company.nameZh;
@@ -1607,7 +1621,7 @@ async function renderCurrent() {
     let barHistory = null;
     const isBarsMode = currentChartViewMode() === "bars";
     if (isBarsMode) {
-      const barRenderResult = EarningsVizRuntime.render.renderRevenueSegmentBarsSvg(snapshot, company);
+      const barRenderResult = EarningsVizRuntime.render.renderRevenueSegmentBarsSvg(snapshot, company, state.historyRange ? { maxQuarters: state.historyRange } : {});
       refs.chartOutput.innerHTML = barRenderResult.svg;
       refs.chartOutput.style.aspectRatio = `${barRenderResult.width} / ${barRenderResult.height}`;
       refineRenderedBarChartLogoPlacement(refs.chartOutput?.querySelector("svg"));
@@ -1627,6 +1641,7 @@ async function renderCurrent() {
     updateMeta(snapshot, company, { history: barHistory });
     updateCalibrationUi(snapshot, company);
     bindInteractiveEditor(snapshot);
+    globalThis.EarningsDesk?.refresh(snapshot, company, barHistory);
     setStatus(
       currentChartViewMode() === "bars"
         ? `已更新 ${company.nameEn} ${quarterKey} 分部趋势图。`
@@ -1638,7 +1653,9 @@ async function renderCurrent() {
       setTimeout(() => warmVisibleLogoAssets(), 0);
     }
   } catch (error) {
+    if (renderToken !== state.renderToken) return;
     refs.chartOutput.innerHTML = "";
+    globalThis.EarningsDesk?.fail(error?.message || "图表渲染失败，请重试。");
     syncEditModeUi();
     const message = error?.message || String(error || "图表渲染失败。");
     setStatus(`图表渲染失败：${message}`);
@@ -1686,18 +1703,26 @@ function exportSvg() {
   }
   downloadBlob(new Blob([svgText], { type: "image/svg+xml;charset=utf-8" }), `${currentFilenameStem()}.svg`);
   setStatus("SVG 已导出。");
+  globalThis.EarningsDesk?.toast("SVG 已导出");
+  globalThis.EarningsDesk?.exporting(false);
 }
 
-function exportPng(scaleFactor = 1, suffix = "") {
-  currentPngDataUrl(scaleFactor)
-    .then(({ dataUrl }) => {
-      const pngBlob = dataUrlToBlob(dataUrl);
-      downloadBlob(pngBlob, `${currentFilenameStem()}${suffix}.png`);
-      setStatus(scaleFactor > 1 ? "超清 PNG 已导出。" : "PNG 已导出。");
-    })
-    .catch(() => {
-      setStatus("PNG 导出失败。");
-    });
+async function exportPng(scaleFactor = 1, suffix = "") {
+  const filename = `${currentFilenameStem()}${suffix}.png`;
+  globalThis.EarningsDesk?.exporting(true);
+  setStatus("正在生成 PNG 图片…");
+  try {
+    const { dataUrl } = await currentPngDataUrl(scaleFactor);
+    if (!dataUrl.startsWith("data:image/png;base64,")) throw new Error("导出尺寸无效");
+    downloadBlob(dataUrlToBlob(dataUrl), filename);
+    setStatus(scaleFactor > 1 ? "超清 PNG 已导出。" : "PNG 已导出。");
+    globalThis.EarningsDesk?.toast(scaleFactor > 1 ? "超清 PNG 已导出" : "PNG 已导出");
+  } catch (error) {
+    setStatus(`PNG 导出失败：${error?.message || "请重试"}`);
+    globalThis.EarningsDesk?.toast("PNG 导出失败，请重试或下载 SVG");
+  } finally {
+    globalThis.EarningsDesk?.exporting(false);
+  }
 }
 
 function dataUrlToBlob(dataUrl) {
@@ -1715,6 +1740,8 @@ function dataUrlToBlob(dataUrl) {
 }
 
 function currentPngDataUrl(scaleFactor = 1) {
+  const requestedScale = Number(scaleFactor);
+  scaleFactor = Number.isFinite(requestedScale) && requestedScale > 0 ? Math.min(requestedScale, 3) : 1;
   const svgText = currentSvgText();
   if (!svgText) return Promise.reject(new Error("当前没有可导出的 PNG。"));
   return new Promise((resolve, reject) => {
@@ -2023,7 +2050,7 @@ function bindEvents() {
   refs.nextQuarterBtn?.addEventListener("click", () => selectAdjacentQuarter("next"));
   refs.renderBtn?.addEventListener("click", renderCurrent);
   refs.downloadSvgBtn?.addEventListener("click", exportSvg);
-  refs.downloadPngBtn?.addEventListener("click", exportPng);
+  refs.downloadPngBtn?.addEventListener("click", () => exportPng(1));
   refs.downloadHdBtn?.addEventListener("click", () => exportPng(3, "-uhd"));
   refs.chartModeToggleBtn?.addEventListener("click", () => {
     state.chartViewMode = currentChartViewMode() === "bars" ? "sankey" : "bars";
@@ -2042,7 +2069,9 @@ function bindEvents() {
   });
   refs.resetImageBtn?.addEventListener("click", () => {
     if (!isInteractiveSankeyEditable()) return;
+    globalThis.EarningsDesk?.rememberEdit();
     clearCurrentEditorOverrides();
+    globalThis.EarningsDesk?.saveDrafts();
     state.editor.selectedNodeId = null;
     state.editor.dragging = null;
     requestRenderCurrent();
@@ -2087,6 +2116,13 @@ function bindEvents() {
     window.addEventListener("pointerup", () => {
       if (!state.editor.dragging) return;
       state.editor.dragging = null;
+      globalThis.EarningsDesk?.saveDrafts();
+      requestEditorRerender();
+    });
+    window.addEventListener("pointercancel", () => {
+      if (!state.editor.dragging) return;
+      state.editor.dragging = null;
+      globalThis.EarningsDesk?.saveDrafts();
       requestEditorRerender();
     });
   }
@@ -2094,17 +2130,20 @@ function bindEvents() {
 
 async function boot() {
   queryRefs();
+  globalThis.EarningsDesk?.init();
   bindEvents();
   syncChartModeToggleUi();
   try {
     await Promise.all([loadDataset(), loadLogoCatalog(), loadSupplementalComponents(), loadLearnedSankeyLayouts()]);
   } catch (error) {
     setStatus(error.message || "数据加载失败。");
+    globalThis.EarningsDesk?.fail(error.message || "数据加载失败，请检查网络后重试。");
     markAutomationBootFailure(error);
     return;
   }
   updateHero();
   initializeDefaultLandingSelection();
+  globalThis.EarningsDesk?.restore();
   syncQuarterOptions({ preferReplica: false });
   renderCompanyList();
   renderCoverage();

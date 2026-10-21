@@ -1186,7 +1186,7 @@ def fetch_official_segment_history(company: dict[str, Any], refresh: bool = Fals
                 return _normalize_micron_segment_cache_payload(cached_payload)
 
     incremental_refresh = bool(refresh and cached_payload_is_current)
-    cik = _resolve_cik(
+    cik = int(company["cik"]) if company.get("cik") else _resolve_cik(
         str(company.get("ticker", "")),
         refresh=bool(refresh and not incremental_refresh),
     )

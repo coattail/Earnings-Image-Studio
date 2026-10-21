@@ -19,7 +19,7 @@ class CompanySearchLayoutTest(unittest.TestCase):
     def test_index_references_company_search_layout_stylesheet(self) -> None:
         index_html = (ROOT / "index.html").read_text(encoding="utf-8")
 
-        self.assertIn("style.css?v=20260903-company-search-layout-v164", index_html)
+        self.assertRegex(index_html, r'href="style\.css\?v=[^" ]+"')
 
 
 if __name__ == "__main__":

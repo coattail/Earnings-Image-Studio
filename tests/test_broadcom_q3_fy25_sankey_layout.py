@@ -103,20 +103,22 @@ class BroadcomQ3FY25SankeyLayoutTests(unittest.TestCase):
         upper_opening = gross["y"] - operating["y"]
         lower_opening = operating_expenses["y"] - (gross["y"] + operating["height"])
 
-        self.assertGreaterEqual(upper_opening, 75)
-        self.assertLessEqual(upper_opening, 100)
+        self.assertGreater(upper_opening, 0)
+        self.assertLess(upper_opening / (operating["x"] - gross["x"] - gross["width"]), 0.35)
         self.assertGreaterEqual(lower_opening, 70)
         self.assertLessEqual(abs(lower_opening - upper_opening), 30)
 
-    def test_profit_nodes_form_a_smooth_upward_staircase(self) -> None:
+    def test_profit_nodes_form_a_shallow_upward_spine(self) -> None:
         gross = visible_rect(self.svg_root, "gross")
         operating = visible_rect(self.svg_root, "operating")
         net = visible_rect(self.svg_root, "net")
 
-        self.assertGreaterEqual(gross["y"] - operating["y"], 75)
-        self.assertLessEqual(gross["y"] - operating["y"], 100)
-        self.assertGreaterEqual(operating["y"] - net["y"], 90)
-        self.assertLessEqual(operating["y"] - net["y"], 135)
+        for source, target in ((gross, operating), (operating, net)):
+            rise = source["y"] - target["y"]
+            runway = target["x"] - source["x"] - source["width"]
+            # A terminal collision constraint may make the final port level.
+            self.assertGreaterEqual(rise, -1)
+            self.assertLess(abs(rise) / runway, 0.4)
 
     def test_opex_terminal_branches_never_rise_to_the_right(self) -> None:
         operating_expenses = visible_rect(self.svg_root, "operating-expenses")

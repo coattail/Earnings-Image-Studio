@@ -55,7 +55,7 @@
       "fiscalLabel": "FY2021 Q1",
       "statementCurrency": "CNY",
       "revenueBn": 37.016,
-      "revenueYoyPct": 120.951,
+      "revenueYoyPct": 120.94,
       "costOfRevenueBn": 29.816,
       "grossProfitBn": 7.2,
       "sgnaBn": 8.944,
@@ -72,7 +72,7 @@
       "operatingMarginPct": -12.99,
       "profitMarginPct": -13.1,
       "effectiveTaxRatePct": 0.226,
-      "revenueQoqPct": -2.376,
+      "revenueQoqPct": -2.378,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
@@ -419,7 +419,7 @@
       "fiscalLabel": "FY2021 Q2",
       "statementCurrency": "CNY",
       "revenueBn": 43.759,
-      "revenueYoyPct": 77.004,
+      "revenueYoyPct": 77.005,
       "costOfRevenueBn": 31.246,
       "grossProfitBn": 12.513,
       "sgnaBn": 12.902,
@@ -784,7 +784,7 @@
       "fiscalLabel": "FY2021 Q3",
       "statementCurrency": "CNY",
       "revenueBn": 48.829,
-      "revenueYoyPct": 37.931,
+      "revenueYoyPct": 37.93,
       "costOfRevenueBn": 38.051,
       "grossProfitBn": 10.778,
       "sgnaBn": 13.775,
@@ -1149,7 +1149,7 @@
       "fiscalLabel": "FY2021 Q4",
       "statementCurrency": "CNY",
       "revenueBn": 49.523,
-      "revenueYoyPct": 30.609,
+      "revenueYoyPct": 30.607,
       "costOfRevenueBn": 37.541,
       "grossProfitBn": 11.983,
       "sgnaBn": 13.675,
@@ -6510,29 +6510,29 @@
       "fiscalQuarter": "Q3",
       "fiscalLabel": "FY2018 Q3",
       "statementCurrency": "CNY",
-      "revenueBn": 19.076,
+      "revenueBn": 19.075999,
       "revenueYoyPct": null,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
-      "sgnaBn": null,
-      "rndBn": null,
+      "costOfRevenueBn": 14.504757999999999,
+      "grossProfitBn": 4.571241,
+      "sgnaBn": 1.3221209999999999,
+      "rndBn": 2.003497,
       "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
-      "taxBn": null,
-      "netIncomeBn": null,
+      "operatingExpensesBn": 8.022679,
+      "operatingIncomeBn": -3.451438,
+      "nonOperatingBn": -79.70124,
+      "pretaxIncomeBn": -83.152678,
+      "taxBn": 0.144478,
+      "netIncomeBn": -83.297156,
       "netIncomeYoyPct": null,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": null,
+      "grossMarginPct": 23.963311,
+      "operatingMarginPct": -18.093092,
+      "profitMarginPct": -436.659469,
       "effectiveTaxRatePct": null,
       "revenueQoqPct": null,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
-      "statementSource": "official-revenue-structure",
+      "statementSource": "official-revenue-matched-statement-column",
       "statementSourceUrl": "https://media-meituan.todayir.com/201905141506231777650200_en.pdf",
       "statementFilingDate": "2018-11-22",
       "officialRevenueSegments": [
@@ -6687,6 +6687,61 @@
           "label": "Official filing revenue structure",
           "score": 112,
           "sourceUrl": null
+        },
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905141506231777650200_en.pdf"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905141506231777650200_en.pdf"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905141506231777650200_en.pdf"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905141506231777650200_en.pdf"
+        },
+        "rndBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905141506231777650200_en.pdf"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905141506231777650200_en.pdf"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905141506231777650200_en.pdf"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905141506231777650200_en.pdf"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905141506231777650200_en.pdf"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905141506231777650200_en.pdf"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905141506231777650200_en.pdf"
         }
       },
       "extractionDiagnostics": {
@@ -6714,7 +6769,16 @@
       "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
       "officialRevenueTaxonomyChangedFromPriorYear": false,
       "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
-      "officialRevenueDetailTaxonomyChangedFromPriorYear": false
+      "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
+      "derivedStatementFields": [
+        "operatingExpensesBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ],
+      "statementValueMode": "direct",
+      "statementSpanQuarters": 1
     },
     "2018Q4": {
       "calendarQuarter": "2018Q4",
@@ -6723,29 +6787,29 @@
       "fiscalQuarter": "Q4",
       "fiscalLabel": "FY2018 Q4",
       "statementCurrency": "CNY",
-      "revenueBn": 19.803,
+      "revenueBn": 19.803452,
       "revenueYoyPct": null,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
-      "sgnaBn": null,
-      "rndBn": null,
+      "costOfRevenueBn": 15.322458,
+      "grossProfitBn": 4.480994,
+      "sgnaBn": 2.8460799999999997,
+      "rndBn": 1.9818259999999999,
       "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
-      "taxBn": null,
-      "netIncomeBn": null,
+      "operatingExpensesBn": 8.215512,
+      "operatingIncomeBn": -3.734518,
+      "nonOperatingBn": 0.044145,
+      "pretaxIncomeBn": -3.6903729999999997,
+      "taxBn": -0.276121,
+      "netIncomeBn": -3.414252,
       "netIncomeYoyPct": null,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": null,
+      "grossMarginPct": 22.627338,
+      "operatingMarginPct": -18.857914,
+      "profitMarginPct": -17.240691,
       "effectiveTaxRatePct": null,
-      "revenueQoqPct": 3.811,
+      "revenueQoqPct": 3.813,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
-      "statementSource": "official-revenue-structure",
+      "statementSource": "official-revenue-matched-statement-column",
       "statementSourceUrl": "https://media-meituan.todayir.com/201905141517061729403688_en.pdf",
       "statementFilingDate": "2019-03-11",
       "officialRevenueSegments": [
@@ -6900,6 +6964,61 @@
           "label": "Official filing revenue structure",
           "score": 112,
           "sourceUrl": null
+        },
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905141517061729403688_en.pdf"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905141517061729403688_en.pdf"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905141517061729403688_en.pdf"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905141517061729403688_en.pdf"
+        },
+        "rndBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905141517061729403688_en.pdf"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905141517061729403688_en.pdf"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905141517061729403688_en.pdf"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905141517061729403688_en.pdf"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905141517061729403688_en.pdf"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905141517061729403688_en.pdf"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905141517061729403688_en.pdf"
         }
       },
       "extractionDiagnostics": {
@@ -6936,7 +7055,16 @@
       "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
       "officialRevenueTaxonomyChangedFromPriorYear": false,
       "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
-      "officialRevenueDetailTaxonomyChangedFromPriorYear": false
+      "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
+      "derivedStatementFields": [
+        "operatingExpensesBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ],
+      "statementValueMode": "direct",
+      "statementSpanQuarters": 1
     },
     "2019Q1": {
       "calendarQuarter": "2019Q1",
@@ -6945,29 +7073,29 @@
       "fiscalQuarter": "Q1",
       "fiscalLabel": "FY2019 Q1",
       "statementCurrency": "CNY",
-      "revenueBn": 19.174,
+      "revenueBn": 19.173512,
       "revenueYoyPct": null,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
-      "sgnaBn": null,
-      "rndBn": null,
+      "costOfRevenueBn": 14.104172,
+      "grossProfitBn": 5.0693399999999995,
+      "sgnaBn": 1.0751929999999998,
+      "rndBn": 2.0361,
       "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
+      "operatingExpensesBn": 6.372982,
+      "operatingIncomeBn": -1.303642,
+      "nonOperatingBn": 0.013631,
+      "pretaxIncomeBn": -1.290011,
       "taxBn": null,
-      "netIncomeBn": null,
+      "netIncomeBn": -1.43333,
       "netIncomeYoyPct": null,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": null,
+      "grossMarginPct": 26.439288,
+      "operatingMarginPct": -6.799182,
+      "profitMarginPct": -7.475574,
       "effectiveTaxRatePct": null,
-      "revenueQoqPct": -3.176,
+      "revenueQoqPct": -3.181,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
-      "statementSource": "official-revenue-structure",
+      "statementSource": "official-revenue-matched-statement-column",
       "statementSourceUrl": "https://media-meituan.todayir.com/201905231646431775306930_en.pdf",
       "statementFilingDate": "2019-05-23",
       "officialRevenueSegments": [
@@ -7122,6 +7250,56 @@
           "label": "Official filing revenue structure",
           "score": 112,
           "sourceUrl": null
+        },
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905231646431775306930_en.pdf"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905231646431775306930_en.pdf"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905231646431775306930_en.pdf"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905231646431775306930_en.pdf"
+        },
+        "rndBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905231646431775306930_en.pdf"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905231646431775306930_en.pdf"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905231646431775306930_en.pdf"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905231646431775306930_en.pdf"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905231646431775306930_en.pdf"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201905231646431775306930_en.pdf"
         }
       },
       "extractionDiagnostics": {
@@ -7158,7 +7336,16 @@
       "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
       "officialRevenueTaxonomyChangedFromPriorYear": false,
       "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
-      "officialRevenueDetailTaxonomyChangedFromPriorYear": false
+      "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
+      "derivedStatementFields": [
+        "operatingExpensesBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ],
+      "statementValueMode": "direct",
+      "statementSpanQuarters": 1
     },
     "2019Q2": {
       "calendarQuarter": "2019Q2",
@@ -7167,29 +7354,29 @@
       "fiscalQuarter": "Q2",
       "fiscalLabel": "FY2019 Q2",
       "statementCurrency": "CNY",
-      "revenueBn": 22.703,
+      "revenueBn": 22.703136999999998,
       "revenueYoyPct": null,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
-      "sgnaBn": null,
-      "rndBn": null,
+      "costOfRevenueBn": 14.762502,
+      "grossProfitBn": 7.940634999999999,
+      "sgnaBn": 1.038298,
+      "rndBn": 2.03233,
       "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
-      "taxBn": null,
-      "netIncomeBn": null,
+      "operatingExpensesBn": 6.828057,
+      "operatingIncomeBn": 1.1125779999999998,
+      "nonOperatingBn": -0.010726,
+      "pretaxIncomeBn": 1.101852,
+      "taxBn": 0.226024,
+      "netIncomeBn": 0.8758279999999999,
       "netIncomeYoyPct": null,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": null,
+      "grossMarginPct": 34.975937,
+      "operatingMarginPct": 4.900547,
+      "profitMarginPct": 3.85774,
       "effectiveTaxRatePct": null,
-      "revenueQoqPct": 18.405,
+      "revenueQoqPct": 18.409,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
-      "statementSource": "official-revenue-structure",
+      "statementSource": "official-revenue-matched-statement-column",
       "statementSourceUrl": "https://media-meituan.todayir.com/201909201511371711838880_en.pdf",
       "statementFilingDate": "2019-09-20",
       "officialRevenueSegments": [
@@ -7344,6 +7531,61 @@
           "label": "Official filing revenue structure",
           "score": 112,
           "sourceUrl": null
+        },
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201909201511371711838880_en.pdf"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201909201511371711838880_en.pdf"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201909201511371711838880_en.pdf"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201909201511371711838880_en.pdf"
+        },
+        "rndBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201909201511371711838880_en.pdf"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201909201511371711838880_en.pdf"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201909201511371711838880_en.pdf"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201909201511371711838880_en.pdf"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201909201511371711838880_en.pdf"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201909201511371711838880_en.pdf"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201909201511371711838880_en.pdf"
         }
       },
       "extractionDiagnostics": {
@@ -7380,7 +7622,16 @@
       "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
       "officialRevenueTaxonomyChangedFromPriorYear": false,
       "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
-      "officialRevenueDetailTaxonomyChangedFromPriorYear": false
+      "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
+      "derivedStatementFields": [
+        "operatingExpensesBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ],
+      "statementValueMode": "direct",
+      "statementSpanQuarters": 1
     },
     "2019Q3": {
       "calendarQuarter": "2019Q3",
@@ -7389,29 +7640,29 @@
       "fiscalQuarter": "Q3",
       "fiscalLabel": "FY2019 Q3",
       "statementCurrency": "CNY",
-      "revenueBn": 27.494,
-      "revenueYoyPct": 44.129,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
-      "sgnaBn": null,
-      "rndBn": null,
+      "revenueBn": 27.493629,
+      "revenueYoyPct": 44.127,
+      "costOfRevenueBn": 17.901345,
+      "grossProfitBn": 9.592284,
+      "sgnaBn": 1.055969,
+      "rndBn": 2.137349,
       "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
-      "taxBn": null,
-      "netIncomeBn": null,
+      "operatingExpensesBn": 8.14522,
+      "operatingIncomeBn": 1.447064,
+      "nonOperatingBn": 0.013553,
+      "pretaxIncomeBn": 1.4606169999999998,
+      "taxBn": 0.127235,
+      "netIncomeBn": 1.3333819999999998,
       "netIncomeYoyPct": null,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": null,
+      "grossMarginPct": 34.889116,
+      "operatingMarginPct": 5.26327,
+      "profitMarginPct": 4.849785,
       "effectiveTaxRatePct": null,
-      "revenueQoqPct": 21.103,
+      "revenueQoqPct": 21.101,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
-      "statementSource": "official-revenue-structure",
+      "statementSource": "official-revenue-matched-statement-column",
       "statementSourceUrl": "https://media-meituan.todayir.com/201911211821501767237030_en.pdf",
       "statementFilingDate": "2019-11-21",
       "officialRevenueSegments": [
@@ -7566,6 +7817,61 @@
           "label": "Official filing revenue structure",
           "score": 112,
           "sourceUrl": null
+        },
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201911211821501767237030_en.pdf"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201911211821501767237030_en.pdf"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201911211821501767237030_en.pdf"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201911211821501767237030_en.pdf"
+        },
+        "rndBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201911211821501767237030_en.pdf"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201911211821501767237030_en.pdf"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201911211821501767237030_en.pdf"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201911211821501767237030_en.pdf"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201911211821501767237030_en.pdf"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201911211821501767237030_en.pdf"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/201911211821501767237030_en.pdf"
         }
       },
       "extractionDiagnostics": {
@@ -7602,7 +7908,16 @@
       "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
       "officialRevenueTaxonomyChangedFromPriorYear": false,
       "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
-      "officialRevenueDetailTaxonomyChangedFromPriorYear": false
+      "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
+      "derivedStatementFields": [
+        "operatingExpensesBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ],
+      "statementValueMode": "direct",
+      "statementSpanQuarters": 1
     },
     "2019Q4": {
       "calendarQuarter": "2019Q4",
@@ -7611,29 +7926,29 @@
       "fiscalQuarter": "Q4",
       "fiscalLabel": "FY2019 Q4",
       "statementCurrency": "CNY",
-      "revenueBn": 28.159,
-      "revenueYoyPct": 42.196,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
-      "sgnaBn": null,
-      "rndBn": null,
+      "revenueBn": 28.158253,
+      "revenueYoyPct": 42.189,
+      "costOfRevenueBn": 18.440124,
+      "grossProfitBn": 9.718129,
+      "sgnaBn": 1.2324739999999998,
+      "rndBn": 2.2398849999999997,
       "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
-      "taxBn": null,
-      "netIncomeBn": null,
+      "operatingExpensesBn": 8.294269,
+      "operatingIncomeBn": 1.42386,
+      "nonOperatingBn": 0.06607,
+      "pretaxIncomeBn": 1.48993,
+      "taxBn": 0.029644999999999998,
+      "netIncomeBn": 1.4602849999999998,
       "netIncomeYoyPct": null,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": null,
+      "grossMarginPct": 34.512542,
+      "operatingMarginPct": 5.056635,
+      "profitMarginPct": 5.185993,
       "effectiveTaxRatePct": null,
-      "revenueQoqPct": 2.419,
+      "revenueQoqPct": 2.417,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
-      "statementSource": "official-revenue-structure",
+      "statementSource": "official-revenue-matched-statement-column",
       "statementSourceUrl": "https://media-meituan.todayir.com/202003301717261783547356_en.pdf",
       "statementFilingDate": "2020-03-30",
       "officialRevenueSegments": [
@@ -7788,6 +8103,61 @@
           "label": "Official filing revenue structure",
           "score": 112,
           "sourceUrl": null
+        },
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202003301717261783547356_en.pdf"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202003301717261783547356_en.pdf"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202003301717261783547356_en.pdf"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202003301717261783547356_en.pdf"
+        },
+        "rndBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202003301717261783547356_en.pdf"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202003301717261783547356_en.pdf"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202003301717261783547356_en.pdf"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202003301717261783547356_en.pdf"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202003301717261783547356_en.pdf"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202003301717261783547356_en.pdf"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202003301717261783547356_en.pdf"
         }
       },
       "extractionDiagnostics": {
@@ -7824,7 +8194,16 @@
       "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
       "officialRevenueTaxonomyChangedFromPriorYear": false,
       "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
-      "officialRevenueDetailTaxonomyChangedFromPriorYear": false
+      "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
+      "derivedStatementFields": [
+        "operatingExpensesBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ],
+      "statementValueMode": "direct",
+      "statementSpanQuarters": 1
     },
     "2020Q1": {
       "calendarQuarter": "2020Q1",
@@ -7833,29 +8212,29 @@
       "fiscalQuarter": "Q1",
       "fiscalLabel": "FY2020 Q1",
       "statementCurrency": "CNY",
-      "revenueBn": 16.753,
-      "revenueYoyPct": -12.626,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
-      "sgnaBn": null,
-      "rndBn": null,
+      "revenueBn": 16.753887,
+      "revenueYoyPct": -12.62,
+      "costOfRevenueBn": 11.557421,
+      "grossProfitBn": 5.196466,
+      "sgnaBn": 1.069741,
+      "rndBn": 2.296458,
       "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
-      "taxBn": null,
-      "netIncomeBn": null,
+      "operatingExpensesBn": 6.911996,
+      "operatingIncomeBn": -1.71553,
+      "nonOperatingBn": 0.021014,
+      "pretaxIncomeBn": -1.694516,
+      "taxBn": -0.115238,
+      "netIncomeBn": -1.579278,
       "netIncomeYoyPct": null,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": null,
+      "grossMarginPct": 31.01648,
+      "operatingMarginPct": -10.239594,
+      "profitMarginPct": -9.426338,
       "effectiveTaxRatePct": null,
-      "revenueQoqPct": -40.506,
+      "revenueQoqPct": -40.501,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
-      "statementSource": "official-revenue-structure",
+      "statementSource": "official-revenue-matched-statement-column",
       "statementSourceUrl": "https://media-meituan.todayir.com/202005251710561736871874_en.pdf",
       "statementFilingDate": "2020-05-25",
       "officialRevenueSegments": [
@@ -8010,6 +8389,61 @@
           "label": "Official filing revenue structure",
           "score": 112,
           "sourceUrl": null
+        },
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202005251710561736871874_en.pdf"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202005251710561736871874_en.pdf"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202005251710561736871874_en.pdf"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202005251710561736871874_en.pdf"
+        },
+        "rndBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202005251710561736871874_en.pdf"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202005251710561736871874_en.pdf"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202005251710561736871874_en.pdf"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202005251710561736871874_en.pdf"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202005251710561736871874_en.pdf"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202005251710561736871874_en.pdf"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202005251710561736871874_en.pdf"
         }
       },
       "extractionDiagnostics": {
@@ -8046,7 +8480,16 @@
       "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
       "officialRevenueTaxonomyChangedFromPriorYear": false,
       "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
-      "officialRevenueDetailTaxonomyChangedFromPriorYear": false
+      "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
+      "derivedStatementFields": [
+        "operatingExpensesBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ],
+      "statementValueMode": "direct",
+      "statementSpanQuarters": 1
     },
     "2020Q2": {
       "calendarQuarter": "2020Q2",
@@ -8055,29 +8498,29 @@
       "fiscalQuarter": "Q2",
       "fiscalLabel": "FY2020 Q2",
       "statementCurrency": "CNY",
-      "revenueBn": 24.722,
-      "revenueYoyPct": 8.893,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
-      "sgnaBn": null,
-      "rndBn": null,
+      "revenueBn": 24.721836999999997,
+      "revenueYoyPct": 8.892,
+      "costOfRevenueBn": 16.146879,
+      "grossProfitBn": 8.574957999999999,
+      "sgnaBn": 1.158092,
+      "rndBn": 2.376737,
       "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
-      "taxBn": null,
-      "netIncomeBn": null,
+      "operatingExpensesBn": 6.400313,
+      "operatingIncomeBn": 2.174645,
+      "nonOperatingBn": 0.022502,
+      "pretaxIncomeBn": 2.1971469999999997,
+      "taxBn": -0.013033999999999999,
+      "netIncomeBn": 2.210181,
       "netIncomeYoyPct": null,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": null,
+      "grossMarginPct": 34.685764,
+      "operatingMarginPct": 8.796454,
+      "profitMarginPct": 8.940197,
       "effectiveTaxRatePct": null,
-      "revenueQoqPct": 47.568,
+      "revenueQoqPct": 47.559,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
-      "statementSource": "official-revenue-structure",
+      "statementSource": "official-revenue-matched-statement-column",
       "statementSourceUrl": "https://media-meituan.todayir.com/202008211704561761848748_en.pdf",
       "statementFilingDate": "2020-08-21",
       "officialRevenueSegments": [
@@ -8232,6 +8675,61 @@
           "label": "Official filing revenue structure",
           "score": 112,
           "sourceUrl": null
+        },
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202008211704561761848748_en.pdf"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202008211704561761848748_en.pdf"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202008211704561761848748_en.pdf"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202008211704561761848748_en.pdf"
+        },
+        "rndBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202008211704561761848748_en.pdf"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202008211704561761848748_en.pdf"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202008211704561761848748_en.pdf"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202008211704561761848748_en.pdf"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202008211704561761848748_en.pdf"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202008211704561761848748_en.pdf"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202008211704561761848748_en.pdf"
         }
       },
       "extractionDiagnostics": {
@@ -8268,7 +8766,16 @@
       "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
       "officialRevenueTaxonomyChangedFromPriorYear": false,
       "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
-      "officialRevenueDetailTaxonomyChangedFromPriorYear": false
+      "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
+      "derivedStatementFields": [
+        "operatingExpensesBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ],
+      "statementValueMode": "direct",
+      "statementSpanQuarters": 1
     },
     "2020Q3": {
       "calendarQuarter": "2020Q3",
@@ -8277,29 +8784,29 @@
       "fiscalQuarter": "Q3",
       "fiscalLabel": "FY2020 Q3",
       "statementCurrency": "CNY",
-      "revenueBn": 35.401,
-      "revenueYoyPct": 28.759,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
-      "sgnaBn": null,
-      "rndBn": null,
+      "revenueBn": 35.401282,
+      "revenueYoyPct": 28.762,
+      "costOfRevenueBn": 24.578273,
+      "grossProfitBn": 10.823008999999999,
+      "sgnaBn": 1.415119,
+      "rndBn": 2.9701199999999996,
       "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
-      "taxBn": null,
-      "netIncomeBn": null,
+      "operatingExpensesBn": 4.099326,
+      "operatingIncomeBn": 6.723682999999999,
+      "nonOperatingBn": 0.02687,
+      "pretaxIncomeBn": 6.750553,
+      "taxBn": 0.429552,
+      "netIncomeBn": 6.321001,
       "netIncomeYoyPct": null,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": null,
+      "grossMarginPct": 30.572365,
+      "operatingMarginPct": 18.992767,
+      "profitMarginPct": 17.855288,
       "effectiveTaxRatePct": null,
-      "revenueQoqPct": 43.196,
+      "revenueQoqPct": 43.198,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
-      "statementSource": "official-revenue-structure",
+      "statementSource": "official-revenue-matched-statement-column",
       "statementSourceUrl": "https://media-meituan.todayir.com/202101071144241709488301_en.pdf",
       "statementFilingDate": "2020-11-30",
       "officialRevenueSegments": [
@@ -8454,6 +8961,61 @@
           "label": "Official filing revenue structure",
           "score": 112,
           "sourceUrl": null
+        },
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202101071144241709488301_en.pdf"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202101071144241709488301_en.pdf"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202101071144241709488301_en.pdf"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202101071144241709488301_en.pdf"
+        },
+        "rndBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202101071144241709488301_en.pdf"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202101071144241709488301_en.pdf"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202101071144241709488301_en.pdf"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202101071144241709488301_en.pdf"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202101071144241709488301_en.pdf"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202101071144241709488301_en.pdf"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202101071144241709488301_en.pdf"
         }
       },
       "extractionDiagnostics": {
@@ -8490,7 +9052,16 @@
       "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
       "officialRevenueTaxonomyChangedFromPriorYear": false,
       "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
-      "officialRevenueDetailTaxonomyChangedFromPriorYear": false
+      "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
+      "derivedStatementFields": [
+        "operatingExpensesBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ],
+      "statementValueMode": "direct",
+      "statementSpanQuarters": 1
     },
     "2020Q4": {
       "calendarQuarter": "2020Q4",
@@ -8499,29 +9070,29 @@
       "fiscalQuarter": "Q4",
       "fiscalLabel": "FY2020 Q4",
       "statementCurrency": "CNY",
-      "revenueBn": 37.917,
-      "revenueYoyPct": 34.653,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
-      "sgnaBn": null,
-      "rndBn": null,
+      "revenueBn": 37.917504,
+      "revenueYoyPct": 34.659,
+      "costOfRevenueBn": 28.461795,
+      "grossProfitBn": 9.455708999999999,
+      "sgnaBn": 1.9509429999999999,
+      "rndBn": 3.249199,
       "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
-      "taxBn": null,
-      "netIncomeBn": null,
+      "operatingExpensesBn": 12.308405,
+      "operatingIncomeBn": -2.852696,
+      "nonOperatingBn": 0.037387,
+      "pretaxIncomeBn": -2.815309,
+      "taxBn": -0.571017,
+      "netIncomeBn": -2.2442919999999997,
       "netIncomeYoyPct": null,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": null,
+      "grossMarginPct": 24.937583,
+      "operatingMarginPct": -7.523428,
+      "profitMarginPct": -5.918881,
       "effectiveTaxRatePct": null,
-      "revenueQoqPct": 7.107,
+      "revenueQoqPct": 7.108,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
-      "statementSource": "official-revenue-structure",
+      "statementSource": "official-revenue-matched-statement-column",
       "statementSourceUrl": "https://media-meituan.todayir.com/202103261701041773929787_en.pdf",
       "statementFilingDate": "2021-03-26",
       "officialRevenueSegments": [
@@ -8676,6 +9247,61 @@
           "label": "Official filing revenue structure",
           "score": 112,
           "sourceUrl": null
+        },
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202103261701041773929787_en.pdf"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202103261701041773929787_en.pdf"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202103261701041773929787_en.pdf"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202103261701041773929787_en.pdf"
+        },
+        "rndBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202103261701041773929787_en.pdf"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202103261701041773929787_en.pdf"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202103261701041773929787_en.pdf"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202103261701041773929787_en.pdf"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202103261701041773929787_en.pdf"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202103261701041773929787_en.pdf"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://media-meituan.todayir.com/202103261701041773929787_en.pdf"
         }
       },
       "extractionDiagnostics": {
@@ -8712,7 +9338,16 @@
       "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
       "officialRevenueTaxonomyChangedFromPriorYear": false,
       "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
-      "officialRevenueDetailTaxonomyChangedFromPriorYear": false
+      "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
+      "derivedStatementFields": [
+        "operatingExpensesBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ],
+      "statementValueMode": "direct",
+      "statementSpanQuarters": 1
     },
     "2026Q1": {
       "calendarQuarter": "2026Q1",
@@ -14867,7 +15502,8 @@
           "2026Q1: opex breakdown sums to 33.431Bn vs operating expenses 32.44Bn."
         ]
       }
-    }
+    },
+    "statementBackfilledQuarterCount": 10
   },
   "marketCapUsd": 58982546713,
   "marketCapAsOf": "2026-07-06",

@@ -6588,35 +6588,35 @@
     },
     "2026Q2": {
       "calendarQuarter": "2026Q2",
-      "periodEnd": "2026-06-30",
+      "periodEnd": "2026-05-10",
       "fiscalYear": "2026",
-      "fiscalQuarter": "Q2",
-      "fiscalLabel": "FY2026 Q2",
+      "fiscalQuarter": "Q3",
+      "fiscalLabel": "FY2026 Q3",
       "statementCurrency": "USD",
       "revenueBn": 70.527,
       "revenueYoyPct": 11.585,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
-      "sgnaBn": null,
+      "costOfRevenueBn": 61.519,
+      "grossProfitBn": 9.008,
+      "sgnaBn": 6.193,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
+      "operatingExpensesBn": 6.193,
+      "operatingIncomeBn": 2.815,
       "nonOperatingBn": null,
       "pretaxIncomeBn": null,
-      "taxBn": null,
-      "netIncomeBn": null,
+      "taxBn": 0.746,
+      "netIncomeBn": 2.192,
       "netIncomeYoyPct": null,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": null,
+      "grossMarginPct": 12.772413,
+      "operatingMarginPct": 3.991379,
+      "profitMarginPct": 3.10803,
       "effectiveTaxRatePct": null,
       "revenueQoqPct": 1.336,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
-      "statementSource": "official-revenue-structure",
-      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000051/cost-20260510_htm.xml",
+      "statementSource": "official-inline-quarter-statement",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000051/cost-20260510.htm",
       "statementFilingDate": "2026-06-03",
       "officialRevenueSegments": [
         {
@@ -6720,39 +6720,88 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "fieldSources": {
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000051/cost-20260510.htm"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000051/cost-20260510.htm"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000051/cost-20260510.htm"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000051/cost-20260510.htm"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000051/cost-20260510.htm"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000051/cost-20260510.htm"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000051/cost-20260510.htm"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000051/cost-20260510.htm"
+        }
+      },
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ],
+      "derivedStatementFields": [],
+      "statementValueMode": "direct",
+      "statementSpanQuarters": 1,
+      "statementPeriodStart": "2026-02-16"
     },
     "2026Q3": {
       "calendarQuarter": "2026Q3",
-      "periodEnd": "2026-09-30",
+      "periodEnd": "2026-08-30",
       "fiscalYear": "2026",
-      "fiscalQuarter": "Q3",
-      "fiscalLabel": "FY2026 Q3",
+      "fiscalQuarter": "Q4",
+      "fiscalLabel": "FY2026 Q4",
       "statementCurrency": "USD",
       "revenueBn": 95.723,
       "revenueYoyPct": 11.104,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
-      "sgnaBn": null,
+      "costOfRevenueBn": 83.531,
+      "grossProfitBn": 12.192,
+      "sgnaBn": 8.391,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
+      "operatingExpensesBn": 8.391,
+      "operatingIncomeBn": 3.801,
       "nonOperatingBn": null,
       "pretaxIncomeBn": null,
-      "taxBn": null,
-      "netIncomeBn": null,
+      "taxBn": 1.011,
+      "netIncomeBn": 2.998,
       "netIncomeYoyPct": null,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": null,
+      "grossMarginPct": 12.736751,
+      "operatingMarginPct": 3.970833,
+      "profitMarginPct": 3.131954,
       "effectiveTaxRatePct": null,
       "revenueQoqPct": 35.725,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
-      "statementSource": "official-revenue-structure",
-      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/cost-20260830_htm.xml",
+      "statementSource": "official-quarter-statement-backfill",
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000909832.json",
       "statementFilingDate": "2026-10-07",
       "officialRevenueSegments": [
         {
@@ -6856,7 +6905,53 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "fieldSources": {
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000909832.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000909832.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000909832.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000909832.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000909832.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000909832.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000909832.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000909832.json"
+        }
+      },
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ],
+      "derivedStatementFields": []
     }
   },
   "statementSource": "official-sec-companyfacts+field-reconciled",
@@ -10612,7 +10707,8 @@
         "warningCount": 0,
         "warnings": []
       }
-    }
+    },
+    "statementBackfilledQuarterCount": 2
   },
   "marketCapUsd": 422045483008,
   "marketCapAsOf": "2026-07-06",

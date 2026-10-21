@@ -5,6 +5,7 @@ function companyDisplay(company) {
 }
 
 function renderCompanyList() {
+  if (globalThis.EarningsDesk) return globalThis.EarningsDesk.renderCompanyList();
   if (!refs.companyList) return;
   const search = refs.companySearch?.value?.trim()?.toLowerCase() || "";
   const filtered = companies().filter((company) => !search || companySearchValue(company).includes(search));
@@ -32,6 +33,7 @@ function renderCompanyList() {
 }
 
 function syncActiveCompanyCard() {
+  if (globalThis.EarningsDesk) return globalThis.EarningsDesk.syncCompany();
   if (!refs.companyList) return;
   refs.companyList.querySelectorAll("[data-company-id]").forEach((node) => {
     const isActive = node.getAttribute("data-company-id") === state.selectedCompanyId;
@@ -40,6 +42,7 @@ function syncActiveCompanyCard() {
 }
 
 function requestRenderCurrent() {
+  globalThis.EarningsDesk?.setBusy(true);
   if (state.pendingRenderFrame && typeof cancelAnimationFrame === "function") {
     cancelAnimationFrame(state.pendingRenderFrame);
   }
@@ -59,8 +62,8 @@ function selectCompany(companyId, { preferReplica = false, rerenderList = false 
   if (!company) return;
   const isCompanySwitch = companyId !== state.selectedCompanyId;
   state.selectedCompanyId = companyId;
-  if (isCompanySwitch) state.selectedQuarter = null;
-  syncQuarterOptions({ preferReplica, preserveSelectedQuarter: !isCompanySwitch });
+  if (isCompanySwitch && !(state.keepQuarterOnCompanySwitch && renderableQuarterKeys(company).includes(state.selectedQuarter))) state.selectedQuarter = null;
+  syncQuarterOptions({ preferReplica, preserveSelectedQuarter: !isCompanySwitch || !!state.keepQuarterOnCompanySwitch });
   if (rerenderList) {
     renderCompanyList();
   } else {
@@ -73,10 +76,10 @@ function selectCompany(companyId, { preferReplica = false, rerenderList = false 
 
 function quarterOptionLabel(company, quarterKey) {
   const entry = company?.financials?.[quarterKey];
-  if (!entry) return quarterKey;
+  if (!entry) return `自然季度 ${quarterKey}`;
   const end = entry.periodEnd || "-";
   const fiscal = entry.fiscalLabel || "";
-  return `${quarterKey} · ${fiscal} · ${end}`;
+  return `${fiscal || quarterKey} · ${end}`;
 }
 
 function isRenderableBridgeEntry(entry) {
@@ -1579,6 +1582,8 @@ function buildOfficialBusinessGroups(company, entry, options = {}) {
       supportLinesZh: suppressSupportLines ? null : item.supportLinesZh || null,
       compactLabel: compactMode,
       sourceUrl: item.sourceUrl || null,
+      inferredFromQuarter: item.inferredFromQuarter || null,
+      syntheticResidual: !!item.syntheticResidual,
       filingDate: item.filingDate || null,
       periodEnd: item.periodEnd || entry?.periodEnd || null,
       memberKey,
@@ -1928,6 +1933,8 @@ function buildGenericSnapshot(company, entry, quarterKey) {
     ...entry,
     quarterKey: entry.quarterKey || quarterKey,
     grossProfitBn,
+    grossProfitLabel: currentChartLanguage() === "zh" ? entry.grossProfitLabelZh || entry.grossProfitLabel : entry.grossProfitLabel,
+    costLabel: currentChartLanguage() === "zh" ? entry.costLabelZh || entry.costLabel : entry.costLabel,
     costOfRevenueBn,
     operatingIncomeBn: operatingProfitBn,
     operatingExpensesBn,
@@ -2244,6 +2251,8 @@ function buildGenericSnapshot(company, entry, quarterKey) {
     revenueYoyPct,
     revenueQoqPct,
     grossProfitBn,
+    grossProfitLabel: normalizedEntry.grossProfitLabel,
+    costLabel: normalizedEntry.costLabel,
     grossMarginPct,
     grossMarginYoyDeltaPp: entry.grossMarginYoyDeltaPp,
     costOfRevenueBn,
@@ -2254,6 +2263,7 @@ function buildGenericSnapshot(company, entry, quarterKey) {
     operatingExpensesBn,
     displayOperatingExpensesBn,
     operatingLossOverflowBn,
+    taxBn,
     netProfitBn: entry.netIncomeBn,
     pretaxIncomeBn: normalizedPretaxIncomeBn,
     netMarginPct,

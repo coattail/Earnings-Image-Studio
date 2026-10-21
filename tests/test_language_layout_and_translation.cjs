@@ -285,15 +285,19 @@ test("TSMC platform growth is converted into each quarter's displayed USD basis"
   assert.notEqual(q2Dce.yoyPct, q2Others.yoyPct);
 });
 
-test("JD historical revenue-only Sankey renders the official four-category hierarchy", () => {
+test("JD historical full Sankey preserves the official four-category hierarchy", () => {
   const { svg, detailCount } = renderJd(loadRuntime(), "2019Q2");
+  const labels = [...svg.matchAll(/<text\b[^>]*>([\s\S]*?)<\/text>/g)]
+    .map((match) => match[1].replace(/<[^>]*>/g, "")).join("");
 
   assert.equal(detailCount, 4);
-  for (const label of ["电子产品及家电收入", "日用百货收入", "平台及营销收入", "物流及其他服务收入"]) {
-    assert.match(svg, new RegExp(label));
+  for (const label of ["电子产品及家电收入", "日用百货收入", "平台与营销收入", "物流及其他服务收入"]) {
+    assert.ok(labels.includes(label), `Missing official category: ${label}`);
   }
-  assert.match(svg, />商品收入<\/text>/);
-  assert.match(svg, />服务收入<\/text>/);
+  assert.ok(labels.includes("净产品营收"));
+  assert.ok(labels.includes("净服务营收"));
+  assert.match(svg, /data-edit-node-visible-id="operating"/);
+  assert.match(svg, /data-edit-node-visible-id="net"/);
 });
 
 test("NVDA bar history normalizes legacy non-Data Center segments into Edge Computing", () => {
@@ -316,18 +320,21 @@ test("NVDA bar history normalizes legacy non-Data Center segments into Edge Comp
   assert.notEqual(history.colorBySegment.edgecomputing, history.colorBySegment.datacenter);
 });
 
-test("positive-heavy NVDA Sankey layout lifts operating and net nodes and keeps the gain bridge attached", () => {
+test("NVDA profit spine stays shallow while its gain bridge remains attached", () => {
   const { svg } = renderNvda(loadRuntime(), "zh");
   const operating = nodeRect(svg, "operating");
+  const gross = nodeRect(svg, "gross");
   const positive = nodeRect(svg, "positive-0");
   const net = nodeRect(svg, "net");
   const tax = nodeRect(svg, "deduction-0");
   const rAndD = nodeRect(svg, "opex-0");
   const sgAndA = nodeRect(svg, "opex-1");
 
-  assert.ok(operating.y <= 560, `operating node should move upward in positive-heavy layouts, got y=${operating.y}`);
-  assert.ok(net.y <= 350, `net node should move upward with operating profit, got y=${net.y}`);
-  assert.ok(net.x - (positive.x + positive.width) <= 120, "positive adjustment node should stay close to the net-income merge");
+  assert.ok(operating.y < gross.y, "operating profit should rise gently from gross profit");
+  assert.ok((gross.y - operating.y) / (operating.x - gross.x - gross.width) < 0.35);
+  assert.ok((operating.y - net.y - positive.height) / (net.x - operating.x - operating.width) < 0.4);
+  const netRunway = net.x - operating.x - operating.width;
+  assert.ok(net.x - (positive.x + positive.width) <= netRunway * 0.6, "gain bridge should stay within the final stage while retaining room to curve");
   assert.ok(
     net.y - positive.y <= 105,
     `positive adjustment node should stay visually attached above net income, got vertical gap=${net.y - positive.y}`

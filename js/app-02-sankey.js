@@ -1244,12 +1244,12 @@ function renderPixelReplicaSvg(snapshot) {
   let grossBottom = grossTop + grossHeight;
   let costTop = costTopBase + stageRecenteringDownY;
   let costBottom = costTop + costHeight;
-  const opTop = opTopBase + stageRecenteringDownY;
-  const opBottom = opTop + opHeight;
+  let opTop = opTopBase + stageRecenteringDownY;
+  let opBottom = opTop + opHeight;
   let opexTop = opexTopBase + stageRecenteringDownY;
   let opexBottom = opexTop + opexHeight;
-  const netTop = netTopBase + stageRecenteringDownY * netRecenteringFactor;
-  const netBottom = netTop + netHeight;
+  let netTop = netTopBase + stageRecenteringDownY * netRecenteringFactor;
+  let netBottom = netTop + netHeight;
   const sourceDensity = rawSources.length >= 11 ? "ultra" : rawSources.length >= 8 ? "dense" : rawSources.length >= 6 ? "compact" : "regular";
   const sources = rawSources.map((item) => ({
     ...item,
@@ -1358,8 +1358,8 @@ function renderPixelReplicaSvg(snapshot) {
       : 0) +
     preDetailOperatingLanePushdownY +
     dominantPositiveOperatingLanePushdownY;
-  const operatingLaneTop = opTop + opLanePushdownY;
-  const operatingLaneBottom = opBottom + opLanePushdownY;
+  let operatingLaneTop = opTop + opLanePushdownY;
+  let operatingLaneBottom = opBottom + opLanePushdownY;
   const extremePositiveCoreStagePushdownY = useExtremePositiveLayout
     ? Math.max(
         operatingLaneTop + scaleY(safeNumber(snapshot.layout?.extremePositiveGrossRiseY, 42)) - grossTop,
@@ -1403,6 +1403,32 @@ function renderPixelReplicaSvg(snapshot) {
   );
   opexTop += extremePositiveExpenseLanePushdownY + dominantPositiveExpenseLanePushdownY;
   opexBottom += extremePositiveExpenseLanePushdownY + dominantPositiveExpenseLanePushdownY;
+  const hasOrdinaryProfitSpine =
+    snapshot.layout?.disableAutomaticProfitSpine !== true &&
+    !hasOperatingLoss && !netLoss && !useExtremePositiveLayout &&
+    opHeight > 0.5 && netHeight > 0.5 &&
+    totalPositiveMergeHeight <= opHeight * 0.85 &&
+    totalPositiveMergeHeight <= netHeight * 0.72;
+  if (hasOrdinaryProfitSpine) {
+    const structuralY = (id) => scaleY(safeNumber(snapshot.layout?.structuralNodeOffsets?.[id]?.dy, 0));
+    const operatingStructuralY = structuralY("operating");
+    const netStructuralY = structuralY("net");
+    const spine = resolveProfitSpinePositions({
+      grossTop: grossTop + structuralY("gross"),
+      operatingTop: operatingLaneTop + operatingStructuralY, netTop: netTop + netStructuralY,
+      operatingRunway: opX - grossX - nodeWidth,
+      netRunway: rightBaseX - opX - nodeWidth,
+      positiveMergeHeight: totalPositiveMergeHeight, unit: verticalScale,
+      operatingMin: scaleY(220),
+      operatingMax: Math.min(opexTop + structuralY("operating-expenses") - opHeight - opexMinGapFromOperating, chartBottomLimit - opHeight),
+      netMin: Math.max(netTopMinY, scaleY(220)), netMax: chartBottomLimit - netHeight,
+      pinOperating: hasExplicitOpNodeTop, pinNet: hasExplicitNetNodeTop,
+    });
+    const operatingShift = spine.operatingTop - operatingStructuralY - operatingLaneTop;
+    opTop += operatingShift; opBottom += operatingShift;
+    operatingLaneTop += operatingShift; operatingLaneBottom += operatingShift;
+    netTop = spine.netTop - netStructuralY; netBottom = netTop + netHeight;
+  }
   const explicitBelowOperatingBn = belowOperatingItems.reduce((sum, item) => sum + Math.max(safeNumber(item.valueBn), 0), 0);
   const explicitCoreNetHeight = Math.max((operatingProfitBn - explicitBelowOperatingBn) * scale, 0);
   const zeroNetRibbonHeight =
@@ -8566,6 +8592,7 @@ function renderPixelReplicaSvg(snapshot) {
     return appliedLiftY;
   };
   const liftHighRetentionProfitFinish = () => {
+    if (hasOrdinaryProfitSpine) return 0;
     if (!(highRetentionNetFinishLiftY > 0.5)) return 0;
     const operatingFinishLiftY = hasExplicitOpNodeTop
       ? 0
@@ -8979,6 +9006,36 @@ function renderPixelReplicaSvg(snapshot) {
     });
   }
   refreshEditableNodeFrames();
+  if (hasOrdinaryProfitSpine && deductionBoxes.length >= 2 && opexBoxes.length &&
+      !costBreakdownSharesOpexColumn &&
+      !Object.keys(snapshot.interactiveEditorNodeOverrides || {}).some((id) => /^(deduction|opex)-/.test(id))) {
+    // Repack the shared terminal column after moving the spine. Deductions
+    // and operating expenses retain the separation of their parent lanes;
+    // this prevents a flatter spine from squeezing red branches together.
+    const parentGap = Math.max(operatingExpenseFrame.top - operatingFrame.bottom, 0);
+    const familyGap = Math.max(parentGap * 0.9, scaleY(40));
+    const entries = [
+      ...deductionBoxes.map((box, index) => ({ box, lane: "deduction", index,
+        gapAbove: index ? scaleY(84) : 0 })),
+      ...opexBoxes.map((box, index) => ({ box, lane: "opex", index,
+        gapAbove: index ? Math.max(scaleY(40), box.top - opexBoxes[index - 1].bottom) : familyGap })),
+    ];
+    const minY = Math.max(netFrame.bottom + familyGap * 0.9, netSummaryBottom + scaleY(20));
+    const availableGaps = Math.max(terminalLayoutBottomLimit - minY - entries.reduce((sum, e) => sum + e.box.height, 0), 0);
+    const requestedGaps = entries.reduce((sum, e) => sum + e.gapAbove, 0);
+    const gapScale = requestedGaps > 0 ? Math.min(availableGaps / requestedGaps, 1) : 1;
+    if (terminalLayoutBottomLimit - minY >= entries.reduce((sum, e) => sum + Math.max(e.box.height, 1), 0)) {
+      const packed = resolveVerticalBoxesVariableGap(entries.map((e) => ({
+        center: e.box.center + combinedNodeOffsetFor(`${e.lane}-${e.index}`).dy,
+        height: e.box.height, gapAbove: e.gapAbove * gapScale,
+      })), minY, terminalLayoutBottomLimit, 0);
+      entries.forEach((e, index) => {
+        const next = shiftBoxCenter(e.box, packed[index].center - combinedNodeOffsetFor(`${e.lane}-${e.index}`).dy);
+        if (e.lane === "deduction") deductionBoxes[e.index] = next;
+        else opexBoxes[e.index] = next;
+      });
+    }
+  }
   const revenueGrossBand = shiftedInterval(revenueGrossSourceBand.top, revenueGrossSourceBand.bottom, "revenue");
   const revenueCostBand = revenueCostSourceBand ? shiftedInterval(revenueCostSourceBand.top, revenueCostSourceBand.bottom, "revenue") : null;
   const grossProfitBand = shiftedInterval(grossProfitSourceBand.top, grossProfitSourceBand.bottom, "gross");
@@ -9622,10 +9679,14 @@ function renderPixelReplicaSvg(snapshot) {
       24,
       56
     );
-    const positiveNodeMaxX = netX - positiveNodeWidth - clamp(
-      safeNumber(snapshot.layout?.positiveNodeMinOffsetFromNetX, positiveRunwayAvailable * (positiveAbove ? 0.055 : 0.07)),
-      18,
-      56
+    const positiveNodeMaxX = netX - positiveNodeWidth - Math.max(
+      clamp(
+        safeNumber(snapshot.layout?.positiveNodeMinOffsetFromNetX, positiveRunwayAvailable * (positiveAbove ? 0.055 : 0.07)),
+        18, 56
+      ),
+      hasOrdinaryProfitSpine && positiveUpperLane
+        ? Math.min(positiveRunwayAvailable * 0.28, Math.max(positiveRunwayAvailable - positiveNodeWidth - 32, 0))
+        : 0
     );
       const positiveNetAffinityStrength = clamp(
         safeNumber(
@@ -10159,7 +10220,15 @@ function renderPixelReplicaSvg(snapshot) {
           usesExtremePositiveTopLane ? extremePositiveTopLaneMinTop : -Infinity
         );
         const preferredTopMin = Math.max(preferredCorridorTop, prominentTopFloor);
-        const laneTopMax = usesExtremePositiveTopLane ? extremePositiveTopLaneMaxBottom - totalPositiveStackHeight : Infinity;
+        // A small group of gains shares one upper lane. Keep its last source
+        // above the net node, so later items do not sag into the main spine.
+        const gainGroupTopMax = hasOrdinaryProfitSpine && positiveAbove && positiveAdjustments.length > 1
+          ? netFrame.top - scaleY(8) - totalPositiveStackHeight
+          : Infinity;
+        const laneTopMax = Math.min(
+          usesExtremePositiveTopLane ? extremePositiveTopLaneMaxBottom - totalPositiveStackHeight : Infinity,
+          gainGroupTopMax
+        );
         const preferredTopMax = Math.max(Math.min(preferredCorridorBottom - totalPositiveStackHeight, laneTopMax), preferredTopMin);
         const candidateTopMin = Math.max(hardCorridorTop, prominentTopFloor);
         const candidateTopMax = Math.max(Math.min(hardCorridorBottom - totalPositiveStackHeight, laneTopMax), candidateTopMin);
@@ -10511,7 +10580,8 @@ function renderPixelReplicaSvg(snapshot) {
         corridorSampleXs = positiveCorridorSampleXsForNode(positiveNodeX);
       }
     }
-    if (positiveUpperLane && positiveSmallAdjustmentStrength > 0 && periodEndObstacle) {
+    if (positiveUpperLane && positiveSmallAdjustmentStrength > 0 && periodEndObstacle &&
+        positiveTop < periodEndObstacle.bottom + positiveLabelBlockHeight + scaleY(12)) {
       const smallAdjustmentLabelGapX = safeNumber(snapshot.layout?.positiveLabelGapX, 14);
       const smallAdjustmentLabelLeftX =
         positiveNodeX - smallAdjustmentLabelGapX - maxPositiveLabelBlockWidth;

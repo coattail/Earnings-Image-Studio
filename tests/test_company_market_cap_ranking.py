@@ -16,9 +16,11 @@ import build_dataset  # noqa: E402
 class CompanyMarketCapRankingTests(unittest.TestCase):
     def test_company_universe_is_sorted_by_latest_market_cap_snapshot(self) -> None:
         companies = build_dataset.TOP30_COMPANIES
-        self.assertEqual(len(companies), 40)
-        self.assertEqual([item["rank"] for item in companies], list(range(1, 41)))
-        market_caps = [item["marketCapUsd"] for item in companies]
+        self.assertEqual(len(companies), 41)
+        self.assertEqual([item["rank"] for item in companies], list(range(1, 42)))
+        market_caps = [item["marketCapUsd"] for item in companies if item.get("marketCapUsd")]
+        self.assertEqual(companies[-1]["id"], "spacex")
+        self.assertNotIn("marketCapUsd", companies[-1])
         self.assertEqual(market_caps, sorted(market_caps, reverse=True))
         self.assertEqual(companies[0]["id"], "nvidia")
         self.assertLess(next(item["rank"] for item in companies if item["id"] == "samsung"), 15)

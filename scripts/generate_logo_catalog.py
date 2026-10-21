@@ -21,6 +21,7 @@ DATASET_PATH = ROOT_DIR / "data" / "earnings-dataset.json"
 SIMPLE_ICON_URL = "https://cdn.jsdelivr.net/npm/simple-icons/icons/{slug}.svg"
 
 COMPANY_DOMAINS: dict[str, str] = {
+    "spacex": "spacex.com",
     "nvidia": "nvidia.com",
     "apple": "apple.com",
     "alphabet": "abc.xyz",
@@ -79,6 +80,18 @@ OFFICIAL_HOST_ALIASES: dict[str, tuple[str, ...]] = {
 }
 
 OVERRIDE_LOGO_SOURCES: dict[str, dict[str, Any]] = {
+    "spacex": {
+        "local_path": "assets/logos/spacex.svg",
+        "source_type": "simple-icons",
+        "skip_browser_normalization": True,
+        "exclusive": True,
+    },
+    "byd": {
+        "local_path": "assets/logos/byd-corporate.svg",
+        "source_type": "local-official-artwork-adaptation",
+        "skip_browser_normalization": True,
+        "exclusive": True,
+    },
     "alibaba": {
         "url": SIMPLE_ICON_URL.format(slug="alibabadotcom"),
         "fill": "#FF6A00",
@@ -145,14 +158,16 @@ OVERRIDE_LOGO_SOURCES: dict[str, dict[str, Any]] = {
         "official": True,
     },
     "exxon": {
-        "url": "https://corporate.exxonmobil.com/-/media/global/icons/footer/sites/logo-exxonmobil-main.svg",
-        "official": True,
+        "local_path": "assets/logos/exxon-corporate.svg",
+        "source_type": "local-official-artwork-adaptation",
+        "exclusive": True,
     },
     "jnj": {
         "url": "https://jnj-content-lab2.brightspotcdn.com/ac/25/bd2078f54d5992dd486ed26140ce/johnson-johnson-logo.svg",
     },
     "jpmorgan": {
         "url": "https://www.jpmorganchase.com/content/dam/jpmorganchase/images/logos/jpmc-logo.svg",
+        "skip_browser_normalization": True,
     },
     "meta": {
         "url": SIMPLE_ICON_URL.format(slug="meta"),

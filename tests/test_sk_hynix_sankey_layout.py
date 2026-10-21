@@ -115,7 +115,13 @@ class SkHynixSankeyLayoutTests(unittest.TestCase):
         )
 
     def test_net_profit_is_lifted_above_operating_profit(self) -> None:
-        self.assertLess(rect(self.svg, "net")["y"], 300)
+        operating = rect(self.svg, "operating")
+        net = rect(self.svg, "net")
+        rise = operating["y"] - net["y"]
+        self.assertGreater(rise, 0)
+        gain_height = sum(float(node.attrib["height"]) for node in self.svg.findall(".//svg:rect", SVG_NS)
+                          if node.attrib.get("data-edit-node-visible-id", "").startswith("positive-"))
+        self.assertLess(abs(rise - gain_height) / (net["x"] - operating["x"] - operating["width"]), 0.4)
 
     def test_historical_product_sources_omit_support_notes(self) -> None:
         historical_svg = render_sk_hynix_markup("2025Q2")

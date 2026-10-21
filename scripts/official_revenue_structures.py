@@ -4316,10 +4316,8 @@ def _coca_cola_quarter_from_period_end(period_end: str) -> str | None:
     if not period_end:
         return None
     year, month, day = (int(part) for part in period_end.split("-"))
-    if month == 4 and day <= 7:
-        return f"{year}Q1"
-    if month == 1 and day <= 7:
-        return f"{year - 1}Q4"
+    if month in {1, 4, 7, 10} and day <= 7:
+        return f"{year - 1}Q4" if month == 1 else f"{year}Q{(month - 1) // 3}"
     return _calendar_quarter(period_end)
 
 
@@ -4337,6 +4335,8 @@ def _parse_coca_cola_records(html_text: str, filing_date: str, source_url: str, 
             continue
         flat = " | ".join(" / ".join(row) for row in rows[:10]).lower()
         if "operating segments and corporate" not in flat or "net operating revenues" not in flat:
+            continue
+        if "six months ended" in flat or "nine months ended" in flat or "year ended" in flat:
             continue
         date_text = " ".join(" ".join(row) for row in rows[:8])
         date_match = re.search(r"([A-Za-z]+\s+\d{1,2}),\s+(20\d{2})", date_text)
@@ -6191,7 +6191,7 @@ def fetch_official_revenue_structure_history(company: dict[str, Any], refresh: b
     elif company_id == "xiaomi":
         result = _parse_xiaomi_records(company)
     else:
-        cik = _resolve_cik(str(company.get("ticker") or ""), refresh=refresh)
+        cik = int(company["cik"]) if company.get("cik") else _resolve_cik(str(company.get("ticker") or ""), refresh=refresh)
         if cik is not None:
             if company_id in SEGMENT_CACHE_HIERARCHY_CONFIGS:
                 result = _parse_cached_segment_hierarchy_records(company, refresh=refresh)

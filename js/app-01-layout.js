@@ -1,3 +1,44 @@
+// Solve the ordinary profit spine as connected flow ports, rather than adding
+// separate upward offsets for every gain, expense category and crowded stage.
+// Heights remain untouched: the net port includes gains that merge above the
+// operating contribution. This small bounded least-squares problem is scale
+// invariant and shared by every company and reporting period.
+function resolveProfitSpinePositions(options) {
+  const { grossTop, operatingTop, netTop, operatingMin, operatingMax, netMin, netMax } = options;
+  if (![grossTop, operatingTop, netTop, operatingMin, operatingMax, netMin, netMax].every(Number.isFinite) ||
+      operatingMax < operatingMin || netMax < netMin) {
+    return { operatingTop, netTop };
+  }
+  const unit = Math.max(options.unit || 1, 0.001);
+  const firstRun = Math.max(options.operatingRunway, unit * 32);
+  const secondRun = Math.max(options.netRunway, unit * 32);
+  const gainPort = Math.max(options.positiveMergeHeight || 0, 0);
+  const firstRise = clamp(firstRun * 0.16, unit * 26, unit * 72);
+  const secondRise = clamp(secondRun * 0.22, unit * 34, unit * 92);
+  const constraints = [
+    { a: 1, b: 0, target: grossTop - firstRise, weight: 1 / firstRun ** 2 },
+    { a: -1, b: 1, target: -gainPort - secondRise, weight: 1 / secondRun ** 2 },
+    // Penalize an abrupt change in direction across the two main ribbons.
+    { a: 1 / firstRun + 1 / secondRun, b: -1 / secondRun,
+      target: grossTop / firstRun + gainPort / secondRun, weight: 0.16 },
+    { a: 1, b: 0, target: operatingTop, weight: 0.025 / firstRun ** 2 },
+    { a: 0, b: 1, target: netTop, weight: 0.025 / secondRun ** 2 },
+  ];
+  let aa = 0, ab = 0, bb = 0, at = 0, bt = 0;
+  for (const { a, b, target, weight } of constraints) {
+    aa += weight * a * a; ab += weight * a * b; bb += weight * b * b;
+    at += weight * a * target; bt += weight * b * target;
+  }
+  const opBounds = options.pinOperating ? [operatingTop, operatingTop] : [operatingMin, operatingMax];
+  const netBounds = options.pinNet ? [netTop, netTop] : [netMin, netMax];
+  let op = clamp(operatingTop, ...opBounds), net = clamp(netTop, ...netBounds);
+  for (let iteration = 0; iteration < 32; iteration += 1) {
+    op = clamp((at - ab * net) / aa, ...opBounds);
+    net = clamp((bt - ab * op) / bb, ...netBounds);
+  }
+  return { operatingTop: op, netTop: net };
+}
+
 function sanitizeOfficialStructureRows(entry, rows = []) {
   const normalizedRows = [...(rows || [])].map((item) => ({ ...item }));
   if (!normalizedRows.length) return normalizedRows;
@@ -3164,6 +3205,7 @@ function bindInteractiveEditor(snapshot = state.currentSnapshot) {
       const bounds = editorCanvasBounds(svg);
       if (!nodeId || !origin) return;
       event.preventDefault();
+      globalThis.EarningsDesk?.rememberEdit();
       const existing = currentEditorOverrides()[nodeId] || { dx: 0, dy: 0 };
       const baseFrameX = Number.isFinite(frameX) ? frameX - safeNumber(existing.dx, 0) : NaN;
       const baseFrameY = Number.isFinite(frameY) ? frameY - safeNumber(existing.dy, 0) : NaN;

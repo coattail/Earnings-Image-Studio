@@ -59,15 +59,16 @@ class AsmlQ2FY26SankeyLayoutTests(unittest.TestCase):
     def setUpClass(cls) -> None:
         cls.svg_root = render_asml_q2_svg()
 
-    def test_profit_nodes_form_the_reference_upward_staircase(self) -> None:
+    def test_profit_nodes_follow_a_shallow_upward_spine(self) -> None:
         gross = visible_rect(self.svg_root, "gross")
         operating = visible_rect(self.svg_root, "operating")
         net = visible_rect(self.svg_root, "net")
 
-        self.assertGreaterEqual(gross["y"] - operating["y"], 50)
-        self.assertLessEqual(gross["y"] - operating["y"], 70)
-        self.assertGreaterEqual(operating["y"] - net["y"], 175)
-        self.assertLessEqual(operating["y"] - net["y"], 195)
+        for source, target in ((gross, operating), (operating, net)):
+            rise = source["y"] - target["y"]
+            runway = target["x"] - source["x"] - source["width"]
+            self.assertGreater(rise, 0)
+            self.assertLess(rise / runway, 0.35)
 
     def test_system_sales_detail_nodes_are_lifted_and_compacted(self) -> None:
         details = [visible_rect(self.svg_root, f"left-detail-{index}") for index in range(6)]

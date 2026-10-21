@@ -3,10 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
-    <title>财报分析工作台</title>
+    <title>财报分析工作台 · Earnings Desk</title>
+    <meta name="description" content="从营收结构到利润流向，查看全球公司财报、核验数据来源并导出高清图表。" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -22,165 +20,72 @@
         href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700;800&display=swap"
       />
     </noscript>
-    <link rel="stylesheet" href="style.css?v=20261020-quarter-navigation" />
+    <link rel="stylesheet" href="style.css?v=20261021-compact-metrics" />
     <script defer src="js/app-00-http.js?v=20260503-berkshire-q1-v162"></script>
     <script defer src="js/app-00-logo-raster.js?v=20260503-berkshire-q1-v162"></script>
-    <script defer src="js/app-00-foundation.js?v=20261020-quarter-navigation"></script>
-    <script defer src="js/app-01-layout.js?v=20260827-nonoperating-gentle-angle-v199"></script>
-    <script defer src="js/app-02-sankey.js?v=20260827-nonoperating-gentle-angle-v199"></script>
-    <script defer src="js/app-03-data.js?v=20261020-quarter-navigation"></script>
-    <script defer src="js/app-04-bootstrap.js?v=20261020-quarter-navigation"></script>
-    <script defer src="./mobile-ui.js?v=20261020-mobile"></script>
+    <script defer src="js/app-00-foundation.js?v=20261021-port-spine"></script>
+    <script defer src="js/app-01-layout.js?v=20261021-port-spine"></script>
+    <script defer src="js/app-02-sankey.js?v=20261021-port-spine"></script>
+    <script defer src="js/app-03-data.js?v=20261021-statement-labels"></script>
+    <script defer src="js/app-04-bootstrap.js?v=20261021-short-window-spacing"></script>
+    <script defer src="js/app-05-desk.js?v=20261021-spacex-sources"></script>
   </head>
   <body>
+    <a class="skip-link" href="#analysis">跳到财报分析</a>
     <main class="page">
-      <section class="hero">
-        <p class="eyebrow">Earnings Analysis Desk</p>
-        <h1>财报分析工作台</h1>
-        <p id="heroCoverageText" class="subtitle">-</p>
-      </section>
-
+      <header class="hero">
+        <a class="brand" href="./" aria-label="财报分析工作台首页"><span class="brand-mark" aria-hidden="true">▥</span><span><h1>财报分析工作台</h1><span class="eyebrow">EARNINGS DESK</span></span></a>
+        <div class="header-info"><span id="heroCoverageText" class="subtitle">正在载入公司数据</span></div>
+      </header>
       <section class="workspace">
-        <aside class="controls">
-          <h2>筛选与操作</h2>
-
-          <div class="control-block">
-            <div class="block-head">
-              <h3>公司池</h3>
-              <span id="companyCountPill" class="status-pill">-</span>
-            </div>
-            <input
-              id="companySearch"
-              class="asset-search"
-              type="search"
-              placeholder="搜索公司、中文名或 ticker"
-              aria-label="搜索公司"
-            />
-            <div id="companyList" class="company-list" aria-label="公司选择"></div>
-          </div>
-
-          <div class="control-block">
-            <h3>季度</h3>
-            <label>
-              <select id="quarterSelect" aria-label="季度选择"></select>
-            </label>
-            <div class="quarter-navigation" role="group" aria-label="季度切换">
-              <button id="previousQuarterBtn" class="analysis-btn" type="button" disabled><span aria-hidden="true">←</span> 前一季度</button>
-              <button id="nextQuarterBtn" class="analysis-btn" type="button" disabled>后一季度 <span aria-hidden="true">→</span></button>
-            </div>
-            <p id="quarterHint" class="analysis-hint">-</p>
-          </div>
-
-          <div class="control-block">
-            <h3>导出</h3>
-            <div class="actions-row">
-              <button id="downloadSvgBtn" class="analysis-btn" type="button">下载 SVG</button>
-              <button id="downloadPngBtn" class="analysis-btn" type="button">下载 PNG</button>
-            </div>
-            <p class="analysis-hint">PNG 会在本地浏览器里按当前 SVG 原始画布尺寸导出，不依赖额外服务。</p>
-          </div>
-
-          <div class="control-block actions">
-            <h3>分析</h3>
-            <button id="renderBtn" class="primary-btn" type="button">更新分析图表</button>
-            <p id="statusText" class="status">正在加载数据...</p>
+        <aside class="controls" aria-label="公司选择">
+          <button id="mobileCompanyToggle" class="mobile-controls-toggle" type="button" aria-expanded="false" aria-controls="companyPicker">选择公司 <span id="mobileCompanyName">—</span><span aria-hidden="true">⌄</span></button>
+          <div id="companyPicker" class="company-picker">
+            <div class="block-head"><h2>公司</h2><span id="companyCountPill" class="status-pill">—</span></div>
+            <div class="search-wrap"><span aria-hidden="true">⌕</span><input id="companySearch" class="asset-search" type="search" placeholder="公司名称或代码" aria-label="搜索公司" autocomplete="off" /></div>
+            <div class="company-filters" role="group" aria-label="公司范围"><button id="allCompaniesBtn" class="filter-btn is-active" type="button" aria-pressed="true">全部公司</button><button id="favoriteCompaniesBtn" class="filter-btn" type="button" aria-pressed="false">我的收藏 <span id="favoriteCount">0</span></button></div>
+            <p id="companyResults" class="sr-only" role="status"></p>
+            <div id="companyList" class="company-list" aria-label="公司列表"></div>
+            <label class="keep-quarter"><input id="keepQuarterCheckbox" type="checkbox" /> 切换公司时保留当前季度</label>
+            <p class="sidebar-note">收藏与浏览偏好保存在本机</p>
           </div>
         </aside>
-
-        <section class="chart-zone">
-          <div class="chart-head">
-            <div>
-              <h2 id="chartTitle">营收与开支可视化图</h2>
-              <p id="chartMeta">-</p>
-            </div>
-            <div class="chart-head-actions">
-              <div class="chart-tools">
-                <button id="chartModeToggleBtn" class="analysis-btn chart-mode-btn" type="button">切换到柱状图</button>
-                <div id="chartEditGroup" class="chart-edit-group">
-                  <button id="editImageBtn" class="analysis-btn chart-edit-btn" type="button">编辑图片</button>
-                  <button id="resetImageBtn" class="analysis-btn chart-reset-btn" type="button">回到默认</button>
-                </div>
-                <label class="language-switch" for="languageSelect">
-                  <span>语言</span>
-                  <select id="languageSelect" aria-label="图表语言">
-                    <option value="zh">中文</option>
-                    <option value="en">English</option>
-                  </select>
-                </label>
-                <button id="downloadHdBtn" class="analysis-btn chart-download-btn" type="button">下载超清图片</button>
-              </div>
+        <section id="analysis" class="chart-zone" aria-label="财报分析" tabindex="-1">
+          <div id="analysisDock" class="analysis-dock">
+          <div class="chart-head"><div class="company-heading"><p id="companyTicker" class="section-kicker">公司财报</p><h2 id="chartTitle">正在准备财报</h2><p id="chartMeta">营收结构 · 利润流向 · 历史趋势</p></div>
+            <div class="chart-head-actions"><button id="shareViewBtn" class="analysis-btn" type="button">↗ 分享视图</button><label class="language-switch" for="languageSelect"><span>图表语言</span><select id="languageSelect" aria-label="图表语言"><option value="zh">中文</option><option value="en">English</option></select></label>
+              <details id="exportMenu" class="export-menu"><summary class="primary-btn">↓ 导出图表</summary><div class="export-options"><p id="exportDimensions">选择导出格式</p><button id="downloadHdBtn" type="button">超清 PNG <span>3× · 适合发布</span></button><button id="downloadPngBtn" type="button">标准 PNG <span>原始画布尺寸</span></button><button id="downloadSvgBtn" type="button">矢量 SVG <span>适合进一步编辑</span></button><button id="downloadCsvBtn" type="button">数据 CSV <span>当前视图的数据</span></button><p>在本机浏览器中生成</p></div></details>
             </div>
           </div>
-
-          <div class="preview-toolbar">
-            <div class="toolbar-item">
-              <span>公司</span>
-              <strong id="toolbarCompany">-</strong>
-            </div>
-            <div class="toolbar-item">
-              <span>季度</span>
-              <strong id="toolbarQuarter">-</strong>
-            </div>
-            <div class="toolbar-item">
-              <span id="toolbarUpdatedLabel">数据更新</span>
-              <strong id="toolbarUpdatedAt">-</strong>
-            </div>
-            <div class="toolbar-item">
-              <span>显示币种</span>
-              <strong id="analysisCurrencyPill">-</strong>
-            </div>
-          </div>
-
+          <div class="period-bar"><div class="period-picker"><label class="sr-only" for="quarterSelect">选择报告期</label><select id="quarterSelect" aria-label="季度选择"></select><div class="quarter-navigation" role="group" aria-label="季度切换"><button id="previousQuarterBtn" class="icon-btn" type="button" title="前一报告期" aria-label="前一报告期" disabled>←</button><button id="nextQuarterBtn" class="icon-btn" type="button" title="后一报告期" aria-label="后一报告期" disabled>→</button><button id="latestQuarterBtn" class="text-btn" type="button">回到最新</button></div></div><p id="quarterHint" class="analysis-hint">—</p></div>
+          <div class="preview-toolbar"><span><span id="toolbarCompany">—</span></span><span><span id="toolbarQuarter">—</span></span><span>显示币种 <strong id="analysisCurrencyPill">—</strong></span><span class="updated-meta"><span id="toolbarUpdatedLabel">数据集更新</span> <time id="toolbarUpdatedAt">—</time></span></div>
+          <details id="metricsDetails" class="metrics-details"><summary><strong>本期指标与摘要</strong><span id="metricsSummary">—</span><span class="metrics-toggle-label">展开</span></summary><div class="metrics-content">
           <div class="kpi-grid">
-            <article class="kpi-card">
-              <span class="kpi-label">营收</span>
-              <strong id="kpiRevenueValue" class="kpi-value">-</strong>
-              <p id="kpiRevenueDelta" class="kpi-delta">-</p>
-            </article>
-            <article class="kpi-card">
-              <span class="kpi-label">毛利率</span>
-              <strong id="kpiGrossMarginValue" class="kpi-value">-</strong>
-              <p id="kpiGrossMarginDelta" class="kpi-delta">-</p>
-            </article>
-            <article class="kpi-card">
-              <span class="kpi-label">经营利润率</span>
-              <strong id="kpiOperatingMarginValue" class="kpi-value">-</strong>
-              <p id="kpiOperatingMarginDelta" class="kpi-delta">-</p>
-            </article>
-            <article class="kpi-card">
-              <span class="kpi-label">净利率</span>
-              <strong id="kpiNetMarginValue" class="kpi-value">-</strong>
-              <p id="kpiNetMarginDelta" class="kpi-delta">-</p>
-            </article>
+            <article class="kpi-card"><span class="kpi-label">营收</span><strong id="kpiRevenueValue" class="kpi-value">—</strong><p id="kpiRevenueDelta" class="kpi-delta">—</p></article>
+            <article class="kpi-card"><span id="kpiGrossMarginLabel" class="kpi-label">毛利率</span><strong id="kpiGrossMarginValue" class="kpi-value">—</strong><p id="kpiGrossMarginDelta" class="kpi-delta">—</p></article>
+            <article class="kpi-card"><span class="kpi-label">经营利润率</span><strong id="kpiOperatingMarginValue" class="kpi-value">—</strong><p id="kpiOperatingMarginDelta" class="kpi-delta">—</p></article>
+            <article class="kpi-card"><span class="kpi-label">净利率</span><strong id="kpiNetMarginValue" class="kpi-value">—</strong><p id="kpiNetMarginDelta" class="kpi-delta">—</p></article>
           </div>
-
-          <div class="preview-stage">
-            <div id="previewCanvas" class="preview-canvas">
-              <div id="chartOutput" class="chart-output"></div>
-            </div>
+          <div id="insightStrip" class="insight-strip" aria-label="本期数据速览"></div>
+          </div></details>
           </div>
-
-          <div class="detail-grid">
-            <article class="detail-card">
-              <span>业务结构</span>
-              <strong id="detailSegmentCount">-</strong>
-              <p id="detailSegmentNote">-</p>
-            </article>
-            <article class="detail-card">
-              <span>利润桥概览</span>
-              <strong id="detailStatementSummary">-</strong>
-              <p id="detailStatementNote">-</p>
-            </article>
-            <article class="detail-card">
-              <span>口径与来源</span>
-              <strong id="detailSourceTitle">-</strong>
-              <p id="detailSourceNote">-</p>
-            </article>
-          </div>
-
-          <p id="footnoteText" class="footnote">-</p>
+          <section id="chartPanel" class="chart-panel" aria-label="图表与数据">
+            <div class="view-toolbar"><div class="view-tabs" role="group" aria-label="图表类型"><button id="sankeyTab" class="view-tab is-active" type="button" aria-pressed="true">利润流向</button><button id="barsTab" class="view-tab" type="button" aria-pressed="false">营收趋势</button></div><div class="view-tools"><label id="historyRangeLabel" class="range-label" hidden>范围 <select id="historyRangeSelect" aria-label="历史报告期范围"><option value="8">近 8 期</option><option value="12">近 12 期</option><option value="30" selected>近 30 期</option></select></label><div id="chartEditGroup" class="chart-edit-group"><button id="editImageBtn" class="text-btn" type="button">编辑排版</button></div><button id="dataViewBtn" class="text-btn" type="button" aria-pressed="false">数据表</button><button id="fullscreenBtn" class="text-btn" type="button">全屏查看</button></div></div>
+            <button id="chartModeToggleBtn" type="button" hidden aria-hidden="true" tabindex="-1">切换图表</button>
+            <div id="editingActions" class="editing-actions" hidden><span>拖动节点调整位置 · 自动保存到本机</span><button id="undoEditBtn" class="text-btn" type="button" disabled>撤销</button><button id="redoEditBtn" class="text-btn" type="button" disabled>重做</button><button id="resetImageBtn" class="text-btn" type="button" disabled>重置排版</button></div>
+            <div id="chartError" class="chart-error" hidden role="alert"><strong>暂时无法显示这份财报</strong><p id="chartErrorText"></p><button id="retryRenderBtn" class="analysis-btn" type="button">重新加载</button></div>
+            <div id="mobileProfitChain" class="mobile-profit-chain"></div>
+            <div class="preview-stage"><button id="zoomChartBtn" class="mobile-preview-toggle" type="button" aria-pressed="false">放大图表 · 可左右滑动</button><div id="previewCanvas" class="preview-canvas"><div id="chartOutput" class="chart-output"><div class="loading-placeholder"><span class="loading-orbit"></span><p>正在加载财报数据…</p></div></div></div></div>
+            <div id="dataTablePanel" class="data-table-panel" hidden><div id="dataTableOutput" class="table-wrap" tabindex="0" aria-label="财报数据表，可横向滚动"></div><p id="dataTableNote" class="analysis-hint"></p></div>
+            <div class="chart-caption"><span id="chartCaption">从业务营收，看到成本与利润的流向</span><button id="openSourcesBtn" class="text-btn" type="button">查看数据依据 ↗</button></div>
+          </section>
+          <details id="sourceDetails" class="source-details"><summary><span><span class="source-icon" aria-hidden="true">↗</span><strong>数据依据与口径</strong><span id="sourceSummary" class="source-summary">正在整理来源</span></span><span class="details-chevron" aria-hidden="true">⌄</span></summary><div class="source-content"><div id="sourceOverview" class="source-overview"></div><div id="sourceLinks" class="source-links"></div><div id="sourceWarnings" class="source-warnings"></div><details class="diagnostics-details"><summary>查看解析记录与字段来源</summary><div id="fieldSourceTable" class="table-wrap" tabindex="0"></div><p id="diagnosticsNote" class="analysis-hint"></p></details></div></details>
+          <div class="detail-grid" hidden aria-hidden="true"><span id="detailSegmentCount"></span><span id="detailSegmentNote"></span><span id="detailStatementSummary"></span><span id="detailStatementNote"></span><span id="detailSourceTitle"></span><span id="detailSourceNote"></span><span id="footnoteText"></span></div>
+          <footer class="workspace-footer"><p id="statusText" class="status" role="status" aria-live="polite">正在加载数据…</p><span>金额与比例可能因四舍五入存在尾差</span></footer>
         </section>
       </section>
     </main>
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+    <dialog id="shareDialog" class="share-dialog"><form method="dialog"><button class="dialog-close text-btn" aria-label="关闭">×</button><h2>分享当前视图</h2><p id="shareHelp">复制链接后，可恢复当前公司、报告期和图表设置。</p><label for="shareUrl">视图链接</label><input id="shareUrl" type="text" readonly /><button id="copyShareBtn" class="primary-btn" type="button">复制链接</button><p class="analysis-hint">本地预览链接仅能在运行预览的电脑上打开。</p></form></dialog>
   </body>
 </html>

@@ -119,11 +119,9 @@ class AlphabetQ2FY23SankeyLayoutTests(unittest.TestCase):
             36,
             "Operating profit should stay near the smooth gross-to-net trajectory instead of creating a sharp late elbow.",
         )
-        self.assertGreaterEqual(
-            gross["y"] - operating["y"],
-            70,
-            "Alphabet Q2 FY23 needs a visible lift at operating profit so the main green band rises progressively.",
-        )
+        self.assertGreater(gross_top, operating_top)
+        self.assertLess((gross_top - operating_top) / incoming_run, 0.35)
+        self.assertLess(abs(operating_top - net_core_top) / outgoing_run, 0.4)
 
 
 if __name__ == "__main__":

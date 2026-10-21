@@ -58,21 +58,21 @@
       "statementCurrency": "USD",
       "revenueBn": 5.073,
       "revenueYoyPct": null,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 5.073,
       "sgnaBn": 0.222,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": null,
+      "operatingExpensesBn": 1.737,
       "operatingIncomeBn": 3.336,
       "nonOperatingBn": -0.119,
       "pretaxIncomeBn": 3.217,
       "taxBn": 0.612,
       "netIncomeBn": 2.605,
       "netIncomeYoyPct": null,
-      "grossMarginPct": null,
-      "operatingMarginPct": 65.76,
-      "profitMarginPct": 51.35,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 65.759905,
+      "profitMarginPct": 51.350286,
       "effectiveTaxRatePct": 19.024,
       "revenueQoqPct": null,
       "grossMarginYoyDeltaPp": null,
@@ -125,7 +125,7 @@
         "status": "medium",
         "confidenceScore": 0.7937,
         "completenessScore": 0.625,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 5,
         "checksPassed": 5,
         "issueCount": 0,
@@ -147,6 +147,56 @@
           "label": "SEC companyfacts / filings",
           "score": 8.1,
           "sourceUrl": null
+        },
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
         }
       },
       "extractionDiagnostics": {
@@ -260,6 +310,19 @@
             "partial-revenue-component-disclosure"
           ]
         }
+      ],
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json",
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingExpensesBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
       ]
     },
     "2018Q2": {
@@ -271,21 +334,21 @@
       "statementCurrency": "USD",
       "revenueBn": 5.24,
       "revenueYoyPct": null,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 5.24,
       "sgnaBn": 0.23,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": null,
+      "operatingExpensesBn": 2.355,
       "operatingIncomeBn": 2.885,
       "nonOperatingBn": -0.073,
       "pretaxIncomeBn": 2.812,
       "taxBn": 0.483,
       "netIncomeBn": 2.329,
       "netIncomeYoyPct": null,
-      "grossMarginPct": null,
-      "operatingMarginPct": 55.057,
-      "profitMarginPct": 44.447,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 55.057252,
+      "profitMarginPct": 44.446565,
       "effectiveTaxRatePct": 17.176,
       "revenueQoqPct": 3.292,
       "grossMarginYoyDeltaPp": null,
@@ -339,7 +402,7 @@
         "status": "medium",
         "confidenceScore": 0.7937,
         "completenessScore": 0.625,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 5,
         "checksPassed": 5,
         "issueCount": 0,
@@ -361,6 +424,56 @@
           "label": "SEC companyfacts / filings",
           "score": 8.1,
           "sourceUrl": null
+        },
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
         }
       },
       "extractionDiagnostics": {
@@ -474,6 +587,26 @@
             "partial-revenue-component-disclosure"
           ]
         }
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2018Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json",
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingExpensesBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
       ]
     },
     "2018Q3": {
@@ -485,21 +618,21 @@
       "statementCurrency": "USD",
       "revenueBn": 5.434,
       "revenueYoyPct": null,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 5.434,
       "sgnaBn": 0.457,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": null,
+      "operatingExpensesBn": 2.028,
       "operatingIncomeBn": 3.406,
       "nonOperatingBn": 0.132,
       "pretaxIncomeBn": 3.538,
       "taxBn": 0.693,
       "netIncomeBn": 2.845,
       "netIncomeYoyPct": null,
-      "grossMarginPct": null,
-      "operatingMarginPct": 62.679,
-      "profitMarginPct": 52.356,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 62.679426,
+      "profitMarginPct": 52.355539,
       "effectiveTaxRatePct": 19.587,
       "revenueQoqPct": 3.702,
       "grossMarginYoyDeltaPp": null,
@@ -553,7 +686,7 @@
         "status": "medium",
         "confidenceScore": 0.7937,
         "completenessScore": 0.625,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 5,
         "checksPassed": 5,
         "issueCount": 0,
@@ -575,6 +708,56 @@
           "label": "SEC companyfacts / filings",
           "score": 8.1,
           "sourceUrl": null
+        },
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
         }
       },
       "extractionDiagnostics": {
@@ -688,6 +871,26 @@
             "partial-revenue-component-disclosure"
           ]
         }
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2018Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json",
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingExpensesBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
       ]
     },
     "2018Q4": {
@@ -699,21 +902,21 @@
       "statementCurrency": "USD",
       "revenueBn": 5.506,
       "revenueYoyPct": null,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 5.506,
       "sgnaBn": 0.276,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": null,
+      "operatingExpensesBn": 1.789,
       "operatingIncomeBn": 3.717,
       "nonOperatingBn": -0.087,
       "pretaxIncomeBn": 3.63,
       "taxBn": 0.653,
       "netIncomeBn": 2.977,
       "netIncomeYoyPct": null,
-      "grossMarginPct": null,
-      "operatingMarginPct": 67.508,
-      "profitMarginPct": 54.068,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 67.508173,
+      "profitMarginPct": 54.068289,
       "effectiveTaxRatePct": 17.989,
       "revenueQoqPct": 1.325,
       "grossMarginYoyDeltaPp": null,
@@ -767,7 +970,7 @@
         "status": "medium",
         "confidenceScore": 0.7937,
         "completenessScore": 0.625,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 5,
         "checksPassed": 5,
         "issueCount": 0,
@@ -789,6 +992,56 @@
           "label": "SEC companyfacts / filings",
           "score": 8.1,
           "sourceUrl": null
+        },
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
         }
       },
       "extractionDiagnostics": {
@@ -902,6 +1155,26 @@
             "partial-revenue-component-disclosure"
           ]
         }
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2018Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json",
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingExpensesBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
       ]
     },
     "2019Q1": {
@@ -913,21 +1186,21 @@
       "statementCurrency": "USD",
       "revenueBn": 5.494,
       "revenueYoyPct": 8.299,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 5.494,
       "sgnaBn": 0.264,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": null,
+      "operatingExpensesBn": 1.853,
       "operatingIncomeBn": 3.641,
       "nonOperatingBn": 0.036,
       "pretaxIncomeBn": 3.677,
       "taxBn": 0.7,
       "netIncomeBn": 2.977,
       "netIncomeYoyPct": 14.28,
-      "grossMarginPct": null,
-      "operatingMarginPct": 66.272,
-      "profitMarginPct": 54.186,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 66.272297,
+      "profitMarginPct": 54.186385,
       "effectiveTaxRatePct": 19.037,
       "revenueQoqPct": -0.218,
       "grossMarginYoyDeltaPp": null,
@@ -985,7 +1258,7 @@
         "status": "medium",
         "confidenceScore": 0.7937,
         "completenessScore": 0.625,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 5,
         "checksPassed": 5,
         "issueCount": 0,
@@ -1007,6 +1280,56 @@
           "label": "SEC companyfacts / filings",
           "score": 8.1,
           "sourceUrl": null
+        },
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
         }
       },
       "extractionDiagnostics": {
@@ -1120,6 +1443,26 @@
             "partial-revenue-component-disclosure"
           ]
         }
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2018Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json",
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingExpensesBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
       ]
     },
     "2019Q2": {
@@ -1131,21 +1474,21 @@
       "statementCurrency": "USD",
       "revenueBn": 5.84,
       "revenueYoyPct": 11.45,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 5.84,
       "sgnaBn": 0.315,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": null,
+      "operatingExpensesBn": 1.932,
       "operatingIncomeBn": 3.908,
       "nonOperatingBn": -0.042,
       "pretaxIncomeBn": 3.866,
       "taxBn": 0.765,
       "netIncomeBn": 3.101,
       "netIncomeYoyPct": 33.15,
-      "grossMarginPct": null,
-      "operatingMarginPct": 66.918,
-      "profitMarginPct": 53.099,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 66.917808,
+      "profitMarginPct": 53.099315,
       "effectiveTaxRatePct": 19.788,
       "revenueQoqPct": 6.298,
       "grossMarginYoyDeltaPp": null,
@@ -1203,7 +1546,7 @@
         "status": "medium",
         "confidenceScore": 0.7937,
         "completenessScore": 0.625,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 5,
         "checksPassed": 5,
         "issueCount": 0,
@@ -1225,6 +1568,56 @@
           "label": "SEC companyfacts / filings",
           "score": 8.1,
           "sourceUrl": null
+        },
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
         }
       },
       "extractionDiagnostics": {
@@ -1338,6 +1731,26 @@
             "partial-revenue-component-disclosure"
           ]
         }
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json",
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingExpensesBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
       ]
     },
     "2019Q3": {
@@ -1349,21 +1762,21 @@
       "statementCurrency": "USD",
       "revenueBn": 6.137,
       "revenueYoyPct": 12.937,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 6.137,
       "sgnaBn": 0.341,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": null,
+      "operatingExpensesBn": 2.402,
       "operatingIncomeBn": 3.735,
       "nonOperatingBn": -0.024,
       "pretaxIncomeBn": 3.711,
       "taxBn": 0.686,
       "netIncomeBn": 3.025,
       "netIncomeYoyPct": 6.33,
-      "grossMarginPct": null,
-      "operatingMarginPct": 60.86,
-      "profitMarginPct": 49.291,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 60.860355,
+      "profitMarginPct": 49.291185,
       "effectiveTaxRatePct": 18.486,
       "revenueQoqPct": 5.086,
       "grossMarginYoyDeltaPp": null,
@@ -1421,7 +1834,7 @@
         "status": "medium",
         "confidenceScore": 0.7937,
         "completenessScore": 0.625,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 5,
         "checksPassed": 5,
         "issueCount": 0,
@@ -1443,6 +1856,56 @@
           "label": "SEC companyfacts / filings",
           "score": 8.1,
           "sourceUrl": null
+        },
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
         }
       },
       "extractionDiagnostics": {
@@ -1556,6 +2019,26 @@
             "partial-revenue-component-disclosure"
           ]
         }
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json",
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingExpensesBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
       ]
     },
     "2019Q4": {
@@ -1567,21 +2050,21 @@
       "statementCurrency": "USD",
       "revenueBn": 6.054,
       "revenueYoyPct": 9.953,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 6.054,
       "sgnaBn": 0.313,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": null,
+      "operatingExpensesBn": 2.038,
       "operatingIncomeBn": 4.016,
       "nonOperatingBn": -0.042,
       "pretaxIncomeBn": 3.974,
       "taxBn": 0.702,
       "netIncomeBn": 3.272,
       "netIncomeYoyPct": 9.91,
-      "grossMarginPct": null,
-      "operatingMarginPct": 66.336,
-      "profitMarginPct": 54.047,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 66.336307,
+      "profitMarginPct": 54.046911,
       "effectiveTaxRatePct": 17.665,
       "revenueQoqPct": -1.352,
       "grossMarginYoyDeltaPp": null,
@@ -1639,7 +2122,7 @@
         "status": "medium",
         "confidenceScore": 0.7937,
         "completenessScore": 0.625,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 5,
         "checksPassed": 5,
         "issueCount": 0,
@@ -1661,6 +2144,56 @@
           "label": "SEC companyfacts / filings",
           "score": 8.1,
           "sourceUrl": null
+        },
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
         }
       },
       "extractionDiagnostics": {
@@ -1774,6 +2307,26 @@
             "partial-revenue-component-disclosure"
           ]
         }
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json",
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingExpensesBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
       ]
     },
     "2020Q1": {
@@ -1785,21 +2338,21 @@
       "statementCurrency": "USD",
       "revenueBn": 5.854,
       "revenueYoyPct": 6.553,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 5.854,
       "sgnaBn": 0.269,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": null,
+      "operatingExpensesBn": 1.93,
       "operatingIncomeBn": 3.924,
       "nonOperatingBn": -0.095,
       "pretaxIncomeBn": 3.829,
       "taxBn": 0.745,
       "netIncomeBn": 3.084,
       "netIncomeYoyPct": 3.59,
-      "grossMarginPct": null,
-      "operatingMarginPct": 67.031,
-      "profitMarginPct": 52.682,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 67.03109,
+      "profitMarginPct": 52.681927,
       "effectiveTaxRatePct": 19.457,
       "revenueQoqPct": -3.304,
       "grossMarginYoyDeltaPp": null,
@@ -1857,7 +2410,7 @@
         "status": "medium",
         "confidenceScore": 0.7937,
         "completenessScore": 0.625,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 5,
         "checksPassed": 5,
         "issueCount": 0,
@@ -1879,6 +2432,56 @@
           "label": "SEC companyfacts / filings",
           "score": 8.1,
           "sourceUrl": null
+        },
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
         }
       },
       "extractionDiagnostics": {
@@ -1992,6 +2595,26 @@
             "partial-revenue-component-disclosure"
           ]
         }
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json",
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingExpensesBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
       ]
     },
     "2020Q2": {
@@ -2003,21 +2626,21 @@
       "statementCurrency": "USD",
       "revenueBn": 4.837,
       "revenueYoyPct": -17.175,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 4.837,
       "sgnaBn": 0.258,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": null,
+      "operatingExpensesBn": 1.838,
       "operatingIncomeBn": 2.999,
       "nonOperatingBn": -0.067,
       "pretaxIncomeBn": 2.932,
       "taxBn": 0.559,
       "netIncomeBn": 2.373,
       "netIncomeYoyPct": -23.48,
-      "grossMarginPct": null,
-      "operatingMarginPct": 62.001,
-      "profitMarginPct": 49.059,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 62.00124,
+      "profitMarginPct": 49.059334,
       "effectiveTaxRatePct": 19.065,
       "revenueQoqPct": -17.373,
       "grossMarginYoyDeltaPp": null,
@@ -2075,7 +2698,7 @@
         "status": "medium",
         "confidenceScore": 0.7937,
         "completenessScore": 0.625,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 5,
         "checksPassed": 5,
         "issueCount": 0,
@@ -2097,6 +2720,56 @@
           "label": "SEC companyfacts / filings",
           "score": 8.1,
           "sourceUrl": null
+        },
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
         }
       },
       "extractionDiagnostics": {
@@ -2210,6 +2883,26 @@
             "partial-revenue-component-disclosure"
           ]
         }
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json",
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingExpensesBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
       ]
     },
     "2020Q3": {
@@ -2221,21 +2914,21 @@
       "statementCurrency": "USD",
       "revenueBn": 5.101,
       "revenueYoyPct": -16.881,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 5.101,
       "sgnaBn": 0.256,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": null,
+      "operatingExpensesBn": 1.959,
       "operatingIncomeBn": 3.142,
       "nonOperatingBn": -0.087,
       "pretaxIncomeBn": 3.055,
       "taxBn": 0.918,
       "netIncomeBn": 2.137,
       "netIncomeYoyPct": -29.36,
-      "grossMarginPct": null,
-      "operatingMarginPct": 61.596,
-      "profitMarginPct": 41.894,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 61.595766,
+      "profitMarginPct": 41.893746,
       "effectiveTaxRatePct": 30.049,
       "revenueQoqPct": 5.458,
       "grossMarginYoyDeltaPp": null,
@@ -2293,7 +2986,7 @@
         "status": "medium",
         "confidenceScore": 0.7937,
         "completenessScore": 0.625,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 5,
         "checksPassed": 5,
         "issueCount": 0,
@@ -2315,6 +3008,56 @@
           "label": "SEC companyfacts / filings",
           "score": 8.1,
           "sourceUrl": null
+        },
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
         }
       },
       "extractionDiagnostics": {
@@ -2428,6 +3171,26 @@
             "partial-revenue-component-disclosure"
           ]
         }
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json",
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingExpensesBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
       ]
     },
     "2020Q4": {
@@ -2439,21 +3202,21 @@
       "statementCurrency": "USD",
       "revenueBn": 5.687,
       "revenueYoyPct": -6.062,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 5.687,
       "sgnaBn": 0.203,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": null,
+      "operatingExpensesBn": 1.843,
       "operatingIncomeBn": 3.844,
       "nonOperatingBn": -0.096,
       "pretaxIncomeBn": 3.748,
       "taxBn": 0.622,
       "netIncomeBn": 3.126,
       "netIncomeYoyPct": -4.46,
-      "grossMarginPct": null,
-      "operatingMarginPct": 67.593,
-      "profitMarginPct": 54.967,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 67.592755,
+      "profitMarginPct": 54.96747,
       "effectiveTaxRatePct": 16.596,
       "revenueQoqPct": 11.488,
       "grossMarginYoyDeltaPp": null,
@@ -2511,7 +3274,7 @@
         "status": "medium",
         "confidenceScore": 0.7937,
         "completenessScore": 0.625,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 5,
         "checksPassed": 5,
         "issueCount": 0,
@@ -2533,6 +3296,56 @@
           "label": "SEC companyfacts / filings",
           "score": 8.1,
           "sourceUrl": null
+        },
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json"
         }
       },
       "extractionDiagnostics": {
@@ -2646,6 +3459,26 @@
             "partial-revenue-component-disclosure"
           ]
         }
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json",
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingExpensesBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
       ]
     },
     "2021Q1": {
@@ -2736,9 +3569,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -2874,7 +3707,16 @@
             "partial-revenue-component-disclosure"
           ]
         }
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2021Q2": {
       "calendarQuarter": "2021Q2",
@@ -2964,9 +3806,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -3101,7 +3943,16 @@
             "partial-revenue-component-disclosure"
           ]
         }
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2021Q3": {
       "calendarQuarter": "2021Q3",
@@ -3191,9 +4042,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -3328,7 +4179,16 @@
             "partial-revenue-component-disclosure"
           ]
         }
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2021Q4": {
       "calendarQuarter": "2021Q4",
@@ -3418,9 +4278,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -3555,7 +4415,16 @@
             "partial-revenue-component-disclosure"
           ]
         }
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2022Q1": {
       "calendarQuarter": "2022Q1",
@@ -3645,9 +4514,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -3782,7 +4651,16 @@
             "partial-revenue-component-disclosure"
           ]
         }
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2022Q2": {
       "calendarQuarter": "2022Q2",
@@ -3873,9 +4751,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -4010,7 +4888,16 @@
             "partial-revenue-component-disclosure"
           ]
         }
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2022Q3": {
       "calendarQuarter": "2022Q3",
@@ -4101,9 +4988,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -4238,7 +5125,16 @@
             "partial-revenue-component-disclosure"
           ]
         }
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2022Q4": {
       "calendarQuarter": "2022Q4",
@@ -4329,9 +5225,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -4466,7 +5362,16 @@
             "partial-revenue-component-disclosure"
           ]
         }
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2023Q1": {
       "calendarQuarter": "2023Q1",
@@ -4556,9 +5461,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -4693,7 +5598,16 @@
             "partial-revenue-component-disclosure"
           ]
         }
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2023Q2": {
       "calendarQuarter": "2023Q2",
@@ -4784,9 +5698,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -4921,7 +5835,16 @@
             "partial-revenue-component-disclosure"
           ]
         }
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2023Q3": {
       "calendarQuarter": "2023Q3",
@@ -5012,9 +5935,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -5149,7 +6072,16 @@
             "partial-revenue-component-disclosure"
           ]
         }
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2023Q4": {
       "calendarQuarter": "2023Q4",
@@ -5240,9 +6172,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -5377,7 +6309,16 @@
             "partial-revenue-component-disclosure"
           ]
         }
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2024Q1": {
       "calendarQuarter": "2024Q1",
@@ -5468,9 +6409,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -5605,7 +6546,16 @@
             "partial-revenue-component-disclosure"
           ]
         }
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2024Q2": {
       "calendarQuarter": "2024Q2",
@@ -5696,9 +6646,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -5833,7 +6783,16 @@
             "partial-revenue-component-disclosure"
           ]
         }
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2024Q3": {
       "calendarQuarter": "2024Q3",
@@ -5924,9 +6883,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -6061,7 +7020,16 @@
             "partial-revenue-component-disclosure"
           ]
         }
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2024Q4": {
       "calendarQuarter": "2024Q4",
@@ -6152,9 +7120,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -6289,7 +7257,16 @@
             "partial-revenue-component-disclosure"
           ]
         }
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2025Q1": {
       "calendarQuarter": "2025Q1",
@@ -6304,7 +7281,7 @@
       "grossProfitBn": 9.37,
       "sgnaBn": 0.419,
       "rndBn": null,
-      "otherOpexBn": 1.0,
+      "otherOpexBn": 1,
       "operatingExpensesBn": 3.935,
       "operatingIncomeBn": 5.435,
       "nonOperatingBn": 0.003,
@@ -6380,9 +7357,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -6517,7 +7494,16 @@
             "partial-revenue-component-disclosure"
           ]
         }
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2025Q2": {
       "calendarQuarter": "2025Q2",
@@ -6608,9 +7594,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -6745,7 +7731,16 @@
             "partial-revenue-component-disclosure"
           ]
         }
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2025Q3": {
       "calendarQuarter": "2025Q3",
@@ -6836,9 +7831,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -6973,7 +7968,16 @@
             "partial-revenue-component-disclosure"
           ]
         }
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2025Q4": {
       "calendarQuarter": "2025Q4",
@@ -7064,9 +8068,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -7201,7 +8205,16 @@
             "partial-revenue-component-disclosure"
           ]
         }
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2026Q1": {
       "calendarQuarter": "2026Q1",
@@ -7223,7 +8236,7 @@
       "pretaxIncomeBn": 7.174,
       "taxBn": 1.153,
       "netIncomeBn": 6.021,
-      "netIncomeYoyPct": 32.0,
+      "netIncomeYoyPct": 32,
       "grossMarginPct": 97.685,
       "operatingMarginPct": 64.417,
       "profitMarginPct": 53.615,
@@ -7295,9 +8308,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -7430,7 +8443,16 @@
             "partial-revenue-component-disclosure"
           ]
         }
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2026Q2": {
       "calendarQuarter": "2026Q2",
@@ -7502,7 +8524,7 @@
           "valueBn": 6.042,
           "yoyPct": 17.252,
           "qoqPct": 9.002,
-          "mixPct": 37.0,
+          "mixPct": 37,
           "mixYoyDeltaPp": 0.6,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1403161/000140316126000103/q32026earningsrelease.htm",
           "sourceForm": "8-K Exhibit 99.1",
@@ -7564,7 +8586,16 @@
       ],
       "officialRevenueStyle": "visa-revenue-components",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2026Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     }
   },
   "statementSource": "official-8k-earnings-release+stockanalysis",
@@ -7616,7 +8647,7 @@
             "valueBn": 6.042,
             "yoyPct": 17.252,
             "qoqPct": 9.002,
-            "mixPct": 37.0,
+            "mixPct": 37,
             "mixYoyDeltaPp": 0.6,
             "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1403161/000140316126000103/q32026earningsrelease.htm",
             "sourceForm": "8-K Exhibit 99.1",
@@ -10785,7 +11816,7 @@
         "highConfidenceQuarterCount": 20,
         "averageConfidenceScore": 0.9226,
         "latestQuarter": "2025Q4",
-        "latestQuarterConfidenceScore": 1.0,
+        "latestQuarterConfidenceScore": 1,
         "latestQuarterIssueCount": 0
       }
     },
@@ -11019,43 +12050,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -11069,43 +12100,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -11119,43 +12150,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -11169,43 +12200,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -11219,43 +12250,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -11269,43 +12300,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -11319,43 +12350,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -11369,43 +12400,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -11419,43 +12450,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -11469,43 +12500,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -11519,43 +12550,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -11569,43 +12600,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -11619,43 +12650,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -11669,43 +12700,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -11719,43 +12750,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -11769,43 +12800,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -11819,43 +12850,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -11869,43 +12900,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -11919,43 +12950,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -11969,43 +13000,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -12019,43 +13050,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -12069,43 +13100,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -12119,43 +13150,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -12169,43 +13200,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -12219,43 +13250,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -12269,43 +13300,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -12319,43 +13350,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -12369,43 +13400,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -12419,43 +13450,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -12469,43 +13500,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -12519,43 +13550,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -12569,43 +13600,43 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -13377,7 +14408,7 @@
         "highConfidenceQuarterCount": 20,
         "averageConfidenceScore": 0.9226,
         "latestQuarter": "2025Q4",
-        "latestQuarterConfidenceScore": 1.0,
+        "latestQuarterConfidenceScore": 1,
         "latestQuarterIssueCount": 0
       },
       "validation": {
@@ -13398,7 +14429,8 @@
         "warningCount": 0,
         "warnings": []
       }
-    }
+    },
+    "statementBackfilledQuarterCount": 12
   },
   "marketCapUsd": 688678502400,
   "marketCapAsOf": "2026-07-06",

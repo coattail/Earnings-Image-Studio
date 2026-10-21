@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-10-21T01:42:23Z",
-  "companyCount": 40,
+  "generatedAt": "2026-10-21T03:44:20Z",
+  "companyCount": 41,
   "companies": [
     {
       "_cacheVersion": "20260803-v4",
@@ -5467,7 +5467,8 @@
             "warningCount": 0,
             "warnings": []
           }
-        }
+        },
+        "statementBackfilledQuarterCount": 1
       },
       "marketCapUsd": 1095207223296,
       "marketCapAsOf": "2026-07-06",
@@ -5484,30 +5485,30 @@
           "fiscalQuarter": "Q2",
           "fiscalLabel": "FY2026 Q2",
           "statementCurrency": "USD",
-          "revenueBn": 123.601,
-          "revenueYoyPct": 101.285,
-          "costOfRevenueBn": null,
-          "grossProfitBn": null,
-          "sgnaBn": null,
+          "revenueBn": 101.808,
+          "revenueYoyPct": 65.795,
+          "costOfRevenueBn": 78.011,
+          "grossProfitBn": 23.797,
+          "sgnaBn": 6.724,
           "rndBn": null,
           "otherOpexBn": null,
-          "operatingExpensesBn": null,
-          "operatingIncomeBn": null,
-          "nonOperatingBn": null,
-          "pretaxIncomeBn": null,
-          "taxBn": null,
-          "netIncomeBn": null,
+          "operatingExpensesBn": 6.724,
+          "operatingIncomeBn": 17.07300000000001,
+          "nonOperatingBn": 14.99,
+          "pretaxIncomeBn": 32.063,
+          "taxBn": 6.291,
+          "netIncomeBn": 25.667,
           "netIncomeYoyPct": null,
-          "grossMarginPct": null,
-          "operatingMarginPct": null,
-          "profitMarginPct": null,
+          "grossMarginPct": 23.374391,
+          "operatingMarginPct": 16.769802,
+          "profitMarginPct": 25.211182,
           "effectiveTaxRatePct": null,
-          "revenueQoqPct": 31.947,
+          "revenueQoqPct": 8.682,
           "grossMarginYoyDeltaPp": null,
           "operatingMarginYoyDeltaPp": null,
           "profitMarginYoyDeltaPp": null,
-          "statementSource": "official-revenue-structure",
-          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630_htm.xml",
+          "statementSource": "official-inline-quarter-statement",
+          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm",
           "statementFilingDate": "2026-08-10",
           "officialRevenueSegments": [
             {
@@ -5669,7 +5670,66 @@
           },
           "officialRevenueStyle": "berkshire-operating-businesses",
           "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueTaxonomyChangedFromPriorYear": false
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "fieldSources": {
+            "revenueBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm"
+            },
+            "costOfRevenueBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm"
+            },
+            "grossProfitBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm"
+            },
+            "sgnaBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm"
+            },
+            "operatingExpensesBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm"
+            },
+            "operatingIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm"
+            },
+            "nonOperatingBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm"
+            },
+            "pretaxIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm"
+            },
+            "taxBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm"
+            },
+            "netIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm"
+            }
+          },
+          "qualityFlags": [
+            "official-quarter-statement-backfilled"
+          ],
+          "derivedStatementFields": [],
+          "statementValueMode": "direct",
+          "statementSpanQuarters": 1,
+          "statementPeriodStart": "2026-04-01"
         }
       },
       "statementPresets": {},
@@ -6586,7 +6646,8 @@
               "2025Q4: revenue segments sum to 6.164Bn vs revenue 19.292Bn."
             ]
           }
-        }
+        },
+        "statementBackfilledQuarterCount": 2
       },
       "marketCapUsd": 1082493829120,
       "marketCapAsOf": "2026-07-06",
@@ -6603,30 +6664,30 @@
           "fiscalQuarter": "Q2",
           "fiscalLabel": "FY2026 Q2",
           "statementCurrency": "USD",
-          "revenueBn": 46.885,
-          "revenueYoyPct": 201.356,
-          "costOfRevenueBn": null,
-          "grossProfitBn": null,
-          "sgnaBn": null,
-          "rndBn": null,
+          "revenueBn": 22.974,
+          "revenueYoyPct": 47.667,
+          "costOfRevenueBn": 3.268,
+          "grossProfitBn": 19.706,
+          "sgnaBn": 3.43,
+          "rndBn": 3.819,
           "otherOpexBn": null,
-          "operatingExpensesBn": null,
-          "operatingIncomeBn": null,
-          "nonOperatingBn": null,
-          "pretaxIncomeBn": null,
-          "taxBn": null,
-          "netIncomeBn": null,
+          "operatingExpensesBn": 10.728,
+          "operatingIncomeBn": 8.978,
+          "nonOperatingBn": 0.269,
+          "pretaxIncomeBn": 9.247,
+          "taxBn": 2.152,
+          "netIncomeBn": 7.095,
           "netIncomeYoyPct": null,
-          "grossMarginPct": null,
-          "operatingMarginPct": null,
-          "profitMarginPct": null,
+          "grossMarginPct": 85.775224,
+          "operatingMarginPct": 39.078959,
+          "profitMarginPct": 30.882737,
           "effectiveTaxRatePct": null,
-          "revenueQoqPct": 16.118,
+          "revenueQoqPct": 16.036,
           "grossMarginYoyDeltaPp": null,
           "operatingMarginYoyDeltaPp": null,
           "profitMarginYoyDeltaPp": null,
-          "statementSource": "official-revenue-structure",
-          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000081/lly-20260630_htm.xml",
+          "statementSource": "official-inline-quarter-statement",
+          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000081/lly-20260630.htm",
           "statementFilingDate": "2026-08-05",
           "officialRevenueSegments": [
             {
@@ -6638,46 +6699,6 @@
               "qoqPct": 16.45,
               "mixPct": 39.1,
               "mixYoyDeltaPp": -33.8,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000081/lly-20260630_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-08-05",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": false,
-              "validationNotes": [
-                "mixed-hierarchy-product-disclosure"
-              ]
-            },
-            {
-              "name": "Mounjaro",
-              "nameZh": null,
-              "memberKey": "mounjaro",
-              "valueBn": 9.943,
-              "yoyPct": 91.25,
-              "qoqPct": 14.79,
-              "mixPct": 21.2,
-              "mixYoyDeltaPp": -12.2,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000081/lly-20260630_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-08-05",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": false,
-              "validationNotes": [
-                "mixed-hierarchy-product-disclosure"
-              ]
-            },
-            {
-              "name": "Zepbound",
-              "nameZh": null,
-              "memberKey": "zepbound",
-              "valueBn": 4.928,
-              "yoyPct": 45.76,
-              "qoqPct": 18.46,
-              "mixPct": 10.5,
-              "mixYoyDeltaPp": -11.2,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000081/lly-20260630_htm.xml",
               "sourceForm": "10-Q",
               "filingDate": "2026-08-05",
@@ -6710,46 +6731,6 @@
               ]
             },
             {
-              "name": "Collaboration & Other Revenue",
-              "nameZh": null,
-              "memberKey": "collaborationotherrevenue",
-              "valueBn": 1.571,
-              "yoyPct": 88.82,
-              "qoqPct": 16.72,
-              "mixPct": 3.4,
-              "mixYoyDeltaPp": -2,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000081/lly-20260630_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-08-05",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": false,
-              "validationNotes": [
-                "mixed-hierarchy-product-disclosure"
-              ]
-            },
-            {
-              "name": "Verzenio",
-              "nameZh": null,
-              "memberKey": "verzenio",
-              "valueBn": 1.474,
-              "yoyPct": -1.01,
-              "qoqPct": 13.21,
-              "mixPct": 3.1,
-              "mixYoyDeltaPp": -6.4,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000081/lly-20260630_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-08-05",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": false,
-              "validationNotes": [
-                "mixed-hierarchy-product-disclosure"
-              ]
-            },
-            {
               "name": "Immunology",
               "nameZh": null,
               "memberKey": "immunology",
@@ -6758,126 +6739,6 @@
               "qoqPct": 17.79,
               "mixPct": 3,
               "mixYoyDeltaPp": -5.1,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000081/lly-20260630_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-08-05",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": false,
-              "validationNotes": [
-                "mixed-hierarchy-product-disclosure"
-              ]
-            },
-            {
-              "name": "Jardiance",
-              "nameZh": null,
-              "memberKey": "jardiance",
-              "valueBn": 1.232,
-              "yoyPct": 78.55,
-              "qoqPct": 10.59,
-              "mixPct": 2.6,
-              "mixYoyDeltaPp": -1.8,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000081/lly-20260630_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-08-05",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": false,
-              "validationNotes": [
-                "mixed-hierarchy-product-disclosure"
-              ]
-            },
-            {
-              "name": "Other Oncology",
-              "nameZh": null,
-              "memberKey": "otheroncology",
-              "valueBn": 1.096,
-              "yoyPct": 18.61,
-              "qoqPct": 13.46,
-              "mixPct": 2.3,
-              "mixYoyDeltaPp": -3.6,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000081/lly-20260630_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-08-05",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": false,
-              "validationNotes": [
-                "mixed-hierarchy-product-disclosure"
-              ]
-            },
-            {
-              "name": "Trulicity Member",
-              "nameZh": null,
-              "memberKey": "trulicitymember",
-              "valueBn": 1.219,
-              "yoyPct": 11.63,
-              "qoqPct": 32.64,
-              "mixPct": 2.6,
-              "mixYoyDeltaPp": -4.4,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000081/lly-20260630_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-08-05",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": false,
-              "validationNotes": [
-                "mixed-hierarchy-product-disclosure"
-              ]
-            },
-            {
-              "name": "Other Cardiometabolic Health",
-              "nameZh": null,
-              "memberKey": "othercardiometabolichealth",
-              "valueBn": 1.031,
-              "yoyPct": 5.2,
-              "qoqPct": 13.92,
-              "mixPct": 2.2,
-              "mixYoyDeltaPp": -4.1,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000081/lly-20260630_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-08-05",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": false,
-              "validationNotes": [
-                "mixed-hierarchy-product-disclosure"
-              ]
-            },
-            {
-              "name": "Taltz",
-              "nameZh": null,
-              "memberKey": "taltz",
-              "valueBn": 0.856,
-              "yoyPct": 0.94,
-              "qoqPct": 16.78,
-              "mixPct": 1.8,
-              "mixYoyDeltaPp": -3.6,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000081/lly-20260630_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-08-05",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": false,
-              "validationNotes": [
-                "mixed-hierarchy-product-disclosure"
-              ]
-            },
-            {
-              "name": "Other Immunology",
-              "nameZh": null,
-              "memberKey": "otherimmunology",
-              "valueBn": 0.561,
-              "yoyPct": 37.5,
-              "qoqPct": 19.36,
-              "mixPct": 1.2,
-              "mixYoyDeltaPp": -1.4,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000081/lly-20260630_htm.xml",
               "sourceForm": "10-Q",
               "filingDate": "2026-08-05",
@@ -6940,7 +6801,71 @@
             "rule": "same-normalized-category-set"
           },
           "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueTaxonomyChangedFromPriorYear": true
+          "officialRevenueTaxonomyChangedFromPriorYear": true,
+          "fieldSources": {
+            "revenueBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000081/lly-20260630.htm"
+            },
+            "costOfRevenueBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000081/lly-20260630.htm"
+            },
+            "grossProfitBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000081/lly-20260630.htm"
+            },
+            "sgnaBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000081/lly-20260630.htm"
+            },
+            "rndBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000081/lly-20260630.htm"
+            },
+            "operatingExpensesBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000081/lly-20260630.htm"
+            },
+            "operatingIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000081/lly-20260630.htm"
+            },
+            "nonOperatingBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000081/lly-20260630.htm"
+            },
+            "pretaxIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000081/lly-20260630.htm"
+            },
+            "taxBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000081/lly-20260630.htm"
+            },
+            "netIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000081/lly-20260630.htm"
+            }
+          },
+          "qualityFlags": [
+            "official-quarter-statement-backfilled"
+          ],
+          "derivedStatementFields": [],
+          "statementValueMode": "direct",
+          "statementSpanQuarters": 1,
+          "statementPeriodStart": "2026-04-01"
         }
       },
       "statementPresets": {},
@@ -7595,7 +7520,8 @@
             "warningCount": 0,
             "warnings": []
           }
-        }
+        },
+        "statementBackfilledQuarterCount": 23
       },
       "marketCapUsd": 896216137728,
       "marketCapAsOf": "2026-07-06",
@@ -7612,30 +7538,30 @@
           "fiscalQuarter": "Q2",
           "fiscalLabel": "FY2026 Q2",
           "statementCurrency": "USD",
-          "revenueBn": 51.976,
-          "revenueYoyPct": 23.567,
-          "costOfRevenueBn": null,
-          "grossProfitBn": null,
+          "revenueBn": 57.347,
+          "revenueYoyPct": 27.687,
+          "costOfRevenueBn": 2.515,
+          "grossProfitBn": 54.832,
           "sgnaBn": null,
           "rndBn": null,
-          "otherOpexBn": null,
-          "operatingExpensesBn": null,
-          "operatingIncomeBn": null,
-          "nonOperatingBn": null,
-          "pretaxIncomeBn": null,
-          "taxBn": null,
-          "netIncomeBn": null,
+          "otherOpexBn": 27.316,
+          "operatingExpensesBn": 27.316,
+          "operatingIncomeBn": 27.516,
+          "nonOperatingBn": 0,
+          "pretaxIncomeBn": 27.516,
+          "taxBn": 6.361,
+          "netIncomeBn": 21.155,
           "netIncomeYoyPct": null,
-          "grossMarginPct": null,
-          "operatingMarginPct": null,
-          "profitMarginPct": null,
+          "grossMarginPct": 95.614417,
+          "operatingMarginPct": 47.981586,
+          "profitMarginPct": 36.889462,
           "effectiveTaxRatePct": null,
-          "revenueQoqPct": 9.819,
+          "revenueQoqPct": 15.071,
           "grossMarginYoyDeltaPp": null,
           "operatingMarginYoyDeltaPp": null,
           "profitMarginYoyDeltaPp": null,
-          "statementSource": "official-revenue-structure",
-          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000162828026054343/jpm-20260630_htm.xml",
+          "statementSource": "official-inline-quarter-statement",
+          "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
           "statementFilingDate": "2026-08-06",
           "officialRevenueSegments": [
             {
@@ -7709,7 +7635,77 @@
             "rule": "same-normalized-category-set"
           },
           "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueTaxonomyChangedFromPriorYear": false
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "fieldSources": {
+            "revenueBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+            },
+            "costOfRevenueBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+            },
+            "grossProfitBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+            },
+            "otherOpexBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+            },
+            "operatingExpensesBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+            },
+            "operatingIncomeBn": {
+              "adapterId": "official-statement-backfill-derived",
+              "label": "Calculated from the same-quarter official statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+            },
+            "nonOperatingBn": {
+              "adapterId": "official-statement-backfill-derived",
+              "label": "Calculated from the same-quarter official statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+            },
+            "pretaxIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+            },
+            "taxBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+            },
+            "netIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+            }
+          },
+          "grossProfitLabel": "Revenue after credit loss provision",
+          "grossProfitLabelZh": "扣除信用损失准备后收入",
+          "costLabel": "Provision for credit losses",
+          "costLabelZh": "信用损失准备",
+          "operatingExpensesLabel": "Noninterest expense",
+          "operatingExpensesLabelZh": "非利息费用",
+          "costOfRevenuePresentationOnly": true,
+          "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+          "derivedStatementFields": [
+            "operatingIncomeBn",
+            "nonOperatingBn"
+          ],
+          "qualityFlags": [
+            "official-quarter-statement-backfilled"
+          ],
+          "statementValueMode": "direct",
+          "statementSpanQuarters": 1,
+          "statementPeriodStart": "2026-04-01"
         }
       },
       "statementPresets": {},
@@ -9026,7 +9022,8 @@
             "warningCount": 0,
             "warnings": []
           }
-        }
+        },
+        "statementBackfilledQuarterCount": 12
       },
       "marketCapUsd": 688678502400,
       "marketCapAsOf": "2026-07-06",
@@ -9444,7 +9441,8 @@
               "2023Q4: revenue segments sum to 7.237Bn vs revenue 6.673Bn."
             ]
           }
-        }
+        },
+        "statementBackfilledQuarterCount": 15
       },
       "marketCapUsd": 681927180288,
       "marketCapAsOf": "2026-07-06",
@@ -10036,7 +10034,8 @@
             "warningCount": 0,
             "warnings": []
           }
-        }
+        },
+        "statementBackfilledQuarterCount": 2
       },
       "marketCapUsd": 633194348544,
       "marketCapAsOf": "2026-07-06",
@@ -10048,35 +10047,35 @@
       "financials": {
         "2026Q2": {
           "calendarQuarter": "2026Q2",
-          "periodEnd": "2026-06-30",
+          "periodEnd": "2026-06-28",
           "fiscalYear": "2026",
           "fiscalQuarter": "Q2",
           "fiscalLabel": "FY2026 Q2",
           "statementCurrency": "USD",
           "revenueBn": 25.31,
           "revenueYoyPct": 6.6,
-          "costOfRevenueBn": null,
-          "grossProfitBn": null,
-          "sgnaBn": null,
-          "rndBn": null,
+          "costOfRevenueBn": 8.051,
+          "grossProfitBn": 17.259,
+          "sgnaBn": 6.432,
+          "rndBn": 3.653,
           "otherOpexBn": null,
-          "operatingExpensesBn": null,
-          "operatingIncomeBn": null,
-          "nonOperatingBn": null,
-          "pretaxIncomeBn": null,
-          "taxBn": null,
-          "netIncomeBn": null,
+          "operatingExpensesBn": 10.119,
+          "operatingIncomeBn": 7.14,
+          "nonOperatingBn": -0.393,
+          "pretaxIncomeBn": 6.747,
+          "taxBn": 1.213,
+          "netIncomeBn": 5.534,
           "netIncomeYoyPct": null,
-          "grossMarginPct": null,
-          "operatingMarginPct": null,
-          "profitMarginPct": null,
+          "grossMarginPct": 68.190439,
+          "operatingMarginPct": 28.210194,
+          "profitMarginPct": 21.864876,
           "effectiveTaxRatePct": null,
           "revenueQoqPct": 5.187,
           "grossMarginYoyDeltaPp": null,
           "operatingMarginYoyDeltaPp": null,
           "profitMarginYoyDeltaPp": null,
-          "statementSource": "official-revenue-structure",
-          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628_htm.xml",
+          "statementSource": "official-inline-quarter-statement",
+          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm",
           "statementFilingDate": "2026-07-23",
           "officialRevenueSegments": [
             {
@@ -10126,7 +10125,71 @@
             "rule": "same-normalized-category-set"
           },
           "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueTaxonomyChangedFromPriorYear": false
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "fieldSources": {
+            "revenueBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
+            },
+            "costOfRevenueBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
+            },
+            "grossProfitBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
+            },
+            "sgnaBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
+            },
+            "rndBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
+            },
+            "operatingExpensesBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
+            },
+            "operatingIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
+            },
+            "nonOperatingBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
+            },
+            "pretaxIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
+            },
+            "taxBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
+            },
+            "netIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
+            }
+          },
+          "qualityFlags": [
+            "official-quarter-statement-backfilled"
+          ],
+          "derivedStatementFields": [],
+          "statementValueMode": "direct",
+          "statementSpanQuarters": 1,
+          "statementPeriodStart": "2026-03-30"
         }
       },
       "statementPresets": {},
@@ -10470,7 +10533,8 @@
             "warningCount": 0,
             "warnings": []
           }
-        }
+        },
+        "statementBackfilledQuarterCount": 14
       },
       "marketCapUsd": 568230805504,
       "marketCapAsOf": "2026-07-06",
@@ -10487,30 +10551,30 @@
           "fiscalQuarter": "Q2",
           "fiscalLabel": "FY2026 Q2",
           "statementCurrency": "USD",
-          "revenueBn": 114.503,
-          "revenueYoyPct": 40.484,
-          "costOfRevenueBn": null,
-          "grossProfitBn": null,
-          "sgnaBn": null,
+          "revenueBn": 114.529,
+          "revenueYoyPct": 40.516,
+          "costOfRevenueBn": 93.85100000000001,
+          "grossProfitBn": 20.678,
+          "sgnaBn": 2.483,
           "rndBn": null,
           "otherOpexBn": null,
-          "operatingExpensesBn": null,
-          "operatingIncomeBn": null,
-          "nonOperatingBn": null,
-          "pretaxIncomeBn": null,
-          "taxBn": null,
-          "netIncomeBn": null,
+          "operatingExpensesBn": 2.483,
+          "operatingIncomeBn": 18.194999999999983,
+          "nonOperatingBn": 1.229,
+          "pretaxIncomeBn": 19.424,
+          "taxBn": 4.543,
+          "netIncomeBn": 14.525,
           "netIncomeYoyPct": null,
-          "grossMarginPct": null,
-          "operatingMarginPct": null,
-          "profitMarginPct": null,
+          "grossMarginPct": 18.054816,
+          "operatingMarginPct": 15.886806,
+          "profitMarginPct": 12.682377,
           "effectiveTaxRatePct": null,
-          "revenueQoqPct": 37.73,
+          "revenueQoqPct": 37.72,
           "grossMarginYoyDeltaPp": null,
           "operatingMarginYoyDeltaPp": null,
           "profitMarginYoyDeltaPp": null,
-          "statementSource": "official-revenue-structure",
-          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630_htm.xml",
+          "statementSource": "official-inline-quarter-statement",
+          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630.htm",
           "statementFilingDate": "2026-08-03",
           "officialRevenueSegments": [
             {
@@ -10604,7 +10668,66 @@
             "rule": "same-normalized-category-set"
           },
           "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueTaxonomyChangedFromPriorYear": false
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "fieldSources": {
+            "revenueBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630.htm"
+            },
+            "costOfRevenueBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630.htm"
+            },
+            "grossProfitBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630.htm"
+            },
+            "sgnaBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630.htm"
+            },
+            "operatingExpensesBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630.htm"
+            },
+            "operatingIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630.htm"
+            },
+            "nonOperatingBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630.htm"
+            },
+            "pretaxIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630.htm"
+            },
+            "taxBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630.htm"
+            },
+            "netIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000093/xom-20260630.htm"
+            }
+          },
+          "qualityFlags": [
+            "official-quarter-statement-backfilled"
+          ],
+          "derivedStatementFields": [],
+          "statementValueMode": "direct",
+          "statementSpanQuarters": 1,
+          "statementPeriodStart": "2026-04-01"
         }
       },
       "statementPresets": {},
@@ -11048,7 +11171,8 @@
               "2014Q4: revenue segments sum to 19.981Bn vs revenue 20.978Bn."
             ]
           }
-        }
+        },
+        "statementBackfilledQuarterCount": 48
       },
       "marketCapUsd": 498500468736,
       "marketCapAsOf": "2026-07-06",
@@ -12064,7 +12188,8 @@
             "warningCount": 0,
             "warnings": []
           }
-        }
+        },
+        "statementBackfilledQuarterCount": 2
       },
       "marketCapUsd": 476596305920,
       "marketCapAsOf": "2026-07-06",
@@ -12083,28 +12208,28 @@
           "statementCurrency": "USD",
           "revenueBn": 9.277,
           "revenueYoyPct": 14.066,
-          "costOfRevenueBn": null,
-          "grossProfitBn": null,
-          "sgnaBn": null,
+          "costOfRevenueBn": 0,
+          "grossProfitBn": 9.277,
+          "sgnaBn": 3.082,
           "rndBn": null,
-          "otherOpexBn": null,
-          "operatingExpensesBn": null,
-          "operatingIncomeBn": null,
-          "nonOperatingBn": null,
-          "pretaxIncomeBn": null,
-          "taxBn": null,
-          "netIncomeBn": null,
+          "otherOpexBn": 0.608,
+          "operatingExpensesBn": 3.69,
+          "operatingIncomeBn": 5.587,
+          "nonOperatingBn": -0.101,
+          "pretaxIncomeBn": 5.486,
+          "taxBn": 1.098,
+          "netIncomeBn": 4.388,
           "netIncomeYoyPct": null,
-          "grossMarginPct": null,
-          "operatingMarginPct": null,
-          "profitMarginPct": null,
+          "grossMarginPct": 100.0,
+          "operatingMarginPct": 60.22421,
+          "profitMarginPct": 47.299774,
           "effectiveTaxRatePct": null,
           "revenueQoqPct": 10.467,
           "grossMarginYoyDeltaPp": null,
           "operatingMarginYoyDeltaPp": null,
           "profitMarginYoyDeltaPp": null,
-          "statementSource": "official-revenue-structure",
-          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139126000083/ma-20260630.htm",
+          "statementSource": "official-inline-quarter-statement",
+          "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001141391.json",
           "statementFilingDate": "2026-07-30",
           "officialRevenueSegments": [
             {
@@ -12155,7 +12280,75 @@
             "rule": "same-normalized-category-set"
           },
           "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueTaxonomyChangedFromPriorYear": false
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "fieldSources": {
+            "revenueBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001141391.json"
+            },
+            "costOfRevenueBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001141391.json"
+            },
+            "grossProfitBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001141391.json"
+            },
+            "sgnaBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001141391.json"
+            },
+            "otherOpexBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001141391.json"
+            },
+            "operatingExpensesBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001141391.json"
+            },
+            "operatingIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001141391.json"
+            },
+            "nonOperatingBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001141391.json"
+            },
+            "pretaxIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001141391.json"
+            },
+            "taxBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001141391.json"
+            },
+            "netIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001141391.json"
+            }
+          },
+          "grossProfitLabel": "Revenue before operating expenses",
+          "grossProfitLabelZh": "营收（扣除营业费用前）",
+          "costOfRevenuePresentationOnly": true,
+          "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+          "qualityFlags": [
+            "official-quarter-statement-backfilled"
+          ],
+          "derivedStatementFields": [],
+          "statementValueMode": "direct",
+          "statementSpanQuarters": 1,
+          "statementPeriodStart": "2026-04-01"
         }
       },
       "statementPresets": {},
@@ -12556,7 +12749,8 @@
             "warningCount": 0,
             "warnings": []
           }
-        }
+        },
+        "statementBackfilledQuarterCount": 2
       },
       "marketCapUsd": 461256622080,
       "marketCapAsOf": "2026-07-06",
@@ -12573,30 +12767,30 @@
           "fiscalQuarter": "Q2",
           "fiscalLabel": "FY2026 Q2",
           "statementCurrency": "USD",
-          "revenueBn": 13.298,
-          "revenueYoyPct": -13.778,
-          "costOfRevenueBn": null,
-          "grossProfitBn": null,
-          "sgnaBn": null,
-          "rndBn": null,
-          "otherOpexBn": null,
-          "operatingExpensesBn": null,
-          "operatingIncomeBn": null,
-          "nonOperatingBn": null,
-          "pretaxIncomeBn": null,
-          "taxBn": null,
-          "netIncomeBn": null,
+          "revenueBn": 16.99,
+          "revenueYoyPct": 10.16,
+          "costOfRevenueBn": 4.291,
+          "grossProfitBn": 12.699,
+          "sgnaBn": 3.632,
+          "rndBn": 2.344,
+          "otherOpexBn": 2.635,
+          "operatingExpensesBn": 6.267,
+          "operatingIncomeBn": 6.432,
+          "nonOperatingBn": -2.154,
+          "pretaxIncomeBn": 4.278,
+          "taxBn": 0.662,
+          "netIncomeBn": 3.613,
           "netIncomeYoyPct": null,
-          "grossMarginPct": null,
-          "operatingMarginPct": null,
-          "profitMarginPct": null,
+          "grossMarginPct": 74.743967,
+          "operatingMarginPct": 37.857563,
+          "profitMarginPct": 21.26545,
           "effectiveTaxRatePct": null,
-          "revenueQoqPct": 16.343,
+          "revenueQoqPct": 13.252,
           "grossMarginYoyDeltaPp": null,
           "operatingMarginYoyDeltaPp": null,
           "profitMarginYoyDeltaPp": null,
-          "statementSource": "official-revenue-structure",
-          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000026/abbv-20260630_htm.xml",
+          "statementSource": "official-inline-quarter-statement",
+          "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001551152.json",
           "statementFilingDate": "2026-08-03",
           "officialRevenueSegments": [
             {
@@ -13030,7 +13224,76 @@
             "rule": "same-normalized-category-set"
           },
           "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueTaxonomyChangedFromPriorYear": true
+          "officialRevenueTaxonomyChangedFromPriorYear": true,
+          "fieldSources": {
+            "revenueBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001551152.json"
+            },
+            "costOfRevenueBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001551152.json"
+            },
+            "grossProfitBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001551152.json"
+            },
+            "sgnaBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001551152.json"
+            },
+            "rndBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001551152.json"
+            },
+            "otherOpexBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001551152.json"
+            },
+            "operatingExpensesBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001551152.json"
+            },
+            "operatingIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001551152.json"
+            },
+            "nonOperatingBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001551152.json"
+            },
+            "pretaxIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001551152.json"
+            },
+            "taxBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001551152.json"
+            },
+            "netIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001551152.json"
+            }
+          },
+          "qualityFlags": [
+            "official-quarter-statement-backfilled"
+          ],
+          "derivedStatementFields": [],
+          "statementValueMode": "direct",
+          "statementSpanQuarters": 1,
+          "statementPeriodStart": "2026-04-01"
         }
       },
       "statementPresets": {},
@@ -13806,7 +14069,8 @@
             "warningCount": 0,
             "warnings": []
           }
-        }
+        },
+        "statementBackfilledQuarterCount": 2
       },
       "marketCapUsd": 443794194432,
       "marketCapAsOf": "2026-07-06",
@@ -13825,28 +14089,28 @@
           "statementCurrency": "USD",
           "revenueBn": 20.543,
           "revenueYoyPct": -36.287,
-          "costOfRevenueBn": null,
-          "grossProfitBn": null,
-          "sgnaBn": null,
-          "rndBn": null,
-          "otherOpexBn": null,
-          "operatingExpensesBn": null,
-          "operatingIncomeBn": null,
-          "nonOperatingBn": null,
-          "pretaxIncomeBn": null,
-          "taxBn": null,
-          "netIncomeBn": null,
+          "costOfRevenueBn": 12.781,
+          "grossProfitBn": 7.762,
+          "sgnaBn": 2.018,
+          "rndBn": 0.616,
+          "otherOpexBn": 0.833,
+          "operatingExpensesBn": 3.467,
+          "operatingIncomeBn": 4.295,
+          "nonOperatingBn": 0.263,
+          "pretaxIncomeBn": 4.558,
+          "taxBn": 1.055,
+          "netIncomeBn": 3.593,
           "netIncomeYoyPct": null,
-          "grossMarginPct": null,
-          "operatingMarginPct": null,
-          "profitMarginPct": null,
+          "grossMarginPct": 37.78416,
+          "operatingMarginPct": 20.907365,
+          "profitMarginPct": 17.490143,
           "effectiveTaxRatePct": null,
           "revenueQoqPct": 17.962,
           "grossMarginYoyDeltaPp": null,
           "operatingMarginYoyDeltaPp": null,
           "profitMarginYoyDeltaPp": null,
-          "statementSource": "official-revenue-structure",
-          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000046/cat-20260630_htm.xml",
+          "statementSource": "official-inline-quarter-statement",
+          "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000018230.json",
           "statementFilingDate": "2026-08-05",
           "officialRevenueSegments": [
             {
@@ -13896,7 +14160,76 @@
             "rule": "same-normalized-category-set"
           },
           "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueTaxonomyChangedFromPriorYear": true
+          "officialRevenueTaxonomyChangedFromPriorYear": true,
+          "fieldSources": {
+            "revenueBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000018230.json"
+            },
+            "costOfRevenueBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000018230.json"
+            },
+            "grossProfitBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000018230.json"
+            },
+            "sgnaBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000018230.json"
+            },
+            "rndBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000018230.json"
+            },
+            "otherOpexBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000018230.json"
+            },
+            "operatingExpensesBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000018230.json"
+            },
+            "operatingIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000018230.json"
+            },
+            "nonOperatingBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000018230.json"
+            },
+            "pretaxIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000018230.json"
+            },
+            "taxBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000018230.json"
+            },
+            "netIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000018230.json"
+            }
+          },
+          "qualityFlags": [
+            "official-quarter-statement-backfilled"
+          ],
+          "derivedStatementFields": [],
+          "statementValueMode": "direct",
+          "statementSpanQuarters": 1,
+          "statementPeriodStart": "2026-04-01"
         }
       },
       "statementPresets": {},
@@ -14268,7 +14601,8 @@
             "warningCount": 0,
             "warnings": []
           }
-        }
+        },
+        "statementBackfilledQuarterCount": 2
       },
       "marketCapUsd": 422045483008,
       "marketCapAsOf": "2026-07-06",
@@ -14280,35 +14614,35 @@
       "financials": {
         "2026Q3": {
           "calendarQuarter": "2026Q3",
-          "periodEnd": "2026-09-30",
+          "periodEnd": "2026-08-30",
           "fiscalYear": "2026",
-          "fiscalQuarter": "Q3",
-          "fiscalLabel": "FY2026 Q3",
+          "fiscalQuarter": "Q4",
+          "fiscalLabel": "FY2026 Q4",
           "statementCurrency": "USD",
           "revenueBn": 95.723,
           "revenueYoyPct": 11.104,
-          "costOfRevenueBn": null,
-          "grossProfitBn": null,
-          "sgnaBn": null,
+          "costOfRevenueBn": 83.531,
+          "grossProfitBn": 12.192,
+          "sgnaBn": 8.391,
           "rndBn": null,
           "otherOpexBn": null,
-          "operatingExpensesBn": null,
-          "operatingIncomeBn": null,
+          "operatingExpensesBn": 8.391,
+          "operatingIncomeBn": 3.801,
           "nonOperatingBn": null,
           "pretaxIncomeBn": null,
-          "taxBn": null,
-          "netIncomeBn": null,
+          "taxBn": 1.011,
+          "netIncomeBn": 2.998,
           "netIncomeYoyPct": null,
-          "grossMarginPct": null,
-          "operatingMarginPct": null,
-          "profitMarginPct": null,
+          "grossMarginPct": 12.736751,
+          "operatingMarginPct": 3.970833,
+          "profitMarginPct": 3.131954,
           "effectiveTaxRatePct": null,
           "revenueQoqPct": 35.725,
           "grossMarginYoyDeltaPp": null,
           "operatingMarginYoyDeltaPp": null,
           "profitMarginYoyDeltaPp": null,
-          "statementSource": "official-revenue-structure",
-          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/cost-20260830_htm.xml",
+          "statementSource": "official-quarter-statement-backfill",
+          "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000909832.json",
           "statementFilingDate": "2026-10-07",
           "officialRevenueSegments": [
             {
@@ -14412,7 +14746,53 @@
               "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
-          }
+          },
+          "fieldSources": {
+            "revenueBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000909832.json"
+            },
+            "costOfRevenueBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000909832.json"
+            },
+            "grossProfitBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000909832.json"
+            },
+            "sgnaBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000909832.json"
+            },
+            "operatingExpensesBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000909832.json"
+            },
+            "operatingIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000909832.json"
+            },
+            "taxBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000909832.json"
+            },
+            "netIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000909832.json"
+            }
+          },
+          "qualityFlags": [
+            "official-quarter-statement-backfilled"
+          ],
+          "derivedStatementFields": []
         }
       },
       "statementPresets": {},
@@ -14851,7 +15231,8 @@
             "warningCount": 0,
             "warnings": []
           }
-        }
+        },
+        "statementBackfilledQuarterCount": 4
       },
       "marketCapUsd": 416782778368,
       "marketCapAsOf": "2026-07-06",
@@ -14868,30 +15249,30 @@
           "fiscalQuarter": "Q2",
           "fiscalLabel": "FY2026 Q2",
           "statementCurrency": "USD",
-          "revenueBn": 32.465,
-          "revenueYoyPct": 22.681,
-          "costOfRevenueBn": null,
-          "grossProfitBn": null,
+          "revenueBn": 31.558,
+          "revenueYoyPct": 19.253,
+          "costOfRevenueBn": 1.366,
+          "grossProfitBn": 30.192,
           "sgnaBn": null,
           "rndBn": null,
-          "otherOpexBn": null,
-          "operatingExpensesBn": null,
-          "operatingIncomeBn": null,
-          "nonOperatingBn": null,
-          "pretaxIncomeBn": null,
-          "taxBn": null,
-          "netIncomeBn": null,
+          "otherOpexBn": 18.627,
+          "operatingExpensesBn": 18.627,
+          "operatingIncomeBn": 11.565,
+          "nonOperatingBn": 0,
+          "pretaxIncomeBn": 11.565,
+          "taxBn": 2.491,
+          "netIncomeBn": 9.074,
           "netIncomeYoyPct": null,
-          "grossMarginPct": null,
-          "operatingMarginPct": null,
-          "profitMarginPct": null,
+          "grossMarginPct": 95.671462,
+          "operatingMarginPct": 36.646809,
+          "profitMarginPct": 28.753406,
           "effectiveTaxRatePct": null,
-          "revenueQoqPct": 4.198,
+          "revenueQoqPct": 4.248,
           "grossMarginYoyDeltaPp": null,
           "operatingMarginYoyDeltaPp": null,
           "profitMarginYoyDeltaPp": null,
-          "statementSource": "official-revenue-structure",
-          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000394/bac-20260630_htm.xml",
+          "statementSource": "official-inline-quarter-statement",
+          "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000070858.json",
           "statementFilingDate": "2026-07-31",
           "officialRevenueSegments": [
             {
@@ -14985,7 +15366,77 @@
             "rule": "same-normalized-category-set"
           },
           "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueTaxonomyChangedFromPriorYear": false
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "fieldSources": {
+            "revenueBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000070858.json"
+            },
+            "costOfRevenueBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000070858.json"
+            },
+            "grossProfitBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000070858.json"
+            },
+            "otherOpexBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000070858.json"
+            },
+            "operatingExpensesBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000070858.json"
+            },
+            "operatingIncomeBn": {
+              "adapterId": "official-statement-backfill-derived",
+              "label": "Calculated from the same-quarter official statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000070858.json"
+            },
+            "nonOperatingBn": {
+              "adapterId": "official-statement-backfill-derived",
+              "label": "Calculated from the same-quarter official statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000070858.json"
+            },
+            "pretaxIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000070858.json"
+            },
+            "taxBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000070858.json"
+            },
+            "netIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000070858.json"
+            }
+          },
+          "grossProfitLabel": "Revenue after credit loss provision",
+          "grossProfitLabelZh": "扣除信用损失准备后收入",
+          "costLabel": "Provision for credit losses",
+          "costLabelZh": "信用损失准备",
+          "operatingExpensesLabel": "Noninterest expense",
+          "operatingExpensesLabelZh": "非利息费用",
+          "costOfRevenuePresentationOnly": true,
+          "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+          "derivedStatementFields": [
+            "operatingIncomeBn",
+            "nonOperatingBn"
+          ],
+          "qualityFlags": [
+            "official-quarter-statement-backfilled"
+          ],
+          "statementValueMode": "direct",
+          "statementSpanQuarters": 1,
+          "statementPeriodStart": "2026-04-01"
         }
       },
       "statementPresets": {},
@@ -16217,7 +16668,7 @@
         "2025Q3",
         "2025Q4",
         "2026Q1",
-        "2026Q3"
+        "2026Q2"
       ],
       "statementSource": "official-sec-companyfacts",
       "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
@@ -16233,7 +16684,7 @@
         "officialExpenseQuarterCount": 0,
         "classification": {
           "status": "ok",
-          "latestQuarter": "2026Q3",
+          "latestQuarter": "2026Q2",
           "latestQuarterHasRevenueClassification": true,
           "latestQuarterHasExpenseClassification": false,
           "latestRevenueClassificationQuarter": "2026Q3",
@@ -16298,7 +16749,8 @@
             "warningCount": 0,
             "warnings": []
           }
-        }
+        },
+        "statementBackfilledQuarterCount": 1
       },
       "marketCapUsd": 362010869760,
       "marketCapAsOf": "2026-07-06",
@@ -16306,263 +16758,189 @@
       "marketCapSource": "CompaniesMarketCap",
       "marketCapSourceUrl": "https://companiesmarketcap.com/",
       "dataLoadMode": "latest-only",
-      "latestQuarter": "2026Q3",
+      "latestQuarter": "2026Q2",
       "financials": {
-        "2026Q3": {
-          "calendarQuarter": "2026Q3",
-          "periodEnd": "2026-09-30",
-          "fiscalYear": "2026",
-          "fiscalQuarter": "Q3",
-          "fiscalLabel": "FY2026 Q3",
+        "2026Q2": {
+          "calendarQuarter": "2026Q2",
+          "periodEnd": "2026-07-03",
+          "fiscalLabel": "FY2026 Q2",
           "statementCurrency": "USD",
-          "revenueBn": 25.852,
-          "revenueYoyPct": 107.563,
-          "costOfRevenueBn": null,
-          "grossProfitBn": null,
-          "sgnaBn": null,
-          "rndBn": null,
-          "otherOpexBn": null,
-          "operatingExpensesBn": null,
-          "operatingIncomeBn": null,
-          "nonOperatingBn": null,
-          "pretaxIncomeBn": null,
-          "taxBn": null,
-          "netIncomeBn": null,
-          "netIncomeYoyPct": null,
-          "grossMarginPct": null,
-          "operatingMarginPct": null,
-          "profitMarginPct": null,
-          "effectiveTaxRatePct": null,
-          "revenueQoqPct": null,
-          "grossMarginYoyDeltaPp": null,
-          "operatingMarginYoyDeltaPp": null,
-          "profitMarginYoyDeltaPp": null,
-          "statementSource": "official-revenue-structure",
+          "statementSource": "official-quarter-statement-backfill",
           "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
-          "statementFilingDate": "2026-07-28",
+          "statementValueMode": "direct",
+          "statementSpanQuarters": 1,
+          "revenueBn": 13.38,
+          "fieldSources": {
+            "revenueBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm"
+            },
+            "costOfRevenueBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm"
+            },
+            "grossProfitBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm"
+            },
+            "sgnaBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm"
+            },
+            "otherOpexBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm"
+            },
+            "operatingExpensesBn": {
+              "adapterId": "official-statement-backfill-derived",
+              "label": "Calculated from the same-quarter official statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm"
+            },
+            "operatingIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm"
+            },
+            "nonOperatingBn": {
+              "adapterId": "official-statement-backfill-derived",
+              "label": "Calculated from the same-quarter official statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm"
+            },
+            "pretaxIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm"
+            },
+            "taxBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm"
+            },
+            "netIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm"
+            }
+          },
+          "costOfRevenueBn": 4.965,
+          "grossProfitBn": 8.415,
+          "sgnaBn": 3.72,
+          "otherOpexBn": 0.023,
+          "operatingExpensesBn": 3.743,
+          "operatingIncomeBn": 4.672,
+          "nonOperatingBn": 0.803,
+          "pretaxIncomeBn": 5.475,
+          "taxBn": 1.037,
+          "netIncomeBn": 4.425,
+          "grossMarginPct": 62.892377,
+          "operatingMarginPct": 34.917788,
+          "profitMarginPct": 33.071749,
+          "derivedStatementFields": [
+            "operatingExpensesBn",
+            "nonOperatingBn"
+          ],
           "officialRevenueSegments": [
             {
-              "name": "North America",
-              "nameZh": null,
-              "memberKey": "northamerica",
-              "valueBn": 10.301,
-              "yoyPct": 96.1,
-              "qoqPct": null,
-              "mixPct": 39.8,
-              "mixYoyDeltaPp": -2.3,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
-              "sourceForm": "8-K",
-              "filingDate": "2026-07-28",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": false,
-              "validationNotes": [
-                "partial-geographic-segment-disclosure"
-              ]
-            },
-            {
               "name": "EMEA",
-              "nameZh": null,
               "memberKey": "emea",
-              "valueBn": 6.252,
-              "yoyPct": 108.68,
-              "qoqPct": null,
-              "mixPct": 24.2,
-              "mixYoyDeltaPp": 0.1,
+              "valueBn": 3.24,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
               "sourceForm": "8-K",
-              "filingDate": "2026-07-28",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": false,
-              "validationNotes": [
-                "partial-geographic-segment-disclosure"
-              ]
+              "filingDate": "2026-07-28"
             },
             {
               "name": "Latin America",
-              "nameZh": null,
               "memberKey": "latinamerica",
-              "valueBn": 3.517,
-              "yoyPct": 123.59,
-              "qoqPct": null,
-              "mixPct": 13.6,
-              "mixYoyDeltaPp": 1,
+              "valueBn": 1.839,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
               "sourceForm": "8-K",
-              "filingDate": "2026-07-28",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": false,
-              "validationNotes": [
-                "partial-geographic-segment-disclosure"
-              ]
+              "filingDate": "2026-07-28"
+            },
+            {
+              "name": "North America",
+              "memberKey": "northamerica",
+              "valueBn": 5.408,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
+              "sourceForm": "8-K",
+              "filingDate": "2026-07-28"
+            },
+            {
+              "name": "Asia Pacific",
+              "memberKey": "pacific",
+              "valueBn": 1.581,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
+              "sourceForm": "8-K",
+              "filingDate": "2026-07-28"
             },
             {
               "name": "Bottling Investments",
-              "nameZh": null,
               "memberKey": "bottlinginvestments",
-              "valueBn": 3.167,
-              "yoyPct": 135.29,
-              "qoqPct": null,
-              "mixPct": 12.3,
-              "mixYoyDeltaPp": 1.4,
+              "valueBn": 1.527,
               "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
               "sourceForm": "8-K",
-              "filingDate": "2026-07-28",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": false,
-              "validationNotes": [
-                "partial-geographic-segment-disclosure"
-              ]
-            },
-            {
-              "name": "Pacific",
-              "nameZh": null,
-              "memberKey": "pacific",
-              "valueBn": 3.089,
-              "yoyPct": 105.11,
-              "qoqPct": null,
-              "mixPct": 11.9,
-              "mixYoyDeltaPp": -0.1,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
-              "sourceForm": "8-K",
-              "filingDate": "2026-07-28",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": false,
-              "validationNotes": [
-                "partial-geographic-segment-disclosure"
-              ]
+              "filingDate": "2026-07-28"
             }
           ],
-          "displayScaleFactor": 1,
-          "displayCurrency": "USD",
-          "sankeyStructureContinuity": {
-            "sourceQuarter": "2026Q1",
-            "fields": [
-              "officialRevenueSegments"
-            ],
-            "rule": "same-normalized-category-set"
-          },
-          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueTaxonomyChangedFromPriorYear": false
+          "qualityFlags": [
+            "official-quarter-statement-backfilled"
+          ],
+          "revenueQoqPct": 7.28,
+          "revenueYoyPct": 6.741
         }
       },
       "statementPresets": {},
       "officialRevenueStructureHistory": {
         "source": "official-filing-tables",
         "quarters": {
-          "2026Q3": {
+          "2026Q2": {
             "segments": [
               {
-                "name": "North America",
-                "nameZh": null,
-                "memberKey": "northamerica",
-                "valueBn": 10.301,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
-                "sourceForm": "8-K",
-                "filingDate": "2026-07-28",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": false,
-                "validationNotes": [
-                  "partial-geographic-segment-disclosure"
-                ]
-              },
-              {
                 "name": "EMEA",
-                "nameZh": null,
                 "memberKey": "emea",
-                "valueBn": 6.252,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
+                "valueBn": 3.24,
                 "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
                 "sourceForm": "8-K",
-                "filingDate": "2026-07-28",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": false,
-                "validationNotes": [
-                  "partial-geographic-segment-disclosure"
-                ]
+                "filingDate": "2026-07-28"
               },
               {
                 "name": "Latin America",
-                "nameZh": null,
                 "memberKey": "latinamerica",
-                "valueBn": 3.517,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
+                "valueBn": 1.839,
                 "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
                 "sourceForm": "8-K",
-                "filingDate": "2026-07-28",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": false,
-                "validationNotes": [
-                  "partial-geographic-segment-disclosure"
-                ]
+                "filingDate": "2026-07-28"
               },
               {
-                "name": "Bottling Investments",
-                "nameZh": null,
-                "memberKey": "bottlinginvestments",
-                "valueBn": 3.167,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
+                "name": "North America",
+                "memberKey": "northamerica",
+                "valueBn": 5.408,
                 "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
                 "sourceForm": "8-K",
-                "filingDate": "2026-07-28",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": false,
-                "validationNotes": [
-                  "partial-geographic-segment-disclosure"
-                ]
+                "filingDate": "2026-07-28"
               },
               {
                 "name": "Asia Pacific",
-                "nameZh": null,
                 "memberKey": "pacific",
-                "valueBn": 3.089,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
+                "valueBn": 1.581,
                 "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
                 "sourceForm": "8-K",
-                "filingDate": "2026-07-28",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": false,
-                "validationNotes": [
-                  "partial-geographic-segment-disclosure"
-                ]
+                "filingDate": "2026-07-28"
+              },
+              {
+                "name": "Bottling Investments",
+                "memberKey": "bottlinginvestments",
+                "valueBn": 1.527,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
+                "sourceForm": "8-K",
+                "filingDate": "2026-07-28"
               }
             ],
-            "displayRevenueBn": 25.852
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm"
           }
         },
         "filingsUsed": [
@@ -17152,7 +17530,8 @@
             "warningCount": 0,
             "warnings": []
           }
-        }
+        },
+        "statementBackfilledQuarterCount": 2
       },
       "marketCapUsd": 352573194240,
       "marketCapAsOf": "2026-07-06",
@@ -17166,33 +17545,33 @@
           "calendarQuarter": "2026Q2",
           "periodEnd": "2026-06-30",
           "fiscalYear": "2026",
-          "fiscalQuarter": "Q2",
-          "fiscalLabel": "FY2026 Q2",
+          "fiscalQuarter": "Q4",
+          "fiscalLabel": "FY2026 Q4",
           "statementCurrency": "USD",
-          "revenueBn": 20.912,
-          "revenueYoyPct": 0.11,
-          "costOfRevenueBn": null,
-          "grossProfitBn": null,
-          "sgnaBn": null,
+          "revenueBn": 21.203,
+          "revenueYoyPct": 1.503,
+          "costOfRevenueBn": 10.919,
+          "grossProfitBn": 10.284,
+          "sgnaBn": 6.335,
           "rndBn": null,
           "otherOpexBn": null,
-          "operatingExpensesBn": null,
-          "operatingIncomeBn": null,
+          "operatingExpensesBn": 6.334,
+          "operatingIncomeBn": 3.95,
           "nonOperatingBn": null,
           "pretaxIncomeBn": null,
-          "taxBn": null,
-          "netIncomeBn": null,
+          "taxBn": 0.851,
+          "netIncomeBn": 3.045,
           "netIncomeYoyPct": null,
-          "grossMarginPct": null,
-          "operatingMarginPct": null,
-          "profitMarginPct": null,
+          "grossMarginPct": 48.50257,
+          "operatingMarginPct": 18.629439,
+          "profitMarginPct": 14.361175,
           "effectiveTaxRatePct": null,
-          "revenueQoqPct": -0.457,
+          "revenueQoqPct": -0.151,
           "grossMarginYoyDeltaPp": null,
           "operatingMarginYoyDeltaPp": null,
           "profitMarginYoyDeltaPp": null,
-          "statementSource": "official-revenue-structure",
-          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/80424/000008042426000103/pg-20260630_htm.xml",
+          "statementSource": "official-quarter-statement-backfill",
+          "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000080424.json",
           "statementFilingDate": "2026-08-04",
           "officialRevenueSegments": [
             {
@@ -17296,7 +17675,53 @@
             "rule": "same-normalized-category-set"
           },
           "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueTaxonomyChangedFromPriorYear": false
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "fieldSources": {
+            "revenueBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000080424.json"
+            },
+            "costOfRevenueBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000080424.json"
+            },
+            "grossProfitBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000080424.json"
+            },
+            "sgnaBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000080424.json"
+            },
+            "operatingExpensesBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000080424.json"
+            },
+            "operatingIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000080424.json"
+            },
+            "taxBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000080424.json"
+            },
+            "netIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000080424.json"
+            }
+          },
+          "qualityFlags": [
+            "official-quarter-statement-backfilled"
+          ],
+          "derivedStatementFields": []
         }
       },
       "statementPresets": {},
@@ -17756,7 +18181,8 @@
             "warningCount": 0,
             "warnings": []
           }
-        }
+        },
+        "statementBackfilledQuarterCount": 2
       },
       "marketCapUsd": 336978313216,
       "marketCapAsOf": "2026-07-06",
@@ -17775,28 +18201,28 @@
           "statementCurrency": "USD",
           "revenueBn": 67.199,
           "revenueYoyPct": 51.434,
-          "costOfRevenueBn": null,
-          "grossProfitBn": null,
-          "sgnaBn": null,
+          "costOfRevenueBn": 36.607,
+          "grossProfitBn": 30.592,
+          "sgnaBn": 1.314,
           "rndBn": null,
           "otherOpexBn": null,
-          "operatingExpensesBn": null,
-          "operatingIncomeBn": null,
-          "nonOperatingBn": null,
-          "pretaxIncomeBn": null,
-          "taxBn": null,
-          "netIncomeBn": null,
+          "operatingExpensesBn": 16.316,
+          "operatingIncomeBn": 14.276,
+          "nonOperatingBn": 2.408,
+          "pretaxIncomeBn": 16.684,
+          "taxBn": 4.47,
+          "netIncomeBn": 12.072,
           "netIncomeYoyPct": null,
-          "grossMarginPct": null,
-          "operatingMarginPct": null,
-          "profitMarginPct": null,
+          "grossMarginPct": 45.524487,
+          "operatingMarginPct": 21.244364,
+          "profitMarginPct": 17.964553,
           "effectiveTaxRatePct": null,
           "revenueQoqPct": 41.305,
           "grossMarginYoyDeltaPp": null,
           "operatingMarginYoyDeltaPp": null,
           "profitMarginYoyDeltaPp": null,
-          "statementSource": "official-revenue-structure",
-          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/93410/000009341026000167/cvx-20260630_htm.xml",
+          "statementSource": "official-inline-quarter-statement",
+          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/93410/000009341026000167/cvx-20260630.htm",
           "statementFilingDate": "2026-08-06",
           "officialRevenueSegments": [
             {
@@ -17870,7 +18296,66 @@
             "rule": "same-normalized-category-set"
           },
           "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueTaxonomyChangedFromPriorYear": false
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "fieldSources": {
+            "revenueBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/93410/000009341026000167/cvx-20260630.htm"
+            },
+            "costOfRevenueBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/93410/000009341026000167/cvx-20260630.htm"
+            },
+            "grossProfitBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/93410/000009341026000167/cvx-20260630.htm"
+            },
+            "sgnaBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/93410/000009341026000167/cvx-20260630.htm"
+            },
+            "operatingExpensesBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/93410/000009341026000167/cvx-20260630.htm"
+            },
+            "operatingIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/93410/000009341026000167/cvx-20260630.htm"
+            },
+            "nonOperatingBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/93410/000009341026000167/cvx-20260630.htm"
+            },
+            "pretaxIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/93410/000009341026000167/cvx-20260630.htm"
+            },
+            "taxBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/93410/000009341026000167/cvx-20260630.htm"
+            },
+            "netIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/93410/000009341026000167/cvx-20260630.htm"
+            }
+          },
+          "qualityFlags": [
+            "official-quarter-statement-backfilled"
+          ],
+          "derivedStatementFields": [],
+          "statementValueMode": "direct",
+          "statementSpanQuarters": 1,
+          "statementPeriodStart": "2026-04-01"
         }
       },
       "statementPresets": {},
@@ -18238,7 +18723,8 @@
             "warningCount": 0,
             "warnings": []
           }
-        }
+        },
+        "statementBackfilledQuarterCount": 1
       },
       "marketCapUsd": 326968508416,
       "marketCapAsOf": "2026-07-06",
@@ -18257,28 +18743,28 @@
           "statementCurrency": "USD",
           "revenueBn": 12.56,
           "revenueYoyPct": 13.368,
-          "costOfRevenueBn": null,
-          "grossProfitBn": null,
-          "sgnaBn": null,
-          "rndBn": null,
+          "costOfRevenueBn": 6.037,
+          "grossProfitBn": 6.523,
+          "sgnaBn": 1.323,
+          "rndBn": 1.008,
           "otherOpexBn": null,
-          "operatingExpensesBn": null,
-          "operatingIncomeBn": null,
-          "nonOperatingBn": null,
-          "pretaxIncomeBn": null,
-          "taxBn": null,
-          "netIncomeBn": null,
+          "operatingExpensesBn": 2.33,
+          "operatingIncomeBn": 4.193,
+          "nonOperatingBn": -0.124,
+          "pretaxIncomeBn": 4.069,
+          "taxBn": 0.667,
+          "netIncomeBn": 3.401,
           "netIncomeYoyPct": null,
-          "grossMarginPct": null,
-          "operatingMarginPct": null,
-          "profitMarginPct": null,
+          "grossMarginPct": 51.934713,
+          "operatingMarginPct": 33.383758,
+          "profitMarginPct": 27.078025,
           "effectiveTaxRatePct": null,
           "revenueQoqPct": 2.531,
           "grossMarginYoyDeltaPp": null,
           "operatingMarginYoyDeltaPp": null,
           "profitMarginYoyDeltaPp": null,
-          "statementSource": "official-revenue-structure",
-          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000211/ex991_q226.htm",
+          "statementSource": "official-quarter-statement-backfill",
+          "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001065280.json",
           "statementFilingDate": "2026-07-16",
           "officialRevenueSegments": [
             {
@@ -18386,7 +18872,68 @@
             "rule": "same-normalized-category-set"
           },
           "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueTaxonomyChangedFromPriorYear": false
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "fieldSources": {
+            "revenueBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001065280.json"
+            },
+            "costOfRevenueBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001065280.json"
+            },
+            "grossProfitBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001065280.json"
+            },
+            "sgnaBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001065280.json"
+            },
+            "rndBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001065280.json"
+            },
+            "operatingExpensesBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001065280.json"
+            },
+            "operatingIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001065280.json"
+            },
+            "nonOperatingBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001065280.json"
+            },
+            "pretaxIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001065280.json"
+            },
+            "taxBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001065280.json"
+            },
+            "netIncomeBn": {
+              "adapterId": "official-statement-backfill",
+              "label": "Official quarterly income statement",
+              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001065280.json"
+            }
+          },
+          "qualityFlags": [
+            "official-quarter-statement-backfilled"
+          ],
+          "derivedStatementFields": []
         }
       },
       "statementPresets": {},
@@ -19081,7 +19628,8 @@
             "warningCount": 0,
             "warnings": []
           }
-        }
+        },
+        "statementBackfilledQuarterCount": 2
       },
       "marketCapUsd": 230698188800,
       "marketCapAsOf": "2026-07-06",
@@ -20316,7 +20864,8 @@
             "warningCount": 0,
             "warnings": []
           }
-        }
+        },
+        "statementBackfilledQuarterCount": 12
       },
       "marketCapUsd": 81524629504,
       "marketCapAsOf": "2026-07-06",
@@ -20923,7 +21472,8 @@
               "2026Q2: opex breakdown sums to 19.361Bn vs operating expenses 10.739Bn."
             ]
           }
-        }
+        },
+        "statementBackfilledQuarterCount": 12
       },
       "marketCapUsd": 74900000000,
       "marketCapAsOf": "2026-07-06",
@@ -21712,7 +22262,8 @@
               "2026Q1: opex breakdown sums to 33.431Bn vs operating expenses 32.44Bn."
             ]
           }
-        }
+        },
+        "statementBackfilledQuarterCount": 10
       },
       "marketCapUsd": 58982546713,
       "marketCapAsOf": "2026-07-06",
@@ -22232,7 +22783,8 @@
             "warningCount": 0,
             "warnings": []
           }
-        }
+        },
+        "statementBackfilledQuarterCount": 12
       },
       "marketCapUsd": 35950309376,
       "marketCapAsOf": "2026-07-06",
@@ -22798,6 +23350,655 @@
             "quarter": "2026Q1",
             "filingDate": "2026-05-12",
             "pdf": "https://ir.jd.com/static-files/aa3128de-d344-4069-86f8-83e0141b95e8"
+          }
+        ],
+        "errors": []
+      },
+      "officialSegmentHistory": {}
+    },
+    {
+      "_cacheVersion": "20260803-v4",
+      "id": "spacex",
+      "ticker": "SPCX",
+      "nameZh": "SpaceX",
+      "nameEn": "SpaceX",
+      "slug": "spcx",
+      "rank": 41,
+      "isAdr": false,
+      "brand": {
+        "primary": "#005288",
+        "secondary": "#152536",
+        "accent": "#DCEBF5"
+      },
+      "quarters": [
+        "2025Q1",
+        "2025Q2",
+        "2025Q3",
+        "2025Q4",
+        "2026Q1",
+        "2026Q2",
+        "2026Q3"
+      ],
+      "statementSource": "official-sec-disclosures",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm",
+      "reportingCurrency": "USD",
+      "cik": 1181412,
+      "errors": [],
+      "errorDetails": [],
+      "coverage": {
+        "quarterCount": 7,
+        "pixelReplicaQuarterCount": 0,
+        "hasPixelReplica": false,
+        "officialFinancialQuarterCount": 7,
+        "officialSegmentQuarterCount": 7,
+        "officialExpenseQuarterCount": 7,
+        "classification": {
+          "status": "ok",
+          "latestQuarter": "2026Q3",
+          "latestQuarterHasRevenueClassification": true,
+          "latestQuarterHasExpenseClassification": true,
+          "latestRevenueClassificationQuarter": "2026Q3",
+          "latestExpenseClassificationQuarter": "2026Q3",
+          "latestStructureHistoryQuarter": "2026Q3",
+          "revenueClassificationQuarterCount": 7,
+          "expenseClassificationQuarterCount": 7,
+          "revenueClassificationCoverageRatio": 1.0,
+          "expenseClassificationCoverageRatio": 1.0,
+          "latestRevenueClassificationLagQuarters": 0,
+          "latestExpenseClassificationLagQuarters": 0,
+          "warnings": [],
+          "blockers": [],
+          "policy": {}
+        },
+        "parser": {
+          "version": "universal-parser-v4",
+          "selectedFinancialSource": "official",
+          "selectedSegmentSource": "official-segments",
+          "selectedRevenueStructureSource": "official-revenue-structures",
+          "financialAttemptCount": 1,
+          "financialReconciliation": {
+            "version": "financial-reconciler-v1",
+            "primarySource": "official",
+            "quarterCount": 2,
+            "fieldOverrideCount": 0,
+            "derivedFieldCount": 0,
+            "mixedSourceQuarterCount": 0,
+            "sourceUsageCounts": {
+              "official": 33
+            }
+          },
+          "financialValidation": {
+            "version": "financial-validation-v1",
+            "status": "high",
+            "quarterCount": 2,
+            "validatedQuarterCount": 2,
+            "issueCount": 0,
+            "mismatchQuarterCount": 0,
+            "highConfidenceQuarterCount": 2,
+            "averageConfidenceScore": 1.0,
+            "latestQuarter": "2026Q2",
+            "latestQuarterConfidenceScore": 1.0,
+            "latestQuarterIssueCount": 0
+          },
+          "validation": {
+            "version": "parser-validation-v1",
+            "status": "high",
+            "overallConfidenceScore": 1.0,
+            "financialConfidenceScore": 1.0,
+            "structuralConfidenceScore": 1.0,
+            "revenueSegmentChecks": 7,
+            "revenueSegmentMismatchCount": 0,
+            "revenueSegmentSkippedChecks": 0,
+            "detailGroupChecks": 3,
+            "detailGroupMismatchCount": 0,
+            "detailGroupSkippedChecks": 0,
+            "opexChecks": 7,
+            "opexSkippedChecks": 0,
+            "opexOverflowMismatchCount": 0,
+            "warningCount": 0,
+            "warnings": []
+          }
+        }
+      },
+      "dataLoadMode": "latest-only",
+      "latestQuarter": "2026Q3",
+      "financials": {
+        "2026Q3": {
+          "revenueBn": 14.575,
+          "costOfRevenueBn": 5.478,
+          "rndBn": 4.596,
+          "sgnaBn": 1.707,
+          "restructuringBn": 0.003,
+          "impairmentBn": 0.0,
+          "operatingIncomeBn": 2.791,
+          "pretaxIncomeBn": 4.014,
+          "taxBn": -0.39,
+          "netIncomeBn": 4.404,
+          "calendarQuarter": "2026Q3",
+          "periodEnd": "2026-09-30",
+          "fiscalYear": 2026,
+          "fiscalQuarter": "Q3",
+          "fiscalLabel": "FY2026 Q3",
+          "statementCurrency": "USD",
+          "displayCurrency": "USD",
+          "displayScaleFactor": 1,
+          "statementSource": "official-sec-disclosure",
+          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm",
+          "statementFilingDate": "2026-10-20",
+          "statementAccountingStandard": "US GAAP",
+          "statementValueMode": "direct",
+          "statementSpanQuarters": 1,
+          "statementPeriodStart": "2026-07-01",
+          "grossProfitBn": 9.097,
+          "operatingExpensesBn": 6.306,
+          "nonOperatingBn": 1.223,
+          "grossMarginPct": 62.415094,
+          "operatingMarginPct": 19.149228,
+          "profitMarginPct": 30.216123,
+          "officialRevenueSegments": [
+            {
+              "name": "Space",
+              "nameZh": "航天",
+              "memberKey": "space",
+              "valueBn": 1.767,
+              "yoyPct": 6.06,
+              "qoqPct": 83.68,
+              "mixPct": 12.1,
+              "mixYoyDeltaPp": -17.8,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm",
+              "sourceForm": "8-K earnings update",
+              "filingDate": null,
+              "supportLines": null,
+              "supportLinesZh": null,
+              "metricMode": null,
+              "validationEligible": true,
+              "validationNotes": null
+            },
+            {
+              "name": "Connectivity",
+              "nameZh": "星链连接",
+              "memberKey": "connectivity",
+              "valueBn": 5.248,
+              "yoyPct": 69.45,
+              "qoqPct": 22.3,
+              "mixPct": 36.0,
+              "mixYoyDeltaPp": -19.5,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm",
+              "sourceForm": "8-K earnings update",
+              "filingDate": null,
+              "supportLines": null,
+              "supportLinesZh": null,
+              "metricMode": null,
+              "validationEligible": true,
+              "validationNotes": null
+            },
+            {
+              "name": "SI",
+              "nameZh": "智能业务",
+              "memberKey": "intelligence",
+              "valueBn": 7.56,
+              "yoyPct": 829.89,
+              "qoqPct": 195.2,
+              "mixPct": 51.9,
+              "mixYoyDeltaPp": 37.3,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm",
+              "sourceForm": "8-K earnings update",
+              "filingDate": null,
+              "supportLines": null,
+              "supportLinesZh": null,
+              "metricMode": null,
+              "validationEligible": true,
+              "validationNotes": null
+            }
+          ],
+          "officialCostBreakdown": [
+            {
+              "name": "Space cost of revenue",
+              "nameZh": "航天成本",
+              "memberKey": "space",
+              "valueBn": 0.435,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm",
+              "sourceForm": null,
+              "filingDate": null
+            },
+            {
+              "name": "Connectivity cost of revenue",
+              "nameZh": "星链连接成本",
+              "memberKey": "connectivity",
+              "valueBn": 2.368,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm",
+              "sourceForm": null,
+              "filingDate": null
+            },
+            {
+              "name": "SI cost of revenue",
+              "nameZh": "智能业务成本",
+              "memberKey": "intelligence",
+              "valueBn": 2.675,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm",
+              "sourceForm": null,
+              "filingDate": null
+            }
+          ],
+          "officialOpexBreakdown": [
+            {
+              "name": "Research and Development",
+              "nameZh": "研发",
+              "memberKey": "researchanddevelopment",
+              "valueBn": 4.596,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm",
+              "sourceForm": null,
+              "filingDate": null,
+              "validationEligible": null,
+              "validationNotes": null
+            },
+            {
+              "name": "Selling, General and Administrative",
+              "nameZh": "销售、一般及行政",
+              "memberKey": "sellinggeneralandadministrative",
+              "valueBn": 1.707,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm",
+              "sourceForm": null,
+              "filingDate": null,
+              "validationEligible": null,
+              "validationNotes": null
+            },
+            {
+              "name": "Restructuring charges",
+              "nameZh": "重组费用",
+              "memberKey": "restructuringBn",
+              "valueBn": 0.003,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm",
+              "sourceForm": null,
+              "filingDate": null,
+              "validationEligible": null,
+              "validationNotes": null
+            }
+          ],
+          "officialRevenueStyle": "spacex-operating-segments",
+          "derivedStatementFields": [
+            "grossProfitBn",
+            "operatingExpensesBn",
+            "nonOperatingBn"
+          ],
+          "fieldSources": {
+            "revenueBn": {
+              "adapterId": "official-sec-disclosure",
+              "label": "Same-quarter SEC disclosure",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm"
+            },
+            "costOfRevenueBn": {
+              "adapterId": "official-sec-disclosure",
+              "label": "Same-quarter SEC disclosure",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm"
+            },
+            "rndBn": {
+              "adapterId": "official-sec-disclosure",
+              "label": "Same-quarter SEC disclosure",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm"
+            },
+            "sgnaBn": {
+              "adapterId": "official-sec-disclosure",
+              "label": "Same-quarter SEC disclosure",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm"
+            },
+            "restructuringBn": {
+              "adapterId": "official-sec-disclosure",
+              "label": "Same-quarter SEC disclosure",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm"
+            },
+            "impairmentBn": {
+              "adapterId": "official-sec-disclosure",
+              "label": "Same-quarter SEC disclosure",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm"
+            },
+            "operatingIncomeBn": {
+              "adapterId": "official-sec-disclosure",
+              "label": "Same-quarter SEC disclosure",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm"
+            },
+            "pretaxIncomeBn": {
+              "adapterId": "official-sec-disclosure",
+              "label": "Same-quarter SEC disclosure",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm"
+            },
+            "taxBn": {
+              "adapterId": "official-sec-disclosure",
+              "label": "Same-quarter SEC disclosure",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm"
+            },
+            "netIncomeBn": {
+              "adapterId": "official-sec-disclosure",
+              "label": "Same-quarter SEC disclosure",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm"
+            },
+            "grossProfitBn": {
+              "adapterId": "official-disclosure-derived",
+              "label": "Same-quarter SEC disclosure",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm"
+            },
+            "operatingExpensesBn": {
+              "adapterId": "official-disclosure-derived",
+              "label": "Same-quarter SEC disclosure",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm"
+            },
+            "nonOperatingBn": {
+              "adapterId": "official-disclosure-derived",
+              "label": "Same-quarter SEC disclosure",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm"
+            }
+          },
+          "statementPresentationNote": "2026Q3起原AI分部更名为SI，历史图表使用一致的智能业务分类。",
+          "officialRevenueDetailGroups": [
+            {
+              "name": "Launch services",
+              "nameZh": "发射服务",
+              "memberKey": "launchservices",
+              "valueBn": 1.13,
+              "yoyPct": null,
+              "qoqPct": null,
+              "mixPct": 7.8,
+              "mixYoyDeltaPp": null,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm",
+              "sourceForm": null,
+              "filingDate": null,
+              "supportLines": null,
+              "supportLinesZh": null,
+              "targetName": "Space",
+              "metricMode": null,
+              "validationEligible": true,
+              "validationNotes": null
+            },
+            {
+              "name": "Launch and development",
+              "nameZh": "发射与开发",
+              "memberKey": "launchanddevelopment",
+              "valueBn": 0.637,
+              "yoyPct": null,
+              "qoqPct": null,
+              "mixPct": 4.4,
+              "mixYoyDeltaPp": null,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm",
+              "sourceForm": null,
+              "filingDate": null,
+              "supportLines": null,
+              "supportLinesZh": null,
+              "targetName": "Space",
+              "metricMode": null,
+              "validationEligible": true,
+              "validationNotes": null
+            },
+            {
+              "name": "Consumer",
+              "nameZh": "星链个人用户",
+              "memberKey": "consumer",
+              "valueBn": 3.121,
+              "yoyPct": null,
+              "qoqPct": null,
+              "mixPct": 21.4,
+              "mixYoyDeltaPp": null,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm",
+              "sourceForm": null,
+              "filingDate": null,
+              "supportLines": null,
+              "supportLinesZh": null,
+              "targetName": "Connectivity",
+              "metricMode": null,
+              "validationEligible": true,
+              "validationNotes": null
+            },
+            {
+              "name": "Enterprise and government",
+              "nameZh": "企业与政府",
+              "memberKey": "enterpriseandgovernment",
+              "valueBn": 2.127,
+              "yoyPct": null,
+              "qoqPct": null,
+              "mixPct": 14.6,
+              "mixYoyDeltaPp": null,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm",
+              "sourceForm": null,
+              "filingDate": null,
+              "supportLines": null,
+              "supportLinesZh": null,
+              "targetName": "Connectivity",
+              "metricMode": null,
+              "validationEligible": true,
+              "validationNotes": null
+            },
+            {
+              "name": "Advertising",
+              "nameZh": "广告",
+              "memberKey": "advertising",
+              "valueBn": 0.538,
+              "yoyPct": null,
+              "qoqPct": null,
+              "mixPct": 3.7,
+              "mixYoyDeltaPp": null,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm",
+              "sourceForm": null,
+              "filingDate": null,
+              "supportLines": null,
+              "supportLinesZh": null,
+              "targetName": "SI",
+              "metricMode": null,
+              "validationEligible": true,
+              "validationNotes": null
+            },
+            {
+              "name": "SI solutions and infrastructure",
+              "nameZh": "智能解决方案与基础设施",
+              "memberKey": "sisolutionsandinfrastructure",
+              "valueBn": 7.022,
+              "yoyPct": null,
+              "qoqPct": null,
+              "mixPct": 48.2,
+              "mixYoyDeltaPp": null,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm",
+              "sourceForm": null,
+              "filingDate": null,
+              "supportLines": null,
+              "supportLinesZh": null,
+              "targetName": "SI",
+              "metricMode": null,
+              "validationEligible": true,
+              "validationNotes": null
+            }
+          ],
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
+          "revenueQoqPct": 86.524,
+          "revenueYoyPct": 161.388,
+          "sankeyStructureContinuity": {
+            "sourceQuarter": "2026Q2",
+            "fields": [
+              "officialRevenueSegments",
+              "officialCostBreakdown",
+              "officialOpexBreakdown"
+            ],
+            "rule": "same-normalized-category-set"
+          },
+          "accountingStandard": "US GAAP"
+        }
+      },
+      "statementPresets": {},
+      "officialRevenueStructureHistory": {
+        "source": "official-sec-disclosures",
+        "quarters": {
+          "2026Q3": {
+            "segments": [
+              {
+                "name": "Space",
+                "nameZh": "航天",
+                "memberKey": "space",
+                "valueBn": 1.767,
+                "yoyPct": null,
+                "qoqPct": null,
+                "mixPct": null,
+                "mixYoyDeltaPp": null,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm",
+                "sourceForm": "8-K earnings update",
+                "filingDate": null,
+                "supportLines": null,
+                "supportLinesZh": null,
+                "metricMode": null,
+                "validationEligible": true,
+                "validationNotes": null
+              },
+              {
+                "name": "Connectivity",
+                "nameZh": "星链连接",
+                "memberKey": "connectivity",
+                "valueBn": 5.248,
+                "yoyPct": null,
+                "qoqPct": null,
+                "mixPct": null,
+                "mixYoyDeltaPp": null,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm",
+                "sourceForm": "8-K earnings update",
+                "filingDate": null,
+                "supportLines": null,
+                "supportLinesZh": null,
+                "metricMode": null,
+                "validationEligible": true,
+                "validationNotes": null
+              },
+              {
+                "name": "SI",
+                "nameZh": "智能业务",
+                "memberKey": "intelligence",
+                "valueBn": 7.56,
+                "yoyPct": null,
+                "qoqPct": null,
+                "mixPct": null,
+                "mixYoyDeltaPp": null,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm",
+                "sourceForm": "8-K earnings update",
+                "filingDate": null,
+                "supportLines": null,
+                "supportLinesZh": null,
+                "metricMode": null,
+                "validationEligible": true,
+                "validationNotes": null
+              }
+            ],
+            "detailGroups": [
+              {
+                "name": "Launch services",
+                "nameZh": "发射服务",
+                "targetName": "Space",
+                "memberKey": "launchservices",
+                "valueBn": 1.13,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm",
+                "validationEligible": true
+              },
+              {
+                "name": "Launch and development",
+                "nameZh": "发射与开发",
+                "targetName": "Space",
+                "memberKey": "launchanddevelopment",
+                "valueBn": 0.637,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm",
+                "validationEligible": true
+              },
+              {
+                "name": "Consumer",
+                "nameZh": "星链个人用户",
+                "targetName": "Connectivity",
+                "memberKey": "consumer",
+                "valueBn": 3.121,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm",
+                "validationEligible": true
+              },
+              {
+                "name": "Enterprise and government",
+                "nameZh": "企业与政府",
+                "targetName": "Connectivity",
+                "memberKey": "enterpriseandgovernment",
+                "valueBn": 2.127,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm",
+                "validationEligible": true
+              },
+              {
+                "name": "Advertising",
+                "nameZh": "广告",
+                "targetName": "SI",
+                "memberKey": "advertising",
+                "valueBn": 0.538,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm",
+                "validationEligible": true
+              },
+              {
+                "name": "SI solutions and infrastructure",
+                "nameZh": "智能解决方案与基础设施",
+                "targetName": "SI",
+                "memberKey": "sisolutionsandinfrastructure",
+                "valueBn": 7.022,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm",
+                "validationEligible": true
+              }
+            ],
+            "opexBreakdown": [
+              {
+                "name": "Research and Development",
+                "nameZh": "研发",
+                "memberKey": "researchanddevelopment",
+                "valueBn": 4.596,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm"
+              },
+              {
+                "name": "Selling, General and Administrative",
+                "nameZh": "销售、一般及行政",
+                "memberKey": "sellinggeneralandadministrative",
+                "valueBn": 1.707,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm"
+              },
+              {
+                "name": "Restructuring charges",
+                "nameZh": "重组费用",
+                "memberKey": "restructuringBn",
+                "valueBn": 0.003,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm"
+              }
+            ],
+            "costBreakdown": [
+              {
+                "name": "Space cost of revenue",
+                "nameZh": "航天成本",
+                "memberKey": "space",
+                "valueBn": 0.435,
+                "color": "#005288",
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm"
+              },
+              {
+                "name": "Connectivity cost of revenue",
+                "nameZh": "星链连接成本",
+                "memberKey": "connectivity",
+                "valueBn": 2.368,
+                "color": "#2D9CDB",
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm"
+              },
+              {
+                "name": "SI cost of revenue",
+                "nameZh": "智能业务成本",
+                "memberKey": "intelligence",
+                "valueBn": 2.675,
+                "color": "#7860C9",
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm"
+              }
+            ],
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm"
+          }
+        },
+        "filingsUsed": [
+          {
+            "form": "10-Q",
+            "filingDate": "2026-08-04",
+            "accession": "0001628280-26-052535",
+            "primaryDocument": "spcx-20260630.htm",
+            "instance": "spcx-20260630_htm.xml"
           }
         ],
         "errors": []

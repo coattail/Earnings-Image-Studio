@@ -68,26 +68,11 @@ class MetaQ2FY26SankeyLayoutTests(unittest.TestCase):
         operating = visible_rect(self.svg_root, "operating")
         net = visible_rect(self.svg_root, "net")
 
-        self.assertLessEqual(
-            operating["y"],
-            529,
-            "Meta's operating-profit node should share a small portion of the finishing lift.",
-        )
-        self.assertLessEqual(
-            net["y"],
-            354,
-            "Meta's high-retention net-profit node should receive a stronger finishing lift.",
-        )
-        self.assertGreaterEqual(
-            gross["y"] - operating["y"],
-            45,
-            "The green ribbon should begin rising clearly before the operating-profit stage.",
-        )
-        self.assertGreaterEqual(
-            operating["y"] - net["y"],
-            172,
-            "The main green ribbon should continue opening upward into net profit.",
-        )
+        for source, target in ((gross, operating), (operating, net)):
+            rise = source["y"] - target["y"]
+            runway = target["x"] - source["x"] - source["width"]
+            self.assertGreater(rise, 0)
+            self.assertLess(rise / runway, 0.4)
 
     def test_high_retention_finish_is_company_agnostic(self) -> None:
         cloned_payload = json.loads(META_PAYLOAD.read_text(encoding="utf-8"))
@@ -112,20 +97,19 @@ class MetaQ2FY26SankeyLayoutTests(unittest.TestCase):
             generic_svg_root = render_sankey_svg(payload_path, "generic-high-retention")
             disabled_svg_root = render_sankey_svg(disabled_payload_path, "generic-high-retention-disabled")
 
-        self.assertAlmostEqual(
-            visible_rect(generic_svg_root, "gross")["y"],
-            visible_rect(disabled_svg_root, "gross")["y"],
-            places=1,
-        )
-        self.assertGreaterEqual(
-            visible_rect(disabled_svg_root, "operating")["y"] - visible_rect(generic_svg_root, "operating")["y"],
-            8,
-            "An anonymous high-retention company should receive the global operating-profit finishing lift.",
-        )
-        self.assertGreaterEqual(
-            visible_rect(disabled_svg_root, "net")["y"] - visible_rect(generic_svg_root, "net")["y"],
-            28,
-            "An anonymous high-retention company should receive the global net-profit finishing lift.",
+        # Company identity and the legacy finishing lift must not stack offsets
+        # onto the globally solved port trajectory.
+        for node_id in ("gross", "operating", "net"):
+            with self.subTest(node_id=node_id):
+                actual = visible_rect(generic_svg_root, node_id)
+                self.assertEqual(actual, visible_rect(disabled_svg_root, node_id))
+        generic_gross = visible_rect(generic_svg_root, "gross")
+        generic_op = visible_rect(generic_svg_root, "operating")
+        self.assertGreater(generic_gross["y"], generic_op["y"])
+        self.assertLess(
+            (generic_gross["y"] - generic_op["y"]) /
+            (generic_op["x"] - generic_gross["x"] - generic_gross["width"]),
+            0.35,
         )
 
 

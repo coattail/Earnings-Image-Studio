@@ -31,7 +31,7 @@ const state = {
   },
 };
 
-const BUILD_ASSET_VERSION = "20260903-nvidia-prior-qoq-v200";
+const BUILD_ASSET_VERSION = "20261021-port-spine";
 const CORPORATE_LOGO_AREA_MULTIPLIER = 1.728;
 const CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER = Math.sqrt(CORPORATE_LOGO_AREA_MULTIPLIER);
 const CORPORATE_LOGO_REVENUE_GAP_MULTIPLIER = 1.2;
@@ -2461,14 +2461,8 @@ async function normalizeBitmapLogoAsset(asset) {
     context.putImageData(normalizedImageData, 0, 0);
     const visibleBounds = opaqueBoundsFromImageData(normalizedImageData, width, height);
     if (!visibleBounds) {
-      if (!transparentImageData && !isSmallSvgRasterFallback) return asset;
-      return {
-        ...asset,
-        mime: "image/png",
-        dataUrl: canvas.toDataURL("image/png"),
-        width,
-        height,
-      };
+      // Background inference must never turn a valid monochrome mark into an empty image.
+      return asset;
     }
     const trimPadding = Math.max(1, Math.round(Math.min(width, height) * 0.012));
     const cropLeft = Math.max(visibleBounds.left - trimPadding, 0);

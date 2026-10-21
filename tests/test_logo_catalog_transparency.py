@@ -2,6 +2,7 @@ import base64
 import json
 import sys
 import unittest
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 
@@ -76,6 +77,22 @@ def edge_alpha_stats(asset: dict) -> dict[str, float]:
 
 
 class LogoCatalogTransparencyTests(unittest.TestCase):
+    def test_byd_corporate_logo_is_visible_on_a_light_background(self) -> None:
+        asset = load_logo_catalog()["byd"]
+        root = ET.fromstring(decode_data_url_payload(asset))
+        paths = list(root.iter("{http://www.w3.org/2000/svg}path"))
+        self.assertGreaterEqual(len(paths), 3)
+        self.assertTrue(any(path.get("fill", "").lower() not in {"", "none", "white", "#fff", "#ffffff", "rgb(255,255,255)"} for path in paths))
+        self.assertNotIn("wang-logo", asset["sourceUrl"])
+
+    def test_local_logo_refresh_keeps_light_background_artwork(self) -> None:
+        catalog = load_logo_catalog()
+        for company_id, domain in [("byd", "byd.com"), ("exxon", "exxonmobil.com")]:
+            with self.subTest(company=company_id):
+                refreshed = generate_logo_catalog._select_logo(company_id, domain)
+                self.assertEqual(decode_data_url_payload(refreshed), decode_data_url_payload(catalog[company_id]))
+                self.assertEqual(refreshed["candidateCount"], 1)
+
     def test_samsung_uses_official_blue_vector_wordmark(self) -> None:
         asset = load_logo_catalog()["samsung"]
         svg_markup = decode_data_url_payload(asset).decode("utf-8")

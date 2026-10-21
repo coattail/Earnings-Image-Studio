@@ -56,29 +56,29 @@
       "fiscalQuarter": "Q2",
       "fiscalLabel": "FY2021 Q2",
       "statementCurrency": "USD",
-      "revenueBn": 32.764,
-      "revenueYoyPct": -0.655,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "revenueBn": 30.479,
+      "revenueYoyPct": -7.583,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 30.479,
       "sgnaBn": 6.589,
       "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "otherOpexBn": 17.667,
+      "operatingExpensesBn": 17.667,
+      "operatingIncomeBn": 12.812,
+      "nonOperatingBn": 2.285,
       "pretaxIncomeBn": 15.097,
       "taxBn": 3.149,
-      "netIncomeBn": 11.496,
+      "netIncomeBn": 11.948,
       "netIncomeYoyPct": 169.54,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": 36.47,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 42.0355,
+      "profitMarginPct": 39.200761,
       "effectiveTaxRatePct": 20.858,
-      "revenueQoqPct": 1.543,
+      "revenueQoqPct": -5.538,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
-      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
       "statementFilingDate": "2021-06-30",
       "parserFinancialFieldSources": {
         "revenueBn": "stockanalysis",
@@ -243,7 +243,77 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "fieldSources": {
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "otherOpexBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        }
+      },
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingIncomeBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ]
     },
     "2021Q3": {
       "calendarQuarter": "2021Q3",
@@ -252,29 +322,29 @@
       "fiscalQuarter": "Q3",
       "fiscalLabel": "FY2021 Q3",
       "statementCurrency": "USD",
-      "revenueBn": 31.174,
-      "revenueYoyPct": 6.954,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "revenueBn": 29.647,
+      "revenueYoyPct": 1.715,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 29.647,
       "sgnaBn": 6.817,
       "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "otherOpexBn": 17.063,
+      "operatingExpensesBn": 17.063,
+      "operatingIncomeBn": 12.584,
+      "nonOperatingBn": 1.527,
       "pretaxIncomeBn": 14.111,
       "taxBn": 2.424,
-      "netIncomeBn": 11.229,
+      "netIncomeBn": 11.687,
       "netIncomeYoyPct": 24.56,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": 37.49,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 42.446116,
+      "profitMarginPct": 39.420515,
       "effectiveTaxRatePct": 17.178,
-      "revenueQoqPct": -4.853,
+      "revenueQoqPct": -2.73,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
-      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
       "statementFilingDate": "2021-09-30",
       "parserFinancialFieldSources": {
         "revenueBn": "stockanalysis",
@@ -401,7 +471,7 @@
           "yoyPct": 15.07,
           "qoqPct": 4.7,
           "mixPct": 13.8,
-          "mixYoyDeltaPp": 1.0,
+          "mixYoyDeltaPp": 1,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000001961721000458/jpm-20210930_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2021-11-02",
@@ -440,7 +510,77 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "fieldSources": {
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "otherOpexBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        }
+      },
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingIncomeBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ]
     },
     "2021Q4": {
       "calendarQuarter": "2021Q4",
@@ -449,29 +589,29 @@
       "fiscalQuarter": "Q4",
       "fiscalLabel": "FY2021 Q4",
       "statementCurrency": "USD",
-      "revenueBn": 30.545,
-      "revenueYoyPct": 4.732,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "revenueBn": 29.257,
+      "revenueYoyPct": 0.315,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 29.257,
       "sgnaBn": 7.313,
       "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "otherOpexBn": 17.888,
+      "operatingExpensesBn": 17.888,
+      "operatingIncomeBn": 11.369,
+      "nonOperatingBn": 1.288,
       "pretaxIncomeBn": 12.657,
       "taxBn": 2.258,
-      "netIncomeBn": 9.927,
+      "netIncomeBn": 10.399,
       "netIncomeYoyPct": -15.14,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": 34.04,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 38.859076,
+      "profitMarginPct": 35.543631,
       "effectiveTaxRatePct": 17.84,
-      "revenueQoqPct": -2.018,
+      "revenueQoqPct": -1.315,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
-      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
       "statementFilingDate": "2021-12-31",
       "parserFinancialFieldSources": {
         "revenueBn": "stockanalysis",
@@ -637,7 +777,77 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "fieldSources": {
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "otherOpexBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        }
+      },
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingIncomeBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ]
     },
     "2022Q1": {
       "calendarQuarter": "2022Q1",
@@ -646,29 +856,29 @@
       "fiscalQuarter": "Q1",
       "fiscalLabel": "FY2022 Q1",
       "statementCurrency": "USD",
-      "revenueBn": 29.254,
-      "revenueYoyPct": -9.335,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "revenueBn": 30.717,
+      "revenueYoyPct": -4.801,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 30.717,
       "sgnaBn": 6.986,
       "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "otherOpexBn": 19.191,
+      "operatingExpensesBn": 19.191,
+      "operatingIncomeBn": 11.526,
+      "nonOperatingBn": -1.463,
       "pretaxIncomeBn": 10.063,
       "taxBn": 1.781,
-      "netIncomeBn": 7.845,
+      "netIncomeBn": 8.282,
       "netIncomeYoyPct": -43.36,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": 28.31,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 37.523196,
+      "profitMarginPct": 26.962268,
       "effectiveTaxRatePct": 17.698,
-      "revenueQoqPct": -4.227,
+      "revenueQoqPct": 4.99,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
-      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
       "statementFilingDate": "2022-03-31",
       "parserFinancialFieldSources": {
         "revenueBn": "stockanalysis",
@@ -755,7 +965,7 @@
           "yoyPct": -7.37,
           "qoqPct": 17.3,
           "mixPct": 46.2,
-          "mixYoyDeltaPp": 1.0,
+          "mixYoyDeltaPp": 1,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000001961722000319/jpm-20220331_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2022-05-03",
@@ -775,7 +985,7 @@
           "yoyPct": -2.3,
           "qoqPct": -0.37,
           "mixPct": 41.8,
-          "mixYoyDeltaPp": 3.0,
+          "mixYoyDeltaPp": 3,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000001961722000319/jpm-20220331_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2022-05-03",
@@ -834,7 +1044,77 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "fieldSources": {
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "otherOpexBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        }
+      },
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingIncomeBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ]
     },
     "2022Q2": {
       "calendarQuarter": "2022Q2",
@@ -843,29 +1123,29 @@
       "fiscalQuarter": "Q2",
       "fiscalLabel": "FY2022 Q2",
       "statementCurrency": "USD",
-      "revenueBn": 29.614,
-      "revenueYoyPct": -9.614,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "revenueBn": 30.715,
+      "revenueYoyPct": 0.774,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 30.715,
       "sgnaBn": 6.855,
       "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "otherOpexBn": 18.749,
+      "operatingExpensesBn": 18.749,
+      "operatingIncomeBn": 11.966,
+      "nonOperatingBn": -1.101,
       "pretaxIncomeBn": 10.865,
       "taxBn": 2.216,
-      "netIncomeBn": 8.195,
+      "netIncomeBn": 8.649,
       "netIncomeYoyPct": -28.71,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": 29.21,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 38.958164,
+      "profitMarginPct": 28.15888,
       "effectiveTaxRatePct": 20.396,
-      "revenueQoqPct": 1.231,
+      "revenueQoqPct": -0.007,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -7.26,
-      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
       "statementFilingDate": "2022-06-30",
       "parserFinancialFieldSources": {
         "revenueBn": "stockanalysis",
@@ -953,7 +1233,7 @@
           "yoyPct": -9.59,
           "qoqPct": -11.69,
           "mixPct": 40.3,
-          "mixYoyDeltaPp": 0.0,
+          "mixYoyDeltaPp": 0,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000001961722000422/jpm-20220630_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2022-08-03",
@@ -993,7 +1273,7 @@
           "yoyPct": 4.85,
           "qoqPct": -0.21,
           "mixPct": 14.5,
-          "mixYoyDeltaPp": 2.0,
+          "mixYoyDeltaPp": 2,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000001961722000422/jpm-20220630_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2022-08-03",
@@ -1032,7 +1312,77 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "fieldSources": {
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "otherOpexBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        }
+      },
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingIncomeBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ]
     },
     "2022Q3": {
       "calendarQuarter": "2022Q3",
@@ -1041,29 +1391,29 @@
       "fiscalQuarter": "Q3",
       "fiscalLabel": "FY2022 Q3",
       "statementCurrency": "USD",
-      "revenueBn": 31.179,
-      "revenueYoyPct": 0.016,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "revenueBn": 32.716,
+      "revenueYoyPct": 10.352,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 32.716,
       "sgnaBn": 7.026,
       "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "otherOpexBn": 19.178,
+      "operatingExpensesBn": 19.178,
+      "operatingIncomeBn": 13.538,
+      "nonOperatingBn": -1.537,
       "pretaxIncomeBn": 12.001,
       "taxBn": 2.264,
-      "netIncomeBn": 9.255,
+      "netIncomeBn": 9.737,
       "netIncomeYoyPct": -17.58,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": 31.23,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 41.380364,
+      "profitMarginPct": 29.762196,
       "effectiveTaxRatePct": 18.865,
-      "revenueQoqPct": 5.285,
+      "revenueQoqPct": 6.515,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -6.26,
-      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
       "statementFilingDate": "2022-09-30",
       "parserFinancialFieldSources": {
         "revenueBn": "stockanalysis",
@@ -1170,7 +1520,7 @@
           "valueBn": 14.331,
           "yoyPct": 14.46,
           "qoqPct": 13.61,
-          "mixPct": 46.0,
+          "mixPct": 46,
           "mixYoyDeltaPp": 5.8,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000001961722000492/jpm-20220930_htm.xml",
           "sourceForm": "10-Q",
@@ -1230,7 +1580,77 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "fieldSources": {
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "otherOpexBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        }
+      },
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingIncomeBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ]
     },
     "2022Q4": {
       "calendarQuarter": "2022Q4",
@@ -1239,29 +1659,29 @@
       "fiscalQuarter": "Q4",
       "fiscalLabel": "FY2022 Q4",
       "statementCurrency": "USD",
-      "revenueBn": 32.259,
-      "revenueYoyPct": 5.611,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "revenueBn": 34.547,
+      "revenueYoyPct": 18.081,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 34.547,
       "sgnaBn": 7.272,
       "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "otherOpexBn": 19.022,
+      "operatingExpensesBn": 19.022,
+      "operatingIncomeBn": 15.525,
+      "nonOperatingBn": -2.288,
       "pretaxIncomeBn": 13.237,
       "taxBn": 2.229,
-      "netIncomeBn": 10.597,
+      "netIncomeBn": 11.008,
       "netIncomeYoyPct": 6.75,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": 34.12,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 44.938779,
+      "profitMarginPct": 31.863838,
       "effectiveTaxRatePct": 16.839,
-      "revenueQoqPct": 3.464,
+      "revenueQoqPct": 5.597,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 0.08,
-      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
       "statementFilingDate": "2022-12-31",
       "parserFinancialFieldSources": {
         "revenueBn": "stockanalysis",
@@ -1409,7 +1829,7 @@
           "yoyPct": 30.32,
           "qoqPct": 11.68,
           "mixPct": 10.6,
-          "mixYoyDeltaPp": 2.0,
+          "mixYoyDeltaPp": 2,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000001961723000231/jpm-20221231_htm.xml",
           "sourceForm": "10-K",
           "filingDate": "2023-02-21",
@@ -1428,7 +1848,77 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "fieldSources": {
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "otherOpexBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        }
+      },
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingIncomeBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ]
     },
     "2023Q1": {
       "calendarQuarter": "2023Q1",
@@ -1437,29 +1927,29 @@
       "fiscalQuarter": "Q1",
       "fiscalLabel": "FY2023 Q1",
       "statementCurrency": "USD",
-      "revenueBn": 36.074,
-      "revenueYoyPct": 23.313,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "revenueBn": 38.349,
+      "revenueYoyPct": 24.846,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 38.349,
       "sgnaBn": 6.792,
       "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "otherOpexBn": 20.107,
+      "operatingExpensesBn": 20.107,
+      "operatingIncomeBn": 18.242,
+      "nonOperatingBn": -2.275,
       "pretaxIncomeBn": 15.967,
       "taxBn": 3.345,
-      "netIncomeBn": 12.193,
+      "netIncomeBn": 12.622,
       "netIncomeYoyPct": 55.42,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": 34.99,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 47.568385,
+      "profitMarginPct": 32.913505,
       "effectiveTaxRatePct": 20.949,
-      "revenueQoqPct": 11.826,
+      "revenueQoqPct": 11.005,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 6.68,
-      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
       "statementFilingDate": "2023-03-31",
       "parserFinancialFieldSources": {
         "revenueBn": "stockanalysis",
@@ -1626,7 +2116,77 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "fieldSources": {
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "otherOpexBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        }
+      },
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingIncomeBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ]
     },
     "2023Q2": {
       "calendarQuarter": "2023Q2",
@@ -1635,29 +2195,29 @@
       "fiscalQuarter": "Q2",
       "fiscalLabel": "FY2023 Q2",
       "statementCurrency": "USD",
-      "revenueBn": 38.408,
-      "revenueYoyPct": 29.695,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "revenueBn": 41.307,
+      "revenueYoyPct": 34.485,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 41.307,
       "sgnaBn": 7.02,
       "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "otherOpexBn": 20.822,
+      "operatingExpensesBn": 20.822,
+      "operatingIncomeBn": 20.485,
+      "nonOperatingBn": -2.899,
       "pretaxIncomeBn": 17.586,
       "taxBn": 3.114,
-      "netIncomeBn": 14.011,
+      "netIncomeBn": 14.472,
       "netIncomeYoyPct": 70.97,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": 37.68,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 49.592079,
+      "profitMarginPct": 35.035224,
       "effectiveTaxRatePct": 17.707,
-      "revenueQoqPct": 6.47,
+      "revenueQoqPct": 7.713,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 8.47,
-      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
       "statementFilingDate": "2023-06-30",
       "parserFinancialFieldSources": {
         "revenueBn": "stockanalysis",
@@ -1824,7 +2384,77 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "fieldSources": {
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "otherOpexBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        }
+      },
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingIncomeBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ]
     },
     "2023Q3": {
       "calendarQuarter": "2023Q3",
@@ -1833,29 +2463,29 @@
       "fiscalQuarter": "Q3",
       "fiscalLabel": "FY2023 Q3",
       "statementCurrency": "USD",
-      "revenueBn": 38.49,
-      "revenueYoyPct": 23.448,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "revenueBn": 39.874,
+      "revenueYoyPct": 21.879,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 39.874,
       "sgnaBn": 7.329,
       "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "otherOpexBn": 21.757,
+      "operatingExpensesBn": 21.757,
+      "operatingIncomeBn": 18.117,
+      "nonOperatingBn": -1.384,
       "pretaxIncomeBn": 16.733,
       "taxBn": 3.582,
-      "netIncomeBn": 12.685,
+      "netIncomeBn": 13.151,
       "netIncomeYoyPct": 37.06,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": 34.17,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 45.435622,
+      "profitMarginPct": 32.981391,
       "effectiveTaxRatePct": 21.407,
-      "revenueQoqPct": 0.213,
+      "revenueQoqPct": -3.469,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 2.94,
-      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
       "statementFilingDate": "2023-09-30",
       "parserFinancialFieldSources": {
         "revenueBn": "stockanalysis",
@@ -1982,7 +2612,7 @@
           "valueBn": 5.005,
           "yoyPct": 10.27,
           "qoqPct": 1.25,
-          "mixPct": 13.0,
+          "mixPct": 13,
           "mixYoyDeltaPp": -1.6,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000001961723000524/jpm-20230930_htm.xml",
           "sourceForm": "10-Q",
@@ -2022,7 +2652,77 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "fieldSources": {
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "otherOpexBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        }
+      },
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingIncomeBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ]
     },
     "2023Q4": {
       "calendarQuarter": "2023Q4",
@@ -2031,29 +2731,29 @@
       "fiscalQuarter": "Q4",
       "fiscalLabel": "FY2023 Q4",
       "statementCurrency": "USD",
-      "revenueBn": 35.812,
-      "revenueYoyPct": 11.014,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "revenueBn": 38.574,
+      "revenueYoyPct": 11.657,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 38.574,
       "sgnaBn": 7.521,
       "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "otherOpexBn": 24.486,
+      "operatingExpensesBn": 24.486,
+      "operatingIncomeBn": 14.088,
+      "nonOperatingBn": -2.762,
       "pretaxIncomeBn": 11.326,
       "taxBn": 2.019,
-      "netIncomeBn": 8.871,
+      "netIncomeBn": 9.307,
       "netIncomeYoyPct": -16.29,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": 25.99,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 36.52201,
+      "profitMarginPct": 24.127651,
       "effectiveTaxRatePct": 17.826,
-      "revenueQoqPct": -6.958,
+      "revenueQoqPct": -3.26,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -8.13,
-      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
       "statementFilingDate": "2023-12-31",
       "parserFinancialFieldSources": {
         "revenueBn": "stockanalysis",
@@ -2181,7 +2881,7 @@
           "yoyPct": 11.05,
           "qoqPct": 1.8,
           "mixPct": 14.2,
-          "mixYoyDeltaPp": 0.0,
+          "mixYoyDeltaPp": 0,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000001961724000225/jpm-20231231_htm.xml",
           "sourceForm": "10-K",
           "filingDate": "2024-02-16",
@@ -2220,7 +2920,77 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "fieldSources": {
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "otherOpexBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        }
+      },
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingIncomeBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ]
     },
     "2024Q1": {
       "calendarQuarter": "2024Q1",
@@ -2229,29 +2999,29 @@
       "fiscalQuarter": "Q1",
       "fiscalLabel": "FY2024 Q1",
       "statementCurrency": "USD",
-      "revenueBn": 40.05,
-      "revenueYoyPct": 11.022,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "revenueBn": 41.934,
+      "revenueYoyPct": 9.348,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 41.934,
       "sgnaBn": 7.34,
       "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "otherOpexBn": 22.757,
+      "operatingExpensesBn": 22.757,
+      "operatingIncomeBn": 19.177,
+      "nonOperatingBn": -1.884,
       "pretaxIncomeBn": 17.293,
       "taxBn": 3.874,
-      "netIncomeBn": 12.942,
+      "netIncomeBn": 13.419,
       "netIncomeYoyPct": 6.14,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": 33.51,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 45.731387,
+      "profitMarginPct": 32.000286,
       "effectiveTaxRatePct": 22.402,
-      "revenueQoqPct": 11.834,
+      "revenueQoqPct": 8.711,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -1.48,
-      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
       "statementFilingDate": "2024-03-31",
       "parserFinancialFieldSources": {
         "revenueBn": "stockanalysis",
@@ -2391,6 +3161,76 @@
             "business-line-revenue-disclosure"
           ]
         }
+      ],
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+      "officialRevenueTaxonomyChangedFromPriorYear": true,
+      "fieldSources": {
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "otherOpexBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        }
+      },
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingIncomeBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
       ]
     },
     "2024Q2": {
@@ -2400,29 +3240,29 @@
       "fiscalQuarter": "Q2",
       "fiscalLabel": "FY2024 Q2",
       "statementCurrency": "USD",
-      "revenueBn": 47.148,
-      "revenueYoyPct": 22.756,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "revenueBn": 50.2,
+      "revenueYoyPct": 21.529,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 50.2,
       "sgnaBn": 7.638,
       "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "otherOpexBn": 23.713,
+      "operatingExpensesBn": 23.713,
+      "operatingIncomeBn": 26.487,
+      "nonOperatingBn": -3.052,
       "pretaxIncomeBn": 23.435,
       "taxBn": 5.286,
-      "netIncomeBn": 17.718,
+      "netIncomeBn": 18.149,
       "netIncomeYoyPct": 26.46,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": 38.49,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 52.762948,
+      "profitMarginPct": 36.153386,
       "effectiveTaxRatePct": 22.556,
-      "revenueQoqPct": 17.723,
+      "revenueQoqPct": 19.712,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 0.81,
-      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
       "statementFilingDate": "2024-06-30",
       "parserFinancialFieldSources": {
         "revenueBn": "stockanalysis",
@@ -2474,7 +3314,7 @@
         "status": "medium",
         "confidenceScore": 0.725,
         "completenessScore": 0.5,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 3,
         "checksPassed": 3,
         "issueCount": 0,
@@ -2510,7 +3350,7 @@
           "valueBn": 17.917,
           "yoyPct": null,
           "qoqPct": 1.89,
-          "mixPct": 38.0,
+          "mixPct": 38,
           "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000001961725000615/jpm-20250630_htm.xml",
           "sourceForm": "10-Q",
@@ -2550,7 +3390,77 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true,
+      "fieldSources": {
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "otherOpexBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        }
+      },
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingIncomeBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ]
     },
     "2024Q3": {
       "calendarQuarter": "2024Q3",
@@ -2559,29 +3469,29 @@
       "fiscalQuarter": "Q3",
       "fiscalLabel": "FY2024 Q3",
       "statementCurrency": "USD",
-      "revenueBn": 39.543,
-      "revenueYoyPct": 2.736,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "revenueBn": 42.654,
+      "revenueYoyPct": 6.972,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 42.654,
       "sgnaBn": 7.743,
       "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "otherOpexBn": 22.565,
+      "operatingExpensesBn": 22.565,
+      "operatingIncomeBn": 20.089,
+      "nonOperatingBn": -3.111,
       "pretaxIncomeBn": 16.978,
       "taxBn": 4.08,
-      "netIncomeBn": 12.537,
+      "netIncomeBn": 12.898,
       "netIncomeYoyPct": -1.17,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": 32.62,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 47.097576,
+      "profitMarginPct": 30.238665,
       "effectiveTaxRatePct": 24.031,
-      "revenueQoqPct": -16.13,
+      "revenueQoqPct": -15.032,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -1.55,
-      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
       "statementFilingDate": "2024-09-30",
       "parserFinancialFieldSources": {
         "revenueBn": "stockanalysis",
@@ -2633,7 +3543,7 @@
         "status": "medium",
         "confidenceScore": 0.725,
         "completenessScore": 0.5,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 3,
         "checksPassed": 3,
         "issueCount": 0,
@@ -2649,7 +3559,7 @@
           "valueBn": 17.791,
           "yoyPct": -3.11,
           "qoqPct": 0.51,
-          "mixPct": 45.0,
+          "mixPct": 45,
           "mixYoyDeltaPp": -2.7,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000001961724000611/jpm-20240930_htm.xml",
           "sourceForm": "10-Q",
@@ -2669,7 +3579,7 @@
           "valueBn": 17.015,
           "yoyPct": null,
           "qoqPct": -5.03,
-          "mixPct": 43.0,
+          "mixPct": 43,
           "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000162828025048859/jpm-20250930_htm.xml",
           "sourceForm": "10-Q",
@@ -2709,7 +3619,77 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true,
+      "fieldSources": {
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "otherOpexBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        }
+      },
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingIncomeBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ]
     },
     "2024Q4": {
       "calendarQuarter": "2024Q4",
@@ -2718,29 +3698,29 @@
       "fiscalQuarter": "Q4",
       "fiscalLabel": "FY2024 Q4",
       "statementCurrency": "USD",
-      "revenueBn": 40.137,
-      "revenueYoyPct": 12.077,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "revenueBn": 42.768,
+      "revenueYoyPct": 10.873,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 42.768,
       "sgnaBn": 8.167,
       "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "otherOpexBn": 22.762,
+      "operatingExpensesBn": 22.762,
+      "operatingIncomeBn": 20.006,
+      "nonOperatingBn": -2.631,
       "pretaxIncomeBn": 17.375,
       "taxBn": 3.37,
-      "netIncomeBn": 13.669,
+      "netIncomeBn": 14.005,
       "netIncomeYoyPct": 54.09,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": 34.89,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 46.777965,
+      "profitMarginPct": 32.746446,
       "effectiveTaxRatePct": 19.396,
-      "revenueQoqPct": 1.502,
+      "revenueQoqPct": 0.267,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 8.9,
-      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
       "statementFilingDate": "2024-12-31",
       "parserFinancialFieldSources": {
         "revenueBn": "stockanalysis",
@@ -2792,7 +3772,7 @@
         "status": "medium",
         "confidenceScore": 0.725,
         "completenessScore": 0.5,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 3,
         "checksPassed": 3,
         "issueCount": 0,
@@ -2868,7 +3848,77 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true,
+      "fieldSources": {
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "otherOpexBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        }
+      },
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingIncomeBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ]
     },
     "2025Q1": {
       "calendarQuarter": "2025Q1",
@@ -2877,29 +3927,29 @@
       "fiscalQuarter": "Q1",
       "fiscalLabel": "FY2025 Q1",
       "statementCurrency": "USD",
-      "revenueBn": 42.005,
-      "revenueYoyPct": 4.881,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "revenueBn": 45.31,
+      "revenueYoyPct": 8.051,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 45.31,
       "sgnaBn": 8.023,
       "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "otherOpexBn": 23.597,
+      "operatingExpensesBn": 23.597,
+      "operatingIncomeBn": 21.713,
+      "nonOperatingBn": -3.305,
       "pretaxIncomeBn": 18.408,
       "taxBn": 3.765,
-      "netIncomeBn": 14.317,
+      "netIncomeBn": 14.643,
       "netIncomeYoyPct": 10.62,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": 34.86,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 47.920989,
+      "profitMarginPct": 32.317369,
       "effectiveTaxRatePct": 20.453,
-      "revenueQoqPct": 4.654,
+      "revenueQoqPct": 5.944,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 1.35,
-      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
       "statementFilingDate": "2025-03-31",
       "parserFinancialFieldSources": {
         "revenueBn": "stockanalysis",
@@ -2951,7 +4001,7 @@
         "status": "medium",
         "confidenceScore": 0.725,
         "completenessScore": 0.5,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 3,
         "checksPassed": 3,
         "issueCount": 0,
@@ -3027,7 +4077,77 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "fieldSources": {
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "otherOpexBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        }
+      },
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingIncomeBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ]
     },
     "2025Q2": {
       "calendarQuarter": "2025Q2",
@@ -3036,29 +4156,29 @@
       "fiscalQuarter": "Q2",
       "fiscalLabel": "FY2025 Q2",
       "statementCurrency": "USD",
-      "revenueBn": 42.063,
-      "revenueYoyPct": -10.785,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "revenueBn": 44.912,
+      "revenueYoyPct": -10.534,
+      "costOfRevenueBn": 2.849,
+      "grossProfitBn": 42.063,
       "sgnaBn": 8.253,
       "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "otherOpexBn": 23.779,
+      "operatingExpensesBn": 23.779,
+      "operatingIncomeBn": 18.284,
+      "nonOperatingBn": 0,
       "pretaxIncomeBn": 18.284,
       "taxBn": 3.297,
-      "netIncomeBn": 14.63,
+      "netIncomeBn": 14.987,
       "netIncomeYoyPct": -17.43,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": 35.63,
+      "grossMarginPct": 93.656484,
+      "operatingMarginPct": 40.710723,
+      "profitMarginPct": 33.369701,
       "effectiveTaxRatePct": 18.032,
-      "revenueQoqPct": 0.138,
+      "revenueQoqPct": -0.878,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -2.86,
-      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
       "statementFilingDate": "2025-06-30",
       "parserFinancialFieldSources": {
         "revenueBn": "stockanalysis",
@@ -3110,7 +4230,7 @@
         "status": "medium",
         "confidenceScore": 0.725,
         "completenessScore": 0.5,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 3,
         "checksPassed": 3,
         "issueCount": 0,
@@ -3186,7 +4306,84 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "fieldSources": {
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "otherOpexBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        }
+      },
+      "grossProfitLabel": "Revenue after credit loss provision",
+      "grossProfitLabelZh": "扣除信用损失准备后收入",
+      "costLabel": "Provision for credit losses",
+      "costLabelZh": "信用损失准备",
+      "operatingExpensesLabel": "Noninterest expense",
+      "operatingExpensesLabelZh": "非利息费用",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingIncomeBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ],
+      "statementValueMode": "direct",
+      "statementSpanQuarters": 1,
+      "statementPeriodStart": "2025-04-01"
     },
     "2025Q3": {
       "calendarQuarter": "2025Q3",
@@ -3195,29 +4392,29 @@
       "fiscalQuarter": "Q3",
       "fiscalLabel": "FY2025 Q3",
       "statementCurrency": "USD",
-      "revenueBn": 43.024,
-      "revenueYoyPct": 8.803,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "revenueBn": 46.427,
+      "revenueYoyPct": 8.846,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 46.427,
       "sgnaBn": 8.912,
       "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "otherOpexBn": 24.281,
+      "operatingExpensesBn": 24.281,
+      "operatingIncomeBn": 22.146,
+      "nonOperatingBn": -3.403,
       "pretaxIncomeBn": 18.743,
       "taxBn": 4.35,
-      "netIncomeBn": 14.043,
+      "netIncomeBn": 14.393,
       "netIncomeYoyPct": 12.01,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": 33.45,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 47.700691,
+      "profitMarginPct": 31.001357,
       "effectiveTaxRatePct": 23.209,
-      "revenueQoqPct": 2.285,
+      "revenueQoqPct": 3.373,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": 0.83,
-      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
       "statementFilingDate": "2025-09-30",
       "parserFinancialFieldSources": {
         "revenueBn": "stockanalysis",
@@ -3269,7 +4466,7 @@
         "status": "medium",
         "confidenceScore": 0.725,
         "completenessScore": 0.5,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 3,
         "checksPassed": 3,
         "issueCount": 0,
@@ -3345,7 +4542,77 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "fieldSources": {
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "otherOpexBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        }
+      },
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingIncomeBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ]
     },
     "2025Q4": {
       "calendarQuarter": "2025Q4",
@@ -3354,29 +4621,29 @@
       "fiscalQuarter": "Q4",
       "fiscalLabel": "FY2025 Q4",
       "statementCurrency": "USD",
-      "revenueBn": 41.143,
-      "revenueYoyPct": 2.506,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "revenueBn": 45.798,
+      "revenueYoyPct": 7.085,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 45.798,
       "sgnaBn": 9.189,
       "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "otherOpexBn": 23.983,
+      "operatingExpensesBn": 23.983,
+      "operatingIncomeBn": 21.815,
+      "nonOperatingBn": -4.655,
       "pretaxIncomeBn": 17.16,
       "taxBn": 4.135,
-      "netIncomeBn": 12.69,
+      "netIncomeBn": 13.025,
       "netIncomeYoyPct": -7.16,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": 31.66,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 47.633084,
+      "profitMarginPct": 28.440107,
       "effectiveTaxRatePct": 24.097,
-      "revenueQoqPct": -4.372,
+      "revenueQoqPct": -1.355,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -3.23,
-      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
       "statementFilingDate": "2025-12-31",
       "parserFinancialFieldSources": {
         "revenueBn": "stockanalysis",
@@ -3428,7 +4695,7 @@
         "status": "medium",
         "confidenceScore": 0.725,
         "completenessScore": 0.5,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 3,
         "checksPassed": 3,
         "issueCount": 0,
@@ -3504,7 +4771,77 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "fieldSources": {
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "otherOpexBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        }
+      },
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingIncomeBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ]
     },
     "2026Q1": {
       "calendarQuarter": "2026Q1",
@@ -3513,29 +4850,29 @@
       "fiscalQuarter": "Q1",
       "fiscalLabel": "FY2026 Q1",
       "statementCurrency": "USD",
-      "revenueBn": 47.329,
-      "revenueYoyPct": 12.675,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "revenueBn": 49.836,
+      "revenueYoyPct": 9.989,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 49.836,
       "sgnaBn": 9.555,
       "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "otherOpexBn": 26.85,
+      "operatingExpensesBn": 26.85,
+      "operatingIncomeBn": 22.986,
+      "nonOperatingBn": -2.507,
       "pretaxIncomeBn": 20.479,
       "taxBn": 3.985,
       "netIncomeBn": 16.494,
       "netIncomeYoyPct": 15.21,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": 34.85,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 46.123284,
+      "profitMarginPct": 33.096557,
       "effectiveTaxRatePct": 19.459,
-      "revenueQoqPct": 15.035,
+      "revenueQoqPct": 8.817,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": -0.01,
-      "statementSourceUrl": "https://stockanalysis.com/stocks/jpm/financials/?p=quarterly",
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
       "statementFilingDate": "2026-03-31",
       "parserFinancialFieldSources": {
         "revenueBn": "stockanalysis",
@@ -3587,7 +4924,7 @@
         "status": "medium",
         "confidenceScore": 0.725,
         "completenessScore": 0.5,
-        "consistencyScore": 1.0,
+        "consistencyScore": 1,
         "checksRun": 3,
         "checksPassed": 3,
         "issueCount": 0,
@@ -3663,7 +5000,77 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "fieldSources": {
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "sgnaBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "otherOpexBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        }
+      },
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingIncomeBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ]
     },
     "2018Q1": {
       "calendarQuarter": "2018Q1",
@@ -3836,7 +5243,9 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2018Q2": {
       "calendarQuarter": "2018Q2",
@@ -3933,7 +5342,7 @@
           "valueBn": 12.497,
           "yoyPct": null,
           "qoqPct": -0.79,
-          "mixPct": 45.0,
+          "mixPct": 45,
           "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000001961719000127/corpq22019_htm.xml",
           "sourceForm": "10-Q",
@@ -4030,7 +5439,9 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2018Q3": {
       "calendarQuarter": "2018Q3",
@@ -4204,7 +5615,9 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2018Q4": {
       "calendarQuarter": "2018Q4",
@@ -4398,7 +5811,9 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2019Q1": {
       "calendarQuarter": "2019Q1",
@@ -4540,7 +5955,7 @@
           "valueBn": 3.489,
           "yoyPct": -0.48,
           "qoqPct": 1.45,
-          "mixPct": 12.0,
+          "mixPct": 12,
           "mixYoyDeltaPp": -0.6,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000001961719000067/corpq12019_htm.xml",
           "sourceForm": "10-Q",
@@ -4560,7 +5975,7 @@
           "valueBn": 2.338,
           "yoyPct": 7.94,
           "qoqPct": 1.39,
-          "mixPct": 8.0,
+          "mixPct": 8,
           "mixYoyDeltaPp": 0.3,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000001961719000067/corpq12019_htm.xml",
           "sourceForm": "10-Q",
@@ -4604,7 +6019,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true
     },
     "2019Q2": {
       "calendarQuarter": "2019Q2",
@@ -4706,7 +6123,7 @@
           "valueBn": 13.833,
           "yoyPct": 10.69,
           "qoqPct": 0.6,
-          "mixPct": 48.0,
+          "mixPct": 48,
           "mixYoyDeltaPp": 2.9,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000001961719000127/corpq22019_htm.xml",
           "sourceForm": "10-Q",
@@ -4810,7 +6227,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2019Q3": {
       "calendarQuarter": "2019Q3",
@@ -5016,7 +6435,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true
     },
     "2019Q4": {
       "calendarQuarter": "2019Q4",
@@ -5179,7 +6600,7 @@
           "yoyPct": -3.38,
           "qoqPct": 0.95,
           "mixPct": 7.9,
-          "mixYoyDeltaPp": -1.0,
+          "mixYoyDeltaPp": -1,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000001961720000257/corp10k2019_htm.xml",
           "sourceForm": "10-K",
           "filingDate": "2020-02-25",
@@ -5195,7 +6616,9 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+      "officialRevenueTaxonomyChangedFromPriorYear": true
     },
     "2020Q1": {
       "calendarQuarter": "2020Q1",
@@ -5206,21 +6629,21 @@
       "statementCurrency": "USD",
       "revenueBn": 28.251,
       "revenueYoyPct": -2.994,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 28.251,
       "sgnaBn": null,
       "rndBn": null,
       "otherOpexBn": 16.85,
       "operatingExpensesBn": 16.85,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "operatingIncomeBn": 11.401,
+      "nonOperatingBn": -8.285,
       "pretaxIncomeBn": 3.116,
       "taxBn": 0.251,
       "netIncomeBn": 2.865,
       "netIncomeYoyPct": -68.79,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": 10.14,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 40.356094,
+      "profitMarginPct": 10.141234,
       "effectiveTaxRatePct": 8.06,
       "revenueQoqPct": -0.282,
       "grossMarginYoyDeltaPp": null,
@@ -5386,7 +6809,73 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
+      "fieldSources": {
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "otherOpexBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        }
+      },
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingIncomeBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ]
     },
     "2020Q2": {
       "calendarQuarter": "2020Q2",
@@ -5397,21 +6886,21 @@
       "statementCurrency": "USD",
       "revenueBn": 32.98,
       "revenueYoyPct": 14.387,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 0,
+      "grossProfitBn": 32.98,
       "sgnaBn": null,
       "rndBn": null,
       "otherOpexBn": 16.942,
       "operatingExpensesBn": 16.942,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "operatingIncomeBn": 16.038,
+      "nonOperatingBn": -10.473,
       "pretaxIncomeBn": 5.565,
       "taxBn": 0.878,
       "netIncomeBn": 4.687,
       "netIncomeYoyPct": -51.44,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": 14.21,
+      "grossMarginPct": 100.0,
+      "operatingMarginPct": 48.629472,
+      "profitMarginPct": 14.211643,
       "effectiveTaxRatePct": 15.78,
       "revenueQoqPct": 16.739,
       "grossMarginYoyDeltaPp": null,
@@ -5500,7 +6989,7 @@
           "valueBn": 12.217,
           "yoyPct": -11.68,
           "qoqPct": -7.24,
-          "mixPct": 37.0,
+          "mixPct": 37,
           "mixYoyDeltaPp": -10.9,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000001961720000372/corpq22020_htm.xml",
           "sourceForm": "10-Q",
@@ -5557,7 +7046,73 @@
       "officialSegmentAxis": "StatementBusinessSegmentsAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+      "officialRevenueTaxonomyChangedFromPriorYear": true,
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
+      "fieldSources": {
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "otherOpexBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        }
+      },
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingIncomeBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ]
     },
     "2020Q3": {
       "calendarQuarter": "2020Q3",
@@ -5743,7 +7298,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true
     },
     "2020Q4": {
       "calendarQuarter": "2020Q4",
@@ -5865,7 +7422,7 @@
           "valueBn": 13.125,
           "yoyPct": -6.52,
           "qoqPct": 2.9,
-          "mixPct": 45.0,
+          "mixPct": 45,
           "mixYoyDeltaPp": -4.6,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000001961721000236/jpm-20201231_htm.xml",
           "sourceForm": "10-K",
@@ -5929,7 +7486,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2021Q1": {
       "calendarQuarter": "2021Q1",
@@ -6118,7 +7677,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true
     },
     "2026Q2": {
       "calendarQuarter": "2026Q2",
@@ -6127,30 +7688,30 @@
       "fiscalQuarter": "Q2",
       "fiscalLabel": "FY2026 Q2",
       "statementCurrency": "USD",
-      "revenueBn": 51.976,
-      "revenueYoyPct": 23.567,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "revenueBn": 57.347,
+      "revenueYoyPct": 27.687,
+      "costOfRevenueBn": 2.515,
+      "grossProfitBn": 54.832,
       "sgnaBn": null,
       "rndBn": null,
-      "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
-      "taxBn": null,
-      "netIncomeBn": null,
+      "otherOpexBn": 27.316,
+      "operatingExpensesBn": 27.316,
+      "operatingIncomeBn": 27.516,
+      "nonOperatingBn": 0,
+      "pretaxIncomeBn": 27.516,
+      "taxBn": 6.361,
+      "netIncomeBn": 21.155,
       "netIncomeYoyPct": null,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": null,
+      "grossMarginPct": 95.614417,
+      "operatingMarginPct": 47.981586,
+      "profitMarginPct": 36.889462,
       "effectiveTaxRatePct": null,
-      "revenueQoqPct": 9.819,
+      "revenueQoqPct": 15.071,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
-      "statementSource": "official-revenue-structure",
-      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000162828026054343/jpm-20260630_htm.xml",
+      "statementSource": "official-inline-quarter-statement",
+      "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
       "statementFilingDate": "2026-08-06",
       "officialRevenueSegments": [
         {
@@ -6160,7 +7721,7 @@
           "valueBn": 20.272,
           "yoyPct": 7.56,
           "qoqPct": 3.6,
-          "mixPct": 39.0,
+          "mixPct": 39,
           "mixYoyDeltaPp": -5.8,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000162828026054343/jpm-20260630_htm.xml",
           "sourceForm": "10-Q",
@@ -6222,7 +7783,79 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "fieldSources": {
+        "revenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "grossProfitBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "otherOpexBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingExpensesBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "nonOperatingBn": {
+          "adapterId": "official-statement-backfill-derived",
+          "label": "Calculated from the same-quarter official statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "taxBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        },
+        "netIncomeBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+        }
+      },
+      "grossProfitLabel": "Revenue after credit loss provision",
+      "grossProfitLabelZh": "扣除信用损失准备后收入",
+      "costLabel": "Provision for credit losses",
+      "costLabelZh": "信用损失准备",
+      "operatingExpensesLabel": "Noninterest expense",
+      "operatingExpensesLabelZh": "非利息费用",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "derivedStatementFields": [
+        "operatingIncomeBn",
+        "nonOperatingBn"
+      ],
+      "qualityFlags": [
+        "official-quarter-statement-backfilled"
+      ],
+      "statementValueMode": "direct",
+      "statementSpanQuarters": 1,
+      "statementPeriodStart": "2026-04-01"
     }
   },
   "statementSource": "stockanalysis-financials",
@@ -9612,7 +11245,8 @@
         "warningCount": 0,
         "warnings": []
       }
-    }
+    },
+    "statementBackfilledQuarterCount": 23
   },
   "marketCapUsd": 896216137728,
   "marketCapAsOf": "2026-07-06",

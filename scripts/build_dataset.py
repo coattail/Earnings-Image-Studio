@@ -49,6 +49,7 @@ try:
     from stockanalysis_financials import fetch_stockanalysis_financial_history
     from universal_parser import UNIVERSAL_PARSER_VERSION, run_universal_company_parser
     from extraction_engine import ENGINE_VERSION as UNIFIED_EXTRACTION_ENGINE_VERSION, build_unified_extraction, merge_unified_extraction
+    from sankey_statement_backfill import apply_statement_supplements, merge_missing_statement, complete_statement
 except ModuleNotFoundError as exc:
     _record_missing_runtime_module(exc)
     parse_income_statement_from_url = None  # type: ignore[assignment]
@@ -89,10 +90,11 @@ UNIVERSE_SOURCE = {
     "label": "CompaniesMarketCap point-in-time ranking",
     "url": "https://companiesmarketcap.com/",
     "as_of": "2026-07-06",
-    "note": "The configured 40-company universe is sorted by a single USD market-cap snapshot; international listings and ADRs use the source's comparable company-level values.",
+    "note": "Companies covered by the USD market-cap snapshot are sorted by comparable company-level values; newly added companies without that snapshot are appended.",
 }
 
 TOP30_COMPANIES: list[dict[str, Any]] = [
+    {"id": "spacex", "ticker": "SPCX", "nameZh": "SpaceX", "nameEn": "SpaceX", "slug": "spcx", "rank": 41, "isAdr": False, "cik": 1181412, "brand": {"primary": "#005288", "secondary": "#152536", "accent": "#DCEBF5"}, "parserFinancialSources": ["official"], "fusedExtractionAdapters": ["official_financials", "official_revenue_structures"]},
     {"id": "nvidia", "ticker": "NVDA", "nameZh": "英伟达", "nameEn": "NVIDIA", "slug": "nvda", "rank": 1, "isAdr": False, "brand": {"primary": "#76B900", "secondary": "#111827", "accent": "#E7F8BC"}},
     {"id": "apple", "ticker": "AAPL", "nameZh": "苹果", "nameEn": "Apple", "slug": "aapl", "rank": 2, "isAdr": False, "brand": {"primary": "#111827", "secondary": "#2563EB", "accent": "#DCEAFE"}},
     {"id": "alphabet", "ticker": "GOOGL", "nameZh": "谷歌", "nameEn": "Alphabet", "slug": "googl", "rank": 3, "isAdr": False, "brand": {"primary": "#2563EB", "secondary": "#DB4437", "accent": "#E8F0FE"}},
@@ -2705,6 +2707,7 @@ def finalize_company_payload(
     payload: dict[str, Any],
     presets: dict[str, Any],
 ) -> dict[str, Any]:
+    payload = apply_statement_supplements(payload)
     payload["statementPresets"] = presets
     apply_micron_official_business_unit_restatements(payload)
     sync_revenue_structure_history_into_financial_entries(payload, company)
@@ -4090,6 +4093,13 @@ def merge_official_financial_breakdowns(company_payload: dict[str, Any], company
             for key, value in official_entry.items():
                 if value is not None:
                     entry[key] = deepcopy(value)
+        elif any(entry.get(key) is None for key in ("grossProfitBn", "operatingIncomeBn", "netIncomeBn")):
+            # Structure-only quarters can be added after the primary statement
+            # parser ran. Recover scalar statement values too, not just lists.
+            candidate = deepcopy(official_entry)
+            candidate.setdefault("statementSourceUrl", official_payload.get("statementSourceUrl"))
+            complete_statement(candidate, str(company.get("id") or ""))
+            merge_missing_statement(entry, candidate, str(company.get("id") or ""))
         if not entry.get("officialOpexBreakdown"):
             opex_breakdown = official_entry.get("officialOpexBreakdown")
             if isinstance(opex_breakdown, list) and opex_breakdown:
