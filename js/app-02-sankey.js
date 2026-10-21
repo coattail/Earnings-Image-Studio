@@ -271,11 +271,24 @@ function renderRevenueOnlyReplicaSvg(snapshot) {
   return svg;
 }
 
-function renderPixelReplicaSvg(snapshot) {
+function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
   if (snapshot?.bridgeCoverageMode === "revenue-only") {
     return renderRevenueOnlyReplicaSvg(snapshot);
   }
-  const canvas = snapshotCanvasSize(snapshot);
+  // Resolve the financial skeleton in the primary design language, then lay
+  // out translated text around it. Text wrapping must not move profit stages
+  // or change the scale used for monetary thickness when switching language.
+  let sharedCore = null;
+  if (!geometryOptions.captureCore && currentChartLanguage() !== "zh") {
+    const displayLanguage = state.uiLanguage;
+    try {
+      state.uiLanguage = "zh";
+      sharedCore = renderPixelReplicaSvg(snapshot, { captureCore: true });
+    } finally {
+      state.uiLanguage = displayLanguage;
+    }
+  }
+  const canvas = sharedCore?.canvas || snapshotCanvasSize(snapshot);
   const width = canvas.width;
   const height = canvas.height;
   const leftShiftX = safeNumber(canvas.leftShiftX, 0);
@@ -2862,7 +2875,7 @@ function renderPixelReplicaSvg(snapshot) {
     ? positiveBelowTopMax >= positiveBelowTopMin && belowPositiveVisibleDelta >= positivePreferredMergeDeltaY
     : false;
   const forcePositiveAbove = snapshot.layout?.forcePositiveAbove === true;
-  const positiveAbove = positiveAdjustments.length
+  const positiveAbove = sharedCore ? sharedCore.positiveAbove : positiveAdjustments.length
     ? forcePositiveAbove ||
       (abovePositiveFeasible &&
       (!belowPositiveFeasible ||
@@ -4442,8 +4455,8 @@ function renderPixelReplicaSvg(snapshot) {
       dy: automaticOffset.dy + learnedOffset.dy,
     };
   };
-  const revenueShift = combinedNodeOffsetFor("revenue");
-  const revenueLabelMarkup = (() => {
+  const renderRevenueLabelMarkup = () => {
+    const revenueShift = combinedNodeOffsetFor("revenue");
     const lines = [
       { text: localizeChartPhrase("Revenue"), size: revenueLabelTitleSize, weight: 700, color: revenueTextColor, strokeWidth: 10, gapAfter: 12 },
       {
@@ -4489,7 +4502,7 @@ function renderPixelReplicaSvg(snapshot) {
         return markup;
       })
       .join("");
-  })();
+  };
   const opexSummaryCenterX = opX + nodeWidth / 2;
   const opexSummaryGapY = safeNumber(
     snapshot.layout?.opexSummaryGapY,
@@ -9106,6 +9119,21 @@ function renderPixelReplicaSvg(snapshot) {
       }
     }
   }
+  if (geometryOptions.captureCore) {
+    return { canvas, positiveAbove, balancedPositiveTop,
+      frames: [revenueFrame, grossFrame, costFrame, operatingFrame, operatingExpenseFrame, netFrame] };
+  }
+  if (sharedCore) {
+    const currentFrames = new Map([revenueFrame, grossFrame, costFrame, operatingFrame, operatingExpenseFrame, netFrame]
+      .map((frame) => [frame.id, frame]));
+    for (const frame of sharedCore.frames) {
+      const current = currentFrames.get(frame.id);
+      const offset = autoLayoutOffsetForNode(frame.id);
+      setAutoLayoutNodeOffset(frame.id, { dx: offset.dx + frame.x - current.x, dy: offset.dy + frame.y - current.y });
+    }
+    balancedPositiveTop = sharedCore.balancedPositiveTop;
+    refreshEditableNodeFrames();
+  }
   const revenueGrossBand = shiftedInterval(revenueGrossSourceBand.top, revenueGrossSourceBand.bottom, "revenue");
   const revenueCostBand = revenueCostSourceBand ? shiftedInterval(revenueCostSourceBand.top, revenueCostSourceBand.bottom, "revenue") : null;
   const grossProfitBand = shiftedInterval(grossProfitSourceBand.top, grossProfitSourceBand.bottom, "gross");
@@ -11652,7 +11680,7 @@ function renderPixelReplicaSvg(snapshot) {
 
   svg += `
     ${renderCorporateLogo(snapshot.companyLogoKey, logoX, logoY, { scale: logoScale })}
-    ${revenueLabelMarkup}
+    ${renderRevenueLabelMarkup()}
     ${renderOpexSummaryMarkup()}
   `;
 

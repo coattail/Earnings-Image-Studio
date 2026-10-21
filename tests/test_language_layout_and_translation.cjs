@@ -413,3 +413,64 @@ test("Alibaba Sankey taxonomy changes exactly when the official segment structur
   assert.deepEqual([...result.renderedTransitionQuarters], expected);
   assert.deepEqual([...result.mismatches], []);
 });
+
+test("Chinese and English share every financial stage across all companies and loss bridges", () => {
+  const context = loadRuntime();
+  context.__dataset = JSON.parse(fs.readFileSync(path.join(ROOT, "data/earnings-dataset.json"), "utf8"));
+  context.__learned = JSON.parse(fs.readFileSync(path.join(ROOT, "data/learned-sankey-layouts.json"), "utf8"));
+  context.__supplemental = JSON.parse(fs.readFileSync(path.join(ROOT, "data/supplemental-components.json"), "utf8"));
+  const results = vm.runInContext(`(() => {
+    state.learnedSankeyLayouts = __learned; state.supplementalComponents = __supplemental;
+    applyLoadedCompaniesToState(__dataset.companies, 'full');
+    const cases = companies().map(company => ({ company, quarter: company.quarters.at(-1) }));
+    for (const [id, quarter] of [['spacex','2026Q1'],['meituan','2025Q4'],['alibaba','2025Q4'],['apple','2025Q4'],['amd','2025Q2']]) {
+      cases.push({company:getCompany(id),quarter});
+    }
+    return cases.map(({company, quarter}) => {
+      state.selectedCompanyId = company.id; state.selectedQuarter = quarter;
+      const variants = ['zh','en'].map(language => {
+        state.uiLanguage = language;
+        const snapshot = buildSnapshot(company, quarter);
+        snapshot.companyNameZh = company.nameZh; snapshot.companyNameEn = company.nameEn;
+        snapshot.learnedEditorNodeOverrides = learnedSankeyLayoutOverridesForSession();
+        snapshot.editorNodeOverrides = snapshot.learnedEditorNodeOverrides;
+        const svg = EarningsVizRuntime.render.renderIncomeStatementSvg(snapshot,company);
+        return {svg, restoredLanguage:state.uiLanguage};
+      });
+      return {id:company.id,quarter,variants};
+    });
+  })()`, context);
+  const core = ["revenue", "gross", "cost", "operating", "operating-expenses", "net"];
+  for (const {id, quarter, variants: [zh, en]} of results) {
+    assert.equal(zh.restoredLanguage, "zh");
+    assert.equal(en.restoredLanguage, "en");
+    assert.deepEqual(viewBox(zh.svg), viewBox(en.svg), `${id}/${quarter}: monetary scale and canvas`);
+    for (const nodeId of core) {
+      const marker = `data-edit-node-visible-id="${nodeId}"`;
+      if (!zh.svg.includes(marker)) { assert.ok(!en.svg.includes(marker)); continue; }
+      assert.deepEqual(nodeRect(en.svg,nodeId),nodeRect(zh.svg,nodeId),`${id}/${quarter}/${nodeId}: shared geometry`);
+    }
+    if (id === "tsmc") {
+      assert.match(zh.svg, />净利润<\/text>/);
+      assert.match(en.svg, />Net profit<\/text>/);
+      assert.doesNotMatch(en.svg, />净利润<\/text>/);
+    }
+  }
+});
+
+test("reference geometry restores the display language even when layout calculation throws", () => {
+  const context = loadRuntime();
+  const result = vm.runInContext(`(() => {
+    state.uiLanguage = 'en';
+    const saved = snapshotCanvasSize;
+    let message;
+    try {
+      snapshotCanvasSize = () => { throw new Error('layout failed'); };
+      renderPixelReplicaSvg({});
+    } catch (error) { message = error.message; }
+    finally { snapshotCanvasSize = saved; }
+    return {message, language:state.uiLanguage};
+  })()`,context);
+  assert.equal(result.message,"layout failed");
+  assert.equal(result.language,"en");
+});
