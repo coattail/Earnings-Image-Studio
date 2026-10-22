@@ -87,7 +87,7 @@ function resolveBarChartLogoPlacement({
   const baseScale =
     Math.min(area.width / Math.max(logoMetrics.visibleWidth, 1), area.height / Math.max(logoMetrics.visibleHeight, 1)) *
     safeNumber(override.scaleMultiplier, 1);
-  const minVisibleX = Math.max(20, plotLeft - 18);
+  const minVisibleX = Math.max(20, plotLeft + 24);
   const minVisibleY = Math.max(96, chartTop - 220);
   const maxVisibleRight = plotLeft + area.width + 96;
   const obstacleRects = collectBarChartLogoObstacleRects({
@@ -188,18 +188,27 @@ function resolveBarChartLogoPlacement({
   };
 }
 
-function barChartClientRect(node, padding = 0) {
-  if (!node?.getBoundingClientRect) return null;
-  const rect = node.getBoundingClientRect();
-  if (!Number.isFinite(rect.left) || !Number.isFinite(rect.top) || !Number.isFinite(rect.right) || !Number.isFinite(rect.bottom)) {
-    return null;
-  }
-  return {
-    left: rect.left - padding,
-    top: rect.top - padding,
-    right: rect.right + padding,
-    bottom: rect.bottom + padding,
-  };
+// Measure every logo and obstacle in the SVG's own viewBox coordinates.
+// Client rectangles depend on letterboxing and the old chart container size
+// while switching views, so they cannot be compared with SVG-unit offsets.
+function barChartSvgRect(svg, node, padding = 0) {
+  if (!svg?.getCTM || !node?.getBBox || !node?.getCTM) return null;
+  try {
+    const root = svg.getCTM(), local = node.getCTM(), box = node.getBBox();
+    if (!root || !local || Math.abs(root.a * root.d - root.b * root.c) < 1e-12) return null;
+    const matrix = root.inverse().multiply(local);
+    const points = [[box.x, box.y], [box.x + box.width, box.y],
+      [box.x, box.y + box.height], [box.x + box.width, box.y + box.height]]
+      .map(([x, y]) => ({ x: matrix.a * x + matrix.c * y + matrix.e,
+        y: matrix.b * x + matrix.d * y + matrix.f }));
+    if (points.some(point => !Number.isFinite(point.x) || !Number.isFinite(point.y))) return null;
+    return {
+      left: Math.min(...points.map(point => point.x)) - padding,
+      top: Math.min(...points.map(point => point.y)) - padding,
+      right: Math.max(...points.map(point => point.x)) + padding,
+      bottom: Math.max(...points.map(point => point.y)) + padding,
+    };
+  } catch (_) { return null; }
 }
 
 function parseBarChartLogoTransform(transformText) {
@@ -233,7 +242,7 @@ function collectBarChartDomObstacleRects(svg, logoWrapper) {
     .map((node) => {
       const tagName = String(node.tagName || "").toLowerCase();
       const padding = tagName === "text" ? 6 : tagName === "line" ? 6 : 4;
-      return barChartClientRect(node, padding);
+      return barChartSvgRect(svg, node, padding);
     })
     .filter((rect) => rect && rect.right > rect.left && rect.bottom > rect.top);
 }
@@ -261,30 +270,19 @@ function refineRenderedBarChartLogoPlacement(svg) {
         bottom: viewBoxValues[1] + viewBoxValues[3],
       }
     : { left: 0, top: 0, right: 2048, bottom: 1325 };
-  const svgClientRect = barChartClientRect(svg, 0);
-  if (!svgClientRect) return;
-  const svgWidth = Math.max(viewBox.right - viewBox.left, 1);
-  const svgHeight = Math.max(viewBox.bottom - viewBox.top, 1);
-  const scaleX = (svgClientRect.right - svgClientRect.left) / svgWidth;
-  const scaleY = (svgClientRect.bottom - svgClientRect.top) / svgHeight;
   const zone = {
-    left: safeNumber(logoWrapper.getAttribute("data-logo-zone-left"), viewBox.left + 20),
+    left: safeNumber(logoWrapper.getAttribute("data-logo-zone-left"), viewBox.left + 118),
     top: safeNumber(logoWrapper.getAttribute("data-logo-zone-top"), viewBox.top + 96),
-    right: safeNumber(logoWrapper.getAttribute("data-logo-zone-right"), viewBox.left + 420),
+    right: safeNumber(logoWrapper.getAttribute("data-logo-zone-right"), viewBox.left + 614),
     bottom: safeNumber(logoWrapper.getAttribute("data-logo-zone-bottom"), viewBox.top + 420),
   };
-  const clientZone = {
-    left: svgClientRect.left + (zone.left - viewBox.left) * scaleX,
-    top: svgClientRect.top + (zone.top - viewBox.top) * scaleY,
-    right: svgClientRect.left + (zone.right - viewBox.left) * scaleX,
-    bottom: svgClientRect.top + (zone.bottom - viewBox.top) * scaleY,
-  };
-  const initialLogoRect = barChartClientRect(logoWrapper, 0);
+  const initialLogoRect = barChartSvgRect(svg, logoWrapper, 0);
+  if (!initialLogoRect) return;
   const isWideWordmark = !!initialLogoRect && initialLogoRect.right - initialLogoRect.left > (initialLogoRect.bottom - initialLogoRect.top) * 1.65;
   const isMediumWideLogo = !!initialLogoRect && initialLogoRect.right - initialLogoRect.left > (initialLogoRect.bottom - initialLogoRect.top) * 1.35;
   if (isMediumWideLogo) {
-    clientZone.right = Math.min(clientZone.right, svgClientRect.left + (svgClientRect.right - svgClientRect.left) * 0.35);
-    clientZone.bottom = Math.min(clientZone.bottom, svgClientRect.top + (svgClientRect.bottom - svgClientRect.top) * 0.33);
+    zone.right = Math.min(zone.right, viewBox.left + (viewBox.right - viewBox.left) * 0.35);
+    zone.bottom = Math.min(zone.bottom, viewBox.top + (viewBox.bottom - viewBox.top) * 0.33);
   }
   const obstacleRects = collectBarChartDomObstacleRects(svg, logoWrapper);
   const xOffsets = [0, 12, 24, 40, 58, 78, 102, 128, -12, -24, -40, 160, -58, 196, -82, 236];
@@ -303,13 +301,14 @@ function refineRenderedBarChartLogoPlacement(svg) {
         } else {
           logoWrapper.setAttribute("transform", `translate(${xOffset.toFixed(2)} ${yOffset.toFixed(2)})`);
         }
-        const logoRect = barChartClientRect(logoWrapper, 2);
-        if (!logoRect) return;
+        const logoRect = barChartSvgRect(svg, logoWrapper, 2);
+        // The axis clearance is a hard boundary, never a soft collision cost.
+        if (!logoRect || logoRect.left < zone.left) return;
         const overflowPenalty =
-          Math.max(clientZone.left - logoRect.left, 0) +
-          Math.max(clientZone.top - logoRect.top, 0) +
-          Math.max(logoRect.right - clientZone.right, 0) +
-          Math.max(logoRect.bottom - clientZone.bottom, 0);
+          Math.max(zone.left - logoRect.left, 0) +
+          Math.max(zone.top - logoRect.top, 0) +
+          Math.max(logoRect.right - zone.right, 0) +
+          Math.max(logoRect.bottom - zone.bottom, 0);
         let collisionArea = 0;
         let collisionCount = 0;
         obstacleRects.forEach((obstacleRect) => {
@@ -318,8 +317,8 @@ function refineRenderedBarChartLogoPlacement(svg) {
           collisionArea += barChartRectIntersectionArea(logoRect, obstacleRect, 2);
         });
         const cornerDistancePenalty =
-          Math.max(logoRect.left - clientZone.left, 0) * 220 +
-          Math.max(logoRect.top - clientZone.top, 0) * 320;
+          Math.max(logoRect.left - zone.left, 0) * 220 +
+          Math.max(logoRect.top - zone.top, 0) * 320;
         const penalty =
           overflowPenalty * 1000000 +
           collisionCount * 100000 +
@@ -647,7 +646,7 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
   });
   const chartLogoKey = snapshot?.companyLogoKey || company?.id || "";
   const chartLogoZone = {
-    left: Math.max(28, plotLeft + 14),
+    left: Math.max(28, plotLeft + 24),
     top: Math.max(96, chartTop - 220),
     right: Math.min(plotRight - 32, plotLeft + 520),
     bottom: Math.min(baselineY - 26, chartTop + 214),
