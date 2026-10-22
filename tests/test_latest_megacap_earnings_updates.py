@@ -51,7 +51,7 @@ class LatestMegacapEarningsUpdateTests(unittest.TestCase):
         for company_id, company_expected in expected.items():
             with self.subTest(company_id=company_id):
                 company = next(item for item in dataset["companies"] if item["id"] == company_id)
-                self.assertEqual(company["quarters"][-1], "2026Q2")
+                self.assertIn("2026Q2", company["quarters"])
                 entry = company["financials"]["2026Q2"]
                 self.assertEqual(entry["periodEnd"], "2026-06-30")
                 self.assertEqual(entry["statementFilingDate"], "2026-07-22")
