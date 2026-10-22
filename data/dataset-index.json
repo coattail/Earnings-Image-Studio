@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T02:24:13Z",
+  "generatedAt": "2026-10-22T05:00:34Z",
   "companyCount": 41,
   "companies": [
     {
@@ -3606,7 +3606,7 @@
             "overallConfidenceScore": 0.9635,
             "financialConfidenceScore": 0.9438,
             "structuralConfidenceScore": 1.0,
-            "revenueSegmentChecks": 22,
+            "revenueSegmentChecks": 23,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
             "detailGroupChecks": 21,
@@ -3668,8 +3668,8 @@
           "statementSpanQuarters": 1,
           "officialRevenueSegments": [
             {
-              "name": "Family of Apps",
-              "nameZh": "应用家族",
+              "name": "Family Of Apps",
+              "nameZh": null,
               "memberKey": "familyofapps",
               "valueBn": 64.158,
               "sourceUrl": "https://www.prnewswire.com/news-releases/meta-reports-third-quarter-2026-results-302915964.html",
@@ -3677,11 +3677,12 @@
               "filingDate": "2026-10-21",
               "qoqPct": 6.27,
               "yoyPct": 26.36,
-              "mixPct": 99.3
+              "mixPct": 99.3,
+              "mixYoyDeltaPp": 0.2
             },
             {
               "name": "Reality Labs",
-              "nameZh": "现实实验室",
+              "nameZh": null,
               "memberKey": "realitylabs",
               "valueBn": 0.443,
               "sourceUrl": "https://www.prnewswire.com/news-releases/meta-reports-third-quarter-2026-results-302915964.html",
@@ -3689,13 +3690,14 @@
               "filingDate": "2026-10-21",
               "qoqPct": 2.78,
               "yoyPct": -5.74,
-              "mixPct": 0.7
+              "mixPct": 0.7,
+              "mixYoyDeltaPp": -0.2
             }
           ],
           "officialRevenueDetailGroups": [
             {
               "name": "Advertising",
-              "nameZh": "广告",
+              "nameZh": null,
               "memberKey": "advertising",
               "targetName": "Family of Apps",
               "valueBn": 63.061,
@@ -3704,11 +3706,12 @@
               "filingDate": "2026-10-21",
               "qoqPct": 6.23,
               "yoyPct": 25.92,
-              "mixPct": 97.6
+              "mixPct": 97.6,
+              "mixYoyDeltaPp": -0.1
             },
             {
-              "name": "Other revenue",
-              "nameZh": "其他收入",
+              "name": "Other",
+              "nameZh": null,
               "memberKey": "other",
               "targetName": "Family of Apps",
               "valueBn": 1.097,
@@ -3717,7 +3720,8 @@
               "filingDate": "2026-10-21",
               "qoqPct": 8.94,
               "yoyPct": 58.99,
-              "mixPct": 1.7
+              "mixPct": 1.7,
+              "mixYoyDeltaPp": 0.4
             }
           ],
           "officialCostBreakdown": null,
@@ -3863,11 +3867,11 @@
             "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 0,
             "revenueSegmentMismatchCount": 0,
-            "revenueSegmentSkippedChecks": 34,
-            "detailGroupChecks": 15,
+            "revenueSegmentSkippedChecks": 35,
+            "detailGroupChecks": 16,
             "detailGroupMismatchCount": 0,
             "detailGroupSkippedChecks": 7,
-            "opexChecks": 2,
+            "opexChecks": 3,
             "opexSkippedChecks": 0,
             "opexOverflowMismatchCount": 0,
             "warningCount": 0,
@@ -9916,6 +9920,7 @@
       "officialSegmentHistory": {}
     },
     {
+      "_cacheVersion": "20260803-v4",
       "id": "jnj",
       "ticker": "JNJ",
       "nameZh": "强生",
@@ -9960,29 +9965,36 @@
         "2025Q3",
         "2025Q4",
         "2026Q1",
-        "2026Q2"
+        "2026Q2",
+        "2026Q3"
       ],
-      "statementSource": "official-sec-companyfacts+field-reconciled",
+      "statementSource": "official-sec-companyfacts",
       "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000200406.json",
       "reportingCurrency": "USD",
       "cik": 200406,
       "errors": [],
+      "errorDetails": [],
+      "marketCapUsd": 633194348544,
+      "marketCapAsOf": "2026-07-06",
+      "marketCapSourceRank": 22,
+      "marketCapSource": "CompaniesMarketCap",
+      "marketCapSourceUrl": "https://companiesmarketcap.com/",
       "coverage": {
-        "quarterCount": 32,
+        "quarterCount": 33,
         "pixelReplicaQuarterCount": 0,
         "hasPixelReplica": false,
-        "officialFinancialQuarterCount": 32,
-        "officialSegmentQuarterCount": 32,
+        "officialFinancialQuarterCount": 33,
+        "officialSegmentQuarterCount": 33,
         "officialExpenseQuarterCount": 0,
         "classification": {
           "status": "ok",
-          "latestQuarter": "2026Q2",
+          "latestQuarter": "2026Q3",
           "latestQuarterHasRevenueClassification": true,
           "latestQuarterHasExpenseClassification": false,
-          "latestRevenueClassificationQuarter": "2026Q2",
+          "latestRevenueClassificationQuarter": "2026Q3",
           "latestExpenseClassificationQuarter": null,
           "latestStructureHistoryQuarter": "2026Q2",
-          "revenueClassificationQuarterCount": 32,
+          "revenueClassificationQuarterCount": 33,
           "expenseClassificationQuarterCount": 0,
           "revenueClassificationCoverageRatio": 1.0,
           "expenseClassificationCoverageRatio": 0.0,
@@ -9993,7 +10005,7 @@
           "policy": {}
         },
         "parser": {
-          "version": "universal-parser-v3",
+          "version": "universal-parser-v4",
           "selectedFinancialSource": "official",
           "selectedSegmentSource": "official-segments",
           "selectedRevenueStructureSource": "official-revenue-structures",
@@ -10001,33 +10013,33 @@
           "financialReconciliation": {
             "version": "financial-reconciler-v1",
             "primarySource": "official",
-            "quarterCount": 30,
-            "fieldOverrideCount": 122,
+            "quarterCount": 33,
+            "fieldOverrideCount": 0,
             "derivedFieldCount": 0,
-            "mixedSourceQuarterCount": 18,
+            "mixedSourceQuarterCount": 0,
             "sourceUsageCounts": {
-              "official": 433,
-              "stockanalysis": 122
+              "official": 463,
+              "stockanalysis": 0
             }
           },
           "financialValidation": {
             "version": "financial-validation-v1",
-            "status": "high",
-            "quarterCount": 30,
-            "validatedQuarterCount": 30,
-            "issueCount": 12,
-            "mismatchQuarterCount": 5,
-            "highConfidenceQuarterCount": 27,
-            "averageConfidenceScore": 0.9225,
-            "latestQuarter": "2025Q4",
-            "latestQuarterConfidenceScore": 1,
+            "status": "medium",
+            "quarterCount": 33,
+            "validatedQuarterCount": 33,
+            "issueCount": 3,
+            "mismatchQuarterCount": 2,
+            "highConfidenceQuarterCount": 30,
+            "averageConfidenceScore": 0.835,
+            "latestQuarter": "2026Q3",
+            "latestQuarterConfidenceScore": 0.225,
             "latestQuarterIssueCount": 0
           },
           "validation": {
             "version": "parser-validation-v1",
             "status": "high",
-            "overallConfidenceScore": 0.9496,
-            "financialConfidenceScore": 0.9225,
+            "overallConfidenceScore": 0.8927,
+            "financialConfidenceScore": 0.835,
             "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 11,
             "revenueSegmentMismatchCount": 0,
@@ -10043,372 +10055,130 @@
           }
         }
       },
-      "marketCapUsd": 633194348544,
-      "marketCapAsOf": "2026-07-06",
-      "marketCapSourceRank": 22,
-      "marketCapSource": "CompaniesMarketCap",
-      "marketCapSourceUrl": "https://companiesmarketcap.com/",
       "dataLoadMode": "latest-only",
-      "latestQuarter": "2026Q2",
+      "latestQuarter": "2026Q3",
       "financials": {
-        "2026Q2": {
-          "calendarQuarter": "2026Q2",
-          "periodEnd": "2026-06-28",
+        "2026Q3": {
+          "calendarQuarter": "2026Q3",
+          "periodEnd": "2026-09-27",
           "fiscalYear": "2026",
-          "fiscalQuarter": "Q2",
-          "fiscalLabel": "FY2026 Q2",
+          "fiscalQuarter": "Q3",
+          "fiscalLabel": "FY2026 Q3",
           "statementCurrency": "USD",
-          "revenueBn": 25.31,
-          "revenueYoyPct": 6.6,
-          "costOfRevenueBn": 8.051,
-          "grossProfitBn": 17.259,
-          "sgnaBn": 6.432,
-          "rndBn": 3.653,
+          "revenueBn": null,
+          "revenueYoyPct": null,
+          "costOfRevenueBn": null,
+          "grossProfitBn": null,
+          "sgnaBn": null,
+          "rndBn": null,
           "otherOpexBn": null,
-          "operatingExpensesBn": 10.119,
-          "operatingIncomeBn": 7.14,
-          "nonOperatingBn": -0.393,
-          "pretaxIncomeBn": 6.747,
-          "taxBn": 1.213,
-          "netIncomeBn": 5.534,
+          "operatingExpensesBn": null,
+          "operatingIncomeBn": null,
+          "nonOperatingBn": null,
+          "pretaxIncomeBn": null,
+          "taxBn": null,
+          "netIncomeBn": null,
           "netIncomeYoyPct": null,
-          "grossMarginPct": 68.190439,
-          "operatingMarginPct": 28.210194,
-          "profitMarginPct": 21.864876,
+          "grossMarginPct": null,
+          "operatingMarginPct": null,
+          "profitMarginPct": null,
           "effectiveTaxRatePct": null,
-          "revenueQoqPct": 5.187,
+          "revenueQoqPct": null,
           "grossMarginYoyDeltaPp": null,
           "operatingMarginYoyDeltaPp": null,
           "profitMarginYoyDeltaPp": null,
-          "statementSource": "official-inline-quarter-statement",
-          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm",
-          "statementFilingDate": "2026-07-23",
+          "statementSourceUrl": "https://stockanalysis.com/stocks/jnj/financials/?p=quarterly",
+          "statementFilingDate": "2026-09-27",
+          "parserFinancialFieldSources": {
+            "calendarQuarter": "stockanalysis",
+            "periodEnd": "stockanalysis",
+            "fiscalYear": "stockanalysis",
+            "fiscalQuarter": "stockanalysis",
+            "fiscalLabel": "stockanalysis",
+            "statementCurrency": "stockanalysis",
+            "statementFilingDate": "stockanalysis",
+            "statementSourceUrl": "stockanalysis"
+          },
+          "parserFinancialCandidateCounts": {
+            "revenueBn": 0,
+            "revenueYoyPct": 0,
+            "revenueQoqPct": 0,
+            "costOfRevenueBn": 0,
+            "grossProfitBn": 0,
+            "grossMarginPct": 0,
+            "grossMarginYoyDeltaPp": 0,
+            "sgnaBn": 0,
+            "rndBn": 0,
+            "otherOpexBn": 0,
+            "operatingExpensesBn": 0,
+            "operatingIncomeBn": 0,
+            "operatingMarginPct": 0,
+            "operatingMarginYoyDeltaPp": 0,
+            "nonOperatingBn": 0,
+            "pretaxIncomeBn": 0,
+            "taxBn": 0,
+            "netIncomeBn": 0,
+            "netIncomeYoyPct": 0,
+            "profitMarginPct": 0,
+            "profitMarginYoyDeltaPp": 0,
+            "effectiveTaxRatePct": 0
+          },
+          "parserFinancialValidation": {
+            "version": "financial-validation-v1",
+            "status": "low",
+            "confidenceScore": 0.225,
+            "completenessScore": 0.0,
+            "consistencyScore": 0.5,
+            "checksRun": 0,
+            "checksPassed": 0,
+            "issueCount": 0,
+            "issues": []
+          },
           "officialRevenueSegments": [
             {
               "name": "Innovative Medicine",
               "nameZh": null,
               "memberKey": "innovativemedicine",
-              "valueBn": 16.384,
-              "yoyPct": 7.78,
-              "qoqPct": 6.21,
-              "mixPct": 64.7,
-              "mixYoyDeltaPp": 0.7,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628_htm.xml",
+              "valueBn": 16.757,
+              "yoyPct": 7.67,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927_htm.xml",
               "sourceForm": "10-Q",
-              "filingDate": "2026-07-23",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": null,
-              "validationNotes": null
+              "filingDate": "2026-10-21",
+              "periodStart": "2026-06-29",
+              "periodEnd": "2026-09-27",
+              "qoqPct": 2.28
             },
             {
               "name": "Med Tech",
               "nameZh": null,
               "memberKey": "medtech",
-              "valueBn": 8.926,
-              "yoyPct": 4.51,
-              "qoqPct": 3.36,
-              "mixPct": 35.3,
-              "mixYoyDeltaPp": -0.7,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628_htm.xml",
+              "valueBn": 8.642,
+              "yoyPct": 2.51,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927_htm.xml",
               "sourceForm": "10-Q",
-              "filingDate": "2026-07-23",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": null,
-              "validationNotes": null
+              "filingDate": "2026-10-21",
+              "periodStart": "2026-06-29",
+              "periodEnd": "2026-09-27",
+              "qoqPct": -3.18
             }
           ],
+          "officialSegmentAxis": "StatementBusinessSegmentsAxis",
+          "officialSegmentSource": "official-filings",
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
           "displayCurrency": "USD",
           "displayScaleFactor": 1,
           "sankeyStructureContinuity": {
-            "sourceQuarter": "2026Q1",
+            "sourceQuarter": "2026Q2",
             "fields": [
               "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
-          },
-          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueTaxonomyChangedFromPriorYear": false,
-          "fieldSources": {
-            "revenueBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
-            },
-            "costOfRevenueBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
-            },
-            "grossProfitBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
-            },
-            "sgnaBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
-            },
-            "rndBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
-            },
-            "operatingExpensesBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
-            },
-            "operatingIncomeBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
-            },
-            "nonOperatingBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
-            },
-            "pretaxIncomeBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
-            },
-            "taxBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
-            },
-            "netIncomeBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
-            }
-          },
-          "qualityFlags": [
-            "official-quarter-statement-backfilled"
-          ],
-          "derivedStatementFields": [],
-          "statementValueMode": "direct",
-          "statementSpanQuarters": 1,
-          "statementPeriodStart": "2026-03-30"
+          }
         }
       },
       "statementPresets": {},
-      "officialRevenueStructureHistory": {
-        "source": "official-filings-xbrl-hierarchy",
-        "quarters": {
-          "2026Q2": {
-            "segments": [
-              {
-                "name": "Innovative Medicine",
-                "nameZh": null,
-                "memberKey": "innovativemedicine",
-                "valueBn": 16.384,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628_htm.xml",
-                "sourceForm": "10-Q",
-                "filingDate": "2026-07-23",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": null,
-                "validationNotes": null
-              },
-              {
-                "name": "Med Tech",
-                "nameZh": null,
-                "memberKey": "medtech",
-                "valueBn": 8.926,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628_htm.xml",
-                "sourceForm": "10-Q",
-                "filingDate": "2026-07-23",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": null,
-                "validationNotes": null
-              }
-            ]
-          }
-        },
-        "filingsUsed": [
-          {
-            "form": "10-Q",
-            "filingDate": "2026-07-23",
-            "accession": "0000200406-26-000153",
-            "instance": "jnj-20260628_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2026-04-22",
-            "accession": "0000200406-26-000087",
-            "instance": "jnj-20260329_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2026-02-11",
-            "accession": "0000200406-26-000016",
-            "instance": "jnj-20251228_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2025-10-22",
-            "accession": "0000200406-25-000209",
-            "instance": "jnj-20250928_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2025-07-24",
-            "accession": "0000200406-25-000178",
-            "instance": "jnj-20250629_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2025-04-23",
-            "accession": "0000200406-25-000119",
-            "instance": "jnj-20250330_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2025-02-13",
-            "accession": "0000200406-25-000038",
-            "instance": "jnj-20241229_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2024-10-23",
-            "accession": "0000200406-24-000096",
-            "instance": "jnj-20240929_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2024-07-25",
-            "accession": "0000200406-24-000075",
-            "instance": "jnj-20240630_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2024-05-01",
-            "accession": "0000200406-24-000049",
-            "instance": "jnj-20240331_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2024-02-16",
-            "accession": "0000200406-24-000013",
-            "instance": "jnj-20231231_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2023-10-27",
-            "accession": "0000200406-23-000102",
-            "instance": "jnj-20231001_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2023-07-31",
-            "accession": "0000200406-23-000082",
-            "instance": "jnj-20230702_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2023-04-28",
-            "accession": "0000200406-23-000056",
-            "instance": "jnj-20230402_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2023-02-16",
-            "accession": "0000200406-23-000016",
-            "instance": "jnj-20230101_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2022-10-27",
-            "accession": "0000200406-22-000086",
-            "instance": "jnj-20221002_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2022-07-29",
-            "accession": "0000200406-22-000071",
-            "instance": "jnj-20220703_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2022-04-29",
-            "accession": "0000200406-22-000048",
-            "instance": "jnj-20220403_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2022-02-17",
-            "accession": "0000200406-22-000022",
-            "instance": "jnj-20220102_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2021-10-29",
-            "accession": "0000200406-21-000070",
-            "instance": "jnj-20211003_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2021-07-29",
-            "accession": "0000200406-21-000057",
-            "instance": "jnj-20210704_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2021-04-30",
-            "accession": "0000200406-21-000036",
-            "instance": "jnj-20210404_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2021-02-22",
-            "accession": "0000200406-21-000008",
-            "instance": "jnj-20210103_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2020-10-23",
-            "accession": "0000200406-20-000056",
-            "instance": "jnj-20200927_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2020-07-24",
-            "accession": "0000200406-20-000050",
-            "instance": "jnj-20200628_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2020-04-29",
-            "accession": "0000200406-20-000035",
-            "instance": "a1q10q03-29x20_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2020-02-18",
-            "accession": "0000200406-20-000010",
-            "instance": "form10-k20191229_htm.xml"
-          }
-        ],
-        "errors": []
-      },
+      "officialRevenueStructureHistory": {},
       "officialSegmentHistory": {}
     },
     {
