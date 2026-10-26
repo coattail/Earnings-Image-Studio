@@ -2635,13 +2635,22 @@ function mergeCompanyFinancialFallback(company, fallbackCompany) {
   };
 }
 
+function sortCompaniesByMarketCap(companiesPayload) {
+  return [...companiesPayload]
+    .sort((left, right) => {
+      const leftCap = Math.max(safeNumber(left.marketCapUsd), 0);
+      const rightCap = Math.max(safeNumber(right.marketCapUsd), 0);
+      return rightCap - leftCap || left.rank - right.rank || String(left.id).localeCompare(String(right.id));
+    })
+    .map((company, index) => ({ ...company, rank: index + 1 }));
+}
+
 function replaceCompanyInState(nextCompany) {
   if (!nextCompany?.id) return null;
   const normalizedCompany = normalizeLoadedCompany(nextCompany, 0);
-  state.sortedCompanies = state.sortedCompanies
+  state.sortedCompanies = sortCompaniesByMarketCap(state.sortedCompanies
     .map((company) => (company?.id === normalizedCompany.id ? normalizedCompany : company))
-    .map((company, index) => normalizeLoadedCompany(company, index))
-    .sort((left, right) => left.rank - right.rank);
+    .map((company, index) => normalizeLoadedCompany(company, index)));
   state.companyById = Object.fromEntries(state.sortedCompanies.map((company) => [company.id, company]));
   if (state.dataset) {
     state.dataset.companies = state.sortedCompanies;
@@ -2651,13 +2660,12 @@ function replaceCompanyInState(nextCompany) {
 }
 
 function applyLoadedCompaniesToState(companiesPayload = [], dataLoadMode = null) {
-  const preparedCompanies = [...(companiesPayload || [])]
+  const preparedCompanies = sortCompaniesByMarketCap([...(companiesPayload || [])]
     .filter((company) => company && typeof company === "object")
     .map((company, index) => normalizeLoadedCompany({
       ...company,
       dataLoadMode: company?.dataLoadMode || dataLoadMode || "full",
-    }, index))
-    .sort((left, right) => left.rank - right.rank);
+    }, index)));
   state.sortedCompanies = preparedCompanies;
   state.companyById = Object.fromEntries(preparedCompanies.map((company) => [company.id, company]));
   if (state.dataset) {
@@ -2835,7 +2843,7 @@ async function enrichDatasetWithFinancialFallbacks() {
       }
     })
   );
-  state.sortedCompanies = enrichedCompanies.map((company, index) => normalizeLoadedCompany(company, index)).sort((left, right) => left.rank - right.rank);
+  state.sortedCompanies = sortCompaniesByMarketCap(enrichedCompanies.map((company, index) => normalizeLoadedCompany(company, index)));
   state.companyById = Object.fromEntries(state.sortedCompanies.map((company) => [company.id, company]));
   if (state.dataset) {
     state.dataset.companies = state.sortedCompanies;
