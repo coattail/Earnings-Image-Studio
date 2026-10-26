@@ -12,6 +12,65 @@ function runtime() {
   for (const file of ['app-00-foundation.js','app-01-layout.js','app-02-sankey.js','app-03-data.js','app-04-bootstrap.js','app-05-desk.js']) vm.runInContext(fs.readFileSync(path.join(ROOT,'js',file),'utf8'),context,{filename:file});
   return context;
 }
+test('company lists sort by USD market cap in both loading modes despite stale ranks', () => {
+  for (const mode of ['latest-only', 'full']) {
+    const ctx = runtime();
+    ctx.payload = [
+      {id:'private',rank:1},
+      {id:'small',rank:2,marketCapUsd:100},
+      {id:'invalid',rank:3,marketCapUsd:'unknown'},
+      {id:'large',rank:9,marketCapUsd:'500'},
+      {id:'equal',rank:10,marketCapUsd:100},
+      {id:'zero',rank:4,marketCapUsd:0},
+      {id:'negative',rank:5,marketCapUsd:-20},
+      {id:'infinite',rank:6,marketCapUsd:Infinity},
+      {id:'null',rank:7,marketCapUsd:null},
+      {id:'nan',rank:8,marketCapUsd:NaN},
+    ];
+    ctx.mode = mode;
+    const result = vm.runInContext(`(() => {
+      state.dataset = {};
+      applyLoadedCompaniesToState(payload, mode);
+      refs.companyList = {innerHTML:''};
+      refs.companySearch = {value:''};
+      EarningsDesk.renderCompanyList();
+      return JSON.stringify({ids:state.filteredCompanyIds, ranks:companies().map(c=>c.rank),
+        count:state.dataset.companyCount, mode:getCompany('large').dataLoadMode});
+    })()`, ctx);
+    const actual = JSON.parse(result);
+    assert.deepEqual(actual.ids,['large','small','equal','private','invalid','zero','negative','infinite','null','nan']);
+    assert.deepEqual(actual.ranks,[1,2,3,4,5,6,7,8,9,10]);
+    assert.equal(actual.count,10);
+    assert.equal(actual.mode,mode);
+    assert.equal(ctx.payload[0].rank,1,'loading must not mutate the source payload');
+  }
+});
+test('market-cap updates reorder state and search results without changing the selection', async () => {
+  const ctx = runtime();
+  vm.runInContext(`
+    applyLoadedCompaniesToState([
+      {id:'small',ticker:'S',nameEn:'Example Small',rank:1,marketCapUsd:100},
+      {id:'large',ticker:'L',nameEn:'Example Large',rank:2,marketCapUsd:500}
+    ]);
+    state.selectedCompanyId='small';
+    state.selectedQuarter='2026Q2';
+    replaceCompanyInState({...getCompany('small'),marketCapUsd:1000,rank:99});
+    refs.companyList={innerHTML:''}; refs.companySearch={value:'example'};
+    EarningsDesk.renderCompanyList();
+  `,ctx);
+  assert.equal(vm.runInContext('state.filteredCompanyIds.join(",")',ctx),'small,large');
+  assert.match(vm.runInContext('refs.companyList.innerHTML',ctx),/Example Small.*Example Large/s);
+  // Background enrichment must preserve the same order even if old ranks arrive.
+  vm.runInContext(`
+    fetchJson=async()=>({ok:false});
+    state.sortedCompanies[0].rank=99; state.sortedCompanies[1].rank=1;
+  `,ctx);
+  await vm.runInContext('enrichDatasetWithFinancialFallbacks()',ctx);
+  assert.equal(vm.runInContext('companies().map(c=>c.id).join(",")',ctx),'small,large');
+  assert.equal(vm.runInContext('getCompany("small").rank',ctx),1);
+  assert.equal(vm.runInContext('state.selectedCompanyId',ctx),'small');
+  assert.equal(vm.runInContext('state.selectedQuarter',ctx),'2026Q2');
+});
 test('short history windows span the plot while preserving chart ratio, column proportions and values', () => {
   const ctx = runtime();
   ctx.payload = JSON.parse(fs.readFileSync(path.join(ROOT,'data/earnings-dataset.json'),'utf8'));
