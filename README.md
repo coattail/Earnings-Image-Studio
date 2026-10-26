@@ -11,7 +11,7 @@ After the merge, the project keeps the original `earnings-image-studio` renderin
 ### Web App
 
 - Interactive browser UI (static HTML/CSS/JS) for company and quarter selection
-- Companies automatically sort by USD market cap in the dataset, descending; missing or invalid values go last, and updated snapshots automatically determine the order
+- Companies sort by USD market cap, descending, with visible ranks, values and snapshot dates. Market caps refresh automatically at 17:37 New York time on weekdays; missing or invalid values go last
 - Sankey-style earnings bridge rendering with stable layout templates
 - Revenue segment / detail-group bar visualization
 - SVG and PNG export directly from the same in-browser renderer

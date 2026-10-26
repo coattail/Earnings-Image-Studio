@@ -23,12 +23,12 @@
     <link rel="stylesheet" href="style.css?v=20261021-final-spine-bounds" />
     <script defer src="js/app-00-http.js?v=20260503-berkshire-q1-v162"></script>
     <script defer src="js/app-00-logo-raster.js?v=20260503-berkshire-q1-v162"></script>
-    <script defer src="js/app-00-foundation.js?v=20261022-bar-logo-svg-space"></script>
+    <script defer src="js/app-00-foundation.js?v=20261027-market-cap-refresh"></script>
     <script defer src="js/app-01-layout.js?v=20261021-final-spine-bounds"></script>
     <script defer src="js/app-02-sankey.js?v=20261021-final-spine-bounds"></script>
     <script defer src="js/app-03-data.js?v=20261027-market-cap-sort"></script>
-    <script defer src="js/app-04-bootstrap.js?v=20261022-bar-logo-svg-space"></script>
-    <script defer src="js/app-05-desk.js?v=20261021-spacex-sources"></script>
+    <script defer src="js/app-04-bootstrap.js?v=20261027-market-cap-refresh"></script>
+    <script defer src="js/app-05-desk.js?v=20261027-market-cap-refresh"></script>
   </head>
   <body>
     <a class="skip-link" href="#analysis">跳到财报分析</a>
@@ -42,12 +42,13 @@
           <button id="mobileCompanyToggle" class="mobile-controls-toggle" type="button" aria-expanded="false" aria-controls="companyPicker">选择公司 <span id="mobileCompanyName">—</span><span aria-hidden="true">⌄</span></button>
           <div id="companyPicker" class="company-picker">
             <div class="block-head"><h2>公司</h2><span id="companyCountPill" class="status-pill">—</span></div>
+            <p id="companySortStatus" class="sidebar-note" role="status">按美元市值从高到低排列</p>
             <div class="search-wrap"><span aria-hidden="true">⌕</span><input id="companySearch" class="asset-search" type="search" placeholder="公司名称或代码" aria-label="搜索公司" autocomplete="off" /></div>
             <div class="company-filters" role="group" aria-label="公司范围"><button id="allCompaniesBtn" class="filter-btn is-active" type="button" aria-pressed="true">全部公司</button><button id="favoriteCompaniesBtn" class="filter-btn" type="button" aria-pressed="false">我的收藏 <span id="favoriteCount">0</span></button></div>
             <p id="companyResults" class="sr-only" role="status"></p>
             <div id="companyList" class="company-list" aria-label="公司列表"></div>
             <label class="keep-quarter"><input id="keepQuarterCheckbox" type="checkbox" /> 切换公司时保留当前季度</label>
-            <p class="sidebar-note">按美元市值从高到低排列 · 收藏与浏览偏好保存在本机</p>
+            <p class="sidebar-note">收藏与浏览偏好保存在本机</p>
           </div>
         </aside>
         <section id="analysis" class="chart-zone" aria-label="财报分析" tabindex="-1">

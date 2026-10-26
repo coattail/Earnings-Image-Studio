@@ -167,6 +167,7 @@ def apply_company_market_cap_snapshot(companies: list[dict[str, Any]]) -> None:
         return
     source = snapshot.get("source") if isinstance(snapshot.get("source"), dict) else {}
     as_of = str(source.get("asOf") or "").strip()
+    UNIVERSE_SOURCE["as_of"] = as_of
     for company in companies:
         entry = entries.get(company.get("id"))
         if not isinstance(entry, dict):

@@ -1,0 +1,41 @@
+name: Refresh Company Market Caps
+
+on:
+  schedule:
+    - cron: "37 17 * * 1-5"
+      timezone: "America/New_York"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: earnings-data-update
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+      - name: Refresh market caps and company order
+        run: python scripts/refresh_market_caps.py
+      - name: Publish updated ranking
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- data; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/company-market-caps.json data/earnings-dataset.json data/dataset-index.json
+          git commit -m "chore(data): refresh company market caps"
+          git push
+          # GITHUB_TOKEN pushes do not start other Actions workflows.
+          gh workflow run deploy-pages.yml --ref main

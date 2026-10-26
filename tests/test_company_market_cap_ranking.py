@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import unittest
 import sys
+import json
 from pathlib import Path
 
 
@@ -19,22 +20,19 @@ class CompanyMarketCapRankingTests(unittest.TestCase):
         self.assertEqual(len(companies), 41)
         self.assertEqual([item["rank"] for item in companies], list(range(1, 42)))
         market_caps = [item["marketCapUsd"] for item in companies if item.get("marketCapUsd")]
-        self.assertEqual(companies[-1]["id"], "spacex")
-        self.assertNotIn("marketCapUsd", companies[-1])
+        snapshot = json.loads(build_dataset.COMPANY_MARKET_CAPS_PATH.read_text())
+        self.assertEqual({company["id"] for company in companies}, set(snapshot["companies"]))
         self.assertEqual(market_caps, sorted(market_caps, reverse=True))
-        self.assertEqual(companies[0]["id"], "nvidia")
-        self.assertLess(next(item["rank"] for item in companies if item["id"] == "samsung"), 15)
-        self.assertLess(
-            next(item["rank"] for item in companies if item["id"] == "sk-hynix"),
-            next(item["rank"] for item in companies if item["id"] == "eli-lilly"),
-        )
+        for company in companies:
+            self.assertEqual(company["marketCapUsd"], snapshot["companies"][company["id"]]["marketCapUsd"])
 
     def test_snapshot_metadata_is_propagated_to_cached_payloads(self) -> None:
         company = next(item for item in build_dataset.TOP30_COMPANIES if item["id"] == "samsung")
         payload = build_dataset.sync_company_metadata({"id": "samsung"}, company)
-        self.assertEqual(payload["marketCapAsOf"], "2026-07-06")
+        snapshot = json.loads(build_dataset.COMPANY_MARKET_CAPS_PATH.read_text())
+        self.assertEqual(payload["marketCapAsOf"], snapshot["source"]["asOf"])
         self.assertEqual(payload["marketCapSource"], "CompaniesMarketCap")
-        self.assertGreater(payload["marketCapUsd"], 1_000_000_000_000)
+        self.assertEqual(payload["marketCapUsd"], snapshot["companies"]["samsung"]["marketCapUsd"])
 
 
 if __name__ == "__main__":
