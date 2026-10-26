@@ -71,6 +71,26 @@ test('market-cap updates reorder state and search results without changing the s
   assert.equal(vm.runInContext('state.selectedCompanyId',ctx),'small');
   assert.equal(vm.runInContext('state.selectedQuarter',ctx),'2026Q2');
 });
+test('company rows visibly show market cap, ranking and the snapshot date', () => {
+  const ctx = runtime();
+  const status = {textContent:''};
+  ctx.document.getElementById = id => id === 'companySortStatus' ? status : null;
+  vm.runInContext(`
+    applyLoadedCompaniesToState([
+      {id:'large',ticker:'L',marketCapUsd:5.2e12,marketCapAsOf:'2026-10-26'},
+      {id:'small',ticker:'S',marketCapUsd:750e9,marketCapAsOf:'2026-10-26'},
+      {id:'missing',ticker:'M'}
+    ]);
+    refs.companyList={innerHTML:''}; EarningsDesk.renderCompanyList();
+  `,ctx);
+  const html = vm.runInContext('refs.companyList.innerHTML',ctx);
+  assert.match(html,/市值 \$5.2T/);
+  assert.match(html,/市值 \$750B/);
+  assert.match(html,/市值暂无/);
+  assert.match(html,/#1/);
+  assert.match(html,/美元市值 · 2026-10-26/);
+  assert.equal(status.textContent,'市值降序 · 更新 2026-10-26');
+});
 test('short history windows span the plot while preserving chart ratio, column proportions and values', () => {
   const ctx = runtime();
   ctx.payload = JSON.parse(fs.readFileSync(path.join(ROOT,'data/earnings-dataset.json'),'utf8'));

@@ -109,6 +109,11 @@
     const drafts = readStorage(DRAFT_KEY);
     state.editor.overridesBySession = Object.fromEntries(Object.entries(drafts).slice(-120).filter(([key]) => /^[-a-z0-9]+::\d{4}Q[1-4]::sankey$/.test(key)).map(([key, values]) => [key, sanitizeEditorNodeOverrides(values)]));
   }
+  function marketCapLabel(company) {
+    const cap = number(company.marketCapUsd);
+    if (!(cap > 0)) return "市值暂无";
+    return `市值 $${decimal(cap / (cap >= 1e12 ? 1e12 : 1e9), 2)}${cap >= 1e12 ? "T" : "B"}`;
+  }
   function renderCompanyList() {
     if (!refs.companyList) return;
     const search = String(refs.companySearch?.value || "").trim().toLowerCase();
@@ -123,8 +128,10 @@
       const logoUrl = /^data:image\/(?:png|jpeg|webp|svg\+xml);base64,/i.test(asset?.dataUrl || "") ? asset.dataUrl : null;
       const wordmark = number(asset?.width) > number(asset?.height) * 2;
       const avatar = `<span class="company-avatar${logoUrl ? " has-logo" : ""}" style="--avatar-color:${color};--avatar-bg:${color}12" aria-hidden="true">${logoUrl ? `<img class="company-logo${wordmark ? " is-wordmark" : ""}" src="${esc(logoUrl)}" alt="" decoding="async" />` : ""}<span class="company-logo-fallback">${esc(String(company.ticker).slice(0, 3))}</span></span>`;
-      return `<div class="company-row${active ? " is-active" : ""}"><button class="company-card" type="button" data-company-id="${esc(company.id)}" aria-pressed="${active}">${avatar}<span class="company-info"><span class="company-title">${esc(name)}</span><span class="company-subtitle">${esc(company.ticker)}<span class="dot">·</span>${company.coverage?.quarterCount || company.quarters?.length || 0} 期财报</span></span></button><button class="favorite-btn${favorite ? " is-favorite" : ""}" type="button" data-favorite-id="${esc(company.id)}" aria-label="${favorite ? "取消收藏" : "收藏"}${esc(name)}" aria-pressed="${favorite}">${favorite ? "★" : "☆"}</button></div>`;
+      return `<div class="company-row${active ? " is-active" : ""}"><button class="company-card" type="button" data-company-id="${esc(company.id)}" aria-pressed="${active}">${avatar}<span class="company-info"><span class="company-title">${esc(name)}</span><span class="company-subtitle">#${company.rank}<span class="dot">·</span>${esc(company.ticker)}<span class="dot">·</span>${company.coverage?.quarterCount || company.quarters?.length || 0} 期财报</span><span class="company-subtitle company-market-cap" title="${esc(company.marketCapAsOf ? `美元市值 · ${company.marketCapAsOf} · ${company.marketCapSource || ""}` : "暂无可用美元市值")}">${marketCapLabel(company)}</span></span></button><button class="favorite-btn${favorite ? " is-favorite" : ""}" type="button" data-favorite-id="${esc(company.id)}" aria-label="${favorite ? "取消收藏" : "收藏"}${esc(name)}" aria-pressed="${favorite}">${favorite ? "★" : "☆"}</button></div>`;
     }).join("") : `<div class="empty-companies"><strong>${search ? "没有找到匹配公司" : "还没有收藏公司"}</strong><p>${search ? "试试中文名、英文名或股票代码" : "点击公司旁的 ☆，建立常看列表"}</p><button type="button" data-clear-filters>查看全部公司</button></div>`;
+    const dates = [...new Set(companies().map(company => company.marketCapAsOf).filter(Boolean))].sort();
+    if ($("companySortStatus")) $("companySortStatus").textContent = `市值降序${dates.length ? ` · 更新 ${dates[0]}${dates.length > 1 ? `—${dates.at(-1)}` : ""}` : " · 暂无市值数据"}`;
     if ($("companyResults")) $("companyResults").textContent = `找到 ${matches.length} 家公司`;
     if ($("favoriteCount")) $("favoriteCount").textContent = ui.favorites.size;
     ["allCompaniesBtn", "favoriteCompaniesBtn"].forEach((id, index) => {

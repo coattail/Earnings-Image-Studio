@@ -2,50 +2,216 @@
   "source": {
     "label": "CompaniesMarketCap",
     "url": "https://companiesmarketcap.com/",
-    "asOf": "2026-07-06",
     "currency": "USD",
-    "note": "Point-in-time comparison snapshot. Source quotes may be delayed by several minutes or hours."
+    "asOf": "2026-10-26",
+    "retrievedAt": "2026-10-26T16:39:32+00:00",
+    "note": "Company-level USD market caps retrieved together; source quotes may be delayed."
   },
   "companies": {
-    "nvidia": {"marketCapUsd": 4718977351680, "sourceRank": 1},
-    "apple": {"marketCapUsd": 4532958920704, "sourceRank": 2},
-    "alphabet": {"marketCapUsd": 4346312392704, "sourceRank": 3},
-    "microsoft": {"marketCapUsd": 2900729528320, "sourceRank": 4},
-    "amazon": {"marketCapUsd": 2610427854848, "sourceRank": 5},
-    "tsmc": {"marketCapUsd": 2251759550464, "sourceRank": 6},
-    "broadcom": {"marketCapUsd": 1714869895168, "sourceRank": 8},
-    "meta": {"marketCapUsd": 1479647035392, "sourceRank": 10},
-    "tesla": {"marketCapUsd": 1477689606144, "sourceRank": 11},
-    "samsung": {"marketCapUsd": 1362597609223, "sourceRank": 12, "sourceUrl": "https://companiesmarketcap.com/samsung/marketcap/"},
-    "micron": {"marketCapUsd": 1101790838784, "sourceRank": 13},
-    "berkshire": {"marketCapUsd": 1095207223296, "sourceRank": 14},
-    "sk-hynix": {"marketCapUsd": 1085286119729, "sourceRank": 15, "sourceUrl": "https://companiesmarketcap.com/sk-hynix/marketcap/"},
-    "eli-lilly": {"marketCapUsd": 1082493829120, "sourceRank": 16},
-    "jpmorgan": {"marketCapUsd": 896216137728, "sourceRank": 17},
-    "walmart": {"marketCapUsd": 890031505408, "sourceRank": 18},
-    "amd": {"marketCapUsd": 844357632000, "sourceRank": 19},
-    "visa": {"marketCapUsd": 688678502400, "sourceRank": 20},
-    "asml": {"marketCapUsd": 681927180288, "sourceRank": 21},
-    "jnj": {"marketCapUsd": 633194348544, "sourceRank": 22},
-    "exxon": {"marketCapUsd": 568230805504, "sourceRank": 24},
-    "tencent": {"marketCapUsd": 498500468736, "sourceRank": 25},
-    "mastercard": {"marketCapUsd": 476596305920, "sourceRank": 27},
-    "abbvie": {"marketCapUsd": 461256622080, "sourceRank": 28},
-    "caterpillar": {"marketCapUsd": 443794194432, "sourceRank": 30},
-    "costco": {"marketCapUsd": 422045483008, "sourceRank": 32},
-    "bank-of-america": {"marketCapUsd": 416782778368, "sourceRank": 33},
-    "oracle": {"marketCapUsd": 404043694080, "sourceRank": 34},
-    "coca-cola": {"marketCapUsd": 362010869760, "sourceRank": 38},
-    "home-depot": {"marketCapUsd": 356868063232, "sourceRank": 39},
-    "procter-gamble": {"marketCapUsd": 352573194240, "sourceRank": 40},
-    "chevron": {"marketCapUsd": 336978313216, "sourceRank": 42},
-    "netflix": {"marketCapUsd": 326968508416, "sourceRank": 46},
-    "palantir": {"marketCapUsd": 309972434944, "sourceRank": 48},
-    "alibaba": {"marketCapUsd": 230698188800, "sourceRank": 76},
-    "byd": {"marketCapUsd": 117490000000, "sourceRank": 195, "sourceUrl": "https://companiesmarketcap.com/byd/marketcap/"},
-    "netease": {"marketCapUsd": 81524629504, "sourceRank": 295},
-    "xiaomi": {"marketCapUsd": 74900000000, "sourceRank": 332, "sourceUrl": "https://companiesmarketcap.com/xiaomi/marketcap/"},
-    "meituan": {"marketCapUsd": 58982546713, "sourceRank": 425},
-    "jd": {"marketCapUsd": 35950309376, "sourceRank": 718}
+    "nvidia": {
+      "marketCapUsd": 5203678461952,
+      "sourceRank": 1,
+      "sourceUrl": "https://companiesmarketcap.com/nvidia/marketcap/"
+    },
+    "apple": {
+      "marketCapUsd": 5028132683776,
+      "sourceRank": 2,
+      "sourceUrl": "https://companiesmarketcap.com/apple/marketcap/"
+    },
+    "alphabet": {
+      "marketCapUsd": 3861846425600,
+      "sourceRank": 4,
+      "sourceUrl": "https://companiesmarketcap.com/alphabet-google/marketcap/"
+    },
+    "microsoft": {
+      "marketCapUsd": 3937246904320,
+      "sourceRank": 3,
+      "sourceUrl": "https://companiesmarketcap.com/microsoft/marketcap/"
+    },
+    "amazon": {
+      "marketCapUsd": 2688219086848,
+      "sourceRank": 5,
+      "sourceUrl": "https://companiesmarketcap.com/amazon/marketcap/"
+    },
+    "tsmc": {
+      "marketCapUsd": 2211719938048,
+      "sourceRank": 6,
+      "sourceUrl": "https://companiesmarketcap.com/tsmc/marketcap/"
+    },
+    "broadcom": {
+      "marketCapUsd": 1575226179584,
+      "sourceRank": 10,
+      "sourceUrl": "https://companiesmarketcap.com/broadcom/marketcap/"
+    },
+    "meta": {
+      "marketCapUsd": 1637969952768,
+      "sourceRank": 9,
+      "sourceUrl": "https://companiesmarketcap.com/meta-platforms/marketcap/"
+    },
+    "tesla": {
+      "marketCapUsd": 1562415333376,
+      "sourceRank": 11,
+      "sourceUrl": "https://companiesmarketcap.com/tesla/marketcap/"
+    },
+    "samsung": {
+      "marketCapUsd": 1046680073172,
+      "sourceRank": 14,
+      "sourceUrl": "https://companiesmarketcap.com/samsung/marketcap/"
+    },
+    "micron": {
+      "marketCapUsd": 1025256128512,
+      "sourceRank": 15,
+      "sourceUrl": "https://companiesmarketcap.com/micron-technology/marketcap/"
+    },
+    "berkshire": {
+      "marketCapUsd": 1168410017792,
+      "sourceRank": 12,
+      "sourceUrl": "https://companiesmarketcap.com/berkshire-hathaway/marketcap/"
+    },
+    "sk-hynix": {
+      "marketCapUsd": 701266938718,
+      "sourceRank": 21,
+      "sourceUrl": "https://companiesmarketcap.com/sk-hynix/marketcap/"
+    },
+    "eli-lilly": {
+      "marketCapUsd": 1139555434496,
+      "sourceRank": 13,
+      "sourceUrl": "https://companiesmarketcap.com/eli-lilly/marketcap/"
+    },
+    "jpmorgan": {
+      "marketCapUsd": 888550522880,
+      "sourceRank": 17,
+      "sourceUrl": "https://companiesmarketcap.com/jp-morgan-chase/marketcap/"
+    },
+    "walmart": {
+      "marketCapUsd": 955223048192,
+      "sourceRank": 16,
+      "sourceUrl": "https://companiesmarketcap.com/walmart/marketcap/"
+    },
+    "amd": {
+      "marketCapUsd": 864779108352,
+      "sourceRank": 18,
+      "sourceUrl": "https://companiesmarketcap.com/amd/marketcap/"
+    },
+    "visa": {
+      "marketCapUsd": 757663006720,
+      "sourceRank": 19,
+      "sourceUrl": "https://companiesmarketcap.com/visa/marketcap/"
+    },
+    "asml": {
+      "marketCapUsd": 616722333696,
+      "sourceRank": 23,
+      "sourceUrl": "https://companiesmarketcap.com/asml/marketcap/"
+    },
+    "jnj": {
+      "marketCapUsd": 638394630144,
+      "sourceRank": 22,
+      "sourceUrl": "https://companiesmarketcap.com/johnson-and-johnson/marketcap/"
+    },
+    "exxon": {
+      "marketCapUsd": 756160069632,
+      "sourceRank": 20,
+      "sourceUrl": "https://companiesmarketcap.com/exxon-mobil/marketcap/"
+    },
+    "tencent": {
+      "marketCapUsd": 445597890000,
+      "sourceRank": 31,
+      "sourceUrl": "https://companiesmarketcap.com/tencent/marketcap/"
+    },
+    "mastercard": {
+      "marketCapUsd": 537493405696,
+      "sourceRank": 24,
+      "sourceUrl": "https://companiesmarketcap.com/mastercard/marketcap/"
+    },
+    "abbvie": {
+      "marketCapUsd": 505342525440,
+      "sourceRank": 25,
+      "sourceUrl": "https://companiesmarketcap.com/abbvie/marketcap/"
+    },
+    "caterpillar": {
+      "marketCapUsd": 318922424320,
+      "sourceRank": 44,
+      "sourceUrl": "https://companiesmarketcap.com/caterpillar/marketcap/"
+    },
+    "costco": {
+      "marketCapUsd": 444775596032,
+      "sourceRank": 32,
+      "sourceUrl": "https://companiesmarketcap.com/costco/marketcap/"
+    },
+    "bank-of-america": {
+      "marketCapUsd": 352365182976,
+      "sourceRank": 40,
+      "sourceUrl": "https://companiesmarketcap.com/bank-of-america/marketcap/"
+    },
+    "oracle": {
+      "marketCapUsd": 382272274432,
+      "sourceRank": 37,
+      "sourceUrl": "https://companiesmarketcap.com/oracle/marketcap/"
+    },
+    "coca-cola": {
+      "marketCapUsd": 397770653696,
+      "sourceRank": 34,
+      "sourceUrl": "https://companiesmarketcap.com/coca-cola/marketcap/"
+    },
+    "home-depot": {
+      "marketCapUsd": 317454843904,
+      "sourceRank": 46,
+      "sourceUrl": "https://companiesmarketcap.com/home-depot/marketcap/"
+    },
+    "procter-gamble": {
+      "marketCapUsd": 370578718720,
+      "sourceRank": 38,
+      "sourceUrl": "https://companiesmarketcap.com/procter-and-gamble/marketcap/"
+    },
+    "chevron": {
+      "marketCapUsd": 455758905344,
+      "sourceRank": 28,
+      "sourceUrl": "https://companiesmarketcap.com/chevron/marketcap/"
+    },
+    "netflix": {
+      "marketCapUsd": 263764754432,
+      "sourceRank": 62,
+      "sourceUrl": "https://companiesmarketcap.com/netflix/marketcap/"
+    },
+    "palantir": {
+      "marketCapUsd": 476214329344,
+      "sourceRank": 27,
+      "sourceUrl": "https://companiesmarketcap.com/palantir/marketcap/"
+    },
+    "alibaba": {
+      "marketCapUsd": 249657655296,
+      "sourceRank": 68,
+      "sourceUrl": "https://companiesmarketcap.com/alibaba/marketcap/"
+    },
+    "spacex": {
+      "marketCapUsd": 2025615654912,
+      "sourceRank": 7,
+      "sourceUrl": "https://companiesmarketcap.com/spacex/marketcap/"
+    },
+    "byd": {
+      "marketCapUsd": 112551247742,
+      "sourceRank": 206,
+      "sourceUrl": "https://companiesmarketcap.com/byd/marketcap/"
+    },
+    "xiaomi": {
+      "marketCapUsd": 87508385792,
+      "sourceRank": 279,
+      "sourceUrl": "https://companiesmarketcap.com/xiaomi/marketcap/"
+    },
+    "netease": {
+      "marketCapUsd": 75850342400,
+      "sourceRank": 324,
+      "sourceUrl": "https://companiesmarketcap.com/netease/marketcap/"
+    },
+    "meituan": {
+      "marketCapUsd": 58250964755,
+      "sourceRank": 419,
+      "sourceUrl": "https://companiesmarketcap.com/meituan-dianping/marketcap/"
+    },
+    "jd": {
+      "marketCapUsd": 34056908800,
+      "sourceRank": 721,
+      "sourceUrl": "https://companiesmarketcap.com/jingdong-mall/marketcap/"
+    }
   }
 }
