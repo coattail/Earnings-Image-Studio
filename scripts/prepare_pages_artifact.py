@@ -4,6 +4,11 @@ import shutil
 from pathlib import Path
 import json
 
+try:
+    from scripts.revenue_growth import assert_revenue_growth_complete
+except ModuleNotFoundError:
+    from revenue_growth import assert_revenue_growth_complete
+
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 DIST_DIR = ROOT_DIR / "dist"
@@ -47,6 +52,8 @@ def latest_quarter_only(history_payload: dict | None, quarter_key: str | None) -
 
 
 def build_dataset_index_company(company_payload: dict) -> dict:
+    # Check with the full history still present, before reducing to latest-only.
+    assert_revenue_growth_complete(company_payload)
     latest_quarter = latest_quarter_key(company_payload)
     company_index = {
         key: value
@@ -138,7 +145,18 @@ def write_nojekyll_marker() -> None:
     (DIST_DIR / ".nojekyll").write_text("", encoding="utf-8")
 
 
+def validate_public_revenue_growth() -> None:
+    dataset = json.loads((DATA_DIR / "earnings-dataset.json").read_text(encoding="utf-8"))
+    for company in dataset.get("companies") or []:
+        assert_revenue_growth_complete(company)
+        cache_path = DATA_DIR / "cache" / f"{company['id']}.json"
+        if cache_path.exists():
+            assert_revenue_growth_complete(json.loads(cache_path.read_text(encoding="utf-8")))
+
+
 def main() -> int:
+    # Reject incomplete source data before deleting a previous usable artifact.
+    validate_public_revenue_growth()
     reset_dist_dir()
     copy_public_root_files()
     copy_public_data_files()
