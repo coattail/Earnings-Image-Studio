@@ -65,6 +65,12 @@ except ModuleNotFoundError as exc:
     merge_unified_extraction = None  # type: ignore[assignment]
 
 try:
+    from scripts.revenue_growth import enrich_growth_rows, complete_company_revenue_growth
+except ModuleNotFoundError:
+    from revenue_growth import enrich_growth_rows, complete_company_revenue_growth
+
+
+try:
     from scripts.prepare_pages_artifact import write_dataset_index_file
 except ModuleNotFoundError:
     from prepare_pages_artifact import write_dataset_index_file  # type: ignore[no-redef]
@@ -2726,6 +2732,7 @@ def finalize_company_payload(
         parser_diagnostics["validation"] = deepcopy(parser_validation)
         payload["parserDiagnostics"] = parser_diagnostics
     apply_company_rendering_preferences(company, payload)
+    complete_company_revenue_growth(payload)
     payload["coverage"] = {
         "quarterCount": len(payload["quarters"]),
         "pixelReplicaQuarterCount": len(presets),
@@ -3793,116 +3800,6 @@ def load_official_revenue_structure_history(company: dict[str, Any], refresh: bo
     return fetch_official_revenue_structure_history(company, refresh=refresh)
 
 
-def enrich_growth_rows(financials: dict[str, Any], field_name: str) -> None:
-    ordered_quarters = sorted(financials, key=parse_period)
-
-    def rows_by_member(quarter_key: str) -> dict[str, dict[str, Any]]:
-        rows = financials.get(quarter_key, {}).get(field_name) or []
-        return {
-            str(item.get("memberKey") or item.get("name") or ""): item
-            for item in rows
-            if isinstance(item, dict)
-        }
-
-    def taxonomy_signature(quarter_key: str) -> frozenset[str]:
-        return frozenset(rows_by_member(quarter_key))
-
-    def has_matching_taxonomy(left_quarter_key: str, right_quarter_key: str) -> bool:
-        left_signature = taxonomy_signature(left_quarter_key)
-        right_signature = taxonomy_signature(right_quarter_key)
-        return bool(left_signature) and left_signature == right_signature
-
-    def prior_quarter_key(quarter_key: str) -> str:
-        if quarter_key.endswith("Q1"):
-            return f"{int(quarter_key[:4]) - 1}Q4"
-        return f"{quarter_key[:4]}Q{int(quarter_key[-1]) - 1}"
-
-    def historical_yoy_growth(quarter_key: str, member_key: str) -> float | None:
-        # Four sequential category ratios are equivalent to dividing the current
-        # category revenue by the same category's revenue one year earlier.
-        current_to_prior_year_ratio = 1.0
-        cursor = quarter_key
-        for _ in range(4):
-            row = rows_by_member(cursor).get(member_key)
-            qoq_pct = row.get("qoqPct") if row else None
-            if qoq_pct is None:
-                return None
-            current_to_prior_year_ratio *= 1 + float(qoq_pct) / 100
-            cursor = prior_quarter_key(cursor)
-        return round((current_to_prior_year_ratio - 1) * 100, 2)
-
-    # Normalize disclosed share rows into chart values before calculating growth.
-    for quarter in ordered_quarters:
-        rows = financials.get(quarter, {}).get(field_name) or []
-        if not rows:
-            continue
-        revenue_bn = float(financials.get(quarter, {}).get("revenueBn") or 0)
-        for row in rows:
-            if revenue_bn and row.get("metricMode") == "share":
-                share_pct = float(row.get("mixPct") or row.get("valueBn") or 0)
-                row["valueBn"] = round(share_pct / 100 * revenue_bn, 3)
-                row["mixPct"] = round(share_pct, 1)
-            elif revenue_bn and row.get("mixPct") is None:
-                row["mixPct"] = round(float(row.get("valueBn") or 0) / revenue_bn * 100, 1)
-
-    # Preserve reported QoQ growth. Calculate only when the source omitted it.
-    for quarter in ordered_quarters:
-        rows = financials.get(quarter, {}).get(field_name) or []
-        if not rows:
-            continue
-        previous_quarter = prior_quarter_key(quarter)
-        prior_quarter_map = rows_by_member(previous_quarter)
-        comparable_to_prior_quarter = has_matching_taxonomy(quarter, previous_quarter)
-        prior_quarter_has_taxonomy = bool(taxonomy_signature(previous_quarter))
-        taxonomy_flag = (
-            "officialRevenueTaxonomyChangedFromPreviousQuarter"
-            if field_name == "officialRevenueSegments"
-            else "officialRevenueDetailTaxonomyChangedFromPreviousQuarter"
-        )
-        financials[quarter][taxonomy_flag] = bool(prior_quarter_has_taxonomy and not comparable_to_prior_quarter)
-        for row in rows:
-            member_key = str(row.get("memberKey") or row.get("name") or "")
-            previous = prior_quarter_map.get(member_key)
-            previous_value = float(previous.get("valueBn") or 0) if previous else 0
-            suppress_qoq = "suppressQoQGrowth" in row and bool(row.get("suppressQoQGrowth"))
-            if not suppress_qoq and comparable_to_prior_quarter and row.get("qoqPct") is None and previous_value:
-                row["qoqPct"] = round((float(row.get("valueBn") or 0) / previous_value - 1) * 100, 2)
-
-    # Calculate undisclosed YoY growth by dividing current and prior-year category
-    # histories. Share-only disclosures use the sequential category ratios because
-    # their displayed mix percentages are rounded before publication.
-    for quarter in ordered_quarters:
-        rows = financials.get(quarter, {}).get(field_name) or []
-        if not rows:
-            continue
-        prior_year_quarter = f"{int(quarter[:4]) - 1}{quarter[4:]}"
-        prior_year_map = rows_by_member(prior_year_quarter)
-        comparable_to_prior_year = has_matching_taxonomy(quarter, prior_year_quarter)
-        prior_year_has_taxonomy = bool(taxonomy_signature(prior_year_quarter))
-        prior_year_taxonomy_flag = (
-            "officialRevenueTaxonomyChangedFromPriorYear"
-            if field_name == "officialRevenueSegments"
-            else "officialRevenueDetailTaxonomyChangedFromPriorYear"
-        )
-        financials[quarter][prior_year_taxonomy_flag] = bool(prior_year_has_taxonomy and not comparable_to_prior_year)
-        revenue_bn = float(financials.get(quarter, {}).get("revenueBn") or 0)
-        prior_year_revenue_bn = float(financials.get(prior_year_quarter, {}).get("revenueBn") or 0)
-        for row in rows:
-            member_key = str(row.get("memberKey") or row.get("name") or "")
-            previous = prior_year_map.get(member_key)
-            previous_value = float(previous.get("valueBn") or 0) if previous else 0
-            if row.get("yoyPct") is None:
-                historical_growth = historical_yoy_growth(quarter, member_key) if row.get("metricMode") == "share" else None
-                if historical_growth is not None:
-                    row["yoyPct"] = historical_growth
-                elif comparable_to_prior_year and previous_value:
-                    row["yoyPct"] = round((float(row.get("valueBn") or 0) / previous_value - 1) * 100, 2)
-            if comparable_to_prior_year and revenue_bn and prior_year_revenue_bn and previous_value and row.get("mixYoyDeltaPp") is None:
-                current_mix = float(row.get("valueBn") or 0) / revenue_bn * 100
-                prior_mix = previous_value / prior_year_revenue_bn * 100
-                row["mixYoyDeltaPp"] = round(current_mix - prior_mix, 1)
-
-
 def apply_revenue_structure_history(
     company_payload: dict[str, Any],
     company: dict[str, Any],
@@ -4290,6 +4187,10 @@ def main() -> int:
         payload = sync_company_metadata(results_by_company_id[company["id"]], company)
         payload = apply_korean_revenue_history(payload, company)
         results_by_company_id[company["id"]] = finalize_company_payload(company, payload, presets)
+        COMPANY_CACHE_DIR.mkdir(parents=True, exist_ok=True)
+        (COMPANY_CACHE_DIR / f"{company['id']}.json").write_text(
+            json.dumps(results_by_company_id[company["id"]], ensure_ascii=False, indent=2), encoding="utf-8"
+        )
     companies = [results_by_company_id[company["id"]] for company in TOP30_COMPANIES if company["id"] in results_by_company_id]
     classification_audit = build_dataset_classification_audit(companies)
 
