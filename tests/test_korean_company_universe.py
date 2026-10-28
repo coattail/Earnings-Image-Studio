@@ -53,7 +53,7 @@ class KoreanCompanyUniverseTests(unittest.TestCase):
             self.assertGreaterEqual(len(company["quarters"]), 33)
 
         self.assertEqual(samsung["quarters"][-1], "2026Q1")
-        self.assertEqual(sk_hynix["quarters"][-1], "2026Q2")
+        self.assertEqual(sk_hynix["quarters"][-1], "2026Q3")
 
         samsung_latest = samsung["financials"]["2026Q1"]
         self.assertEqual(samsung_latest["statementSource"], "manual-samsung-official")
@@ -81,7 +81,8 @@ class KoreanCompanyUniverseTests(unittest.TestCase):
         self.assertAlmostEqual(sk_hynix_segments["dram"]["valueBn"], 57902.651, delta=0.1)
         self.assertAlmostEqual(sk_hynix_segments["nand"]["valueBn"], 21416.049, delta=0.1)
         self.assertEqual(sk_hynix_latest["revenueClassificationSource"], "sk-hynix-official-product-mix")
-        self.assertEqual(sk_hynix["coverage"]["classification"]["status"], "ok")
+        self.assertEqual(sk_hynix["coverage"]["classification"]["status"], "warning")
+        self.assertTrue(all("Expense classification history is sparse" in warning for warning in sk_hynix["coverage"]["classification"]["warnings"]))
         self.assertFalse(sk_hynix["coverage"]["classification"]["blockers"])
 
     def test_korean_company_revenue_classification_covers_full_history(self) -> None:

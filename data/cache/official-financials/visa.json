@@ -44,7 +44,8 @@
     "2025Q1",
     "2025Q2",
     "2025Q3",
-    "2025Q4"
+    "2025Q4",
+    "2026Q3"
   ],
   "financials": {
     "2018Q1": {
@@ -1006,6 +1007,96 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": -3.75,
       "profitMarginYoyDeltaPp": -0.14
+    },
+    "2026Q3": {
+      "calendarQuarter": "2026Q3",
+      "periodEnd": "2026-09-30",
+      "fiscalYear": "2026",
+      "fiscalQuarter": "Q4",
+      "fiscalLabel": "FY2026 Q4",
+      "statementCurrency": "USD",
+      "statementSource": "manual-visa-earnings-release",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1403161/000140316126000126/q42026earningsrelease.htm",
+      "statementFilingDate": "2026-10-27",
+      "statementMeta": {
+        "statementSource": "manual-visa-earnings-release",
+        "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1403161/000140316126000126/q42026earningsrelease.htm",
+        "statementValueMode": "quarterly",
+        "statementSpanQuarters": 1,
+        "qualityFlags": [],
+        "adapterId": "manual_financials"
+      },
+      "revenueBn": 12.139,
+      "costOfRevenueBn": 0.293,
+      "grossProfitBn": 11.846,
+      "sgnaBn": 3.733,
+      "rndBn": null,
+      "otherOpexBn": 0.474,
+      "operatingExpensesBn": 4.584,
+      "operatingIncomeBn": 7.262,
+      "nonOperatingBn": 0.098,
+      "pretaxIncomeBn": 7.36,
+      "taxBn": 1.358,
+      "netIncomeBn": 6.002,
+      "dilutedEps": 3.19,
+      "clientIncentivesBn": 5.123,
+      "totalOperatingExpensesBn": 4.877,
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "statementPresentationNotes": [
+        "Visa does not report gross profit. Network and processing expense is mapped to cost of revenue for continuity with this chart; gross profit and remaining operating expenses are presentation-derived. Revenue categories are before client incentives and are not additive to net revenue."
+      ],
+      "revenueYoyPct": 13.195,
+      "revenueQoqPct": 4.35,
+      "netIncomeYoyPct": 17.917,
+      "grossMarginPct": 97.586,
+      "operatingMarginPct": 59.824,
+      "profitMarginPct": 49.444,
+      "effectiveTaxRatePct": 18.451,
+      "grossMarginYoyDeltaPp": -0.185,
+      "operatingMarginYoyDeltaPp": 2.495,
+      "profitMarginYoyDeltaPp": 1.98,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "operatingIncomeBn": "official",
+        "netIncomeBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official"
+      },
+      "fieldSources": {
+        "revenueBn": {
+          "adapterId": "manual_financials",
+          "label": "Official quarterly earnings release",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1403161/000140316126000126/q42026earningsrelease.htm"
+        },
+        "operatingIncomeBn": {
+          "adapterId": "manual_financials",
+          "label": "Official quarterly earnings release",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1403161/000140316126000126/q42026earningsrelease.htm"
+        },
+        "netIncomeBn": {
+          "adapterId": "manual_financials",
+          "label": "Official quarterly earnings release",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1403161/000140316126000126/q42026earningsrelease.htm"
+        },
+        "costOfRevenueBn": {
+          "adapterId": "manual_financials",
+          "label": "Official quarterly earnings release",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1403161/000140316126000126/q42026earningsrelease.htm"
+        },
+        "grossProfitBn": {
+          "adapterId": "manual_financials",
+          "label": "Official quarterly earnings release",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1403161/000140316126000126/q42026earningsrelease.htm"
+        },
+        "taxBn": {
+          "adapterId": "manual_financials",
+          "label": "Official quarterly earnings release",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1403161/000140316126000126/q42026earningsrelease.htm"
+        }
+      }
     }
   },
   "statementSource": "official-sec-companyfacts",
