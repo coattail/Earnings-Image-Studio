@@ -186,6 +186,12 @@ function resolveCompactCostFan(entries, options) {
   return { ...result, costTop };
 }
 
+// Limit decorative whitespace relative to the horizontal curve runway. Small
+// outer branches can move inward gently without changing their value thickness.
+function resolveOuterBranchLift(gap, runway, preferredRatio = 0.9) {
+  return Math.max(0, Math.min(gap - Math.max(runway, 0) * preferredRatio, Math.max(runway, 0) * 0.14));
+}
+
 function sanitizeOfficialStructureRows(entry, rows = []) {
   const normalizedRows = [...(rows || [])].map((item) => ({ ...item }));
   if (!normalizedRows.length) return normalizedRows;
