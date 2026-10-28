@@ -55,6 +55,7 @@ function render(q,language='zh',options={}) {
     s.learnedEditorNodeOverrides=currentResolvedEditorOverrides();s.interactiveEditorNodeOverrides=options.offsets||{};
     s.editorNodeOverrides={...s.learnedEditorNodeOverrides,...s.interactiveEditorNodeOverrides};s.editModeEnabled=!!options.editing;
     if(options.legacy)s.layout={...s.layout,disableBalancedExpenseFan:true};
+    if(options.expanded)s.layout={...s.layout,disableCompactOuterBranches:true};
     const before=JSON.stringify(s);const svg=EarningsVizRuntime.render.renderIncomeStatementSvg(s,c);
     return {svg,unchanged:before===JSON.stringify(s)};
   })()`,ctx);
@@ -75,6 +76,40 @@ test('Microsoft three quarters share a downward expense split without changing m
     assert.ok(Math.abs(first-second)<.075,`${q}: consistent profit spine slopes`);
     assert.ok(render(q).unchanged);
   }
+});
+
+test('outer branch compaction is proportional, bounded and leaves close branches alone', () => {
+  assert.ok(Math.abs(pure.resolveOuterBranchLift(377,332)-46.48)<1e-6);
+  assert.equal(pure.resolveOuterBranchLift(170,428),0);
+  assert.equal(pure.resolveOuterBranchLift(120,0),0);
+  for(const ratio of [.34,.9]) {
+    const lift=pure.resolveOuterBranchLift(200,332,ratio);
+    assert.ok(lift>=0&&lift<=332*.14);
+    assert.ok(Math.abs(pure.resolveOuterBranchLift(200*2.5,332*2.5,ratio)-lift*2.5)<1e-6);
+  }
+});
+
+test('small sources and tax caps move inward gently while keeping money, order and editing stable', () => {
+  const expanded=frames(render('2026Q3','zh',{expanded:true}).svg), normal=frames(render('2026Q3').svg);
+  for(const id of ['source-1','deduction-0']) {
+    const lift=expanded[id].y-normal[id].y;
+    assert.ok(lift>25&&lift<60,`${id}: modest inward lift`);
+    assert.equal(normal[id].height,expanded[id].height);
+    for(const language of ['zh','en']) {
+      const baseline=frames(render('2026Q3',language).svg);
+      const opened=frames(render('2026Q3',language,{editing:true}).svg);
+      assert.deepEqual(opened[id],baseline[id],`${id}: no editor jump`);
+      const offsets={[id]:{dx:0,dy:90}};
+      const edited=render('2026Q3',language,{editing:true,offsets});
+      assert.ok(Math.abs(frames(edited.svg)[id].y-baseline[id].y-90)<.2,`${id}: additive manual drag`);
+      assert.ok(edited.unchanged);
+    }
+  }
+  assert.ok(normal['source-1'].y>normal['source-0'].y+normal['source-0'].height+100);
+  assert.ok(normal['deduction-0'].y>normal.operating.y+normal.operating.height);
+  assert.ok(normal['deduction-0'].y+normal['deduction-0'].height<normal['opex-0'].y-100);
+  for(const id of ['revenue','gross','cost','operating','operating-expenses','net','source-0'])
+    assert.deepEqual(normal[id],expanded[id],`${id}: preserve main spine`);
 });
 
 test('latest automatic Microsoft cost fan approaches the compact hand-tuned reference', () => {

@@ -5711,6 +5711,20 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
     });
   };
   balanceHierarchicalRevenueDetailFans();
+  if (snapshot.layout?.disableCompactOuterBranches !== true) {
+    sourceSlices.forEach((slice, index) => {
+      if (!index || slice.height > revenueHeight * 0.3 ||
+          snapshot.layout?.sourceNodeOffsets?.[index] != null) return;
+      const id = `source-${index}`, previousId = `source-${index - 1}`;
+      const top = slice.top + balancedLayoutOffsetForNode(id).dy;
+      const previousBottom = sourceSlices[index - 1].bottom + balancedLayoutOffsetForNode(previousId).dy;
+      const runway = revenueX - (safeNumber(slice.nodeX, leftX) + sourceNodeWidth);
+      const metricClearance = sourceMetricRequirements[index] + sourceNodeGap;
+      const lift = Math.min(resolveOuterBranchLift(top - previousBottom, runway),
+        Math.max(top - previousBottom - metricClearance, 0));
+      if (lift > 0) setAutoLayoutNodeOffset(id, { dy: autoLayoutOffsetForNode(id).dy - lift });
+    });
+  }
   const enforceOrderedRevenueRibbonSources = () => {
     if (snapshot.layout?.disableRevenueRibbonOrderGuard === true) return;
     const packSlices = (slices, nodeIdForIndex, minTop, maxBottom, minimumGapY) => {
@@ -9232,6 +9246,32 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
     }
     balancedPositiveTop = sharedCore.balancedPositiveTop;
     refreshEditableNodeFrames();
+  }
+  // Pull an overextended deduction toward its final source port, reserving the
+  // net summary and earlier deductions. Resolve the automatic baseline before
+  // adding interactive drags so opening the editor cannot shift the tax cap.
+  if (!netLoss && snapshot.layout?.disableCompactOuterBranches !== true) {
+    let previousBottom = Math.max(automaticFrameCoordinate(netFrame, "top") + netFrame.height,
+      netSummaryBottom + balancedLayoutOffsetForNode("net").dy) + scaleY(28);
+    deductionBoxes.forEach((box, index) => {
+      const slice = deductionSourceSlices[index] || deductionSlices[index];
+      if (!box || !slice) return;
+      const id = `deduction-${index}`;
+      const bridge = constantThicknessBridge(resolveDeductionTerminalSourceSlice(index, slice), box.center, 0,
+        opDeductionSourceBand.top, opDeductionSourceBand.bottom);
+      const sourceCenter = (bridge.sourceTop + bridge.sourceBottom) / 2 + balancedLayoutOffsetForNode("operating").dy;
+      const label = resolveRightBranchLabelSpec(slice.item, rightTerminalNodeX, nodeWidth, {
+        density: deductionBoxes.length >= 3 ? "dense" : "regular", defaultMode: "negative-parentheses",
+      });
+      const halfHeight = Math.max(box.height, bridge.targetHeight, label.collisionHeight) / 2;
+      const offset = balancedLayoutOffsetForNode(id);
+      const center = box.center + offset.dy;
+      const runway = Math.max(rightTerminalNodeX + offset.dx - automaticFrameCoordinate(operatingFrame, "right"), 0);
+      const lift = Math.min(resolveOuterBranchLift(center - sourceCenter, runway, 0.34),
+        Math.max(center - halfHeight - previousBottom, 0));
+      deductionBoxes[index] = shiftBoxCenter(box, box.center - lift);
+      previousBottom = center - lift + halfHeight + scaleY(18);
+    });
   }
   // Last geometry pass: the final visible source ports own negative-flow
   // direction, including small positive adjustments and learned offsets. Earlier

@@ -56,15 +56,37 @@ class GoogleMicrosoftQ3UpdateTests(unittest.TestCase):
             self.assertIn("订阅、平台及设备", labels)
             self.assertNotIn("应用商店", labels)
 
-    def test_microsoft_recast_yoy_is_used_without_fabricated_qoq(self):
+    def test_microsoft_growth_uses_official_recast_comparatives(self):
         q = self.companies["microsoft"]["financials"][P]
         self.assertEqual({r["memberKey"]: r["valueBn"] for r in q["officialRevenueSegments"]}, {"agentsandinfra": 76.795, "devicesandconsumer": 15.484})
         self.assertTrue(q["officialRevenueTaxonomyChangedFromPreviousQuarter"])
+        bases = {"agentsandinfra": 74.576, "devicesandconsumer": 15.431,
+                 "azure": 29.417, "microsoft365cloud": 26.721,
+                 "productivityandserverlicensing": 11.033, "industrysolutions": 5.292,
+                 "frontierandsupportservices": 2.113, "searchandadvertising": 6.435,
+                 "xbox": 4.983, "windowsoemanddevices": 4.013}
         for r in q["officialRevenueSegments"] + q["officialRevenueDetailGroups"]:
             self.assertEqual(r["yoyPct"], round((r["valueBn"] / r["yoyComparisonValueBn"] - 1) * 100, 2))
-            self.assertIsNone(r["qoqPct"])
-            self.assertTrue(r["suppressQoQGrowth"])
+            self.assertEqual(r["qoqComparisonValueBn"], bases[r["memberKey"]])
+            self.assertEqual(r["qoqPct"], round((r["valueBn"] / bases[r["memberKey"]] - 1) * 100, 2))
+            self.assertFalse(r["suppressQoQGrowth"])
+            self.assertEqual(r["qoqComparisonQuarter"], "2026Q2")
+            self.assertEqual(r["qoqComparisonBasis"], "official-recast")
+            self.assertIn("d291965dex991.htm", r["qoqComparisonSourceUrl"])
         self.assertEqual(q["dilutedEps"], 4.92)
+
+    def test_microsoft_all_revenue_growth_labels_render_from_full_and_latest_payloads(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory)
+            latest = output / "latest.json"
+            latest.write_text(json.dumps(self.index["microsoft"]))
+            for payload in [latest, ROOT / "data/cache/microsoft.json"]:
+                for language in ["zh", "en"]:
+                    result = subprocess.run(["node", str(ROOT / "scripts/direct_chart_render.cjs"), "--payload", str(payload), "--quarter", P, "--language", language, "--modes", "sankey", "--output-dir", directory], cwd=ROOT, capture_output=True, text=True, check=True)
+                    svg = Path(json.loads(result.stdout)["outputs"]["sankey"]["svg"]).read_text()
+                    labels = "".join(ET.fromstring(svg).itertext())
+                    for growth in ["+3.0%", "+0.3%", "+12.7%", "+4.0%", "-23.8%", "+0.9%", "-0.2%", "+1.8%", "+7.9%", "-11.5%"]:
+                        self.assertIn(("环比" if language == "zh" else "Q/Q ") + growth, labels)
 
     def test_latest_index_caches_and_rebuild_overrides_are_consistent(self):
         for cid in ["alphabet", "microsoft"]:
@@ -89,6 +111,9 @@ class GoogleMicrosoftQ3UpdateTests(unittest.TestCase):
                         restored = restored_rows[current["memberKey"]]
                         for field in ["memberKey", "name", "valueBn", "yoyPct", "qoqPct", "sourceUrl"]:
                             self.assertEqual(restored.get(field), current.get(field))
+                        if cid == "microsoft":
+                            for field in ["qoqComparisonValueBn", "qoqComparisonQuarter", "qoqComparisonSourceUrl", "qoqComparisonBasis"]:
+                                self.assertEqual(restored.get(field), current.get(field))
                 self.assertEqual(next(r for r in self.dataset["classificationAudit"]["companies"] if r["id"] == cid)["latestQuarter"], P)
 
 if __name__ == "__main__": unittest.main()

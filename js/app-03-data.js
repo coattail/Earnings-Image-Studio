@@ -1529,6 +1529,17 @@ function shouldSuppressRevenueSupportLines(company) {
   return String(company?.id || "").toLowerCase() === "sk-hynix";
 }
 
+function officialRowQoqPct(item) {
+  const baseline = safeNumber(item.qoqComparisonValueBn, null);
+  const current = safeNumber(item.valueBn, null);
+  // Retain full precision until the one-decimal chart label is formatted.
+  // Rounding the published two-decimal rate again can turn 7.947% into 8.0%.
+  if (item.qoqComparisonBasis === "official-recast" && !item.suppressQoQGrowth && baseline > 0 && current !== null) {
+    return (current / baseline - 1) * 100;
+  }
+  return item.qoqPct;
+}
+
 function buildOfficialBusinessGroups(company, entry, options = {}) {
   const revenueBn = safeNumber(entry?.revenueBn);
   const quarterKey = entryQuarterKey(company, entry);
@@ -1570,7 +1581,7 @@ function buildOfficialBusinessGroups(company, entry, options = {}) {
       valueBn: item.valueBn,
       flowValueBn: item.flowValueBn ?? item.valueBn,
       yoyPct: resolvedDisplayAdjustedGrowthPct(company, quarterKey, item.yoyPct, "yoy"),
-      qoqPct: resolvedDisplayAdjustedGrowthPct(company, quarterKey, item.qoqPct, "qoq"),
+      qoqPct: resolvedDisplayAdjustedGrowthPct(company, quarterKey, officialRowQoqPct(item), "qoq"),
       mixPct: item.mixPct ?? null,
       mixYoyDeltaPp: item.mixYoyDeltaPp ?? null,
       metricMode: item.metricMode || null,
@@ -1785,7 +1796,7 @@ function buildOfficialDetailGroups(company, entry, businessGroups = null) {
       displayLines: wrapLines(item.name, 14),
       valueBn: item.valueBn,
       yoyPct: resolvedDisplayAdjustedGrowthPct(company, quarterKey, item.yoyPct, "yoy"),
-      qoqPct: resolvedDisplayAdjustedGrowthPct(company, quarterKey, item.qoqPct, "qoq"),
+      qoqPct: resolvedDisplayAdjustedGrowthPct(company, quarterKey, officialRowQoqPct(item), "qoq"),
       nodeColor: color,
       flowColor: rgba(color, 0.72),
       labelColor: color,

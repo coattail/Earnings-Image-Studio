@@ -3822,6 +3822,15 @@ def apply_revenue_structure_history(
                         row[metric_key] = growth_override.get(metric_key)
             return rows
 
+        def comparison_provenance(row: dict[str, Any]) -> dict[str, Any]:
+            # Restated comparatives belong to the current disclosure. Keep them
+            # without rewriting the historical chart's reported classification.
+            fields = ("suppressQoQGrowth", "suppressYoYGrowth",
+                      "yoyComparisonValueBn", "yoyComparisonSourceUrl",
+                      "qoqComparisonValueBn", "qoqComparisonQuarter",
+                      "qoqComparisonSourceUrl", "qoqComparisonBasis")
+            return {key: deepcopy(row[key]) for key in fields if key in row}
+
         normalized_segments = []
         if segments:
             for row in segments:
@@ -3843,6 +3852,7 @@ def apply_revenue_structure_history(
                         "metricMode": row.get("metricMode"),
                         "validationEligible": row.get("validationEligible"),
                         "validationNotes": row.get("validationNotes"),
+                        **comparison_provenance(row),
                     }
                 )
             normalized_segments = normalize_official_revenue_segments(company["id"], quarter, normalized_segments)
@@ -3884,6 +3894,7 @@ def apply_revenue_structure_history(
                         "metricMode": row.get("metricMode"),
                         "validationEligible": row.get("validationEligible"),
                         "validationNotes": row.get("validationNotes"),
+                        **comparison_provenance(row),
                     }
                 )
             normalized_detail_groups = mark_detail_groups_validation_ineligible(normalized_detail_groups)
