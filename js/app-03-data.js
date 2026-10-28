@@ -3194,10 +3194,11 @@ const BAR_SEGMENT_COLOR_SLOT_OVERRIDES_BY_COMPANY = Object.freeze({
 
 const BAR_SEGMENT_COLOR_OVERRIDES_BY_COMPANY = Object.freeze({
   microsoft: Object.freeze({
-    intelligentcloud: "#2497C8",
-    productivitybusinessprocesses: "#7D9E46",
-    productivityandbusinessprocesses: "#7D9E46",
-    morepersonalcomputing: "#C79C42",
+    // Pin the existing brand slots so new, similar hues cannot displace them.
+    intelligentcloud: "#00A4EF",
+    productivitybusinessprocesses: "#7FBA00",
+    productivityandbusinessprocesses: "#7FBA00",
+    morepersonalcomputing: "#FFB900",
     agentsandinfra: "#277DA8",
     devicesandconsumer: "#57988C",
   }),

@@ -110,6 +110,9 @@ test('Microsoft old and new segment palettes are fixed across ordering and visib
   for(const key of ctx.keys) assert.equal(reversed[key],all[key]);
   assert.equal(current.agentsandinfra,all.agentsandinfra);
   assert.equal(current.devicesandconsumer,all.devicesandconsumer);
+  assert.equal(all.intelligentcloud,'#0e9fe1','retain the original cloud blue');
+  assert.equal(all.productivitybusinessprocesses,'#7baf0b','retain the original productivity green');
+  assert.equal(all.morepersonalcomputing,'#f0b20f','retain the original computing gold');
   ctx.palette=all;
   const hues=vm.runInContext('Object.fromEntries(Object.entries(palette).map(([k,v])=>[k,colorToHsl(v).h]))',ctx);
   assert.ok(hues.agentsandinfra>190&&hues.agentsandinfra<220,'blue infrastructure');
