@@ -1565,6 +1565,7 @@ function buildOfficialBusinessGroups(company, entry, options = {}) {
       id: memberKey,
       name: labelMeta.name || item.name,
       nameZh: labelMeta.nameZh || item.nameZh || translateBusinessLabelToZh(item.name),
+      preserveOfficialLabel: !!entry.sankeyPreserveOfficialLabels,
       displayLines: wrapLines(labelMeta.name || item.name, compactMode ? 14 : 16),
       valueBn: item.valueBn,
       flowValueBn: item.flowValueBn ?? item.valueBn,

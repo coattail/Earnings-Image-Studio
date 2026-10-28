@@ -753,7 +753,8 @@ def preserve_previous_quarter_sankey_structure(payload: dict[str, Any]) -> dict[
         previous_entry = financials.get(previous_quarter) if previous_quarter else None
         if not isinstance(entry, dict):
             continue
-        if isinstance(previous_entry, dict):
+        # Explicit official label corrections take priority over layout continuity.
+        if isinstance(previous_entry, dict) and not entry.get("sankeyPreserveOfficialLabels"):
             continuity_fields: list[str] = []
             for field_group in SANKEY_STRUCTURE_FIELD_GROUPS:
                 current_field, current_rows = first_sankey_structure_field(entry, field_group)

@@ -2085,7 +2085,7 @@ function resolveSourceLabelLines(item, options = {}) {
     // Source columns are geometry-sensitive. Prefer the canonical member-key
     // translation when one exists so a newly supplied nameZh cannot silently
     // change wrapping, widen the canvas, and shrink the Sankey itself.
-    const canonicalMemberLabel = translateBusinessLabelToZh("", translationOptions);
+    const canonicalMemberLabel = item?.preserveOfficialLabel ? "" : translateBusinessLabelToZh("", translationOptions);
     const localized = canonicalMemberLabel ||
       (explicitZh && hasChineseGlyph(explicitZh)
         ? explicitZh
