@@ -1,9 +1,9 @@
 (function initEarningsVizLogoRaster(globalScope) {
   "use strict";
 
-  const MAX_RASTER_SIDE = 900;
+  const MAX_RASTER_SIDE = 2048;
   const SMALL_SVG_EDGE_THRESHOLD = 64;
-  const SMALL_SVG_TARGET_SIDE = 256;
+  const SMALL_SVG_TARGET_SIDE = 1024;
 
   function isSvgLogoMime(mime) {
     return /^image\/(svg\+xml|svg)$/i.test(String(mime || "").trim());
@@ -20,7 +20,7 @@
     const naturalMaxSide = Math.max(sourceWidth, sourceHeight, 1);
     let rasterScale = Math.min(1, MAX_RASTER_SIDE / naturalMaxSide);
 
-    if (shouldRasterizeSmallSvgLogo(asset, sourceWidth, sourceHeight)) {
+    if (isSvgLogoMime(asset?.mime)) {
       rasterScale = Math.max(rasterScale, SMALL_SVG_TARGET_SIDE / naturalMaxSide);
     }
 
