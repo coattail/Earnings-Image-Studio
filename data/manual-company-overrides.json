@@ -1222,6 +1222,96 @@
           "qualityFlags": [],
           "adapterId": "manual_financials"
         }
+      },
+      "2026Q3": {
+        "calendarQuarter": "2026Q3",
+        "periodEnd": "2026-09-30",
+        "fiscalYear": "2026",
+        "fiscalQuarter": "Q4",
+        "fiscalLabel": "FY2026 Q4",
+        "statementCurrency": "USD",
+        "statementSource": "manual-visa-earnings-release",
+        "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1403161/000140316126000126/q42026earningsrelease.htm",
+        "statementFilingDate": "2026-10-27",
+        "statementMeta": {
+          "statementSource": "manual-visa-earnings-release",
+          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1403161/000140316126000126/q42026earningsrelease.htm",
+          "statementValueMode": "quarterly",
+          "statementSpanQuarters": 1,
+          "qualityFlags": [],
+          "adapterId": "manual_financials"
+        },
+        "revenueBn": 12.139,
+        "costOfRevenueBn": 0.293,
+        "grossProfitBn": 11.846,
+        "sgnaBn": 3.733,
+        "rndBn": null,
+        "otherOpexBn": 0.474,
+        "operatingExpensesBn": 4.584,
+        "operatingIncomeBn": 7.262,
+        "nonOperatingBn": 0.098,
+        "pretaxIncomeBn": 7.36,
+        "taxBn": 1.358,
+        "netIncomeBn": 6.002,
+        "dilutedEps": 3.19,
+        "clientIncentivesBn": 5.123,
+        "totalOperatingExpensesBn": 4.877,
+        "displayCurrency": "USD",
+        "displayScaleFactor": 1,
+        "statementPresentationNotes": [
+          "Visa does not report gross profit. Network and processing expense is mapped to cost of revenue for continuity with this chart; gross profit and remaining operating expenses are presentation-derived. Revenue categories are before client incentives and are not additive to net revenue."
+        ],
+        "revenueYoyPct": 13.195,
+        "revenueQoqPct": 4.35,
+        "netIncomeYoyPct": 17.917,
+        "grossMarginPct": 97.586,
+        "operatingMarginPct": 59.824,
+        "profitMarginPct": 49.444,
+        "effectiveTaxRatePct": 18.451,
+        "grossMarginYoyDeltaPp": -0.185,
+        "operatingMarginYoyDeltaPp": 2.495,
+        "profitMarginYoyDeltaPp": 1.98,
+        "parserFinancialFieldSources": {
+          "revenueBn": "official",
+          "costOfRevenueBn": "official",
+          "grossProfitBn": "official",
+          "operatingIncomeBn": "official",
+          "netIncomeBn": "official",
+          "pretaxIncomeBn": "official",
+          "taxBn": "official"
+        },
+        "fieldSources": {
+          "revenueBn": {
+            "adapterId": "manual_financials",
+            "label": "Official quarterly earnings release",
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1403161/000140316126000126/q42026earningsrelease.htm"
+          },
+          "operatingIncomeBn": {
+            "adapterId": "manual_financials",
+            "label": "Official quarterly earnings release",
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1403161/000140316126000126/q42026earningsrelease.htm"
+          },
+          "netIncomeBn": {
+            "adapterId": "manual_financials",
+            "label": "Official quarterly earnings release",
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1403161/000140316126000126/q42026earningsrelease.htm"
+          },
+          "costOfRevenueBn": {
+            "adapterId": "manual_financials",
+            "label": "Official quarterly earnings release",
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1403161/000140316126000126/q42026earningsrelease.htm"
+          },
+          "grossProfitBn": {
+            "adapterId": "manual_financials",
+            "label": "Official quarterly earnings release",
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1403161/000140316126000126/q42026earningsrelease.htm"
+          },
+          "taxBn": {
+            "adapterId": "manual_financials",
+            "label": "Official quarterly earnings release",
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1403161/000140316126000126/q42026earningsrelease.htm"
+          }
+        }
       }
     },
     "officialRevenueStructureHistory": {
@@ -1307,6 +1397,71 @@
               ]
             }
           ]
+        },
+        "2026Q3": {
+          "style": "visa-revenue-components",
+          "segments": [
+            {
+              "name": "Service Revenues",
+              "memberKey": "servicerevenues",
+              "metricMode": "gross-revenue-component",
+              "validationEligible": false,
+              "validationNotes": [
+                "gross-revenue-before-client-incentives",
+                "visa-addable-revenue-category-taxonomy",
+                "partial-revenue-component-disclosure"
+              ],
+              "valueBn": 5.255,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1403161/000140316126000126/q42026earningsrelease.htm",
+              "sourceForm": "8-K Exhibit 99.1",
+              "filingDate": "2026-10-27"
+            },
+            {
+              "name": "Data Processing Revenues",
+              "memberKey": "dataprocessingrevenues",
+              "metricMode": "gross-revenue-component",
+              "validationEligible": false,
+              "validationNotes": [
+                "gross-revenue-before-client-incentives",
+                "visa-addable-revenue-category-taxonomy",
+                "partial-revenue-component-disclosure"
+              ],
+              "valueBn": 6.245,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1403161/000140316126000126/q42026earningsrelease.htm",
+              "sourceForm": "8-K Exhibit 99.1",
+              "filingDate": "2026-10-27"
+            },
+            {
+              "name": "International Transaction Revenues",
+              "memberKey": "internationaltransactionrevenues",
+              "metricMode": "gross-revenue-component",
+              "validationEligible": false,
+              "validationNotes": [
+                "gross-revenue-before-client-incentives",
+                "visa-addable-revenue-category-taxonomy",
+                "partial-revenue-component-disclosure"
+              ],
+              "valueBn": 4.115,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1403161/000140316126000126/q42026earningsrelease.htm",
+              "sourceForm": "8-K Exhibit 99.1",
+              "filingDate": "2026-10-27"
+            },
+            {
+              "name": "Other Revenues",
+              "memberKey": "otherrevenues",
+              "metricMode": "gross-revenue-component",
+              "validationEligible": false,
+              "validationNotes": [
+                "gross-revenue-before-client-incentives",
+                "visa-addable-revenue-category-taxonomy",
+                "partial-revenue-component-disclosure"
+              ],
+              "valueBn": 1.647,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1403161/000140316126000126/q42026earningsrelease.htm",
+              "sourceForm": "8-K Exhibit 99.1",
+              "filingDate": "2026-10-27"
+            }
+          ]
         }
       },
       "filingsUsed": [
@@ -1315,6 +1470,12 @@
           "quarter": "2026Q2",
           "filingDate": "2026-07-28",
           "url": "https://www.sec.gov/Archives/edgar/data/1403161/000140316126000103/q32026earningsrelease.htm"
+        },
+        {
+          "title": "Visa FY2026 Q4 Earnings Release",
+          "quarter": "2026Q3",
+          "filingDate": "2026-10-27",
+          "url": "https://www.sec.gov/Archives/edgar/data/1403161/000140316126000126/q42026earningsrelease.htm"
         }
       ],
       "errors": []
@@ -1576,6 +1737,125 @@
             "preliminary-results"
           ],
           "adapterId": "manual_financials"
+        }
+      },
+      "2026Q3": {
+        "calendarQuarter": "2026Q3",
+        "periodEnd": "2026-09-30",
+        "fiscalYear": "2026",
+        "fiscalQuarter": "Q3",
+        "fiscalLabel": "FY2026 Q3",
+        "statementCurrency": "KRW",
+        "statementSource": "manual-sk-hynix-official",
+        "statementSourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q3_eng.pdf?1=",
+        "statementFilingDate": "2026-10-28",
+        "statementMeta": {
+          "statementSource": "manual-sk-hynix-official",
+          "statementSourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q3_eng.pdf?1=",
+          "statementValueMode": "quarterly",
+          "statementSpanQuarters": 1,
+          "qualityFlags": [],
+          "adapterId": "manual_financials"
+        },
+        "revenueBn": 104615.5,
+        "costOfRevenueBn": 14963.0,
+        "grossProfitBn": 89653.0,
+        "sgnaBn": 6319.0,
+        "rndBn": null,
+        "otherOpexBn": null,
+        "operatingExpensesBn": 6319.2,
+        "operatingIncomeBn": 83333.8,
+        "nonOperatingBn": -32625.8,
+        "pretaxIncomeBn": 50708.0,
+        "taxBn": 10933.0,
+        "netIncomeBn": 39775.6,
+        "dilutedEps": 54454,
+        "displayCurrency": "USD",
+        "displayScaleFactor": 0.000753,
+        "displayFxSourceUrl": "https://api.frankfurter.dev/v1/2026-10-28?base=KRW&symbols=USD",
+        "displayFxAsOf": "2026-10-27",
+        "operatingExpensesLabel": "SG&A (including R&D)",
+        "operatingExpensesLabelZh": "销售、一般及行政费用（含研发）",
+        "officialOpexBreakdown": [
+          {
+            "name": "SG&A (including R&D)",
+            "nameZh": "销售、一般及行政费用（含研发）",
+            "memberKey": "sgna",
+            "valueBn": 6319,
+            "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q3_eng.pdf?1=",
+            "sourceForm": "FY2026 Q3 earnings presentation, attachment 2",
+            "filingDate": "2026-10-28",
+            "metricMode": "reported",
+            "validationEligible": true
+          }
+        ],
+        "statementPrecisionNote": "Headline revenue, operating profit and consolidated net profit retain the news release precision (KRW 0.1bn). Costs, gross profit, pretax profit, tax and product mix are rounded in the official presentation (pp. 5–6, 15, 17, 20); bridge differences up to KRW 1bn are disclosure rounding, not an undisclosed expense.",
+        "reportedStatementBn": {
+          "revenue": 104615,
+          "costOfRevenue": 14963,
+          "grossProfit": 89653,
+          "sgna": 6319,
+          "operatingIncome": 83334,
+          "pretaxIncome": 50708,
+          "tax": 10933,
+          "netIncome": 39776
+        },
+        "statementHeadlineSourceUrl": "https://news.skhynix.com/en/q3-2026-business-results/",
+        "revenueYoyPct": 327.894,
+        "revenueQoqPct": 31.893,
+        "netIncomeYoyPct": 215.8,
+        "grossMarginPct": 85.698,
+        "operatingMarginPct": 79.657,
+        "profitMarginPct": 38.021,
+        "effectiveTaxRatePct": 21.561,
+        "grossMarginYoyDeltaPp": 28.318,
+        "operatingMarginYoyDeltaPp": 33.097,
+        "profitMarginYoyDeltaPp": -13.499,
+        "parserFinancialFieldSources": {
+          "revenueBn": "official",
+          "costOfRevenueBn": "official",
+          "grossProfitBn": "official",
+          "operatingIncomeBn": "official",
+          "netIncomeBn": "official",
+          "pretaxIncomeBn": "official",
+          "taxBn": "official"
+        },
+        "fieldSources": {
+          "revenueBn": {
+            "adapterId": "manual_financials",
+            "label": "Official quarterly earnings release",
+            "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q3_eng.pdf?1="
+          },
+          "operatingIncomeBn": {
+            "adapterId": "manual_financials",
+            "label": "Official quarterly earnings release",
+            "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q3_eng.pdf?1="
+          },
+          "netIncomeBn": {
+            "adapterId": "manual_financials",
+            "label": "Official quarterly earnings release",
+            "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q3_eng.pdf?1="
+          },
+          "costOfRevenueBn": {
+            "adapterId": "manual_financials",
+            "label": "Official quarterly earnings release",
+            "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q3_eng.pdf?1="
+          },
+          "grossProfitBn": {
+            "adapterId": "manual_financials",
+            "label": "Official quarterly earnings release",
+            "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q3_eng.pdf?1="
+          },
+          "taxBn": {
+            "adapterId": "manual_financials",
+            "label": "Official quarterly earnings release",
+            "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q3_eng.pdf?1="
+          },
+          "officialOpexBreakdown": {
+            "adapterId": "manual_financials",
+            "label": "Official quarterly earnings release",
+            "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q3_eng.pdf?1="
+          }
         }
       }
     }

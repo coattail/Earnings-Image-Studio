@@ -12,22 +12,134 @@
     "secondary": "#F58220",
     "accent": "#FDE7EC"
   },
-  "quarters": [],
-  "financials": {},
+  "quarters": [
+    "2026Q3"
+  ],
+  "financials": {
+    "2026Q3": {
+      "calendarQuarter": "2026Q3",
+      "periodEnd": "2026-09-30",
+      "fiscalYear": "2026",
+      "fiscalQuarter": "Q3",
+      "fiscalLabel": "FY2026 Q3",
+      "statementCurrency": "KRW",
+      "statementSource": "manual-sk-hynix-official",
+      "statementSourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q3_eng.pdf?1=",
+      "statementFilingDate": "2026-10-28",
+      "statementMeta": {
+        "statementSource": "manual-sk-hynix-official",
+        "statementSourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q3_eng.pdf?1=",
+        "statementValueMode": "quarterly",
+        "statementSpanQuarters": 1,
+        "qualityFlags": [],
+        "adapterId": "manual_financials"
+      },
+      "revenueBn": 104615.5,
+      "costOfRevenueBn": 14963.0,
+      "grossProfitBn": 89653.0,
+      "sgnaBn": 6319.0,
+      "rndBn": null,
+      "otherOpexBn": null,
+      "operatingExpensesBn": 6319.2,
+      "operatingIncomeBn": 83333.8,
+      "nonOperatingBn": -32625.8,
+      "pretaxIncomeBn": 50708.0,
+      "taxBn": 10933.0,
+      "netIncomeBn": 39775.6,
+      "dilutedEps": 54454,
+      "displayCurrency": "USD",
+      "displayScaleFactor": 0.000753,
+      "displayFxSourceUrl": "https://api.frankfurter.dev/v1/2026-10-28?base=KRW&symbols=USD",
+      "displayFxAsOf": "2026-10-27",
+      "operatingExpensesLabel": "SG&A (including R&D)",
+      "operatingExpensesLabelZh": "销售、一般及行政费用（含研发）",
+      "officialOpexBreakdown": [
+        {
+          "name": "SG&A (including R&D)",
+          "nameZh": "销售、一般及行政费用（含研发）",
+          "memberKey": "sgna",
+          "valueBn": 6319,
+          "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q3_eng.pdf?1=",
+          "sourceForm": "FY2026 Q3 earnings presentation, attachment 2",
+          "filingDate": "2026-10-28",
+          "metricMode": "reported",
+          "validationEligible": true
+        }
+      ],
+      "statementPrecisionNote": "Headline revenue, operating profit and consolidated net profit retain the news release precision (KRW 0.1bn). Costs, gross profit, pretax profit, tax and product mix are rounded in the official presentation (pp. 5–6, 15, 17, 20); bridge differences up to KRW 1bn are disclosure rounding, not an undisclosed expense.",
+      "reportedStatementBn": {
+        "revenue": 104615,
+        "costOfRevenue": 14963,
+        "grossProfit": 89653,
+        "sgna": 6319,
+        "operatingIncome": 83334,
+        "pretaxIncome": 50708,
+        "tax": 10933,
+        "netIncome": 39776
+      },
+      "statementHeadlineSourceUrl": "https://news.skhynix.com/en/q3-2026-business-results/",
+      "revenueYoyPct": 327.894,
+      "revenueQoqPct": 31.893,
+      "netIncomeYoyPct": 215.8,
+      "grossMarginPct": 85.698,
+      "operatingMarginPct": 79.657,
+      "profitMarginPct": 38.021,
+      "effectiveTaxRatePct": 21.561,
+      "grossMarginYoyDeltaPp": 28.318,
+      "operatingMarginYoyDeltaPp": 33.097,
+      "profitMarginYoyDeltaPp": -13.499,
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "operatingIncomeBn": "official",
+        "netIncomeBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official"
+      },
+      "fieldSources": {
+        "revenueBn": {
+          "adapterId": "manual_financials",
+          "label": "Official quarterly earnings release",
+          "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q3_eng.pdf?1="
+        },
+        "operatingIncomeBn": {
+          "adapterId": "manual_financials",
+          "label": "Official quarterly earnings release",
+          "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q3_eng.pdf?1="
+        },
+        "netIncomeBn": {
+          "adapterId": "manual_financials",
+          "label": "Official quarterly earnings release",
+          "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q3_eng.pdf?1="
+        },
+        "costOfRevenueBn": {
+          "adapterId": "manual_financials",
+          "label": "Official quarterly earnings release",
+          "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q3_eng.pdf?1="
+        },
+        "grossProfitBn": {
+          "adapterId": "manual_financials",
+          "label": "Official quarterly earnings release",
+          "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q3_eng.pdf?1="
+        },
+        "taxBn": {
+          "adapterId": "manual_financials",
+          "label": "Official quarterly earnings release",
+          "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q3_eng.pdf?1="
+        },
+        "officialOpexBreakdown": {
+          "adapterId": "manual_financials",
+          "label": "Official quarterly earnings release",
+          "sourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2026Q3_eng.pdf?1="
+        }
+      }
+    }
+  },
   "statementSource": "official-sec-companyfacts",
   "statementSourceUrl": null,
   "reportingCurrency": null,
   "cik": null,
-  "errors": [
-    "Unable to resolve SEC CIK."
-  ],
-  "errorDetails": [
-    {
-      "message": "Unable to resolve SEC CIK.",
-      "layer": "financials",
-      "sourceId": "official_financials",
-      "phase": "resolve-cik",
-      "severity": "error"
-    }
-  ]
+  "errors": [],
+  "errorDetails": []
 }
