@@ -166,6 +166,26 @@ function resolveDirectedBranchColumn(entries, options) {
   return { centers, feasible: true, dropScale };
 }
 
+// Pack a cost fan from its real ports and label footprints. Decorative gaps
+// must not grow with every child index or with an unrelated expense fan.
+function resolveCompactCostFan(entries, options) {
+  const { grossBottom, revenueTop, grossTop, runway, unit, minY, maxY } = options;
+  const gap = clamp(Math.abs(grossTop - revenueTop) * 1.1, runway * 0.16, runway * 0.3);
+  const costTop = grossBottom + gap;
+  const shift = costTop - options.costTop;
+  const lead = clamp(runway * 0.3, unit * 42, unit * 108);
+  const targets = entries.map(entry => ({
+    ...entry,
+    sourceCenter: entry.sourceCenter + shift,
+    center: entry.sourceCenter + shift + lead,
+    drop: Math.min(lead, unit * 48),
+  }));
+  const result = resolveDirectedBranchColumn(targets, {
+    minY: Math.max(minY, costTop), maxY, gap: unit * 28,
+  });
+  return { ...result, costTop };
+}
+
 function sanitizeOfficialStructureRows(entry, rows = []) {
   const normalizedRows = [...(rows || [])].map((item) => ({ ...item }));
   if (!normalizedRows.length) return normalizedRows;
