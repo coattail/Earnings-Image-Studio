@@ -2415,6 +2415,30 @@ function opaqueBoundsFromImageData(imageData, width, height, alphaThreshold = 10
   };
 }
 
+// Measure alpha bounds on a canvas, but retain the original SVG paths. The
+// measurement bitmap must never become the artwork used by charts or exports.
+function cropVectorLogoAsset(asset, crop, analysisWidth, analysisHeight, naturalWidth, naturalHeight) {
+  try {
+    const encoded = String(asset.dataUrl).split(",")[1];
+    const bytes = Uint8Array.from(atob(encoded), char => char.charCodeAt(0));
+    const source = new TextDecoder().decode(bytes);
+    const doc = new DOMParser().parseFromString(source, "image/svg+xml");
+    const root = doc.documentElement;
+    if (root.localName !== "svg" || doc.querySelector("parsererror")) return null;
+    // A nested viewport also handles non-zero viewBox origins, preserveAspectRatio,
+    // and SVGs with intrinsic dimensions but no viewBox, without editing artwork.
+    if (!root.hasAttribute("viewBox")) root.setAttribute("viewBox", `0 0 ${naturalWidth} ${naturalHeight}`);
+    root.setAttribute("x", "0"); root.setAttribute("y", "0");
+    root.setAttribute("width", String(analysisWidth)); root.setAttribute("height", String(analysisHeight));
+    const content = new XMLSerializer().serializeToString(root);
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${crop.left} ${crop.top} ${crop.width} ${crop.height}" width="${crop.width}" height="${crop.height}">${content}</svg>`;
+    const data = new TextEncoder().encode(svg);
+    const base64 = btoa(Array.from(data, byte => String.fromCharCode(byte)).join(""));
+    return { ...asset, mime: "image/svg+xml", dataUrl: `data:image/svg+xml;base64,${base64}`,
+      width: crop.width, height: crop.height };
+  } catch (_error) { return null; }
+}
+
 async function normalizeBitmapLogoAsset(asset) {
   const mime = String(asset?.mime || "").trim().toLowerCase();
   if (!asset?.dataUrl || !/^image\/(png|jpeg|jpg|webp|svg\+xml|svg)$/i.test(mime)) return asset;
@@ -2473,6 +2497,10 @@ async function normalizeBitmapLogoAsset(asset) {
     const cropHeight = cropBottom - cropTop + 1;
     if (!transparentImageData && cropWidth >= width - 2 && cropHeight >= height - 2 && !isSmallSvgRasterFallback) {
       return asset;
+    }
+    if (/^image\/(svg\+xml|svg)$/i.test(mime) && !transparentImageData) {
+      return cropVectorLogoAsset(asset, { left: cropLeft, top: cropTop, width: cropWidth, height: cropHeight },
+        width, height, naturalWidth, naturalHeight) || asset;
     }
     const croppedCanvas = document.createElement("canvas");
     croppedCanvas.width = cropWidth;
