@@ -1,6 +1,9 @@
 import json
 import unittest
 import sys
+import subprocess
+import tempfile
+import xml.etree.ElementTree as ET
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -44,6 +47,14 @@ class GoogleMicrosoftQ3UpdateTests(unittest.TestCase):
         rows = {r["memberKey"]: r for r in q["officialRevenueSegments"]}
         self.assertEqual(rows["googleplay"]["name"], "Subscriptions, Platforms & Devices")
         self.assertEqual(rows["otherrevenue"]["valueBn"], .566)  # Other Bets + hedging
+
+    def test_google_sankey_renders_the_official_subscription_label(self):
+        with tempfile.TemporaryDirectory() as directory:
+            result = subprocess.run(["node", str(ROOT / "scripts/direct_chart_render.cjs"), "--payload", str(ROOT / "data/cache/alphabet.json"), "--quarter", P, "--language", "zh", "--modes", "sankey", "--output-dir", directory], cwd=ROOT, capture_output=True, text=True, check=True)
+            svg = Path(json.loads(result.stdout)["outputs"]["sankey"]["svg"])
+            labels = "".join(ET.fromstring(svg.read_text()).itertext())
+            self.assertIn("订阅、平台及设备", labels)
+            self.assertNotIn("应用商店", labels)
 
     def test_microsoft_recast_yoy_is_used_without_fabricated_qoq(self):
         q = self.companies["microsoft"]["financials"][P]
