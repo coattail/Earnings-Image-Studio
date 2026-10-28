@@ -86,6 +86,86 @@ function resolveProfitSpinePositions(options) {
   return best || { operatingTop, netTop };
 }
 
+// Final negative-flow ports, in rendered coordinates. Each entry reserves its
+// label footprint as well as the monetary cap. Project preferred positions onto
+// an ordered column; never change ribbon thickness to create space.
+function resolveDirectedBranchColumn(entries, options) {
+  if (!entries.length) return { centers: [], feasible: true, dropScale: 1 };
+  const { minY, maxY } = options;
+  if (![minY, maxY].every(Number.isFinite) || maxY < minY ||
+      entries.some(e => ![e.center, e.height, e.sourceCenter, e.drop].every(Number.isFinite)))
+    return { centers: entries.map(e => e.center), feasible: false, dropScale: 0 };
+  const gap = Math.max(options.gap || 0, 0);
+  const bounds = (dropScale, gapScale) => {
+    const distances = entries.map((e, i) => i ? (entries[i - 1].height + e.height) / 2 + gap * gapScale : 0);
+    const lo = [], hi = [];
+    entries.forEach((e, i) => {
+      lo[i] = e.pinned ? e.center : Math.max(minY + e.height / 2, e.sourceCenter + Math.max(e.drop, 0) * dropScale);
+      hi[i] = e.pinned ? e.center : maxY - e.height / 2;
+      if (i) lo[i] = Math.max(lo[i], lo[i - 1] + distances[i]);
+    });
+    for (let i = entries.length - 2; i >= 0; i--) hi[i] = Math.min(hi[i], hi[i + 1] - distances[i + 1]);
+    return { lo, hi, distances, feasible: lo.every((v, i) => v <= hi[i] + 1e-7) };
+  };
+  let dropScale = 1, range = bounds(1, 1);
+  if (!range.feasible) {
+    // Compress decorative drop and whitespace together. Spending all remaining
+    // space on gaps first would unnecessarily flatten a crowded tax branch.
+    if (!bounds(0, 0).feasible) {
+      const centers = entries.map(e => e.center);
+      let repaired = false;
+      // An old crowded suffix may already exceed the available label space.
+      // Repair independent reversed runs in their free slots, rather than let
+      // unrelated legacy crowding prevent a safe tax correction above them.
+      if (options.repairLegacyCrowding) {
+        for (let start = 0; start < entries.length; start++) {
+          if (entries[start].pinned || centers[start] >= entries[start].sourceCenter) continue;
+          let end = start + 1;
+          while (end < entries.length && !entries[end].pinned && centers[end] < entries[end].sourceCenter) end++;
+          const result = resolveDirectedBranchColumn(entries.slice(start, end), {
+            minY: start ? Math.max(minY, centers[start - 1] + entries[start - 1].height / 2 + gap) : minY,
+            maxY: end < entries.length ? Math.min(maxY, centers[end] - entries[end].height / 2 - gap) : maxY,
+            gap,
+          });
+          if (result.feasible) { centers.splice(start, end - start, ...result.centers); repaired = true; }
+          start = end - 1;
+        }
+      }
+      return { centers, feasible: false, repaired, dropScale: 0 };
+    }
+    let low = 0, high = 1;
+    for (let i = 0; i < 40; i++) {
+      const mid = (low + high) / 2;
+      if (bounds(mid, mid).feasible) low = mid; else high = mid;
+    }
+    dropScale = low; range = bounds(dropScale, dropScale);
+  }
+  // Bounded isotonic regression: remove cumulative spacing, pool inversions,
+  // and restore spacing. This moves neighboring terminals together instead of
+  // correcting one node and then pushing a later node back above its source.
+  let offset = 0;
+  const blocks = [];
+  entries.forEach((e, i) => {
+    offset += range.distances[i];
+    const block = { start: i, end: i, sum: e.center - offset, count: 1,
+      low: range.lo[i] - offset, high: range.hi[i] - offset };
+    block.value = clamp(block.sum, block.low, block.high);
+    blocks.push(block);
+    while (blocks.length > 1 && blocks.at(-2).value > blocks.at(-1).value) {
+      const b = blocks.pop(), a = blocks.pop();
+      const merged = { start: a.start, end: b.end, sum: a.sum + b.sum, count: a.count + b.count,
+        low: Math.max(a.low, b.low), high: Math.min(a.high, b.high) };
+      merged.value = clamp(merged.sum / merged.count, merged.low, merged.high);
+      blocks.push(merged);
+    }
+  });
+  const centers = []; offset = 0;
+  const values = [];
+  for (const block of blocks) for (let i = block.start; i <= block.end; i++) values[i] = block.value;
+  entries.forEach((_e, i) => { offset += range.distances[i]; centers[i] = values[i] + offset; });
+  return { centers, feasible: true, dropScale };
+}
+
 function sanitizeOfficialStructureRows(entry, rows = []) {
   const normalizedRows = [...(rows || [])].map((item) => ({ ...item }));
   if (!normalizedRows.length) return normalizedRows;

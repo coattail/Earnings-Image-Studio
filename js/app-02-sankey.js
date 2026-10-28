@@ -9187,6 +9187,68 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
     balancedPositiveTop = sharedCore.balancedPositiveTop;
     refreshEditableNodeFrames();
   }
+  // Last geometry pass: the final visible source ports own negative-flow
+  // direction, including small positive adjustments and learned offsets. Earlier
+  // fan heuristics run before the profit spine settles and cannot guarantee it.
+  const terminalFamilies = [
+    { lane: "deduction", boxes: deductionBoxes, slices: deductionSourceSlices, fallback: deductionSlices,
+      source: operatingFrame, top: opDeductionSourceBand.top, bottom: opDeductionSourceBand.bottom,
+      x: rightTerminalNodeX, minHeight: 0 },
+    { lane: "opex", boxes: opexBoxes, slices: opexSourceSlices, fallback: opexSlices,
+      source: operatingExpenseFrame, top: opexTop, bottom: opexBottom,
+      x: rightTerminalNodeX, minHeight: 14 },
+    { lane: "cost-breakdown", boxes: costBreakdownBoxes, slices: costBreakdownSourceSlices, fallback: costBreakdownSlices,
+      source: costFrame, top: costTop, bottom: costBottom, x: costBreakdownX, minHeight: 10 },
+  ];
+  const terminalEntries = terminalFamilies.flatMap(family => family.boxes.flatMap((box, index) => {
+    if (!box || (family.lane === "deduction" && netLoss)) return [];
+    const slice = family.slices[index] || family.fallback[index];
+    if (!slice) return [];
+    const id = `${family.lane}-${index}`, shift = editorOffsetForNode(id);
+    const sourceSlice = family.lane === "deduction" ? resolveDeductionTerminalSourceSlice(index, slice) : slice;
+    const bridge = constantThicknessBridge(sourceSlice, box.center, family.minHeight, family.top, family.bottom);
+    const sourceShift = editorOffsetForNode(family.source.id);
+    const label = resolveRightBranchLabelSpec(slice.item, family.x, nodeWidth, {
+      density: family.boxes.length >= 3 ? "dense" : "regular", defaultMode: "negative-parentheses",
+    });
+    return [{ id, family, index, box, x: family.x + shift.dx, center: box.center + shift.dy,
+      height: Math.max(box.height, bridge.targetHeight, label.collisionHeight),
+      sourceCenter: (bridge.sourceTop + bridge.sourceBottom) / 2 + sourceShift.dy,
+      drop: clamp((family.x + shift.dx - family.source.right) * 0.14, scaleY(24), scaleY(64)) }];
+  }));
+  if (!snapshot.editModeEnabled && snapshot.layout?.disableDirectedTerminalLayout !== true) {
+    // Terminals sharing a column must be solved together. Sorting by their
+    // source ports preserves ribbon order; label footprints also reserve space
+    // when a thin tax cap is placed beside a much wider expense cap.
+    const columns = [];
+    for (const e of [...terminalEntries].sort((a, b) => a.x - b.x)) {
+      let column = columns.at(-1);
+      if (!column || e.x > column.right + scaleY(12)) {
+        column = { right: e.x + nodeWidth, entries: [] }; columns.push(column);
+      }
+      column.right = Math.max(column.right, e.x + nodeWidth); column.entries.push(e);
+    }
+    for (const column of columns) {
+      const entries = column.entries.sort((a, b) => a.sourceCenter - b.sourceCenter);
+      if (!entries.some(e => e.center < e.sourceCenter + e.drop - 0.5)) continue;
+      const overlaps = frame => entries.some(e => e.x < frame.right + scaleY(12) && e.x + nodeWidth > frame.left - scaleY(12));
+      const obstacles = [netFrame, operatingExpenseFrame, costFrame].filter(overlaps);
+      const minY = Math.max(scaleY(180), ...obstacles.map(frame => frame.bottom + scaleY(24)));
+      const result = resolveDirectedBranchColumn(entries, {
+        minY,
+        // Some dense layouts already use the reserved lower margin. Reuse that
+        // occupied space, bounded by the canvas, instead of declaring the whole
+        // column infeasible merely because it exceeds the preferred bottom.
+        maxY: Math.max(terminalLayoutBottomLimit, Math.min(height - scaleY(40),
+          Math.max(...entries.map(e => e.center + e.height / 2)))),
+        gap: scaleY(18), repairLegacyCrowding: true,
+      });
+      if (!result.feasible && !result.repaired) continue;
+      entries.forEach((e, i) => {
+        e.family.boxes[e.index] = shiftBoxCenter(e.box, e.box.center + result.centers[i] - e.center);
+      });
+    }
+  }
   const revenueGrossBand = shiftedInterval(revenueGrossSourceBand.top, revenueGrossSourceBand.bottom, "revenue");
   const revenueCostBand = revenueCostSourceBand ? shiftedInterval(revenueCostSourceBand.top, revenueCostSourceBand.bottom, "revenue") : null;
   const grossProfitBand = shiftedInterval(grossProfitSourceBand.top, grossProfitSourceBand.bottom, "gross");
