@@ -3193,6 +3193,14 @@ const BAR_SEGMENT_COLOR_SLOT_OVERRIDES_BY_COMPANY = Object.freeze({
 });
 
 const BAR_SEGMENT_COLOR_OVERRIDES_BY_COMPANY = Object.freeze({
+  microsoft: Object.freeze({
+    intelligentcloud: "#2497C8",
+    productivitybusinessprocesses: "#7D9E46",
+    productivityandbusinessprocesses: "#7D9E46",
+    morepersonalcomputing: "#C79C42",
+    agentsandinfra: "#277DA8",
+    devicesandconsumer: "#57988C",
+  }),
   micron: Object.freeze({
     microncloudmemory: "#0B63B6",
     microncoredatacenter: "#3454A4",

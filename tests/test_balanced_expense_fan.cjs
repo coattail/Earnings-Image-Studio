@@ -1,0 +1,117 @@
+const test = require('node:test');
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const vm = require('node:vm');
+const root = path.resolve(__dirname, '..');
+const clamp = (v, lo, hi) => Math.min(Math.max(v, lo), hi);
+const pure = vm.createContext({ clamp, Math, Number });
+const layout = fs.readFileSync(path.join(root, 'js/app-01-layout.js'), 'utf8');
+vm.runInContext(layout.slice(0, layout.indexOf('function sanitizeOfficialStructureRows')), pure);
+
+test('cost fan packing reserves labels, keeps direction and scales with the canvas', () => {
+  const rows = [{ sourceCenter: 1100, center: 1500, height: 68 }, { sourceCenter: 1200, center: 1800, height: 170 }];
+  const options = { grossBottom: 1040, revenueTop: 560, grossTop: 648, costTop: 1080, runway: 332, unit: 1.25, minY: 1270, maxY: 1900 };
+  const result = pure.resolveCompactCostFan(rows, options);
+  assert.ok(result.feasible);
+  assert.ok(result.centers[1] - result.centers[0] >= (68 + 170) / 2 + 28 * options.unit - 1e-6);
+  assert.ok(result.centers[1] < rows[1].center - 300, 'remove decorative tail whitespace');
+  result.centers.forEach((y, i) => assert.ok(y > rows[i].sourceCenter + result.costTop - options.costTop));
+  const factor = 2.5;
+  const scaled = pure.resolveCompactCostFan(rows.map(row => Object.fromEntries(Object.entries(row).map(([k,v]) => [k,v*factor]))),
+    Object.fromEntries(Object.entries(options).map(([k,v]) => [k,v*factor])));
+  assert.ok(Math.abs(scaled.costTop - result.costTop * factor) < 1e-6);
+  result.centers.forEach((y,i) => assert.ok(Math.abs(scaled.centers[i] - y*factor) < 1e-6));
+  assert.equal(pure.resolveCompactCostFan(rows, {...options,maxY:1280}).feasible, false);
+});
+
+function runtime() {
+  const noop = () => {};
+  const document = { addEventListener:noop, querySelector:()=>null, querySelectorAll:()=>[], getElementById:()=>null,
+    createElement:()=>({style:{},setAttribute:noop}), documentElement:null };
+  const ctx = vm.createContext({console,setTimeout,clearTimeout,requestAnimationFrame:()=>1,cancelAnimationFrame:noop,
+    Math,Number,String,Boolean,Array,Object,JSON,Date,RegExp,Map,Set,Intl,Promise,URL,URLSearchParams,Blob,
+    document,window:{addEventListener:noop,document},navigator:{userAgent:'node'}});
+  ctx.globalThis=ctx;
+  for(const file of ['app-00-foundation.js','app-01-layout.js','app-02-sankey.js','app-03-data.js','app-04-bootstrap.js'])
+    vm.runInContext(fs.readFileSync(path.join(root,'js',file),'utf8'),ctx,{filename:file});
+  ctx.payload=JSON.parse(fs.readFileSync(path.join(root,'data/cache/microsoft.json')));
+  ctx.supplemental=JSON.parse(fs.readFileSync(path.join(root,'data/supplemental-components.json')));
+  ctx.learned=JSON.parse(fs.readFileSync(path.join(root,'data/learned-sankey-layouts.json')));
+  vm.runInContext(`applyLoadedCompaniesToState([payload],'full');state.logoCatalog={};state.supplementalComponents=supplemental;state.learnedSankeyLayouts=learned;state.selectedCompanyId='microsoft';`,ctx);
+  return ctx;
+}
+function frames(svg) {
+  return Object.fromEntries([...svg.matchAll(/<rect\b[^>]*data-edit-node-visible-id="([^"]+)"[^>]*>/g)].map(m=>{
+    const attrs=Object.fromEntries([...m[0].matchAll(/([\w-]+)="([^"]*)"/g)].map(a=>[a[1],a[2]]));
+    return [m[1],Object.fromEntries(['x','y','width','height'].map(k=>[k,+attrs[k]]))];
+  }));
+}
+const ctx=runtime();
+function render(q,language='zh',options={}) {
+  ctx.q=q;ctx.language=language;ctx.options=options;
+  return vm.runInContext(`(() => {
+    state.selectedQuarter=q;state.uiLanguage=language;const c=getCompany('microsoft'),s=buildSnapshot(c,q);
+    s.learnedEditorNodeOverrides=currentResolvedEditorOverrides();s.interactiveEditorNodeOverrides=options.offsets||{};
+    s.editorNodeOverrides={...s.learnedEditorNodeOverrides,...s.interactiveEditorNodeOverrides};s.editModeEnabled=!!options.editing;
+    if(options.legacy)s.layout={...s.layout,disableBalancedExpenseFan:true};
+    const before=JSON.stringify(s);const svg=EarningsVizRuntime.render.renderIncomeStatementSvg(s,c);
+    return {svg,unchanged:before===JSON.stringify(s)};
+  })()`,ctx);
+}
+
+test('Microsoft three quarters share a downward expense split without changing money or profit stages', () => {
+  for(const q of ['2026Q1','2026Q2','2026Q3']){
+    const before=frames(render(q,'zh',{legacy:true}).svg),after=frames(render(q).svg),english=frames(render(q,'en').svg);
+    for(const [id,node] of Object.entries(before)){
+      assert.equal(after[id].height,node.height,`${q}/${id}: value thickness`);
+      if(!['cost','operating-expenses'].includes(id)&&!/^(cost-breakdown|opex|deduction)-/.test(id)) assert.deepEqual(after[id],node,`${q}/${id}: keep main spine`);
+      if(!/^(cost-breakdown|opex|deduction)-/.test(id)) assert.equal(english[id].y,after[id].y,`${q}/${id}: bilingual core positions`);
+    }
+    assert.ok(after['operating-expenses'].y >= after.gross.y+after.operating.height+20,`${q}: lower ribbon descends`);
+    const gains=Object.entries(after).filter(([id])=>id.startsWith('positive-')).reduce((sum,[,n])=>sum+n.height,0);
+    const first=(after.gross.y-after.operating.y)/(after.operating.x-after.gross.x-after.gross.width);
+    const second=(after.operating.y-after.net.y-gains)/(after.net.x-after.operating.x-after.operating.width);
+    assert.ok(Math.abs(first-second)<.075,`${q}: consistent profit spine slopes`);
+    assert.ok(render(q).unchanged);
+  }
+});
+
+test('latest automatic Microsoft cost fan approaches the compact hand-tuned reference', () => {
+  const before=frames(render('2026Q3','zh',{legacy:true}).svg),after=frames(render('2026Q3').svg);
+  const last=after['cost-breakdown-1'];
+  const leftBottom=Math.max(...Object.entries(after).filter(([id])=>/^(source|left-detail)-/.test(id)).map(([,n])=>n.y+n.height));
+  assert.ok(last.y < before['cost-breakdown-1'].y-300);
+  assert.ok(last.y+last.height-leftBottom < 170,'balanced left and right fan envelopes');
+  const costGap=after.cost.y-after.gross.y-after.gross.height;
+  const upperDrop=after.gross.y-after.revenue.y;
+  assert.ok(costGap/upperDrop > .9 && costGap/upperDrop < 1.3,'balanced revenue fork');
+  const childGap=last.y-after['cost-breakdown-0'].y-after['cost-breakdown-0'].height;
+  assert.ok(childGap > 24 && childGap < after.cost.height*.5,'avoid the former long empty tail');
+});
+
+test('interactive cost positioning remains free and the saved draft is untouched', () => {
+  const saved={'cost-breakdown-1':{dx:0,dy:240}};
+  const normal=frames(render('2026Q3').svg);
+  const editing=render('2026Q3','zh',{offsets:saved,editing:true});
+  assert.ok(Math.abs(frames(editing.svg)['cost-breakdown-1'].y-normal['cost-breakdown-1'].y-240)<1,'drag remains additive to the compact layout');
+  const opened=frames(render('2026Q3','zh',{editing:true}).svg);
+  for(const id of ['cost','cost-breakdown-0','cost-breakdown-1']) assert.deepEqual(opened[id],normal[id],`${id}: opening editor keeps the automatic layout`);
+  assert.ok(editing.unchanged);
+  assert.equal(saved['cost-breakdown-1'].dy,240);
+});
+
+test('Microsoft old and new segment palettes are fixed across ordering and visible ranges', () => {
+  ctx.keys=['intelligentcloud','productivitybusinessprocesses','morepersonalcomputing','agentsandinfra','devicesandconsumer'];
+  const all=vm.runInContext('stableBarColorMap("microsoft",keys)',ctx);
+  const reversed=vm.runInContext('stableBarColorMap("microsoft",keys.slice().reverse())',ctx);
+  const current=vm.runInContext('stableBarColorMap("microsoft",["agentsandinfra","devicesandconsumer"])',ctx);
+  assert.equal(new Set(Object.values(all)).size,5);
+  for(const key of ctx.keys) assert.equal(reversed[key],all[key]);
+  assert.equal(current.agentsandinfra,all.agentsandinfra);
+  assert.equal(current.devicesandconsumer,all.devicesandconsumer);
+  ctx.palette=all;
+  const hues=vm.runInContext('Object.fromEntries(Object.entries(palette).map(([k,v])=>[k,colorToHsl(v).h]))',ctx);
+  assert.ok(hues.agentsandinfra>190&&hues.agentsandinfra<220,'blue infrastructure');
+  assert.ok(hues.devicesandconsumer>150&&hues.devicesandconsumer<180,'teal consumer');
+});

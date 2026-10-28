@@ -9067,7 +9067,8 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
         // The visible spine must rise through both connected ports, including
         // the gain thickness above the operating contribution at the net node.
         minOperatingRise: firstRun * 0.14 * riseScale, maxOperatingRise: firstRun * 0.349,
-        minNetRise: lastRun * 0.18 * riseScale, maxNetRise: lastRun * 0.38, maxSlopeChange: 0.14,
+        minNetRise: lastRun * 0.18 * riseScale, maxNetRise: lastRun * 0.38,
+        maxSlopeChange: safeNumber(snapshot.layout?.profitSpineMaxSlopeChange, 0.07),
         operatingMin: headerFloor + scaleY(100),
         operatingMax: Math.min(chartBottomLimit - opHeight,
           operatingExpenseFrame.top - manualNodeOffsetFor("operating-expenses").dy +
@@ -9172,6 +9173,51 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
     }
   }
   refreshEditableNodeFrames();
+  // Resolve the red split by its final incoming port, using the same gentle
+  // downward lead whether the statement has two expense rows or three.
+  const automaticFrameCoordinate = (frame, coordinate) =>
+    frame[coordinate] - manualNodeOffsetFor(frame.id)[coordinate === "top" ? "dy" : "dx"] +
+      learnedEditorOffsetForNode(frame.id)[coordinate === "top" ? "dy" : "dx"];
+  if (hasOrdinaryProfitSpine && !hasExplicitOpexNodeTop &&
+      snapshot.layout?.disableBalancedExpenseFan !== true) {
+    const runway = Math.max(automaticFrameCoordinate(operatingExpenseFrame, "left") - automaticFrameCoordinate(grossFrame, "right"), 1);
+    const sourceTop = grossExpenseSourceBand.top + balancedLayoutOffsetForNode("gross").dy;
+    const preferredTop = sourceTop + clamp(runway * 0.14, scaleY(28), scaleY(60));
+    const currentTop = automaticFrameCoordinate(operatingExpenseFrame, "top");
+    if (currentTop < preferredTop && preferredTop + opexHeight < chartBottomLimit) {
+      const offset = autoLayoutOffsetForNode("operating-expenses");
+      setAutoLayoutNodeOffset("operating-expenses", { dy: offset.dy + preferredTop - currentTop });
+      refreshEditableNodeFrames();
+    }
+  }
+  if (hasOrdinaryProfitSpine && !hasExplicitCostNodeTop &&
+      costBreakdownBoxes.length >= 2 && costBreakdownBoxes.length <= 3 &&
+      snapshot.layout?.disableBalancedExpenseFan !== true) {
+    const sourceShift = balancedLayoutOffsetForNode("cost");
+    const entries = costBreakdownBoxes.map((box, index) => {
+      const slice = costBreakdownSourceSlices[index] || costBreakdownSlices[index];
+      const bridge = constantThicknessBridge(slice, box.center, 10, costTop, costBottom);
+      return { center: box.center, height: Math.max(bridge.targetHeight, costBreakdownLabelSpecs[index].collisionHeight),
+        sourceCenter: (bridge.sourceTop + bridge.sourceBottom) / 2 + sourceShift.dy };
+    });
+    const summaryBottom = costBreakdownOpexSummaryBottom + balancedLayoutOffsetForNode("operating-expenses").dy;
+    const currentTop = automaticFrameCoordinate(costFrame, "top");
+    const compact = resolveCompactCostFan(entries, {
+      grossBottom: automaticFrameCoordinate(grossFrame, "top") + grossFrame.height,
+      grossTop: automaticFrameCoordinate(grossFrame, "top"), revenueTop: automaticFrameCoordinate(revenueFrame, "top"),
+      costTop: currentTop, runway: Math.max(costBreakdownX - automaticFrameCoordinate(costFrame, "right"), 1), unit: verticalScale,
+      minY: costBreakdownSharesOpexColumn ? summaryBottom + scaleY(20) : scaleY(180),
+      maxY: height - scaleY(40),
+    });
+    if (compact.feasible) {
+      const offset = autoLayoutOffsetForNode("cost");
+      setAutoLayoutNodeOffset("cost", { dy: offset.dy + compact.costTop - currentTop });
+      compact.centers.forEach((center, index) => {
+        costBreakdownBoxes[index] = shiftBoxCenter(costBreakdownBoxes[index], center - balancedLayoutOffsetForNode(`cost-breakdown-${index}`).dy);
+      });
+      refreshEditableNodeFrames();
+    }
+  }
   if (geometryOptions.captureCore) {
     return { canvas, positiveAbove, balancedPositiveTop,
       frames: [revenueFrame, grossFrame, costFrame, operatingFrame, operatingExpenseFrame, netFrame] };
