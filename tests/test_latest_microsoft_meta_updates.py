@@ -17,7 +17,7 @@ class LatestMicrosoftMetaUpdatesTest(unittest.TestCase):
 
     def test_microsoft_fy2026_q4_official_results(self) -> None:
         company = self.companies["microsoft"]
-        self.assertEqual(company["quarters"][-1], "2026Q2")
+        self.assertIn("2026Q2", company["quarters"])
         entry = company["financials"]["2026Q2"]
 
         self.assertEqual(entry["fiscalLabel"], "FY2026 Q4")

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-28T05:53:21Z",
+  "generatedAt": "2026-10-28T20:09:59Z",
   "companyCount": 41,
   "companies": [
     {
@@ -997,7 +997,8 @@
         "2025Q3",
         "2025Q4",
         "2026Q1",
-        "2026Q2"
+        "2026Q2",
+        "2026Q3"
       ],
       "statementSource": "official-sec-companyfacts",
       "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
@@ -1005,26 +1006,26 @@
       "cik": 789019,
       "errors": [],
       "coverage": {
-        "quarterCount": 34,
+        "quarterCount": 35,
         "pixelReplicaQuarterCount": 1,
         "hasPixelReplica": true,
-        "officialFinancialQuarterCount": 34,
-        "officialSegmentQuarterCount": 34,
-        "officialExpenseQuarterCount": 0,
+        "officialFinancialQuarterCount": 35,
+        "officialSegmentQuarterCount": 35,
+        "officialExpenseQuarterCount": 1,
         "classification": {
           "status": "ok",
-          "latestQuarter": "2026Q2",
+          "latestQuarter": "2026Q3",
           "latestQuarterHasRevenueClassification": true,
-          "latestQuarterHasExpenseClassification": false,
-          "latestRevenueClassificationQuarter": "2026Q2",
-          "latestExpenseClassificationQuarter": null,
-          "latestStructureHistoryQuarter": "2025Q4",
-          "revenueClassificationQuarterCount": 34,
-          "expenseClassificationQuarterCount": 0,
+          "latestQuarterHasExpenseClassification": true,
+          "latestRevenueClassificationQuarter": "2026Q3",
+          "latestExpenseClassificationQuarter": "2026Q3",
+          "latestStructureHistoryQuarter": "2026Q3",
+          "revenueClassificationQuarterCount": 35,
+          "expenseClassificationQuarterCount": 1,
           "revenueClassificationCoverageRatio": 1.0,
-          "expenseClassificationCoverageRatio": 0.0,
+          "expenseClassificationCoverageRatio": 0.0286,
           "latestRevenueClassificationLagQuarters": 0,
-          "latestExpenseClassificationLagQuarters": null,
+          "latestExpenseClassificationLagQuarters": 0,
           "warnings": [],
           "blockers": [],
           "policy": {}
@@ -1066,13 +1067,13 @@
             "overallConfidenceScore": 1.0,
             "financialConfidenceScore": 1.0,
             "structuralConfidenceScore": 1.0,
-            "revenueSegmentChecks": 34,
+            "revenueSegmentChecks": 35,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
-            "detailGroupChecks": 0,
+            "detailGroupChecks": 2,
             "detailGroupMismatchCount": 0,
             "detailGroupSkippedChecks": 0,
-            "opexChecks": 0,
+            "opexChecks": 1,
             "opexSkippedChecks": 0,
             "opexOverflowMismatchCount": 0,
             "warningCount": 0,
@@ -1086,100 +1087,928 @@
       "marketCapSource": "CompaniesMarketCap",
       "marketCapSourceUrl": "https://companiesmarketcap.com/microsoft/marketcap/",
       "dataLoadMode": "latest-only",
-      "latestQuarter": "2026Q2",
+      "latestQuarter": "2026Q3",
       "financials": {
-        "2026Q2": {
-          "calendarQuarter": "2026Q2",
-          "periodEnd": "2026-06-30",
-          "fiscalYear": "2026",
-          "fiscalQuarter": "Q4",
-          "fiscalLabel": "FY2026 Q4",
+        "2026Q3": {
+          "calendarQuarter": "2026Q3",
+          "periodEnd": "2026-09-30",
+          "fiscalYear": "2027",
+          "fiscalQuarter": "Q1",
+          "fiscalLabel": "FY2027 Q1",
           "statementCurrency": "USD",
-          "revenueBn": 90.007,
-          "revenueYoyPct": 17.747,
-          "costOfRevenueBn": 29.525,
-          "grossProfitBn": 60.482,
-          "sgnaBn": 9.882,
-          "rndBn": 9.997,
-          "otherOpexBn": null,
-          "operatingExpensesBn": 19.879,
-          "operatingIncomeBn": 40.603,
-          "nonOperatingBn": 3.444,
-          "pretaxIncomeBn": 44.047,
-          "taxBn": 8.281,
-          "netIncomeBn": 35.766,
-          "netIncomeYoyPct": 31.333,
-          "grossMarginPct": 67.197,
-          "operatingMarginPct": 45.111,
-          "profitMarginPct": 39.737,
-          "effectiveTaxRatePct": 18.8,
-          "revenueQoqPct": 8.591,
-          "grossMarginYoyDeltaPp": -1.383,
-          "operatingMarginYoyDeltaPp": 0.211,
-          "profitMarginYoyDeltaPp": 4.107,
-          "statementSource": "microsoft-fy2026-form-10-k",
-          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
-          "statementFilingDate": "2026-07-29",
-          "statementValueMode": "derived-quarter-from-fiscal-year-less-nine-months",
+          "statementSource": "microsoft-fy2027-q1-earnings-release",
+          "statementSourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+          "statementFilingDate": "2026-10-28",
+          "statementValueMode": "reported",
           "statementSpanQuarters": 1,
-          "officialRevenueSegments": [
-            {
-              "name": "More Personal Computing",
-              "nameZh": null,
-              "memberKey": "morepersonalcomputing",
-              "valueBn": 12.854,
-              "yoyPct": -4.44,
-              "qoqPct": -2.56,
-              "mixPct": 14.3,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
-              "sourceForm": "FY2026 Form 10-K",
-              "filingDate": "2026-07-29",
-              "mixYoyDeltaPp": -3.3
-            },
-            {
-              "name": "Productivity & Business Processes",
-              "nameZh": null,
-              "memberKey": "productivitybusinessprocesses",
-              "valueBn": 37.847,
-              "yoyPct": 14.3,
-              "qoqPct": 8.09,
-              "mixPct": 42,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
-              "sourceForm": "FY2026 Form 10-K",
-              "filingDate": "2026-07-29",
-              "mixYoyDeltaPp": -1.3
-            },
-            {
-              "name": "Intelligent Cloud",
-              "nameZh": null,
-              "memberKey": "intelligentcloud",
-              "valueBn": 39.306,
-              "yoyPct": 31.55,
-              "qoqPct": 13.34,
-              "mixPct": 43.7,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
-              "sourceForm": "FY2026 Form 10-K",
-              "filingDate": "2026-07-29",
-              "mixYoyDeltaPp": 4.6
-            }
-          ],
-          "officialCostBreakdown": null,
-          "officialOpexBreakdown": null,
           "displayCurrency": "USD",
           "displayScaleFactor": 1,
-          "sankeyStructureContinuity": {
-            "sourceQuarter": "2026Q1",
-            "fields": [
-              "officialRevenueSegments"
-            ],
-            "rule": "same-normalized-category-set"
+          "revenueBn": 92.279,
+          "costOfRevenueBn": 29.72,
+          "grossProfitBn": 62.559,
+          "rndBn": 9.047,
+          "sgnaBn": 7.597,
+          "otherOpexBn": null,
+          "operatingExpensesBn": 16.644,
+          "operatingIncomeBn": 45.915,
+          "nonOperatingBn": 0.038,
+          "pretaxIncomeBn": 45.953,
+          "taxBn": 9.324,
+          "netIncomeBn": 36.629,
+          "dilutedEps": 4.92,
+          "operatingCashFlowBn": 58.0,
+          "capitalExpenditureBn": 39.367,
+          "freeCashFlowBn": 18.633,
+          "netAssetsBn": 470.509,
+          "officialRevenueSegments": [
+            {
+              "name": "Agents and Infra",
+              "nameZh": "智能体与基础设施",
+              "memberKey": "agentsandinfra",
+              "valueBn": 76.795,
+              "yoyPct": 24.52,
+              "qoqPct": null,
+              "mixPct": 83.2,
+              "mixYoyDeltaPp": null,
+              "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+              "sourceForm": "FY2027 Q1 earnings release",
+              "filingDate": "2026-10-28",
+              "supportLines": null,
+              "supportLinesZh": null,
+              "metricMode": null,
+              "validationEligible": null,
+              "validationNotes": [
+                "fy2027-recast-taxonomy-no-comparable-prior-quarter"
+              ],
+              "suppressQoQGrowth": true,
+              "yoyComparisonValueBn": 61.672,
+              "yoyComparisonSourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast"
+            },
+            {
+              "name": "Devices and Consumer",
+              "nameZh": "设备与消费者",
+              "memberKey": "devicesandconsumer",
+              "valueBn": 15.484,
+              "yoyPct": -3.23,
+              "qoqPct": null,
+              "mixPct": 16.8,
+              "mixYoyDeltaPp": null,
+              "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+              "sourceForm": "FY2027 Q1 earnings release",
+              "filingDate": "2026-10-28",
+              "supportLines": null,
+              "supportLinesZh": null,
+              "metricMode": null,
+              "validationEligible": null,
+              "validationNotes": [
+                "fy2027-recast-taxonomy-no-comparable-prior-quarter"
+              ],
+              "suppressQoQGrowth": true,
+              "yoyComparisonValueBn": 16.001,
+              "yoyComparisonSourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast"
+            }
+          ],
+          "officialRevenueDetailGroups": [
+            {
+              "name": "Azure",
+              "nameZh": "Azure",
+              "memberKey": "azure",
+              "valueBn": 33.165,
+              "yoyPct": 48.16,
+              "qoqPct": null,
+              "mixPct": 35.9,
+              "mixYoyDeltaPp": null,
+              "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+              "sourceForm": "FY2027 Q1 earnings release",
+              "filingDate": "2026-10-28",
+              "supportLines": null,
+              "supportLinesZh": null,
+              "targetName": "Agents and Infra",
+              "metricMode": null,
+              "validationEligible": null,
+              "validationNotes": [
+                "fy2027-recast-taxonomy-no-comparable-prior-quarter"
+              ],
+              "suppressQoQGrowth": true,
+              "yoyComparisonValueBn": 22.384,
+              "yoyComparisonSourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast"
+            },
+            {
+              "name": "Microsoft 365 cloud",
+              "nameZh": "Microsoft 365 云",
+              "memberKey": "microsoft365cloud",
+              "valueBn": 27.778,
+              "yoyPct": 17.24,
+              "qoqPct": null,
+              "mixPct": 30.1,
+              "mixYoyDeltaPp": null,
+              "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+              "sourceForm": "FY2027 Q1 earnings release",
+              "filingDate": "2026-10-28",
+              "supportLines": null,
+              "supportLinesZh": null,
+              "targetName": "Agents and Infra",
+              "metricMode": null,
+              "validationEligible": null,
+              "validationNotes": [
+                "fy2027-recast-taxonomy-no-comparable-prior-quarter"
+              ],
+              "suppressQoQGrowth": true,
+              "yoyComparisonValueBn": 23.694,
+              "yoyComparisonSourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast"
+            },
+            {
+              "name": "Productivity and server licensing",
+              "nameZh": "生产力及服务器许可",
+              "memberKey": "productivityandserverlicensing",
+              "valueBn": 8.407,
+              "yoyPct": -3.12,
+              "qoqPct": null,
+              "mixPct": 9.1,
+              "mixYoyDeltaPp": null,
+              "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+              "sourceForm": "FY2027 Q1 earnings release",
+              "filingDate": "2026-10-28",
+              "supportLines": null,
+              "supportLinesZh": null,
+              "targetName": "Agents and Infra",
+              "metricMode": null,
+              "validationEligible": null,
+              "validationNotes": [
+                "fy2027-recast-taxonomy-no-comparable-prior-quarter"
+              ],
+              "suppressQoQGrowth": true,
+              "yoyComparisonValueBn": 8.678,
+              "yoyComparisonSourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast"
+            },
+            {
+              "name": "Industry solutions",
+              "nameZh": "行业解决方案",
+              "memberKey": "industrysolutions",
+              "valueBn": 5.337,
+              "yoyPct": 9.05,
+              "qoqPct": null,
+              "mixPct": 5.8,
+              "mixYoyDeltaPp": null,
+              "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+              "sourceForm": "FY2027 Q1 earnings release",
+              "filingDate": "2026-10-28",
+              "supportLines": null,
+              "supportLinesZh": null,
+              "targetName": "Agents and Infra",
+              "metricMode": null,
+              "validationEligible": null,
+              "validationNotes": [
+                "fy2027-recast-taxonomy-no-comparable-prior-quarter"
+              ],
+              "suppressQoQGrowth": true,
+              "yoyComparisonValueBn": 4.894,
+              "yoyComparisonSourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast"
+            },
+            {
+              "name": "Frontier and support services",
+              "nameZh": "前沿与支持服务",
+              "memberKey": "frontierandsupportservices",
+              "valueBn": 2.108,
+              "yoyPct": 4.25,
+              "qoqPct": null,
+              "mixPct": 2.3,
+              "mixYoyDeltaPp": null,
+              "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+              "sourceForm": "FY2027 Q1 earnings release",
+              "filingDate": "2026-10-28",
+              "supportLines": null,
+              "supportLinesZh": null,
+              "targetName": "Agents and Infra",
+              "metricMode": null,
+              "validationEligible": null,
+              "validationNotes": [
+                "fy2027-recast-taxonomy-no-comparable-prior-quarter"
+              ],
+              "suppressQoQGrowth": true,
+              "yoyComparisonValueBn": 2.022,
+              "yoyComparisonSourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast"
+            },
+            {
+              "name": "Search and advertising",
+              "nameZh": "搜索与广告",
+              "memberKey": "searchandadvertising",
+              "valueBn": 6.554,
+              "yoyPct": 10.3,
+              "qoqPct": null,
+              "mixPct": 7.1,
+              "mixYoyDeltaPp": null,
+              "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+              "sourceForm": "FY2027 Q1 earnings release",
+              "filingDate": "2026-10-28",
+              "supportLines": null,
+              "supportLinesZh": null,
+              "targetName": "Devices and Consumer",
+              "metricMode": null,
+              "validationEligible": null,
+              "validationNotes": [
+                "fy2027-recast-taxonomy-no-comparable-prior-quarter"
+              ],
+              "suppressQoQGrowth": true,
+              "yoyComparisonValueBn": 5.942,
+              "yoyComparisonSourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast"
+            },
+            {
+              "name": "XBOX",
+              "nameZh": "Xbox",
+              "memberKey": "xbox",
+              "valueBn": 5.379,
+              "yoyPct": -2.34,
+              "qoqPct": null,
+              "mixPct": 5.8,
+              "mixYoyDeltaPp": null,
+              "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+              "sourceForm": "FY2027 Q1 earnings release",
+              "filingDate": "2026-10-28",
+              "supportLines": null,
+              "supportLinesZh": null,
+              "targetName": "Devices and Consumer",
+              "metricMode": null,
+              "validationEligible": null,
+              "validationNotes": [
+                "fy2027-recast-taxonomy-no-comparable-prior-quarter"
+              ],
+              "suppressQoQGrowth": true,
+              "yoyComparisonValueBn": 5.508,
+              "yoyComparisonSourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast"
+            },
+            {
+              "name": "Windows OEM and devices",
+              "nameZh": "Windows OEM 与设备",
+              "memberKey": "windowsoemanddevices",
+              "valueBn": 3.551,
+              "yoyPct": -21.97,
+              "qoqPct": null,
+              "mixPct": 3.8,
+              "mixYoyDeltaPp": null,
+              "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+              "sourceForm": "FY2027 Q1 earnings release",
+              "filingDate": "2026-10-28",
+              "supportLines": null,
+              "supportLinesZh": null,
+              "targetName": "Devices and Consumer",
+              "metricMode": null,
+              "validationEligible": null,
+              "validationNotes": [
+                "fy2027-recast-taxonomy-no-comparable-prior-quarter"
+              ],
+              "suppressQoQGrowth": true,
+              "yoyComparisonValueBn": 4.551,
+              "yoyComparisonSourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast"
+            }
+          ],
+          "officialRevenueStyle": "segment-bridge",
+          "officialCostBreakdown": [
+            {
+              "name": "Product",
+              "nameZh": "产品成本",
+              "memberKey": "productcost",
+              "valueBn": 2.471,
+              "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+              "sourceForm": "FY2027 Q1 earnings release",
+              "filingDate": "2026-10-28"
+            },
+            {
+              "name": "Service and other",
+              "nameZh": "服务及其他成本",
+              "memberKey": "serviceandothercost",
+              "valueBn": 27.249,
+              "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+              "sourceForm": "FY2027 Q1 earnings release",
+              "filingDate": "2026-10-28"
+            }
+          ],
+          "officialOpexBreakdown": [
+            {
+              "name": "Research and development",
+              "nameZh": "研发费用",
+              "memberKey": "researchanddevelopment",
+              "valueBn": 9.047,
+              "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+              "sourceForm": "FY2027 Q1 earnings release",
+              "filingDate": "2026-10-28",
+              "validationEligible": null,
+              "validationNotes": null
+            },
+            {
+              "name": "Sales and marketing",
+              "nameZh": "销售和营销费用",
+              "memberKey": "salesandmarketing",
+              "valueBn": 5.716,
+              "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+              "sourceForm": "FY2027 Q1 earnings release",
+              "filingDate": "2026-10-28",
+              "validationEligible": null,
+              "validationNotes": null
+            },
+            {
+              "name": "General and administrative",
+              "nameZh": "一般及行政费用",
+              "memberKey": "generalandadministrative",
+              "valueBn": 1.881,
+              "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+              "sourceForm": "FY2027 Q1 earnings release",
+              "filingDate": "2026-10-28",
+              "validationEligible": null,
+              "validationNotes": null
+            }
+          ],
+          "financialNotes": [
+            "FY2027 introduces Agents and Infra / Devices and Consumer. YoY uses the recast September 2025 comparatives in this release. QoQ segment and product growth are suppressed because the previous quarter uses the old taxonomy.",
+            "GAAP net income includes $0.207bn net gains from OpenAI investments; non-GAAP net income of $36.422bn is not substituted.",
+            "Cash capital expenditure excludes non-cash finance leases; free cash flow equals operating cash flow less cash additions to property and equipment."
+          ],
+          "grossMarginPct": 67.793,
+          "grossMarginYoyDeltaPp": -1.257,
+          "operatingMarginPct": 49.757,
+          "operatingMarginYoyDeltaPp": 0.887,
+          "profitMarginPct": 39.694,
+          "profitMarginYoyDeltaPp": 3.974,
+          "effectiveTaxRatePct": 20.29,
+          "revenueYoyPct": 18.804,
+          "revenueQoqPct": 2.524,
+          "netIncomeYoyPct": 32.011,
+          "parserFinancialFieldSources": {
+            "statementSpanQuarters": "official",
+            "displayScaleFactor": "official",
+            "revenueBn": "official",
+            "costOfRevenueBn": "official",
+            "grossProfitBn": "derived",
+            "rndBn": "official",
+            "sgnaBn": "derived",
+            "operatingExpensesBn": "derived",
+            "operatingIncomeBn": "official",
+            "nonOperatingBn": "official",
+            "pretaxIncomeBn": "official",
+            "taxBn": "official",
+            "netIncomeBn": "official",
+            "dilutedEps": "official",
+            "operatingCashFlowBn": "official",
+            "capitalExpenditureBn": "official",
+            "freeCashFlowBn": "derived",
+            "netAssetsBn": "official",
+            "grossMarginPct": "derived",
+            "grossMarginYoyDeltaPp": "derived",
+            "operatingMarginPct": "derived",
+            "operatingMarginYoyDeltaPp": "derived",
+            "profitMarginPct": "derived",
+            "profitMarginYoyDeltaPp": "derived",
+            "effectiveTaxRatePct": "derived",
+            "revenueYoyPct": "derived",
+            "revenueQoqPct": "derived",
+            "netIncomeYoyPct": "derived",
+            "calendarQuarter": "official",
+            "periodEnd": "official",
+            "fiscalYear": "official",
+            "fiscalQuarter": "official",
+            "fiscalLabel": "official",
+            "statementCurrency": "official",
+            "statementFilingDate": "official",
+            "statementSourceUrl": "official"
           },
-          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueTaxonomyChangedFromPriorYear": false
+          "parserFinancialValidation": {
+            "version": "financial-validation-v1",
+            "status": "high",
+            "confidenceScore": 1.0,
+            "completenessScore": 1.0,
+            "consistencyScore": 1.0,
+            "checksRun": 8,
+            "checksPassed": 8,
+            "issueCount": 0,
+            "issues": []
+          },
+          "fieldSources": {
+            "revenueBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+              "filingDate": "2026-10-28"
+            },
+            "costOfRevenueBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+              "filingDate": "2026-10-28"
+            },
+            "operatingIncomeBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+              "filingDate": "2026-10-28"
+            },
+            "netIncomeBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+              "filingDate": "2026-10-28"
+            },
+            "operatingCashFlowBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+              "filingDate": "2026-10-28"
+            },
+            "capitalExpenditureBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+              "filingDate": "2026-10-28"
+            },
+            "dilutedEps": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+              "filingDate": "2026-10-28"
+            },
+            "netAssetsBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+              "filingDate": "2026-10-28"
+            }
+          },
+          "statementMeta": {
+            "statementSource": "microsoft-fy2027-q1-earnings-release",
+            "statementSourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+            "statementValueMode": "reported",
+            "statementSpanQuarters": 1,
+            "qualityFlags": [],
+            "adapterId": "official_earnings_release"
+          },
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+          "officialRevenueTaxonomyChangedFromPriorYear": true,
+          "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueDetailTaxonomyChangedFromPriorYear": false
         }
       },
       "statementPresets": {},
-      "officialRevenueStructureHistory": {},
+      "officialRevenueStructureHistory": {
+        "source": "official-segment-cache",
+        "quarters": {
+          "2026Q3": {
+            "segments": [
+              {
+                "name": "Agents and Infra",
+                "nameZh": "智能体与基础设施",
+                "memberKey": "agentsandinfra",
+                "valueBn": 76.795,
+                "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+                "sourceForm": "FY2027 Q1 earnings release",
+                "filingDate": "2026-10-28",
+                "yoyPct": 24.52,
+                "yoyComparisonValueBn": 61.672,
+                "yoyComparisonSourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+                "qoqPct": null,
+                "suppressQoQGrowth": true,
+                "validationNotes": [
+                  "fy2027-recast-taxonomy-no-comparable-prior-quarter"
+                ]
+              },
+              {
+                "name": "Devices and Consumer",
+                "nameZh": "设备与消费者",
+                "memberKey": "devicesandconsumer",
+                "valueBn": 15.484,
+                "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+                "sourceForm": "FY2027 Q1 earnings release",
+                "filingDate": "2026-10-28",
+                "yoyPct": -3.23,
+                "yoyComparisonValueBn": 16.001,
+                "yoyComparisonSourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+                "qoqPct": null,
+                "suppressQoQGrowth": true,
+                "validationNotes": [
+                  "fy2027-recast-taxonomy-no-comparable-prior-quarter"
+                ]
+              }
+            ],
+            "detailGroups": [
+              {
+                "name": "Azure",
+                "nameZh": "Azure",
+                "memberKey": "azure",
+                "valueBn": 33.165,
+                "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+                "sourceForm": "FY2027 Q1 earnings release",
+                "filingDate": "2026-10-28",
+                "yoyPct": 48.16,
+                "yoyComparisonValueBn": 22.384,
+                "yoyComparisonSourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+                "targetName": "Agents and Infra",
+                "qoqPct": null,
+                "suppressQoQGrowth": true,
+                "validationNotes": [
+                  "fy2027-recast-taxonomy-no-comparable-prior-quarter"
+                ]
+              },
+              {
+                "name": "Microsoft 365 cloud",
+                "nameZh": "Microsoft 365 云",
+                "memberKey": "microsoft365cloud",
+                "valueBn": 27.778,
+                "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+                "sourceForm": "FY2027 Q1 earnings release",
+                "filingDate": "2026-10-28",
+                "yoyPct": 17.24,
+                "yoyComparisonValueBn": 23.694,
+                "yoyComparisonSourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+                "targetName": "Agents and Infra",
+                "qoqPct": null,
+                "suppressQoQGrowth": true,
+                "validationNotes": [
+                  "fy2027-recast-taxonomy-no-comparable-prior-quarter"
+                ]
+              },
+              {
+                "name": "Productivity and server licensing",
+                "nameZh": "生产力及服务器许可",
+                "memberKey": "productivityandserverlicensing",
+                "valueBn": 8.407,
+                "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+                "sourceForm": "FY2027 Q1 earnings release",
+                "filingDate": "2026-10-28",
+                "yoyPct": -3.12,
+                "yoyComparisonValueBn": 8.678,
+                "yoyComparisonSourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+                "targetName": "Agents and Infra",
+                "qoqPct": null,
+                "suppressQoQGrowth": true,
+                "validationNotes": [
+                  "fy2027-recast-taxonomy-no-comparable-prior-quarter"
+                ]
+              },
+              {
+                "name": "Industry solutions",
+                "nameZh": "行业解决方案",
+                "memberKey": "industrysolutions",
+                "valueBn": 5.337,
+                "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+                "sourceForm": "FY2027 Q1 earnings release",
+                "filingDate": "2026-10-28",
+                "yoyPct": 9.05,
+                "yoyComparisonValueBn": 4.894,
+                "yoyComparisonSourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+                "targetName": "Agents and Infra",
+                "qoqPct": null,
+                "suppressQoQGrowth": true,
+                "validationNotes": [
+                  "fy2027-recast-taxonomy-no-comparable-prior-quarter"
+                ]
+              },
+              {
+                "name": "Frontier and support services",
+                "nameZh": "前沿与支持服务",
+                "memberKey": "frontierandsupportservices",
+                "valueBn": 2.108,
+                "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+                "sourceForm": "FY2027 Q1 earnings release",
+                "filingDate": "2026-10-28",
+                "yoyPct": 4.25,
+                "yoyComparisonValueBn": 2.022,
+                "yoyComparisonSourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+                "targetName": "Agents and Infra",
+                "qoqPct": null,
+                "suppressQoQGrowth": true,
+                "validationNotes": [
+                  "fy2027-recast-taxonomy-no-comparable-prior-quarter"
+                ]
+              },
+              {
+                "name": "Search and advertising",
+                "nameZh": "搜索与广告",
+                "memberKey": "searchandadvertising",
+                "valueBn": 6.554,
+                "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+                "sourceForm": "FY2027 Q1 earnings release",
+                "filingDate": "2026-10-28",
+                "yoyPct": 10.3,
+                "yoyComparisonValueBn": 5.942,
+                "yoyComparisonSourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+                "targetName": "Devices and Consumer",
+                "qoqPct": null,
+                "suppressQoQGrowth": true,
+                "validationNotes": [
+                  "fy2027-recast-taxonomy-no-comparable-prior-quarter"
+                ]
+              },
+              {
+                "name": "XBOX",
+                "nameZh": "Xbox",
+                "memberKey": "xbox",
+                "valueBn": 5.379,
+                "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+                "sourceForm": "FY2027 Q1 earnings release",
+                "filingDate": "2026-10-28",
+                "yoyPct": -2.34,
+                "yoyComparisonValueBn": 5.508,
+                "yoyComparisonSourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+                "targetName": "Devices and Consumer",
+                "qoqPct": null,
+                "suppressQoQGrowth": true,
+                "validationNotes": [
+                  "fy2027-recast-taxonomy-no-comparable-prior-quarter"
+                ]
+              },
+              {
+                "name": "Windows OEM and devices",
+                "nameZh": "Windows OEM 与设备",
+                "memberKey": "windowsoemanddevices",
+                "valueBn": 3.551,
+                "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+                "sourceForm": "FY2027 Q1 earnings release",
+                "filingDate": "2026-10-28",
+                "yoyPct": -21.97,
+                "yoyComparisonValueBn": 4.551,
+                "yoyComparisonSourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+                "targetName": "Devices and Consumer",
+                "qoqPct": null,
+                "suppressQoQGrowth": true,
+                "validationNotes": [
+                  "fy2027-recast-taxonomy-no-comparable-prior-quarter"
+                ]
+              }
+            ],
+            "costBreakdown": [
+              {
+                "name": "Product",
+                "nameZh": "产品成本",
+                "memberKey": "productcost",
+                "valueBn": 2.471,
+                "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+                "sourceForm": "FY2027 Q1 earnings release",
+                "filingDate": "2026-10-28"
+              },
+              {
+                "name": "Service and other",
+                "nameZh": "服务及其他成本",
+                "memberKey": "serviceandothercost",
+                "valueBn": 27.249,
+                "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+                "sourceForm": "FY2027 Q1 earnings release",
+                "filingDate": "2026-10-28"
+              }
+            ],
+            "opexBreakdown": [
+              {
+                "name": "Research and development",
+                "nameZh": "研发费用",
+                "memberKey": "researchanddevelopment",
+                "valueBn": 9.047,
+                "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+                "sourceForm": "FY2027 Q1 earnings release",
+                "filingDate": "2026-10-28"
+              },
+              {
+                "name": "Sales and marketing",
+                "nameZh": "销售和营销费用",
+                "memberKey": "salesandmarketing",
+                "valueBn": 5.716,
+                "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+                "sourceForm": "FY2027 Q1 earnings release",
+                "filingDate": "2026-10-28"
+              },
+              {
+                "name": "General and administrative",
+                "nameZh": "一般及行政费用",
+                "memberKey": "generalandadministrative",
+                "valueBn": 1.881,
+                "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+                "sourceForm": "FY2027 Q1 earnings release",
+                "filingDate": "2026-10-28"
+              }
+            ],
+            "style": "segment-bridge",
+            "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+            "filingDate": "2026-10-28",
+            "sourceForm": "FY2027 Q1 earnings release"
+          }
+        },
+        "filingsUsed": [
+          {
+            "form": "10-Q",
+            "filingDate": "2026-01-28",
+            "accession": "0001193125-26-027207",
+            "primaryDocument": "msft-20251231.htm",
+            "instance": "msft-20251231_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2025-10-29",
+            "accession": "0001193125-25-256321",
+            "primaryDocument": "msft-20250930.htm",
+            "instance": "msft-20250930_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2025-07-30",
+            "accession": "0000950170-25-100235",
+            "primaryDocument": "msft-20250630.htm",
+            "instance": "msft-20250630_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2025-04-30",
+            "accession": "0000950170-25-061046",
+            "primaryDocument": "msft-20250331.htm",
+            "instance": "msft-20250331_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2025-01-29",
+            "accession": "0000950170-25-010491",
+            "primaryDocument": "msft-20241231.htm",
+            "instance": "msft-20241231_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2024-10-30",
+            "accession": "0000950170-24-118967",
+            "primaryDocument": "msft-20240930.htm",
+            "instance": "msft-20240930_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2024-07-30",
+            "accession": "0000950170-24-087843",
+            "primaryDocument": "msft-20240630.htm",
+            "instance": "msft-20240630_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2024-04-25",
+            "accession": "0000950170-24-048288",
+            "primaryDocument": "msft-20240331.htm",
+            "instance": "msft-20240331_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2024-01-30",
+            "accession": "0000950170-24-008814",
+            "primaryDocument": "msft-20231231.htm",
+            "instance": "msft-20231231_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2023-10-24",
+            "accession": "0000950170-23-054855",
+            "primaryDocument": "msft-20230930.htm",
+            "instance": "msft-20230930_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2023-07-27",
+            "accession": "0000950170-23-035122",
+            "primaryDocument": "msft-20230630.htm",
+            "instance": "msft-20230630_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2023-04-25",
+            "accession": "0000950170-23-014423",
+            "primaryDocument": "msft-20230331.htm",
+            "instance": "msft-20230331_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2023-01-24",
+            "accession": "0001564590-23-000733",
+            "primaryDocument": "msft-10q_20221231.htm",
+            "instance": "msft-10q_20221231_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2022-10-25",
+            "accession": "0001564590-22-035087",
+            "primaryDocument": "msft-10q_20220930.htm",
+            "instance": "msft-10q_20220930_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2022-07-28",
+            "accession": "0001564590-22-026876",
+            "primaryDocument": "msft-10k_20220630.htm",
+            "instance": "msft-10k_20220630_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2022-04-26",
+            "accession": "0001564590-22-015675",
+            "primaryDocument": "msft-10q_20220331.htm",
+            "instance": "msft-10q_20220331_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2022-01-25",
+            "accession": "0001564590-22-002324",
+            "primaryDocument": "msft-10q_20211231.htm",
+            "instance": "msft-10q_20211231_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2021-10-26",
+            "accession": "0001564590-21-051992",
+            "primaryDocument": "msft-10q_20210930.htm",
+            "instance": "msft-10q_20210930_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2021-07-29",
+            "accession": "0001564590-21-039151",
+            "primaryDocument": "msft-10k_20210630.htm",
+            "instance": "msft-10k_20210630_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2021-04-27",
+            "accession": "0001564590-21-020891",
+            "primaryDocument": "msft-10q_20210331.htm",
+            "instance": "msft-10q_20210331_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2021-01-26",
+            "accession": "0001564590-21-002316",
+            "primaryDocument": "msft-10q_20201231.htm",
+            "instance": "msft-10q_20201231_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2020-10-27",
+            "accession": "0001564590-20-047996",
+            "primaryDocument": "msft-10q_20200930.htm",
+            "instance": "msft-10q_20200930_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2020-07-30",
+            "accession": "0001564590-20-034944",
+            "primaryDocument": "msft-10k_20200630.htm",
+            "instance": "msft-10k_20200630_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2020-04-29",
+            "accession": "0001564590-20-019706",
+            "primaryDocument": "msft-10q_20200331.htm",
+            "instance": "msft-10q_20200331_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2020-01-29",
+            "accession": "0001564590-20-002450",
+            "primaryDocument": "msft-10q_20191231.htm",
+            "instance": "msft-10q_20191231_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2019-10-23",
+            "accession": "0001564590-19-037549",
+            "primaryDocument": "msft-10q_20190930.htm",
+            "instance": "msft-10q_20190930_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2019-08-01",
+            "accession": "0001564590-19-027952",
+            "primaryDocument": "msft-10k_20190630.htm",
+            "instance": "msft-20190630.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2019-04-24",
+            "accession": "0001564590-19-012709",
+            "primaryDocument": "msft-10q_20190331.htm",
+            "instance": "msft-20190331.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2019-01-30",
+            "accession": "0001564590-19-001392",
+            "primaryDocument": "msft-10q_20181231.htm",
+            "instance": "msft-20181231.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2018-10-24",
+            "accession": "0001564590-18-024893",
+            "primaryDocument": "msft-10q_20180930.htm",
+            "instance": "msft-20180930.xml"
+          },
+          {
+            "quarter": "2026Q3",
+            "periodEnd": "2026-09-30",
+            "filingDate": "2026-10-28",
+            "sourceUrl": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast",
+            "form": "FY2027 Q1 earnings release"
+          }
+        ],
+        "errors": []
+      },
       "officialSegmentHistory": {}
     },
     {
@@ -1229,7 +2058,8 @@
         "2025Q3",
         "2025Q4",
         "2026Q1",
-        "2026Q2"
+        "2026Q2",
+        "2026Q3"
       ],
       "statementSource": "official-sec-companyfacts",
       "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json",
@@ -1237,24 +2067,24 @@
       "cik": 1652044,
       "errors": [],
       "coverage": {
-        "quarterCount": 34,
+        "quarterCount": 35,
         "pixelReplicaQuarterCount": 1,
         "hasPixelReplica": true,
-        "officialFinancialQuarterCount": 34,
-        "officialSegmentQuarterCount": 34,
-        "officialExpenseQuarterCount": 6,
+        "officialFinancialQuarterCount": 35,
+        "officialSegmentQuarterCount": 35,
+        "officialExpenseQuarterCount": 7,
         "classification": {
           "status": "ok",
-          "latestQuarter": "2026Q2",
+          "latestQuarter": "2026Q3",
           "latestQuarterHasRevenueClassification": true,
           "latestQuarterHasExpenseClassification": true,
-          "latestRevenueClassificationQuarter": "2026Q2",
-          "latestExpenseClassificationQuarter": "2026Q2",
-          "latestStructureHistoryQuarter": "2026Q2",
-          "revenueClassificationQuarterCount": 34,
-          "expenseClassificationQuarterCount": 6,
+          "latestRevenueClassificationQuarter": "2026Q3",
+          "latestExpenseClassificationQuarter": "2026Q3",
+          "latestStructureHistoryQuarter": "2026Q3",
+          "revenueClassificationQuarterCount": 35,
+          "expenseClassificationQuarterCount": 7,
           "revenueClassificationCoverageRatio": 1.0,
-          "expenseClassificationCoverageRatio": 0.1765,
+          "expenseClassificationCoverageRatio": 0.2,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": 0,
           "warnings": [],
@@ -1298,13 +2128,13 @@
             "overallConfidenceScore": 0.9635,
             "financialConfidenceScore": 0.9438,
             "structuralConfidenceScore": 1.0,
-            "revenueSegmentChecks": 22,
+            "revenueSegmentChecks": 23,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 12,
-            "detailGroupChecks": 22,
+            "detailGroupChecks": 23,
             "detailGroupMismatchCount": 0,
             "detailGroupSkippedChecks": 0,
-            "opexChecks": 6,
+            "opexChecks": 7,
             "opexSkippedChecks": 0,
             "opexOverflowMismatchCount": 0,
             "warningCount": 0,
@@ -1318,183 +2148,207 @@
       "marketCapSource": "CompaniesMarketCap",
       "marketCapSourceUrl": "https://companiesmarketcap.com/alphabet-google/marketcap/",
       "dataLoadMode": "latest-only",
-      "latestQuarter": "2026Q2",
+      "latestQuarter": "2026Q3",
       "financials": {
-        "2026Q2": {
-          "calendarQuarter": "2026Q2",
-          "periodEnd": "2026-06-30",
+        "2026Q3": {
+          "calendarQuarter": "2026Q3",
+          "periodEnd": "2026-09-30",
           "fiscalYear": "2026",
-          "fiscalQuarter": "Q2",
-          "fiscalLabel": "FY2026 Q2",
+          "fiscalQuarter": "Q3",
+          "fiscalLabel": "FY2026 Q3",
           "statementCurrency": "USD",
-          "revenueBn": 119.796,
-          "revenueYoyPct": 24.234,
-          "revenueQoqPct": 9.009,
-          "costOfRevenueBn": 45.943,
-          "grossProfitBn": 73.853,
-          "rndBn": 18.219,
-          "sgnaBn": 14.864,
+          "statementSource": "alphabet-q3-2026-earnings-release",
+          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+          "statementFilingDate": "2026-10-28",
+          "statementValueMode": "reported",
+          "statementSpanQuarters": 1,
+          "displayCurrency": "USD",
+          "displayScaleFactor": 1,
+          "revenueBn": 127.577,
+          "costOfRevenueBn": 51.419,
+          "grossProfitBn": 76.158,
+          "rndBn": 20.64,
+          "sgnaBn": 14.942,
           "otherOpexBn": null,
-          "operatingExpensesBn": 33.083,
-          "operatingIncomeBn": 40.77,
-          "nonOperatingBn": 97.983,
-          "pretaxIncomeBn": 138.753,
-          "taxBn": 26.56,
-          "netIncomeBn": 112.193,
-          "netIncomeYoyPct": 297.904,
-          "grossMarginPct": 61.649,
-          "operatingMarginPct": 34.033,
-          "profitMarginPct": 93.653,
-          "effectiveTaxRatePct": 19.142,
-          "grossMarginYoyDeltaPp": 2.134,
-          "operatingMarginYoyDeltaPp": 1.604,
-          "profitMarginYoyDeltaPp": 64.413,
-          "statementSource": "manual-alphabet-earnings-release",
-          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
-          "statementFilingDate": "2026-07-22",
-          "statementMeta": {
-            "statementSource": "manual-alphabet-earnings-release",
-            "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
-            "statementValueMode": "quarterly",
-            "statementSpanQuarters": 1,
-            "qualityFlags": [],
-            "adapterId": "manual_financials"
-          },
+          "operatingExpensesBn": 35.582,
+          "operatingIncomeBn": 40.576,
+          "nonOperatingBn": -8.221,
+          "pretaxIncomeBn": 32.355,
+          "taxBn": 5.887,
+          "netIncomeBn": 26.468,
+          "netIncomeAvailableToCommonStockholdersBn": 26.17,
+          "preferredStockDividendsBn": 0.298,
+          "dilutedEps": 2.12,
+          "operatingCashFlowBn": 42.29,
+          "capitalExpenditureBn": 51.355,
+          "freeCashFlowBn": -9.065,
+          "netAssetsBn": 677.549,
           "officialRevenueSegments": [
             {
               "name": "Ad Revenue",
-              "nameZh": null,
+              "nameZh": "广告收入",
               "memberKey": "adrevenue",
-              "valueBn": 81.629,
-              "yoyPct": 14.42,
-              "qoqPct": 5.66,
-              "mixPct": 68.1,
-              "mixYoyDeltaPp": -5.8,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
-              "sourceForm": "8-K",
-              "filingDate": "2026-07-22",
+              "valueBn": 82.012,
+              "yoyPct": 10.56,
+              "qoqPct": 0.47,
+              "mixPct": 64.3,
+              "mixYoyDeltaPp": -8.2,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+              "sourceForm": "8-K earnings release",
+              "filingDate": "2026-10-28",
               "supportLines": null,
               "supportLinesZh": null,
               "metricMode": null,
               "validationEligible": null,
-              "validationNotes": null
-            },
-            {
-              "name": "Google Play",
-              "nameZh": null,
-              "memberKey": "googleplay",
-              "valueBn": 12.911,
-              "yoyPct": 15.25,
-              "qoqPct": 4.26,
-              "mixPct": 10.8,
-              "mixYoyDeltaPp": -0.8,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
-              "sourceForm": "8-K",
-              "filingDate": "2026-07-22",
-              "supportLines": [
-                "Official: subscriptions, platforms, and devices"
-              ],
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": null,
-              "validationNotes": null
+              "validationNotes": null,
+              "yoyComparisonValueBn": 74.182,
+              "yoyComparisonSourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm"
             },
             {
               "name": "Google Cloud",
-              "nameZh": null,
+              "nameZh": "谷歌云",
               "memberKey": "googlecloud",
-              "valueBn": 24.768,
-              "yoyPct": 81.8,
-              "qoqPct": 23.67,
-              "mixPct": 20.7,
-              "mixYoyDeltaPp": 6.5,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
-              "sourceForm": "8-K",
-              "filingDate": "2026-07-22",
+              "valueBn": 30.709,
+              "yoyPct": 102.61,
+              "qoqPct": 23.99,
+              "mixPct": 24.1,
+              "mixYoyDeltaPp": 9.3,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+              "sourceForm": "8-K earnings release",
+              "filingDate": "2026-10-28",
               "supportLines": null,
               "supportLinesZh": null,
               "metricMode": null,
               "validationEligible": null,
-              "validationNotes": null
+              "validationNotes": null,
+              "yoyComparisonValueBn": 15.157,
+              "yoyComparisonSourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm"
             },
             {
-              "name": "Other",
-              "nameZh": null,
-              "memberKey": "otherrevenue",
-              "valueBn": 0.488,
-              "yoyPct": 86.97,
-              "qoqPct": 111.26,
-              "mixPct": 0.4,
-              "mixYoyDeltaPp": 0.1,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
-              "sourceForm": "8-K",
-              "filingDate": "2026-07-22",
-              "supportLines": [
-                "Other Bets + hedging"
-              ],
+              "name": "Subscriptions, Platforms & Devices",
+              "nameZh": "订阅、平台及设备",
+              "memberKey": "googleplay",
+              "valueBn": 14.29,
+              "yoyPct": 11.03,
+              "qoqPct": 10.68,
+              "mixPct": 11.2,
+              "mixYoyDeltaPp": -1.4,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+              "sourceForm": "8-K earnings release",
+              "filingDate": "2026-10-28",
+              "supportLines": null,
               "supportLinesZh": null,
               "metricMode": null,
               "validationEligible": null,
-              "validationNotes": null
+              "validationNotes": null,
+              "yoyComparisonValueBn": 12.87,
+              "yoyComparisonSourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm"
+            },
+            {
+              "name": "Other",
+              "nameZh": "其他及套期保值",
+              "memberKey": "otherrevenue",
+              "valueBn": 0.566,
+              "yoyPct": 313.14,
+              "qoqPct": 15.98,
+              "mixPct": 0.4,
+              "mixYoyDeltaPp": 0.3,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+              "sourceForm": "8-K earnings release",
+              "filingDate": "2026-10-28",
+              "supportLines": null,
+              "supportLinesZh": null,
+              "metricMode": null,
+              "validationEligible": null,
+              "validationNotes": null,
+              "yoyComparisonValueBn": 0.137,
+              "yoyComparisonSourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm"
             }
           ],
           "officialRevenueDetailGroups": [
             {
-              "name": "Google Search",
-              "nameZh": null,
+              "name": "Search advertising",
+              "nameZh": "搜索广告",
               "memberKey": "searchadvertising",
-              "valueBn": 63.271,
-              "yoyPct": 16.76,
-              "qoqPct": 4.76,
-              "mixPct": 52.8,
-              "mixYoyDeltaPp": -3.4,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
-              "sourceForm": "8-K",
-              "filingDate": "2026-07-22",
+              "valueBn": 63.35,
+              "yoyPct": 11.99,
+              "qoqPct": 0.12,
+              "mixPct": 49.7,
+              "mixYoyDeltaPp": -5.6,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+              "sourceForm": "8-K earnings release",
+              "filingDate": "2026-10-28",
               "supportLines": null,
               "supportLinesZh": null,
               "targetName": "Ad Revenue",
               "metricMode": null,
               "validationEligible": null,
-              "validationNotes": null
-            },
-            {
-              "name": "Google AdMob",
-              "nameZh": null,
-              "memberKey": "admob",
-              "valueBn": 7.303,
-              "yoyPct": -0.69,
-              "qoqPct": 4.76,
-              "mixPct": 6.1,
-              "mixYoyDeltaPp": -1.5,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
-              "sourceForm": "8-K",
-              "filingDate": "2026-07-22",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "targetName": "Ad Revenue",
-              "metricMode": null,
-              "validationEligible": null,
-              "validationNotes": null
+              "validationNotes": null,
+              "yoyComparisonValueBn": 56.567,
+              "yoyComparisonSourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm"
             },
             {
               "name": "YouTube",
-              "nameZh": null,
+              "nameZh": "YouTube",
               "memberKey": "youtube",
-              "valueBn": 11.055,
-              "yoyPct": 12.85,
-              "qoqPct": 11.86,
-              "mixPct": 9.2,
-              "mixYoyDeltaPp": -0.9,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
-              "sourceForm": "8-K",
-              "filingDate": "2026-07-22",
+              "valueBn": 11.207,
+              "yoyPct": 9.22,
+              "qoqPct": 1.37,
+              "mixPct": 8.8,
+              "mixYoyDeltaPp": -1.2,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+              "sourceForm": "8-K earnings release",
+              "filingDate": "2026-10-28",
               "supportLines": null,
               "supportLinesZh": null,
               "targetName": "Ad Revenue",
               "metricMode": null,
               "validationEligible": null,
-              "validationNotes": null
+              "validationNotes": null,
+              "yoyComparisonValueBn": 10.261,
+              "yoyComparisonSourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm"
+            },
+            {
+              "name": "Google Network",
+              "nameZh": "谷歌广告网络",
+              "memberKey": "admob",
+              "valueBn": 7.455,
+              "yoyPct": 1.37,
+              "qoqPct": 2.08,
+              "mixPct": 5.8,
+              "mixYoyDeltaPp": -1.3,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+              "sourceForm": "8-K earnings release",
+              "filingDate": "2026-10-28",
+              "supportLines": null,
+              "supportLinesZh": null,
+              "targetName": "Ad Revenue",
+              "metricMode": null,
+              "validationEligible": null,
+              "validationNotes": null,
+              "yoyComparisonValueBn": 7.354,
+              "yoyComparisonSourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm"
+            }
+          ],
+          "officialRevenueStyle": "ad-funnel-bridge",
+          "officialCostBreakdown": [
+            {
+              "name": "TAC",
+              "nameZh": "流量获取成本",
+              "memberKey": "tac",
+              "valueBn": 16.366,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+              "sourceForm": "8-K earnings release",
+              "filingDate": "2026-10-28"
+            },
+            {
+              "name": "Other cost",
+              "nameZh": "其他成本",
+              "memberKey": "othercost",
+              "valueBn": 35.053,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+              "sourceForm": "8-K earnings release",
+              "filingDate": "2026-10-28"
             }
           ],
           "officialOpexBreakdown": [
@@ -1502,10 +2356,10 @@
               "name": "Research and development",
               "nameZh": "研发费用",
               "memberKey": "researchanddevelopment",
-              "valueBn": 18.219,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
-              "sourceForm": "8-K",
-              "filingDate": "2026-07-22",
+              "valueBn": 20.64,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+              "sourceForm": "8-K earnings release",
+              "filingDate": "2026-10-28",
               "validationEligible": null,
               "validationNotes": null
             },
@@ -1513,10 +2367,10 @@
               "name": "Sales and marketing",
               "nameZh": "销售和营销费用",
               "memberKey": "salesandmarketing",
-              "valueBn": 8.403,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
-              "sourceForm": "8-K",
-              "filingDate": "2026-07-22",
+              "valueBn": 8.804,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+              "sourceForm": "8-K earnings release",
+              "filingDate": "2026-10-28",
               "validationEligible": null,
               "validationNotes": null
             },
@@ -1524,203 +2378,238 @@
               "name": "General and administrative",
               "nameZh": "一般及行政费用",
               "memberKey": "generalandadministrative",
-              "valueBn": 6.461,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
-              "sourceForm": "8-K",
-              "filingDate": "2026-07-22",
+              "valueBn": 6.138,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+              "sourceForm": "8-K earnings release",
+              "filingDate": "2026-10-28",
               "validationEligible": null,
               "validationNotes": null
             }
           ],
-          "officialCostBreakdown": [
-            {
-              "name": "Other cost",
-              "nameZh": "其他成本",
-              "memberKey": "othercost",
-              "valueBn": 29.764,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
-              "sourceForm": "8-K",
-              "filingDate": "2026-07-22"
-            },
-            {
-              "name": "TAC",
-              "nameZh": "流量获取成本",
-              "memberKey": "tac",
-              "valueBn": 16.179,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
-              "sourceForm": "8-K",
-              "filingDate": "2026-07-22"
-            }
+          "financialNotes": [
+            "GAAP net income is $26.468bn; after $0.298bn preferred dividends, income available to common stockholders is $26.170bn. Diluted EPS uses common-stockholder income.",
+            "Other revenue combines $0.372bn Other Bets and $0.194bn hedging gains; neither is omitted from the revenue bridge."
           ],
-          "officialRevenueStyle": "ad-funnel-bridge",
-          "displayCurrency": "USD",
-          "displayScaleFactor": 1,
-          "sankeyLayout": {
-            "useExtremePositiveLayout": true,
-            "extremePositiveCanvasExtraY": -40,
-            "extremePositiveDesignExtraY": -19,
-            "positiveLabelPlacement": "left-center",
-            "structuralNodeOffsets": {
-              "revenue": {
-                "dy": -37.8
-              },
-              "operating": {
-                "dy": -23.4
-              },
-              "operating-expenses": {
-                "dy": 70.8
-              },
-              "cost-breakdown-0": {
-                "dy": 100.1
-              },
-              "cost-breakdown-1": {
-                "dy": 178.7
-              },
-              "positive-0": {
-                "dy": -50
-              },
-              "deduction-0": {
-                "dy": -40.7
-              },
-              "opex-0": {
-                "dy": 35.1
-              },
-              "opex-1": {
-                "dy": 18.5
-              },
-              "opex-2": {
-                "dy": -40.8
-              }
+          "grossMarginPct": 59.696,
+          "grossMarginYoyDeltaPp": 0.116,
+          "operatingMarginPct": 31.805,
+          "operatingMarginYoyDeltaPp": 1.295,
+          "profitMarginPct": 20.747,
+          "profitMarginYoyDeltaPp": -13.433,
+          "effectiveTaxRatePct": 18.195,
+          "revenueYoyPct": 24.653,
+          "revenueQoqPct": 6.495,
+          "netIncomeYoyPct": -24.332,
+          "parserFinancialFieldSources": {
+            "statementSpanQuarters": "official",
+            "displayScaleFactor": "official",
+            "revenueBn": "official",
+            "costOfRevenueBn": "official",
+            "grossProfitBn": "derived",
+            "rndBn": "official",
+            "sgnaBn": "derived",
+            "operatingExpensesBn": "derived",
+            "operatingIncomeBn": "official",
+            "nonOperatingBn": "official",
+            "pretaxIncomeBn": "official",
+            "taxBn": "official",
+            "netIncomeBn": "official",
+            "netIncomeAvailableToCommonStockholdersBn": "official",
+            "preferredStockDividendsBn": "official",
+            "dilutedEps": "official",
+            "operatingCashFlowBn": "official",
+            "capitalExpenditureBn": "official",
+            "freeCashFlowBn": "derived",
+            "netAssetsBn": "official",
+            "grossMarginPct": "derived",
+            "grossMarginYoyDeltaPp": "derived",
+            "operatingMarginPct": "derived",
+            "operatingMarginYoyDeltaPp": "derived",
+            "profitMarginPct": "derived",
+            "profitMarginYoyDeltaPp": "derived",
+            "effectiveTaxRatePct": "derived",
+            "revenueYoyPct": "derived",
+            "revenueQoqPct": "derived",
+            "netIncomeYoyPct": "derived",
+            "calendarQuarter": "official",
+            "periodEnd": "official",
+            "fiscalYear": "official",
+            "fiscalQuarter": "official",
+            "fiscalLabel": "official",
+            "statementCurrency": "official",
+            "statementFilingDate": "official",
+            "statementSourceUrl": "official"
+          },
+          "parserFinancialValidation": {
+            "version": "financial-validation-v1",
+            "status": "high",
+            "confidenceScore": 1.0,
+            "completenessScore": 1.0,
+            "consistencyScore": 1.0,
+            "checksRun": 8,
+            "checksPassed": 8,
+            "issueCount": 0,
+            "issues": []
+          },
+          "fieldSources": {
+            "revenueBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+              "filingDate": "2026-10-28"
+            },
+            "costOfRevenueBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+              "filingDate": "2026-10-28"
+            },
+            "operatingIncomeBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+              "filingDate": "2026-10-28"
+            },
+            "netIncomeBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+              "filingDate": "2026-10-28"
+            },
+            "operatingCashFlowBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+              "filingDate": "2026-10-28"
+            },
+            "capitalExpenditureBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+              "filingDate": "2026-10-28"
+            },
+            "dilutedEps": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+              "filingDate": "2026-10-28"
+            },
+            "netAssetsBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+              "filingDate": "2026-10-28"
             }
           },
-          "sankeyStructureContinuity": {
-            "sourceQuarter": "2026Q1",
-            "fields": [
-              "officialRevenueSegments",
-              "officialRevenueDetailGroups",
-              "officialCostBreakdown"
-            ],
-            "rule": "same-normalized-category-set"
+          "statementMeta": {
+            "statementSource": "alphabet-q3-2026-earnings-release",
+            "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+            "statementValueMode": "reported",
+            "statementSpanQuarters": 1,
+            "qualityFlags": [],
+            "adapterId": "official_earnings_release"
           },
           "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
           "officialRevenueTaxonomyChangedFromPriorYear": false,
           "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueDetailTaxonomyChangedFromPriorYear": false
+          "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
+          "sankeyPreserveOfficialLabels": true
         }
       },
       "statementPresets": {},
       "officialRevenueStructureHistory": {
         "source": "manual-official-quarterly-results",
         "quarters": {
-          "2026Q2": {
-            "style": "ad-funnel-bridge",
+          "2026Q3": {
             "segments": [
               {
                 "name": "Ad Revenue",
-                "nameZh": null,
+                "nameZh": "广告收入",
                 "memberKey": "adrevenue",
-                "valueBn": 81.629,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
-                "sourceForm": "8-K",
-                "filingDate": "2026-07-22",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": null,
-                "validationNotes": null
+                "valueBn": 82.012,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+                "sourceForm": "8-K earnings release",
+                "filingDate": "2026-10-28",
+                "yoyPct": 10.56,
+                "yoyComparisonValueBn": 74.182,
+                "yoyComparisonSourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm"
               },
               {
                 "name": "Google Cloud",
                 "nameZh": "谷歌云",
                 "memberKey": "googlecloud",
-                "valueBn": 24.768,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
-                "sourceForm": "8-K",
-                "filingDate": "2026-07-22",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": null,
-                "validationNotes": null
+                "valueBn": 30.709,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+                "sourceForm": "8-K earnings release",
+                "filingDate": "2026-10-28",
+                "yoyPct": 102.61,
+                "yoyComparisonValueBn": 15.157,
+                "yoyComparisonSourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm"
               },
               {
-                "name": "Google Play",
-                "nameZh": "订阅、平台和设备",
+                "name": "Subscriptions, Platforms & Devices",
+                "nameZh": "订阅、平台及设备",
                 "memberKey": "googleplay",
-                "valueBn": 12.911,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
-                "sourceForm": "8-K",
-                "filingDate": "2026-07-22",
-                "supportLines": [
-                  "Official: subscriptions, platforms, and devices"
-                ],
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": null,
-                "validationNotes": null
+                "valueBn": 14.29,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+                "sourceForm": "8-K earnings release",
+                "filingDate": "2026-10-28",
+                "yoyPct": 11.03,
+                "yoyComparisonValueBn": 12.87,
+                "yoyComparisonSourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm"
               },
               {
                 "name": "Other",
-                "nameZh": "其他",
+                "nameZh": "其他及套期保值",
                 "memberKey": "otherrevenue",
-                "valueBn": 0.488,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
-                "sourceForm": "8-K",
-                "filingDate": "2026-07-22",
-                "supportLines": [
-                  "Other Bets + hedging"
-                ],
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": null,
-                "validationNotes": null
+                "valueBn": 0.566,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+                "sourceForm": "8-K earnings release",
+                "filingDate": "2026-10-28",
+                "yoyPct": 313.14,
+                "yoyComparisonValueBn": 0.137,
+                "yoyComparisonSourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm"
               }
             ],
             "detailGroups": [
               {
-                "name": "Google Search",
-                "nameZh": "谷歌搜索",
+                "name": "Search advertising",
+                "nameZh": "搜索广告",
                 "memberKey": "searchadvertising",
-                "targetName": "Ad Revenue",
-                "valueBn": 63.271,
-                "filingDate": "2026-07-22",
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
-                "sourceForm": "8-K"
+                "valueBn": 63.35,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+                "sourceForm": "8-K earnings release",
+                "filingDate": "2026-10-28",
+                "yoyPct": 11.99,
+                "yoyComparisonValueBn": 56.567,
+                "yoyComparisonSourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+                "targetName": "Ad Revenue"
               },
               {
                 "name": "YouTube",
+                "nameZh": "YouTube",
                 "memberKey": "youtube",
-                "targetName": "Ad Revenue",
-                "valueBn": 11.055,
-                "filingDate": "2026-07-22",
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
-                "sourceForm": "8-K"
+                "valueBn": 11.207,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+                "sourceForm": "8-K earnings release",
+                "filingDate": "2026-10-28",
+                "yoyPct": 9.22,
+                "yoyComparisonValueBn": 10.261,
+                "yoyComparisonSourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+                "targetName": "Ad Revenue"
               },
               {
-                "name": "Google AdMob",
+                "name": "Google Network",
                 "nameZh": "谷歌广告网络",
                 "memberKey": "admob",
-                "targetName": "Ad Revenue",
-                "valueBn": 7.303,
-                "filingDate": "2026-07-22",
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
-                "sourceForm": "8-K"
+                "valueBn": 7.455,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+                "sourceForm": "8-K earnings release",
+                "filingDate": "2026-10-28",
+                "yoyPct": 1.37,
+                "yoyComparisonValueBn": 7.354,
+                "yoyComparisonSourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+                "targetName": "Ad Revenue"
               }
             ],
             "costBreakdown": [
@@ -1728,19 +2617,19 @@
                 "name": "TAC",
                 "nameZh": "流量获取成本",
                 "memberKey": "tac",
-                "valueBn": 16.179,
-                "filingDate": "2026-07-22",
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
-                "sourceForm": "8-K"
+                "valueBn": 16.366,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+                "sourceForm": "8-K earnings release",
+                "filingDate": "2026-10-28"
               },
               {
                 "name": "Other cost",
                 "nameZh": "其他成本",
                 "memberKey": "othercost",
-                "valueBn": 29.764,
-                "filingDate": "2026-07-22",
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
-                "sourceForm": "8-K"
+                "valueBn": 35.053,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+                "sourceForm": "8-K earnings release",
+                "filingDate": "2026-10-28"
               }
             ],
             "opexBreakdown": [
@@ -1748,30 +2637,34 @@
                 "name": "Research and development",
                 "nameZh": "研发费用",
                 "memberKey": "researchanddevelopment",
-                "valueBn": 18.219,
-                "filingDate": "2026-07-22",
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
-                "sourceForm": "8-K"
+                "valueBn": 20.64,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+                "sourceForm": "8-K earnings release",
+                "filingDate": "2026-10-28"
               },
               {
                 "name": "Sales and marketing",
                 "nameZh": "销售和营销费用",
                 "memberKey": "salesandmarketing",
-                "valueBn": 8.403,
-                "filingDate": "2026-07-22",
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
-                "sourceForm": "8-K"
+                "valueBn": 8.804,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+                "sourceForm": "8-K earnings release",
+                "filingDate": "2026-10-28"
               },
               {
                 "name": "General and administrative",
                 "nameZh": "一般及行政费用",
                 "memberKey": "generalandadministrative",
-                "valueBn": 6.461,
-                "filingDate": "2026-07-22",
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
-                "sourceForm": "8-K"
+                "valueBn": 6.138,
+                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+                "sourceForm": "8-K earnings release",
+                "filingDate": "2026-10-28"
               }
-            ]
+            ],
+            "style": "ad-funnel-bridge",
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+            "filingDate": "2026-10-28",
+            "sourceForm": "8-K earnings release"
           }
         },
         "filingsUsed": [
@@ -1906,6 +2799,13 @@
             "quarter": "2026Q2",
             "filingDate": "2026-07-22",
             "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm"
+          },
+          {
+            "quarter": "2026Q3",
+            "periodEnd": "2026-09-30",
+            "filingDate": "2026-10-28",
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm",
+            "form": "8-K earnings release"
           }
         ],
         "errors": []
