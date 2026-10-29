@@ -14,6 +14,7 @@ After the merge, the project keeps the original `earnings-image-studio` renderin
 - Companies sort by USD market cap, descending, with visible ranks, values and snapshot dates. Market caps refresh automatically at 17:37 New York time on weekdays; missing or invalid values go last
 - Sankey-style earnings bridge rendering with stable layout templates
 - Revenue segment / detail-group bar visualization
+- Microsoft segment bars support the official FY2027 restatement for FY2025–FY2026, followed by current disclosures. Switch to “原始披露” to retain the original history and colors; share a selected basis with `basis=recast` or `basis=reported`. Direct SVG rendering accepts `--bar-basis recast`.
 - SVG and PNG export directly from the same in-browser renderer
 - Manual pixel-replica presets for high-fidelity company-specific layouts
 

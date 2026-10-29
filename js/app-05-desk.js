@@ -64,7 +64,7 @@
     const selection = {
       company: state.selectedCompanyId, quarter: state.selectedQuarter,
       view: currentChartViewMode(), lang: currentChartLanguage(),
-      range: state.historyRange || 30, table: ui.table,
+      range: state.historyRange || 30, basis: state.barHistoryBasis || "recast", table: ui.table,
     };
     writeStorage(STORAGE_KEY, { ...selection, favorites: [...ui.favorites], keepQuarter: !!state.keepQuarterOnCompanySwitch });
     try {
@@ -74,18 +74,20 @@
       url.searchParams.set("view", selection.view);
       url.searchParams.set("lang", selection.lang);
       if (selection.view === "bars") url.searchParams.set("range", selection.range); else url.searchParams.delete("range");
+      if (selection.view === "bars" && canUseRecastBarHistory(ui.company, state.selectedQuarter)) url.searchParams.set("basis", selection.basis); else url.searchParams.delete("basis");
       if (ui.table) url.searchParams.set("table", "1"); else url.searchParams.delete("table");
       globalScope.history.replaceState(null, "", url);
     } catch (_) { /* Rendering also works without URL/history access. */ }
   }
   function selectionFrom(saved, params) {
     // A shared selection takes precedence over every saved selection field.
-    const hasSharedSelection = ["company", "quarter", "view", "lang", "range", "table"].some((key) => params.has(key));
+    const hasSharedSelection = ["company", "quarter", "view", "lang", "range", "basis", "table"].some((key) => params.has(key));
     const input = hasSharedSelection ? Object.fromEntries(params) : saved;
     return {
       company: String(input.company || ""), quarter: String(input.quarter || ""),
       view: input.view === "bars" ? "bars" : "sankey", lang: input.lang === "en" ? "en" : "zh",
       range: [8, 12, 30].includes(Number(input.range)) ? Number(input.range) : 30,
+      basis: input.basis === "reported" ? "reported" : "recast",
       table: input.table === true || input.table === "1",
     };
   }
@@ -101,10 +103,12 @@
     state.chartViewMode = selection.view;
     state.uiLanguage = selection.lang;
     state.historyRange = selection.range;
+    state.barHistoryBasis = selection.basis;
     state.keepQuarterOnCompanySwitch = saved.keepQuarter === true;
     ui.table = selection.table;
     ui.favorites = new Set((Array.isArray(saved.favorites) ? saved.favorites : []).filter((id) => typeof id === "string" && getCompany(id)));
     if ($("historyRangeSelect")) $("historyRangeSelect").value = String(state.historyRange);
+    if ($("barBasisSelect")) $("barBasisSelect").value = state.barHistoryBasis;
     if ($("keepQuarterCheckbox")) $("keepQuarterCheckbox").checked = state.keepQuarterOnCompanySwitch;
     const drafts = readStorage(DRAFT_KEY);
     state.editor.overridesBySession = Object.fromEntries(Object.entries(drafts).slice(-120).filter(([key]) => /^[-a-z0-9]+::\d{4}Q[1-4]::sankey$/.test(key)).map(([key, values]) => [key, sanitizeEditorNodeOverrides(values)]));
@@ -209,7 +213,8 @@
     if (history?.convertedQuarterCount > 0) warnings.push(`历史图有 ${history.convertedQuarterCount} 个报告期经过币种换算；不同期间的折算会影响增长比较。`);
     if (history?.imputedQuarterCount > 0 || history?.smoothedQuarterCount > 0 || history?.quarters?.some((quarter) => quarter.isBackfilledSegments)) warnings.push("历史图部分报告期包含结构推算、平滑或历史回填，不能视作全部来自当期直接披露。相关变化仅供对照原文。\n");
     if (history?.missingQuarterCount > 0) warnings.push(`历史窗口内 ${history.missingQuarterCount} 个报告期缺少可用数据，图表连续不代表原始披露完整。`);
-    if (history?.taxonomyBreaks?.length || entry.officialRevenueTaxonomyChangedFromPreviousQuarter || entry.officialRevenueTaxonomyChangedFromPriorYear) warnings.push("业务分类在历史期间发生变化，趋势图按可比较分类归并；比较时请留意口径变化。");
+    if (history?.basis === "recast") warnings.push(history.basisNoteZh);
+    else if (history?.taxonomyBreaks?.length || entry.officialRevenueTaxonomyChangedFromPreviousQuarter || entry.officialRevenueTaxonomyChangedFromPriorYear) warnings.push("业务分类在历史期间发生变化，趋势图按可比较分类归并；比较时请留意口径变化。");
     const meta = entry.statementMeta || {};
     if (number(entry.statementSpanQuarters || meta.statementSpanQuarters || meta.spanQuarters) > 1) warnings.push(`本期原始期间覆盖 ${entry.statementSpanQuarters || meta.statementSpanQuarters || meta.spanQuarters} 个季度，请勿将累计值与单季值直接比较。`);
     return warnings;
@@ -234,6 +239,7 @@
     const entry = company.financials?.[snapshot.quarterKey] || {};
     const meta = entry.statementMeta || {};
     const sources = collectSources(entry, company, snapshot);
+    if (history?.recastSourceUrl) sources.unshift({ href: history.recastSourceUrl, label: "官方历史分部重列（第 15 页）", exact: true });
     const warnings = evidenceWarnings(snapshot, company, history);
     const sourceCurrency = entry.statementCurrency || snapshot.sourceCurrency || company.reportingCurrency || "未标明";
     const mode = entry.statementValueMode || meta.statementValueMode || meta.valueMode || "";
@@ -258,10 +264,10 @@
       const headers = ["报告期", "财季", "显示币种", "营收合计（十亿）", ...segments.map((item) => item.nameZh || item.name || item.key), "数据状态"];
       const rows = history.quarters.map((quarter) => {
         const missing = quarter.hasRevenueValue === false || quarter.isMissingQuarterData;
-        const status = missing ? "本期数据缺失" : quarter.isImputedSegments ? "包含推算分类" : quarter.isBackfilledSegments ? "包含历史回填" : quarter.isSmoothedSegments ? "包含平滑处理" : "按图表可比口径整理";
+        const status = missing ? "本期数据缺失" : history.basis === "recast" ? (quarter.quarterKey <= "2026Q2" ? "官方历史重列" : "当期披露（新口径）") : quarter.isImputedSegments ? "包含推算分类" : quarter.isBackfilledSegments ? "包含历史回填" : quarter.isSmoothedSegments ? "包含平滑处理" : "按图表可比口径整理";
         return [quarter.quarterKey, quarter.entry?.fiscalLabel || quarter.label || "", quarter.displayCurrency || history.primaryDisplayCurrency || "USD", missing ? null : number(quarter.totalRevenueBn), ...segments.map((segment) => missing ? null : number(quarter.segmentMap?.[segment.key])), status];
       });
-      return { headers, rows, caption: `${company.nameZh || company.nameEn} · 当前窗口分部营收`, note: "金额单位为十亿；币种见各行。业务分类与图表一致，可能经过历史分类归并、差额补齐或换算；空白表示该分部本期无可用金额。" };
+      return { headers, rows, caption: `${company.nameZh || company.nameEn} · 当前窗口分部营收`, note: history.basis === "recast" ? `金额单位为十亿美元。${history.basisNoteZh}；更早期间不作推算。` : "金额单位为十亿；币种见各行。业务分类与图表一致，可能经过历史分类归并、差额补齐或换算；空白表示该分部本期无可用金额。" };
     }
     const entry = company.financials?.[snapshot.quarterKey] || {};
     const scale = number(snapshot.displayScaleFactor) || 1;
@@ -348,6 +354,12 @@
       $(id)?.setAttribute("aria-pressed", String(active));
     }
     if ($("historyRangeLabel")) $("historyRangeLabel").hidden = !bars;
+    const recastCompany = !!BAR_RECAST_HISTORIES[ui.company?.id];
+    if ($("barBasisLabel")) $("barBasisLabel").hidden = !bars || !recastCompany;
+    if ($("barBasisSelect")) {
+      $("barBasisSelect").value = ui.history?.basis === "recast" ? "recast" : "reported";
+      $("barBasisSelect").querySelector('[value="recast"]').disabled = !canUseRecastBarHistory(ui.company, state.selectedQuarter);
+    }
     if ($("dataViewBtn")) { $("dataViewBtn").textContent = ui.table ? "返回图表" : "数据表"; $("dataViewBtn").setAttribute("aria-pressed", String(ui.table)); }
     if ($("dataTablePanel")) $("dataTablePanel").hidden = !ui.table;
     const preview = document.querySelector(".preview-stage");
@@ -357,7 +369,7 @@
     if ($("editingActions")) $("editingActions").hidden = !state.editor.enabled || bars || ui.table;
     if (refs.editImageBtn) refs.editImageBtn.textContent = state.editor.enabled ? "完成编辑" : "编辑排版";
     if (refs.resetImageBtn) refs.resetImageBtn.textContent = "重置排版";
-    if ($("chartCaption")) $("chartCaption").textContent = bars ? `当前显示 ${ui.history?.quarters?.length || 0} 期 · 历史分类按可比口径归并` : "从业务营收，看到成本与利润的流向";
+    if ($("chartCaption")) $("chartCaption").textContent = bars ? `当前显示 ${ui.history?.quarters?.length || 0} 期 · ${ui.history?.basis === "recast" ? ui.history.basisNoteZh : "历史分类按可比口径归并"}` : "从业务营收，看到成本与利润的流向";
     syncUndoButtons();
     queueChartFit();
   }
@@ -481,6 +493,7 @@
     on("sankeyTab", "click", () => setMode("sankey"));
     on("barsTab", "click", () => setMode("bars"));
     on("historyRangeSelect", "change", (event) => { state.historyRange = Number(event.target.value); requestRenderCurrent(); });
+    on("barBasisSelect", "change", (event) => { state.barHistoryBasis = event.target.value === "reported" ? "reported" : "recast"; requestRenderCurrent(); });
     on("dataViewBtn", "click", () => { ui.table = !ui.table; syncViews(); persist(); });
     on("fullscreenBtn", "click", fullscreen);
     on("zoomChartBtn", "click", () => {

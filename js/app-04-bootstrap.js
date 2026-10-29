@@ -388,7 +388,8 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
   const history = buildRevenueSegmentBarHistory(
     company,
     snapshot?.quarterKey,
-    safeNumber(options.maxQuarters, configuredMaxQuarters)
+    safeNumber(options.maxQuarters, configuredMaxQuarters),
+    { basis: options.basis }
   );
   const chartTitle =
     currentChartLanguage() === "en"
@@ -892,6 +893,9 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
   });
   svg += `</g>`;
 
+  if (history.basis === "recast") {
+    svg += `<text data-bar-basis-note="recast" x="${plotLeft}" y="${height - 24}" font-size="18" fill="${mutedText}">${escapeHtml(currentChartLanguage() === "en" ? history.basisNoteEn : history.basisNoteZh)}</text>`;
+  }
   svg += "</g></svg>";
   return {
     svg,
@@ -1620,7 +1624,10 @@ async function renderCurrent() {
     let barHistory = null;
     const isBarsMode = currentChartViewMode() === "bars";
     if (isBarsMode) {
-      const barRenderResult = EarningsVizRuntime.render.renderRevenueSegmentBarsSvg(snapshot, company, state.historyRange ? { maxQuarters: state.historyRange } : {});
+      const barRenderResult = EarningsVizRuntime.render.renderRevenueSegmentBarsSvg(snapshot, company, {
+        maxQuarters: state.historyRange || 30,
+        basis: canUseRecastBarHistory(company, snapshot.quarterKey) ? state.barHistoryBasis : "reported",
+      });
       refs.chartOutput.innerHTML = barRenderResult.svg;
       refs.chartOutput.style.aspectRatio = `${barRenderResult.width} / ${barRenderResult.height}`;
       refineRenderedBarChartLogoPlacement(refs.chartOutput?.querySelector("svg"));
