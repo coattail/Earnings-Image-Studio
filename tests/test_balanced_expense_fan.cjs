@@ -52,14 +52,84 @@ function render(q,language='zh',options={}) {
   ctx.q=q;ctx.language=language;ctx.options=options;
   return vm.runInContext(`(() => {
     state.selectedQuarter=q;state.uiLanguage=language;const c=getCompany('microsoft'),s=buildSnapshot(c,q);
-    s.learnedEditorNodeOverrides=currentResolvedEditorOverrides();s.interactiveEditorNodeOverrides=options.offsets||{};
+    s.learnedEditorNodeOverrides={...currentResolvedEditorOverrides(),...options.learned};s.interactiveEditorNodeOverrides=options.offsets||{};
     s.editorNodeOverrides={...s.learnedEditorNodeOverrides,...s.interactiveEditorNodeOverrides};s.editModeEnabled=!!options.editing;
     if(options.legacy)s.layout={...s.layout,disableBalancedExpenseFan:true};
-    if(options.expanded)s.layout={...s.layout,disableCompactOuterBranches:true};
+    if(options.expanded)s.layout={...s.layout,disableCompactOuterBranches:true,disableDirectedRevenueInflows:true};
+    s.layout={...s.layout,...options.layout};
     const before=JSON.stringify(s);const svg=EarningsVizRuntime.render.renderIncomeStatementSvg(s,c);
     return {svg,unchanged:before===JSON.stringify(s)};
   })()`,ctx);
 }
+
+function revenuePorts(svg) {
+  const revenue=frames(svg).revenue;
+  return [...svg.matchAll(/<path d="([^"]+)" fill="rgba[^\"]+" opacity="0\.98"><\/path>\s*<rect[^>]*data-edit-node-visible-id="(source-\d+)"/g)].map(m=>{
+    const targets=[...m[1].matchAll(/L (-?[\d.]+) (-?[\d.]+)/g)].filter(p=>Math.abs(+p[1]-revenue.x)<.2);
+    return {id:m[2],targetTop:+targets[0][2],targetBottom:+targets[1][2]};
+  });
+}
+
+function labelBounds(svg,id) {
+  const group=svg.match(new RegExp(`<g data-layout-label-id="${id}">([\\s\\S]*?)</g>`));
+  assert.ok(group,`${id}: measurable rendered label`);
+  const texts=[...group[1].matchAll(/<text ([^>]+)>([^<]+)<\/text>/g)].map(m=>{
+    const a=Object.fromEntries([...m[1].matchAll(/([\w-]+)="([^"]*)"/g)].map(p=>[p[1],p[2]]));
+    const size=+a['font-size'],width=[...m[2]].reduce((sum,c)=>sum+size*(c.charCodeAt(0)>255?1:.65),0);
+    const left=+a.x-(a['text-anchor']==='middle'?width/2:a['text-anchor']==='end'?width:0);
+    return {left,right:left+width,top:+a.y-size*.96,bottom:+a.y+size*.28};
+  });
+  return {left:Math.min(...texts.map(t=>t.left)),right:Math.max(...texts.map(t=>t.right)),
+    top:Math.min(...texts.map(t=>t.top)),bottom:Math.max(...texts.map(t=>t.bottom))};
+}
+
+test('revenue port constraints keep both outer directions and scale without forcing crowded neighbors', () => {
+  for(const side of [-1,1]) {
+    const entry={center:600,targetCenter:600,runway:332,side};
+    const options={minCenter:300,maxCenter:900,unit:1.25};
+    const center=pure.resolveRevenueInflowCenter(entry,options);
+    assert.ok((center-600)*side>=332*.22-1e-6);
+    const scaled=pure.resolveRevenueInflowCenter({...entry,center:1200,targetCenter:1200,runway:664},
+      {minCenter:600,maxCenter:1800,unit:2.5});
+    assert.ok(Math.abs(scaled-center*2)<1e-6);
+    assert.equal(pure.resolveRevenueInflowCenter(entry,{...options,minCenter:750,maxCenter:700}),entry.center);
+  }
+});
+
+test('expense packing reserves label-only horizontal overlaps and has a bounded infeasible fallback', () => {
+  const rows=[{center:600,height:80,sourceCenter:500,drop:30,left:100,right:240},
+    {center:800,height:160,sourceCenter:660,drop:20,left:100,right:240}];
+  const obstacles=[{left:220,right:400,top:570,bottom:700}];
+  const options={minY:200,maxY:1100,gap:24,clearance:30};
+  const result=pure.resolveBranchColumnBelowObstacles(rows,obstacles,options);
+  assert.ok(result.feasible);
+  assert.ok(result.centers[0]-40>=730);
+  assert.ok(result.centers[1]-result.centers[0]>=40+80+24-1e-6);
+  const scaled=pure.resolveBranchColumnBelowObstacles(rows.map(r=>Object.fromEntries(Object.entries(r).map(([k,v])=>[k,v*2]))),
+    obstacles.map(r=>Object.fromEntries(Object.entries(r).map(([k,v])=>[k,v*2]))),
+    Object.fromEntries(Object.entries(options).map(([k,v])=>[k,v*2])));
+  result.centers.forEach((c,i)=>assert.ok(Math.abs(scaled.centers[i]-c*2)<1e-6));
+  assert.equal(pure.resolveBranchColumnBelowObstacles(rows,obstacles,{...options,maxY:750}).feasible,false);
+  assert.equal(pure.resolveBranchColumnBelowObstacles(rows,[{left:300,right:400,bottom:700}],options).centers[0],600);
+});
+
+test('final labels clear expense summaries and outer revenue ribbons converge across languages and restored layouts', () => {
+  const scenarios=[{}, {learned:{'source-1':{dx:0,dy:-220},'operating-expenses':{dx:0,dy:100}}},
+    {offsets:{'operating-expenses':{dx:0,dy:100},
+      'cost-breakdown-0':{dx:0,dy:-180},'cost-breakdown-1':{dx:0,dy:-100}}}];
+  for(const language of ['zh','en']) for(const options of scenarios) {
+    const result=render('2026Q3',language,options), nodes=frames(result.svg), ports=revenuePorts(result.svg);
+    assert.equal(ports.length,2);
+    assert.ok(nodes[ports[0].id].y<ports[0].targetTop-30,'upper stream descends');
+    assert.ok(nodes[ports.at(-1).id].y>ports.at(-1).targetTop+30,'lower stream rises');
+    const summary=labelBounds(result.svg,'operating-expenses-summary');
+    for(const id of ['cost-breakdown-0','cost-breakdown-1']) {
+      const label=labelBounds(result.svg,id);
+      assert.ok(label.top>summary.bottom+12,`${language}/${id}: real title, value and ratio extents`);
+    }
+    assert.ok(result.unchanged,'saved placements remain unchanged');
+  }
+});
 
 test('Microsoft three quarters share a downward expense split without changing money or profit stages', () => {
   for(const q of ['2026Q1','2026Q2','2026Q3']){
@@ -93,7 +163,7 @@ test('small sources and tax caps move inward gently while keeping money, order a
   const expanded=frames(render('2026Q3','zh',{expanded:true}).svg), normal=frames(render('2026Q3').svg);
   for(const id of ['source-1','deduction-0']) {
     const lift=expanded[id].y-normal[id].y;
-    assert.ok(lift>25&&lift<60,`${id}: modest inward lift`);
+    assert.ok(id==='source-1' ? lift>60&&lift<150 : lift>25&&lift<60,`${id}: bounded inward lift`);
     assert.equal(normal[id].height,expanded[id].height);
     for(const language of ['zh','en']) {
       const baseline=frames(render('2026Q3',language).svg);

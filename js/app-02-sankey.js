@@ -4576,7 +4576,7 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
   };
   const renderOpexSummaryMarkup = () => {
     const summaryMetrics = resolveOpexSummaryMetrics();
-    return `
+    return `<g data-layout-label-id="operating-expenses-summary">
       ${svgTextBlock(summaryMetrics.centerX, summaryMetrics.titleY, operatingExpenseLabelLines, {
         fill: redText,
         fontSize: expenseSummaryLayout.titleSize,
@@ -4588,6 +4588,7 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
       })}
       <text x="${summaryMetrics.centerX}" y="${summaryMetrics.valueY}" text-anchor="middle" font-size="${expenseSummaryLayout.valueSize}" font-weight="700" fill="${redText}" paint-order="stroke fill" stroke="${background}" stroke-width="${expenseSummaryLayout.valueStroke}" stroke-linejoin="round">${escapeHtml(formatBillionsByMode(operatingExpensesBn, "negative-parentheses"))}</text>
       ${revenueBn > 0 ? `<text x="${summaryMetrics.centerX}" y="${summaryMetrics.ratioY}" text-anchor="middle" font-size="${expenseSummaryLayout.subSize}" fill="${muted}" paint-order="stroke fill" stroke="${background}" stroke-width="${expenseSummaryLayout.subStroke}" stroke-linejoin="round">${escapeHtml(formatPct((operatingExpensesBn / revenueBn) * 100))} ${ofRevenueLabel()}</text>` : ""}
+      </g>
     `;
   };
   const shiftOpexGroupDownForSummaryClearance = () => {
@@ -5257,7 +5258,7 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
         collisionBandCenterY: safeNumber(options.collisionBandCenterY, box.center),
         collisionBandHeight: safeNumber(options.collisionBandHeight, box.height),
       });
-      return renderTreeLabelBlock(item, box, labelSpec.labelX, color, {
+      const markup = renderTreeLabelBlock(item, box, labelSpec.labelX, color, {
         ...options,
         anchor: "start",
         centerWrapped: options.centerWrapped !== false,
@@ -5270,6 +5271,7 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
         noteOffsetY: labelSpec.noteOffsetY,
         labelCenterY: resolvedLabelCenterY,
       });
+      return options.labelId ? `<g data-layout-label-id="${escapeHtml(options.labelId)}">${markup}</g>` : markup;
     };
   const renderRightSummaryLabel = (lines, labelX, labelCenterY) => {
     const blockHeight = lines.reduce((sum, line, index) => sum + line.size + (index < lines.length - 1 ? line.gapAfter : 0), 0);
@@ -5775,6 +5777,34 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
     }
   };
   enforceOrderedRevenueRibbonSources();
+  const enforceRevenueInflowDirections = offsetFor => {
+    if (snapshot.layout?.disableDirectedRevenueInflows === true || sourceSlices.length < 2) return;
+    [0, sourceSlices.length - 1].forEach(index => {
+      const slice = sourceSlices[index], id = `source-${index}`;
+      const offset = offsetFor(id);
+      const previous = sourceSlices[index - 1], next = sourceSlices[index + 1];
+      const currentTop = slice.top + offset.dy, currentBottom = slice.bottom + offset.dy;
+      const previousBottom = previous && previous.bottom + offsetFor(`source-${index - 1}`).dy;
+      const nextTop = next && next.top + offsetFor(`source-${index + 1}`).dy;
+      const minTop = previous
+        ? previousBottom + Math.min(sourceMetricRequirements[index] + sourceNodeGap, currentTop - previousBottom)
+        : sourceNodeMinY;
+      const maxBottom = next
+        ? nextTop - Math.min(sourceMetricRequirements[index + 1] + sourceNodeGap, nextTop - currentBottom)
+        : sourceNodeMaxY;
+      const center = slice.center + offset.dy;
+      const resolved = resolveRevenueInflowCenter({ center,
+        targetCenter: (slice.revenueTop + slice.revenueBottom) / 2 + offsetFor("revenue").dy,
+        runway: revenueX + offsetFor("revenue").dx -
+          (safeNumber(slice.nodeX, leftX) + offset.dx + sourceNodeWidth),
+        side: index ? 1 : -1,
+      }, { minCenter: minTop + slice.height / 2, maxCenter: maxBottom - slice.height / 2, unit: verticalScale });
+      setAutoLayoutNodeOffset(id, { dy: autoLayoutOffsetForNode(id).dy + resolved - center });
+    });
+  };
+  // Constrain learned preferences in the automatic baseline. Explicit parent
+  // drags remain additive in both view and edit modes, without moving siblings.
+  enforceRevenueInflowDirections(balancedLayoutOffsetForNode);
   const editorOffsetForNode = (nodeId, options = {}) => combinedNodeOffsetFor(nodeId, options);
   const editableNodeFrame = (nodeId, x, y, widthValue, heightValue) => {
     const offset = editorOffsetForNode(nodeId);
@@ -7163,6 +7193,7 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
     });
     html += renderEditableNodeRect(targetFrame, redNode);
     html += renderRightBranchLabel(block.item, block.box, targetFrame.x, terminalNodeWidth, labelColor, {
+      labelId: terminalNodeId,
       density,
       defaultMode: "negative-parentheses",
       labelX,
@@ -7233,6 +7264,7 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
     sourceHoldDeltaReduction: 0,
     minAdaptiveSourceHoldLength: 0,
   });
+  let costBreakdownFinalPackingApplied = false;
   const renderSharedTrunkCostBreakdownPair = (upperBlock, lowerBlock) => {
     if (!upperBlock || !lowerBlock) return "";
     const density = costBreakdownSlices.length >= 3 ? "dense" : "regular";
@@ -7261,7 +7293,7 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
       )
     );
     const currentRenderGapY = lowerFrame.y - (upperFrame.y + upperFrame.height);
-    if (currentRenderGapY < desiredRenderGapY) {
+    if (!costBreakdownFinalPackingApplied && currentRenderGapY < desiredRenderGapY) {
       let remainingGapY = desiredRenderGapY - currentRenderGapY;
       const lowerMaxY = costBreakdownMaxY - lowerFrame.height;
       const lowerShiftY = Math.min(Math.max(lowerMaxY - lowerFrame.y, 0), remainingGapY);
@@ -7388,6 +7420,7 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
     html += renderEditableNodeRect(upperFrame, redNode);
     html += renderEditableNodeRect(lowerFrame, redNode);
     html += renderRightBranchLabel(upperBlock.item, upperBlock.box, upperFrame.x, nodeWidth, redText, {
+      labelId: "cost-breakdown-0",
       density,
       defaultMode: "negative-parentheses",
       labelX: costBreakdownLabelSafeX,
@@ -7396,6 +7429,7 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
       labelCenterY: upperFrame.centerY,
     });
     html += renderRightBranchLabel(lowerBlock.item, lowerBlock.box, lowerFrame.x, nodeWidth, redText, {
+      labelId: "cost-breakdown-1",
       density,
       defaultMode: "negative-parentheses",
       labelX: costBreakdownLabelSafeX,
@@ -9333,6 +9367,39 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
       entries.forEach((e, i) => {
         e.family.boxes[e.index] = shiftBoxCenter(e.box, e.box.center + result.centers[i] - e.center);
       });
+    }
+  }
+  // The compact fan and spine have now reached their final positions. Earlier
+  // barriers use provisional summary coordinates and can be invalidated by a
+  // later parent move. Reserve the actual summary, labels and node footprints
+  // together, then do not let the shared-trunk renderer repack them again.
+  if (costBreakdownBoxes.length && snapshot.layout?.disableFinalExpenseLabelClearance !== true) {
+    const offsetFor = snapshot.editModeEnabled ? balancedLayoutOffsetForNode : editorOffsetForNode;
+    const summary = resolveOpexSummaryObstacleRect(offsetFor("operating-expenses"));
+    const sourceShift = offsetFor("cost");
+    const entries = costBreakdownBoxes.map((box, index) => {
+      const slice = costBreakdownSourceSlices[index] || costBreakdownSlices[index];
+      const bridge = constantThicknessBridge(slice, box.center, 10, costTop, costBottom);
+      const offset = offsetFor(`cost-breakdown-${index}`);
+      const label = resolveRightBranchLabelSpec(slice.item, costBreakdownX + offset.dx, nodeWidth, {
+        labelX: costBreakdownLabelSafeX,
+        density: costBreakdownSlices.length >= 3 ? "dense" : "regular", defaultMode: "negative-parentheses",
+      });
+      return { center: box.center + offset.dy, height: Math.max(box.height, bridge.targetHeight, label.collisionHeight),
+        sourceCenter: (bridge.sourceTop + bridge.sourceBottom) / 2 + sourceShift.dy,
+        drop: Math.max(bridge.sourceBottom - bridge.sourceTop - bridge.targetHeight, 0) / 2,
+        left: Math.min(costBreakdownX + offset.dx, label.labelX),
+        right: Math.max(costBreakdownX + offset.dx + nodeWidth, label.labelX + label.blockWidth),
+      };
+    });
+    const result = resolveBranchColumnBelowObstacles(entries, [summary], {
+      minY: scaleY(180), maxY: height - scaleY(40), gap: scaleY(36), clearance: scaleY(24),
+    });
+    if (result.feasible) {
+      result.centers.forEach((center, index) => {
+        costBreakdownBoxes[index] = shiftBoxCenter(costBreakdownBoxes[index], center - offsetFor(`cost-breakdown-${index}`).dy);
+      });
+      costBreakdownFinalPackingApplied = true;
     }
   }
   const revenueGrossBand = shiftedInterval(revenueGrossSourceBand.top, revenueGrossSourceBand.bottom, "revenue");
