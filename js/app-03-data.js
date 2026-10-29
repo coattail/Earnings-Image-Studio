@@ -3593,10 +3593,9 @@ function relativeLuminance(hexColor) {
   return 0.2126 * srgbToLinear(rgb.r) + 0.7152 * srgbToLinear(rgb.g) + 0.0722 * srgbToLinear(rgb.b);
 }
 
-function barSegmentTextColor(fillColor, companyId = null, segmentKey = null) {
-  // The lighter Microsoft categories use navy figures for clear contrast;
-  // historical categories keep their existing fill and label treatment.
-  if (companyId === "microsoft" && ["agentsandinfra", "devicesandconsumer"].includes(segmentKey)) return "#0F3552";
+function barSegmentTextColor(fillColor, companyId = null) {
+  // Keep Microsoft in-bar annotations white across both reporting structures.
+  if (companyId === "microsoft") return "#FFFFFF";
   return relativeLuminance(fillColor) > 0.52 ? "#0F3552" : "#FFFFFF";
 }
 

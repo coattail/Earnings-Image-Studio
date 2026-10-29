@@ -867,7 +867,7 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
       const valueFontSize = clamp(Math.round(barWidth * 0.42), 11, 24);
       if (heightValue >= valueFontSize + 7) {
         svg += `<text x="${x + barWidth / 2}" y="${y + heightValue / 2 + valueFontSize * 0.34}" text-anchor="middle" font-size="${valueFontSize}" font-weight="700" fill="${barSegmentTextColor(
-          fillColor, company?.id, segmentKey
+          fillColor, company?.id
         )}">${escapeHtml(
           valueLabel
         )}</text>`;
