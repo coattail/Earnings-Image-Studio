@@ -220,6 +220,6 @@ test('Microsoft old and new segment palettes are fixed across ordering and visib
   assert.equal(all.morepersonalcomputing,'#f0b20f','retain the original computing gold');
   ctx.palette=all;
   const hues=vm.runInContext('Object.fromEntries(Object.entries(palette).map(([k,v])=>[k,colorToHsl(v).h]))',ctx);
-  assert.ok(hues.agentsandinfra>190&&hues.agentsandinfra<220,'blue infrastructure');
-  assert.ok(hues.devicesandconsumer>20&&hues.devicesandconsumer<40,'warm orange consumer');
+  assert.ok(hues.agentsandinfra>225&&hues.agentsandinfra<245,'cool periwinkle infrastructure');
+  assert.ok(hues.devicesandconsumer>5&&hues.devicesandconsumer<20,'warm coral consumer');
 });
