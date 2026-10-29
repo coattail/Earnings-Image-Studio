@@ -4,7 +4,7 @@
   "nameZh": "家得宝",
   "nameEn": "Home Depot",
   "slug": "hd",
-  "rank": 28,
+  "rank": 34,
   "isAdr": false,
   "brand": {
     "primary": "#F96302",
@@ -126,9 +126,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -217,9 +217,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -308,9 +308,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -324,7 +324,7 @@
           "valueBn": 10.66,
           "yoyPct": null,
           "qoqPct": null,
-          "mixPct": 35.0,
+          "mixPct": 35,
           "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495019000057/hd10q08042019_htm.xml",
           "sourceForm": "10-Q",
@@ -401,7 +401,9 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2018Q4": {
       "calendarQuarter": "2018Q4",
@@ -483,9 +485,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -513,13 +515,13 @@
           ]
         },
         {
-          "name": "Major Product Line Dcor",
+          "name": "Major Product Line Hardlines",
           "nameZh": null,
-          "memberKey": "majorproductlinedcor",
-          "valueBn": 8.919,
+          "memberKey": "majorproductlinehardlines",
+          "valueBn": 7.14,
           "yoyPct": null,
-          "qoqPct": -7.6,
-          "mixPct": 33.9,
+          "qoqPct": -29.66,
+          "mixPct": 27.1,
           "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495019000066/hd10q11032019_htm.xml",
           "sourceForm": "10-Q",
@@ -533,13 +535,13 @@
           ]
         },
         {
-          "name": "Major Product Line Hardlines",
+          "name": "Major Product Line Dcor",
           "nameZh": null,
-          "memberKey": "majorproductlinehardlines",
-          "valueBn": 7.14,
+          "memberKey": "majorproductlinedcor",
+          "valueBn": 8.919,
           "yoyPct": null,
-          "qoqPct": -29.66,
-          "mixPct": 27.1,
+          "qoqPct": -7.6,
+          "mixPct": 33.9,
           "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495019000066/hd10q11032019_htm.xml",
           "sourceForm": "10-Q",
@@ -576,7 +578,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2018Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2019Q1": {
       "calendarQuarter": "2019Q1",
@@ -663,9 +674,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -759,9 +770,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -852,7 +863,9 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2019Q3": {
       "calendarQuarter": "2019Q3",
@@ -939,9 +952,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -955,28 +968,8 @@
           "valueBn": 10.495,
           "yoyPct": -1.55,
           "qoqPct": 11.6,
-          "mixPct": 34.0,
-          "mixYoyDeltaPp": -1.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495019000057/hd10q08042019_htm.xml",
-          "sourceForm": "10-Q",
-          "filingDate": "2019-08-27",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": false,
-          "validationNotes": [
-            "partial-merchandise-category-disclosure"
-          ]
-        },
-        {
-          "name": "Major Product Line Hardlines",
-          "nameZh": null,
-          "memberKey": "majorproductlinehardlines",
-          "valueBn": 10.294,
-          "yoyPct": 1.42,
-          "qoqPct": 25.05,
-          "mixPct": 33.4,
-          "mixYoyDeltaPp": 0.1,
+          "mixPct": 34,
+          "mixYoyDeltaPp": -1,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495019000057/hd10q08042019_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2019-08-27",
@@ -997,6 +990,26 @@
           "qoqPct": 14.92,
           "mixPct": 32.6,
           "mixYoyDeltaPp": 0.9,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495019000057/hd10q08042019_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2019-08-27",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-merchandise-category-disclosure"
+          ]
+        },
+        {
+          "name": "Major Product Line Hardlines",
+          "nameZh": null,
+          "memberKey": "majorproductlinehardlines",
+          "valueBn": 10.294,
+          "yoyPct": 1.42,
+          "qoqPct": 25.05,
+          "mixPct": 33.4,
+          "mixYoyDeltaPp": 0.1,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495019000057/hd10q08042019_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2019-08-27",
@@ -1032,7 +1045,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2019Q4": {
       "calendarQuarter": "2019Q4",
@@ -1119,9 +1141,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -1212,7 +1234,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2020Q1": {
       "calendarQuarter": "2020Q1",
@@ -1299,9 +1330,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -1372,7 +1403,9 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2020Q2": {
       "calendarQuarter": "2020Q2",
@@ -1459,9 +1492,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -1536,7 +1569,7 @@
           "yoyPct": -16.88,
           "qoqPct": -19.55,
           "mixPct": 3.4,
-          "mixYoyDeltaPp": -1.0,
+          "mixYoyDeltaPp": -1,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495020000041/hd-20200503_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2020-05-27",
@@ -1552,7 +1585,9 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2020Q3": {
       "calendarQuarter": "2020Q3",
@@ -1639,9 +1674,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -1649,34 +1684,14 @@
       },
       "officialRevenueSegments": [
         {
-          "name": "Major Product Line Hardlines",
-          "nameZh": null,
-          "memberKey": "majorproductlinehardlines",
-          "valueBn": 13.707,
-          "yoyPct": 33.16,
-          "qoqPct": 50.0,
-          "mixPct": 36.0,
-          "mixYoyDeltaPp": 2.6,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495020000068/hd-20200802_htm.xml",
-          "sourceForm": "10-Q",
-          "filingDate": "2020-08-25",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": false,
-          "validationNotes": [
-            "partial-merchandise-category-disclosure"
-          ]
-        },
-        {
           "name": "Major Product Line Building Materials",
           "nameZh": null,
           "memberKey": "majorproductlinebuildingmaterials",
           "valueBn": 12.556,
           "yoyPct": 19.64,
           "qoqPct": 27.91,
-          "mixPct": 33.0,
-          "mixYoyDeltaPp": -1.0,
+          "mixPct": 33,
+          "mixYoyDeltaPp": -1,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495020000068/hd-20200802_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2020-08-25",
@@ -1695,8 +1710,28 @@
           "valueBn": 11.79,
           "yoyPct": 17.31,
           "qoqPct": 26.69,
-          "mixPct": 31.0,
+          "mixPct": 31,
           "mixYoyDeltaPp": -1.6,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495020000068/hd-20200802_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2020-08-25",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-merchandise-category-disclosure"
+          ]
+        },
+        {
+          "name": "Major Product Line Hardlines",
+          "nameZh": null,
+          "memberKey": "majorproductlinehardlines",
+          "valueBn": 13.707,
+          "yoyPct": 33.16,
+          "qoqPct": 50,
+          "mixPct": 36,
+          "mixYoyDeltaPp": 2.6,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495020000068/hd-20200802_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2020-08-25",
@@ -1732,7 +1767,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2020Q4": {
       "calendarQuarter": "2020Q4",
@@ -1819,9 +1863,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -1856,7 +1900,7 @@
           "yoyPct": 19.5,
           "qoqPct": -4.89,
           "mixPct": 33.4,
-          "mixYoyDeltaPp": -1.0,
+          "mixYoyDeltaPp": -1,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495020000103/hd-20201101_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2020-11-24",
@@ -1875,7 +1919,7 @@
           "valueBn": 9.729,
           "yoyPct": 29.01,
           "qoqPct": -29.02,
-          "mixPct": 29.0,
+          "mixPct": 29,
           "mixYoyDeltaPp": 1.3,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495020000103/hd-20201101_htm.xml",
           "sourceForm": "10-Q",
@@ -1912,7 +1956,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2021Q1": {
       "calendarQuarter": "2021Q1",
@@ -1999,9 +2052,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -2072,7 +2125,9 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2021Q2": {
       "calendarQuarter": "2021Q2",
@@ -2163,9 +2218,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -2256,7 +2311,9 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2021Q3": {
       "calendarQuarter": "2021Q3",
@@ -2347,9 +2404,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -2363,28 +2420,8 @@
           "valueBn": 14.411,
           "yoyPct": 14.77,
           "qoqPct": 5.5,
-          "mixPct": 35.0,
+          "mixPct": 35,
           "mixYoyDeltaPp": 2.1,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495021000189/hd-20210801_htm.xml",
-          "sourceForm": "10-Q",
-          "filingDate": "2021-08-24",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": false,
-          "validationNotes": [
-            "partial-merchandise-category-disclosure"
-          ]
-        },
-        {
-          "name": "Major Product Line Dcor",
-          "nameZh": null,
-          "memberKey": "majorproductlinedcor",
-          "valueBn": 13.395,
-          "yoyPct": 13.61,
-          "qoqPct": 12.73,
-          "mixPct": 32.6,
-          "mixYoyDeltaPp": 1.6,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495021000189/hd-20210801_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2021-08-24",
@@ -2417,12 +2454,32 @@
           ]
         },
         {
+          "name": "Major Product Line Dcor",
+          "nameZh": null,
+          "memberKey": "majorproductlinedcor",
+          "valueBn": 13.395,
+          "yoyPct": 13.61,
+          "qoqPct": 12.73,
+          "mixPct": 32.6,
+          "mixYoyDeltaPp": 1.6,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495021000189/hd-20210801_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2021-08-24",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-merchandise-category-disclosure"
+          ]
+        },
+        {
           "name": "Services",
           "nameZh": null,
           "memberKey": "services",
           "valueBn": 1.401,
           "yoyPct": 31.8,
-          "qoqPct": 14.0,
+          "qoqPct": 14,
           "mixPct": 3.4,
           "mixYoyDeltaPp": 0.6,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495021000189/hd-20210801_htm.xml",
@@ -2440,7 +2497,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2021Q4": {
       "calendarQuarter": "2021Q4",
@@ -2531,9 +2597,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -2548,27 +2614,7 @@
           "yoyPct": 9.65,
           "qoqPct": -4.18,
           "mixPct": 37.5,
-          "mixYoyDeltaPp": -0.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495021000234/hd-20211031_htm.xml",
-          "sourceForm": "10-Q",
-          "filingDate": "2021-11-23",
-          "supportLines": null,
-          "supportLinesZh": null,
-          "metricMode": null,
-          "validationEligible": false,
-          "validationNotes": [
-            "partial-merchandise-category-disclosure"
-          ]
-        },
-        {
-          "name": "Major Product Line Dcor",
-          "nameZh": null,
-          "memberKey": "majorproductlinedcor",
-          "valueBn": 12.783,
-          "yoyPct": 14.0,
-          "qoqPct": -4.57,
-          "mixPct": 34.7,
-          "mixYoyDeltaPp": 1.3,
+          "mixYoyDeltaPp": 0,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495021000234/hd-20211031_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2021-11-23",
@@ -2589,6 +2635,26 @@
           "qoqPct": -23.17,
           "mixPct": 27.8,
           "mixYoyDeltaPp": -1.2,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495021000234/hd-20211031_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2021-11-23",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": false,
+          "validationNotes": [
+            "partial-merchandise-category-disclosure"
+          ]
+        },
+        {
+          "name": "Major Product Line Dcor",
+          "nameZh": null,
+          "memberKey": "majorproductlinedcor",
+          "valueBn": 12.783,
+          "yoyPct": 14,
+          "qoqPct": -4.57,
+          "mixPct": 34.7,
+          "mixYoyDeltaPp": 1.3,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495021000234/hd-20211031_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2021-11-23",
@@ -2624,7 +2690,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2022Q1": {
       "calendarQuarter": "2022Q1",
@@ -2715,9 +2790,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -2788,7 +2863,9 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2022Q2": {
       "calendarQuarter": "2022Q2",
@@ -2879,9 +2956,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -2972,7 +3049,9 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2022Q3": {
       "calendarQuarter": "2022Q3",
@@ -3063,9 +3142,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -3156,7 +3235,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2022Q4": {
       "calendarQuarter": "2022Q4",
@@ -3247,9 +3335,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -3264,7 +3352,7 @@
           "yoyPct": 11.11,
           "qoqPct": -3.4,
           "mixPct": 39.5,
-          "mixYoyDeltaPp": 2.0,
+          "mixYoyDeltaPp": 2,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495022000239/hd-20221030_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2022-11-22",
@@ -3340,7 +3428,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2023Q1": {
       "calendarQuarter": "2023Q1",
@@ -3370,7 +3467,7 @@
       "revenueQoqPct": -7.823,
       "grossMarginYoyDeltaPp": 0.07,
       "operatingMarginYoyDeltaPp": -0.25,
-      "profitMarginYoyDeltaPp": 0.0,
+      "profitMarginYoyDeltaPp": 0,
       "statementFilingDate": "2023-01-29",
       "statementSourceUrl": "https://stockanalysis.com/stocks/hd/financials/?p=quarterly",
       "parserFinancialFieldSources": {
@@ -3431,9 +3528,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -3504,7 +3601,9 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2023Q2": {
       "calendarQuarter": "2023Q2",
@@ -3595,9 +3694,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -3672,7 +3771,7 @@
           "yoyPct": -5.13,
           "qoqPct": 6.29,
           "mixPct": 3.7,
-          "mixYoyDeltaPp": -0.0,
+          "mixYoyDeltaPp": 0,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495023000144/hd-20230430_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2023-05-23",
@@ -3688,7 +3787,9 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2023Q3": {
       "calendarQuarter": "2023Q3",
@@ -3698,7 +3799,7 @@
       "fiscalLabel": "FY2023 Q2",
       "statementCurrency": "USD",
       "revenueBn": 42.916,
-      "revenueYoyPct": -2.0,
+      "revenueYoyPct": -2,
       "costOfRevenueBn": 28.759,
       "grossProfitBn": 14.157,
       "sgnaBn": 6.915,
@@ -3779,9 +3880,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -3809,14 +3910,14 @@
           ]
         },
         {
-          "name": "Major Product Line Hardlines",
+          "name": "Major Product Line Dcor",
           "nameZh": null,
-          "memberKey": "majorproductlinehardlines",
-          "valueBn": 14.114,
-          "yoyPct": 2.18,
-          "qoqPct": 29.17,
-          "mixPct": 32.9,
-          "mixYoyDeltaPp": 1.3,
+          "memberKey": "majorproductlinedcor",
+          "valueBn": 13.411,
+          "yoyPct": -4.86,
+          "qoqPct": 9.47,
+          "mixPct": 31.2,
+          "mixYoyDeltaPp": -0.9,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495023000185/hd-20230730_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2023-08-22",
@@ -3829,14 +3930,14 @@
           ]
         },
         {
-          "name": "Major Product Line Dcor",
+          "name": "Major Product Line Hardlines",
           "nameZh": null,
-          "memberKey": "majorproductlinedcor",
-          "valueBn": 13.411,
-          "yoyPct": -4.86,
-          "qoqPct": 9.47,
-          "mixPct": 31.2,
-          "mixYoyDeltaPp": -0.9,
+          "memberKey": "majorproductlinehardlines",
+          "valueBn": 14.114,
+          "yoyPct": 2.18,
+          "qoqPct": 29.17,
+          "mixPct": 32.9,
+          "mixYoyDeltaPp": 1.3,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495023000185/hd-20230730_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2023-08-22",
@@ -3872,7 +3973,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2023Q4": {
       "calendarQuarter": "2023Q4",
@@ -3963,9 +4073,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -4056,7 +4166,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2024Q1": {
       "calendarQuarter": "2024Q1",
@@ -4147,9 +4266,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -4220,7 +4339,9 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2024Q2": {
       "calendarQuarter": "2024Q2",
@@ -4311,9 +4432,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -4348,7 +4469,7 @@
           "yoyPct": 0.76,
           "qoqPct": null,
           "mixPct": 33.9,
-          "mixYoyDeltaPp": 1.0,
+          "mixYoyDeltaPp": 1,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495024000152/hd-20240428_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2024-05-21",
@@ -4388,7 +4509,7 @@
           "yoyPct": -2.12,
           "qoqPct": -1.18,
           "mixPct": 3.7,
-          "mixYoyDeltaPp": 0.0,
+          "mixYoyDeltaPp": 0,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495024000152/hd-20240428_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2024-05-21",
@@ -4404,7 +4525,9 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2024Q3": {
       "calendarQuarter": "2024Q3",
@@ -4495,9 +4618,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -4517,13 +4640,15 @@
           "periodEnd": "2024-07-28",
           "mixPct": 3.6,
           "qoqPct": 17.16,
-          "mixYoyDeltaPp": 0.0
+          "mixYoyDeltaPp": 0
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+      "officialRevenueTaxonomyChangedFromPriorYear": true
     },
     "2024Q4": {
       "calendarQuarter": "2024Q4",
@@ -4614,9 +4739,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -4642,7 +4767,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true
     },
     "2025Q1": {
       "calendarQuarter": "2025Q1",
@@ -4664,7 +4798,7 @@
       "pretaxIncomeBn": 3.887,
       "taxBn": 0.89,
       "netIncomeBn": 2.997,
-      "netIncomeYoyPct": 7.0,
+      "netIncomeYoyPct": 7,
       "grossMarginPct": 32.83,
       "operatingMarginPct": 11.32,
       "profitMarginPct": 7.55,
@@ -4733,9 +4867,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -4761,7 +4895,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true
     },
     "2025Q2": {
       "calendarQuarter": "2025Q2",
@@ -4852,9 +4995,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -4880,7 +5023,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true
     },
     "2025Q3": {
       "calendarQuarter": "2025Q3",
@@ -4971,9 +5123,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -4999,7 +5151,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2025Q4": {
       "calendarQuarter": "2025Q4",
@@ -5090,9 +5251,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -5118,7 +5279,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2026Q1": {
       "calendarQuarter": "2026Q1",
@@ -5209,9 +5379,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -5237,7 +5407,16 @@
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     }
   },
   "statementSource": "official-sec-companyfacts",
@@ -7524,9 +7703,9 @@
         "issueCount": 0,
         "mismatchQuarterCount": 0,
         "highConfidenceQuarterCount": 33,
-        "averageConfidenceScore": 1.0,
+        "averageConfidenceScore": 1,
         "latestQuarter": "2026Q1",
-        "latestQuarterConfidenceScore": 1.0,
+        "latestQuarterConfidenceScore": 1,
         "latestQuarterIssueCount": 0
       }
     },
@@ -7636,9 +7815,9 @@
         "issueCount": 0,
         "mismatchQuarterCount": 0,
         "highConfidenceQuarterCount": 33,
-        "averageConfidenceScore": 1.0,
+        "averageConfidenceScore": 1,
         "latestQuarter": "2026Q1",
-        "latestQuarterConfidenceScore": 1.0,
+        "latestQuarterConfidenceScore": 1,
         "latestQuarterIssueCount": 0
       },
       "validation": {
@@ -7660,5 +7839,10 @@
         "warnings": []
       }
     }
-  }
+  },
+  "marketCapUsd": 317764141056,
+  "marketCapAsOf": "2026-10-28",
+  "marketCapSourceRank": 47,
+  "marketCapSource": "CompaniesMarketCap",
+  "marketCapSourceUrl": "https://companiesmarketcap.com/home-depot/marketcap/"
 }

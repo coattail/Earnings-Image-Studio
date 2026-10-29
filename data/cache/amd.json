@@ -4,7 +4,7 @@
   "nameZh": "超威半导体",
   "nameEn": "AMD",
   "slug": "amd",
-  "rank": 19.5,
+  "rank": 16,
   "isAdr": false,
   "brand": {
     "primary": "#111827",
@@ -45,7 +45,8 @@
     "2025Q2",
     "2025Q3",
     "2025Q4",
-    "2026Q1"
+    "2026Q1",
+    "2026Q2"
   ],
   "financials": {
     "2018Q1": {
@@ -127,9 +128,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -201,10 +202,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -215,7 +216,9 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2018Q2": {
       "calendarQuarter": "2018Q2",
@@ -297,9 +300,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -371,10 +374,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -385,7 +388,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2018Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2018Q3": {
       "calendarQuarter": "2018Q3",
@@ -467,9 +479,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -541,10 +553,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -555,7 +567,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2018Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2018Q4": {
       "calendarQuarter": "2018Q4",
@@ -637,9 +658,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -711,10 +732,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -725,7 +746,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2018Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2019Q1": {
       "calendarQuarter": "2019Q1",
@@ -751,7 +781,7 @@
       "grossMarginPct": 40.959,
       "operatingMarginPct": 2.987,
       "profitMarginPct": 1.258,
-      "effectiveTaxRatePct": -325.0,
+      "effectiveTaxRatePct": -325,
       "revenueQoqPct": -10.359,
       "grossMarginYoyDeltaPp": 4.71,
       "operatingMarginYoyDeltaPp": -4.3,
@@ -812,9 +842,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -886,10 +916,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -900,7 +930,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2018Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2019Q2": {
       "calendarQuarter": "2019Q2",
@@ -987,9 +1026,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -1061,10 +1100,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -1075,7 +1114,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2019Q3": {
       "calendarQuarter": "2019Q3",
@@ -1162,9 +1210,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -1236,10 +1284,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -1250,7 +1298,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2019Q4": {
       "calendarQuarter": "2019Q4",
@@ -1337,9 +1394,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -1411,10 +1468,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -1425,7 +1482,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2020Q1": {
       "calendarQuarter": "2020Q1",
@@ -1512,9 +1578,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -1586,10 +1652,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -1600,7 +1666,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2020Q2": {
       "calendarQuarter": "2020Q2",
@@ -1687,9 +1762,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -1761,10 +1836,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -1775,7 +1850,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2020Q3": {
       "calendarQuarter": "2020Q3",
@@ -1797,7 +1881,7 @@
       "pretaxIncomeBn": 0.401,
       "taxBn": 0.012,
       "netIncomeBn": 0.39,
-      "netIncomeYoyPct": 225.0,
+      "netIncomeYoyPct": 225,
       "grossMarginPct": 43.913,
       "operatingMarginPct": 16.03,
       "profitMarginPct": 13.924,
@@ -1862,9 +1946,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -1894,7 +1978,7 @@
           "nameZh": null,
           "memberKey": "enterpriseembeddedsemicustom",
           "valueBn": 1.134,
-          "yoyPct": 116.0,
+          "yoyPct": 116,
           "qoqPct": 100.71,
           "mixPct": 40.5,
           "mixYoyDeltaPp": 11.3,
@@ -1936,10 +2020,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -1950,7 +2034,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2020Q4": {
       "calendarQuarter": "2020Q4",
@@ -2037,9 +2130,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -2111,10 +2204,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -2125,7 +2218,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2021Q1": {
       "calendarQuarter": "2021Q1",
@@ -2217,9 +2319,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -2233,7 +2335,7 @@
           "valueBn": 2.1,
           "yoyPct": 46.04,
           "qoqPct": 7.14,
-          "mixPct": 61.0,
+          "mixPct": 61,
           "mixYoyDeltaPp": -19.6,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248822000078/amd-20220326_htm.xml",
           "sourceForm": "10-Q",
@@ -2251,7 +2353,7 @@
           "valueBn": 1.345,
           "yoyPct": 286.49,
           "qoqPct": 4.75,
-          "mixPct": 39.0,
+          "mixPct": 39,
           "mixYoyDeltaPp": 19.6,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248822000078/amd-20220326_htm.xml",
           "sourceForm": "10-Q",
@@ -2291,10 +2393,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -2305,7 +2407,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2021Q2": {
       "calendarQuarter": "2021Q2",
@@ -2397,9 +2508,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -2471,10 +2582,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -2485,7 +2596,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2021Q3": {
       "calendarQuarter": "2021Q3",
@@ -2577,9 +2697,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -2651,10 +2771,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -2665,7 +2785,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2021Q4": {
       "calendarQuarter": "2021Q4",
@@ -2757,9 +2886,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -2831,10 +2960,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -2845,7 +2974,16 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2022Q1": {
       "calendarQuarter": "2022Q1",
@@ -2938,7 +3076,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.8875,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.75,
         "checksRun": 8,
         "checksPassed": 6,
@@ -2972,7 +3110,7 @@
           "valueBn": 1.293,
           "yoyPct": null,
           "qoqPct": null,
-          "mixPct": 22.0,
+          "mixPct": 22,
           "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2023-5-2-amd-reports-first-quarter-2023-financial-results.html",
           "sourceForm": "QuarterlyResultsRelease",
@@ -3062,10 +3200,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -3080,7 +3218,9 @@
       "officialRevenueStyle": "semiconductor-segments",
       "qualityFlags": [
         "amd-official-segment-label-correction"
-      ]
+      ],
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+      "officialRevenueTaxonomyChangedFromPriorYear": true
     },
     "2022Q2": {
       "calendarQuarter": "2022Q2",
@@ -3173,7 +3313,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.8875,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.75,
         "checksRun": 8,
         "checksPassed": 6,
@@ -3297,10 +3437,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -3315,7 +3455,16 @@
       "officialRevenueStyle": "semiconductor-segments",
       "qualityFlags": [
         "amd-official-segment-label-correction"
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true
     },
     "2022Q3": {
       "calendarQuarter": "2022Q3",
@@ -3408,7 +3557,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.8875,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.75,
         "checksRun": 8,
         "checksPassed": 6,
@@ -3532,10 +3681,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -3550,7 +3699,16 @@
       "officialRevenueStyle": "semiconductor-segments",
       "qualityFlags": [
         "amd-official-segment-label-correction"
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true
     },
     "2022Q4": {
       "calendarQuarter": "2022Q4",
@@ -3643,7 +3801,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.8875,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.75,
         "checksRun": 8,
         "checksPassed": 6,
@@ -3728,7 +3886,7 @@
           "valueBn": 1.397,
           "yoyPct": null,
           "qoqPct": 7.21,
-          "mixPct": 25.0,
+          "mixPct": 25,
           "mixYoyDeltaPp": null,
           "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2024-1-30-amd-reports-fourth-quarter-and-full-year-2023-fina.html",
           "sourceForm": "QuarterlyResultsRelease",
@@ -3767,10 +3925,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -3785,7 +3943,16 @@
       "officialRevenueStyle": "semiconductor-segments",
       "qualityFlags": [
         "amd-official-segment-label-correction"
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true
     },
     "2023Q4": {
       "calendarQuarter": "2023Q4",
@@ -3878,7 +4045,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.8875,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.75,
         "checksRun": 8,
         "checksPassed": 6,
@@ -3912,7 +4079,7 @@
           "valueBn": 2.282,
           "yoyPct": 37.89,
           "qoqPct": 42.8,
-          "mixPct": 37.0,
+          "mixPct": 37,
           "mixYoyDeltaPp": 7.4,
           "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2024-1-30-amd-reports-fourth-quarter-and-full-year-2023-fina.html",
           "sourceForm": "QuarterlyResultsRelease",
@@ -4002,10 +4169,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -4020,7 +4187,16 @@
       "officialRevenueStyle": "semiconductor-segments",
       "qualityFlags": [
         "amd-official-segment-label-correction"
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2024Q1": {
       "calendarQuarter": "2024Q1",
@@ -4113,7 +4289,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.8875,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.75,
         "checksRun": 8,
         "checksPassed": 6,
@@ -4142,7 +4318,7 @@
       "officialRevenueSegments": [
         {
           "name": "Data Center",
-          "nameZh": null,
+          "nameZh": "数据中心",
           "memberKey": "datacenter",
           "valueBn": 2.337,
           "yoyPct": 80.46,
@@ -4160,12 +4336,12 @@
         },
         {
           "name": "Client",
-          "nameZh": null,
+          "nameZh": "客户端",
           "memberKey": "client",
           "valueBn": 1.368,
           "yoyPct": 85.12,
           "qoqPct": 213.04,
-          "mixPct": 25.0,
+          "mixPct": 25,
           "mixYoyDeltaPp": 11.2,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000047/amd-20250329_htm.xml",
           "sourceForm": "10-Q",
@@ -4178,13 +4354,13 @@
         },
         {
           "name": "Gaming",
-          "nameZh": null,
+          "nameZh": "游戏",
           "memberKey": "gaming",
           "valueBn": 0.922,
           "yoyPct": -47.52,
           "qoqPct": -69.49,
           "mixPct": 16.8,
-          "mixYoyDeltaPp": -16.0,
+          "mixYoyDeltaPp": -16,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000047/amd-20250329_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2025-05-07",
@@ -4196,7 +4372,7 @@
         },
         {
           "name": "Embedded",
-          "nameZh": null,
+          "nameZh": "嵌入式",
           "memberKey": "embedded",
           "valueBn": 0.846,
           "yoyPct": -45.84,
@@ -4241,10 +4417,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -4255,7 +4431,17 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "officialRevenueStyle": "semiconductor-segments"
     },
     "2024Q2": {
       "calendarQuarter": "2024Q2",
@@ -4348,7 +4534,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.8875,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.75,
         "checksRun": 8,
         "checksPassed": 6,
@@ -4377,7 +4563,7 @@
       "officialRevenueSegments": [
         {
           "name": "Data Center",
-          "nameZh": null,
+          "nameZh": "数据中心",
           "memberKey": "datacenter",
           "valueBn": 2.834,
           "yoyPct": 61.3,
@@ -4395,7 +4581,7 @@
         },
         {
           "name": "Client",
-          "nameZh": null,
+          "nameZh": "客户端",
           "memberKey": "client",
           "valueBn": 1.492,
           "yoyPct": 15.21,
@@ -4412,14 +4598,14 @@
           "validationNotes": null
         },
         {
-          "name": "Embedded",
-          "nameZh": null,
-          "memberKey": "embedded",
-          "valueBn": 0.861,
-          "yoyPct": -44.88,
-          "qoqPct": 1.77,
-          "mixPct": 14.8,
-          "mixYoyDeltaPp": -14.4,
+          "name": "Gaming",
+          "nameZh": "游戏",
+          "memberKey": "gaming",
+          "valueBn": 0.648,
+          "yoyPct": -12.31,
+          "qoqPct": -29.72,
+          "mixPct": 11.1,
+          "mixYoyDeltaPp": -2.7,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000108/amd-20250628_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2025-08-06",
@@ -4430,14 +4616,14 @@
           "validationNotes": null
         },
         {
-          "name": "Gaming",
-          "nameZh": null,
-          "memberKey": "gaming",
-          "valueBn": 0.648,
-          "yoyPct": -12.31,
-          "qoqPct": -29.72,
-          "mixPct": 11.1,
-          "mixYoyDeltaPp": -2.7,
+          "name": "Embedded",
+          "nameZh": "嵌入式",
+          "memberKey": "embedded",
+          "valueBn": 0.861,
+          "yoyPct": -44.88,
+          "qoqPct": 1.77,
+          "mixPct": 14.8,
+          "mixYoyDeltaPp": -14.4,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000108/amd-20250628_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2025-08-06",
@@ -4476,10 +4662,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -4490,7 +4676,17 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "officialRevenueStyle": "semiconductor-segments"
     },
     "2024Q3": {
       "calendarQuarter": "2024Q3",
@@ -4583,7 +4779,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.8875,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.75,
         "checksRun": 8,
         "checksPassed": 6,
@@ -4612,12 +4808,12 @@
       "officialRevenueSegments": [
         {
           "name": "Data Center",
-          "nameZh": null,
+          "nameZh": "数据中心",
           "memberKey": "datacenter",
           "valueBn": 3.549,
           "yoyPct": 135.66,
           "qoqPct": 25.23,
-          "mixPct": 52.0,
+          "mixPct": 52,
           "mixYoyDeltaPp": 23.9,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000166/amd-20250927_htm.xml",
           "sourceForm": "10-Q",
@@ -4630,7 +4826,7 @@
         },
         {
           "name": "Client",
-          "nameZh": null,
+          "nameZh": "客户端",
           "memberKey": "client",
           "valueBn": 1.881,
           "yoyPct": 17.71,
@@ -4647,14 +4843,14 @@
           "validationNotes": null
         },
         {
-          "name": "Embedded",
-          "nameZh": null,
-          "memberKey": "embedded",
-          "valueBn": 0.927,
-          "yoyPct": -25.42,
-          "qoqPct": 7.67,
-          "mixPct": 13.6,
-          "mixYoyDeltaPp": -9.6,
+          "name": "Gaming",
+          "nameZh": "游戏",
+          "memberKey": "gaming",
+          "valueBn": 0.462,
+          "yoyPct": -68.2,
+          "qoqPct": -28.7,
+          "mixPct": 6.8,
+          "mixYoyDeltaPp": -20.3,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000166/amd-20250927_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2025-11-05",
@@ -4665,14 +4861,14 @@
           "validationNotes": null
         },
         {
-          "name": "Gaming",
-          "nameZh": null,
-          "memberKey": "gaming",
-          "valueBn": 0.462,
-          "yoyPct": -68.2,
-          "qoqPct": -28.7,
-          "mixPct": 6.8,
-          "mixYoyDeltaPp": -20.3,
+          "name": "Embedded",
+          "nameZh": "嵌入式",
+          "memberKey": "embedded",
+          "valueBn": 0.927,
+          "yoyPct": -25.42,
+          "qoqPct": 7.67,
+          "mixPct": 13.6,
+          "mixYoyDeltaPp": -9.6,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000166/amd-20250927_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2025-11-05",
@@ -4711,10 +4907,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -4725,7 +4921,17 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "officialRevenueStyle": "semiconductor-segments"
     },
     "2024Q4": {
       "calendarQuarter": "2024Q4",
@@ -4818,7 +5024,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.8875,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.75,
         "checksRun": 8,
         "checksPassed": 6,
@@ -4847,7 +5053,7 @@
       "officialRevenueSegments": [
         {
           "name": "Data Center",
-          "nameZh": null,
+          "nameZh": "数据中心",
           "memberKey": "datacenter",
           "valueBn": 3.859,
           "yoyPct": 133.6,
@@ -4865,7 +5071,7 @@
         },
         {
           "name": "Client",
-          "nameZh": null,
+          "nameZh": "客户端",
           "memberKey": "client",
           "valueBn": 2.313,
           "yoyPct": 429.29,
@@ -4882,14 +5088,14 @@
           "validationNotes": null
         },
         {
-          "name": "Embedded",
-          "nameZh": null,
-          "memberKey": "embedded",
-          "valueBn": 0.923,
-          "yoyPct": -12.68,
-          "qoqPct": -0.43,
-          "mixPct": 12.1,
-          "mixYoyDeltaPp": -5.1,
+          "name": "Gaming",
+          "nameZh": "游戏",
+          "memberKey": "gaming",
+          "valueBn": 0.563,
+          "yoyPct": -81.37,
+          "qoqPct": 21.86,
+          "mixPct": 7.4,
+          "mixYoyDeltaPp": -41.6,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227_htm.xml",
           "sourceForm": "10-K",
           "filingDate": "2026-02-04",
@@ -4900,14 +5106,14 @@
           "validationNotes": null
         },
         {
-          "name": "Gaming",
-          "nameZh": null,
-          "memberKey": "gaming",
-          "valueBn": 0.563,
-          "yoyPct": -81.37,
-          "qoqPct": 21.86,
-          "mixPct": 7.4,
-          "mixYoyDeltaPp": -41.6,
+          "name": "Embedded",
+          "nameZh": "嵌入式",
+          "memberKey": "embedded",
+          "valueBn": 0.923,
+          "yoyPct": -12.68,
+          "qoqPct": -0.43,
+          "mixPct": 12.1,
+          "mixYoyDeltaPp": -5.1,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227_htm.xml",
           "sourceForm": "10-K",
           "filingDate": "2026-02-04",
@@ -4946,10 +5152,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -4960,7 +5166,17 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "officialRevenueStyle": "semiconductor-segments"
     },
     "2025Q1": {
       "calendarQuarter": "2025Q1",
@@ -5053,7 +5269,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.8875,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.75,
         "checksRun": 8,
         "checksPassed": 6,
@@ -5082,7 +5298,7 @@
       "officialRevenueSegments": [
         {
           "name": "Data Center",
-          "nameZh": null,
+          "nameZh": "数据中心",
           "memberKey": "datacenter",
           "valueBn": 3.674,
           "yoyPct": 57.21,
@@ -5100,7 +5316,7 @@
         },
         {
           "name": "Client",
-          "nameZh": null,
+          "nameZh": "客户端",
           "memberKey": "client",
           "valueBn": 2.294,
           "yoyPct": 67.69,
@@ -5117,14 +5333,14 @@
           "validationNotes": null
         },
         {
-          "name": "Embedded",
-          "nameZh": null,
-          "memberKey": "embedded",
-          "valueBn": 0.823,
-          "yoyPct": -2.72,
-          "qoqPct": -10.83,
-          "mixPct": 11.1,
-          "mixYoyDeltaPp": -4.4,
+          "name": "Gaming",
+          "nameZh": "游戏",
+          "memberKey": "gaming",
+          "valueBn": 0.647,
+          "yoyPct": -29.83,
+          "qoqPct": 14.92,
+          "mixPct": 8.7,
+          "mixYoyDeltaPp": -8.1,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000047/amd-20250329_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2025-05-07",
@@ -5135,14 +5351,14 @@
           "validationNotes": null
         },
         {
-          "name": "Gaming",
-          "nameZh": null,
-          "memberKey": "gaming",
-          "valueBn": 0.647,
-          "yoyPct": -29.83,
-          "qoqPct": 14.92,
-          "mixPct": 8.7,
-          "mixYoyDeltaPp": -8.1,
+          "name": "Embedded",
+          "nameZh": "嵌入式",
+          "memberKey": "embedded",
+          "valueBn": 0.823,
+          "yoyPct": -2.72,
+          "qoqPct": -10.83,
+          "mixPct": 11.1,
+          "mixYoyDeltaPp": -4.4,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000047/amd-20250329_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2025-05-07",
@@ -5181,10 +5397,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -5195,7 +5411,17 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "officialRevenueStyle": "semiconductor-segments"
     },
     "2025Q2": {
       "calendarQuarter": "2025Q2",
@@ -5288,7 +5514,7 @@
         "version": "financial-validation-v1",
         "status": "medium",
         "confidenceScore": 0.8313,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.625,
         "checksRun": 8,
         "checksPassed": 5,
@@ -5326,7 +5552,7 @@
       "officialRevenueSegments": [
         {
           "name": "Data Center",
-          "nameZh": null,
+          "nameZh": "数据中心",
           "memberKey": "datacenter",
           "valueBn": 3.24,
           "yoyPct": 14.33,
@@ -5344,7 +5570,7 @@
         },
         {
           "name": "Client",
-          "nameZh": null,
+          "nameZh": "客户端",
           "memberKey": "client",
           "valueBn": 2.499,
           "yoyPct": 67.49,
@@ -5362,7 +5588,7 @@
         },
         {
           "name": "Gaming",
-          "nameZh": null,
+          "nameZh": "游戏",
           "memberKey": "gaming",
           "valueBn": 1.122,
           "yoyPct": 73.15,
@@ -5380,13 +5606,13 @@
         },
         {
           "name": "Embedded",
-          "nameZh": null,
+          "nameZh": "嵌入式",
           "memberKey": "embedded",
           "valueBn": 0.824,
           "yoyPct": -4.3,
           "qoqPct": 0.12,
           "mixPct": 10.7,
-          "mixYoyDeltaPp": -4.0,
+          "mixYoyDeltaPp": -4,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000108/amd-20250628_htm.xml",
           "sourceForm": "10-Q",
           "filingDate": "2025-08-06",
@@ -5425,10 +5651,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -5439,7 +5665,17 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "officialRevenueStyle": "semiconductor-segments"
     },
     "2025Q3": {
       "calendarQuarter": "2025Q3",
@@ -5532,7 +5768,7 @@
         "version": "financial-validation-v1",
         "status": "medium",
         "confidenceScore": 0.8313,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.625,
         "checksRun": 8,
         "checksPassed": 5,
@@ -5570,12 +5806,12 @@
       "officialRevenueSegments": [
         {
           "name": "Data Center",
-          "nameZh": null,
+          "nameZh": "数据中心",
           "memberKey": "datacenter",
           "valueBn": 4.341,
           "yoyPct": 22.32,
           "qoqPct": 33.98,
-          "mixPct": 47.0,
+          "mixPct": 47,
           "mixYoyDeltaPp": -5.1,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000166/amd-20250927_htm.xml",
           "sourceForm": "10-Q",
@@ -5588,7 +5824,7 @@
         },
         {
           "name": "Client",
-          "nameZh": null,
+          "nameZh": "客户端",
           "memberKey": "client",
           "valueBn": 2.75,
           "yoyPct": 46.2,
@@ -5606,12 +5842,12 @@
         },
         {
           "name": "Gaming",
-          "nameZh": null,
+          "nameZh": "游戏",
           "memberKey": "gaming",
           "valueBn": 1.298,
           "yoyPct": 180.95,
           "qoqPct": 15.69,
-          "mixPct": 14.0,
+          "mixPct": 14,
           "mixYoyDeltaPp": 7.3,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000166/amd-20250927_htm.xml",
           "sourceForm": "10-Q",
@@ -5624,11 +5860,11 @@
         },
         {
           "name": "Embedded",
-          "nameZh": null,
+          "nameZh": "嵌入式",
           "memberKey": "embedded",
           "valueBn": 0.857,
           "yoyPct": -7.55,
-          "qoqPct": 4.0,
+          "qoqPct": 4,
           "mixPct": 9.3,
           "mixYoyDeltaPp": -4.3,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000166/amd-20250927_htm.xml",
@@ -5669,10 +5905,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -5683,7 +5919,17 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "officialRevenueStyle": "semiconductor-segments"
     },
     "2025Q4": {
       "calendarQuarter": "2025Q4",
@@ -5776,7 +6022,7 @@
         "version": "financial-validation-v1",
         "status": "medium",
         "confidenceScore": 0.8313,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.625,
         "checksRun": 8,
         "checksPassed": 5,
@@ -5813,14 +6059,14 @@
       },
       "officialRevenueSegments": [
         {
-          "name": "Data Center Segment",
+          "name": "Data Center",
           "nameZh": "数据中心",
           "memberKey": "datacenter",
           "valueBn": 5.38,
           "yoyPct": 39.41,
           "qoqPct": 23.93,
           "mixPct": 52.4,
-          "mixYoyDeltaPp": 2.0,
+          "mixYoyDeltaPp": 2,
           "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2026-2-3-amd-reports-fourth-quarter-and-full-year-2025-fina.html",
           "sourceForm": null,
           "filingDate": "2026-02-03",
@@ -5838,7 +6084,7 @@
           "yoyPct": 33.9,
           "qoqPct": 12.62,
           "mixPct": 30.2,
-          "mixYoyDeltaPp": -0.0,
+          "mixYoyDeltaPp": 0,
           "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2026-2-3-amd-reports-fourth-quarter-and-full-year-2025-fina.html",
           "sourceForm": null,
           "filingDate": "2026-02-03",
@@ -5867,7 +6113,7 @@
           "validationNotes": null
         },
         {
-          "name": "Embedded Segment",
+          "name": "Embedded",
           "nameZh": "嵌入式",
           "memberKey": "embedded",
           "valueBn": 0.95,
@@ -5953,10 +6199,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -5967,7 +6213,19 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
+      "officialRevenueStyle": "semiconductor-segments"
     },
     "2023Q1": {
       "calendarQuarter": "2023Q1",
@@ -6060,7 +6318,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.8875,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.75,
         "checksRun": 8,
         "checksPassed": 6,
@@ -6129,7 +6387,7 @@
           "yoyPct": -6.29,
           "qoqPct": 6.87,
           "mixPct": 32.8,
-          "mixYoyDeltaPp": 1.0,
+          "mixYoyDeltaPp": 1,
           "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2023-5-2-amd-reports-first-quarter-2023-financial-results.html",
           "sourceForm": "QuarterlyResultsRelease",
           "filingDate": "2023-05-02",
@@ -6184,10 +6442,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -6202,7 +6460,16 @@
       "officialRevenueStyle": "semiconductor-segments",
       "qualityFlags": [
         "amd-official-segment-label-correction"
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2023Q2": {
       "calendarQuarter": "2023Q2",
@@ -6228,7 +6495,7 @@
       "grossMarginPct": 45.59,
       "operatingMarginPct": -0.37,
       "profitMarginPct": 0.5,
-      "effectiveTaxRatePct": 1150.0,
+      "effectiveTaxRatePct": 1150,
       "revenueQoqPct": 0.112,
       "grossMarginYoyDeltaPp": 3.29,
       "operatingMarginYoyDeltaPp": 0.78,
@@ -6295,7 +6562,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.8875,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.75,
         "checksRun": 8,
         "checksPassed": 6,
@@ -6330,7 +6597,7 @@
           "yoyPct": -11.1,
           "qoqPct": 2.01,
           "mixPct": 24.7,
-          "mixYoyDeltaPp": 2.0,
+          "mixYoyDeltaPp": 2,
           "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2023-8-1-amd-reports-second-quarter-2023-financial-results.html",
           "sourceForm": "QuarterlyResultsRelease",
           "filingDate": "2023-08-01",
@@ -6381,7 +6648,7 @@
           "yoyPct": 16.07,
           "qoqPct": -6.59,
           "mixPct": 27.2,
-          "mixYoyDeltaPp": 8.0,
+          "mixYoyDeltaPp": 8,
           "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2023-8-1-amd-reports-second-quarter-2023-financial-results.html",
           "sourceForm": "QuarterlyResultsRelease",
           "filingDate": "2023-08-01",
@@ -6419,10 +6686,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -6437,7 +6704,16 @@
       "officialRevenueStyle": "semiconductor-segments",
       "qualityFlags": [
         "amd-official-segment-label-correction"
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2023Q3": {
       "calendarQuarter": "2023Q3",
@@ -6505,7 +6781,7 @@
           "valueBn": 1.506,
           "yoyPct": -7.66,
           "qoqPct": -4.74,
-          "mixPct": 26.0,
+          "mixPct": 26,
           "mixYoyDeltaPp": -3.3,
           "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2023-10-31-amd-reports-third-quarter-2023-financial-results.html",
           "sourceForm": "QuarterlyResultsRelease",
@@ -6523,7 +6799,7 @@
           "yoyPct": -4.6,
           "qoqPct": -14.8,
           "mixPct": 21.4,
-          "mixYoyDeltaPp": -2.0,
+          "mixYoyDeltaPp": -2,
           "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2023-10-31-amd-reports-third-quarter-2023-financial-results.html",
           "sourceForm": "QuarterlyResultsRelease",
           "filingDate": "2023-10-31",
@@ -6536,7 +6812,16 @@
       "officialRevenueStyle": "semiconductor-segments",
       "qualityFlags": [
         "amd-official-segment-label-correction"
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2026Q1": {
       "calendarQuarter": "2026Q1",
@@ -6612,7 +6897,7 @@
           "valueBn": 0.72,
           "yoyPct": 11.28,
           "qoqPct": -14.59,
-          "mixPct": 7.0,
+          "mixPct": 7,
           "mixYoyDeltaPp": -1.7,
           "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1284/amd-reports-first-quarter-2026-financial-results",
           "sourceForm": "QuarterlyResultsRelease",
@@ -6643,7 +6928,156 @@
       "officialRevenueStyle": "semiconductor-segments",
       "qualityFlags": [
         "amd-official-segment-label-correction"
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
+    },
+    "2026Q2": {
+      "calendarQuarter": "2026Q2",
+      "periodEnd": "2026-06-27",
+      "fiscalYear": "2026",
+      "fiscalQuarter": "Q2",
+      "fiscalLabel": "FY2026 Q2",
+      "statementCurrency": "USD",
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "revenueBn": 11.536,
+      "revenueYoyPct": 50.111,
+      "costOfRevenueBn": 5.333,
+      "grossProfitBn": 6.203,
+      "sgnaBn": 1.401,
+      "rndBn": 2.528,
+      "otherOpexBn": 0.284,
+      "operatingExpensesBn": 4.213,
+      "operatingIncomeBn": 1.99,
+      "pretaxIncomeBn": 2.551,
+      "taxBn": 0.252,
+      "netIncomeBn": 2.297,
+      "equityIncomeBn": 0.006,
+      "discontinuedOperationsBn": -0.008,
+      "netIncomeYoyPct": 163.417,
+      "nonOperatingBn": 0.561,
+      "grossMarginPct": 53.771,
+      "operatingMarginPct": 17.25,
+      "profitMarginPct": 19.912,
+      "effectiveTaxRatePct": 9.878,
+      "revenueQoqPct": 12.513,
+      "grossMarginYoyDeltaPp": 13.966,
+      "operatingMarginYoyDeltaPp": 18.994,
+      "profitMarginYoyDeltaPp": 8.565,
+      "statementSource": "manual-amd-official",
+      "statementSourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+      "statementFilingDate": "2026-08-04",
+      "officialOpexBreakdown": [
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 2.528
+        },
+        {
+          "name": "Marketing, General and Administrative",
+          "nameZh": "营销、一般及行政",
+          "memberKey": "marketinggeneralandadministrative",
+          "valueBn": 1.401
+        },
+        {
+          "name": "Amortization of Acquisition-related Intangibles",
+          "nameZh": "收购相关无形资产摊销",
+          "memberKey": "amortizationofacquisitionrelatedintangibles",
+          "valueBn": 0.284
+        }
+      ],
+      "officialRevenueSegments": [
+        {
+          "name": "Data Center",
+          "nameZh": "数据中心",
+          "memberKey": "datacenter",
+          "valueBn": 6.718,
+          "yoyPct": 107.35,
+          "qoqPct": 16.33,
+          "mixPct": 58.2,
+          "mixYoyDeltaPp": 16.1,
+          "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+          "sourceForm": "QuarterlyResultsRelease",
+          "filingDate": "2026-08-04",
+          "metricMode": "flow",
+          "validationNotes": [
+            "amd-official-restated-segment-table"
+          ]
+        },
+        {
+          "name": "Client",
+          "nameZh": "客户端",
+          "memberKey": "client",
+          "valueBn": 3.062,
+          "yoyPct": 22.53,
+          "qoqPct": 6.14,
+          "mixPct": 26.5,
+          "mixYoyDeltaPp": -6,
+          "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+          "sourceForm": "QuarterlyResultsRelease",
+          "filingDate": "2026-08-04",
+          "metricMode": "flow",
+          "validationNotes": [
+            "amd-official-restated-segment-table"
+          ]
+        },
+        {
+          "name": "Gaming",
+          "nameZh": "游戏",
+          "memberKey": "gaming",
+          "valueBn": 0.779,
+          "yoyPct": -30.57,
+          "qoqPct": 8.19,
+          "mixPct": 6.8,
+          "mixYoyDeltaPp": -7.8,
+          "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+          "sourceForm": "QuarterlyResultsRelease",
+          "filingDate": "2026-08-04",
+          "metricMode": "flow",
+          "validationNotes": [
+            "amd-official-restated-segment-table"
+          ]
+        },
+        {
+          "name": "Embedded",
+          "nameZh": "嵌入式",
+          "memberKey": "embedded",
+          "valueBn": 0.977,
+          "yoyPct": 18.57,
+          "qoqPct": 11.91,
+          "mixPct": 8.5,
+          "mixYoyDeltaPp": -2.3,
+          "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+          "sourceForm": "QuarterlyResultsRelease",
+          "filingDate": "2026-08-04",
+          "metricMode": "flow",
+          "validationNotes": [
+            "amd-official-restated-segment-table"
+          ]
+        }
+      ],
+      "officialRevenueStyle": "semiconductor-segments",
+      "qualityFlags": [
+        "amd-official-segment-label-correction"
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2026Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     }
   },
   "statementSource": "stockanalysis-financials+field-reconciled",
@@ -8690,6 +9124,78 @@
             "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2026-2-3-amd-reports-fourth-quarter-and-full-year-2025-fina.html"
           }
         ]
+      },
+      "2026Q2": {
+        "segments": [
+          {
+            "name": "Data Center",
+            "nameZh": "数据中心",
+            "memberKey": "datacenter",
+            "valueBn": 6.718,
+            "yoyPct": 107.35,
+            "qoqPct": null,
+            "mixPct": 58.2,
+            "mixYoyDeltaPp": 16.1,
+            "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-08-04",
+            "metricMode": "flow",
+            "validationNotes": [
+              "amd-official-restated-segment-table"
+            ]
+          },
+          {
+            "name": "Client",
+            "nameZh": "客户端",
+            "memberKey": "client",
+            "valueBn": 3.062,
+            "yoyPct": 22.53,
+            "qoqPct": null,
+            "mixPct": 26.5,
+            "mixYoyDeltaPp": -6,
+            "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-08-04",
+            "metricMode": "flow",
+            "validationNotes": [
+              "amd-official-restated-segment-table"
+            ]
+          },
+          {
+            "name": "Gaming",
+            "nameZh": "游戏",
+            "memberKey": "gaming",
+            "valueBn": 0.779,
+            "yoyPct": -30.57,
+            "qoqPct": null,
+            "mixPct": 6.8,
+            "mixYoyDeltaPp": -7.8,
+            "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-08-04",
+            "metricMode": "flow",
+            "validationNotes": [
+              "amd-official-restated-segment-table"
+            ]
+          },
+          {
+            "name": "Embedded",
+            "nameZh": "嵌入式",
+            "memberKey": "embedded",
+            "valueBn": 0.977,
+            "yoyPct": 18.57,
+            "qoqPct": null,
+            "mixPct": 8.5,
+            "mixYoyDeltaPp": -2.3,
+            "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+            "sourceForm": "QuarterlyResultsRelease",
+            "filingDate": "2026-08-04",
+            "metricMode": "flow",
+            "validationNotes": [
+              "amd-official-restated-segment-table"
+            ]
+          }
+        ]
       }
     },
     "filingsUsed": [
@@ -8929,6 +9435,12 @@
         "quarter": "2025Q4",
         "filingDate": "2026-02-03",
         "url": "https://www.amd.com/en/newsroom/press-releases/2026-2-3-amd-reports-fourth-quarter-and-full-year-2025-fina.html"
+      },
+      {
+        "title": "AMD Second Quarter 2026 Financial Results",
+        "quarter": "2026Q2",
+        "filingDate": "2026-08-04",
+        "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
       }
     ],
     "errors": []
@@ -9038,13 +9550,13 @@
       "overallConfidenceScore": 0.9611,
       "financialConfidenceScore": 0.9401,
       "structuralConfidenceScore": 1.0,
-      "revenueSegmentChecks": 33,
+      "revenueSegmentChecks": 34,
       "revenueSegmentMismatchCount": 0,
       "revenueSegmentSkippedChecks": 0,
       "detailGroupChecks": 0,
       "detailGroupMismatchCount": 0,
       "detailGroupSkippedChecks": 0,
-      "opexChecks": 0,
+      "opexChecks": 1,
       "opexSkippedChecks": 0,
       "opexOverflowMismatchCount": 0,
       "warningCount": 0,
@@ -9148,67 +9660,67 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -9220,7 +9732,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248819000045/amd-20190330.xml"
         }
       },
@@ -9228,67 +9740,67 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -9300,7 +9812,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248819000104/amd0629201910q_htm.xml"
         }
       },
@@ -9308,67 +9820,67 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -9380,7 +9892,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248819000159/amd0928201910q_htm.xml"
         }
       },
@@ -9388,67 +9900,67 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -9460,7 +9972,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000162828021001185/amd-20201226_htm.xml"
         }
       },
@@ -9468,67 +9980,67 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -9540,7 +10052,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248820000051/amdq1fy2010q_htm.xml"
         }
       },
@@ -9548,67 +10060,67 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -9620,7 +10132,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248820000103/amd-20200627_htm.xml"
         }
       },
@@ -9628,67 +10140,67 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -9700,7 +10212,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248820000164/amd-20200926_htm.xml"
         }
       },
@@ -9708,67 +10220,67 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -9780,7 +10292,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248822000016/amd-20211225_htm.xml"
         }
       },
@@ -9788,67 +10300,67 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -9860,7 +10372,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248821000056/amd-20210327_htm.xml"
         }
       },
@@ -9868,67 +10380,67 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -9940,7 +10452,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248821000116/amd-20210626_htm.xml"
         }
       },
@@ -9948,67 +10460,67 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -10020,7 +10532,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248821000178/amd-20210925_htm.xml"
         }
       },
@@ -10028,67 +10540,67 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -10100,7 +10612,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248822000016/amd-20211225_htm.xml"
         }
       },
@@ -10108,73 +10620,73 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "otherOpexBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 67.0,
+          "score": 67,
           "sourceUrl": "https://stockanalysis.com/stocks/amd/financials/?p=quarterly"
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -10186,7 +10698,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248822000078/amd-20220326_htm.xml"
         }
       },
@@ -10194,73 +10706,73 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "otherOpexBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 67.0,
+          "score": 67,
           "sourceUrl": "https://stockanalysis.com/stocks/amd/financials/?p=quarterly"
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -10272,7 +10784,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248821000116/amd-20210626_htm.xml"
         }
       },
@@ -10280,73 +10792,73 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "otherOpexBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 67.0,
+          "score": 67,
           "sourceUrl": "https://stockanalysis.com/stocks/amd/financials/?p=quarterly"
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -10358,7 +10870,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248821000178/amd-20210925_htm.xml"
         }
       },
@@ -10366,73 +10878,73 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "otherOpexBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 67.0,
+          "score": 67,
           "sourceUrl": "https://stockanalysis.com/stocks/amd/financials/?p=quarterly"
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -10444,7 +10956,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248822000016/amd-20211225_htm.xml"
         }
       },
@@ -10452,73 +10964,73 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "otherOpexBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -10530,7 +11042,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248823000076/amd-20230401_htm.xml"
         }
       },
@@ -10538,73 +11050,73 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "otherOpexBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -10616,7 +11128,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248823000139/amd-20230701_htm.xml"
         }
       },
@@ -10624,73 +11136,73 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "otherOpexBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -10702,7 +11214,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248823000195/amd-20230930_htm.xml"
         }
       },
@@ -10710,73 +11222,73 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "otherOpexBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -10788,7 +11300,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000012/amd-20241228_htm.xml"
         }
       },
@@ -10796,73 +11308,73 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "otherOpexBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -10874,7 +11386,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248824000056/amd-20240330_htm.xml"
         }
       },
@@ -10882,73 +11394,73 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "otherOpexBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -10960,7 +11472,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248824000163/amd-20240928_htm.xml"
         }
       },
@@ -10968,73 +11480,73 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "otherOpexBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -11046,7 +11558,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227_htm.xml"
         }
       },
@@ -11054,73 +11566,73 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "otherOpexBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -11132,7 +11644,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000047/amd-20250329_htm.xml"
         }
       },
@@ -11140,73 +11652,73 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "otherOpexBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -11218,7 +11730,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000108/amd-20250628_htm.xml"
         }
       },
@@ -11226,73 +11738,73 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "otherOpexBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -11304,7 +11816,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000166/amd-20250927_htm.xml"
         }
       },
@@ -11312,73 +11824,73 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "otherOpexBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -11390,7 +11902,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227_htm.xml"
         }
       },
@@ -11398,73 +11910,73 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "otherOpexBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -11476,7 +11988,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000047/amd-20250329_htm.xml"
         }
       },
@@ -11484,73 +11996,73 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "otherOpexBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -11562,7 +12074,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000108/amd-20250628_htm.xml"
         }
       },
@@ -11570,73 +12082,73 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "otherOpexBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -11648,7 +12160,7 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000166/amd-20250927_htm.xml"
         }
       },
@@ -11656,73 +12168,73 @@
         "revenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "costOfRevenueBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 120.0,
+          "score": 120,
           "sourceUrl": null
         },
         "grossProfitBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "sgnaBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "rndBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "otherOpexBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "operatingExpensesBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "operatingIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "nonOperatingBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 110.0,
+          "score": 110,
           "sourceUrl": null
         },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "taxBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 112.0,
+          "score": 112,
           "sourceUrl": null
         },
         "netIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
-          "score": 118.0,
+          "score": 118,
           "sourceUrl": null
         },
         "statementMeta": {
@@ -11734,13 +12246,13 @@
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
           "label": "Official filing revenue structure",
-          "score": 114.0,
+          "score": 114,
           "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2026-2-3-amd-reports-fourth-quarter-and-full-year-2025-fina.html"
         },
         "officialRevenueDetailGroups": {
           "adapterId": "manual_revenue_structures",
           "label": "Manual revenue structure overrides",
-          "score": 152.0,
+          "score": 152,
           "sourceUrl": "https://www.amd.com/en/newsroom/press-releases/2026-2-3-amd-reports-fourth-quarter-and-full-year-2025-fina.html"
         }
       }
@@ -11754,10 +12266,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -11777,10 +12289,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -11800,10 +12312,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -11823,10 +12335,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -11846,10 +12358,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -11869,10 +12381,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -11892,10 +12404,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -11915,10 +12427,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -11938,10 +12450,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -11961,10 +12473,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -11984,10 +12496,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -12007,10 +12519,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -12030,10 +12542,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -12053,10 +12565,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -12076,10 +12588,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -12099,10 +12611,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -12122,10 +12634,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -12145,10 +12657,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -12168,10 +12680,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -12191,10 +12703,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -12214,10 +12726,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -12237,10 +12749,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -12260,10 +12772,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -12283,10 +12795,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -12306,10 +12818,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -12329,10 +12841,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -12352,10 +12864,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -12375,10 +12887,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -12398,10 +12910,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -12421,10 +12933,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -12444,10 +12956,10 @@
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
         "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": 100.0,
+        "revenueSegmentCoveragePct": 100,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": 0,
-        "revenueSegmentResidualBn": 0.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
         "statementSource": null,
@@ -12463,27 +12975,29 @@
   },
   "statementPresets": {},
   "coverage": {
-    "quarterCount": 33,
+    "quarterCount": 34,
     "pixelReplicaQuarterCount": 0,
     "hasPixelReplica": false,
-    "officialFinancialQuarterCount": 33,
-    "officialSegmentQuarterCount": 33,
-    "officialExpenseQuarterCount": 0,
+    "officialFinancialQuarterCount": 34,
+    "officialSegmentQuarterCount": 34,
+    "officialExpenseQuarterCount": 1,
     "classification": {
-      "status": "ok",
-      "latestQuarter": "2026Q1",
+      "status": "warning",
+      "latestQuarter": "2026Q2",
       "latestQuarterHasRevenueClassification": true,
-      "latestQuarterHasExpenseClassification": false,
-      "latestRevenueClassificationQuarter": "2026Q1",
-      "latestExpenseClassificationQuarter": null,
-      "latestStructureHistoryQuarter": "2025Q4",
-      "revenueClassificationQuarterCount": 33,
-      "expenseClassificationQuarterCount": 0,
+      "latestQuarterHasExpenseClassification": true,
+      "latestRevenueClassificationQuarter": "2026Q2",
+      "latestExpenseClassificationQuarter": "2026Q2",
+      "latestStructureHistoryQuarter": "2026Q2",
+      "revenueClassificationQuarterCount": 34,
+      "expenseClassificationQuarterCount": 1,
       "revenueClassificationCoverageRatio": 1.0,
-      "expenseClassificationCoverageRatio": 0.0,
+      "expenseClassificationCoverageRatio": 0.0294,
       "latestRevenueClassificationLagQuarters": 0,
-      "latestExpenseClassificationLagQuarters": null,
-      "warnings": [],
+      "latestExpenseClassificationLagQuarters": 0,
+      "warnings": [
+        "Expense classification history is sparse: 1 of 34 quarters have official expense breakdowns."
+      ],
       "blockers": [],
       "policy": {
         "allowLatestRevenueGap": true,
@@ -12527,18 +13041,23 @@
         "overallConfidenceScore": 0.9611,
         "financialConfidenceScore": 0.9401,
         "structuralConfidenceScore": 1.0,
-        "revenueSegmentChecks": 33,
+        "revenueSegmentChecks": 34,
         "revenueSegmentMismatchCount": 0,
         "revenueSegmentSkippedChecks": 0,
         "detailGroupChecks": 0,
         "detailGroupMismatchCount": 0,
         "detailGroupSkippedChecks": 0,
-        "opexChecks": 0,
+        "opexChecks": 1,
         "opexSkippedChecks": 0,
         "opexOverflowMismatchCount": 0,
         "warningCount": 0,
         "warnings": []
       }
     }
-  }
+  },
+  "marketCapUsd": 914610454528,
+  "marketCapAsOf": "2026-10-28",
+  "marketCapSourceRank": 17,
+  "marketCapSource": "CompaniesMarketCap",
+  "marketCapSourceUrl": "https://companiesmarketcap.com/amd/marketcap/"
 }

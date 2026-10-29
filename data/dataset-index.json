@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-28T20:09:59Z",
+  "generatedAt": "2026-10-29T00:05:26Z",
   "companyCount": 41,
   "companies": [
     {
@@ -17628,6 +17628,7 @@
       "officialSegmentHistory": {}
     },
     {
+      "_cacheVersion": "20260803-v4",
       "id": "coca-cola",
       "ticker": "KO",
       "nameZh": "可口可乐",
@@ -17673,31 +17674,39 @@
         "2025Q3",
         "2025Q4",
         "2026Q1",
-        "2026Q2"
+        "2026Q2",
+        "2026Q3",
+        "2026Q4"
       ],
       "statementSource": "official-sec-companyfacts",
       "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
       "reportingCurrency": "USD",
       "cik": 21344,
       "errors": [],
+      "errorDetails": [],
+      "marketCapUsd": 392306425856,
+      "marketCapAsOf": "2026-10-28",
+      "marketCapSourceRank": 35,
+      "marketCapSource": "CompaniesMarketCap",
+      "marketCapSourceUrl": "https://companiesmarketcap.com/coca-cola/marketcap/",
       "coverage": {
-        "quarterCount": 33,
+        "quarterCount": 35,
         "pixelReplicaQuarterCount": 0,
         "hasPixelReplica": false,
-        "officialFinancialQuarterCount": 33,
-        "officialSegmentQuarterCount": 28,
+        "officialFinancialQuarterCount": 35,
+        "officialSegmentQuarterCount": 30,
         "officialExpenseQuarterCount": 0,
         "classification": {
           "status": "ok",
-          "latestQuarter": "2026Q2",
+          "latestQuarter": "2026Q4",
           "latestQuarterHasRevenueClassification": true,
           "latestQuarterHasExpenseClassification": false,
-          "latestRevenueClassificationQuarter": "2026Q2",
+          "latestRevenueClassificationQuarter": "2026Q4",
           "latestExpenseClassificationQuarter": null,
-          "latestStructureHistoryQuarter": "2026Q2",
-          "revenueClassificationQuarterCount": 28,
+          "latestStructureHistoryQuarter": "2026Q3",
+          "revenueClassificationQuarterCount": 30,
           "expenseClassificationQuarterCount": 0,
-          "revenueClassificationCoverageRatio": 0.8485,
+          "revenueClassificationCoverageRatio": 0.8571,
           "expenseClassificationCoverageRatio": 0.0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
@@ -17706,7 +17715,7 @@
           "policy": {}
         },
         "parser": {
-          "version": "universal-parser-v3",
+          "version": "universal-parser-v4",
           "selectedFinancialSource": "official",
           "selectedSegmentSource": "official-segments",
           "selectedRevenueStructureSource": "official-revenue-structures",
@@ -17714,37 +17723,37 @@
           "financialReconciliation": {
             "version": "financial-reconciler-v1",
             "primarySource": "official",
-            "quarterCount": 30,
+            "quarterCount": 35,
             "fieldOverrideCount": 0,
             "derivedFieldCount": 0,
             "mixedSourceQuarterCount": 0,
             "sourceUsageCounts": {
-              "official": 609,
+              "official": 630,
               "stockanalysis": 0
             }
           },
           "financialValidation": {
             "version": "financial-validation-v1",
             "status": "high",
-            "quarterCount": 30,
-            "validatedQuarterCount": 30,
+            "quarterCount": 35,
+            "validatedQuarterCount": 35,
             "issueCount": 2,
             "mismatchQuarterCount": 2,
-            "highConfidenceQuarterCount": 30,
-            "averageConfidenceScore": 0.9963,
-            "latestQuarter": "2025Q4",
-            "latestQuarterConfidenceScore": 1,
+            "highConfidenceQuarterCount": 31,
+            "averageConfidenceScore": 0.9082,
+            "latestQuarter": "2026Q4",
+            "latestQuarterConfidenceScore": 0.225,
             "latestQuarterIssueCount": 0
           },
           "validation": {
             "version": "parser-validation-v1",
             "status": "high",
-            "overallConfidenceScore": 0.9976,
-            "financialConfidenceScore": 0.9963,
+            "overallConfidenceScore": 0.9403,
+            "financialConfidenceScore": 0.9082,
             "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 1,
             "revenueSegmentMismatchCount": 0,
-            "revenueSegmentSkippedChecks": 23,
+            "revenueSegmentSkippedChecks": 24,
             "detailGroupChecks": 0,
             "detailGroupMismatchCount": 0,
             "detailGroupSkippedChecks": 0,
@@ -17756,418 +17765,242 @@
           }
         }
       },
-      "marketCapUsd": 392306425856,
-      "marketCapAsOf": "2026-10-28",
-      "marketCapSourceRank": 35,
-      "marketCapSource": "CompaniesMarketCap",
-      "marketCapSourceUrl": "https://companiesmarketcap.com/coca-cola/marketcap/",
       "dataLoadMode": "latest-only",
-      "latestQuarter": "2026Q2",
+      "latestQuarter": "2026Q4",
       "financials": {
-        "2026Q2": {
-          "calendarQuarter": "2026Q2",
-          "periodEnd": "2026-07-03",
-          "fiscalLabel": "FY2026 Q2",
+        "2026Q4": {
+          "calendarQuarter": "2026Q4",
+          "periodEnd": "2026-10-02",
+          "fiscalYear": "2026",
+          "fiscalQuarter": "Q3",
+          "fiscalLabel": "FY2026 Q3",
           "statementCurrency": "USD",
-          "statementSource": "official-quarter-statement-backfill",
-          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
-          "statementValueMode": "direct",
-          "statementSpanQuarters": 1,
-          "revenueBn": 13.38,
-          "fieldSources": {
-            "revenueBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm"
-            },
-            "costOfRevenueBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm"
-            },
-            "grossProfitBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm"
-            },
-            "sgnaBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm"
-            },
-            "otherOpexBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm"
-            },
-            "operatingExpensesBn": {
-              "adapterId": "official-statement-backfill-derived",
-              "label": "Calculated from the same-quarter official statement",
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm"
-            },
-            "operatingIncomeBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm"
-            },
-            "nonOperatingBn": {
-              "adapterId": "official-statement-backfill-derived",
-              "label": "Calculated from the same-quarter official statement",
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm"
-            },
-            "pretaxIncomeBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm"
-            },
-            "taxBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm"
-            },
-            "netIncomeBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm"
-            }
+          "revenueBn": 0.001,
+          "revenueYoyPct": null,
+          "costOfRevenueBn": 0.001,
+          "grossProfitBn": 0.001,
+          "sgnaBn": 0.001,
+          "rndBn": 0.001,
+          "otherOpexBn": 0.01,
+          "operatingExpensesBn": 0.001,
+          "operatingIncomeBn": 0.001,
+          "nonOperatingBn": 0.0,
+          "pretaxIncomeBn": 0.001,
+          "taxBn": 0.001,
+          "netIncomeBn": 0.001,
+          "netIncomeYoyPct": null,
+          "grossMarginPct": null,
+          "operatingMarginPct": null,
+          "profitMarginPct": null,
+          "effectiveTaxRatePct": null,
+          "revenueQoqPct": null,
+          "grossMarginYoyDeltaPp": null,
+          "operatingMarginYoyDeltaPp": null,
+          "profitMarginYoyDeltaPp": null,
+          "statementSourceUrl": "https://stockanalysis.com/stocks/ko/financials/?p=quarterly",
+          "statementFilingDate": "2026-10-02",
+          "parserFinancialFieldSources": {
+            "calendarQuarter": "stockanalysis",
+            "periodEnd": "stockanalysis",
+            "fiscalYear": "stockanalysis",
+            "fiscalQuarter": "stockanalysis",
+            "fiscalLabel": "stockanalysis",
+            "statementCurrency": "stockanalysis",
+            "statementFilingDate": "stockanalysis",
+            "statementSourceUrl": "stockanalysis"
           },
-          "costOfRevenueBn": 4.965,
-          "grossProfitBn": 8.415,
-          "sgnaBn": 3.72,
-          "otherOpexBn": 0.023,
-          "operatingExpensesBn": 3.743,
-          "operatingIncomeBn": 4.672,
-          "nonOperatingBn": 0.803,
-          "pretaxIncomeBn": 5.475,
-          "taxBn": 1.037,
-          "netIncomeBn": 4.425,
-          "grossMarginPct": 62.892377,
-          "operatingMarginPct": 34.917788,
-          "profitMarginPct": 33.071749,
-          "derivedStatementFields": [
-            "operatingExpensesBn",
-            "nonOperatingBn"
-          ],
+          "parserFinancialCandidateCounts": {
+            "revenueBn": 0,
+            "revenueYoyPct": 0,
+            "revenueQoqPct": 0,
+            "costOfRevenueBn": 0,
+            "grossProfitBn": 0,
+            "grossMarginPct": 0,
+            "grossMarginYoyDeltaPp": 0,
+            "sgnaBn": 0,
+            "rndBn": 0,
+            "otherOpexBn": 0,
+            "operatingExpensesBn": 0,
+            "operatingIncomeBn": 0,
+            "operatingMarginPct": 0,
+            "operatingMarginYoyDeltaPp": 0,
+            "nonOperatingBn": 0,
+            "pretaxIncomeBn": 0,
+            "taxBn": 0,
+            "netIncomeBn": 0,
+            "netIncomeYoyPct": 0,
+            "profitMarginPct": 0,
+            "profitMarginYoyDeltaPp": 0,
+            "effectiveTaxRatePct": 0
+          },
+          "parserFinancialValidation": {
+            "version": "financial-validation-v1",
+            "status": "low",
+            "confidenceScore": 0.225,
+            "completenessScore": 0.0,
+            "consistencyScore": 0.5,
+            "checksRun": 0,
+            "checksPassed": 0,
+            "issueCount": 0,
+            "issues": []
+          },
           "officialRevenueSegments": [
             {
-              "name": "North America",
-              "memberKey": "northamerica",
-              "valueBn": 5.408,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
-              "sourceForm": "8-K",
-              "filingDate": "2026-07-28",
-              "mixPct": 40.4,
-              "qoqPct": 10.53,
-              "yoyPct": 7.54,
-              "mixYoyDeltaPp": 0.3,
-              "nameZh": null
+              "name": "Concentrate Operations",
+              "nameZh": null,
+              "memberKey": "concentrateoperations",
+              "valueBn": 8.199,
+              "yoyPct": null,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002_htm.xml",
+              "sourceForm": "10-Q",
+              "filingDate": "2026-10-28",
+              "periodStart": "2026-07-04",
+              "periodEnd": "2026-10-02",
+              "validationEligible": false,
+              "validationNotes": [
+                "partial-operation-model-disclosure"
+              ],
+              "mixPct": 819900.0
             },
             {
-              "name": "EMEA",
-              "memberKey": "emea",
-              "valueBn": 3.24,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
-              "sourceForm": "8-K",
-              "filingDate": "2026-07-28",
-              "mixPct": 24.2,
-              "qoqPct": 7.57,
-              "yoyPct": 2.02,
-              "mixYoyDeltaPp": -1.1,
-              "nameZh": null
-            },
-            {
-              "name": "Latin America",
-              "memberKey": "latinamerica",
-              "valueBn": 1.839,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
-              "sourceForm": "8-K",
-              "filingDate": "2026-07-28",
-              "mixPct": 13.7,
-              "qoqPct": 9.59,
-              "yoyPct": 15.88,
-              "mixYoyDeltaPp": 1.1,
-              "nameZh": null
-            },
-            {
-              "name": "Bottling Investments",
-              "memberKey": "bottlinginvestments",
-              "valueBn": 1.527,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
-              "sourceForm": "8-K",
-              "filingDate": "2026-07-28",
-              "mixPct": 11.4,
-              "qoqPct": -6.89,
-              "yoyPct": 8.22,
-              "mixYoyDeltaPp": 0.2,
-              "nameZh": null
-            },
-            {
-              "name": "Pacific",
-              "memberKey": "pacific",
-              "valueBn": 1.581,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
-              "sourceForm": "8-K",
-              "filingDate": "2026-07-28",
-              "mixPct": 11.8,
-              "qoqPct": 4.84,
-              "yoyPct": 0.57,
-              "mixYoyDeltaPp": -0.7,
-              "nameZh": null
+              "name": "Finished Product Operations",
+              "nameZh": null,
+              "memberKey": "finishedproductoperations",
+              "valueBn": 5.181,
+              "yoyPct": null,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067844/ko-20261002_htm.xml",
+              "sourceForm": "10-Q",
+              "filingDate": "2026-10-28",
+              "periodStart": "2026-07-04",
+              "periodEnd": "2026-10-02",
+              "validationEligible": false,
+              "validationNotes": [
+                "partial-operation-model-disclosure"
+              ],
+              "mixPct": 518100.0
             }
           ],
-          "qualityFlags": [
-            "official-quarter-statement-backfilled"
-          ],
-          "revenueQoqPct": 7.28,
-          "revenueYoyPct": 6.741,
-          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueTaxonomyChangedFromPriorYear": false,
-          "sankeyStructureContinuity": {
-            "sourceQuarter": "2026Q1",
-            "fields": [
-              "officialRevenueSegments"
-            ],
-            "rule": "same-normalized-category-set"
+          "officialSegmentAxis": "ProductOrServiceAxis",
+          "officialSegmentSource": "official-filings",
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+          "officialRevenueTaxonomyChangedFromPriorYear": true,
+          "displayCurrency": "USD",
+          "displayScaleFactor": 1,
+          "statementMeta": {
+            "statementSource": "generic-official-filing-table",
+            "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067403/a2026q3earningsreleaseex-9.htm",
+            "statementValueMode": "direct",
+            "statementSpanQuarters": 1,
+            "qualityFlags": [],
+            "adapterId": "generic_filing_tables"
+          },
+          "fieldSources": {
+            "revenueBn": {
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 89.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067403/a2026q3earningsreleaseex-9.htm"
+            },
+            "costOfRevenueBn": {
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 87.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067403/a2026q3earningsreleaseex-9.htm"
+            },
+            "grossProfitBn": {
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 87.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067403/a2026q3earningsreleaseex-9.htm"
+            },
+            "sgnaBn": {
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 85.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067403/a2026q3earningsreleaseex-9.htm"
+            },
+            "rndBn": {
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 85.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067403/a2026q3earningsreleaseex-9.htm"
+            },
+            "otherOpexBn": {
+              "adapterId": "generic_ir_pdf",
+              "label": "Generic IR PDF parser",
+              "score": 74.0,
+              "sourceUrl": "https://investors.coca-colacompany.com/_assets/_1df3df91e6951f35952f0bd0d28b0ece/cocacolacompany/db/880/11140/earnings_release/Coca-Cola+2026+Q3+Earnings+Release_Full+Release_10.27.26.pdf"
+            },
+            "operatingExpensesBn": {
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 87.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067403/a2026q3earningsreleaseex-9.htm"
+            },
+            "operatingIncomeBn": {
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 87.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067403/a2026q3earningsreleaseex-9.htm"
+            },
+            "nonOperatingBn": {
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 83.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067403/a2026q3earningsreleaseex-9.htm"
+            },
+            "pretaxIncomeBn": {
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 87.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067403/a2026q3earningsreleaseex-9.htm"
+            },
+            "taxBn": {
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 85.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067403/a2026q3earningsreleaseex-9.htm"
+            },
+            "netIncomeBn": {
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 87.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067403/a2026q3earningsreleaseex-9.htm"
+            },
+            "statementMeta": {
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 12.3,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026067403/a2026q3earningsreleaseex-9.htm"
+            }
+          },
+          "extractionDiagnostics": {
+            "qualityScore": 80,
+            "availableRequiredFieldCount": 3,
+            "requiredFieldCount": 3,
+            "sourceFieldCount": 14,
+            "hasCostBreakdownProfile": false,
+            "costBreakdownMode": "none",
+            "opexBreakdownMode": "none",
+            "revenueSegmentCoveragePct": 100.0,
+            "costBreakdownCoveragePct": 0,
+            "opexBreakdownCoveragePct": 0,
+            "revenueSegmentResidualBn": 0,
+            "costBreakdownResidualBn": null,
+            "opexBreakdownResidualBn": null,
+            "statementSource": "generic-official-filing-table",
+            "statementValueMode": "direct",
+            "statementSpanQuarters": 1,
+            "statementQualityFlags": [],
+            "issues": [
+              "cost-breakdown-coverage-low",
+              "opex-breakdown-coverage-low"
+            ]
           }
         }
       },
       "statementPresets": {},
-      "officialRevenueStructureHistory": {
-        "source": "official-filing-tables",
-        "quarters": {
-          "2026Q2": {
-            "segments": [
-              {
-                "name": "EMEA",
-                "memberKey": "emea",
-                "valueBn": 3.24,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
-                "sourceForm": "8-K",
-                "filingDate": "2026-07-28"
-              },
-              {
-                "name": "Latin America",
-                "memberKey": "latinamerica",
-                "valueBn": 1.839,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
-                "sourceForm": "8-K",
-                "filingDate": "2026-07-28"
-              },
-              {
-                "name": "North America",
-                "memberKey": "northamerica",
-                "valueBn": 5.408,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
-                "sourceForm": "8-K",
-                "filingDate": "2026-07-28"
-              },
-              {
-                "name": "Asia Pacific",
-                "memberKey": "pacific",
-                "valueBn": 1.581,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
-                "sourceForm": "8-K",
-                "filingDate": "2026-07-28"
-              },
-              {
-                "name": "Bottling Investments",
-                "memberKey": "bottlinginvestments",
-                "valueBn": 1.527,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm",
-                "sourceForm": "8-K",
-                "filingDate": "2026-07-28"
-              }
-            ],
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm"
-          }
-        },
-        "filingsUsed": [
-          {
-            "form": "10-Q",
-            "filingDate": "2026-07-29",
-            "accession": "0001628280-26-050503",
-            "instance": "ko-20260703_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2026-04-30",
-            "accession": "0001628280-26-028802",
-            "instance": "ko-20260403_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2026-02-20",
-            "accession": "0001628280-26-010047",
-            "instance": "ko-20251231_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2025-10-23",
-            "accession": "0001628280-25-046054",
-            "instance": "ko-20250926_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2025-07-24",
-            "accession": "0000021344-25-000061",
-            "instance": "ko-20250627_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2025-05-01",
-            "accession": "0000021344-25-000029",
-            "instance": "ko-20250328_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2025-02-20",
-            "accession": "0000021344-25-000011",
-            "instance": "ko-20241231_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2024-10-24",
-            "accession": "0000021344-24-000060",
-            "instance": "ko-20240927_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2024-07-29",
-            "accession": "0000021344-24-000044",
-            "instance": "ko-20240628_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2024-05-02",
-            "accession": "0000021344-24-000017",
-            "instance": "ko-20240329_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2024-02-20",
-            "accession": "0000021344-24-000009",
-            "instance": "ko-20231231_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2023-10-24",
-            "accession": "0000021344-23-000060",
-            "instance": "ko-20230929_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2023-07-27",
-            "accession": "0000021344-23-000048",
-            "instance": "ko-20230630_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2023-04-26",
-            "accession": "0000021344-23-000024",
-            "instance": "ko-20230331_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2023-02-21",
-            "accession": "0000021344-23-000011",
-            "instance": "ko-20221231_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2022-10-26",
-            "accession": "0000021344-22-000042",
-            "instance": "ko-20220930_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2022-07-27",
-            "accession": "0000021344-22-000034",
-            "instance": "ko-20220701_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2022-04-28",
-            "accession": "0000021344-22-000016",
-            "instance": "ko-20220401_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2022-02-22",
-            "accession": "0000021344-22-000009",
-            "instance": "ko-20211231_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2021-10-28",
-            "accession": "0000021344-21-000030",
-            "instance": "ko-20211001_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2021-07-26",
-            "accession": "0000021344-21-000024",
-            "instance": "ko-20210702_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2021-04-27",
-            "accession": "0000021344-21-000014",
-            "instance": "ko-20210402_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2021-02-25",
-            "accession": "0000021344-21-000008",
-            "instance": "ko-20201231_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2020-10-22",
-            "accession": "0000021344-20-000046",
-            "instance": "ko-20200925_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2020-07-22",
-            "accession": "0000021344-20-000041",
-            "instance": "ko-20200626_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2020-04-24",
-            "accession": "0000021344-20-000014",
-            "instance": "a2020032710-q_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2020-02-24",
-            "accession": "0000021344-20-000006",
-            "instance": "a2019123110-k_htm.xml"
-          },
-          {
-            "form": "8-K",
-            "filingDate": "2026-07-28",
-            "accession": "0001628280-26-049922",
-            "primaryDocument": "ko-20260728.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026049922/a2026q2earningsreleaseex-9.htm"
-          },
-          {
-            "form": "8-K",
-            "filingDate": "2026-04-28",
-            "accession": "0001628280-26-027723",
-            "primaryDocument": "ko-20260428.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026027723/a2026q1earningsreleaseex-9.htm"
-          },
-          {
-            "form": "8-K",
-            "filingDate": "2026-02-10",
-            "accession": "0001628280-26-006642",
-            "primaryDocument": "ko-20260210.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/21344/000162828026006642/a2025q4earningsreleaseex-9.htm"
-          }
-        ],
-        "errors": []
-      },
+      "officialRevenueStructureHistory": {},
       "officialSegmentHistory": {}
     },
     {

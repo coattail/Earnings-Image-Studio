@@ -138,9 +138,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -247,7 +247,16 @@
       "officialRevenueStyle": "semiconductor-product-mix",
       "revenueClassificationSource": "sk-hynix-fy-product-mix-proxy",
       "revenueClassificationSourceUrl": "https://news.skhynix.com/sk-hynix-inc-reports-fiscal-year-2021-and-fourth-quarter-results/",
-      "revenueClassificationMetricMode": "annual-mix-proxy"
+      "revenueClassificationMetricMode": "annual-mix-proxy",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2021Q3": {
       "calendarQuarter": "2021Q3",
@@ -336,9 +345,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -445,7 +454,16 @@
       "officialRevenueStyle": "semiconductor-product-mix",
       "revenueClassificationSource": "sk-hynix-official-product-mix",
       "revenueClassificationSourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2022Q3_eng.pdf?1=",
-      "revenueClassificationMetricMode": "official-product-mix-derived"
+      "revenueClassificationMetricMode": "official-product-mix-derived",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2021Q4": {
       "calendarQuarter": "2021Q4",
@@ -534,9 +552,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -643,7 +661,16 @@
       "officialRevenueStyle": "semiconductor-product-mix",
       "revenueClassificationSource": "sk-hynix-official-product-mix",
       "revenueClassificationSourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2022Q4_eng.pdf?1=",
-      "revenueClassificationMetricMode": "official-product-mix-derived"
+      "revenueClassificationMetricMode": "official-product-mix-derived",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2022Q1": {
       "calendarQuarter": "2022Q1",
@@ -732,9 +759,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -841,7 +868,16 @@
       "officialRevenueStyle": "semiconductor-product-mix",
       "revenueClassificationSource": "sk-hynix-official-product-mix",
       "revenueClassificationSourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2023Q1_eng.pdf?1=",
-      "revenueClassificationMetricMode": "official-product-mix-derived"
+      "revenueClassificationMetricMode": "official-product-mix-derived",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2021Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2022Q2": {
       "calendarQuarter": "2022Q2",
@@ -933,9 +969,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -1042,7 +1078,16 @@
       "officialRevenueStyle": "semiconductor-product-mix",
       "revenueClassificationSource": "sk-hynix-official-product-mix",
       "revenueClassificationSourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2022Q3_eng.pdf?1=",
-      "revenueClassificationMetricMode": "official-product-mix-derived"
+      "revenueClassificationMetricMode": "official-product-mix-derived",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2022Q3": {
       "calendarQuarter": "2022Q3",
@@ -1134,9 +1179,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -1243,7 +1288,16 @@
       "officialRevenueStyle": "semiconductor-product-mix",
       "revenueClassificationSource": "sk-hynix-official-product-mix",
       "revenueClassificationSourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2022Q3_eng.pdf?1=",
-      "revenueClassificationMetricMode": "official-product-mix-derived"
+      "revenueClassificationMetricMode": "official-product-mix-derived",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2022Q4": {
       "calendarQuarter": "2022Q4",
@@ -1335,9 +1389,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -1444,7 +1498,16 @@
       "officialRevenueStyle": "semiconductor-product-mix",
       "revenueClassificationSource": "sk-hynix-official-product-mix",
       "revenueClassificationSourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2023Q1_eng.pdf?1=",
-      "revenueClassificationMetricMode": "official-product-mix-derived"
+      "revenueClassificationMetricMode": "official-product-mix-derived",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2023Q1": {
       "calendarQuarter": "2023Q1",
@@ -1536,9 +1599,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -1645,7 +1708,16 @@
       "officialRevenueStyle": "semiconductor-product-mix",
       "revenueClassificationSource": "sk-hynix-official-product-mix",
       "revenueClassificationSourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2023Q1_eng.pdf?1=",
-      "revenueClassificationMetricMode": "official-product-mix-derived"
+      "revenueClassificationMetricMode": "official-product-mix-derived",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2022Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2023Q2": {
       "calendarQuarter": "2023Q2",
@@ -1667,7 +1739,7 @@
       "pretaxIncomeBn": -3788.207,
       "taxBn": -800.3,
       "netIncomeBn": -2991.181,
-      "netIncomeYoyPct": -204.0,
+      "netIncomeYoyPct": -204,
       "grossMarginPct": -16.12,
       "operatingMarginPct": -39.45,
       "profitMarginPct": -40.94,
@@ -1737,9 +1809,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -1846,7 +1918,16 @@
       "officialRevenueStyle": "semiconductor-product-mix",
       "revenueClassificationSource": "sk-hynix-official-product-mix",
       "revenueClassificationSourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2023Q2_eng.pdf?1=",
-      "revenueClassificationMetricMode": "official-product-mix-derived"
+      "revenueClassificationMetricMode": "official-product-mix-derived",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2023Q3": {
       "calendarQuarter": "2023Q3",
@@ -1938,9 +2019,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -2047,7 +2128,16 @@
       "officialRevenueStyle": "semiconductor-product-mix",
       "revenueClassificationSource": "sk-hynix-official-product-mix",
       "revenueClassificationSourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2023Q3_eng.pdf?1=",
-      "revenueClassificationMetricMode": "official-product-mix-derived"
+      "revenueClassificationMetricMode": "official-product-mix-derived",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2023Q4": {
       "calendarQuarter": "2023Q4",
@@ -2072,7 +2162,7 @@
       "netIncomeYoyPct": -63.728,
       "grossMarginPct": 19.686,
       "operatingMarginPct": 3.06,
-      "profitMarginPct": -12.0,
+      "profitMarginPct": -12,
       "effectiveTaxRatePct": 26.42,
       "revenueQoqPct": 24.7,
       "grossMarginYoyDeltaPp": 19.381,
@@ -2139,9 +2229,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -2248,7 +2338,16 @@
       "officialRevenueStyle": "semiconductor-product-mix",
       "revenueClassificationSource": "sk-hynix-official-product-mix",
       "revenueClassificationSourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2023Q4_eng.pdf?1=",
-      "revenueClassificationMetricMode": "official-product-mix-derived"
+      "revenueClassificationMetricMode": "official-product-mix-derived",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2024Q1": {
       "calendarQuarter": "2024Q1",
@@ -2340,9 +2439,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -2449,7 +2548,16 @@
       "officialRevenueStyle": "semiconductor-product-mix",
       "revenueClassificationSource": "sk-hynix-official-product-mix",
       "revenueClassificationSourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2024Q1_eng.pdf?1=",
-      "revenueClassificationMetricMode": "official-product-mix-derived"
+      "revenueClassificationMetricMode": "official-product-mix-derived",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2023Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2024Q2": {
       "calendarQuarter": "2024Q2",
@@ -2541,9 +2649,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -2650,7 +2758,16 @@
       "officialRevenueStyle": "semiconductor-product-mix",
       "revenueClassificationSource": "sk-hynix-official-product-mix",
       "revenueClassificationSourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2024Q2_eng.pdf?1=",
-      "revenueClassificationMetricMode": "official-product-mix-derived"
+      "revenueClassificationMetricMode": "official-product-mix-derived",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2024Q3": {
       "calendarQuarter": "2024Q3",
@@ -2674,7 +2791,7 @@
       "netIncomeBn": 5748.676,
       "netIncomeYoyPct": -363.25,
       "grossMarginPct": 52.19,
-      "operatingMarginPct": 40.0,
+      "operatingMarginPct": 40,
       "profitMarginPct": 32.71,
       "effectiveTaxRatePct": 16.365,
       "revenueQoqPct": 7.001,
@@ -2742,9 +2859,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -2851,7 +2968,16 @@
       "officialRevenueStyle": "semiconductor-product-mix",
       "revenueClassificationSource": "sk-hynix-official-product-mix",
       "revenueClassificationSourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2024Q3_eng.pdf?1=",
-      "revenueClassificationMetricMode": "official-product-mix-derived"
+      "revenueClassificationMetricMode": "official-product-mix-derived",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2024Q4": {
       "calendarQuarter": "2024Q4",
@@ -2943,9 +3069,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -3052,7 +3178,16 @@
       "officialRevenueStyle": "semiconductor-product-mix",
       "revenueClassificationSource": "sk-hynix-official-product-mix",
       "revenueClassificationSourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2024Q4_eng.pdf?1=",
-      "revenueClassificationMetricMode": "official-product-mix-derived"
+      "revenueClassificationMetricMode": "official-product-mix-derived",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2025Q1": {
       "calendarQuarter": "2025Q1",
@@ -3144,9 +3279,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -3253,7 +3388,16 @@
       "officialRevenueStyle": "semiconductor-product-mix",
       "revenueClassificationSource": "sk-hynix-official-product-mix",
       "revenueClassificationSourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2025Q1_eng.pdf?1=",
-      "revenueClassificationMetricMode": "official-product-mix-derived"
+      "revenueClassificationMetricMode": "official-product-mix-derived",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2024Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2025Q2": {
       "calendarQuarter": "2025Q2",
@@ -3345,9 +3489,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -3454,7 +3598,16 @@
       "officialRevenueStyle": "semiconductor-product-mix",
       "revenueClassificationSource": "sk-hynix-official-product-mix",
       "revenueClassificationSourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2025Q2_eng.pdf?1=",
-      "revenueClassificationMetricMode": "official-product-mix-derived"
+      "revenueClassificationMetricMode": "official-product-mix-derived",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2025Q3": {
       "calendarQuarter": "2025Q3",
@@ -3546,9 +3699,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -3655,7 +3808,16 @@
       "officialRevenueStyle": "semiconductor-product-mix",
       "revenueClassificationSource": "sk-hynix-official-product-mix",
       "revenueClassificationSourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2025Q3_eng.pdf?1=",
-      "revenueClassificationMetricMode": "official-product-mix-derived"
+      "revenueClassificationMetricMode": "official-product-mix-derived",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2025Q4": {
       "calendarQuarter": "2025Q4",
@@ -3747,9 +3909,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -3856,7 +4018,16 @@
       "officialRevenueStyle": "semiconductor-product-mix",
       "revenueClassificationSource": "sk-hynix-official-product-mix",
       "revenueClassificationSourceUrl": "https://irsvc.teletogether.com/hynix/pdf/hynix2025Q4_eng.pdf?1=",
-      "revenueClassificationMetricMode": "official-product-mix-derived"
+      "revenueClassificationMetricMode": "official-product-mix-derived",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2026Q1": {
       "calendarQuarter": "2026Q1",
@@ -3884,7 +4055,7 @@
       "profitMarginPct": 76.71,
       "effectiveTaxRatePct": 21.836,
       "revenueQoqPct": 60.163,
-      "grossMarginYoyDeltaPp": 22.0,
+      "grossMarginYoyDeltaPp": 22,
       "operatingMarginYoyDeltaPp": 29.36,
       "profitMarginYoyDeltaPp": 30.75,
       "statementSourceUrl": "https://news.skhynix.com/q1-2026-business-results/",
@@ -3948,9 +4119,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -4004,7 +4175,7 @@
           "name": "DRAM",
           "nameZh": "DRAM（含 HBM）",
           "memberKey": "dram",
-          "valueBn": 40660.0,
+          "valueBn": 40660,
           "yoyPct": 189.66,
           "sourceUrl": "https://stockanalysis.com/quote/krx/000660/financials/metrics/?p=quarterly",
           "sourceForm": "StockAnalysis business metrics",
@@ -4019,19 +4190,19 @@
           "name": "NAND Flash / Storage",
           "nameZh": "NAND 闪存与存储",
           "memberKey": "nand",
-          "valueBn": 11570.0,
+          "valueBn": 11570,
           "yoyPct": 258.46,
           "sourceUrl": "https://stockanalysis.com/quote/krx/000660/financials/metrics/?p=quarterly",
           "sourceForm": "StockAnalysis business metrics",
           "filingDate": "2026-03-31",
           "metricMode": "reported-product-revenue",
           "validationEligible": true,
-          "mixPct": 22.0,
+          "mixPct": 22,
           "qoqPct": 53.24,
-          "mixYoyDeltaPp": 4.0
+          "mixYoyDeltaPp": 4
         },
         {
-          "name": "Other products and services",
+          "name": "Other Products & Services",
           "nameZh": "其他产品与服务",
           "memberKey": "otherproductsservices",
           "valueBn": 343.42,
@@ -4055,7 +4226,16 @@
         "valueBn": 2.867,
         "sourceUrl": "https://stockanalysis.com/quote/krx/000660/financials/metrics/?p=quarterly",
         "sourceForm": "reconciliation to consolidated revenue"
-      }
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2025Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2018Q1": {
       "calendarQuarter": "2018Q1",
@@ -4064,19 +4244,19 @@
       "fiscalQuarter": "Q1",
       "fiscalLabel": "FY2018 Q1",
       "statementCurrency": "KRW",
-      "revenueBn": 8720.0,
+      "revenueBn": 8720,
       "revenueYoyPct": null,
-      "costOfRevenueBn": 3383.0,
-      "grossProfitBn": 5336.0,
-      "sgnaBn": 969.0,
+      "costOfRevenueBn": 3383,
+      "grossProfitBn": 5336,
+      "sgnaBn": 969,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": 969.0,
-      "operatingIncomeBn": 4367.0,
-      "nonOperatingBn": -76.0,
-      "pretaxIncomeBn": 4291.0,
-      "taxBn": 1169.0,
-      "netIncomeBn": 3121.0,
+      "operatingExpensesBn": 969,
+      "operatingIncomeBn": 4367,
+      "nonOperatingBn": -76,
+      "pretaxIncomeBn": 4291,
+      "taxBn": 1169,
+      "netIncomeBn": 3121,
       "netIncomeYoyPct": null,
       "grossMarginPct": 61.193,
       "operatingMarginPct": 50.08,
@@ -4148,7 +4328,9 @@
       "revenueClassificationSourceUrl": "https://files.quartr.com/conference-calls/d51f3-2023-12-13-09-08-18.pdf?ref=U3RvY2tBbmFseXNpcw==",
       "revenueClassificationMetricMode": "official-product-mix-derived",
       "displayCurrency": "USD",
-      "displayScaleFactor": 0.00094
+      "displayScaleFactor": 0.00094,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2018Q2": {
       "calendarQuarter": "2018Q2",
@@ -4157,19 +4339,19 @@
       "fiscalQuarter": "Q2",
       "fiscalLabel": "FY2018 Q2",
       "statementCurrency": "KRW",
-      "revenueBn": 10371.0,
+      "revenueBn": 10371,
       "revenueYoyPct": null,
-      "costOfRevenueBn": 3762.0,
-      "grossProfitBn": 6608.0,
-      "sgnaBn": 1034.0,
+      "costOfRevenueBn": 3762,
+      "grossProfitBn": 6608,
+      "sgnaBn": 1034,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": 1034.0,
-      "operatingIncomeBn": 5574.0,
-      "nonOperatingBn": 329.0,
-      "pretaxIncomeBn": 5903.0,
-      "taxBn": 1575.0,
-      "netIncomeBn": 4329.0,
+      "operatingExpensesBn": 1034,
+      "operatingIncomeBn": 5574,
+      "nonOperatingBn": 329,
+      "pretaxIncomeBn": 5903,
+      "taxBn": 1575,
+      "netIncomeBn": 4329,
       "netIncomeYoyPct": null,
       "grossMarginPct": 63.716,
       "operatingMarginPct": 53.746,
@@ -4244,7 +4426,16 @@
       "revenueClassificationSourceUrl": "https://files.quartr.com/conference-calls/33957-2023-12-13-09-20-16.pdf?ref=U3RvY2tBbmFseXNpcw==",
       "revenueClassificationMetricMode": "official-product-mix-derived",
       "displayCurrency": "USD",
-      "displayScaleFactor": 0.0009
+      "displayScaleFactor": 0.0009,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2018Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2018Q3": {
       "calendarQuarter": "2018Q3",
@@ -4253,19 +4444,19 @@
       "fiscalQuarter": "Q3",
       "fiscalLabel": "FY2018 Q3",
       "statementCurrency": "KRW",
-      "revenueBn": 11417.0,
+      "revenueBn": 11417,
       "revenueYoyPct": null,
-      "costOfRevenueBn": 3872.0,
-      "grossProfitBn": 7545.0,
-      "sgnaBn": 1073.0,
+      "costOfRevenueBn": 3872,
+      "grossProfitBn": 7545,
+      "sgnaBn": 1073,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": 1073.0,
-      "operatingIncomeBn": 6472.0,
-      "nonOperatingBn": -37.0,
-      "pretaxIncomeBn": 6435.0,
-      "taxBn": 1743.0,
-      "netIncomeBn": 4692.0,
+      "operatingExpensesBn": 1073,
+      "operatingIncomeBn": 6472,
+      "nonOperatingBn": -37,
+      "pretaxIncomeBn": 6435,
+      "taxBn": 1743,
+      "netIncomeBn": 4692,
       "netIncomeYoyPct": null,
       "grossMarginPct": 66.086,
       "operatingMarginPct": 56.687,
@@ -4340,7 +4531,16 @@
       "revenueClassificationSourceUrl": "https://files.quartr.com/conference-calls/84658-2023-12-13-09-26-13.pdf?ref=U3RvY2tBbmFseXNpcw==",
       "revenueClassificationMetricMode": "official-product-mix-derived",
       "displayCurrency": "USD",
-      "displayScaleFactor": 0.0009
+      "displayScaleFactor": 0.0009,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2018Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2018Q4": {
       "calendarQuarter": "2018Q4",
@@ -4349,19 +4549,19 @@
       "fiscalQuarter": "Q4",
       "fiscalLabel": "FY2018 Q4",
       "statementCurrency": "KRW",
-      "revenueBn": 9938.0,
+      "revenueBn": 9938,
       "revenueYoyPct": null,
-      "costOfRevenueBn": 4164.0,
-      "grossProfitBn": 5774.0,
-      "sgnaBn": 1344.0,
+      "costOfRevenueBn": 4164,
+      "grossProfitBn": 5774,
+      "sgnaBn": 1344,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": 1344.0,
-      "operatingIncomeBn": 4430.0,
-      "nonOperatingBn": 282.0,
-      "pretaxIncomeBn": 4712.0,
-      "taxBn": 1314.0,
-      "netIncomeBn": 3398.0,
+      "operatingExpensesBn": 1344,
+      "operatingIncomeBn": 4430,
+      "nonOperatingBn": 282,
+      "pretaxIncomeBn": 4712,
+      "taxBn": 1314,
+      "netIncomeBn": 3398,
       "netIncomeYoyPct": null,
       "grossMarginPct": 58.1,
       "operatingMarginPct": 44.576,
@@ -4436,7 +4636,16 @@
       "revenueClassificationSourceUrl": "https://files.quartr.com/conference-calls/c5e81-2023-12-13-09-55-12.pdf?ref=U3RvY2tBbmFseXNpcw==",
       "revenueClassificationMetricMode": "official-product-mix-derived",
       "displayCurrency": "USD",
-      "displayScaleFactor": 0.0009
+      "displayScaleFactor": 0.0009,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2018Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2019Q1": {
       "calendarQuarter": "2019Q1",
@@ -4445,19 +4654,19 @@
       "fiscalQuarter": "Q1",
       "fiscalLabel": "FY2019 Q1",
       "statementCurrency": "KRW",
-      "revenueBn": 6773.0,
+      "revenueBn": 6773,
       "revenueYoyPct": -22.328,
-      "costOfRevenueBn": 4092.0,
-      "grossProfitBn": 2680.0,
-      "sgnaBn": 1314.0,
+      "costOfRevenueBn": 4092,
+      "grossProfitBn": 2680,
+      "sgnaBn": 1314,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": 1314.0,
-      "operatingIncomeBn": 1366.0,
-      "nonOperatingBn": 114.0,
-      "pretaxIncomeBn": 1480.0,
-      "taxBn": 377.0,
-      "netIncomeBn": 1102.0,
+      "operatingExpensesBn": 1314,
+      "operatingIncomeBn": 1366,
+      "nonOperatingBn": 114,
+      "pretaxIncomeBn": 1480,
+      "taxBn": 377,
+      "netIncomeBn": 1102,
       "netIncomeYoyPct": null,
       "grossMarginPct": 39.569,
       "operatingMarginPct": 20.168,
@@ -4538,7 +4747,16 @@
       "revenueClassificationSourceUrl": "https://files.quartr.com/conference-calls/af33e-2023-12-13-09-10-12.pdf?ref=U3RvY2tBbmFseXNpcw==",
       "revenueClassificationMetricMode": "official-product-mix-derived",
       "displayCurrency": "USD",
-      "displayScaleFactor": 0.00088
+      "displayScaleFactor": 0.00088,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2018Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2019Q2": {
       "calendarQuarter": "2019Q2",
@@ -4547,19 +4765,19 @@
       "fiscalQuarter": "Q2",
       "fiscalLabel": "FY2019 Q2",
       "statementCurrency": "KRW",
-      "revenueBn": 6452.0,
+      "revenueBn": 6452,
       "revenueYoyPct": -37.788,
-      "costOfRevenueBn": 4435.0,
-      "grossProfitBn": 2017.0,
-      "sgnaBn": 1379.0,
+      "costOfRevenueBn": 4435,
+      "grossProfitBn": 2017,
+      "sgnaBn": 1379,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": 1379.0,
-      "operatingIncomeBn": 638.0,
-      "nonOperatingBn": 38.0,
-      "pretaxIncomeBn": 676.0,
-      "taxBn": 139.0,
-      "netIncomeBn": 537.0,
+      "operatingExpensesBn": 1379,
+      "operatingIncomeBn": 638,
+      "nonOperatingBn": 38,
+      "pretaxIncomeBn": 676,
+      "taxBn": 139,
+      "netIncomeBn": 537,
       "netIncomeYoyPct": null,
       "grossMarginPct": 31.262,
       "operatingMarginPct": 9.888,
@@ -4640,7 +4858,16 @@
       "revenueClassificationSourceUrl": "https://files.quartr.com/conference-calls/448ea-2023-12-13-09-32-11.pdf?ref=U3RvY2tBbmFseXNpcw==",
       "revenueClassificationMetricMode": "official-product-mix-derived",
       "displayCurrency": "USD",
-      "displayScaleFactor": 0.00087
+      "displayScaleFactor": 0.00087,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2019Q3": {
       "calendarQuarter": "2019Q3",
@@ -4649,19 +4876,19 @@
       "fiscalQuarter": "Q3",
       "fiscalLabel": "FY2019 Q3",
       "statementCurrency": "KRW",
-      "revenueBn": 6839.0,
+      "revenueBn": 6839,
       "revenueYoyPct": -40.098,
-      "costOfRevenueBn": 5023.0,
-      "grossProfitBn": 1816.0,
-      "sgnaBn": 1343.0,
+      "costOfRevenueBn": 5023,
+      "grossProfitBn": 1816,
+      "sgnaBn": 1343,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": 1343.0,
-      "operatingIncomeBn": 473.0,
-      "nonOperatingBn": 47.0,
-      "pretaxIncomeBn": 520.0,
-      "taxBn": 25.0,
-      "netIncomeBn": 495.0,
+      "operatingExpensesBn": 1343,
+      "operatingIncomeBn": 473,
+      "nonOperatingBn": 47,
+      "pretaxIncomeBn": 520,
+      "taxBn": 25,
+      "netIncomeBn": 495,
       "netIncomeYoyPct": null,
       "grossMarginPct": 26.554,
       "operatingMarginPct": 6.916,
@@ -4742,7 +4969,16 @@
       "revenueClassificationSourceUrl": "https://files.quartr.com/conference-calls/eb14a-2023-12-13-09-14-07.pdf?ref=U3RvY2tBbmFseXNpcw==",
       "revenueClassificationMetricMode": "official-product-mix-derived",
       "displayCurrency": "USD",
-      "displayScaleFactor": 0.00083
+      "displayScaleFactor": 0.00083,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2019Q4": {
       "calendarQuarter": "2019Q4",
@@ -4751,19 +4987,19 @@
       "fiscalQuarter": "Q4",
       "fiscalLabel": "FY2019 Q4",
       "statementCurrency": "KRW",
-      "revenueBn": 6927.0,
+      "revenueBn": 6927,
       "revenueYoyPct": -30.298,
-      "costOfRevenueBn": 5274.0,
-      "grossProfitBn": 1653.0,
-      "sgnaBn": 1417.0,
+      "costOfRevenueBn": 5274,
+      "grossProfitBn": 1653,
+      "sgnaBn": 1417,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": 1417.0,
-      "operatingIncomeBn": 236.0,
-      "nonOperatingBn": -469.0,
-      "pretaxIncomeBn": -233.0,
-      "taxBn": -115.0,
-      "netIncomeBn": -118.0,
+      "operatingExpensesBn": 1417,
+      "operatingIncomeBn": 236,
+      "nonOperatingBn": -469,
+      "pretaxIncomeBn": -233,
+      "taxBn": -115,
+      "netIncomeBn": -118,
       "netIncomeYoyPct": null,
       "grossMarginPct": 23.863,
       "operatingMarginPct": 3.407,
@@ -4844,7 +5080,16 @@
       "revenueClassificationSourceUrl": "https://files.quartr.com/conference-calls/a47df-2023-12-13-09-27-06.pdf?ref=U3RvY2tBbmFseXNpcw==",
       "revenueClassificationMetricMode": "official-product-mix-derived",
       "displayCurrency": "USD",
-      "displayScaleFactor": 0.00087
+      "displayScaleFactor": 0.00087,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2020Q1": {
       "calendarQuarter": "2020Q1",
@@ -4853,19 +5098,19 @@
       "fiscalQuarter": "Q1",
       "fiscalLabel": "FY2020 Q1",
       "statementCurrency": "KRW",
-      "revenueBn": 7199.0,
+      "revenueBn": 7199,
       "revenueYoyPct": 6.29,
-      "costOfRevenueBn": 5007.0,
-      "grossProfitBn": 2192.0,
-      "sgnaBn": 1392.0,
+      "costOfRevenueBn": 5007,
+      "grossProfitBn": 2192,
+      "sgnaBn": 1392,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": 1392.0,
-      "operatingIncomeBn": 800.0,
-      "nonOperatingBn": 129.0,
-      "pretaxIncomeBn": 929.0,
-      "taxBn": 279.0,
-      "netIncomeBn": 649.0,
+      "operatingExpensesBn": 1392,
+      "operatingIncomeBn": 800,
+      "nonOperatingBn": 129,
+      "pretaxIncomeBn": 929,
+      "taxBn": 279,
+      "netIncomeBn": 649,
       "netIncomeYoyPct": null,
       "grossMarginPct": 30.449,
       "operatingMarginPct": 11.113,
@@ -4946,7 +5191,16 @@
       "revenueClassificationSourceUrl": "https://files.quartr.com/conference-calls/ddfcb-2023-12-13-09-28-05.pdf?ref=U3RvY2tBbmFseXNpcw==",
       "revenueClassificationMetricMode": "official-product-mix-derived",
       "displayCurrency": "USD",
-      "displayScaleFactor": 0.00082
+      "displayScaleFactor": 0.00082,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2019Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2020Q2": {
       "calendarQuarter": "2020Q2",
@@ -4955,19 +5209,19 @@
       "fiscalQuarter": "Q2",
       "fiscalLabel": "FY2020 Q2",
       "statementCurrency": "KRW",
-      "revenueBn": 8607.0,
+      "revenueBn": 8607,
       "revenueYoyPct": 33.4,
-      "costOfRevenueBn": 5262.0,
-      "grossProfitBn": 3344.0,
-      "sgnaBn": 1397.0,
+      "costOfRevenueBn": 5262,
+      "grossProfitBn": 3344,
+      "sgnaBn": 1397,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": 1397.0,
-      "operatingIncomeBn": 1947.0,
-      "nonOperatingBn": -220.0,
-      "pretaxIncomeBn": 1727.0,
-      "taxBn": 463.0,
-      "netIncomeBn": 1264.0,
+      "operatingExpensesBn": 1397,
+      "operatingIncomeBn": 1947,
+      "nonOperatingBn": -220,
+      "pretaxIncomeBn": 1727,
+      "taxBn": 463,
+      "netIncomeBn": 1264,
       "netIncomeYoyPct": null,
       "grossMarginPct": 38.852,
       "operatingMarginPct": 22.621,
@@ -5048,7 +5302,16 @@
       "revenueClassificationSourceUrl": "https://files.quartr.com/conference-calls/b0485-2023-12-13-09-46-04.pdf?ref=U3RvY2tBbmFseXNpcw==",
       "revenueClassificationMetricMode": "official-product-mix-derived",
       "displayCurrency": "USD",
-      "displayScaleFactor": 0.00083
+      "displayScaleFactor": 0.00083,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2020Q3": {
       "calendarQuarter": "2020Q3",
@@ -5057,19 +5320,19 @@
       "fiscalQuarter": "Q3",
       "fiscalLabel": "FY2020 Q3",
       "statementCurrency": "KRW",
-      "revenueBn": 8129.0,
+      "revenueBn": 8129,
       "revenueYoyPct": 18.862,
-      "costOfRevenueBn": 5286.0,
-      "grossProfitBn": 2843.0,
-      "sgnaBn": 1544.0,
+      "costOfRevenueBn": 5286,
+      "grossProfitBn": 2843,
+      "sgnaBn": 1544,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": 1543.0,
-      "operatingIncomeBn": 1300.0,
-      "nonOperatingBn": 49.0,
-      "pretaxIncomeBn": 1349.0,
-      "taxBn": 271.0,
-      "netIncomeBn": 1078.0,
+      "operatingExpensesBn": 1543,
+      "operatingIncomeBn": 1300,
+      "nonOperatingBn": 49,
+      "pretaxIncomeBn": 1349,
+      "taxBn": 271,
+      "netIncomeBn": 1078,
       "netIncomeYoyPct": null,
       "grossMarginPct": 34.974,
       "operatingMarginPct": 15.992,
@@ -5150,7 +5413,16 @@
       "revenueClassificationSourceUrl": "https://files.quartr.com/conference-calls/01b41-2023-12-13-09-37-02.pdf?ref=U3RvY2tBbmFseXNpcw==",
       "revenueClassificationMetricMode": "official-product-mix-derived",
       "displayCurrency": "USD",
-      "displayScaleFactor": 0.00086
+      "displayScaleFactor": 0.00086,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2020Q4": {
       "calendarQuarter": "2020Q4",
@@ -5159,19 +5431,19 @@
       "fiscalQuarter": "Q4",
       "fiscalLabel": "FY2020 Q4",
       "statementCurrency": "KRW",
-      "revenueBn": 7966.0,
+      "revenueBn": 7966,
       "revenueYoyPct": 14.999,
-      "costOfRevenueBn": 5535.0,
-      "grossProfitBn": 2431.0,
-      "sgnaBn": 1465.0,
+      "costOfRevenueBn": 5535,
+      "grossProfitBn": 2431,
+      "sgnaBn": 1465,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": 1465.0,
-      "operatingIncomeBn": 966.0,
-      "nonOperatingBn": 1267.0,
-      "pretaxIncomeBn": 2233.0,
-      "taxBn": 465.0,
-      "netIncomeBn": 1768.0,
+      "operatingExpensesBn": 1465,
+      "operatingIncomeBn": 966,
+      "nonOperatingBn": 1267,
+      "pretaxIncomeBn": 2233,
+      "taxBn": 465,
+      "netIncomeBn": 1768,
       "netIncomeYoyPct": null,
       "grossMarginPct": 30.517,
       "operatingMarginPct": 12.127,
@@ -5252,7 +5524,16 @@
       "revenueClassificationSourceUrl": "https://files.quartr.com/conference-calls/29c0e-2023-12-13-08-35-57.pdf?ref=U3RvY2tBbmFseXNpcw==",
       "revenueClassificationMetricMode": "official-product-mix-derived",
       "displayCurrency": "USD",
-      "displayScaleFactor": 0.00092
+      "displayScaleFactor": 0.00092,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2021Q1": {
       "calendarQuarter": "2021Q1",
@@ -5261,19 +5542,19 @@
       "fiscalQuarter": "Q1",
       "fiscalLabel": "FY2021 Q1",
       "statementCurrency": "KRW",
-      "revenueBn": 8494.0,
+      "revenueBn": 8494,
       "revenueYoyPct": 17.989,
-      "costOfRevenueBn": 5766.0,
-      "grossProfitBn": 2729.0,
-      "sgnaBn": 1404.0,
+      "costOfRevenueBn": 5766,
+      "grossProfitBn": 2729,
+      "sgnaBn": 1404,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": 1405.0,
-      "operatingIncomeBn": 1324.0,
-      "nonOperatingBn": 27.0,
-      "pretaxIncomeBn": 1351.0,
-      "taxBn": 358.0,
-      "netIncomeBn": 993.0,
+      "operatingExpensesBn": 1405,
+      "operatingIncomeBn": 1324,
+      "nonOperatingBn": 27,
+      "pretaxIncomeBn": 1351,
+      "taxBn": 358,
+      "netIncomeBn": 993,
       "netIncomeYoyPct": null,
       "grossMarginPct": 32.129,
       "operatingMarginPct": 15.587,
@@ -5354,7 +5635,16 @@
       "revenueClassificationSourceUrl": "https://files.quartr.com/conference-calls/31372-2023-10-10-06-01-50.pdf?ref=U3RvY2tBbmFseXNpcw==",
       "revenueClassificationMetricMode": "official-product-mix-derived",
       "displayCurrency": "USD",
-      "displayScaleFactor": 0.00089
+      "displayScaleFactor": 0.00089,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2020Q4",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2026Q2": {
       "calendarQuarter": "2026Q2",
@@ -5599,7 +5889,16 @@
             "Allocated from the official Q2 aggregate using the Q1 2026 expense mix"
           ]
         }
-      ]
+      ],
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2026Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2026Q3": {
       "calendarQuarter": "2026Q3",

@@ -4,7 +4,7 @@
   "nameZh": "三星电子",
   "nameEn": "Samsung Electronics",
   "slug": "005930",
-  "rank": 10,
+  "rank": 13,
   "isAdr": false,
   "brand": {
     "primary": "#1428A0",
@@ -170,9 +170,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -328,7 +328,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2021Q3": {
       "calendarQuarter": "2021Q3",
@@ -416,9 +418,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -574,7 +576,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2021Q4": {
       "calendarQuarter": "2021Q4",
@@ -662,9 +666,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -820,7 +824,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2022Q1": {
       "calendarQuarter": "2022Q1",
@@ -908,9 +914,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -987,10 +993,7 @@
           "metricMode": "official-business-unit-sales",
           "validationEligible": false,
           "validationNotes": "Business-unit sales include intersegment transactions; use the reconciliation bridge to consolidated revenue.",
-          "mixPct": 34.5,
-          "qoqPct": 3.31,
-          "yoyPct": 41.35,
-          "mixYoyDeltaPp": 5.5
+          "mixPct": 34.5
         },
         {
           "memberKey": "sdc",
@@ -1020,10 +1023,7 @@
           "metricMode": "official-business-unit-sales",
           "validationEligible": false,
           "validationNotes": "Business-unit sales include intersegment transactions; use the reconciliation bridge to consolidated revenue.",
-          "mixPct": 3.4,
-          "qoqPct": -6.32,
-          "yoyPct": 12.66,
-          "mixYoyDeltaPp": -0.2
+          "mixPct": 3.4
         }
       ],
       "officialRevenueStyle": "samsung-business-unit-bridge",
@@ -1035,7 +1035,9 @@
         "valueBn": -7798.502,
         "sourceUrl": "https://images.samsung.com/is/content/samsung/assets/global/ir/docs/2022_1Q_conference_eng.pdf",
         "sourceForm": "Samsung Electronics quarterly earnings presentation"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+      "officialRevenueTaxonomyChangedFromPriorYear": true
     },
     "2022Q2": {
       "calendarQuarter": "2022Q2",
@@ -1126,9 +1128,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -1207,9 +1209,7 @@
           "validationEligible": false,
           "validationNotes": "Business-unit sales include intersegment transactions; use the reconciliation bridge to consolidated revenue.",
           "mixPct": 36.9,
-          "qoqPct": 6.07,
-          "yoyPct": 25.33,
-          "mixYoyDeltaPp": 1.2
+          "qoqPct": 6.07
         },
         {
           "memberKey": "sdc",
@@ -1241,9 +1241,7 @@
           "validationEligible": false,
           "validationNotes": "Business-unit sales include intersegment transactions; use the reconciliation bridge to consolidated revenue.",
           "mixPct": 3.9,
-          "qoqPct": 11.61,
-          "yoyPct": 23.14,
-          "mixYoyDeltaPp": 0.1
+          "qoqPct": 11.61
         }
       ],
       "officialRevenueStyle": "samsung-business-unit-bridge",
@@ -1262,7 +1260,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true
     },
     "2022Q3": {
       "calendarQuarter": "2022Q3",
@@ -1353,9 +1353,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -1434,9 +1434,7 @@
           "validationEligible": false,
           "validationNotes": "Business-unit sales include intersegment transactions; use the reconciliation bridge to consolidated revenue.",
           "mixPct": 30.0,
-          "qoqPct": -19.23,
-          "yoyPct": -12.84,
-          "mixYoyDeltaPp": -5.7
+          "qoqPct": -19.23
         },
         {
           "memberKey": "sdc",
@@ -1468,9 +1466,7 @@
           "validationEligible": false,
           "validationNotes": "Business-unit sales include intersegment transactions; use the reconciliation bridge to consolidated revenue.",
           "mixPct": 4.7,
-          "qoqPct": 21.81,
-          "yoyPct": 51.25,
-          "mixYoyDeltaPp": 1.5
+          "qoqPct": 21.81
         }
       ],
       "officialRevenueStyle": "samsung-business-unit-bridge",
@@ -1489,7 +1485,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true
     },
     "2022Q4": {
       "calendarQuarter": "2022Q4",
@@ -1518,7 +1516,7 @@
       "effectiveTaxRatePct": -372.009,
       "revenueQoqPct": -8.22,
       "grossMarginYoyDeltaPp": -10.31,
-      "operatingMarginYoyDeltaPp": -12.0,
+      "operatingMarginYoyDeltaPp": -12,
       "profitMarginYoyDeltaPp": 19.46,
       "statementSourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly",
       "statementFilingDate": "2022-12-31",
@@ -1580,9 +1578,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -1661,9 +1659,7 @@
           "validationEligible": false,
           "validationNotes": "Business-unit sales include intersegment transactions; use the reconciliation bridge to consolidated revenue.",
           "mixPct": 28.5,
-          "qoqPct": -12.81,
-          "yoyPct": -22.84,
-          "mixYoyDeltaPp": -5.5
+          "qoqPct": -12.81
         },
         {
           "memberKey": "sdc",
@@ -1695,9 +1691,7 @@
           "validationEligible": false,
           "validationNotes": "Business-unit sales include intersegment transactions; use the reconciliation bridge to consolidated revenue.",
           "mixPct": 5.6,
-          "qoqPct": 8.54,
-          "yoyPct": 38.25,
-          "mixYoyDeltaPp": 1.9
+          "qoqPct": 8.54
         }
       ],
       "officialRevenueStyle": "samsung-business-unit-bridge",
@@ -1716,7 +1710,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true
     },
     "2023Q1": {
       "calendarQuarter": "2023Q1",
@@ -1740,7 +1736,7 @@
       "netIncomeBn": 1401.252,
       "netIncomeYoyPct": -87.41,
       "grossMarginPct": 27.83,
-      "operatingMarginPct": 1.0,
+      "operatingMarginPct": 1,
       "profitMarginPct": 2.2,
       "effectiveTaxRatePct": 13.786,
       "revenueQoqPct": -9.542,
@@ -1808,7 +1804,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.9438,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.875,
         "checksRun": 8,
         "checksPassed": 7,
@@ -1957,7 +1953,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2023Q2": {
       "calendarQuarter": "2023Q2",
@@ -2049,7 +2047,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.9438,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.875,
         "checksRun": 8,
         "checksPassed": 7,
@@ -2198,7 +2196,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2023Q3": {
       "calendarQuarter": "2023Q3",
@@ -2290,7 +2290,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.9438,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.875,
         "checksRun": 8,
         "checksPassed": 7,
@@ -2439,7 +2439,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2023Q4": {
       "calendarQuarter": "2023Q4",
@@ -2531,7 +2533,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.9438,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.875,
         "checksRun": 8,
         "checksPassed": 7,
@@ -2680,7 +2682,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2024Q1": {
       "calendarQuarter": "2024Q1",
@@ -2771,9 +2775,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -2911,7 +2915,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2024Q2": {
       "calendarQuarter": "2024Q2",
@@ -3002,9 +3008,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -3142,7 +3148,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2024Q3": {
       "calendarQuarter": "2024Q3",
@@ -3171,7 +3179,7 @@
       "effectiveTaxRatePct": 2.127,
       "revenueQoqPct": 6.792,
       "grossMarginYoyDeltaPp": 7.09,
-      "operatingMarginYoyDeltaPp": 8.0,
+      "operatingMarginYoyDeltaPp": 8,
       "profitMarginYoyDeltaPp": 4.21,
       "statementSourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly",
       "statementFilingDate": "2024-09-30",
@@ -3234,7 +3242,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.9438,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.875,
         "checksRun": 8,
         "checksPassed": 7,
@@ -3383,7 +3391,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2024Q4": {
       "calendarQuarter": "2024Q4",
@@ -3408,7 +3418,7 @@
       "netIncomeYoyPct": 25.85,
       "grossMarginPct": 37.63,
       "operatingMarginPct": 8.56,
-      "profitMarginPct": 10.0,
+      "profitMarginPct": 10,
       "effectiveTaxRatePct": 1.976,
       "revenueQoqPct": -4.189,
       "grossMarginYoyDeltaPp": 5.66,
@@ -3474,9 +3484,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -3614,7 +3624,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2025Q1": {
       "calendarQuarter": "2025Q1",
@@ -3705,9 +3717,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -3845,7 +3857,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2025Q2": {
       "calendarQuarter": "2025Q2",
@@ -3937,7 +3951,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.8875,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.75,
         "checksRun": 8,
         "checksPassed": 6,
@@ -4095,7 +4109,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2025Q3": {
       "calendarQuarter": "2025Q3",
@@ -4187,7 +4203,7 @@
         "version": "financial-validation-v1",
         "status": "high",
         "confidenceScore": 0.9438,
-        "completenessScore": 1.0,
+        "completenessScore": 1,
         "consistencyScore": 0.875,
         "checksRun": 8,
         "checksPassed": 7,
@@ -4336,7 +4352,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2025Q4": {
       "calendarQuarter": "2025Q4",
@@ -4427,9 +4445,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -4567,7 +4585,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2026Q1": {
       "calendarQuarter": "2026Q1",
@@ -4607,7 +4627,7 @@
           "memberKey": "dx",
           "valueBn": 52654.7,
           "yoyPct": 1.81,
-          "qoqPct": 19.0,
+          "qoqPct": 19,
           "sourceUrl": "https://images.samsung.com/is/content/samsung/assets/global/ir/docs/2026_1Q_Interim_Report.pdf",
           "sourceForm": "Q1 2026 interim report",
           "filingDate": "2026-04-30",
@@ -4616,7 +4636,7 @@
           ],
           "validationEligible": false,
           "mixPct": 39.3,
-          "mixYoyDeltaPp": -26.0
+          "mixYoyDeltaPp": -26
         },
         {
           "name": "Device Solutions (DS)",
@@ -4624,7 +4644,7 @@
           "memberKey": "ds",
           "valueBn": 81715.6,
           "yoyPct": 225.16,
-          "qoqPct": 86.0,
+          "qoqPct": 86,
           "sourceUrl": "https://images.samsung.com/is/content/samsung/assets/global/ir/docs/2026_1Q_Interim_Report.pdf",
           "sourceForm": "Q1 2026 interim report",
           "filingDate": "2026-04-30",
@@ -4632,7 +4652,7 @@
             "存储 · 晶圆代工 · System LSI"
           ],
           "validationEligible": false,
-          "mixPct": 61.0,
+          "mixPct": 61,
           "mixYoyDeltaPp": 29.3
         },
         {
@@ -4641,7 +4661,7 @@
           "memberKey": "sdc",
           "valueBn": 6693.5,
           "yoyPct": 14.09,
-          "qoqPct": -29.0,
+          "qoqPct": -29,
           "sourceUrl": "https://images.samsung.com/is/content/samsung/assets/global/ir/docs/2026_1Q_Interim_Report.pdf",
           "sourceForm": "Q1 2026 interim report",
           "filingDate": "2026-04-30",
@@ -4649,7 +4669,7 @@
             "OLED 显示面板"
           ],
           "validationEligible": false,
-          "mixPct": 5.0,
+          "mixPct": 5,
           "mixYoyDeltaPp": -2.5
         },
         {
@@ -4658,7 +4678,7 @@
           "memberKey": "harman",
           "valueBn": 3826.3,
           "yoyPct": 11.9,
-          "qoqPct": -16.0,
+          "qoqPct": -16,
           "sourceUrl": "https://images.samsung.com/is/content/samsung/assets/global/ir/docs/2026_1Q_Interim_Report.pdf",
           "sourceForm": "Q1 2026 interim report",
           "filingDate": "2026-04-30",
@@ -4731,9 +4751,9 @@
       "parserFinancialValidation": {
         "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
+        "confidenceScore": 1,
+        "completenessScore": 1,
+        "consistencyScore": 1,
         "checksRun": 8,
         "checksPassed": 8,
         "issueCount": 0,
@@ -4796,7 +4816,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2018Q1": {
       "calendarQuarter": "2018Q1",
@@ -4805,19 +4827,19 @@
       "fiscalQuarter": "Q1",
       "fiscalLabel": "FY2018 Q1",
       "statementCurrency": "KRW",
-      "revenueBn": 60560.0,
+      "revenueBn": 60560,
       "revenueYoyPct": null,
-      "costOfRevenueBn": 31910.0,
-      "grossProfitBn": 28650.0,
-      "sgnaBn": 8790.0,
-      "rndBn": 4220.0,
+      "costOfRevenueBn": 31910,
+      "grossProfitBn": 28650,
+      "sgnaBn": 8790,
+      "rndBn": 4220,
       "otherOpexBn": null,
-      "operatingExpensesBn": 13010.0,
-      "operatingIncomeBn": 15640.0,
-      "nonOperatingBn": 540.0,
-      "pretaxIncomeBn": 16180.0,
-      "taxBn": 4490.0,
-      "netIncomeBn": 11690.0,
+      "operatingExpensesBn": 13010,
+      "operatingIncomeBn": 15640,
+      "nonOperatingBn": 540,
+      "pretaxIncomeBn": 16180,
+      "taxBn": 4490,
+      "netIncomeBn": 11690,
       "netIncomeYoyPct": null,
       "grossMarginPct": 47.308,
       "operatingMarginPct": 25.826,
@@ -4925,7 +4947,9 @@
         "sourceForm": "Samsung Electronics quarterly earnings presentation"
       },
       "displayCurrency": "USD",
-      "displayScaleFactor": 0.00094
+      "displayScaleFactor": 0.00094,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2018Q2": {
       "calendarQuarter": "2018Q2",
@@ -4934,19 +4958,19 @@
       "fiscalQuarter": "Q2",
       "fiscalLabel": "FY2018 Q2",
       "statementCurrency": "KRW",
-      "revenueBn": 58480.0,
+      "revenueBn": 58480,
       "revenueYoyPct": null,
-      "costOfRevenueBn": 31270.0,
-      "grossProfitBn": 27210.0,
-      "sgnaBn": 7970.0,
-      "rndBn": 4370.0,
+      "costOfRevenueBn": 31270,
+      "grossProfitBn": 27210,
+      "sgnaBn": 7970,
+      "rndBn": 4370,
       "otherOpexBn": null,
-      "operatingExpensesBn": 12340.0,
-      "operatingIncomeBn": 14870.0,
-      "nonOperatingBn": 540.0,
-      "pretaxIncomeBn": 15410.0,
-      "taxBn": 4360.0,
-      "netIncomeBn": 11040.0,
+      "operatingExpensesBn": 12340,
+      "operatingIncomeBn": 14870,
+      "nonOperatingBn": 540,
+      "pretaxIncomeBn": 15410,
+      "taxBn": 4360,
+      "netIncomeBn": 11040,
       "netIncomeYoyPct": null,
       "grossMarginPct": 46.529,
       "operatingMarginPct": 25.427,
@@ -5066,7 +5090,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2018Q3": {
       "calendarQuarter": "2018Q3",
@@ -5075,19 +5101,19 @@
       "fiscalQuarter": "Q3",
       "fiscalLabel": "FY2018 Q3",
       "statementCurrency": "KRW",
-      "revenueBn": 65460.0,
+      "revenueBn": 65460,
       "revenueYoyPct": null,
-      "costOfRevenueBn": 35190.0,
-      "grossProfitBn": 30270.0,
-      "sgnaBn": 8170.0,
-      "rndBn": 4520.0,
+      "costOfRevenueBn": 35190,
+      "grossProfitBn": 30270,
+      "sgnaBn": 8170,
+      "rndBn": 4520,
       "otherOpexBn": null,
-      "operatingExpensesBn": 12700.0,
-      "operatingIncomeBn": 17570.0,
-      "nonOperatingBn": 400.0,
-      "pretaxIncomeBn": 17970.0,
-      "taxBn": 4820.0,
-      "netIncomeBn": 13150.0,
+      "operatingExpensesBn": 12700,
+      "operatingIncomeBn": 17570,
+      "nonOperatingBn": 400,
+      "pretaxIncomeBn": 17970,
+      "taxBn": 4820,
+      "netIncomeBn": 13150,
       "netIncomeYoyPct": null,
       "grossMarginPct": 46.242,
       "operatingMarginPct": 26.841,
@@ -5207,7 +5233,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2018Q4": {
       "calendarQuarter": "2018Q4",
@@ -5216,19 +5244,19 @@
       "fiscalQuarter": "Q4",
       "fiscalLabel": "FY2018 Q4",
       "statementCurrency": "KRW",
-      "revenueBn": 59270.0,
+      "revenueBn": 59270,
       "revenueYoyPct": null,
-      "costOfRevenueBn": 34020.0,
-      "grossProfitBn": 25250.0,
-      "sgnaBn": 9210.0,
-      "rndBn": 5240.0,
+      "costOfRevenueBn": 34020,
+      "grossProfitBn": 25250,
+      "sgnaBn": 9210,
+      "rndBn": 5240,
       "otherOpexBn": null,
-      "operatingExpensesBn": 14450.0,
-      "operatingIncomeBn": 10800.0,
-      "nonOperatingBn": 810.0,
-      "pretaxIncomeBn": 11610.0,
-      "taxBn": 3150.0,
-      "netIncomeBn": 8460.0,
+      "operatingExpensesBn": 14450,
+      "operatingIncomeBn": 10800,
+      "nonOperatingBn": 810,
+      "pretaxIncomeBn": 11610,
+      "taxBn": 3150,
+      "netIncomeBn": 8460,
       "netIncomeYoyPct": null,
       "grossMarginPct": 42.602,
       "operatingMarginPct": 18.222,
@@ -5348,7 +5376,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2019Q1": {
       "calendarQuarter": "2019Q1",
@@ -5357,19 +5387,19 @@
       "fiscalQuarter": "Q1",
       "fiscalLabel": "FY2019 Q1",
       "statementCurrency": "KRW",
-      "revenueBn": 52390.0,
+      "revenueBn": 52390,
       "revenueYoyPct": -13.491,
-      "costOfRevenueBn": 32750.0,
-      "grossProfitBn": 19640.0,
-      "sgnaBn": 8510.0,
-      "rndBn": 4900.0,
+      "costOfRevenueBn": 32750,
+      "grossProfitBn": 19640,
+      "sgnaBn": 8510,
+      "rndBn": 4900,
       "otherOpexBn": null,
-      "operatingExpensesBn": 13410.0,
-      "operatingIncomeBn": 6230.0,
-      "nonOperatingBn": 680.0,
-      "pretaxIncomeBn": 6910.0,
-      "taxBn": 1870.0,
-      "netIncomeBn": 5040.0,
+      "operatingExpensesBn": 13410,
+      "operatingIncomeBn": 6230,
+      "nonOperatingBn": 680,
+      "pretaxIncomeBn": 6910,
+      "taxBn": 1870,
+      "netIncomeBn": 5040,
       "netIncomeYoyPct": null,
       "grossMarginPct": 37.488,
       "operatingMarginPct": 11.892,
@@ -5499,7 +5529,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2019Q2": {
       "calendarQuarter": "2019Q2",
@@ -5508,19 +5540,19 @@
       "fiscalQuarter": "Q2",
       "fiscalLabel": "FY2019 Q2",
       "statementCurrency": "KRW",
-      "revenueBn": 56130.0,
+      "revenueBn": 56130,
       "revenueYoyPct": -4.018,
-      "costOfRevenueBn": 35940.0,
-      "grossProfitBn": 20180.0,
-      "sgnaBn": 8640.0,
-      "rndBn": 4950.0,
+      "costOfRevenueBn": 35940,
+      "grossProfitBn": 20180,
+      "sgnaBn": 8640,
+      "rndBn": 4950,
       "otherOpexBn": null,
-      "operatingExpensesBn": 13580.0,
-      "operatingIncomeBn": 6600.0,
-      "nonOperatingBn": 580.0,
-      "pretaxIncomeBn": 7180.0,
-      "taxBn": 2000.0,
-      "netIncomeBn": 5180.0,
+      "operatingExpensesBn": 13580,
+      "operatingIncomeBn": 6600,
+      "nonOperatingBn": 580,
+      "pretaxIncomeBn": 7180,
+      "taxBn": 2000,
+      "netIncomeBn": 5180,
       "netIncomeYoyPct": null,
       "grossMarginPct": 35.952,
       "operatingMarginPct": 11.758,
@@ -5650,7 +5682,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2019Q3": {
       "calendarQuarter": "2019Q3",
@@ -5659,19 +5693,19 @@
       "fiscalQuarter": "Q3",
       "fiscalLabel": "FY2019 Q3",
       "statementCurrency": "KRW",
-      "revenueBn": 62000.0,
+      "revenueBn": 62000,
       "revenueYoyPct": -5.286,
-      "costOfRevenueBn": 39990.0,
-      "grossProfitBn": 22010.0,
-      "sgnaBn": 9100.0,
-      "rndBn": 5130.0,
+      "costOfRevenueBn": 39990,
+      "grossProfitBn": 22010,
+      "sgnaBn": 9100,
+      "rndBn": 5130,
       "otherOpexBn": null,
-      "operatingExpensesBn": 14230.0,
-      "operatingIncomeBn": 7780.0,
-      "nonOperatingBn": 840.0,
-      "pretaxIncomeBn": 8620.0,
-      "taxBn": 2330.0,
-      "netIncomeBn": 6290.0,
+      "operatingExpensesBn": 14230,
+      "operatingIncomeBn": 7780,
+      "nonOperatingBn": 840,
+      "pretaxIncomeBn": 8620,
+      "taxBn": 2330,
+      "netIncomeBn": 6290,
       "netIncomeYoyPct": null,
       "grossMarginPct": 35.5,
       "operatingMarginPct": 12.548,
@@ -5801,7 +5835,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2019Q4": {
       "calendarQuarter": "2019Q4",
@@ -5810,19 +5846,19 @@
       "fiscalQuarter": "Q4",
       "fiscalLabel": "FY2019 Q4",
       "statementCurrency": "KRW",
-      "revenueBn": 59880.0,
+      "revenueBn": 59880,
       "revenueYoyPct": 1.029,
-      "costOfRevenueBn": 38550.0,
-      "grossProfitBn": 21330.0,
-      "sgnaBn": 9250.0,
-      "rndBn": 4920.0,
+      "costOfRevenueBn": 38550,
+      "grossProfitBn": 21330,
+      "sgnaBn": 9250,
+      "rndBn": 4920,
       "otherOpexBn": null,
-      "operatingExpensesBn": 14170.0,
-      "operatingIncomeBn": 7160.0,
-      "nonOperatingBn": 560.0,
-      "pretaxIncomeBn": 7720.0,
-      "taxBn": 2490.0,
-      "netIncomeBn": 5230.0,
+      "operatingExpensesBn": 14170,
+      "operatingIncomeBn": 7160,
+      "nonOperatingBn": 560,
+      "pretaxIncomeBn": 7720,
+      "taxBn": 2490,
+      "netIncomeBn": 5230,
       "netIncomeYoyPct": null,
       "grossMarginPct": 35.621,
       "operatingMarginPct": 11.957,
@@ -5952,7 +5988,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2020Q1": {
       "calendarQuarter": "2020Q1",
@@ -5961,19 +5999,19 @@
       "fiscalQuarter": "Q1",
       "fiscalLabel": "FY2020 Q1",
       "statementCurrency": "KRW",
-      "revenueBn": 55330.0,
+      "revenueBn": 55330,
       "revenueYoyPct": 5.612,
-      "costOfRevenueBn": 34810.0,
-      "grossProfitBn": 20520.0,
-      "sgnaBn": 8710.0,
-      "rndBn": 5360.0,
+      "costOfRevenueBn": 34810,
+      "grossProfitBn": 20520,
+      "sgnaBn": 8710,
+      "rndBn": 5360,
       "otherOpexBn": null,
-      "operatingExpensesBn": 14070.0,
-      "operatingIncomeBn": 6450.0,
-      "nonOperatingBn": 310.0,
-      "pretaxIncomeBn": 6760.0,
-      "taxBn": 1870.0,
-      "netIncomeBn": 4880.0,
+      "operatingExpensesBn": 14070,
+      "operatingIncomeBn": 6450,
+      "nonOperatingBn": 310,
+      "pretaxIncomeBn": 6760,
+      "taxBn": 1870,
+      "netIncomeBn": 4880,
       "netIncomeYoyPct": null,
       "grossMarginPct": 37.087,
       "operatingMarginPct": 11.657,
@@ -6103,7 +6141,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2020Q2": {
       "calendarQuarter": "2020Q2",
@@ -6112,19 +6152,19 @@
       "fiscalQuarter": "Q2",
       "fiscalLabel": "FY2020 Q2",
       "statementCurrency": "KRW",
-      "revenueBn": 52970.0,
+      "revenueBn": 52970,
       "revenueYoyPct": -5.63,
-      "costOfRevenueBn": 31910.0,
-      "grossProfitBn": 21060.0,
-      "sgnaBn": 7690.0,
-      "rndBn": 5220.0,
+      "costOfRevenueBn": 31910,
+      "grossProfitBn": 21060,
+      "sgnaBn": 7690,
+      "rndBn": 5220,
       "otherOpexBn": null,
-      "operatingExpensesBn": 12910.0,
-      "operatingIncomeBn": 8150.0,
-      "nonOperatingBn": -380.0,
-      "pretaxIncomeBn": 7770.0,
-      "taxBn": 2210.0,
-      "netIncomeBn": 5560.0,
+      "operatingExpensesBn": 12910,
+      "operatingIncomeBn": 8150,
+      "nonOperatingBn": -380,
+      "pretaxIncomeBn": 7770,
+      "taxBn": 2210,
+      "netIncomeBn": 5560,
       "netIncomeYoyPct": null,
       "grossMarginPct": 39.758,
       "operatingMarginPct": 15.386,
@@ -6254,7 +6294,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2020Q3": {
       "calendarQuarter": "2020Q3",
@@ -6263,19 +6305,19 @@
       "fiscalQuarter": "Q3",
       "fiscalLabel": "FY2020 Q3",
       "statementCurrency": "KRW",
-      "revenueBn": 66960.0,
+      "revenueBn": 66960,
       "revenueYoyPct": 8.0,
-      "costOfRevenueBn": 39970.0,
-      "grossProfitBn": 26990.0,
-      "sgnaBn": 9330.0,
-      "rndBn": 5310.0,
+      "costOfRevenueBn": 39970,
+      "grossProfitBn": 26990,
+      "sgnaBn": 9330,
+      "rndBn": 5310,
       "otherOpexBn": null,
-      "operatingExpensesBn": 14640.0,
-      "operatingIncomeBn": 12350.0,
-      "nonOperatingBn": 490.0,
-      "pretaxIncomeBn": 12840.0,
-      "taxBn": 3480.0,
-      "netIncomeBn": 9360.0,
+      "operatingExpensesBn": 14640,
+      "operatingIncomeBn": 12350,
+      "nonOperatingBn": 490,
+      "pretaxIncomeBn": 12840,
+      "taxBn": 3480,
+      "netIncomeBn": 9360,
       "netIncomeYoyPct": null,
       "grossMarginPct": 40.308,
       "operatingMarginPct": 18.444,
@@ -6405,7 +6447,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2020Q4": {
       "calendarQuarter": "2020Q4",
@@ -6414,19 +6458,19 @@
       "fiscalQuarter": "Q4",
       "fiscalLabel": "FY2020 Q4",
       "statementCurrency": "KRW",
-      "revenueBn": 61550.0,
+      "revenueBn": 61550,
       "revenueYoyPct": 2.789,
-      "costOfRevenueBn": 37800.0,
-      "grossProfitBn": 23750.0,
-      "sgnaBn": 9480.0,
-      "rndBn": 5220.0,
+      "costOfRevenueBn": 37800,
+      "grossProfitBn": 23750,
+      "sgnaBn": 9480,
+      "rndBn": 5220,
       "otherOpexBn": null,
-      "operatingExpensesBn": 14700.0,
-      "operatingIncomeBn": 9050.0,
-      "nonOperatingBn": -80.0,
-      "pretaxIncomeBn": 8970.0,
-      "taxBn": 2370.0,
-      "netIncomeBn": 6610.0,
+      "operatingExpensesBn": 14700,
+      "operatingIncomeBn": 9050,
+      "nonOperatingBn": -80,
+      "pretaxIncomeBn": 8970,
+      "taxBn": 2370,
+      "netIncomeBn": 6610,
       "netIncomeYoyPct": null,
       "grossMarginPct": 38.587,
       "operatingMarginPct": 14.703,
@@ -6556,7 +6600,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2021Q1": {
       "calendarQuarter": "2021Q1",
@@ -6565,19 +6611,19 @@
       "fiscalQuarter": "Q1",
       "fiscalLabel": "FY2021 Q1",
       "statementCurrency": "KRW",
-      "revenueBn": 65390.0,
+      "revenueBn": 65390,
       "revenueYoyPct": 18.182,
-      "costOfRevenueBn": 41500.0,
-      "grossProfitBn": 23890.0,
-      "sgnaBn": 9070.0,
-      "rndBn": 5440.0,
+      "costOfRevenueBn": 41500,
+      "grossProfitBn": 23890,
+      "sgnaBn": 9070,
+      "rndBn": 5440,
       "otherOpexBn": null,
-      "operatingExpensesBn": 14510.0,
-      "operatingIncomeBn": 9380.0,
-      "nonOperatingBn": 370.0,
-      "pretaxIncomeBn": 9750.0,
-      "taxBn": 2610.0,
-      "netIncomeBn": 7140.0,
+      "operatingExpensesBn": 14510,
+      "operatingIncomeBn": 9380,
+      "nonOperatingBn": 370,
+      "pretaxIncomeBn": 9750,
+      "taxBn": 2610,
+      "netIncomeBn": 7140,
       "netIncomeYoyPct": null,
       "grossMarginPct": 36.535,
       "operatingMarginPct": 14.345,
@@ -6707,7 +6753,9 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     }
   },
   "statementSource": "stockanalysis-financials",
@@ -6793,7 +6841,7 @@
         "highConfidenceQuarterCount": 20,
         "averageConfidenceScore": 0.9775,
         "latestQuarter": "2026Q1",
-        "latestQuarterConfidenceScore": 1.0,
+        "latestQuarterConfidenceScore": 1,
         "latestQuarterIssueCount": 0
       }
     },
@@ -6970,61 +7018,61 @@
         "revenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 75.0,
+          "score": 75,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "costOfRevenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "grossProfitBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "sgnaBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "rndBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingExpensesBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "pretaxIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "taxBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "netIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "statementMeta": {
@@ -7038,61 +7086,61 @@
         "revenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 75.0,
+          "score": 75,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "costOfRevenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "grossProfitBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "sgnaBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "rndBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingExpensesBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "pretaxIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "taxBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "netIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "statementMeta": {
@@ -7106,61 +7154,61 @@
         "revenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 75.0,
+          "score": 75,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "costOfRevenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "grossProfitBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "sgnaBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "rndBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingExpensesBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "pretaxIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "taxBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "netIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "statementMeta": {
@@ -7174,61 +7222,61 @@
         "revenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 75.0,
+          "score": 75,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "costOfRevenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "grossProfitBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "sgnaBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "rndBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingExpensesBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "pretaxIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "taxBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "netIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "statementMeta": {
@@ -7242,61 +7290,61 @@
         "revenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 75.0,
+          "score": 75,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "costOfRevenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "grossProfitBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "sgnaBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "rndBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingExpensesBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "pretaxIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "taxBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "netIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "statementMeta": {
@@ -7310,61 +7358,61 @@
         "revenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 75.0,
+          "score": 75,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "costOfRevenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "grossProfitBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "sgnaBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "rndBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingExpensesBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "pretaxIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "taxBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "netIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "statementMeta": {
@@ -7378,61 +7426,61 @@
         "revenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 75.0,
+          "score": 75,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "costOfRevenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "grossProfitBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "sgnaBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "rndBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingExpensesBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "pretaxIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "taxBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "netIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "statementMeta": {
@@ -7446,61 +7494,61 @@
         "revenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 75.0,
+          "score": 75,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "costOfRevenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "grossProfitBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "sgnaBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "rndBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingExpensesBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "pretaxIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "taxBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "netIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "statementMeta": {
@@ -7514,61 +7562,61 @@
         "revenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 75.0,
+          "score": 75,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "costOfRevenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "grossProfitBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "sgnaBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "rndBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingExpensesBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "pretaxIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "taxBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "netIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "statementMeta": {
@@ -7582,61 +7630,61 @@
         "revenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 75.0,
+          "score": 75,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "costOfRevenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "grossProfitBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "sgnaBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "rndBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingExpensesBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "pretaxIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "taxBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "netIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "statementMeta": {
@@ -7650,61 +7698,61 @@
         "revenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 75.0,
+          "score": 75,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "costOfRevenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "grossProfitBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "sgnaBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "rndBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingExpensesBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "pretaxIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "taxBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "netIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "statementMeta": {
@@ -7718,61 +7766,61 @@
         "revenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 75.0,
+          "score": 75,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "costOfRevenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "grossProfitBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "sgnaBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "rndBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingExpensesBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "pretaxIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "taxBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "netIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "statementMeta": {
@@ -7786,61 +7834,61 @@
         "revenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 75.0,
+          "score": 75,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "costOfRevenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "grossProfitBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "sgnaBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "rndBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingExpensesBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "pretaxIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "taxBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "netIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "statementMeta": {
@@ -7854,61 +7902,61 @@
         "revenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 75.0,
+          "score": 75,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "costOfRevenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "grossProfitBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "sgnaBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "rndBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingExpensesBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "pretaxIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "taxBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "netIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "statementMeta": {
@@ -7922,61 +7970,61 @@
         "revenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 75.0,
+          "score": 75,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "costOfRevenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "grossProfitBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "sgnaBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "rndBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingExpensesBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "pretaxIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "taxBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "netIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "statementMeta": {
@@ -7990,61 +8038,61 @@
         "revenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 75.0,
+          "score": 75,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "costOfRevenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "grossProfitBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "sgnaBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "rndBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingExpensesBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "pretaxIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "taxBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "netIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "statementMeta": {
@@ -8058,61 +8106,61 @@
         "revenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 75.0,
+          "score": 75,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "costOfRevenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "grossProfitBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "sgnaBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "rndBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingExpensesBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "pretaxIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "taxBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "netIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "statementMeta": {
@@ -8126,61 +8174,61 @@
         "revenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 75.0,
+          "score": 75,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "costOfRevenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "grossProfitBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "sgnaBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "rndBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingExpensesBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "pretaxIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "taxBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "netIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "statementMeta": {
@@ -8194,61 +8242,61 @@
         "revenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 75.0,
+          "score": 75,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "costOfRevenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "grossProfitBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "sgnaBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "rndBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingExpensesBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "pretaxIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "taxBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "netIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "statementMeta": {
@@ -8262,61 +8310,61 @@
         "revenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 75.0,
+          "score": 75,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "costOfRevenueBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "grossProfitBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "sgnaBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "rndBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingExpensesBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "operatingIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "pretaxIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "taxBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 69.0,
+          "score": 69,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "netIncomeBn": {
           "adapterId": "stockanalysis_financials",
           "label": "StockAnalysis financials",
-          "score": 73.0,
+          "score": 73,
           "sourceUrl": "https://stockanalysis.com/quote/krx/005930/financials/?p=quarterly"
         },
         "statementMeta": {
@@ -8865,7 +8913,7 @@
         "highConfidenceQuarterCount": 20,
         "averageConfidenceScore": 0.9775,
         "latestQuarter": "2026Q1",
-        "latestQuarterConfidenceScore": 1.0,
+        "latestQuarterConfidenceScore": 1,
         "latestQuarterIssueCount": 0
       },
       "validation": {
@@ -8891,9 +8939,9 @@
   "classificationPolicy": {
     "maxBarQuarters": 36
   },
-  "marketCapUsd": 1362597609223,
-  "marketCapAsOf": "2026-07-06",
-  "marketCapSourceRank": 12,
+  "marketCapUsd": 1142502865389,
+  "marketCapAsOf": "2026-10-28",
+  "marketCapSourceRank": 14,
   "marketCapSource": "CompaniesMarketCap",
   "marketCapSourceUrl": "https://companiesmarketcap.com/samsung/marketcap/"
 }
