@@ -192,6 +192,32 @@ function resolveOuterBranchLift(gap, runway, preferredRatio = 0.9) {
   return Math.max(0, Math.min(gap - Math.max(runway, 0) * preferredRatio, Math.max(runway, 0) * 0.14));
 }
 
+// Bound the outer revenue ports by their horizontal runway. The upper stream
+// descends and the lower stream rises, with comparable slopes on both sides.
+function resolveRevenueInflowCenter(entry, options) {
+  const { center, targetCenter, runway, side } = entry;
+  const { minCenter, maxCenter, unit } = options;
+  if (maxCenter < minCenter || !(runway > 0) || !side) return center;
+  const lead = clamp(runway * 0.22, unit * 32, unit * 96);
+  const maxLead = Math.max(lead, clamp(runway * 0.42, unit * 64, unit * 160));
+  const preferred = side > 0
+    ? clamp(center, targetCenter + lead, targetCenter + maxLead)
+    : clamp(center, targetCenter - maxLead, targetCenter - lead);
+  return clamp(preferred, minCenter, maxCenter);
+}
+
+// Reserve the whole text rectangle, even when only a label (rather than its
+// narrow node) shares a column with the obstacle. Keep each real source port.
+function resolveBranchColumnBelowObstacles(entries, obstacles, options) {
+  const targets = entries.map(entry => {
+    const floor = Math.max(options.minY, ...obstacles
+      .filter(rect => entry.left < rect.right && entry.right > rect.left)
+      .map(rect => rect.bottom + options.clearance));
+    return { ...entry, sourceCenter: Math.max(entry.sourceCenter + entry.drop, floor + entry.height / 2), drop: 0 };
+  });
+  return resolveDirectedBranchColumn(targets, options);
+}
+
 function sanitizeOfficialStructureRows(entry, rows = []) {
   const normalizedRows = [...(rows || [])].map((item) => ({ ...item }));
   if (!normalizedRows.length) return normalizedRows;
