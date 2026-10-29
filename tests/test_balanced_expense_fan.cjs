@@ -211,7 +211,8 @@ test('Microsoft old and new segment palettes are fixed across ordering and visib
   const all=vm.runInContext('stableBarColorMap("microsoft",keys)',ctx);
   const reversed=vm.runInContext('stableBarColorMap("microsoft",keys.slice().reverse())',ctx);
   const current=vm.runInContext('stableBarColorMap("microsoft",["agentsandinfra","devicesandconsumer"])',ctx);
-  assert.equal(new Set(Object.values(all)).size,5);
+  assert.equal(new Set(Object.values(all)).size,4);
+  assert.equal(all.agentsandinfra,all.intelligentcloud,'reuse Microsoft logo blue across reporting structures');
   for(const key of ctx.keys) assert.equal(reversed[key],all[key]);
   assert.equal(current.agentsandinfra,all.agentsandinfra);
   assert.equal(current.devicesandconsumer,all.devicesandconsumer);
@@ -220,6 +221,6 @@ test('Microsoft old and new segment palettes are fixed across ordering and visib
   assert.equal(all.morepersonalcomputing,'#f0b20f','retain the original computing gold');
   ctx.palette=all;
   const hues=vm.runInContext('Object.fromEntries(Object.entries(palette).map(([k,v])=>[k,colorToHsl(v).h]))',ctx);
-  assert.ok(hues.agentsandinfra>225&&hues.agentsandinfra<245,'cool periwinkle infrastructure');
-  assert.ok(hues.devicesandconsumer>5&&hues.devicesandconsumer<20,'warm coral consumer');
+  assert.ok(hues.agentsandinfra>190&&hues.agentsandinfra<220,'Microsoft logo blue infrastructure');
+  assert.ok(hues.devicesandconsumer>5&&hues.devicesandconsumer<20,'Microsoft logo orange-red consumer');
 });
