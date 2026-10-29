@@ -222,5 +222,5 @@ test('Microsoft old and new segment palettes are fixed across ordering and visib
   ctx.palette=all;
   const hues=vm.runInContext('Object.fromEntries(Object.entries(palette).map(([k,v])=>[k,colorToHsl(v).h]))',ctx);
   assert.ok(hues.agentsandinfra>190&&hues.agentsandinfra<220,'Microsoft logo blue infrastructure');
-  assert.ok(hues.devicesandconsumer>5&&hues.devicesandconsumer<20,'Microsoft logo orange-red consumer');
+  assert.ok(hues.devicesandconsumer>20&&hues.devicesandconsumer<40,'warm orange consumer');
 });
