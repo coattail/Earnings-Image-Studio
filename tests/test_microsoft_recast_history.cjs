@@ -137,3 +137,27 @@ test('historical growth labels compare only officially restated periods in both 
   assert.equal(vm.runInContext('buildSnapshot(getCompany("microsoft"),q).revenueBasis',ctx),undefined,`${q}: outside the eight historical quarters`);
  }
 });
+
+test('restated topology invalidates obsolete preset geometry while preserving its financial content',()=>{
+ const ctx=runtime();
+ const result=JSON.parse(vm.runInContext(`(()=>{
+  const c=getCompany('microsoft'),q='2024Q3',entry=c.financials[q],preset=c.statementPresets[q],before=JSON.stringify(c);
+  const current=buildSnapshot(c,q);
+  const reported={...c,financials:{...c.financials,[q]:{...entry,officialRevenueRestatement:null}}};
+  const original=buildSnapshot(reported,q);
+  const sameTopology={...c,statementPresets:{...c.statementPresets,[q]:{...preset,businessGroups:entry.officialRevenueRestatement.officialRevenueSegments}}};
+  const pinned=buildSnapshot(sameTopology,q);
+  const explicit={...c,financials:{...c.financials,[q]:{...entry,sankeyLayout:{grossNodeTop:390}}}};
+  const requested=buildSnapshot(explicit,q);
+  const fields=['revenueBn','grossProfitBn','costOfRevenueBn','operatingProfitBn','operatingExpensesBn','netProfitBn','grossMarginPct','netMarginPct','opexBreakdown','belowOperatingItems'];
+  return JSON.stringify({rebuilt:current.layoutRebuiltForRevenueRestatement,layout:current.layout,
+   current:Object.fromEntries(fields.map(k=>[k,current[k]])),original:Object.fromEntries(fields.map(k=>[k,original[k]])),
+   pinnedLayout:pinned.layout,pinnedRebuilt:pinned.layoutRebuiltForRevenueRestatement,
+   explicitTop:requested.layout.grossNodeTop,unchanged:before===JSON.stringify(c)});
+ })()`,ctx));
+ assert.equal(result.rebuilt,true);
+ for(const key of ['costNodeTop','opNodeTop','opexNodeTop','netNodeTop','sourceNodeOffsets'])assert.equal(result.layout[key],undefined,key);
+ assert.deepEqual(result.current,result.original);
+ assert.equal(result.pinnedRebuilt,false);assert.equal(result.pinnedLayout.costNodeTop,824);assert.equal(result.pinnedLayout.grossNodeTop,420);
+ assert.equal(result.explicitTop,390);assert.equal(result.unchanged,true);
+});
