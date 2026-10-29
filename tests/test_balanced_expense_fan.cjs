@@ -255,3 +255,61 @@ test('FY25 Q1 uses the later-quarter profit layout after its revenue topology is
   for(const id of ['revenue','gross','cost','operating','operating-expenses','net'])assert.equal(after[id].height,before[id].height,`${language}/${id}: monetary thickness`);
  }
 });
+
+test('expense fan compaction anchors the leading curve and respects fixed neighbors and scale',()=>{
+ const entries=[{lane:'deduction',center:850,height:80,sourceCenter:700,runway:332,drop:40},
+  {lane:'opex',center:1300,height:116,sourceCenter:1000,runway:332,drop:40},
+  {lane:'opex',center:1500,height:116,sourceCenter:1080,runway:332,drop:40}];
+ const options={unit:1.25,minY:300,maxY:1800,gap:24};
+ const result=pure.resolveCompactOpexFan(entries,options);
+ assert.ok(result.feasible&&result.compacted);assert.equal(result.centers[0],850);
+ assert.ok(Math.abs(result.centers[1]-1152.72)<1e-6);
+ assert.ok(result.centers[2]-result.centers[1]>=140-1e-6);
+ const factor=2.5,scaled=pure.resolveCompactOpexFan(entries.map(e=>Object.fromEntries(Object.entries(e).map(([k,v])=>[k,typeof v==='number'?v*factor:v]))),
+  Object.fromEntries(Object.entries(options).map(([k,v])=>[k,v*factor])));
+ result.centers.forEach((y,i)=>assert.ok(Math.abs(scaled.centers[i]-y*factor)<1e-6));
+ const gentle=entries.map((e,i)=>({...e,center:i===1?1153:e.center}));
+ assert.equal(pure.resolveCompactOpexFan(gentle,options).compacted,false,'a gentle lead must not move to satisfy later preferred positions');
+ assert.equal(pure.resolveCompactOpexFan(entries,{...options,maxY:1100}).compacted,false);
+ const guarded=pure.resolveCompactOpexFan(entries,{...options,minY:1150});
+ assert.ok(guarded.feasible&&guarded.compacted);assert.ok(guarded.centers[1]>=1208,'the pinned leading label must respect the obstacle floor');
+});
+
+test('historical Microsoft expense outlets approach the current-quarter slopes without moving money or parent stages',()=>{
+ for(const q of ['2024Q3','2024Q4','2025Q1','2025Q2','2025Q3'])for(const language of ['zh','en']) {
+  const legacy=frames(render(q,language,{layout:{disableCompactOpexFan:true}}).svg);
+  const result=render(q,language),current=frames(result.svg);
+  const parent=current['operating-expenses'];let cursor=parent.y;
+  const children=Object.keys(current).filter(id=>/^opex-\d+$/.test(id));
+  const lastDeduction=Object.keys(current).filter(id=>/^deduction-\d+$/.test(id)).at(-1);
+  let priorLabel=labelBounds(result.svg,lastDeduction);
+  children.forEach((id,index)=>{
+   const child=current[id],runway=child.x-parent.x-parent.width,slope=(child.y-cursor)/runway;
+   assert.ok(slope>0&&slope<1.08,`${q}/${language}/${id}: bounded descent`);
+   if(!index)assert.ok(slope>.4&&slope<.52,`${q}/${language}: same gentle leading curve as the latest quarter`);
+   assert.ok(legacy[id].y-child.y>60,`${q}/${id}: remove obsolete drop`);
+   const label=labelBounds(result.svg,id);
+   assert.ok(label.top>priorLabel.bottom+8,`${q}/${language}/${id}: labels stay separate`);
+   priorLabel=label;cursor+=child.height;
+  });
+  for(const [id,frame] of Object.entries(legacy)) {
+   assert.equal(current[id].height,frame.height,`${q}/${id}: monetary thickness`);
+   if(!/^opex-/.test(id))assert.deepEqual(current[id],frame,`${q}/${id}: unrelated nodes stay fixed`);
+  }
+  assert.ok(result.unchanged);
+ }
+ for(const q of ['2025Q4','2026Q1','2026Q2','2026Q3'])for(const language of q==='2026Q3'?['zh','en']:['zh']) {
+  assert.deepEqual(frames(render(q,language).svg),frames(render(q,language,{layout:{disableCompactOpexFan:true}}).svg),`${q}/${language}: retain the existing gentle fan`);
+ }
+});
+
+test('opening the editor preserves the compact baseline and manual expense drags remain effective',()=>{
+ for(const q of ['2024Q3','2024Q4','2025Q3']) {
+  const normal=frames(render(q).svg),opened=frames(render(q,'zh',{editing:true}).svg);
+  for(const id of Object.keys(normal).filter(id=>id.startsWith('opex-')))assert.deepEqual(opened[id],normal[id],`${q}/${id}: editor stability`);
+  const draft={'opex-0':{dx:0,dy:80}};
+  const edited=render(q,'zh',{editing:true,offsets:draft});
+  assert.ok(frames(edited.svg)['opex-0'].y>opened['opex-0'].y+40,`${q}: manual drag remains effective`);
+  assert.ok(edited.unchanged);assert.equal(draft['opex-0'].dy,80);
+ }
+});
