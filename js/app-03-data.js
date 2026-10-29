@@ -4860,8 +4860,10 @@ function canUseRecastBarHistory(company, quarterKey) {
 
 function buildRecastBarCompany(company) {
   const config = BAR_RECAST_HISTORIES[company.id];
-  const financials = {}, quarters = {};
-  const lastRestatedQuarter = Object.keys(config.quarters).sort((a, b) => quarterSortValue(a) - quarterSortValue(b)).at(-1);
+  // Overlay the official restatement on the existing history. Earlier periods
+  // retain their reported categories and must not disappear from the window.
+  const financials = { ...company.financials };
+  const quarters = { ...company.officialRevenueStructureHistory?.quarters };
   Object.entries(config.quarters).forEach(([key, values]) => {
     const [year, quarter] = [Number(key.slice(0, 4)), Number(key.slice(-1))];
     const fiscalYear = quarter >= 3 ? year + 1 : year;
@@ -4876,14 +4878,7 @@ function buildRecastBarCompany(company) {
       officialRevenueStyle: "segment-bridge" };
     quarters[key] = { style: "segment-bridge", segments: rows };
   });
-  Object.entries(company.financials || {}).forEach(([key, entry]) => {
-    if (quarterSortValue(key) <= quarterSortValue(lastRestatedQuarter)) return;
-    const rows = entry.officialRevenueSegments || [];
-    if (!config.segments.every(segment => rows.some(row => row.memberKey === segment.memberKey))) return;
-    financials[key] = entry;
-    quarters[key] = { style: "segment-bridge", segments: rows };
-  });
-  return { ...company, quarters: Object.keys(financials), financials,
+  return { ...company, quarters: [...new Set([...(company.quarters || []), ...Object.keys(financials)])], financials,
     officialRevenueStructureHistory: { quarters } };
 }
 
@@ -4891,9 +4886,17 @@ function buildRevenueSegmentBarHistory(company, anchorQuarterKey, maxQuarters = 
   if (options.basis === "recast" && BAR_RECAST_HISTORIES[company?.id]) {
     if (!canUseRecastBarHistory(company, anchorQuarterKey)) return null;
     const history = buildRevenueSegmentBarHistory(buildRecastBarCompany(company), anchorQuarterKey, maxQuarters, { ...options, basis: "reported" });
-    return history && { ...history, basis: "recast", recastSourceUrl: BAR_RECAST_HISTORIES[company.id].sourceUrl,
-      basisNoteZh: "按 FY2027 两分部口径重列 · 官方可比数据自 Q1 FY25 起",
-      basisNoteEn: "Restated to FY2027 segments · Official comparable history starts in Q1 FY25" };
+    if (!history) return history;
+    const firstQuarter = BAR_RECAST_HISTORIES[company.id].firstQuarter;
+    const taxonomyBreaks = history.taxonomyBreaks.filter(item => {
+      const index = history.quarters.findIndex(q => q.quarterKey === item.quarterKey);
+      return index > 0 && barTaxonomyBreakSignature(history.quarters[index - 1]).join("|") !== barTaxonomyBreakSignature(history.quarters[index]).join("|");
+    }).map(item => item.quarterKey === firstQuarter ? { ...item,
+      labelZh: "Q1 FY25 起采用官方重列", labelEn: "Official restatement from Q1 FY25" } : item);
+    return { ...history, basis: "recast", recastFirstQuarter: firstQuarter, taxonomyBreaks,
+      recastSourceUrl: BAR_RECAST_HISTORIES[company.id].sourceUrl,
+      basisNoteZh: "Q1 FY25 起按 FY2027 两分部口径重列 · 更早季度保留原分类",
+      basisNoteEn: "FY2027 segments from Q1 FY25 · Earlier quarters retain their original categories" };
   }
   const structureQuarterMap =
     company?.officialRevenueStructureHistory?.quarters && typeof company.officialRevenueStructureHistory.quarters === "object"
