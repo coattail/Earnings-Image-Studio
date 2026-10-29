@@ -9350,35 +9350,63 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
     { lane: "cost-breakdown", boxes: costBreakdownBoxes, slices: costBreakdownSourceSlices, fallback: costBreakdownSlices,
       source: costFrame, top: costTop, bottom: costBottom, x: costBreakdownX, minHeight: 10 },
   ];
-  const terminalEntries = terminalFamilies.flatMap(family => family.boxes.flatMap((box, index) => {
+  const terminalEntriesFor = offsetFor => terminalFamilies.flatMap(family => family.boxes.flatMap((box, index) => {
     if (!box || (family.lane === "deduction" && netLoss)) return [];
     const slice = family.slices[index] || family.fallback[index];
     if (!slice) return [];
-    const id = `${family.lane}-${index}`, shift = editorOffsetForNode(id);
+    const id = `${family.lane}-${index}`, shift = offsetFor(id);
     const sourceSlice = family.lane === "deduction" ? resolveDeductionTerminalSourceSlice(index, slice) : slice;
     const bridge = constantThicknessBridge(sourceSlice, box.center, family.minHeight, family.top, family.bottom);
-    const sourceShift = editorOffsetForNode(family.source.id);
+    const sourceShift = offsetFor(family.source.id);
+    const sourceRight = family.source.right - editorOffsetForNode(family.source.id).dx + sourceShift.dx;
     const label = resolveRightBranchLabelSpec(slice.item, family.x, nodeWidth, {
       density: family.boxes.length >= 3 ? "dense" : "regular", defaultMode: "negative-parentheses",
     });
     return [{ id, family, index, box, x: family.x + shift.dx, center: box.center + shift.dy,
       height: Math.max(box.height, bridge.targetHeight, label.collisionHeight),
       sourceCenter: (bridge.sourceTop + bridge.sourceBottom) / 2 + sourceShift.dy,
-      drop: clamp((family.x + shift.dx - family.source.right) * 0.14, scaleY(24), scaleY(64)) }];
+      lane: family.lane, runway: Math.max(family.x + shift.dx - sourceRight, 1),
+      drop: clamp((family.x + shift.dx - sourceRight) * 0.14, scaleY(24), scaleY(64)) }];
   }));
+  const terminalColumnsFor = entries => {
+    const columns = [];
+    for (const entry of [...entries].sort((a, b) => a.x - b.x)) {
+      let column = columns.at(-1);
+      if (!column || entry.x > column.right + scaleY(12)) {
+        column = { right: entry.x + nodeWidth, entries: [] }; columns.push(column);
+      }
+      column.right = Math.max(column.right, entry.x + nodeWidth); column.entries.push(entry);
+    }
+    return columns;
+  };
+  if (hasOrdinaryProfitSpine && snapshot.layout?.disableCompactOpexFan !== true) {
+    // Resolve the automatic baseline before interactive drags, in both viewing
+    // and editing modes. Adjacent families keep their final positions.
+    for (const column of terminalColumnsFor(terminalEntriesFor(balancedLayoutOffsetForNode))) {
+      const entries = column.entries.sort((a, b) => a.sourceCenter - b.sourceCenter);
+      if (!entries.some(entry => entry.lane === "opex")) continue;
+      const overlaps = frame => entries.some(entry => entry.x < frame.right + scaleY(12) && entry.x + nodeWidth > frame.left - scaleY(12));
+      const floors = [netFrame, operatingExpenseFrame, costFrame].filter(overlaps)
+        .map(frame => automaticFrameCoordinate(frame, "top") + frame.height + scaleY(24));
+      if (overlaps(netFrame)) floors.push(netSummaryBottom + balancedLayoutOffsetForNode("net").dy + scaleY(24));
+      const result = resolveCompactOpexFan(entries, {
+        unit: verticalScale, minY: Math.max(scaleY(180), ...floors),
+        maxY: Math.max(terminalLayoutBottomLimit, Math.min(height - scaleY(40), Math.max(...entries.map(entry => entry.center + entry.height / 2)))),
+        gap: scaleY(18),
+      });
+      if (!result.compacted) continue;
+      entries.forEach((entry, index) => {
+        if (entry.lane === "opex") entry.family.boxes[entry.index] = shiftBoxCenter(entry.box,
+          entry.box.center + result.centers[index] - entry.center);
+      });
+    }
+  }
+  const terminalEntries = terminalEntriesFor(editorOffsetForNode);
   if (!snapshot.editModeEnabled && snapshot.layout?.disableDirectedTerminalLayout !== true) {
     // Terminals sharing a column must be solved together. Sorting by their
     // source ports preserves ribbon order; label footprints also reserve space
     // when a thin tax cap is placed beside a much wider expense cap.
-    const columns = [];
-    for (const e of [...terminalEntries].sort((a, b) => a.x - b.x)) {
-      let column = columns.at(-1);
-      if (!column || e.x > column.right + scaleY(12)) {
-        column = { right: e.x + nodeWidth, entries: [] }; columns.push(column);
-      }
-      column.right = Math.max(column.right, e.x + nodeWidth); column.entries.push(e);
-    }
-    for (const column of columns) {
+    for (const column of terminalColumnsFor(terminalEntries)) {
       const entries = column.entries.sort((a, b) => a.sourceCenter - b.sourceCenter);
       if (!entries.some(e => e.center < e.sourceCenter + e.drop - 0.5)) continue;
       const overlaps = frame => entries.some(e => e.x < frame.right + scaleY(12) && e.x + nodeWidth > frame.left - scaleY(12));
@@ -11946,6 +11974,7 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
     });
     svg += renderEditableNodeRect(deductionFrame, redNode);
     svg += renderRightBranchLabel(slice.item, box, deductionFrame.x, nodeWidth, redText, {
+      labelId: `deduction-${index}`,
       density: deductionSlices.length >= 3 ? "dense" : "regular",
       defaultMode: "negative-parentheses",
       labelX: Math.max(negativeTerminalLabelX, deductionFrame.right + rightBranchLabelGapX),

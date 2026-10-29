@@ -186,6 +186,34 @@ function resolveCompactCostFan(entries, options) {
   return { ...result, costTop };
 }
 
+// Remove accumulated decorative drop from an expense fan only when it exceeds
+// a runway-sized tolerance. Fixed neighboring deductions/costs and full label
+// footprints constrain the solution; already compact fans remain unchanged.
+function resolveCompactOpexFan(entries, options) {
+  const { unit, minY, maxY, gap } = options;
+  const firstOpex = entries.findIndex(entry => entry.lane === "opex");
+  const targets = entries.map((entry, index) => {
+    if (entry.lane !== "opex") return { ...entry, pinned: true };
+    const lead = clamp(entry.runway * 0.46, unit * 64, unit * 128);
+    return { ...entry, center: Math.min(entry.center, entry.sourceCenter + lead), pinned: index === firstOpex };
+  });
+  if (firstOpex >= 0) {
+    const first = targets[firstOpex], previous = targets[firstOpex - 1];
+    first.center = Math.max(first.center, minY + first.height / 2,
+      previous ? previous.center + (previous.height + first.height) / 2 + gap : -Infinity);
+    if (first.center + first.height / 2 > maxY)
+      return { centers: entries.map(entry => entry.center), feasible: false, compacted: false };
+  }
+  // Anchor the leading branch. Later rows must pack below it, rather than
+  // pulling an already gentle first curve upward to satisfy their preferences.
+  const excess = firstOpex >= 0 && entries[firstOpex].center - targets[firstOpex].center > entries[firstOpex].runway * 0.18;
+  if (!excess) return { centers: entries.map(entry => entry.center), feasible: true, compacted: false };
+  const result = resolveDirectedBranchColumn(targets, { minY, maxY, gap });
+  const compacted = result.feasible && entries.some((entry, index) => entry.lane === "opex" &&
+    entry.center - result.centers[index] > entry.runway * 0.18);
+  return { ...result, compacted };
+}
+
 // Limit decorative whitespace relative to the horizontal curve runway. Small
 // outer branches can move inward gently without changing their value thickness.
 function resolveOuterBranchLift(gap, runway, preferredRatio = 0.9) {
