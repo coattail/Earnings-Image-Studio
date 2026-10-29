@@ -3210,8 +3210,8 @@ const BAR_SEGMENT_COLOR_OVERRIDES_BY_COMPANY = Object.freeze({
     productivitybusinessprocesses: "#7FBA00",
     productivityandbusinessprocesses: "#7FBA00",
     morepersonalcomputing: "#FFB900",
-    agentsandinfra: "#277DA8",
-    devicesandconsumer: "#57988C",
+    agentsandinfra: "#40A9DA",
+    devicesandconsumer: "#58BEA5",
   }),
   micron: Object.freeze({
     microncloudmemory: "#0B63B6",
@@ -3593,7 +3593,10 @@ function relativeLuminance(hexColor) {
   return 0.2126 * srgbToLinear(rgb.r) + 0.7152 * srgbToLinear(rgb.g) + 0.0722 * srgbToLinear(rgb.b);
 }
 
-function barSegmentTextColor(fillColor) {
+function barSegmentTextColor(fillColor, companyId = null, segmentKey = null) {
+  // The lighter Microsoft categories use navy figures for clear contrast;
+  // historical categories keep their existing fill and label treatment.
+  if (companyId === "microsoft" && ["agentsandinfra", "devicesandconsumer"].includes(segmentKey)) return "#0F3552";
   return relativeLuminance(fillColor) > 0.52 ? "#0F3552" : "#FFFFFF";
 }
 
