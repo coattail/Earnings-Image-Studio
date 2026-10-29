@@ -67,3 +67,73 @@ test('SVG exports and CSV tables retain the full window and all restated values'
  assert.equal(ctx.EarningsDesk.selectionFrom({basis:'reported'},new URLSearchParams()).basis,'reported');
  assert.equal(ctx.EarningsDesk.selectionFrom({},new URLSearchParams()).basis,'recast');
 });
+
+// Published USD millions, FY25 Q1 through FY26 Q4, slides 15 and 17.
+const restatedProducts={
+ azure:[16021,17337,18540,20712,22384,24129,26008,29417],
+ microsoft365cloud:[20017,20686,20967,22935,23694,24466,25418,26721],
+ productivityandserverlicensing:[8051,8307,8731,10302,8678,8814,8760,11033],
+ industrysolutions:[4459,4544,4579,4835,4894,4994,5165,5292],
+ frontierandsupportservices:[1928,1892,1946,1994,2022,2038,2087,2113],
+ searchandadvertising:[5159,5773,5437,5802,5942,6393,6065,6435],
+ xbox:[5621,6581,5721,5532,5508,5958,5341,4983],
+ windowsoemanddevices:[4329,4512,4145,4329,4551,4481,4042,4013],
+};
+test('eight historical Sankeys use official product and segment values without changing profit statements or bars',()=>{
+ const ctx=runtime();
+ for(const [i,[q,infra,consumer]] of official.slice(0,8).entries()) {
+  ctx.q=q;
+  const result=JSON.parse(vm.runInContext(`(()=>{
+   state.selectedQuarter=q; const c=getCompany('microsoft'),before=JSON.stringify(c),s=buildSnapshot(c,q);
+   const original={...c,financials:{...c.financials,[q]:{...c.financials[q],officialRevenueRestatement:null}}};
+   const prior=buildSnapshot(original,q);
+   const table=EarningsDesk.buildTable(s,c,null);
+   const statements=['revenueBn','costOfRevenueBn','grossProfitBn','operatingProfitBn','operatingExpensesBn','nonOperatingBn','taxBn','netProfitBn'];
+   return JSON.stringify({s,prior: Object.fromEntries(statements.map(k=>[k,prior[k]])),current:Object.fromEntries(statements.map(k=>[k,s[k]])),
+    table, unchanged:before===JSON.stringify(c),warnings:EarningsDesk.evidenceWarnings(s,c,null)});
+  })()`,ctx));
+  assert.deepEqual(result.current,result.prior,`${q}: original profit statement`);
+  assert.equal(result.unchanged,true,`${q}: source payload is immutable`);
+  const details=result.table.rows.filter(r=>r[0].startsWith('业务明细 · '));
+  assert.equal(details.length,8);
+  for(const row of details){assert.equal(row[1],row[2]);assert.match(row[3],/第 17 页/);}
+  const groups=Object.fromEntries(result.s.businessGroups.map(r=>[r.id,r.valueBn]));
+  assert.deepEqual(groups,{agentsandinfra:infra,devicesandconsumer:consumer});
+  assert.equal(result.s.leftDetailGroups.length,8);
+  for(const row of result.s.leftDetailGroups)assert.equal(row.valueBn,restatedProducts[row.id][i]/1000,`${q}/${row.id}`);
+  for(const group of result.s.businessGroups)assert.ok(Math.abs(group.valueBn-result.s.leftDetailGroups.filter(r=>r.targetId===group.id).reduce((sum,r)=>sum+r.valueBn,0))<1e-9);
+  assert.equal(result.s.revenueBasis,'official-recast');
+  assert.match(result.s.revenueRestatementSourceUrl,/d291965dex991.htm$/);
+  assert.ok(result.warnings.some(w=>w.includes('官方历史重列')));
+  for(const row of result.table.rows.filter(r=>r[0].startsWith('业务 · '))) {
+   assert.equal(row[1],row[2]);assert.match(row[3],/官方历史重列/);
+  }
+ }
+ const originalReported=history(ctx,'reported'),originalRecast=history(ctx);
+ vm.runInContext(`Object.values(getCompany('microsoft').financials).forEach(e=>delete e.officialRevenueRestatement)`,ctx);
+ assert.deepEqual(history(ctx,'reported').quarters.map(q=>q.segmentMap),originalReported.quarters.map(q=>q.segmentMap));
+ assert.deepEqual(history(ctx).quarters.map(q=>q.segmentMap),originalRecast.quarters.map(q=>q.segmentMap));
+});
+test('historical growth labels compare only officially restated periods in both languages',()=>{
+ const ctx=runtime();
+ for(const language of ['zh','en'])for(const [i,[q]] of official.slice(0,8).entries()) {
+  ctx.q=q;ctx.language=language;
+  const result=JSON.parse(vm.runInContext(`(()=>{state.selectedQuarter=q;state.uiLanguage=language;const c=getCompany('microsoft'),s=buildSnapshot(c,q);return JSON.stringify({s,svg:EarningsVizRuntime.render.renderIncomeStatementSvg(s,c)});})()`,ctx));
+  const raw=ctx.payload.financials[q].officialRevenueRestatement;
+  const rawById=Object.fromEntries([...raw.officialRevenueSegments,...raw.officialRevenueDetailGroups].map(r=>[r.memberKey,r]));
+  for(const row of [...result.s.businessGroups,...result.s.leftDetailGroups]) {
+   const expected=rawById[row.id];
+   assert.equal(row.yoyPct,expected.yoyPct);
+   if(!i)assert.equal(row.qoqPct,null);
+   else assert.ok(Math.abs(row.qoqPct-(expected.valueBn/expected.qoqComparisonValueBn-1)*100)<1e-9);
+   if(i<4)assert.equal(row.yoyPct,null,`${q}/${row.id}: no old-basis YoY`);
+  }
+  assert.equal((result.svg.match(/data-edit-node-visible-id="source-\d+"/g)||[]).length,2);
+  assert.ok(!/NaN|undefined|Infinity/.test(result.svg));
+  assert.ok(result.s.revenueRestatementNote.includes(language==='zh'?'官方历史重列':'official restatements'));
+ }
+ for(const q of ['2024Q2','2026Q3']) {
+  ctx.q=q;
+  assert.equal(vm.runInContext('buildSnapshot(getCompany("microsoft"),q).revenueBasis',ctx),undefined,`${q}: outside the eight historical quarters`);
+ }
+});

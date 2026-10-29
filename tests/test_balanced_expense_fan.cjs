@@ -224,3 +224,18 @@ test('Microsoft old and new segment palettes are fixed across ordering and visib
   assert.ok(hues.agentsandinfra>190&&hues.agentsandinfra<220,'Microsoft logo blue infrastructure');
   assert.ok(hues.devicesandconsumer>20&&hues.devicesandconsumer<40,'warm orange consumer');
 });
+
+test('all eight restated Microsoft quarters keep directed revenue inflows and clear expense labels',()=>{
+ for(const q of ['2024Q3','2024Q4','2025Q1','2025Q2','2025Q3','2025Q4','2026Q1','2026Q2'])for(const language of ['zh','en']) {
+  const {svg,unchanged}=render(q,language),nodes=frames(svg),ports=revenuePorts(svg);
+  assert.equal(ports.length,2,`${q}/${language}: restated segment count`);
+  assert.ok(nodes[ports[0].id].y<ports[0].targetTop-30,`${q}/${language}: upper inflow descends`);
+  assert.ok(nodes[ports[1].id].y>ports[1].targetTop+30,`${q}/${language}: consumer inflow rises`);
+  const summary=labelBounds(svg,'operating-expenses-summary');
+  for(const id of Object.keys(nodes).filter(id=>id.startsWith('cost-breakdown-'))) {
+   const label=labelBounds(svg,id);
+   assert.ok(label.right<summary.left||label.left>summary.right||label.top>summary.bottom+12||label.bottom<summary.top-12,`${q}/${language}/${id}: label clearance`);
+  }
+  assert.ok(unchanged);
+ }
+});

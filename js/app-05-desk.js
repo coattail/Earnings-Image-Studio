@@ -214,6 +214,7 @@
     if (history?.imputedQuarterCount > 0 || history?.smoothedQuarterCount > 0 || history?.quarters?.some((quarter) => quarter.isBackfilledSegments)) warnings.push("历史图部分报告期包含结构推算、平滑或历史回填，不能视作全部来自当期直接披露。相关变化仅供对照原文。\n");
     if (history?.missingQuarterCount > 0) warnings.push(`历史窗口内 ${history.missingQuarterCount} 个报告期缺少可用数据，图表连续不代表原始披露完整。`);
     if (history?.basis === "recast") warnings.push(history.basisNoteZh);
+    else if (!history && snapshot.revenueRestatementNote) warnings.push(snapshot.revenueRestatementNote);
     else if (history?.taxonomyBreaks?.length || entry.officialRevenueTaxonomyChangedFromPreviousQuarter || entry.officialRevenueTaxonomyChangedFromPriorYear) warnings.push("业务分类在历史期间发生变化，趋势图按可比较分类归并；比较时请留意口径变化。");
     const meta = entry.statementMeta || {};
     if (number(entry.statementSpanQuarters || meta.statementSpanQuarters || meta.spanQuarters) > 1) warnings.push(`本期原始期间覆盖 ${entry.statementSpanQuarters || meta.statementSpanQuarters || meta.spanQuarters} 个季度，请勿将累计值与单季值直接比较。`);
@@ -229,6 +230,7 @@
       if (href && !output.has(href)) output.set(href, { href, label, exact });
     };
     add(entry.statementSourceUrl, "本期财务数据来源", true);
+    add(snapshot.revenueRestatementSourceUrl, "官方业务收入历史重列（第 15、17 页）", true);
     (Array.isArray(entry.statementSourceUrls) ? entry.statementSourceUrls : []).forEach((url) => add(url, "单季计算依据", true));
     fieldSourceRows(entry).forEach(({field, info}) => add(info?.sourceUrl, info?.label || field, true));
     [...(entry.officialRevenueSegments || []), ...(entry.officialRevenueDetailGroups || []).flatMap((group) => group.items || [])].forEach((row) => add(row.sourceUrl, row.periodEnd && row.periodEnd !== entry.periodEnd ? `业务分部披露（截至 ${row.periodEnd}）` : "业务分部披露", !row.periodEnd || row.periodEnd === entry.periodEnd));
@@ -269,7 +271,7 @@
       });
       return { headers, rows, caption: `${company.nameZh || company.nameEn} · 当前窗口分部营收`, note: history.basis === "recast" ? `金额单位为十亿美元。${history.basisNoteZh}；历史季度不作删除或推算。` : "金额单位为十亿；币种见各行。业务分类与图表一致，可能经过历史分类归并、差额补齐或换算；空白表示该分部本期无可用金额。" };
     }
-    const entry = company.financials?.[snapshot.quarterKey] || {};
+    const entry = resolveSankeyFinancialEntry(company.financials?.[snapshot.quarterKey]) || {};
     const scale = number(snapshot.displayScaleFactor) || 1;
     const headers = ["财务项目", `原始数据（${entry.statementCurrency || snapshot.sourceCurrency || "USD"} 十亿）`, `图中金额（${snapshot.displayCurrency || "USD"} 十亿）`, "处理说明"];
     const rows = financialFields.map(([label, rawKey, displayKey]) => {
@@ -287,8 +289,14 @@
     for (const group of snapshot.businessGroups || []) {
       const raw = (entry.officialRevenueSegments || []).find((item) => (item.memberKey && item.memberKey === group.memberKey) || item.name === group.name);
       const value = number(group.valueBn);
-      const treatment = group.inferredFromQuarter ? `按 ${group.inferredFromQuarter} 结构推算` : group.syntheticResidual ? "由营收差额计算" : /history-harmonized/i.test(snapshot.sourceLabel || "") ? "历史分类归并 / 回填" : raw ? "业务分类，见原文核验" : "图中业务分类，见来源";
+      const treatment = group.inferredFromQuarter ? `按 ${group.inferredFromQuarter} 结构推算` : group.syntheticResidual ? "由营收差额计算" : snapshot.revenueBasis === "official-recast" ? "官方历史重列（第 15 页）" : /history-harmonized/i.test(snapshot.sourceLabel || "") ? "历史分类归并 / 回填" : raw ? "业务分类，见原文核验" : "图中业务分类，见来源";
       rows.push([`业务 · ${group.nameZh || group.name}`, number(raw?.valueBn), value === null ? null : value * scale, treatment]);
+    }
+    if (snapshot.revenueBasis === "official-recast") {
+      for (const detail of snapshot.leftDetailGroups || []) {
+        const raw = entry.officialRevenueDetailGroups.find((row) => row.memberKey === detail.id);
+        rows.push([`业务明细 · ${detail.nameZh || detail.name}`, number(raw?.valueBn), number(detail.valueBn) * scale, "官方历史重列（第 17 页）"]);
+      }
     }
     return { headers, rows, caption: `${company.nameZh || company.nameEn} · ${snapshot.fiscalLabel} 财务数据对照`, note: "单位为十亿（B）。原始数据指本项目数据集中的字段，不保证等同于财报直接披露值；图中金额可能经过币种折算或对账计算。具体依据请查看下方来源记录。" };
   }

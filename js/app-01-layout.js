@@ -1140,6 +1140,11 @@ function snapshotCanvasSize(snapshot) {
         detailRightX: baseLeftDetailX + leftDetailWidth,
       })
     : null;
+  const sharedRegularLabelAdjustment = alignRegularLeadColumn
+    ? Math.max(0, ...leadEligibleSourceIndexes.map(index => resolvePreDetailRegularSourceLabelLeadAdjustment(snapshot, sources[index], {
+        compactMode: compactSources || sources[index].compactLabel, fontSize: sourceLabelTitleSize,
+      })))
+    : null;
   const sourceLabelLeftEdges = sources.map((item, sourceIndex) => {
     const compactMode = compactSources || item.compactLabel;
     const labelWidth = Math.max(
@@ -1168,7 +1173,7 @@ function snapshotCanvasSize(snapshot) {
         : 0;
     const labelLeadAdjustmentX =
       preDetailLeadEnabled && regularSourceRankMap.has(sourceIndex)
-        ? resolvePreDetailRegularSourceLabelLeadAdjustment(snapshot, item, {
+        ? sharedRegularLabelAdjustment ?? resolvePreDetailRegularSourceLabelLeadAdjustment(snapshot, item, {
             compactMode,
             fontSize: sourceLabelTitleSize,
             labelWidth,

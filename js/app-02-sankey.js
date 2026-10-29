@@ -1984,6 +1984,12 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
       box.bottom += deltaY;
       box.center += deltaY;
     };
+    const sharedRegularLabelAdjustment = alignRegularLeadColumn
+      ? Math.max(0, ...regularLeadIndexes.map(index => resolvePreDetailRegularSourceLabelLeadAdjustment(snapshot, sourceSlices[index].item, {
+          compactMode: compactSources || sourceSlices[index].item.compactLabel,
+          fontSize: safeNumber(snapshot.layout?.sourceTemplateTitleSize, 28),
+        })))
+      : null;
     regularLeadIndexes.forEach((sourceIndex, orderIndex) => {
       const slice = sourceSlices[sourceIndex];
       const leadDistanceX =
@@ -1995,7 +2001,7 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
               leftX,
               detailRightX,
             });
-      const labelLeadAdjustmentX = resolvePreDetailRegularSourceLabelLeadAdjustment(snapshot, slice.item, {
+      const labelLeadAdjustmentX = sharedRegularLabelAdjustment ?? resolvePreDetailRegularSourceLabelLeadAdjustment(snapshot, slice.item, {
         compactMode: compactSources || slice.item.compactLabel,
         fontSize: safeNumber(snapshot.layout?.sourceTemplateTitleSize, 28),
       });
@@ -4955,7 +4961,7 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
     });
     const labelX = safeNumber(slice.labelX, usesPreDetailRevenueLayout ? leftX - sourceSummaryLabelGapX : sourceTemplateLabelX) + sourceShift.dx;
     const metricX = safeNumber(slice.metricX, sourceTemplateMetricX) + sourceShift.dx;
-    return renderTemplateSourceAnnotation(item, slice, box, {
+    return `<g data-layout-source-label-id="source-${index}">` + renderTemplateSourceAnnotation(item, slice, box, {
       density: "regular",
       labelLines,
       supportLines: [],
@@ -4980,7 +4986,7 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
       qoqSize: safeNumber(snapshot.layout?.sourceTemplateQoqSize, 14),
       titleColor: item.nodeColor || item.labelColor || dark,
       valueColor: item.nodeColor || item.valueColor || item.labelColor || dark,
-    });
+    }) + `</g>`;
   };
   const renderTreeLabelBlock = (item, box, labelX, color, options = {}) => {
     const baseLayout = box.layout || {};
@@ -5729,19 +5735,26 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
   }
   const enforceOrderedRevenueRibbonSources = () => {
     if (snapshot.layout?.disableRevenueRibbonOrderGuard === true) return;
-    const packSlices = (slices, nodeIdForIndex, minTop, maxBottom, minimumGapY) => {
+    const packSlices = (slices, nodeIdForIndex, minTop, maxBottom, minimumGapY, annotationInsets = []) => {
       if (slices.length < 2) return;
-      const packed = resolveOrderedVerticalBoxes(
-        slices.map((slice, index) => {
+      const entries = slices.map((slice, index) => {
           const nodeId = nodeIdForIndex(index);
           const offset = balancedLayoutOffsetForNode(nodeId);
+          const inset = annotationInsets[index] || { above: 0, below: 0 };
           return {
-            top: slice.top + offset.dy,
-            height: slice.height,
+            top: slice.top + offset.dy - inset.above,
+            height: slice.height + inset.above + inset.below,
           };
-        }),
-        minTop,
-        maxBottom,
+        });
+      const packingTop = minTop - Math.max(0, ...annotationInsets.map(inset => inset.above));
+      const requiredSpan = entries.reduce((sum, entry) => sum + entry.height, 0) + (entries.length - 1) * minimumGapY;
+      const reservesAnnotations = annotationInsets.some(inset => inset.above > 0 || inset.below > 0);
+      const packingBottom = Math.max(maxBottom + Math.max(0, ...annotationInsets.map(inset => inset.below)),
+        reservesAnnotations ? packingTop + requiredSpan : maxBottom);
+      const packed = resolveOrderedVerticalBoxes(
+        entries,
+        packingTop,
+        packingBottom,
         minimumGapY
       );
       packed.forEach((box, index) => {
@@ -5749,11 +5762,27 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
         const automaticOffset = autoLayoutOffsetForNode(nodeId);
         const currentRenderedTop = slices[index].top + balancedLayoutOffsetForNode(nodeId).dy;
         setAutoLayoutNodeOffset(nodeId, {
-          dy: automaticOffset.dy + box.top - currentRenderedTop,
+          dy: automaticOffset.dy + box.top + (annotationInsets[index]?.above || 0) - currentRenderedTop,
         });
       });
     };
 
+    // Small peer sources need room for the same full-size metrics that the
+    // renderer prints, even when their monetary ribbon is only a few pixels.
+    const sourceAnnotationInsets = sourceSlices.map(slice => {
+      const key = normalizeLabelKey(slice.item.id || slice.item.memberKey || slice.item.name);
+      if (!autoStackRegularSourcesBelowDetails || leftDetailTargetKeys.has(key)) return { above: 0, below: 0 };
+      const metrics = [safeNumber(snapshot.layout?.sourceTemplateValueSize, 24)];
+      if (showQoq && slice.item.qoqPct != null) metrics.push(safeNumber(snapshot.layout?.sourceTemplateQoqSize, 14));
+      if (slice.item.yoyPct != null) metrics.push(safeNumber(snapshot.layout?.sourceTemplateYoySize, 14));
+      const titleSize = safeNumber(snapshot.layout?.sourceTemplateTitleSize, 28);
+      const lineCount = Math.max(...["zh", "en"].map(language => resolveSourceLabelLines(slice.item, {
+        compactMode: compactSources || slice.item.compactLabel, fontSize: titleSize,
+        maxWidth: language === "zh" ? 166 : 198, language,
+      }).length));
+      return { above: metrics.reduce((sum, size) => sum + size, 0) + (metrics.length - 1) * 4 + scaleY(20),
+        below: Math.max(lineCount * safeNumber(snapshot.layout?.sourceTemplateTitleLineHeight, 31) * 0.6 - slice.height / 2, 0) };
+    });
     packSlices(
       sourceSlices,
       (index) => `source-${index}`,
@@ -5764,7 +5793,8 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
           snapshot.layout?.sourceRibbonOrderMinGapY,
           sourceSlices.length >= 6 ? 64 : sourceSlices.length >= 5 ? 36 : 4
         )
-      )
+      ),
+      sourceAnnotationInsets
     );
     if (prototypeFlags.hierarchicalDetails && leftDetailRenderSlices.length) {
       packSlices(
