@@ -4831,7 +4831,67 @@ function alignQuarterRowsToAnchorRegime(company, quarter, anchorQuarter) {
   };
 }
 
+// Microsoft FY27 Segments and Investor Metrics, September 2, 2026,
+// slide 15: quarterly segment revenue as restated, in billions of USD.
+const BAR_RECAST_HISTORIES = {
+  microsoft: {
+    sourceUrl: "https://www.sec.gov/Archives/edgar/data/789019/000119312526380280/d291965dex991.htm",
+    firstQuarter: "2024Q3",
+    segments: [
+      { memberKey: "agentsandinfra", name: "Agents and Infra", nameZh: "智能体与基础设施" },
+      { memberKey: "devicesandconsumer", name: "Devices and Consumer", nameZh: "设备与消费者" },
+    ],
+    quarters: {
+      "2024Q3": [50.476, 15.109], "2024Q4": [52.766, 16.866],
+      "2025Q1": [54.763, 15.303], "2025Q2": [60.778, 15.663],
+      "2025Q3": [61.672, 16.001], "2025Q4": [64.441, 16.832],
+      "2026Q1": [67.438, 15.448], "2026Q2": [74.576, 15.431],
+    },
+  },
+};
+
+function canUseRecastBarHistory(company, quarterKey) {
+  const config = BAR_RECAST_HISTORIES[company?.id];
+  return !!config && !!parseQuarterKey(quarterKey) && quarterSortValue(quarterKey) >= quarterSortValue(config.firstQuarter);
+}
+
+function buildRecastBarCompany(company) {
+  const config = BAR_RECAST_HISTORIES[company.id];
+  const financials = {}, quarters = {};
+  const lastRestatedQuarter = Object.keys(config.quarters).sort((a, b) => quarterSortValue(a) - quarterSortValue(b)).at(-1);
+  Object.entries(config.quarters).forEach(([key, values]) => {
+    const [year, quarter] = [Number(key.slice(0, 4)), Number(key.slice(-1))];
+    const fiscalYear = quarter >= 3 ? year + 1 : year;
+    const fiscalQuarter = (quarter + 1) % 4 + 1;
+    const rows = config.segments.map((segment, index) => ({ ...segment, valueBn: values[index],
+      sourceUrl: config.sourceUrl, sourceForm: "FY27 segment history as restated, slide 15", filingDate: "2026-09-02" }));
+    financials[key] = { ...company.financials?.[key], calendarQuarter: key,
+      fiscalLabel: `FY${fiscalYear} Q${fiscalQuarter}`, fiscalYear: String(fiscalYear), fiscalQuarter: `Q${fiscalQuarter}`,
+      periodEnd: `${year}-${String(quarter * 3).padStart(2, "0")}-${quarter === 1 || quarter === 4 ? 31 : 30}`,
+      statementCurrency: "USD", displayCurrency: "USD", displayScaleFactor: 1,
+      revenueBn: Number((values[0] + values[1]).toFixed(3)), officialRevenueSegments: rows,
+      officialRevenueStyle: "segment-bridge" };
+    quarters[key] = { style: "segment-bridge", segments: rows };
+  });
+  Object.entries(company.financials || {}).forEach(([key, entry]) => {
+    if (quarterSortValue(key) <= quarterSortValue(lastRestatedQuarter)) return;
+    const rows = entry.officialRevenueSegments || [];
+    if (!config.segments.every(segment => rows.some(row => row.memberKey === segment.memberKey))) return;
+    financials[key] = entry;
+    quarters[key] = { style: "segment-bridge", segments: rows };
+  });
+  return { ...company, quarters: Object.keys(financials), financials,
+    officialRevenueStructureHistory: { quarters } };
+}
+
 function buildRevenueSegmentBarHistory(company, anchorQuarterKey, maxQuarters = 30, options = {}) {
+  if (options.basis === "recast" && BAR_RECAST_HISTORIES[company?.id]) {
+    if (!canUseRecastBarHistory(company, anchorQuarterKey)) return null;
+    const history = buildRevenueSegmentBarHistory(buildRecastBarCompany(company), anchorQuarterKey, maxQuarters, { ...options, basis: "reported" });
+    return history && { ...history, basis: "recast", recastSourceUrl: BAR_RECAST_HISTORIES[company.id].sourceUrl,
+      basisNoteZh: "按 FY2027 两分部口径重列 · 官方可比数据自 Q1 FY25 起",
+      basisNoteEn: "Restated to FY2027 segments · Official comparable history starts in Q1 FY25" };
+  }
   const structureQuarterMap =
     company?.officialRevenueStructureHistory?.quarters && typeof company.officialRevenueStructureHistory.quarters === "object"
       ? company.officialRevenueStructureHistory.quarters
