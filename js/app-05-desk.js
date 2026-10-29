@@ -264,10 +264,10 @@
       const headers = ["报告期", "财季", "显示币种", "营收合计（十亿）", ...segments.map((item) => item.nameZh || item.name || item.key), "数据状态"];
       const rows = history.quarters.map((quarter) => {
         const missing = quarter.hasRevenueValue === false || quarter.isMissingQuarterData;
-        const status = missing ? "本期数据缺失" : history.basis === "recast" ? (quarter.quarterKey <= "2026Q2" ? "官方历史重列" : "当期披露（新口径）") : quarter.isImputedSegments ? "包含推算分类" : quarter.isBackfilledSegments ? "包含历史回填" : quarter.isSmoothedSegments ? "包含平滑处理" : "按图表可比口径整理";
+        const status = missing ? "本期数据缺失" : history.basis === "recast" ? (quarter.quarterKey < history.recastFirstQuarter ? "原始披露（原分类）" : quarter.quarterKey <= "2026Q2" ? "官方历史重列" : "当期披露（新口径）") : quarter.isImputedSegments ? "包含推算分类" : quarter.isBackfilledSegments ? "包含历史回填" : quarter.isSmoothedSegments ? "包含平滑处理" : "按图表可比口径整理";
         return [quarter.quarterKey, quarter.entry?.fiscalLabel || quarter.label || "", quarter.displayCurrency || history.primaryDisplayCurrency || "USD", missing ? null : number(quarter.totalRevenueBn), ...segments.map((segment) => missing ? null : number(quarter.segmentMap?.[segment.key])), status];
       });
-      return { headers, rows, caption: `${company.nameZh || company.nameEn} · 当前窗口分部营收`, note: history.basis === "recast" ? `金额单位为十亿美元。${history.basisNoteZh}；更早期间不作推算。` : "金额单位为十亿；币种见各行。业务分类与图表一致，可能经过历史分类归并、差额补齐或换算；空白表示该分部本期无可用金额。" };
+      return { headers, rows, caption: `${company.nameZh || company.nameEn} · 当前窗口分部营收`, note: history.basis === "recast" ? `金额单位为十亿美元。${history.basisNoteZh}；历史季度不作删除或推算。` : "金额单位为十亿；币种见各行。业务分类与图表一致，可能经过历史分类归并、差额补齐或换算；空白表示该分部本期无可用金额。" };
     }
     const entry = company.financials?.[snapshot.quarterKey] || {};
     const scale = number(snapshot.displayScaleFactor) || 1;
