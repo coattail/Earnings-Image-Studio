@@ -2438,8 +2438,30 @@ function mergeOfficialRevenueStructureIntoSnapshot(snapshot, company, entry) {
   };
 }
 
+function resolveSankeyFinancialEntry(entry) {
+  const restatement = entry?.officialRevenueRestatement;
+  if (!restatement) return entry;
+  // Apply only the revenue presentation. Keep the original statement and bar
+  // histories intact so the reported view remains available.
+  return {
+    ...entry,
+    officialRevenueSegments: restatement.officialRevenueSegments,
+    officialRevenueDetailGroups: restatement.officialRevenueDetailGroups,
+    officialRevenueStyle: restatement.officialRevenueStyle,
+  };
+}
+
 function buildSnapshot(company, quarterKey) {
-  const entry = company.financials?.[quarterKey];
+  const entry = resolveSankeyFinancialEntry(company.financials?.[quarterKey]);
+  const snapshot = buildSnapshotFromEntry(company, quarterKey, entry);
+  const restatement = entry?.officialRevenueRestatement;
+  if (!snapshot || !restatement) return snapshot;
+  const note = currentChartLanguage() === "en" ? restatement.basisNoteEn : restatement.basisNoteZh;
+  return { ...snapshot, revenueBasis: "official-recast", revenueRestatementSourceUrl: restatement.sourceUrl,
+    revenueRestatementNote: note, footnote: appendFootnoteOnce(snapshot.footnote, note) };
+}
+
+function buildSnapshotFromEntry(company, quarterKey, entry) {
   const preset = company.statementPresets?.[quarterKey];
   const resolvedRevenueYoyPct = resolvedRevenueGrowthPct(company, quarterKey, "yoy");
   const resolvedRevenueQoqPct = resolvedRevenueGrowthPct(company, quarterKey, "qoq");
