@@ -239,3 +239,19 @@ test('all eight restated Microsoft quarters keep directed revenue inflows and cl
   assert.ok(unchanged);
  }
 });
+
+test('FY25 Q1 uses the later-quarter profit layout after its revenue topology is restated',()=>{
+ const oldLayout=ctx.payload.statementPresets['2024Q3'].layout;
+ for(const language of ['zh','en']) {
+  const before=frames(render('2024Q3',language,{layout:oldLayout}).svg),after=frames(render('2024Q3',language).svg);
+  const runway=after.gross.x-after.revenue.x-after.revenue.width;
+  const gap=after.cost.y-after.gross.y-after.gross.height;
+  assert.ok(gap>runway*.13,`${language}: a visible opening between gross and cost`);
+  assert.ok(after.gross.y<before.gross.y-25,`${language}: lift the stale gross placement`);
+  const first=(after.gross.y-after.operating.y)/(after.operating.x-after.gross.x-after.gross.width);
+  const second=(after.operating.y-after.net.y)/(after.net.x-after.operating.x-after.operating.width);
+  assert.ok(first>0&&first<.35&&second>0&&second<.4,`${language}: balanced profit spine`);
+  assert.ok(Math.abs(first-second)<.07);
+  for(const id of ['revenue','gross','cost','operating','operating-expenses','net'])assert.equal(after[id].height,before[id].height,`${language}/${id}: monetary thickness`);
+ }
+});

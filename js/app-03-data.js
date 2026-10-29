@@ -2409,11 +2409,20 @@ function mergeOfficialRevenueStructureIntoSnapshot(snapshot, company, entry) {
   if (!entry) return snapshot;
   const officialBusinessGroups = buildOfficialBusinessGroups(company, entry);
   const officialDetailGroups = buildOfficialDetailGroups(company, entry, officialBusinessGroups);
+  const structureKey = rows => [...new Set((rows || []).map(row => revenueRowCanonicalKey(company, row)))].sort().join("|");
+  const obsoletePresetLayout = !!entry.officialRevenueRestatement && snapshot.mode === "pixel-replica" &&
+    !!officialBusinessGroups?.length && !!snapshot.businessGroups?.length &&
+    structureKey(snapshot.businessGroups) !== structureKey(officialBusinessGroups);
   const taxonomyChangeNote = officialBusinessGroups ? officialRevenueTaxonomyChangeNote(company, entry) : "";
   const historyHarmonizedBusinessGroups = !officialBusinessGroups ? buildHistoryHarmonizedBusinessGroups(company, snapshot?.quarterKey || entryQuarterKey(company, entry)) : null;
   if (!officialBusinessGroups && !officialDetailGroups && !historyHarmonizedBusinessGroups) return snapshot;
   return {
     ...snapshot,
+    // A restatement can replace the topology that a calibrated preset was
+    // drawn for. Reuse its financial content, then let the current prototype
+    // rebuild geometry instead of pinning stages to obsolete coordinates.
+    layout: obsoletePresetLayout ? { ...(entry.sankeyLayout || {}) } : snapshot.layout,
+    layoutRebuiltForRevenueRestatement: obsoletePresetLayout,
     businessGroups: officialBusinessGroups || historyHarmonizedBusinessGroups || snapshot.businessGroups,
     leftDetailGroups: officialDetailGroups || snapshot.leftDetailGroups || null,
     officialRevenueStyle:
