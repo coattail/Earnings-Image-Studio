@@ -3211,7 +3211,7 @@ const BAR_SEGMENT_COLOR_OVERRIDES_BY_COMPANY = Object.freeze({
     productivityandbusinessprocesses: "#7FBA00",
     morepersonalcomputing: "#FFB900",
     agentsandinfra: "#40A9DA",
-    devicesandconsumer: "#58BEA5",
+    devicesandconsumer: "#F3A25A",
   }),
   micron: Object.freeze({
     microncloudmemory: "#0B63B6",
