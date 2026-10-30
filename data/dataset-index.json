@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-29T05:57:46Z",
+  "generatedAt": "2026-10-30T00:01:45Z",
   "companyCount": 41,
   "companies": [
     {
@@ -12385,6 +12385,7 @@
       "officialSegmentHistory": {}
     },
     {
+      "_cacheVersion": "20260803-v4",
       "id": "mastercard",
       "ticker": "MA",
       "nameZh": "万事达卡",
@@ -12431,31 +12432,38 @@
         "2025Q3",
         "2025Q4",
         "2026Q1",
-        "2026Q2"
+        "2026Q2",
+        "2026Q3"
       ],
-      "statementSource": "official-sec-companyfacts+field-reconciled",
+      "statementSource": "official-sec-companyfacts",
       "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001141391.json",
       "reportingCurrency": "USD",
       "cik": 1141391,
       "errors": [],
+      "errorDetails": [],
+      "marketCapUsd": 534637608960,
+      "marketCapAsOf": "2026-10-29",
+      "marketCapSourceRank": 24,
+      "marketCapSource": "CompaniesMarketCap",
+      "marketCapSourceUrl": "https://companiesmarketcap.com/mastercard/marketcap/",
       "coverage": {
-        "quarterCount": 34,
+        "quarterCount": 35,
         "pixelReplicaQuarterCount": 0,
         "hasPixelReplica": false,
-        "officialFinancialQuarterCount": 34,
-        "officialSegmentQuarterCount": 30,
+        "officialFinancialQuarterCount": 35,
+        "officialSegmentQuarterCount": 31,
         "officialExpenseQuarterCount": 0,
         "classification": {
           "status": "ok",
-          "latestQuarter": "2026Q2",
+          "latestQuarter": "2026Q3",
           "latestQuarterHasRevenueClassification": true,
           "latestQuarterHasExpenseClassification": false,
-          "latestRevenueClassificationQuarter": "2026Q2",
+          "latestRevenueClassificationQuarter": "2026Q3",
           "latestExpenseClassificationQuarter": null,
           "latestStructureHistoryQuarter": "2026Q2",
-          "revenueClassificationQuarterCount": 30,
+          "revenueClassificationQuarterCount": 31,
           "expenseClassificationQuarterCount": 0,
-          "revenueClassificationCoverageRatio": 0.8824,
+          "revenueClassificationCoverageRatio": 0.8857,
           "expenseClassificationCoverageRatio": 0.0,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
@@ -12464,7 +12472,7 @@
           "policy": {}
         },
         "parser": {
-          "version": "universal-parser-v3",
+          "version": "universal-parser-v4",
           "selectedFinancialSource": "official",
           "selectedSegmentSource": "official-segments",
           "selectedRevenueStructureSource": "official-revenue-structures",
@@ -12472,33 +12480,33 @@
           "financialReconciliation": {
             "version": "financial-reconciler-v1",
             "primarySource": "official",
-            "quarterCount": 32,
-            "fieldOverrideCount": 56,
-            "derivedFieldCount": 20,
-            "mixedSourceQuarterCount": 20,
+            "quarterCount": 35,
+            "fieldOverrideCount": 0,
+            "derivedFieldCount": 102,
+            "mixedSourceQuarterCount": 0,
             "sourceUsageCounts": {
-              "official": 527,
-              "stockanalysis": 56
+              "official": 561,
+              "stockanalysis": 0
             }
           },
           "financialValidation": {
             "version": "financial-validation-v1",
             "status": "high",
-            "quarterCount": 32,
-            "validatedQuarterCount": 32,
-            "issueCount": 7,
-            "mismatchQuarterCount": 7,
-            "highConfidenceQuarterCount": 32,
-            "averageConfidenceScore": 0.9361,
-            "latestQuarter": "2025Q4",
-            "latestQuarterConfidenceScore": 1,
+            "quarterCount": 35,
+            "validatedQuarterCount": 35,
+            "issueCount": 19,
+            "mismatchQuarterCount": 19,
+            "highConfidenceQuarterCount": 34,
+            "averageConfidenceScore": 0.9473,
+            "latestQuarter": "2026Q3",
+            "latestQuarterConfidenceScore": 0.225,
             "latestQuarterIssueCount": 0
           },
           "validation": {
             "version": "parser-validation-v1",
             "status": "high",
-            "overallConfidenceScore": 0.9585,
-            "financialConfidenceScore": 0.9361,
+            "overallConfidenceScore": 0.9657,
+            "financialConfidenceScore": 0.9473,
             "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 30,
             "revenueSegmentMismatchCount": 0,
@@ -12514,434 +12522,211 @@
           }
         }
       },
-      "marketCapUsd": 534637608960,
-      "marketCapAsOf": "2026-10-29",
-      "marketCapSourceRank": 24,
-      "marketCapSource": "CompaniesMarketCap",
-      "marketCapSourceUrl": "https://companiesmarketcap.com/mastercard/marketcap/",
       "dataLoadMode": "latest-only",
-      "latestQuarter": "2026Q2",
+      "latestQuarter": "2026Q3",
       "financials": {
-        "2026Q2": {
-          "calendarQuarter": "2026Q2",
-          "periodEnd": "2026-06-30",
+        "2026Q3": {
+          "calendarQuarter": "2026Q3",
+          "periodEnd": "2026-09-30",
           "fiscalYear": "2026",
-          "fiscalQuarter": "Q2",
-          "fiscalLabel": "FY2026 Q2",
+          "fiscalQuarter": "Q3",
+          "fiscalLabel": "FY2026 Q3",
           "statementCurrency": "USD",
-          "revenueBn": 9.277,
-          "revenueYoyPct": 14.066,
-          "costOfRevenueBn": 0,
-          "grossProfitBn": 9.277,
-          "sgnaBn": 3.082,
-          "rndBn": null,
-          "otherOpexBn": 0.608,
-          "operatingExpensesBn": 3.69,
-          "operatingIncomeBn": 5.587,
-          "nonOperatingBn": -0.101,
-          "pretaxIncomeBn": 5.486,
-          "taxBn": 1.098,
-          "netIncomeBn": 4.388,
+          "revenueBn": 0.0,
+          "revenueYoyPct": null,
+          "costOfRevenueBn": 0.0,
+          "grossProfitBn": 0.0,
+          "sgnaBn": 0.0,
+          "rndBn": 0.0,
+          "otherOpexBn": null,
+          "operatingExpensesBn": 0.0,
+          "operatingIncomeBn": 0.0,
+          "nonOperatingBn": 0.0,
+          "pretaxIncomeBn": 0.0,
+          "taxBn": 0.0,
+          "netIncomeBn": 0.0,
           "netIncomeYoyPct": null,
-          "grossMarginPct": 100.0,
-          "operatingMarginPct": 60.22421,
-          "profitMarginPct": 47.299774,
+          "grossMarginPct": null,
+          "operatingMarginPct": null,
+          "profitMarginPct": null,
           "effectiveTaxRatePct": null,
-          "revenueQoqPct": 10.467,
+          "revenueQoqPct": null,
           "grossMarginYoyDeltaPp": null,
           "operatingMarginYoyDeltaPp": null,
           "profitMarginYoyDeltaPp": null,
-          "statementSource": "official-inline-quarter-statement",
-          "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001141391.json",
-          "statementFilingDate": "2026-07-30",
+          "statementSourceUrl": "https://stockanalysis.com/stocks/ma/financials/?p=quarterly",
+          "statementFilingDate": "2026-09-30",
+          "parserFinancialFieldSources": {
+            "calendarQuarter": "stockanalysis",
+            "periodEnd": "stockanalysis",
+            "fiscalYear": "stockanalysis",
+            "fiscalQuarter": "stockanalysis",
+            "fiscalLabel": "stockanalysis",
+            "statementCurrency": "stockanalysis",
+            "statementFilingDate": "stockanalysis",
+            "statementSourceUrl": "stockanalysis"
+          },
+          "parserFinancialCandidateCounts": {
+            "revenueBn": 0,
+            "revenueYoyPct": 0,
+            "revenueQoqPct": 0,
+            "costOfRevenueBn": 0,
+            "grossProfitBn": 0,
+            "grossMarginPct": 0,
+            "grossMarginYoyDeltaPp": 0,
+            "sgnaBn": 0,
+            "rndBn": 0,
+            "otherOpexBn": 0,
+            "operatingExpensesBn": 0,
+            "operatingIncomeBn": 0,
+            "operatingMarginPct": 0,
+            "operatingMarginYoyDeltaPp": 0,
+            "nonOperatingBn": 0,
+            "pretaxIncomeBn": 0,
+            "taxBn": 0,
+            "netIncomeBn": 0,
+            "netIncomeYoyPct": 0,
+            "profitMarginPct": 0,
+            "profitMarginYoyDeltaPp": 0,
+            "effectiveTaxRatePct": 0
+          },
+          "parserFinancialValidation": {
+            "version": "financial-validation-v1",
+            "status": "low",
+            "confidenceScore": 0.225,
+            "completenessScore": 0.0,
+            "consistencyScore": 0.5,
+            "checksRun": 0,
+            "checksPassed": 0,
+            "issueCount": 0,
+            "issues": []
+          },
           "officialRevenueSegments": [
             {
-              "name": "Payment network",
+              "name": "Payment Solutions",
               "nameZh": null,
-              "memberKey": "paymentnetwork",
-              "valueBn": 5.451,
-              "yoyPct": 10.23,
-              "qoqPct": 10.17,
-              "mixPct": 58.8,
-              "mixYoyDeltaPp": -2,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139126000083/ma-20260630.htm",
+              "memberKey": "paymentsolutions",
+              "valueBn": 9.807,
+              "yoyPct": null,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139126000124/ma-20260930_htm.xml",
               "sourceForm": "10-Q",
-              "filingDate": "2026-07-30",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": null,
-              "validationNotes": null
-            },
-            {
-              "name": "Value-added services and solutions",
-              "nameZh": null,
-              "memberKey": "valueaddedservicesandsolutions",
-              "valueBn": 3.826,
-              "yoyPct": 20.01,
-              "qoqPct": 10.9,
-              "mixPct": 41.2,
-              "mixYoyDeltaPp": 2,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139126000083/ma-20260630.htm",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-07-30",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": null,
-              "validationNotes": null
+              "filingDate": "2026-10-29",
+              "periodStart": "2026-07-01",
+              "periodEnd": "2026-09-30"
             }
           ],
-          "officialRevenueStyle": "mastercard-revenue-bridge",
+          "officialSegmentAxis": "StatementBusinessSegmentsAxis",
+          "officialSegmentSource": "official-filings",
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+          "officialRevenueTaxonomyChangedFromPriorYear": true,
           "displayCurrency": "USD",
           "displayScaleFactor": 1,
-          "sankeyStructureContinuity": {
-            "sourceQuarter": "2026Q1",
-            "fields": [
-              "officialRevenueSegments"
-            ],
-            "rule": "same-normalized-category-set"
+          "statementMeta": {
+            "statementSource": "generic-official-filing-table",
+            "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139126000124/ma-20260930.htm",
+            "statementValueMode": "direct",
+            "statementSpanQuarters": 1,
+            "qualityFlags": [],
+            "adapterId": "generic_filing_tables"
           },
-          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueTaxonomyChangedFromPriorYear": false,
           "fieldSources": {
             "revenueBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001141391.json"
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 89.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139126000124/ma-20260930.htm"
             },
             "costOfRevenueBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001141391.json"
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 87.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139126000124/ma-20260930.htm"
             },
             "grossProfitBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001141391.json"
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 87.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139126000124/ma-20260930.htm"
             },
             "sgnaBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001141391.json"
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 85.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139126000124/ma-20260930.htm"
             },
-            "otherOpexBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001141391.json"
+            "rndBn": {
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 85.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139126000124/ma-20260930.htm"
             },
             "operatingExpensesBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001141391.json"
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 87.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139126000124/ma-20260930.htm"
             },
             "operatingIncomeBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001141391.json"
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 87.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139126000124/ma-20260930.htm"
             },
             "nonOperatingBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001141391.json"
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 83.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139126000124/ma-20260930.htm"
             },
             "pretaxIncomeBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001141391.json"
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 87.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139126000124/ma-20260930.htm"
             },
             "taxBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001141391.json"
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 85.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139126000124/ma-20260930.htm"
             },
             "netIncomeBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001141391.json"
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 87.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139126000124/ma-20260930.htm"
+            },
+            "statementMeta": {
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 12.3,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139126000124/ma-20260930.htm"
             }
           },
-          "grossProfitLabel": "Revenue before operating expenses",
-          "grossProfitLabelZh": "营收（扣除营业费用前）",
-          "costOfRevenuePresentationOnly": true,
-          "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
-          "qualityFlags": [
-            "official-quarter-statement-backfilled"
-          ],
-          "derivedStatementFields": [],
-          "statementValueMode": "direct",
-          "statementSpanQuarters": 1,
-          "statementPeriodStart": "2026-04-01"
+          "extractionDiagnostics": {
+            "qualityScore": 100,
+            "availableRequiredFieldCount": 3,
+            "requiredFieldCount": 3,
+            "sourceFieldCount": 13,
+            "hasCostBreakdownProfile": false,
+            "costBreakdownMode": "none",
+            "opexBreakdownMode": "none",
+            "revenueSegmentCoveragePct": null,
+            "costBreakdownCoveragePct": null,
+            "opexBreakdownCoveragePct": null,
+            "revenueSegmentResidualBn": null,
+            "costBreakdownResidualBn": null,
+            "opexBreakdownResidualBn": null,
+            "statementSource": "generic-official-filing-table",
+            "statementValueMode": "direct",
+            "statementSpanQuarters": 1,
+            "statementQualityFlags": [],
+            "issues": []
+          }
         }
       },
       "statementPresets": {},
-      "officialRevenueStructureHistory": {
-        "source": "official-filing-tables",
-        "quarters": {
-          "2026Q2": {
-            "segments": [
-              {
-                "name": "Payment network",
-                "nameZh": null,
-                "memberKey": "paymentnetwork",
-                "valueBn": 5.451,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139126000083/ma-20260630.htm",
-                "sourceForm": "10-Q",
-                "filingDate": "2026-07-30",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": null,
-                "validationNotes": null
-              },
-              {
-                "name": "Value-added services and solutions",
-                "nameZh": null,
-                "memberKey": "valueaddedservicesandsolutions",
-                "valueBn": 3.826,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139126000083/ma-20260630.htm",
-                "sourceForm": "10-Q",
-                "filingDate": "2026-07-30",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": null,
-                "validationNotes": null
-              }
-            ],
-            "displayRevenueBn": 9.277,
-            "style": "mastercard-revenue-bridge"
-          }
-        },
-        "filingsUsed": [
-          {
-            "form": "10-Q",
-            "filingDate": "2026-07-30",
-            "accession": "0001141391-26-000083",
-            "primaryDocument": "ma-20260630.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139126000083/ma-20260630.htm"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2026-04-30",
-            "accession": "0001141391-26-000031",
-            "primaryDocument": "ma-20260331.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139126000031/ma-20260331.htm"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2026-02-11",
-            "accession": "0001141391-26-000013",
-            "primaryDocument": "ma-20251231.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139126000013/ma-20251231.htm"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2025-10-30",
-            "accession": "0001141391-25-000193",
-            "primaryDocument": "ma-20250930.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139125000193/ma-20250930.htm"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2025-07-31",
-            "accession": "0001141391-25-000172",
-            "primaryDocument": "ma-20250630.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139125000172/ma-20250630.htm"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2025-05-01",
-            "accession": "0001141391-25-000090",
-            "primaryDocument": "ma-20250331.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139125000090/ma-20250331.htm"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2025-02-12",
-            "accession": "0001141391-25-000011",
-            "primaryDocument": "ma-20241231.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139125000011/ma-20241231.htm"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2024-10-31",
-            "accession": "0001141391-24-000202",
-            "primaryDocument": "ma-20240930.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139124000202/ma-20240930.htm"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2024-07-31",
-            "accession": "0001141391-24-000161",
-            "primaryDocument": "ma-20240630.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139124000161/ma-20240630.htm"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2024-05-01",
-            "accession": "0001141391-24-000087",
-            "primaryDocument": "ma-20240331.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139124000087/ma-20240331.htm"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2024-02-13",
-            "accession": "0001141391-24-000022",
-            "primaryDocument": "ma-20231231.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139124000022/ma-20231231.htm"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2023-10-26",
-            "accession": "0001141391-23-000157",
-            "primaryDocument": "ma-20230930.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139123000157/ma-20230930.htm"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2023-07-27",
-            "accession": "0001141391-23-000131",
-            "primaryDocument": "ma-20230630.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139123000131/ma-20230630.htm"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2023-04-27",
-            "accession": "0001141391-23-000059",
-            "primaryDocument": "ma-20230331.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139123000059/ma-20230331.htm"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2023-02-14",
-            "accession": "0001141391-23-000020",
-            "primaryDocument": "ma-20221231.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139123000020/ma-20221231.htm"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2022-10-27",
-            "accession": "0001141391-22-000163",
-            "primaryDocument": "ma-20220930.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139122000163/ma-20220930.htm"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2022-07-28",
-            "accession": "0001141391-22-000150",
-            "primaryDocument": "ma-20220630.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139122000150/ma-20220630.htm"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2022-04-28",
-            "accession": "0001141391-22-000088",
-            "primaryDocument": "ma-20220331.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139122000088/ma-20220331.htm"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2022-02-11",
-            "accession": "0001141391-22-000023",
-            "primaryDocument": "ma-20211231.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139122000023/ma-20211231.htm"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2021-10-28",
-            "accession": "0001141391-21-000182",
-            "primaryDocument": "ma-20210930.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139121000182/ma-20210930.htm"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2021-07-29",
-            "accession": "0001141391-21-000156",
-            "primaryDocument": "ma-20210630.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139121000156/ma-20210630.htm"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2021-04-29",
-            "accession": "0001141391-21-000091",
-            "primaryDocument": "ma-20210331.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139121000091/ma-20210331.htm"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2021-02-12",
-            "accession": "0001141391-21-000018",
-            "primaryDocument": "ma-20201231.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139121000018/ma-20201231.htm"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2020-10-28",
-            "accession": "0001141391-20-000203",
-            "primaryDocument": "ma-20200930.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139120000203/ma-20200930.htm"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2020-07-30",
-            "accession": "0001141391-20-000165",
-            "primaryDocument": "ma06302020-10xq.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139120000165/ma06302020-10xq.htm"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2020-04-29",
-            "accession": "0001141391-20-000091",
-            "primaryDocument": "ma03312020-10xq.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139120000091/ma03312020-10xq.htm"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2020-02-14",
-            "accession": "0001141391-20-000032",
-            "primaryDocument": "ma12312019-10xk.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139120000032/ma12312019-10xk.htm"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2019-10-29",
-            "accession": "0001141391-19-000150",
-            "primaryDocument": "ma09302019-10xq.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139119000150/ma09302019-10xq.htm"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2019-07-30",
-            "accession": "0001141391-19-000128",
-            "primaryDocument": "ma06302019-10xq.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139119000128/ma06302019-10xq.htm"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2019-04-30",
-            "accession": "0001141391-19-000076",
-            "primaryDocument": "ma03312019-10xq.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139119000076/ma03312019-10xq.htm"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2019-02-13",
-            "accession": "0001141391-19-000013",
-            "primaryDocument": "ma12312018-10xk.htm",
-            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139119000013/ma12312018-10xk.htm"
-          }
-        ],
-        "errors": []
-      },
+      "officialRevenueStructureHistory": {},
       "officialSegmentHistory": {}
     },
     {
