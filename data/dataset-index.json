@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-30T05:59:11Z",
+  "generatedAt": "2026-10-30T23:56:05Z",
   "companyCount": 41,
   "companies": [
     {
@@ -18014,6 +18014,7 @@
       "officialSegmentHistory": {}
     },
     {
+      "_cacheVersion": "20260803-v4",
       "id": "bank-of-america",
       "ticker": "BAC",
       "nameZh": "美国银行",
@@ -18060,33 +18061,40 @@
         "2025Q3",
         "2025Q4",
         "2026Q1",
-        "2026Q2"
+        "2026Q2",
+        "2026Q3"
       ],
-      "statementSource": "official-sec-companyfacts+field-reconciled",
+      "statementSource": "official-sec-companyfacts",
       "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000070858.json",
       "reportingCurrency": "USD",
       "cik": 70858,
       "errors": [],
+      "errorDetails": [],
+      "marketCapUsd": 354026618880,
+      "marketCapAsOf": "2026-10-30",
+      "marketCapSourceRank": 42,
+      "marketCapSource": "CompaniesMarketCap",
+      "marketCapSourceUrl": "https://companiesmarketcap.com/bank-of-america/marketcap/",
       "coverage": {
-        "quarterCount": 34,
+        "quarterCount": 35,
         "pixelReplicaQuarterCount": 0,
         "hasPixelReplica": false,
-        "officialFinancialQuarterCount": 34,
+        "officialFinancialQuarterCount": 35,
         "officialSegmentQuarterCount": 34,
         "officialExpenseQuarterCount": 0,
         "classification": {
           "status": "ok",
-          "latestQuarter": "2026Q2",
-          "latestQuarterHasRevenueClassification": true,
+          "latestQuarter": "2026Q3",
+          "latestQuarterHasRevenueClassification": false,
           "latestQuarterHasExpenseClassification": false,
           "latestRevenueClassificationQuarter": "2026Q2",
           "latestExpenseClassificationQuarter": null,
           "latestStructureHistoryQuarter": "2026Q2",
           "revenueClassificationQuarterCount": 34,
           "expenseClassificationQuarterCount": 0,
-          "revenueClassificationCoverageRatio": 1.0,
+          "revenueClassificationCoverageRatio": 0.9714,
           "expenseClassificationCoverageRatio": 0.0,
-          "latestRevenueClassificationLagQuarters": 0,
+          "latestRevenueClassificationLagQuarters": 1,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
           "blockers": [],
@@ -18101,33 +18109,33 @@
           "financialReconciliation": {
             "version": "financial-reconciler-v1",
             "primarySource": "official",
-            "quarterCount": 32,
-            "fieldOverrideCount": 20,
-            "derivedFieldCount": 180,
-            "mixedSourceQuarterCount": 20,
+            "quarterCount": 35,
+            "fieldOverrideCount": 0,
+            "derivedFieldCount": 192,
+            "mixedSourceQuarterCount": 0,
             "sourceUsageCounts": {
-              "official": 371,
-              "stockanalysis": 20
+              "official": 395,
+              "stockanalysis": 0
             }
           },
           "financialValidation": {
             "version": "financial-validation-v1",
             "status": "high",
-            "quarterCount": 32,
-            "validatedQuarterCount": 32,
+            "quarterCount": 35,
+            "validatedQuarterCount": 35,
             "issueCount": 0,
             "mismatchQuarterCount": 0,
-            "highConfidenceQuarterCount": 30,
-            "averageConfidenceScore": 0.9871,
-            "latestQuarter": "2025Q4",
-            "latestQuarterConfidenceScore": 1,
+            "highConfidenceQuarterCount": 32,
+            "averageConfidenceScore": 0.9661,
+            "latestQuarter": "2026Q3",
+            "latestQuarterConfidenceScore": 0.225,
             "latestQuarterIssueCount": 0
           },
           "validation": {
             "version": "parser-validation-v1",
             "status": "high",
-            "overallConfidenceScore": 0.9041,
-            "financialConfidenceScore": 0.9871,
+            "overallConfidenceScore": 0.8905,
+            "financialConfidenceScore": 0.9661,
             "structuralConfidenceScore": 0.75,
             "revenueSegmentChecks": 0,
             "revenueSegmentMismatchCount": 0,
@@ -18143,514 +18151,197 @@
           }
         }
       },
-      "marketCapUsd": 354026618880,
-      "marketCapAsOf": "2026-10-30",
-      "marketCapSourceRank": 42,
-      "marketCapSource": "CompaniesMarketCap",
-      "marketCapSourceUrl": "https://companiesmarketcap.com/bank-of-america/marketcap/",
       "dataLoadMode": "latest-only",
-      "latestQuarter": "2026Q2",
+      "latestQuarter": "2026Q3",
       "financials": {
-        "2026Q2": {
-          "calendarQuarter": "2026Q2",
-          "periodEnd": "2026-06-30",
+        "2026Q3": {
+          "calendarQuarter": "2026Q3",
+          "periodEnd": "2026-09-30",
           "fiscalYear": "2026",
-          "fiscalQuarter": "Q2",
-          "fiscalLabel": "FY2026 Q2",
+          "fiscalQuarter": "Q3",
+          "fiscalLabel": "FY2026 Q3",
           "statementCurrency": "USD",
-          "revenueBn": 31.558,
-          "revenueYoyPct": 19.253,
-          "costOfRevenueBn": 1.366,
-          "grossProfitBn": 30.192,
-          "sgnaBn": null,
-          "rndBn": null,
-          "otherOpexBn": 18.627,
-          "operatingExpensesBn": 18.627,
-          "operatingIncomeBn": 11.565,
-          "nonOperatingBn": 0,
-          "pretaxIncomeBn": 11.565,
-          "taxBn": 2.491,
-          "netIncomeBn": 9.074,
+          "revenueBn": 0.003,
+          "revenueYoyPct": null,
+          "costOfRevenueBn": 0.003,
+          "grossProfitBn": 0.003,
+          "sgnaBn": 0.003,
+          "rndBn": 0.003,
+          "otherOpexBn": null,
+          "operatingExpensesBn": 0.003,
+          "operatingIncomeBn": 0.003,
+          "nonOperatingBn": 0.0,
+          "pretaxIncomeBn": 0.003,
+          "taxBn": 0.003,
+          "netIncomeBn": 0.003,
           "netIncomeYoyPct": null,
-          "grossMarginPct": 95.671462,
-          "operatingMarginPct": 36.646809,
-          "profitMarginPct": 28.753406,
+          "grossMarginPct": null,
+          "operatingMarginPct": null,
+          "profitMarginPct": null,
           "effectiveTaxRatePct": null,
-          "revenueQoqPct": 4.248,
+          "revenueQoqPct": null,
           "grossMarginYoyDeltaPp": null,
           "operatingMarginYoyDeltaPp": null,
           "profitMarginYoyDeltaPp": null,
-          "statementSource": "official-inline-quarter-statement",
-          "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000070858.json",
-          "statementFilingDate": "2026-07-31",
-          "officialRevenueSegments": [
-            {
-              "name": "Consumer Banking",
-              "nameZh": null,
-              "memberKey": "consumerbanking",
-              "valueBn": 11.336,
-              "yoyPct": 4.84,
-              "qoqPct": 2.6,
-              "mixPct": 34.9,
-              "mixYoyDeltaPp": -5.9,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000394/bac-20260630_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-07-31",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": false,
-              "validationNotes": [
-                "business-line-revenue-disclosure"
-              ]
-            },
-            {
-              "name": "Global Banking",
-              "nameZh": null,
-              "memberKey": "globalbanking",
-              "valueBn": 6.236,
-              "yoyPct": 9.6,
-              "qoqPct": -0.81,
-              "mixPct": 19.2,
-              "mixYoyDeltaPp": -2.3,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000394/bac-20260630_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-07-31",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": false,
-              "validationNotes": [
-                "business-line-revenue-disclosure"
-              ]
-            },
-            {
-              "name": "Global Wealth & Investment Management",
-              "nameZh": null,
-              "memberKey": "globalwealthinvestmentmanagement",
-              "valueBn": 6.871,
-              "yoyPct": 15.73,
-              "qoqPct": 2.37,
-              "mixPct": 21.2,
-              "mixYoyDeltaPp": -1.3,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000394/bac-20260630_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-07-31",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": false,
-              "validationNotes": [
-                "business-line-revenue-disclosure"
-              ]
-            },
-            {
-              "name": "Global Markets",
-              "nameZh": null,
-              "memberKey": "globalmarkets",
-              "valueBn": 8.022,
-              "yoyPct": 34.15,
-              "qoqPct": 12.84,
-              "mixPct": 24.7,
-              "mixYoyDeltaPp": 2.1,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000394/bac-20260630_htm.xml",
-              "sourceForm": "10-Q",
-              "filingDate": "2026-07-31",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": false,
-              "validationNotes": [
-                "business-line-revenue-disclosure"
-              ]
-            }
-          ],
+          "statementSourceUrl": "https://stockanalysis.com/stocks/bac/financials/?p=quarterly",
+          "statementFilingDate": "2026-09-30",
+          "parserFinancialFieldSources": {
+            "calendarQuarter": "stockanalysis",
+            "periodEnd": "stockanalysis",
+            "fiscalYear": "stockanalysis",
+            "fiscalQuarter": "stockanalysis",
+            "fiscalLabel": "stockanalysis",
+            "statementCurrency": "stockanalysis",
+            "statementFilingDate": "stockanalysis",
+            "statementSourceUrl": "stockanalysis"
+          },
+          "parserFinancialCandidateCounts": {
+            "revenueBn": 0,
+            "revenueYoyPct": 0,
+            "revenueQoqPct": 0,
+            "costOfRevenueBn": 0,
+            "grossProfitBn": 0,
+            "grossMarginPct": 0,
+            "grossMarginYoyDeltaPp": 0,
+            "sgnaBn": 0,
+            "rndBn": 0,
+            "otherOpexBn": 0,
+            "operatingExpensesBn": 0,
+            "operatingIncomeBn": 0,
+            "operatingMarginPct": 0,
+            "operatingMarginYoyDeltaPp": 0,
+            "nonOperatingBn": 0,
+            "pretaxIncomeBn": 0,
+            "taxBn": 0,
+            "netIncomeBn": 0,
+            "netIncomeYoyPct": 0,
+            "profitMarginPct": 0,
+            "profitMarginYoyDeltaPp": 0,
+            "effectiveTaxRatePct": 0
+          },
+          "parserFinancialValidation": {
+            "version": "financial-validation-v1",
+            "status": "low",
+            "confidenceScore": 0.225,
+            "completenessScore": 0.0,
+            "consistencyScore": 0.5,
+            "checksRun": 0,
+            "checksPassed": 0,
+            "issueCount": 0,
+            "issues": []
+          },
           "displayCurrency": "USD",
           "displayScaleFactor": 1,
-          "sankeyStructureContinuity": {
-            "sourceQuarter": "2026Q1",
-            "fields": [
-              "officialRevenueSegments"
-            ],
-            "rule": "same-normalized-category-set"
+          "statementMeta": {
+            "statementSource": "generic-official-filing-table",
+            "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000548/bac-20260930.htm",
+            "statementValueMode": "direct",
+            "statementSpanQuarters": 1,
+            "qualityFlags": [],
+            "adapterId": "generic_filing_tables"
           },
-          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueTaxonomyChangedFromPriorYear": false,
           "fieldSources": {
             "revenueBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000070858.json"
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 89.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000548/bac-20260930.htm"
             },
             "costOfRevenueBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000070858.json"
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 87.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000548/bac-20260930.htm"
             },
             "grossProfitBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000070858.json"
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 87.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000548/bac-20260930.htm"
             },
-            "otherOpexBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000070858.json"
+            "sgnaBn": {
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 85.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000548/bac-20260930.htm"
+            },
+            "rndBn": {
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 85.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000548/bac-20260930.htm"
             },
             "operatingExpensesBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000070858.json"
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 87.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000548/bac-20260930.htm"
             },
             "operatingIncomeBn": {
-              "adapterId": "official-statement-backfill-derived",
-              "label": "Calculated from the same-quarter official statement",
-              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000070858.json"
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 87.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000548/bac-20260930.htm"
             },
             "nonOperatingBn": {
-              "adapterId": "official-statement-backfill-derived",
-              "label": "Calculated from the same-quarter official statement",
-              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000070858.json"
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 83.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000548/bac-20260930.htm"
             },
             "pretaxIncomeBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000070858.json"
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 87.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000548/bac-20260930.htm"
             },
             "taxBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000070858.json"
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 85.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000548/bac-20260930.htm"
             },
             "netIncomeBn": {
-              "adapterId": "official-statement-backfill",
-              "label": "Official quarterly income statement",
-              "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000070858.json"
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 87.0,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000548/bac-20260930.htm"
+            },
+            "statementMeta": {
+              "adapterId": "generic_filing_tables",
+              "label": "Generic official filing table parser",
+              "score": 12.3,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000548/bac-20260930.htm"
             }
           },
-          "grossProfitLabel": "Revenue after credit loss provision",
-          "grossProfitLabelZh": "扣除信用损失准备后收入",
-          "costLabel": "Provision for credit losses",
-          "costLabelZh": "信用损失准备",
-          "operatingExpensesLabel": "Noninterest expense",
-          "operatingExpensesLabelZh": "非利息费用",
-          "costOfRevenuePresentationOnly": true,
-          "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
-          "derivedStatementFields": [
-            "operatingIncomeBn",
-            "nonOperatingBn"
-          ],
-          "qualityFlags": [
-            "official-quarter-statement-backfilled"
-          ],
-          "statementValueMode": "direct",
-          "statementSpanQuarters": 1,
-          "statementPeriodStart": "2026-04-01"
+          "extractionDiagnostics": {
+            "qualityScore": 60,
+            "availableRequiredFieldCount": 3,
+            "requiredFieldCount": 3,
+            "sourceFieldCount": 12,
+            "hasCostBreakdownProfile": false,
+            "costBreakdownMode": "none",
+            "opexBreakdownMode": "none",
+            "revenueSegmentCoveragePct": 0,
+            "costBreakdownCoveragePct": 0,
+            "opexBreakdownCoveragePct": 0,
+            "revenueSegmentResidualBn": null,
+            "costBreakdownResidualBn": null,
+            "opexBreakdownResidualBn": null,
+            "statementSource": "generic-official-filing-table",
+            "statementValueMode": "direct",
+            "statementSpanQuarters": 1,
+            "statementQualityFlags": [],
+            "issues": [
+              "revenue-segment-coverage-low",
+              "cost-breakdown-coverage-low",
+              "opex-breakdown-coverage-low"
+            ]
+          }
         }
       },
       "statementPresets": {},
-      "officialRevenueStructureHistory": {
-        "source": "official-segment-cache",
-        "quarters": {
-          "2026Q2": {
-            "segments": [
-              {
-                "name": "Consumer Banking",
-                "nameZh": null,
-                "memberKey": "consumerbanking",
-                "valueBn": 11.336,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000394/bac-20260630_htm.xml",
-                "sourceForm": "10-Q",
-                "filingDate": "2026-07-31",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": false,
-                "validationNotes": [
-                  "business-line-revenue-disclosure"
-                ]
-              },
-              {
-                "name": "Global Markets",
-                "nameZh": null,
-                "memberKey": "globalmarkets",
-                "valueBn": 8.022,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000394/bac-20260630_htm.xml",
-                "sourceForm": "10-Q",
-                "filingDate": "2026-07-31",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": false,
-                "validationNotes": [
-                  "business-line-revenue-disclosure"
-                ]
-              },
-              {
-                "name": "Global Wealth & Investment Management",
-                "nameZh": null,
-                "memberKey": "globalwealthinvestmentmanagement",
-                "valueBn": 6.871,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000394/bac-20260630_htm.xml",
-                "sourceForm": "10-Q",
-                "filingDate": "2026-07-31",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": false,
-                "validationNotes": [
-                  "business-line-revenue-disclosure"
-                ]
-              },
-              {
-                "name": "Global Banking",
-                "nameZh": null,
-                "memberKey": "globalbanking",
-                "valueBn": 6.236,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000394/bac-20260630_htm.xml",
-                "sourceForm": "10-Q",
-                "filingDate": "2026-07-31",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": false,
-                "validationNotes": [
-                  "business-line-revenue-disclosure"
-                ]
-              }
-            ]
-          }
-        },
-        "filingsUsed": [
-          {
-            "form": "10-Q",
-            "filingDate": "2026-07-31",
-            "accession": "0000070858-26-000394",
-            "primaryDocument": "bac-20260630.htm",
-            "instance": "bac-20260630_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2026-05-01",
-            "accession": "0000070858-26-000249",
-            "primaryDocument": "bac-20260331.htm",
-            "instance": "bac-20260331_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2026-02-25",
-            "accession": "0000070858-26-000157",
-            "primaryDocument": "bac-20251231.htm",
-            "instance": "bac-20251231_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2025-10-31",
-            "accession": "0000070858-25-000405",
-            "primaryDocument": "bac-20250930.htm",
-            "instance": "bac-20250930_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2025-07-31",
-            "accession": "0000070858-25-000268",
-            "primaryDocument": "bac-20250630.htm",
-            "instance": "bac-20250630_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2025-04-30",
-            "accession": "0000070858-25-000200",
-            "primaryDocument": "bac-20250331.htm",
-            "instance": "bac-20250331_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2025-02-25",
-            "accession": "0000070858-25-000139",
-            "primaryDocument": "bac-20241231.htm",
-            "instance": "bac-20241231_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2024-10-29",
-            "accession": "0000070858-24-000280",
-            "primaryDocument": "bac-20240930.htm",
-            "instance": "bac-20240930_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2024-07-30",
-            "accession": "0000070858-24-000208",
-            "primaryDocument": "bac-20240630.htm",
-            "instance": "bac-20240630_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2024-04-30",
-            "accession": "0000070858-24-000156",
-            "primaryDocument": "bac-20240331.htm",
-            "instance": "bac-20240331_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2024-02-20",
-            "accession": "0000070858-24-000122",
-            "primaryDocument": "bac-20231231.htm",
-            "instance": "bac-20231231_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2023-10-31",
-            "accession": "0000070858-23-000272",
-            "primaryDocument": "bac-20230930.htm",
-            "instance": "bac-20230930_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2023-07-31",
-            "accession": "0000070858-23-000176",
-            "primaryDocument": "bac-20230630.htm",
-            "instance": "bac-20230630_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2023-05-01",
-            "accession": "0000070858-23-000142",
-            "primaryDocument": "bac-20230331.htm",
-            "instance": "bac-20230331_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2023-02-22",
-            "accession": "0000070858-23-000092",
-            "primaryDocument": "bac-20221231.htm",
-            "instance": "bac-20221231_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2022-10-28",
-            "accession": "0000070858-22-000131",
-            "primaryDocument": "bac-20220930.htm",
-            "instance": "bac-20220930_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2022-07-29",
-            "accession": "0000070858-22-000112",
-            "primaryDocument": "bac-20220630.htm",
-            "instance": "bac-20220630_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2022-04-29",
-            "accession": "0000070858-22-000088",
-            "primaryDocument": "bac-20220331.htm",
-            "instance": "bac-20220331_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2022-02-22",
-            "accession": "0000070858-22-000062",
-            "primaryDocument": "bac-20211231.htm",
-            "instance": "bac-20211231_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2021-10-29",
-            "accession": "0000070858-21-000107",
-            "primaryDocument": "bac-20210930.htm",
-            "instance": "bac-20210930_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2021-07-30",
-            "accession": "0000070858-21-000084",
-            "primaryDocument": "bac-20210630.htm",
-            "instance": "bac-20210630_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2021-04-29",
-            "accession": "0000070858-21-000063",
-            "primaryDocument": "bac-20210331.htm",
-            "instance": "bac-20210331_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2021-02-24",
-            "accession": "0000070858-21-000023",
-            "primaryDocument": "bac-20201231.htm",
-            "instance": "bac-20201231_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2020-10-30",
-            "accession": "0000070858-20-000071",
-            "primaryDocument": "bac-20200930.htm",
-            "instance": "bac-20200930_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2020-07-31",
-            "accession": "0000070858-20-000040",
-            "primaryDocument": "bac-0630202010xq.htm",
-            "instance": "bac-0630202010xq_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2020-05-01",
-            "accession": "0000070858-20-000023",
-            "primaryDocument": "bac-0331202010xq.htm",
-            "instance": "bac-0331202010xq_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2020-02-19",
-            "accession": "0000070858-20-000011",
-            "primaryDocument": "bac-1231201910xk.htm",
-            "instance": "bac-1231201910xk_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2019-10-28",
-            "accession": "0000070858-19-000057",
-            "primaryDocument": "bac-930201910xq.htm",
-            "instance": "bac-930201910xq_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2019-07-29",
-            "accession": "0000070858-19-000042",
-            "primaryDocument": "bac-630201910xq.htm",
-            "instance": "bac-630201910xq_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2019-04-26",
-            "accession": "0000070858-19-000026",
-            "primaryDocument": "bac-331201910xq.htm",
-            "instance": "bac-331201910xq_htm.xml"
-          }
-        ],
-        "errors": []
-      },
+      "officialRevenueStructureHistory": {},
       "officialSegmentHistory": {}
     },
     {
