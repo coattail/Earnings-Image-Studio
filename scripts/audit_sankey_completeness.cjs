@@ -16,10 +16,11 @@ function auditDataset(dataset, {renderAll = false} = {}) {
   context.payload = dataset;
   context.supplemental = JSON.parse(fs.readFileSync(path.join(ROOT,'data/supplemental-components.json'),'utf8'));
   context.logos = JSON.parse(fs.readFileSync(path.join(ROOT,'data/logo-catalog.json'),'utf8')).logos;
+  context.learned = JSON.parse(fs.readFileSync(path.join(ROOT,'data/learned-sankey-layouts.json'),'utf8'));
   context.renderAll = renderAll;
   const companies = vm.runInContext(`(() => {
     applyLoadedCompaniesToState(payload.companies,'full');
-    state.logoCatalog=logos; state.supplementalComponents=supplemental;
+    state.logoCatalog=logos; state.supplementalComponents=supplemental; state.learnedSankeyLayouts=learned;
     return companies().map(company => {
       state.selectedCompanyId=company.id;
       const quarters=Object.keys(company.financials).sort();
@@ -31,6 +32,9 @@ function auditDataset(dataset, {renderAll = false} = {}) {
           const result={quarter,mode:snapshot?.bridgeCoverageMode||'full',missing};
           if(snapshot && (renderAll || quarter===quarters.at(-1))) {
             try {
+              snapshot.learnedEditorNodeOverrides=currentResolvedEditorOverrides();
+              snapshot.interactiveEditorNodeOverrides={};
+              snapshot.editorNodeOverrides=snapshot.learnedEditorNodeOverrides;
               const svg=EarningsVizRuntime.render.renderIncomeStatementSvg(snapshot,company);
               result.svgValid=svg.includes('<svg') && !/\\b(?:NaN|Infinity)\\b/.test(svg);
               if(!result.svgValid) result.renderError='Invalid numeric SVG output';

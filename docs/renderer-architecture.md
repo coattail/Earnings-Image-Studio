@@ -67,6 +67,27 @@ Reason:
 
 ## Next Refactor Steps
 
+### Connected expense-stage placement
+
+After profit-stage placement and expense-terminal compaction, `resolveExpenseStageTop`
+balances the gross-to-expense inlet against the leading expense outlet using their
+actual flow ports and horizontal distances. Earlier crowding rules could lift the
+parent independently of its terminal fan, leaving a nearly flat inlet followed by
+a steep outlet, particularly when the expense breakdown grew beyond three rows.
+
+The parent moves toward equal incoming/outgoing slopes only when their difference
+exceeds the layout tolerance. Canvas bounds, the operating-profit lane, downward
+flow at every child port, and overlapping cost-label footprints constrain that
+move. Later small expense rows do not dominate the parent position merely because
+their labels need more space. Monetary thicknesses and financial data stay intact.
+
+The primary-language core is captured after terminal compaction and port balance,
+so translated labels share the same financial skeleton. Interactive expense edits
+use a clean automatic baseline, with the user's offsets applied afterward; explicit
+parent placement and loss/extreme-gain layouts retain their existing rules.
+
+### Future extraction
+
 1. Move layout-only computations out of `renderPixelReplicaSvg` into a dedicated `buildReplicaLayoutModel(snapshot)` function.
 2. Move ribbon path factories into a dedicated geometry module.
 3. Add layout diagnostics output for:

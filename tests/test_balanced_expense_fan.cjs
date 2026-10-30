@@ -276,9 +276,13 @@ test('expense fan compaction anchors the leading curve and respects fixed neighb
 });
 
 test('historical Microsoft expense outlets approach the current-quarter slopes without moving money or parent stages',()=>{
+ // Isolate terminal compaction: the connected-stage solver intentionally
+ // responds to the final outlet positions and is covered separately.
+ const fanRender=(q,language='zh',options={})=>render(q,language,{...options,
+  layout:{...options.layout,disableExpenseStagePortBalance:true}});
  for(const q of ['2024Q3','2024Q4','2025Q1','2025Q2','2025Q3'])for(const language of ['zh','en']) {
-  const legacy=frames(render(q,language,{layout:{disableCompactOpexFan:true}}).svg);
-  const result=render(q,language),current=frames(result.svg);
+  const legacy=frames(fanRender(q,language,{layout:{disableCompactOpexFan:true}}).svg);
+  const result=fanRender(q,language),current=frames(result.svg);
   const parent=current['operating-expenses'];let cursor=parent.y;
   const children=Object.keys(current).filter(id=>/^opex-\d+$/.test(id));
   const lastDeduction=Object.keys(current).filter(id=>/^deduction-\d+$/.test(id)).at(-1);
@@ -299,7 +303,7 @@ test('historical Microsoft expense outlets approach the current-quarter slopes w
   assert.ok(result.unchanged);
  }
  for(const q of ['2025Q4','2026Q1','2026Q2','2026Q3'])for(const language of q==='2026Q3'?['zh','en']:['zh']) {
-  assert.deepEqual(frames(render(q,language).svg),frames(render(q,language,{layout:{disableCompactOpexFan:true}}).svg),`${q}/${language}: retain the existing gentle fan`);
+  assert.deepEqual(frames(fanRender(q,language).svg),frames(fanRender(q,language,{layout:{disableCompactOpexFan:true}}).svg),`${q}/${language}: retain the existing gentle fan`);
  }
 });
 

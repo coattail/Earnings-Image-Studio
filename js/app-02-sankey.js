@@ -9296,10 +9296,6 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
       refreshEditableNodeFrames();
     }
   }
-  if (geometryOptions.captureCore) {
-    return { canvas, positiveAbove, balancedPositiveTop,
-      frames: [revenueFrame, grossFrame, costFrame, operatingFrame, operatingExpenseFrame, netFrame] };
-  }
   if (sharedCore) {
     const currentFrames = new Map([revenueFrame, grossFrame, costFrame, operatingFrame, operatingExpenseFrame, netFrame]
       .map((frame) => [frame.id, frame]));
@@ -9400,6 +9396,77 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
           entry.box.center + result.centers[index] - entry.center);
       });
     }
+  }
+  if (!sharedCore && hasOrdinaryProfitSpine && !hasExplicitOpexNodeTop && opexBoxes.length &&
+      snapshot.layout?.disableExpenseStagePortBalance !== true) {
+    // Earlier crowding passes lift the parent and spread its children
+    // independently. Reconcile the final real ports after those passes; the
+    // number of expense rows is not a reason to leave a kink at the parent.
+    // Use the automatic baseline so editor offsets remain additive.
+    const currentTop = automaticFrameCoordinate(operatingExpenseFrame, "top");
+    const sourceShift = balancedLayoutOffsetForNode("operating-expenses");
+    const incomingRunway = automaticFrameCoordinate(operatingExpenseFrame, "left") -
+      automaticFrameCoordinate(grossFrame, "right");
+    const sourceTop = grossExpenseSourceBand.center + balancedLayoutOffsetForNode("gross").dy -
+      (opexInboundTargetBand.center - opexTop);
+    const ports = opexBoxes.flatMap((box, index) => {
+      const slice = opexSourceSlices[index] || opexSlices[index];
+      if (!box || !slice) return [];
+      const bridge = constantThicknessBridge(slice, box.center, 14, opexTop, opexBottom);
+      const targetShift = balancedLayoutOffsetForNode(`opex-${index}`);
+      return [{
+        runway: rightTerminalNodeX + targetShift.dx -
+          (automaticFrameCoordinate(operatingExpenseFrame, "left") + nodeWidth),
+        targetTop: box.center + targetShift.dy - (bridge.sourceTop + bridge.sourceBottom) / 2 + opexTop,
+        maxTop: Math.min(
+          bridge.targetTop + targetShift.dy - (bridge.sourceTop - opexTop),
+          bridge.targetTop + bridge.targetHeight + targetShift.dy - (bridge.sourceBottom - opexTop)
+        ),
+      }];
+    });
+    const first = ports[0];
+    if (first && incomingRunway > 0 && first.runway > 0) {
+      const minTop = Math.max(sourceTop + clamp(incomingRunway * 0.14, scaleY(28), scaleY(60)),
+        automaticFrameCoordinate(operatingFrame, "top") + opHeight + opexMinGapFromOperating);
+      let maxTop = Math.min(chartBottomLimit - opexHeight, sourceTop + incomingRunway * 0.4,
+        ...ports.map(port => port.maxTop - clamp(port.runway * 0.14, scaleY(24), scaleY(64))));
+      // Lowering the parent also lowers its summary. Reserve actual labels in
+      // a shared cost column instead of asking a later pass to push them away.
+      const summary = resolveOpexSummaryObstacleRect(sourceShift);
+      costBreakdownBoxes.forEach((box, index) => {
+        const offset = balancedLayoutOffsetForNode(`cost-breakdown-${index}`);
+        const label = resolveRightBranchLabelSpec(costBreakdownSlices[index].item, costBreakdownX + offset.dx, nodeWidth, {
+          labelX: costBreakdownLabelSafeX,
+          density: costBreakdownBoxes.length >= 3 ? "dense" : "regular", defaultMode: "negative-parentheses",
+        });
+        if (summary && Math.min(costBreakdownX + offset.dx, label.labelX) < summary.right &&
+            Math.max(costBreakdownX + offset.dx + nodeWidth, label.labelX + label.blockWidth) > summary.left)
+          maxTop = Math.min(maxTop, box.center + offset.dy - label.collisionHeight / 2 - scaleY(20) -
+            (summary.bottom - currentTop));
+      });
+      let nextTop = resolveExpenseStageTop({ top: currentTop, sourceTop, targetTop: first.targetTop,
+        incomingRunway, outgoingRunway: first.runway, minTop, maxTop });
+      if (Object.keys(snapshot.interactiveEditorNodeOverrides || {}).some(id =>
+          id === "operating-expenses" || /^(opex|cost-breakdown)-/.test(id))) {
+        // Child dragging can change the provisional packing itself. Solve the
+        // untouched baseline once, so the new parent balance never cancels a
+        // drag or changes when the user opens the editor with a saved draft.
+        const baseline = renderPixelReplicaSvg({ ...snapshot,
+          editorNodeOverrides: snapshot.learnedEditorNodeOverrides || {},
+          interactiveEditorNodeOverrides: {}, editModeEnabled: false,
+        }, { captureCore: true });
+        nextTop = baseline.frames.find(frame => frame.id === "operating-expenses").top;
+      }
+      if (Math.abs(nextTop - currentTop) > 0.5) {
+        const offset = autoLayoutOffsetForNode("operating-expenses");
+        setAutoLayoutNodeOffset("operating-expenses", { dy: offset.dy + nextTop - currentTop });
+        refreshEditableNodeFrames();
+      }
+    }
+  }
+  if (geometryOptions.captureCore) {
+    return { canvas, positiveAbove, balancedPositiveTop,
+      frames: [revenueFrame, grossFrame, costFrame, operatingFrame, operatingExpenseFrame, netFrame] };
   }
   const terminalEntries = terminalEntriesFor(editorOffsetForNode);
   if (!snapshot.editModeEnabled && snapshot.layout?.disableDirectedTerminalLayout !== true) {
