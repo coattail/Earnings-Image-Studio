@@ -214,6 +214,25 @@ function resolveCompactOpexFan(entries, options) {
   return { ...result, compacted };
 }
 
+// Balance the inlet and leading outlet of an expense stage as one connected
+// route. Matching their secant slopes avoids a flat inlet followed by a steep
+// fan, without letting decorative gaps in later, tiny branches pull the parent
+// down. Already balanced stages retain their placement; pins and real port /
+// label bounds take precedence when the ideal position cannot fit.
+function resolveExpenseStageTop(options) {
+  const { top, sourceTop, targetTop, incomingRunway, outgoingRunway, minTop, maxTop } = options;
+  if (![top, sourceTop, targetTop, incomingRunway, outgoingRunway, minTop, maxTop].every(Number.isFinite) ||
+      incomingRunway <= 0 || outgoingRunway <= 0 || maxTop < minTop || options.pinned) return top;
+  const incomingSlope = (top - sourceTop) / incomingRunway;
+  const outgoingSlope = (targetTop - top) / outgoingRunway;
+  const activation = Number.isFinite(options.activationSlopeDifference) ? options.activationSlopeDifference : 0.18;
+  if (Math.abs(incomingSlope - outgoingSlope) <= activation) return top;
+  const balancedTop = (sourceTop * outgoingRunway + targetTop * incomingRunway) / (incomingRunway + outgoingRunway);
+  const nextTop = clamp(balancedTop, minTop, maxTop);
+  const nextBend = Math.abs((nextTop - sourceTop) / incomingRunway - (targetTop - nextTop) / outgoingRunway);
+  return nextBend < Math.abs(incomingSlope - outgoingSlope) ? nextTop : top;
+}
+
 // Limit decorative whitespace relative to the horizontal curve runway. Small
 // outer branches can move inward gently without changing their value thickness.
 function resolveOuterBranchLift(gap, runway, preferredRatio = 0.9) {
