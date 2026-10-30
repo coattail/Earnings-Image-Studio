@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-30T00:01:45Z",
+  "generatedAt": "2026-10-30T02:30:00Z",
   "companyCount": 41,
   "companies": [
     {
@@ -2939,7 +2939,8 @@
         "2025Q3",
         "2025Q4",
         "2026Q1",
-        "2026Q2"
+        "2026Q2",
+        "2026Q3"
       ],
       "statementSource": "official-sec-companyfacts+field-reconciled",
       "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json",
@@ -2947,24 +2948,24 @@
       "cik": 1018724,
       "errors": [],
       "coverage": {
-        "quarterCount": 34,
+        "quarterCount": 35,
         "pixelReplicaQuarterCount": 1,
         "hasPixelReplica": true,
-        "officialFinancialQuarterCount": 34,
-        "officialSegmentQuarterCount": 34,
-        "officialExpenseQuarterCount": 1,
+        "officialFinancialQuarterCount": 35,
+        "officialSegmentQuarterCount": 35,
+        "officialExpenseQuarterCount": 2,
         "classification": {
           "status": "ok",
-          "latestQuarter": "2026Q2",
+          "latestQuarter": "2026Q3",
           "latestQuarterHasRevenueClassification": true,
           "latestQuarterHasExpenseClassification": true,
-          "latestRevenueClassificationQuarter": "2026Q2",
-          "latestExpenseClassificationQuarter": "2026Q2",
-          "latestStructureHistoryQuarter": "2025Q4",
-          "revenueClassificationQuarterCount": 34,
-          "expenseClassificationQuarterCount": 1,
+          "latestRevenueClassificationQuarter": "2026Q3",
+          "latestExpenseClassificationQuarter": "2026Q3",
+          "latestStructureHistoryQuarter": "2026Q3",
+          "revenueClassificationQuarterCount": 35,
+          "expenseClassificationQuarterCount": 2,
           "revenueClassificationCoverageRatio": 1.0,
-          "expenseClassificationCoverageRatio": 0.0294,
+          "expenseClassificationCoverageRatio": 0.0571,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": 0,
           "warnings": [],
@@ -3008,13 +3009,13 @@
             "overallConfidenceScore": 0.9635,
             "financialConfidenceScore": 0.9438,
             "structuralConfidenceScore": 1.0,
-            "revenueSegmentChecks": 2,
+            "revenueSegmentChecks": 3,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 32,
             "detailGroupChecks": 0,
             "detailGroupMismatchCount": 0,
             "detailGroupSkippedChecks": 0,
-            "opexChecks": 1,
+            "opexChecks": 2,
             "opexSkippedChecks": 0,
             "opexOverflowMismatchCount": 0,
             "warningCount": 0,
@@ -3028,133 +3029,180 @@
       "marketCapSource": "CompaniesMarketCap",
       "marketCapSourceUrl": "https://companiesmarketcap.com/amazon/marketcap/",
       "dataLoadMode": "latest-only",
-      "latestQuarter": "2026Q2",
+      "latestQuarter": "2026Q3",
       "financials": {
-        "2026Q2": {
-          "calendarQuarter": "2026Q2",
-          "periodEnd": "2026-06-30",
+        "2026Q3": {
+          "calendarQuarter": "2026Q3",
+          "periodEnd": "2026-09-30",
           "fiscalYear": "2026",
-          "fiscalQuarter": "Q2",
-          "fiscalLabel": "FY2026 Q2",
+          "fiscalQuarter": "Q3",
+          "fiscalLabel": "FY2026 Q3",
           "statementCurrency": "USD",
-          "revenueBn": 200.606,
-          "revenueYoyPct": 19.621,
-          "costOfRevenueBn": 95.778,
-          "grossProfitBn": 104.828,
-          "sgnaBn": 14.486,
-          "rndBn": 33.158,
-          "otherOpexBn": 29.723,
-          "operatingExpensesBn": 77.367,
-          "operatingIncomeBn": 27.461,
-          "nonOperatingBn": 53.396,
-          "pretaxIncomeBn": 80.857,
-          "taxBn": 18.199,
-          "netIncomeBn": 62.647,
-          "netIncomeYoyPct": 244.896,
-          "grossMarginPct": 52.256,
-          "operatingMarginPct": 13.689,
-          "profitMarginPct": 31.229,
-          "effectiveTaxRatePct": 22.508,
-          "revenueQoqPct": 10.515,
-          "grossMarginYoyDeltaPp": 0.442,
-          "operatingMarginYoyDeltaPp": 2.257,
-          "profitMarginYoyDeltaPp": 20.398,
-          "statementSource": "amazon-q2-2026-earnings-release",
-          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000024/amzn-20260630xex991.htm",
-          "statementFilingDate": "2026-07-30",
+          "statementSource": "amazon-q3-2026-earnings-release",
+          "statementSourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+          "statementFilingDate": "2026-10-29",
           "statementValueMode": "reported",
           "statementSpanQuarters": 1,
+          "displayCurrency": "USD",
+          "displayScaleFactor": 1,
+          "revenueBn": 201.944,
+          "costOfRevenueBn": 94.573,
+          "grossProfitBn": 107.371,
+          "sgnaBn": 14.35,
+          "rndBn": 34.814,
+          "otherOpexBn": 30.131,
+          "operatingExpensesBn": 79.295,
+          "operatingIncomeBn": 28.076,
+          "nonOperatingBn": -1.207,
+          "pretaxIncomeBn": 26.869,
+          "taxBn": 6.18,
+          "equityMethodInvestmentActivityNetOfTaxBn": -0.004,
+          "netIncomeBn": 20.685,
+          "dilutedEps": 1.89,
+          "netAssetsBn": 613.601,
+          "operatingCashFlowBn": 42.422,
+          "purchasesOfPropertyAndEquipmentBn": 77.259,
+          "propertyAndEquipmentSalesAndIncentivesBn": 1.381,
+          "capitalExpenditureBn": 75.878,
+          "freeCashFlowBn": -33.456,
+          "capitalExpenditureBasis": "Purchases of property and equipment, net of proceeds from sales and incentives",
+          "statementPresentationNote": "Net income includes a $0.004 billion equity-method investment loss, net of tax, below the $6.180 billion income-tax provision. Free cash flow uses cash purchases of property and equipment net of sales and incentives, consistent with Amazon's definition.",
+          "grossMarginPct": 53.169,
+          "operatingMarginPct": 13.903,
+          "profitMarginPct": 10.243,
+          "effectiveTaxRatePct": 23.0,
+          "revenueYoyPct": 12.086,
+          "netIncomeYoyPct": -2.369,
+          "revenueQoqPct": 0.667,
+          "grossMarginYoyDeltaPp": 2.379,
+          "operatingMarginYoyDeltaPp": 4.233,
+          "profitMarginYoyDeltaPp": -1.517,
           "officialRevenueSegments": [
             {
               "name": "Online Stores",
               "nameZh": null,
               "memberKey": "onlinestores",
-              "valueBn": 70.432,
-              "yoyPct": 14.55,
-              "qoqPct": 9.61,
-              "mixPct": 35.1,
-              "mixYoyDeltaPp": -1.6,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000024/amzn-20260630xex991.htm",
-              "sourceForm": "Q2 2026 earnings release",
-              "filingDate": "2026-07-30"
+              "valueBn": 68.47,
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "sourceForm": "Q3 2026 earnings release",
+              "filingDate": "2026-10-29",
+              "yoyPct": 1.58,
+              "qoqPct": -2.79,
+              "mixPct": 33.9,
+              "mixYoyDeltaPp": -3.5,
+              "yoyComparisonValueBn": 67.407,
+              "yoyComparisonSourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "qoqComparisonValueBn": 70.432,
+              "qoqComparisonQuarter": "2026Q2",
+              "qoqComparisonSourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000024/amzn-20260630xex991.htm"
             },
             {
               "name": "Third Party Seller Services",
               "nameZh": null,
               "memberKey": "thirdpartysellerservices",
-              "valueBn": 46.78,
-              "yoyPct": 15.94,
-              "qoqPct": 12.51,
-              "mixPct": 23.3,
-              "mixYoyDeltaPp": -0.7,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000024/amzn-20260630xex991.htm",
-              "sourceForm": "Q2 2026 earnings release",
-              "filingDate": "2026-07-30"
+              "valueBn": 46.492,
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "sourceForm": "Q3 2026 earnings release",
+              "filingDate": "2026-10-29",
+              "yoyPct": 9.43,
+              "qoqPct": -0.62,
+              "mixPct": 23.0,
+              "mixYoyDeltaPp": -0.6,
+              "yoyComparisonValueBn": 42.486,
+              "yoyComparisonSourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "qoqComparisonValueBn": 46.78,
+              "qoqComparisonQuarter": "2026Q2",
+              "qoqComparisonSourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000024/amzn-20260630xex991.htm"
             },
             {
               "name": "Amazon Web Services",
               "nameZh": null,
               "memberKey": "amazonwebservices",
-              "valueBn": 42.232,
-              "yoyPct": 36.79,
-              "qoqPct": 12.36,
-              "mixPct": 21.1,
-              "mixYoyDeltaPp": 2.6,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000024/amzn-20260630xex991.htm",
-              "sourceForm": "Q2 2026 earnings release",
-              "filingDate": "2026-07-30"
+              "valueBn": 45.984,
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "sourceForm": "Q3 2026 earnings release",
+              "filingDate": "2026-10-29",
+              "yoyPct": 39.32,
+              "qoqPct": 8.88,
+              "mixPct": 22.8,
+              "mixYoyDeltaPp": 4.5,
+              "yoyComparisonValueBn": 33.006,
+              "yoyComparisonSourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "qoqComparisonValueBn": 42.232,
+              "qoqComparisonQuarter": "2026Q2",
+              "qoqComparisonSourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000024/amzn-20260630xex991.htm"
             },
             {
               "name": "Subscription Services",
               "nameZh": null,
               "memberKey": "subscriptionservices",
-              "valueBn": 13.73,
-              "yoyPct": 12.47,
-              "qoqPct": 2.26,
-              "mixPct": 6.8,
-              "mixYoyDeltaPp": -0.4,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000024/amzn-20260630xex991.htm",
-              "sourceForm": "Q2 2026 earnings release",
-              "filingDate": "2026-07-30"
+              "valueBn": 14.006,
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "sourceForm": "Q3 2026 earnings release",
+              "filingDate": "2026-10-29",
+              "yoyPct": 11.39,
+              "qoqPct": 2.01,
+              "mixPct": 6.9,
+              "mixYoyDeltaPp": -0.0,
+              "yoyComparisonValueBn": 12.574,
+              "yoyComparisonSourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "qoqComparisonValueBn": 13.73,
+              "qoqComparisonQuarter": "2026Q2",
+              "qoqComparisonSourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000024/amzn-20260630xex991.htm"
             },
             {
               "name": "Advertising Services",
               "nameZh": null,
               "memberKey": "advertisingservices",
-              "valueBn": 19.809,
-              "yoyPct": 26.22,
-              "qoqPct": 14.88,
-              "mixPct": 9.9,
-              "mixYoyDeltaPp": 0.5,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000024/amzn-20260630xex991.htm",
-              "sourceForm": "Q2 2026 earnings release",
-              "filingDate": "2026-07-30"
+              "valueBn": 19.637,
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "sourceForm": "Q3 2026 earnings release",
+              "filingDate": "2026-10-29",
+              "yoyPct": 10.92,
+              "qoqPct": -0.87,
+              "mixPct": 9.7,
+              "mixYoyDeltaPp": -0.1,
+              "yoyComparisonValueBn": 17.703,
+              "yoyComparisonSourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "qoqComparisonValueBn": 19.809,
+              "qoqComparisonQuarter": "2026Q2",
+              "qoqComparisonSourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000024/amzn-20260630xex991.htm"
             },
             {
               "name": "Physical Stores",
               "nameZh": null,
               "memberKey": "physicalstores",
-              "valueBn": 5.794,
-              "yoyPct": 3.56,
-              "qoqPct": 0.16,
-              "mixPct": 2.9,
-              "mixYoyDeltaPp": -0.4,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000024/amzn-20260630xex991.htm",
-              "sourceForm": "Q2 2026 earnings release",
-              "filingDate": "2026-07-30"
+              "valueBn": 5.71,
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "sourceForm": "Q3 2026 earnings release",
+              "filingDate": "2026-10-29",
+              "yoyPct": 2.37,
+              "qoqPct": -1.45,
+              "mixPct": 2.8,
+              "mixYoyDeltaPp": -0.3,
+              "yoyComparisonValueBn": 5.578,
+              "yoyComparisonSourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "qoqComparisonValueBn": 5.794,
+              "qoqComparisonQuarter": "2026Q2",
+              "qoqComparisonSourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000024/amzn-20260630xex991.htm"
             },
             {
               "name": "Other Services",
               "nameZh": null,
               "memberKey": "otherservices",
-              "valueBn": 1.829,
-              "yoyPct": 22.01,
-              "qoqPct": 11.19,
-              "mixPct": 0.9,
-              "mixYoyDeltaPp": 0,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000024/amzn-20260630xex991.htm",
-              "sourceForm": "Q2 2026 earnings release",
-              "filingDate": "2026-07-30"
+              "valueBn": 1.645,
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "sourceForm": "Q3 2026 earnings release",
+              "filingDate": "2026-10-29",
+              "yoyPct": 16.25,
+              "qoqPct": -10.06,
+              "mixPct": 0.8,
+              "mixYoyDeltaPp": 0.0,
+              "yoyComparisonValueBn": 1.415,
+              "yoyComparisonSourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "qoqComparisonValueBn": 1.829,
+              "qoqComparisonQuarter": "2026Q2",
+              "qoqComparisonSourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000024/amzn-20260630xex991.htm"
             }
           ],
           "officialCostBreakdown": null,
@@ -3163,48 +3211,546 @@
               "name": "Fulfillment",
               "nameZh": "履约",
               "memberKey": "fulfillment",
-              "valueBn": 29.633
+              "valueBn": 29.997,
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "sourceForm": "Q3 2026 earnings release",
+              "filingDate": "2026-10-29"
             },
             {
               "name": "Technology and Infrastructure",
               "nameZh": "技术与基础设施",
               "memberKey": "technologyandinfrastructure",
-              "valueBn": 33.158
+              "valueBn": 34.814,
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "sourceForm": "Q3 2026 earnings release",
+              "filingDate": "2026-10-29"
             },
             {
               "name": "Sales and Marketing",
               "nameZh": "销售与营销",
               "memberKey": "salesandmarketing",
-              "valueBn": 11.698
+              "valueBn": 11.649,
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "sourceForm": "Q3 2026 earnings release",
+              "filingDate": "2026-10-29"
             },
             {
               "name": "General and Administrative",
               "nameZh": "一般及行政",
               "memberKey": "generalandadministrative",
-              "valueBn": 2.788
+              "valueBn": 2.701,
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "sourceForm": "Q3 2026 earnings release",
+              "filingDate": "2026-10-29"
             },
             {
               "name": "Other Operating Expense, Net",
               "nameZh": "其他营业费用净额",
               "memberKey": "otheroperatingexpensenet",
-              "valueBn": 0.09
+              "valueBn": 0.134,
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "sourceForm": "Q3 2026 earnings release",
+              "filingDate": "2026-10-29"
             }
           ],
-          "displayCurrency": "USD",
-          "displayScaleFactor": 1,
-          "sankeyStructureContinuity": {
-            "sourceQuarter": "2026Q1",
-            "fields": [
-              "officialRevenueSegments"
-            ],
-            "rule": "same-normalized-category-set"
+          "fieldSources": {
+            "revenueBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "filingDate": "2026-10-29"
+            },
+            "costOfRevenueBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "filingDate": "2026-10-29"
+            },
+            "grossProfitBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "filingDate": "2026-10-29"
+            },
+            "sgnaBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "filingDate": "2026-10-29"
+            },
+            "rndBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "filingDate": "2026-10-29"
+            },
+            "otherOpexBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "filingDate": "2026-10-29"
+            },
+            "operatingExpensesBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "filingDate": "2026-10-29"
+            },
+            "operatingIncomeBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "filingDate": "2026-10-29"
+            },
+            "nonOperatingBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "filingDate": "2026-10-29"
+            },
+            "pretaxIncomeBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "filingDate": "2026-10-29"
+            },
+            "taxBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "filingDate": "2026-10-29"
+            },
+            "equityMethodInvestmentActivityNetOfTaxBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "filingDate": "2026-10-29"
+            },
+            "netIncomeBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "filingDate": "2026-10-29"
+            },
+            "dilutedEps": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "filingDate": "2026-10-29"
+            },
+            "netAssetsBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "filingDate": "2026-10-29"
+            },
+            "operatingCashFlowBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "filingDate": "2026-10-29"
+            },
+            "purchasesOfPropertyAndEquipmentBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "filingDate": "2026-10-29"
+            },
+            "propertyAndEquipmentSalesAndIncentivesBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "filingDate": "2026-10-29"
+            },
+            "capitalExpenditureBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "filingDate": "2026-10-29"
+            },
+            "freeCashFlowBn": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "filingDate": "2026-10-29"
+            },
+            "officialRevenueSegments": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "filingDate": "2026-10-29"
+            },
+            "officialOpexBreakdown": {
+              "adapterId": "official_earnings_release",
+              "label": "Official quarterly earnings release",
+              "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+              "filingDate": "2026-10-29"
+            }
+          },
+          "parserFinancialValidation": {
+            "version": "financial-validation-v1",
+            "status": "high",
+            "confidenceScore": 1.0,
+            "completenessScore": 1.0,
+            "consistencyScore": 1.0,
+            "checksRun": 8,
+            "checksPassed": 8,
+            "issueCount": 0,
+            "issues": []
           },
           "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueTaxonomyChangedFromPriorYear": false
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "sankeyStructureContinuity": {
+            "sourceQuarter": "2026Q2",
+            "fields": [
+              "officialRevenueSegments",
+              "officialOpexBreakdown"
+            ],
+            "rule": "same-normalized-category-set"
+          }
         }
       },
       "statementPresets": {},
-      "officialRevenueStructureHistory": {},
+      "officialRevenueStructureHistory": {
+        "source": "official-segment-cache",
+        "quarters": {
+          "2026Q3": {
+            "segments": [
+              {
+                "name": "Online Stores",
+                "nameZh": "在线商店",
+                "memberKey": "onlinestores",
+                "valueBn": 68.47,
+                "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+                "sourceForm": "Q3 2026 earnings release",
+                "filingDate": "2026-10-29",
+                "yoyPct": 1.58,
+                "qoqPct": -2.79,
+                "mixPct": 33.9,
+                "mixYoyDeltaPp": -3.5,
+                "yoyComparisonValueBn": 67.407,
+                "yoyComparisonSourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+                "qoqComparisonValueBn": 70.432,
+                "qoqComparisonQuarter": "2026Q2",
+                "qoqComparisonSourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000024/amzn-20260630xex991.htm"
+              },
+              {
+                "name": "Third Party Seller Services",
+                "nameZh": "第三方卖家服务",
+                "memberKey": "thirdpartysellerservices",
+                "valueBn": 46.492,
+                "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+                "sourceForm": "Q3 2026 earnings release",
+                "filingDate": "2026-10-29",
+                "yoyPct": 9.43,
+                "qoqPct": -0.62,
+                "mixPct": 23.0,
+                "mixYoyDeltaPp": -0.6,
+                "yoyComparisonValueBn": 42.486,
+                "yoyComparisonSourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+                "qoqComparisonValueBn": 46.78,
+                "qoqComparisonQuarter": "2026Q2",
+                "qoqComparisonSourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000024/amzn-20260630xex991.htm"
+              },
+              {
+                "name": "Amazon Web Services",
+                "nameZh": "亚马逊云服务",
+                "memberKey": "amazonwebservices",
+                "valueBn": 45.984,
+                "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+                "sourceForm": "Q3 2026 earnings release",
+                "filingDate": "2026-10-29",
+                "yoyPct": 39.32,
+                "qoqPct": 8.88,
+                "mixPct": 22.8,
+                "mixYoyDeltaPp": 4.5,
+                "yoyComparisonValueBn": 33.006,
+                "yoyComparisonSourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+                "qoqComparisonValueBn": 42.232,
+                "qoqComparisonQuarter": "2026Q2",
+                "qoqComparisonSourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000024/amzn-20260630xex991.htm"
+              },
+              {
+                "name": "Advertising Services",
+                "nameZh": "广告服务",
+                "memberKey": "advertisingservices",
+                "valueBn": 19.637,
+                "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+                "sourceForm": "Q3 2026 earnings release",
+                "filingDate": "2026-10-29",
+                "yoyPct": 10.92,
+                "qoqPct": -0.87,
+                "mixPct": 9.7,
+                "mixYoyDeltaPp": -0.1,
+                "yoyComparisonValueBn": 17.703,
+                "yoyComparisonSourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+                "qoqComparisonValueBn": 19.809,
+                "qoqComparisonQuarter": "2026Q2",
+                "qoqComparisonSourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000024/amzn-20260630xex991.htm"
+              },
+              {
+                "name": "Subscription Services",
+                "nameZh": "订阅服务",
+                "memberKey": "subscriptionservices",
+                "valueBn": 14.006,
+                "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+                "sourceForm": "Q3 2026 earnings release",
+                "filingDate": "2026-10-29",
+                "yoyPct": 11.39,
+                "qoqPct": 2.01,
+                "mixPct": 6.9,
+                "mixYoyDeltaPp": -0.0,
+                "yoyComparisonValueBn": 12.574,
+                "yoyComparisonSourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+                "qoqComparisonValueBn": 13.73,
+                "qoqComparisonQuarter": "2026Q2",
+                "qoqComparisonSourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000024/amzn-20260630xex991.htm"
+              },
+              {
+                "name": "Physical Stores",
+                "nameZh": "实体店",
+                "memberKey": "physicalstores",
+                "valueBn": 5.71,
+                "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+                "sourceForm": "Q3 2026 earnings release",
+                "filingDate": "2026-10-29",
+                "yoyPct": 2.37,
+                "qoqPct": -1.45,
+                "mixPct": 2.8,
+                "mixYoyDeltaPp": -0.3,
+                "yoyComparisonValueBn": 5.578,
+                "yoyComparisonSourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+                "qoqComparisonValueBn": 5.794,
+                "qoqComparisonQuarter": "2026Q2",
+                "qoqComparisonSourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000024/amzn-20260630xex991.htm"
+              },
+              {
+                "name": "Other Services",
+                "nameZh": "其他服务",
+                "memberKey": "otherservices",
+                "valueBn": 1.645,
+                "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+                "sourceForm": "Q3 2026 earnings release",
+                "filingDate": "2026-10-29",
+                "yoyPct": 16.25,
+                "qoqPct": -10.06,
+                "mixPct": 0.8,
+                "mixYoyDeltaPp": 0.0,
+                "yoyComparisonValueBn": 1.415,
+                "yoyComparisonSourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+                "qoqComparisonValueBn": 1.829,
+                "qoqComparisonQuarter": "2026Q2",
+                "qoqComparisonSourceUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000024/amzn-20260630xex991.htm"
+              }
+            ]
+          }
+        },
+        "filingsUsed": [
+          {
+            "form": "10-K",
+            "filingDate": "2026-02-06",
+            "accession": "0001018724-26-000004",
+            "primaryDocument": "amzn-20251231.htm",
+            "instance": "amzn-20251231_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2025-10-31",
+            "accession": "0001018724-25-000123",
+            "primaryDocument": "amzn-20250930.htm",
+            "instance": "amzn-20250930_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2025-08-01",
+            "accession": "0001018724-25-000086",
+            "primaryDocument": "amzn-20250630.htm",
+            "instance": "amzn-20250630_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2025-05-02",
+            "accession": "0001018724-25-000036",
+            "primaryDocument": "amzn-20250331.htm",
+            "instance": "amzn-20250331_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2025-02-07",
+            "accession": "0001018724-25-000004",
+            "primaryDocument": "amzn-20241231.htm",
+            "instance": "amzn-20241231_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2024-11-01",
+            "accession": "0001018724-24-000161",
+            "primaryDocument": "amzn-20240930.htm",
+            "instance": "amzn-20240930_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2024-08-02",
+            "accession": "0001018724-24-000130",
+            "primaryDocument": "amzn-20240630.htm",
+            "instance": "amzn-20240630_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2024-05-01",
+            "accession": "0001018724-24-000083",
+            "primaryDocument": "amzn-20240331.htm",
+            "instance": "amzn-20240331_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2024-02-02",
+            "accession": "0001018724-24-000008",
+            "primaryDocument": "amzn-20231231.htm",
+            "instance": "amzn-20231231_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2023-10-27",
+            "accession": "0001018724-23-000018",
+            "primaryDocument": "amzn-20230930.htm",
+            "instance": "amzn-20230930_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2023-08-04",
+            "accession": "0001018724-23-000012",
+            "primaryDocument": "amzn-20230630.htm",
+            "instance": "amzn-20230630_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2023-04-28",
+            "accession": "0001018724-23-000008",
+            "primaryDocument": "amzn-20230331.htm",
+            "instance": "amzn-20230331_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2023-02-03",
+            "accession": "0001018724-23-000004",
+            "primaryDocument": "amzn-20221231.htm",
+            "instance": "amzn-20221231_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2022-10-28",
+            "accession": "0001018724-22-000023",
+            "primaryDocument": "amzn-20220930.htm",
+            "instance": "amzn-20220930_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2022-07-29",
+            "accession": "0001018724-22-000019",
+            "primaryDocument": "amzn-20220630.htm",
+            "instance": "amzn-20220630_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2022-04-29",
+            "accession": "0001018724-22-000013",
+            "primaryDocument": "amzn-20220331.htm",
+            "instance": "amzn-20220331_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2022-02-04",
+            "accession": "0001018724-22-000005",
+            "primaryDocument": "amzn-20211231.htm",
+            "instance": "amzn-20211231_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2021-10-29",
+            "accession": "0001018724-21-000028",
+            "primaryDocument": "amzn-20210930.htm",
+            "instance": "amzn-20210930_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2021-07-30",
+            "accession": "0001018724-21-000020",
+            "primaryDocument": "amzn-20210630.htm",
+            "instance": "amzn-20210630_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2021-04-30",
+            "accession": "0001018724-21-000010",
+            "primaryDocument": "amzn-20210331.htm",
+            "instance": "amzn-20210331_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2021-02-03",
+            "accession": "0001018724-21-000004",
+            "primaryDocument": "amzn-20201231.htm",
+            "instance": "amzn-20201231_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2020-10-30",
+            "accession": "0001018724-20-000030",
+            "primaryDocument": "amzn-20200930.htm",
+            "instance": "amzn-20200930_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2020-07-31",
+            "accession": "0001018724-20-000021",
+            "primaryDocument": "amzn-20200630.htm",
+            "instance": "amzn-20200630_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2020-05-01",
+            "accession": "0001018724-20-000010",
+            "primaryDocument": "amzn-20200331x10q.htm",
+            "instance": "amzn-20200331x10q_htm.xml"
+          },
+          {
+            "form": "10-K",
+            "filingDate": "2020-01-31",
+            "accession": "0001018724-20-000004",
+            "primaryDocument": "amzn-20191231x10k.htm",
+            "instance": "amzn-20191231x10k_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2019-10-25",
+            "accession": "0001018724-19-000089",
+            "primaryDocument": "amzn-2019930x10q.htm",
+            "instance": "amzn-2019930x10q_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2019-07-26",
+            "accession": "0001018724-19-000071",
+            "primaryDocument": "amzn-2019630x10q.htm",
+            "instance": "amzn-2019630x10q_htm.xml"
+          },
+          {
+            "form": "10-Q",
+            "filingDate": "2019-04-26",
+            "accession": "0001018724-19-000043",
+            "primaryDocument": "amzn-2019331x10q.htm",
+            "instance": "amzn-20190331.xml"
+          },
+          {
+            "form": "Earnings release",
+            "filingDate": "2026-10-29",
+            "sourceUrl": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+            "periodEnd": "2026-09-30"
+          }
+        ],
+        "errors": []
+      },
       "officialSegmentHistory": {}
     },
     {
@@ -23765,6 +24311,5 @@
       },
       "officialSegmentHistory": {}
     }
-  ],
-  "marketCapUpdatedAt": "2026-10-30T01:18:38+00:00"
+  ]
 }
