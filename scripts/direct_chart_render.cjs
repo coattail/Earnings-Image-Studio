@@ -124,7 +124,7 @@ function loadRuntime(rootDir) {
     vm.runInContext(source, context, { filename: scriptPath });
   });
   const bindings = vm.runInContext(
-    "({ state, EarningsVizRuntime, buildSnapshot, normalizeLoadedCompany, currentResolvedEditorOverrides })",
+    "({ state, EarningsVizRuntime, buildSnapshot, normalizeLoadedCompany, currentResolvedEditorOverrides, mergeEditorNodeOffsets })",
     context
   );
   return {
@@ -138,7 +138,7 @@ function writeSvg(filePath, svg) {
   fs.writeFileSync(filePath, ensureTrailingNewline(svg), "utf8");
 }
 
-function initializeRuntimeForQuarter(rootDir, companyPayload, quarterKey, language, editorNodeOverrides = {}) {
+function initializeRuntimeForQuarter(rootDir, companyPayload, quarterKey, language, editorNodeOverrides = {}, editMode = false) {
   debug(`initialize runtime for ${companyPayload.ticker || companyPayload.id} ${quarterKey} (${language})`);
   const runtime = loadRuntime(rootDir);
   const normalizeLoadedCompany = runtime.normalizeLoadedCompany;
@@ -172,12 +172,9 @@ function initializeRuntimeForQuarter(rootDir, companyPayload, quarterKey, langua
   snapshot.learnedEditorNodeOverrides = resolvedEditorNodeOverrides;
   snapshot.interactiveEditorNodeOverrides =
     editorNodeOverrides && typeof editorNodeOverrides === "object" ? editorNodeOverrides : {};
-  snapshot.editorNodeOverrides = {
-    ...resolvedEditorNodeOverrides,
-    ...snapshot.interactiveEditorNodeOverrides,
-  };
+  snapshot.editorNodeOverrides = runtime.mergeEditorNodeOffsets(resolvedEditorNodeOverrides, snapshot.interactiveEditorNodeOverrides);
   snapshot.editorSelectedNodeId = null;
-  snapshot.editModeEnabled = false;
+  snapshot.editModeEnabled = editMode;
   state.currentSnapshot = snapshot;
 
   return {
@@ -243,7 +240,8 @@ function main() {
       companyPayload,
       quarterKey,
       requestedLanguage,
-      editorNodeOverrides
+      editorNodeOverrides,
+      args["edit-mode"] === "true"
     );
     const sankeySvg = EarningsVizRuntime.render.renderIncomeStatementSvg(snapshot, sankeyCompany);
     const sankeyPath = path.join(outputDir, `${safeBaseName}-sankey.svg`);

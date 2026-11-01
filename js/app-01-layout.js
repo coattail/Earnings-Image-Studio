@@ -239,6 +239,46 @@ function resolveOuterBranchLift(gap, runway, preferredRatio = 0.9) {
   return Math.max(0, Math.min(gap - Math.max(runway, 0) * preferredRatio, Math.max(runway, 0) * 0.14));
 }
 
+// Pack complete source information, not just monetary rectangles. Text can
+// extend above a thin ribbon or below a wrapped title; only horizontally
+// overlapping footprints impose vertical separation. Bounds are propagated
+// both ways so a crowded suffix can use free space above without clipping.
+function resolveSourceInformationColumn(entries, { minY, maxY, gap = 12 }) {
+  const original = entries.map(entry => entry.top);
+  if (!entries.length) return { tops: [], feasible: true };
+  if (![minY, maxY, gap].every(Number.isFinite) || minY > maxY || entries.some(entry =>
+      !Number.isFinite(entry.top) || !entry.rects?.length || entry.rects.some(rect =>
+        ![rect.left, rect.right, rect.top, rect.bottom].every(Number.isFinite))))
+    return { tops: original, feasible: false };
+  const relative = entries.map(entry => entry.rects.map(rect => ({ ...rect,
+    top: rect.top - entry.top, bottom: rect.bottom - entry.top })));
+  const edges = entries.map(() => []);
+  const low = [], high = [];
+  entries.forEach((entry, index) => {
+    low[index] = minY - Math.min(...relative[index].map(rect => rect.top));
+    high[index] = maxY - Math.max(...relative[index].map(rect => rect.bottom));
+    if (Number.isFinite(entry.minTop)) low[index] = Math.max(low[index], entry.minTop);
+    if (Number.isFinite(entry.maxTop)) high[index] = Math.min(high[index], entry.maxTop);
+    for (let previous = 0; previous < index; previous++) {
+      const distances = relative[previous].flatMap(a => relative[index].flatMap(b =>
+        a.left < b.right && a.right > b.left ? [a.bottom - b.top + gap] : []));
+      if (!distances.length) continue;
+      const distance = Math.max(...distances);
+      edges[index].push({ previous, distance });
+      low[index] = Math.max(low[index], low[previous] + distance);
+    }
+  });
+  for (let index = entries.length - 1; index >= 0; index--)
+    for (const { previous, distance } of edges[index]) high[previous] = Math.min(high[previous], high[index] - distance);
+  if (low.some((value, index) => value > high[index] + 1e-7)) return { tops: original, feasible: false };
+  const tops = [];
+  entries.forEach((entry, index) => {
+    const floor = Math.max(low[index], ...edges[index].map(({ previous, distance }) => tops[previous] + distance));
+    tops[index] = clamp(entry.top, floor, high[index]);
+  });
+  return { tops, feasible: true };
+}
+
 // Bound the outer revenue ports by their horizontal runway. The upper stream
 // descends and the lower stream rises, with comparable slopes on both sides.
 function resolveRevenueInflowCenter(entry, options) {

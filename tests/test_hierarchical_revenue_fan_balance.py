@@ -25,6 +25,7 @@ def render_company_svg(
     company: str,
     quarter: str,
     node_overrides: dict[str, dict[str, float]] | None = None,
+    edit_mode: bool = False,
 ) -> ET.Element:
     with tempfile.TemporaryDirectory(prefix=f"{company}-hierarchical-revenue-") as temp_dir:
         command = [
@@ -45,6 +46,8 @@ def render_company_svg(
         ]
         if node_overrides:
             command.extend(["--node-overrides", json.dumps(node_overrides)])
+        if edit_mode:
+            command.append("--edit-mode")
         result = subprocess.run(
             command,
             cwd=ROOT_DIR,
@@ -298,16 +301,18 @@ class HierarchicalRevenueFanBalanceTests(unittest.TestCase):
                 )
 
     def test_dragging_parent_and_detail_nodes_keeps_every_other_node_fixed(self) -> None:
-        base_root = self.svg_roots["asml"]
+        base_root = render_company_svg("asml", COMPANY_QUARTERS["asml"], edit_mode=True)
         parent_drag_root = render_company_svg(
             "asml",
             COMPANY_QUARTERS["asml"],
             {"source-0": {"dx": 0, "dy": 100}},
+            edit_mode=True,
         )
         detail_drag_root = render_company_svg(
             "asml",
             COMPANY_QUARTERS["asml"],
             {"left-detail-0": {"dx": 0, "dy": 100}},
+            edit_mode=True,
         )
 
         self.assertAlmostEqual(

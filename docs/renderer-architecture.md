@@ -86,6 +86,26 @@ so translated labels share the same financial skeleton. Interactive expense edit
 use a clean automatic baseline, with the user's offsets applied afterward; explicit
 parent placement and loss/extreme-gain layouts retain their existing rules.
 
+### Final revenue-source information packing
+
+Earlier source spacing reserved provisional ribbon and metric positions. Restored
+node offsets could subsequently place a multi-line title or growth block inside
+another source, and a saved horizontal offset could detach a tiny residual from
+its peer column. The annotation formatter now also measures each visible text
+line, including its outline, at the final source position.
+
+`resolveSourceInformationColumn` packs those footprints together with the monetary
+rectangles. Only horizontally overlapping footprints impose vertical separation;
+forward/backward bounds let a crowded suffix use room above while respecting the
+title, canvas and outer inflow directions. An infeasible column retains its prior
+positions rather than clipping or changing monetary thicknesses. Normal display
+also projects peer sources onto their shared column, preserving a common column
+translation. In the editor, interactive offsets remain additive to the automatic
+baseline. Neither path rewrites saved offsets or financial data. The pass applies
+to all companies and uses the active language's actual annotation wrapping.
+The direct renderer mirrors the UI's additive offset merge; `--edit-mode` enables
+the unconstrained interactive path for drag regression checks and editor previews.
+
 ### Future extraction
 
 1. Move layout-only computations out of `renderPixelReplicaSvg` into a dedicated `buildReplicaLayoutModel(snapshot)` function.
