@@ -4875,11 +4875,21 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
     }
     let metricCursor = metricTop;
     let html = "";
+    const collectTextBounds = (x, y, text, size, anchor, halo) => {
+      if (!options.collectBounds) return;
+      const textWidth = approximateTextWidth(text, size);
+      const left = x - (anchor === "end" ? textWidth : anchor === "middle" ? textWidth / 2 : 0);
+      options.collectBounds({ left: left - halo, right: left + textWidth + halo,
+        top: y - size * 0.98 - halo, bottom: y + size * 0.28 + halo });
+    };
     metricLines.forEach((line, lineIndex) => {
       metricCursor += line.size;
+      collectTextBounds(metricX, metricCursor, line.text, line.size, metricAnchor, line.strokeWidth / 2);
       html += `<text x="${metricX}" y="${metricCursor}" text-anchor="${metricAnchor}" font-size="${line.size}" font-weight="${line.weight}" fill="${line.color}" paint-order="stroke fill" stroke="${background}" stroke-width="${line.strokeWidth}" stroke-linejoin="round">${escapeHtml(line.text)}</text>`;
       if (lineIndex < metricLines.length - 1) metricCursor += metricGap;
     });
+    labelLines.forEach((line, index) => collectTextBounds(effectiveLabelX, titleStartY + index * titleLineHeight,
+      line, titleSize, effectiveLabelAnchor, 2.5));
     html += svgTextBlock(effectiveLabelX, titleStartY, labelLines, {
       fill: titleColor,
       fontSize: titleSize,
@@ -4890,6 +4900,9 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
       haloWidth: 5,
     });
     if (supportLines.length) {
+      supportLines.forEach((line, index) => collectTextBounds(effectiveLabelX,
+        titleStartY + labelLines.length * titleLineHeight + subtitleGap + index * subtitleLineHeight,
+        line, subtitleSize, effectiveLabelAnchor, 2));
       html += svgTextBlock(
         effectiveLabelX,
         titleStartY + labelLines.length * titleLineHeight + subtitleGap,
@@ -4950,9 +4963,9 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
     });
     return block;
   };
-  const renderLeftLabel = (slice, box, index) => {
+  const renderLeftLabel = (slice, box, index, annotationRects = null, offsetFor = editorOffsetForNode) => {
     const item = slice.item;
-    const sourceShift = editorOffsetForNode(`source-${index}`);
+    const sourceShift = offsetFor(`source-${index}`);
     const compactMode = compactSources || item.compactLabel;
     const labelLines = resolveSourceLabelLines(item, {
       compactMode,
@@ -4970,9 +4983,10 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
       metricX,
       metricAnchor: "start",
       metricPlacement: "above-ribbon",
+      collectBounds: annotationRects ? rect => annotationRects.push(rect) : null,
       previousRibbonBottom:
         index > 0
-          ? safeNumber(sourceSlices[index - 1]?.bottom) + editorOffsetForNode(`source-${index - 1}`).dy
+          ? safeNumber(sourceSlices[index - 1]?.bottom) + offsetFor(`source-${index - 1}`).dy
           : null,
       ribbonTop: slice.top + sourceShift.dy,
       labelCenterY: slice.center + sourceShift.dy,
@@ -5836,6 +5850,53 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
   // drags remain additive in both view and edit modes, without moving siblings.
   enforceRevenueInflowDirections(balancedLayoutOffsetForNode);
   const editorOffsetForNode = (nodeId, options = {}) => combinedNodeOffsetFor(nodeId, options);
+  if (snapshot.layout?.disableSourceInformationPacking !== true && sourceSlices.length >= 2) {
+    const informationOffsetFor = snapshot.editModeEnabled ? balancedLayoutOffsetForNode : editorOffsetForNode;
+    // Presentation uses one grid for each source column, including tiny
+    // residuals. Saved offsets remain preferences rather than permission to
+    // overlap information. The editor remains free and the saved draft is never
+    // rewritten; a common horizontal translation of the column is retained.
+    if (snapshot.layout?.alignPreDetailRegularSourceColumn !== false) {
+      const columns = new Map();
+      sourceSlices.forEach((slice, index) => {
+        const key = safeNumber(slice.nodeX, leftX).toFixed(1);
+        if (!columns.has(key)) columns.set(key, []);
+        columns.get(key).push(index);
+      });
+      for (const indexes of columns.values()) {
+        if (indexes.length < 2) continue;
+        const xs = indexes.map(index => safeNumber(sourceSlices[index].nodeX, leftX) + informationOffsetFor(`source-${index}`).dx).sort((a, b) => a - b);
+        const columnX = xs[Math.floor((xs.length - 1) / 2)];
+        indexes.forEach(index => {
+          const id = `source-${index}`, offset = autoLayoutOffsetForNode(id);
+          setAutoLayoutNodeOffset(id, { dx: offset.dx + columnX - safeNumber(sourceSlices[index].nodeX, leftX) - informationOffsetFor(id).dx });
+        });
+      }
+    }
+    const entries = sourceSlices.map((slice, index) => {
+      const offset = informationOffsetFor(`source-${index}`);
+      const top = slice.top + offset.dy, x = safeNumber(slice.nodeX, leftX) + offset.dx;
+      const rects = [{ left: x, right: x + sourceNodeWidth, top, bottom: top + slice.height }];
+      // Measure with the exact formatter used below: translated wrapped titles,
+      // visible growth lines, their font sizes, baselines and outline widths.
+      renderLeftLabel(slice, leftBoxes[index], index, rects, informationOffsetFor);
+      const targetCenter = (slice.revenueTop + slice.revenueBottom) / 2 + informationOffsetFor("revenue").dy;
+      const runway = Math.max(revenueX + informationOffsetFor("revenue").dx - x - sourceNodeWidth, 0);
+      const lead = clamp(runway * 0.14, scaleY(20), scaleY(56));
+      return { top, rects,
+        ...(index === 0 && top + slice.height / 2 < targetCenter ? { maxTop: targetCenter - lead - slice.height / 2 } : {}),
+        ...(index === sourceSlices.length - 1 && top + slice.height / 2 > targetCenter ? { minTop: targetCenter + lead - slice.height / 2 } : {}),
+      };
+    });
+    const packed = resolveSourceInformationColumn(entries, {
+      minY: Math.max(scaleY(160), titleObstacle.bottom + scaleY(20)),
+      maxY: height - scaleY(40), gap: scaleY(12),
+    });
+    if (packed.feasible) packed.tops.forEach((top, index) => {
+      const id = `source-${index}`, offset = autoLayoutOffsetForNode(id);
+      setAutoLayoutNodeOffset(id, { dy: offset.dy + top - entries[index].top });
+    });
+  }
   const editableNodeFrame = (nodeId, x, y, widthValue, heightValue) => {
     const offset = editorOffsetForNode(nodeId);
     return {
