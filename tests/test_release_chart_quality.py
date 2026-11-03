@@ -120,4 +120,12 @@ class ReleaseChartTests(unittest.TestCase):
         self.assertEqual(chart_issues(p), [])
         self.assertEqual(p['financials']['2026Q3']['officialRevenueSegments'][0]['valueBn'], 80)
 
+class FinancialSpineValueTests(unittest.TestCase):
+    def test_every_rendered_statement_amount_rejects_nonfinite_and_non_numeric_values(self):
+        for field in ['costOfRevenueBn','grossProfitBn','operatingExpensesBn','operatingIncomeBn','nonOperatingBn','pretaxIncomeBn','taxBn','sgnaBn','rndBn','otherOpexBn']:
+            for value in [True,'3.5',float('nan'),float('inf')]:
+                with self.subTest(field=field,value=value):
+                    p=fixture();enrich_from_release(p,html(),'url');p['financials']['2026Q3'][field]=value
+                    self.assertIn(f'invalid financial value in {field}',chart_issues(p))
+
 if __name__=='__main__':unittest.main()

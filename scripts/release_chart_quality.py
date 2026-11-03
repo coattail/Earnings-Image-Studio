@@ -6,6 +6,8 @@ import re
 FIELDS = ('officialRevenueSegments', 'officialRevenueDetailGroups', 'officialCostBreakdown', 'officialOpexBreakdown')
 CONTRACT_VERSION = 3
 FINGERPRINT_FIELDS = ('periodEnd', 'statementFilingDate', 'revenueBn', 'operatingIncomeBn', 'netIncomeBn',
+                      'costOfRevenueBn','grossProfitBn','operatingExpensesBn','nonOperatingBn','pretaxIncomeBn','taxBn',
+                      'sgnaBn','rndBn','otherOpexBn','statementCurrency','displayCurrency','displayScaleFactor',
                       *FIELDS, 'officialRevenueStyle', 'officialRevenueReconciliation', 'clientIncentivesBn', 'revenueYoyPct', 'revenueQoqPct', 'chartQuality')
 
 def chart_fingerprint(payload):
@@ -39,7 +41,7 @@ def chart_issues(payload, quarter=None):
         return ['missing requested reporting quarter']
     entry, prior = financials[quarter], previous_entry(payload, quarter)
     issues = []
-    for field in ('revenueBn', 'netIncomeBn', 'operatingIncomeBn'):
+    for field in (field for field in FINGERPRINT_FIELDS if field.endswith('Bn')):
         if entry.get(field) is not None and not finite(entry[field]):
             issues.append(f'invalid financial value in {field}')
     if entry.get('calendarQuarter') and entry['calendarQuarter'] != quarter:
@@ -240,7 +242,7 @@ def enrich_from_release(payload, html, url):
             amount = next((v for name,v in pools[field].items() if name in aliases), None)
             if amount is None: continue
             row = {k:deepcopy(v) for k,v in template.items() if k in {'name','nameZh','memberKey','targetName','targetId','valueFormat'}}
-            row.update(valueBn=round(abs(amount), 3), sourceUrl=url, filingDate=entry.get('statementFilingDate'),
+            row.update(valueBn=round(abs(amount), 3), sourceUrl=url, filingDate=entry.get('_classificationFilingDate') or entry.get('statementFilingDate'),
                        sourceForm='earnings release', yoyPct=None, qoqPct=None)
             parsed.append(row)
         if templates and len(parsed) == len(templates): entry[field] = parsed
