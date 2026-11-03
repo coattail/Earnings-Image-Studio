@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-31T05:55:23Z",
+  "generatedAt": "2026-11-03T02:59:04Z",
   "companyCount": 41,
   "companies": [
     {
@@ -20154,6 +20154,12 @@
       },
       "financialSource": "stockanalysis",
       "financialPath": "quote/hkg/1211",
+      "marketCapUsd": 111526813265,
+      "marketCapAsOf": "2026-10-31",
+      "marketCapSourceRank": 202,
+      "marketCapSource": "CompaniesMarketCap",
+      "marketCapSourceUrl": "https://companiesmarketcap.com/byd/marketcap/",
+      "_cacheVersion": "20260706-v2",
       "quarters": [
         "2020Q4",
         "2021Q1",
@@ -20175,7 +20181,10 @@
         "2025Q1",
         "2025Q2",
         "2025Q3",
-        "2025Q4"
+        "2025Q4",
+        "2026Q1",
+        "2026Q2",
+        "2026Q3"
       ],
       "statementSource": "stockanalysis-financials",
       "statementSourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly",
@@ -20195,27 +20204,29 @@
         "latestRevenueGapReason": "BYD's Q1/Q3 interim filings may disclose statement and expense lines without a parseable same-quarter segment revenue composition table. The latest official disclosed revenue split currently available is the 2025 annual report filed on 2026-03-28."
       },
       "coverage": {
-        "quarterCount": 21,
+        "quarterCount": 24,
         "pixelReplicaQuarterCount": 0,
         "hasPixelReplica": false,
-        "officialFinancialQuarterCount": 21,
+        "officialFinancialQuarterCount": 24,
         "officialSegmentQuarterCount": 6,
         "officialExpenseQuarterCount": 7,
         "classification": {
-          "status": "ok",
-          "latestQuarter": "2025Q4",
-          "latestQuarterHasRevenueClassification": true,
-          "latestQuarterHasExpenseClassification": true,
+          "status": "exception",
+          "latestQuarter": "2026Q3",
+          "latestQuarterHasRevenueClassification": false,
+          "latestQuarterHasExpenseClassification": false,
           "latestRevenueClassificationQuarter": "2025Q4",
           "latestExpenseClassificationQuarter": "2025Q4",
           "latestStructureHistoryQuarter": "2025Q4",
           "revenueClassificationQuarterCount": 6,
           "expenseClassificationQuarterCount": 7,
-          "revenueClassificationCoverageRatio": 0.2857,
-          "expenseClassificationCoverageRatio": 0.3333,
-          "latestRevenueClassificationLagQuarters": 0,
-          "latestExpenseClassificationLagQuarters": 0,
-          "warnings": [],
+          "revenueClassificationCoverageRatio": 0.25,
+          "expenseClassificationCoverageRatio": 0.2917,
+          "latestRevenueClassificationLagQuarters": 3,
+          "latestExpenseClassificationLagQuarters": 3,
+          "warnings": [
+            "Latest revenue classification is unavailable for 2026Q3; using 2025Q4 as the newest official disclosed structure. BYD's Q1/Q3 interim filings may disclose statement and expense lines without a parseable same-quarter segment revenue composition table. The latest official disclosed revenue split currently available is the 2025 annual report filed on 2026-03-28."
+          ],
           "blockers": [],
           "policy": {
             "displayOfficiallyClassifiedPeriodsOnly": true,
@@ -20242,346 +20253,130 @@
             "primarySource": "stockanalysis",
             "quarterCount": 20,
             "fieldOverrideCount": 0,
-            "derivedFieldCount": 20,
+            "derivedFieldCount": 0,
             "mixedSourceQuarterCount": 0,
             "sourceUsageCounts": {
-              "stockanalysis": 407
+              "stockanalysis": 0
             }
           },
           "financialValidation": {
             "version": "financial-validation-v1",
-            "status": "high",
+            "status": "low",
             "quarterCount": 20,
             "validatedQuarterCount": 20,
-            "issueCount": 17,
-            "mismatchQuarterCount": 17,
-            "highConfidenceQuarterCount": 20,
-            "averageConfidenceScore": 0.9522,
-            "latestQuarter": "2025Q3",
-            "latestQuarterConfidenceScore": 0.9438,
-            "latestQuarterIssueCount": 1
+            "issueCount": 0,
+            "mismatchQuarterCount": 0,
+            "highConfidenceQuarterCount": 0,
+            "averageConfidenceScore": 0.225,
+            "latestQuarter": "2026Q3",
+            "latestQuarterConfidenceScore": 0.225,
+            "latestQuarterIssueCount": 0
           },
           "validation": {
             "version": "parser-validation-v1",
-            "status": "medium",
-            "overallConfidenceScore": 0.7939,
-            "financialConfidenceScore": 0.9522,
-            "structuralConfidenceScore": 0.5,
+            "status": "low",
+            "overallConfidenceScore": 0.4962,
+            "financialConfidenceScore": 0.225,
+            "structuralConfidenceScore": 1.0,
             "revenueSegmentChecks": 6,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
             "detailGroupChecks": 0,
             "detailGroupMismatchCount": 0,
             "detailGroupSkippedChecks": 0,
-            "opexChecks": 5,
-            "opexSkippedChecks": 1,
-            "opexOverflowMismatchCount": 5,
-            "warningCount": 5,
-            "warnings": [
-              "2023Q2: opex breakdown sums to 31.492Bn vs operating expenses 18.854Bn.",
-              "2023Q4: opex breakdown sums to 78.248Bn vs operating expenses 16.901Bn.",
-              "2024Q2: opex breakdown sums to 41.633Bn vs operating expenses 18.747Bn.",
-              "2024Q4: opex breakdown sums to 95.925Bn vs operating expenses 30.879Bn.",
-              "2025Q2: opex breakdown sums to 52.393Bn vs operating expenses 27.433Bn."
-            ]
+            "opexChecks": 0,
+            "opexSkippedChecks": 0,
+            "opexOverflowMismatchCount": 0,
+            "warningCount": 0,
+            "warnings": []
           }
         }
       },
-      "marketCapUsd": 111526813265,
-      "marketCapAsOf": "2026-10-31",
-      "marketCapSourceRank": 202,
-      "marketCapSource": "CompaniesMarketCap",
-      "marketCapSourceUrl": "https://companiesmarketcap.com/byd/marketcap/",
       "dataLoadMode": "latest-only",
-      "latestQuarter": "2025Q4",
+      "latestQuarter": "2026Q3",
       "financials": {
-        "2025Q4": {
-          "fiscalLabel": "FY 2025",
-          "statementSource": "manual-byd-official",
-          "statementSourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF",
-          "statementFilingDate": "2026-03-28",
-          "revenueBn": 803.965,
-          "costOfRevenueBn": 661.305,
-          "operatingIncomeBn": 40.185,
+        "2026Q3": {
+          "calendarQuarter": "2026Q3",
+          "periodEnd": "2026-09-30",
+          "fiscalYear": "2026",
+          "fiscalQuarter": "Q3",
+          "fiscalLabel": "FY2026 Q3",
+          "statementCurrency": "CNY",
+          "revenueBn": null,
+          "revenueYoyPct": null,
+          "costOfRevenueBn": null,
+          "grossProfitBn": null,
+          "sgnaBn": null,
+          "rndBn": null,
+          "otherOpexBn": null,
           "operatingExpensesBn": null,
-          "netIncomeBn": 32.619,
-          "taxBn": 5.992,
-          "officialRevenueSegments": [
-            {
-              "name": "Transportation equipment & electrical manufacturing",
-              "nameZh": "交通运输设备及电气制造业",
-              "memberKey": "transportationelectricalmanufacturing",
-              "valueBn": 648.646,
-              "yoyPct": 5.06,
-              "qoqPct": null,
-              "mixPct": 80.7,
-              "mixYoyDeltaPp": 1.2,
-              "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF",
-              "sourceForm": null,
-              "filingDate": "2026-03-28",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": null,
-              "validationNotes": null
-            },
-            {
-              "name": "Daily electronic devices manufacturing",
-              "nameZh": "日用电子器件制造业",
-              "memberKey": "dailyelectronicdevicesmanufacturing",
-              "valueBn": 155.237,
-              "yoyPct": -2.74,
-              "qoqPct": null,
-              "mixPct": 19.3,
-              "mixYoyDeltaPp": -1.2,
-              "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF",
-              "sourceForm": null,
-              "filingDate": "2026-03-28",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": null,
-              "validationNotes": null
-            },
-            {
-              "name": "Other",
-              "nameZh": "其他",
-              "memberKey": "other",
-              "valueBn": 0.083,
-              "yoyPct": -25.89,
-              "qoqPct": null,
-              "mixPct": 0,
-              "mixYoyDeltaPp": 0,
-              "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF",
-              "sourceForm": null,
-              "filingDate": "2026-03-28",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": null,
-              "validationNotes": null
-            }
-          ],
-          "officialOpexBreakdown": [
-            {
-              "name": "Selling expense",
-              "nameZh": "销售费用",
-              "valueBn": 26.185,
-              "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF"
-            },
-            {
-              "name": "Administrative expense",
-              "nameZh": "管理费用",
-              "valueBn": 20.2,
-              "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF"
-            },
-            {
-              "name": "R&D expense",
-              "nameZh": "研发费用",
-              "valueBn": 57.978,
-              "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF"
-            }
-          ],
-          "revenueQoqPct": 312.321,
-          "revenueYoyPct": 3.457,
-          "statementMeta": {
-            "statementSource": "manual-byd-official",
-            "statementSourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF",
-            "statementValueMode": null,
-            "statementSpanQuarters": null,
-            "qualityFlags": [],
-            "adapterId": "manual_financials"
+          "operatingIncomeBn": null,
+          "nonOperatingBn": null,
+          "pretaxIncomeBn": null,
+          "taxBn": null,
+          "netIncomeBn": null,
+          "netIncomeYoyPct": null,
+          "grossMarginPct": null,
+          "operatingMarginPct": null,
+          "profitMarginPct": null,
+          "effectiveTaxRatePct": null,
+          "revenueQoqPct": null,
+          "grossMarginYoyDeltaPp": null,
+          "operatingMarginYoyDeltaPp": null,
+          "profitMarginYoyDeltaPp": null,
+          "statementSourceUrl": "https://stockanalysis.com/quote/hkg/1211/financials/?p=quarterly",
+          "statementFilingDate": "2026-09-30",
+          "parserFinancialFieldSources": {
+            "calendarQuarter": "stockanalysis",
+            "periodEnd": "stockanalysis",
+            "fiscalYear": "stockanalysis",
+            "fiscalQuarter": "stockanalysis",
+            "fiscalLabel": "stockanalysis",
+            "statementCurrency": "stockanalysis",
+            "statementFilingDate": "stockanalysis",
+            "statementSourceUrl": "stockanalysis"
           },
-          "fieldSources": {
-            "revenueBn": {
-              "adapterId": "manual_financials",
-              "label": "Manual company overrides",
-              "score": 153,
-              "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF"
-            },
-            "costOfRevenueBn": {
-              "adapterId": "manual_financials",
-              "label": "Manual company overrides",
-              "score": 153,
-              "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF"
-            },
-            "operatingIncomeBn": {
-              "adapterId": "manual_financials",
-              "label": "Manual company overrides",
-              "score": 153,
-              "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF"
-            },
-            "taxBn": {
-              "adapterId": "manual_financials",
-              "label": "Manual company overrides",
-              "score": 151,
-              "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF"
-            },
-            "netIncomeBn": {
-              "adapterId": "manual_financials",
-              "label": "Manual company overrides",
-              "score": 153,
-              "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF"
-            },
-            "opexBreakdown": [
-              {
-                "adapterId": "manual_financials",
-                "label": "Manual company overrides",
-                "score": 160,
-                "itemCount": 3
-              }
-            ],
-            "statementMeta": {
-              "adapterId": "manual_financials",
-              "label": "Manual company overrides",
-              "score": 7.56,
-              "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF"
-            },
-            "officialRevenueSegments": {
-              "adapterId": "manual_revenue_structures",
-              "label": "Manual revenue structure overrides",
-              "score": 154,
-              "sourceUrl": null
-            }
+          "parserFinancialCandidateCounts": {
+            "revenueBn": 0,
+            "revenueYoyPct": 0,
+            "revenueQoqPct": 0,
+            "costOfRevenueBn": 0,
+            "grossProfitBn": 0,
+            "grossMarginPct": 0,
+            "grossMarginYoyDeltaPp": 0,
+            "sgnaBn": 0,
+            "rndBn": 0,
+            "otherOpexBn": 0,
+            "operatingExpensesBn": 0,
+            "operatingIncomeBn": 0,
+            "operatingMarginPct": 0,
+            "operatingMarginYoyDeltaPp": 0,
+            "nonOperatingBn": 0,
+            "pretaxIncomeBn": 0,
+            "taxBn": 0,
+            "netIncomeBn": 0,
+            "netIncomeYoyPct": 0,
+            "profitMarginPct": 0,
+            "profitMarginYoyDeltaPp": 0,
+            "effectiveTaxRatePct": 0
           },
-          "extractionDiagnostics": {
-            "qualityScore": 93,
-            "availableRequiredFieldCount": 3,
-            "requiredFieldCount": 3,
-            "sourceFieldCount": 8,
-            "hasCostBreakdownProfile": false,
-            "costBreakdownMode": "none",
-            "opexBreakdownMode": "explicit",
-            "revenueSegmentCoveragePct": 100,
-            "costBreakdownCoveragePct": 0,
-            "opexBreakdownCoveragePct": null,
-            "revenueSegmentResidualBn": 0,
-            "costBreakdownResidualBn": null,
-            "opexBreakdownResidualBn": null,
-            "statementSource": "manual-byd-official",
-            "statementValueMode": null,
-            "statementSpanQuarters": null,
-            "statementQualityFlags": [],
-            "issues": [
-              "cost-breakdown-coverage-low"
-            ]
+          "parserFinancialValidation": {
+            "version": "financial-validation-v1",
+            "status": "low",
+            "confidenceScore": 0.225,
+            "completenessScore": 0.0,
+            "consistencyScore": 0.5,
+            "checksRun": 0,
+            "checksPassed": 0,
+            "issueCount": 0,
+            "issues": []
           },
-          "sankeyStructureContinuity": {
-            "sourceQuarter": "2025Q3",
-            "fields": [
-              "officialOpexBreakdown"
-            ],
-            "rule": "same-normalized-category-set"
-          },
-          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueTaxonomyChangedFromPriorYear": false
+          "displayCurrency": "USD",
+          "displayScaleFactor": 0.14915
         }
       },
       "statementPresets": {},
-      "officialRevenueStructureHistory": {
-        "source": "manual-cninfo-official",
-        "quarters": {
-          "2025Q4": {
-            "segments": [
-              {
-                "name": "Transportation equipment & electrical manufacturing",
-                "nameZh": "交通运输设备及电气制造业",
-                "memberKey": "transportationelectricalmanufacturing",
-                "valueBn": 648.646,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF",
-                "sourceForm": null,
-                "filingDate": "2026-03-28",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": null,
-                "validationNotes": null
-              },
-              {
-                "name": "Daily electronic devices manufacturing",
-                "nameZh": "日用电子器件制造业",
-                "memberKey": "dailyelectronicdevicesmanufacturing",
-                "valueBn": 155.237,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF",
-                "sourceForm": null,
-                "filingDate": "2026-03-28",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": null,
-                "validationNotes": null
-              },
-              {
-                "name": "Other",
-                "nameZh": "其他",
-                "memberKey": "other",
-                "valueBn": 0.083,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF",
-                "sourceForm": null,
-                "filingDate": "2026-03-28",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": null,
-                "validationNotes": null
-              }
-            ]
-          }
-        },
-        "filingsUsed": [
-          {
-            "title": "BYD 2023 Half-Year Report",
-            "quarter": "2023Q2",
-            "filingDate": "2023-08-29",
-            "pdf": "https://static.cninfo.com.cn/finalpage/2023-08-29/1217680503.PDF"
-          },
-          {
-            "title": "BYD 2023 Annual Report",
-            "quarter": "2023Q4",
-            "filingDate": "2024-03-27",
-            "pdf": "https://static.cninfo.com.cn/finalpage/2024-03-27/1219412018.PDF"
-          },
-          {
-            "title": "BYD 2024 Half-Year Report",
-            "quarter": "2024Q2",
-            "filingDate": "2024-08-29",
-            "pdf": "https://static.cninfo.com.cn/finalpage/2024-08-29/1221030552.PDF"
-          },
-          {
-            "title": "BYD 2024 Annual Report",
-            "quarter": "2024Q4",
-            "filingDate": "2025-03-25",
-            "pdf": "https://static.cninfo.com.cn/finalpage/2025-03-25/1222881496.PDF"
-          },
-          {
-            "title": "BYD 2025 Half-Year Report",
-            "quarter": "2025Q2",
-            "filingDate": "2025-08-30",
-            "pdf": "https://static.cninfo.com.cn/finalpage/2025-08-30/1224626653.PDF"
-          },
-          {
-            "title": "BYD 2025 Annual Report",
-            "quarter": "2025Q4",
-            "filingDate": "2026-03-28",
-            "pdf": "http://static.cninfo.com.cn/finalpage/2026-03-28/1225045351.PDF"
-          }
-        ],
-        "errors": [
-          "segment-cache-missing"
-        ]
-      },
+      "officialRevenueStructureHistory": {},
       "officialSegmentHistory": {}
     },
     {
