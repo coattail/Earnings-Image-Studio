@@ -7867,29 +7867,29 @@
       "statementCurrency": "USD",
       "revenueBn": 50.172,
       "revenueYoyPct": 8.066,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 2.743,
+      "grossProfitBn": 47.429,
       "sgnaBn": 1.917,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
+      "operatingExpensesBn": 27.295,
+      "operatingIncomeBn": 20.134,
+      "nonOperatingBn": 0,
+      "pretaxIncomeBn": 20.134,
       "taxBn": 4.829,
       "netIncomeBn": 15.305,
       "netIncomeYoyPct": null,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": 30.505,
+      "grossMarginPct": 94.532807,
+      "operatingMarginPct": 40.129953,
+      "profitMarginPct": 30.505063,
       "effectiveTaxRatePct": null,
       "revenueQoqPct": -12.512,
-      "grossMarginYoyDeltaPp": null,
-      "operatingMarginYoyDeltaPp": null,
+      "grossMarginYoyDeltaPp": 1.863,
+      "operatingMarginYoyDeltaPp": -0.241,
       "profitMarginYoyDeltaPp": -0.496,
       "statementSource": "official-earnings-release",
-      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000162828026065582/a3q26erfex992supplement.htm",
-      "statementFilingDate": "2026-10-13",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000162828026069523/jpm-20260930.htm",
+      "statementFilingDate": "2026-11-03",
       "statementSpanQuarters": 1,
       "statementValueMode": "reported",
       "officialOpexBreakdown": [
@@ -7898,7 +7898,8 @@
           "nameZh": "销售与营销",
           "valueBn": 1.917,
           "valueFormat": "negative-parentheses",
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000162828026065582/a3q26erfex992supplement.htm"
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000162828026065582/a3q26erfex992supplement.htm",
+          "filingDate": "2026-10-13"
         }
       ],
       "parserFinancialFieldSources": {
@@ -7910,9 +7911,9 @@
         "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000162828026065582/a3q26erfex992supplement.htm"
       },
       "automaticEarnings": {
-        "filingDate": "2026-10-13",
-        "accession": "0001628280-26-065582",
-        "form": "8-K"
+        "filingDate": "2026-11-03",
+        "accession": "0001628280-26-069523",
+        "form": "10-Q"
       },
       "displayCurrency": "USD",
       "displayScaleFactor": 1,
@@ -7922,6 +7923,8 @@
         "status": "ready",
         "issues": [],
         "requiredMarginComparisons": [
+          "grossMarginYoyDeltaPp",
+          "operatingMarginYoyDeltaPp",
           "profitMarginYoyDeltaPp"
         ],
         "requiredDetailParents": [],
@@ -7988,8 +7991,10 @@
       },
       "chartCompletionAttempts": [
         {
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000162828026065582/a3q26erfex992supplement.htm",
-          "remainingIssues": []
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000162828026069523/jpm-20260930.htm",
+          "remainingIssues": [
+            "revenue classifications do not reconcile to total revenue"
+          ]
         }
       ],
       "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
@@ -8000,7 +8005,8 @@
           "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
-      }
+      },
+      "statementAccession": "0001628280-26-069523"
     }
   },
   "statementSource": "stockanalysis-financials",
