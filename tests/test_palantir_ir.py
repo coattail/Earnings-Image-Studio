@@ -31,6 +31,22 @@ class PalantirReleaseTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "does not reconcile"):
             palantir_ir.parse_release(self.html.replace("1,930,125", "1,930,999"), URL, "2026-11-02")
 
+    def test_two_column_statement_does_not_confuse_headline_margin_with_prior_year(self):
+        from bs4 import BeautifulSoup
+        soup = BeautifulSoup(self.html, "html.parser")
+        for table in soup.find_all("table"):
+            if "Cost of revenue" not in table.get_text():
+                continue
+            for cell in table.find_all("td"):
+                import re
+                numbers = list(re.finditer(r"\(?\d[\d,]*(?:\.\d+)?\)?", cell.get_text()))
+                # Remove YTD columns from the actual financial rows.
+                if len(numbers) >= 4:
+                    cell.string = cell.get_text()[:numbers[-2].start()].strip()
+        entry = palantir_ir.parse_release(str(soup), URL, "2026-11-02")
+        self.assertEqual(entry["revenueBn"], 2.313411)
+        self.assertAlmostEqual(entry["netIncomeYoyPct"], (1128012 / 475599 - 1) * 100)
+
     def test_earnings_8k_is_detected_before_10q_and_uses_statement_end_date(self):
         recent = {"form": ["8-K", "8-K", "10-Q"], "items": ["5.02", "2.02,9.01", ""],
                   "accessionNumber": ["unrelated", "0001321655-26-000045", "old"],

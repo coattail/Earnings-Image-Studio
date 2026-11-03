@@ -23,9 +23,17 @@ def parse_release(html: str, source_url: str, filing_date: str) -> dict:
     end = datetime.strptime(match[1], "%B %d, %Y").date()
     quarter = f"{end.year}Q{(end.month - 1) // 3 + 1}"
     rows = [re.sub(r"\s+", " ", row.get_text(" ", strip=True)) for row in soup.find_all("tr")]
+    statements = [table for table in soup.find_all("table")
+                  if "Cost of revenue" in table.get_text() and "Gross profit" in table.get_text()]
+    if not statements:
+        raise ValueError("Missing Palantir GAAP income statement table")
+    statement_rows = [re.sub(r"\s+", " ", row.get_text(" ", strip=True))
+                      for row in min(statements, key=lambda table: len(table.get_text())).find_all("tr")]
 
-    def value(label: str, minimum: int = 4, column: int = 0) -> float:
-        for row in rows:
+    def value(label: str, minimum: int = 2, column: int = 0) -> float:
+        # Q1 has two comparative columns, while Q2/Q3 usually include YTD.
+        # Prefer the statement over the headline summary's margin columns.
+        for row in statement_rows + rows:
             if not row.lower().replace("’", "'").startswith(label.lower().replace("’", "'")):
                 continue
             tail = re.sub(r"^\s*\(\d\)", "", row[len(label):])
