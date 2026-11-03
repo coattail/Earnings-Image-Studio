@@ -7798,39 +7798,34 @@
       "fiscalQuarter": "Q3",
       "fiscalLabel": "FY2026 Q3",
       "statementCurrency": "USD",
-      "revenueBn": -0.0,
+      "revenueBn": 12.874,
       "revenueYoyPct": null,
-      "costOfRevenueBn": 0.0,
-      "grossProfitBn": -0.0,
-      "sgnaBn": 0.0,
-      "rndBn": 0.0,
-      "otherOpexBn": null,
-      "operatingExpensesBn": 0.0,
-      "operatingIncomeBn": -0.0,
-      "nonOperatingBn": 0.0,
-      "pretaxIncomeBn": -0.0,
-      "taxBn": 0.0,
-      "netIncomeBn": -0.0,
+      "costOfRevenueBn": 6.079,
+      "grossProfitBn": 6.795,
+      "sgnaBn": 1.303,
+      "rndBn": null,
+      "otherOpexBn": 1.033,
+      "operatingExpensesBn": 2.337,
+      "operatingIncomeBn": 4.459,
+      "nonOperatingBn": -0.142,
+      "pretaxIncomeBn": 4.317,
+      "taxBn": 0.653,
+      "netIncomeBn": 3.664,
       "netIncomeYoyPct": null,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": null,
-      "effectiveTaxRatePct": null,
+      "grossMarginPct": 52.781,
+      "operatingMarginPct": 34.636,
+      "profitMarginPct": 28.46,
+      "effectiveTaxRatePct": 15.126,
       "revenueQoqPct": null,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
-      "statementSourceUrl": "https://stockanalysis.com/stocks/nflx/financials/?p=quarterly",
-      "statementFilingDate": "2026-09-30",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm",
+      "statementFilingDate": "2026-10-20",
       "parserFinancialFieldSources": {
-        "calendarQuarter": "stockanalysis",
-        "periodEnd": "stockanalysis",
-        "fiscalYear": "stockanalysis",
-        "fiscalQuarter": "stockanalysis",
-        "fiscalLabel": "stockanalysis",
-        "statementCurrency": "stockanalysis",
-        "statementFilingDate": "stockanalysis",
-        "statementSourceUrl": "stockanalysis"
+        "revenueBn": "official",
+        "operatingIncomeBn": "official",
+        "netIncomeBn": "official"
       },
       "parserFinancialCandidateCounts": {
         "revenueBn": 0,
@@ -7857,15 +7852,8 @@
         "effectiveTaxRatePct": 0
       },
       "parserFinancialValidation": {
-        "version": "financial-validation-v1",
-        "status": "low",
-        "confidenceScore": 0.225,
-        "completenessScore": 0.0,
-        "consistencyScore": 0.5,
-        "checksRun": 0,
-        "checksPassed": 0,
-        "issueCount": 0,
-        "issues": []
+        "status": "high",
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm"
       },
       "officialRevenueSegments": [
         {
@@ -7878,7 +7866,8 @@
           "sourceForm": "10-Q",
           "filingDate": "2026-10-21",
           "periodStart": "2026-07-01",
-          "periodEnd": "2026-09-30"
+          "periodEnd": "2026-09-30",
+          "mixPct": 43.7
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
@@ -7988,6 +7977,30 @@
         "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": []
+      },
+      "statementSource": "official-earnings-release",
+      "statementSpanQuarters": 1,
+      "statementValueMode": "reported",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales & Marketing",
+          "nameZh": "销售与营销",
+          "valueBn": 0.837,
+          "valueFormat": "negative-parentheses",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm"
+        },
+        {
+          "name": "G&A",
+          "nameZh": "管理费用",
+          "valueBn": 0.466,
+          "valueFormat": "negative-parentheses",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm"
+        }
+      ],
+      "automaticEarnings": {
+        "filingDate": "2026-10-20",
+        "accession": "0001065280-26-000290",
+        "form": "8-K"
       }
     }
   },

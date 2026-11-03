@@ -45,7 +45,8 @@
     "2025Q3",
     "2025Q4",
     "2026Q1",
-    "2026Q2"
+    "2026Q2",
+    "2026Q3"
   ],
   "financials": {
     "2018Q1": {
@@ -18018,6 +18019,73 @@
       "statementValueMode": "direct",
       "statementSpanQuarters": 1,
       "statementPeriodStart": "2026-04-01"
+    },
+    "2026Q3": {
+      "calendarQuarter": "2026Q3",
+      "periodEnd": "2026-09-30",
+      "fiscalYear": "2026",
+      "fiscalQuarter": "Q3",
+      "fiscalLabel": "FY2026 Q3",
+      "statementCurrency": "USD",
+      "revenueBn": 17.404,
+      "revenueYoyPct": null,
+      "costOfRevenueBn": null,
+      "grossProfitBn": null,
+      "sgnaBn": 4.087,
+      "rndBn": 2.567,
+      "otherOpexBn": 4.483,
+      "operatingExpensesBn": 11.137,
+      "operatingIncomeBn": 6.267,
+      "nonOperatingBn": null,
+      "pretaxIncomeBn": null,
+      "taxBn": 0.609,
+      "netIncomeBn": 4.218,
+      "netIncomeYoyPct": null,
+      "grossMarginPct": null,
+      "operatingMarginPct": 36.009,
+      "profitMarginPct": 24.236,
+      "effectiveTaxRatePct": null,
+      "revenueQoqPct": null,
+      "grossMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": null,
+      "profitMarginYoyDeltaPp": null,
+      "statementSource": "official-earnings-release",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000033/abbv-20260930xexhibit991.htm",
+      "statementFilingDate": "2026-10-30",
+      "statementSpanQuarters": 1,
+      "statementValueMode": "reported",
+      "officialOpexBreakdown": [
+        {
+          "name": "G&A",
+          "nameZh": "管理费用",
+          "valueBn": 4.087,
+          "valueFormat": "negative-parentheses",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000033/abbv-20260930xexhibit991.htm"
+        },
+        {
+          "name": "R&D",
+          "nameZh": "研发",
+          "valueBn": 2.567,
+          "valueFormat": "negative-parentheses",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000033/abbv-20260930xexhibit991.htm"
+        }
+      ],
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "operatingIncomeBn": "official",
+        "netIncomeBn": "official"
+      },
+      "parserFinancialValidation": {
+        "status": "high",
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000033/abbv-20260930xexhibit991.htm"
+      },
+      "automaticEarnings": {
+        "filingDate": "2026-10-30",
+        "accession": "0001551152-26-000033",
+        "form": "8-K"
+      },
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1
     }
   },
   "statementSource": "official-sec-companyfacts+field-reconciled",

@@ -8161,39 +8161,33 @@
       "fiscalQuarter": "Q3",
       "fiscalLabel": "FY2026 Q3",
       "statementCurrency": "USD",
-      "revenueBn": 0.003,
+      "revenueBn": 29.958,
       "revenueYoyPct": null,
-      "costOfRevenueBn": 0.003,
-      "grossProfitBn": 0.003,
-      "sgnaBn": 0.003,
-      "rndBn": 0.003,
+      "costOfRevenueBn": null,
+      "grossProfitBn": null,
+      "sgnaBn": 0.669,
+      "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": 0.003,
-      "operatingIncomeBn": 0.003,
-      "nonOperatingBn": 0.0,
-      "pretaxIncomeBn": 0.003,
-      "taxBn": 0.003,
-      "netIncomeBn": 0.003,
+      "operatingExpensesBn": null,
+      "operatingIncomeBn": null,
+      "nonOperatingBn": null,
+      "pretaxIncomeBn": 8.967,
+      "taxBn": 2.034,
+      "netIncomeBn": 6.933,
       "netIncomeYoyPct": null,
       "grossMarginPct": null,
       "operatingMarginPct": null,
-      "profitMarginPct": null,
-      "effectiveTaxRatePct": null,
+      "profitMarginPct": 23.142,
+      "effectiveTaxRatePct": 22.683,
       "revenueQoqPct": null,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
-      "statementSourceUrl": "https://stockanalysis.com/stocks/bac/financials/?p=quarterly",
-      "statementFilingDate": "2026-09-30",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000481/bac-09302026ex993.htm",
+      "statementFilingDate": "2026-10-14",
       "parserFinancialFieldSources": {
-        "calendarQuarter": "stockanalysis",
-        "periodEnd": "stockanalysis",
-        "fiscalYear": "stockanalysis",
-        "fiscalQuarter": "stockanalysis",
-        "fiscalLabel": "stockanalysis",
-        "statementCurrency": "stockanalysis",
-        "statementFilingDate": "stockanalysis",
-        "statementSourceUrl": "stockanalysis"
+        "revenueBn": "official",
+        "netIncomeBn": "official"
       },
       "parserFinancialCandidateCounts": {
         "revenueBn": 0,
@@ -8220,15 +8214,8 @@
         "effectiveTaxRatePct": 0
       },
       "parserFinancialValidation": {
-        "version": "financial-validation-v1",
-        "status": "low",
-        "confidenceScore": 0.225,
-        "completenessScore": 0.0,
-        "consistencyScore": 0.5,
-        "checksRun": 0,
-        "checksPassed": 0,
-        "issueCount": 0,
-        "issues": []
+        "status": "high",
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000481/bac-09302026ex993.htm"
       },
       "displayCurrency": "USD",
       "displayScaleFactor": 1,
@@ -8240,6 +8227,27 @@
         "qualityFlags": [],
         "adapterId": "generic_filing_tables"
       },
+      "opexBreakdown": [
+        {
+          "taxonomyId": "sales_marketing",
+          "name": "Sales & Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesmarketing",
+          "valueBn": 0.669,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000548/bac-20260930.htm",
+          "sourceForm": null,
+          "filingDate": null,
+          "metricMode": null,
+          "supportLines": null,
+          "supportLinesZh": null,
+          "provenance": {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 90.0,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000548/bac-20260930.htm"
+          }
+        }
+      ],
       "fieldSources": {
         "revenueBn": {
           "adapterId": "generic_filing_tables",
@@ -8247,46 +8255,10 @@
           "score": 89.0,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000548/bac-20260930.htm"
         },
-        "costOfRevenueBn": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 87.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000548/bac-20260930.htm"
-        },
-        "grossProfitBn": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 87.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000548/bac-20260930.htm"
-        },
         "sgnaBn": {
           "adapterId": "generic_filing_tables",
           "label": "Generic official filing table parser",
           "score": 85.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000548/bac-20260930.htm"
-        },
-        "rndBn": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 85.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000548/bac-20260930.htm"
-        },
-        "operatingExpensesBn": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 87.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000548/bac-20260930.htm"
-        },
-        "operatingIncomeBn": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 87.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000548/bac-20260930.htm"
-        },
-        "nonOperatingBn": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 83.0,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000548/bac-20260930.htm"
         },
         "pretaxIncomeBn": {
@@ -8307,24 +8279,32 @@
           "score": 87.0,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000548/bac-20260930.htm"
         },
+        "opexBreakdown": [
+          {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 90.0,
+            "itemCount": 1
+          }
+        ],
         "statementMeta": {
           "adapterId": "generic_filing_tables",
           "label": "Generic official filing table parser",
-          "score": 12.3,
+          "score": 6.5,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000548/bac-20260930.htm"
         }
       },
       "extractionDiagnostics": {
-        "qualityScore": 60,
-        "availableRequiredFieldCount": 3,
+        "qualityScore": 72,
+        "availableRequiredFieldCount": 2,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 12,
+        "sourceFieldCount": 7,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "none",
+        "opexBreakdownMode": "explicit",
         "revenueSegmentCoveragePct": 0,
-        "costBreakdownCoveragePct": 0,
-        "opexBreakdownCoveragePct": 0,
+        "costBreakdownCoveragePct": null,
+        "opexBreakdownCoveragePct": null,
         "revenueSegmentResidualBn": null,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
@@ -8333,10 +8313,33 @@
         "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
-          "revenue-segment-coverage-low",
-          "cost-breakdown-coverage-low",
-          "opex-breakdown-coverage-low"
+          "missing-required:operatingIncomeBn",
+          "revenue-segment-coverage-low"
         ]
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2026Q2",
+        "fields": [
+          "opexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "statementSource": "official-earnings-release",
+      "statementSpanQuarters": 1,
+      "statementValueMode": "reported",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales & Marketing",
+          "nameZh": "销售与营销",
+          "valueBn": 0.669,
+          "valueFormat": "negative-parentheses",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000481/bac-09302026ex993.htm"
+        }
+      ],
+      "automaticEarnings": {
+        "filingDate": "2026-10-14",
+        "accession": "0000070858-26-000481",
+        "form": "8-K"
       }
     }
   },

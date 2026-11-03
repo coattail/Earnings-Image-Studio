@@ -62,3 +62,9 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+
+      - uses: actions/checkout@v5
+      - name: Verify actual public earnings data
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: python scripts/verify_earnings_deployment.py --url "${PAGE_URL%/}/data/earnings-dataset.json"

@@ -8729,39 +8729,34 @@
       "fiscalQuarter": "Q1",
       "fiscalLabel": "FY2027 Q1",
       "statementCurrency": "USD",
-      "revenueBn": -0.0,
+      "revenueBn": 23.276,
       "revenueYoyPct": null,
-      "costOfRevenueBn": 0.0,
-      "grossProfitBn": -0.0,
-      "sgnaBn": 0.0,
+      "costOfRevenueBn": 11.678,
+      "grossProfitBn": 11.598,
+      "sgnaBn": 5.661,
       "rndBn": 0.0,
       "otherOpexBn": null,
-      "operatingExpensesBn": 0.0,
-      "operatingIncomeBn": -0.0,
+      "operatingExpensesBn": 5.661,
+      "operatingIncomeBn": 5.937,
       "nonOperatingBn": 0.0,
       "pretaxIncomeBn": -0.0,
       "taxBn": 0.0,
-      "netIncomeBn": -0.0,
+      "netIncomeBn": 4.731,
       "netIncomeYoyPct": null,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": null,
+      "grossMarginPct": 49.828,
+      "operatingMarginPct": 25.507,
+      "profitMarginPct": 20.326,
       "effectiveTaxRatePct": null,
       "revenueQoqPct": null,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
-      "statementSourceUrl": "https://stockanalysis.com/stocks/pg/financials/?p=quarterly",
-      "statementFilingDate": "2026-09-30",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/80424/000008042426000250/fy2627q1jas8-kexhibit991.htm",
+      "statementFilingDate": "2026-10-22",
       "parserFinancialFieldSources": {
-        "calendarQuarter": "stockanalysis",
-        "periodEnd": "stockanalysis",
-        "fiscalYear": "stockanalysis",
-        "fiscalQuarter": "stockanalysis",
-        "fiscalLabel": "stockanalysis",
-        "statementCurrency": "stockanalysis",
-        "statementFilingDate": "stockanalysis",
-        "statementSourceUrl": "stockanalysis"
+        "revenueBn": "official",
+        "operatingIncomeBn": "official",
+        "netIncomeBn": "official"
       },
       "parserFinancialCandidateCounts": {
         "revenueBn": 0,
@@ -8788,15 +8783,8 @@
         "effectiveTaxRatePct": 0
       },
       "parserFinancialValidation": {
-        "version": "financial-validation-v1",
-        "status": "low",
-        "confidenceScore": 0.225,
-        "completenessScore": 0.0,
-        "consistencyScore": 0.5,
-        "checksRun": 0,
-        "checksPassed": 0,
-        "issueCount": 0,
-        "issues": []
+        "status": "high",
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/80424/000008042426000250/fy2627q1jas8-kexhibit991.htm"
       },
       "displayCurrency": "USD",
       "displayScaleFactor": 1,
@@ -8901,6 +8889,23 @@
         "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": []
+      },
+      "statementSource": "official-earnings-release",
+      "statementSpanQuarters": 1,
+      "statementValueMode": "reported",
+      "officialOpexBreakdown": [
+        {
+          "name": "G&A",
+          "nameZh": "管理费用",
+          "valueBn": 5.661,
+          "valueFormat": "negative-parentheses",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/80424/000008042426000250/fy2627q1jas8-kexhibit991.htm"
+        }
+      ],
+      "automaticEarnings": {
+        "filingDate": "2026-10-22",
+        "accession": "0000080424-26-000250",
+        "form": "8-K"
       }
     }
   },

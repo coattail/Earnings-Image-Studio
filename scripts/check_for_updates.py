@@ -225,8 +225,9 @@ def latest_remote_official_revenue_structure(company: dict[str, Any]) -> dict[st
     }
 
 
-def detect_company_update(company: dict[str, Any]) -> dict[str, Any]:
-    payload = load_local_company_payload(str(company["id"]))
+def detect_company_update(company: dict[str, Any], payload: dict[str, Any] | None = None) -> dict[str, Any]:
+    if payload is None:
+        payload = load_local_company_payload(str(company["id"]))
     if payload is None:
         return {
             "companyId": company["id"],

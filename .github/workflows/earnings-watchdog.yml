@@ -1,0 +1,26 @@
+name: Earnings Scheduler Watchdog
+on:
+  schedule:
+    - cron: "13,43 * * * *"
+  workflow_dispatch:
+  workflow_run:
+    workflows: [Update Earnings Data, Deploy Preview Site]
+    types: [completed]
+    branches: [main]
+permissions:
+  contents: read
+  actions: write
+concurrency:
+  group: earnings-scheduler-watchdog
+  cancel-in-progress: false
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - name: Recover a missed earnings poll
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET_WORKFLOW: update-data.yml
+        run: python scripts/check_earnings_scheduler.py

@@ -667,9 +667,15 @@ def build_incremental_company_payload_for_dataset(
     manual_company_overrides: dict[str, Any],
     fx_cache: dict[str, float],
 ) -> dict[str, Any]:
+    from earnings_release import supplement_cached_release
+    cached = load_existing_dataset_companies_by_id().get(str(company["id"])) or load_cached_company_payload(str(company["id"]))
+    if isinstance(cached, dict) and company.get("id") != "palantir":
+        supplemented = supplement_cached_release(deepcopy(cached))
+        if supplemented != cached:
+            return apply_usd_display_fields(supplemented, fx_cache)
     if company.get("id") == "palantir":
         from palantir_ir import supplement
-        cached = load_cached_company_payload("palantir")
+        cached = cached or load_cached_company_payload("palantir")
         if not isinstance(cached, dict):
             raise ValueError("Missing Palantir historical cache")
         return supplement(deepcopy(cached))
@@ -678,16 +684,44 @@ def build_incremental_company_payload_for_dataset(
     # official statements and segment/revenue enrichment. Full SEC companyfacts
     # and filing-history refreshes remain available through manual --refresh;
     # large issuers can otherwise consume the entire scheduled-job budget.
+    primary = None
     if company.get("id") == "asml":
         fetch_official_financial_history(company, refresh=True)
     else:
-        fetch_stockanalysis_financial_history(company, refresh=True)
-    return build_company_payload_for_dataset(
+        primary = fetch_stockanalysis_financial_history(company, refresh=True)
+    if isinstance(cached, dict) and primary:
+        from earnings_release import CACHE as release_cache, VERSION as release_version, complete_quarter
+        quick = deepcopy(cached)
+        latest_cached = max(quick.get("financials", {}), default="")
+        for quarter, entry in primary.get("financials", {}).items():
+            if quarter > latest_cached and complete_quarter(entry, str(company["id"])):
+                quick.setdefault("financials", {})[quarter] = deepcopy(entry)
+        marker_path = release_cache / f"{company['id']}.json"
+        if marker_path.exists():
+            marker = json.loads(marker_path.read_text())
+            quarter = marker.get("quarter")
+            current = quick.get("financials", {}).get(quarter, {})
+            if marker.get("_cacheVersion") == release_version and complete_quarter(current, str(company["id"])):
+                current["automaticEarnings"] = {k: marker.get(k) for k in ("filingDate", "accession", "form")}
+                current["statementFilingDate"] = max(current.get("statementFilingDate") or "", marker["filingDate"])
+        if quick != cached:
+            quick["quarters"] = sorted(quick["financials"])
+            return apply_usd_display_fields(quick, fx_cache)
+    payload = build_company_payload_for_dataset(
         company,
         refresh=False,
         manual_company_overrides=manual_company_overrides,
         fx_cache=fx_cache,
     )
+    # A cached official 10-Q must not suppress a newly available normalized
+    # quarter. Preserve its explicit source until the official filing catches up.
+    from earnings_release import complete_quarter
+    latest = max(payload.get("financials", {}), default="")
+    for quarter, entry in (primary or {}).get("financials", {}).items():
+        if quarter > latest and complete_quarter(entry, str(company["id"])):
+            payload.setdefault("financials", {})[quarter] = deepcopy(entry)
+    payload["quarters"] = sorted(payload.get("financials", {}))
+    return apply_usd_display_fields(payload, fx_cache)
 
 
 def normalize_segment_label_key(value: Any) -> str:
@@ -2729,6 +2763,16 @@ def finalize_company_payload(
     apply_micron_official_business_unit_restatements(payload)
     sync_revenue_structure_history_into_financial_entries(payload, company)
     preserve_previous_quarter_sankey_structure(payload)
+    # Source discovery can create a future structure-only placeholder. It must
+    # not become the latest financial quarter before any actuals are available.
+    actual_quarters = [q for q, e in payload.get("financials", {}).items()
+                       if isinstance(e, dict) and any(e.get(k) is not None for k in ("revenueBn", "operatingIncomeBn", "netIncomeBn"))]
+    if actual_quarters:
+        latest_actual = max(actual_quarters, key=parse_period)
+        for q in list(payload["financials"]):
+            if parse_period(q) > parse_period(latest_actual):
+                del payload["financials"][q]
+        payload["quarters"] = sorted(payload["financials"], key=parse_period)
     segment_quarter_count = sum(1 for item in payload["financials"].values() if item.get("officialRevenueSegments"))
     expense_quarter_count = sum(1 for item in payload["financials"].values() if item.get("officialOpexBreakdown") or item.get("opexBreakdown"))
     classification_coverage = build_company_classification_coverage(company, payload)
@@ -4143,6 +4187,10 @@ def main() -> int:
         for company in TOP30_COMPANIES:
             if company["id"] in results_by_company_id:
                 continue
+            existing_payload = existing_companies_by_id.get(str(company["id"]))
+            if isinstance(existing_payload, dict):
+                results_by_company_id[company["id"]] = deepcopy(existing_payload)
+                continue
             cached_payload = load_cached_company_payload(company["id"])
             if (
                 getattr(args, "cache_supplement_only", False)
@@ -4204,6 +4252,8 @@ def main() -> int:
     for company in TOP30_COMPANIES:
         if company["id"] not in results_by_company_id:
             continue
+        if selected_tokens and not company_matches_selection(company, selected_tokens):
+            continue  # A selected refresh must preserve every sibling verbatim.
         presets = manual_presets.get(str(company["id"])) or {}
         payload = sync_company_metadata(results_by_company_id[company["id"]], company)
         payload = apply_korean_revenue_history(payload, company)
