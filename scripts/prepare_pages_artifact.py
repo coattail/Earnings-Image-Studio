@@ -152,16 +152,20 @@ def write_nojekyll_marker() -> None:
 
 def validate_public_revenue_growth() -> None:
     try:
-        from scripts.release_chart_quality import assert_chart_publication
+        from scripts.release_chart_quality import assert_chart_publication, chart_fingerprint
     except ModuleNotFoundError:
-        from release_chart_quality import assert_chart_publication
+        from release_chart_quality import assert_chart_publication, chart_fingerprint
     dataset = json.loads((DATA_DIR / "earnings-dataset.json").read_text(encoding="utf-8"))
     for company in dataset.get("companies") or []:
         assert_chart_publication(company)
         assert_revenue_growth_complete(company)
         cache_path = DATA_DIR / "cache" / f"{company['id']}.json"
         if cache_path.exists():
-            assert_revenue_growth_complete(json.loads(cache_path.read_text(encoding="utf-8")))
+            cached = json.loads(cache_path.read_text(encoding="utf-8"))
+            assert_chart_publication(cached)
+            assert_revenue_growth_complete(cached)
+            if chart_fingerprint(cached) != chart_fingerprint(company):
+                raise ValueError(f"{company['id']}: public company cache differs from canonical chart data")
 
 
 def main() -> int:

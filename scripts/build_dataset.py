@@ -2801,10 +2801,8 @@ def finalize_company_payload(
     apply_company_rendering_preferences(company, payload)
     recompute_revenue_growth_metrics(payload["financials"], missing_only=True)
     complete_company_revenue_growth(payload)
-    from release_chart_quality import chart_issues
-    issues = chart_issues(payload)
-    if payload.get('financials'):
-        payload['financials'][max(payload['financials'])]['chartQuality'] = {'status': 'pending' if issues else 'ready', 'issues': issues}
+    from release_chart_quality import stamp_chart_quality
+    stamp_chart_quality(payload)
     payload["coverage"] = {
         "quarterCount": len(payload["quarters"]),
         "pixelReplicaQuarterCount": len(presets),

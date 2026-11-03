@@ -1797,7 +1797,37 @@
         ],
         "rule": "same-normalized-category-set"
       },
-      "accountingStandard": "US GAAP"
+      "accountingStandard": "US GAAP",
+      "chartQuality": {
+        "version": 3,
+        "quarter": "2026Q3",
+        "status": "ready",
+        "issues": [],
+        "requiredDetailParents": [
+          "connectivity",
+          "si",
+          "space"
+        ],
+        "requiredSegmentKeys": [
+          "connectivity",
+          "intelligence",
+          "space"
+        ],
+        "requiredDetailMembers": {
+          "si": [
+            "advertising",
+            "sisolutionsinfrastructure"
+          ],
+          "space": [
+            "launchdevelopment",
+            "launchservices"
+          ],
+          "connectivity": [
+            "consumer",
+            "enterprisegovernment"
+          ]
+        }
+      }
     },
     "2025Q4": {
       "revenueBn": 4.96,

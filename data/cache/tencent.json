@@ -16384,7 +16384,29 @@
       "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
       "officialRevenueTaxonomyChangedFromPriorYear": false,
       "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
-      "officialRevenueDetailTaxonomyChangedFromPriorYear": false
+      "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
+      "chartQuality": {
+        "version": 3,
+        "quarter": "2026Q2",
+        "status": "ready",
+        "issues": [],
+        "requiredDetailParents": [
+          "valueaddedservices"
+        ],
+        "requiredSegmentKeys": [
+          "fintechbusinessservices",
+          "marketingservices",
+          "others",
+          "valueaddedservices"
+        ],
+        "requiredDetailMembers": {
+          "valueaddedservices": [
+            "domesticgames",
+            "internationalgames",
+            "socialnetworks"
+          ]
+        }
+      }
     }
   },
   "statementSource": "tencent-ir-pdf+field-reconciled",

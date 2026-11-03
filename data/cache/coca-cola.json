@@ -7840,6 +7840,20 @@
           "cost-breakdown-coverage-low",
           "opex-breakdown-coverage-low"
         ]
+      },
+      "chartQuality": {
+        "version": 3,
+        "quarter": "2026Q4",
+        "status": "pending",
+        "issues": [
+          "revenue classifications do not reconcile to total revenue"
+        ],
+        "requiredDetailParents": [],
+        "requiredSegmentKeys": [
+          "concentrateoperations",
+          "finishedproductoperations"
+        ],
+        "requiredDetailMembers": {}
       }
     }
   },
@@ -14632,7 +14646,7 @@
     "officialSegmentQuarterCount": 30,
     "officialExpenseQuarterCount": 0,
     "classification": {
-      "status": "ok",
+      "status": "error",
       "latestQuarter": "2026Q4",
       "latestQuarterHasRevenueClassification": true,
       "latestQuarterHasExpenseClassification": false,
@@ -14646,7 +14660,9 @@
       "latestRevenueClassificationLagQuarters": 0,
       "latestExpenseClassificationLagQuarters": null,
       "warnings": [],
-      "blockers": [],
+      "blockers": [
+        "revenue classifications do not reconcile to total revenue"
+      ],
       "policy": {}
     },
     "parser": {

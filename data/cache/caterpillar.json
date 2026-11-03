@@ -5661,10 +5661,19 @@
       "displayCurrency": "USD",
       "displayScaleFactor": 1,
       "chartQuality": {
+        "version": 3,
+        "quarter": "2026Q3",
         "status": "pending",
         "issues": [
-          "missing current-quarter revenue classification"
-        ]
+          "missing current-quarter revenue classification",
+          "missing previously disclosed revenue categories: financialproducts,machinerypowerenergy"
+        ],
+        "requiredDetailParents": [],
+        "requiredSegmentKeys": [
+          "financialproducts",
+          "machinerypowerenergy"
+        ],
+        "requiredDetailMembers": {}
       }
     }
   },
@@ -7662,7 +7671,8 @@
       "latestExpenseClassificationLagQuarters": 0,
       "warnings": [],
       "blockers": [
-        "missing current-quarter revenue classification"
+        "missing current-quarter revenue classification",
+        "missing previously disclosed revenue categories: financialproducts,machinerypowerenergy"
       ],
       "policy": {}
     },

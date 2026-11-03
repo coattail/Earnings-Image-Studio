@@ -343,7 +343,7 @@ test("NVDA profit spine stays shallow while its gain bridge remains attached", (
   assert.ok(sgAndA.y - (rAndD.y + rAndD.height) >= 120, "R&D and SG&A branches should remain fanned out");
 });
 
-test("Alibaba latest-only payload suppresses cross-taxonomy QoQ metrics and explains the reporting break", () => {
+test("Alibaba latest-only suppresses cross-taxonomy growth and blocks an unreconciled chart", () => {
   const context = loadRuntime();
   const result = vm.runInContext(
     `(() => {
@@ -354,12 +354,15 @@ test("Alibaba latest-only payload suppresses cross-taxonomy QoQ metrics and expl
       const snapshot = buildSnapshot(company, "2026Q2");
       snapshot.companyNameZh = company.nameZh;
       snapshot.companyNameEn = company.nameEn;
-      const svg = EarningsVizRuntime.render.renderIncomeStatementSvg(snapshot, company);
+      let svg='',blocked=false;
+      try {svg=EarningsVizRuntime.render.renderIncomeStatementSvg(snapshot, company);}
+      catch(error) {blocked=/营收分类|classification/i.test(error.message);}
       return {
         businessQoq: snapshot.businessGroups.map((item) => item.qoqPct),
         detailQoq: snapshot.leftDetailGroups.map((item) => item.qoqPct),
         footnote: snapshot.footnote,
         svg,
+        blocked,
       };
     })()`,
     context
@@ -368,6 +371,7 @@ test("Alibaba latest-only payload suppresses cross-taxonomy QoQ metrics and expl
   assert.ok(result.businessQoq.every((value) => value === null));
   assert.ok(result.detailQoq.every((value) => value === null));
   assert.match(result.footnote, /本季度官方调整了分部报告口径/);
+  assert.equal(result.blocked,true);
   assert.doesNotMatch(result.svg, /环比[+-]0\.0%|环比-56\.0%/);
 });
 
@@ -414,7 +418,7 @@ test("Alibaba Sankey taxonomy changes exactly when the official segment structur
   assert.deepEqual([...result.mismatches], []);
 });
 
-test("Chinese and English share every financial stage across all companies and loss bridges", () => {
+test("publishable companies share geometry and pending charts are rejected in both languages", () => {
   const context = loadRuntime();
   context.__dataset = JSON.parse(fs.readFileSync(path.join(ROOT, "data/earnings-dataset.json"), "utf8"));
   context.__learned = JSON.parse(fs.readFileSync(path.join(ROOT, "data/learned-sankey-layouts.json"), "utf8"));
@@ -434,6 +438,11 @@ test("Chinese and English share every financial stage across all companies and l
         snapshot.companyNameZh = company.nameZh; snapshot.companyNameEn = company.nameEn;
         snapshot.learnedEditorNodeOverrides = learnedSankeyLayoutOverridesForSession();
         snapshot.editorNodeOverrides = snapshot.learnedEditorNodeOverrides;
+        if(company.financials[quarter]?.chartQuality?.status==='pending') {
+          try { EarningsVizRuntime.render.renderIncomeStatementSvg(snapshot,company); }
+          catch(error) { return {blocked:true,restoredLanguage:state.uiLanguage}; }
+          throw Error('Pending chart was rendered: '+company.id);
+        }
         const svg = EarningsVizRuntime.render.renderIncomeStatementSvg(snapshot,company);
         return {svg, restoredLanguage:state.uiLanguage};
       });
@@ -444,6 +453,7 @@ test("Chinese and English share every financial stage across all companies and l
   for (const {id, quarter, variants: [zh, en]} of results) {
     assert.equal(zh.restoredLanguage, "zh");
     assert.equal(en.restoredLanguage, "en");
+    if(zh.blocked||en.blocked) {assert.equal(zh.blocked,true);assert.equal(en.blocked,true);continue;}
     assert.deepEqual(viewBox(zh.svg), viewBox(en.svg), `${id}/${quarter}: monetary scale and canvas`);
     for (const nodeId of core) {
       const marker = `data-edit-node-visible-id="${nodeId}"`;

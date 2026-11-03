@@ -339,8 +339,25 @@
             "rule": "same-normalized-category-set"
           },
           "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
             "status": "ready",
-            "issues": []
+            "issues": [],
+            "requiredDetailParents": [
+              "products"
+            ],
+            "requiredSegmentKeys": [
+              "products",
+              "services"
+            ],
+            "requiredDetailMembers": {
+              "products": [
+                "ipad",
+                "iphone",
+                "mac",
+                "wearables"
+              ]
+            }
           }
         }
       },
@@ -730,7 +747,26 @@
             ],
             "rule": "same-normalized-category-set"
           },
-          "officialRevenueStyle": "nvidia-fy2027-market-platform"
+          "officialRevenueStyle": "nvidia-fy2027-market-platform",
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
+            "status": "ready",
+            "issues": [],
+            "requiredDetailParents": [
+              "datacenter"
+            ],
+            "requiredSegmentKeys": [
+              "datacenter",
+              "edgecomputing"
+            ],
+            "requiredDetailMembers": {
+              "datacenter": [
+                "aicloudsindustrialenterprise",
+                "hyperscale"
+              ]
+            }
+          }
         }
       },
       "statementPresets": {},
@@ -1586,7 +1622,35 @@
           "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
           "officialRevenueTaxonomyChangedFromPriorYear": true,
           "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueDetailTaxonomyChangedFromPriorYear": false
+          "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
+            "status": "ready",
+            "issues": [],
+            "requiredDetailParents": [
+              "agentsinfra",
+              "devicesconsumer"
+            ],
+            "requiredSegmentKeys": [
+              "agentsinfra",
+              "devicesconsumer"
+            ],
+            "requiredDetailMembers": {
+              "devicesconsumer": [
+                "searchadvertising",
+                "windowsoemdevices",
+                "xbox"
+              ],
+              "agentsinfra": [
+                "azure",
+                "frontiersupportservices",
+                "industrysolutions",
+                "microsoft365cloud",
+                "productivityserverlicensing"
+              ]
+            }
+          }
         }
       },
       "statementPresets": {},
@@ -2596,7 +2660,29 @@
           "officialRevenueTaxonomyChangedFromPriorYear": false,
           "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
           "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
-          "sankeyPreserveOfficialLabels": true
+          "sankeyPreserveOfficialLabels": true,
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
+            "status": "ready",
+            "issues": [],
+            "requiredDetailParents": [
+              "adrevenue"
+            ],
+            "requiredSegmentKeys": [
+              "adrevenue",
+              "googlecloud",
+              "googleplay",
+              "otherrevenue"
+            ],
+            "requiredDetailMembers": {
+              "adrevenue": [
+                "admob",
+                "searchadvertising",
+                "youtube"
+              ]
+            }
+          }
         }
       },
       "statementPresets": {},
@@ -3410,6 +3496,23 @@
               "officialOpexBreakdown"
             ],
             "rule": "same-normalized-category-set"
+          },
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
+            "status": "ready",
+            "issues": [],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "advertisingservices",
+              "amazonwebservices",
+              "onlinestores",
+              "otherservices",
+              "physicalstores",
+              "subscriptionservices",
+              "thirdpartysellerservices"
+            ],
+            "requiredDetailMembers": {}
           }
         }
       },
@@ -4209,6 +4312,22 @@
             "issues": [
               "cost-breakdown-coverage-low"
             ]
+          },
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
+            "status": "ready",
+            "issues": [],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "automotive",
+              "dce",
+              "hpc",
+              "iot",
+              "others",
+              "smartphones"
+            ],
+            "requiredDetailMembers": {}
           }
         }
       },
@@ -4848,7 +4967,37 @@
             ],
             "rule": "same-normalized-category-set"
           },
-          "accountingStandard": "US GAAP"
+          "accountingStandard": "US GAAP",
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
+            "status": "ready",
+            "issues": [],
+            "requiredDetailParents": [
+              "connectivity",
+              "si",
+              "space"
+            ],
+            "requiredSegmentKeys": [
+              "connectivity",
+              "intelligence",
+              "space"
+            ],
+            "requiredDetailMembers": {
+              "si": [
+                "advertising",
+                "sisolutionsinfrastructure"
+              ],
+              "space": [
+                "launchdevelopment",
+                "launchservices"
+              ],
+              "connectivity": [
+                "consumer",
+                "enterprisegovernment"
+              ]
+            }
+          }
         }
       },
       "statementPresets": {},
@@ -5403,6 +5552,27 @@
               "officialOpexBreakdown"
             ],
             "rule": "same-normalized-category-set"
+          },
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
+            "status": "ready",
+            "issues": [],
+            "requiredDetailParents": [
+              "auto"
+            ],
+            "requiredSegmentKeys": [
+              "auto",
+              "energygenerationstorage",
+              "services"
+            ],
+            "requiredDetailMembers": {
+              "auto": [
+                "autosales",
+                "leasing",
+                "regulatorycredits"
+              ]
+            }
           }
         }
       },
@@ -5991,6 +6161,25 @@
               "officialRevenueDetailGroups"
             ],
             "rule": "same-normalized-category-set"
+          },
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
+            "status": "ready",
+            "issues": [],
+            "requiredDetailParents": [
+              "familyofapps"
+            ],
+            "requiredSegmentKeys": [
+              "familyofapps",
+              "realitylabs"
+            ],
+            "requiredDetailMembers": {
+              "familyofapps": [
+                "advertising",
+                "other"
+              ]
+            }
           }
         }
       },
@@ -6301,6 +6490,18 @@
               "officialOpexBreakdown"
             ],
             "rule": "same-normalized-category-set"
+          },
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
+            "status": "ready",
+            "issues": [],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "infrastructuresoftware",
+              "semiconductorsolutions"
+            ],
+            "requiredDetailMembers": {}
           }
         }
       },
@@ -6722,7 +6923,8 @@
           "latestExpenseClassificationLagQuarters": 0,
           "warnings": [],
           "blockers": [
-            "missing current-quarter revenue classification"
+            "missing current-quarter revenue classification",
+            "missing previously disclosed revenue categories: cardiometabolichealth,immunology,neuroscience,oncology,productserviceother"
           ],
           "policy": {}
         },
@@ -6856,10 +7058,22 @@
           "displayCurrency": "USD",
           "displayScaleFactor": 1,
           "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
             "status": "pending",
             "issues": [
-              "missing current-quarter revenue classification"
-            ]
+              "missing current-quarter revenue classification",
+              "missing previously disclosed revenue categories: cardiometabolichealth,immunology,neuroscience,oncology,productserviceother"
+            ],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "cardiometabolichealth",
+              "immunology",
+              "neuroscience",
+              "oncology",
+              "productserviceother"
+            ],
+            "requiredDetailMembers": {}
           }
         }
       },
@@ -6929,7 +7143,7 @@
         "officialSegmentQuarterCount": 34,
         "officialExpenseQuarterCount": 0,
         "classification": {
-          "status": "ok",
+          "status": "error",
           "latestQuarter": "2026Q2",
           "latestQuarterHasRevenueClassification": true,
           "latestQuarterHasExpenseClassification": false,
@@ -6943,7 +7157,9 @@
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
-          "blockers": [],
+          "blockers": [
+            "revenue classifications do not reconcile to total revenue"
+          ],
           "policy": {}
         },
         "parser": {
@@ -7256,7 +7472,26 @@
           "derivedStatementFields": [],
           "statementValueMode": "direct",
           "statementSpanQuarters": 1,
-          "statementPeriodStart": "2026-04-01"
+          "statementPeriodStart": "2026-04-01",
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q2",
+            "status": "pending",
+            "issues": [
+              "revenue classifications do not reconcile to total revenue"
+            ],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "berkshirehathawayenergycompany",
+              "burlingtonnorthernsantafecorporation",
+              "insurancecorporateother",
+              "manufacturingbusinesses",
+              "mclanecompany",
+              "pilottravelcentersllc",
+              "serviceretailbusinesses"
+            ],
+            "requiredDetailMembers": {}
+          }
         }
       },
       "statementPresets": {},
@@ -7756,7 +7991,8 @@
           "warnings": [],
           "blockers": [
             "Missing latest-quarter revenue classification for 2026Q3. Add an official parser/manual override or declare an explicit exception.",
-            "missing current-quarter revenue classification"
+            "missing current-quarter revenue classification",
+            "missing previously disclosed revenue categories: ce,dp,ds,harman,im"
           ],
           "policy": {
             "maxBarQuarters": 36
@@ -7902,10 +8138,22 @@
             "form": "official-ir-release"
           },
           "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
             "status": "pending",
             "issues": [
-              "missing current-quarter revenue classification"
-            ]
+              "missing current-quarter revenue classification",
+              "missing previously disclosed revenue categories: ce,dp,ds,harman,im"
+            ],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "ce",
+              "dp",
+              "ds",
+              "harman",
+              "im"
+            ],
+            "requiredDetailMembers": {}
           }
         }
       },
@@ -8301,6 +8549,20 @@
               "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
+          },
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
+            "status": "ready",
+            "issues": [],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "aebu",
+              "cdbu",
+              "cmbu",
+              "mcbu"
+            ],
+            "requiredDetailMembers": {}
           }
         }
       },
@@ -8485,7 +8747,8 @@
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
           "blockers": [
-            "missing current-quarter revenue classification"
+            "missing current-quarter revenue classification",
+            "missing previously disclosed revenue categories: samsclubus,walmartinternational,walmartus"
           ],
           "policy": {}
         },
@@ -8682,10 +8945,20 @@
             ]
           },
           "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
             "status": "pending",
             "issues": [
-              "missing current-quarter revenue classification"
-            ]
+              "missing current-quarter revenue classification",
+              "missing previously disclosed revenue categories: samsclubus,walmartinternational,walmartus"
+            ],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "samsclubus",
+              "walmartinternational",
+              "walmartus"
+            ],
+            "requiredDetailMembers": {}
           }
         }
       },
@@ -8771,7 +9044,8 @@
           "latestExpenseClassificationLagQuarters": 0,
           "warnings": [],
           "blockers": [
-            "missing current-quarter revenue classification"
+            "missing current-quarter revenue classification",
+            "missing previously disclosed revenue categories: assetwealthmanagement,commercialinvestmentbank,consumercommunitybanking"
           ],
           "policy": {}
         },
@@ -8892,10 +9166,20 @@
           "displayCurrency": "USD",
           "displayScaleFactor": 1,
           "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
             "status": "pending",
             "issues": [
-              "missing current-quarter revenue classification"
-            ]
+              "missing current-quarter revenue classification",
+              "missing previously disclosed revenue categories: assetwealthmanagement,commercialinvestmentbank,consumercommunitybanking"
+            ],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "assetwealthmanagement",
+              "commercialinvestmentbank",
+              "consumercommunitybanking"
+            ],
+            "requiredDetailMembers": {}
           }
         }
       },
@@ -9188,7 +9472,21 @@
             "rule": "same-normalized-category-set"
           },
           "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueTaxonomyChangedFromPriorYear": false
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q2",
+            "status": "ready",
+            "issues": [],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "client",
+              "datacenter",
+              "embedded",
+              "gaming"
+            ],
+            "requiredDetailMembers": {}
+          }
         }
       },
       "statementPresets": {},
@@ -9846,6 +10144,20 @@
               "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
+          },
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
+            "status": "ready",
+            "issues": [],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "dataprocessingrevenues",
+              "internationaltransactionrevenues",
+              "otherrevenues",
+              "servicerevenues"
+            ],
+            "requiredDetailMembers": {}
           }
         }
       },
@@ -10289,7 +10601,21 @@
           "derivedStatementFields": [],
           "statementValueMode": "direct",
           "statementSpanQuarters": 1,
-          "statementPeriodStart": "2026-04-01"
+          "statementPeriodStart": "2026-04-01",
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q2",
+            "status": "ready",
+            "issues": [],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "chemicalproducts",
+              "energyproducts",
+              "specialtyproducts",
+              "upstream"
+            ],
+            "requiredDetailMembers": {}
+          }
         }
       },
       "statementPresets": {},
@@ -10881,6 +11207,19 @@
               "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
+          },
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
+            "status": "ready",
+            "issues": [],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "dram",
+              "n",
+              "otherproductsservices"
+            ],
+            "requiredDetailMembers": {}
           }
         }
       },
@@ -10971,7 +11310,8 @@
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
           "blockers": [
-            "missing current-quarter revenue classification"
+            "missing current-quarter revenue classification",
+            "missing previously disclosed revenue categories: innovativemedicine,medtech"
           ],
           "policy": {}
         },
@@ -11079,10 +11419,19 @@
           "displayCurrency": "USD",
           "displayScaleFactor": 1,
           "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
             "status": "pending",
             "issues": [
-              "missing current-quarter revenue classification"
-            ]
+              "missing current-quarter revenue classification",
+              "missing previously disclosed revenue categories: innovativemedicine,medtech"
+            ],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "innovativemedicine",
+              "medtech"
+            ],
+            "requiredDetailMembers": {}
           }
         }
       },
@@ -11537,7 +11886,30 @@
           "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
           "equityInvestmentGainBn": 0.5097,
           "interestAndOtherBn": 0.0682,
-          "sankeyLayout": null
+          "sankeyLayout": null,
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
+            "status": "ready",
+            "issues": [],
+            "requiredDetailParents": [
+              "netsystemsales"
+            ],
+            "requiredSegmentKeys": [
+              "installedbasemanagement",
+              "netsystemsales"
+            ],
+            "requiredDetailMembers": {
+              "netsystemsales": [
+                "arfdry",
+                "arfi",
+                "euv",
+                "iline",
+                "krf",
+                "metrologyinspection"
+              ]
+            }
+          }
         }
       },
       "statementPresets": {},
@@ -11780,16 +12152,16 @@
           "status": "ok",
           "latestQuarter": "2026Q3",
           "latestQuarterHasRevenueClassification": true,
-          "latestQuarterHasExpenseClassification": false,
+          "latestQuarterHasExpenseClassification": true,
           "latestRevenueClassificationQuarter": "2026Q3",
-          "latestExpenseClassificationQuarter": null,
+          "latestExpenseClassificationQuarter": "2026Q3",
           "latestStructureHistoryQuarter": "2026Q2",
           "revenueClassificationQuarterCount": 31,
-          "expenseClassificationQuarterCount": 0,
+          "expenseClassificationQuarterCount": 1,
           "revenueClassificationCoverageRatio": 0.8857,
-          "expenseClassificationCoverageRatio": 0.0,
+          "expenseClassificationCoverageRatio": 0.0286,
           "latestRevenueClassificationLagQuarters": 0,
-          "latestExpenseClassificationLagQuarters": null,
+          "latestExpenseClassificationLagQuarters": 0,
           "warnings": [],
           "blockers": [],
           "policy": {}
@@ -12055,6 +12427,17 @@
             "filingDate": "2026-10-29",
             "accession": "0001141391-26-000122",
             "form": "8-K"
+          },
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
+            "status": "ready",
+            "issues": [],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "paymentsolutions"
+            ],
+            "requiredDetailMembers": {}
           }
         }
       },
@@ -12140,7 +12523,8 @@
           "latestExpenseClassificationLagQuarters": 0,
           "warnings": [],
           "blockers": [
-            "missing current-quarter revenue classification"
+            "missing current-quarter revenue classification",
+            "missing previously disclosed revenue categories: botoxcosmetic,botoxtherapeutic,creon,elahere,epkinly,humira,imbruvica,juvedermcollection,linzessconstella,mavyret,otheraesthetics,otherneuroscience,otheroncology,otherproducts,qulipta,rinvoq,skyrizi,ubrelvy,venclexta,vraylar,vyalev"
           ],
           "policy": {}
         },
@@ -12270,10 +12654,38 @@
           "displayCurrency": "USD",
           "displayScaleFactor": 1,
           "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
             "status": "pending",
             "issues": [
-              "missing current-quarter revenue classification"
-            ]
+              "missing current-quarter revenue classification",
+              "missing previously disclosed revenue categories: botoxcosmetic,botoxtherapeutic,creon,elahere,epkinly,humira,imbruvica,juvedermcollection,linzessconstella,mavyret,otheraesthetics,otherneuroscience,otheroncology,otherproducts,qulipta,rinvoq,skyrizi,ubrelvy,venclexta,vraylar,vyalev"
+            ],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "botoxcosmetic",
+              "botoxtherapeutic",
+              "creon",
+              "elahere",
+              "epkinly",
+              "humira",
+              "imbruvica",
+              "juvedermcollection",
+              "linzessconstella",
+              "mavyret",
+              "otheraesthetics",
+              "otherneuroscience",
+              "otheroncology",
+              "otherproducts",
+              "qulipta",
+              "rinvoq",
+              "skyrizi",
+              "ubrelvy",
+              "venclexta",
+              "vraylar",
+              "vyalev"
+            ],
+            "requiredDetailMembers": {}
           }
         }
       },
@@ -12359,7 +12771,8 @@
           "latestExpenseClassificationLagQuarters": 3,
           "warnings": [],
           "blockers": [
-            "missing current-quarter revenue classification"
+            "missing current-quarter revenue classification",
+            "missing previously disclosed revenue categories: allothersegments,downstream,upstream"
           ],
           "policy": {}
         },
@@ -12472,10 +12885,20 @@
           "displayCurrency": "USD",
           "displayScaleFactor": 1,
           "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
             "status": "pending",
             "issues": [
-              "missing current-quarter revenue classification"
-            ]
+              "missing current-quarter revenue classification",
+              "missing previously disclosed revenue categories: allothersegments,downstream,upstream"
+            ],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "allothersegments",
+              "downstream",
+              "upstream"
+            ],
+            "requiredDetailMembers": {}
           }
         }
       },
@@ -12802,7 +13225,22 @@
           "qualityFlags": [
             "official-quarter-statement-backfilled"
           ],
-          "derivedStatementFields": []
+          "derivedStatementFields": [],
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
+            "status": "ready",
+            "issues": [],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "foodssundries",
+              "freshfoods",
+              "membership",
+              "nonfoods",
+              "other"
+            ],
+            "requiredDetailMembers": {}
+          }
         }
       },
       "statementPresets": {},
@@ -13563,7 +14001,29 @@
           "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
           "officialRevenueTaxonomyChangedFromPriorYear": false,
           "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueDetailTaxonomyChangedFromPriorYear": false
+          "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q2",
+            "status": "ready",
+            "issues": [],
+            "requiredDetailParents": [
+              "valueaddedservices"
+            ],
+            "requiredSegmentKeys": [
+              "fintechbusinessservices",
+              "marketingservices",
+              "others",
+              "valueaddedservices"
+            ],
+            "requiredDetailMembers": {
+              "valueaddedservices": [
+                "domesticgames",
+                "internationalgames",
+                "socialnetworks"
+              ]
+            }
+          }
         }
       },
       "statementPresets": {},
@@ -14440,6 +14900,18 @@
               "officialOpexBreakdown"
             ],
             "rule": "same-normalized-category-set"
+          },
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
+            "status": "ready",
+            "issues": [],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "commercial",
+              "governmentoperating"
+            ],
+            "requiredDetailMembers": {}
           }
         }
       },
@@ -14517,7 +14989,7 @@
         "officialSegmentQuarterCount": 30,
         "officialExpenseQuarterCount": 0,
         "classification": {
-          "status": "ok",
+          "status": "error",
           "latestQuarter": "2026Q4",
           "latestQuarterHasRevenueClassification": true,
           "latestQuarterHasExpenseClassification": false,
@@ -14531,7 +15003,9 @@
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
-          "blockers": [],
+          "blockers": [
+            "revenue classifications do not reconcile to total revenue"
+          ],
           "policy": {}
         },
         "parser": {
@@ -14816,6 +15290,20 @@
               "cost-breakdown-coverage-low",
               "opex-breakdown-coverage-low"
             ]
+          },
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q4",
+            "status": "pending",
+            "issues": [
+              "revenue classifications do not reconcile to total revenue"
+            ],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "concentrateoperations",
+              "finishedproductoperations"
+            ],
+            "requiredDetailMembers": {}
           }
         }
       },
@@ -15249,6 +15737,32 @@
               "officialOpexBreakdown"
             ],
             "rule": "same-normalized-category-set"
+          },
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
+            "status": "ready",
+            "issues": [],
+            "requiredDetailParents": [
+              "cloud",
+              "software"
+            ],
+            "requiredSegmentKeys": [
+              "cloud",
+              "hardware",
+              "services",
+              "software"
+            ],
+            "requiredDetailMembers": {
+              "software": [
+                "softwarelicense",
+                "softwaresupport"
+              ],
+              "cloud": [
+                "cloudapplications",
+                "cloudinfrastructure"
+              ]
+            }
           }
         }
       },
@@ -15786,7 +16300,8 @@
           "latestExpenseClassificationLagQuarters": 0,
           "warnings": [],
           "blockers": [
-            "missing current-quarter revenue classification"
+            "missing current-quarter revenue classification",
+            "missing previously disclosed revenue categories: babyfemininefamilycare,beauty,fabriccarehomecare,grooming,healthcare"
           ],
           "policy": {}
         },
@@ -16030,10 +16545,22 @@
             "form": "8-K"
           },
           "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
             "status": "pending",
             "issues": [
-              "missing current-quarter revenue classification"
-            ]
+              "missing current-quarter revenue classification",
+              "missing previously disclosed revenue categories: babyfemininefamilycare,beauty,fabriccarehomecare,grooming,healthcare"
+            ],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "babyfemininefamilycare",
+              "beauty",
+              "fabriccarehomecare",
+              "grooming",
+              "healthcare"
+            ],
+            "requiredDetailMembers": {}
           }
         }
       },
@@ -16126,7 +16653,8 @@
           "latestExpenseClassificationLagQuarters": 0,
           "warnings": [],
           "blockers": [
-            "missing current-quarter revenue classification"
+            "missing current-quarter revenue classification",
+            "missing previously disclosed revenue categories: consumerbanking,globalbanking,globalmarkets,globalwealthinvestmentmanagement"
           ],
           "policy": {}
         },
@@ -16372,10 +16900,21 @@
             "form": "8-K"
           },
           "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
             "status": "pending",
             "issues": [
-              "missing current-quarter revenue classification"
-            ]
+              "missing current-quarter revenue classification",
+              "missing previously disclosed revenue categories: consumerbanking,globalbanking,globalmarkets,globalwealthinvestmentmanagement"
+            ],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "consumerbanking",
+              "globalbanking",
+              "globalmarkets",
+              "globalwealthinvestmentmanagement"
+            ],
+            "requiredDetailMembers": {}
           }
         }
       },
@@ -16444,7 +16983,7 @@
         "officialSegmentQuarterCount": 30,
         "officialExpenseQuarterCount": 0,
         "classification": {
-          "status": "ok",
+          "status": "error",
           "latestQuarter": "2026Q1",
           "latestQuarterHasRevenueClassification": true,
           "latestQuarterHasExpenseClassification": false,
@@ -16458,7 +16997,9 @@
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
-          "blockers": [],
+          "blockers": [
+            "revenue classifications do not reconcile to total revenue"
+          ],
           "policy": {}
         },
         "parser": {
@@ -16646,7 +17187,20 @@
             "rule": "same-normalized-category-set"
           },
           "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueTaxonomyChangedFromPriorYear": false
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q1",
+            "status": "pending",
+            "issues": [
+              "revenue classifications do not reconcile to total revenue"
+            ],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "services"
+            ],
+            "requiredDetailMembers": {}
+          }
         }
       },
       "statementPresets": {},
@@ -16731,7 +17285,8 @@
           "latestExpenseClassificationLagQuarters": 0,
           "warnings": [],
           "blockers": [
-            "missing current-quarter revenue classification"
+            "missing current-quarter revenue classification",
+            "missing previously disclosed revenue categories: financialproducts,machinerypowerenergy"
           ],
           "policy": {}
         },
@@ -16861,10 +17416,19 @@
           "displayCurrency": "USD",
           "displayScaleFactor": 1,
           "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
             "status": "pending",
             "issues": [
-              "missing current-quarter revenue classification"
-            ]
+              "missing current-quarter revenue classification",
+              "missing previously disclosed revenue categories: financialproducts,machinerypowerenergy"
+            ],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "financialproducts",
+              "machinerypowerenergy"
+            ],
+            "requiredDetailMembers": {}
           }
         }
       },
@@ -17227,10 +17791,17 @@
             "form": "8-K"
           },
           "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
             "status": "pending",
             "issues": [
               "revenue classifications do not reconcile to total revenue"
-            ]
+            ],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "streaming"
+            ],
+            "requiredDetailMembers": {}
           }
         }
       },
@@ -17307,7 +17878,7 @@
         "officialSegmentQuarterCount": 41,
         "officialExpenseQuarterCount": 0,
         "classification": {
-          "status": "ok",
+          "status": "error",
           "latestQuarter": "2026Q2",
           "latestQuarterHasRevenueClassification": true,
           "latestQuarterHasExpenseClassification": false,
@@ -17321,7 +17892,9 @@
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": null,
           "warnings": [],
-          "blockers": [],
+          "blockers": [
+            "revenue classifications do not reconcile to total revenue"
+          ],
           "policy": {}
         },
         "parser": {
@@ -17601,8 +18174,30 @@
           "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": true,
           "officialRevenueDetailTaxonomyChangedFromPriorYear": true,
           "chartQuality": {
-            "status": "ready",
-            "issues": []
+            "version": 3,
+            "quarter": "2026Q2",
+            "status": "pending",
+            "issues": [
+              "revenue classifications do not reconcile to total revenue"
+            ],
+            "requiredDetailParents": [
+              "alibabaecommercegroup"
+            ],
+            "requiredSegmentKeys": [
+              "aicloudcomputeservices",
+              "ailabsapplications",
+              "alibabaecommercegroup",
+              "allothers"
+            ],
+            "requiredDetailMembers": {
+              "alibabaecommercegroup": [
+                "chinaquickcommerce",
+                "customermanagement",
+                "directsaleslogisticsothers",
+                "globalwholesale",
+                "internationalecommerce"
+              ]
+            }
           }
         }
       },
@@ -18129,7 +18724,8 @@
             "Latest revenue classification is unavailable for 2026Q3; using 2025Q4 as the newest official disclosed structure. BYD's Q1/Q3 interim filings may disclose statement and expense lines without a parseable same-quarter segment revenue composition table. The latest official disclosed revenue split currently available is the 2025 annual report filed on 2026-03-28."
           ],
           "blockers": [
-            "missing current-quarter revenue classification"
+            "missing current-quarter revenue classification",
+            "missing previously disclosed revenue categories: dailyelectronicdevicesmanufacturing,other,transportationelectricalmanufacturing"
           ],
           "policy": {
             "displayOfficiallyClassifiedPeriodsOnly": true,
@@ -18277,10 +18873,20 @@
           "displayCurrency": "USD",
           "displayScaleFactor": 0.14915,
           "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
             "status": "pending",
             "issues": [
-              "missing current-quarter revenue classification"
-            ]
+              "missing current-quarter revenue classification",
+              "missing previously disclosed revenue categories: dailyelectronicdevicesmanufacturing,other,transportationelectricalmanufacturing"
+            ],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "dailyelectronicdevicesmanufacturing",
+              "other",
+              "transportationelectricalmanufacturing"
+            ],
+            "requiredDetailMembers": {}
           }
         }
       },
@@ -18679,7 +19285,28 @@
           "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
           "officialRevenueTaxonomyChangedFromPriorYear": false,
           "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueDetailTaxonomyChangedFromPriorYear": false
+          "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q2",
+            "status": "ready",
+            "issues": [],
+            "requiredDetailParents": [
+              "smartphonexaiot"
+            ],
+            "requiredSegmentKeys": [
+              "smartevaiothernewinitiatives",
+              "smartphonexaiot"
+            ],
+            "requiredDetailMembers": {
+              "smartphonexaiot": [
+                "internetservices",
+                "iotlifestyleproducts",
+                "otherrelatedbusinesses",
+                "smartphones"
+              ]
+            }
+          }
         }
       },
       "statementPresets": {},
@@ -19359,7 +19986,21 @@
             "rule": "same-normalized-category-set"
           },
           "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueTaxonomyChangedFromPriorYear": false
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q1",
+            "status": "ready",
+            "issues": [],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "cloudmusic",
+              "gamesrelatedvalueaddedservices",
+              "innovativebusinessesothers",
+              "youdao"
+            ],
+            "requiredDetailMembers": {}
+          }
         }
       },
       "statementPresets": {},
@@ -19939,7 +20580,19 @@
           "displayCurrency": "USD",
           "displayScaleFactor": 0.14782,
           "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueTaxonomyChangedFromPriorYear": false
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q1",
+            "status": "ready",
+            "issues": [],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "corelocalcommerce",
+              "newinitiatives"
+            ],
+            "requiredDetailMembers": {}
+          }
         }
       },
       "statementPresets": {},
@@ -20560,7 +21213,31 @@
           "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
           "officialRevenueTaxonomyChangedFromPriorYear": false,
           "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueDetailTaxonomyChangedFromPriorYear": false
+          "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q2",
+            "status": "ready",
+            "issues": [],
+            "requiredDetailParents": [
+              "netproductrevenues",
+              "netservicerevenues"
+            ],
+            "requiredSegmentKeys": [
+              "netproductrevenues",
+              "netservicerevenues"
+            ],
+            "requiredDetailMembers": {
+              "netservicerevenues": [
+                "logisticsotherservicerevenues",
+                "marketplacemarketingrevenues"
+              ],
+              "netproductrevenues": [
+                "electronicshomeappliancesrevenues",
+                "generalmerchiserevenues"
+              ]
+            }
+          }
         }
       },
       "statementPresets": {},

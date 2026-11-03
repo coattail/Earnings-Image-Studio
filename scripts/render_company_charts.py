@@ -394,7 +394,8 @@ def main() -> int:
     company = resolve_company(args.company, refresh=args.refresh)
     payload = build_company_payload(company, refresh=args.refresh)
     chosen_quarter = choose_quarter(payload, args.quarter)
-    if 'sankey' in modes and payload['financials'][chosen_quarter].get('chartQuality', {}).get('status') == 'pending':
+    from release_chart_quality import chart_issues
+    if 'sankey' in modes and chart_issues(payload, chosen_quarter):
         raise ValueError('Revenue classification is incomplete; refusing to export a misleading Sankey chart')
     basename = args.basename or f"{company['id']}-{chosen_quarter}"
 

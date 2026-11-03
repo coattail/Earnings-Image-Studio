@@ -9007,7 +9007,31 @@
       "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
       "officialRevenueTaxonomyChangedFromPriorYear": false,
       "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
-      "officialRevenueDetailTaxonomyChangedFromPriorYear": false
+      "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
+      "chartQuality": {
+        "version": 3,
+        "quarter": "2026Q2",
+        "status": "ready",
+        "issues": [],
+        "requiredDetailParents": [
+          "netproductrevenues",
+          "netservicerevenues"
+        ],
+        "requiredSegmentKeys": [
+          "netproductrevenues",
+          "netservicerevenues"
+        ],
+        "requiredDetailMembers": {
+          "netservicerevenues": [
+            "logisticsotherservicerevenues",
+            "marketplacemarketingrevenues"
+          ],
+          "netproductrevenues": [
+            "electronicshomeappliancesrevenues",
+            "generalmerchiserevenues"
+          ]
+        }
+      }
     }
   },
   "statementSource": "stockanalysis-financials",

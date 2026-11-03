@@ -7214,10 +7214,20 @@
         ]
       },
       "chartQuality": {
+        "version": 3,
+        "quarter": "2026Q3",
         "status": "pending",
         "issues": [
-          "missing current-quarter revenue classification"
-        ]
+          "missing current-quarter revenue classification",
+          "missing previously disclosed revenue categories: samsclubus,walmartinternational,walmartus"
+        ],
+        "requiredDetailParents": [],
+        "requiredSegmentKeys": [
+          "samsclubus",
+          "walmartinternational",
+          "walmartus"
+        ],
+        "requiredDetailMembers": {}
       }
     }
   },
@@ -13278,7 +13288,8 @@
       "latestExpenseClassificationLagQuarters": null,
       "warnings": [],
       "blockers": [
-        "missing current-quarter revenue classification"
+        "missing current-quarter revenue classification",
+        "missing previously disclosed revenue categories: samsclubus,walmartinternational,walmartus"
       ],
       "policy": {}
     },

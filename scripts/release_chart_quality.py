@@ -4,9 +4,23 @@ import math
 import re
 
 FIELDS = ('officialRevenueSegments', 'officialRevenueDetailGroups', 'officialCostBreakdown', 'officialOpexBreakdown')
+CONTRACT_VERSION = 3
+FINGERPRINT_FIELDS = ('periodEnd', 'statementFilingDate', 'revenueBn', 'operatingIncomeBn', 'netIncomeBn',
+                      *FIELDS, 'officialRevenueStyle', 'clientIncentivesBn', 'revenueYoyPct', 'revenueQoqPct', 'chartQuality')
+
+def chart_fingerprint(payload):
+    financials = payload.get('financials') or {}
+    quarter = max(financials, default='')
+    return (quarter, {field: financials.get(quarter, {}).get(field) for field in FINGERPRINT_FIELDS})
+
+def finite(value):
+    return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
 
 def key(value):
-    return re.sub(r'[^a-z0-9\u4e00-\u9fff]', '', str(value).lower()).replace('and', '')
+    return re.sub(r'[^a-z0-9\u4e00-\u9fff]', '', str(value or '').lower()).replace('and', '')
+
+def identity(row):
+    return key(row.get('memberKey') or row.get('name'))
 
 def previous_entry(payload, quarter):
     financials = payload.get('financials', {})
@@ -16,23 +30,70 @@ def previous_entry(payload, quarter):
     previous = complete or previous
     return financials[max(previous)] if previous else {}
 
-def chart_issues(payload):
+def chart_issues(payload, quarter=None):
     financials = payload.get('financials', {})
     if not financials:
         return []
-    quarter = max(financials)
+    quarter = quarter or max(financials)
+    if quarter not in financials:
+        return ['missing requested reporting quarter']
     entry, prior = financials[quarter], previous_entry(payload, quarter)
     issues = []
+    if entry.get('calendarQuarter') and entry['calendarQuarter'] != quarter:
+        issues.append('statement belongs to a different reporting quarter')
+    if entry.get('periodEnd') and entry.get('statementFilingDate') and entry['periodEnd'] > entry['statementFilingDate']:
+        issues.append('reporting period ends after publication date')
     segments = entry.get('officialRevenueSegments') or []
-    if prior.get('officialRevenueSegments') and not segments:
+    statement_available = finite(entry.get('revenueBn')) and finite(entry.get('netIncomeBn'))
+    if (statement_available or prior.get('officialRevenueSegments')) and not segments:
         issues.append('missing current-quarter revenue classification')
+    for field in FIELDS:
+        rows = entry.get(field)
+        rows = [] if rows is None else rows
+        if not isinstance(rows, list) or any(not isinstance(r, dict) or not finite(r.get('valueBn')) for r in rows):
+            issues.append(f'invalid monetary values in {field}')
+            continue
+        if any(not identity(r) for r in rows):
+            issues.append(f'missing category identity in {field}')
+        if any(r.get('syntheticInterpolated') or r.get('inferredFromQuarter') for r in rows):
+            issues.append(f'previous-quarter estimates in {field}')
+        if entry.get('automaticEarnings'):
+            period_end = entry.get('periodEnd') or ''
+            if any(not r.get('sourceUrl') or (period_end and (r.get('filingDate') or '') < period_end
+                   and not (not r.get('filingDate') and r.get('sourceUrl') == entry.get('statementSourceUrl'))) for r in rows):
+                issues.append(f'unverified current-quarter source in {field}')
+    if any(issue.startswith('invalid monetary') for issue in issues):
+        return issues
     def total(rows):
-        return sum(r.get('valueBn', 0) for r in rows if isinstance(r.get('valueBn'), (int, float)))
+        return sum(r.get('valueBn', 0) for r in rows if isinstance(r, dict) and finite(r.get('valueBn')))
     def balances(rows, value):
-        return isinstance(value, (int, float)) and math.isclose(total(rows), value, rel_tol=.005, abs_tol=.02)
-    old_segments = prior.get('officialRevenueSegments') or []
-    if old_segments and balances(old_segments, prior.get('revenueBn')) and segments and not balances(segments, entry.get('revenueBn')):
+        return finite(value) and abs(total(rows)-value) <= max(.005*abs(value), min(.02, abs(value)*.01))
+    current_keys = {identity(r) for r in segments}
+    if len(current_keys) != len(segments):
+        issues.append('duplicate revenue categories')
+    if not entry.get('officialRevenueTaxonomyChangedFromPreviousQuarter'):
+        missing = {identity(r) for r in prior.get('officialRevenueSegments') or []} - current_keys
+        if missing:
+            issues.append('missing previously disclosed revenue categories: ' + ','.join(sorted(missing)))
+    # Visa discloses gross components and an explicit contra-revenue subtotal.
+    adjustment = entry.get('clientIncentivesBn', 0) if entry.get('officialRevenueStyle') == 'visa-revenue-components' else 0
+    expected = entry.get('revenueBn')
+    if finite(expected) and finite(adjustment): expected += adjustment
+    if segments and not balances(segments, expected):
         issues.append('revenue classifications do not reconcile to total revenue')
+    targets = {key(r.get('name')): r for r in segments if isinstance(r, dict)}
+    targets.update({key(r.get('memberKey')): r for r in segments if isinstance(r, dict) and r.get('memberKey')})
+    current_groups = {}
+    for row in entry.get('officialRevenueDetailGroups') or []:
+        if not isinstance(row, dict): continue
+        parent = key(row.get('targetName') or row.get('targetId'))
+        if not parent or parent not in targets:
+            issues.append('revenue detail has no current-quarter parent')
+        else:
+            current_groups.setdefault(parent, []).append(row)
+    for parent, rows in current_groups.items():
+        if not balances(rows, targets[parent].get('valueBn')):
+            issues.append(f'revenue detail does not reconcile for {parent}')
     groups = {}
     for row in prior.get('officialRevenueDetailGroups') or []:
         parent = row.get('targetName') or row.get('targetId')
@@ -44,14 +105,68 @@ def chart_issues(payload):
         rows = [r for r in entry.get('officialRevenueDetailGroups') or [] if key(r.get('targetName') or r.get('targetId')) == parent]
         target = next((r for r in segments if parent in {key(r.get('name')), key(r.get('memberKey'))}), None)
         if segments and target is None:
-            continue  # A newly disclosed taxonomy can replace an old parent.
+            if not entry.get('officialRevenueTaxonomyChangedFromPreviousQuarter'):
+                issues.append(f'unverified revenue taxonomy change for {parent}')
+            continue
         if len(rows) < 2:
             issues.append(f'missing current-quarter revenue detail for {parent}')
         elif target and not balances(rows, target.get('valueBn')):
             issues.append(f'revenue detail does not reconcile for {parent}')
+        if not (entry.get('officialRevenueDetailTaxonomyChangedFromPreviousQuarter') or entry.get('officialRevenueTaxonomyChangedFromPreviousQuarter')):
+            missing = {identity(r) for r in old_rows} - {identity(r) for r in rows}
+            if missing:
+                issues.append(f'missing previously disclosed revenue detail for {parent}: ' + ','.join(sorted(missing)))
     return issues
 
+def stamp_chart_quality(payload):
+    if payload.get('financials'):
+        quarter = max(payload['financials'])
+        issues = chart_issues(payload, quarter)
+        entry = payload['financials'][quarter]
+        prior = previous_entry(payload, quarter)
+        required = set()
+        targets = {key(r.get('name')) for r in entry.get('officialRevenueSegments') or [] if isinstance(r, dict)}
+        targets.update(key(r.get('memberKey')) for r in entry.get('officialRevenueSegments') or [] if isinstance(r, dict))
+        for basis in (prior, entry):
+            groups = {}
+            for row in basis.get('officialRevenueDetailGroups') or []:
+                if not isinstance(row, dict): continue
+                parent = key(row.get('targetName') or row.get('targetId'))
+                if parent: groups[parent] = groups.get(parent, 0) + 1
+            for parent, count in groups.items():
+                if count >= 2 and (parent in targets or not entry.get('officialRevenueTaxonomyChangedFromPreviousQuarter')):
+                    required.add(parent)
+        required_segments = {identity(r) for r in entry.get('officialRevenueSegments') or [] if isinstance(r, dict)}
+        if not entry.get('officialRevenueTaxonomyChangedFromPreviousQuarter'):
+            required_segments.update(identity(r) for r in prior.get('officialRevenueSegments') or [])
+        member_bases = [entry] if (entry.get('officialRevenueDetailTaxonomyChangedFromPreviousQuarter') or entry.get('officialRevenueTaxonomyChangedFromPreviousQuarter')) else [prior, entry]
+        payload['financials'][quarter]['chartQuality'] = {
+            'version': CONTRACT_VERSION, 'quarter': quarter,
+            'status': 'pending' if issues else 'ready', 'issues': issues,
+            'requiredDetailParents': sorted(required),
+            'requiredSegmentKeys': sorted(required_segments),
+            'requiredDetailMembers': {
+                parent: sorted({identity(r) for basis in member_bases for r in basis.get('officialRevenueDetailGroups') or []
+                                if isinstance(r, dict) and key(r.get('targetName') or r.get('targetId')) == parent})
+                for parent in required}}
+    return payload
+
 def assert_chart_publication(payload):
+    def valid_json(value):
+        if isinstance(value, float) and not math.isfinite(value):
+            raise ValueError(f"{payload.get('id')}: non-finite value cannot be published")
+        if isinstance(value, dict):
+            for item in value.values(): valid_json(item)
+        elif isinstance(value, list):
+            for item in value: valid_json(item)
+    valid_json(payload)
+    financials = payload.get('financials') or {}
+    quarter = max(financials, default='')
+    entry = financials.get(quarter, {})
+    contract = entry.get('chartQuality') or {}
+    if finite(entry.get('revenueBn')) and finite(entry.get('netIncomeBn')):
+        if contract.get('version') != CONTRACT_VERSION or contract.get('quarter') != quarter:
+            raise ValueError(f"{payload.get('id')}: missing current-quarter chart validation contract")
     issues = chart_issues(payload)
     if issues:
         latest = payload['financials'][max(payload['financials'])]

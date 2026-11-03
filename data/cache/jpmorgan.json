@@ -7917,10 +7917,20 @@
       "displayCurrency": "USD",
       "displayScaleFactor": 1,
       "chartQuality": {
+        "version": 3,
+        "quarter": "2026Q3",
         "status": "pending",
         "issues": [
-          "missing current-quarter revenue classification"
-        ]
+          "missing current-quarter revenue classification",
+          "missing previously disclosed revenue categories: assetwealthmanagement,commercialinvestmentbank,consumercommunitybanking"
+        ],
+        "requiredDetailParents": [],
+        "requiredSegmentKeys": [
+          "assetwealthmanagement",
+          "commercialinvestmentbank",
+          "consumercommunitybanking"
+        ],
+        "requiredDetailMembers": {}
       }
     }
   },
@@ -11261,7 +11271,8 @@
       "latestExpenseClassificationLagQuarters": 0,
       "warnings": [],
       "blockers": [
-        "missing current-quarter revenue classification"
+        "missing current-quarter revenue classification",
+        "missing previously disclosed revenue categories: assetwealthmanagement,commercialinvestmentbank,consumercommunitybanking"
       ],
       "policy": {}
     },

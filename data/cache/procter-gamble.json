@@ -8908,10 +8908,22 @@
         "form": "8-K"
       },
       "chartQuality": {
+        "version": 3,
+        "quarter": "2026Q3",
         "status": "pending",
         "issues": [
-          "missing current-quarter revenue classification"
-        ]
+          "missing current-quarter revenue classification",
+          "missing previously disclosed revenue categories: babyfemininefamilycare,beauty,fabriccarehomecare,grooming,healthcare"
+        ],
+        "requiredDetailParents": [],
+        "requiredSegmentKeys": [
+          "babyfemininefamilycare",
+          "beauty",
+          "fabriccarehomecare",
+          "grooming",
+          "healthcare"
+        ],
+        "requiredDetailMembers": {}
       }
     }
   },
@@ -16386,7 +16398,8 @@
       "latestExpenseClassificationLagQuarters": 0,
       "warnings": [],
       "blockers": [
-        "missing current-quarter revenue classification"
+        "missing current-quarter revenue classification",
+        "missing previously disclosed revenue categories: babyfemininefamilycare,beauty,fabriccarehomecare,grooming,healthcare"
       ],
       "policy": {}
     },

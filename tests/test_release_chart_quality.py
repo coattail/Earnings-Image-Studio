@@ -3,7 +3,7 @@ import sys
 import unittest
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
-from release_chart_quality import chart_issues, enrich_from_release
+from release_chart_quality import chart_issues, enrich_from_release, assert_chart_publication, stamp_chart_quality
 import watch_earnings
 
 def fixture():
@@ -17,6 +17,56 @@ def html():
     <tr><td>Phone</td><td>55000</td><td>45000</td></tr><tr><td>Mac</td><td>25000</td><td>20000</td></tr></table>'''
 
 class ReleaseChartTests(unittest.TestCase):
+    def test_first_company_cannot_pass_with_only_financial_totals(self):
+        p=fixture();del p['financials']['2026Q2']
+        self.assertIn('missing current-quarter revenue classification',chart_issues(p))
+
+    def test_wrong_ready_flag_and_pending_flag_do_not_legalize_nonfinite_json(self):
+        p=fixture();enrich_from_release(p,html(),'url');stamp_chart_quality(p)
+        p['financials']['2026Q3']['officialRevenueSegments'][0]['valueBn']=float('nan')
+        with self.assertRaisesRegex(ValueError,'non-finite'):assert_chart_publication(p)
+        p['financials']['2026Q3']['chartQuality']['status']='pending'
+        with self.assertRaisesRegex(ValueError,'non-finite'):assert_chart_publication(p)
+
+    def test_category_rename_requires_explicit_taxonomy_change_and_new_children_must_reconcile(self):
+        p=fixture();enrich_from_release(p,html(),'url');e=p['financials']['2026Q3']
+        e['officialRevenueSegments'][0]['name']='Devices'
+        e['officialRevenueDetailGroups']=[]
+        self.assertTrue(any('taxonomy' in x for x in chart_issues(p)))
+        e['officialRevenueTaxonomyChangedFromPreviousQuarter']=True
+        self.assertEqual(chart_issues(p),[])
+        e['officialRevenueDetailGroups']=[{'name':'Phone','targetName':'Devices','valueBn':55}]
+        self.assertTrue(any('reconcile' in x for x in chart_issues(p)))
+
+    def test_additive_totals_are_checked_without_a_matching_historical_basis(self):
+        p=fixture();enrich_from_release(p,html(),'url');del p['financials']['2026Q2']
+        p['financials']['2026Q3']['officialRevenueSegments'][0]['valueBn']=70
+        self.assertIn('revenue classifications do not reconcile to total revenue',chart_issues(p))
+
+    def test_inferred_or_stale_classifications_are_rejected_even_if_they_balance(self):
+        for mutation in ({'inferredFromQuarter':'2026Q2'}, {'syntheticInterpolated':True}):
+            p=fixture();enrich_from_release(p,html(),'url')
+            p['financials']['2026Q3']['officialRevenueSegments'][0].update(mutation)
+            self.assertTrue(any('estimates' in x for x in chart_issues(p)))
+
+    def test_explicit_gross_to_net_adjustment_is_required_for_visa_style(self):
+        p=fixture();enrich_from_release(p,html(),'url');e=p['financials']['2026Q3']
+        e['officialRevenueStyle']='visa-revenue-components';e['revenueBn']=115
+        self.assertTrue(chart_issues(p));e['clientIncentivesBn']=5
+        self.assertEqual(chart_issues(p),[])
+
+    def test_small_category_loss_is_not_hidden_by_rounding_tolerance(self):
+        p=fixture();enrich_from_release(p,html(),'url')
+        p['financials']['2026Q2']['officialRevenueDetailGroups'].append({'name':'Small category','targetName':'Products','valueBn':.001})
+        self.assertTrue(any('smallcategory' in issue for issue in chart_issues(p)))
+        stamp_chart_quality(p)
+        self.assertIn('smallcategory',p['financials']['2026Q3']['chartQuality']['requiredDetailMembers']['products'])
+
+    def test_small_company_cannot_hide_a_large_relative_revenue_gap(self):
+        p=fixture();del p['financials']['2026Q2'];e=p['financials']['2026Q3']
+        e.update(revenueBn=.02,officialRevenueSegments=[{'name':'Only parsed category','valueBn':.01}])
+        self.assertIn('revenue classifications do not reconcile to total revenue',chart_issues(p))
+
     def test_complete_trunk_does_not_mean_complete_chart(self):
         p=fixture()
         self.assertTrue(chart_issues(p))

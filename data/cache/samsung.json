@@ -3197,10 +3197,22 @@
         "form": "official-ir-release"
       },
       "chartQuality": {
+        "version": 3,
+        "quarter": "2026Q3",
         "status": "pending",
         "issues": [
-          "missing current-quarter revenue classification"
-        ]
+          "missing current-quarter revenue classification",
+          "missing previously disclosed revenue categories: ce,dp,ds,harman,im"
+        ],
+        "requiredDetailParents": [],
+        "requiredSegmentKeys": [
+          "ce",
+          "dp",
+          "ds",
+          "harman",
+          "im"
+        ],
+        "requiredDetailMembers": {}
       }
     },
     "2018Q1": {
@@ -6404,7 +6416,8 @@
       "warnings": [],
       "blockers": [
         "Missing latest-quarter revenue classification for 2026Q3. Add an official parser/manual override or declare an explicit exception.",
-        "missing current-quarter revenue classification"
+        "missing current-quarter revenue classification",
+        "missing previously disclosed revenue categories: ce,dp,ds,harman,im"
       ],
       "policy": {
         "maxBarQuarters": 36

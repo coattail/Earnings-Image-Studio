@@ -8524,7 +8524,26 @@
         ],
         "rule": "same-normalized-category-set"
       },
-      "officialRevenueStyle": "nvidia-fy2027-market-platform"
+      "officialRevenueStyle": "nvidia-fy2027-market-platform",
+      "chartQuality": {
+        "version": 3,
+        "quarter": "2026Q3",
+        "status": "ready",
+        "issues": [],
+        "requiredDetailParents": [
+          "datacenter"
+        ],
+        "requiredSegmentKeys": [
+          "datacenter",
+          "edgecomputing"
+        ],
+        "requiredDetailMembers": {
+          "datacenter": [
+            "aicloudsindustrialenterprise",
+            "hyperscale"
+          ]
+        }
+      }
     }
   },
   "statementSource": "official-sec-companyfacts",

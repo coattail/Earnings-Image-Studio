@@ -12916,7 +12916,29 @@
       "officialRevenueTaxonomyChangedFromPriorYear": false,
       "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
       "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
-      "sankeyPreserveOfficialLabels": true
+      "sankeyPreserveOfficialLabels": true,
+      "chartQuality": {
+        "version": 3,
+        "quarter": "2026Q3",
+        "status": "ready",
+        "issues": [],
+        "requiredDetailParents": [
+          "adrevenue"
+        ],
+        "requiredSegmentKeys": [
+          "adrevenue",
+          "googlecloud",
+          "googleplay",
+          "otherrevenue"
+        ],
+        "requiredDetailMembers": {
+          "adrevenue": [
+            "admob",
+            "searchadvertising",
+            "youtube"
+          ]
+        }
+      }
     }
   },
   "statementSource": "official-sec-companyfacts",

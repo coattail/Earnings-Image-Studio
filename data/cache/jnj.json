@@ -6428,10 +6428,19 @@
       "displayCurrency": "USD",
       "displayScaleFactor": 1,
       "chartQuality": {
+        "version": 3,
+        "quarter": "2026Q3",
         "status": "pending",
         "issues": [
-          "missing current-quarter revenue classification"
-        ]
+          "missing current-quarter revenue classification",
+          "missing previously disclosed revenue categories: innovativemedicine,medtech"
+        ],
+        "requiredDetailParents": [],
+        "requiredSegmentKeys": [
+          "innovativemedicine",
+          "medtech"
+        ],
+        "requiredDetailMembers": {}
       }
     }
   },
@@ -11435,7 +11444,8 @@
       "latestExpenseClassificationLagQuarters": null,
       "warnings": [],
       "blockers": [
-        "missing current-quarter revenue classification"
+        "missing current-quarter revenue classification",
+        "missing previously disclosed revenue categories: innovativemedicine,medtech"
       ],
       "policy": {}
     },

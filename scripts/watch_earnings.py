@@ -99,10 +99,6 @@ def detect(company: dict, local: dict | None = None, *, external=False) -> dict:
 
 
 def validate_refresh(item: dict, payload: dict, previous: dict | None = None) -> None:
-    from release_chart_quality import chart_issues
-    issues = chart_issues(payload)
-    if issues:
-        raise ValueError(f"{item['companyId']}: incomplete Sankey chart: {'; '.join(issues)}")
     quarter = checker.latest_local_quarter(payload)
     entry = payload.get("financials", {}).get(quarter, {})
     if not complete_quarter(entry, item["companyId"]):
@@ -118,6 +114,10 @@ def validate_refresh(item: dict, payload: dict, previous: dict | None = None) ->
         released = item.get("remoteFilingDate") or ""
         if (entry.get("statementFilingDate") or "") < released:
             raise ValueError(f"{item['companyId']}: earnings detected but refreshed source still lags {released}")
+    from release_chart_quality import chart_issues
+    issues = chart_issues(payload)
+    if issues:
+        raise ValueError(f"{item['companyId']}: incomplete Sankey chart: {'; '.join(issues)}")
 
 
 def save(path: Path, payload: dict) -> None:
