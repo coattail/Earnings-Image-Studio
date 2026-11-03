@@ -17,6 +17,7 @@ test('missing numeric values do not become real zero growth',()=>{
 });
 test('automatic releases never scale previous-quarter revenue splits',()=>{
  assert.equal(vm.runInContext("(()=>{const c=structuredClone(payload),e=c.financials['2026Q3'];delete e.officialRevenueSegments;return resolveRenderableOfficialRevenueRows(c,e).length})()",vm.createContext({...ctx,structuredClone})),0);
+ assert.equal(vm.runInContext("(()=>{const c=structuredClone(payload),e=c.financials['2026Q3'];delete e.officialRevenueSegments;delete e.automaticEarnings;return resolveRenderableOfficialRevenueRows(c,e).length})()",vm.createContext({...ctx,structuredClone})),0);
 });
 
 ctx.structuredClone=structuredClone;

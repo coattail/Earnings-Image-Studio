@@ -1289,7 +1289,7 @@ function resolveRenderableOfficialRevenueRows(company, entry, options = {}) {
     }
     return nextRows;
   }
-  if (entry?.automaticEarnings || !allowNearbyInterpolation || !(revenueBn > 0.2)) return [];
+  if (entry?.automaticEarnings || entry?.chartQuality || !allowNearbyInterpolation || !(revenueBn > 0.2)) return [];
   const currentQuarterKey = entryQuarterKey(company, entry);
   if (!currentQuarterKey) return [];
   let bestCandidate = null;
