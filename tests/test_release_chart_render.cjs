@@ -94,7 +94,7 @@ test('a newly released quarter keeps the previous company template, fonts, ribbo
 
 test('a complete official product partition is not silently truncated at seven or twelve categories',()=>{
  const result=vm.runInContext(`(()=>{
-   const c=normalizeLoadedCompany(structuredClone(dataset.companies.find(c=>c.id==='abbvie')),0),q=c.quarters.at(-1);
+   const c=normalizeLoadedCompany(structuredClone(dataset.companies.find(c=>c.id==='abbvie')),0),q='2026Q3';
    const e=c.financials[q],groups=buildOfficialBusinessGroups(c,e);
    return {official:e.officialRevenueSegments.length,visible:groups.length};
  })()`,ctx);
