@@ -61,7 +61,7 @@ def assert_chart_publication(payload):
 def enrich_from_release(payload, html, url):
     """Use previous row identities only, never previous values or percentages."""
     from bs4 import BeautifulSoup
-    from generic_filing_table_parser import _extract_quarter_columns, _row_numeric_series, _table_scale
+    from generic_filing_table_parser import _extract_quarter_columns, _row_numeric_series, _table_scale, _parse_number
     from official_financials import _extract_html_tables
     quarter = max(payload['financials'])
     entry = payload['financials'][quarter]
@@ -94,7 +94,8 @@ def enrich_from_release(payload, html, url):
                 if 'operating expenses' in label.lower(): section = 'expense'
                 if 'net sales by' in label.lower() or 'revenue by' in label.lower(): section = 'revenue'
                 values = _row_numeric_series(row, len(columns))
-                if len(values) != len(columns) or '%' in ' '.join(row[1:]): continue
+                first_amount = next((str(cell) for cell in row[1:] if _parse_number(cell) is not None), '')
+                if len(values) != len(columns) or '%' in first_amount: continue
                 for field in FIELDS:
                     if field == 'officialCostBreakdown' and section != 'cost': continue
                     if field in FIELDS[:2] and section != 'revenue': continue
