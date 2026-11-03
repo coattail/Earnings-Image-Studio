@@ -20,7 +20,7 @@ from generic_filing_table_parser import _period_entries_from_table
 from sankey_statement_backfill import parse_inline_statements, complete_statement
 
 CACHE = Path(__file__).resolve().parents[1] / "data/cache/earnings-releases"
-VERSION = "earnings-release-v8"
+VERSION = "earnings-release-v9"
 CORE = ("revenueBn", "operatingIncomeBn", "netIncomeBn")
 
 
@@ -44,6 +44,8 @@ def plausible(entry: dict, previous: dict) -> bool:
 def parse_release(html: str, company: dict, url: str, filed: str, *, allow_partial=False) -> dict:
     """Parse GAAP/IFRS statement tables; adjusted reconciliations are excluded."""
     text = BeautifulSoup(html, "html.parser").get_text(" ", strip=True)
+    fiscal_heading=re.search(r'\b(first|second|third|fourth)[ -]+quarter(?:[ -]+(?:of|fiscal|the|for))*[ -]+(20\d{2})\b',text[:2500],re.I)
+    fiscal_marker=re.search(r'fy(20\d{2}|\d{2})[-_]?q([1-4])',url,re.I)
     currency = company.get("reportingCurrency") or "USD"
     # A USD convenience translation must never be mistaken for native numbers.
     if not company.get("reportingCurrency") and re.search(r"RMB|Renminbi", text, re.I):
@@ -118,6 +120,12 @@ def parse_release(html: str, company: dict, url: str, filed: str, *, allow_parti
             continue
         entry.update(statementSource="official-earnings-release", statementSourceUrl=url,
                      statementFilingDate=filed, statementValueMode="reported", statementSpanQuarters=1)
+        if fiscal_heading and quarter==max(financials):
+            ordinal={'first':1,'second':2,'third':3,'fourth':4}[fiscal_heading[1].lower()]
+            entry.update(fiscalYear=fiscal_heading[2],fiscalQuarter=f'Q{ordinal}',fiscalLabel=f'FY{fiscal_heading[2]} Q{ordinal}')
+        elif fiscal_marker and quarter==max(financials):
+            year=str(2000+int(fiscal_marker[1]))if len(fiscal_marker[1])==2 else fiscal_marker[1]
+            entry.update(fiscalYear=year,fiscalQuarter=f'Q{fiscal_marker[2]}',fiscalLabel=f'FY{year} Q{fiscal_marker[2]}')
         entry["parserFinancialFieldSources"] = {k: "official" for k in CORE if isinstance(entry.get(k), (float, int))}
         entry["parserFinancialValidation"] = {"status": "high" if complete_quarter(entry) else "partial", "sourceUrl": url}
         result[quarter] = entry
@@ -290,11 +298,15 @@ def samsung_statement(pages: list[str], quarter: str) -> dict | None:
         amounts = {}
         for label, field in [("Sales", "revenueBn"), ("Cost of sales", "costOfRevenueBn"),
                               ("Gross profit", "grossProfitBn"), ("SG&A expenses", "sgnaBn"),
-                              ("R&D expenses", "rndBn"), ("Operating profit", "operatingIncomeBn"), ("Net profit", "netIncomeBn")]:
+                              ("R&D expenses", "rndBn"), ("Operating profit", "operatingIncomeBn"),
+                              ("Profitbefore income tax", "pretaxIncomeBn"), ("Income tax", "taxBn"), ("Net profit", "netIncomeBn")]:
             match = re.search(r"^" + re.escape(label) + r"[ \t]+(?=\(?-?\d)([^\n]+)", page, re.M)
             if not match:
                 continue
-            values = re.findall(r"(?<![\w.])(-?\d+(?:\.\d+)?)\s+(?:\d+(?:\.\d+)?%|-)", match[1])
+            # Taxes have dash percentage cells; negative finance amounts may
+            # use parentheses. Read amounts independently of those cells.
+            from release_chart_completion import numbers
+            values = numbers([s for s in re.sub(r"\(?-?\d+(?:\.\d+)?%", "", match[1]).split() if s not in {'-','—','–'}])
             if len(values) == len(quarters):
                 amounts[field] = float(values[index]) * 1000  # trillion KRW -> billion KRW
         if not complete_quarter(amounts):

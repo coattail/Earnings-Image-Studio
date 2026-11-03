@@ -8730,7 +8730,7 @@
       "fiscalLabel": "FY2027 Q1",
       "statementCurrency": "USD",
       "revenueBn": 23.276,
-      "revenueYoyPct": null,
+      "revenueYoyPct": 3.976,
       "costOfRevenueBn": 11.678,
       "grossProfitBn": 11.598,
       "sgnaBn": 5.661,
@@ -8747,7 +8747,7 @@
       "operatingMarginPct": 25.507,
       "profitMarginPct": 20.326,
       "effectiveTaxRatePct": null,
-      "revenueQoqPct": null,
+      "revenueQoqPct": 9.777,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
@@ -8910,21 +8910,92 @@
       "chartQuality": {
         "version": 3,
         "quarter": "2026Q3",
-        "status": "pending",
-        "issues": [
-          "missing current-quarter revenue classification",
-          "missing previously disclosed revenue categories: babyfemininefamilycare,beauty,fabriccarehomecare,grooming,healthcare"
-        ],
+        "status": "ready",
+        "issues": [],
         "requiredDetailParents": [],
         "requiredSegmentKeys": [
           "babyfemininefamilycare",
           "beauty",
+          "corporate",
           "fabriccarehomecare",
           "grooming",
           "healthcare"
         ],
         "requiredDetailMembers": {}
-      }
+      },
+      "officialRevenueSegments": [
+        {
+          "name": "Fabric Care & Home Care",
+          "nameZh": null,
+          "memberKey": "fabriccarehomecare",
+          "valueBn": 8.205,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/80424/000008042426000250/fy2627q1jas8-kexhibit991.htm",
+          "filingDate": "2026-10-22",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 35.3
+        },
+        {
+          "name": "Baby Feminine & Family Care",
+          "nameZh": null,
+          "memberKey": "babyfemininefamilycare",
+          "valueBn": 5.322,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/80424/000008042426000250/fy2627q1jas8-kexhibit991.htm",
+          "filingDate": "2026-10-22",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 22.9
+        },
+        {
+          "name": "Beauty",
+          "nameZh": null,
+          "memberKey": "beauty",
+          "valueBn": 4.41,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/80424/000008042426000250/fy2627q1jas8-kexhibit991.htm",
+          "filingDate": "2026-10-22",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 18.9
+        },
+        {
+          "name": "Health Care",
+          "nameZh": null,
+          "memberKey": "healthcare",
+          "valueBn": 3.318,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/80424/000008042426000250/fy2627q1jas8-kexhibit991.htm",
+          "filingDate": "2026-10-22",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 14.3
+        },
+        {
+          "name": "Grooming",
+          "nameZh": null,
+          "memberKey": "grooming",
+          "valueBn": 1.889,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/80424/000008042426000250/fy2627q1jas8-kexhibit991.htm",
+          "filingDate": "2026-10-22",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 8.1
+        },
+        {
+          "name": "Corporate",
+          "nameZh": "公司其他收入",
+          "memberKey": "corporate",
+          "valueBn": 0.132,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/80424/000008042426000250/fy2627q1jas8-kexhibit991.htm",
+          "filingDate": "2026-10-22",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 0.6
+        }
+      ],
+      "revenueClassificationSourceUrl": "https://www.sec.gov/Archives/edgar/data/80424/000008042426000250/fy2627q1jas8-kexhibit991.htm",
+      "revenueClassificationSource": "official-complete-table",
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+      "revenueClassificationBasisNote": "Current official revenue partition; prior-period category amounts are not allocated.",
+      "chartCompletionAttempts": [
+        {
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/80424/000008042426000250/fy2627q1jas8-kexhibit991.htm",
+          "remainingIssues": []
+        }
+      ],
+      "officialRevenueTaxonomyChangedFromPriorYear": true
     }
   },
   "statementSource": "official-sec-companyfacts",
@@ -13183,7 +13254,7 @@
       "overallConfidenceScore": 0.9422,
       "financialConfidenceScore": 0.9111,
       "structuralConfidenceScore": 1.0,
-      "revenueSegmentChecks": 34,
+      "revenueSegmentChecks": 35,
       "revenueSegmentMismatchCount": 0,
       "revenueSegmentSkippedChecks": 0,
       "detailGroupChecks": 0,
@@ -16380,27 +16451,24 @@
     "pixelReplicaQuarterCount": 0,
     "hasPixelReplica": false,
     "officialFinancialQuarterCount": 35,
-    "officialSegmentQuarterCount": 34,
-    "officialExpenseQuarterCount": 0,
+    "officialSegmentQuarterCount": 35,
+    "officialExpenseQuarterCount": 1,
     "classification": {
-      "status": "error",
+      "status": "ok",
       "latestQuarter": "2026Q3",
-      "latestQuarterHasRevenueClassification": false,
+      "latestQuarterHasRevenueClassification": true,
       "latestQuarterHasExpenseClassification": true,
-      "latestRevenueClassificationQuarter": "2026Q2",
+      "latestRevenueClassificationQuarter": "2026Q3",
       "latestExpenseClassificationQuarter": "2026Q3",
       "latestStructureHistoryQuarter": "2026Q2",
-      "revenueClassificationQuarterCount": 34,
+      "revenueClassificationQuarterCount": 35,
       "expenseClassificationQuarterCount": 1,
-      "revenueClassificationCoverageRatio": 0.9714,
+      "revenueClassificationCoverageRatio": 1.0,
       "expenseClassificationCoverageRatio": 0.0286,
-      "latestRevenueClassificationLagQuarters": 1,
+      "latestRevenueClassificationLagQuarters": 0,
       "latestExpenseClassificationLagQuarters": 0,
       "warnings": [],
-      "blockers": [
-        "missing current-quarter revenue classification",
-        "missing previously disclosed revenue categories: babyfemininefamilycare,beauty,fabriccarehomecare,grooming,healthcare"
-      ],
+      "blockers": [],
       "policy": {}
     },
     "parser": {
@@ -16440,7 +16508,7 @@
         "overallConfidenceScore": 0.9422,
         "financialConfidenceScore": 0.9111,
         "structuralConfidenceScore": 1.0,
-        "revenueSegmentChecks": 34,
+        "revenueSegmentChecks": 35,
         "revenueSegmentMismatchCount": 0,
         "revenueSegmentSkippedChecks": 0,
         "detailGroupChecks": 0,

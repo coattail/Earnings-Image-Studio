@@ -25,6 +25,10 @@ def statement(adjusted=False, units=True):
 
 
 class ReleaseParserTests(unittest.TestCase):
+    def test_fiscal_quarter_from_official_release_identity_is_distinct_from_calendar_quarter(self):
+        entries=release.parse_release(statement(),{'id':'sample'},'https://www.sec.gov/earningsreleasefy27q2.htm','2026-11-02')
+        self.assertEqual(entries['2026Q3']['fiscalLabel'],'FY2027 Q2')
+
     def test_quarterly_gaap_total_and_common_earnings_win_over_ytd_and_product_rows(self):
         entries = release.parse_release(statement(), {"id": "sample"}, "https://www.sec.gov/release.htm", "2026-11-02")
         latest = entries["2026Q3"]

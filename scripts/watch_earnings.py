@@ -14,6 +14,7 @@ from pathlib import Path
 import subprocess
 import sys
 import time
+import tempfile
 
 import check_for_updates as checker
 from build_dataset import TOP30_COMPANIES, parse_company_selection, company_matches_selection
@@ -139,6 +140,20 @@ def refresh_one(item: dict, timeout: int = 150) -> None:
         old_dataset = json.loads(snapshots[paths[0]])
         previous = next((c for c in old_dataset["companies"] if c["id"] == item["companyId"]), {})
         validate_refresh(item, payload, previous)
+        # Exercise the same JS runtime and both chart modes used by the manual
+        # chart command. A data-only refresh is not a completed chart update.
+        from render_company_charts import run_direct_renderer
+        quarter=checker.latest_local_quarter(payload)
+        with tempfile.TemporaryDirectory(prefix='earnings-chart-update-') as directory:
+            for language in ('zh','en'):
+                rendered=run_direct_renderer(paths[-1],Path(directory),quarter,language,['sankey','bars'],f'{item["companyId"]}-{language}')
+                for mode in ('sankey','bars'):
+                    svg=Path(rendered['outputs'][mode]['svg']).read_text()
+                    if not svg.lstrip().startswith('<svg') or not svg.rstrip().endswith('</svg>'):
+                        raise ValueError(f'{item["companyId"]}: {mode} did not generate a complete SVG')
+                    import re
+                    if re.search(r'(?:="|[ ,])(?:NaN|[+-]?Infinity)(?:[" ,<]|$)',svg):
+                        raise ValueError(f'{item["companyId"]}: invalid geometry in {mode}')
         blockers = payload.get("coverage", {}).get("classification", {}).get("blockers", [])
         if result.returncode and not blockers:
             raise RuntimeError(f"builder exit code {result.returncode}")

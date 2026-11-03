@@ -80,7 +80,10 @@ def enrich_growth_rows(financials: dict[str, Any], field_name: str) -> None:
             if field_name == "officialRevenueSegments"
             else "officialRevenueDetailTaxonomyChangedFromPreviousQuarter"
         )
-        financials[quarter][taxonomy_flag] = bool(prior_quarter_has_taxonomy and not comparable_to_prior_quarter)
+        verified_change=bool(financials[quarter].get('officialRevenueTaxonomyChangeVerified')
+                             and financials[quarter].get('officialRevenueTaxonomyChangeSourceUrl')
+                             and financials[quarter].get(taxonomy_flag))
+        financials[quarter][taxonomy_flag] = verified_change or bool(prior_quarter_has_taxonomy and not comparable_to_prior_quarter)
         for row in rows:
             member_key = str(row.get("memberKey") or row.get("name") or "")
             previous = prior_quarter_map.get(member_key)

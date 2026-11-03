@@ -7866,7 +7866,7 @@
       "fiscalLabel": "FY2026 Q3",
       "statementCurrency": "USD",
       "revenueBn": 50.172,
-      "revenueYoyPct": null,
+      "revenueYoyPct": 8.066,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
       "sgnaBn": 1.917,
@@ -7883,7 +7883,7 @@
       "operatingMarginPct": null,
       "profitMarginPct": 30.505,
       "effectiveTaxRatePct": null,
-      "revenueQoqPct": null,
+      "revenueQoqPct": -12.512,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
@@ -7919,11 +7919,8 @@
       "chartQuality": {
         "version": 3,
         "quarter": "2026Q3",
-        "status": "pending",
-        "issues": [
-          "missing current-quarter revenue classification",
-          "missing previously disclosed revenue categories: assetwealthmanagement,commercialinvestmentbank,consumercommunitybanking"
-        ],
+        "status": "ready",
+        "issues": [],
         "requiredDetailParents": [],
         "requiredSegmentKeys": [
           "assetwealthmanagement",
@@ -7931,6 +7928,75 @@
           "consumercommunitybanking"
         ],
         "requiredDetailMembers": {}
+      },
+      "officialRevenueSegments": [
+        {
+          "name": "Consumer Community Banking",
+          "nameZh": null,
+          "memberKey": "consumercommunitybanking",
+          "valueBn": 21.171,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000162828026065582/a3q26erfex992supplement.htm",
+          "filingDate": "2026-10-13",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 42.2,
+          "qoqPct": 4.43,
+          "yoyPct": 8.72,
+          "mixYoyDeltaPp": 0.3
+        },
+        {
+          "name": "Commercial & Investment Bank",
+          "nameZh": null,
+          "memberKey": "commercialinvestmentbank",
+          "valueBn": 22.734,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000162828026065582/a3q26erfex992supplement.htm",
+          "filingDate": "2026-10-13",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 45.3,
+          "qoqPct": -8.53,
+          "yoyPct": 14.37,
+          "mixYoyDeltaPp": 2.5
+        },
+        {
+          "name": "Asset & Wealth Management",
+          "nameZh": null,
+          "memberKey": "assetwealthmanagement",
+          "valueBn": 6.909,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000162828026065582/a3q26erfex992supplement.htm",
+          "filingDate": "2026-10-13",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 13.8,
+          "qoqPct": 0.85,
+          "yoyPct": 13.9,
+          "mixYoyDeltaPp": 0.7
+        }
+      ],
+      "officialRevenueStyle": null,
+      "officialRevenueReconciliation": {
+        "name": "Corporate and tax-equivalent reconciliation",
+        "nameZh": "总部及税额等值调整净额",
+        "valueBn": -0.642,
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000162828026065582/a3q26erfex992supplement.htm",
+        "filingDate": "2026-10-13",
+        "sourceForm": "official current-period disclosure",
+        "kind": "reported-basis-reconciliation",
+        "reportedBusinessTotalBn": 50.814,
+        "reportedManagedTotalBn": 50.907000000000004,
+        "reportedConsolidatedRevenueBn": 50.172
+      },
+      "chartCompletionAttempts": [
+        {
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000162828026065582/a3q26erfex992supplement.htm",
+          "remainingIssues": []
+        }
+      ],
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2026Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
       }
     }
   },
@@ -11077,11 +11143,11 @@
     },
     "validation": {
       "version": "parser-validation-v1",
-      "status": "low",
-      "overallConfidenceScore": 0.6168,
+      "status": "medium",
+      "overallConfidenceScore": 0.7043,
       "financialConfidenceScore": 0.545,
-      "structuralConfidenceScore": 0.75,
-      "revenueSegmentChecks": 0,
+      "structuralConfidenceScore": 1.0,
+      "revenueSegmentChecks": 1,
       "revenueSegmentMismatchCount": 0,
       "revenueSegmentSkippedChecks": 34,
       "detailGroupChecks": 0,
@@ -11249,31 +11315,28 @@
   },
   "statementPresets": {},
   "coverage": {
-    "quarterCount": 34,
+    "quarterCount": 35,
     "pixelReplicaQuarterCount": 0,
     "hasPixelReplica": false,
-    "officialFinancialQuarterCount": 34,
-    "officialSegmentQuarterCount": 34,
-    "officialExpenseQuarterCount": 0,
+    "officialFinancialQuarterCount": 35,
+    "officialSegmentQuarterCount": 35,
+    "officialExpenseQuarterCount": 1,
     "classification": {
-      "status": "error",
+      "status": "ok",
       "latestQuarter": "2026Q3",
-      "latestQuarterHasRevenueClassification": false,
+      "latestQuarterHasRevenueClassification": true,
       "latestQuarterHasExpenseClassification": true,
-      "latestRevenueClassificationQuarter": "2026Q2",
+      "latestRevenueClassificationQuarter": "2026Q3",
       "latestExpenseClassificationQuarter": "2026Q3",
       "latestStructureHistoryQuarter": "2026Q2",
-      "revenueClassificationQuarterCount": 34,
+      "revenueClassificationQuarterCount": 35,
       "expenseClassificationQuarterCount": 1,
-      "revenueClassificationCoverageRatio": 0.9714,
+      "revenueClassificationCoverageRatio": 1.0,
       "expenseClassificationCoverageRatio": 0.0286,
-      "latestRevenueClassificationLagQuarters": 1,
+      "latestRevenueClassificationLagQuarters": 0,
       "latestExpenseClassificationLagQuarters": 0,
       "warnings": [],
-      "blockers": [
-        "missing current-quarter revenue classification",
-        "missing previously disclosed revenue categories: assetwealthmanagement,commercialinvestmentbank,consumercommunitybanking"
-      ],
+      "blockers": [],
       "policy": {}
     },
     "parser": {
@@ -11308,11 +11371,11 @@
       },
       "validation": {
         "version": "parser-validation-v1",
-        "status": "low",
-        "overallConfidenceScore": 0.6168,
+        "status": "medium",
+        "overallConfidenceScore": 0.7043,
         "financialConfidenceScore": 0.545,
-        "structuralConfidenceScore": 0.75,
-        "revenueSegmentChecks": 0,
+        "structuralConfidenceScore": 1.0,
+        "revenueSegmentChecks": 1,
         "revenueSegmentMismatchCount": 0,
         "revenueSegmentSkippedChecks": 34,
         "detailGroupChecks": 0,

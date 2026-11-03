@@ -6,7 +6,7 @@ import re
 FIELDS = ('officialRevenueSegments', 'officialRevenueDetailGroups', 'officialCostBreakdown', 'officialOpexBreakdown')
 CONTRACT_VERSION = 3
 FINGERPRINT_FIELDS = ('periodEnd', 'statementFilingDate', 'revenueBn', 'operatingIncomeBn', 'netIncomeBn',
-                      *FIELDS, 'officialRevenueStyle', 'clientIncentivesBn', 'revenueYoyPct', 'revenueQoqPct', 'chartQuality')
+                      *FIELDS, 'officialRevenueStyle', 'officialRevenueReconciliation', 'clientIncentivesBn', 'revenueYoyPct', 'revenueQoqPct', 'chartQuality')
 
 def chart_fingerprint(payload):
     financials = payload.get('financials') or {}
@@ -80,6 +80,19 @@ def chart_issues(payload, quarter=None):
             issues.append('missing previously disclosed revenue categories: ' + ','.join(sorted(missing)))
     # Visa discloses gross components and an explicit contra-revenue subtotal.
     adjustment = entry.get('clientIncentivesBn', 0) if entry.get('officialRevenueStyle') == 'visa-revenue-components' else 0
+    reconciliation = entry.get('officialRevenueReconciliation') or {}
+    if (entry.get('officialRevenueStyle') in {'alibaba-commerce-staged', 'samsung-business-unit-bridge'} or reconciliation.get('kind')=='reported-basis-reconciliation') and reconciliation:
+        reconciliation = entry.get('officialRevenueReconciliation') or {}
+        value = reconciliation.get('valueBn')
+        if not finite(value) or value > 0 or not reconciliation.get('sourceUrl'):
+            issues.append('invalid explicit revenue consolidation bridge')
+        else:
+            adjustment = -value
+            if reconciliation.get('kind')=='reported-basis-reconciliation':
+                business=reconciliation.get('reportedBusinessTotalBn')
+                consolidated=reconciliation.get('reportedConsolidatedRevenueBn')
+                if not finite(business) or not finite(consolidated) or abs(consolidated-entry.get('revenueBn',0))>.001 or abs(business+value-consolidated)>.001:
+                    issues.append('bank revenue basis reconciliation is inconsistent')
     expected = entry.get('revenueBn')
     if finite(expected) and finite(adjustment): expected += adjustment
     if segments and not balances(segments, expected):

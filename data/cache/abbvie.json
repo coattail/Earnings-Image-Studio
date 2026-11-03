@@ -18028,7 +18028,7 @@
       "fiscalLabel": "FY2026 Q3",
       "statementCurrency": "USD",
       "revenueBn": 17.404,
-      "revenueYoyPct": null,
+      "revenueYoyPct": 10.319,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
       "sgnaBn": 4.087,
@@ -18045,7 +18045,7 @@
       "operatingMarginPct": 36.009,
       "profitMarginPct": 24.236,
       "effectiveTaxRatePct": null,
-      "revenueQoqPct": null,
+      "revenueQoqPct": 2.437,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
@@ -18089,11 +18089,8 @@
       "chartQuality": {
         "version": 3,
         "quarter": "2026Q3",
-        "status": "pending",
-        "issues": [
-          "missing current-quarter revenue classification",
-          "missing previously disclosed revenue categories: botoxcosmetic,botoxtherapeutic,creon,elahere,epkinly,humira,imbruvica,juvedermcollection,linzessconstella,mavyret,otheraesthetics,otherneuroscience,otheroncology,otherproducts,qulipta,rinvoq,skyrizi,ubrelvy,venclexta,vraylar,vyalev"
-        ],
+        "status": "ready",
+        "issues": [],
         "requiredDetailParents": [],
         "requiredSegmentKeys": [
           "botoxcosmetic",
@@ -18119,6 +18116,261 @@
           "vyalev"
         ],
         "requiredDetailMembers": {}
+      },
+      "officialRevenueSegments": [
+        {
+          "name": "SKYRIZI",
+          "nameZh": null,
+          "memberKey": "skyrizi",
+          "valueBn": 5.776,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000033/abbv-20260930xexhibit991.htm",
+          "filingDate": "2026-10-30",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 33.2,
+          "qoqPct": 21.17
+        },
+        {
+          "name": "RINVOQ",
+          "nameZh": null,
+          "memberKey": "rinvoq",
+          "valueBn": 2.706,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000033/abbv-20260930xexhibit991.htm",
+          "filingDate": "2026-10-30",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 15.5,
+          "qoqPct": 53.31
+        },
+        {
+          "name": "Other Products",
+          "nameZh": null,
+          "memberKey": "otherproducts",
+          "valueBn": 1.013,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000033/abbv-20260930xexhibit991.htm",
+          "filingDate": "2026-10-30",
+          "sourceForm": "official current-period disclosure",
+          "valueMethod": "current-period-reported-total-less-disclosed-components",
+          "derivation": {
+            "totalRevenueBn": 17.404,
+            "disclosedComponentsBn": 16.391000000000002
+          },
+          "mixPct": 5.8,
+          "qoqPct": -8.66
+        },
+        {
+          "name": "Vraylar",
+          "nameZh": null,
+          "memberKey": "vraylar",
+          "valueBn": 1.068,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000033/abbv-20260930xexhibit991.htm",
+          "filingDate": "2026-10-30",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 6.1,
+          "qoqPct": 0.0
+        },
+        {
+          "name": "Botox Therapeutic",
+          "nameZh": null,
+          "memberKey": "botoxtherapeutic",
+          "valueBn": 1.08,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000033/abbv-20260930xexhibit991.htm",
+          "filingDate": "2026-10-30",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 6.2,
+          "qoqPct": 25.0
+        },
+        {
+          "name": "Botox Cosmetic",
+          "nameZh": null,
+          "memberKey": "botoxcosmetic",
+          "valueBn": 0.669,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000033/abbv-20260930xexhibit991.htm",
+          "filingDate": "2026-10-30",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 3.8,
+          "qoqPct": 67.25
+        },
+        {
+          "name": "Creon",
+          "nameZh": null,
+          "memberKey": "creon",
+          "valueBn": 0.361,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000033/abbv-20260930xexhibit991.htm",
+          "filingDate": "2026-10-30",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 2.1,
+          "qoqPct": 4.64
+        },
+        {
+          "name": "HUMIRA",
+          "nameZh": null,
+          "memberKey": "humira",
+          "valueBn": 0.683,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000033/abbv-20260930xexhibit991.htm",
+          "filingDate": "2026-10-30",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 3.9,
+          "qoqPct": 60.71
+        },
+        {
+          "name": "VENCLEXTA",
+          "nameZh": null,
+          "memberKey": "venclexta",
+          "valueBn": 0.803,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000033/abbv-20260930xexhibit991.htm",
+          "filingDate": "2026-10-30",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 4.6,
+          "qoqPct": 117.62
+        },
+        {
+          "name": "Imbruvica",
+          "nameZh": null,
+          "memberKey": "imbruvica",
+          "valueBn": 0.522,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000033/abbv-20260930xexhibit991.htm",
+          "filingDate": "2026-10-30",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 3.0,
+          "qoqPct": 54.9
+        },
+        {
+          "name": "Ubrelvy",
+          "nameZh": null,
+          "memberKey": "ubrelvy",
+          "valueBn": 0.449,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000033/abbv-20260930xexhibit991.htm",
+          "filingDate": "2026-10-30",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 2.6,
+          "qoqPct": 18.47
+        },
+        {
+          "name": "Linzess Constella",
+          "nameZh": null,
+          "memberKey": "linzessconstella",
+          "valueBn": 0.339,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000033/abbv-20260930xexhibit991.htm",
+          "filingDate": "2026-10-30",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 1.9,
+          "qoqPct": 19.79
+        },
+        {
+          "name": "Qulipta",
+          "nameZh": null,
+          "memberKey": "qulipta",
+          "valueBn": 0.398,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000033/abbv-20260930xexhibit991.htm",
+          "filingDate": "2026-10-30",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 2.3,
+          "qoqPct": 37.72
+        },
+        {
+          "name": "Other Aesthetics",
+          "nameZh": null,
+          "memberKey": "otheraesthetics",
+          "valueBn": 0.285,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000033/abbv-20260930xexhibit991.htm",
+          "filingDate": "2026-10-30",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 1.6,
+          "qoqPct": 10.47
+        },
+        {
+          "name": "MAVYRET",
+          "nameZh": null,
+          "memberKey": "mavyret",
+          "valueBn": 0.265,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000033/abbv-20260930xexhibit991.htm",
+          "filingDate": "2026-10-30",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 1.5,
+          "qoqPct": 99.25
+        },
+        {
+          "name": "Elahere",
+          "nameZh": null,
+          "memberKey": "elahere",
+          "valueBn": 0.224,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000033/abbv-20260930xexhibit991.htm",
+          "filingDate": "2026-10-30",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 1.3,
+          "qoqPct": 39.13
+        },
+        {
+          "name": "Vyalev",
+          "nameZh": null,
+          "memberKey": "vyalev",
+          "valueBn": 0.286,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000033/abbv-20260930xexhibit991.htm",
+          "filingDate": "2026-10-30",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 1.6,
+          "qoqPct": 123.44
+        },
+        {
+          "name": "Juvederm Collection",
+          "nameZh": null,
+          "memberKey": "juvedermcollection",
+          "valueBn": 0.222,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000033/abbv-20260930xexhibit991.htm",
+          "filingDate": "2026-10-30",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 1.3,
+          "qoqPct": 115.53
+        },
+        {
+          "name": "Other Neuroscience",
+          "nameZh": null,
+          "memberKey": "otherneuroscience",
+          "valueBn": 0.108,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000033/abbv-20260930xexhibit991.htm",
+          "filingDate": "2026-10-30",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 0.6,
+          "qoqPct": 151.16
+        },
+        {
+          "name": "Epkinly",
+          "nameZh": null,
+          "memberKey": "epkinly",
+          "valueBn": 0.108,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000033/abbv-20260930xexhibit991.htm",
+          "filingDate": "2026-10-30",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 0.6,
+          "qoqPct": 176.92
+        },
+        {
+          "name": "Other Oncology",
+          "nameZh": null,
+          "memberKey": "otheroncology",
+          "valueBn": 0.039,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000033/abbv-20260930xexhibit991.htm",
+          "filingDate": "2026-10-30",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 0.2,
+          "qoqPct": 18.18
+        }
+      ],
+      "revenueClassificationSourceUrl": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000033/abbv-20260930xexhibit991.htm",
+      "revenueClassificationSource": "official-complete-table",
+      "chartCompletionAttempts": [
+        {
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000033/abbv-20260930xexhibit991.htm",
+          "remainingIssues": []
+        }
+      ],
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2026Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
       }
     }
   },
@@ -32762,16 +33014,16 @@
     "validation": {
       "version": "parser-validation-v1",
       "status": "high",
-      "overallConfidenceScore": 0.876,
+      "overallConfidenceScore": 0.9635,
       "financialConfidenceScore": 0.9438,
-      "structuralConfidenceScore": 0.75,
-      "revenueSegmentChecks": 0,
+      "structuralConfidenceScore": 1.0,
+      "revenueSegmentChecks": 1,
       "revenueSegmentMismatchCount": 0,
       "revenueSegmentSkippedChecks": 34,
       "detailGroupChecks": 0,
       "detailGroupMismatchCount": 0,
       "detailGroupSkippedChecks": 0,
-      "opexChecks": 0,
+      "opexChecks": 1,
       "opexSkippedChecks": 0,
       "opexOverflowMismatchCount": 0,
       "warningCount": 0,
@@ -32780,31 +33032,28 @@
   },
   "statementPresets": {},
   "coverage": {
-    "quarterCount": 34,
+    "quarterCount": 35,
     "pixelReplicaQuarterCount": 0,
     "hasPixelReplica": false,
-    "officialFinancialQuarterCount": 34,
-    "officialSegmentQuarterCount": 34,
-    "officialExpenseQuarterCount": 0,
+    "officialFinancialQuarterCount": 35,
+    "officialSegmentQuarterCount": 35,
+    "officialExpenseQuarterCount": 1,
     "classification": {
-      "status": "error",
+      "status": "ok",
       "latestQuarter": "2026Q3",
-      "latestQuarterHasRevenueClassification": false,
+      "latestQuarterHasRevenueClassification": true,
       "latestQuarterHasExpenseClassification": true,
-      "latestRevenueClassificationQuarter": "2026Q2",
+      "latestRevenueClassificationQuarter": "2026Q3",
       "latestExpenseClassificationQuarter": "2026Q3",
       "latestStructureHistoryQuarter": "2026Q2",
-      "revenueClassificationQuarterCount": 34,
+      "revenueClassificationQuarterCount": 35,
       "expenseClassificationQuarterCount": 1,
-      "revenueClassificationCoverageRatio": 0.9714,
+      "revenueClassificationCoverageRatio": 1.0,
       "expenseClassificationCoverageRatio": 0.0286,
-      "latestRevenueClassificationLagQuarters": 1,
+      "latestRevenueClassificationLagQuarters": 0,
       "latestExpenseClassificationLagQuarters": 0,
       "warnings": [],
-      "blockers": [
-        "missing current-quarter revenue classification",
-        "missing previously disclosed revenue categories: botoxcosmetic,botoxtherapeutic,creon,elahere,epkinly,humira,imbruvica,juvedermcollection,linzessconstella,mavyret,otheraesthetics,otherneuroscience,otheroncology,otherproducts,qulipta,rinvoq,skyrizi,ubrelvy,venclexta,vraylar,vyalev"
-      ],
+      "blockers": [],
       "policy": {}
     },
     "parser": {
@@ -32841,16 +33090,16 @@
       "validation": {
         "version": "parser-validation-v1",
         "status": "high",
-        "overallConfidenceScore": 0.876,
+        "overallConfidenceScore": 0.9635,
         "financialConfidenceScore": 0.9438,
-        "structuralConfidenceScore": 0.75,
-        "revenueSegmentChecks": 0,
+        "structuralConfidenceScore": 1.0,
+        "revenueSegmentChecks": 1,
         "revenueSegmentMismatchCount": 0,
         "revenueSegmentSkippedChecks": 34,
         "detailGroupChecks": 0,
         "detailGroupMismatchCount": 0,
         "detailGroupSkippedChecks": 0,
-        "opexChecks": 0,
+        "opexChecks": 1,
         "opexSkippedChecks": 0,
         "opexOverflowMismatchCount": 0,
         "warningCount": 0,

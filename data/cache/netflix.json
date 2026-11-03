@@ -7799,7 +7799,7 @@
       "fiscalLabel": "FY2026 Q3",
       "statementCurrency": "USD",
       "revenueBn": 12.874,
-      "revenueYoyPct": null,
+      "revenueYoyPct": 11.851,
       "costOfRevenueBn": 6.079,
       "grossProfitBn": 6.795,
       "sgnaBn": 1.303,
@@ -7816,7 +7816,7 @@
       "operatingMarginPct": 34.636,
       "profitMarginPct": 28.46,
       "effectiveTaxRatePct": 15.126,
-      "revenueQoqPct": null,
+      "revenueQoqPct": 2.5,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
@@ -7857,23 +7857,62 @@
       },
       "officialRevenueSegments": [
         {
-          "name": "Streaming",
+          "name": "UCAN",
+          "memberKey": "ucan",
           "nameZh": null,
-          "memberKey": "streaming",
-          "valueBn": 5.628,
-          "yoyPct": null,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930_htm.xml",
-          "sourceForm": "10-Q",
-          "filingDate": "2026-10-21",
-          "periodStart": "2026-07-01",
-          "periodEnd": "2026-09-30",
-          "mixPct": 43.7
+          "valueBn": 5.628215,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm",
+          "filingDate": "2026-10-20",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 43.7,
+          "qoqPct": 3.61,
+          "yoyPct": 10.97,
+          "mixYoyDeltaPp": -0.3
+        },
+        {
+          "name": "EMEA",
+          "memberKey": "emea",
+          "nameZh": null,
+          "valueBn": 4.106572,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm",
+          "filingDate": "2026-10-20",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 31.9,
+          "qoqPct": 1.8,
+          "yoyPct": 11.02,
+          "mixYoyDeltaPp": -0.2
+        },
+        {
+          "name": "LATAM",
+          "memberKey": "latam",
+          "nameZh": null,
+          "valueBn": 1.602603,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm",
+          "filingDate": "2026-10-20",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 12.4,
+          "qoqPct": 1.17,
+          "yoyPct": 16.89,
+          "mixYoyDeltaPp": 0.5
+        },
+        {
+          "name": "APAC",
+          "memberKey": "apac",
+          "nameZh": null,
+          "valueBn": 1.536786,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm",
+          "filingDate": "2026-10-20",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 11.9,
+          "qoqPct": 1.77,
+          "yoyPct": 12.26,
+          "mixYoyDeltaPp": 0.0
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
-      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
-      "officialRevenueTaxonomyChangedFromPriorYear": true,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
       "displayCurrency": "USD",
       "displayScaleFactor": 1,
       "statementMeta": {
@@ -8005,15 +8044,33 @@
       "chartQuality": {
         "version": 3,
         "quarter": "2026Q3",
-        "status": "pending",
-        "issues": [
-          "revenue classifications do not reconcile to total revenue"
-        ],
+        "status": "ready",
+        "issues": [],
         "requiredDetailParents": [],
         "requiredSegmentKeys": [
-          "streaming"
+          "apac",
+          "emea",
+          "latam",
+          "ucan"
         ],
         "requiredDetailMembers": {}
+      },
+      "revenueClassificationSourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm",
+      "revenueClassificationSource": "official-complete-table",
+      "chartCompletionAttempts": [
+        {
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm",
+          "remainingIssues": []
+        }
+      ],
+      "officialRevenueStyle": "netflix-regional-revenue",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2026Q2",
+        "fields": [
+          "officialRevenueSegments",
+          "officialRevenueStyle"
+        ],
+        "rule": "same-normalized-category-set"
       }
     }
   },
@@ -10733,13 +10790,13 @@
       "overallConfidenceScore": 0.9835,
       "financialConfidenceScore": 0.9746,
       "structuralConfidenceScore": 1.0,
-      "revenueSegmentChecks": 27,
+      "revenueSegmentChecks": 28,
       "revenueSegmentMismatchCount": 0,
       "revenueSegmentSkippedChecks": 3,
       "detailGroupChecks": 0,
       "detailGroupMismatchCount": 0,
       "detailGroupSkippedChecks": 0,
-      "opexChecks": 28,
+      "opexChecks": 29,
       "opexSkippedChecks": 0,
       "opexOverflowMismatchCount": 0,
       "warningCount": 0,
@@ -14788,9 +14845,9 @@
     "hasPixelReplica": false,
     "officialFinancialQuarterCount": 35,
     "officialSegmentQuarterCount": 31,
-    "officialExpenseQuarterCount": 28,
+    "officialExpenseQuarterCount": 29,
     "classification": {
-      "status": "error",
+      "status": "ok",
       "latestQuarter": "2026Q3",
       "latestQuarterHasRevenueClassification": true,
       "latestQuarterHasExpenseClassification": true,
@@ -14804,9 +14861,7 @@
       "latestRevenueClassificationLagQuarters": 0,
       "latestExpenseClassificationLagQuarters": 0,
       "warnings": [],
-      "blockers": [
-        "revenue classifications do not reconcile to total revenue"
-      ],
+      "blockers": [],
       "policy": {}
     },
     "parser": {
@@ -14846,13 +14901,13 @@
         "overallConfidenceScore": 0.9835,
         "financialConfidenceScore": 0.9746,
         "structuralConfidenceScore": 1.0,
-        "revenueSegmentChecks": 27,
+        "revenueSegmentChecks": 28,
         "revenueSegmentMismatchCount": 0,
         "revenueSegmentSkippedChecks": 3,
         "detailGroupChecks": 0,
         "detailGroupMismatchCount": 0,
         "detailGroupSkippedChecks": 0,
-        "opexChecks": 28,
+        "opexChecks": 29,
         "opexSkippedChecks": 0,
         "opexOverflowMismatchCount": 0,
         "warningCount": 0,

@@ -1329,7 +1329,7 @@ function resolveRenderableOfficialRevenueRows(company, entry, options = {}) {
 
 function finalizeCuratedOfficialSegments(selected, revenueBn, options = {}) {
   const preserveAllRows = options.preserveAllRows === true;
-  const maxItems = 7;
+  const maxItems = preserveAllRows ? selected.length : 7;
   let curated = selected
     .slice()
     .sort((left, right) => safeNumber(right.valueBn) - safeNumber(left.valueBn))
@@ -1421,6 +1421,11 @@ function finalizeCuratedOfficialSegments(selected, revenueBn, options = {}) {
 
 function curatedOfficialSegments(company, entry, rows, detailGroups = []) {
   const revenueBn = safeNumber(entry?.revenueBn);
+  // A reconciled, explicitly extracted partition is already disjoint. The
+  // heuristic candidate search must not truncate its official categories.
+  if (entry?.revenueClassificationSource === 'official-complete-table') {
+    return finalizeCuratedOfficialSegments(rows, revenueBn, {preserveAllRows:true});
+  }
   const rawCandidates = [...rows].filter((item) => safeNumber(item.valueBn) > 0.02).slice(0, 12);
   const rawLabels = rawCandidates.map((item) => item.name);
   const candidates = rawCandidates.filter((item) => {
@@ -2488,7 +2493,12 @@ function chartPublicationIssue(company, quarterKey) {
   if (!segments.length) return message;
   const total = rows => rows.reduce((sum,row) => sum + row.valueBn, 0);
   const matches = (amount,expected) => Number.isFinite(expected) && Math.abs(amount-expected) <= Math.max(Math.min(.02,.01*Math.abs(expected)),.005*Math.abs(expected));
-  const adjustment = entry.officialRevenueStyle === 'visa-revenue-components' ? entry.clientIncentivesBn ?? 0 : 0;
+  let adjustment = entry.officialRevenueStyle === 'visa-revenue-components' ? entry.clientIncentivesBn ?? 0 : 0;
+  if ((['alibaba-commerce-staged','samsung-business-unit-bridge'].includes(entry.officialRevenueStyle) || entry.officialRevenueReconciliation?.kind === 'reported-basis-reconciliation') && entry.officialRevenueReconciliation) {
+    const bridge = entry.officialRevenueReconciliation;
+    if (!bridge || !Number.isFinite(bridge.valueBn) || bridge.valueBn > 0 || !bridge.sourceUrl) return message;
+    adjustment = -bridge.valueBn;
+  }
   if (!matches(total(segments), entry.revenueBn + adjustment)) return message;
   const normalize = value => String(value ?? '').toLowerCase().replace(/[^a-z0-9\u4e00-\u9fff]/g,'').replaceAll('and','');
   const identity = row => normalize(row.memberKey || row.name);
