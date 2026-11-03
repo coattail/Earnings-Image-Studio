@@ -4810,7 +4810,7 @@
       "costOfRevenueBn": 6.963,
       "grossProfitBn": 15.508,
       "sgnaBn": 5.478,
-      "rndBn": null,
+      "rndBn": 11.934,
       "otherOpexBn": null,
       "operatingExpensesBn": null,
       "operatingIncomeBn": null,
@@ -4934,38 +4934,92 @@
       "displayCurrency": "USD",
       "displayScaleFactor": 1,
       "statementMeta": {
-        "statementSource": null,
-        "statementSourceUrl": null,
-        "statementValueMode": null,
-        "statementSpanQuarters": null,
+        "statementSource": "generic-official-filing-table",
+        "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040625000209/jnj-20250928.htm",
+        "statementValueMode": "direct",
+        "statementSpanQuarters": 1,
         "qualityFlags": [],
-        "adapterId": "official_financials"
+        "adapterId": "generic_filing_tables"
       },
+      "opexBreakdown": [
+        {
+          "taxonomyId": "general_administrative",
+          "name": "G&A",
+          "nameZh": "管理费用",
+          "memberKey": "ga",
+          "valueBn": 16.416,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040625000209/jnj-20250928.htm",
+          "sourceForm": null,
+          "filingDate": null,
+          "metricMode": null,
+          "supportLines": null,
+          "supportLinesZh": null,
+          "provenance": {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 92.02,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040625000209/jnj-20250928.htm"
+          }
+        },
+        {
+          "taxonomyId": "rnd",
+          "name": "R&D",
+          "nameZh": "研发",
+          "memberKey": "rd",
+          "valueBn": 11.934,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040625000209/jnj-20250928.htm",
+          "sourceForm": null,
+          "filingDate": null,
+          "metricMode": null,
+          "supportLines": null,
+          "supportLinesZh": null,
+          "provenance": {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 92.01,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040625000209/jnj-20250928.htm"
+          }
+        }
+      ],
       "fieldSources": {
+        "rndBn": {
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 85.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040625000209/jnj-20250928.htm"
+        },
+        "opexBreakdown": [
+          {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 92.0,
+            "itemCount": 2
+          }
+        ],
         "statementMeta": {
-          "adapterId": "official_financials",
-          "label": "SEC companyfacts / filings",
-          "score": 8.1,
-          "sourceUrl": null
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 8.7,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040625000209/jnj-20250928.htm"
         }
       },
       "extractionDiagnostics": {
         "qualityScore": 79,
         "availableRequiredFieldCount": 2,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 9,
+        "sourceFieldCount": 11,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "none",
+        "opexBreakdownMode": "explicit",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": null,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
-        "statementSource": null,
-        "statementValueMode": null,
-        "statementSpanQuarters": null,
+        "statementSource": "generic-official-filing-table",
+        "statementValueMode": "direct",
+        "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
           "missing-required:operatingIncomeBn",
@@ -4992,7 +5046,7 @@
       "costOfRevenueBn": 7.128,
       "grossProfitBn": 15.392,
       "sgnaBn": 6.453,
-      "rndBn": null,
+      "rndBn": 12.281,
       "otherOpexBn": null,
       "operatingExpensesBn": null,
       "operatingIncomeBn": null,
@@ -5123,7 +5177,42 @@
         "qualityFlags": [],
         "adapterId": "official_financials"
       },
+      "opexBreakdown": [
+        {
+          "taxonomyId": "rnd",
+          "name": "R&D",
+          "nameZh": "研发",
+          "memberKey": "rd",
+          "valueBn": 12.281,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040625000209/jnj-20250928.htm",
+          "sourceForm": null,
+          "filingDate": null,
+          "metricMode": null,
+          "supportLines": null,
+          "supportLinesZh": null,
+          "provenance": {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 90.01,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040625000209/jnj-20250928.htm"
+          }
+        }
+      ],
       "fieldSources": {
+        "rndBn": {
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 85.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000002/a2025q4exhibit991.htm"
+        },
+        "opexBreakdown": [
+          {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 90.0,
+            "itemCount": 1
+          }
+        ],
         "statementMeta": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
@@ -5135,10 +5224,10 @@
         "qualityScore": 79,
         "availableRequiredFieldCount": 2,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 9,
+        "sourceFieldCount": 11,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "none",
+        "opexBreakdownMode": "explicit",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": null,
@@ -5174,7 +5263,7 @@
       "costOfRevenueBn": 7.357,
       "grossProfitBn": 14.536,
       "sgnaBn": 5.112,
-      "rndBn": null,
+      "rndBn": 3.225,
       "otherOpexBn": null,
       "operatingExpensesBn": null,
       "operatingIncomeBn": null,
@@ -5298,38 +5387,92 @@
       "displayCurrency": "USD",
       "displayScaleFactor": 1,
       "statementMeta": {
-        "statementSource": null,
-        "statementSourceUrl": null,
-        "statementValueMode": null,
-        "statementSpanQuarters": null,
+        "statementSource": "generic-official-filing-table",
+        "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000087/jnj-20260329.htm",
+        "statementValueMode": "direct",
+        "statementSpanQuarters": 1,
         "qualityFlags": [],
-        "adapterId": "official_financials"
+        "adapterId": "generic_filing_tables"
       },
+      "opexBreakdown": [
+        {
+          "taxonomyId": "general_administrative",
+          "name": "G&A",
+          "nameZh": "管理费用",
+          "memberKey": "ga",
+          "valueBn": 5.112,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000087/jnj-20260329.htm",
+          "sourceForm": null,
+          "filingDate": null,
+          "metricMode": null,
+          "supportLines": null,
+          "supportLinesZh": null,
+          "provenance": {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 92.01,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000087/jnj-20260329.htm"
+          }
+        },
+        {
+          "taxonomyId": "rnd",
+          "name": "R&D",
+          "nameZh": "研发",
+          "memberKey": "rd",
+          "valueBn": 3.225,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000087/jnj-20260329.htm",
+          "sourceForm": null,
+          "filingDate": null,
+          "metricMode": null,
+          "supportLines": null,
+          "supportLinesZh": null,
+          "provenance": {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 92.0,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000087/jnj-20260329.htm"
+          }
+        }
+      ],
       "fieldSources": {
+        "rndBn": {
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 85.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000087/jnj-20260329.htm"
+        },
+        "opexBreakdown": [
+          {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 92.0,
+            "itemCount": 2
+          }
+        ],
         "statementMeta": {
-          "adapterId": "official_financials",
-          "label": "SEC companyfacts / filings",
-          "score": 8.1,
-          "sourceUrl": null
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 8.7,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000087/jnj-20260329.htm"
         }
       },
       "extractionDiagnostics": {
         "qualityScore": 79,
         "availableRequiredFieldCount": 2,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 9,
+        "sourceFieldCount": 11,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "none",
+        "opexBreakdownMode": "explicit",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": null,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
-        "statementSource": null,
-        "statementValueMode": null,
-        "statementSpanQuarters": null,
+        "statementSource": "generic-official-filing-table",
+        "statementValueMode": "direct",
+        "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
           "missing-required:operatingIncomeBn",
@@ -5356,7 +5499,7 @@
       "costOfRevenueBn": 7.628,
       "grossProfitBn": 16.115,
       "sgnaBn": 5.889,
-      "rndBn": null,
+      "rndBn": 6.741,
       "otherOpexBn": null,
       "operatingExpensesBn": null,
       "operatingIncomeBn": null,
@@ -5480,38 +5623,92 @@
       "displayCurrency": "USD",
       "displayScaleFactor": 1,
       "statementMeta": {
-        "statementSource": null,
-        "statementSourceUrl": null,
-        "statementValueMode": null,
-        "statementSpanQuarters": null,
+        "statementSource": "generic-official-filing-table",
+        "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm",
+        "statementValueMode": "direct",
+        "statementSpanQuarters": 1,
         "qualityFlags": [],
-        "adapterId": "official_financials"
+        "adapterId": "generic_filing_tables"
       },
+      "opexBreakdown": [
+        {
+          "taxonomyId": "general_administrative",
+          "name": "G&A",
+          "nameZh": "管理费用",
+          "memberKey": "ga",
+          "valueBn": 11.001,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm",
+          "sourceForm": null,
+          "filingDate": null,
+          "metricMode": null,
+          "supportLines": null,
+          "supportLinesZh": null,
+          "provenance": {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 92.01,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
+          }
+        },
+        {
+          "taxonomyId": "rnd",
+          "name": "R&D",
+          "nameZh": "研发",
+          "memberKey": "rd",
+          "valueBn": 6.741,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm",
+          "sourceForm": null,
+          "filingDate": null,
+          "metricMode": null,
+          "supportLines": null,
+          "supportLinesZh": null,
+          "provenance": {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 92.01,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
+          }
+        }
+      ],
       "fieldSources": {
+        "rndBn": {
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 85.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
+        },
+        "opexBreakdown": [
+          {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 92.0,
+            "itemCount": 2
+          }
+        ],
         "statementMeta": {
-          "adapterId": "official_financials",
-          "label": "SEC companyfacts / filings",
-          "score": 8.1,
-          "sourceUrl": null
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 8.7,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
         }
       },
       "extractionDiagnostics": {
         "qualityScore": 79,
         "availableRequiredFieldCount": 2,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 9,
+        "sourceFieldCount": 11,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "none",
+        "opexBreakdownMode": "explicit",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": null,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
-        "statementSource": null,
-        "statementValueMode": null,
-        "statementSpanQuarters": null,
+        "statementSource": "generic-official-filing-table",
+        "statementValueMode": "direct",
+        "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
           "missing-required:operatingIncomeBn",
@@ -5521,7 +5718,8 @@
       "sankeyStructureContinuity": {
         "sourceQuarter": "2025Q1",
         "fields": [
-          "officialRevenueSegments"
+          "officialRevenueSegments",
+          "opexBreakdown"
         ],
         "rule": "same-normalized-category-set"
       }
@@ -5538,7 +5736,7 @@
       "costOfRevenueBn": 7.303,
       "grossProfitBn": 16.69,
       "sgnaBn": 5.922,
-      "rndBn": null,
+      "rndBn": 10.413,
       "otherOpexBn": null,
       "operatingExpensesBn": null,
       "operatingIncomeBn": null,
@@ -5662,38 +5860,92 @@
       "displayCurrency": "USD",
       "displayScaleFactor": 1,
       "statementMeta": {
-        "statementSource": null,
-        "statementSourceUrl": null,
-        "statementValueMode": null,
-        "statementSpanQuarters": null,
+        "statementSource": "generic-official-filing-table",
+        "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927.htm",
+        "statementValueMode": "direct",
+        "statementSpanQuarters": 1,
         "qualityFlags": [],
-        "adapterId": "official_financials"
+        "adapterId": "generic_filing_tables"
       },
+      "opexBreakdown": [
+        {
+          "taxonomyId": "general_administrative",
+          "name": "G&A",
+          "nameZh": "管理费用",
+          "memberKey": "ga",
+          "valueBn": 16.923,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927.htm",
+          "sourceForm": null,
+          "filingDate": null,
+          "metricMode": null,
+          "supportLines": null,
+          "supportLinesZh": null,
+          "provenance": {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 92.02,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927.htm"
+          }
+        },
+        {
+          "taxonomyId": "rnd",
+          "name": "R&D",
+          "nameZh": "研发",
+          "memberKey": "rd",
+          "valueBn": 10.413,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927.htm",
+          "sourceForm": null,
+          "filingDate": null,
+          "metricMode": null,
+          "supportLines": null,
+          "supportLinesZh": null,
+          "provenance": {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 92.01,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927.htm"
+          }
+        }
+      ],
       "fieldSources": {
+        "rndBn": {
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 85.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927.htm"
+        },
+        "opexBreakdown": [
+          {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 92.0,
+            "itemCount": 2
+          }
+        ],
         "statementMeta": {
-          "adapterId": "official_financials",
-          "label": "SEC companyfacts / filings",
-          "score": 8.1,
-          "sourceUrl": null
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 8.7,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927.htm"
         }
       },
       "extractionDiagnostics": {
         "qualityScore": 79,
         "availableRequiredFieldCount": 2,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 9,
+        "sourceFieldCount": 11,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "none",
+        "opexBreakdownMode": "explicit",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": null,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
-        "statementSource": null,
-        "statementValueMode": null,
-        "statementSpanQuarters": null,
+        "statementSource": "generic-official-filing-table",
+        "statementValueMode": "direct",
+        "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
           "missing-required:operatingIncomeBn",
@@ -5703,7 +5955,8 @@
       "sankeyStructureContinuity": {
         "sourceQuarter": "2025Q2",
         "fields": [
-          "officialRevenueSegments"
+          "officialRevenueSegments",
+          "opexBreakdown"
         ],
         "rule": "same-normalized-category-set"
       }
@@ -5720,7 +5973,7 @@
       "costOfRevenueBn": 7.968,
       "grossProfitBn": 16.596,
       "sgnaBn": 6.753,
-      "rndBn": null,
+      "rndBn": 15.619,
       "otherOpexBn": null,
       "operatingExpensesBn": null,
       "operatingIncomeBn": null,
@@ -5851,7 +6104,42 @@
         "qualityFlags": [],
         "adapterId": "official_financials"
       },
+      "opexBreakdown": [
+        {
+          "taxonomyId": "rnd",
+          "name": "R&D",
+          "nameZh": "研发",
+          "memberKey": "rd",
+          "valueBn": 15.619,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927.htm",
+          "sourceForm": null,
+          "filingDate": null,
+          "metricMode": null,
+          "supportLines": null,
+          "supportLinesZh": null,
+          "provenance": {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 90.02,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927.htm"
+          }
+        }
+      ],
       "fieldSources": {
+        "rndBn": {
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 85.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000002/a2025q4exhibit991.htm"
+        },
+        "opexBreakdown": [
+          {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 90.0,
+            "itemCount": 1
+          }
+        ],
         "statementMeta": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
@@ -5863,10 +6151,10 @@
         "qualityScore": 79,
         "availableRequiredFieldCount": 2,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 9,
+        "sourceFieldCount": 11,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "none",
+        "opexBreakdownMode": "explicit",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": null,
@@ -6026,19 +6314,72 @@
       "displayCurrency": "USD",
       "displayScaleFactor": 1,
       "statementMeta": {
-        "statementSource": null,
-        "statementSourceUrl": null,
-        "statementValueMode": null,
-        "statementSpanQuarters": null,
+        "statementSource": "generic-official-filing-table",
+        "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000087/jnj-20260329.htm",
+        "statementValueMode": "direct",
+        "statementSpanQuarters": 1,
         "qualityFlags": [],
-        "adapterId": "official_financials"
+        "adapterId": "generic_filing_tables"
       },
+      "opexBreakdown": [
+        {
+          "taxonomyId": "general_administrative",
+          "name": "G&A",
+          "nameZh": "管理费用",
+          "memberKey": "ga",
+          "valueBn": 6.034,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000087/jnj-20260329.htm",
+          "sourceForm": null,
+          "filingDate": null,
+          "metricMode": null,
+          "supportLines": null,
+          "supportLinesZh": null,
+          "provenance": {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 92.01,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000087/jnj-20260329.htm"
+          }
+        },
+        {
+          "taxonomyId": "rnd",
+          "name": "R&D",
+          "nameZh": "研发",
+          "memberKey": "rd",
+          "valueBn": 3.527,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000087/jnj-20260329.htm",
+          "sourceForm": null,
+          "filingDate": null,
+          "metricMode": null,
+          "supportLines": null,
+          "supportLinesZh": null,
+          "provenance": {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 92.0,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000087/jnj-20260329.htm"
+          }
+        }
+      ],
       "fieldSources": {
+        "rndBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000087/jnj-20260329.htm"
+        },
+        "opexBreakdown": [
+          {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 92.0,
+            "itemCount": 2
+          }
+        ],
         "statementMeta": {
-          "adapterId": "official_financials",
-          "label": "SEC companyfacts / filings",
-          "score": 8.1,
-          "sourceUrl": null
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 8.7,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000087/jnj-20260329.htm"
         },
         "revenueBn": {
           "adapterId": "official-statement-backfill",
@@ -6056,11 +6397,6 @@
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000087/jnj-20260329.htm"
         },
         "sgnaBn": {
-          "adapterId": "official-statement-backfill",
-          "label": "Official quarterly income statement",
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000087/jnj-20260329.htm"
-        },
-        "rndBn": {
           "adapterId": "official-statement-backfill",
           "label": "Official quarterly income statement",
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000087/jnj-20260329.htm"
@@ -6100,19 +6436,19 @@
         "qualityScore": 79,
         "availableRequiredFieldCount": 2,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 9,
+        "sourceFieldCount": 11,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "none",
+        "opexBreakdownMode": "explicit",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": null,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
-        "statementSource": null,
-        "statementValueMode": null,
-        "statementSpanQuarters": null,
+        "statementSource": "generic-official-filing-table",
+        "statementValueMode": "direct",
+        "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
           "missing-required:operatingIncomeBn",
@@ -6270,19 +6606,72 @@
       "displayCurrency": "USD",
       "displayScaleFactor": 1,
       "statementMeta": {
-        "statementSource": null,
-        "statementSourceUrl": null,
-        "statementValueMode": null,
-        "statementSpanQuarters": null,
+        "statementSource": "generic-official-filing-table",
+        "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm",
+        "statementValueMode": "direct",
+        "statementSpanQuarters": 1,
         "qualityFlags": [],
-        "adapterId": "official_financials"
+        "adapterId": "generic_filing_tables"
       },
+      "opexBreakdown": [
+        {
+          "taxonomyId": "general_administrative",
+          "name": "G&A",
+          "nameZh": "管理费用",
+          "memberKey": "ga",
+          "valueBn": 12.466,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm",
+          "sourceForm": null,
+          "filingDate": null,
+          "metricMode": null,
+          "supportLines": null,
+          "supportLinesZh": null,
+          "provenance": {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 92.01,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
+          }
+        },
+        {
+          "taxonomyId": "rnd",
+          "name": "R&D",
+          "nameZh": "研发",
+          "memberKey": "rd",
+          "valueBn": 7.18,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm",
+          "sourceForm": null,
+          "filingDate": null,
+          "metricMode": null,
+          "supportLines": null,
+          "supportLinesZh": null,
+          "provenance": {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 92.01,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
+          }
+        }
+      ],
       "fieldSources": {
+        "rndBn": {
+          "adapterId": "official-statement-backfill",
+          "label": "Official quarterly income statement",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
+        },
+        "opexBreakdown": [
+          {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 92.0,
+            "itemCount": 2
+          }
+        ],
         "statementMeta": {
-          "adapterId": "official_financials",
-          "label": "SEC companyfacts / filings",
-          "score": 8.1,
-          "sourceUrl": null
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 8.7,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
         },
         "revenueBn": {
           "adapterId": "official-statement-backfill",
@@ -6300,11 +6689,6 @@
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
         },
         "sgnaBn": {
-          "adapterId": "official-statement-backfill",
-          "label": "Official quarterly income statement",
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
-        },
-        "rndBn": {
           "adapterId": "official-statement-backfill",
           "label": "Official quarterly income statement",
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
@@ -6344,19 +6728,19 @@
         "qualityScore": 79,
         "availableRequiredFieldCount": 2,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 9,
+        "sourceFieldCount": 11,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "none",
+        "opexBreakdownMode": "explicit",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": null,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
-        "statementSource": null,
-        "statementValueMode": null,
-        "statementSpanQuarters": null,
+        "statementSource": "generic-official-filing-table",
+        "statementValueMode": "direct",
+        "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
           "missing-required:operatingIncomeBn",
@@ -6373,60 +6757,248 @@
       "sankeyStructureContinuity": {
         "sourceQuarter": "2026Q1",
         "fields": [
-          "officialRevenueSegments"
+          "officialRevenueSegments",
+          "opexBreakdown"
         ],
         "rule": "same-normalized-category-set"
       }
     },
     "2026Q3": {
       "calendarQuarter": "2026Q3",
-      "periodEnd": "2026-09-30",
+      "periodEnd": "2026-09-27",
       "fiscalYear": "2026",
       "fiscalQuarter": "Q3",
       "fiscalLabel": "FY2026 Q3",
       "statementCurrency": "USD",
       "revenueBn": 25.399,
       "revenueYoyPct": 5.86,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
-      "sgnaBn": null,
-      "rndBn": null,
+      "costOfRevenueBn": 8.097,
+      "grossProfitBn": 17.302,
+      "sgnaBn": 6.285,
+      "rndBn": 11.832,
       "otherOpexBn": null,
       "operatingExpensesBn": null,
       "operatingIncomeBn": null,
       "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
-      "taxBn": null,
+      "pretaxIncomeBn": 0.034,
+      "taxBn": -0.176,
       "netIncomeBn": 0.21,
-      "netIncomeYoyPct": null,
-      "grossMarginPct": null,
+      "netIncomeYoyPct": -95.92,
+      "grossMarginPct": 68.121,
       "operatingMarginPct": null,
       "profitMarginPct": 0.827,
-      "effectiveTaxRatePct": null,
+      "effectiveTaxRatePct": -517.647,
       "revenueQoqPct": 0.352,
-      "grossMarginYoyDeltaPp": null,
+      "grossMarginYoyDeltaPp": -1.44,
       "operatingMarginYoyDeltaPp": null,
-      "profitMarginYoyDeltaPp": null,
-      "statementSource": "official-earnings-release",
-      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000189/a2026q3exhibit991.htm",
-      "statementFilingDate": "2026-10-13",
-      "statementSpanQuarters": 1,
-      "statementValueMode": "reported",
+      "profitMarginYoyDeltaPp": -20.65,
+      "statementFilingDate": "2026-09-27",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/jnj/financials/?p=quarterly",
       "parserFinancialFieldSources": {
         "revenueBn": "official",
-        "netIncomeBn": "official"
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
+      },
+      "parserFinancialCandidateCounts": {
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 0,
+        "otherOpexBn": 0,
+        "operatingExpensesBn": 0,
+        "operatingIncomeBn": 0,
+        "operatingMarginPct": 0,
+        "operatingMarginYoyDeltaPp": 0,
+        "nonOperatingBn": 0,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
       },
       "parserFinancialValidation": {
+        "version": "financial-validation-v1",
         "status": "high",
-        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000189/a2026q3exhibit991.htm"
+        "confidenceScore": 0.8625,
+        "completenessScore": 0.75,
+        "consistencyScore": 1.0,
+        "checksRun": 5,
+        "checksPassed": 5,
+        "issueCount": 0,
+        "issues": []
       },
-      "automaticEarnings": {
-        "filingDate": "2026-10-13",
-        "accession": "0000200406-26-000189",
-        "form": "8-K"
-      },
+      "officialRevenueSegments": [
+        {
+          "name": "Innovative Medicine",
+          "nameZh": null,
+          "memberKey": "innovativemedicine",
+          "valueBn": 16.757,
+          "yoyPct": 7.67,
+          "qoqPct": 2.28,
+          "mixPct": 66.0,
+          "mixYoyDeltaPp": 1.1,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-10-21",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        },
+        {
+          "name": "Med Tech",
+          "nameZh": null,
+          "memberKey": "medtech",
+          "valueBn": 8.642,
+          "yoyPct": 2.51,
+          "qoqPct": -3.18,
+          "mixPct": 34.0,
+          "mixYoyDeltaPp": -1.1,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927_htm.xml",
+          "sourceForm": "10-Q",
+          "filingDate": "2026-10-21",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
+        }
+      ],
+      "officialSegmentAxis": "StatementBusinessSegmentsAxis",
+      "officialSegmentSource": "official-filings",
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
       "displayCurrency": "USD",
       "displayScaleFactor": 1,
+      "statementMeta": {
+        "statementSource": "generic-official-filing-table",
+        "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927.htm",
+        "statementValueMode": "direct",
+        "statementSpanQuarters": 1,
+        "qualityFlags": [],
+        "adapterId": "generic_filing_tables"
+      },
+      "opexBreakdown": [
+        {
+          "taxonomyId": "general_administrative",
+          "name": "G&A",
+          "nameZh": "管理费用",
+          "memberKey": "ga",
+          "valueBn": 18.751,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927.htm",
+          "sourceForm": null,
+          "filingDate": null,
+          "metricMode": null,
+          "supportLines": null,
+          "supportLinesZh": null,
+          "provenance": {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 92.02,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927.htm"
+          }
+        },
+        {
+          "taxonomyId": "rnd",
+          "name": "R&D",
+          "nameZh": "研发",
+          "memberKey": "rd",
+          "valueBn": 11.832,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927.htm",
+          "sourceForm": null,
+          "filingDate": null,
+          "metricMode": null,
+          "supportLines": null,
+          "supportLinesZh": null,
+          "provenance": {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 92.01,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927.htm"
+          }
+        }
+      ],
+      "fieldSources": {
+        "rndBn": {
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 85.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927.htm"
+        },
+        "opexBreakdown": [
+          {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 92.0,
+            "itemCount": 2
+          }
+        ],
+        "statementMeta": {
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 8.7,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927.htm"
+        }
+      },
+      "extractionDiagnostics": {
+        "qualityScore": 79,
+        "availableRequiredFieldCount": 2,
+        "requiredFieldCount": 3,
+        "sourceFieldCount": 11,
+        "hasCostBreakdownProfile": false,
+        "costBreakdownMode": "none",
+        "opexBreakdownMode": "explicit",
+        "revenueSegmentCoveragePct": 100.0,
+        "costBreakdownCoveragePct": 0,
+        "opexBreakdownCoveragePct": null,
+        "revenueSegmentResidualBn": 0.0,
+        "costBreakdownResidualBn": null,
+        "opexBreakdownResidualBn": null,
+        "statementSource": "generic-official-filing-table",
+        "statementValueMode": "direct",
+        "statementSpanQuarters": 1,
+        "statementQualityFlags": [],
+        "issues": [
+          "missing-required:operatingIncomeBn",
+          "cost-breakdown-coverage-low"
+        ]
+      },
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2026Q2",
+        "fields": [
+          "officialRevenueSegments",
+          "opexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      },
       "chartQuality": {
         "version": 3,
         "quarter": "2026Q3",
@@ -6438,49 +7010,6 @@
           "medtech"
         ],
         "requiredDetailMembers": {}
-      },
-      "officialRevenueSegments": [
-        {
-          "name": "Innovative Medicine",
-          "nameZh": null,
-          "memberKey": "innovativemedicine",
-          "valueBn": 16.757,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000189/a2026q3exhibit991.htm",
-          "filingDate": "2026-10-13",
-          "sourceForm": "earnings release",
-          "yoyPct": 7.67,
-          "qoqPct": 2.28,
-          "mixPct": 66.0,
-          "mixYoyDeltaPp": 1.1
-        },
-        {
-          "name": "Med Tech",
-          "nameZh": null,
-          "memberKey": "medtech",
-          "valueBn": 8.642,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000189/a2026q3exhibit991.htm",
-          "filingDate": "2026-10-13",
-          "sourceForm": "earnings release",
-          "yoyPct": 2.51,
-          "qoqPct": -3.18,
-          "mixPct": 34.0,
-          "mixYoyDeltaPp": -1.1
-        }
-      ],
-      "chartCompletionAttempts": [
-        {
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000189/a2026q3exhibit991.htm",
-          "remainingIssues": []
-        }
-      ],
-      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-      "officialRevenueTaxonomyChangedFromPriorYear": false,
-      "sankeyStructureContinuity": {
-        "sourceQuarter": "2026Q2",
-        "fields": [
-          "officialRevenueSegments"
-        ],
-        "rule": "same-normalized-category-set"
       }
     }
   },
@@ -8503,9 +9032,55 @@
             "validationNotes": null
           }
         ]
+      },
+      "2026Q3": {
+        "segments": [
+          {
+            "name": "Innovative Medicine",
+            "nameZh": null,
+            "memberKey": "innovativemedicine",
+            "valueBn": 16.757,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-10-21",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          },
+          {
+            "name": "Med Tech",
+            "nameZh": null,
+            "memberKey": "medtech",
+            "valueBn": 8.642,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927_htm.xml",
+            "sourceForm": "10-Q",
+            "filingDate": "2026-10-21",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          }
+        ]
       }
     },
     "filingsUsed": [
+      {
+        "form": "10-Q",
+        "filingDate": "2026-10-21",
+        "accession": "0000200406-26-000197",
+        "instance": "jnj-20260927_htm.xml"
+      },
       {
         "form": "10-Q",
         "filingDate": "2026-07-23",
@@ -8690,8 +9265,8 @@
           "status": "success",
           "selected": true,
           "reason": "",
-          "quarter_count": 32,
-          "latest_quarter": "2026Q2",
+          "quarter_count": 33,
+          "latest_quarter": "2026Q3",
           "error": "",
           "error_details": []
         },
@@ -8715,21 +9290,21 @@
         "derivedFieldCount": 0,
         "mixedSourceQuarterCount": 0,
         "sourceUsageCounts": {
-          "official": 463,
+          "official": 478,
           "stockanalysis": 0
         }
       },
       "validation": {
         "version": "financial-validation-v1",
-        "status": "medium",
+        "status": "high",
         "quarterCount": 33,
         "validatedQuarterCount": 33,
         "issueCount": 3,
         "mismatchQuarterCount": 2,
-        "highConfidenceQuarterCount": 30,
-        "averageConfidenceScore": 0.835,
+        "highConfidenceQuarterCount": 31,
+        "averageConfidenceScore": 0.8543,
         "latestQuarter": "2026Q3",
-        "latestQuarterConfidenceScore": 0.225,
+        "latestQuarterConfidenceScore": 0.8625,
         "latestQuarterIssueCount": 0
       }
     },
@@ -8758,8 +9333,8 @@
           "status": "success",
           "selected": true,
           "reason": "",
-          "quarter_count": 32,
-          "latest_quarter": "2026Q2",
+          "quarter_count": 33,
+          "latest_quarter": "2026Q3",
           "error": "",
           "error_details": []
         }
@@ -8768,25 +9343,27 @@
     "summary": {
       "financialQuarterCount": 33,
       "segmentQuarterCount": 33,
-      "revenueStructureQuarterCount": 32
+      "revenueStructureQuarterCount": 33
     },
     "validation": {
       "version": "parser-validation-v1",
-      "status": "high",
-      "overallConfidenceScore": 0.8927,
-      "financialConfidenceScore": 0.835,
-      "structuralConfidenceScore": 1.0,
+      "status": "medium",
+      "overallConfidenceScore": 0.8178,
+      "financialConfidenceScore": 0.8543,
+      "structuralConfidenceScore": 0.75,
       "revenueSegmentChecks": 12,
       "revenueSegmentMismatchCount": 0,
       "revenueSegmentSkippedChecks": 21,
       "detailGroupChecks": 0,
       "detailGroupMismatchCount": 0,
       "detailGroupSkippedChecks": 0,
-      "opexChecks": 0,
+      "opexChecks": 2,
       "opexSkippedChecks": 0,
-      "opexOverflowMismatchCount": 0,
-      "warningCount": 0,
-      "warnings": []
+      "opexOverflowMismatchCount": 1,
+      "warningCount": 1,
+      "warnings": [
+        "2026Q2: opex breakdown sums to 19.646Bn vs operating expenses 10.119Bn."
+      ]
     }
   },
   "unifiedExtraction": {
@@ -8820,21 +9397,9 @@
         "adapterId": "generic_filing_tables",
         "kind": "statement",
         "label": "Generic official filing table parser",
-        "enabled": false,
+        "enabled": true,
         "priority": 80,
-        "errorCount": 1,
-        "errors": [
-          "companyfacts: IncompleteRead(3206991 bytes read, 871408 more expected)"
-        ],
-        "errorDetails": [
-          {
-            "message": "companyfacts: IncompleteRead(3206991 bytes read, 871408 more expected)",
-            "severity": "error",
-            "layer": "financials",
-            "sourceId": "generic_filing_tables",
-            "phase": "fetch"
-          }
-        ]
+        "errorCount": 0
       },
       {
         "adapterId": "generic_ir_pdf",
@@ -8842,19 +9407,7 @@
         "label": "Generic IR PDF parser",
         "enabled": false,
         "priority": 72,
-        "errorCount": 1,
-        "errors": [
-          "submissions: <urlopen error [Errno 1] Operation not permitted>"
-        ],
-        "errorDetails": [
-          {
-            "message": "submissions: <urlopen error [Errno 1] Operation not permitted>",
-            "severity": "error",
-            "layer": "financials",
-            "sourceId": "generic_ir_pdf",
-            "phase": "fetch"
-          }
-        ]
+        "errorCount": 0
       },
       {
         "adapterId": "stockanalysis_financials",
@@ -10259,6 +10812,12 @@
           "score": 112.0,
           "sourceUrl": null
         },
+        "rndBn": {
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 85.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040625000209/jnj-20250928.htm"
+        },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
@@ -10277,11 +10836,19 @@
           "score": 118.0,
           "sourceUrl": null
         },
+        "opexBreakdown": [
+          {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 92.0,
+            "itemCount": 2
+          }
+        ],
         "statementMeta": {
-          "adapterId": "official_financials",
-          "label": "SEC companyfacts / filings",
-          "score": 8.1,
-          "sourceUrl": null
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 8.7,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040625000209/jnj-20250928.htm"
         },
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
@@ -10315,6 +10882,12 @@
           "score": 112.0,
           "sourceUrl": null
         },
+        "rndBn": {
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 85.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000002/a2025q4exhibit991.htm"
+        },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
@@ -10333,6 +10906,14 @@
           "score": 118.0,
           "sourceUrl": null
         },
+        "opexBreakdown": [
+          {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 90.0,
+            "itemCount": 1
+          }
+        ],
         "statementMeta": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
@@ -10371,6 +10952,12 @@
           "score": 112.0,
           "sourceUrl": null
         },
+        "rndBn": {
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 85.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000087/jnj-20260329.htm"
+        },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
@@ -10389,11 +10976,19 @@
           "score": 118.0,
           "sourceUrl": null
         },
+        "opexBreakdown": [
+          {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 92.0,
+            "itemCount": 2
+          }
+        ],
         "statementMeta": {
-          "adapterId": "official_financials",
-          "label": "SEC companyfacts / filings",
-          "score": 8.1,
-          "sourceUrl": null
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 8.7,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000087/jnj-20260329.htm"
         },
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
@@ -10427,6 +11022,12 @@
           "score": 112.0,
           "sourceUrl": null
         },
+        "rndBn": {
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 85.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
+        },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
@@ -10445,11 +11046,19 @@
           "score": 118.0,
           "sourceUrl": null
         },
+        "opexBreakdown": [
+          {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 92.0,
+            "itemCount": 2
+          }
+        ],
         "statementMeta": {
-          "adapterId": "official_financials",
-          "label": "SEC companyfacts / filings",
-          "score": 8.1,
-          "sourceUrl": null
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 8.7,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
         },
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
@@ -10483,6 +11092,12 @@
           "score": 112.0,
           "sourceUrl": null
         },
+        "rndBn": {
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 85.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927.htm"
+        },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
@@ -10501,11 +11116,19 @@
           "score": 118.0,
           "sourceUrl": null
         },
+        "opexBreakdown": [
+          {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 92.0,
+            "itemCount": 2
+          }
+        ],
         "statementMeta": {
-          "adapterId": "official_financials",
-          "label": "SEC companyfacts / filings",
-          "score": 8.1,
-          "sourceUrl": null
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 8.7,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927.htm"
         },
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
@@ -10539,6 +11162,12 @@
           "score": 112.0,
           "sourceUrl": null
         },
+        "rndBn": {
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 85.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000002/a2025q4exhibit991.htm"
+        },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
@@ -10557,6 +11186,14 @@
           "score": 118.0,
           "sourceUrl": null
         },
+        "opexBreakdown": [
+          {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 90.0,
+            "itemCount": 1
+          }
+        ],
         "statementMeta": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
@@ -10595,6 +11232,12 @@
           "score": 112.0,
           "sourceUrl": null
         },
+        "rndBn": {
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 85.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000087/jnj-20260329.htm"
+        },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
@@ -10613,11 +11256,19 @@
           "score": 118.0,
           "sourceUrl": null
         },
+        "opexBreakdown": [
+          {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 92.0,
+            "itemCount": 2
+          }
+        ],
         "statementMeta": {
-          "adapterId": "official_financials",
-          "label": "SEC companyfacts / filings",
-          "score": 8.1,
-          "sourceUrl": null
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 8.7,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000087/jnj-20260329.htm"
         },
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
@@ -10651,6 +11302,12 @@
           "score": 112.0,
           "sourceUrl": null
         },
+        "rndBn": {
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 85.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
+        },
         "pretaxIncomeBn": {
           "adapterId": "official_financials",
           "label": "SEC companyfacts / filings",
@@ -10669,11 +11326,19 @@
           "score": 118.0,
           "sourceUrl": null
         },
+        "opexBreakdown": [
+          {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 92.0,
+            "itemCount": 2
+          }
+        ],
         "statementMeta": {
-          "adapterId": "official_financials",
-          "label": "SEC companyfacts / filings",
-          "score": 8.1,
-          "sourceUrl": null
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 8.7,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000153/jnj-20260628.htm"
         },
         "officialRevenueSegments": {
           "adapterId": "official_revenue_structures",
@@ -10683,10 +11348,72 @@
         }
       },
       "2026Q3": {
+        "revenueBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 120.0,
+          "sourceUrl": null
+        },
+        "costOfRevenueBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 120.0,
+          "sourceUrl": null
+        },
+        "grossProfitBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 118.0,
+          "sourceUrl": null
+        },
+        "sgnaBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 112.0,
+          "sourceUrl": null
+        },
+        "rndBn": {
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 85.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927.htm"
+        },
+        "pretaxIncomeBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 118.0,
+          "sourceUrl": null
+        },
+        "taxBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 112.0,
+          "sourceUrl": null
+        },
+        "netIncomeBn": {
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 118.0,
+          "sourceUrl": null
+        },
+        "opexBreakdown": [
+          {
+            "adapterId": "generic_filing_tables",
+            "label": "Generic official filing table parser",
+            "score": 92.0,
+            "itemCount": 2
+          }
+        ],
+        "statementMeta": {
+          "adapterId": "generic_filing_tables",
+          "label": "Generic official filing table parser",
+          "score": 8.7,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927.htm"
+        },
         "officialRevenueSegments": {
-          "adapterId": "official_segments",
-          "label": "Official XBRL segment facts",
-          "score": 104.0,
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 114.0,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927_htm.xml"
         }
       }
@@ -11251,19 +11978,19 @@
         "qualityScore": 79,
         "availableRequiredFieldCount": 2,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 9,
+        "sourceFieldCount": 11,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "none",
+        "opexBreakdownMode": "explicit",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": null,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
-        "statementSource": null,
-        "statementValueMode": null,
-        "statementSpanQuarters": null,
+        "statementSource": "generic-official-filing-table",
+        "statementValueMode": "direct",
+        "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
           "missing-required:operatingIncomeBn",
@@ -11274,10 +12001,10 @@
         "qualityScore": 79,
         "availableRequiredFieldCount": 2,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 9,
+        "sourceFieldCount": 11,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "none",
+        "opexBreakdownMode": "explicit",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": null,
@@ -11297,19 +12024,19 @@
         "qualityScore": 79,
         "availableRequiredFieldCount": 2,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 9,
+        "sourceFieldCount": 11,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "none",
+        "opexBreakdownMode": "explicit",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": null,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
-        "statementSource": null,
-        "statementValueMode": null,
-        "statementSpanQuarters": null,
+        "statementSource": "generic-official-filing-table",
+        "statementValueMode": "direct",
+        "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
           "missing-required:operatingIncomeBn",
@@ -11320,19 +12047,19 @@
         "qualityScore": 79,
         "availableRequiredFieldCount": 2,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 9,
+        "sourceFieldCount": 11,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "none",
+        "opexBreakdownMode": "explicit",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": null,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
-        "statementSource": null,
-        "statementValueMode": null,
-        "statementSpanQuarters": null,
+        "statementSource": "generic-official-filing-table",
+        "statementValueMode": "direct",
+        "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
           "missing-required:operatingIncomeBn",
@@ -11343,19 +12070,19 @@
         "qualityScore": 79,
         "availableRequiredFieldCount": 2,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 9,
+        "sourceFieldCount": 11,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "none",
+        "opexBreakdownMode": "explicit",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": null,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
-        "statementSource": null,
-        "statementValueMode": null,
-        "statementSpanQuarters": null,
+        "statementSource": "generic-official-filing-table",
+        "statementValueMode": "direct",
+        "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
           "missing-required:operatingIncomeBn",
@@ -11366,10 +12093,10 @@
         "qualityScore": 79,
         "availableRequiredFieldCount": 2,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 9,
+        "sourceFieldCount": 11,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "none",
+        "opexBreakdownMode": "explicit",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": null,
@@ -11389,19 +12116,19 @@
         "qualityScore": 79,
         "availableRequiredFieldCount": 2,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 9,
+        "sourceFieldCount": 11,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "none",
+        "opexBreakdownMode": "explicit",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": null,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
-        "statementSource": null,
-        "statementValueMode": null,
-        "statementSpanQuarters": null,
+        "statementSource": "generic-official-filing-table",
+        "statementValueMode": "direct",
+        "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
           "missing-required:operatingIncomeBn",
@@ -11412,19 +12139,19 @@
         "qualityScore": 79,
         "availableRequiredFieldCount": 2,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 9,
+        "sourceFieldCount": 11,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "none",
+        "opexBreakdownMode": "explicit",
         "revenueSegmentCoveragePct": 100.0,
         "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": null,
         "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
-        "statementSource": null,
-        "statementValueMode": null,
-        "statementSpanQuarters": null,
+        "statementSource": "generic-official-filing-table",
+        "statementValueMode": "direct",
+        "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
           "missing-required:operatingIncomeBn",
@@ -11432,25 +12159,26 @@
         ]
       },
       "2026Q3": {
-        "qualityScore": 59,
-        "availableRequiredFieldCount": 0,
+        "qualityScore": 79,
+        "availableRequiredFieldCount": 2,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 1,
+        "sourceFieldCount": 11,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": null,
-        "costBreakdownCoveragePct": null,
+        "opexBreakdownMode": "explicit",
+        "revenueSegmentCoveragePct": 100.0,
+        "costBreakdownCoveragePct": 0,
         "opexBreakdownCoveragePct": null,
-        "revenueSegmentResidualBn": null,
+        "revenueSegmentResidualBn": 0.0,
         "costBreakdownResidualBn": null,
         "opexBreakdownResidualBn": null,
-        "statementSource": null,
-        "statementValueMode": null,
-        "statementSpanQuarters": null,
+        "statementSource": "generic-official-filing-table",
+        "statementValueMode": "direct",
+        "statementSpanQuarters": 1,
         "statementQualityFlags": [],
         "issues": [
-          "missing-required:revenueBn,operatingIncomeBn,netIncomeBn"
+          "missing-required:operatingIncomeBn",
+          "cost-breakdown-coverage-low"
         ]
       }
     }
@@ -11467,21 +12195,21 @@
     "hasPixelReplica": false,
     "officialFinancialQuarterCount": 33,
     "officialSegmentQuarterCount": 33,
-    "officialExpenseQuarterCount": 0,
+    "officialExpenseQuarterCount": 9,
     "classification": {
       "status": "ok",
       "latestQuarter": "2026Q3",
       "latestQuarterHasRevenueClassification": true,
-      "latestQuarterHasExpenseClassification": false,
+      "latestQuarterHasExpenseClassification": true,
       "latestRevenueClassificationQuarter": "2026Q3",
-      "latestExpenseClassificationQuarter": null,
-      "latestStructureHistoryQuarter": "2026Q2",
+      "latestExpenseClassificationQuarter": "2026Q3",
+      "latestStructureHistoryQuarter": "2026Q3",
       "revenueClassificationQuarterCount": 33,
-      "expenseClassificationQuarterCount": 0,
+      "expenseClassificationQuarterCount": 9,
       "revenueClassificationCoverageRatio": 1.0,
-      "expenseClassificationCoverageRatio": 0.0,
+      "expenseClassificationCoverageRatio": 0.2727,
       "latestRevenueClassificationLagQuarters": 0,
-      "latestExpenseClassificationLagQuarters": null,
+      "latestExpenseClassificationLagQuarters": 0,
       "warnings": [],
       "blockers": [],
       "policy": {}
@@ -11500,40 +12228,42 @@
         "derivedFieldCount": 0,
         "mixedSourceQuarterCount": 0,
         "sourceUsageCounts": {
-          "official": 463,
+          "official": 478,
           "stockanalysis": 0
         }
       },
       "financialValidation": {
         "version": "financial-validation-v1",
-        "status": "medium",
+        "status": "high",
         "quarterCount": 33,
         "validatedQuarterCount": 33,
         "issueCount": 3,
         "mismatchQuarterCount": 2,
-        "highConfidenceQuarterCount": 30,
-        "averageConfidenceScore": 0.835,
+        "highConfidenceQuarterCount": 31,
+        "averageConfidenceScore": 0.8543,
         "latestQuarter": "2026Q3",
-        "latestQuarterConfidenceScore": 0.225,
+        "latestQuarterConfidenceScore": 0.8625,
         "latestQuarterIssueCount": 0
       },
       "validation": {
         "version": "parser-validation-v1",
-        "status": "high",
-        "overallConfidenceScore": 0.8927,
-        "financialConfidenceScore": 0.835,
-        "structuralConfidenceScore": 1.0,
+        "status": "medium",
+        "overallConfidenceScore": 0.8178,
+        "financialConfidenceScore": 0.8543,
+        "structuralConfidenceScore": 0.75,
         "revenueSegmentChecks": 12,
         "revenueSegmentMismatchCount": 0,
         "revenueSegmentSkippedChecks": 21,
         "detailGroupChecks": 0,
         "detailGroupMismatchCount": 0,
         "detailGroupSkippedChecks": 0,
-        "opexChecks": 0,
+        "opexChecks": 2,
         "opexSkippedChecks": 0,
-        "opexOverflowMismatchCount": 0,
-        "warningCount": 0,
-        "warnings": []
+        "opexOverflowMismatchCount": 1,
+        "warningCount": 1,
+        "warnings": [
+          "2026Q2: opex breakdown sums to 19.646Bn vs operating expenses 10.119Bn."
+        ]
       }
     }
   }

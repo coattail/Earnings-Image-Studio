@@ -7803,243 +7803,239 @@
       "costOfRevenueBn": 6.079,
       "grossProfitBn": 6.795,
       "sgnaBn": 1.303,
-      "rndBn": null,
-      "otherOpexBn": 1.033,
+      "rndBn": 1.033,
+      "otherOpexBn": null,
       "operatingExpensesBn": 2.337,
       "operatingIncomeBn": 4.459,
       "nonOperatingBn": -0.142,
       "pretaxIncomeBn": 4.317,
       "taxBn": 0.653,
       "netIncomeBn": 3.664,
-      "netIncomeYoyPct": null,
+      "netIncomeYoyPct": 43.86,
       "grossMarginPct": 52.781,
-      "operatingMarginPct": 34.636,
+      "operatingMarginPct": 34.632,
       "profitMarginPct": 28.46,
       "effectiveTaxRatePct": 15.126,
       "revenueQoqPct": 2.5,
-      "grossMarginYoyDeltaPp": null,
-      "operatingMarginYoyDeltaPp": null,
-      "profitMarginYoyDeltaPp": null,
-      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm",
-      "statementFilingDate": "2026-10-20",
+      "grossMarginYoyDeltaPp": 6.34,
+      "operatingMarginYoyDeltaPp": 6.41,
+      "profitMarginYoyDeltaPp": 6.33,
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales and Marketing",
+          "nameZh": "销售与营销",
+          "memberKey": "salesandmarketing",
+          "valueBn": 0.837
+        },
+        {
+          "name": "Research and Development",
+          "nameZh": "研发",
+          "memberKey": "researchanddevelopment",
+          "valueBn": 1.033
+        },
+        {
+          "name": "General and Administrative",
+          "nameZh": "一般及行政",
+          "memberKey": "generalandadministrative",
+          "valueBn": 0.466
+        }
+      ],
+      "statementFilingDate": "2026-09-30",
+      "statementSourceUrl": "https://stockanalysis.com/stocks/nflx/financials/?p=quarterly",
       "parserFinancialFieldSources": {
         "revenueBn": "official",
+        "revenueYoyPct": "official",
+        "revenueQoqPct": "official",
+        "costOfRevenueBn": "official",
+        "grossProfitBn": "official",
+        "grossMarginPct": "official",
+        "grossMarginYoyDeltaPp": "official",
+        "sgnaBn": "official",
+        "rndBn": "official",
+        "operatingExpensesBn": "official",
         "operatingIncomeBn": "official",
-        "netIncomeBn": "official"
+        "operatingMarginPct": "official",
+        "operatingMarginYoyDeltaPp": "official",
+        "nonOperatingBn": "official",
+        "pretaxIncomeBn": "official",
+        "taxBn": "official",
+        "netIncomeBn": "official",
+        "netIncomeYoyPct": "official",
+        "profitMarginPct": "official",
+        "profitMarginYoyDeltaPp": "official",
+        "effectiveTaxRatePct": "official",
+        "calendarQuarter": "official",
+        "periodEnd": "official",
+        "fiscalYear": "official",
+        "fiscalQuarter": "official",
+        "fiscalLabel": "official",
+        "statementCurrency": "official",
+        "statementFilingDate": "stockanalysis",
+        "statementSourceUrl": "stockanalysis"
       },
       "parserFinancialCandidateCounts": {
-        "revenueBn": 0,
-        "revenueYoyPct": 0,
-        "revenueQoqPct": 0,
-        "costOfRevenueBn": 0,
-        "grossProfitBn": 0,
-        "grossMarginPct": 0,
-        "grossMarginYoyDeltaPp": 0,
-        "sgnaBn": 0,
-        "rndBn": 0,
+        "revenueBn": 1,
+        "revenueYoyPct": 1,
+        "revenueQoqPct": 1,
+        "costOfRevenueBn": 1,
+        "grossProfitBn": 1,
+        "grossMarginPct": 1,
+        "grossMarginYoyDeltaPp": 1,
+        "sgnaBn": 1,
+        "rndBn": 1,
         "otherOpexBn": 0,
-        "operatingExpensesBn": 0,
-        "operatingIncomeBn": 0,
-        "operatingMarginPct": 0,
-        "operatingMarginYoyDeltaPp": 0,
-        "nonOperatingBn": 0,
-        "pretaxIncomeBn": 0,
-        "taxBn": 0,
-        "netIncomeBn": 0,
-        "netIncomeYoyPct": 0,
-        "profitMarginPct": 0,
-        "profitMarginYoyDeltaPp": 0,
-        "effectiveTaxRatePct": 0
+        "operatingExpensesBn": 1,
+        "operatingIncomeBn": 1,
+        "operatingMarginPct": 1,
+        "operatingMarginYoyDeltaPp": 1,
+        "nonOperatingBn": 1,
+        "pretaxIncomeBn": 1,
+        "taxBn": 1,
+        "netIncomeBn": 1,
+        "netIncomeYoyPct": 1,
+        "profitMarginPct": 1,
+        "profitMarginYoyDeltaPp": 1,
+        "effectiveTaxRatePct": 1
       },
       "parserFinancialValidation": {
+        "version": "financial-validation-v1",
         "status": "high",
-        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm"
+        "confidenceScore": 1.0,
+        "completenessScore": 1.0,
+        "consistencyScore": 1.0,
+        "checksRun": 8,
+        "checksPassed": 8,
+        "issueCount": 0,
+        "issues": []
       },
       "officialRevenueSegments": [
         {
           "name": "UCAN",
-          "memberKey": "ucan",
           "nameZh": null,
-          "valueBn": 5.628215,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm",
-          "filingDate": "2026-10-20",
-          "sourceForm": "official current-period disclosure",
-          "mixPct": 43.7,
+          "memberKey": "ucan",
+          "valueBn": 5.628,
+          "yoyPct": 10.96,
           "qoqPct": 3.61,
-          "yoyPct": 10.97,
-          "mixYoyDeltaPp": -0.3
+          "mixPct": 43.7,
+          "mixYoyDeltaPp": -0.4,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm",
+          "sourceForm": "8-K",
+          "filingDate": "2026-10-20",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "EMEA",
-          "memberKey": "emea",
           "nameZh": null,
-          "valueBn": 4.106572,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm",
-          "filingDate": "2026-10-20",
-          "sourceForm": "official current-period disclosure",
+          "memberKey": "emea",
+          "valueBn": 4.107,
+          "yoyPct": 11.03,
+          "qoqPct": 1.81,
           "mixPct": 31.9,
-          "qoqPct": 1.8,
-          "yoyPct": 11.02,
-          "mixYoyDeltaPp": -0.2
+          "mixYoyDeltaPp": -0.2,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm",
+          "sourceForm": "8-K",
+          "filingDate": "2026-10-20",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "LATAM",
-          "memberKey": "latam",
           "nameZh": null,
-          "valueBn": 1.602603,
+          "memberKey": "latam",
+          "valueBn": 1.603,
+          "yoyPct": 16.92,
+          "qoqPct": 1.2,
+          "mixPct": 12.5,
+          "mixYoyDeltaPp": 0.5,
           "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm",
+          "sourceForm": "8-K",
           "filingDate": "2026-10-20",
-          "sourceForm": "official current-period disclosure",
-          "mixPct": 12.4,
-          "qoqPct": 1.17,
-          "yoyPct": 16.89,
-          "mixYoyDeltaPp": 0.5
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         },
         {
           "name": "APAC",
-          "memberKey": "apac",
           "nameZh": null,
-          "valueBn": 1.536786,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm",
-          "filingDate": "2026-10-20",
-          "sourceForm": "official current-period disclosure",
+          "memberKey": "apac",
+          "valueBn": 1.537,
+          "yoyPct": 12.27,
+          "qoqPct": 1.79,
           "mixPct": 11.9,
-          "qoqPct": 1.77,
-          "yoyPct": 12.26,
-          "mixYoyDeltaPp": 0.0
+          "mixYoyDeltaPp": 0.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm",
+          "sourceForm": "8-K",
+          "filingDate": "2026-10-20",
+          "supportLines": null,
+          "supportLinesZh": null,
+          "metricMode": null,
+          "validationEligible": null,
+          "validationNotes": null
         }
       ],
       "officialSegmentAxis": "ProductOrServiceAxis",
       "officialSegmentSource": "official-filings",
+      "officialRevenueStyle": "netflix-regional-revenue",
       "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
       "officialRevenueTaxonomyChangedFromPriorYear": false,
       "displayCurrency": "USD",
       "displayScaleFactor": 1,
       "statementMeta": {
-        "statementSource": "generic-official-filing-table",
-        "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930.htm",
-        "statementValueMode": "direct",
-        "statementSpanQuarters": 1,
+        "statementSource": null,
+        "statementSourceUrl": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
         "qualityFlags": [],
-        "adapterId": "generic_filing_tables"
+        "adapterId": "official_financials"
       },
       "fieldSources": {
-        "revenueBn": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 89.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930.htm"
-        },
-        "costOfRevenueBn": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 87.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930.htm"
-        },
-        "grossProfitBn": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 87.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930.htm"
-        },
-        "sgnaBn": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 85.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930.htm"
-        },
-        "rndBn": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 85.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930.htm"
-        },
-        "operatingExpensesBn": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 87.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930.htm"
-        },
-        "operatingIncomeBn": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 87.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930.htm"
-        },
-        "nonOperatingBn": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 83.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930.htm"
-        },
-        "pretaxIncomeBn": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 87.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930.htm"
-        },
-        "taxBn": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 85.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930.htm"
-        },
-        "netIncomeBn": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 87.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930.htm"
-        },
         "statementMeta": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 12.3,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930.htm"
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 12.7,
+          "sourceUrl": null
         }
       },
       "extractionDiagnostics": {
-        "qualityScore": 100,
+        "qualityScore": 93,
         "availableRequiredFieldCount": 3,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 13,
+        "sourceFieldCount": 15,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": null,
-        "costBreakdownCoveragePct": null,
-        "opexBreakdownCoveragePct": null,
-        "revenueSegmentResidualBn": null,
+        "opexBreakdownMode": "explicit",
+        "revenueSegmentCoveragePct": 100.0,
+        "costBreakdownCoveragePct": 0,
+        "opexBreakdownCoveragePct": 100.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": null,
-        "statementSource": "generic-official-filing-table",
-        "statementValueMode": "direct",
-        "statementSpanQuarters": 1,
+        "opexBreakdownResidualBn": 0.001,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
         "statementQualityFlags": [],
-        "issues": []
+        "issues": [
+          "cost-breakdown-coverage-low"
+        ]
       },
-      "statementSource": "official-earnings-release",
-      "statementSpanQuarters": 1,
-      "statementValueMode": "reported",
-      "officialOpexBreakdown": [
-        {
-          "name": "Sales & Marketing",
-          "nameZh": "销售与营销",
-          "valueBn": 0.837,
-          "valueFormat": "negative-parentheses",
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm"
-        },
-        {
-          "name": "G&A",
-          "nameZh": "管理费用",
-          "valueBn": 0.466,
-          "valueFormat": "negative-parentheses",
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm"
-        }
-      ],
-      "automaticEarnings": {
-        "filingDate": "2026-10-20",
-        "accession": "0001065280-26-000290",
-        "form": "8-K"
+      "revenueClassificationSource": "official-complete-table",
+      "revenueClassificationSourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2026Q2",
+        "fields": [
+          "officialRevenueSegments",
+          "officialOpexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
       },
       "chartQuality": {
         "version": 3,
@@ -8054,23 +8050,6 @@
           "ucan"
         ],
         "requiredDetailMembers": {}
-      },
-      "revenueClassificationSourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm",
-      "revenueClassificationSource": "official-complete-table",
-      "chartCompletionAttempts": [
-        {
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm",
-          "remainingIssues": []
-        }
-      ],
-      "officialRevenueStyle": "netflix-regional-revenue",
-      "sankeyStructureContinuity": {
-        "sourceQuarter": "2026Q2",
-        "fields": [
-          "officialRevenueSegments",
-          "officialRevenueStyle"
-        ],
-        "rule": "same-normalized-category-set"
       }
     }
   },
@@ -10448,9 +10427,100 @@
           }
         ],
         "style": "netflix-regional-revenue"
+      },
+      "2026Q3": {
+        "segments": [
+          {
+            "name": "UCAN",
+            "nameZh": null,
+            "memberKey": "ucan",
+            "valueBn": 5.628,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm",
+            "sourceForm": "8-K",
+            "filingDate": "2026-10-20",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          },
+          {
+            "name": "EMEA",
+            "nameZh": null,
+            "memberKey": "emea",
+            "valueBn": 4.107,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm",
+            "sourceForm": "8-K",
+            "filingDate": "2026-10-20",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          },
+          {
+            "name": "LATAM",
+            "nameZh": null,
+            "memberKey": "latam",
+            "valueBn": 1.603,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm",
+            "sourceForm": "8-K",
+            "filingDate": "2026-10-20",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          },
+          {
+            "name": "APAC",
+            "nameZh": null,
+            "memberKey": "apac",
+            "valueBn": 1.537,
+            "yoyPct": null,
+            "qoqPct": null,
+            "mixPct": null,
+            "mixYoyDeltaPp": null,
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm",
+            "sourceForm": "8-K",
+            "filingDate": "2026-10-20",
+            "supportLines": null,
+            "supportLinesZh": null,
+            "metricMode": null,
+            "validationEligible": null,
+            "validationNotes": null
+          }
+        ],
+        "style": "netflix-regional-revenue"
       }
     },
     "filingsUsed": [
+      {
+        "form": "10-Q",
+        "filingDate": "2026-10-21",
+        "accession": "0001065280-26-000291",
+        "primaryDocument": "nflx-20260930.htm",
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930.htm"
+      },
+      {
+        "form": "8-K",
+        "filingDate": "2026-10-20",
+        "accession": "0001065280-26-000290",
+        "primaryDocument": "nflx-20261020.htm",
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm"
+      },
       {
         "form": "10-Q",
         "filingDate": "2026-07-17",
@@ -10704,8 +10774,8 @@
           "status": "success",
           "selected": true,
           "reason": "",
-          "quarter_count": 34,
-          "latest_quarter": "2026Q2",
+          "quarter_count": 35,
+          "latest_quarter": "2026Q3",
           "error": "",
           "error_details": []
         },
@@ -10729,7 +10799,7 @@
         "derivedFieldCount": 0,
         "mixedSourceQuarterCount": 0,
         "sourceUsageCounts": {
-          "official": 694,
+          "official": 715,
           "stockanalysis": 0
         }
       },
@@ -10740,10 +10810,10 @@
         "validatedQuarterCount": 35,
         "issueCount": 2,
         "mismatchQuarterCount": 1,
-        "highConfidenceQuarterCount": 34,
-        "averageConfidenceScore": 0.9746,
+        "highConfidenceQuarterCount": 35,
+        "averageConfidenceScore": 0.9968,
         "latestQuarter": "2026Q3",
-        "latestQuarterConfidenceScore": 0.225,
+        "latestQuarterConfidenceScore": 1.0,
         "latestQuarterIssueCount": 0
       }
     },
@@ -10772,8 +10842,8 @@
           "status": "success",
           "selected": true,
           "reason": "",
-          "quarter_count": 27,
-          "latest_quarter": "2026Q2",
+          "quarter_count": 28,
+          "latest_quarter": "2026Q3",
           "error": "",
           "error_details": []
         }
@@ -10782,13 +10852,13 @@
     "summary": {
       "financialQuarterCount": 35,
       "segmentQuarterCount": 31,
-      "revenueStructureQuarterCount": 27
+      "revenueStructureQuarterCount": 28
     },
     "validation": {
       "version": "parser-validation-v1",
       "status": "high",
-      "overallConfidenceScore": 0.9835,
-      "financialConfidenceScore": 0.9746,
+      "overallConfidenceScore": 0.9979,
+      "financialConfidenceScore": 0.9968,
       "structuralConfidenceScore": 1.0,
       "revenueSegmentChecks": 28,
       "revenueSegmentMismatchCount": 0,
@@ -10828,22 +10898,6 @@
         "label": "SEC companyfacts / filings",
         "enabled": true,
         "priority": 110,
-        "errorCount": 0
-      },
-      {
-        "adapterId": "generic_filing_tables",
-        "kind": "statement",
-        "label": "Generic official filing table parser",
-        "enabled": true,
-        "priority": 80,
-        "errorCount": 0
-      },
-      {
-        "adapterId": "generic_ir_pdf",
-        "kind": "statement",
-        "label": "Generic IR PDF parser",
-        "enabled": false,
-        "priority": 72,
         "errorCount": 0
       },
       {
@@ -13970,82 +14024,96 @@
       },
       "2026Q3": {
         "revenueBn": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 89.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930.htm"
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 120.0,
+          "sourceUrl": null
         },
         "costOfRevenueBn": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 87.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930.htm"
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 120.0,
+          "sourceUrl": null
         },
         "grossProfitBn": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 87.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930.htm"
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 118.0,
+          "sourceUrl": null
         },
         "sgnaBn": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 85.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930.htm"
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 112.0,
+          "sourceUrl": null
         },
         "rndBn": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 85.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930.htm"
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 112.0,
+          "sourceUrl": null
         },
         "operatingExpensesBn": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 87.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930.htm"
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 118.0,
+          "sourceUrl": null
         },
         "operatingIncomeBn": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 87.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930.htm"
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 118.0,
+          "sourceUrl": null
         },
         "nonOperatingBn": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 83.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930.htm"
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 110.0,
+          "sourceUrl": null
         },
         "pretaxIncomeBn": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 87.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930.htm"
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 118.0,
+          "sourceUrl": null
         },
         "taxBn": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 85.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930.htm"
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 112.0,
+          "sourceUrl": null
         },
         "netIncomeBn": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 87.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930.htm"
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 118.0,
+          "sourceUrl": null
         },
+        "opexBreakdown": [
+          {
+            "adapterId": "official_financials",
+            "label": "SEC companyfacts / filings",
+            "score": 141.99,
+            "itemCount": 3
+          }
+        ],
         "statementMeta": {
-          "adapterId": "generic_filing_tables",
-          "label": "Generic official filing table parser",
-          "score": 12.3,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930.htm"
+          "adapterId": "official_financials",
+          "label": "SEC companyfacts / filings",
+          "score": 12.7,
+          "sourceUrl": null
         },
         "officialRevenueSegments": {
-          "adapterId": "official_segments",
-          "label": "Official XBRL segment facts",
-          "score": 104.0,
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930_htm.xml"
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 114.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm"
+        },
+        "officialRevenueStyle": {
+          "adapterId": "official_revenue_structures",
+          "label": "Official filing revenue structure",
+          "score": 106.0,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm"
         }
       }
     },
@@ -14812,24 +14880,26 @@
         ]
       },
       "2026Q3": {
-        "qualityScore": 100,
+        "qualityScore": 93,
         "availableRequiredFieldCount": 3,
         "requiredFieldCount": 3,
-        "sourceFieldCount": 13,
+        "sourceFieldCount": 15,
         "hasCostBreakdownProfile": false,
         "costBreakdownMode": "none",
-        "opexBreakdownMode": "none",
-        "revenueSegmentCoveragePct": null,
-        "costBreakdownCoveragePct": null,
-        "opexBreakdownCoveragePct": null,
-        "revenueSegmentResidualBn": null,
+        "opexBreakdownMode": "explicit",
+        "revenueSegmentCoveragePct": 100.0,
+        "costBreakdownCoveragePct": 0,
+        "opexBreakdownCoveragePct": 100.0,
+        "revenueSegmentResidualBn": 0,
         "costBreakdownResidualBn": null,
-        "opexBreakdownResidualBn": null,
-        "statementSource": "generic-official-filing-table",
-        "statementValueMode": "direct",
-        "statementSpanQuarters": 1,
+        "opexBreakdownResidualBn": 0.001,
+        "statementSource": null,
+        "statementValueMode": null,
+        "statementSpanQuarters": null,
         "statementQualityFlags": [],
-        "issues": []
+        "issues": [
+          "cost-breakdown-coverage-low"
+        ]
       }
     }
   },
@@ -14853,7 +14923,7 @@
       "latestQuarterHasExpenseClassification": true,
       "latestRevenueClassificationQuarter": "2026Q3",
       "latestExpenseClassificationQuarter": "2026Q3",
-      "latestStructureHistoryQuarter": "2026Q2",
+      "latestStructureHistoryQuarter": "2026Q3",
       "revenueClassificationQuarterCount": 31,
       "expenseClassificationQuarterCount": 29,
       "revenueClassificationCoverageRatio": 0.8857,
@@ -14878,7 +14948,7 @@
         "derivedFieldCount": 0,
         "mixedSourceQuarterCount": 0,
         "sourceUsageCounts": {
-          "official": 694,
+          "official": 715,
           "stockanalysis": 0
         }
       },
@@ -14889,17 +14959,17 @@
         "validatedQuarterCount": 35,
         "issueCount": 2,
         "mismatchQuarterCount": 1,
-        "highConfidenceQuarterCount": 34,
-        "averageConfidenceScore": 0.9746,
+        "highConfidenceQuarterCount": 35,
+        "averageConfidenceScore": 0.9968,
         "latestQuarter": "2026Q3",
-        "latestQuarterConfidenceScore": 0.225,
+        "latestQuarterConfidenceScore": 1.0,
         "latestQuarterIssueCount": 0
       },
       "validation": {
         "version": "parser-validation-v1",
         "status": "high",
-        "overallConfidenceScore": 0.9835,
-        "financialConfidenceScore": 0.9746,
+        "overallConfidenceScore": 0.9979,
+        "financialConfidenceScore": 0.9968,
         "structuralConfidenceScore": 1.0,
         "revenueSegmentChecks": 28,
         "revenueSegmentMismatchCount": 0,
