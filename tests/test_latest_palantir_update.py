@@ -24,7 +24,7 @@ class LatestPalantirUpdateTest(unittest.TestCase):
         )
 
     def test_palantir_q2_2026_official_results(self) -> None:
-        self.assertEqual(self.company["quarters"][-1], "2026Q2")
+        self.assertEqual(self.company["quarters"][-1], "2026Q3")
         entry = self.company["financials"]["2026Q2"]
 
         self.assertEqual(entry["fiscalLabel"], "FY2026 Q2")
@@ -48,6 +48,21 @@ class LatestPalantirUpdateTest(unittest.TestCase):
             {"governmentoperating": 0.99, "commercial": 0.945},
         )
         self.assertLess(abs(sum(segments.values()) - entry["revenueBn"]), 0.001)
+
+    def test_q3_2026_release_is_available_before_the_10q(self) -> None:
+        entry = self.company["financials"]["2026Q3"]
+        self.assertEqual(entry["revenueBn"], 2.313411)
+        self.assertEqual(entry["grossProfitBn"], 1.930125)
+        self.assertEqual(entry["operatingIncomeBn"], 1.084845)
+        self.assertEqual(entry["netIncomeBn"], 1.128012)
+        self.assertEqual(entry["periodEnd"], "2026-09-30")
+        self.assertEqual(entry["statementFilingDate"], "2026-11-02")
+        self.assertEqual(entry["netAssetsBn"], 11.3451)
+        self.assertEqual(entry["operatingCashFlowBn"], 1.20457)
+        self.assertEqual(entry["capexBn"], .008014)
+        self.assertAlmostEqual(sum(row["valueBn"] for row in entry["officialOpexBreakdown"]), entry["operatingExpensesBn"])
+        self.assertAlmostEqual(entry["pretaxIncomeBn"] - entry["taxBn"] - entry["noncontrollingInterestBn"], entry["netIncomeBn"])
+        self.assertEqual({row["memberKey"]: row["valueBn"] for row in entry["officialRevenueSegments"]}, {"governmentoperating": 1.15, "commercial": 1.17})
 
     def test_operating_expenses_reconcile_to_operating_income(self) -> None:
         entry = self.company["financials"]["2026Q2"]

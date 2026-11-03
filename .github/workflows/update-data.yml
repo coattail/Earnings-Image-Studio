@@ -29,6 +29,7 @@ env:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: earnings-data-update
@@ -125,4 +126,9 @@ jobs:
 
       - name: Push refreshed data
         if: steps.changes.outputs.changed == 'true'
-        run: git push
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git push
+          # GITHUB_TOKEN pushes do not trigger the push deployment workflow.
+          gh workflow run deploy-pages.yml --ref main

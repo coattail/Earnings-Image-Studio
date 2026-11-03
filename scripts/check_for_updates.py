@@ -296,6 +296,9 @@ def detect_company_update(company: dict[str, Any]) -> dict[str, Any]:
         }
 
     remote = discover_asml_ir_release() if company.get("id") == "asml" else None
+    if company.get("id") == "palantir":
+        from palantir_ir import latest_release
+        remote = latest_release()
     if not remote:
         remote = latest_remote_sec_filing(company)
     if remote is None:
