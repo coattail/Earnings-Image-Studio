@@ -53,6 +53,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Check complete chart publication rules
+        run: |
+          python -m unittest discover -s tests -p 'test_release_chart_quality.py'
+          node --test tests/test_release_chart_render.cjs
+
       - name: Restore fair retry order
         uses: actions/cache/restore@v4
         with:

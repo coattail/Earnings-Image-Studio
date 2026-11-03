@@ -43,6 +43,18 @@ class LatestAppleUpdateTest(unittest.TestCase):
         self.assertEqual(entry["statementFilingDate"], "2026-11-02")
         self.assertIn("000032019326000024/", entry["statementSourceUrl"])
 
+    def test_latest_chart_keeps_disclosed_product_hierarchy_and_growth(self):
+        entry = self.company['financials']['2026Q3']
+        details = {r['memberKey']: r['valueBn'] for r in entry['officialRevenueDetailGroups']}
+        self.assertEqual(details, {'iphone':57.583,'mac':10.792,'ipad':6.229,'wearables':8.3})
+        self.assertAlmostEqual(sum(details.values()),82.904)
+        self.assertAlmostEqual(sum(r['valueBn'] for r in entry['officialRevenueSegments']),114.477)
+        self.assertAlmostEqual(sum(r['valueBn'] for r in entry['officialCostBreakdown']),59.657)
+        self.assertAlmostEqual(sum(r['valueBn'] for r in entry['officialOpexBreakdown']),19.189)
+        self.assertEqual(entry['revenueYoyPct'],11.722)
+        self.assertEqual(entry['revenueQoqPct'],4.625)
+        self.assertEqual(entry['chartQuality']['status'],'ready')
+
     def test_product_and_service_sales_reconcile_to_revenue(self) -> None:
         entry = self.company["financials"]["2026Q2"]
         segments = {

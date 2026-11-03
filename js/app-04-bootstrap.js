@@ -1603,6 +1603,9 @@ async function renderCurrent() {
         return;
       }
     }
+    if (currentChartViewMode() !== "bars" && company.financials?.[quarterKey]?.chartQuality?.status === "pending") {
+      throw new Error("本期营收分类尚未齐全，正在补充。请先查看其他报告期或营收趋势。");
+    }
     const snapshot = buildSnapshot(company, quarterKey);
     if (!snapshot) {
       refs.chartOutput.innerHTML = "";
