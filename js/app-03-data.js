@@ -2471,6 +2471,7 @@ function chartPublicationIssue(company, quarterKey) {
     ? "Revenue classifications are incomplete or inconsistent. Please choose another reporting period."
     : "本期营收分类尚未齐全或金额不一致，请先查看其他报告期或营收趋势。";
   if (entry.chartQuality?.status === "pending" || entry.chartQuality?.quarter && entry.chartQuality.quarter !== quarterKey) return message;
+  if (!Number.isFinite(entry.revenueBn) || !Number.isFinite(entry.netIncomeBn)) return message;
   if (entry.calendarQuarter && entry.calendarQuarter !== quarterKey) return message;
   if (entry.periodEnd && entry.statementFilingDate && entry.periodEnd > entry.statementFilingDate) return message;
   const fields = ['officialRevenueSegments','officialRevenueDetailGroups','officialCostBreakdown','officialOpexBreakdown'];

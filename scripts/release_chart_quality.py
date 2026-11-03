@@ -39,6 +39,9 @@ def chart_issues(payload, quarter=None):
         return ['missing requested reporting quarter']
     entry, prior = financials[quarter], previous_entry(payload, quarter)
     issues = []
+    for field in ('revenueBn', 'netIncomeBn', 'operatingIncomeBn'):
+        if entry.get(field) is not None and not finite(entry[field]):
+            issues.append(f'invalid financial value in {field}')
     if entry.get('calendarQuarter') and entry['calendarQuarter'] != quarter:
         issues.append('statement belongs to a different reporting quarter')
     if entry.get('periodEnd') and entry.get('statementFilingDate') and entry['periodEnd'] > entry['statementFilingDate']:
