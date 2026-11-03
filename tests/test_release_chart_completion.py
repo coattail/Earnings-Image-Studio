@@ -3,14 +3,34 @@ import json
 from pathlib import Path
 import sys
 import unittest
+from unittest.mock import patch
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
 from release_chart_completion import complete_current_chart,extract_partition
 from release_chart_quality import chart_issues
 from build_dataset import finalize_company_payload,TOP30_COMPANIES
+from watch_earnings import enrich_reported_period,validate_refresh
 
 class OfficialDisclosureCompletionTests(unittest.TestCase):
+    def test_later_statutory_filings_keep_valid_current_categories_and_old_charts(self):
+        fixtures=json.loads((ROOT/'tests/fixtures/automatic-release-classifications.json').read_text())
+        companies=json.loads((ROOT/'data/earnings-dataset.json').read_text())['companies']
+        for cid in ['eli-lilly','coca-cola','bank-of-america']:
+            with self.subTest(company=cid):
+                company=next(c for c in companies if c['id']==cid);q=max(company['financials'])
+                fixture=next(f for f in fixtures if f['company']==cid);document=fixture['documents'][-1]
+                item=dict(companyId=cid,remoteQuarter=q,remoteAccession='0000000001-26-000001',remoteForm='10-Q',
+                          remoteFilingDate=document[2],remoteReportDate=company['financials'][q]['periodEnd'])
+                recent={'filings':{'recent':{'accessionNumber':[item['remoteAccession']],'primaryDocument':['report.htm']}}}
+                with patch('official_segments._resolve_cik',return_value=1),patch('official_segments._request_json',return_value=recent),patch('official_segments._request',return_value=document[1].encode()):
+                    updated=enrich_reported_period(item,company)
+                validate_refresh(item,updated,company)
+                self.assertEqual(chart_issues(updated),[])
+                for period,entry in company['financials'].items():
+                    if period<q:self.assertEqual(updated['financials'][period],entry)
+                self.assertEqual(updated['financials'][q]['automaticEarnings']['form'],'10-Q')
+
     def test_replay_current_official_tables_recovers_complete_classifications(self):
         fixtures=json.loads((ROOT/'tests/fixtures/automatic-release-classifications.json').read_text())
         self.assertEqual(len(fixtures),12)

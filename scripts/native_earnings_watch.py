@@ -14,6 +14,8 @@ def latest_native_release(company):
         if not matches:
             raise ValueError("Samsung official earnings PDF index could not be parsed")
         href, year, quarter = max(matches, key=lambda row: (row[1], row[2]))
+        if company.get('_localQuarter')==f'{year}Q{quarter}'and str(company.get('_localSourceUrl')or'').endswith(href.split('/')[-1])and company.get('_localFilingDate'):
+            return dict(quarter=f'{year}Q{quarter}',sourceUrl=urljoin(url,href),filingDate=company['_localFilingDate'],form='official-ir-pdf')
         from datetime import datetime
         ordinal = {"1": "first", "2": "second", "3": "third", "4": "fourth"}[quarter]
         news_url = f"https://news.samsung.com/global/samsung-electronics-announces-{ordinal}-quarter-{year}-results"
