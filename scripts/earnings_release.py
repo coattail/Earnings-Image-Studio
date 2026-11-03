@@ -20,7 +20,7 @@ from generic_filing_table_parser import _period_entries_from_table
 from sankey_statement_backfill import parse_inline_statements, complete_statement
 
 CACHE = Path(__file__).resolve().parents[1] / "data/cache/earnings-releases"
-VERSION = "earnings-release-v9"
+VERSION = "earnings-release-v10"
 CORE = ("revenueBn", "operatingIncomeBn", "netIncomeBn")
 
 
@@ -129,6 +129,20 @@ def parse_release(html: str, company: dict, url: str, filed: str, *, allow_parti
         entry["parserFinancialFieldSources"] = {k: "official" for k in CORE if isinstance(entry.get(k), (float, int))}
         entry["parserFinancialValidation"] = {"status": "high" if complete_quarter(entry) else "partial", "sourceUrl": url}
         result[quarter] = entry
+    # A release commonly includes the same quarter last year. Use those actual
+    # comparative columns even when the local historical cache has a gap.
+    if result and (fiscal_heading or fiscal_marker):
+        latest = max(result)
+        reference = result[latest]
+        if str(reference.get('fiscalYear', '')).isdigit() and re.fullmatch(r'Q[1-4]', str(reference.get('fiscalQuarter', ''))):
+            fiscal_index = int(reference['fiscalYear']) * 4 + int(reference['fiscalQuarter'][-1]) - 1
+            for q, entry in result.items():
+                distance = (int(latest[:4]) - int(q[:4])) * 4 + int(latest[-1]) - int(q[-1])
+                index = fiscal_index - distance
+                entry.update(fiscalYear=str(index // 4), fiscalQuarter=f'Q{index % 4 + 1}',
+                             fiscalLabel=f'FY{index // 4} Q{index % 4 + 1}')
+    from margin_metrics import complete_margin_metrics
+    complete_margin_metrics(result)
     return result
 
 
@@ -190,6 +204,8 @@ def discover_release(company: dict, local: dict | None = None) -> dict | None:
                     partials.extend(incomplete.values())
             if not entries:
                 continue
+            from margin_metrics import complete_margin_metrics
+            complete_margin_metrics(entries)
             quarter = max(entries)
             entry = entries[quarter]
             if entry["periodEnd"] > filed:
@@ -312,6 +328,11 @@ def samsung_statement(pages: list[str], quarter: str) -> dict | None:
         if not complete_quarter(amounts):
             continue
         year, month = int(quarter[:4]), int(quarter[-1]) * 3
-        return dict(**amounts, calendarQuarter=quarter, periodEnd=f"{year}-{month:02d}-{calendar.monthrange(year, month)[1]}",
-                    fiscalYear=str(year), fiscalQuarter=f"Q{quarter[-1]}", fiscalLabel=f"FY{year} Q{quarter[-1]}", statementCurrency="KRW")
+        entry = dict(**amounts, calendarQuarter=quarter, periodEnd=f"{year}-{month:02d}-{calendar.monthrange(year, month)[1]}",
+                     fiscalYear=str(year), fiscalQuarter=f"Q{quarter[-1]}", fiscalLabel=f"FY{year} Q{quarter[-1]}", statementCurrency="KRW")
+        prior_quarter = f'{year - 1}Q{quarter[-1]}'
+        prior = samsung_statement(pages, prior_quarter) if prior_quarter in quarters else None
+        from margin_metrics import complete_margin_metrics
+        complete_margin_metrics({**({prior_quarter: prior} if prior else {}), quarter: entry}, quarters=[quarter])
+        return entry
     return None

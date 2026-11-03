@@ -1803,6 +1803,11 @@
         "quarter": "2026Q3",
         "status": "ready",
         "issues": [],
+        "requiredMarginComparisons": [
+          "grossMarginYoyDeltaPp",
+          "operatingMarginYoyDeltaPp",
+          "profitMarginYoyDeltaPp"
+        ],
         "requiredDetailParents": [
           "connectivity",
           "si",
@@ -1814,6 +1819,10 @@
           "space"
         ],
         "requiredDetailMembers": {
+          "connectivity": [
+            "consumer",
+            "enterprisegovernment"
+          ],
           "si": [
             "advertising",
             "sisolutionsinfrastructure"
@@ -1821,13 +1830,12 @@
           "space": [
             "launchdevelopment",
             "launchservices"
-          ],
-          "connectivity": [
-            "consumer",
-            "enterprisegovernment"
           ]
         }
-      }
+      },
+      "grossMarginYoyDeltaPp": 10.927,
+      "operatingMarginYoyDeltaPp": 24.045,
+      "profitMarginYoyDeltaPp": 49.119
     },
     "2025Q4": {
       "revenueBn": 4.96,

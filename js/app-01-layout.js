@@ -168,10 +168,18 @@ function resolveDirectedBranchColumn(entries, options) {
 
 // Pack a cost fan from its real ports and label footprints. Decorative gaps
 // must not grow with every child index or with an unrelated expense fan.
+function resolveCostStageTop(options) {
+  const { grossBottom, revenueTop, grossTop, runway, unit, costHeight, maxY } = options;
+  // Reserve a quarter of a horizontal stage for the red/green split. Bound
+  // the opening by the remaining canvas, rather than squeezing monetary caps.
+  const gap = clamp(Math.abs(grossTop - revenueTop) * 1.1 + unit * 24, runway * 0.24, runway * 0.34);
+  const preferred = Math.max(options.costTop, grossBottom + gap);
+  return Math.max(options.costTop, Math.min(preferred, maxY - costHeight));
+}
+
 function resolveCompactCostFan(entries, options) {
   const { grossBottom, revenueTop, grossTop, runway, unit, minY, maxY } = options;
-  const gap = clamp(Math.abs(grossTop - revenueTop) * 1.1, runway * 0.16, runway * 0.3);
-  const costTop = grossBottom + gap;
+  const costTop = resolveCostStageTop({ ...options, costTop: grossBottom, costHeight: options.costHeight || 0 });
   const shift = costTop - options.costTop;
   const lead = clamp(runway * 0.3, unit * 42, unit * 108);
   const targets = entries.map(entry => ({
@@ -1426,18 +1434,6 @@ function snapshotCanvasSize(snapshot) {
   };
 }
 
-function currentSnapshotLogoKeys() {
-  return [];
-}
-
-function queueLogoNormalization(logoKey) {
-  return;
-}
-
-function warmVisibleLogoAssets() {
-  return;
-}
-
 function resolvePositiveAdjustmentBridgeStrengths(snapshot, options = {}) {
   const rawPositiveAdjustments = Array.isArray(options.positiveAdjustments)
     ? options.positiveAdjustments
@@ -1713,7 +1709,7 @@ function shouldStackRegularSourcesBelowDetails(snapshot, detailTargetKeys = new 
   return collectPreDetailLeadEligibleSourceIndexes(detailTargetKeys, sourceItems).length > 0;
 }
 
-function medianNumber(values = []) {
+function medianStageGap(values = []) {
   const filtered = [...values].map((value) => safeNumber(value, null)).filter((value) => value !== null).sort((left, right) => left - right);
   if (!filtered.length) return 0;
   const middle = Math.floor(filtered.length / 2);
@@ -1733,7 +1729,7 @@ function resolveUniformStageGap(layout, stageGaps, options = {}) {
   if (strategy === "standard" || strategy === "fixed") {
     preferredGap = standardGap;
   } else if (strategy === "median") {
-    preferredGap = medianNumber(filtered);
+    preferredGap = medianStageGap(filtered);
   } else if (strategy === "mean" || strategy === "average") {
     preferredGap = filtered.reduce((sum, value) => sum + value, 0) / filtered.length;
   } else {

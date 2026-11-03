@@ -11268,6 +11268,11 @@
         "quarter": "2026Q3",
         "status": "ready",
         "issues": [],
+        "requiredMarginComparisons": [
+          "grossMarginYoyDeltaPp",
+          "operatingMarginYoyDeltaPp",
+          "profitMarginYoyDeltaPp"
+        ],
         "requiredDetailParents": [
           "agentsinfra",
           "devicesconsumer"
@@ -11277,17 +11282,17 @@
           "devicesconsumer"
         ],
         "requiredDetailMembers": {
-          "devicesconsumer": [
-            "searchadvertising",
-            "windowsoemdevices",
-            "xbox"
-          ],
           "agentsinfra": [
             "azure",
             "frontiersupportservices",
             "industrysolutions",
             "microsoft365cloud",
             "productivityserverlicensing"
+          ],
+          "devicesconsumer": [
+            "searchadvertising",
+            "windowsoemdevices",
+            "xbox"
           ]
         }
       }

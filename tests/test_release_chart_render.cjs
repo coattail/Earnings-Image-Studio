@@ -15,6 +15,13 @@ test('missing numeric values do not become real zero growth',()=>{
  assert.equal(vm.runInContext('safeNumber(null,null)',ctx),null);
  assert.equal(vm.runInContext('safeNumber(0,null)',ctx),0);
 });
+test('latest-only publication retains and checks all three margin comparisons',()=>{
+ for(const field of ['grossMarginYoyDeltaPp','operatingMarginYoyDeltaPp','profitMarginYoyDeltaPp']) {
+   ctx.field=field;
+   const issue=vm.runInContext(`(()=>{const c=structuredClone(payload),q='2026Q3';c.financials={[q]:c.financials[q]};delete c.financials[q][field];return chartPublicationIssue(c,q);})()`,vm.createContext({...ctx,structuredClone}));
+   assert.ok(issue,field);
+ }
+});
 test('automatic releases never scale previous-quarter revenue splits',()=>{
  assert.equal(vm.runInContext("(()=>{const c=structuredClone(payload),e=c.financials['2026Q3'];delete e.officialRevenueSegments;return resolveRenderableOfficialRevenueRows(c,e).length})()",vm.createContext({...ctx,structuredClone})),0);
  assert.equal(vm.runInContext("(()=>{const c=structuredClone(payload),e=c.financials['2026Q3'];delete e.officialRevenueSegments;delete e.automaticEarnings;return resolveRenderableOfficialRevenueRows(c,e).length})()",vm.createContext({...ctx,structuredClone})),0);

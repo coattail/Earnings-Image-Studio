@@ -31,7 +31,7 @@ const state = {
   },
 };
 
-const BUILD_ASSET_VERSION = "20261029-recast-peer-layout";
+const BUILD_ASSET_VERSION = "20261104-fast-startup";
 const CORPORATE_LOGO_AREA_MULTIPLIER = 1.728;
 const CORPORATE_LOGO_LINEAR_SCALE_MULTIPLIER = Math.sqrt(CORPORATE_LOGO_AREA_MULTIPLIER);
 const CORPORATE_LOGO_REVENUE_GAP_MULTIPLIER = 1.2;
@@ -895,9 +895,11 @@ function formatGrowthMetric(value, period = "yoy") {
 
 function formatPp(value, period = "yoy") {
   if (value === null || value === undefined || Number.isNaN(Number(value))) return "";
-  const numeric = Math.round(Number(value) * 10) / 10;
+  // A real small change (e.g. +0.02pp) must not disappear as "+0pp".
+  const precision = Math.abs(Number(value)) > 0 && Math.abs(Number(value)) < 0.05 ? 100 : 10;
+  const numeric = Math.round(Number(value) * precision) / precision;
   const prefix = numeric >= 0 ? "+" : "";
-  const rounded = Number.isInteger(numeric) ? numeric.toFixed(0) : numeric.toFixed(1);
+  const rounded = Number.isInteger(numeric) ? numeric.toFixed(0) : numeric.toFixed(precision === 100 ? 2 : 1);
   const metricLabel = period === "qoq" ? qoqLabel() : yoyLabel();
   if (currentChartLanguage() === "en") return `${metricLabel} ${prefix}${rounded}pp`;
   return `${metricLabel}${prefix}${rounded}个百分点`;
@@ -2520,12 +2522,32 @@ async function normalizeBitmapLogoAsset(asset) {
   }
 }
 
-async function normalizeLogoCatalogAssets(catalog) {
-  const entries = Object.entries(catalog || {});
-  const normalizedEntries = await Promise.all(
-    entries.map(async ([companyId, asset]) => [companyId, await normalizeBitmapLogoAsset(asset)])
-  );
-  return Object.fromEntries(normalizedEntries);
+async function prepareChartLogoAssets(snapshot) {
+  const keys = new Set();
+  const visit = (value) => {
+    if (!value || typeof value !== "object") return;
+    for (const [key, child] of Object.entries(value)) {
+      if (/(?:logoKey|lockupKey)$/i.test(key) && typeof child === "string") keys.add(normalizeLogoKey(child));
+      else if (child && typeof child === "object") visit(child);
+    }
+  };
+  visit(snapshot);
+  await Promise.all([...keys].map(async (key) => {
+    if (state.normalizedLogoKeys[key]) return;
+    if (!state.logoNormalizationJobs[key]) {
+      state.logoNormalizationJobs[key] = (async () => {
+        let asset = state.logoCatalog[key];
+        if (!asset) return;
+        if (asset.assetUrl) {
+          asset = await loadJsonAsset(asset.assetUrl);
+          if (!asset?.dataUrl) throw new Error(`Logo asset unavailable: ${key}`);
+        }
+        state.logoCatalog[key] = await normalizeBitmapLogoAsset(asset);
+        state.normalizedLogoKeys[key] = true;
+      })().finally(() => { delete state.logoNormalizationJobs[key]; });
+    }
+    await state.logoNormalizationJobs[key];
+  }));
 }
 
 function normalizeLabelKey(value) {

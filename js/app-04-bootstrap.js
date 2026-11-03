@@ -1223,6 +1223,7 @@ function markAutomationReady() {
   if (automationBootState.isReady) return;
   automationBootState.isReady = true;
   automationBootState.error = null;
+  globalThis.performance?.mark?.("earnings-chart-ready");
   if (typeof resolveAutomationReady === "function") {
     resolveAutomationReady(true);
     resolveAutomationReady = null;
@@ -1609,13 +1610,18 @@ async function renderCurrent() {
       state.currentSnapshot = null;
       throw new Error("本期营收分类尚未齐全，正在补充。请先查看其他报告期或营收趋势。");
     }
-    const snapshot = buildSnapshot(company, quarterKey);
+    let snapshot = buildSnapshot(company, quarterKey);
     if (!snapshot) {
       refs.chartOutput.innerHTML = "";
       setStatus("当前公司或季度缺少可用数据。");
       globalThis.EarningsDesk?.fail("当前报告期缺少可用数据，请选择其他报告期。");
       return;
     }
+    await prepareChartLogoAssets(snapshot);
+    if (renderToken !== state.renderToken) return;
+    // Normalization can change a logo's visible aspect ratio. Resolve the
+    // existing template again with those exact metrics before displaying it.
+    snapshot = buildSnapshot(company, quarterKey);
     snapshot.companyNameZh = company.nameZh;
     snapshot.companyNameEn = company.nameEn;
     snapshot.learnedEditorNodeOverrides = learnedSankeyLayoutOverridesForSession();
@@ -1659,11 +1665,6 @@ async function renderCurrent() {
         ? `已更新 ${company.nameEn} ${quarterKey} 分部趋势图。`
         : `已更新 ${company.nameEn} ${quarterKey} 利润桥图。`
     );
-    if (typeof requestIdleCallback === "function") {
-      requestIdleCallback(() => warmVisibleLogoAssets(), { timeout: 180 });
-    } else {
-      setTimeout(() => warmVisibleLogoAssets(), 0);
-    }
   } catch (error) {
     if (renderToken !== state.renderToken) return;
     state.currentSnapshot = null;
@@ -1881,9 +1882,9 @@ async function automationRenderSelection(options = {}) {
     if (refs.quarterSelect) refs.quarterSelect.value = requestedQuarter;
   }
 
-  renderCompanyList();
   renderCoverage();
   await renderCurrent();
+  renderCompanyList();
   await waitForAnimationFrames(2);
   return {
     companyId: state.selectedCompanyId,
@@ -1957,10 +1958,11 @@ async function loadDataset() {
 
 async function loadLogoCatalog() {
   try {
-    const payload = await loadJsonAsset(`./data/logo-catalog.json?v=${BUILD_ASSET_VERSION}`);
+    const payload = await loadJsonAsset(`./data/logo-index.json?v=${BUILD_ASSET_VERSION}`) ||
+      await loadJsonAsset(`./data/logo-catalog.json?v=${BUILD_ASSET_VERSION}`);
     if (!payload) return;
     const rawCatalog = payload?.logos || {};
-    state.logoCatalog = await normalizeLogoCatalogAssets(rawCatalog);
+    state.logoCatalog = rawCatalog;
     state.normalizedLogoKeys = {};
     state.logoNormalizationJobs = {};
   } catch (_error) {
@@ -2011,9 +2013,8 @@ async function safeParseJsonAssetResponse(response) {
 }
 
 function fetchJson(url) {
-  return fetch(url, {
-    cache: "no-store",
-  });
+  // Data responses revalidate through HTTP headers; hashed assets are reusable.
+  return fetch(url);
 }
 
 function formatDatasetGeneratedAt(value) {
