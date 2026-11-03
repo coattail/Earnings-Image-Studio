@@ -655,6 +655,9 @@ def build_company_payload_for_dataset(
     payload = apply_usd_display_fields(payload, fx_cache)
     payload = apply_fused_extraction(payload, company, refresh=refresh)
     payload = apply_amd_official_segment_revenue_corrections(payload)
+    if company.get("id") == "palantir":
+        from palantir_ir import supplement
+        payload = supplement(payload)
     return payload
 
 
@@ -664,6 +667,12 @@ def build_incremental_company_payload_for_dataset(
     manual_company_overrides: dict[str, Any],
     fx_cache: dict[str, float],
 ) -> dict[str, Any]:
+    if company.get("id") == "palantir":
+        from palantir_ir import supplement
+        cached = load_cached_company_payload("palantir")
+        if not isinstance(cached, dict):
+            raise ValueError("Missing Palantir historical cache")
+        return supplement(deepcopy(cached))
     # Refresh the normalized financial-table source, which is bounded and
     # available for the whole tracked universe, then reconcile it with cached
     # official statements and segment/revenue enrichment. Full SEC companyfacts
@@ -4205,6 +4214,11 @@ def main() -> int:
         )
     companies = [results_by_company_id[company["id"]] for company in TOP30_COMPANIES if company["id"] in results_by_company_id]
     classification_audit = build_dataset_classification_audit(companies)
+    # Retain the global audit in the artifact, but unrelated existing coverage
+    # gaps must not fail a successful single-company incremental refresh.
+    run_audit = build_dataset_classification_audit([
+        item for item in companies if not selected_tokens or company_matches_selection(item, selected_tokens)
+    ])
 
     dataset = {
         "generatedAt": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
@@ -4227,15 +4241,15 @@ def main() -> int:
     print(f"[done] wrote {OUTPUT_PATH}", flush=True)
     write_dataset_index_file(dataset, DATASET_INDEX_PATH)
     print(f"[done] wrote {DATASET_INDEX_PATH}", flush=True)
-    if classification_audit["blockingIssues"]:
+    if run_audit["blockingIssues"]:
         print("[error] classification coverage blockers detected:", file=sys.stderr, flush=True)
-        for issue in classification_audit["blockingIssues"]:
+        for issue in run_audit["blockingIssues"]:
             print(f"  - {issue}", file=sys.stderr, flush=True)
     if failures:
         print("[warn] partial failures detected:", flush=True)
         for failure in failures:
             print(f"  - {failure}", flush=True)
-    return 1 if classification_audit["blockingIssues"] else 0
+    return 1 if run_audit["blockingIssues"] else 0
 
 
 if __name__ == "__main__":
