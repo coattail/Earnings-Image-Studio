@@ -41,3 +41,10 @@ def version_static_assets(dist_dir: Path):
 
     html = re.sub(r'"((?:js/[^"?]+\.js|style\.css))(?:\?[^\"]*)?"', version, html)
     index_path.write_text(html, encoding="utf-8")
+
+
+if __name__ == "__main__":
+    # Some hosts publish the repository root directly, without a build command.
+    # Keep the same generated assets there as in the GitHub Pages artifact.
+    data_dir = Path(__file__).resolve().parents[1] / "data"
+    write_logo_assets(json.loads((data_dir / "logo-catalog.json").read_text(encoding="utf-8")), data_dir)

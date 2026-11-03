@@ -7,6 +7,15 @@ from scripts.public_assets import write_logo_assets, version_static_assets
 
 
 class PublicAssetsTests(unittest.TestCase):
+    def test_root_and_built_sites_use_the_same_canonical_logo_assets(self):
+        data = Path(__file__).resolve().parents[1] / 'data'
+        with tempfile.TemporaryDirectory() as directory:
+            generated = Path(directory)
+            write_logo_assets(json.loads((data / 'logo-catalog.json').read_text()), generated)
+            self.assertEqual((data / 'logo-index.json').read_bytes(), (generated / 'logo-index.json').read_bytes())
+            for file in (generated / 'logos').iterdir():
+                self.assertEqual((data / 'logos' / file.name).read_bytes(), file.read_bytes())
+
     def test_split_logos_retain_exact_export_asset_and_content_addressed_preview(self):
         image = b'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"/>'
         asset = {"mime": "image/svg+xml", "width": 24, "height": 24,
