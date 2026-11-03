@@ -54,4 +54,11 @@ class ReleaseChartTests(unittest.TestCase):
         p['financials']['2026Q4']={'revenueBn':130,'netIncomeBn':20}
         self.assertTrue(chart_issues(p))
 
+    def test_trailing_growth_column_does_not_hide_monetary_classifications(self):
+        p=fixture()
+        content=html().replace('</tr>', '<td>20%</td></tr>')
+        enrich_from_release(p, content, 'url')
+        self.assertEqual(chart_issues(p), [])
+        self.assertEqual(p['financials']['2026Q3']['officialRevenueSegments'][0]['valueBn'], 80)
+
 if __name__=='__main__':unittest.main()
