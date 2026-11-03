@@ -18,8 +18,11 @@ class OfficialDisclosureCompletionTests(unittest.TestCase):
         companies=json.loads((ROOT/'data/earnings-dataset.json').read_text())['companies']
         for cid in ['eli-lilly','coca-cola','bank-of-america']:
             with self.subTest(company=cid):
-                company=next(c for c in companies if c['id']==cid);q=max(company['financials'])
                 fixture=next(f for f in fixtures if f['company']==cid);document=fixture['documents'][-1]
+                q=max(fixture['payload']['financials'])
+                company=copy.deepcopy(next(c for c in companies if c['id']==cid))
+                company['financials']={period:entry for period,entry in company['financials'].items()if period<=q}
+                company['quarters']=sorted(company['financials'])
                 item=dict(companyId=cid,remoteQuarter=q,remoteAccession='0000000001-26-000001',remoteForm='10-Q',
                           remoteFilingDate=document[2],remoteReportDate=company['financials'][q]['periodEnd'])
                 recent={'filings':{'recent':{'accessionNumber':[item['remoteAccession']],'primaryDocument':['report.htm']}}}
