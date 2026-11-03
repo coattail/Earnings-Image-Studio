@@ -3195,6 +3195,12 @@
         "filingDate": "2026-10-29",
         "accession": "https://images.samsung.com/is/content/samsung/assets/global/ir/docs/2026_3Q_conference_eng.pdf",
         "form": "official-ir-release"
+      },
+      "chartQuality": {
+        "status": "pending",
+        "issues": [
+          "missing current-quarter revenue classification"
+        ]
       }
     },
     "2018Q1": {
@@ -6397,7 +6403,8 @@
       "latestExpenseClassificationLagQuarters": null,
       "warnings": [],
       "blockers": [
-        "Missing latest-quarter revenue classification for 2026Q3. Add an official parser/manual override or declare an explicit exception."
+        "Missing latest-quarter revenue classification for 2026Q3. Add an official parser/manual override or declare an explicit exception.",
+        "missing current-quarter revenue classification"
       ],
       "policy": {
         "maxBarQuarters": 36

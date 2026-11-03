@@ -394,6 +394,8 @@ def main() -> int:
     company = resolve_company(args.company, refresh=args.refresh)
     payload = build_company_payload(company, refresh=args.refresh)
     chosen_quarter = choose_quarter(payload, args.quarter)
+    if 'sankey' in modes and payload['financials'][chosen_quarter].get('chartQuality', {}).get('status') == 'pending':
+        raise ValueError('Revenue classification is incomplete; refusing to export a misleading Sankey chart')
     basename = args.basename or f"{company['id']}-{chosen_quarter}"
 
     with tempfile.TemporaryDirectory(prefix="earnings-direct-render-") as temp_dir:

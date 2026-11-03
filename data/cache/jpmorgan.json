@@ -7915,7 +7915,13 @@
         "form": "8-K"
       },
       "displayCurrency": "USD",
-      "displayScaleFactor": 1
+      "displayScaleFactor": 1,
+      "chartQuality": {
+        "status": "pending",
+        "issues": [
+          "missing current-quarter revenue classification"
+        ]
+      }
     }
   },
   "statementSource": "stockanalysis-financials",
@@ -11240,21 +11246,23 @@
     "officialSegmentQuarterCount": 34,
     "officialExpenseQuarterCount": 0,
     "classification": {
-      "status": "ok",
-      "latestQuarter": "2026Q2",
-      "latestQuarterHasRevenueClassification": true,
-      "latestQuarterHasExpenseClassification": false,
+      "status": "error",
+      "latestQuarter": "2026Q3",
+      "latestQuarterHasRevenueClassification": false,
+      "latestQuarterHasExpenseClassification": true,
       "latestRevenueClassificationQuarter": "2026Q2",
-      "latestExpenseClassificationQuarter": null,
+      "latestExpenseClassificationQuarter": "2026Q3",
       "latestStructureHistoryQuarter": "2026Q2",
       "revenueClassificationQuarterCount": 34,
-      "expenseClassificationQuarterCount": 0,
-      "revenueClassificationCoverageRatio": 1.0,
-      "expenseClassificationCoverageRatio": 0.0,
-      "latestRevenueClassificationLagQuarters": 0,
-      "latestExpenseClassificationLagQuarters": null,
+      "expenseClassificationQuarterCount": 1,
+      "revenueClassificationCoverageRatio": 0.9714,
+      "expenseClassificationCoverageRatio": 0.0286,
+      "latestRevenueClassificationLagQuarters": 1,
+      "latestExpenseClassificationLagQuarters": 0,
       "warnings": [],
-      "blockers": [],
+      "blockers": [
+        "missing current-quarter revenue classification"
+      ],
       "policy": {}
     },
     "parser": {

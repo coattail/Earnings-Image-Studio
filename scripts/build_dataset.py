@@ -671,6 +671,14 @@ def build_incremental_company_payload_for_dataset(
     cached = load_existing_dataset_companies_by_id().get(str(company["id"])) or load_cached_company_payload(str(company["id"]))
     if isinstance(cached, dict) and company.get("id") != "palantir":
         supplemented = supplement_cached_release(deepcopy(cached))
+        from release_chart_quality import chart_issues, enrich_from_release
+        if chart_issues(supplemented):
+            latest = supplemented["financials"][max(supplemented["financials"])]
+            url = latest.get("statementSourceUrl") or ""
+            if url and not url.lower().endswith('.pdf'):
+                from official_segments import _request
+                enrich_from_release(supplemented, _request(url).decode('utf-8', errors='replace'), url)
+            return apply_usd_display_fields(supplemented, fx_cache)
         if supplemented != cached:
             return apply_usd_display_fields(supplemented, fx_cache)
     if company.get("id") == "palantir":
@@ -2118,7 +2126,7 @@ def normalize_revenue_outliers_after_segment_refresh(
         entry["qualityFlags"] = quality_flags
 
 
-def recompute_revenue_growth_metrics(financials: dict[str, Any]) -> None:
+def recompute_revenue_growth_metrics(financials: dict[str, Any], *, missing_only=False) -> None:
     ordered_quarters = sorted(financials.keys(), key=parse_period)
     for quarter_key in ordered_quarters:
         entry = financials.get(quarter_key)
@@ -2137,8 +2145,10 @@ def recompute_revenue_growth_metrics(financials: dict[str, Any]) -> None:
         prior_year_key = f"{year - 1}Q{quarter_number}"
         prior_quarter_revenue = float((financials.get(prior_quarter_key) or {}).get("revenueBn") or 0)
         prior_year_revenue = float((financials.get(prior_year_key) or {}).get("revenueBn") or 0)
-        entry["revenueQoqPct"] = round((revenue_bn / prior_quarter_revenue - 1) * 100, 3) if prior_quarter_revenue > 0 else None
-        entry["revenueYoyPct"] = round((revenue_bn / prior_year_revenue - 1) * 100, 3) if prior_year_revenue > 0 else None
+        if not missing_only or entry.get("revenueQoqPct") is None:
+            entry["revenueQoqPct"] = round((revenue_bn / prior_quarter_revenue - 1) * 100, 3) if prior_quarter_revenue > 0 else None
+        if not missing_only or entry.get("revenueYoyPct") is None:
+            entry["revenueYoyPct"] = round((revenue_bn / prior_year_revenue - 1) * 100, 3) if prior_year_revenue > 0 else None
 
 
 def quarter_end_date(quarter_key: str) -> str | None:
@@ -2669,6 +2679,9 @@ def build_company_classification_coverage(company: dict[str, Any], payload: dict
         if require_latest_expense and not expense_quarters:
             warnings.append("No official expense classification history is currently available.")
 
+    from release_chart_quality import chart_issues
+    blockers.extend(chart_issues(payload))
+
     status = "ok"
     if blockers:
         status = "error"
@@ -2786,7 +2799,12 @@ def finalize_company_payload(
         parser_diagnostics["validation"] = deepcopy(parser_validation)
         payload["parserDiagnostics"] = parser_diagnostics
     apply_company_rendering_preferences(company, payload)
+    recompute_revenue_growth_metrics(payload["financials"], missing_only=True)
     complete_company_revenue_growth(payload)
+    from release_chart_quality import chart_issues
+    issues = chart_issues(payload)
+    if payload.get('financials'):
+        payload['financials'][max(payload['financials'])]['chartQuality'] = {'status': 'pending' if issues else 'ready', 'issues': issues}
     payload["coverage"] = {
         "quarterCount": len(payload["quarters"]),
         "pixelReplicaQuarterCount": len(presets),

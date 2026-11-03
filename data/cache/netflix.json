@@ -8001,6 +8001,12 @@
         "filingDate": "2026-10-20",
         "accession": "0001065280-26-000290",
         "form": "8-K"
+      },
+      "chartQuality": {
+        "status": "pending",
+        "issues": [
+          "revenue classifications do not reconcile to total revenue"
+        ]
       }
     }
   },
@@ -14777,21 +14783,23 @@
     "officialSegmentQuarterCount": 31,
     "officialExpenseQuarterCount": 28,
     "classification": {
-      "status": "ok",
+      "status": "error",
       "latestQuarter": "2026Q3",
       "latestQuarterHasRevenueClassification": true,
-      "latestQuarterHasExpenseClassification": false,
+      "latestQuarterHasExpenseClassification": true,
       "latestRevenueClassificationQuarter": "2026Q3",
-      "latestExpenseClassificationQuarter": "2026Q2",
+      "latestExpenseClassificationQuarter": "2026Q3",
       "latestStructureHistoryQuarter": "2026Q2",
       "revenueClassificationQuarterCount": 31,
-      "expenseClassificationQuarterCount": 28,
+      "expenseClassificationQuarterCount": 29,
       "revenueClassificationCoverageRatio": 0.8857,
-      "expenseClassificationCoverageRatio": 0.8,
+      "expenseClassificationCoverageRatio": 0.8286,
       "latestRevenueClassificationLagQuarters": 0,
-      "latestExpenseClassificationLagQuarters": 1,
+      "latestExpenseClassificationLagQuarters": 0,
       "warnings": [],
-      "blockers": [],
+      "blockers": [
+        "revenue classifications do not reconcile to total revenue"
+      ],
       "policy": {}
     },
     "parser": {

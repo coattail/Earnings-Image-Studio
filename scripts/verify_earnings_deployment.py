@@ -8,7 +8,8 @@ from urllib.request import Request, urlopen
 
 def fingerprint(data):
     return {c["id"]: (c["quarters"][-1], *[c["financials"][c["quarters"][-1]].get(k)
-            for k in ("periodEnd", "statementFilingDate", "revenueBn", "operatingIncomeBn", "netIncomeBn")])
+            for k in ("periodEnd", "statementFilingDate", "revenueBn", "operatingIncomeBn", "netIncomeBn",
+                      "officialRevenueSegments", "officialRevenueDetailGroups", "officialCostBreakdown", "officialOpexBreakdown", "revenueYoyPct", "revenueQoqPct", "chartQuality")])
             for c in data["companies"] if c.get("quarters")}
 
 
