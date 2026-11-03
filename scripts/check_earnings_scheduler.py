@@ -11,7 +11,7 @@ def decision(runs, now):
     if not runs:
         return "dispatch"
     latest = max(datetime.fromisoformat(run["created_at"].replace("Z", "+00:00")) for run in runs)
-    return "dispatch" if (now - latest).total_seconds() > 15 * 60 else "recent"
+    return "dispatch" if (now - latest).total_seconds() > 90 * 60 else "recent"
 
 
 def main():
@@ -22,7 +22,7 @@ def main():
     print(f"Earnings scheduler: {status}")
     if status == "dispatch":
         subprocess.run(["gh", "workflow", "run", workflow, "--repo", repo, "--ref", "main"], check=True)
-        print("::warning::No earnings check started within 15 minutes; a recovery run was dispatched")
+        print("::warning::No earnings check started within 90 minutes; a recovery run was dispatched")
 
 
 if __name__ == "__main__":

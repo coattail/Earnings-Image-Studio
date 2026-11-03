@@ -10,7 +10,8 @@ class SchedulerTests(unittest.TestCase):
     def test_recovery_only_when_poll_is_missing(self):
         now = datetime(2026, 11, 3, tzinfo=timezone.utc)
         self.assertEqual(decision([], now), "dispatch")
-        self.assertEqual(decision([dict(status="completed", created_at=(now-timedelta(minutes=20)).isoformat())], now), "dispatch")
+        self.assertEqual(decision([dict(status="completed", created_at=(now-timedelta(minutes=95)).isoformat())], now), "dispatch")
+        self.assertEqual(decision([dict(status="completed", created_at=(now-timedelta(minutes=20)).isoformat())], now), "recent")
         self.assertEqual(decision([dict(status="completed", created_at=(now-timedelta(minutes=2)).isoformat())], now), "recent")
 
     def test_active_refresh_is_not_duplicated(self):

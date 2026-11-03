@@ -113,9 +113,10 @@ def latest_local_filing_marker(payload: dict[str, Any]) -> tuple[str, str]:
         if not isinstance(entry, dict):
             continue
         filing_date = str(entry.get("statementFilingDate") or "")
-        if filing_date and (filing_date, "") > (latest_date, latest_accession):
+        accession=str(entry.get('statementAccession')or(entry.get('automaticEarnings')or{}).get('accession')or'')
+        if filing_date and (filing_date, accession) > (latest_date, latest_accession):
             latest_date = filing_date
-            latest_accession = ""
+            latest_accession = accession
     return latest_date, latest_accession
 
 
