@@ -20,7 +20,7 @@ def release_window(company,payload,today=None):
     if 0<=(today-latest).days<=21:return True,'recent-release-enrichment-window'
     policy=(payload or {}).get('classificationPolicy')or{}
     cadence=182 if policy.get('officialClassificationReportingFrequency')=='semiannual'else 91
-    predictions=[latest+timedelta(days=cadence)]
+    predictions=[latest+timedelta(days=cadence*step)for step in range(1,5)]
     # Last year's individual quarter dates preserve non-calendar fiscal years
     # and the longer delay before annual results. Do not hard-code Q1 months.
     for filed in dates:
