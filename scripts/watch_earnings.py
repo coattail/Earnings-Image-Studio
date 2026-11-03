@@ -35,11 +35,7 @@ def bounded_detect(company, local, external):
 def detect(company: dict, local: dict | None = None, *, external=False) -> dict:
     local = local or checker.load_local_company_payload(company["id"]) or {}
     from release_chart_quality import chart_issues
-    if not external and chart_issues(local):
-        return dict(companyId=company['id'], ticker=company['ticker'], needsUpdate=True,
-                    localQuarter=max(local.get('financials', {}), default=''),
-                    remoteQuarter=max(local.get('financials', {}), default=''),
-                    reason='incomplete-chart-classification', chartIssues=chart_issues(local))
+    pending_chart_issues = chart_issues(local) if not external else []
     # A structure-only row or a parsed year/quarter label is not a financial
     # quarter and must not suppress discovery of the actual released results.
     valid = {}
@@ -95,6 +91,10 @@ def detect(company: dict, local: dict | None = None, *, external=False) -> dict:
         and result.get("remoteAccession") != marker.get("accession")
         and (result.get("remoteFilingDate") or "") >= (entry.get("statementFilingDate") or "")):
         result.update(needsUpdate=True, reason="official-filing-enrichment-ready", buildRefreshMode="full-refresh")
+    if pending_chart_issues and not result.get('needsUpdate'):
+        result.update(companyId=company['id'], ticker=company['ticker'], needsUpdate=True,
+                      localQuarter=latest, remoteQuarter=latest,
+                      reason='incomplete-chart-classification', chartIssues=pending_chart_issues)
     return result
 
 
@@ -184,7 +184,9 @@ def run(args) -> int:
             report["report"].append(item)
             if item.get('reason') == 'incomplete-chart-classification' and state.get(company['id'], {}).get('error'):
                 item['buildRefreshMode'] = 'full-refresh'
-            if state.get(company["id"], {}).get("pendingDetails") and item.get("reason") not in {"check-failed", "incomplete-chart-classification"}:
+            if (state.get(company["id"], {}).get("pendingDetails")
+                and item.get("reason") not in {"check-failed", "incomplete-chart-classification"}
+                and (item.get('remoteQuarter') or '') <= (item.get('localQuarter') or '')):
                 item.update(needsUpdate=True, reason="pending-classification-details", buildRefreshMode="full-refresh")
             report["checked"] += 1
             print(f"[watch] {company['ticker']}: {item['reason']}", flush=True)

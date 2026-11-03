@@ -1,6 +1,7 @@
 import copy
 import sys
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
 from release_chart_quality import chart_issues, enrich_from_release, assert_chart_publication, stamp_chart_quality
@@ -95,9 +96,17 @@ class ReleaseChartTests(unittest.TestCase):
             self.assertTrue(chart_issues(p))
 
     def test_existing_incomplete_quarter_is_retried_without_a_new_filing(self):
-        result=watch_earnings.detect({'id':'sample','ticker':'TEST'},fixture())
+        with patch.object(watch_earnings,'latest_native_release',return_value=None), patch.object(watch_earnings,'discover_release',return_value=None), patch.object(watch_earnings.checker,'detect_company_update',return_value={'needsUpdate':False}):
+            result=watch_earnings.detect({'id':'sample','ticker':'TEST'},fixture())
         self.assertTrue(result['needsUpdate'])
         self.assertEqual(result['reason'],'incomplete-chart-classification')
+
+    def test_pending_old_chart_does_not_hide_the_next_new_earnings_release(self):
+        release={'quarter':'2026Q4','filingDate':'2027-01-15'}
+        with patch.object(watch_earnings,'latest_native_release',return_value=None), patch.object(watch_earnings,'discover_release',return_value=release):
+            result=watch_earnings.detect({'id':'sample','ticker':'TEST'},fixture())
+        self.assertEqual(result['remoteQuarter'],'2026Q4')
+        self.assertEqual(result['reason'],'earnings-release-detected')
 
     def test_pending_quarter_does_not_erase_the_next_quarters_required_hierarchy(self):
         p=fixture();p['financials']['2026Q3']['chartQuality']={'status':'pending'}
