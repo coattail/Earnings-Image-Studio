@@ -906,6 +906,8 @@ function renderRevenueSegmentBarsSvg(snapshot, company, options = {}) {
 }
 
 function renderIncomeStatementSvg(snapshot, company) {
+  const issue = chartPublicationIssue(company, snapshot.quarterKey);
+  if (issue) throw new Error(issue);
   if (snapshot.mode === "pixel-replica" || snapshot.mode === "replica-template") {
     return renderPixelReplicaSvg(snapshot);
   }
@@ -1664,6 +1666,7 @@ async function renderCurrent() {
     }
   } catch (error) {
     if (renderToken !== state.renderToken) return;
+    state.currentSnapshot = null;
     refs.chartOutput.innerHTML = "";
     globalThis.EarningsDesk?.fail(error?.message || "图表渲染失败，请重试。");
     syncEditModeUi();

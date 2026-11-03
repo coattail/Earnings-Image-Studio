@@ -3124,16 +3124,16 @@
       "sgnaBn": 27800.0,
       "rndBn": 14400.0,
       "otherOpexBn": null,
-      "operatingExpensesBn": null,
+      "operatingExpensesBn": 27900.0,
       "operatingIncomeBn": 107400.0,
-      "nonOperatingBn": null,
-      "pretaxIncomeBn": null,
-      "taxBn": null,
+      "nonOperatingBn": -8900.0,
+      "pretaxIncomeBn": 98500.0,
+      "taxBn": 23400.0,
       "netIncomeBn": 75100.0,
       "netIncomeYoyPct": null,
-      "grossMarginPct": null,
-      "operatingMarginPct": null,
-      "profitMarginPct": null,
+      "grossMarginPct": 69.278034,
+      "operatingMarginPct": 54.99232,
+      "profitMarginPct": 38.453661,
       "effectiveTaxRatePct": null,
       "revenueQoqPct": null,
       "grossMarginYoyDeltaPp": null,
@@ -3197,11 +3197,86 @@
         "form": "official-ir-release"
       },
       "chartQuality": {
-        "status": "pending",
-        "issues": [
-          "missing current-quarter revenue classification"
-        ]
-      }
+        "version": 3,
+        "quarter": "2026Q3",
+        "status": "ready",
+        "issues": [],
+        "requiredDetailParents": [],
+        "requiredSegmentKeys": [
+          "ds",
+          "dx",
+          "harman",
+          "sdc"
+        ],
+        "requiredDetailMembers": {}
+      },
+      "derivedStatementFields": [
+        "operatingExpensesBn",
+        "nonOperatingBn"
+      ],
+      "officialRevenueSegments": [
+        {
+          "name": "DS",
+          "nameZh": "半导体",
+          "memberKey": "ds",
+          "valueBn": 147100.0,
+          "sourceUrl": "https://images.samsung.com/is/content/samsung/assets/global/ir/docs/2026_3Q_conference_eng.pdf",
+          "filingDate": "2026-10-29",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 75.3,
+          "yoyPct": 344.41
+        },
+        {
+          "name": "DX",
+          "nameZh": "移动、电视及家电",
+          "memberKey": "dx",
+          "valueBn": 52100.0,
+          "sourceUrl": "https://images.samsung.com/is/content/samsung/assets/global/ir/docs/2026_3Q_conference_eng.pdf",
+          "filingDate": "2026-10-29",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 26.7,
+          "yoyPct": 7.64
+        },
+        {
+          "name": "SDC",
+          "nameZh": "显示面板",
+          "memberKey": "sdc",
+          "valueBn": 8000.0,
+          "sourceUrl": "https://images.samsung.com/is/content/samsung/assets/global/ir/docs/2026_3Q_conference_eng.pdf",
+          "filingDate": "2026-10-29",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 4.1,
+          "yoyPct": -1.23
+        },
+        {
+          "name": "Harman",
+          "nameZh": "哈曼",
+          "memberKey": "harman",
+          "valueBn": 4300.0,
+          "sourceUrl": "https://images.samsung.com/is/content/samsung/assets/global/ir/docs/2026_3Q_conference_eng.pdf",
+          "filingDate": "2026-10-29",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 2.2,
+          "yoyPct": 7.5
+        }
+      ],
+      "officialRevenueStyle": "samsung-business-unit-bridge",
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+      "officialRevenueDetailGroups": [],
+      "officialRevenueReconciliation": {
+        "name": "Intersegment eliminations and reconciliation",
+        "nameZh": "分部间交易抵销及调节",
+        "valueBn": -16200.0,
+        "sourceUrl": "https://images.samsung.com/is/content/samsung/assets/global/ir/docs/2026_3Q_conference_eng.pdf",
+        "filingDate": "2026-10-29",
+        "sourceForm": "official current-period disclosure",
+        "valueMethod": "reported-unit-sales-less-consolidated-revenue"
+      },
+      "revenueClassificationBasisNote": "Business-unit sales include intersegment sales; the deduction is shown explicitly.",
+      "officialRevenueTaxonomyChangeVerified": true,
+      "officialRevenueTaxonomyChangeSourceUrl": "https://images.samsung.com/is/content/samsung/assets/global/ir/docs/2026_3Q_conference_eng.pdf",
+      "revenueClassificationSource": "official-complete-table",
+      "officialRevenueTaxonomyChangedFromPriorYear": false
     },
     "2018Q1": {
       "calendarQuarter": "2018Q1",
@@ -5771,11 +5846,11 @@
     "validation": {
       "version": "parser-validation-v1",
       "status": "low",
-      "overallConfidenceScore": 0.4087,
+      "overallConfidenceScore": 0.1463,
       "financialConfidenceScore": 0.225,
-      "structuralConfidenceScore": 0.75,
-      "revenueSegmentChecks": 0,
-      "revenueSegmentMismatchCount": 0,
+      "structuralConfidenceScore": 0.0,
+      "revenueSegmentChecks": 1,
+      "revenueSegmentMismatchCount": 1,
       "revenueSegmentSkippedChecks": 15,
       "detailGroupChecks": 0,
       "detailGroupMismatchCount": 0,
@@ -5783,8 +5858,10 @@
       "opexChecks": 0,
       "opexSkippedChecks": 0,
       "opexOverflowMismatchCount": 0,
-      "warningCount": 0,
-      "warnings": []
+      "warningCount": 1,
+      "warnings": [
+        "2026Q3: revenue segments sum to 211500.0Bn vs revenue 195300.0Bn."
+      ]
     }
   },
   "classificationPolicy": {
@@ -6385,27 +6462,24 @@
     "pixelReplicaQuarterCount": 0,
     "hasPixelReplica": false,
     "officialFinancialQuarterCount": 35,
-    "officialSegmentQuarterCount": 33,
+    "officialSegmentQuarterCount": 34,
     "officialExpenseQuarterCount": 0,
     "classification": {
-      "status": "error",
+      "status": "ok",
       "latestQuarter": "2026Q3",
-      "latestQuarterHasRevenueClassification": false,
+      "latestQuarterHasRevenueClassification": true,
       "latestQuarterHasExpenseClassification": false,
-      "latestRevenueClassificationQuarter": "2026Q1",
+      "latestRevenueClassificationQuarter": "2026Q3",
       "latestExpenseClassificationQuarter": null,
       "latestStructureHistoryQuarter": null,
-      "revenueClassificationQuarterCount": 33,
+      "revenueClassificationQuarterCount": 34,
       "expenseClassificationQuarterCount": 0,
-      "revenueClassificationCoverageRatio": 0.9429,
+      "revenueClassificationCoverageRatio": 0.9714,
       "expenseClassificationCoverageRatio": 0.0,
-      "latestRevenueClassificationLagQuarters": 2,
+      "latestRevenueClassificationLagQuarters": 0,
       "latestExpenseClassificationLagQuarters": null,
       "warnings": [],
-      "blockers": [
-        "Missing latest-quarter revenue classification for 2026Q3. Add an official parser/manual override or declare an explicit exception.",
-        "missing current-quarter revenue classification"
-      ],
+      "blockers": [],
       "policy": {
         "maxBarQuarters": 36
       }
@@ -6443,11 +6517,11 @@
       "validation": {
         "version": "parser-validation-v1",
         "status": "low",
-        "overallConfidenceScore": 0.4087,
+        "overallConfidenceScore": 0.1463,
         "financialConfidenceScore": 0.225,
-        "structuralConfidenceScore": 0.75,
-        "revenueSegmentChecks": 0,
-        "revenueSegmentMismatchCount": 0,
+        "structuralConfidenceScore": 0.0,
+        "revenueSegmentChecks": 1,
+        "revenueSegmentMismatchCount": 1,
         "revenueSegmentSkippedChecks": 15,
         "detailGroupChecks": 0,
         "detailGroupMismatchCount": 0,
@@ -6455,8 +6529,10 @@
         "opexChecks": 0,
         "opexSkippedChecks": 0,
         "opexOverflowMismatchCount": 0,
-        "warningCount": 0,
-        "warnings": []
+        "warningCount": 1,
+        "warnings": [
+          "2026Q3: revenue segments sum to 211500.0Bn vs revenue 195300.0Bn."
+        ]
       }
     }
   }

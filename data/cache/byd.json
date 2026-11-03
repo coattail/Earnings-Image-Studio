@@ -2401,10 +2401,20 @@
       "displayCurrency": "USD",
       "displayScaleFactor": 0.14915,
       "chartQuality": {
+        "version": 3,
+        "quarter": "2026Q3",
         "status": "pending",
         "issues": [
-          "missing current-quarter revenue classification"
-        ]
+          "missing current-quarter revenue classification",
+          "missing previously disclosed revenue categories: dailyelectronicdevicesmanufacturing,other,transportationelectricalmanufacturing"
+        ],
+        "requiredDetailParents": [],
+        "requiredSegmentKeys": [
+          "dailyelectronicdevicesmanufacturing",
+          "other",
+          "transportationelectricalmanufacturing"
+        ],
+        "requiredDetailMembers": {}
       }
     },
     "2020Q4": {
@@ -4749,7 +4759,8 @@
         "Latest revenue classification is unavailable for 2026Q3; using 2025Q4 as the newest official disclosed structure. BYD's Q1/Q3 interim filings may disclose statement and expense lines without a parseable same-quarter segment revenue composition table. The latest official disclosed revenue split currently available is the 2025 annual report filed on 2026-03-28."
       ],
       "blockers": [
-        "missing current-quarter revenue classification"
+        "missing current-quarter revenue classification",
+        "missing previously disclosed revenue categories: dailyelectronicdevicesmanufacturing,other,transportationelectricalmanufacturing"
       ],
       "policy": {
         "displayOfficiallyClassifiedPeriodsOnly": true,

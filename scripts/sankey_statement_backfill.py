@@ -225,6 +225,9 @@ def apply_statement_supplements(payload: dict[str, Any], supplements: dict[str, 
         for field, value in statement.items():
             if value is None:
                 continue
+            if entry.get('revenueClassificationSource')=='official-complete-table' and field in {
+                'officialRevenueSegments','officialRevenueDetailGroups','officialRevenueStyle','officialRevenueReconciliation'}:
+                continue
             entry[field] = deepcopy(value)
             if field in STATEMENT_FIELDS:
                 derived = field in statement.get("derivedStatementFields", [])

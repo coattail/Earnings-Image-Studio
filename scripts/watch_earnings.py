@@ -14,6 +14,7 @@ from pathlib import Path
 import subprocess
 import sys
 import time
+import tempfile
 
 import check_for_updates as checker
 from build_dataset import TOP30_COMPANIES, parse_company_selection, company_matches_selection
@@ -35,11 +36,7 @@ def bounded_detect(company, local, external):
 def detect(company: dict, local: dict | None = None, *, external=False) -> dict:
     local = local or checker.load_local_company_payload(company["id"]) or {}
     from release_chart_quality import chart_issues
-    if not external and chart_issues(local):
-        return dict(companyId=company['id'], ticker=company['ticker'], needsUpdate=True,
-                    localQuarter=max(local.get('financials', {}), default=''),
-                    remoteQuarter=max(local.get('financials', {}), default=''),
-                    reason='incomplete-chart-classification', chartIssues=chart_issues(local))
+    pending_chart_issues = chart_issues(local) if not external else []
     # A structure-only row or a parsed year/quarter label is not a financial
     # quarter and must not suppress discovery of the actual released results.
     valid = {}
@@ -95,14 +92,14 @@ def detect(company: dict, local: dict | None = None, *, external=False) -> dict:
         and result.get("remoteAccession") != marker.get("accession")
         and (result.get("remoteFilingDate") or "") >= (entry.get("statementFilingDate") or "")):
         result.update(needsUpdate=True, reason="official-filing-enrichment-ready", buildRefreshMode="full-refresh")
+    if pending_chart_issues and not result.get('needsUpdate'):
+        result.update(companyId=company['id'], ticker=company['ticker'], needsUpdate=True,
+                      localQuarter=latest, remoteQuarter=latest,
+                      reason='incomplete-chart-classification', chartIssues=pending_chart_issues)
     return result
 
 
 def validate_refresh(item: dict, payload: dict, previous: dict | None = None) -> None:
-    from release_chart_quality import chart_issues
-    issues = chart_issues(payload)
-    if issues:
-        raise ValueError(f"{item['companyId']}: incomplete Sankey chart: {'; '.join(issues)}")
     quarter = checker.latest_local_quarter(payload)
     entry = payload.get("financials", {}).get(quarter, {})
     if not complete_quarter(entry, item["companyId"]):
@@ -118,6 +115,10 @@ def validate_refresh(item: dict, payload: dict, previous: dict | None = None) ->
         released = item.get("remoteFilingDate") or ""
         if (entry.get("statementFilingDate") or "") < released:
             raise ValueError(f"{item['companyId']}: earnings detected but refreshed source still lags {released}")
+    from release_chart_quality import chart_issues
+    issues = chart_issues(payload)
+    if issues:
+        raise ValueError(f"{item['companyId']}: incomplete Sankey chart: {'; '.join(issues)}")
 
 
 def save(path: Path, payload: dict) -> None:
@@ -139,6 +140,20 @@ def refresh_one(item: dict, timeout: int = 150) -> None:
         old_dataset = json.loads(snapshots[paths[0]])
         previous = next((c for c in old_dataset["companies"] if c["id"] == item["companyId"]), {})
         validate_refresh(item, payload, previous)
+        # Exercise the same JS runtime and both chart modes used by the manual
+        # chart command. A data-only refresh is not a completed chart update.
+        from render_company_charts import run_direct_renderer
+        quarter=checker.latest_local_quarter(payload)
+        with tempfile.TemporaryDirectory(prefix='earnings-chart-update-') as directory:
+            for language in ('zh','en'):
+                rendered=run_direct_renderer(paths[-1],Path(directory),quarter,language,['sankey','bars'],f'{item["companyId"]}-{language}')
+                for mode in ('sankey','bars'):
+                    svg=Path(rendered['outputs'][mode]['svg']).read_text()
+                    if not svg.lstrip().startswith('<svg') or not svg.rstrip().endswith('</svg>'):
+                        raise ValueError(f'{item["companyId"]}: {mode} did not generate a complete SVG')
+                    import re
+                    if re.search(r'(?:="|[ ,])(?:NaN|[+-]?Infinity)(?:[" ,<]|$)',svg):
+                        raise ValueError(f'{item["companyId"]}: invalid geometry in {mode}')
         blockers = payload.get("coverage", {}).get("classification", {}).get("blockers", [])
         if result.returncode and not blockers:
             raise RuntimeError(f"builder exit code {result.returncode}")
@@ -184,7 +199,9 @@ def run(args) -> int:
             report["report"].append(item)
             if item.get('reason') == 'incomplete-chart-classification' and state.get(company['id'], {}).get('error'):
                 item['buildRefreshMode'] = 'full-refresh'
-            if state.get(company["id"], {}).get("pendingDetails") and item.get("reason") not in {"check-failed", "incomplete-chart-classification"}:
+            if (state.get(company["id"], {}).get("pendingDetails")
+                and item.get("reason") not in {"check-failed", "incomplete-chart-classification"}
+                and (item.get('remoteQuarter') or '') <= (item.get('localQuarter') or '')):
                 item.update(needsUpdate=True, reason="pending-classification-details", buildRefreshMode="full-refresh")
             report["checked"] += 1
             print(f"[watch] {company['ticker']}: {item['reason']}", flush=True)

@@ -11262,7 +11262,35 @@
       "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
       "officialRevenueTaxonomyChangedFromPriorYear": true,
       "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
-      "officialRevenueDetailTaxonomyChangedFromPriorYear": false
+      "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
+      "chartQuality": {
+        "version": 3,
+        "quarter": "2026Q3",
+        "status": "ready",
+        "issues": [],
+        "requiredDetailParents": [
+          "agentsinfra",
+          "devicesconsumer"
+        ],
+        "requiredSegmentKeys": [
+          "agentsinfra",
+          "devicesconsumer"
+        ],
+        "requiredDetailMembers": {
+          "devicesconsumer": [
+            "searchadvertising",
+            "windowsoemdevices",
+            "xbox"
+          ],
+          "agentsinfra": [
+            "azure",
+            "frontiersupportservices",
+            "industrysolutions",
+            "microsoft365cloud",
+            "productivityserverlicensing"
+          ]
+        }
+      }
     }
   },
   "statementSource": "official-sec-companyfacts",

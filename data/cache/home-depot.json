@@ -44,7 +44,8 @@
     "2025Q2",
     "2025Q3",
     "2025Q4",
-    "2026Q1"
+    "2026Q1",
+    "2026Q3"
   ],
   "financials": {
     "2018Q1": {
@@ -5416,7 +5417,132 @@
         "rule": "same-normalized-category-set"
       },
       "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-      "officialRevenueTaxonomyChangedFromPriorYear": false
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "chartQuality": {
+        "version": 3,
+        "quarter": "2026Q1",
+        "status": "pending",
+        "issues": [
+          "revenue classifications do not reconcile to total revenue"
+        ],
+        "requiredDetailParents": [],
+        "requiredSegmentKeys": [
+          "services"
+        ],
+        "requiredDetailMembers": {}
+      }
+    },
+    "2026Q3": {
+      "calendarQuarter": "2026Q3",
+      "periodEnd": "2026-08-02",
+      "fiscalYear": "2026",
+      "fiscalQuarter": "Q2",
+      "fiscalLabel": "FY2026 Q2",
+      "statementCurrency": "USD",
+      "revenueBn": 47.861,
+      "revenueYoyPct": 5.707,
+      "costOfRevenueBn": 31.746,
+      "grossProfitBn": 16.115,
+      "sgnaBn": 8.424,
+      "rndBn": null,
+      "otherOpexBn": 0.852,
+      "operatingExpensesBn": 9.276,
+      "operatingIncomeBn": 6.839,
+      "nonOperatingBn": -0.524,
+      "pretaxIncomeBn": 6.315,
+      "taxBn": 1.549,
+      "netIncomeBn": 4.766,
+      "netIncomeYoyPct": null,
+      "grossMarginPct": 33.67,
+      "operatingMarginPct": 14.289,
+      "profitMarginPct": 9.958,
+      "effectiveTaxRatePct": null,
+      "revenueQoqPct": null,
+      "grossMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": null,
+      "profitMarginYoyDeltaPp": null,
+      "statementSource": "official-earnings-release",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495026000145/hd_exhibit991x08022026.htm",
+      "statementFilingDate": "2026-08-18",
+      "statementSpanQuarters": 1,
+      "statementValueMode": "reported",
+      "officialOpexBreakdown": [
+        {
+          "name": "G&A",
+          "nameZh": "管理费用",
+          "valueBn": 8.424,
+          "valueFormat": "negative-parentheses",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495026000145/hd_exhibit991x08022026.htm"
+        }
+      ],
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "operatingIncomeBn": "official",
+        "netIncomeBn": "official"
+      },
+      "parserFinancialValidation": {
+        "status": "high",
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495026000145/hd_exhibit991x08022026.htm"
+      },
+      "automaticEarnings": {
+        "filingDate": "2026-08-18",
+        "accession": "0000354950-26-000145",
+        "form": "8-K"
+      },
+      "officialRevenueSegments": [
+        {
+          "name": "Products",
+          "nameZh": "产品",
+          "memberKey": "products",
+          "valueBn": 46.3,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000162828026058715/hd-20260802.htm",
+          "filingDate": "2026-08-25",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 96.7
+        },
+        {
+          "name": "Services",
+          "nameZh": "服务",
+          "memberKey": "services",
+          "valueBn": 1.561,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000162828026058715/hd-20260802.htm",
+          "filingDate": "2026-08-25",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 3.3
+        }
+      ],
+      "revenueClassificationSourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000162828026058715/hd-20260802.htm",
+      "revenueClassificationSource": "official-complete-table",
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "revenueClassificationBasisNote": "Current official revenue partition; prior-period category amounts are not allocated.",
+      "chartCompletionAttempts": [
+        {
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495026000145/hd_exhibit991x08022026.htm",
+          "remainingIssues": [
+            "missing current-quarter revenue classification",
+            "missing previously disclosed revenue categories: services"
+          ]
+        },
+        {
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000162828026058715/hd-20260802.htm",
+          "remainingIssues": []
+        }
+      ],
+      "chartQuality": {
+        "version": 3,
+        "quarter": "2026Q3",
+        "status": "ready",
+        "issues": [],
+        "requiredDetailParents": [],
+        "requiredSegmentKeys": [
+          "products",
+          "services"
+        ],
+        "requiredDetailMembers": {}
+      },
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPriorYear": true
     }
   },
   "statementSource": "official-sec-companyfacts",
@@ -7747,10 +7873,10 @@
     "validation": {
       "version": "parser-validation-v1",
       "status": "high",
-      "overallConfidenceScore": 0.9125,
+      "overallConfidenceScore": 1.0,
       "financialConfidenceScore": 1.0,
-      "structuralConfidenceScore": 0.75,
-      "revenueSegmentChecks": 0,
+      "structuralConfidenceScore": 1.0,
+      "revenueSegmentChecks": 1,
       "revenueSegmentMismatchCount": 0,
       "revenueSegmentSkippedChecks": 23,
       "detailGroupChecks": 0,
@@ -7765,26 +7891,26 @@
   },
   "statementPresets": {},
   "coverage": {
-    "quarterCount": 33,
+    "quarterCount": 34,
     "pixelReplicaQuarterCount": 0,
     "hasPixelReplica": false,
-    "officialFinancialQuarterCount": 33,
-    "officialSegmentQuarterCount": 30,
-    "officialExpenseQuarterCount": 0,
+    "officialFinancialQuarterCount": 34,
+    "officialSegmentQuarterCount": 31,
+    "officialExpenseQuarterCount": 1,
     "classification": {
       "status": "ok",
-      "latestQuarter": "2026Q1",
+      "latestQuarter": "2026Q3",
       "latestQuarterHasRevenueClassification": true,
-      "latestQuarterHasExpenseClassification": false,
-      "latestRevenueClassificationQuarter": "2026Q1",
-      "latestExpenseClassificationQuarter": null,
+      "latestQuarterHasExpenseClassification": true,
+      "latestRevenueClassificationQuarter": "2026Q3",
+      "latestExpenseClassificationQuarter": "2026Q3",
       "latestStructureHistoryQuarter": "2024Q2",
-      "revenueClassificationQuarterCount": 30,
-      "expenseClassificationQuarterCount": 0,
-      "revenueClassificationCoverageRatio": 0.9091,
-      "expenseClassificationCoverageRatio": 0.0,
+      "revenueClassificationQuarterCount": 31,
+      "expenseClassificationQuarterCount": 1,
+      "revenueClassificationCoverageRatio": 0.9118,
+      "expenseClassificationCoverageRatio": 0.0294,
       "latestRevenueClassificationLagQuarters": 0,
-      "latestExpenseClassificationLagQuarters": null,
+      "latestExpenseClassificationLagQuarters": 0,
       "warnings": [],
       "blockers": [],
       "policy": {}
@@ -7823,10 +7949,10 @@
       "validation": {
         "version": "parser-validation-v1",
         "status": "high",
-        "overallConfidenceScore": 0.9125,
+        "overallConfidenceScore": 1.0,
         "financialConfidenceScore": 1.0,
-        "structuralConfidenceScore": 0.75,
-        "revenueSegmentChecks": 0,
+        "structuralConfidenceScore": 1.0,
+        "revenueSegmentChecks": 1,
         "revenueSegmentMismatchCount": 0,
         "revenueSegmentSkippedChecks": 23,
         "detailGroupChecks": 0,

@@ -6386,7 +6386,7 @@
       "fiscalLabel": "FY2026 Q3",
       "statementCurrency": "USD",
       "revenueBn": 25.399,
-      "revenueYoyPct": null,
+      "revenueYoyPct": 5.86,
       "costOfRevenueBn": null,
       "grossProfitBn": null,
       "sgnaBn": null,
@@ -6403,7 +6403,7 @@
       "operatingMarginPct": null,
       "profitMarginPct": 0.827,
       "effectiveTaxRatePct": null,
-      "revenueQoqPct": null,
+      "revenueQoqPct": 0.352,
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
@@ -6428,10 +6428,59 @@
       "displayCurrency": "USD",
       "displayScaleFactor": 1,
       "chartQuality": {
-        "status": "pending",
-        "issues": [
-          "missing current-quarter revenue classification"
-        ]
+        "version": 3,
+        "quarter": "2026Q3",
+        "status": "ready",
+        "issues": [],
+        "requiredDetailParents": [],
+        "requiredSegmentKeys": [
+          "innovativemedicine",
+          "medtech"
+        ],
+        "requiredDetailMembers": {}
+      },
+      "officialRevenueSegments": [
+        {
+          "name": "Innovative Medicine",
+          "nameZh": null,
+          "memberKey": "innovativemedicine",
+          "valueBn": 16.757,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000189/a2026q3exhibit991.htm",
+          "filingDate": "2026-10-13",
+          "sourceForm": "earnings release",
+          "yoyPct": 7.67,
+          "qoqPct": 2.28,
+          "mixPct": 66.0,
+          "mixYoyDeltaPp": 1.1
+        },
+        {
+          "name": "Med Tech",
+          "nameZh": null,
+          "memberKey": "medtech",
+          "valueBn": 8.642,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000189/a2026q3exhibit991.htm",
+          "filingDate": "2026-10-13",
+          "sourceForm": "earnings release",
+          "yoyPct": 2.51,
+          "qoqPct": -3.18,
+          "mixPct": 34.0,
+          "mixYoyDeltaPp": -1.1
+        }
+      ],
+      "chartCompletionAttempts": [
+        {
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000189/a2026q3exhibit991.htm",
+          "remainingIssues": []
+        }
+      ],
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2026Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
       }
     }
   },
@@ -8727,7 +8776,7 @@
       "overallConfidenceScore": 0.8927,
       "financialConfidenceScore": 0.835,
       "structuralConfidenceScore": 1.0,
-      "revenueSegmentChecks": 11,
+      "revenueSegmentChecks": 12,
       "revenueSegmentMismatchCount": 0,
       "revenueSegmentSkippedChecks": 21,
       "detailGroupChecks": 0,
@@ -11420,23 +11469,21 @@
     "officialSegmentQuarterCount": 33,
     "officialExpenseQuarterCount": 0,
     "classification": {
-      "status": "error",
+      "status": "ok",
       "latestQuarter": "2026Q3",
-      "latestQuarterHasRevenueClassification": false,
+      "latestQuarterHasRevenueClassification": true,
       "latestQuarterHasExpenseClassification": false,
-      "latestRevenueClassificationQuarter": "2026Q2",
+      "latestRevenueClassificationQuarter": "2026Q3",
       "latestExpenseClassificationQuarter": null,
       "latestStructureHistoryQuarter": "2026Q2",
-      "revenueClassificationQuarterCount": 32,
+      "revenueClassificationQuarterCount": 33,
       "expenseClassificationQuarterCount": 0,
-      "revenueClassificationCoverageRatio": 0.9697,
+      "revenueClassificationCoverageRatio": 1.0,
       "expenseClassificationCoverageRatio": 0.0,
-      "latestRevenueClassificationLagQuarters": 1,
+      "latestRevenueClassificationLagQuarters": 0,
       "latestExpenseClassificationLagQuarters": null,
       "warnings": [],
-      "blockers": [
-        "missing current-quarter revenue classification"
-      ],
+      "blockers": [],
       "policy": {}
     },
     "parser": {
@@ -11476,7 +11523,7 @@
         "overallConfidenceScore": 0.8927,
         "financialConfidenceScore": 0.835,
         "structuralConfidenceScore": 1.0,
-        "revenueSegmentChecks": 11,
+        "revenueSegmentChecks": 12,
         "revenueSegmentMismatchCount": 0,
         "revenueSegmentSkippedChecks": 21,
         "detailGroupChecks": 0,

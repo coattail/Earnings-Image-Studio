@@ -1329,7 +1329,7 @@ function resolveRenderableOfficialRevenueRows(company, entry, options = {}) {
 
 function finalizeCuratedOfficialSegments(selected, revenueBn, options = {}) {
   const preserveAllRows = options.preserveAllRows === true;
-  const maxItems = 7;
+  const maxItems = preserveAllRows ? selected.length : 7;
   let curated = selected
     .slice()
     .sort((left, right) => safeNumber(right.valueBn) - safeNumber(left.valueBn))
@@ -1421,6 +1421,11 @@ function finalizeCuratedOfficialSegments(selected, revenueBn, options = {}) {
 
 function curatedOfficialSegments(company, entry, rows, detailGroups = []) {
   const revenueBn = safeNumber(entry?.revenueBn);
+  // A reconciled, explicitly extracted partition is already disjoint. The
+  // heuristic candidate search must not truncate its official categories.
+  if (entry?.revenueClassificationSource === 'official-complete-table') {
+    return finalizeCuratedOfficialSegments(rows, revenueBn, {preserveAllRows:true});
+  }
   const rawCandidates = [...rows].filter((item) => safeNumber(item.valueBn) > 0.02).slice(0, 12);
   const rawLabels = rawCandidates.map((item) => item.name);
   const candidates = rawCandidates.filter((item) => {
@@ -2458,6 +2463,66 @@ function resolveSankeyFinancialEntry(entry) {
     officialRevenueDetailGroups: restatement.officialRevenueDetailGroups,
     officialRevenueStyle: restatement.officialRevenueStyle,
   };
+}
+
+function chartPublicationIssue(company, quarterKey) {
+  const entry = company?.financials?.[quarterKey];
+  if (!entry) return null;
+  // Legacy historical snapshots are revalidated by the server export path;
+  // every newly built quarter carries a contract, including latest-only data.
+  const latest = company.quarters?.at(-1) ?? Object.keys(company.financials ?? {}).sort().at(-1);
+  if (!entry.chartQuality && !entry.automaticEarnings && quarterKey !== latest) return null;
+  const message = currentChartLanguage() === "en"
+    ? "Revenue classifications are incomplete or inconsistent. Please choose another reporting period."
+    : "本期营收分类尚未齐全或金额不一致，请先查看其他报告期或营收趋势。";
+  if (entry.chartQuality?.status === "pending" || entry.chartQuality?.quarter && entry.chartQuality.quarter !== quarterKey) return message;
+  if (!Number.isFinite(entry.revenueBn) || !Number.isFinite(entry.netIncomeBn)) return message;
+  if (['costOfRevenueBn','grossProfitBn','operatingExpensesBn','operatingIncomeBn','nonOperatingBn','pretaxIncomeBn','taxBn','sgnaBn','rndBn','otherOpexBn']
+    .some(field => entry[field] != null && !Number.isFinite(entry[field]))) return message;
+  if (entry.calendarQuarter && entry.calendarQuarter !== quarterKey) return message;
+  if (entry.periodEnd && entry.statementFilingDate && entry.periodEnd > entry.statementFilingDate) return message;
+  const fields = ['officialRevenueSegments','officialRevenueDetailGroups','officialCostBreakdown','officialOpexBreakdown'];
+  for (const field of fields) {
+    const rows = entry[field] ?? [];
+    if (!Array.isArray(rows)) return message;
+    for (const row of rows) {
+      if (!row || !Number.isFinite(row.valueBn) || row.syntheticInterpolated || row.inferredFromQuarter) return message;
+      if (entry.automaticEarnings && (!row.sourceUrl || entry.periodEnd && (row.filingDate ?? '') < entry.periodEnd
+        && !(row.filingDate == null && row.sourceUrl === entry.statementSourceUrl))) return message;
+    }
+  }
+  const segments = entry.officialRevenueSegments ?? [];
+  if (!segments.length) return message;
+  const total = rows => rows.reduce((sum,row) => sum + row.valueBn, 0);
+  const matches = (amount,expected) => Number.isFinite(expected) && Math.abs(amount-expected) <= Math.max(Math.min(.02,.01*Math.abs(expected)),.005*Math.abs(expected));
+  let adjustment = entry.officialRevenueStyle === 'visa-revenue-components' ? entry.clientIncentivesBn ?? 0 : 0;
+  if ((['alibaba-commerce-staged','samsung-business-unit-bridge'].includes(entry.officialRevenueStyle) || entry.officialRevenueReconciliation?.kind === 'reported-basis-reconciliation') && entry.officialRevenueReconciliation) {
+    const bridge = entry.officialRevenueReconciliation;
+    if (!bridge || !Number.isFinite(bridge.valueBn) || bridge.valueBn > 0 || !bridge.sourceUrl) return message;
+    adjustment = -bridge.valueBn;
+  }
+  if (!matches(total(segments), entry.revenueBn + adjustment)) return message;
+  const normalize = value => String(value ?? '').toLowerCase().replace(/[^a-z0-9\u4e00-\u9fff]/g,'').replaceAll('and','');
+  const identity = row => normalize(row.memberKey || row.name);
+  const keys = new Set(segments.map(identity));
+  if (keys.size !== segments.length || keys.has('')) return message;
+  for (const key of entry.chartQuality?.requiredSegmentKeys ?? []) if (!keys.has(key)) return message;
+  const parents = new Map(segments.flatMap(row => [[normalize(row.name),row],[normalize(row.memberKey),row]]));
+  const groups = new Map();
+  for (const row of entry.officialRevenueDetailGroups ?? []) {
+    const parent = normalize(row.targetName || row.targetId);
+    if (!parent || !parents.has(parent)) return message;
+    groups.set(parent,[...(groups.get(parent) ?? []),row]);
+  }
+  for (const parent of entry.chartQuality?.requiredDetailParents ?? []) {
+    if ((groups.get(parent)?.length ?? 0) < 2) return message;
+  }
+  for (const [parent,members] of Object.entries(entry.chartQuality?.requiredDetailMembers ?? {})) {
+    const current = new Set((groups.get(parent) ?? []).map(identity));
+    for (const member of members) if (!current.has(member)) return message;
+  }
+  for (const [parent,rows] of groups) if (!matches(total(rows),parents.get(parent).valueBn)) return message;
+  return null;
 }
 
 function buildSnapshot(company, quarterKey) {

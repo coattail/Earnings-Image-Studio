@@ -658,6 +658,10 @@ def build_company_payload_for_dataset(
     if company.get("id") == "palantir":
         from palantir_ir import supplement
         payload = supplement(payload)
+    from release_chart_quality import chart_issues
+    if chart_issues(payload):
+        from release_chart_completion import complete_current_chart
+        payload = complete_current_chart(payload, company)
     return payload
 
 
@@ -671,13 +675,10 @@ def build_incremental_company_payload_for_dataset(
     cached = load_existing_dataset_companies_by_id().get(str(company["id"])) or load_cached_company_payload(str(company["id"]))
     if isinstance(cached, dict) and company.get("id") != "palantir":
         supplemented = supplement_cached_release(deepcopy(cached))
-        from release_chart_quality import chart_issues, enrich_from_release
+        from release_chart_quality import chart_issues
         if chart_issues(supplemented):
-            latest = supplemented["financials"][max(supplemented["financials"])]
-            url = latest.get("statementSourceUrl") or ""
-            if url and not url.lower().endswith('.pdf'):
-                from official_segments import _request
-                enrich_from_release(supplemented, _request(url).decode('utf-8', errors='replace'), url)
+            from release_chart_completion import complete_current_chart
+            complete_current_chart(supplemented, company)
             return apply_usd_display_fields(supplemented, fx_cache)
         if supplemented != cached:
             return apply_usd_display_fields(supplemented, fx_cache)
@@ -2801,10 +2802,8 @@ def finalize_company_payload(
     apply_company_rendering_preferences(company, payload)
     recompute_revenue_growth_metrics(payload["financials"], missing_only=True)
     complete_company_revenue_growth(payload)
-    from release_chart_quality import chart_issues
-    issues = chart_issues(payload)
-    if payload.get('financials'):
-        payload['financials'][max(payload['financials'])]['chartQuality'] = {'status': 'pending' if issues else 'ready', 'issues': issues}
+    from release_chart_quality import stamp_chart_quality
+    stamp_chart_quality(payload)
     payload["coverage"] = {
         "quarterCount": len(payload["quarters"]),
         "pixelReplicaQuarterCount": len(presets),

@@ -22,6 +22,7 @@ from build_dataset import (
     apply_manual_company_override,
     apply_usd_display_fields,
     build_company_payload_with_universal_parser,
+    build_company_payload_for_dataset,
     finalize_company_payload,
     load_cached_company_payload,
     load_fx_cache,
@@ -310,13 +311,13 @@ def build_company_payload(company: dict[str, Any], refresh: bool) -> dict[str, A
     if isinstance(cached_payload, dict):
         payload = deepcopy(cached_payload)
     else:
-        payload = build_company_payload_with_universal_parser(company, refresh=refresh)
-        payload = supplement_tencent_official_financials(payload)
-        payload = sanitize_implausible_q4_revenue_aligned_statements(payload)
-        payload = apply_manual_company_override(payload, company, manual_overrides)
-        payload = apply_usd_display_fields(payload, fx_cache)
-        payload = apply_fused_extraction(payload, company, refresh=refresh)
+        payload = build_company_payload_for_dataset(company,refresh=refresh,
+            manual_company_overrides=manual_overrides,fx_cache=fx_cache)
         save_fx_cache(fx_cache)
+    from release_chart_quality import chart_issues
+    if chart_issues(payload):
+        from release_chart_completion import complete_current_chart
+        complete_current_chart(payload,company)
     payload = apply_korean_revenue_history(payload, company)
     payload = finalize_company_payload(company, payload, manual_presets.get(str(company["id"])) or {})
     COMPANY_CACHE_DIR.mkdir(parents=True, exist_ok=True)
@@ -394,7 +395,8 @@ def main() -> int:
     company = resolve_company(args.company, refresh=args.refresh)
     payload = build_company_payload(company, refresh=args.refresh)
     chosen_quarter = choose_quarter(payload, args.quarter)
-    if 'sankey' in modes and payload['financials'][chosen_quarter].get('chartQuality', {}).get('status') == 'pending':
+    from release_chart_quality import chart_issues
+    if 'sankey' in modes and chart_issues(payload, chosen_quarter):
         raise ValueError('Revenue classification is incomplete; refusing to export a misleading Sankey chart')
     basename = args.basename or f"{company['id']}-{chosen_quarter}"
 

@@ -12205,8 +12205,25 @@
         "rule": "same-normalized-category-set"
       },
       "chartQuality": {
+        "version": 3,
+        "quarter": "2026Q3",
         "status": "ready",
-        "issues": []
+        "issues": [],
+        "requiredDetailParents": [
+          "products"
+        ],
+        "requiredSegmentKeys": [
+          "products",
+          "services"
+        ],
+        "requiredDetailMembers": {
+          "products": [
+            "ipad",
+            "iphone",
+            "mac",
+            "wearables"
+          ]
+        }
       }
     }
   },
