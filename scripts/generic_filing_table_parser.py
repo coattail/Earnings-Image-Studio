@@ -22,7 +22,7 @@ from statement_periods import finalize_period_entries
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 CACHE_DIR = ROOT_DIR / "data" / "cache" / "generic-filing-tables"
-GENERIC_FILING_TABLE_CACHE_VERSION = "20260329-v1"
+GENERIC_FILING_TABLE_CACHE_VERSION = "20261103-v2"
 MIN_FILING_DATE = "2018-01-01"
 SUPPORTED_FORMS = {"10-Q", "10-K", "20-F", "6-K", "8-K"}
 MAX_FILINGS_TO_SCAN = 28
@@ -32,12 +32,18 @@ ROW_ALIASES: dict[str, tuple[str, ...]] = {
         "revenue",
         "revenues",
         "totalrevenue",
+        "totalrevenues",
         "netrevenue",
         "netrevenues",
         "sales",
         "netsales",
+        "totalnetsales",
         "salesrevenue",
+        "salesandrevenues",
+        "totalsalesandrevenues",
         "totalnetrevenues",
+        "totalnetrevenue",
+        "reportedsales",
         "营业收入",
         "主营业务收入",
         "收入",
@@ -56,7 +62,7 @@ ROW_ALIASES: dict[str, tuple[str, ...]] = {
         "销售成本",
         "主营业务成本",
     ),
-    "grossProfit": ("grossprofit", "毛利", "毛利润", "毛利额"),
+    "grossProfit": ("grossprofit", "grossmargin", "毛利", "毛利润", "毛利额"),
     "sgna": (
         "sellinggeneralandadministrative",
         "sellinggeneraladministrative",
@@ -110,7 +116,10 @@ ROW_ALIASES: dict[str, tuple[str, ...]] = {
         "operatingincome",
         "incomefromoperations",
         "incomelossfromoperations",
+        "lossfromoperations",
+        "operatingloss",
         "operatingprofit",
+        "operatingearnings",
         "profitfromoperations",
         "营业利润",
         "经营利润",
@@ -133,6 +142,16 @@ ROW_ALIASES: dict[str, tuple[str, ...]] = {
         "所得税费用",
     ),
     "netIncome": (
+        "attributabletoownersofparent",
+        "profitlossaftertax",
+        "netincomeattributabletocommonstockholders",
+        "netincomelossattributabletocommonstockholders",
+        "netincomeattributabletoshareholders",
+        "netincomeattributabletoordinaryshareholders",
+        "netearnings",
+        "netprofit",
+        "profitattributabletocommonshareholders",
+        "profitattributabletocommonstockholders",
         "netincome",
         "netincomeloss",
         "profitloss",
@@ -210,16 +229,53 @@ def _infer_scale_from_revenue_values(values: list[float], base_scale: float) -> 
 
 
 def _normalize_row_name(value: str) -> str:
-    return _normalize_table_key(value)
+    return re.sub(r"[^a-z0-9\u4e00-\u9fff]+", "", str(value or "").lower())
 
 
 def _find_row(row_map: dict[str, list[str]], field_name: str) -> list[str] | None:
     aliases = ROW_ALIASES.get(field_name, ())
+    def is_period_header(row):
+        quarters = sum(bool(re.fullmatch(r"(?:[1-4]Q(?:20)?\d{2}|Q[1-4]\s*20\d{2})", str(cell).strip(), re.I)) for cell in row[1:]) >= 2
+        years = len(row) >= 3 and all(re.fullmatch(r"20\d{2}", str(cell).strip()) for cell in row[1:])
+        return quarters or years
+    def is_percentage(row):
+        first = next((str(cell) for cell in row[1:] if _parse_number(cell) is not None), "")
+        return "%" in first
+    if field_name == "netIncome":
+        for key, row in row_map.items():
+            if re.fullmatch(r"profit\d{0,2}", _normalize_row_name(key)) and not is_period_header(row):
+                return row
+        for key, row in row_map.items():
+            label = _normalize_row_name(key)
+            if ("attributableto" in label and label.startswith(("netincome", "netearnings", "netprofit", "profit"))
+                and not any(token in label for token in ("noncontrolling", "pershare", "continuingoperations", "discontinuedoperations"))
+                and not is_period_header(row)):
+                return row
+    # Total revenue must win over an earlier product/service revenue row.
+    # Prefer explicit common-shareholder earnings over consolidated net income.
+    for alias in aliases:
+        for key, row in row_map.items():
+            if is_period_header(row):
+                continue
+            if _normalize_row_name(key).startswith(("adjusted", "nongaap", "reconciliation")):
+                continue
+            if field_name == "grossProfit" and is_percentage(row):
+                continue
+            if _normalize_row_name(key) == _normalize_row_name(alias):
+                return row
     for key, row in row_map.items():
+        if is_period_header(row):
+            continue
+        if _normalize_row_name(key).startswith(("adjusted", "nongaap", "reconciliation")):
+            continue
+        if field_name == "grossProfit" and is_percentage(row):
+            continue
         normalized_key = _normalize_row_name(key)
         for alias in aliases:
             normalized_alias = _normalize_row_name(alias)
-            if normalized_key == normalized_alias or normalized_key.startswith(normalized_alias) or normalized_key.endswith(normalized_alias):
+            if field_name == "netIncome" and normalized_alias == "profitloss":
+                continue  # A suffix also matches operating profit (loss).
+            if normalized_alias and (normalized_key == normalized_alias or normalized_key.startswith(normalized_alias) or normalized_key.endswith(normalized_alias)):
                 return row
     return None
 
@@ -239,6 +295,10 @@ def _extract_quarter_columns(rows: list[list[str]]) -> list[dict[str, Any]]:
     for row in header_scan_rows:
         for cell in row:
             quarter_match = re.fullmatch(r"Q([1-4])\s+(\d{4})", str(cell or "").strip())
+            short_match = re.fullmatch(r"([1-4])Q\s*(?:20)?(\d{2})", str(cell or "").strip())
+            if short_match:
+                columns.append(_period_column(2000 + int(short_match[2]), int(short_match[1])))
+                continue
             if quarter_match:
                 year = int(quarter_match.group(2))
                 quarter_number = int(quarter_match.group(1))
@@ -246,12 +306,33 @@ def _extract_quarter_columns(rows: list[list[str]]) -> list[dict[str, Any]]:
     if columns:
         return columns
 
+    for i, row in enumerate(header_scan_rows[:-1]):
+        named_columns = [re.fullmatch(r"(First|Second|Third|Fourth) Quarter\s+(20\d{2})", str(cell).strip(), re.I) for cell in row]
+        named_columns = [match for match in named_columns if match]
+        if not named_columns:
+            continue
+        direct = [_period_column(int(match[2]), ("first", "second", "third", "fourth").index(match[1].lower()) + 1) for match in named_columns]
+        cumulative = re.search(r"(Six|Nine|Twelve) Months Ended", " ".join(row), re.I)
+        if cumulative:
+            span = {"six": 2, "nine": 3, "twelve": 4}[cumulative[1].lower()]
+            years = [int(cell) for cell in header_scan_rows[i + 1] if re.fullmatch(r"20\d{2}", str(cell).strip())]
+            return [_period_column(year, int(direct[0]["quarter"][-1]), span=span) for year in years] + direct
+        return direct
+
+    # Issuers may label a quarter by name rather than repeat its ending date.
+    named = re.search(r"\b(first|second|third|fourth) quarter\b|\bQ([1-4])\b", " ".join(" ".join(row) for row in header_scan_rows[:2]), re.I)
+    if named:
+        number = int(named[2]) if named[2] else ("first", "second", "third", "fourth").index(named[1].lower()) + 1
+        years = [int(cell) for row in header_scan_rows[:3] for cell in row if re.fullmatch(r"20\d{2}", str(cell).strip())]
+        if len(years) >= 2:
+            return [_period_column(year, number) for year in years[:2]]
+
     for row_index, row in enumerate(header_scan_rows[:-1]):
         span = 0
         header_cell = ""
         for cell in row:
             normalized = _normalize_table_key(cell)
-            if "threemonthsended" in normalized or "quarterended" in normalized:
+            if any(token in normalized for token in ("threemonthsended", "quarterended", "13weeksended", "thirteenweeksended", "12weeksended", "twelveweeksended")):
                 span = 1
                 header_cell = str(cell or "")
                 break
@@ -278,10 +359,21 @@ def _extract_quarter_columns(rows: list[list[str]]) -> list[dict[str, Any]]:
             parsed = _quarter_from_date_label(header_cell, str(year))
             if parsed is None:
                 continue
-            parsed_year, quarter_number, _ = parsed
-            extracted.append(_period_column(parsed_year, quarter_number, span=span))
+            parsed_year, quarter_number, period_end = parsed
+            extracted.append({**_period_column(parsed_year, quarter_number, span=span), "periodEnd": period_end})
         if extracted:
             return extracted
+
+    # Some releases split duration, month/day, and years across three rows.
+    for i, row in enumerate(header_scan_rows[:-2]):
+        if not any("threemonthsended" in _normalize_table_key(cell) for cell in row):
+            continue
+        dates = header_scan_rows[i + 1]
+        years = [str(cell).strip() for cell in header_scan_rows[i + 2] if re.fullmatch(r"20\d{2}", str(cell).strip())]
+        if dates and len(years) >= 2:
+            parsed_columns = [_quarter_from_date_label(dates[0], year) for year in years[:2]]
+            if all(parsed_columns):
+                return [{**_period_column(y, q), "periodEnd": end} for y, q, end in parsed_columns]
 
     header_text = " ".join(" ".join(row) for row in header_scan_rows)
     chinese_span_map = {"3": 1, "三": 1, "6": 2, "六": 2, "9": 3, "九": 3, "12": 4, "十二": 4}
@@ -299,8 +391,17 @@ def _extract_quarter_columns(rows: list[list[str]]) -> list[dict[str, Any]]:
             parsed = _quarter_from_date_label(cell, cell)
             if parsed is None:
                 continue
-            year, quarter_number, _ = parsed
-            columns.append(_period_column(year, quarter_number))
+            year, quarter_number, period_end = parsed
+            columns.append({**_period_column(year, quarter_number), "periodEnd": period_end})
+    # Headers with full dates in each cell may mix quarterly and YTD columns.
+    # Keep the latter cumulative so annual amounts cannot replace the quarter.
+    normalized_header = _normalize_table_key(header_text)
+    if len(columns) >= 4 and any(token in normalized_header for token in ("threemonthsended", "quarterended", "13weeksended", "thirteenweeksended", "12weeksended", "twelveweeksended")):
+        cumulative_span = next((span for token, span in [("sixmonthsended", 2), ("ninemonthsended", 3), ("twelvemonthsended", 4), ("yearended", 4)] if token in normalized_header), None)
+        if cumulative_span:
+            for column in columns[len(columns) // 2:]:
+                column["statementSpanQuarters"] = cumulative_span
+                column["statementValueMode"] = "cumulative"
     return columns
 
 
@@ -396,7 +497,23 @@ def _period_entries_from_table(rows: list[list[str]], currency: str, source_url:
     if not quarter_columns:
         return []
 
-    row_map = {_normalize_row_name(row[0]): row for row in rows if row and len(row) > 1}
+    if sum("percenttosales" in _normalize_table_key(cell) for row in rows[:4] for cell in row) >= len(quarter_columns):
+        # Amount / margin columns alternate; margin percentages are not a
+        # second year's financial amounts (even when the '%' is omitted).
+        cleaned = []
+        for row in rows:
+            numbers = [cell for cell in row[1:] if _parse_number(cell) is not None]
+            cleaned.append([row[0], *numbers[::2][:len(quarter_columns)]] if row and len(numbers) >= 2 * len(quarter_columns) else row)
+        rows = cleaned
+
+    row_map = {}
+    for row in rows:
+        if not row or len(row) < 2:
+            continue
+        first_number = next((str(cell) for cell in row[1:] if _parse_number(cell) is not None), "")
+        if "%" in first_number:
+            continue  # Later comparisons-as-percent rows repeat monetary labels.
+        row_map.setdefault(_normalize_row_name(row[0]), row)
     revenue_row = _find_row(row_map, "revenue")
     revenue_present = revenue_row is not None
     supporting_rows_present = any(

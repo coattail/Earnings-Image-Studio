@@ -45,7 +45,8 @@
     "2025Q3",
     "2025Q4",
     "2026Q1",
-    "2026Q2"
+    "2026Q2",
+    "2026Q3"
   ],
   "financials": {
     "2018Q1": {
@@ -5592,6 +5593,73 @@
       "statementValueMode": "direct",
       "statementSpanQuarters": 1,
       "statementPeriodStart": "2026-04-01"
+    },
+    "2026Q3": {
+      "calendarQuarter": "2026Q3",
+      "periodEnd": "2026-09-30",
+      "fiscalYear": "2026",
+      "fiscalQuarter": "Q3",
+      "fiscalLabel": "FY2026 Q3",
+      "statementCurrency": "USD",
+      "revenueBn": 20.682,
+      "revenueYoyPct": null,
+      "costOfRevenueBn": 13.332,
+      "grossProfitBn": 7.35,
+      "sgnaBn": 1.797,
+      "rndBn": 0.596,
+      "otherOpexBn": 0.743,
+      "operatingExpensesBn": 3.136,
+      "operatingIncomeBn": 4.214,
+      "nonOperatingBn": null,
+      "pretaxIncomeBn": null,
+      "taxBn": null,
+      "netIncomeBn": 3.287,
+      "netIncomeYoyPct": null,
+      "grossMarginPct": 35.538,
+      "operatingMarginPct": 20.375,
+      "profitMarginPct": 15.893,
+      "effectiveTaxRatePct": null,
+      "revenueQoqPct": null,
+      "grossMarginYoyDeltaPp": null,
+      "operatingMarginYoyDeltaPp": null,
+      "profitMarginYoyDeltaPp": null,
+      "statementSource": "official-earnings-release",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000052/ex991toformcat3q2026earnin.htm",
+      "statementFilingDate": "2026-10-29",
+      "statementSpanQuarters": 1,
+      "statementValueMode": "reported",
+      "officialOpexBreakdown": [
+        {
+          "name": "G&A",
+          "nameZh": "管理费用",
+          "valueBn": 1.797,
+          "valueFormat": "negative-parentheses",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000052/ex991toformcat3q2026earnin.htm"
+        },
+        {
+          "name": "R&D",
+          "nameZh": "研发",
+          "valueBn": 0.596,
+          "valueFormat": "negative-parentheses",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000052/ex991toformcat3q2026earnin.htm"
+        }
+      ],
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "operatingIncomeBn": "official",
+        "netIncomeBn": "official"
+      },
+      "parserFinancialValidation": {
+        "status": "high",
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/18230/000001823026000052/ex991toformcat3q2026earnin.htm"
+      },
+      "automaticEarnings": {
+        "filingDate": "2026-10-29",
+        "accession": "0000018230-26-000052",
+        "form": "8-K"
+      },
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1
     }
   },
   "statementSource": "official-sec-companyfacts",

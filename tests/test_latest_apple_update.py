@@ -20,7 +20,7 @@ class LatestAppleUpdateTest(unittest.TestCase):
         )
 
     def test_apple_fy2026_q3_official_results(self) -> None:
-        self.assertEqual(self.company["quarters"][-1], "2026Q2")
+        self.assertEqual(self.company["quarters"][-1], "2026Q3")
         entry = self.company["financials"]["2026Q2"]
 
         self.assertEqual(entry["fiscalLabel"], "FY2026 Q3")
@@ -31,6 +31,17 @@ class LatestAppleUpdateTest(unittest.TestCase):
         self.assertEqual(entry["netIncomeBn"], 29.789)
         self.assertEqual(entry["statementFilingDate"], "2026-07-30")
         self.assertEqual(entry["statementSourceUrl"], SOURCE_URL)
+
+    def test_apple_new_release_is_automatically_available_before_the_10k(self) -> None:
+        entry = self.company["financials"]["2026Q3"]
+        self.assertEqual(entry["fiscalLabel"], "FY2026 Q4")
+        self.assertEqual(entry["revenueBn"], 114.477)
+        self.assertEqual(entry["grossProfitBn"], 54.82)
+        self.assertEqual(entry["operatingIncomeBn"], 35.631)
+        self.assertEqual(entry["netIncomeBn"], 30.711)
+        self.assertEqual(entry["periodEnd"], "2026-09-26")
+        self.assertEqual(entry["statementFilingDate"], "2026-11-02")
+        self.assertIn("000032019326000024/", entry["statementSourceUrl"])
 
     def test_product_and_service_sales_reconcile_to_revenue(self) -> None:
         entry = self.company["financials"]["2026Q2"]

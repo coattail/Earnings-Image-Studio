@@ -11,6 +11,7 @@ import urllib.request
 from http.client import IncompleteRead, RemoteDisconnected
 import xml.etree.ElementTree as ET
 from collections import defaultdict
+from contextvars import ContextVar
 from copy import deepcopy
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta
@@ -53,6 +54,17 @@ SEC_RATE_LIMIT_MAX_COOLDOWN_SECONDS = 120.0
 SEC_RATE_LIMIT_MAX_ATTEMPTS = 2
 _SEC_REQUEST_LOCK = threading.Lock()
 _SEC_NEXT_REQUEST_AT = 0.0
+REQUEST_DEADLINE = ContextVar("earnings_request_deadline", default=None)
+
+
+def _request_timeout(default: float) -> float:
+    deadline = REQUEST_DEADLINE.get()
+    if deadline is None:
+        return default
+    remaining = deadline - time.monotonic()
+    if remaining <= 0:
+        raise TimeoutError("Issuer discovery network budget exhausted; retry next poll")
+    return min(default, remaining)
 
 ALLOWED_FORMS = {"10-Q", "10-K", "20-F", "6-K"}
 REVENUE_TAG_PRIORITY = {
@@ -227,11 +239,12 @@ def _request(url: str) -> bytes:
     sec_url = _is_sec_url(url)
     sec_rate_limit_attempts = 0
     for attempt in range(5):
+        timeout = _request_timeout(25)
         if sec_url:
             _wait_for_sec_request_slot()
         request = urllib.request.Request(url, headers=SEC_HEADERS)
         try:
-            with urllib.request.urlopen(request, timeout=25) as response:
+            with urllib.request.urlopen(request, timeout=timeout) as response:
                 return response.read()
         except urllib.error.HTTPError as exc:
             last_error = exc
@@ -258,7 +271,7 @@ def _request(url: str) -> bytes:
     try:
         if sec_url:
             _wait_for_sec_request_slot()
-        response = requests.get(url, timeout=60, headers=SEC_HEADERS)
+        response = requests.get(url, timeout=_request_timeout(60), headers=SEC_HEADERS)
         response.raise_for_status()
         return response.content
     except Exception as exc:  # noqa: BLE001
