@@ -8163,14 +8163,14 @@
       "statementCurrency": "USD",
       "revenueBn": 29.958,
       "revenueYoyPct": 6.658,
-      "costOfRevenueBn": null,
-      "grossProfitBn": null,
+      "costOfRevenueBn": 1.269,
+      "grossProfitBn": 28.689,
       "sgnaBn": 0.669,
       "rndBn": null,
       "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "operatingExpensesBn": 19.722,
+      "operatingIncomeBn": 8.967,
+      "nonOperatingBn": 0,
       "pretaxIncomeBn": 8.967,
       "taxBn": 2.034,
       "netIncomeBn": 6.933,
@@ -8183,8 +8183,8 @@
       "grossMarginYoyDeltaPp": null,
       "operatingMarginYoyDeltaPp": null,
       "profitMarginYoyDeltaPp": null,
-      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000481/bac-09302026ex993.htm",
-      "statementFilingDate": "2026-10-14",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000548/bac-20260930.htm",
+      "statementFilingDate": "2026-10-30",
       "parserFinancialFieldSources": {
         "revenueBn": "official",
         "netIncomeBn": "official"
@@ -8333,13 +8333,14 @@
           "nameZh": "销售与营销",
           "valueBn": 0.669,
           "valueFormat": "negative-parentheses",
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000481/bac-09302026ex993.htm"
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000481/bac-09302026ex993.htm",
+          "filingDate": "2026-10-14"
         }
       ],
       "automaticEarnings": {
-        "filingDate": "2026-10-14",
-        "accession": "0000070858-26-000481",
-        "form": "8-K"
+        "filingDate": "2026-10-30",
+        "accession": "0000070858-26-000548",
+        "form": "10-Q"
       },
       "chartQuality": {
         "version": 3,
@@ -8424,12 +8425,15 @@
       },
       "chartCompletionAttempts": [
         {
-          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000481/bac-09302026ex993.htm",
-          "remainingIssues": []
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000548/bac-20260930.htm",
+          "remainingIssues": [
+            "revenue classifications do not reconcile to total revenue"
+          ]
         }
       ],
       "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-      "officialRevenueTaxonomyChangedFromPriorYear": false
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "statementAccession": "0000070858-26-000548"
     }
   },
   "statementSource": "official-sec-companyfacts",
