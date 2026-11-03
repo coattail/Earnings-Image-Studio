@@ -49,4 +49,9 @@ class ReleaseChartTests(unittest.TestCase):
         self.assertTrue(result['needsUpdate'])
         self.assertEqual(result['reason'],'incomplete-chart-classification')
 
+    def test_pending_quarter_does_not_erase_the_next_quarters_required_hierarchy(self):
+        p=fixture();p['financials']['2026Q3']['chartQuality']={'status':'pending'}
+        p['financials']['2026Q4']={'revenueBn':130,'netIncomeBn':20}
+        self.assertTrue(chart_issues(p))
+
 if __name__=='__main__':unittest.main()

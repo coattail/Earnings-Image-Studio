@@ -11,6 +11,9 @@ def key(value):
 def previous_entry(payload, quarter):
     financials = payload.get('financials', {})
     previous = [q for q in financials if q < quarter and financials[q].get('revenueBn')]
+    complete = [q for q in previous if financials[q].get('officialRevenueSegments')
+                and financials[q].get('chartQuality', {}).get('status') != 'pending']
+    previous = complete or previous
     return financials[max(previous)] if previous else {}
 
 def chart_issues(payload):
