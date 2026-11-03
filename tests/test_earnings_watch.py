@@ -28,6 +28,12 @@ class ReleaseParserTests(unittest.TestCase):
     def test_fiscal_quarter_from_official_release_identity_is_distinct_from_calendar_quarter(self):
         entries=release.parse_release(statement(),{'id':'sample'},'https://www.sec.gov/earningsreleasefy27q2.htm','2026-11-02')
         self.assertEqual(entries['2026Q3']['fiscalLabel'],'FY2027 Q2')
+        self.assertEqual(entries['2025Q3']['fiscalLabel'],'FY2026 Q2')
+        # Comparative columns must survive even without a historical cache.
+        current=entries['2026Q3']
+        self.assertAlmostEqual(current['grossMarginYoyDeltaPp'],6.667,places=3)
+        self.assertEqual(current['operatingMarginYoyDeltaPp'],5)
+        self.assertAlmostEqual(current['profitMarginYoyDeltaPp'],5.833,places=3)
 
     def test_quarterly_gaap_total_and_common_earnings_win_over_ytd_and_product_rows(self):
         entries = release.parse_release(statement(), {"id": "sample"}, "https://www.sec.gov/release.htm", "2026-11-02")
@@ -101,6 +107,7 @@ class ReleaseParserTests(unittest.TestCase):
         self.assertEqual(entry['revenueBn'], 195300)
         self.assertEqual(entry['netIncomeBn'], 75100)
         self.assertEqual(entry['statementCurrency'], 'KRW')
+        self.assertAlmostEqual(entry['profitMarginYoyDeltaPp'],24.284,places=3)
 
     def test_unrelated_euro_debt_discussion_does_not_change_usd_statement_currency(self):
         entries = release.parse_release(statement()+"<p>Debt issued in euros</p>", {"reportingCurrency":"USD"}, "https://example.org", "2026-11-02")

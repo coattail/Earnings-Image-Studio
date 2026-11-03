@@ -359,7 +359,7 @@ def complete_current_chart(payload, company, *, documents=None):
         parsed=parse_release(html,{**company,'id':payload['id'],'reportingCurrency':native},url,filed,allow_partial=True).get(quarter)
         if parsed and parsed.get('periodEnd','')<=filed:
             for field,value in parsed.items():
-                if value is not None and (field.endswith('Bn') or field in {'periodEnd','statementCurrency','fiscalYear','fiscalQuarter','fiscalLabel'}): entry[field]=value
+                if value is not None and (field.endswith(('Bn','MarginPct','MarginYoyDeltaPp')) or field in {'periodEnd','statementCurrency','fiscalYear','fiscalQuarter','fiscalLabel'}): entry[field]=value
         soup=BeautifulSoup(html,'html.parser')
         fiscal={n.get('name','').split(':')[-1]:n.get_text(strip=True)for n in soup.find_all('ix:nonnumeric')
                 if n.get('name','').split(':')[-1]in {'DocumentFiscalYearFocus','DocumentFiscalPeriodFocus'}}

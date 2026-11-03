@@ -2476,6 +2476,9 @@ function chartPublicationIssue(company, quarterKey) {
     ? "Revenue classifications are incomplete or inconsistent. Please choose another reporting period."
     : "本期营收分类尚未齐全或金额不一致，请先查看其他报告期或营收趋势。";
   if (entry.chartQuality?.status === "pending" || entry.chartQuality?.quarter && entry.chartQuality.quarter !== quarterKey) return message;
+  if ((entry.chartQuality?.requiredMarginComparisons ?? []).some(field => !Number.isFinite(entry[field]))) {
+    return currentChartLanguage() === "en" ? "Margin comparisons are incomplete." : "利润率同比数据不完整。";
+  }
   if (!Number.isFinite(entry.revenueBn) || !Number.isFinite(entry.netIncomeBn)) return message;
   if (['costOfRevenueBn','grossProfitBn','operatingExpensesBn','operatingIncomeBn','nonOperatingBn','pretaxIncomeBn','taxBn','sgnaBn','rndBn','otherOpexBn']
     .some(field => entry[field] != null && !Number.isFinite(entry[field]))) return message;

@@ -5458,9 +5458,9 @@
       "profitMarginPct": 9.958,
       "effectiveTaxRatePct": null,
       "revenueQoqPct": null,
-      "grossMarginYoyDeltaPp": null,
-      "operatingMarginYoyDeltaPp": null,
-      "profitMarginYoyDeltaPp": null,
+      "grossMarginYoyDeltaPp": 0.26,
+      "operatingMarginYoyDeltaPp": -0.191,
+      "profitMarginYoyDeltaPp": -0.092,
       "statementSource": "official-earnings-release",
       "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495026000145/hd_exhibit991x08022026.htm",
       "statementFilingDate": "2026-08-18",
@@ -5533,6 +5533,11 @@
         "quarter": "2026Q3",
         "status": "ready",
         "issues": [],
+        "requiredMarginComparisons": [
+          "grossMarginYoyDeltaPp",
+          "operatingMarginYoyDeltaPp",
+          "profitMarginYoyDeltaPp"
+        ],
         "requiredDetailParents": [],
         "requiredSegmentKeys": [
           "products",

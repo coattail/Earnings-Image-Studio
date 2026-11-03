@@ -8,6 +8,8 @@ CONTRACT_VERSION = 3
 FINGERPRINT_FIELDS = ('periodEnd', 'statementFilingDate', 'revenueBn', 'operatingIncomeBn', 'netIncomeBn',
                       'costOfRevenueBn','grossProfitBn','operatingExpensesBn','nonOperatingBn','pretaxIncomeBn','taxBn',
                       'sgnaBn','rndBn','otherOpexBn','statementCurrency','displayCurrency','displayScaleFactor',
+                      'grossMarginPct','operatingMarginPct','profitMarginPct',
+                      'grossMarginYoyDeltaPp','operatingMarginYoyDeltaPp','profitMarginYoyDeltaPp',
                       *FIELDS, 'officialRevenueStyle', 'officialRevenueReconciliation', 'clientIncentivesBn', 'revenueYoyPct', 'revenueQoqPct', 'chartQuality')
 
 def chart_fingerprint(payload):
@@ -41,6 +43,9 @@ def chart_issues(payload, quarter=None):
         return ['missing requested reporting quarter']
     entry, prior = financials[quarter], previous_entry(payload, quarter)
     issues = []
+    for field in (entry.get('chartQuality') or {}).get('requiredMarginComparisons', []):
+        if not finite(entry.get(field)):
+            issues.append(f'missing required margin comparison: {field}')
     for field in (field for field in FINGERPRINT_FIELDS if field.endswith('Bn')):
         if entry.get(field) is not None and not finite(entry[field]):
             issues.append(f'invalid financial value in {field}')
@@ -139,8 +144,18 @@ def chart_issues(payload, quarter=None):
 def stamp_chart_quality(payload):
     if payload.get('financials'):
         quarter = max(payload['financials'])
+        try:
+            from scripts.margin_metrics import complete_margin_metrics, comparable_year_ago, margin_value, MARGIN_FIELDS
+        except ModuleNotFoundError:
+            from margin_metrics import complete_margin_metrics, comparable_year_ago, margin_value, MARGIN_FIELDS
+        # Every publication route (including cached early releases) finishes here.
+        complete_margin_metrics(payload['financials'], quarters=[quarter])
         issues = chart_issues(payload, quarter)
         entry = payload['financials'][quarter]
+        year_ago = comparable_year_ago(payload['financials'], quarter)
+        margin_comparisons = [delta for margin, amount, delta in MARGIN_FIELDS
+                              if finite(entry.get(delta)) or (year_ago and margin_value(entry, margin, amount) is not None
+                              and margin_value(year_ago, margin, amount) is not None)]
         prior = previous_entry(payload, quarter)
         required = set()
         targets = {key(r.get('name')) for r in entry.get('officialRevenueSegments') or [] if isinstance(r, dict)}
@@ -161,12 +176,13 @@ def stamp_chart_quality(payload):
         payload['financials'][quarter]['chartQuality'] = {
             'version': CONTRACT_VERSION, 'quarter': quarter,
             'status': 'pending' if issues else 'ready', 'issues': issues,
+            'requiredMarginComparisons': margin_comparisons,
             'requiredDetailParents': sorted(required),
             'requiredSegmentKeys': sorted(required_segments),
             'requiredDetailMembers': {
                 parent: sorted({identity(r) for basis in member_bases for r in basis.get('officialRevenueDetailGroups') or []
                                 if isinstance(r, dict) and key(r.get('targetName') or r.get('targetId')) == parent})
-                for parent in required}}
+                for parent in sorted(required)}}
     return payload
 
 def assert_chart_publication(payload):

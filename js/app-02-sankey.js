@@ -9330,6 +9330,21 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
     }
   }
   if (hasOrdinaryProfitSpine && !hasExplicitCostNodeTop &&
+      snapshot.layout?.disableBalancedExpenseFan !== true) {
+    const currentTop = automaticFrameCoordinate(costFrame, "top");
+    const nextTop = resolveCostStageTop({
+      grossBottom: automaticFrameCoordinate(grossFrame, "top") + grossFrame.height,
+      grossTop: automaticFrameCoordinate(grossFrame, "top"),
+      revenueTop: automaticFrameCoordinate(revenueFrame, "top"), costTop: currentTop,
+      costHeight: costFrame.height, maxY: chartBottomLimit,
+      runway: Math.max(automaticFrameCoordinate(costFrame, "left") - automaticFrameCoordinate(revenueFrame, "right"), 1),
+      unit: verticalScale,
+    });
+    const offset = autoLayoutOffsetForNode("cost");
+    setAutoLayoutNodeOffset("cost", { dy: offset.dy + nextTop - currentTop });
+    refreshEditableNodeFrames();
+  }
+  if (hasOrdinaryProfitSpine && !hasExplicitCostNodeTop &&
       costBreakdownBoxes.length >= 2 && costBreakdownBoxes.length <= 3 &&
       snapshot.layout?.disableBalancedExpenseFan !== true) {
     const sourceShift = balancedLayoutOffsetForNode("cost");
@@ -9344,7 +9359,8 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
     const compact = resolveCompactCostFan(entries, {
       grossBottom: automaticFrameCoordinate(grossFrame, "top") + grossFrame.height,
       grossTop: automaticFrameCoordinate(grossFrame, "top"), revenueTop: automaticFrameCoordinate(revenueFrame, "top"),
-      costTop: currentTop, runway: Math.max(costBreakdownX - automaticFrameCoordinate(costFrame, "right"), 1), unit: verticalScale,
+      costTop: currentTop, costHeight: costFrame.height,
+      runway: Math.max(costBreakdownX - automaticFrameCoordinate(costFrame, "right"), 1), unit: verticalScale,
       minY: costBreakdownSharesOpexColumn ? summaryBottom + scaleY(20) : scaleY(180),
       maxY: height - scaleY(40),
     });

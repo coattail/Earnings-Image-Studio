@@ -6797,9 +6797,9 @@
       "profitMarginPct": 3.132,
       "effectiveTaxRatePct": null,
       "revenueQoqPct": 35.725,
-      "grossMarginYoyDeltaPp": null,
-      "operatingMarginYoyDeltaPp": null,
-      "profitMarginYoyDeltaPp": null,
+      "grossMarginYoyDeltaPp": -0.173,
+      "operatingMarginYoyDeltaPp": 0.091,
+      "profitMarginYoyDeltaPp": 0.102,
       "statementSource": "official-quarter-statement-backfill",
       "statementSourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000909832.json",
       "statementFilingDate": "2026-10-07",
@@ -6957,6 +6957,11 @@
         "quarter": "2026Q3",
         "status": "ready",
         "issues": [],
+        "requiredMarginComparisons": [
+          "grossMarginYoyDeltaPp",
+          "operatingMarginYoyDeltaPp",
+          "profitMarginYoyDeltaPp"
+        ],
         "requiredDetailParents": [],
         "requiredSegmentKeys": [
           "foodssundries",

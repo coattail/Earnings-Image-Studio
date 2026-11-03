@@ -139,6 +139,12 @@ def copy_public_data_files() -> None:
     for filename in PUBLIC_DATA_FILES:
         shutil.copy2(DATA_DIR / filename, dist_data_dir / filename)
 
+    try:
+        from scripts.public_assets import write_logo_assets
+    except ModuleNotFoundError:
+        from public_assets import write_logo_assets
+    write_logo_assets(json.loads((DATA_DIR / "logo-catalog.json").read_text(encoding="utf-8")), dist_data_dir)
+
     dataset_payload = json.loads((DATA_DIR / "earnings-dataset.json").read_text(encoding="utf-8"))
     write_dataset_index_file(dataset_payload, dist_data_dir / DATASET_INDEX_FILENAME)
 
@@ -156,7 +162,14 @@ def validate_public_revenue_growth() -> None:
     except ModuleNotFoundError:
         from release_chart_quality import assert_chart_publication, chart_fingerprint
     dataset = json.loads((DATA_DIR / "earnings-dataset.json").read_text(encoding="utf-8"))
+    try:
+        from scripts.margin_metrics import missing_margin_comparisons
+    except ModuleNotFoundError:
+        from margin_metrics import missing_margin_comparisons
     for company in dataset.get("companies") or []:
+        financials = company.get("financials") or {}
+        if financials and missing_margin_comparisons(financials, max(financials)):
+            raise ValueError(f"{company['id']}: margin comparisons were not completed before publication")
         assert_chart_publication(company)
         assert_revenue_growth_complete(company)
         cache_path = DATA_DIR / "cache" / f"{company['id']}.json"
@@ -174,6 +187,11 @@ def main() -> int:
     reset_dist_dir()
     copy_public_root_files()
     copy_public_data_files()
+    try:
+        from scripts.public_assets import version_static_assets
+    except ModuleNotFoundError:
+        from public_assets import version_static_assets
+    version_static_assets(DIST_DIR)
     write_nojekyll_marker()
     print(f"[pages] prepared static artifact at {DIST_DIR}")
     return 0

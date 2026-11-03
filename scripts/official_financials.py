@@ -767,21 +767,19 @@ def _finalize_financials(financials: dict[str, Any]) -> tuple[list[str], dict[st
     for index, period in enumerate(ordered_periods):
         entry = financials[period]
         previous = financials[ordered_periods[index - 1]] if index > 0 else None
-        year_ago = financials[ordered_periods[index - 4]] if index >= 4 else None
+        # Missing periods must not shift a year-over-year comparison.
+        year_ago = financials.get(f"{int(period[:4]) - 1}{period[4:]}")
         if previous and entry.get("revenueBn") not in (None, 0) and previous.get("revenueBn") not in (None, 0):
             entry["revenueQoqPct"] = round((entry["revenueBn"] / previous["revenueBn"] - 1) * 100, 2)
         if year_ago and entry.get("revenueBn") not in (None, 0) and year_ago.get("revenueBn") not in (None, 0):
             entry["revenueYoyPct"] = round((entry["revenueBn"] / year_ago["revenueBn"] - 1) * 100, 2)
         if year_ago and entry.get("netIncomeBn") not in (None, 0) and year_ago.get("netIncomeBn") not in (None, 0):
             entry["netIncomeYoyPct"] = round((entry["netIncomeBn"] / year_ago["netIncomeBn"] - 1) * 100, 2)
-        if year_ago:
-            for key, target in (
-                ("grossMarginPct", "grossMarginYoyDeltaPp"),
-                ("operatingMarginPct", "operatingMarginYoyDeltaPp"),
-                ("profitMarginPct", "profitMarginYoyDeltaPp"),
-            ):
-                if entry.get(key) is not None and year_ago.get(key) is not None:
-                    entry[target] = round(entry[key] - year_ago[key], 2)
+    try:
+        from scripts.margin_metrics import complete_margin_metrics
+    except ModuleNotFoundError:
+        from margin_metrics import complete_margin_metrics
+    complete_margin_metrics(financials)
     return (ordered_periods, {period: financials[period] for period in ordered_periods})
 
 

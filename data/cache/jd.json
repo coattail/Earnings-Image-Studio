@@ -9013,6 +9013,11 @@
         "quarter": "2026Q2",
         "status": "ready",
         "issues": [],
+        "requiredMarginComparisons": [
+          "grossMarginYoyDeltaPp",
+          "operatingMarginYoyDeltaPp",
+          "profitMarginYoyDeltaPp"
+        ],
         "requiredDetailParents": [
           "netproductrevenues",
           "netservicerevenues"
@@ -9022,13 +9027,13 @@
           "netservicerevenues"
         ],
         "requiredDetailMembers": {
-          "netservicerevenues": [
-            "logisticsotherservicerevenues",
-            "marketplacemarketingrevenues"
-          ],
           "netproductrevenues": [
             "electronicshomeappliancesrevenues",
             "generalmerchiserevenues"
+          ],
+          "netservicerevenues": [
+            "logisticsotherservicerevenues",
+            "marketplacemarketingrevenues"
           ]
         }
       }

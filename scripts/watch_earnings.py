@@ -194,6 +194,10 @@ def refresh_one(item: dict, timeout: int = 150) -> None:
             combined['companies']=[payload if c['id']==item['companyId']else c for c in combined['companies']]
             save(paths[-1],payload);save(paths[0],combined);write_dataset_index_file(combined,paths[1])
         validate_refresh(item, payload, previous)
+        from margin_metrics import missing_margin_comparisons
+        missing = missing_margin_comparisons(payload['financials'], checker.latest_local_quarter(payload))
+        if missing:
+            raise ValueError(f"{item['companyId']}: missing margin comparisons: {', '.join(missing)}")
         # Exercise the same JS runtime and both chart modes used by the manual
         # chart command. A data-only refresh is not a completed chart update.
         from render_company_charts import run_direct_renderer
