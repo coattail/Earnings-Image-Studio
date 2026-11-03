@@ -48,3 +48,4 @@ if __name__ == "__main__":
     # Keep the same generated assets there as in the GitHub Pages artifact.
     data_dir = Path(__file__).resolve().parents[1] / "data"
     write_logo_assets(json.loads((data_dir / "logo-catalog.json").read_text(encoding="utf-8")), data_dir)
+    version_static_assets(data_dir.parent)

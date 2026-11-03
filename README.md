@@ -156,3 +156,10 @@ cp "SKILL.md" "$CODEX_HOME/skills/earnings-image-studio/SKILL.md"
 
 - This repository is path-agnostic: all commands use relative paths.
 - For CI/CD deployment, use your own repository settings and pages URL.
+- Cloudflare currently serves the repository root; GitHub Pages serves `dist/`.
+  After changing browser scripts, styles, or `data/logo-catalog.json`, run
+  `python3 scripts/public_assets.py` and commit the generated `index.html`,
+  `data/logo-index.json`, and `data/logos/` changes. This gives both hosts the
+  same content-versioned assets. `python3 scripts/prepare_pages_artifact.py`
+  also generates these assets in `dist/`. Ordinary earnings updates only
+  revalidate financial JSON; they do not regenerate or download every logo.
