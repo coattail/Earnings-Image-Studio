@@ -6765,7 +6765,7 @@
     },
     "2026Q3": {
       "calendarQuarter": "2026Q3",
-      "periodEnd": "2026-09-30",
+      "periodEnd": "2026-09-27",
       "fiscalYear": "2026",
       "fiscalQuarter": "Q3",
       "fiscalLabel": "FY2026 Q3",
@@ -6775,25 +6775,25 @@
       "costOfRevenueBn": 8.097,
       "grossProfitBn": 17.302,
       "sgnaBn": 6.285,
-      "rndBn": 11.832,
+      "rndBn": 4.652,
       "otherOpexBn": null,
-      "operatingExpensesBn": null,
-      "operatingIncomeBn": null,
-      "nonOperatingBn": null,
+      "operatingExpensesBn": 11.457,
+      "operatingIncomeBn": 5.845,
+      "nonOperatingBn": -5.811,
       "pretaxIncomeBn": 0.034,
       "taxBn": -0.176,
       "netIncomeBn": 0.21,
       "netIncomeYoyPct": -95.92,
-      "grossMarginPct": 68.121,
-      "operatingMarginPct": null,
-      "profitMarginPct": 0.827,
+      "grossMarginPct": 68.120792,
+      "operatingMarginPct": 23.012717,
+      "profitMarginPct": 0.826804,
       "effectiveTaxRatePct": -517.647,
       "revenueQoqPct": 0.352,
-      "grossMarginYoyDeltaPp": -1.44,
-      "operatingMarginYoyDeltaPp": null,
+      "grossMarginYoyDeltaPp": -1.441,
+      "operatingMarginYoyDeltaPp": -6.3,
       "profitMarginYoyDeltaPp": -20.646,
-      "statementFilingDate": "2026-10-13",
-      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000189/a2026q3exhibit991.htm",
+      "statementFilingDate": "2026-10-21",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927.htm",
       "parserFinancialFieldSources": {
         "revenueBn": "official",
         "netIncomeBn": "official"
@@ -6978,6 +6978,7 @@
         "issues": [],
         "requiredMarginComparisons": [
           "grossMarginYoyDeltaPp",
+          "operatingMarginYoyDeltaPp",
           "profitMarginYoyDeltaPp"
         ],
         "requiredDetailParents": [],
@@ -6991,10 +6992,19 @@
       "statementSpanQuarters": 1,
       "statementValueMode": "reported",
       "automaticEarnings": {
-        "filingDate": "2026-10-13",
-        "accession": "0000200406-26-000189",
-        "form": "8-K"
-      }
+        "filingDate": "2026-10-21",
+        "accession": "0000200406-26-000197",
+        "form": "10-Q"
+      },
+      "chartCompletionAttempts": [
+        {
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000197/jnj-20260927.htm",
+          "remainingIssues": [
+            "revenue classifications do not reconcile to total revenue"
+          ]
+        }
+      ],
+      "statementAccession": "0000200406-26-000197"
     }
   },
   "statementSource": "official-sec-companyfacts",
@@ -9332,21 +9342,22 @@
     "validation": {
       "version": "parser-validation-v1",
       "status": "medium",
-      "overallConfidenceScore": 0.8178,
+      "overallConfidenceScore": 0.7886,
       "financialConfidenceScore": 0.8543,
-      "structuralConfidenceScore": 0.75,
+      "structuralConfidenceScore": 0.6667,
       "revenueSegmentChecks": 12,
       "revenueSegmentMismatchCount": 0,
       "revenueSegmentSkippedChecks": 21,
       "detailGroupChecks": 0,
       "detailGroupMismatchCount": 0,
       "detailGroupSkippedChecks": 0,
-      "opexChecks": 2,
+      "opexChecks": 3,
       "opexSkippedChecks": 0,
-      "opexOverflowMismatchCount": 1,
-      "warningCount": 1,
+      "opexOverflowMismatchCount": 2,
+      "warningCount": 2,
       "warnings": [
-        "2026Q2: opex breakdown sums to 19.646Bn vs operating expenses 10.119Bn."
+        "2026Q2: opex breakdown sums to 19.646Bn vs operating expenses 10.119Bn.",
+        "2026Q3: opex breakdown sums to 30.583Bn vs operating expenses 11.457Bn."
       ]
     }
   },
@@ -12167,8 +12178,8 @@
       }
     }
   },
-  "marketCapUsd": 657677221888,
-  "marketCapAsOf": "2026-10-31",
+  "marketCapUsd": 640753795072,
+  "marketCapAsOf": "2026-11-04",
   "marketCapSourceRank": 22,
   "marketCapSource": "CompaniesMarketCap",
   "marketCapSourceUrl": "https://companiesmarketcap.com/johnson-and-johnson/marketcap/",
@@ -12232,21 +12243,22 @@
       "validation": {
         "version": "parser-validation-v1",
         "status": "medium",
-        "overallConfidenceScore": 0.8178,
+        "overallConfidenceScore": 0.7886,
         "financialConfidenceScore": 0.8543,
-        "structuralConfidenceScore": 0.75,
+        "structuralConfidenceScore": 0.6667,
         "revenueSegmentChecks": 12,
         "revenueSegmentMismatchCount": 0,
         "revenueSegmentSkippedChecks": 21,
         "detailGroupChecks": 0,
         "detailGroupMismatchCount": 0,
         "detailGroupSkippedChecks": 0,
-        "opexChecks": 2,
+        "opexChecks": 3,
         "opexSkippedChecks": 0,
-        "opexOverflowMismatchCount": 1,
-        "warningCount": 1,
+        "opexOverflowMismatchCount": 2,
+        "warningCount": 2,
         "warnings": [
-          "2026Q2: opex breakdown sums to 19.646Bn vs operating expenses 10.119Bn."
+          "2026Q2: opex breakdown sums to 19.646Bn vs operating expenses 10.119Bn.",
+          "2026Q3: opex breakdown sums to 30.583Bn vs operating expenses 11.457Bn."
         ]
       }
     }
