@@ -74,12 +74,14 @@ def latest_native_release(company):
     if company_id == "alibaba":
         from official_revenue_structures import _quarter_from_alibaba_title, _timestamp_ms_to_iso_date
         items = []
-        for year in [date.today().year + 1, date.today().year]:
+        # This endpoint is indexed by calendar year, not Alibaba fiscal year.
+        for year in [date.today().year, date.today().year - 1]:
             try:
                 payload = _request_json(f"https://data.alibabagroup.com/data/index/ir/quarterly-results/q{year}/list.json")
-            except Exception:
-                if year > date.today().year:
-                    continue  # Next fiscal year's index may not exist yet.
+            except Exception as error:
+                status = getattr(error, 'code', None) or getattr(getattr(error, 'response', None), 'status_code', None)
+                if status == 404 and year == date.today().year:
+                    continue  # Early January may still use last year's index.
                 raise
             for item in payload.get("content", []):
                 title = item.get("documentTitle") or ""
@@ -89,7 +91,7 @@ def latest_native_release(company):
                     filed = _timestamp_ms_to_iso_date(item.get('eventDate') or item.get('documentPublishTime'))
                     if not filed or filed > date.today().isoformat(): continue
                     items.append(dict(quarter=quarter, filingDate=filed, sourceUrl=f"https://www.alibabagroup.com/en-US/document-{item.get('documentId')}", form="official-ir-release"))
-            # The newest fiscal-year index already covers current releases;
+            # The newest calendar-year index already covers current releases;
             # do not spend the issuer's budget crawling an older archive too.
             if items and max(i['quarter'] for i in items) >= (company.get('_localQuarter') or f'{date.today().year}Q2'):
                 break
