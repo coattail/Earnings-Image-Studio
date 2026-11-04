@@ -48,7 +48,7 @@ const context = vm.createContext({
   navigator: { userAgent: "node" },
 });
 context.globalThis = context;
-["app-00-foundation.js", "app-01-layout.js", "app-02-sankey.js", "app-03-data.js", "app-04-bootstrap.js"].forEach((filename) => {
+require(path.join(root, 'js', 'runtime-files.json')).shared.forEach((filename) => {
   vm.runInContext(fs.readFileSync(path.join(root, "js", filename), "utf8"), context, { filename });
 });
 const dataset = JSON.parse(fs.readFileSync(path.join(root, "data", "dataset-index.json"), "utf8"));

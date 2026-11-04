@@ -110,15 +110,11 @@ function createVmContext() {
   return vm.createContext(context);
 }
 
-function loadRuntime(rootDir) {
+function loadRuntime(rootDir, { compiled = false } = {}) {
   const context = createVmContext();
-  const scriptPaths = [
-    path.join(rootDir, "js", "app-00-foundation.js"),
-    path.join(rootDir, "js", "app-01-layout.js"),
-    path.join(rootDir, "js", "app-02-sankey.js"),
-    path.join(rootDir, "js", "app-03-data.js"),
-    path.join(rootDir, "js", "app-04-bootstrap.js"),
-  ];
+  const scriptPaths = compiled
+    ? [path.join(rootDir, loadJson(path.join(rootDir, 'assets/frontend-manifest.json')).bundle)]
+    : require(path.join(rootDir, 'js/runtime-files.json')).shared.map(filename => path.join(rootDir, 'js', filename));
   scriptPaths.forEach((scriptPath) => {
     const source = fs.readFileSync(scriptPath, "utf8");
     vm.runInContext(source, context, { filename: scriptPath });
@@ -285,4 +281,5 @@ function main() {
   debug("completed");
 }
 
-main();
+if (require.main === module) main();
+module.exports = { loadRuntime };

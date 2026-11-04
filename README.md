@@ -48,10 +48,11 @@ python3 -m venv .venv
 python3 -m pip install -r requirements.txt
 ```
 
-If you run JavaScript audit/export helpers:
+For frontend development (Node rendering helpers need no npm packages):
 
 ```bash
-npm install
+npm ci
+npm run build
 ```
 
 Runtime assumptions:
@@ -144,7 +145,9 @@ cp "SKILL.md" "$CODEX_HOME/skills/earnings-image-studio/SKILL.md"
 
 ## Project Structure
 
-- `index.html`, `style.css`, `js/`: web app shell and renderer
+- `index.html`, `style.css`, `js/`: web app shell and readable renderer modules
+- `js/runtime-files.json`: shared source order for Node, browser builds and tests
+- `assets/`: content-hashed production bundle and source-integrity manifest
 - `data/`: generated dataset, presets, and caches
 - `scripts/build_dataset.py`: end-to-end dataset build pipeline
 - `scripts/universal_parser.py`: source orchestration and fallback selection
@@ -158,8 +161,15 @@ cp "SKILL.md" "$CODEX_HOME/skills/earnings-image-studio/SKILL.md"
 - For CI/CD deployment, use your own repository settings and pages URL.
 - Cloudflare currently serves the repository root; GitHub Pages serves `dist/`.
   After changing browser scripts, styles, or `data/logo-catalog.json`, run
-  `python3 scripts/public_assets.py` and commit the generated `index.html`,
-  `data/logo-index.json`, and `data/logos/` changes. This gives both hosts the
-  same content-versioned assets. `python3 scripts/prepare_pages_artifact.py`
-  also generates these assets in `dist/`. Ordinary earnings updates only
-  revalidate financial JSON; they do not regenerate or download every logo.
+  `npm ci` once, then `npm run build`. Commit the generated `assets/`, `index.html`,
+  `data/logo-index.json`, and `data/logos/` changes along with source changes.
+  Both hosts use the same compressed, content-hashed bundle. Pages preparation
+  verifies every source and bundle hash before publishing, so changing a source
+  without rebuilding cannot silently deploy stale browser code.
+- `python3 scripts/prepare_pages_artifact.py` copies the validated bundle into
+  `dist/` and regenerates current financial data. Data-only automated runs require
+  Python and Node, with no npm install or frontend rebuild. Tiny logos share a
+  bounded inline budget; larger assets load only when referenced by the chart.
+- Run `node --test tests/test_built_runtime_parity.cjs` after renderer/build changes
+  to compare modular and production SVGs for all companies, both languages,
+  historical periods, and editable layouts.

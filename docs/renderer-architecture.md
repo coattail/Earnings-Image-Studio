@@ -14,32 +14,54 @@ The main reason is that the hardest part of the product is not a generic chart l
 
 A full D3 migration would not solve those problems automatically, and would likely create a long regression window while the custom layout language is rebuilt.
 
-## New Runtime Split
+## Runtime and source boundaries
 
-The frontend now exposes a small runtime boundary on `window.earningsImageStudio`:
+`js/runtime-files.json` defines source order once. The direct Node renderer,
+audits, tests, and production compiler all consume it. Files are classic scripts:
+public runtime functions retain their names and the `window.earningsImageStudio`
+and automation APIs remain stable.
 
-- `layout`
-  - `snapshotCanvasSize`
-  - `stackValueSlices`
-  - `separateStackSlices`
-  - `resolveVerticalBoxes`
-  - `resolveVerticalBoxesVariableGap`
-  - `prototypeBandConfig`
-  - `approximateTextWidth`
-  - `approximateTextBlockWidth`
-  - `estimatedStackSpan`
-- `render`
-  - `renderPixelReplicaSvg`
-  - `renderIncomeStatementSvg`
+| Module | Responsibility |
+| --- | --- |
+| `app-01-layout.js` | Shared geometry and packing solvers |
+| `app-02-sankey.js` | Replica layout ownership and ordered refinement passes |
+| `renderer/replica-annotations.js` | Label measurement and annotation output, with explicit per-call layout inputs |
+| `renderer/replica-markup.js` | SVG output from finalized replica coordinates, styles and annotation callbacks |
+| `renderer/revenue-only.js` | Revenue-only disclosure presentation |
+| `renderer/segment-bars.js` | Historical bars, axes and logo collision refinement |
+| `renderer/income-statement.js` | Statement rendering entry and non-replica fallback |
+| `renderer/runtime.js` | Stable layout/render/i18n API assembly |
+| `app-03-data.js` | Financial snapshots and historical data adapters |
+| `app-04-bootstrap.js` | Loading, DOM updates, exports and automation |
 
-This is not a full file-level extraction yet. It is an intentional seam so we can keep moving without destabilizing the renderer.
+The SVG phase receives a named layout model. It does not assign to layout-owner
+bindings. Annotation helpers receive their local geometry dependencies on each
+call; this preserves late-bound editor offsets and the original ordering of
+layout passes, including the hoisted branch-label resolver used during packing.
 
-## Why This Split Helps
+`npm run build` compiles the ordered modules into a single minified production
+asset. Readable modules remain the source of truth. A source-integrity manifest
+lets data-only cloud runs validate the checked-in bundle without installing npm
+dependencies. The root site and Pages artifact load the same bundle.
 
-- Layout rules can evolve without being tied to DOM update code.
-- Render entry points now have a stable home for future extraction.
-- Browser-side diagnostics can inspect layout behavior through one runtime object.
-- If we later split files, the call sites are already aligned to engine boundaries.
+The startup path preloads data alongside the deferred bundle. Small logos are
+embedded in the logo index (2 KB per asset, 16 KB total budget), avoiding another
+request before rendering. Large logos retain lazy loading and all exported SVGs
+retain embedded images. The complete sidebar is populated after the first chart
+gets a paint opportunity.
+
+## Verification
+
+Before this extraction, 340 latest, historical, bilingual and editor scenarios
+were captured across all 41 companies. All 335 renderable SVGs remain byte-for-byte
+identical after extraction and production minification; the five pre-existing
+publication errors are also unchanged. This is a preservation check, not a claim
+that missing financial disclosures have been resolved.
+
+The recurring `test_built_runtime_parity.cjs` compares current source and compiled
+SVGs across the same matrix. Domain tests cover monetary ratios, additive drags,
+source labels, bar history and logo placement. Artifact validation rejects stale
+source hashes, altered bundles, missing inputs and an outdated HTML bundle link.
 
 ## D3 Recommendation
 
@@ -114,4 +136,4 @@ the unconstrained interactive path for drag regression checks and editor preview
    - left label overflow
    - right band overflow
    - canvas height expansion reason
-4. Split the runtime into separate files only after the layout model is stable.
+4. Continue extracting bounded layout passes as explicit input/output solvers; preserve pass ordering and the source/production parity matrix.

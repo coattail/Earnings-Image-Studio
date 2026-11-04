@@ -46,7 +46,7 @@ const context = vm.createContext({
   navigator: { userAgent: "node" },
 });
 context.globalThis = context;
-["app-00-foundation.js", "app-01-layout.js", "app-02-sankey.js", "app-03-data.js", "app-04-bootstrap.js"].forEach((filename) => {
+require(path.join(root, 'js', 'runtime-files.json')).shared.forEach((filename) => {
   vm.runInContext(fs.readFileSync(path.join(root, "js", filename), "utf8"), context, { filename });
 });
 const indexCompany = JSON.parse(fs.readFileSync(path.join(root, "data", "dataset-index.json"), "utf8"))
@@ -83,9 +83,11 @@ process.stdout.write(JSON.stringify(result));
         )
         payload = json.loads(result.stdout)
 
-        self.assertEqual(payload["latestQuarter"], "2026Q2")
-        self.assertIsNone(payload["beforeEntryOpex"])
-        self.assertIsNone(payload["afterEntryOpex"])
+        company = next(c for c in json.loads((ROOT_DIR / 'data/dataset-index.json').read_text())['companies'] if c['id'] == 'microsoft')
+        expected_quarter = max(company['financials'])
+        self.assertEqual(payload["latestQuarter"], expected_quarter)
+        self.assertEqual(payload["beforeEntryOpex"], company['financials'][expected_quarter].get('officialOpexBreakdown'))
+        self.assertEqual(payload["afterEntryOpex"], payload["beforeEntryOpex"])
         self.assertEqual(payload["afterOpex"], payload["beforeOpex"])
         self.assertEqual(payload["afterBusinessGroups"], payload["beforeBusinessGroups"])
         self.assertTrue(payload["historicalQuarterAvailable"])
@@ -111,7 +113,7 @@ const context = vm.createContext({
   navigator: { userAgent: "node" },
 });
 context.globalThis = context;
-["app-00-foundation.js", "app-01-layout.js", "app-02-sankey.js", "app-03-data.js", "app-04-bootstrap.js"].forEach((filename) => {
+require(path.join(root, 'js', 'runtime-files.json')).shared.forEach((filename) => {
   vm.runInContext(fs.readFileSync(path.join(root, "js", filename), "utf8"), context, { filename });
 });
 const indexCompany = JSON.parse(fs.readFileSync(path.join(root, "data", "dataset-index.json"), "utf8"))

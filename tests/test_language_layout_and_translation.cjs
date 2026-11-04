@@ -70,7 +70,7 @@ function createContext() {
 
 function loadRuntime() {
   const context = createContext();
-  ["app-00-foundation.js", "app-01-layout.js", "app-02-sankey.js", "app-03-data.js", "app-04-bootstrap.js"].forEach((filename) => {
+  require(path.join(ROOT, 'js', 'runtime-files.json')).shared.forEach((filename) => {
     vm.runInContext(fs.readFileSync(path.join(ROOT, "js", filename), "utf8"), context, { filename });
   });
   context.__nvdaPayload = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "cache", "nvidia.json"), "utf8"));

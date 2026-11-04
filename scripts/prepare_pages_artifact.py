@@ -128,6 +128,7 @@ def copy_public_root_files() -> None:
     if dist_js_dir.exists():
         shutil.rmtree(dist_js_dir)
     shutil.copytree(JS_DIR, dist_js_dir)
+    shutil.copytree(ROOT_DIR / 'assets', DIST_DIR / 'assets', dirs_exist_ok=True)
 
 
 def copy_public_data_files() -> None:
@@ -183,6 +184,11 @@ def validate_public_revenue_growth() -> None:
 
 def main() -> int:
     # Reject incomplete source data before deleting a previous usable artifact.
+    try:
+        from scripts.public_assets import validate_frontend_assets
+    except ModuleNotFoundError:
+        from public_assets import validate_frontend_assets
+    validate_frontend_assets(ROOT_DIR)
     validate_public_revenue_growth()
     reset_dist_dir()
     copy_public_root_files()
