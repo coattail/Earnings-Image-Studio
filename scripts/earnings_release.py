@@ -43,7 +43,7 @@ def plausible(entry: dict, previous: dict) -> bool:
 
 def parse_release(html: str, company: dict, url: str, filed: str, *, allow_partial=False) -> dict:
     """Parse GAAP/IFRS statement tables; adjusted reconciliations are excluded."""
-    text = BeautifulSoup(html, "html.parser").get_text(" ", strip=True)
+    text = re.sub(r'\s+', ' ', BeautifulSoup(html, "html.parser").get_text(" ", strip=True))
     fiscal_heading=re.search(r'\b(first|second|third|fourth)[ -]+quarter(?:[ -]+(?:of|fiscal|the|for))*[ -]+(20\d{2})\b',text[:2500],re.I)
     fiscal_marker=re.search(r'fy(20\d{2}|\d{2})[-_]?q([1-4])',url,re.I)
     currency = company.get("reportingCurrency") or "USD"
@@ -54,7 +54,7 @@ def parse_release(html: str, company: dict, url: str, filed: str, *, allow_parti
         currency = "EUR"
     entries = []
     for table in BeautifulSoup(html, "html.parser").find_all("table"):
-        table_text = table.get_text(" ", strip=True)
+        table_text = re.sub(r'\s+', ' ', table.get_text(" ", strip=True))
         quarter_heading = r"(?:three months|quarter|13 weeks|thirteen weeks).{0,30}ended|\b(?:first|second|third|fourth) quarter\b|\bQ[1-4]\b"
         heading = re.split(quarter_heading, table_text, maxsplit=1, flags=re.I)[0][:400]
         if re.search(r"reconciliation|non[-\s]?gaap|adjusted (?:net|operating|income|earnings)", heading, re.I):

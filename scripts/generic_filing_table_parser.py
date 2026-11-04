@@ -296,6 +296,36 @@ def _period_column(year: int, quarter_number: int, *, span: int = 1) -> dict[str
     }
 
 
+def _mark_cumulative_columns(columns, rows):
+    normalized = _normalize_table_key(' '.join(' '.join(row) for row in rows[:6]))
+    if len(columns) >= 2 and any(token in normalized for token in ('threemonthsended', 'quarterended', '13weeksended', 'thirteenweeksended', '12weeksended', 'twelveweeksended')):
+        span = next((span for token, span in [('sixmonthsended', 2), ('ninemonthsended', 3), ('twelvemonthsended', 4), ('yearended', 4)] if token in normalized), None)
+        if span:
+            boundary = next((i for i, column in enumerate(columns)
+                             if column['periodEnd'] in {c['periodEnd'] for c in columns[:i]}), len(columns) // 2)
+            for column in columns[boundary:]:
+                column.update(statementSpanQuarters=span, statementValueMode='cumulative')
+    return columns
+
+
+def _native_currency_rows(rows, currency):
+    """Drop explicitly labelled convenience translations before reading dates."""
+    symbols = {'CNY': {'RMB', 'CNY'}, 'USD': {'USD', 'US$'}, 'EUR': {'EUR'}, 'HKD': {'HKD', 'HK$'}}
+    known = set().union(*symbols.values())
+    native = symbols.get(currency, {currency})
+    header = next((row for row in rows[:8] if len(row) >= 3 and all(str(c).strip() in known for c in row)), None)
+    if not header or not any(str(c).strip() in native for c in header) or all(str(c).strip() in native for c in header):
+        return rows
+    keep = [i for i,c in enumerate(header) if str(c).strip() in native]
+    header_position = rows.index(header)
+    projected = []
+    for position, row in enumerate(rows):
+        if position <= header_position and len(row) == len(header): projected.append([row[i] for i in keep])
+        elif len(row) == len(header) + 1: projected.append([row[0], *[row[i+1] for i in keep]])
+        else: projected.append(row)
+    return projected
+
+
 def _extract_quarter_columns(rows: list[list[str]]) -> list[dict[str, Any]]:
     columns: list[dict[str, Any]] = []
     header_scan_rows = rows[:6]
@@ -378,9 +408,10 @@ def _extract_quarter_columns(rows: list[list[str]]) -> list[dict[str, Any]]:
         dates = header_scan_rows[i + 1]
         years = [str(cell).strip() for cell in header_scan_rows[i + 2] if re.fullmatch(r"20\d{2}", str(cell).strip())]
         if dates and len(years) >= 2:
-            parsed_columns = [_quarter_from_date_label(dates[0], year) for year in years[:2]]
+            paired_dates = dates if len(dates) == len(years) else [dates[0]] * len(years)
+            parsed_columns = [_quarter_from_date_label(day, year) for day, year in zip(paired_dates, years)]
             if all(parsed_columns):
-                return [{**_period_column(y, q), "periodEnd": end} for y, q, end in parsed_columns]
+                return _mark_cumulative_columns([{**_period_column(y, q), "periodEnd": end} for y, q, end in parsed_columns], rows)
 
     header_text = " ".join(" ".join(row) for row in header_scan_rows)
     chinese_span_map = {"3": 1, "三": 1, "6": 2, "六": 2, "9": 3, "九": 3, "12": 4, "十二": 4}
@@ -402,19 +433,7 @@ def _extract_quarter_columns(rows: list[list[str]]) -> list[dict[str, Any]]:
             columns.append({**_period_column(year, quarter_number), "periodEnd": period_end})
     # Headers with full dates in each cell may mix quarterly and YTD columns.
     # Keep the latter cumulative so annual amounts cannot replace the quarter.
-    normalized_header = _normalize_table_key(header_text)
-    if len(columns) >= 4 and any(token in normalized_header for token in ("threemonthsended", "quarterended", "13weeksended", "thirteenweeksended", "12weeksended", "twelveweeksended")):
-        cumulative_span = next((span for token, span in [("sixmonthsended", 2), ("ninemonthsended", 3), ("twelvemonthsended", 4), ("yearended", 4)] if token in normalized_header), None)
-        if cumulative_span:
-            # A quarterly block may contain current, preceding and year-ago
-            # quarters, followed by only two YTD columns. Locate the repeated
-            # reporting dates instead of dividing an odd column count in half.
-            boundary = next((i for i, column in enumerate(columns)
-                             if column['periodEnd'] in {c['periodEnd'] for c in columns[:i]}), len(columns) // 2)
-            for column in columns[boundary:]:
-                column["statementSpanQuarters"] = cumulative_span
-                column["statementValueMode"] = "cumulative"
-    return columns
+    return _mark_cumulative_columns(columns, rows)
 
 
 def _row_numeric_series(row: list[str] | None, expected_count: int, *, absolute: bool = False) -> list[float]:
@@ -505,6 +524,7 @@ def _merge_entry(existing: dict[str, Any] | None, incoming: dict[str, Any]) -> d
 def _period_entries_from_table(rows: list[list[str]], currency: str, source_url: str, filing_date: str) -> list[dict[str, Any]]:
     if len(rows) < 3:
         return []
+    rows = _native_currency_rows(rows, currency)
     quarter_columns = _extract_quarter_columns(rows)
     if not quarter_columns:
         return []

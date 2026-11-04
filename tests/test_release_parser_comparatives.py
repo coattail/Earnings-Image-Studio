@@ -14,6 +14,18 @@ from sankey_statement_backfill import parse_inline_statements
 
 
 class ReleaseComparativeTests(unittest.TestCase):
+    def test_native_columns_exclude_dollar_translations_and_preserve_actual_quarter_dates(self):
+        html = (ROOT / 'tests/fixtures/netease-q2-2026-release.html').read_text()
+        result = parse_release(html, {'id':'netease','reportingCurrency':'CNY'}, 'https://www.sec.gov/current', '2026-08-20')
+        self.assertEqual(result['2026Q2']['revenueBn'], 30.107)
+        self.assertEqual(result['2026Q2']['netIncomeBn'], 6.981)
+        self.assertEqual(result['2026Q1']['revenueBn'], 30.591)
+        self.assertEqual(result['2025Q2']['revenueBn'], 27.892)
+        self.assertAlmostEqual(result['2026Q2']['grossMarginYoyDeltaPp'], 5.75)
+        wrapped = html.replace('Three Months Ended', 'Three\nMonths Ended')
+        self.assertEqual(parse_release(wrapped, {'id':'netease','reportingCurrency':'CNY'},
+                                      'https://www.sec.gov/current', '2026-08-20')['2026Q2']['revenueBn'], 30.107)
+
     def test_explicit_total_revenue_wins_over_a_net_sales_inline_tag(self):
         html = '''<xbrli:context id="q"><xbrli:period><xbrli:startdate>2026-05-01</xbrli:startdate><xbrli:enddate>2026-07-31</xbrli:enddate></xbrli:period></xbrli:context>
         <xbrli:unit id="usd"><xbrli:measure>iso4217:USD</xbrli:measure></xbrli:unit><table>
