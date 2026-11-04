@@ -22,7 +22,7 @@ from statement_periods import finalize_period_entries
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 CACHE_DIR = ROOT_DIR / "data" / "cache" / "generic-filing-tables"
-GENERIC_FILING_TABLE_CACHE_VERSION = "20261103-v2"
+GENERIC_FILING_TABLE_CACHE_VERSION = "20261104-v3"
 MIN_FILING_DATE = "2018-01-01"
 SUPPORTED_FORMS = {"10-Q", "10-K", "20-F", "6-K", "8-K"}
 MAX_FILINGS_TO_SCAN = 28
@@ -50,6 +50,9 @@ ROW_ALIASES: dict[str, tuple[str, ...]] = {
         "销售收入",
     ),
     "costOfRevenue": (
+        "totalcostofrevenue",
+        "totalcostofrevenues",
+        "totalcostofsales",
         "costofrevenue",
         "costofrevenues",
         "costofsales",
@@ -64,6 +67,8 @@ ROW_ALIASES: dict[str, tuple[str, ...]] = {
     ),
     "grossProfit": ("grossprofit", "grossmargin", "毛利", "毛利润", "毛利额"),
     "sgna": (
+        "marketinggeneralandadministrative",
+        "marketinggeneralandadministrativeexpenses",
         "sellinggeneralandadministrative",
         "sellinggeneraladministrative",
         "sellinggeneralandadministrativeexpenses",
@@ -125,6 +130,7 @@ ROW_ALIASES: dict[str, tuple[str, ...]] = {
         "经营利润",
     ),
     "pretaxIncome": (
+        "incomefromcontinuingoperationsbeforeincometaxes",
         "incomebeforetaxes",
         "incomebeforeincometaxes",
         "incomebeforetax",
@@ -134,6 +140,7 @@ ROW_ALIASES: dict[str, tuple[str, ...]] = {
         "税前利润",
     ),
     "tax": (
+        "incometaxprovision",
         "incometaxexpense",
         "incometaxexpenses",
         "provisionforincometaxes",
@@ -399,7 +406,12 @@ def _extract_quarter_columns(rows: list[list[str]]) -> list[dict[str, Any]]:
     if len(columns) >= 4 and any(token in normalized_header for token in ("threemonthsended", "quarterended", "13weeksended", "thirteenweeksended", "12weeksended", "twelveweeksended")):
         cumulative_span = next((span for token, span in [("sixmonthsended", 2), ("ninemonthsended", 3), ("twelvemonthsended", 4), ("yearended", 4)] if token in normalized_header), None)
         if cumulative_span:
-            for column in columns[len(columns) // 2:]:
+            # A quarterly block may contain current, preceding and year-ago
+            # quarters, followed by only two YTD columns. Locate the repeated
+            # reporting dates instead of dividing an odd column count in half.
+            boundary = next((i for i, column in enumerate(columns)
+                             if column['periodEnd'] in {c['periodEnd'] for c in columns[:i]}), len(columns) // 2)
+            for column in columns[boundary:]:
                 column["statementSpanQuarters"] = cumulative_span
                 column["statementValueMode"] = "cumulative"
     return columns
@@ -536,6 +548,9 @@ def _period_entries_from_table(rows: list[list[str]], currency: str, source_url:
     sgna_row = _find_row(row_map, "sgna")
     sales_marketing_row = _find_row(row_map, "salesAndMarketing")
     general_admin_row = _find_row(row_map, "generalAndAdministrative")
+    if sgna_row is not None:
+        if sales_marketing_row is sgna_row: sales_marketing_row = None
+        if general_admin_row is sgna_row: general_admin_row = None
     rnd_row = _find_row(row_map, "rnd")
     fulfillment_row = _find_row(row_map, "fulfillment")
     taxes_surcharges_row = _find_row(row_map, "taxesAndSurcharges")
@@ -558,7 +573,8 @@ def _period_entries_from_table(rows: list[list[str]], currency: str, source_url:
     operating_expenses_series = _row_numeric_series(operating_expenses_row, expected_count, absolute=True)
     operating_income_series = _row_numeric_series(operating_income_row, expected_count)
     pretax_series = _row_numeric_series(pretax_row, expected_count)
-    tax_series = _row_numeric_series(tax_row, expected_count, absolute=True)
+    tax_series = _row_numeric_series(tax_row, expected_count,
+        absolute=not bool(tax_row and re.search(r'benefit|credit', str(tax_row[0]), re.I)))
     net_income_series = _row_numeric_series(net_income_row, expected_count)
 
     for index, column in enumerate(quarter_columns):

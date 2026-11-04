@@ -88,6 +88,13 @@ def parse_inline_statements(html: str, company_id: str, source_url: str) -> dict
         for field, concepts in FINANCIAL_CONCEPTS.items():
             if field + "Bn" in STATEMENT_FIELDS:
                 entry[field + "Bn"] = fact(*concepts)
+        # Net-sales tags can coexist with a reported consolidated revenue
+        # total that also includes membership or other operating income.
+        totals = [r for r in records if not r['dimensioned']
+                  and r['name'].split(':')[-1] in FINANCIAL_CONCEPTS['revenue']
+                  and re.match(r'^Total revenues?\b', r['label'], re.I)]
+        if totals:
+            entry['revenueBn'] = totals[0]['value']
         entry["rndBn"] = fact("ResearchAndDevelopmentExpense", "ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost")
         entry["nonOperatingBn"] = fact("NonoperatingIncomeExpense")
         if company_id == "jnj":

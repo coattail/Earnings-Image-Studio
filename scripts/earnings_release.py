@@ -20,7 +20,7 @@ from generic_filing_table_parser import _period_entries_from_table
 from sankey_statement_backfill import parse_inline_statements, complete_statement
 
 CACHE = Path(__file__).resolve().parents[1] / "data/cache/earnings-releases"
-VERSION = "earnings-release-v10"
+VERSION = "earnings-release-v11"
 CORE = ("revenueBn", "operatingIncomeBn", "netIncomeBn")
 
 
@@ -88,8 +88,11 @@ def parse_release(html: str, company: dict, url: str, filed: str, *, allow_parti
             if not re.search(r"\b(?:thousands|millions|billions)\b", " ".join(map(str, rows[:6])), re.I):
                 # "In millions, except shares which are in thousands" still
                 # means that monetary statement rows are in millions.
-                monetary_prefix = re.sub(r"except[^)]*(?:\)|$)", ")", prefix, flags=re.I)
-                scales = list(re.finditer(r"(?:in\s+|\$\s+|\(\s*)(thousands|millions|billions)|(thousands|millions|billions)\s+of\s+dollars", monetary_prefix, re.I))
+                scales = list(re.finditer(r"(?:in\s+|\$\s+|\(\s*)(thousands|millions|billions)|(thousands|millions|billions)\s+of\s+dollars", prefix, re.I))
+                # An earlier unparenthesized "except per share" sentence must
+                # not swallow the next statement's independent unit heading.
+                scales = [m for m in scales if not re.search(r'\bexcept\b',
+                    prefix[max(prefix.rfind('(', 0, m.end()), prefix.rfind(')', 0, m.end())) + 1:m.start()], re.I)]
                 if not scales:
                     continue  # Unknown units must be retried, never guessed.
                 rows.insert(0, ["in " + (scales[-1][1] or scales[-1][2])])

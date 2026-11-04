@@ -52,7 +52,9 @@ def names(row):
     values = [row.get('name'), row.get('memberKey')]
     for value in list(values):
         values.extend(ALIASES.get(key(value), []))
-    return {key(v) for v in values if v}
+    labels = {key(v) for v in values if v}
+    # Issuers often append "Segment" to otherwise unchanged category names.
+    return labels | {v.removesuffix('segment') if v.endswith('segment') else v+'segment' for v in labels}
 
 def label_key(value):
     # Footnote references do not change the identity of a revenue category.
