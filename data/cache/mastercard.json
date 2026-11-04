@@ -6464,11 +6464,11 @@
       "statementCurrency": "USD",
       "revenueBn": 9.807,
       "revenueYoyPct": 14.008,
-      "costOfRevenueBn": 0.0,
+      "costOfRevenueBn": 0,
       "grossProfitBn": 9.807,
-      "sgnaBn": 3.293,
+      "sgnaBn": 3.545,
       "rndBn": null,
-      "otherOpexBn": 0.652,
+      "otherOpexBn": 0.4,
       "operatingExpensesBn": 3.945,
       "operatingIncomeBn": 5.862,
       "nonOperatingBn": -0.121,
@@ -6482,40 +6482,14 @@
       "effectiveTaxRatePct": 19.387,
       "revenueQoqPct": 5.713,
       "grossMarginYoyDeltaPp": 0.0,
-      "operatingMarginYoyDeltaPp": 0.94,
-      "profitMarginYoyDeltaPp": 1.54,
-      "statementFilingDate": "2026-09-30",
-      "statementSourceUrl": "https://stockanalysis.com/stocks/ma/financials/?p=quarterly",
+      "operatingMarginYoyDeltaPp": 0.939,
+      "profitMarginYoyDeltaPp": 1.539,
+      "statementFilingDate": "2026-10-29",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139126000122/ma09302026-exx991xearnings.htm",
       "parserFinancialFieldSources": {
         "revenueBn": "official",
-        "revenueYoyPct": "official",
-        "revenueQoqPct": "official",
-        "sgnaBn": "official",
-        "otherOpexBn": "official",
-        "operatingExpensesBn": "official",
         "operatingIncomeBn": "official",
-        "operatingMarginPct": "official",
-        "operatingMarginYoyDeltaPp": "official",
-        "nonOperatingBn": "official",
-        "pretaxIncomeBn": "official",
-        "taxBn": "official",
-        "netIncomeBn": "official",
-        "netIncomeYoyPct": "official",
-        "profitMarginPct": "official",
-        "profitMarginYoyDeltaPp": "official",
-        "effectiveTaxRatePct": "official",
-        "calendarQuarter": "official",
-        "periodEnd": "official",
-        "fiscalYear": "official",
-        "fiscalQuarter": "official",
-        "fiscalLabel": "official",
-        "statementCurrency": "official",
-        "statementFilingDate": "stockanalysis",
-        "statementSourceUrl": "stockanalysis",
-        "grossProfitBn": "derived",
-        "costOfRevenueBn": "derived",
-        "grossMarginPct": "derived",
-        "grossMarginYoyDeltaPp": "derived"
+        "netIncomeBn": "official"
       },
       "parserFinancialCandidateCounts": {
         "revenueBn": 1,
@@ -6542,15 +6516,8 @@
         "effectiveTaxRatePct": 1
       },
       "parserFinancialValidation": {
-        "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
-        "checksRun": 8,
-        "checksPassed": 8,
-        "issueCount": 0,
-        "issues": []
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139126000122/ma09302026-exx991xearnings.htm"
       },
       "officialRevenueSegments": [
         {
@@ -6637,6 +6604,13 @@
       },
       "officialOpexBreakdown": [
         {
+          "name": "Sales & Marketing",
+          "nameZh": "销售与营销",
+          "valueBn": 0.252,
+          "valueFormat": "negative-parentheses",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1141391/000114139126000122/ma09302026-exx991xearnings.htm"
+        },
+        {
           "name": "G&A",
           "nameZh": "管理费用",
           "valueBn": 3.293,
@@ -6667,6 +6641,18 @@
           "valueaddedservicessolutions"
         ],
         "requiredDetailMembers": {}
+      },
+      "statementSource": "official-earnings-release",
+      "statementSpanQuarters": 1,
+      "statementValueMode": "reported",
+      "grossProfitLabel": "Revenue before operating expenses",
+      "grossProfitLabelZh": "营收（扣除营业费用前）",
+      "costOfRevenuePresentationOnly": true,
+      "statementPresentationNote": "公司未单独列示营业成本；图中费用前收入节点承接营收，成本数值不作为已披露的零成本展示。",
+      "automaticEarnings": {
+        "filingDate": "2026-10-29",
+        "accession": "0001141391-26-000122",
+        "form": "8-K"
       }
     }
   },
@@ -8573,7 +8559,7 @@
       "detailGroupChecks": 0,
       "detailGroupMismatchCount": 0,
       "detailGroupSkippedChecks": 0,
-      "opexChecks": 0,
+      "opexChecks": 1,
       "opexSkippedChecks": 0,
       "opexOverflowMismatchCount": 0,
       "warningCount": 0,
@@ -12050,7 +12036,7 @@
         "detailGroupChecks": 0,
         "detailGroupMismatchCount": 0,
         "detailGroupSkippedChecks": 0,
-        "opexChecks": 0,
+        "opexChecks": 1,
         "opexSkippedChecks": 0,
         "opexOverflowMismatchCount": 0,
         "warningCount": 0,

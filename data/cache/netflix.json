@@ -7804,7 +7804,7 @@
       "grossProfitBn": 6.795,
       "sgnaBn": 1.303,
       "rndBn": 1.033,
-      "otherOpexBn": null,
+      "otherOpexBn": 1.033,
       "operatingExpensesBn": 2.337,
       "operatingIncomeBn": 4.459,
       "nonOperatingBn": -0.142,
@@ -7817,61 +7817,31 @@
       "profitMarginPct": 28.46,
       "effectiveTaxRatePct": 15.126,
       "revenueQoqPct": 2.5,
-      "grossMarginYoyDeltaPp": 6.34,
-      "operatingMarginYoyDeltaPp": 6.41,
-      "profitMarginYoyDeltaPp": 6.33,
+      "grossMarginYoyDeltaPp": 6.335,
+      "operatingMarginYoyDeltaPp": 6.412,
+      "profitMarginYoyDeltaPp": 6.333,
       "officialOpexBreakdown": [
         {
-          "name": "Sales and Marketing",
+          "name": "Sales & Marketing",
           "nameZh": "销售与营销",
-          "memberKey": "salesandmarketing",
-          "valueBn": 0.837
+          "valueBn": 0.837,
+          "valueFormat": "negative-parentheses",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm"
         },
         {
-          "name": "Research and Development",
-          "nameZh": "研发",
-          "memberKey": "researchanddevelopment",
-          "valueBn": 1.033
-        },
-        {
-          "name": "General and Administrative",
-          "nameZh": "一般及行政",
-          "memberKey": "generalandadministrative",
-          "valueBn": 0.466
+          "name": "G&A",
+          "nameZh": "管理费用",
+          "valueBn": 0.466,
+          "valueFormat": "negative-parentheses",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm"
         }
       ],
-      "statementFilingDate": "2026-09-30",
-      "statementSourceUrl": "https://stockanalysis.com/stocks/nflx/financials/?p=quarterly",
+      "statementFilingDate": "2026-10-20",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm",
       "parserFinancialFieldSources": {
         "revenueBn": "official",
-        "revenueYoyPct": "official",
-        "revenueQoqPct": "official",
-        "costOfRevenueBn": "official",
-        "grossProfitBn": "official",
-        "grossMarginPct": "official",
-        "grossMarginYoyDeltaPp": "official",
-        "sgnaBn": "official",
-        "rndBn": "official",
-        "operatingExpensesBn": "official",
         "operatingIncomeBn": "official",
-        "operatingMarginPct": "official",
-        "operatingMarginYoyDeltaPp": "official",
-        "nonOperatingBn": "official",
-        "pretaxIncomeBn": "official",
-        "taxBn": "official",
-        "netIncomeBn": "official",
-        "netIncomeYoyPct": "official",
-        "profitMarginPct": "official",
-        "profitMarginYoyDeltaPp": "official",
-        "effectiveTaxRatePct": "official",
-        "calendarQuarter": "official",
-        "periodEnd": "official",
-        "fiscalYear": "official",
-        "fiscalQuarter": "official",
-        "fiscalLabel": "official",
-        "statementCurrency": "official",
-        "statementFilingDate": "stockanalysis",
-        "statementSourceUrl": "stockanalysis"
+        "netIncomeBn": "official"
       },
       "parserFinancialCandidateCounts": {
         "revenueBn": 1,
@@ -7898,15 +7868,8 @@
         "effectiveTaxRatePct": 1
       },
       "parserFinancialValidation": {
-        "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
-        "checksRun": 8,
-        "checksPassed": 8,
-        "issueCount": 0,
-        "issues": []
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000290/ex991_q326.htm"
       },
       "officialRevenueSegments": [
         {
@@ -8032,8 +7995,7 @@
       "sankeyStructureContinuity": {
         "sourceQuarter": "2026Q2",
         "fields": [
-          "officialRevenueSegments",
-          "officialOpexBreakdown"
+          "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
       },
@@ -8055,6 +8017,14 @@
           "ucan"
         ],
         "requiredDetailMembers": {}
+      },
+      "statementSource": "official-earnings-release",
+      "statementSpanQuarters": 1,
+      "statementValueMode": "reported",
+      "automaticEarnings": {
+        "filingDate": "2026-10-20",
+        "accession": "0001065280-26-000290",
+        "form": "8-K"
       }
     }
   },
