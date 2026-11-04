@@ -2538,7 +2538,7 @@ async function prepareChartLogoAssets(snapshot) {
       state.logoNormalizationJobs[key] = (async () => {
         let asset = state.logoCatalog[key];
         if (!asset) return;
-        if (asset.assetUrl) {
+        if (asset.assetUrl && !asset.dataUrl) {
           asset = await loadJsonAsset(asset.assetUrl);
           if (!asset?.dataUrl) throw new Error(`Logo asset unavailable: ${key}`);
         }

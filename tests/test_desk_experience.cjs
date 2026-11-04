@@ -9,7 +9,7 @@ function runtime() {
   const document = { addEventListener: noop, querySelector: () => null, querySelectorAll: () => [], getElementById: () => null, createElement: () => ({style:{},setAttribute:noop}), documentElement: null };
   const context = vm.createContext({console, setTimeout, clearTimeout, requestAnimationFrame: () => 1, cancelAnimationFrame: noop, Math, Number, String, Boolean, Array, Object, JSON, Date, RegExp, Map, Set, Intl, Promise, URL, URLSearchParams, Blob, document, window: { addEventListener: noop, document }, navigator: {userAgent:'node'} });
   context.globalThis = context;
-  for (const file of ['app-00-foundation.js','app-01-layout.js','app-02-sankey.js','app-03-data.js','app-04-bootstrap.js','app-05-desk.js']) vm.runInContext(fs.readFileSync(path.join(ROOT,'js',file),'utf8'),context,{filename:file});
+  for (const file of [...require(path.join(ROOT, 'js', 'runtime-files.json')).shared, ...require(path.join(ROOT, 'js', 'runtime-files.json')).browserSuffix]) vm.runInContext(fs.readFileSync(path.join(ROOT,'js',file),'utf8'),context,{filename:file});
   return context;
 }
 test('company lists sort by USD market cap in both loading modes despite stale ranks', () => {

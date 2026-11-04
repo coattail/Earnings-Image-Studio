@@ -66,7 +66,7 @@ function runtime() {
     Math, Number, String, Boolean, Array, Object, JSON, Date, RegExp, Map, Set, Intl, Promise, URL, URLSearchParams, Blob,
     document, window: { addEventListener: noop, document }, navigator: { userAgent: 'node' } });
   ctx.globalThis = ctx;
-  for (const file of ['app-00-foundation.js', 'app-01-layout.js', 'app-02-sankey.js', 'app-03-data.js', 'app-04-bootstrap.js']) {
+  for (const file of require(path.join(ROOT, 'js', 'runtime-files.json')).shared) {
     vm.runInContext(fs.readFileSync(path.join(ROOT, 'js', file), 'utf8'), ctx, { filename: file });
   }
   return ctx;

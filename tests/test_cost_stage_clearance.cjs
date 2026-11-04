@@ -18,7 +18,7 @@ test('cost split gets proportional breathing room while preserving existing gene
 test('current Apple has a wider cost split, stable monetary caps and additive editor drags', () => {
   const noop=()=>{},document={addEventListener:noop,querySelector:()=>null,querySelectorAll:()=>[],getElementById:()=>null,documentElement:null};
   const ctx=vm.createContext({console,setTimeout,clearTimeout,Math,Number,String,Boolean,Array,Object,JSON,Date,RegExp,Map,Set,Intl,Promise,URL,URLSearchParams,Blob,document,window:{document,addEventListener:noop},navigator:{userAgent:'node'}});ctx.globalThis=ctx;
-  for(const file of ['app-00-foundation.js','app-01-layout.js','app-02-sankey.js','app-03-data.js','app-04-bootstrap.js']) vm.runInContext(fs.readFileSync(path.join(root,'js',file),'utf8'),ctx);
+  for(const file of require(path.join(root, 'js', 'runtime-files.json')).shared) vm.runInContext(fs.readFileSync(path.join(root,'js',file),'utf8'),ctx);
   ctx.payload=JSON.parse(fs.readFileSync(path.join(root,'data/cache/apple.json')));
   ctx.supplemental=JSON.parse(fs.readFileSync(path.join(root,'data/supplemental-components.json')));
   ctx.learned=JSON.parse(fs.readFileSync(path.join(root,'data/learned-sankey-layouts.json')));

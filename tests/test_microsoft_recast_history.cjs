@@ -9,7 +9,7 @@ function runtime(mode='full') {
  const document={addEventListener:noop,querySelector:()=>null,querySelectorAll:()=>[],getElementById:()=>null,createElement:()=>({style:{},setAttribute:noop}),documentElement:null};
  const ctx=vm.createContext({console,setTimeout,clearTimeout,requestAnimationFrame:()=>1,cancelAnimationFrame:noop,Math,Number,String,Boolean,Array,Object,JSON,Date,RegExp,Map,Set,Intl,Promise,URL,URLSearchParams,Blob,document,window:{addEventListener:noop,document},navigator:{userAgent:'node'}});
  ctx.globalThis=ctx;
- for(const name of ['app-00-foundation.js','app-01-layout.js','app-02-sankey.js','app-03-data.js','app-04-bootstrap.js','app-05-desk.js'])vm.runInContext(fs.readFileSync(path.join(root,'js',name),'utf8'),ctx,{filename:name});
+ for(const name of [...require(path.join(root, 'js', 'runtime-files.json')).shared, ...require(path.join(root, 'js', 'runtime-files.json')).browserSuffix])vm.runInContext(fs.readFileSync(path.join(root,'js',name),'utf8'),ctx,{filename:name});
  ctx.payload=mode==='full'?JSON.parse(fs.readFileSync(path.join(root,'data/cache/microsoft.json'))):JSON.parse(fs.readFileSync(path.join(root,'data/dataset-index.json'))).companies.find(c=>c.id==='microsoft');
  ctx.mode=mode;
  vm.runInContext(`applyLoadedCompaniesToState([payload],mode);state.selectedCompanyId='microsoft';state.selectedQuarter='2026Q3';state.uiLanguage='zh';state.logoCatalog={};`,ctx);

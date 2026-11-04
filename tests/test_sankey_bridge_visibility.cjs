@@ -63,7 +63,7 @@ function loadRuntime() {
   windowStub.window = windowStub;
   windowStub.self = windowStub;
   windowStub.globalThis = context;
-  ["app-00-foundation.js", "app-01-layout.js", "app-02-sankey.js", "app-03-data.js", "app-04-bootstrap.js"].forEach(
+  require(path.join(ROOT, 'js', 'runtime-files.json')).shared.forEach(
     (filename) => vm.runInContext(fs.readFileSync(path.join(ROOT, "js", filename), "utf8"), context, { filename })
   );
   return context;

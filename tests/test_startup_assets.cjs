@@ -42,3 +42,13 @@ test('failed logo requests release their job so a later selection can retry', as
   await vm.runInContext(`prepareChartLogoAssets({companyLogoKey:'apple'})`, ctx);
   assert.equal(vm.runInContext('state.normalizedLogoKeys.apple', ctx), true);
 });
+
+test('inline logos keep the exact normalization and export path without a network request', async () => {
+  const ctx=runtime();
+  vm.runInContext("state.logoCatalog.apple={assetUrl:'apple.json',dataUrl:'data:image/svg+xml;base64,PHN2Zy8+',width:20,height:10}",ctx);
+  await vm.runInContext("prepareChartLogoAssets({companyLogoKey:'apple'})",ctx);
+  assert.equal(vm.runInContext('requests.length',ctx),0);
+  assert.equal(vm.runInContext('normalized.length',ctx),1);
+  assert.equal(vm.runInContext('state.logoCatalog.apple.width',ctx),18);
+  assert.ok(vm.runInContext('state.logoCatalog.apple.dataUrl',ctx).startsWith('data:image/'));
+});

@@ -3,7 +3,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
-from scripts.public_assets import write_logo_assets, version_static_assets
+from scripts.public_assets import write_logo_assets, version_static_assets, validate_frontend_assets, INLINE_LOGO_TOTAL_BYTES
 
 
 class PublicAssetsTests(unittest.TestCase):
@@ -17,7 +17,7 @@ class PublicAssetsTests(unittest.TestCase):
                 self.assertEqual((data / 'logos' / file.name).read_bytes(), file.read_bytes())
 
     def test_split_logos_retain_exact_export_asset_and_content_addressed_preview(self):
-        image = b'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"/>'
+        image = b'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><!--' + b'x' * 3000 + b'--></svg>'
         asset = {"mime": "image/svg+xml", "width": 24, "height": 24,
                  "dataUrl": "data:image/svg+xml;base64," + base64.b64encode(image).decode()}
         with tempfile.TemporaryDirectory() as directory:
@@ -31,6 +31,42 @@ class PublicAssetsTests(unittest.TestCase):
             asset["width"] = 25
             write_logo_assets({"logos": {"apple": asset}}, root)
             self.assertNotEqual(json.loads((root / "logo-index.json").read_text())["logos"]["apple"]["assetUrl"], first)
+
+    def test_small_inline_logos_avoid_a_second_fetch_with_a_bounded_total_budget(self):
+        asset = {'mime':'image/svg+xml','width':24,'height':24,'dataUrl':'data:image/svg+xml;base64,' + base64.b64encode(b'<svg><!--'+b'x'*700+b'--></svg>').decode()}
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            write_logo_assets({'logos':{str(i):asset for i in range(40)}}, root)
+            logos = json.loads((root/'logo-index.json').read_text())['logos']
+            inline = [a for a in logos.values() if a.get('dataUrl')]
+            self.assertGreater(len(inline),0)
+            self.assertLess(len(inline),40)
+            self.assertLessEqual(sum(len(json.dumps(asset,separators=(',',':')).encode()) for a in inline),INLINE_LOGO_TOTAL_BYTES)
+            self.assertEqual(logos['0']['dataUrl'],asset['dataUrl'])
+            self.assertTrue(logos['39']['assetUrl'])
+
+    def test_checked_in_frontend_matches_sources_and_rejects_a_stale_or_modified_bundle(self):
+        import shutil
+        source = Path(__file__).resolve().parents[1]
+        validate_frontend_assets(source)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for name in ('js','assets'):
+                shutil.copytree(source/name,root/name)
+            for name in ('index.html','package.json','scripts/build_frontend.cjs'):
+                (root/name).parent.mkdir(parents=True,exist_ok=True)
+                shutil.copy2(source/name,root/name)
+            validate_frontend_assets(root)
+            script = root/'js/app-02-sankey.js'
+            original = script.read_bytes()
+            script.write_bytes(original+b'\n// changed')
+            with self.assertRaisesRegex(ValueError,'stale'):
+                validate_frontend_assets(root)
+            script.write_bytes(original)
+            bundle = root/json.loads((root/'assets/frontend-manifest.json').read_text())['bundle']
+            bundle.write_bytes(bundle.read_bytes()+b'\n// modified')
+            with self.assertRaisesRegex(ValueError,'content'):
+                validate_frontend_assets(root)
 
     def test_deployment_versions_are_derived_from_real_script_contents(self):
         with tempfile.TemporaryDirectory() as directory:

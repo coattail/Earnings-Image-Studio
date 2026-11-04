@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const vm = require('node:vm');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
-const source = fs.readFileSync(path.join(root, 'js/app-04-bootstrap.js'), 'utf8');
+const source = fs.readFileSync(path.join(root, 'js/renderer/segment-bars.js'), 'utf8');
 const ctx = vm.createContext({ Math, Number, Array, Object, Set,
   safeNumber: (value, fallback = 0) => value == null || !Number.isFinite(Number(value)) ? fallback : Number(value),
 });
