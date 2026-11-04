@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-03T14:57:45Z",
+  "generatedAt": "2026-11-04T01:06:09Z",
   "companyCount": 41,
   "companies": [
     {
@@ -168,61 +168,33 @@
           "profitMarginPct": 26.827,
           "effectiveTaxRatePct": 15.01,
           "revenueQoqPct": 4.625,
-          "grossMarginYoyDeltaPp": 0.71,
-          "operatingMarginYoyDeltaPp": -0.52,
-          "profitMarginYoyDeltaPp": 0.02,
+          "grossMarginYoyDeltaPp": 0.709,
+          "operatingMarginYoyDeltaPp": -0.522,
+          "profitMarginYoyDeltaPp": 0.022,
           "officialOpexBreakdown": [
             {
-              "name": "Sales and Marketing",
-              "nameZh": "销售与营销",
-              "memberKey": "salesandmarketing",
-              "valueBn": 5.502
+              "name": "Selling, general and administrative",
+              "nameZh": "销售、一般及行政",
+              "valueBn": 7.459,
+              "valueFormat": "negative-parentheses",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000024/a8-kex991q4202609262026.htm",
+              "filingDate": "2026-11-02"
             },
             {
-              "name": "Research and Development",
+              "name": "R&D",
               "nameZh": "研发",
-              "memberKey": "researchanddevelopment",
-              "valueBn": 11.73
-            },
-            {
-              "name": "General and Administrative",
-              "nameZh": "一般及行政",
-              "memberKey": "generalandadministrative",
-              "valueBn": 1.957
+              "valueBn": 11.73,
+              "valueFormat": "negative-parentheses",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000024/a8-kex991q4202609262026.htm",
+              "filingDate": "2026-11-02"
             }
           ],
-          "statementFilingDate": "2026-09-26",
-          "statementSourceUrl": "https://stockanalysis.com/stocks/aapl/financials/?p=quarterly",
+          "statementFilingDate": "2026-11-03",
+          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm",
           "parserFinancialFieldSources": {
             "revenueBn": "official",
-            "revenueYoyPct": "official",
-            "revenueQoqPct": "official",
-            "costOfRevenueBn": "official",
-            "grossProfitBn": "official",
-            "grossMarginPct": "official",
-            "grossMarginYoyDeltaPp": "official",
-            "sgnaBn": "official",
-            "rndBn": "official",
-            "operatingExpensesBn": "official",
             "operatingIncomeBn": "official",
-            "operatingMarginPct": "official",
-            "operatingMarginYoyDeltaPp": "official",
-            "nonOperatingBn": "official",
-            "pretaxIncomeBn": "official",
-            "taxBn": "official",
-            "netIncomeBn": "official",
-            "netIncomeYoyPct": "official",
-            "profitMarginPct": "official",
-            "profitMarginYoyDeltaPp": "official",
-            "effectiveTaxRatePct": "official",
-            "calendarQuarter": "official",
-            "periodEnd": "official",
-            "fiscalYear": "official",
-            "fiscalQuarter": "official",
-            "fiscalLabel": "official",
-            "statementCurrency": "official",
-            "statementFilingDate": "stockanalysis",
-            "statementSourceUrl": "stockanalysis"
+            "netIncomeBn": "official"
           },
           "parserFinancialCandidateCounts": {
             "revenueBn": 1,
@@ -249,15 +221,8 @@
             "effectiveTaxRatePct": 1
           },
           "parserFinancialValidation": {
-            "version": "financial-validation-v1",
             "status": "high",
-            "confidenceScore": 1.0,
-            "completenessScore": 1.0,
-            "consistencyScore": 1.0,
-            "checksRun": 8,
-            "checksPassed": 8,
-            "issueCount": 0,
-            "issues": []
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000024/a8-kex991q4202609262026.htm"
           },
           "officialRevenueSegments": [
             {
@@ -494,7 +459,26 @@
                 "wearables"
               ]
             }
-          }
+          },
+          "statementSource": "official-earnings-release",
+          "statementSpanQuarters": 1,
+          "statementValueMode": "reported",
+          "automaticEarnings": {
+            "filingDate": "2026-11-03",
+            "accession": "0000320193-26-000026",
+            "form": "10-K"
+          },
+          "chartCompletionAttempts": [
+            {
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm",
+              "remainingIssues": [
+                "revenue classifications do not reconcile to total revenue",
+                "revenue detail does not reconcile for products",
+                "revenue detail does not reconcile for products"
+              ]
+            }
+          ],
+          "statementAccession": "0000320193-26-000026"
         }
       },
       "statementPresets": {},
@@ -9467,22 +9451,22 @@
           "otherOpexBn": null,
           "operatingExpensesBn": 39.75,
           "operatingIncomeBn": 9.383,
-          "nonOperatingBn": -1.371,
+          "nonOperatingBn": -1.2,
           "pretaxIncomeBn": 8.012,
           "taxBn": 1.483,
-          "netIncomeBn": 6.529,
+          "netIncomeBn": 6.366,
           "netIncomeYoyPct": null,
-          "grossMarginPct": 26.143,
-          "operatingMarginPct": 4.993,
-          "profitMarginPct": 3.474,
+          "grossMarginPct": 26.143335,
+          "operatingMarginPct": 4.992631,
+          "profitMarginPct": 3.387305,
           "effectiveTaxRatePct": 18.51,
           "revenueQoqPct": 6.974,
-          "grossMarginYoyDeltaPp": 1.688,
-          "operatingMarginYoyDeltaPp": 0.847,
-          "profitMarginYoyDeltaPp": -0.524,
+          "grossMarginYoyDeltaPp": 0.985,
+          "operatingMarginYoyDeltaPp": 0.886,
+          "profitMarginYoyDeltaPp": -0.573,
           "statementSource": "official-earnings-release",
-          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000145/earningsreleasefy27q2.htm",
-          "statementFilingDate": "2026-08-20",
+          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/wmt-20260731.htm",
+          "statementFilingDate": "2026-08-28",
           "statementSpanQuarters": 1,
           "statementValueMode": "reported",
           "officialOpexBreakdown": [
@@ -9491,7 +9475,8 @@
               "nameZh": "管理费用",
               "valueBn": 39.75,
               "valueFormat": "negative-parentheses",
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000145/earningsreleasefy27q2.htm"
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000145/earningsreleasefy27q2.htm",
+              "filingDate": "2026-08-20"
             }
           ],
           "parserFinancialFieldSources": {
@@ -9504,9 +9489,9 @@
             "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000145/earningsreleasefy27q2.htm"
           },
           "automaticEarnings": {
-            "filingDate": "2026-08-20",
-            "accession": "0000104169-26-000145",
-            "form": "8-K"
+            "filingDate": "2026-08-28",
+            "accession": "0000104169-26-000154",
+            "form": "10-Q"
           },
           "officialRevenueSegments": [
             {
@@ -9514,8 +9499,8 @@
               "nameZh": "沃尔玛美国",
               "memberKey": "walmartus",
               "valueBn": 125.93900000000001,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000145/earningsreleasefy27q2.htm",
-              "filingDate": "2026-08-20",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/wmt-20260731.htm",
+              "filingDate": "2026-08-28",
               "sourceForm": "official current-period disclosure",
               "mixPct": 67.0
             },
@@ -9524,8 +9509,8 @@
               "nameZh": "沃尔玛国际",
               "memberKey": "walmartinternational",
               "valueBn": 35.624,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000145/earningsreleasefy27q2.htm",
-              "filingDate": "2026-08-20",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/wmt-20260731.htm",
+              "filingDate": "2026-08-28",
               "sourceForm": "official current-period disclosure",
               "mixPct": 19.0
             },
@@ -9534,8 +9519,8 @@
               "nameZh": "山姆会员店美国",
               "memberKey": "samsclubus",
               "valueBn": 26.367,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000145/earningsreleasefy27q2.htm",
-              "filingDate": "2026-08-20",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/wmt-20260731.htm",
+              "filingDate": "2026-08-28",
               "sourceForm": "official current-period disclosure",
               "mixPct": 14.0
             },
@@ -9544,8 +9529,8 @@
               "nameZh": "公司及支持部门",
               "memberKey": "corporate",
               "valueBn": 0.007,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000145/earningsreleasefy27q2.htm",
-              "filingDate": "2026-08-20",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/wmt-20260731.htm",
+              "filingDate": "2026-08-28",
               "sourceForm": "official current-period disclosure",
               "mixPct": 0.0
             }
@@ -9557,8 +9542,8 @@
               "memberKey": "walmartusnetsales",
               "targetName": "Walmart U.S.",
               "valueBn": 125.189,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000145/earningsreleasefy27q2.htm",
-              "filingDate": "2026-08-20",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/wmt-20260731.htm",
+              "filingDate": "2026-08-28",
               "sourceForm": "official current-period disclosure"
             },
             {
@@ -9567,8 +9552,8 @@
               "memberKey": "walmartusmembershipotherincome",
               "targetName": "Walmart U.S.",
               "valueBn": 0.75,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000145/earningsreleasefy27q2.htm",
-              "filingDate": "2026-08-20",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/wmt-20260731.htm",
+              "filingDate": "2026-08-28",
               "sourceForm": "official current-period disclosure"
             },
             {
@@ -9577,8 +9562,8 @@
               "memberKey": "walmartinternationalnetsales",
               "targetName": "Walmart International",
               "valueBn": 35.198,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000145/earningsreleasefy27q2.htm",
-              "filingDate": "2026-08-20",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/wmt-20260731.htm",
+              "filingDate": "2026-08-28",
               "sourceForm": "official current-period disclosure"
             },
             {
@@ -9587,8 +9572,8 @@
               "memberKey": "walmartinternationalmembershipotherincome",
               "targetName": "Walmart International",
               "valueBn": 0.426,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000145/earningsreleasefy27q2.htm",
-              "filingDate": "2026-08-20",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/wmt-20260731.htm",
+              "filingDate": "2026-08-28",
               "sourceForm": "official current-period disclosure"
             },
             {
@@ -9597,8 +9582,8 @@
               "memberKey": "samsclubusnetsales",
               "targetName": "Sam’s Club U.S.",
               "valueBn": 25.713,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000145/earningsreleasefy27q2.htm",
-              "filingDate": "2026-08-20",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/wmt-20260731.htm",
+              "filingDate": "2026-08-28",
               "sourceForm": "official current-period disclosure"
             },
             {
@@ -9607,8 +9592,8 @@
               "memberKey": "samsclubusmembershipotherincome",
               "targetName": "Sam’s Club U.S.",
               "valueBn": 0.654,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000145/earningsreleasefy27q2.htm",
-              "filingDate": "2026-08-20",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/wmt-20260731.htm",
+              "filingDate": "2026-08-28",
               "sourceForm": "official current-period disclosure"
             },
             {
@@ -9617,8 +9602,8 @@
               "memberKey": "corporatemembershipotherincome",
               "targetName": "Corporate and support",
               "valueBn": 0.007,
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000145/earningsreleasefy27q2.htm",
-              "filingDate": "2026-08-20",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/wmt-20260731.htm",
+              "filingDate": "2026-08-28",
               "sourceForm": "official current-period disclosure"
             }
           ],
@@ -9627,7 +9612,7 @@
           "revenueClassificationBasisNote": "Segment revenue includes net sales and membership/other income; totals reconcile to consolidated revenue.",
           "chartCompletionAttempts": [
             {
-              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000145/earningsreleasefy27q2.htm",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/wmt-20260731.htm",
               "remainingIssues": []
             }
           ],
@@ -9652,7 +9637,8 @@
               "walmartus"
             ],
             "requiredDetailMembers": {}
-          }
+          },
+          "statementAccession": "0000104169-26-000154"
         }
       },
       "statementPresets": {},
@@ -10000,7 +9986,8 @@
         "2025Q3",
         "2025Q4",
         "2026Q1",
-        "2026Q2"
+        "2026Q2",
+        "2026Q3"
       ],
       "statementSource": "stockanalysis-financials+field-reconciled",
       "statementSourceUrl": "https://stockanalysis.com/stocks/amd/financials/?p=quarterly",
@@ -10011,28 +9998,28 @@
         "latestRevenueGapReason": "AMD's latest statement-level financials are available from the normalized quarterly table source, while the local SEC segment taxonomy scan timed out on recent archive index requests. Keep AMD selectable with statement-level data until a parseable official segment split is added."
       },
       "coverage": {
-        "quarterCount": 34,
+        "quarterCount": 35,
         "pixelReplicaQuarterCount": 0,
         "hasPixelReplica": false,
-        "officialFinancialQuarterCount": 34,
-        "officialSegmentQuarterCount": 34,
-        "officialExpenseQuarterCount": 1,
+        "officialFinancialQuarterCount": 35,
+        "officialSegmentQuarterCount": 35,
+        "officialExpenseQuarterCount": 2,
         "classification": {
           "status": "warning",
-          "latestQuarter": "2026Q2",
+          "latestQuarter": "2026Q3",
           "latestQuarterHasRevenueClassification": true,
           "latestQuarterHasExpenseClassification": true,
-          "latestRevenueClassificationQuarter": "2026Q2",
-          "latestExpenseClassificationQuarter": "2026Q2",
+          "latestRevenueClassificationQuarter": "2026Q3",
+          "latestExpenseClassificationQuarter": "2026Q3",
           "latestStructureHistoryQuarter": "2026Q2",
-          "revenueClassificationQuarterCount": 34,
-          "expenseClassificationQuarterCount": 1,
+          "revenueClassificationQuarterCount": 35,
+          "expenseClassificationQuarterCount": 2,
           "revenueClassificationCoverageRatio": 1.0,
-          "expenseClassificationCoverageRatio": 0.0294,
+          "expenseClassificationCoverageRatio": 0.0571,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": 0,
           "warnings": [
-            "Expense classification history is sparse: 1 of 34 quarters have official expense breakdowns."
+            "Expense classification history is sparse: 2 of 35 quarters have official expense breakdowns."
           ],
           "blockers": [],
           "policy": {
@@ -10077,7 +10064,7 @@
             "overallConfidenceScore": 0.9611,
             "financialConfidenceScore": 0.9401,
             "structuralConfidenceScore": 1.0,
-            "revenueSegmentChecks": 34,
+            "revenueSegmentChecks": 35,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
             "detailGroupChecks": 0,
@@ -10097,150 +10084,142 @@
       "marketCapSource": "CompaniesMarketCap",
       "marketCapSourceUrl": "https://companiesmarketcap.com/amd/marketcap/",
       "dataLoadMode": "latest-only",
-      "latestQuarter": "2026Q2",
+      "latestQuarter": "2026Q3",
       "financials": {
-        "2026Q2": {
-          "calendarQuarter": "2026Q2",
-          "periodEnd": "2026-06-27",
+        "2026Q3": {
+          "calendarQuarter": "2026Q3",
+          "periodEnd": "2026-09-26",
           "fiscalYear": "2026",
-          "fiscalQuarter": "Q2",
-          "fiscalLabel": "FY2026 Q2",
+          "fiscalQuarter": "Q3",
+          "fiscalLabel": "FY2026 Q3",
           "statementCurrency": "USD",
-          "displayCurrency": "USD",
-          "displayScaleFactor": 1,
-          "revenueBn": 11.536,
-          "revenueYoyPct": 50.111,
-          "costOfRevenueBn": 5.333,
-          "grossProfitBn": 6.203,
-          "sgnaBn": 1.401,
-          "rndBn": 2.528,
-          "otherOpexBn": 0.284,
-          "operatingExpensesBn": 4.213,
-          "operatingIncomeBn": 1.99,
-          "pretaxIncomeBn": 2.551,
-          "taxBn": 0.252,
-          "netIncomeBn": 2.297,
-          "equityIncomeBn": 0.006,
-          "discontinuedOperationsBn": -0.008,
-          "netIncomeYoyPct": 163.417,
-          "nonOperatingBn": 0.561,
-          "grossMarginPct": 53.771,
-          "operatingMarginPct": 17.25,
-          "profitMarginPct": 19.912,
-          "effectiveTaxRatePct": 9.878,
-          "revenueQoqPct": 12.513,
-          "grossMarginYoyDeltaPp": 13.966,
-          "operatingMarginYoyDeltaPp": 18.994,
-          "profitMarginYoyDeltaPp": 8.565,
-          "statementSource": "manual-amd-official",
-          "statementSourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
-          "statementFilingDate": "2026-08-04",
+          "revenueBn": 13.377,
+          "revenueYoyPct": 44.679,
+          "costOfRevenueBn": 6.167,
+          "grossProfitBn": 7.21,
+          "sgnaBn": 1.298,
+          "rndBn": 2.803,
+          "otherOpexBn": 0.277,
+          "operatingExpensesBn": 4.378,
+          "operatingIncomeBn": 2.832,
+          "nonOperatingBn": -0.964,
+          "pretaxIncomeBn": 1.868,
+          "taxBn": -0.555,
+          "netIncomeBn": 2.428,
+          "netIncomeYoyPct": null,
+          "grossMarginPct": 53.898,
+          "operatingMarginPct": 21.171,
+          "profitMarginPct": 18.151,
+          "effectiveTaxRatePct": -29.711,
+          "revenueQoqPct": 15.959,
+          "grossMarginYoyDeltaPp": 2.2,
+          "operatingMarginYoyDeltaPp": 7.435,
+          "profitMarginYoyDeltaPp": 4.707,
+          "statementSource": "official-earnings-release",
+          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000188/q32026991.htm",
+          "statementFilingDate": "2026-11-03",
+          "statementSpanQuarters": 1,
+          "statementValueMode": "reported",
           "officialOpexBreakdown": [
             {
-              "name": "Research and Development",
+              "name": "R&D",
               "nameZh": "研发",
-              "memberKey": "researchanddevelopment",
-              "valueBn": 2.528
-            },
-            {
-              "name": "Marketing, General and Administrative",
-              "nameZh": "营销、一般及行政",
-              "memberKey": "marketinggeneralandadministrative",
-              "valueBn": 1.401
-            },
-            {
-              "name": "Amortization of Acquisition-related Intangibles",
-              "nameZh": "收购相关无形资产摊销",
-              "memberKey": "amortizationofacquisitionrelatedintangibles",
-              "valueBn": 0.284
+              "valueBn": 2.803,
+              "valueFormat": "negative-parentheses",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000188/q32026991.htm"
             }
           ],
+          "parserFinancialFieldSources": {
+            "revenueBn": "official",
+            "operatingIncomeBn": "official",
+            "netIncomeBn": "official"
+          },
+          "parserFinancialValidation": {
+            "status": "high",
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000188/q32026991.htm"
+          },
+          "automaticEarnings": {
+            "filingDate": "2026-11-03",
+            "accession": "0000002488-26-000188",
+            "form": "8-K"
+          },
           "officialRevenueSegments": [
             {
               "name": "Data Center",
               "nameZh": "数据中心",
               "memberKey": "datacenter",
-              "valueBn": 6.718,
-              "yoyPct": 107.35,
-              "qoqPct": 16.33,
-              "mixPct": 58.2,
-              "mixYoyDeltaPp": 16.1,
-              "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
-              "sourceForm": "QuarterlyResultsRelease",
-              "filingDate": "2026-08-04",
-              "metricMode": "flow",
-              "validationNotes": [
-                "amd-official-restated-segment-table"
-              ]
+              "valueBn": 8.546,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000188/q32026991.htm",
+              "filingDate": "2026-11-03",
+              "sourceForm": "official current-period disclosure",
+              "mixPct": 63.9,
+              "qoqPct": 27.21,
+              "yoyPct": 96.87,
+              "mixYoyDeltaPp": 16.9
             },
             {
               "name": "Client",
               "nameZh": "客户端",
               "memberKey": "client",
-              "valueBn": 3.062,
-              "yoyPct": 22.53,
-              "qoqPct": 6.14,
-              "mixPct": 26.5,
-              "mixYoyDeltaPp": -6,
-              "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
-              "sourceForm": "QuarterlyResultsRelease",
-              "filingDate": "2026-08-04",
-              "metricMode": "flow",
-              "validationNotes": [
-                "amd-official-restated-segment-table"
-              ]
+              "valueBn": 2.949,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000188/q32026991.htm",
+              "filingDate": "2026-11-03",
+              "sourceForm": "official current-period disclosure",
+              "mixPct": 22.0,
+              "qoqPct": -3.69,
+              "yoyPct": 7.24,
+              "mixYoyDeltaPp": -7.7
             },
             {
               "name": "Gaming",
               "nameZh": "游戏",
               "memberKey": "gaming",
-              "valueBn": 0.779,
-              "yoyPct": -30.57,
-              "qoqPct": 8.19,
-              "mixPct": 6.8,
-              "mixYoyDeltaPp": -7.8,
-              "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
-              "sourceForm": "QuarterlyResultsRelease",
-              "filingDate": "2026-08-04",
-              "metricMode": "flow",
-              "validationNotes": [
-                "amd-official-restated-segment-table"
-              ]
+              "valueBn": 0.773,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000188/q32026991.htm",
+              "filingDate": "2026-11-03",
+              "sourceForm": "official current-period disclosure",
+              "mixPct": 5.8,
+              "qoqPct": -0.77,
+              "yoyPct": -40.45,
+              "mixYoyDeltaPp": -8.3
             },
             {
               "name": "Embedded",
               "nameZh": "嵌入式",
               "memberKey": "embedded",
-              "valueBn": 0.977,
-              "yoyPct": 18.57,
-              "qoqPct": 11.91,
-              "mixPct": 8.5,
-              "mixYoyDeltaPp": -2.3,
-              "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
-              "sourceForm": "QuarterlyResultsRelease",
-              "filingDate": "2026-08-04",
-              "metricMode": "flow",
-              "validationNotes": [
-                "amd-official-restated-segment-table"
-              ]
+              "valueBn": 1.109,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000188/q32026991.htm",
+              "filingDate": "2026-11-03",
+              "sourceForm": "official current-period disclosure",
+              "mixPct": 8.3,
+              "qoqPct": 13.51,
+              "yoyPct": 29.4,
+              "mixYoyDeltaPp": -1.0
             }
           ],
-          "officialRevenueStyle": "semiconductor-segments",
-          "qualityFlags": [
-            "amd-official-segment-label-correction"
+          "revenueClassificationSourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000188/q32026991.htm",
+          "revenueClassificationSource": "official-complete-table",
+          "chartCompletionAttempts": [
+            {
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000188/q32026991.htm",
+              "remainingIssues": []
+            }
           ],
+          "displayCurrency": "USD",
+          "displayScaleFactor": 1,
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "officialRevenueStyle": "semiconductor-segments",
           "sankeyStructureContinuity": {
-            "sourceQuarter": "2026Q1",
+            "sourceQuarter": "2026Q2",
             "fields": [
               "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
           },
-          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueTaxonomyChangedFromPriorYear": false,
           "chartQuality": {
             "version": 3,
-            "quarter": "2026Q2",
+            "quarter": "2026Q3",
             "status": "ready",
             "issues": [],
             "requiredMarginComparisons": [
@@ -10260,329 +10239,7 @@
         }
       },
       "statementPresets": {},
-      "officialRevenueStructureHistory": {
-        "source": "manual-official-quarterly-results",
-        "quarters": {
-          "2026Q2": {
-            "segments": [
-              {
-                "name": "Data Center",
-                "nameZh": "数据中心",
-                "memberKey": "datacenter",
-                "valueBn": 6.718,
-                "yoyPct": 107.35,
-                "qoqPct": null,
-                "mixPct": 58.2,
-                "mixYoyDeltaPp": 16.1,
-                "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
-                "sourceForm": "QuarterlyResultsRelease",
-                "filingDate": "2026-08-04",
-                "metricMode": "flow",
-                "validationNotes": [
-                  "amd-official-restated-segment-table"
-                ]
-              },
-              {
-                "name": "Client",
-                "nameZh": "客户端",
-                "memberKey": "client",
-                "valueBn": 3.062,
-                "yoyPct": 22.53,
-                "qoqPct": null,
-                "mixPct": 26.5,
-                "mixYoyDeltaPp": -6,
-                "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
-                "sourceForm": "QuarterlyResultsRelease",
-                "filingDate": "2026-08-04",
-                "metricMode": "flow",
-                "validationNotes": [
-                  "amd-official-restated-segment-table"
-                ]
-              },
-              {
-                "name": "Gaming",
-                "nameZh": "游戏",
-                "memberKey": "gaming",
-                "valueBn": 0.779,
-                "yoyPct": -30.57,
-                "qoqPct": null,
-                "mixPct": 6.8,
-                "mixYoyDeltaPp": -7.8,
-                "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
-                "sourceForm": "QuarterlyResultsRelease",
-                "filingDate": "2026-08-04",
-                "metricMode": "flow",
-                "validationNotes": [
-                  "amd-official-restated-segment-table"
-                ]
-              },
-              {
-                "name": "Embedded",
-                "nameZh": "嵌入式",
-                "memberKey": "embedded",
-                "valueBn": 0.977,
-                "yoyPct": 18.57,
-                "qoqPct": null,
-                "mixPct": 8.5,
-                "mixYoyDeltaPp": -2.3,
-                "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
-                "sourceForm": "QuarterlyResultsRelease",
-                "filingDate": "2026-08-04",
-                "metricMode": "flow",
-                "validationNotes": [
-                  "amd-official-restated-segment-table"
-                ]
-              }
-            ]
-          }
-        },
-        "filingsUsed": [
-          {
-            "form": "10-K",
-            "filingDate": "2026-02-04",
-            "accession": "0000002488-26-000018",
-            "primaryDocument": "amd-20251227.htm",
-            "instance": "amd-20251227_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2025-11-05",
-            "accession": "0000002488-25-000166",
-            "primaryDocument": "amd-20250927.htm",
-            "instance": "amd-20250927_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2025-08-06",
-            "accession": "0000002488-25-000108",
-            "primaryDocument": "amd-20250628.htm",
-            "instance": "amd-20250628_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2025-05-07",
-            "accession": "0000002488-25-000047",
-            "primaryDocument": "amd-20250329.htm",
-            "instance": "amd-20250329_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2025-02-05",
-            "accession": "0000002488-25-000012",
-            "primaryDocument": "amd-20241228.htm",
-            "instance": "amd-20241228_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2024-10-30",
-            "accession": "0000002488-24-000163",
-            "primaryDocument": "amd-20240928.htm",
-            "instance": "amd-20240928_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2024-07-31",
-            "accession": "0000002488-24-000123",
-            "primaryDocument": "amd-20240629.htm",
-            "instance": "amd-20240629_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2024-05-01",
-            "accession": "0000002488-24-000056",
-            "primaryDocument": "amd-20240330.htm",
-            "instance": "amd-20240330_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2024-01-31",
-            "accession": "0000002488-24-000012",
-            "primaryDocument": "amd-20231230.htm",
-            "instance": "amd-20231230_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2023-11-01",
-            "accession": "0000002488-23-000195",
-            "primaryDocument": "amd-20230930.htm",
-            "instance": "amd-20230930_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2023-08-02",
-            "accession": "0000002488-23-000139",
-            "primaryDocument": "amd-20230701.htm",
-            "instance": "amd-20230701_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2023-05-03",
-            "accession": "0000002488-23-000076",
-            "primaryDocument": "amd-20230401.htm",
-            "instance": "amd-20230401_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2023-02-27",
-            "accession": "0000002488-23-000047",
-            "primaryDocument": "amd-20221231.htm",
-            "instance": "amd-20221231_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2022-11-02",
-            "accession": "0000002488-22-000170",
-            "primaryDocument": "amd-20220924.htm",
-            "instance": "amd-20220924_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2022-08-03",
-            "accession": "0000002488-22-000123",
-            "primaryDocument": "amd-20220625.htm",
-            "instance": "amd-20220625_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2022-05-04",
-            "accession": "0000002488-22-000078",
-            "primaryDocument": "amd-20220326.htm",
-            "instance": "amd-20220326_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2022-02-03",
-            "accession": "0000002488-22-000016",
-            "primaryDocument": "amd-20211225.htm",
-            "instance": "amd-20211225_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2021-10-27",
-            "accession": "0000002488-21-000178",
-            "primaryDocument": "amd-20210925.htm",
-            "instance": "amd-20210925_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2021-07-28",
-            "accession": "0000002488-21-000116",
-            "primaryDocument": "amd-20210626.htm",
-            "instance": "amd-20210626_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2021-04-28",
-            "accession": "0000002488-21-000056",
-            "primaryDocument": "amd-20210327.htm",
-            "instance": "amd-20210327_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2021-01-29",
-            "accession": "0001628280-21-001185",
-            "primaryDocument": "amd-20201226.htm",
-            "instance": "amd-20201226_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2020-10-28",
-            "accession": "0000002488-20-000164",
-            "primaryDocument": "amd-20200926.htm",
-            "instance": "amd-20200926_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2020-07-29",
-            "accession": "0000002488-20-000103",
-            "primaryDocument": "amd-20200627.htm",
-            "instance": "amd-20200627_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2020-04-29",
-            "accession": "0000002488-20-000051",
-            "primaryDocument": "amdq1fy2010q.htm",
-            "instance": "amdq1fy2010q_htm.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2020-02-04",
-            "accession": "0000002488-20-000008",
-            "primaryDocument": "amdform10-kfy2019.htm",
-            "instance": "amdform10-kfy2019_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2019-10-30",
-            "accession": "0000002488-19-000159",
-            "primaryDocument": "amd0928201910q.htm",
-            "instance": "amd0928201910q_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2019-07-31",
-            "accession": "0000002488-19-000104",
-            "primaryDocument": "amd0629201910q.htm",
-            "instance": "amd0629201910q_htm.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2019-05-01",
-            "accession": "0000002488-19-000045",
-            "primaryDocument": "amd0330201910q.htm",
-            "instance": "amd-20190330.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2019-02-08",
-            "accession": "0000002488-19-000011",
-            "primaryDocument": "amd-12292018x10k.htm",
-            "instance": "amd-20181229.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2018-10-31",
-            "accession": "0000002488-18-000189",
-            "primaryDocument": "amd0929201810q.htm",
-            "instance": "amd-20180929.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2018-08-02",
-            "accession": "0000002488-18-000128",
-            "primaryDocument": "amd0630201810q.htm",
-            "instance": "amd-20180630.xml"
-          },
-          {
-            "form": "10-Q",
-            "filingDate": "2018-05-03",
-            "accession": "0000002488-18-000068",
-            "primaryDocument": "amd0331201810q.htm",
-            "instance": "amd-20180331.xml"
-          },
-          {
-            "form": "10-K",
-            "filingDate": "2018-02-27",
-            "accession": "0000002488-18-000042",
-            "primaryDocument": "amd-12302017x10k.htm",
-            "instance": "amd-20171230.xml"
-          },
-          {
-            "title": "AMD Fourth Quarter and Full Year 2025 Financial Results",
-            "quarter": "2025Q4",
-            "filingDate": "2026-02-03",
-            "url": "https://www.amd.com/en/newsroom/press-releases/2026-2-3-amd-reports-fourth-quarter-and-full-year-2025-fina.html"
-          },
-          {
-            "title": "AMD Second Quarter 2026 Financial Results",
-            "quarter": "2026Q2",
-            "filingDate": "2026-08-04",
-            "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
-          }
-        ],
-        "errors": []
-      },
+      "officialRevenueStructureHistory": {},
       "officialSegmentHistory": {}
     },
     {
@@ -21923,31 +21580,32 @@
         "2025Q2",
         "2025Q3",
         "2025Q4",
-        "2026Q1"
+        "2026Q1",
+        "2026Q2"
       ],
       "statementSource": "stockanalysis-financials",
       "statementSourceUrl": "https://stockanalysis.com/stocks/ntes/financials/?p=quarterly",
       "reportingCurrency": "CNY",
       "errors": [],
       "coverage": {
-        "quarterCount": 33,
+        "quarterCount": 34,
         "pixelReplicaQuarterCount": 0,
         "hasPixelReplica": false,
-        "officialFinancialQuarterCount": 33,
-        "officialSegmentQuarterCount": 33,
-        "officialExpenseQuarterCount": 28,
+        "officialFinancialQuarterCount": 34,
+        "officialSegmentQuarterCount": 34,
+        "officialExpenseQuarterCount": 29,
         "classification": {
           "status": "ok",
-          "latestQuarter": "2026Q1",
+          "latestQuarter": "2026Q2",
           "latestQuarterHasRevenueClassification": true,
           "latestQuarterHasExpenseClassification": true,
-          "latestRevenueClassificationQuarter": "2026Q1",
-          "latestExpenseClassificationQuarter": "2026Q1",
+          "latestRevenueClassificationQuarter": "2026Q2",
+          "latestExpenseClassificationQuarter": "2026Q2",
           "latestStructureHistoryQuarter": "2026Q1",
-          "revenueClassificationQuarterCount": 33,
-          "expenseClassificationQuarterCount": 28,
+          "revenueClassificationQuarterCount": 34,
+          "expenseClassificationQuarterCount": 29,
           "revenueClassificationCoverageRatio": 1.0,
-          "expenseClassificationCoverageRatio": 0.8485,
+          "expenseClassificationCoverageRatio": 0.8529,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": 0,
           "warnings": [],
@@ -21987,16 +21645,16 @@
           "validation": {
             "version": "parser-validation-v1",
             "status": "high",
-            "overallConfidenceScore": 0.9801,
+            "overallConfidenceScore": 0.9802,
             "financialConfidenceScore": 0.9775,
-            "structuralConfidenceScore": 0.9848,
-            "revenueSegmentChecks": 33,
+            "structuralConfidenceScore": 0.9853,
+            "revenueSegmentChecks": 34,
             "revenueSegmentMismatchCount": 1,
             "revenueSegmentSkippedChecks": 0,
             "detailGroupChecks": 0,
             "detailGroupMismatchCount": 0,
             "detailGroupSkippedChecks": 0,
-            "opexChecks": 28,
+            "opexChecks": 29,
             "opexSkippedChecks": 0,
             "opexOverflowMismatchCount": 0,
             "warningCount": 1,
@@ -22012,156 +21670,155 @@
       "marketCapSource": "CompaniesMarketCap",
       "marketCapSourceUrl": "https://companiesmarketcap.com/netease/marketcap/",
       "dataLoadMode": "latest-only",
-      "latestQuarter": "2026Q1",
+      "latestQuarter": "2026Q2",
       "financials": {
-        "2026Q1": {
-          "calendarQuarter": "2026Q1",
-          "periodEnd": "2026-03-31",
+        "2026Q2": {
+          "calendarQuarter": "2026Q2",
+          "periodEnd": "2026-06-30",
           "fiscalYear": "2026",
-          "fiscalQuarter": "Q1",
-          "fiscalLabel": "FY2026 Q1",
+          "fiscalQuarter": "Q2",
+          "fiscalLabel": "FY2026 Q2",
           "statementCurrency": "CNY",
-          "displayCurrency": "USD",
-          "displayScaleFactor": 0.14496,
-          "revenueBn": 30.591,
-          "costOfRevenueBn": 9.374,
+          "revenueBn": 30.107,
+          "revenueYoyPct": 7.941,
+          "costOfRevenueBn": 8.889,
           "grossProfitBn": 21.217,
-          "sgnaBn": 4.078,
-          "rndBn": 4.482,
+          "sgnaBn": 4.484,
+          "rndBn": 4.644,
           "otherOpexBn": null,
-          "operatingExpensesBn": 8.56,
-          "operatingIncomeBn": 12.657,
-          "nonOperatingBn": 0.712,
-          "pretaxIncomeBn": 13.369,
-          "taxBn": 2.524,
-          "netIncomeBn": 10.674,
-          "statementSource": "manual-netease-official",
-          "statementSourceUrl": "https://ir.netease.com/static-files/93a788ed-25f4-452a-9d1d-97bc3aca0a24",
-          "statementFilingDate": "2026-05-21",
+          "operatingExpensesBn": 9.128,
+          "operatingIncomeBn": 12.089,
+          "nonOperatingBn": -2.464,
+          "pretaxIncomeBn": 9.625,
+          "taxBn": 2.645,
+          "netIncomeBn": 6.981,
+          "netIncomeYoyPct": null,
+          "grossMarginPct": 70.474,
+          "operatingMarginPct": 40.155,
+          "profitMarginPct": 23.187,
+          "effectiveTaxRatePct": 27.475,
+          "revenueQoqPct": -1.582,
+          "grossMarginYoyDeltaPp": 5.75,
+          "operatingMarginYoyDeltaPp": 7.668,
+          "profitMarginYoyDeltaPp": -7.65,
+          "statementSource": "official-earnings-release",
+          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926098940/tm2623482d1_ex99-1.htm",
+          "statementFilingDate": "2026-08-20",
+          "statementSpanQuarters": 1,
+          "statementValueMode": "reported",
+          "officialOpexBreakdown": [
+            {
+              "name": "Sales & Marketing",
+              "nameZh": "销售与营销",
+              "valueBn": 3.679,
+              "valueFormat": "negative-parentheses",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926098940/tm2623482d1_ex99-1.htm"
+            },
+            {
+              "name": "G&A",
+              "nameZh": "管理费用",
+              "valueBn": 0.805,
+              "valueFormat": "negative-parentheses",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926098940/tm2623482d1_ex99-1.htm"
+            },
+            {
+              "name": "R&D",
+              "nameZh": "研发",
+              "valueBn": 4.644,
+              "valueFormat": "negative-parentheses",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926098940/tm2623482d1_ex99-1.htm"
+            }
+          ],
+          "parserFinancialFieldSources": {
+            "revenueBn": "official",
+            "operatingIncomeBn": "official",
+            "netIncomeBn": "official"
+          },
+          "parserFinancialValidation": {
+            "status": "high",
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926098940/tm2623482d1_ex99-1.htm"
+          },
+          "automaticEarnings": {
+            "filingDate": "2026-08-20",
+            "accession": "0001104659-26-098940",
+            "form": "6-K"
+          },
           "officialRevenueSegments": [
             {
               "name": "Games and related value-added services",
               "nameZh": null,
               "memberKey": "gamesandrelatedvalueaddedservices",
-              "valueBn": 25.7,
-              "yoyPct": 7.08,
-              "qoqPct": 16.82,
-              "mixPct": 84.0,
-              "mixYoyDeltaPp": 0.8,
-              "sourceUrl": "https://ir.netease.com/static-files/93a788ed-25f4-452a-9d1d-97bc3aca0a24",
-              "sourceForm": null,
-              "filingDate": "2026-05-21",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": null,
-              "validationNotes": null
+              "valueBn": 25.022788,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926098940/tm2623482d1_ex99-1.htm",
+              "filingDate": "2026-08-20",
+              "sourceForm": "official current-period disclosure",
+              "mixPct": 83.1,
+              "qoqPct": -2.64,
+              "yoyPct": 9.72,
+              "mixYoyDeltaPp": 1.3
             },
             {
               "name": "Innovative businesses and others",
               "nameZh": null,
               "memberKey": "innovativebusinessesandothers",
-              "valueBn": 1.5,
-              "yoyPct": -7.64,
-              "qoqPct": -25.0,
-              "mixPct": 4.9,
-              "mixYoyDeltaPp": -0.7,
-              "sourceUrl": "https://ir.netease.com/static-files/93a788ed-25f4-452a-9d1d-97bc3aca0a24",
-              "sourceForm": null,
-              "filingDate": "2026-05-21",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": null,
-              "validationNotes": null
+              "valueBn": 1.639425,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926098940/tm2623482d1_ex99-1.htm",
+              "filingDate": "2026-08-20",
+              "sourceForm": "official current-period disclosure",
+              "mixPct": 5.4,
+              "qoqPct": 9.29,
+              "yoyPct": -3.51,
+              "mixYoyDeltaPp": -0.6
             },
             {
               "name": "Cloud Music",
               "nameZh": null,
               "memberKey": "cloudmusic",
-              "valueBn": 2,
-              "yoyPct": 5.26,
-              "qoqPct": 0.0,
-              "mixPct": 6.5,
-              "mixYoyDeltaPp": -0.1,
-              "sourceUrl": "https://ir.netease.com/static-files/93a788ed-25f4-452a-9d1d-97bc3aca0a24",
-              "sourceForm": null,
-              "filingDate": "2026-05-21",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": null,
-              "validationNotes": null
+              "valueBn": 1.977472,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926098940/tm2623482d1_ex99-1.htm",
+              "filingDate": "2026-08-20",
+              "sourceForm": "official current-period disclosure",
+              "mixPct": 6.6,
+              "qoqPct": -1.13,
+              "yoyPct": -1.13,
+              "mixYoyDeltaPp": -0.6
             },
             {
               "name": "Youdao",
               "nameZh": null,
               "memberKey": "youdao",
-              "valueBn": 1.348,
-              "yoyPct": 3.85,
-              "qoqPct": -15.75,
-              "mixPct": 4.4,
-              "mixYoyDeltaPp": -0.1,
-              "sourceUrl": "https://ir.netease.com/static-files/93a788ed-25f4-452a-9d1d-97bc3aca0a24",
-              "sourceForm": null,
-              "filingDate": "2026-05-21",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": null,
-              "validationNotes": null
+              "valueBn": 1.466861,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926098940/tm2623482d1_ex99-1.htm",
+              "filingDate": "2026-08-20",
+              "sourceForm": "official current-period disclosure",
+              "mixPct": 4.9,
+              "qoqPct": 8.82,
+              "yoyPct": 3.45,
+              "mixYoyDeltaPp": -0.2
             }
           ],
-          "officialOpexBreakdown": [
+          "revenueClassificationSourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926098940/tm2623482d1_ex99-1.htm",
+          "revenueClassificationSource": "official-complete-table",
+          "chartCompletionAttempts": [
             {
-              "name": "Selling and marketing",
-              "nameZh": "销售及市场费用",
-              "memberKey": "sellingandmarketing",
-              "valueBn": 3.441,
-              "sourceUrl": "https://ir.netease.com/static-files/93a788ed-25f4-452a-9d1d-97bc3aca0a24",
-              "sourceForm": "QuarterlyResultsPDF",
-              "filingDate": "2026-05-21",
-              "validationEligible": null,
-              "validationNotes": null
-            },
-            {
-              "name": "General and administrative",
-              "nameZh": "管理费用",
-              "memberKey": "generalandadministrative",
-              "valueBn": 0.637,
-              "sourceUrl": "https://ir.netease.com/static-files/93a788ed-25f4-452a-9d1d-97bc3aca0a24",
-              "sourceForm": "QuarterlyResultsPDF",
-              "filingDate": "2026-05-21",
-              "validationEligible": null,
-              "validationNotes": null
-            },
-            {
-              "name": "Research and development",
-              "nameZh": "研发费用",
-              "memberKey": "researchanddevelopment",
-              "valueBn": 4.482,
-              "sourceUrl": "https://ir.netease.com/static-files/93a788ed-25f4-452a-9d1d-97bc3aca0a24",
-              "sourceForm": "QuarterlyResultsPDF",
-              "filingDate": "2026-05-21",
-              "validationEligible": null,
-              "validationNotes": null
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926098940/tm2623482d1_ex99-1.htm",
+              "remainingIssues": []
             }
           ],
-          "revenueQoqPct": 11.05,
-          "revenueYoyPct": 6.112,
+          "displayCurrency": "USD",
+          "displayScaleFactor": 0.14873,
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
           "sankeyStructureContinuity": {
-            "sourceQuarter": "2025Q4",
+            "sourceQuarter": "2026Q1",
             "fields": [
-              "officialRevenueSegments",
-              "officialOpexBreakdown"
+              "officialRevenueSegments"
             ],
             "rule": "same-normalized-category-set"
           },
-          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
-          "officialRevenueTaxonomyChangedFromPriorYear": false,
           "chartQuality": {
             "version": 3,
-            "quarter": "2026Q1",
+            "quarter": "2026Q2",
             "status": "ready",
             "issues": [],
             "requiredMarginComparisons": [
@@ -22177,333 +21834,11 @@
               "youdao"
             ],
             "requiredDetailMembers": {}
-          },
-          "grossMarginPct": 69.357,
-          "grossMarginYoyDeltaPp": 5.257,
-          "operatingMarginPct": 41.374914,
-          "operatingMarginYoyDeltaPp": 5.155,
-          "profitMarginPct": 34.892615,
-          "profitMarginYoyDeltaPp": -1.687
+          }
         }
       },
       "statementPresets": {},
-      "officialRevenueStructureHistory": {
-        "source": "manual-official-quarterly-results",
-        "quarters": {
-          "2026Q1": {
-            "segments": [
-              {
-                "name": "Games and related value-added services",
-                "nameZh": "游戏及相关增值服务",
-                "memberKey": "gamesandrelatedvalueaddedservices",
-                "valueBn": 25.7,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://ir.netease.com/static-files/93a788ed-25f4-452a-9d1d-97bc3aca0a24",
-                "sourceForm": null,
-                "filingDate": "2026-05-21",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": null,
-                "validationNotes": null
-              },
-              {
-                "name": "Youdao",
-                "nameZh": "有道",
-                "memberKey": "youdao",
-                "valueBn": 1.348,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://ir.netease.com/static-files/93a788ed-25f4-452a-9d1d-97bc3aca0a24",
-                "sourceForm": null,
-                "filingDate": "2026-05-21",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": null,
-                "validationNotes": null
-              },
-              {
-                "name": "Cloud Music",
-                "nameZh": "云音乐",
-                "memberKey": "cloudmusic",
-                "valueBn": 2,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://ir.netease.com/static-files/93a788ed-25f4-452a-9d1d-97bc3aca0a24",
-                "sourceForm": null,
-                "filingDate": "2026-05-21",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": null,
-                "validationNotes": null
-              },
-              {
-                "name": "Innovative businesses and others",
-                "nameZh": "创新业务及其他",
-                "memberKey": "innovativebusinessesandothers",
-                "valueBn": 1.5,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://ir.netease.com/static-files/93a788ed-25f4-452a-9d1d-97bc3aca0a24",
-                "sourceForm": null,
-                "filingDate": "2026-05-21",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": null,
-                "validationNotes": null
-              }
-            ],
-            "opexBreakdown": [
-              {
-                "name": "Selling and marketing",
-                "nameZh": "销售及市场费用",
-                "memberKey": "sellingandmarketing",
-                "valueBn": 3.441,
-                "filingDate": "2026-05-21",
-                "sourceUrl": "https://ir.netease.com/static-files/93a788ed-25f4-452a-9d1d-97bc3aca0a24",
-                "sourceForm": "QuarterlyResultsPDF"
-              },
-              {
-                "name": "General and administrative",
-                "nameZh": "管理费用",
-                "memberKey": "generalandadministrative",
-                "valueBn": 0.637,
-                "filingDate": "2026-05-21",
-                "sourceUrl": "https://ir.netease.com/static-files/93a788ed-25f4-452a-9d1d-97bc3aca0a24",
-                "sourceForm": "QuarterlyResultsPDF"
-              },
-              {
-                "name": "Research and development",
-                "nameZh": "研发费用",
-                "memberKey": "researchanddevelopment",
-                "valueBn": 4.482,
-                "filingDate": "2026-05-21",
-                "sourceUrl": "https://ir.netease.com/static-files/93a788ed-25f4-452a-9d1d-97bc3aca0a24",
-                "sourceForm": "QuarterlyResultsPDF"
-              }
-            ]
-          }
-        },
-        "filingsUsed": [
-          {
-            "title": "Q2 2018 Earnings Release",
-            "quarter": "2018Q2",
-            "filingDate": "2018-08-08",
-            "pdf": "http://ir.netease.com/static-files/774c003e-2652-4a24-a286-41eb6e835f93"
-          },
-          {
-            "title": "Q3 2018 Earnings Release",
-            "quarter": "2018Q3",
-            "filingDate": "2018-11-14",
-            "pdf": "http://ir.netease.com/static-files/d3c47cd9-db6b-4817-94e7-b1d7c4b95504"
-          },
-          {
-            "title": "Q4 2018 Earnings Release",
-            "quarter": "2018Q4",
-            "filingDate": "2019-02-21",
-            "pdf": "http://ir.netease.com/system/files-encrypted/nasdaq_kms/assets/2019/02/20/18-16-05/Q4%202018%20Earnings%20Release.pdf"
-          },
-          {
-            "title": "Q1 2019 Earnings Release",
-            "quarter": "2019Q1",
-            "filingDate": "2019-05-15",
-            "pdf": "http://ir.netease.com/system/files-encrypted/nasdaq_kms/assets/2019/05/15/11-01-25/Q1%202019%20Earnings%20Release.pdf"
-          },
-          {
-            "title": "Q2 2019 Earnings Release",
-            "quarter": "2019Q2",
-            "filingDate": "2019-08-08",
-            "pdf": "http://ir.netease.com/system/files-encrypted/nasdaq_kms/assets/2019/08/07/10-46-44/Q2%202019%20Earnings%20Release-Final.pdf"
-          },
-          {
-            "title": "Q3 2019 Earnings Release",
-            "quarter": "2019Q3",
-            "filingDate": "2019-11-20",
-            "pdf": "http://ir.netease.com/system/files-encrypted/nasdaq_kms/assets/2019/11/20/14-03-57/Q3%202019%20Earnings%20Release.pdf"
-          },
-          {
-            "title": "Q4 2019 Earnings Release",
-            "quarter": "2019Q4",
-            "filingDate": "2020-02-26",
-            "pdf": "http://ir.netease.com/system/files-encrypted/nasdaq_kms/assets/2020/02/26/20-07-41/Q4%202019%20Earnings%20Release-Final.pdf"
-          },
-          {
-            "title": "Q1 2020 Earnings Release",
-            "quarter": "2020Q1",
-            "filingDate": "2020-05-20",
-            "pdf": "http://ir.netease.com/system/files-encrypted/nasdaq_kms/assets/2020/05/19/10-04-36/Q1%202020%20Earnings%20Release.pdf"
-          },
-          {
-            "title": "Q2 2020 Earnings Release",
-            "quarter": "2020Q2",
-            "filingDate": "2020-08-13",
-            "pdf": "http://ir.netease.com/system/files-encrypted/nasdaq_kms/assets/2020/08/13/3-02-46/Q2%202020%20Earnings%20Release%20%281%29.pdf"
-          },
-          {
-            "title": "Q3 2020 Earnings Release",
-            "quarter": "2020Q3",
-            "filingDate": "2020-11-19",
-            "pdf": "http://ir.netease.com/system/files-encrypted/nasdaq_kms/assets/2020/11/19/1-46-42/Q3%202020%20Earnings%20Release.pdf"
-          },
-          {
-            "title": "Q4 2020 Earnings Release",
-            "quarter": "2020Q4",
-            "filingDate": "2021-02-25",
-            "pdf": "http://ir.netease.com/system/files-encrypted/nasdaq_kms/assets/2021/02/25/0-51-18/Q4%202020%20Earnings%20Release.pdf"
-          },
-          {
-            "title": "Q1 2021 Earnings Release",
-            "quarter": "2021Q1",
-            "filingDate": "2021-05-18",
-            "pdf": "http://ir.netease.com/system/files-encrypted/nasdaq_kms/assets/2021/05/18/0-05-18/Q1%202021%20Earnings%20Release.pdf"
-          },
-          {
-            "title": "Q2 2021 Earnings Release",
-            "quarter": "2021Q2",
-            "filingDate": "2021-08-31",
-            "pdf": "http://ir.netease.com/static-files/3a5e97a5-5071-4f62-850d-0ed2dd3ce8ae"
-          },
-          {
-            "title": "Q3 2021 Earnings Release",
-            "quarter": "2021Q3",
-            "filingDate": "2021-11-16",
-            "pdf": "http://ir.netease.com/system/files-encrypted/nasdaq_kms/assets/2021/11/16/3-20-07/Q3%202021%20Earnings%20Release.pdf"
-          },
-          {
-            "title": "Q4 2021 Earnings Release",
-            "quarter": "2021Q4",
-            "filingDate": "2022-02-24",
-            "pdf": "http://ir.netease.com/system/files-encrypted/nasdaq_kms/assets/2022/02/24/2-01-07/Q4%202021%20Earnings%20Release.pdf"
-          },
-          {
-            "title": "Q1 2022 Earnings Release",
-            "quarter": "2022Q1",
-            "filingDate": "2022-05-24",
-            "pdf": "http://ir.netease.com/static-files/7078b2eb-a9d4-4b2e-9144-39ee1dbc18fb"
-          },
-          {
-            "title": "Q2 2022 Earnings Release",
-            "quarter": "2022Q2",
-            "filingDate": "2022-08-18",
-            "pdf": "http://ir.netease.com/system/files-encrypted/nasdaq_kms/assets/2022/08/18/1-53-28/Q2%202022%20Earnings%20Release.pdf"
-          },
-          {
-            "title": "Q3 2022 Earnings Release",
-            "quarter": "2022Q3",
-            "filingDate": "2022-11-17",
-            "pdf": "http://ir.netease.com/system/files-encrypted/nasdaq_kms/assets/2022/11/17/3-22-14/Q3%202022%20Earnings%20Release.pdf"
-          },
-          {
-            "title": "Q4 2022 Earnings Release",
-            "quarter": "2022Q4",
-            "filingDate": "2023-02-23",
-            "pdf": "http://ir.netease.com/system/files-encrypted/nasdaq_kms/assets/2023/02/23/3-16-05/Q4%202022%20Earnings%20Release.pdf"
-          },
-          {
-            "title": "Q1 2023 Earnings Release",
-            "quarter": "2023Q1",
-            "filingDate": "2023-05-25",
-            "pdf": "http://ir.netease.com/system/files-encrypted/nasdaq_kms/assets/2023/05/25/4-21-18/Q1%202023%20Earnings%20Release.pdf"
-          },
-          {
-            "title": "Q2 2023 Earnings Release",
-            "quarter": "2023Q2",
-            "filingDate": "2023-08-24",
-            "pdf": "http://ir.netease.com/static-files/38ad2d01-3113-4ab5-a0df-69b20d7459c5"
-          },
-          {
-            "title": "Q3 2023 Earnings Release",
-            "quarter": "2023Q3",
-            "filingDate": "2023-11-16",
-            "pdf": "http://ir.netease.com/system/files-encrypted/nasdaq_kms/assets/2023/11/16/3-19-42/3Q23%20NTES%20Earnings%20Release.pdf"
-          },
-          {
-            "title": "Q4 2023 Earnings Release",
-            "quarter": "2023Q4",
-            "filingDate": "2024-02-29",
-            "pdf": "http://ir.netease.com/system/files-encrypted/nasdaq_kms/assets/2024/02/29/3-17-11/4Q23%20NTES%20Earnings%20Release.pdf"
-          },
-          {
-            "title": "Q1 2024 Earnings Release",
-            "quarter": "2024Q1",
-            "filingDate": "2024-05-23",
-            "pdf": "http://ir.netease.com/system/files-encrypted/nasdaq_kms/assets/2024/05/23/4-13-24/Q1%202024%20Earning%20Release.pdf"
-          },
-          {
-            "title": "Q2 2024 Earnings Release",
-            "quarter": "2024Q2",
-            "filingDate": "2024-08-22",
-            "pdf": "http://ir.netease.com/system/files-encrypted/nasdaq_kms/assets/2024/08/22/4-25-01/Q2%202024%20Earning%20Release.pdf"
-          },
-          {
-            "title": "Q3 2024 Earnings Release",
-            "quarter": "2024Q3",
-            "filingDate": "2024-11-14",
-            "pdf": "http://ir.netease.com/system/files-encrypted/nasdaq_kms/assets/2024/11/14/3-18-19/Q3%202024%20Earnings%20Release.pdf"
-          },
-          {
-            "title": "Q4 2024 Earnings Release",
-            "quarter": "2024Q4",
-            "filingDate": "2025-02-20",
-            "pdf": "http://ir.netease.com/system/files-encrypted/nasdaq_kms/assets/2025/02/20/3-04-13/Q4%202024%20Earnings%20Release.pdf"
-          },
-          {
-            "title": "Q1 2025 Earnings Release",
-            "quarter": "2025Q1",
-            "filingDate": "2025-05-15",
-            "pdf": "http://ir.netease.com/system/files-encrypted/nasdaq_kms/assets/2025/05/15/4-33-36/Q1%202025%20Earnings%20Release.pdf"
-          },
-          {
-            "title": "Q2 2025 Earnings Release",
-            "quarter": "2025Q2",
-            "filingDate": "2025-08-14",
-            "pdf": "http://ir.netease.com/system/files-encrypted/nasdaq_kms/assets/2025/08/14/4-05-06/Q2%202025%20Earnings%20Release.pdf"
-          },
-          {
-            "title": "Q3 2025 Earnings Release",
-            "quarter": "2025Q3",
-            "filingDate": "2025-11-20",
-            "pdf": "http://ir.netease.com/static-files/256883f1-8eee-41e6-8bb2-560d3a431dd3"
-          },
-          {
-            "title": "Q4 2025 Earnings Release",
-            "quarter": "2025Q4",
-            "filingDate": "2026-02-11",
-            "pdf": "http://ir.netease.com/static-files/0c5eceec-d577-4822-a112-d23d7d3cf83a"
-          },
-          {
-            "title": "Q1 2026 Earnings Release",
-            "quarter": "2026Q1",
-            "filingDate": "2026-05-21",
-            "pdf": "http://ir.netease.com/static-files/93a788ed-25f4-452a-9d1d-97bc3aca0a24"
-          },
-          {
-            "title": "NetEase Fourth Quarter and Fiscal Year 2025 Results",
-            "quarter": "2025Q4",
-            "filingDate": "2026-02-11",
-            "pdf": "https://ir.netease.com/node/15256/pdf"
-          },
-          {
-            "title": "NetEase First Quarter 2026 Results",
-            "quarter": "2026Q1",
-            "filingDate": "2026-05-21",
-            "pdf": "https://ir.netease.com/static-files/93a788ed-25f4-452a-9d1d-97bc3aca0a24"
-          }
-        ],
-        "errors": []
-      },
+      "officialRevenueStructureHistory": {},
       "officialSegmentHistory": {}
     },
     {
@@ -22552,7 +21887,8 @@
         "2025Q2",
         "2025Q3",
         "2025Q4",
-        "2026Q1"
+        "2026Q1",
+        "2026Q2"
       ],
       "statementSource": "stockanalysis-financials",
       "statementSourceUrl": "https://stockanalysis.com/quote/hkg/3690/financials/?p=quarterly",
@@ -22564,24 +21900,24 @@
         "latestRevenueGapReason": "As of 2026-03-27, Meituan's official investor results page exposes parseable segment disclosure through 2025Q3 only. The 2025Q4 financial statement trunk is now available from Stock Analysis's Hong Kong listing page, and the latest official segment split currently available to the parser remains 2025Q3."
       },
       "coverage": {
-        "quarterCount": 31,
+        "quarterCount": 32,
         "pixelReplicaQuarterCount": 0,
         "hasPixelReplica": false,
-        "officialFinancialQuarterCount": 31,
-        "officialSegmentQuarterCount": 30,
-        "officialExpenseQuarterCount": 30,
+        "officialFinancialQuarterCount": 32,
+        "officialSegmentQuarterCount": 31,
+        "officialExpenseQuarterCount": 31,
         "classification": {
           "status": "ok",
-          "latestQuarter": "2026Q1",
+          "latestQuarter": "2026Q2",
           "latestQuarterHasRevenueClassification": true,
           "latestQuarterHasExpenseClassification": true,
-          "latestRevenueClassificationQuarter": "2026Q1",
-          "latestExpenseClassificationQuarter": "2026Q1",
+          "latestRevenueClassificationQuarter": "2026Q2",
+          "latestExpenseClassificationQuarter": "2026Q2",
           "latestStructureHistoryQuarter": "2026Q1",
-          "revenueClassificationQuarterCount": 30,
-          "expenseClassificationQuarterCount": 30,
-          "revenueClassificationCoverageRatio": 0.9677,
-          "expenseClassificationCoverageRatio": 0.9677,
+          "revenueClassificationQuarterCount": 31,
+          "expenseClassificationQuarterCount": 31,
+          "revenueClassificationCoverageRatio": 0.9688,
+          "expenseClassificationCoverageRatio": 0.9688,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": 0,
           "warnings": [],
@@ -22628,18 +21964,19 @@
             "overallConfidenceScore": 0.8833,
             "financialConfidenceScore": 1.0,
             "structuralConfidenceScore": 0.6667,
-            "revenueSegmentChecks": 30,
+            "revenueSegmentChecks": 31,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
             "detailGroupChecks": 30,
             "detailGroupMismatchCount": 0,
             "detailGroupSkippedChecks": 0,
-            "opexChecks": 1,
+            "opexChecks": 2,
             "opexSkippedChecks": 29,
-            "opexOverflowMismatchCount": 1,
-            "warningCount": 1,
+            "opexOverflowMismatchCount": 2,
+            "warningCount": 2,
             "warnings": [
-              "2026Q1: opex breakdown sums to 33.431Bn vs operating expenses 32.44Bn."
+              "2026Q1: opex breakdown sums to 33.431Bn vs operating expenses 32.44Bn.",
+              "2026Q2: opex breakdown sums to 35.631Bn vs operating expenses 32.404Bn."
             ]
           }
         }
@@ -22650,123 +21987,129 @@
       "marketCapSource": "CompaniesMarketCap",
       "marketCapSourceUrl": "https://companiesmarketcap.com/meituan-dianping/marketcap/",
       "dataLoadMode": "latest-only",
-      "latestQuarter": "2026Q1",
+      "latestQuarter": "2026Q2",
       "financials": {
-        "2026Q1": {
-          "calendarQuarter": "2026Q1",
-          "periodEnd": "2026-03-31",
+        "2026Q2": {
+          "calendarQuarter": "2026Q2",
+          "periodEnd": "2026-06-30",
           "fiscalYear": "2026",
-          "fiscalQuarter": "Q1",
-          "fiscalLabel": "FY2026 Q1",
+          "fiscalQuarter": "Q2",
+          "fiscalLabel": "FY2026 Q2",
           "statementCurrency": "CNY",
-          "revenueBn": 91.039,
-          "costOfRevenueBn": 65.069,
-          "grossProfitBn": 25.97,
-          "sgnaBn": 25.907,
-          "rndBn": 7.043,
-          "otherOpexBn": null,
-          "operatingExpensesBn": 32.44,
-          "operatingIncomeBn": -6.47,
-          "nonOperatingBn": -0.807,
-          "pretaxIncomeBn": -7.277,
-          "taxBn": -0.45,
-          "netIncomeBn": -6.827,
-          "statementSource": "manual-meituan-official",
-          "statementSourceUrl": "https://media-meituan.todayir.com/202606011753301715997254_en.pdf",
-          "statementFilingDate": "2026-06-01",
+          "revenueBn": 104.643,
+          "revenueYoyPct": 13.941,
+          "costOfRevenueBn": 69.548,
+          "grossProfitBn": 35.095,
+          "sgnaBn": 27.961,
+          "rndBn": 7.67,
+          "otherOpexBn": 23.101,
+          "operatingExpensesBn": 32.404,
+          "operatingIncomeBn": 2.691,
+          "nonOperatingBn": -0.387,
+          "pretaxIncomeBn": 2.304,
+          "taxBn": 0.149,
+          "netIncomeBn": 2.155,
+          "netIncomeYoyPct": null,
+          "grossMarginPct": 33.538,
+          "operatingMarginPct": 2.572,
+          "profitMarginPct": 2.059,
+          "effectiveTaxRatePct": 6.467,
+          "revenueQoqPct": 14.943,
+          "grossMarginYoyDeltaPp": 0.418,
+          "operatingMarginYoyDeltaPp": 4.982,
+          "profitMarginYoyDeltaPp": 1.659,
+          "statementSource": "official-ir-earnings-release",
+          "statementSourceUrl": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf",
+          "statementFilingDate": "2026-08-28",
+          "statementSpanQuarters": 1,
+          "statementValueMode": "reported",
+          "officialOpexBreakdown": [
+            {
+              "name": "Sales & Marketing",
+              "nameZh": "销售与营销",
+              "valueBn": 24.723,
+              "valueFormat": "negative-parentheses",
+              "sourceUrl": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf"
+            },
+            {
+              "name": "G&A",
+              "nameZh": "管理费用",
+              "valueBn": 3.238,
+              "valueFormat": "negative-parentheses",
+              "sourceUrl": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf"
+            },
+            {
+              "name": "R&D",
+              "nameZh": "研发",
+              "valueBn": 7.67,
+              "valueFormat": "negative-parentheses",
+              "sourceUrl": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf"
+            }
+          ],
+          "parserFinancialFieldSources": {
+            "revenueBn": "official",
+            "operatingIncomeBn": "official",
+            "netIncomeBn": "official"
+          },
+          "parserFinancialValidation": {
+            "status": "high",
+            "sourceUrl": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf"
+          },
+          "automaticEarnings": {
+            "filingDate": "2026-08-28",
+            "accession": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf",
+            "form": "official-ir-release"
+          },
           "officialRevenueSegments": [
             {
               "name": "Core local commerce",
               "nameZh": "核心本地商业",
               "memberKey": "corelocalcommerce",
-              "valueBn": 64.063,
-              "yoyPct": -0.41,
-              "qoqPct": null,
-              "mixPct": 70.4,
-              "mixYoyDeltaPp": -3.9,
-              "sourceUrl": "https://media-meituan.todayir.com/202606011753301715997254_en.pdf",
-              "sourceForm": null,
-              "filingDate": "2026-06-01",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": null,
-              "validationNotes": null
+              "valueBn": 71.530555,
+              "sourceUrl": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf",
+              "filingDate": "2026-08-28",
+              "sourceForm": "official current-period disclosure",
+              "mixPct": 68.4,
+              "qoqPct": 11.66,
+              "yoyPct": 9.46,
+              "mixYoyDeltaPp": -2.8
             },
             {
               "name": "New initiatives",
               "nameZh": "新业务",
               "memberKey": "newinitiatives",
-              "valueBn": 26.976,
-              "yoyPct": 21.34,
-              "qoqPct": null,
-              "mixPct": 29.6,
-              "mixYoyDeltaPp": 3.9,
-              "sourceUrl": "https://media-meituan.todayir.com/202606011753301715997254_en.pdf",
-              "sourceForm": null,
-              "filingDate": "2026-06-01",
-              "supportLines": null,
-              "supportLinesZh": null,
-              "metricMode": null,
-              "validationEligible": null,
-              "validationNotes": null
+              "valueBn": 33.112489,
+              "sourceUrl": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf",
+              "filingDate": "2026-08-28",
+              "sourceForm": "official current-period disclosure",
+              "mixPct": 31.6,
+              "qoqPct": 22.75,
+              "yoyPct": 24.99,
+              "mixYoyDeltaPp": 2.8
             }
           ],
-          "officialOpexBreakdown": [
+          "revenueClassificationSource": "official-complete-table",
+          "revenueClassificationSourceUrl": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf",
+          "chartCompletionAttempts": [
             {
-              "name": "Selling and marketing",
-              "nameZh": "销售及市场费用",
-              "memberKey": "sellingandmarketing",
-              "valueBn": 22.969,
-              "sourceUrl": "https://media-meituan.todayir.com/202606011753301715997254_en.pdf",
-              "sourceForm": "QuarterlyResultsPDF",
-              "filingDate": "2026-06-01",
-              "validationEligible": null,
-              "validationNotes": null
-            },
-            {
-              "name": "Research and development",
-              "nameZh": "研发费用",
-              "memberKey": "researchanddevelopment",
-              "valueBn": 7.043,
-              "sourceUrl": "https://media-meituan.todayir.com/202606011753301715997254_en.pdf",
-              "sourceForm": "QuarterlyResultsPDF",
-              "filingDate": "2026-06-01",
-              "validationEligible": null,
-              "validationNotes": null
-            },
-            {
-              "name": "General and administrative",
-              "nameZh": "管理费用",
-              "memberKey": "generalandadministrative",
-              "valueBn": 2.938,
-              "sourceUrl": "https://media-meituan.todayir.com/202606011753301715997254_en.pdf",
-              "sourceForm": "QuarterlyResultsPDF",
-              "filingDate": "2026-06-01",
-              "validationEligible": null,
-              "validationNotes": null
-            },
-            {
-              "name": "Impairment losses",
-              "nameZh": "减值损失",
-              "memberKey": "impairmentlosses",
-              "valueBn": 0.481,
-              "sourceUrl": "https://media-meituan.todayir.com/202606011753301715997254_en.pdf",
-              "sourceForm": "QuarterlyResultsPDF",
-              "filingDate": "2026-06-01",
-              "validationEligible": null,
-              "validationNotes": null
+              "sourceUrl": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf",
+              "remainingIssues": []
             }
           ],
-          "revenueQoqPct": -1.148,
-          "revenueYoyPct": 5.178,
           "displayCurrency": "USD",
-          "displayScaleFactor": 0.14782,
+          "displayScaleFactor": 0.14879,
           "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
           "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "sankeyStructureContinuity": {
+            "sourceQuarter": "2026Q1",
+            "fields": [
+              "officialRevenueSegments"
+            ],
+            "rule": "same-normalized-category-set"
+          },
           "chartQuality": {
             "version": 3,
-            "quarter": "2026Q1",
+            "quarter": "2026Q2",
             "status": "ready",
             "issues": [],
             "requiredMarginComparisons": [
@@ -22780,282 +22123,11 @@
               "newinitiatives"
             ],
             "requiredDetailMembers": {}
-          },
-          "grossMarginPct": 28.526236,
-          "grossMarginYoyDeltaPp": -8.924,
-          "operatingMarginPct": -7.106844,
-          "operatingMarginYoyDeltaPp": -18.387,
-          "profitMarginPct": -7.498984,
-          "profitMarginYoyDeltaPp": -19.119
+          }
         }
       },
       "statementPresets": {},
-      "officialRevenueStructureHistory": {
-        "source": "manual-official-quarterly-results",
-        "quarters": {
-          "2026Q1": {
-            "segments": [
-              {
-                "name": "Core local commerce",
-                "nameZh": "核心本地商业",
-                "memberKey": "corelocalcommerce",
-                "valueBn": 64.063,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://media-meituan.todayir.com/202606011753301715997254_en.pdf",
-                "sourceForm": null,
-                "filingDate": "2026-06-01",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": null,
-                "validationNotes": null
-              },
-              {
-                "name": "New initiatives",
-                "nameZh": "新业务",
-                "memberKey": "newinitiatives",
-                "valueBn": 26.976,
-                "yoyPct": null,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://media-meituan.todayir.com/202606011753301715997254_en.pdf",
-                "sourceForm": null,
-                "filingDate": "2026-06-01",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": null,
-                "validationNotes": null
-              }
-            ],
-            "opexBreakdown": [
-              {
-                "name": "Selling and marketing",
-                "nameZh": "销售及市场费用",
-                "memberKey": "sellingandmarketing",
-                "valueBn": 22.969,
-                "filingDate": "2026-06-01",
-                "sourceUrl": "https://media-meituan.todayir.com/202606011753301715997254_en.pdf",
-                "sourceForm": "QuarterlyResultsPDF"
-              },
-              {
-                "name": "Research and development",
-                "nameZh": "研发费用",
-                "memberKey": "researchanddevelopment",
-                "valueBn": 7.043,
-                "filingDate": "2026-06-01",
-                "sourceUrl": "https://media-meituan.todayir.com/202606011753301715997254_en.pdf",
-                "sourceForm": "QuarterlyResultsPDF"
-              },
-              {
-                "name": "General and administrative",
-                "nameZh": "管理费用",
-                "memberKey": "generalandadministrative",
-                "valueBn": 2.938,
-                "filingDate": "2026-06-01",
-                "sourceUrl": "https://media-meituan.todayir.com/202606011753301715997254_en.pdf",
-                "sourceForm": "QuarterlyResultsPDF"
-              },
-              {
-                "name": "Impairment losses",
-                "nameZh": "减值损失",
-                "memberKey": "impairmentlosses",
-                "valueBn": 0.481,
-                "filingDate": "2026-06-01",
-                "sourceUrl": "https://media-meituan.todayir.com/202606011753301715997254_en.pdf",
-                "sourceForm": "QuarterlyResultsPDF"
-              }
-            ]
-          }
-        },
-        "filingsUsed": [
-          {
-            "title": "Announcement of the Results for the Three Months ended September 30, 2018",
-            "quarter": "2018Q3",
-            "filingDate": "2018-11-22",
-            "pdf": "https://media-meituan.todayir.com/201905141506231777650200_en.pdf"
-          },
-          {
-            "title": "Announcement of the Results for the Year ended December 31, 2018",
-            "quarter": "2018Q4",
-            "filingDate": "2019-03-11",
-            "pdf": "https://media-meituan.todayir.com/201905141517061729403688_en.pdf"
-          },
-          {
-            "title": "Announcement of the Results for the Three Months ended March 31, 2019",
-            "quarter": "2019Q1",
-            "filingDate": "2019-05-23",
-            "pdf": "https://media-meituan.todayir.com/201905231646431775306930_en.pdf"
-          },
-          {
-            "title": "Announcement of the Results for the Three and Six Months ended June 30, 2019",
-            "quarter": "2019Q2",
-            "filingDate": "2019-09-20",
-            "pdf": "https://media-meituan.todayir.com/201909201511371711838880_en.pdf"
-          },
-          {
-            "title": "Announcement of the Results for the Three Months ended September 30, 2019",
-            "quarter": "2019Q3",
-            "filingDate": "2019-11-21",
-            "pdf": "https://media-meituan.todayir.com/201911211821501767237030_en.pdf"
-          },
-          {
-            "title": "Announcement of the Results for the Year ended December 31, 2019",
-            "quarter": "2019Q4",
-            "filingDate": "2020-03-30",
-            "pdf": "https://media-meituan.todayir.com/202003301717261783547356_en.pdf"
-          },
-          {
-            "title": "Announcement of the Results for the Three Months ended March 31, 2020",
-            "quarter": "2020Q1",
-            "filingDate": "2020-05-25",
-            "pdf": "https://media-meituan.todayir.com/202005251710561736871874_en.pdf"
-          },
-          {
-            "title": "Announcement of the Results for the Three and Six Months ended June 30, 2020",
-            "quarter": "2020Q2",
-            "filingDate": "2020-08-21",
-            "pdf": "https://media-meituan.todayir.com/202008211704561761848748_en.pdf"
-          },
-          {
-            "title": "Announcement of the Results for the Three Months ended September 30, 2020",
-            "quarter": "2020Q3",
-            "filingDate": "2020-11-30",
-            "pdf": "https://media-meituan.todayir.com/202101071144241709488301_en.pdf"
-          },
-          {
-            "title": "Announcement of the Results for the Year ended December 31, 2020",
-            "quarter": "2020Q4",
-            "filingDate": "2021-03-26",
-            "pdf": "https://media-meituan.todayir.com/202103261701041773929787_en.pdf"
-          },
-          {
-            "title": "Announcement of the Results for the Three Months ended March 31, 2021",
-            "quarter": "2021Q1",
-            "filingDate": "2021-05-28",
-            "pdf": "https://media-meituan.todayir.com/202105281712591732610662_en.pdf"
-          },
-          {
-            "title": "Announcement of the Results for the Three and Six Months ended June 30, 2021",
-            "quarter": "2021Q2",
-            "filingDate": "2021-08-30",
-            "pdf": "https://media-meituan.todayir.com/202108301719371776436174_en.pdf"
-          },
-          {
-            "title": "Announcement of the Results for the Three Months ended September 30, 2021",
-            "quarter": "2021Q3",
-            "filingDate": "2021-11-26",
-            "pdf": "https://media-meituan.todayir.com/202111301644161764621862_en.pdf"
-          },
-          {
-            "title": "Announcement of the Results for the Year ended December 31, 2021",
-            "quarter": "2021Q4",
-            "filingDate": "2022-03-25",
-            "pdf": "https://media-meituan.todayir.com/202203310945131741673886_en.pdf"
-          },
-          {
-            "title": "Announcement of the Results for the Three Months ended March 31, 2022",
-            "quarter": "2022Q1",
-            "filingDate": "2022-06-02",
-            "pdf": "https://media-meituan.todayir.com/202206021833371703258715_en.pdf"
-          },
-          {
-            "title": "Announcement of the Results for the Three and Six Months ended June 30, 2022",
-            "quarter": "2022Q2",
-            "filingDate": "2022-08-26",
-            "pdf": "https://media-meituan.todayir.com/202211091216511722991004_en.pdf"
-          },
-          {
-            "title": "Announcement of the Results for the Three Months ended September 30, 2022",
-            "quarter": "2022Q3",
-            "filingDate": "2022-11-25",
-            "pdf": "https://media-meituan.todayir.com/202211251751381717697019_en.pdf"
-          },
-          {
-            "title": "Announcement of the Results for the Year ended December 31, 2022",
-            "quarter": "2022Q4",
-            "filingDate": "2023-03-24",
-            "pdf": "https://media-meituan.todayir.com/202303241705151750494665_en.pdf"
-          },
-          {
-            "title": "Announcement of the Results for the Three Months ended March 31, 2023",
-            "quarter": "2023Q1",
-            "filingDate": "2023-05-25",
-            "pdf": "https://media-meituan.todayir.com/202305251729431742504632_en.pdf"
-          },
-          {
-            "title": "Announcement of the Results for the Three and Six Months ended June 30, 2023",
-            "quarter": "2023Q2",
-            "filingDate": "2023-08-24",
-            "pdf": "https://media-meituan.todayir.com/202308241711521792649756_en.pdf"
-          },
-          {
-            "title": "Announcement of the Results for the Three Months ended September 30, 2023",
-            "quarter": "2023Q3",
-            "filingDate": "2023-11-28",
-            "pdf": "https://media-meituan.todayir.com/202311281711141778683369_en.pdf"
-          },
-          {
-            "title": "Announcement of the Results for the Year ended December 31, 2023",
-            "quarter": "2023Q4",
-            "filingDate": "2024-03-22",
-            "pdf": "https://media-meituan.todayir.com/202403221654401765350700_en.pdf"
-          },
-          {
-            "title": "Announcement of the Results for the Three Months ended March 31, 2024",
-            "quarter": "2024Q1",
-            "filingDate": "2024-06-06",
-            "pdf": "https://media-meituan.todayir.com/202406061707351762491804_en.pdf"
-          },
-          {
-            "title": "Announcement of the Results for the Three and Six Months ended June 30, 2024",
-            "quarter": "2024Q2",
-            "filingDate": "2024-08-28",
-            "pdf": "https://media-meituan.todayir.com/202408281643241773620253_en.pdf"
-          },
-          {
-            "title": "Announcement of the Results for the Three Months ended September 30, 2024",
-            "quarter": "2024Q3",
-            "filingDate": "2024-11-29",
-            "pdf": "https://media-meituan.todayir.com/202411291732521746780008_en.pdf"
-          },
-          {
-            "title": "Announcement of the Results for the Year ended December 31, 2024",
-            "quarter": "2024Q4",
-            "filingDate": "2025-03-25",
-            "pdf": "https://media-meituan.todayir.com/202503251145151770472338_en.pdf"
-          },
-          {
-            "title": "Announcement of the Results for the Three Months ended March 31, 2025",
-            "quarter": "2025Q1",
-            "filingDate": "2025-05-26",
-            "pdf": "https://media-meituan.todayir.com/202505261803551741269344_en.pdf"
-          },
-          {
-            "title": "Announcement of the Results for the Three and Six Months ended June 30, 2025",
-            "quarter": "2025Q2",
-            "filingDate": "2025-08-27",
-            "pdf": "https://media-meituan.todayir.com/202508281529101776683541_en.pdf"
-          },
-          {
-            "title": "Announcement of the Results for the Three Months ended September 30, 2025",
-            "quarter": "2025Q3",
-            "filingDate": "2025-11-28",
-            "pdf": "https://media-meituan.todayir.com/202511281719181795180056_en.pdf"
-          },
-          {
-            "title": "Meituan First Quarter 2026 Results",
-            "quarter": "2026Q1",
-            "filingDate": "2026-06-01",
-            "pdf": "https://media-meituan.todayir.com/202606011753301715997254_en.pdf"
-          }
-        ],
-        "errors": []
-      },
+      "officialRevenueStructureHistory": {},
       "officialSegmentHistory": {}
     },
     {

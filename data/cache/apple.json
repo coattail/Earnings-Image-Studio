@@ -9417,61 +9417,33 @@
       "profitMarginPct": 26.827,
       "effectiveTaxRatePct": 15.01,
       "revenueQoqPct": 4.625,
-      "grossMarginYoyDeltaPp": 0.71,
-      "operatingMarginYoyDeltaPp": -0.52,
-      "profitMarginYoyDeltaPp": 0.02,
+      "grossMarginYoyDeltaPp": 0.709,
+      "operatingMarginYoyDeltaPp": -0.522,
+      "profitMarginYoyDeltaPp": 0.022,
       "officialOpexBreakdown": [
         {
-          "name": "Sales and Marketing",
-          "nameZh": "销售与营销",
-          "memberKey": "salesandmarketing",
-          "valueBn": 5.502
+          "name": "Selling, general and administrative",
+          "nameZh": "销售、一般及行政",
+          "valueBn": 7.459,
+          "valueFormat": "negative-parentheses",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000024/a8-kex991q4202609262026.htm",
+          "filingDate": "2026-11-02"
         },
         {
-          "name": "Research and Development",
+          "name": "R&D",
           "nameZh": "研发",
-          "memberKey": "researchanddevelopment",
-          "valueBn": 11.73
-        },
-        {
-          "name": "General and Administrative",
-          "nameZh": "一般及行政",
-          "memberKey": "generalandadministrative",
-          "valueBn": 1.957
+          "valueBn": 11.73,
+          "valueFormat": "negative-parentheses",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000024/a8-kex991q4202609262026.htm",
+          "filingDate": "2026-11-02"
         }
       ],
-      "statementFilingDate": "2026-09-26",
-      "statementSourceUrl": "https://stockanalysis.com/stocks/aapl/financials/?p=quarterly",
+      "statementFilingDate": "2026-11-03",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm",
       "parserFinancialFieldSources": {
         "revenueBn": "official",
-        "revenueYoyPct": "official",
-        "revenueQoqPct": "official",
-        "costOfRevenueBn": "official",
-        "grossProfitBn": "official",
-        "grossMarginPct": "official",
-        "grossMarginYoyDeltaPp": "official",
-        "sgnaBn": "official",
-        "rndBn": "official",
-        "operatingExpensesBn": "official",
         "operatingIncomeBn": "official",
-        "operatingMarginPct": "official",
-        "operatingMarginYoyDeltaPp": "official",
-        "nonOperatingBn": "official",
-        "pretaxIncomeBn": "official",
-        "taxBn": "official",
-        "netIncomeBn": "official",
-        "netIncomeYoyPct": "official",
-        "profitMarginPct": "official",
-        "profitMarginYoyDeltaPp": "official",
-        "effectiveTaxRatePct": "official",
-        "calendarQuarter": "official",
-        "periodEnd": "official",
-        "fiscalYear": "official",
-        "fiscalQuarter": "official",
-        "fiscalLabel": "official",
-        "statementCurrency": "official",
-        "statementFilingDate": "stockanalysis",
-        "statementSourceUrl": "stockanalysis"
+        "netIncomeBn": "official"
       },
       "parserFinancialCandidateCounts": {
         "revenueBn": 1,
@@ -9498,15 +9470,8 @@
         "effectiveTaxRatePct": 1
       },
       "parserFinancialValidation": {
-        "version": "financial-validation-v1",
         "status": "high",
-        "confidenceScore": 1.0,
-        "completenessScore": 1.0,
-        "consistencyScore": 1.0,
-        "checksRun": 8,
-        "checksPassed": 8,
-        "issueCount": 0,
-        "issues": []
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000024/a8-kex991q4202609262026.htm"
       },
       "officialRevenueSegments": [
         {
@@ -9743,7 +9708,26 @@
             "wearables"
           ]
         }
-      }
+      },
+      "statementSource": "official-earnings-release",
+      "statementSpanQuarters": 1,
+      "statementValueMode": "reported",
+      "automaticEarnings": {
+        "filingDate": "2026-11-03",
+        "accession": "0000320193-26-000026",
+        "form": "10-K"
+      },
+      "chartCompletionAttempts": [
+        {
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm",
+          "remainingIssues": [
+            "revenue classifications do not reconcile to total revenue",
+            "revenue detail does not reconcile for products",
+            "revenue detail does not reconcile for products"
+          ]
+        }
+      ],
+      "statementAccession": "0000320193-26-000026"
     }
   },
   "statementSource": "official-sec-companyfacts",

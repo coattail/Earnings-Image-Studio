@@ -17,5 +17,9 @@ class ReleaseWindowTests(unittest.TestCase):
         self.assertTrue(release_window({'nextEarningsDate':'2026-10-05'},self.payload(['2026-08-20']),date(2026,10,1))[0])
     def test_missing_history_is_discovered_instead_of_silently_ignored(self):
         self.assertTrue(release_window({}, {},date(2026,11,3))[0])
+    def test_quarter_end_is_not_a_vendor_publication_date(self):
+        payload={'financials':{'2026Q3':{'periodEnd':'2026-09-26','statementFilingDate':'2026-09-26',
+            'officialRevenueSegments':[{'filingDate':'2026-11-02','sourceUrl':'https://www.sec.gov/current'}]}}}
+        self.assertEqual(release_window({},payload,date(2026,11,3)),(True,'recent-release-enrichment-window'))
 
 if __name__=='__main__':unittest.main()

@@ -10,9 +10,16 @@ def release_window(company,payload,today=None):
     today=today or date.today()
     dates=[]
     for entry in (payload or {}).get('financials',{}).values():
-        filed=day((entry.get('automaticEarnings')or{}).get('filingDate')or entry.get('statementFilingDate'))
+        marker=entry.get('automaticEarnings')or{}
+        filed=day(marker.get('filingDate')or entry.get('statementFilingDate'))
         end=day(entry.get('periodEnd'))
-        if filed and filed<=today and (not end or end<=filed):dates.append(filed)
+        # Vendors often substitute the quarter end for a missing publication
+        # date. A verified category disclosure may still supply the real date.
+        if filed and filed<=today and (not end or end<filed or marker):dates.append(filed)
+        for field in ('officialRevenueSegments','officialRevenueDetailGroups','officialCostBreakdown','officialOpexBreakdown'):
+            for row in entry.get(field)or[]:
+                published=day(row.get('filingDate'))
+                if row.get('sourceUrl') and published and published<=today and (not end or end<published):dates.append(published)
     explicit=day(company.get('nextEarningsDate')or (payload or {}).get('nextEarningsDate'))
     if explicit and explicit-timedelta(days=14)<=today<=explicit+timedelta(days=35):return True,'announced-release-window'
     if not dates:return True,'first-release-discovery'

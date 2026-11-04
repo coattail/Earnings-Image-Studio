@@ -22,7 +22,7 @@ from statement_periods import finalize_period_entries
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 CACHE_DIR = ROOT_DIR / "data" / "cache" / "generic-filing-tables"
-GENERIC_FILING_TABLE_CACHE_VERSION = "20261103-v2"
+GENERIC_FILING_TABLE_CACHE_VERSION = "20261104-v3"
 MIN_FILING_DATE = "2018-01-01"
 SUPPORTED_FORMS = {"10-Q", "10-K", "20-F", "6-K", "8-K"}
 MAX_FILINGS_TO_SCAN = 28
@@ -50,6 +50,9 @@ ROW_ALIASES: dict[str, tuple[str, ...]] = {
         "销售收入",
     ),
     "costOfRevenue": (
+        "totalcostofrevenue",
+        "totalcostofrevenues",
+        "totalcostofsales",
         "costofrevenue",
         "costofrevenues",
         "costofsales",
@@ -64,6 +67,8 @@ ROW_ALIASES: dict[str, tuple[str, ...]] = {
     ),
     "grossProfit": ("grossprofit", "grossmargin", "毛利", "毛利润", "毛利额"),
     "sgna": (
+        "marketinggeneralandadministrative",
+        "marketinggeneralandadministrativeexpenses",
         "sellinggeneralandadministrative",
         "sellinggeneraladministrative",
         "sellinggeneralandadministrativeexpenses",
@@ -125,6 +130,9 @@ ROW_ALIASES: dict[str, tuple[str, ...]] = {
         "经营利润",
     ),
     "pretaxIncome": (
+        "profitbeforeincometax",
+        "profitlossbeforeincometax",
+        "incomefromcontinuingoperationsbeforeincometaxes",
         "incomebeforetaxes",
         "incomebeforeincometaxes",
         "incomebeforetax",
@@ -134,6 +142,7 @@ ROW_ALIASES: dict[str, tuple[str, ...]] = {
         "税前利润",
     ),
     "tax": (
+        "incometaxprovision",
         "incometaxexpense",
         "incometaxexpenses",
         "provisionforincometaxes",
@@ -142,6 +151,10 @@ ROW_ALIASES: dict[str, tuple[str, ...]] = {
         "所得税费用",
     ),
     "netIncome": (
+        "profitfortheperiod",
+        "profitlossfortheperiod",
+        "profitfortheyear",
+        "profitlossfortheyear",
         "attributabletoownersofparent",
         "profitlossaftertax",
         "netincomeattributabletocommonstockholders",
@@ -289,6 +302,36 @@ def _period_column(year: int, quarter_number: int, *, span: int = 1) -> dict[str
     }
 
 
+def _mark_cumulative_columns(columns, rows):
+    normalized = _normalize_table_key(' '.join(' '.join(row) for row in rows[:6]))
+    if len(columns) >= 2 and any(token in normalized for token in ('threemonthsended', 'quarterended', '13weeksended', 'thirteenweeksended', '12weeksended', 'twelveweeksended')):
+        span = next((span for token, span in [('sixmonthsended', 2), ('ninemonthsended', 3), ('twelvemonthsended', 4), ('yearended', 4)] if token in normalized), None)
+        if span:
+            boundary = next((i for i, column in enumerate(columns)
+                             if column['periodEnd'] in {c['periodEnd'] for c in columns[:i]}), len(columns) // 2)
+            for column in columns[boundary:]:
+                column.update(statementSpanQuarters=span, statementValueMode='cumulative')
+    return columns
+
+
+def _native_currency_rows(rows, currency):
+    """Drop explicitly labelled convenience translations before reading dates."""
+    symbols = {'CNY': {'RMB', 'CNY'}, 'USD': {'USD', 'US$'}, 'EUR': {'EUR'}, 'HKD': {'HKD', 'HK$'}}
+    known = set().union(*symbols.values())
+    native = symbols.get(currency, {currency})
+    header = next((row for row in rows[:8] if len(row) >= 3 and all(str(c).strip() in known for c in row)), None)
+    if not header or not any(str(c).strip() in native for c in header) or all(str(c).strip() in native for c in header):
+        return rows
+    keep = [i for i,c in enumerate(header) if str(c).strip() in native]
+    header_position = rows.index(header)
+    projected = []
+    for position, row in enumerate(rows):
+        if position <= header_position and len(row) == len(header): projected.append([row[i] for i in keep])
+        elif len(row) == len(header) + 1: projected.append([row[0], *[row[i+1] for i in keep]])
+        else: projected.append(row)
+    return projected
+
+
 def _extract_quarter_columns(rows: list[list[str]]) -> list[dict[str, Any]]:
     columns: list[dict[str, Any]] = []
     header_scan_rows = rows[:6]
@@ -371,9 +414,10 @@ def _extract_quarter_columns(rows: list[list[str]]) -> list[dict[str, Any]]:
         dates = header_scan_rows[i + 1]
         years = [str(cell).strip() for cell in header_scan_rows[i + 2] if re.fullmatch(r"20\d{2}", str(cell).strip())]
         if dates and len(years) >= 2:
-            parsed_columns = [_quarter_from_date_label(dates[0], year) for year in years[:2]]
+            paired_dates = dates if len(dates) == len(years) else [dates[0]] * len(years)
+            parsed_columns = [_quarter_from_date_label(day, year) for day, year in zip(paired_dates, years)]
             if all(parsed_columns):
-                return [{**_period_column(y, q), "periodEnd": end} for y, q, end in parsed_columns]
+                return _mark_cumulative_columns([{**_period_column(y, q), "periodEnd": end} for y, q, end in parsed_columns], rows)
 
     header_text = " ".join(" ".join(row) for row in header_scan_rows)
     chinese_span_map = {"3": 1, "三": 1, "6": 2, "六": 2, "9": 3, "九": 3, "12": 4, "十二": 4}
@@ -395,14 +439,7 @@ def _extract_quarter_columns(rows: list[list[str]]) -> list[dict[str, Any]]:
             columns.append({**_period_column(year, quarter_number), "periodEnd": period_end})
     # Headers with full dates in each cell may mix quarterly and YTD columns.
     # Keep the latter cumulative so annual amounts cannot replace the quarter.
-    normalized_header = _normalize_table_key(header_text)
-    if len(columns) >= 4 and any(token in normalized_header for token in ("threemonthsended", "quarterended", "13weeksended", "thirteenweeksended", "12weeksended", "twelveweeksended")):
-        cumulative_span = next((span for token, span in [("sixmonthsended", 2), ("ninemonthsended", 3), ("twelvemonthsended", 4), ("yearended", 4)] if token in normalized_header), None)
-        if cumulative_span:
-            for column in columns[len(columns) // 2:]:
-                column["statementSpanQuarters"] = cumulative_span
-                column["statementValueMode"] = "cumulative"
-    return columns
+    return _mark_cumulative_columns(columns, rows)
 
 
 def _row_numeric_series(row: list[str] | None, expected_count: int, *, absolute: bool = False) -> list[float]:
@@ -493,6 +530,7 @@ def _merge_entry(existing: dict[str, Any] | None, incoming: dict[str, Any]) -> d
 def _period_entries_from_table(rows: list[list[str]], currency: str, source_url: str, filing_date: str) -> list[dict[str, Any]]:
     if len(rows) < 3:
         return []
+    rows = _native_currency_rows(rows, currency)
     quarter_columns = _extract_quarter_columns(rows)
     if not quarter_columns:
         return []
@@ -536,6 +574,9 @@ def _period_entries_from_table(rows: list[list[str]], currency: str, source_url:
     sgna_row = _find_row(row_map, "sgna")
     sales_marketing_row = _find_row(row_map, "salesAndMarketing")
     general_admin_row = _find_row(row_map, "generalAndAdministrative")
+    if sgna_row is not None:
+        if sales_marketing_row is sgna_row: sales_marketing_row = None
+        if general_admin_row is sgna_row: general_admin_row = None
     rnd_row = _find_row(row_map, "rnd")
     fulfillment_row = _find_row(row_map, "fulfillment")
     taxes_surcharges_row = _find_row(row_map, "taxesAndSurcharges")
@@ -558,7 +599,8 @@ def _period_entries_from_table(rows: list[list[str]], currency: str, source_url:
     operating_expenses_series = _row_numeric_series(operating_expenses_row, expected_count, absolute=True)
     operating_income_series = _row_numeric_series(operating_income_row, expected_count)
     pretax_series = _row_numeric_series(pretax_row, expected_count)
-    tax_series = _row_numeric_series(tax_row, expected_count, absolute=True)
+    tax_series = _row_numeric_series(tax_row, expected_count,
+        absolute=not bool(tax_row and re.search(r'benefit|credit', str(tax_row[0]), re.I)))
     net_income_series = _row_numeric_series(net_income_row, expected_count)
 
     for index, column in enumerate(quarter_columns):
@@ -618,6 +660,9 @@ def _period_entries_from_table(rows: list[list[str]], currency: str, source_url:
         entry["statementValueMode"] = "direct" if statement_span_quarters == 1 else "cumulative"
 
         opex_items: list[dict[str, Any]] = []
+        if sgna_row is not None and sales_marketing_raw is None and general_admin_raw is None and sgna_raw is not None:
+            opex_items.append(_make_breakdown_item('Selling, general and administrative', '销售、一般及行政',
+                sgna_raw * scale, value_format='negative-parentheses', source_url=source_url))
         for raw_name, display_name, display_name_zh, value_format in OPTIONAL_BREAKDOWN_ROWS:
             raw_value = {
                 "salesAndMarketing": sales_marketing_raw,

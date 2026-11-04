@@ -46,7 +46,8 @@
     "2025Q3",
     "2025Q4",
     "2026Q1",
-    "2026Q2"
+    "2026Q2",
+    "2026Q3"
   ],
   "financials": {
     "2018Q1": {
@@ -7097,6 +7098,157 @@
         ],
         "requiredDetailMembers": {}
       }
+    },
+    "2026Q3": {
+      "calendarQuarter": "2026Q3",
+      "periodEnd": "2026-09-26",
+      "fiscalYear": "2026",
+      "fiscalQuarter": "Q3",
+      "fiscalLabel": "FY2026 Q3",
+      "statementCurrency": "USD",
+      "revenueBn": 13.377,
+      "revenueYoyPct": 44.679,
+      "costOfRevenueBn": 6.167,
+      "grossProfitBn": 7.21,
+      "sgnaBn": 1.298,
+      "rndBn": 2.803,
+      "otherOpexBn": 0.277,
+      "operatingExpensesBn": 4.378,
+      "operatingIncomeBn": 2.832,
+      "nonOperatingBn": -0.964,
+      "pretaxIncomeBn": 1.868,
+      "taxBn": -0.555,
+      "netIncomeBn": 2.428,
+      "netIncomeYoyPct": null,
+      "grossMarginPct": 53.898,
+      "operatingMarginPct": 21.171,
+      "profitMarginPct": 18.151,
+      "effectiveTaxRatePct": -29.711,
+      "revenueQoqPct": 15.959,
+      "grossMarginYoyDeltaPp": 2.2,
+      "operatingMarginYoyDeltaPp": 7.435,
+      "profitMarginYoyDeltaPp": 4.707,
+      "statementSource": "official-earnings-release",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000188/q32026991.htm",
+      "statementFilingDate": "2026-11-03",
+      "statementSpanQuarters": 1,
+      "statementValueMode": "reported",
+      "officialOpexBreakdown": [
+        {
+          "name": "R&D",
+          "nameZh": "研发",
+          "valueBn": 2.803,
+          "valueFormat": "negative-parentheses",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000188/q32026991.htm"
+        }
+      ],
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "operatingIncomeBn": "official",
+        "netIncomeBn": "official"
+      },
+      "parserFinancialValidation": {
+        "status": "high",
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000188/q32026991.htm"
+      },
+      "automaticEarnings": {
+        "filingDate": "2026-11-03",
+        "accession": "0000002488-26-000188",
+        "form": "8-K"
+      },
+      "officialRevenueSegments": [
+        {
+          "name": "Data Center",
+          "nameZh": "数据中心",
+          "memberKey": "datacenter",
+          "valueBn": 8.546,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000188/q32026991.htm",
+          "filingDate": "2026-11-03",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 63.9,
+          "qoqPct": 27.21,
+          "yoyPct": 96.87,
+          "mixYoyDeltaPp": 16.9
+        },
+        {
+          "name": "Client",
+          "nameZh": "客户端",
+          "memberKey": "client",
+          "valueBn": 2.949,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000188/q32026991.htm",
+          "filingDate": "2026-11-03",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 22.0,
+          "qoqPct": -3.69,
+          "yoyPct": 7.24,
+          "mixYoyDeltaPp": -7.7
+        },
+        {
+          "name": "Gaming",
+          "nameZh": "游戏",
+          "memberKey": "gaming",
+          "valueBn": 0.773,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000188/q32026991.htm",
+          "filingDate": "2026-11-03",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 5.8,
+          "qoqPct": -0.77,
+          "yoyPct": -40.45,
+          "mixYoyDeltaPp": -8.3
+        },
+        {
+          "name": "Embedded",
+          "nameZh": "嵌入式",
+          "memberKey": "embedded",
+          "valueBn": 1.109,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000188/q32026991.htm",
+          "filingDate": "2026-11-03",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 8.3,
+          "qoqPct": 13.51,
+          "yoyPct": 29.4,
+          "mixYoyDeltaPp": -1.0
+        }
+      ],
+      "revenueClassificationSourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000188/q32026991.htm",
+      "revenueClassificationSource": "official-complete-table",
+      "chartCompletionAttempts": [
+        {
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000188/q32026991.htm",
+          "remainingIssues": []
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "officialRevenueStyle": "semiconductor-segments",
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2026Q2",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "chartQuality": {
+        "version": 3,
+        "quarter": "2026Q3",
+        "status": "ready",
+        "issues": [],
+        "requiredMarginComparisons": [
+          "grossMarginYoyDeltaPp",
+          "operatingMarginYoyDeltaPp",
+          "profitMarginYoyDeltaPp"
+        ],
+        "requiredDetailParents": [],
+        "requiredSegmentKeys": [
+          "client",
+          "datacenter",
+          "embedded",
+          "gaming"
+        ],
+        "requiredDetailMembers": {}
+      }
     }
   },
   "statementSource": "stockanalysis-financials+field-reconciled",
@@ -9569,7 +9721,7 @@
       "overallConfidenceScore": 0.9611,
       "financialConfidenceScore": 0.9401,
       "structuralConfidenceScore": 1.0,
-      "revenueSegmentChecks": 34,
+      "revenueSegmentChecks": 35,
       "revenueSegmentMismatchCount": 0,
       "revenueSegmentSkippedChecks": 0,
       "detailGroupChecks": 0,
@@ -12994,28 +13146,28 @@
   },
   "statementPresets": {},
   "coverage": {
-    "quarterCount": 34,
+    "quarterCount": 35,
     "pixelReplicaQuarterCount": 0,
     "hasPixelReplica": false,
-    "officialFinancialQuarterCount": 34,
-    "officialSegmentQuarterCount": 34,
-    "officialExpenseQuarterCount": 1,
+    "officialFinancialQuarterCount": 35,
+    "officialSegmentQuarterCount": 35,
+    "officialExpenseQuarterCount": 2,
     "classification": {
       "status": "warning",
-      "latestQuarter": "2026Q2",
+      "latestQuarter": "2026Q3",
       "latestQuarterHasRevenueClassification": true,
       "latestQuarterHasExpenseClassification": true,
-      "latestRevenueClassificationQuarter": "2026Q2",
-      "latestExpenseClassificationQuarter": "2026Q2",
+      "latestRevenueClassificationQuarter": "2026Q3",
+      "latestExpenseClassificationQuarter": "2026Q3",
       "latestStructureHistoryQuarter": "2026Q2",
-      "revenueClassificationQuarterCount": 34,
-      "expenseClassificationQuarterCount": 1,
+      "revenueClassificationQuarterCount": 35,
+      "expenseClassificationQuarterCount": 2,
       "revenueClassificationCoverageRatio": 1.0,
-      "expenseClassificationCoverageRatio": 0.0294,
+      "expenseClassificationCoverageRatio": 0.0571,
       "latestRevenueClassificationLagQuarters": 0,
       "latestExpenseClassificationLagQuarters": 0,
       "warnings": [
-        "Expense classification history is sparse: 1 of 34 quarters have official expense breakdowns."
+        "Expense classification history is sparse: 2 of 35 quarters have official expense breakdowns."
       ],
       "blockers": [],
       "policy": {
@@ -13060,7 +13212,7 @@
         "overallConfidenceScore": 0.9611,
         "financialConfidenceScore": 0.9401,
         "structuralConfidenceScore": 1.0,
-        "revenueSegmentChecks": 34,
+        "revenueSegmentChecks": 35,
         "revenueSegmentMismatchCount": 0,
         "revenueSegmentSkippedChecks": 0,
         "detailGroupChecks": 0,

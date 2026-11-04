@@ -4,13 +4,14 @@ import json
 from pathlib import Path
 import time
 from urllib.request import Request, urlopen
+try:
+    from scripts.release_chart_quality import chart_fingerprint
+except ModuleNotFoundError:
+    from release_chart_quality import chart_fingerprint
 
 
 def fingerprint(data):
-    return {c["id"]: (c["quarters"][-1], *[c["financials"][c["quarters"][-1]].get(k)
-            for k in ("periodEnd", "statementFilingDate", "revenueBn", "operatingIncomeBn", "netIncomeBn",
-                      "officialRevenueSegments", "officialRevenueDetailGroups", "officialCostBreakdown", "officialOpexBreakdown", "revenueYoyPct", "revenueQoqPct", "chartQuality")])
-            for c in data["companies"] if c.get("quarters")}
+    return {c['id']: chart_fingerprint(c) for c in data['companies'] if c.get('financials')}
 
 
 def main():

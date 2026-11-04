@@ -30,6 +30,7 @@ ALIASES = {
     'noninterestincome': ['noninterest revenue','total noninterest income'],
     'globalwealthinvestmentmanagement': ['GWIM'],
     'pacific': ['Asia Pacific'],
+    'cloudmusic': ['NetEase Cloud Music'],
 }
 
 def numbers(cells):
@@ -52,7 +53,9 @@ def names(row):
     values = [row.get('name'), row.get('memberKey')]
     for value in list(values):
         values.extend(ALIASES.get(key(value), []))
-    return {key(v) for v in values if v}
+    labels = {key(v) for v in values if v}
+    # Issuers often append "Segment" to otherwise unchanged category names.
+    return labels | {v.removesuffix('segment') if v.endswith('segment') else v+'segment' for v in labels}
 
 def label_key(value):
     # Footnote references do not change the identity of a revenue category.
@@ -152,6 +155,34 @@ def enrich_pdf_partition(payload, content, url):
             if len(children)==5 and matches_total(sum(r['valueBn']for r in children),rows[0]['valueBn']):entry['officialRevenueDetailGroups']=children
             entry['revenueClassificationSource']='official-complete-table'
             return payload
+    # A transposed segment table can disclose its complete partition on one
+    # page. Read only the requested quarterly section and its declared units.
+    from datetime import date
+    from calendar import month_name
+    end = date.fromisoformat(entry['periodEnd']) if entry.get('periodEnd') else None
+    templates = previous_entry(payload, quarter).get('officialRevenueSegments') or []
+    for page in pages if end and templates else []:
+        text = re.sub(r'\s+', ' ', page)
+        heading = re.search(r'Three Months Ended\s+'+month_name[end.month]+r'\s+'+str(end.day)+r',?\s*'+str(end.year), text, re.I)
+        if not heading: continue
+        section = re.split(r'Three Months Ended', text[heading.end():], maxsplit=1, flags=re.I)[0]
+        unit = re.search(r'\b(thousands|millions|billions)\b', section[:1000], re.I)
+        total = re.search(r'Total\s+(?:net\s+)?revenues?\s*:?\s*', section, re.I)
+        if not unit or not total: continue
+        header = key(section[:total.start()])
+        positions = [min((header.find(n) for n in names(t) if n in header), default=-1) for t in templates]
+        if -1 in positions or len(set(positions)) != len(positions): continue
+        tokens = []
+        for token in section[total.end():].split():
+            if not re.fullmatch(r'[()$\d,\.\-—–]+', token): break
+            tokens.append(token)
+        values = numbers(tokens); scale = {'thousands':1e-6,'millions':.001,'billions':1}[unit[1].lower()]
+        if len(values) < len(templates)+1 or not matches_total(values[-1]*scale, entry.get('revenueBn')): continue
+        ordered = sorted(zip(positions, templates), key=lambda x:x[0])
+        result = [sourced(t, values[i]*scale, entry, url) for i,(_,t) in enumerate(ordered)]
+        if not matches_total(sum(r['valueBn'] for r in result), entry.get('revenueBn')): continue
+        entry.update(officialRevenueSegments=result, revenueClassificationSource='official-complete-table', revenueClassificationSourceUrl=url)
+        break
     return payload
 
 def table_candidates(html, entry):
@@ -176,7 +207,7 @@ def extract_partition(rows, templates, entry, url, *, allow_corporate=False, res
     mapped = [(label_key(r[0]), numbers(r[1:])) for r in rows if r]
     total_labels = {'revenue','revenues','totalrevenues','netsales','totalcompany',
                     'netsalesrevenue','totalsalesrevenues','netrevenues','consolidatedrevenue',
-                    'totalnetrevenue','totalrevenuenetofinterestexpense','total','consolidated'}
+                    'totalnetrevenue','totalnetrevenues','totalrevenuenetofinterestexpense','total','consolidated'}
     anchors = []
     for label, values in mapped:
         if label not in total_labels:

@@ -137,7 +137,7 @@ TOP30_COMPANIES: list[dict[str, Any]] = [
     {"id": "byd", "ticker": "BYDDY", "nameZh": "比亚迪", "nameEn": "BYD", "slug": "byddy", "rank": 34, "isAdr": True, "brand": {"primary": "#D71920", "secondary": "#111827", "accent": "#FEE2E2"}, "financialSource": "stockanalysis", "financialPath": "quote/hkg/1211"},
     {"id": "xiaomi", "ticker": "XIACY", "nameZh": "小米集团", "nameEn": "Xiaomi", "slug": "xiacy", "rank": 35, "isAdr": True, "brand": {"primary": "#FF6900", "secondary": "#111827", "accent": "#FFE7D6"}, "financialSource": "stockanalysis", "financialPath": "quote/hkg/1810"},
     {"id": "netease", "ticker": "NTES", "nameZh": "网易", "nameEn": "NetEase", "slug": "ntes", "rank": 36, "isAdr": True, "brand": {"primary": "#D71920", "secondary": "#111827", "accent": "#FEE2E2"}, "financialSource": "stockanalysis"},
-    {"id": "meituan", "ticker": "MPNGY", "nameZh": "美团", "nameEn": "Meituan", "slug": "mpngy", "rank": 37, "isAdr": True, "brand": {"primary": "#FFD100", "secondary": "#111827", "accent": "#FEF3C7"}, "financialSource": "stockanalysis", "financialPath": "quote/hkg/3690"},
+    {"id": "meituan", "ticker": "MPNGY", "nameZh": "美团", "nameEn": "Meituan", "slug": "mpngy", "rank": 37, "isAdr": True, "brand": {"primary": "#FFD100", "secondary": "#111827", "accent": "#FEF3C7"}, "financialSource": "stockanalysis", "financialPath": "quote/hkg/3690", "hkexStockId": 198419},
     {"id": "jd", "ticker": "JD", "nameZh": "京东集团", "nameEn": "JD.com", "slug": "jd", "rank": 38, "isAdr": True, "brand": {"primary": "#D70A0A", "secondary": "#111827", "accent": "#FEE2E2"}, "financialSource": "stockanalysis"},
     {
         "id": "samsung", "ticker": "005930", "nameZh": "三星电子", "nameEn": "Samsung Electronics", "slug": "005930", "rank": 39, "isAdr": False,
