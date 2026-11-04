@@ -130,6 +130,8 @@ ROW_ALIASES: dict[str, tuple[str, ...]] = {
         "经营利润",
     ),
     "pretaxIncome": (
+        "profitbeforeincometax",
+        "profitlossbeforeincometax",
         "incomefromcontinuingoperationsbeforeincometaxes",
         "incomebeforetaxes",
         "incomebeforeincometaxes",
@@ -149,6 +151,10 @@ ROW_ALIASES: dict[str, tuple[str, ...]] = {
         "所得税费用",
     ),
     "netIncome": (
+        "profitfortheperiod",
+        "profitlossfortheperiod",
+        "profitfortheyear",
+        "profitlossfortheyear",
         "attributabletoownersofparent",
         "profitlossaftertax",
         "netincomeattributabletocommonstockholders",
@@ -654,6 +660,9 @@ def _period_entries_from_table(rows: list[list[str]], currency: str, source_url:
         entry["statementValueMode"] = "direct" if statement_span_quarters == 1 else "cumulative"
 
         opex_items: list[dict[str, Any]] = []
+        if sgna_row is not None and sales_marketing_raw is None and general_admin_raw is None and sgna_raw is not None:
+            opex_items.append(_make_breakdown_item('Selling, general and administrative', '销售、一般及行政',
+                sgna_raw * scale, value_format='negative-parentheses', source_url=source_url))
         for raw_name, display_name, display_name_zh, value_format in OPTIONAL_BREAKDOWN_ROWS:
             raw_value = {
                 "salesAndMarketing": sales_marketing_raw,

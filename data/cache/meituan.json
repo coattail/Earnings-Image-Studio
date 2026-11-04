@@ -44,7 +44,8 @@
     "2025Q2",
     "2025Q3",
     "2025Q4",
-    "2026Q1"
+    "2026Q1",
+    "2026Q2"
   ],
   "financials": {
     "2021Q1": {
@@ -9484,6 +9485,142 @@
       "operatingMarginYoyDeltaPp": -18.387,
       "profitMarginPct": -7.498984,
       "profitMarginYoyDeltaPp": -19.119
+    },
+    "2026Q2": {
+      "calendarQuarter": "2026Q2",
+      "periodEnd": "2026-06-30",
+      "fiscalYear": "2026",
+      "fiscalQuarter": "Q2",
+      "fiscalLabel": "FY2026 Q2",
+      "statementCurrency": "CNY",
+      "revenueBn": 104.643,
+      "revenueYoyPct": 13.941,
+      "costOfRevenueBn": 69.548,
+      "grossProfitBn": 35.095,
+      "sgnaBn": 27.961,
+      "rndBn": 7.67,
+      "otherOpexBn": 23.101,
+      "operatingExpensesBn": 32.404,
+      "operatingIncomeBn": 2.691,
+      "nonOperatingBn": -0.387,
+      "pretaxIncomeBn": 2.304,
+      "taxBn": 0.149,
+      "netIncomeBn": 2.155,
+      "netIncomeYoyPct": null,
+      "grossMarginPct": 33.538,
+      "operatingMarginPct": 2.572,
+      "profitMarginPct": 2.059,
+      "effectiveTaxRatePct": 6.467,
+      "revenueQoqPct": 14.943,
+      "grossMarginYoyDeltaPp": 0.418,
+      "operatingMarginYoyDeltaPp": 4.982,
+      "profitMarginYoyDeltaPp": 1.659,
+      "statementSource": "official-ir-earnings-release",
+      "statementSourceUrl": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf",
+      "statementFilingDate": "2026-08-28",
+      "statementSpanQuarters": 1,
+      "statementValueMode": "reported",
+      "officialOpexBreakdown": [
+        {
+          "name": "Sales & Marketing",
+          "nameZh": "销售与营销",
+          "valueBn": 24.723,
+          "valueFormat": "negative-parentheses",
+          "sourceUrl": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf"
+        },
+        {
+          "name": "G&A",
+          "nameZh": "管理费用",
+          "valueBn": 3.238,
+          "valueFormat": "negative-parentheses",
+          "sourceUrl": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf"
+        },
+        {
+          "name": "R&D",
+          "nameZh": "研发",
+          "valueBn": 7.67,
+          "valueFormat": "negative-parentheses",
+          "sourceUrl": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf"
+        }
+      ],
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "operatingIncomeBn": "official",
+        "netIncomeBn": "official"
+      },
+      "parserFinancialValidation": {
+        "status": "high",
+        "sourceUrl": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf"
+      },
+      "automaticEarnings": {
+        "filingDate": "2026-08-28",
+        "accession": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf",
+        "form": "official-ir-release"
+      },
+      "officialRevenueSegments": [
+        {
+          "name": "Core local commerce",
+          "nameZh": "核心本地商业",
+          "memberKey": "corelocalcommerce",
+          "valueBn": 71.530555,
+          "sourceUrl": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf",
+          "filingDate": "2026-08-28",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 68.4,
+          "qoqPct": 11.66,
+          "yoyPct": 9.46,
+          "mixYoyDeltaPp": -2.8
+        },
+        {
+          "name": "New initiatives",
+          "nameZh": "新业务",
+          "memberKey": "newinitiatives",
+          "valueBn": 33.112489,
+          "sourceUrl": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf",
+          "filingDate": "2026-08-28",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 31.6,
+          "qoqPct": 22.75,
+          "yoyPct": 24.99,
+          "mixYoyDeltaPp": 2.8
+        }
+      ],
+      "revenueClassificationSource": "official-complete-table",
+      "revenueClassificationSourceUrl": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf",
+      "chartCompletionAttempts": [
+        {
+          "sourceUrl": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf",
+          "remainingIssues": []
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 0.14879,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2026Q1",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "chartQuality": {
+        "version": 3,
+        "quarter": "2026Q2",
+        "status": "ready",
+        "issues": [],
+        "requiredMarginComparisons": [
+          "grossMarginYoyDeltaPp",
+          "operatingMarginYoyDeltaPp",
+          "profitMarginYoyDeltaPp"
+        ],
+        "requiredDetailParents": [],
+        "requiredSegmentKeys": [
+          "corelocalcommerce",
+          "newinitiatives"
+        ],
+        "requiredDetailMembers": {}
+      }
     }
   },
   "statementSource": "stockanalysis-financials",
@@ -12899,18 +13036,19 @@
       "overallConfidenceScore": 0.8833,
       "financialConfidenceScore": 1.0,
       "structuralConfidenceScore": 0.6667,
-      "revenueSegmentChecks": 30,
+      "revenueSegmentChecks": 31,
       "revenueSegmentMismatchCount": 0,
       "revenueSegmentSkippedChecks": 0,
       "detailGroupChecks": 30,
       "detailGroupMismatchCount": 0,
       "detailGroupSkippedChecks": 0,
-      "opexChecks": 1,
+      "opexChecks": 2,
       "opexSkippedChecks": 29,
-      "opexOverflowMismatchCount": 1,
-      "warningCount": 1,
+      "opexOverflowMismatchCount": 2,
+      "warningCount": 2,
       "warnings": [
-        "2026Q1: opex breakdown sums to 33.431Bn vs operating expenses 32.44Bn."
+        "2026Q1: opex breakdown sums to 33.431Bn vs operating expenses 32.44Bn.",
+        "2026Q2: opex breakdown sums to 35.631Bn vs operating expenses 32.404Bn."
       ]
     }
   },
@@ -15447,24 +15585,24 @@
   },
   "statementPresets": {},
   "coverage": {
-    "quarterCount": 31,
+    "quarterCount": 32,
     "pixelReplicaQuarterCount": 0,
     "hasPixelReplica": false,
-    "officialFinancialQuarterCount": 31,
-    "officialSegmentQuarterCount": 30,
-    "officialExpenseQuarterCount": 30,
+    "officialFinancialQuarterCount": 32,
+    "officialSegmentQuarterCount": 31,
+    "officialExpenseQuarterCount": 31,
     "classification": {
       "status": "ok",
-      "latestQuarter": "2026Q1",
+      "latestQuarter": "2026Q2",
       "latestQuarterHasRevenueClassification": true,
       "latestQuarterHasExpenseClassification": true,
-      "latestRevenueClassificationQuarter": "2026Q1",
-      "latestExpenseClassificationQuarter": "2026Q1",
+      "latestRevenueClassificationQuarter": "2026Q2",
+      "latestExpenseClassificationQuarter": "2026Q2",
       "latestStructureHistoryQuarter": "2026Q1",
-      "revenueClassificationQuarterCount": 30,
-      "expenseClassificationQuarterCount": 30,
-      "revenueClassificationCoverageRatio": 0.9677,
-      "expenseClassificationCoverageRatio": 0.9677,
+      "revenueClassificationQuarterCount": 31,
+      "expenseClassificationQuarterCount": 31,
+      "revenueClassificationCoverageRatio": 0.9688,
+      "expenseClassificationCoverageRatio": 0.9688,
       "latestRevenueClassificationLagQuarters": 0,
       "latestExpenseClassificationLagQuarters": 0,
       "warnings": [],
@@ -15511,18 +15649,19 @@
         "overallConfidenceScore": 0.8833,
         "financialConfidenceScore": 1.0,
         "structuralConfidenceScore": 0.6667,
-        "revenueSegmentChecks": 30,
+        "revenueSegmentChecks": 31,
         "revenueSegmentMismatchCount": 0,
         "revenueSegmentSkippedChecks": 0,
         "detailGroupChecks": 30,
         "detailGroupMismatchCount": 0,
         "detailGroupSkippedChecks": 0,
-        "opexChecks": 1,
+        "opexChecks": 2,
         "opexSkippedChecks": 29,
-        "opexOverflowMismatchCount": 1,
-        "warningCount": 1,
+        "opexOverflowMismatchCount": 2,
+        "warningCount": 2,
         "warnings": [
-          "2026Q1: opex breakdown sums to 33.431Bn vs operating expenses 32.44Bn."
+          "2026Q1: opex breakdown sums to 33.431Bn vs operating expenses 32.44Bn.",
+          "2026Q2: opex breakdown sums to 35.631Bn vs operating expenses 32.404Bn."
         ]
       }
     }

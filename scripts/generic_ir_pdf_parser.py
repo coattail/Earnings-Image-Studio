@@ -33,7 +33,7 @@ MAX_IR_DETAIL_PAGES = 10
 MAX_IR_CRAWL_PAGES = 24
 MAX_IR_PDF_CANDIDATES = 40
 TARGET_HISTORY_WINDOW_QUARTERS = 30
-GENERIC_IR_PDF_CACHE_VERSION = "generic-ir-pdf-v2"
+GENERIC_IR_PDF_CACHE_VERSION = "generic-ir-pdf-v3"
 OCR_PDF_PAGE_LIMIT = 24
 OCR_MIN_TEXT_SIGNAL = 80
 OCR_MIN_MEANINGFUL_SIGNAL = 50
@@ -1314,6 +1314,8 @@ def _match_field(label: str) -> str | None:
     for field_name, aliases in ROW_ALIASES.items():
         for alias in aliases:
             alias_key = _normalize_key(alias)
+            if field_name == 'netIncome' and alias_key == 'profitloss' and normalized != alias_key:
+                continue
             if normalized == alias_key or normalized.startswith(alias_key) or normalized.endswith(alias_key):
                 return field_name
     return None

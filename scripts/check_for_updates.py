@@ -123,9 +123,15 @@ def latest_local_filing_marker(payload: dict[str, Any]) -> tuple[str, str]:
 def latest_local_revenue_structure_quarter(payload: dict[str, Any]) -> str:
     history = payload.get("officialRevenueStructureHistory")
     quarters = history.get("quarters") if isinstance(history, dict) else None
-    if not isinstance(quarters, dict):
-        return ""
-    quarter_keys = [str(item) for item in quarters.keys() if str(item)]
+    quarter_keys = [str(item) for item in (quarters or {}) if str(item)] if isinstance(quarters, dict) else []
+    # Early official releases are stored directly on the financial entry.
+    # Their legacy history index need not have been rebuilt to count as covered.
+    from release_chart_quality import chart_issues
+    for quarter, entry in (payload.get('financials') or {}).items():
+        if (entry.get('revenueClassificationSource') == 'official-complete-table'
+            and entry.get('revenueClassificationSourceUrl') and entry.get('officialRevenueSegments')
+            and not chart_issues(payload, quarter)):
+            quarter_keys.append(str(quarter))
     if not quarter_keys:
         return ""
     return max(quarter_keys, key=parse_period)

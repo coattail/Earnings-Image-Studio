@@ -149,7 +149,7 @@ def parse_release(html: str, company: dict, url: str, filed: str, *, allow_parti
     return result
 
 
-def discover_release(company: dict, local: dict | None = None) -> dict | None:
+def discover_release(company: dict, local: dict | None = None, *, expected_filing_date=None, expected_quarter=None) -> dict | None:
     cik = company.get("cik") or _resolve_cik(company["ticker"], refresh=False)
     if not cik:
         return None
@@ -157,9 +157,13 @@ def discover_release(company: dict, local: dict | None = None) -> dict | None:
     latest = max((local or {}).get("financials", {}), default="")
     existing = (local or {}).get("financials", {}).get(latest, {})
     cutoff = max(existing.get("statementFilingDate") or "", (date.today() - timedelta(days=120)).isoformat())
+    if expected_filing_date:
+        cutoff = (date.fromisoformat(expected_filing_date) - timedelta(days=1)).isoformat()
     examined = 0
     for i, form in enumerate(recent["form"]):
         filed = recent["filingDate"][i]
+        if expected_filing_date and filed != expected_filing_date:
+            continue
         if filed <= cutoff or form not in {"8-K", "6-K"}:
             continue
         if form == "8-K" and "2.02" not in (recent.get("items", [""] * len(recent["form"]))[i] or ""):
@@ -169,16 +173,8 @@ def discover_release(company: dict, local: dict | None = None) -> dict | None:
         examined += 1
         accession = recent["accessionNumber"][i]
         marker = dict(filingDate=filed, accession=accession, form=form)
-        # A later 10-Q/10-K for the same period proves the local quarter already
-        # covers this release, even when an older provider omitted report dates.
-        earliest_regular = (date.fromisoformat(filed) - timedelta(days=7)).isoformat()
-        regular = [(recent["filingDate"][j], recent.get("reportDate", [""] * len(recent["form"]))[j])
-                   for j, f in enumerate(recent["form"]) if f in {"10-Q", "10-K", "20-F"}
-                   and recent["filingDate"][j] >= earliest_regular]
-        if regular:
-            report_end = max(regular)[1] or ""
-            if report_end and f"{report_end[:4]}Q{(int(report_end[5:7])-1)//3+1}" == latest and complete_quarter(existing, company["id"]):
-                return None
+        # Quarter keys alone do not prove that vendor values came from this
+        # release. The publication-date cutoff above handles covered reports.
         if existing.get("automaticEarnings", {}).get("accession") == accession:
             return None
         cache = CACHE / f"{company['id']}.json"
@@ -204,7 +200,9 @@ def discover_release(company: dict, local: dict | None = None) -> dict | None:
                 entries = parse_release(content.decode("utf-8", errors="replace"), company, url, filed)
                 if not entries:
                     incomplete = parse_release(content.decode("utf-8", errors="replace"), company, url, filed, allow_partial=True)
-                    partials.extend(incomplete.values())
+                    partials.extend(e for q,e in incomplete.items() if not expected_quarter or q == expected_quarter)
+            if expected_quarter:
+                entries = {q:e for q,e in entries.items() if q == expected_quarter}
             if not entries:
                 continue
             from margin_metrics import complete_margin_metrics
@@ -273,7 +271,15 @@ def discover_ir_statement(company: dict, item: dict) -> dict | None:
     quarter = item.get("quarter") or ""
     if not url or not filed or not quarter:
         return None
-    content = _request(url)
+    try:
+        content = _request(url)
+    except Exception:
+        # Investor-relations CDNs may block cloud runners. A same-date SEC
+        # exhibit is an independent official copy, validated for this quarter.
+        alternative = discover_release(company, expected_filing_date=filed, expected_quarter=quarter)
+        if alternative and alternative.get('quarter') == quarter and complete_quarter(alternative.get('entry', {})):
+            return alternative
+        raise
     if not content.startswith(b"%PDF"):
         soup = BeautifulSoup(content, "html.parser")
         links = [urljoin(url, a["href"]) for a in soup.find_all("a", href=True) if re.search(r"\.pdf(?:\?|$)", a["href"], re.I)]

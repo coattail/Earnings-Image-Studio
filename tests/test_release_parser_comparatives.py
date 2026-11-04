@@ -45,6 +45,8 @@ class ReleaseComparativeTests(unittest.TestCase):
                                 'sgnaBn':1.298,'rndBn':2.803,'otherOpexBn':.277,'taxBn':-.555,
                                 'operatingMarginYoyDeltaPp':7.435,'profitMarginYoyDeltaPp':4.707}.items():
             self.assertAlmostEqual(current[field], expected, places=6, msg=field)
+        self.assertEqual({r['name'] for r in current['officialOpexBreakdown']},
+                         {'Selling, general and administrative','R&D'})
         company = json.loads((ROOT / 'data/cache/amd.json').read_text())
         company['financials'] = {q:e for q,e in company['financials'].items() if q < '2026Q3'}
         company['financials']['2026Q3'] = current

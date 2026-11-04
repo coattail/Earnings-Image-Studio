@@ -1,12 +1,35 @@
 """Official release indexes for non-SEC issuers; never treat guidance as results."""
 import re
+from datetime import date
 from bs4 import BeautifulSoup
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 from official_segments import _request, _request_json
+
+
+def _exchange_day():
+    from datetime import datetime, timezone, timedelta
+    return datetime.now(timezone(timedelta(hours=8))).date()
 
 
 def latest_native_release(company):
     company_id = company["id"]
+    if company.get('hkexStockId'):
+        url = f"https://www1.hkexnews.hk/search/titlesearch.xhtml?category=0&lang=EN&market=SEHK&stockId={int(company['hkexStockId'])}"
+        soup = BeautifulSoup(_request(url), 'html.parser')
+        releases = []
+        for link in soup.find_all('a', href=True):
+            title = re.sub(r'\s+', ' ', link.get_text(' ', strip=True))
+            period = re.search(r'results.*ended\s+(March|June|September|December)\s+(\d{1,2}),?\s+(20\d{2})', title, re.I)
+            source = urljoin(url, link['href'])
+            if urlparse(source).hostname not in {'www1.hkexnews.hk','www.hkexnews.hk','hkexnews.hk'}: continue
+            published = re.search(r'/((20\d{2})(\d{2})(\d{2}))\d*\.pdf', source)
+            if not period or not published: continue
+            end = date(int(period[3]), {'march':3,'june':6,'september':9,'december':12}[period[1].lower()], int(period[2]))
+            filed = date(int(published[2]), int(published[3]), int(published[4]))
+            if not end <= filed <= _exchange_day(): continue
+            releases.append(dict(quarter=f'{end.year}Q{(end.month-1)//3+1}', filingDate=filed.isoformat(),
+                                 sourceUrl=source, form='official-exchange-pdf'))
+        if releases: return max(releases, key=lambda r:(r['quarter'],r['filingDate']))
     if company_id == "samsung":
         url = "https://www.samsung.com/global/ir/financial-information/earnings-release/"
         html = _request(url).decode("utf-8", errors="replace")
@@ -49,10 +72,9 @@ def latest_native_release(company):
             raise ValueError("Tencent official results index could not be parsed")
         return max(items, key=lambda item: item["quarter"])
     if company_id == "alibaba":
-        from datetime import date
         from official_revenue_structures import _quarter_from_alibaba_title, _timestamp_ms_to_iso_date
         items = []
-        for year in [date.today().year, date.today().year + 1]:
+        for year in [date.today().year + 1, date.today().year]:
             try:
                 payload = _request_json(f"https://data.alibabagroup.com/data/index/ir/quarterly-results/q{year}/list.json")
             except Exception:
@@ -64,7 +86,13 @@ def latest_native_release(company):
                 if isinstance(title, dict): title = title.get("en_US", "")
                 quarter = _quarter_from_alibaba_title(title)
                 if quarter:
-                    items.append(dict(quarter=quarter, filingDate=_timestamp_ms_to_iso_date(item.get("eventDate") or item.get("documentPublishTime")), sourceUrl=f"https://www.alibabagroup.com/en-US/document-{item.get('documentId')}", form="official-ir-release"))
+                    filed = _timestamp_ms_to_iso_date(item.get('eventDate') or item.get('documentPublishTime'))
+                    if not filed or filed > date.today().isoformat(): continue
+                    items.append(dict(quarter=quarter, filingDate=filed, sourceUrl=f"https://www.alibabagroup.com/en-US/document-{item.get('documentId')}", form="official-ir-release"))
+            # The newest fiscal-year index already covers current releases;
+            # do not spend the issuer's budget crawling an older archive too.
+            if items and max(i['quarter'] for i in items) >= (company.get('_localQuarter') or f'{date.today().year}Q2'):
+                break
         if not items:
             raise ValueError("Alibaba official results index could not be parsed")
         return max(items, key=lambda item: item["quarter"])

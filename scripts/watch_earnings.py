@@ -52,6 +52,12 @@ def detect(company: dict, local: dict | None = None, *, external=False) -> dict:
     company = {**company, **({"reportingCurrency": native} if native else {}),
                '_localQuarter':latest,'_localFilingDate':entry.get('statementFilingDate'),'_localSourceUrl':entry.get('statementSourceUrl')}
     native_release = latest_native_release(company)
+    if (company.get('hkexStockId') and native_release and native_release['quarter'] == latest
+        and native_release.get('filingDate') and native_release['filingDate'] <= (entry.get('statementFilingDate')or'')
+        and native_release.get('sourceUrl') == entry.get('statementSourceUrl') and not pending_chart_issues
+        and all(isinstance(entry.get(k),(int,float)) for k in ('revenueBn','grossProfitBn','operatingIncomeBn','netIncomeBn'))):
+        return dict(companyId=company['id'],ticker=company['ticker'],needsUpdate=False,reason='up-to-date',
+                    localQuarter=latest,remoteQuarter=latest,remoteFilingDate=native_release['filingDate'])
     if native_release and native_release["quarter"] > latest:
         try:
             native_release = discover_ir_statement(company, native_release) or native_release

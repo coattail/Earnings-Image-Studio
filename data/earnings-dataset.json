@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-04T00:16:51Z",
+  "generatedAt": "2026-11-04T01:06:09Z",
   "universeSource": {
     "label": "CompaniesMarketCap point-in-time ranking",
     "url": "https://companiesmarketcap.com/",
@@ -9436,61 +9436,33 @@
           "profitMarginPct": 26.827,
           "effectiveTaxRatePct": 15.01,
           "revenueQoqPct": 4.625,
-          "grossMarginYoyDeltaPp": 0.71,
-          "operatingMarginYoyDeltaPp": -0.52,
-          "profitMarginYoyDeltaPp": 0.02,
+          "grossMarginYoyDeltaPp": 0.709,
+          "operatingMarginYoyDeltaPp": -0.522,
+          "profitMarginYoyDeltaPp": 0.022,
           "officialOpexBreakdown": [
             {
-              "name": "Sales and Marketing",
-              "nameZh": "销售与营销",
-              "memberKey": "salesandmarketing",
-              "valueBn": 5.502
+              "name": "Selling, general and administrative",
+              "nameZh": "销售、一般及行政",
+              "valueBn": 7.459,
+              "valueFormat": "negative-parentheses",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000024/a8-kex991q4202609262026.htm",
+              "filingDate": "2026-11-02"
             },
             {
-              "name": "Research and Development",
+              "name": "R&D",
               "nameZh": "研发",
-              "memberKey": "researchanddevelopment",
-              "valueBn": 11.73
-            },
-            {
-              "name": "General and Administrative",
-              "nameZh": "一般及行政",
-              "memberKey": "generalandadministrative",
-              "valueBn": 1.957
+              "valueBn": 11.73,
+              "valueFormat": "negative-parentheses",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000024/a8-kex991q4202609262026.htm",
+              "filingDate": "2026-11-02"
             }
           ],
-          "statementFilingDate": "2026-09-26",
-          "statementSourceUrl": "https://stockanalysis.com/stocks/aapl/financials/?p=quarterly",
+          "statementFilingDate": "2026-11-03",
+          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm",
           "parserFinancialFieldSources": {
             "revenueBn": "official",
-            "revenueYoyPct": "official",
-            "revenueQoqPct": "official",
-            "costOfRevenueBn": "official",
-            "grossProfitBn": "official",
-            "grossMarginPct": "official",
-            "grossMarginYoyDeltaPp": "official",
-            "sgnaBn": "official",
-            "rndBn": "official",
-            "operatingExpensesBn": "official",
             "operatingIncomeBn": "official",
-            "operatingMarginPct": "official",
-            "operatingMarginYoyDeltaPp": "official",
-            "nonOperatingBn": "official",
-            "pretaxIncomeBn": "official",
-            "taxBn": "official",
-            "netIncomeBn": "official",
-            "netIncomeYoyPct": "official",
-            "profitMarginPct": "official",
-            "profitMarginYoyDeltaPp": "official",
-            "effectiveTaxRatePct": "official",
-            "calendarQuarter": "official",
-            "periodEnd": "official",
-            "fiscalYear": "official",
-            "fiscalQuarter": "official",
-            "fiscalLabel": "official",
-            "statementCurrency": "official",
-            "statementFilingDate": "stockanalysis",
-            "statementSourceUrl": "stockanalysis"
+            "netIncomeBn": "official"
           },
           "parserFinancialCandidateCounts": {
             "revenueBn": 1,
@@ -9517,15 +9489,8 @@
             "effectiveTaxRatePct": 1
           },
           "parserFinancialValidation": {
-            "version": "financial-validation-v1",
             "status": "high",
-            "confidenceScore": 1.0,
-            "completenessScore": 1.0,
-            "consistencyScore": 1.0,
-            "checksRun": 8,
-            "checksPassed": 8,
-            "issueCount": 0,
-            "issues": []
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000024/a8-kex991q4202609262026.htm"
           },
           "officialRevenueSegments": [
             {
@@ -9762,7 +9727,26 @@
                 "wearables"
               ]
             }
-          }
+          },
+          "statementSource": "official-earnings-release",
+          "statementSpanQuarters": 1,
+          "statementValueMode": "reported",
+          "automaticEarnings": {
+            "filingDate": "2026-11-03",
+            "accession": "0000320193-26-000026",
+            "form": "10-K"
+          },
+          "chartCompletionAttempts": [
+            {
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm",
+              "remainingIssues": [
+                "revenue classifications do not reconcile to total revenue",
+                "revenue detail does not reconcile for products",
+                "revenue detail does not reconcile for products"
+              ]
+            }
+          ],
+          "statementAccession": "0000320193-26-000026"
         }
       },
       "statementSource": "official-sec-companyfacts",
@@ -574559,7 +574543,8 @@
         "2025Q2",
         "2025Q3",
         "2025Q4",
-        "2026Q1"
+        "2026Q1",
+        "2026Q2"
       ],
       "financials": {
         "2021Q1": {
@@ -581270,6 +581255,170 @@
           "operatingMarginYoyDeltaPp": 5.155,
           "profitMarginPct": 34.892615,
           "profitMarginYoyDeltaPp": -1.687
+        },
+        "2026Q2": {
+          "calendarQuarter": "2026Q2",
+          "periodEnd": "2026-06-30",
+          "fiscalYear": "2026",
+          "fiscalQuarter": "Q2",
+          "fiscalLabel": "FY2026 Q2",
+          "statementCurrency": "CNY",
+          "revenueBn": 30.107,
+          "revenueYoyPct": 7.941,
+          "costOfRevenueBn": 8.889,
+          "grossProfitBn": 21.217,
+          "sgnaBn": 4.484,
+          "rndBn": 4.644,
+          "otherOpexBn": null,
+          "operatingExpensesBn": 9.128,
+          "operatingIncomeBn": 12.089,
+          "nonOperatingBn": -2.464,
+          "pretaxIncomeBn": 9.625,
+          "taxBn": 2.645,
+          "netIncomeBn": 6.981,
+          "netIncomeYoyPct": null,
+          "grossMarginPct": 70.474,
+          "operatingMarginPct": 40.155,
+          "profitMarginPct": 23.187,
+          "effectiveTaxRatePct": 27.475,
+          "revenueQoqPct": -1.582,
+          "grossMarginYoyDeltaPp": 5.75,
+          "operatingMarginYoyDeltaPp": 7.668,
+          "profitMarginYoyDeltaPp": -7.65,
+          "statementSource": "official-earnings-release",
+          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926098940/tm2623482d1_ex99-1.htm",
+          "statementFilingDate": "2026-08-20",
+          "statementSpanQuarters": 1,
+          "statementValueMode": "reported",
+          "officialOpexBreakdown": [
+            {
+              "name": "Sales & Marketing",
+              "nameZh": "销售与营销",
+              "valueBn": 3.679,
+              "valueFormat": "negative-parentheses",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926098940/tm2623482d1_ex99-1.htm"
+            },
+            {
+              "name": "G&A",
+              "nameZh": "管理费用",
+              "valueBn": 0.805,
+              "valueFormat": "negative-parentheses",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926098940/tm2623482d1_ex99-1.htm"
+            },
+            {
+              "name": "R&D",
+              "nameZh": "研发",
+              "valueBn": 4.644,
+              "valueFormat": "negative-parentheses",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926098940/tm2623482d1_ex99-1.htm"
+            }
+          ],
+          "parserFinancialFieldSources": {
+            "revenueBn": "official",
+            "operatingIncomeBn": "official",
+            "netIncomeBn": "official"
+          },
+          "parserFinancialValidation": {
+            "status": "high",
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926098940/tm2623482d1_ex99-1.htm"
+          },
+          "automaticEarnings": {
+            "filingDate": "2026-08-20",
+            "accession": "0001104659-26-098940",
+            "form": "6-K"
+          },
+          "officialRevenueSegments": [
+            {
+              "name": "Games and related value-added services",
+              "nameZh": null,
+              "memberKey": "gamesandrelatedvalueaddedservices",
+              "valueBn": 25.022788,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926098940/tm2623482d1_ex99-1.htm",
+              "filingDate": "2026-08-20",
+              "sourceForm": "official current-period disclosure",
+              "mixPct": 83.1,
+              "qoqPct": -2.64,
+              "yoyPct": 9.72,
+              "mixYoyDeltaPp": 1.3
+            },
+            {
+              "name": "Innovative businesses and others",
+              "nameZh": null,
+              "memberKey": "innovativebusinessesandothers",
+              "valueBn": 1.639425,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926098940/tm2623482d1_ex99-1.htm",
+              "filingDate": "2026-08-20",
+              "sourceForm": "official current-period disclosure",
+              "mixPct": 5.4,
+              "qoqPct": 9.29,
+              "yoyPct": -3.51,
+              "mixYoyDeltaPp": -0.6
+            },
+            {
+              "name": "Cloud Music",
+              "nameZh": null,
+              "memberKey": "cloudmusic",
+              "valueBn": 1.977472,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926098940/tm2623482d1_ex99-1.htm",
+              "filingDate": "2026-08-20",
+              "sourceForm": "official current-period disclosure",
+              "mixPct": 6.6,
+              "qoqPct": -1.13,
+              "yoyPct": -1.13,
+              "mixYoyDeltaPp": -0.6
+            },
+            {
+              "name": "Youdao",
+              "nameZh": null,
+              "memberKey": "youdao",
+              "valueBn": 1.466861,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926098940/tm2623482d1_ex99-1.htm",
+              "filingDate": "2026-08-20",
+              "sourceForm": "official current-period disclosure",
+              "mixPct": 4.9,
+              "qoqPct": 8.82,
+              "yoyPct": 3.45,
+              "mixYoyDeltaPp": -0.2
+            }
+          ],
+          "revenueClassificationSourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926098940/tm2623482d1_ex99-1.htm",
+          "revenueClassificationSource": "official-complete-table",
+          "chartCompletionAttempts": [
+            {
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926098940/tm2623482d1_ex99-1.htm",
+              "remainingIssues": []
+            }
+          ],
+          "displayCurrency": "USD",
+          "displayScaleFactor": 0.14873,
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "sankeyStructureContinuity": {
+            "sourceQuarter": "2026Q1",
+            "fields": [
+              "officialRevenueSegments"
+            ],
+            "rule": "same-normalized-category-set"
+          },
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q2",
+            "status": "ready",
+            "issues": [],
+            "requiredMarginComparisons": [
+              "grossMarginYoyDeltaPp",
+              "operatingMarginYoyDeltaPp",
+              "profitMarginYoyDeltaPp"
+            ],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "cloudmusic",
+              "gamesrelatedvalueaddedservices",
+              "innovativebusinessesothers",
+              "youdao"
+            ],
+            "requiredDetailMembers": {}
+          }
         }
       },
       "statementSource": "stockanalysis-financials",
@@ -584695,16 +584844,16 @@
         "validation": {
           "version": "parser-validation-v1",
           "status": "high",
-          "overallConfidenceScore": 0.9801,
+          "overallConfidenceScore": 0.9802,
           "financialConfidenceScore": 0.9775,
-          "structuralConfidenceScore": 0.9848,
-          "revenueSegmentChecks": 33,
+          "structuralConfidenceScore": 0.9853,
+          "revenueSegmentChecks": 34,
           "revenueSegmentMismatchCount": 1,
           "revenueSegmentSkippedChecks": 0,
           "detailGroupChecks": 0,
           "detailGroupMismatchCount": 0,
           "detailGroupSkippedChecks": 0,
-          "opexChecks": 28,
+          "opexChecks": 29,
           "opexSkippedChecks": 0,
           "opexOverflowMismatchCount": 0,
           "warningCount": 1,
@@ -584715,24 +584864,24 @@
       },
       "statementPresets": {},
       "coverage": {
-        "quarterCount": 33,
+        "quarterCount": 34,
         "pixelReplicaQuarterCount": 0,
         "hasPixelReplica": false,
-        "officialFinancialQuarterCount": 33,
-        "officialSegmentQuarterCount": 33,
-        "officialExpenseQuarterCount": 28,
+        "officialFinancialQuarterCount": 34,
+        "officialSegmentQuarterCount": 34,
+        "officialExpenseQuarterCount": 29,
         "classification": {
           "status": "ok",
-          "latestQuarter": "2026Q1",
+          "latestQuarter": "2026Q2",
           "latestQuarterHasRevenueClassification": true,
           "latestQuarterHasExpenseClassification": true,
-          "latestRevenueClassificationQuarter": "2026Q1",
-          "latestExpenseClassificationQuarter": "2026Q1",
+          "latestRevenueClassificationQuarter": "2026Q2",
+          "latestExpenseClassificationQuarter": "2026Q2",
           "latestStructureHistoryQuarter": "2026Q1",
-          "revenueClassificationQuarterCount": 33,
-          "expenseClassificationQuarterCount": 28,
+          "revenueClassificationQuarterCount": 34,
+          "expenseClassificationQuarterCount": 29,
           "revenueClassificationCoverageRatio": 1.0,
-          "expenseClassificationCoverageRatio": 0.8485,
+          "expenseClassificationCoverageRatio": 0.8529,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": 0,
           "warnings": [],
@@ -584772,16 +584921,16 @@
           "validation": {
             "version": "parser-validation-v1",
             "status": "high",
-            "overallConfidenceScore": 0.9801,
+            "overallConfidenceScore": 0.9802,
             "financialConfidenceScore": 0.9775,
-            "structuralConfidenceScore": 0.9848,
-            "revenueSegmentChecks": 33,
+            "structuralConfidenceScore": 0.9853,
+            "revenueSegmentChecks": 34,
             "revenueSegmentMismatchCount": 1,
             "revenueSegmentSkippedChecks": 0,
             "detailGroupChecks": 0,
             "detailGroupMismatchCount": 0,
             "detailGroupSkippedChecks": 0,
-            "opexChecks": 28,
+            "opexChecks": 29,
             "opexSkippedChecks": 0,
             "opexOverflowMismatchCount": 0,
             "warningCount": 1,
@@ -584843,7 +584992,8 @@
         "2025Q2",
         "2025Q3",
         "2025Q4",
-        "2026Q1"
+        "2026Q1",
+        "2026Q2"
       ],
       "financials": {
         "2021Q1": {
@@ -594283,6 +594433,142 @@
           "operatingMarginYoyDeltaPp": -18.387,
           "profitMarginPct": -7.498984,
           "profitMarginYoyDeltaPp": -19.119
+        },
+        "2026Q2": {
+          "calendarQuarter": "2026Q2",
+          "periodEnd": "2026-06-30",
+          "fiscalYear": "2026",
+          "fiscalQuarter": "Q2",
+          "fiscalLabel": "FY2026 Q2",
+          "statementCurrency": "CNY",
+          "revenueBn": 104.643,
+          "revenueYoyPct": 13.941,
+          "costOfRevenueBn": 69.548,
+          "grossProfitBn": 35.095,
+          "sgnaBn": 27.961,
+          "rndBn": 7.67,
+          "otherOpexBn": 23.101,
+          "operatingExpensesBn": 32.404,
+          "operatingIncomeBn": 2.691,
+          "nonOperatingBn": -0.387,
+          "pretaxIncomeBn": 2.304,
+          "taxBn": 0.149,
+          "netIncomeBn": 2.155,
+          "netIncomeYoyPct": null,
+          "grossMarginPct": 33.538,
+          "operatingMarginPct": 2.572,
+          "profitMarginPct": 2.059,
+          "effectiveTaxRatePct": 6.467,
+          "revenueQoqPct": 14.943,
+          "grossMarginYoyDeltaPp": 0.418,
+          "operatingMarginYoyDeltaPp": 4.982,
+          "profitMarginYoyDeltaPp": 1.659,
+          "statementSource": "official-ir-earnings-release",
+          "statementSourceUrl": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf",
+          "statementFilingDate": "2026-08-28",
+          "statementSpanQuarters": 1,
+          "statementValueMode": "reported",
+          "officialOpexBreakdown": [
+            {
+              "name": "Sales & Marketing",
+              "nameZh": "销售与营销",
+              "valueBn": 24.723,
+              "valueFormat": "negative-parentheses",
+              "sourceUrl": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf"
+            },
+            {
+              "name": "G&A",
+              "nameZh": "管理费用",
+              "valueBn": 3.238,
+              "valueFormat": "negative-parentheses",
+              "sourceUrl": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf"
+            },
+            {
+              "name": "R&D",
+              "nameZh": "研发",
+              "valueBn": 7.67,
+              "valueFormat": "negative-parentheses",
+              "sourceUrl": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf"
+            }
+          ],
+          "parserFinancialFieldSources": {
+            "revenueBn": "official",
+            "operatingIncomeBn": "official",
+            "netIncomeBn": "official"
+          },
+          "parserFinancialValidation": {
+            "status": "high",
+            "sourceUrl": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf"
+          },
+          "automaticEarnings": {
+            "filingDate": "2026-08-28",
+            "accession": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf",
+            "form": "official-ir-release"
+          },
+          "officialRevenueSegments": [
+            {
+              "name": "Core local commerce",
+              "nameZh": "核心本地商业",
+              "memberKey": "corelocalcommerce",
+              "valueBn": 71.530555,
+              "sourceUrl": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf",
+              "filingDate": "2026-08-28",
+              "sourceForm": "official current-period disclosure",
+              "mixPct": 68.4,
+              "qoqPct": 11.66,
+              "yoyPct": 9.46,
+              "mixYoyDeltaPp": -2.8
+            },
+            {
+              "name": "New initiatives",
+              "nameZh": "新业务",
+              "memberKey": "newinitiatives",
+              "valueBn": 33.112489,
+              "sourceUrl": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf",
+              "filingDate": "2026-08-28",
+              "sourceForm": "official current-period disclosure",
+              "mixPct": 31.6,
+              "qoqPct": 22.75,
+              "yoyPct": 24.99,
+              "mixYoyDeltaPp": 2.8
+            }
+          ],
+          "revenueClassificationSource": "official-complete-table",
+          "revenueClassificationSourceUrl": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf",
+          "chartCompletionAttempts": [
+            {
+              "sourceUrl": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800435.pdf",
+              "remainingIssues": []
+            }
+          ],
+          "displayCurrency": "USD",
+          "displayScaleFactor": 0.14879,
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "sankeyStructureContinuity": {
+            "sourceQuarter": "2026Q1",
+            "fields": [
+              "officialRevenueSegments"
+            ],
+            "rule": "same-normalized-category-set"
+          },
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q2",
+            "status": "ready",
+            "issues": [],
+            "requiredMarginComparisons": [
+              "grossMarginYoyDeltaPp",
+              "operatingMarginYoyDeltaPp",
+              "profitMarginYoyDeltaPp"
+            ],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "corelocalcommerce",
+              "newinitiatives"
+            ],
+            "requiredDetailMembers": {}
+          }
         }
       },
       "statementSource": "stockanalysis-financials",
@@ -597698,18 +597984,19 @@
           "overallConfidenceScore": 0.8833,
           "financialConfidenceScore": 1.0,
           "structuralConfidenceScore": 0.6667,
-          "revenueSegmentChecks": 30,
+          "revenueSegmentChecks": 31,
           "revenueSegmentMismatchCount": 0,
           "revenueSegmentSkippedChecks": 0,
           "detailGroupChecks": 30,
           "detailGroupMismatchCount": 0,
           "detailGroupSkippedChecks": 0,
-          "opexChecks": 1,
+          "opexChecks": 2,
           "opexSkippedChecks": 29,
-          "opexOverflowMismatchCount": 1,
-          "warningCount": 1,
+          "opexOverflowMismatchCount": 2,
+          "warningCount": 2,
           "warnings": [
-            "2026Q1: opex breakdown sums to 33.431Bn vs operating expenses 32.44Bn."
+            "2026Q1: opex breakdown sums to 33.431Bn vs operating expenses 32.44Bn.",
+            "2026Q2: opex breakdown sums to 35.631Bn vs operating expenses 32.404Bn."
           ]
         }
       },
@@ -600246,24 +600533,24 @@
       },
       "statementPresets": {},
       "coverage": {
-        "quarterCount": 31,
+        "quarterCount": 32,
         "pixelReplicaQuarterCount": 0,
         "hasPixelReplica": false,
-        "officialFinancialQuarterCount": 31,
-        "officialSegmentQuarterCount": 30,
-        "officialExpenseQuarterCount": 30,
+        "officialFinancialQuarterCount": 32,
+        "officialSegmentQuarterCount": 31,
+        "officialExpenseQuarterCount": 31,
         "classification": {
           "status": "ok",
-          "latestQuarter": "2026Q1",
+          "latestQuarter": "2026Q2",
           "latestQuarterHasRevenueClassification": true,
           "latestQuarterHasExpenseClassification": true,
-          "latestRevenueClassificationQuarter": "2026Q1",
-          "latestExpenseClassificationQuarter": "2026Q1",
+          "latestRevenueClassificationQuarter": "2026Q2",
+          "latestExpenseClassificationQuarter": "2026Q2",
           "latestStructureHistoryQuarter": "2026Q1",
-          "revenueClassificationQuarterCount": 30,
-          "expenseClassificationQuarterCount": 30,
-          "revenueClassificationCoverageRatio": 0.9677,
-          "expenseClassificationCoverageRatio": 0.9677,
+          "revenueClassificationQuarterCount": 31,
+          "expenseClassificationQuarterCount": 31,
+          "revenueClassificationCoverageRatio": 0.9688,
+          "expenseClassificationCoverageRatio": 0.9688,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": 0,
           "warnings": [],
@@ -600310,18 +600597,19 @@
             "overallConfidenceScore": 0.8833,
             "financialConfidenceScore": 1.0,
             "structuralConfidenceScore": 0.6667,
-            "revenueSegmentChecks": 30,
+            "revenueSegmentChecks": 31,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
             "detailGroupChecks": 30,
             "detailGroupMismatchCount": 0,
             "detailGroupSkippedChecks": 0,
-            "opexChecks": 1,
+            "opexChecks": 2,
             "opexSkippedChecks": 29,
-            "opexOverflowMismatchCount": 1,
-            "warningCount": 1,
+            "opexOverflowMismatchCount": 2,
+            "warningCount": 2,
             "warnings": [
-              "2026Q1: opex breakdown sums to 33.431Bn vs operating expenses 32.44Bn."
+              "2026Q1: opex breakdown sums to 33.431Bn vs operating expenses 32.44Bn.",
+              "2026Q2: opex breakdown sums to 35.631Bn vs operating expenses 32.404Bn."
             ]
           }
         }
@@ -614335,14 +614623,14 @@
         "id": "netease",
         "ticker": "NTES",
         "financialSource": "stockanalysis",
-        "latestQuarter": "2026Q1",
+        "latestQuarter": "2026Q2",
         "status": "ok",
         "latestQuarterHasRevenueClassification": true,
         "latestQuarterHasExpenseClassification": true,
-        "latestRevenueClassificationQuarter": "2026Q1",
-        "latestExpenseClassificationQuarter": "2026Q1",
-        "revenueClassificationQuarterCount": 33,
-        "expenseClassificationQuarterCount": 28,
+        "latestRevenueClassificationQuarter": "2026Q2",
+        "latestExpenseClassificationQuarter": "2026Q2",
+        "revenueClassificationQuarterCount": 34,
+        "expenseClassificationQuarterCount": 29,
         "warnings": [],
         "blockers": []
       },
@@ -614350,14 +614638,14 @@
         "id": "meituan",
         "ticker": "MPNGY",
         "financialSource": "stockanalysis",
-        "latestQuarter": "2026Q1",
+        "latestQuarter": "2026Q2",
         "status": "ok",
         "latestQuarterHasRevenueClassification": true,
         "latestQuarterHasExpenseClassification": true,
-        "latestRevenueClassificationQuarter": "2026Q1",
-        "latestExpenseClassificationQuarter": "2026Q1",
-        "revenueClassificationQuarterCount": 30,
-        "expenseClassificationQuarterCount": 30,
+        "latestRevenueClassificationQuarter": "2026Q2",
+        "latestExpenseClassificationQuarter": "2026Q2",
+        "revenueClassificationQuarterCount": 31,
+        "expenseClassificationQuarterCount": 31,
         "warnings": [],
         "blockers": []
       },

@@ -32,7 +32,11 @@ test('current Apple has a wider cost split, stable monetary caps and additive ed
   const frames=svg=>Object.fromEntries([...svg.matchAll(/<rect[^>]*data-edit-node-visible-id="([^"]+)"[^>]*>/g)].map(m=>[m[1],Object.fromEntries([...m[0].matchAll(/(x|y|width|height)="([\d.-]+)"/g)].map(a=>[a[1],Number(a[2])]))]));
   const a=frames(svgs[0]),b=frames(svgs[1]),gap=a.cost.y-a.gross.y-a.gross.height;
   assert.ok(gap>75&&gap<110,`cost/gross gap ${gap}`);
-  assert.equal(a.cost.height,308.8);assert.equal(a.gross.height,283.7);
+  // The official expense taxonomy can change the available vertical scale;
+  // monetary thickness must remain proportional and unchanged by editor drags.
+  const financials=ctx.payload.financials['2026Q3'];
+  assert.ok(Math.abs(a.cost.height/a.gross.height-financials.costOfRevenueBn/financials.grossProfitBn)<0.002);
+  for(const id of ['cost','gross'])assert.equal(a[id].height,b[id].height);
   assert.ok(Math.abs(b.cost.y-a.cost.y-38)<0.2,`manual drag remains additive: ${a.cost.y} -> ${b.cost.y}`);
   for(const text of ['同比+0.7个百分点','同比-0.5个百分点','同比+0.02个百分点'])assert.ok(svgs[0].includes(text),text);
 });
