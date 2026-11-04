@@ -52,9 +52,17 @@ def detect(company: dict, local: dict | None = None, *, external=False) -> dict:
     company = {**company, **({"reportingCurrency": native} if native else {}),
                '_localQuarter':latest,'_localFilingDate':entry.get('statementFilingDate'),'_localSourceUrl':entry.get('statementSourceUrl')}
     native_release = latest_native_release(company)
-    if (company.get('hkexStockId') and native_release and native_release['quarter'] == latest
+    covered_sources = {entry.get('statementSourceUrl')}
+    if company['id'] == 'alibaba' and native_release:
+        # The live official index links a document page; the parsed statement
+        # links its PDF. Match the recorded page/PDF pair, not just a quarter.
+        for filing in (local.get('officialRevenueStructureHistory') or {}).get('filingsUsed') or []:
+            if (filing.get('quarter') == latest and filing.get('filingDate') == native_release.get('filingDate')
+                and filing.get('pdf') == entry.get('statementSourceUrl')):
+                covered_sources.add(filing.get('page'))
+    if ((company.get('hkexStockId') or company['id'] == 'alibaba') and native_release and native_release['quarter'] == latest
         and native_release.get('filingDate') and native_release['filingDate'] <= (entry.get('statementFilingDate')or'')
-        and native_release.get('sourceUrl') == entry.get('statementSourceUrl') and not pending_chart_issues
+        and native_release.get('sourceUrl') and native_release['sourceUrl'] in covered_sources and not pending_chart_issues
         and all(isinstance(entry.get(k),(int,float)) for k in ('revenueBn','grossProfitBn','operatingIncomeBn','netIncomeBn'))):
         return dict(companyId=company['id'],ticker=company['ticker'],needsUpdate=False,reason='up-to-date',
                     localQuarter=latest,remoteQuarter=latest,remoteFilingDate=native_release['filingDate'])

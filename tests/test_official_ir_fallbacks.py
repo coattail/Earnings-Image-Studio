@@ -20,6 +20,26 @@ class FixedDate(date):
 
 
 class OfficialIrFallbackTests(unittest.TestCase):
+    def test_live_official_index_matches_its_already_parsed_pdf_without_archive_crawling(self):
+        import watch_earnings as watch
+        company = {'id':'alibaba','ticker':'BABA'}
+        item = {'quarter':'2026Q2','filingDate':'2026-08-20','sourceUrl':'https://www.alibabagroup.com/en-US/document-current'}
+        entry = {'revenueBn':100,'grossProfitBn':60,'operatingIncomeBn':30,'netIncomeBn':20,
+                 'statementFilingDate':item['filingDate'],'statementSourceUrl':'https://data.alibabagroup.com/current.pdf',
+                 'officialRevenueSegments':[{'name':'Business','valueBn':100}]}
+        payload = {'financials':{'2026Q2':entry},'officialRevenueStructureHistory':{'filingsUsed':[
+            {'quarter':'2026Q2','filingDate':item['filingDate'],'page':item['sourceUrl'],'pdf':entry['statementSourceUrl']}]}}
+        with patch.object(watch,'latest_native_release',return_value=item), \
+             patch.object(watch,'discover_release',return_value=None) as sec, \
+             patch.object(watch.checker,'detect_company_update',return_value={'needsUpdate':False}) as archive:
+            self.assertEqual(watch.detect(company,payload)['reason'],'up-to-date')
+            sec.assert_not_called(); archive.assert_not_called()
+            # A different official document must still be checked, even if its
+            # quarter and publication date have not changed.
+            item['sourceUrl'] += '-amended'
+            watch.detect(company,payload)
+            sec.assert_called_once(); archive.assert_called_once()
+
     def test_validated_release_partition_counts_without_a_legacy_history_rebuild(self):
         from check_for_updates import latest_local_revenue_structure_quarter
         entry = {'revenueBn':10,'netIncomeBn':1,'officialRevenueSegments':[{'name':'A','valueBn':10}],
@@ -65,13 +85,13 @@ class OfficialIrFallbackTests(unittest.TestCase):
         self.assertEqual(result['quarter'],'2026Q2')
         self.assertEqual(result['filingDate'],'2026-08-28')
 
-    def test_latest_fiscal_index_avoids_an_unneeded_older_alibaba_archive(self):
+    def test_current_calendar_index_avoids_missing_future_and_unneeded_old_archives(self):
         stamp = int(datetime(2026,8,20,tzinfo=timezone.utc).timestamp()*1000)
         payload = {'content':[{'documentTitle':'Alibaba Group Announces June Quarter 2026 Results','documentId':'current','eventDate':stamp}]}
         with patch.object(native,'date',FixedDate), patch.object(native,'_request_json',return_value=payload) as request:
             result = native.latest_native_release({'id':'alibaba','_localQuarter':'2026Q2'})
         self.assertEqual(result['quarter'],'2026Q2')
-        request.assert_called_once_with('https://data.alibabagroup.com/data/index/ir/quarterly-results/q2027/list.json')
+        request.assert_called_once_with('https://data.alibabagroup.com/data/index/ir/quarterly-results/q2026/list.json')
 
     def test_vendor_quarter_numbers_do_not_suppress_a_new_official_release(self):
         recent = dict(form=['10-Q','8-K'],filingDate=['2026-11-04','2026-11-03'],
