@@ -2,11 +2,6 @@ name: Earnings Pipeline Regression Checks
 
 on:
   pull_request:
-    paths:
-      - 'scripts/**'
-      - 'tests/**'
-      - 'data/**'
-      - '.github/workflows/**'
   workflow_dispatch:
 
 permissions:
