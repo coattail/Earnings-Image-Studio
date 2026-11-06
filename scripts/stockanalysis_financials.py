@@ -21,7 +21,7 @@ from official_revenue_structures import (
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 CACHE_DIR = ROOT_DIR / "data" / "cache" / "stockanalysis-financials"
-STOCKANALYSIS_CACHE_VERSION = "20260706-v2"
+STOCKANALYSIS_CACHE_VERSION = "20261106-v3"
 FINANCIAL_TABLE_LABELS = ("Fiscal Quarter", "Fiscal Year", "Period Ending")
 
 REQUEST_HEADERS = {
@@ -32,7 +32,7 @@ REQUEST_HEADERS = {
 
 ROW_ALIASES = {
     "revenue": ["Revenue"],
-    "revenueYoyPct": ["Revenue Growth (YoY)"],
+    "revenueYoyPct": ["Revenue Growth (YoY)", "Revenue Growth"],
     "costOfRevenue": ["Cost of Revenue"],
     "grossProfit": ["Gross Profit"],
     "sgna": ["Selling, General & Admin"],
@@ -161,6 +161,11 @@ def _normalize_fiscal_header(raw: str) -> tuple[str, str, str]:
 
 def _row_map(table) -> dict[str, list[str]]:
     rows: dict[str, list[str]] = {}
+    # Layout-only growth labels are duplicated inside the parent label cell.
+    # Ignore explicitly hidden nodes without changing the caller's DOM.
+    table = BeautifulSoup(str(table), "html.parser")
+    for node in table.select('[aria-hidden="true"]'):
+        node.decompose()
     for tr in table.find_all("tr"):
         cells = [cell.get_text(" ", strip=True) for cell in tr.find_all(["th", "td"])]
         if len(cells) < 2:
@@ -460,6 +465,8 @@ def fetch_stockanalysis_financial_history(company: dict[str, Any], refresh: bool
         key: _find_row(row_map_value, aliases)
         for key, aliases in ROW_ALIASES.items()
     }
+    if not extracted_rows["revenue"] or not extracted_rows["netIncome"]:
+        raise RuntimeError(f"Missing revenue / net income rows for {company['ticker']}")
 
     for index in range(column_count):
         period_end = _extract_period_end(period_ends[index])

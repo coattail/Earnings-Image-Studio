@@ -173,6 +173,23 @@ def discover_release(company: dict, local: dict | None = None, *, expected_filin
         examined += 1
         accession = recent["accessionNumber"][i]
         marker = dict(filingDate=filed, accession=accession, form=form)
+        # An earnings announcement can be furnished days after its 10-Q.
+        # reportDate is the announcement EVENT, never the earnings quarter.
+        # Only deduplicate when the exact local statutory filing proves that
+        # the event had already occurred and its reporting period is covered.
+        event_date = (recent.get("reportDate") or [""] * len(recent["form"]))[i]
+        if (not expected_filing_date and form == "8-K" and event_date
+            and event_date <= (existing.get("statementFilingDate") or "")
+            and complete_quarter(existing)):
+            local_url = existing.get("statementSourceUrl") or ""
+            if any(local_form in {"10-Q", "10-K"}
+                   and recent["accessionNumber"][j]
+                   and recent["filingDate"][j] >= event_date
+                   and recent["reportDate"][j] == existing.get("periodEnd")
+                   and (recent["accessionNumber"][j] == existing.get("statementAccession")
+                        or local_url.startswith(f"https://www.sec.gov/Archives/edgar/data/{int(cik)}/{recent['accessionNumber'][j].replace('-', '')}/"))
+                   for j, local_form in enumerate(recent["form"])):
+                continue
         # Quarter keys alone do not prove that vendor values came from this
         # release. The publication-date cutoff above handles covered reports.
         if existing.get("automaticEarnings", {}).get("accession") == accession:
