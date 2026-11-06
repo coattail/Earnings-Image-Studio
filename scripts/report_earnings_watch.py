@@ -16,6 +16,33 @@ if os.environ.get("GITHUB_STEP_SUMMARY"):
         summary.write("\n\n".join(lines) + "\n")
 for line in lines:
     print(line)
+def cell(value):
+    return str(value or '').replace('|', '\\|').replace('\r', ' ').replace('\n', ' ')
+
+
+def annotation(value):
+    return str(value).replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+
+
+failures = [item for item in report.get('report', []) if item.get('companyId') in report['failedCompanies']]
+if failures:
+    details = ['\nFailure details\n', '| Company | Phase | Quarter | Consecutive failures | Error | Source |',
+               '| --- | --- | --- | --- | --- | --- |']
+    for item in failures:
+        failure = item.get('failure') or {}
+        message = failure.get('message') or item.get('refreshError') or item.get('error') or 'See diagnostic artifact'
+        values = [item['companyId'], failure.get('phase') or item.get('reason'), failure.get('quarter'),
+                  failure.get('consecutiveFailures', 1), message[:500], failure.get('sourceUrl')]
+        details.append('| ' + ' | '.join(cell(v) for v in values) + ' |')
+        repeated = failure.get('sameFailureCount', 1)
+        if repeated >= 3:
+            print(f"::error::{annotation(item['companyId'])}: same failure repeated {repeated} times; inspect the source/parser. {annotation(message)}")
+        else:
+            print(f"::error::{annotation(item['companyId'])}: {annotation(failure.get('phase') or item.get('reason'))}: {annotation(message)}")
+    details.append('\nValid sibling updates remain publishable. Failed issuers keep their last validated data and retry on the next eligible run.\n')
+    if os.environ.get('GITHUB_STEP_SUMMARY'):
+        with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
+            summary.write('\n'.join(details))
 for item in report.get("report", []):
     if item.get("reason") == "outside-classified-reporting-period":
         message = f"{item['companyId']}: {item.get('remoteQuarter')} statement detected; chart publication remains limited to configured half-year / annual classified periods."

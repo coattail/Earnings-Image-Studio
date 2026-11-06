@@ -21,6 +21,7 @@ import check_for_updates as checker
 from build_dataset import TOP30_COMPANIES, parse_company_selection, company_matches_selection
 from earnings_release import discover_release, complete_quarter, discover_ir_statement, plausible
 from native_earnings_watch import latest_native_release
+from earnings_diagnostics import record_failure, clear_failure
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -220,6 +221,8 @@ def refresh_one(item: dict, timeout: int = 150) -> None:
             combined=json.loads(paths[0].read_text())
             combined['companies']=[payload if c['id']==item['companyId']else c for c in combined['companies']]
             save(paths[-1],payload);save(paths[0],combined);write_dataset_index_file(combined,paths[1])
+        latest_entry = payload.get('financials', {}).get(checker.latest_local_quarter(payload), {})
+        item['refreshSourceUrl'] = latest_entry.get('statementSourceUrl') or ''
         validate_refresh(item, payload, previous)
         from margin_metrics import missing_margin_comparisons
         missing = missing_margin_comparisons(payload['financials'], checker.latest_local_quarter(payload))
@@ -296,16 +299,21 @@ def run(args) -> int:
             except Exception as error:
                 item = dict(companyId=company["id"], ticker=company["ticker"], needsUpdate=False, reason="check-failed", error=str(error))
                 report["failedCompanies"].append(company["id"])
+                record_failure(state, item, error, 'discovery', datetime.now(timezone.utc).isoformat())
             report["report"].append(item)
             if item.get('reason') == 'incomplete-chart-classification' and state.get(company['id'], {}).get('error'):
                 item['buildRefreshMode'] = 'full-refresh'
             if (state.get(company["id"], {}).get("pendingDetails")
-                and item.get("reason") not in {"check-failed", "incomplete-chart-classification"}
+                and item.get("reason") not in {"check-failed", "incomplete-chart-classification", "outside-classified-reporting-period"}
                 and (item.get('remoteQuarter') or '') <= (item.get('localQuarter') or '')):
                 item.update(needsUpdate=True, reason="pending-classification-details", buildRefreshMode="full-refresh")
+            if not item.get('needsUpdate') and item.get('reason') in {'up-to-date', 'outside-classified-reporting-period'}:
+                clear_failure(state, company['id'])
             report["checked"] += 1
             print(f"[watch] {company['ticker']}: {item['reason']}", flush=True)
             save(args.report_path, report)
+            if not args.dry_run:
+                save(args.state_path, state)
     stale = [item for item in report["report"] if item.get("needsUpdate")]
     # Fresh releases and issuers never attempted take priority over previously
     # failing issuers. One unavailable source cannot starve the rest of the list.
@@ -316,17 +324,18 @@ def run(args) -> int:
             if time.monotonic() - started >= args.budget_seconds:
                 report["deferredCompanies"].append(company_id)
                 continue
-            state[company_id] = {"lastAttempt": datetime.now(timezone.utc).isoformat()}
+            state.setdefault(company_id, {})['lastAttempt'] = datetime.now(timezone.utc).isoformat()
             try:
                 blockers = refresh_one(item)
                 report["updatedCompanies"].append(company_id)
+                clear_failure(state, company_id)
                 if blockers:
                     report["pendingDetails"].append(dict(companyId=company_id, issues=blockers))
                     state[company_id]["pendingDetails"] = True
             except Exception as error:
                 report["failedCompanies"].append(company_id)
                 item["refreshError"] = str(error)
-                state[company_id]["error"] = str(error)
+                record_failure(state, item, error, 'refresh', datetime.now(timezone.utc).isoformat())
             save(args.state_path, state)
             save(args.report_path, report)
     report["finishedAt"] = datetime.now(timezone.utc).isoformat()
