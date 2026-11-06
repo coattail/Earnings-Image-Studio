@@ -16,6 +16,13 @@ if os.environ.get("GITHUB_STEP_SUMMARY"):
         summary.write("\n\n".join(lines) + "\n")
 for line in lines:
     print(line)
+for item in report.get("report", []):
+    if item.get("reason") == "outside-classified-reporting-period":
+        message = f"{item['companyId']}: {item.get('remoteQuarter')} statement detected; chart publication remains limited to configured half-year / annual classified periods."
+        print(f"::notice::{message}")
+        if os.environ.get("GITHUB_STEP_SUMMARY"):
+            with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as summary:
+                summary.write(f"\n{message}\n")
 for item in report.get("pendingDetails", []):
     print(f"::warning::{item['companyId']}: core financial data published; classification details pending; retry queued")
 if report["failedCompanies"] or report["deferredCompanies"] or report.get("pendingDetails"):

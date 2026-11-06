@@ -187,7 +187,10 @@ def latest_remote_sec_filing(company: dict[str, Any]) -> dict[str, str] | None:
 
 def latest_remote_stockanalysis(company: dict[str, Any]) -> dict[str, str] | None:
     payload = fetch_stockanalysis_financial_history(company, refresh=True)
-    latest_quarter = latest_local_quarter(payload)
+    from earnings_release import complete_quarter
+    # A future/empty column header is not a released set of results.
+    latest_quarter = max((q for q, entry in (payload.get("financials") or {}).items()
+                          if complete_quarter(entry)), key=parse_period, default="")
     if not latest_quarter:
         return None
     entry = (payload.get("financials") or {}).get(latest_quarter) or {}

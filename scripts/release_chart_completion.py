@@ -283,6 +283,40 @@ def enrich_complete_partition(payload, html, url):
     elif cid=='home-depot':
         templates=[{'name':n,'nameZh':z,'memberKey':n.lower()}for n,z in [('Products','产品'),('Services','服务')]]
     tables=list(table_candidates(html,entry))
+    if cid == 'chevron':
+        from datetime import date
+        from calendar import month_name
+        end = date.fromisoformat(entry['periodEnd']) if entry.get('periodEnd') else None
+        heading = (rf'Three months ended {month_name[end.month]} {end.day},? {end.year}' if end else r'(?!)')
+        for rows in tables:
+            # Chevron's current segment note has two geographical columns per
+            # operating segment, followed by segment, corporate and group totals.
+            if len(rows) < 2 or rows[0] != ['Upstream', 'Downstream', 'Segment Total', 'All Other', 'Total']:
+                continue
+            if not re.fullmatch(heading, rows[1][0], re.I):
+                continue
+            if rows[1][1:] not in (['U.S.', 'Int’l.', 'U.S.', 'Int’l.'], ['U.S.', "Int'l.", 'U.S.', "Int'l."]):
+                continue
+            text = ' '.join(' '.join(r) for r in rows)
+            if not re.search(r'in millions of dollars', text, re.I):
+                continue
+            for row in rows:
+                if label_key(row[0]) not in {'totalrevenuesotherincome', 'salesotheroperatingrevenues'}:
+                    continue
+                values = numbers(row[1:])
+                if len(values) != 7 or not matches_total(values[-1] * .001, entry.get('revenueBn')):
+                    continue
+                if not matches_total(sum(values[:4]), values[4]) or not matches_total(values[4] + values[5], values[6]):
+                    continue
+                amounts = {'upstream': sum(values[:2]), 'downstream': sum(values[2:4]), 'allothersegments': values[5]}
+                if {key(t.get('memberKey') or t.get('name')) for t in templates} != set(amounts):
+                    continue
+                partition = [sourced(t, amounts[key(t.get('memberKey') or t.get('name'))] * .001, entry, url) for t in templates]
+                if any(r['valueBn'] < 0 for r in partition):
+                    continue
+                entry.update(officialRevenueSegments=partition, revenueClassificationSource='official-complete-table',
+                             revenueClassificationSourceUrl=url)
+                return payload
     if cid in {'jpmorgan','bank-of-america'}:
         for rows in tables:
             partition=[];reported_total=None

@@ -90,6 +90,19 @@ def detect(company: dict, local: dict | None = None, *, external=False) -> dict:
     if external:
         return dict(companyId=company["id"], ticker=company["ticker"], needsUpdate=False, reason="no-new-earnings-release")
     result = checker.detect_company_update(company, payload=local)
+    policy = local.get('classificationPolicy') or {}
+    remote_quarter = result.get('remoteQuarter') or ''
+    # Some issuers intentionally publish classified charts only for H1/FY.
+    # A quarterly vendor statement must not override that explicit policy.
+    # New official classifications still take precedence and are refreshed.
+    if (policy.get('displayOfficiallyClassifiedPeriodsOnly')
+        and policy.get('displayPeriodTypes')
+        and not result.get('remoteOfficialRevenueQuarter')
+        and remote_quarter.endswith(('Q1', 'Q3'))
+        and set(policy['displayPeriodTypes']) <= {'half-year', 'annual'}):
+        result.update(needsUpdate=False, reason='outside-classified-reporting-period',
+                      sourceWarning=policy.get('latestRevenueGapReason') or 'Official revenue classifications are published only for half-year / annual periods.')
+        return result
     if result.get("reason") == "new-official-ir-quarter-detected":
         from official_revenue_structures import _available_custom_history_items
         candidates = _available_custom_history_items(company["id"])
