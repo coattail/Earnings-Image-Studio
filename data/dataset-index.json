@@ -14100,31 +14100,28 @@
       "cik": 93410,
       "errors": [],
       "coverage": {
-        "quarterCount": 34,
+        "quarterCount": 35,
         "pixelReplicaQuarterCount": 0,
         "hasPixelReplica": false,
-        "officialFinancialQuarterCount": 34,
-        "officialSegmentQuarterCount": 34,
+        "officialFinancialQuarterCount": 35,
+        "officialSegmentQuarterCount": 35,
         "officialExpenseQuarterCount": 8,
         "classification": {
-          "status": "error",
+          "status": "ok",
           "latestQuarter": "2026Q3",
-          "latestQuarterHasRevenueClassification": false,
+          "latestQuarterHasRevenueClassification": true,
           "latestQuarterHasExpenseClassification": false,
-          "latestRevenueClassificationQuarter": "2026Q2",
+          "latestRevenueClassificationQuarter": "2026Q3",
           "latestExpenseClassificationQuarter": "2025Q4",
           "latestStructureHistoryQuarter": "2026Q2",
-          "revenueClassificationQuarterCount": 34,
+          "revenueClassificationQuarterCount": 35,
           "expenseClassificationQuarterCount": 8,
-          "revenueClassificationCoverageRatio": 0.9714,
+          "revenueClassificationCoverageRatio": 1.0,
           "expenseClassificationCoverageRatio": 0.2286,
-          "latestRevenueClassificationLagQuarters": 1,
+          "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": 3,
           "warnings": [],
-          "blockers": [
-            "missing current-quarter revenue classification",
-            "missing previously disclosed revenue categories: allothersegments,downstream,upstream"
-          ],
+          "blockers": [],
           "policy": {}
         },
         "parser": {
@@ -14164,7 +14161,7 @@
             "overallConfidenceScore": 1.0,
             "financialConfidenceScore": 1.0,
             "structuralConfidenceScore": 1.0,
-            "revenueSegmentChecks": 0,
+            "revenueSegmentChecks": 1,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 34,
             "detailGroupChecks": 0,
@@ -14193,31 +14190,31 @@
           "fiscalQuarter": "Q3",
           "fiscalLabel": "FY2026 Q3",
           "statementCurrency": "USD",
-          "revenueBn": 65.237,
-          "revenueYoyPct": null,
-          "costOfRevenueBn": null,
-          "grossProfitBn": null,
-          "sgnaBn": null,
+          "revenueBn": 67.798,
+          "revenueYoyPct": 40.75,
+          "costOfRevenueBn": 36.534,
+          "grossProfitBn": 31.264,
+          "sgnaBn": 1.227,
           "rndBn": null,
           "otherOpexBn": 9.494,
-          "operatingExpensesBn": 9.494,
-          "operatingIncomeBn": null,
-          "nonOperatingBn": null,
-          "pretaxIncomeBn": null,
-          "taxBn": 13.625,
+          "operatingExpensesBn": 19.879,
+          "operatingIncomeBn": 11.385,
+          "nonOperatingBn": 2.24,
+          "pretaxIncomeBn": 13.625,
+          "taxBn": 3.577,
           "netIncomeBn": 9.924,
           "netIncomeYoyPct": null,
-          "grossMarginPct": null,
-          "operatingMarginPct": null,
-          "profitMarginPct": 15.212,
+          "grossMarginPct": 46.113455,
+          "operatingMarginPct": 16.792531,
+          "profitMarginPct": 14.6376,
           "effectiveTaxRatePct": null,
-          "revenueQoqPct": null,
-          "grossMarginYoyDeltaPp": null,
-          "operatingMarginYoyDeltaPp": null,
-          "profitMarginYoyDeltaPp": 7.862,
+          "revenueQoqPct": 0.891,
+          "grossMarginYoyDeltaPp": 1.211,
+          "operatingMarginYoyDeltaPp": 8.151,
+          "profitMarginYoyDeltaPp": 7.521,
           "statementSource": "official-earnings-release",
-          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/93410/000009341026000196/a09302026ex9918-k.htm",
-          "statementFilingDate": "2026-10-30",
+          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/93410/000009341026000200/cvx-20260930.htm",
+          "statementFilingDate": "2026-11-05",
           "statementSpanQuarters": 1,
           "statementValueMode": "reported",
           "parserFinancialFieldSources": {
@@ -14229,21 +14226,20 @@
             "sourceUrl": "https://www.sec.gov/Archives/edgar/data/93410/000009341026000196/a09302026ex9918-k.htm"
           },
           "automaticEarnings": {
-            "filingDate": "2026-10-30",
-            "accession": "0000093410-26-000196",
-            "form": "8-K"
+            "filingDate": "2026-11-05",
+            "accession": "0000093410-26-000200",
+            "form": "10-Q"
           },
           "displayCurrency": "USD",
           "displayScaleFactor": 1,
           "chartQuality": {
             "version": 3,
             "quarter": "2026Q3",
-            "status": "pending",
-            "issues": [
-              "missing current-quarter revenue classification",
-              "missing previously disclosed revenue categories: allothersegments,downstream,upstream"
-            ],
+            "status": "ready",
+            "issues": [],
             "requiredMarginComparisons": [
+              "grossMarginYoyDeltaPp",
+              "operatingMarginYoyDeltaPp",
               "profitMarginYoyDeltaPp"
             ],
             "requiredDetailParents": [],
@@ -14253,6 +14249,65 @@
               "upstream"
             ],
             "requiredDetailMembers": {}
+          },
+          "officialRevenueSegments": [
+            {
+              "name": "Downstream",
+              "nameZh": null,
+              "memberKey": "downstream",
+              "valueBn": 47.826,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/93410/000009341026000200/cvx-20260930.htm",
+              "filingDate": "2026-11-05",
+              "sourceForm": "official current-period disclosure",
+              "mixPct": 70.5,
+              "qoqPct": -3.67,
+              "yoyPct": 45.02,
+              "mixYoyDeltaPp": 2.1
+            },
+            {
+              "name": "Upstream",
+              "nameZh": null,
+              "memberKey": "upstream",
+              "valueBn": 19.805,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/93410/000009341026000200/cvx-20260930.htm",
+              "filingDate": "2026-11-05",
+              "sourceForm": "official current-period disclosure",
+              "mixPct": 29.2,
+              "qoqPct": 12.99,
+              "yoyPct": 30.6,
+              "mixYoyDeltaPp": -2.3
+            },
+            {
+              "name": "All Other Segments",
+              "nameZh": null,
+              "memberKey": "allothersegments",
+              "valueBn": 0.167,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/93410/000009341026000200/cvx-20260930.htm",
+              "filingDate": "2026-11-05",
+              "sourceForm": "official current-period disclosure",
+              "mixPct": 0.2,
+              "qoqPct": 568.0,
+              "yoyPct": 595.83,
+              "mixYoyDeltaPp": 0.2
+            }
+          ],
+          "revenueClassificationSource": "official-complete-table",
+          "revenueClassificationSourceUrl": "https://www.sec.gov/Archives/edgar/data/93410/000009341026000200/cvx-20260930.htm",
+          "chartCompletionAttempts": [
+            {
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/93410/000009341026000200/cvx-20260930.htm",
+              "remainingIssues": []
+            }
+          ],
+          "statementAccession": "0000093410-26-000200",
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "sankeyStructureContinuity": {
+            "sourceQuarter": "2026Q2",
+            "fields": [
+              "officialRevenueSegments"
+            ],
+            "rule": "same-normalized-category-set"
           }
         }
       },
@@ -22773,6 +22828,5 @@
       },
       "officialSegmentHistory": {}
     }
-  ],
-  "marketCapUpdatedAt": "2026-11-06T02:47:24+00:00"
+  ]
 }
