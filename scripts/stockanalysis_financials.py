@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import math
 import re
 from datetime import date
 from pathlib import Path
@@ -9,6 +10,7 @@ from urllib.parse import urlencode
 
 import requests
 from bs4 import BeautifulSoup
+from earnings_diagnostics import SourceContractError
 from official_revenue_structures import (
     _extract_pdf_text,
     _load_alibaba_press_release_pdf,
@@ -21,7 +23,7 @@ from official_revenue_structures import (
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 CACHE_DIR = ROOT_DIR / "data" / "cache" / "stockanalysis-financials"
-STOCKANALYSIS_CACHE_VERSION = "20261106-v3"
+STOCKANALYSIS_CACHE_VERSION = "20261106-v4"
 FINANCIAL_TABLE_LABELS = ("Fiscal Quarter", "Fiscal Year", "Period Ending")
 
 REQUEST_HEADERS = {
@@ -170,6 +172,8 @@ def _row_map(table) -> dict[str, list[str]]:
         cells = [cell.get_text(" ", strip=True) for cell in tr.find_all(["th", "td"])]
         if len(cells) < 2:
             continue
+        if cells[0] in rows:
+            raise RuntimeError(f"Duplicate financial row: {cells[0]}")
         rows[cells[0]] = cells[1:]
     return rows
 
@@ -335,7 +339,7 @@ def _load_table(url: str) -> tuple[str, Any]:
     soup = BeautifulSoup(html_text, "html.parser")
     tables = soup.find_all("table")
     if not tables:
-        raise RuntimeError(f"Unable to locate financial table for {url}")
+        raise SourceContractError(f"Unable to locate financial table for {url}", url)
 
     for label in FINANCIAL_TABLE_LABELS:
         for candidate in tables:
@@ -441,13 +445,20 @@ def fetch_stockanalysis_financial_history(company: dict[str, Any], refresh: bool
     source_url = f"https://stockanalysis.com/{financial_path}/financials/?{urlencode({'p': 'quarterly'})}"
     html_text, table = _load_table(source_url)
     currency = _parse_currency(html_text)
-    row_map_value = _row_map(table)
+    if not currency:
+        raise SourceContractError(f"Unverified statement currency / million-unit heading for {company['ticker']}", source_url)
+    try:
+        row_map_value = _row_map(table)
+    except RuntimeError as error:
+        raise SourceContractError(str(error), source_url) from error
     headers = row_map_value.get("Fiscal Quarter") or row_map_value.get("Fiscal Year")
     if not headers:
-        raise RuntimeError(f"Unsupported Stock Analysis table structure for {company['ticker']}")
+        raise SourceContractError(f"Unsupported Stock Analysis table structure for {company['ticker']}", source_url)
     period_ends = row_map_value.get("Period Ending") or []
     if not period_ends:
-        raise RuntimeError(f"Missing period ending row for {company['ticker']}")
+        raise SourceContractError(f"Missing period ending row for {company['ticker']}", source_url)
+    if len(headers) != len(period_ends):
+        raise SourceContractError(f"Reporting header/date column mismatch for {company['ticker']}", source_url)
 
     column_count = min(len(headers), len(period_ends))
     result = {
@@ -466,7 +477,19 @@ def fetch_stockanalysis_financial_history(company: dict[str, Any], refresh: bool
         for key, aliases in ROW_ALIASES.items()
     }
     if not extracted_rows["revenue"] or not extracted_rows["netIncome"]:
-        raise RuntimeError(f"Missing revenue / net income rows for {company['ticker']}")
+        raise SourceContractError(f"Missing revenue / net income rows for {company['ticker']}", source_url)
+    for field, values in extracted_rows.items():
+        if values is None:
+            continue
+        if len(values) != column_count:
+            raise SourceContractError(f"Column mismatch in {field} for {company['ticker']}", source_url)
+        for raw in values:
+            parsed = _clean_number(raw)
+            if (parsed is None and str(raw).strip() not in {'', '-', '—', 'N/A'}
+                or (not field.endswith('Pct') and '%' in str(raw))):
+                raise SourceContractError(f"Unrecognized value in {field} for {company['ticker']}: {str(raw)[:80]}", source_url)
+            if parsed is not None and not math.isfinite(parsed):
+                raise SourceContractError(f"Non-finite value in {field} for {company['ticker']}", source_url)
 
     for index in range(column_count):
         period_end = _extract_period_end(period_ends[index])
@@ -524,6 +547,9 @@ def fetch_stockanalysis_financial_history(company: dict[str, Any], refresh: bool
         }
 
     _supplement_alibaba_missing_quarters(result)
+    if not any(isinstance(e.get('revenueBn'), (int, float)) and e['revenueBn'] > 0
+               and isinstance(e.get('netIncomeBn'), (int, float)) for e in result['financials'].values()):
+        raise SourceContractError(f"No usable revenue / net income periods for {company['ticker']}", source_url)
 
     ordered_quarters = sorted(result["financials"].keys())
     for quarter_key in ordered_quarters:
