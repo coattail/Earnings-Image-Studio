@@ -20,7 +20,7 @@ from generic_filing_table_parser import _period_entries_from_table
 from sankey_statement_backfill import parse_inline_statements, complete_statement
 
 CACHE = Path(__file__).resolve().parents[1] / "data/cache/earnings-releases"
-VERSION = "earnings-release-v11"
+VERSION = "earnings-release-v12"
 CORE = ("revenueBn", "operatingIncomeBn", "netIncomeBn")
 
 
@@ -55,6 +55,8 @@ def parse_release(html: str, company: dict, url: str, filed: str, *, allow_parti
     entries = []
     for table in BeautifulSoup(html, "html.parser").find_all("table"):
         table_text = re.sub(r'\s+', ' ', table.get_text(" ", strip=True))
+        if re.search(r'cash flows? (?:from|used in|provided by) operating activities', table_text[:600], re.I):
+            continue  # A cash-flow starting net loss is not an income statement.
         quarter_heading = r"(?:three months|quarter|13 weeks|thirteen weeks).{0,30}ended|\b(?:first|second|third|fourth) quarter\b|\bQ[1-4]\b"
         heading = re.split(quarter_heading, table_text, maxsplit=1, flags=re.I)[0][:400]
         if re.search(r"reconciliation|non[-\s]?gaap|adjusted (?:net|operating|income|earnings)", heading, re.I):

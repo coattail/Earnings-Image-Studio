@@ -715,6 +715,12 @@ def build_incremental_company_payload_for_dataset(
                 current["statementFilingDate"] = max(current.get("statementFilingDate") or "", marker["filingDate"])
         if quick != cached:
             quick["quarters"] = sorted(quick["financials"])
+            # The vendor fast path must satisfy the same official chart contract
+            # as a full build before it can bypass the remaining enrichment.
+            from release_chart_quality import chart_issues
+            if chart_issues(quick):
+                from release_chart_completion import complete_current_chart
+                complete_current_chart(quick, company)
             return apply_usd_display_fields(quick, fx_cache)
     payload = build_company_payload_for_dataset(
         company,
@@ -730,6 +736,10 @@ def build_incremental_company_payload_for_dataset(
         if quarter > latest and complete_quarter(entry, str(company["id"])):
             payload.setdefault("financials", {})[quarter] = deepcopy(entry)
     payload["quarters"] = sorted(payload.get("financials", {}))
+    from release_chart_quality import chart_issues
+    if chart_issues(payload):
+        from release_chart_completion import complete_current_chart
+        complete_current_chart(payload, company)
     return apply_usd_display_fields(payload, fx_cache)
 
 

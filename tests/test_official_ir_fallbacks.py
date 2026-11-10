@@ -66,7 +66,7 @@ class OfficialIrFallbackTests(unittest.TestCase):
             result = release.discover_ir_statement({'id':'netease','cik':1,'reportingCurrency':'CNY'},
                 {'sourceUrl':'https://ir.example/blocked.pdf','quarter':'2026Q2','filingDate':'2026-08-20'})
         self.assertEqual(result['quarter'],'2026Q2')
-        self.assertEqual(result['entry']['revenueBn'],30.107)
+        self.assertEqual(result['entry']['revenueBn'],30.106546)
         self.assertEqual(result['form'],'6-K')
 
     def test_ir_fallback_never_accepts_a_different_reporting_quarter(self):
