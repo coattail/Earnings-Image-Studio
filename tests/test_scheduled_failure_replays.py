@@ -101,3 +101,35 @@ class ScheduledFailureReplays(unittest.TestCase):
 
 
 if __name__ == '__main__': unittest.main()
+
+class PeriodAndProvenanceTests(unittest.TestCase):
+    def test_monthly_6k_event_date_is_not_a_quarterly_statement(self):
+        import check_for_updates as checker
+        recent = dict(form=['6-K','20-F'], filingDate=['2026-11-10','2026-04-01'],
+                      reportDate=['2026-10-31','2025-12-31'], accessionNumber=['monthly','annual'],
+                      primaryDocument=['monthly.htm','annual.htm'])
+        with patch.object(checker,'_resolve_cik',return_value=1), patch.object(checker,'_request_json',return_value={'filings':{'recent':recent}}):
+            result = checker.latest_remote_sec_filing({'ticker':'TSM'})
+        self.assertEqual(result['form'],'20-F')
+        self.assertEqual(result['quarter'],'2025Q4')
+
+    def test_complete_chart_with_old_vendor_date_still_recovers_official_statement_provenance(self):
+        from release_chart_completion import complete_current_chart
+        payload={'id':'sample','financials':{'2026Q3':dict(periodEnd='2026-09-30',revenueBn=105.647,netIncomeBn=22.112,
+            statementFilingDate='2026-09-30',statementSourceUrl='https://vendor.example/financials',
+            officialRevenueSegments=[{'name':'All revenue','memberKey':'all','valueBn':105.647}])}}
+        html='''<p>Consolidated Statements of Earnings (in millions)</p><table>
+        <tr><td>Three Months Ended</td></tr><tr><td>September 30, 2026</td><td>September 30, 2025</td></tr>
+        <tr><td>Revenue</td><td>105647</td><td>94972</td></tr>
+        <tr><td>Net income</td><td>22112</td><td>30796</td></tr></table>'''
+        recent=dict(form=['10-Q'],reportDate=['2026-09-30'],filingDate=['2026-11-09'],
+                    accessionNumber=['0001193125-26-452412'],primaryDocument=['brka-20260930.htm'])
+        with patch('official_segments._request_json',return_value={'filings':{'recent':recent}}), \
+             patch('official_segments._request',side_effect=lambda url:b'<html>Vendor</html>' if 'vendor.example' in url else html.encode()):
+            complete_current_chart(payload,{'cik':1067983},require_filing_date='2026-11-09')
+        entry=payload['financials']['2026Q3']
+        self.assertEqual(entry['statementFilingDate'],'2026-11-09')
+        self.assertEqual(entry['statementSourceUrl'],BRK_URL)
+        self.assertEqual(entry['statementAccession'],'0001193125-26-452412')
+        self.assertEqual(entry['revenueBn'],105.647)
+        self.assertEqual(chart_issues(payload),[])

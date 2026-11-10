@@ -232,6 +232,17 @@ def refresh_one(item: dict, timeout: int = 150) -> None:
             combined['companies']=[payload if c['id']==item['companyId']else c for c in combined['companies']]
             save(paths[-1],payload);save(paths[0],combined);write_dataset_index_file(combined,paths[1])
         latest_entry = payload.get('financials', {}).get(checker.latest_local_quarter(payload), {})
+        if ((item.get('remoteFilingDate') or '') > (latest_entry.get('statementFilingDate') or '')
+            and not item.get('remoteQuarter') and item.get('release', {}).get('form') == '8-K'):
+            from release_chart_completion import complete_current_chart
+            cfg = next(c for c in TOP30_COMPANIES if c['id'] == item['companyId'])
+            complete_current_chart(payload, cfg, require_filing_date=item['remoteFilingDate'])
+            save(paths[-1], payload)
+            combined = json.loads(paths[0].read_text())
+            combined['companies'] = [payload if c['id'] == item['companyId'] else c for c in combined['companies']]
+            save(paths[0], combined)
+            from prepare_pages_artifact import write_dataset_index_file
+            write_dataset_index_file(combined, paths[1])
         item['refreshSourceUrl'] = latest_entry.get('statementSourceUrl') or ''
         validate_refresh(item, payload, previous)
         from margin_metrics import missing_margin_comparisons

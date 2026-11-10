@@ -401,7 +401,7 @@ def enrich_complete_partition(payload, html, url):
         return payload
     return payload
 
-def complete_current_chart(payload, company, *, documents=None):
+def complete_current_chart(payload, company, *, documents=None, require_filing_date=None):
     """Try release, then matching statutory filing; keep successful extraction.
 
     `documents` injects saved official responses for deterministic replay tests.
@@ -425,6 +425,14 @@ def complete_current_chart(payload, company, *, documents=None):
         if parsed and parsed.get('periodEnd','')<=filed:
             for field,value in parsed.items():
                 if value is not None and (field.endswith(('Bn','MarginPct','MarginYoyDeltaPp')) or field in {'periodEnd','statementCurrency','fiscalYear','fiscalQuarter','fiscalLabel'}): entry[field]=value
+        if (parsed and parsed.get('periodEnd') == entry.get('periodEnd')
+            and all(finite(parsed.get(k)) for k in ('revenueBn','netIncomeBn'))
+            and url.startswith('https://www.sec.gov/Archives/edgar/data/')):
+            entry.update(statementSourceUrl=url, statementFilingDate=filed)
+            accession = re.search(r'/edgar/data/\d+/(\d{18})/', url)
+            if accession:
+                digits = accession[1]
+                entry['statementAccession'] = f'{digits[:10]}-{digits[10:12]}-{digits[12:]}'
         soup=BeautifulSoup(html,'html.parser')
         fiscal={n.get('name','').split(':')[-1]:n.get_text(strip=True)for n in soup.find_all('ix:nonnumeric')
                 if n.get('name','').split(':')[-1]in {'DocumentFiscalYearFocus','DocumentFiscalPeriodFocus'}}
@@ -451,7 +459,7 @@ def complete_current_chart(payload, company, *, documents=None):
                     attempts.append({'sourceUrl':url,'remainingIssues':chart_issues(payload)})
                 else: apply(content.decode('utf-8',errors='replace'),url)
             except Exception as exc: attempts.append({'sourceUrl':url,'error':str(exc)})
-        if chart_issues(payload):
+        if chart_issues(payload) or (require_filing_date and (entry.get('statementFilingDate') or '') < require_filing_date):
             cik=company.get('cik')or _resolve_cik(company.get('ticker',''),False)
             if cik:
                 recent=_request_json(f'https://data.sec.gov/submissions/CIK{int(cik):010d}.json')['filings']['recent']

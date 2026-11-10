@@ -163,7 +163,10 @@ def latest_remote_sec_filing(company: dict[str, Any]) -> dict[str, str] | None:
     }
     best_record: tuple[str, str, str, str] | None = None
     for form, accession, filing_date, _primary_document in _submission_records(submissions):
-        if form not in ALLOWED_FORMS or filing_date < MIN_FILING_DATE:
+        # A 6-K reportDate can be a monthly sales/event date, not a quarter.
+        # Valid quarterly 6-K statements are handled by discover_release in
+        # the watcher; only statutory periodic filings belong in this fallback.
+        if form not in {"10-Q", "10-K", "20-F"} or filing_date < MIN_FILING_DATE:
             continue
         candidate = (
             str(filing_date),
