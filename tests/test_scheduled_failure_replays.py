@@ -33,6 +33,14 @@ class ScheduledFailureReplays(unittest.TestCase):
         # A discontinued/continuing-operations subtotal cannot stand in for total net loss.
         self.assertEqual(parse_release(html.replace('<td>Net loss</td>', '<td>Unrelated total</td>'), {'id': 'chronoscale'}, CHRN_URL, '2026-10-15'), {})
 
+    def test_cash_flow_net_loss_and_deferred_revenue_are_not_a_quarterly_statement(self):
+        html = """<p>Condensed Consolidated Statements of Cash Flows (Dollars in thousands)</p><table>
+        <tr><td>Three Months Ended</td></tr><tr><td>August 31, 2026</td><td>August 31, 2025</td></tr>
+        <tr><td>CASH FLOW FROM OPERATING ACTIVITIES</td></tr>
+        <tr><td>Net loss</td><td>(42,484)</td><td>(11,243)</td></tr>
+        <tr><td>Deferred revenue</td><td>93</td><td>80</td></tr></table>"""
+        self.assertEqual(parse_release(html, {'id':'sample'}, CHRN_URL, '2026-10-15'), {})
+
     def test_vendor_fast_path_recovers_official_q3_categories_before_returning(self):
         cached = json.loads((ROOT / 'data/cache/berkshire.json').read_text())
         # Keep the stable previous-quarter structure regardless of future data refreshes.
