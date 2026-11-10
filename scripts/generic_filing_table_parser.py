@@ -22,7 +22,7 @@ from statement_periods import finalize_period_entries
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 CACHE_DIR = ROOT_DIR / "data" / "cache" / "generic-filing-tables"
-GENERIC_FILING_TABLE_CACHE_VERSION = "20261104-v3"
+GENERIC_FILING_TABLE_CACHE_VERSION = "20261110-v4"
 MIN_FILING_DATE = "2018-01-01"
 SUPPORTED_FORMS = {"10-Q", "10-K", "20-F", "6-K", "8-K"}
 MAX_FILINGS_TO_SCAN = 28
@@ -167,6 +167,7 @@ ROW_ALIASES: dict[str, tuple[str, ...]] = {
         "profitattributabletocommonstockholders",
         "netincome",
         "netincomeloss",
+        "netloss",
         "profitloss",
         "netincomeattributabletoordinaryshareholders",
         "netincomelossattributabletoordinaryshareholders",
@@ -196,7 +197,7 @@ def _make_breakdown_item(
     return {
         "name": name,
         "nameZh": name_zh,
-        "valueBn": round(float(value) / 1_000_000_000, 3),
+        "valueBn": round(float(value) / 1_000_000_000, 9),
         "valueFormat": value_format,
         "sourceUrl": source_url,
     }
@@ -286,7 +287,7 @@ def _find_row(row_map: dict[str, list[str]], field_name: str) -> list[str] | Non
         normalized_key = _normalize_row_name(key)
         for alias in aliases:
             normalized_alias = _normalize_row_name(alias)
-            if field_name == "netIncome" and normalized_alias == "profitloss":
+            if field_name == "netIncome" and normalized_alias in {"profitloss", "netloss"}:
                 continue  # A suffix also matches operating profit (loss).
             if normalized_alias and (normalized_key == normalized_alias or normalized_key.startswith(normalized_alias) or normalized_key.endswith(normalized_alias)):
                 return row
@@ -630,6 +631,12 @@ def _period_entries_from_table(rows: list[list[str]], currency: str, source_url:
 
         if gross_raw is None and revenue_raw is not None and cost_raw is not None:
             gross_raw = revenue_raw - cost_raw
+        # "Total costs and expenses" includes COGS; it is not the Opex node.
+        if (operating_expenses_row and _normalize_row_name(operating_expenses_row[0]) == "totalcostsandexpenses"
+            and operating_expenses_raw is not None and cost_raw is not None
+            and revenue_raw is not None and operating_income_raw is not None
+            and abs(revenue_raw - operating_expenses_raw - operating_income_raw) <= max(1, abs(revenue_raw) * 1e-6)):
+            operating_expenses_raw -= cost_raw
         if operating_expenses_raw is None and gross_raw is not None and operating_income_raw is not None:
             operating_expenses_raw = gross_raw - operating_income_raw
         if sgna_raw is None:

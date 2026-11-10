@@ -561,7 +561,7 @@ def _select_reporting_currency(companyfacts: dict[str, Any]) -> str | None:
 def _money_to_bn(value: float | None) -> float | None:
     if value is None:
         return None
-    return round(value / 1_000_000_000, 3)
+    return round(value / 1_000_000_000, 9)
 
 
 def _safe_pct(numerator: float | None, denominator: float | None) -> float | None:

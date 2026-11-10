@@ -28,11 +28,21 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def bounded_detect(company, local, external):
     from official_segments import REQUEST_DEADLINE
-    token = REQUEST_DEADLINE.set(time.monotonic() + 60)
-    try:
-        return detect(company, local, external=external)
-    finally:
-        REQUEST_DEADLINE.reset(token)
+    from urllib.error import URLError, HTTPError
+    # One fresh bounded attempt lets a stalled index recover in the same poll.
+    # Parsing/contract errors still fail immediately, and exhausted retries stay red.
+    for attempt in range(2):
+        token = REQUEST_DEADLINE.set(time.monotonic() + 60)
+        try:
+            result = detect(company, local, external=external)
+            if attempt:
+                result["discoveryAttempts"] = attempt + 1
+            return result
+        except (TimeoutError, ConnectionError, URLError) as error:
+            if attempt or isinstance(error, HTTPError) and error.code < 500 and error.code != 429:
+                raise
+        finally:
+            REQUEST_DEADLINE.reset(token)
 
 
 def detect(company: dict, local: dict | None = None, *, external=False) -> dict:
@@ -300,6 +310,9 @@ def run(args) -> int:
                 item = dict(companyId=company["id"], ticker=company["ticker"], needsUpdate=False, reason="check-failed", error=str(error))
                 report["failedCompanies"].append(company["id"])
                 record_failure(state, item, error, 'discovery', datetime.now(timezone.utc).isoformat())
+                # An unsuccessful daily probe was not a completed calendar check.
+                # Keep it eligible next poll even outside the expected release window.
+                state.setdefault(company['id'], {}).pop('lastCalendarCheck', None)
             report["report"].append(item)
             if item.get('reason') == 'incomplete-chart-classification' and state.get(company['id'], {}).get('error'):
                 item['buildRefreshMode'] = 'full-refresh'

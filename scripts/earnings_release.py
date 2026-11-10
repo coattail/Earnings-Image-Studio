@@ -20,7 +20,7 @@ from generic_filing_table_parser import _period_entries_from_table
 from sankey_statement_backfill import parse_inline_statements, complete_statement
 
 CACHE = Path(__file__).resolve().parents[1] / "data/cache/earnings-releases"
-VERSION = "earnings-release-v11"
+VERSION = "earnings-release-v12"
 CORE = ("revenueBn", "operatingIncomeBn", "netIncomeBn")
 
 
