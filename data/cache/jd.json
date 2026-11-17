@@ -46,7 +46,8 @@
     "2025Q3",
     "2025Q4",
     "2026Q1",
-    "2026Q2"
+    "2026Q2",
+    "2026Q3"
   ],
   "financials": {
     "2021Q1": {
@@ -9037,6 +9038,238 @@
           ]
         }
       }
+    },
+    "2026Q3": {
+      "calendarQuarter": "2026Q3",
+      "periodEnd": "2026-09-30",
+      "fiscalYear": "2026",
+      "fiscalQuarter": "Q3",
+      "fiscalLabel": "FY2026 Q3",
+      "statementCurrency": "CNY",
+      "revenueBn": 309.593,
+      "revenueYoyPct": 3.522,
+      "costOfRevenueBn": 253.632,
+      "grossProfitBn": 55.961,
+      "sgnaBn": 42.522,
+      "rndBn": 7.73,
+      "otherOpexBn": null,
+      "operatingExpensesBn": null,
+      "operatingIncomeBn": null,
+      "nonOperatingBn": null,
+      "pretaxIncomeBn": 8.966,
+      "taxBn": 1.637,
+      "netIncomeBn": 6.503,
+      "netIncomeYoyPct": null,
+      "grossMarginPct": 18.076,
+      "operatingMarginPct": null,
+      "profitMarginPct": 2.1,
+      "effectiveTaxRatePct": 18.258,
+      "revenueQoqPct": -10.626,
+      "grossMarginYoyDeltaPp": 1.198,
+      "operatingMarginYoyDeltaPp": null,
+      "profitMarginYoyDeltaPp": 0.336,
+      "statementSource": "official-earnings-release",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1549802/000119312526464688/d179042dex991.htm",
+      "statementFilingDate": "2026-11-17",
+      "statementSpanQuarters": 1,
+      "statementValueMode": "reported",
+      "officialOpexBreakdown": [
+        {
+          "name": "Fulfillment",
+          "nameZh": null,
+          "memberKey": "fulfillment",
+          "valueBn": 23.64,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1549802/000119312526464688/d179042dex991.htm",
+          "filingDate": "2026-11-17",
+          "sourceForm": "earnings release",
+          "yoyPct": null,
+          "qoqPct": null
+        },
+        {
+          "name": "Marketing",
+          "nameZh": null,
+          "memberKey": "marketing",
+          "valueBn": 15.534,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1549802/000119312526464688/d179042dex991.htm",
+          "filingDate": "2026-11-17",
+          "sourceForm": "earnings release",
+          "yoyPct": null,
+          "qoqPct": null
+        },
+        {
+          "name": "Research and development",
+          "nameZh": null,
+          "memberKey": "researchanddevelopment",
+          "valueBn": 7.73,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1549802/000119312526464688/d179042dex991.htm",
+          "filingDate": "2026-11-17",
+          "sourceForm": "earnings release",
+          "yoyPct": null,
+          "qoqPct": null
+        },
+        {
+          "name": "General and administrative",
+          "nameZh": null,
+          "memberKey": "generalandadministrative",
+          "valueBn": 3.348,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1549802/000119312526464688/d179042dex991.htm",
+          "filingDate": "2026-11-17",
+          "sourceForm": "earnings release",
+          "yoyPct": null,
+          "qoqPct": null
+        }
+      ],
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "netIncomeBn": "official"
+      },
+      "parserFinancialValidation": {
+        "status": "high",
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1549802/000119312526464688/d179042dex991.htm"
+      },
+      "automaticEarnings": {
+        "filingDate": "2026-11-17",
+        "accession": "0001193125-26-464688",
+        "form": "6-K"
+      },
+      "statementAccession": "0001193125-26-464688",
+      "officialRevenueSegments": [
+        {
+          "name": "Net product revenues",
+          "nameZh": "商品收入",
+          "memberKey": "netproductrevenues",
+          "valueBn": 233.175,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1549802/000119312526464688/d179042dex991.htm",
+          "filingDate": "2026-11-17",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 75.3,
+          "qoqPct": -12.71,
+          "yoyPct": 3.13,
+          "mixYoyDeltaPp": -0.3
+        },
+        {
+          "name": "Net service revenues",
+          "nameZh": "服务收入",
+          "memberKey": "netservicerevenues",
+          "valueBn": 76.418,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1549802/000119312526464688/d179042dex991.htm",
+          "filingDate": "2026-11-17",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 24.7,
+          "qoqPct": -3.62,
+          "yoyPct": 4.73,
+          "mixYoyDeltaPp": 0.3
+        }
+      ],
+      "officialRevenueDetailGroups": [
+        {
+          "name": "Electronics and home appliances revenues",
+          "nameZh": "电子产品及家电收入",
+          "memberKey": "electronicsandhomeappliancesrevenues",
+          "targetName": "Net product revenues",
+          "valueBn": 127.725,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1549802/000119312526464688/d179042dex991.htm",
+          "filingDate": "2026-11-17",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 41.3,
+          "qoqPct": -19.1,
+          "yoyPct": -0.67,
+          "mixYoyDeltaPp": -1.7
+        },
+        {
+          "name": "General merchandise revenues",
+          "nameZh": "日用百货收入",
+          "memberKey": "generalmerchandiserevenues",
+          "targetName": "Net product revenues",
+          "valueBn": 105.45,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1549802/000119312526464688/d179042dex991.htm",
+          "filingDate": "2026-11-17",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 34.1,
+          "qoqPct": -3.46,
+          "yoyPct": 8.15,
+          "mixYoyDeltaPp": 1.5
+        },
+        {
+          "name": "Marketplace and marketing revenues",
+          "nameZh": "平台及营销收入",
+          "memberKey": "marketplaceandmarketingrevenues",
+          "targetName": "Net service revenues",
+          "valueBn": 28.142,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1549802/000119312526464688/d179042dex991.htm",
+          "filingDate": "2026-11-17",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 9.1,
+          "qoqPct": -8.81,
+          "yoyPct": 9.55,
+          "mixYoyDeltaPp": 0.5
+        },
+        {
+          "name": "Logistics and other service revenues",
+          "nameZh": "物流及其他服务收入",
+          "memberKey": "logisticsandotherservicerevenues",
+          "targetName": "Net service revenues",
+          "valueBn": 48.276,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1549802/000119312526464688/d179042dex991.htm",
+          "filingDate": "2026-11-17",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 15.6,
+          "qoqPct": -0.31,
+          "yoyPct": 2.11,
+          "mixYoyDeltaPp": -0.2
+        }
+      ],
+      "revenueClassificationSourceUrl": "https://www.sec.gov/Archives/edgar/data/1549802/000119312526464688/d179042dex991.htm",
+      "revenueClassificationSource": "official-complete-table",
+      "chartCompletionAttempts": [
+        {
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1549802/000119312526464688/d179042dex991.htm",
+          "remainingIssues": []
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 0.15,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": false,
+      "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2026Q2",
+        "fields": [
+          "officialRevenueSegments",
+          "officialRevenueDetailGroups",
+          "officialOpexBreakdown"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "chartQuality": {
+        "version": 3,
+        "quarter": "2026Q3",
+        "status": "ready",
+        "issues": [],
+        "requiredMarginComparisons": [
+          "grossMarginYoyDeltaPp",
+          "profitMarginYoyDeltaPp"
+        ],
+        "requiredDetailParents": [
+          "netproductrevenues",
+          "netservicerevenues"
+        ],
+        "requiredSegmentKeys": [
+          "netproductrevenues",
+          "netservicerevenues"
+        ],
+        "requiredDetailMembers": {
+          "netproductrevenues": [
+            "electronicshomeappliancesrevenues",
+            "generalmerchiserevenues"
+          ],
+          "netservicerevenues": [
+            "logisticsotherservicerevenues",
+            "marketplacemarketingrevenues"
+          ]
+        }
+      }
     }
   },
   "statementSource": "stockanalysis-financials",
@@ -13300,10 +13533,10 @@
       "overallConfidenceScore": 0.9635,
       "financialConfidenceScore": 0.9438,
       "structuralConfidenceScore": 1.0,
-      "revenueSegmentChecks": 0,
+      "revenueSegmentChecks": 1,
       "revenueSegmentMismatchCount": 0,
       "revenueSegmentSkippedChecks": 34,
-      "detailGroupChecks": 60,
+      "detailGroupChecks": 62,
       "detailGroupMismatchCount": 0,
       "detailGroupSkippedChecks": 0,
       "opexChecks": 23,
@@ -13315,22 +13548,22 @@
   },
   "statementPresets": {},
   "coverage": {
-    "quarterCount": 34,
+    "quarterCount": 35,
     "pixelReplicaQuarterCount": 0,
     "hasPixelReplica": false,
-    "officialFinancialQuarterCount": 34,
-    "officialSegmentQuarterCount": 34,
-    "officialExpenseQuarterCount": 34,
+    "officialFinancialQuarterCount": 35,
+    "officialSegmentQuarterCount": 35,
+    "officialExpenseQuarterCount": 35,
     "classification": {
       "status": "ok",
-      "latestQuarter": "2026Q2",
+      "latestQuarter": "2026Q3",
       "latestQuarterHasRevenueClassification": true,
       "latestQuarterHasExpenseClassification": true,
-      "latestRevenueClassificationQuarter": "2026Q2",
-      "latestExpenseClassificationQuarter": "2026Q2",
+      "latestRevenueClassificationQuarter": "2026Q3",
+      "latestExpenseClassificationQuarter": "2026Q3",
       "latestStructureHistoryQuarter": "2026Q2",
-      "revenueClassificationQuarterCount": 34,
-      "expenseClassificationQuarterCount": 34,
+      "revenueClassificationQuarterCount": 35,
+      "expenseClassificationQuarterCount": 35,
       "revenueClassificationCoverageRatio": 1.0,
       "expenseClassificationCoverageRatio": 1.0,
       "latestRevenueClassificationLagQuarters": 0,
@@ -13375,10 +13608,10 @@
         "overallConfidenceScore": 0.9635,
         "financialConfidenceScore": 0.9438,
         "structuralConfidenceScore": 1.0,
-        "revenueSegmentChecks": 0,
+        "revenueSegmentChecks": 1,
         "revenueSegmentMismatchCount": 0,
         "revenueSegmentSkippedChecks": 34,
-        "detailGroupChecks": 60,
+        "detailGroupChecks": 62,
         "detailGroupMismatchCount": 0,
         "detailGroupSkippedChecks": 0,
         "opexChecks": 23,
@@ -13389,9 +13622,9 @@
       }
     }
   },
-  "marketCapUsd": 34680840192,
-  "marketCapAsOf": "2026-10-31",
-  "marketCapSourceRank": 712,
+  "marketCapUsd": 37192769536,
+  "marketCapAsOf": "2026-11-17",
+  "marketCapSourceRank": 666,
   "marketCapSource": "CompaniesMarketCap",
   "marketCapSourceUrl": "https://companiesmarketcap.com/jingdong-mall/marketcap/"
 }
