@@ -20,8 +20,16 @@ from generic_filing_table_parser import _period_entries_from_table
 from sankey_statement_backfill import parse_inline_statements, complete_statement
 
 CACHE = Path(__file__).resolve().parents[1] / "data/cache/earnings-releases"
-VERSION = "earnings-release-v12"
+VERSION = "earnings-release-v13"
 CORE = ("revenueBn", "operatingIncomeBn", "netIncomeBn")
+
+
+def earnings_exhibit_names(index: dict) -> list[str]:
+    """Include CFO commentary and quarter-named press releases in one filing."""
+    names = [item['name'] for item in index.get('directory', {}).get('item', [])
+             if re.search(r'\.(?:htm|html|pdf)$', item.get('name', ''), re.I)
+             and re.search(r'ex(?:hibit)?[._-]?99|earn|result|press|financial|cfocommentary|q[1-4]fy\d+pr', item['name'], re.I)]
+    return sorted(names, key=lambda name: ('99' not in name, name))[:6]
 
 
 def complete_quarter(entry: dict, company_id: str = "") -> bool:
@@ -128,9 +136,11 @@ def parse_release(html: str, company: dict, url: str, filed: str, *, allow_parti
         if fiscal_heading and quarter==max(financials):
             ordinal={'first':1,'second':2,'third':3,'fourth':4}[fiscal_heading[1].lower()]
             entry.update(fiscalYear=fiscal_heading[2],fiscalQuarter=f'Q{ordinal}',fiscalLabel=f'FY{fiscal_heading[2]} Q{ordinal}')
+            entry['statementFiscalPeriodSource'] = 'official-heading'
         elif fiscal_marker and quarter==max(financials):
             year=str(2000+int(fiscal_marker[1]))if len(fiscal_marker[1])==2 else fiscal_marker[1]
             entry.update(fiscalYear=year,fiscalQuarter=f'Q{fiscal_marker[2]}',fiscalLabel=f'FY{year} Q{fiscal_marker[2]}')
+            entry['statementFiscalPeriodSource'] = 'official-heading'
         entry["parserFinancialFieldSources"] = {k: "official" for k in CORE if isinstance(entry.get(k), (float, int))}
         entry["parserFinancialValidation"] = {"status": "high" if complete_quarter(entry) else "partial", "sourceUrl": url}
         result[quarter] = entry
@@ -203,11 +213,9 @@ def discover_release(company: dict, local: dict | None = None, *, expected_filin
                 return saved
         base = f"https://www.sec.gov/Archives/edgar/data/{int(cik)}/{accession.replace('-', '')}/"
         index = _request_json(base + "index.json")
-        names = [x["name"] for x in index.get("directory", {}).get("item", [])
-                 if re.search(r"\.(?:htm|html|pdf)$", x.get("name", ""), re.I)
-                 and re.search(r"ex(?:hibit)?[._-]?99|earn|result|press|financial", x["name"], re.I)]
+        names = earnings_exhibit_names(index)
         partials = []
-        for name in sorted(names, key=lambda s: ("99" not in s, s))[:4]:
+        for name in names:
             url = base + name
             content = _request(url)
             if name.lower().endswith(".pdf"):

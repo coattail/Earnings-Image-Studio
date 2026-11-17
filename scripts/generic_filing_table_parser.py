@@ -135,6 +135,7 @@ ROW_ALIASES: dict[str, tuple[str, ...]] = {
         "incomefromcontinuingoperationsbeforeincometaxes",
         "incomebeforetaxes",
         "incomebeforeincometaxes",
+        "incomebeforeincometax",
         "incomebeforetax",
         "pretaxincome",
         "profitbeforetax",

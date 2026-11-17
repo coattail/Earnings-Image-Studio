@@ -5,7 +5,7 @@
   "nameZh": "英伟达",
   "nameEn": "NVIDIA",
   "slug": "nvda",
-  "rank": 2,
+  "rank": 3,
   "isAdr": false,
   "brand": {
     "primary": "#76B900",
@@ -47,7 +47,8 @@
     "2025Q4",
     "2026Q1",
     "2026Q2",
-    "2026Q3"
+    "2026Q3",
+    "2026Q4"
   ],
   "financials": {
     "2018Q1": {
@@ -8549,6 +8550,188 @@
           ]
         }
       }
+    },
+    "2026Q4": {
+      "calendarQuarter": "2026Q4",
+      "periodEnd": "2026-10-25",
+      "fiscalYear": "2027",
+      "fiscalQuarter": "Q3",
+      "fiscalLabel": "FY2027 Q3",
+      "statementCurrency": "USD",
+      "revenueBn": 115.844,
+      "revenueYoyPct": 103.214,
+      "costOfRevenueBn": 29.168,
+      "grossProfitBn": 86.676,
+      "sgnaBn": 1.702,
+      "rndBn": 7.454,
+      "otherOpexBn": null,
+      "operatingExpensesBn": 9.156,
+      "operatingIncomeBn": 77.52,
+      "nonOperatingBn": 1.497,
+      "pretaxIncomeBn": 79.017,
+      "taxBn": 13.73,
+      "netIncomeBn": 65.287,
+      "netIncomeYoyPct": null,
+      "grossMarginPct": 74.821,
+      "operatingMarginPct": 66.918,
+      "profitMarginPct": 56.358,
+      "effectiveTaxRatePct": 17.376,
+      "revenueQoqPct": 20.394,
+      "grossMarginYoyDeltaPp": 1.409,
+      "operatingMarginYoyDeltaPp": 3.749,
+      "profitMarginYoyDeltaPp": 0.381,
+      "statementSource": "official-earnings-release",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000088/q3fy27pr.htm",
+      "statementFilingDate": "2026-11-17",
+      "statementSpanQuarters": 1,
+      "statementValueMode": "reported",
+      "officialOpexBreakdown": [
+        {
+          "name": "G&A",
+          "nameZh": "管理费用",
+          "valueBn": 1.702,
+          "valueFormat": "negative-parentheses",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000088/q3fy27pr.htm"
+        },
+        {
+          "name": "R&D",
+          "nameZh": "研发",
+          "valueBn": 7.454,
+          "valueFormat": "negative-parentheses",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000088/q3fy27pr.htm"
+        }
+      ],
+      "statementFiscalPeriodSource": "official-heading",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "operatingIncomeBn": "official",
+        "netIncomeBn": "official"
+      },
+      "parserFinancialValidation": {
+        "status": "high",
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000088/q3fy27pr.htm"
+      },
+      "automaticEarnings": {
+        "filingDate": "2026-11-17",
+        "accession": "0001045810-26-000088",
+        "form": "8-K"
+      },
+      "statementAccession": "0001045810-26-000088",
+      "officialRevenueSegments": [
+        {
+          "name": "Data Center",
+          "nameZh": "数据中心",
+          "memberKey": "datacenter",
+          "valueBn": 107.6,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000088/q3fy27cfocommentary.htm",
+          "filingDate": "2026-11-17",
+          "sourceForm": "official current-period disclosure",
+          "reportedPrecisionBn": 0.1,
+          "qoqPct": 21.0,
+          "yoyPct": 110.0,
+          "mixPct": 92.9
+        },
+        {
+          "name": "Edge Computing",
+          "nameZh": "边缘计算",
+          "memberKey": "edgecomputing",
+          "valueBn": 8.2,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000088/q3fy27cfocommentary.htm",
+          "filingDate": "2026-11-17",
+          "sourceForm": "official current-period disclosure",
+          "reportedPrecisionBn": 0.1,
+          "qoqPct": 14.0,
+          "yoyPct": 42.0,
+          "mixPct": 7.1
+        }
+      ],
+      "officialRevenueDetailGroups": [
+        {
+          "name": "Hyperscale",
+          "nameZh": "超大规模",
+          "memberKey": "hyperscale",
+          "targetName": "Data Center",
+          "valueBn": 60.1,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000088/q3fy27cfocommentary.htm",
+          "filingDate": "2026-11-17",
+          "sourceForm": "official current-period disclosure",
+          "reportedPrecisionBn": 0.1,
+          "qoqPct": 23.0,
+          "yoyPct": 71.0,
+          "mixPct": 51.9
+        },
+        {
+          "name": "AI Clouds, Industrial, & Enterprise",
+          "nameZh": "AI云、工业与企业",
+          "memberKey": "aicloudsindustrialenterprise",
+          "targetName": "Data Center",
+          "valueBn": 47.5,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000088/q3fy27cfocommentary.htm",
+          "filingDate": "2026-11-17",
+          "sourceForm": "official current-period disclosure",
+          "reportedPrecisionBn": 0.1,
+          "qoqPct": 18.0,
+          "yoyPct": 195.0,
+          "mixPct": 41.0
+        }
+      ],
+      "officialRevenueStyle": "nvidia-fy2027-market-platform",
+      "revenueClassificationSource": "official-complete-table",
+      "revenueClassificationSourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000088/q3fy27cfocommentary.htm",
+      "revenueClassificationBasisNote": "Market-platform amounts are reported in rounded billions; consolidated statements retain exact millions.",
+      "chartCompletionAttempts": [
+        {
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000088/q3fy27pr.htm",
+          "remainingIssues": [
+            "missing current-quarter revenue classification",
+            "missing previously disclosed revenue categories: datacenter,edgecomputing",
+            "missing current-quarter revenue detail for datacenter",
+            "missing previously disclosed revenue detail for datacenter: aicloudsindustrialenterprise,hyperscale"
+          ]
+        },
+        {
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000088/q3fy27cfocommentary.htm",
+          "remainingIssues": []
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true,
+      "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueDetailTaxonomyChangedFromPriorYear": false,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2026Q3",
+        "fields": [
+          "officialRevenueSegments",
+          "officialRevenueDetailGroups"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "chartQuality": {
+        "version": 3,
+        "quarter": "2026Q4",
+        "status": "ready",
+        "issues": [],
+        "requiredMarginComparisons": [
+          "grossMarginYoyDeltaPp",
+          "operatingMarginYoyDeltaPp",
+          "profitMarginYoyDeltaPp"
+        ],
+        "requiredDetailParents": [
+          "datacenter"
+        ],
+        "requiredSegmentKeys": [
+          "datacenter",
+          "edgecomputing"
+        ],
+        "requiredDetailMembers": {
+          "datacenter": [
+            "aicloudsindustrialenterprise",
+            "hyperscale"
+          ]
+        }
+      }
     }
   },
   "statementSource": "official-sec-companyfacts",
@@ -12119,13 +12302,13 @@
       "overallConfidenceScore": 1.0,
       "financialConfidenceScore": 1.0,
       "structuralConfidenceScore": 1.0,
-      "revenueSegmentChecks": 35,
+      "revenueSegmentChecks": 36,
       "revenueSegmentMismatchCount": 0,
       "revenueSegmentSkippedChecks": 0,
-      "detailGroupChecks": 2,
+      "detailGroupChecks": 3,
       "detailGroupMismatchCount": 0,
       "detailGroupSkippedChecks": 0,
-      "opexChecks": 1,
+      "opexChecks": 2,
       "opexSkippedChecks": 0,
       "opexOverflowMismatchCount": 0,
       "warningCount": 0,
@@ -15793,9 +15976,9 @@
       }
     }
   },
-  "marketCapUsd": 4941441662976,
-  "marketCapAsOf": "2026-10-31",
-  "marketCapSourceRank": 2,
+  "marketCapUsd": 3770312556544,
+  "marketCapAsOf": "2026-11-17",
+  "marketCapSourceRank": 3,
   "marketCapSource": "CompaniesMarketCap",
   "marketCapSourceUrl": "https://companiesmarketcap.com/nvidia/marketcap/",
   "statementPresets": {
@@ -15917,24 +16100,24 @@
     }
   },
   "coverage": {
-    "quarterCount": 35,
+    "quarterCount": 36,
     "pixelReplicaQuarterCount": 1,
     "hasPixelReplica": true,
-    "officialFinancialQuarterCount": 35,
-    "officialSegmentQuarterCount": 35,
-    "officialExpenseQuarterCount": 1,
+    "officialFinancialQuarterCount": 36,
+    "officialSegmentQuarterCount": 36,
+    "officialExpenseQuarterCount": 2,
     "classification": {
       "status": "ok",
-      "latestQuarter": "2026Q3",
+      "latestQuarter": "2026Q4",
       "latestQuarterHasRevenueClassification": true,
       "latestQuarterHasExpenseClassification": true,
-      "latestRevenueClassificationQuarter": "2026Q3",
-      "latestExpenseClassificationQuarter": "2026Q3",
+      "latestRevenueClassificationQuarter": "2026Q4",
+      "latestExpenseClassificationQuarter": "2026Q4",
       "latestStructureHistoryQuarter": "2026Q3",
-      "revenueClassificationQuarterCount": 35,
-      "expenseClassificationQuarterCount": 1,
+      "revenueClassificationQuarterCount": 36,
+      "expenseClassificationQuarterCount": 2,
       "revenueClassificationCoverageRatio": 1.0,
-      "expenseClassificationCoverageRatio": 0.0286,
+      "expenseClassificationCoverageRatio": 0.0556,
       "latestRevenueClassificationLagQuarters": 0,
       "latestExpenseClassificationLagQuarters": 0,
       "warnings": [],
@@ -15978,13 +16161,13 @@
         "overallConfidenceScore": 1.0,
         "financialConfidenceScore": 1.0,
         "structuralConfidenceScore": 1.0,
-        "revenueSegmentChecks": 35,
+        "revenueSegmentChecks": 36,
         "revenueSegmentMismatchCount": 0,
         "revenueSegmentSkippedChecks": 0,
-        "detailGroupChecks": 2,
+        "detailGroupChecks": 3,
         "detailGroupMismatchCount": 0,
         "detailGroupSkippedChecks": 0,
-        "opexChecks": 1,
+        "opexChecks": 2,
         "opexSkippedChecks": 0,
         "opexOverflowMismatchCount": 0,
         "warningCount": 0,
