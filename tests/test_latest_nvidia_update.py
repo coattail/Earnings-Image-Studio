@@ -9,6 +9,21 @@ ROOT_DIR = Path(__file__).resolve().parents[1]
 
 
 class LatestNvidiaUpdateTests(unittest.TestCase):
+    def test_fy2027_q3_release_is_published_with_complete_classifications(self) -> None:
+        dataset = json.loads((ROOT_DIR / 'data/earnings-dataset.json').read_text())
+        company = next(c for c in dataset['companies'] if c['id'] == 'nvidia')
+        current = company['financials']['2026Q4']
+        self.assertEqual(current['periodEnd'], '2026-10-25')
+        self.assertEqual(current['fiscalLabel'], 'FY2027 Q3')
+        self.assertEqual(current['statementFilingDate'], '2026-11-17')
+        self.assertEqual(current['revenueBn'], 115.844)
+        self.assertEqual(current['netIncomeBn'], 65.287)
+        self.assertEqual(current['chartQuality']['status'], 'ready')
+        self.assertEqual({r['memberKey']:r['valueBn'] for r in current['officialRevenueSegments']},
+                         {'datacenter':107.6,'edgecomputing':8.2})
+        self.assertEqual({r['memberKey']:r['valueBn'] for r in current['officialRevenueDetailGroups']},
+                         {'hyperscale':60.1,'aicloudsindustrialenterprise':47.5})
+
     def test_latest_nvidia_quarter_matches_official_filing(self) -> None:
         dataset = json.loads((ROOT_DIR / "data" / "earnings-dataset.json").read_text(encoding="utf-8"))
         nvidia = next(company for company in dataset["companies"] if company["id"] == "nvidia")
