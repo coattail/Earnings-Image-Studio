@@ -12287,53 +12287,52 @@
       "statementCurrency": "TWD",
       "displayCurrency": "USD",
       "displayScaleFactor": 0.031266668138984086,
-      "revenueBn": 1494.243,
+      "revenueBn": 1494.243284,
       "revenueYoyPct": 50.946,
       "revenueQoqPct": 17.622,
-      "costOfRevenueBn": 501.864,
-      "grossProfitBn": 992.379,
-      "sgnaBn": 27.457,
-      "rndBn": 88.979,
+      "costOfRevenueBn": 501.864634,
+      "grossProfitBn": 992.37865,
+      "sgnaBn": 27.456859,
+      "rndBn": 88.979578,
       "otherOpexBn": -0.502,
-      "operatingExpensesBn": 115.934,
-      "operatingIncomeBn": 876.445,
-      "nonOperatingBn": 34.594,
-      "pretaxIncomeBn": 911.039,
-      "taxBn": 147.698,
-      "netIncomeBn": 763.064,
+      "operatingExpensesBn": 116.436437,
+      "operatingIncomeBn": 876.445164,
+      "nonOperatingBn": 34.593606,
+      "pretaxIncomeBn": 911.03877,
+      "taxBn": 147.697943,
+      "netIncomeBn": 763.340827,
       "netIncomeYoyPct": 68.707,
       "grossMarginPct": 66.413,
       "operatingMarginPct": 58.655,
-      "profitMarginPct": 51.067,
+      "profitMarginPct": 51.085,
       "effectiveTaxRatePct": 16.212,
-      "grossMarginYoyDeltaPp": 6.9,
-      "operatingMarginYoyDeltaPp": 8.1,
-      "profitMarginYoyDeltaPp": 5.4,
-      "statementSource": "TSMC 3Q26 consolidated quarterly financial statements",
-      "statementSourceUrl": "https://investor.tsmc.com/english/encrypt/files/encrypt_file/qr/phase4_reports/2026-10/e18db1d00f041c8d37a90dedbcb150518d8277d9/FS.pdf",
-      "statementFilingDate": "2026-10-15",
+      "grossMarginYoyDeltaPp": 0.413,
+      "operatingMarginYoyDeltaPp": -0.345,
+      "profitMarginYoyDeltaPp": 0.085,
+      "statementSource": "official-earnings-release",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000801/a2026q3consolidatedreport-.htm",
+      "statementFilingDate": "2026-11-13",
       "officialOpexBreakdown": [
+        {
+          "name": "Sales & Marketing",
+          "nameZh": "销售与营销",
+          "valueBn": 4.493228,
+          "valueFormat": "negative-parentheses",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000801/a2026q3consolidatedreport-.htm"
+        },
+        {
+          "name": "G&A",
+          "nameZh": "管理费用",
+          "valueBn": 22.963631,
+          "valueFormat": "negative-parentheses",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000801/a2026q3consolidatedreport-.htm"
+        },
         {
           "name": "R&D",
           "nameZh": "研发",
-          "memberKey": "rd",
-          "valueBn": 88.979,
-          "sourceUrl": "https://investor.tsmc.com/english/encrypt/files/encrypt_file/qr/phase4_reports/2026-10/e18db1d00f041c8d37a90dedbcb150518d8277d9/FS.pdf",
-          "sourceForm": "QuarterlyFinancialStatements",
-          "filingDate": "2026-10-15",
-          "validationEligible": null,
-          "validationNotes": null
-        },
-        {
-          "name": "SG&A",
-          "nameZh": "销售及管理费用",
-          "memberKey": "sga",
-          "valueBn": 27.457,
-          "sourceUrl": "https://investor.tsmc.com/english/encrypt/files/encrypt_file/qr/phase4_reports/2026-10/e18db1d00f041c8d37a90dedbcb150518d8277d9/FS.pdf",
-          "sourceForm": "QuarterlyFinancialStatements",
-          "filingDate": "2026-10-15",
-          "validationEligible": null,
-          "validationNotes": null
+          "valueBn": 88.979578,
+          "valueFormat": "negative-parentheses",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000801/a2026q3consolidatedreport-.htm"
         }
       ],
       "officialRevenueSegments": [
@@ -12464,8 +12463,7 @@
       "sankeyStructureContinuity": {
         "sourceQuarter": "2026Q2",
         "fields": [
-          "officialRevenueSegments",
-          "officialOpexBreakdown"
+          "officialRevenueSegments"
         ],
         "rule": "same-normalized-category-set"
       },
@@ -12609,6 +12607,22 @@
           "smartphones"
         ],
         "requiredDetailMembers": {}
+      },
+      "statementSpanQuarters": 1,
+      "statementValueMode": "reported",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "operatingIncomeBn": "official",
+        "netIncomeBn": "official"
+      },
+      "parserFinancialValidation": {
+        "status": "high",
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000801/a2026q3consolidatedreport-.htm"
+      },
+      "automaticEarnings": {
+        "filingDate": "2026-11-13",
+        "accession": "0001046179-26-000801",
+        "form": "6-K"
       }
     }
   },
@@ -20383,8 +20397,8 @@
       }
     }
   },
-  "marketCapUsd": 2106382745600,
-  "marketCapAsOf": "2026-10-31",
+  "marketCapUsd": 1936888430592,
+  "marketCapAsOf": "2026-11-17",
   "marketCapSourceRank": 6,
   "marketCapSource": "CompaniesMarketCap",
   "marketCapSourceUrl": "https://companiesmarketcap.com/tsmc/marketcap/"
