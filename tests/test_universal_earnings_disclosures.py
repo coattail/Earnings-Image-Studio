@@ -99,7 +99,7 @@ class UniversalDisclosureTests(unittest.TestCase):
         self.assertIn('period differs',entry['chartCompletionAttempts'][0]['error'])
 
     def test_failed_and_pending_issuers_retry_after_daily_probe_and_outside_window(self):
-        for failure in ({'failure':{'sameFailureCount':3}}, {'pendingDetails':True}):
+        for failure in ({'failure':{'sameFailureCount':3}}, {'pendingDetails':True}, {'pendingRelease':{'quarter':'2026Q3'}}):
             with self.subTest(state=failure),tempfile.TemporaryDirectory() as directory:
                 root=Path(directory);dataset=root/'dataset.json'
                 dataset.write_text(json.dumps({'companies':[{'id':'sample'}]}))
@@ -112,6 +112,26 @@ class UniversalDisclosureTests(unittest.TestCase):
                      patch.object(watch,'refresh_one',return_value=[]) as refresh:
                     self.assertEqual(watch.run(args),0)
                     detect.assert_called_once();refresh.assert_called_once()
+
+    def test_budget_deferred_release_is_persisted_until_a_later_successful_poll(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);dataset=root/'dataset.json'
+            dataset.write_text(json.dumps({'companies':[{'id':'sample'}]}))
+            args=Namespace(universe=None,companies='',dry_run=False,report_path=root/'report.json',
+                           state_path=root/'state.json',budget_seconds=0)
+            detected=dict(companyId='sample',needsUpdate=True,reason='earnings-release-detected',remoteQuarter='2026Q3')
+            with patch.object(watch,'TOP30_COMPANIES',[{'id':'sample','ticker':'TEST'}]), \
+                 patch.object(watch.checker,'DATASET_PATH',dataset),patch('earnings_windows.release_window',return_value=(False,'outside')), \
+                 patch.object(watch,'bounded_detect',side_effect=lambda *_:copy.deepcopy(detected)) as detect, \
+                 patch.object(watch,'refresh_one',return_value=[]) as refresh:
+                self.assertEqual(watch.run(args),1)
+                refresh.assert_not_called()
+                self.assertEqual(json.loads(args.state_path.read_text())['sample']['pendingRelease']['quarter'],'2026Q3')
+                args.budget_seconds=100
+                self.assertEqual(watch.run(args),0)
+                self.assertEqual(detect.call_count,2)
+                refresh.assert_called_once()
+                self.assertNotIn('pendingRelease',json.loads(args.state_path.read_text())['sample'])
 
 
 if __name__=='__main__': unittest.main()

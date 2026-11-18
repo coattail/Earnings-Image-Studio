@@ -56,11 +56,18 @@ test('every ready issuer keeps gain labels clear of final profit titles in both 
     const q=company.quarters.at(-1);if(company.financials[q].chartQuality?.status!=='ready')continue;
     for(const language of ['zh','en']) {
       const result=render(company,q,language);assert.ok(result.unchanged,company.id);charts++;
-      for(const id of Object.keys(nodes(result.svg)).filter(id=>/^positive-\d+$/.test(id))) {
+      const visible=nodes(result.svg),ids=Object.keys(visible).filter(id=>/^positive-\d+$/.test(id));
+      for(const [index,id] of ids.entries()) {
         const label=bounds(result.svg,id);assert.ok(label);branches++;
         for(const metric of ['gross-summary','operating-summary']) {
           const obstacle=bounds(result.svg,metric);
           if(obstacle&&overlaps(label,obstacle,4))failures.push(`${company.id}/${q}/${language}/${id}/${metric}`);
+        }
+        for(const other of ids.slice(index+1)) {
+          if(overlaps(label,bounds(result.svg,other),4))failures.push(`${company.id}/${language}: ${id}/${other} labels`);
+          const a=visible[id],b=visible[other];
+          if(overlaps({left:a.x,right:a.x+a.width,top:a.y,bottom:a.y+a.height},
+            {left:b.x,right:b.x+b.width,top:b.y,bottom:b.y+b.height},2))failures.push(`${company.id}/${language}: ${id}/${other} caps`);
         }
       }
     }

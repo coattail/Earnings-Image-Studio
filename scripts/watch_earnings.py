@@ -303,7 +303,7 @@ def run(args) -> int:
         active,reason=release_window(company,locals_by_id.get(company['id']))
         # A previously detected failure remains eligible every poll, even if
         # the learned release window closes or today's calendar probe ran.
-        retry = state.get(company['id'], {}).get('failure') or state.get(company['id'], {}).get('pendingDetails')
+        retry = any(state.get(company['id'], {}).get(field) for field in ('failure','pendingDetails','pendingRelease'))
         if active or getattr(args,'companies','') or retry:
             eligible.append(company)
         elif state.get(company['id'],{}).get('lastCalendarCheck')!=calendar_day:
@@ -328,6 +328,14 @@ def run(args) -> int:
                 # Keep it eligible next poll even outside the expected release window.
                 state.setdefault(company['id'], {}).pop('lastCalendarCheck', None)
             report["report"].append(item)
+            if item.get('needsUpdate') and not args.universe:
+                # Persist discovery before refresh budgeting. An issuer queued
+                # at the end of today's poll must not disappear outside its
+                # release window just because no refresh was attempted yet.
+                state.setdefault(company['id'], {})['pendingRelease'] = {
+                    'quarter': item.get('remoteQuarter') or item.get('remoteOfficialRevenueQuarter') or '',
+                    'filingDate': item.get('remoteFilingDate') or '',
+                }
             if item.get('reason') == 'incomplete-chart-classification' and state.get(company['id'], {}).get('error'):
                 item['buildRefreshMode'] = 'full-refresh'
             if (state.get(company["id"], {}).get("pendingDetails")

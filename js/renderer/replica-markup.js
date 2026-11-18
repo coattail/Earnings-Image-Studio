@@ -1548,6 +1548,7 @@ function renderReplicaSvgMarkup(model) {
       }
     }
     const placedPositiveLabelRects = [];
+    const placedPositiveNodeRects = [];
     let netPositiveCursor = netPositiveTop;
     const positiveStackStartY = positiveTop;
     positiveAdjustments.forEach((item, index) => {
@@ -2383,7 +2384,7 @@ function renderReplicaSvgMarkup(model) {
         const top = Math.min(capRect.top, chosenLabelRect.top);
         const bottom = Math.max(capRect.bottom, chosenLabelRect.bottom);
         const repaired = resolveAttachedBranchPlacement([chosenLabelRect, capRect],
-          [...positiveLabelObstacles, ...placedPositiveLabelRects, ...smallBridgeCalloutRects,
+          [...positiveLabelObstacles, ...placedPositiveLabelRects, ...placedPositiveNodeRects, ...smallBridgeCalloutRects,
            {left:operatingFrame.left,right:operatingFrame.right,top:operatingFrame.top,bottom:operatingFrame.bottom}], {
             minDx: Math.max(scaleY(20) - Math.min(chosenLabelRect.left, capRect.left), positiveNodeMinX - capRect.left),
             maxDx: Math.min(width - scaleY(24) - Math.max(chosenLabelRect.right, capRect.right),
@@ -2435,7 +2436,7 @@ function renderReplicaSvgMarkup(model) {
           for (const candidate of candidates) {
             const rect = labelBoundsRect(candidate.anchor,candidate.x,candidate.y);
             const result = resolveAttachedBranchPlacement([rect],
-              [...positiveLabelObstacles,...placedPositiveLabelRects,...smallBridgeCalloutRects,capRect], {
+              [...positiveLabelObstacles,...placedPositiveLabelRects,...placedPositiveNodeRects,...smallBridgeCalloutRects,capRect], {
                 minDx:Math.max(scaleY(20)-rect.left,positiveFrame.left-scaleY(180)-rect.left),
                 maxDx:Math.min(width-scaleY(24)-rect.right,positiveFrame.right+positiveRunwayAvailable-rect.right),
                 minDy:scaleY(24)-rect.top,
@@ -2469,6 +2470,7 @@ function renderReplicaSvgMarkup(model) {
         }
       }
       placedPositiveLabelRects.push(chosenLabelRect);
+      placedPositiveNodeRects.push({left:positiveFrame.left,right:positiveFrame.right,top:positiveFrame.top,bottom:positiveFrame.bottom});
       positiveMarkup += `<path data-layout-branch-id="${positiveNodeId}" d="${flowPath(
         positiveFrame.right, positiveFrame.top, positiveFrame.bottom,
         netFrame.x + positiveTargetInsetX, adjustedTargetTop,
