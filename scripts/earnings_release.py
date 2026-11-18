@@ -11,7 +11,7 @@ import math
 import re
 from datetime import date, timedelta
 from pathlib import Path
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse, unquote
 from bs4 import BeautifulSoup
 from pypdf import PdfReader
 from official_segments import _request, _request_json, _resolve_cik
@@ -20,16 +20,51 @@ from generic_filing_table_parser import _period_entries_from_table
 from sankey_statement_backfill import parse_inline_statements, complete_statement
 
 CACHE = Path(__file__).resolve().parents[1] / "data/cache/earnings-releases"
-VERSION = "earnings-release-v13"
+VERSION = "earnings-release-v14"
 CORE = ("revenueBn", "operatingIncomeBn", "netIncomeBn")
 
 
-def earnings_exhibit_names(index: dict) -> list[str]:
-    """Include CFO commentary and quarter-named press releases in one filing."""
-    names = [item['name'] for item in index.get('directory', {}).get('item', [])
-             if re.search(r'\.(?:htm|html|pdf)$', item.get('name', ''), re.I)
-             and re.search(r'ex(?:hibit)?[._-]?99|earn|result|press|financial|cfocommentary|q[1-4]fy\d+pr', item['name'], re.I)]
-    return sorted(names, key=lambda name: ('99' not in name, name))[:6]
+MAX_EARNINGS_EXHIBITS = 12
+
+
+def earnings_exhibit_names(index: dict, manifest: str = '', primary_document: str = '') -> list[str]:
+    """Prefer SEC document types, with a bounded filename-independent fallback.
+
+    Issuers need not put "earnings" or "99" in an exhibit filename. Only
+    documents in this filing's directory are eligible; exclude generated XBRL
+    views and index pages rather than treating them as financial attachments.
+    """
+    available = {item['name'] for item in index.get('directory', {}).get('item', [])
+                 if re.fullmatch(r'[^/\\]+\.(?:htm|html|pdf)', item.get('name', ''), re.I)
+                 and not re.search(r'-index(?:-headers)?\.html?$|^R\d+\.htm$|^FilingSummary', item['name'], re.I)
+                 and item['name'] != primary_document}
+    declared = []
+    for row in BeautifulSoup(manifest, 'html.parser').find_all('tr') if manifest else []:
+        cells = row.find_all(['td', 'th'])
+        if not any(re.fullmatch(r'EX-99(?:\.\d+)?', cell.get_text(strip=True), re.I) for cell in cells):
+            continue
+        for link in row.find_all('a', href=True):
+            name = unquote(urlparse(link['href']).path.rsplit('/', 1)[-1])
+            if name in available and name not in declared:
+                declared.append(name)
+    named = sorted(available - set(declared), key=lambda name: (
+        not bool(re.search(r'ex(?:hibit)?[._-]?99|earn|result|press|financial|commentary|q[1-4]fy\d+pr', name, re.I)),
+        '99' not in name, name))
+    return (declared + named)[:MAX_EARNINGS_EXHIBITS]
+
+
+def filing_exhibit_names(base: str, index: dict, primary_document: str = '', diagnostics: list | None = None) -> list[str]:
+    """Read the SEC's typed document inventory when the filing provides one."""
+    manifest_name = next((item['name'] for item in index.get('directory', {}).get('item', [])
+                          if re.fullmatch(r'\d{10}-\d{2}-\d{6}-index\.html?', item.get('name', ''))), '')
+    manifest = ''
+    if manifest_name:
+        try:
+            manifest = _request(base + manifest_name).decode('utf-8', errors='replace')
+        except Exception as error:
+            if diagnostics is not None:
+                diagnostics.append(dict(sourceUrl=base + manifest_name, error=str(error)))
+    return earnings_exhibit_names(index, manifest, primary_document)
 
 
 def complete_quarter(entry: dict, company_id: str = "") -> bool:
@@ -47,6 +82,18 @@ def plausible(entry: dict, previous: dict) -> bool:
     if previous.get("revenueBn") and previous.get("statementCurrency") == entry.get("statementCurrency"):
         return .02 <= entry["revenueBn"] / previous["revenueBn"] <= 50
     return True
+
+
+def parse_earnings_document(content: bytes, name: str, company: dict, url: str, filed: str):
+    if content.startswith(b'%PDF') or name.lower().endswith('.pdf'):
+        from generic_ir_pdf_parser import _entries_from_pdf_pages
+        pages = [page.extract_text() for page in PdfReader(io.BytesIO(content)).pages[:30]]
+        entries = _entries_from_pdf_pages(pages, url, filed)
+        return {q:e for q,e in entries.items() if complete_quarter(e, company['id'])}, {}
+    html = content.decode('utf-8', errors='replace')
+    entries = parse_release(html, company, url, filed)
+    partials = parse_release(html, company, url, filed, allow_partial=True) if not entries else {}
+    return entries, partials
 
 
 def parse_release(html: str, company: dict, url: str, filed: str, *, allow_partial=False) -> dict:
@@ -213,21 +260,23 @@ def discover_release(company: dict, local: dict | None = None, *, expected_filin
                 return saved
         base = f"https://www.sec.gov/Archives/edgar/data/{int(cik)}/{accession.replace('-', '')}/"
         index = _request_json(base + "index.json")
-        names = earnings_exhibit_names(index)
+        document_errors = []
+        primary = (recent.get('primaryDocument') or [''] * len(recent['form']))[i]
+        # A 6-K may contain the financial statements in its primary document;
+        # unlike an 8-K wrapper, that document must remain a parse candidate.
+        names = filing_exhibit_names(base, index, primary if form == '8-K' else '', document_errors)
         partials = []
         for name in names:
             url = base + name
-            content = _request(url)
-            if name.lower().endswith(".pdf"):
-                from generic_ir_pdf_parser import _entries_from_pdf_pages
-                pages = [page.extract_text() for page in PdfReader(io.BytesIO(content)).pages[:30]]
-                entries = _entries_from_pdf_pages(pages, url, filed)
-                entries = {q: e for q, e in entries.items() if complete_quarter(e, company["id"])}
-            else:
-                entries = parse_release(content.decode("utf-8", errors="replace"), company, url, filed)
-                if not entries:
-                    incomplete = parse_release(content.decode("utf-8", errors="replace"), company, url, filed, allow_partial=True)
-                    partials.extend(e for q,e in incomplete.items() if not expected_quarter or q == expected_quarter)
+            try:
+                content = _request(url)
+                entries, incomplete = parse_earnings_document(content, name, company, url, filed)
+            except Exception as error:
+                # One inaccessible or malformed attachment must not hide a
+                # healthy sibling from the very same earnings announcement.
+                document_errors.append(dict(sourceUrl=url, error=str(error)))
+                continue
+            partials.extend(e for q,e in incomplete.items() if not expected_quarter or q == expected_quarter)
             if expected_quarter:
                 entries = {q:e for q,e in entries.items() if q == expected_quarter}
             if not entries:
@@ -242,6 +291,8 @@ def discover_release(company: dict, local: dict | None = None, *, expected_filin
                 return dict(**marker, quarter=quarter, reportDate=entry["periodEnd"], parseError="Statement units or revenue scale require verification")
             entry["automaticEarnings"] = marker
             payload = dict(**marker, quarter=quarter, reportDate=entry["periodEnd"], entry=entry, _cacheVersion=VERSION)
+            if document_errors:
+                payload['documentWarnings'] = document_errors
             CACHE.mkdir(parents=True, exist_ok=True)
             cache.write_text(json.dumps(payload, ensure_ascii=False, indent=2))
             return payload
@@ -253,7 +304,10 @@ def discover_release(company: dict, local: dict | None = None, *, expected_filin
                 CACHE.mkdir(parents=True, exist_ok=True)
                 cache.write_text(json.dumps(payload, ensure_ascii=False, indent=2))
                 return payload
-            return dict(**marker, quarter="", reportDate="", parseError="Earnings 8-K found; no validated quarterly statement parsed")
+            return dict(**marker, quarter="", reportDate="", parseError="Earnings 8-K found; no validated quarterly statement parsed",
+                        documentWarnings=document_errors)
+        if document_errors:
+            raise RuntimeError(f"{company['id']}: earnings attachments could not be checked: {document_errors}")
     return None
 
 

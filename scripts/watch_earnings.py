@@ -301,7 +301,10 @@ def run(args) -> int:
     calendar_day=datetime.now(timezone.utc).date().isoformat()
     for company in companies:
         active,reason=release_window(company,locals_by_id.get(company['id']))
-        if active or getattr(args,'companies',''):
+        # A previously detected failure remains eligible every poll, even if
+        # the learned release window closes or today's calendar probe ran.
+        retry = state.get(company['id'], {}).get('failure') or state.get(company['id'], {}).get('pendingDetails')
+        if active or getattr(args,'companies','') or retry:
             eligible.append(company)
         elif state.get(company['id'],{}).get('lastCalendarCheck')!=calendar_day:
             # A daily official-index probe catches rescheduled releases, but

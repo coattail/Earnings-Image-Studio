@@ -3,6 +3,38 @@
 // Heights remain untouched: the net port includes gains that merge above the
 // operating contribution. This small bounded least-squares problem is scale
 // invariant and shared by every company and reporting period.
+// Revalidate attached annotations AFTER every alignment/editor transform. Move
+// the monetary cap and its label together; a label-only fix can detach the name
+// from its branch or push it into the main profit ribbon.
+function resolveAttachedBranchPlacement(rects, obstacles, options) {
+  const { minDx, maxDx, minDy, maxDy } = options;
+  if (![minDx, maxDx, minDy, maxDy].every(Number.isFinite) || minDx > maxDx || minDy > maxDy)
+    return { dx: 0, dy: 0, feasible: false };
+  const gap = Math.max(options.gap || 0, 0);
+  const xs = new Set([clamp(0, minDx, maxDx), minDx, maxDx]);
+  const ys = new Set([clamp(0, minDy, maxDy), minDy, maxDy]);
+  for (const rect of rects) for (const obstacle of obstacles) {
+    for (const x of [obstacle.right + gap - rect.left, obstacle.left - gap - rect.right])
+      if (x >= minDx && x <= maxDx) xs.add(x);
+    for (const y of [obstacle.bottom + gap - rect.top, obstacle.top - gap - rect.bottom])
+      if (y >= minDy && y <= maxDy) ys.add(y);
+  }
+  let best = { dx: 0, dy: 0, feasible: false }, bestScore = Infinity;
+  const candidates = [...xs].flatMap(dx => [...ys].map(dy => ({ dx, dy, score: dx ** 2 + dy ** 2 })))
+    .sort((a, b) => a.score - b.score);
+  for (const { dx, dy, score } of candidates) {
+    if (score >= bestScore) break;
+    const moved = rects.map(rect => ({ left: rect.left + dx, right: rect.right + dx,
+      top: rect.top + dy, bottom: rect.bottom + dy }));
+    if (moved.some(rect => obstacles.some(obstacle => rect.left < obstacle.right + gap - 1e-7 &&
+        rect.right > obstacle.left - gap + 1e-7 && rect.top < obstacle.bottom + gap - 1e-7 &&
+        rect.bottom > obstacle.top - gap + 1e-7))) continue;
+    if (options.accept && !options.accept(moved, dx, dy)) continue;
+    best = { dx, dy, feasible: true }; bestScore = score;
+  }
+  return best;
+}
+
 function resolveProfitSpinePositions(options) {
   const { grossTop, operatingTop, netTop, operatingMin, operatingMax, netMin, netMax } = options;
   if (![grossTop, operatingTop, netTop, operatingMin, operatingMax, netMin, netMax].every(Number.isFinite) ||

@@ -493,7 +493,7 @@ function renderReplicaSvgMarkup(model) {
       }
 
       ${renderEditableNodeRect(grossFrame, greenNode)}
-      ${renderMetricCluster(
+      <g data-layout-label-id="gross-summary">${renderMetricCluster(
         grossFrame.centerX,
         grossMetricYShifted,
         localizeChartPhrase(snapshot.grossProfitLabel || "Gross profit"),
@@ -502,7 +502,7 @@ function renderReplicaSvgMarkup(model) {
         snapshot.grossMarginYoyDeltaPp !== null && snapshot.grossMarginYoyDeltaPp !== undefined ? formatPp(snapshot.grossMarginYoyDeltaPp) : "",
         greenText,
         grossMetricLayout
-      )}
+      )}</g>
 
       ${
         showCostBridge
@@ -533,7 +533,7 @@ function renderReplicaSvgMarkup(model) {
       ${
         hasOperatingLoss
           ? ""
-          : renderMetricCluster(
+          : `<g data-layout-label-id="operating-summary">${renderMetricCluster(
               operatingFrame.centerX,
               operatingMetricYShifted,
               localizeChartPhrase(operatingOutcomeLabel),
@@ -542,7 +542,7 @@ function renderReplicaSvgMarkup(model) {
               snapshot.operatingMarginYoyDeltaPp !== null && snapshot.operatingMarginYoyDeltaPp !== undefined ? formatPp(snapshot.operatingMarginYoyDeltaPp) : "",
               operatingOutcomeTextColor,
               operatingMetricLayout
-            )
+            )}</g>`
       }
 
       ${renderEditableNodeRect(operatingExpenseFrame, redNode)}
@@ -2338,18 +2338,8 @@ function renderReplicaSvgMarkup(model) {
         centerY: finalSourceTop - labelTopGapY - labelBottomOffset,
       };
       const positiveNodeId = `positive-${index}`;
-      const positiveFrame = editableNodeFrame(positiveNodeId, positiveNodeX, finalSourceTop, positiveNodeWidth, gainHeight);
+      let positiveFrame = editableNodeFrame(positiveNodeId, positiveNodeX, finalSourceTop, positiveNodeWidth, gainHeight);
       const positiveShift = editorOffsetForNode(positiveNodeId);
-      positiveMarkup += `<path d="${flowPath(
-        positiveFrame.right,
-        positiveFrame.top,
-        positiveFrame.bottom,
-        netFrame.x + positiveTargetInsetX,
-        adjustedTargetTop,
-        adjustedTargetTop + adjustedTargetHeight,
-        positiveBranchPathOptions
-      )}" fill="${greenFlow}" opacity="0.97"></path>`;
-      positiveMarkup += renderEditableNodeRect(positiveFrame, greenNode);
       const forceLeftCenteredLabel = snapshot.layout?.positiveLabelPlacement === "left-center";
       const alignSingleLeftLabelToNode =
         (positiveNeedsVisibleMergeAngle || positiveSmallAdjustmentStrength > 0) &&
@@ -2357,14 +2347,15 @@ function renderReplicaSvgMarkup(model) {
         chosenPlacement.type === "left" &&
         snapshot.layout?.positiveSingleLeftLabelFollowNodeCenter !== false;
       const useLeftCenteredLabel = forceLeftCenteredLabel || alignSingleLeftLabelToNode;
-      const labelAnchor = useLeftCenteredLabel ? "end" : chosenPlacement.anchor;
-      const labelX = useLeftCenteredLabel
+      let labelAnchor = useLeftCenteredLabel ? "end" : chosenPlacement.anchor;
+      let labelX = useLeftCenteredLabel
         ? positiveFrame.x - labelGapX
         : chosenPlacement.x + positiveShift.dx;
       let labelCenterY = useLeftCenteredLabel
         ? positiveFrame.centerY - labelCenterBias
         : chosenPlacement.centerY + positiveShift.dy;
       let chosenLabelRect = labelBoundsRect(labelAnchor, labelX, labelCenterY);
+      let detachedPositiveLabel = false;
       placedPositiveLabelRects.forEach((placedRect) => {
         const overlapsHorizontally =
           chosenLabelRect.left < placedRect.right + positiveLabelInterLabelPadding &&
@@ -2381,9 +2372,118 @@ function renderReplicaSvgMarkup(model) {
         );
         chosenLabelRect = labelBoundsRect(labelAnchor, labelX, labelCenterY);
       });
+      if (!snapshot.editModeEnabled) {
+        // Final left-centering and saved offsets can invalidate the earlier
+        // corridor search. Reserve the actual text/halo bounds and move the
+        // branch with its label before drawing either the cap or its ribbon.
+        const capRect = { left: positiveFrame.left, right: positiveFrame.right,
+          top: positiveFrame.top, bottom: positiveFrame.bottom };
+        const clearance = scaleY(12);
+        const headerFloor = Math.max(titleObstacle.bottom, periodEndObstacle?.bottom || 0) + scaleY(20);
+        const top = Math.min(capRect.top, chosenLabelRect.top);
+        const bottom = Math.max(capRect.bottom, chosenLabelRect.bottom);
+        const repaired = resolveAttachedBranchPlacement([chosenLabelRect, capRect],
+          [...positiveLabelObstacles, ...placedPositiveLabelRects, ...smallBridgeCalloutRects,
+           {left:operatingFrame.left,right:operatingFrame.right,top:operatingFrame.top,bottom:operatingFrame.bottom}], {
+            minDx: Math.max(scaleY(20) - Math.min(chosenLabelRect.left, capRect.left), positiveNodeMinX - capRect.left),
+            maxDx: Math.min(width - scaleY(24) - Math.max(chosenLabelRect.right, capRect.right),
+              netFrame.left - Math.max(positiveRunwayAvailable * .28, scaleY(48)) - capRect.right),
+            minDy: headerFloor - top,
+            maxDy: (positiveAbove ? netFrame.top - clearance : chartBottomLimit - clearance) - bottom,
+            gap: clearance,
+            accept: (rects, dx, dy) => {
+              // The final label must also clear the curved main flow, not just
+              // the rectangular stage titles. Include its full horizontal span.
+              for (const rect of rects) for (let sample = 0; sample <= 8; sample++) {
+                const x = rect.left + (rect.right - rect.left) * sample / 8;
+                if (x <= operatingFrame.right || x >= netFrame.left) continue;
+                const envelope = shiftedMainNetRibbonEnvelopeAtX(x);
+                if (envelope && (positiveAbove ? rect.bottom > envelope.top - clearance : rect.top < envelope.bottom + clearance)) return false;
+              }
+              // A relocated cap keeps its original merge port and monetary
+              // thickness. Its ribbon must clear all protected stage labels.
+              for (let sample = 0; sample <= 12; sample++) {
+                const x = positiveFrame.right + dx + (netFrame.left - positiveFrame.right - dx) * sample / 12;
+                const envelope = flowEnvelopeAtX(x, positiveFrame.right + dx, positiveFrame.top + dy,
+                  positiveFrame.bottom + dy, netFrame.left + positiveTargetInsetX,
+                  adjustedTargetTop, adjustedTargetTop + adjustedTargetHeight, positiveBranchPathOptions);
+                if (envelope && smallBridgeCalloutObstacles.some(obstacle =>
+                    x > obstacle.left - clearance && x < obstacle.right + clearance &&
+                    envelope.bottom > obstacle.top - clearance && envelope.top < obstacle.bottom + clearance)) return false;
+              }
+              return true;
+            },
+          });
+        if (repaired.feasible && (Math.abs(repaired.dx) > .01 || Math.abs(repaired.dy) > .01)) {
+          const offset = autoLayoutOffsetForNode(positiveNodeId);
+          setAutoLayoutNodeOffset(positiveNodeId, {dx:offset.dx + repaired.dx,dy:offset.dy + repaired.dy});
+          positiveFrame = editableNodeFrame(positiveNodeId, positiveNodeX, finalSourceTop, positiveNodeWidth, gainHeight);
+          labelX += repaired.dx; labelCenterY += repaired.dy;
+          chosenLabelRect = labelBoundsRect(labelAnchor, labelX, labelCenterY);
+        }
+        if (!repaired.feasible) {
+          // Long translations or several gains may have no attached corridor.
+          // Search adjacent label lanes using the same hard obstacles, then
+          // connect a detached label back to its unchanged monetary cap.
+          const candidates = [
+            {anchor:'middle',x:positiveFrame.centerX,y:positiveFrame.top-clearance-labelBottomOffset},
+            {anchor:'start',x:positiveFrame.right+clearance,y:positiveFrame.centerY-labelCenterBias},
+            {anchor:'end',x:positiveFrame.left-clearance,y:positiveFrame.centerY-labelCenterBias},
+            {anchor:'middle',x:positiveFrame.centerX,y:positiveFrame.bottom+clearance-labelTopOffset},
+          ];
+          let alternate = null;
+          for (const candidate of candidates) {
+            const rect = labelBoundsRect(candidate.anchor,candidate.x,candidate.y);
+            const result = resolveAttachedBranchPlacement([rect],
+              [...positiveLabelObstacles,...placedPositiveLabelRects,...smallBridgeCalloutRects,capRect], {
+                minDx:Math.max(scaleY(20)-rect.left,positiveFrame.left-scaleY(180)-rect.left),
+                maxDx:Math.min(width-scaleY(24)-rect.right,positiveFrame.right+positiveRunwayAvailable-rect.right),
+                minDy:scaleY(24)-rect.top,
+                maxDy:Math.min(chartBottomLimit-clearance-rect.bottom,positiveFrame.bottom+scaleY(120)-rect.bottom),
+                gap:clearance,
+                accept:([box])=>{
+                  for(let sample=0;sample<=16;sample++) {
+                    const x=box.left+(box.right-box.left)*sample/16;
+                    if(x>operatingFrame.right&&x<netFrame.left) {
+                      const main=shiftedMainNetRibbonEnvelopeAtX(x);
+                      if(main&&(positiveAbove?box.bottom>main.top-clearance:box.top<main.bottom+clearance))return false;
+                    }
+                    if(x>=positiveFrame.right&&x<=netFrame.left) {
+                      const own=flowEnvelopeAtX(x,positiveFrame.right,positiveFrame.top,positiveFrame.bottom,
+                        netFrame.left+positiveTargetInsetX,adjustedTargetTop,adjustedTargetTop+adjustedTargetHeight,positiveBranchPathOptions);
+                      if(own&&box.bottom>own.top-clearance&&box.top<own.bottom+clearance)return false;
+                    }
+                  }
+                  return true;
+                },
+              });
+            if(!result.feasible)continue;
+            const score=(candidate.x+result.dx-labelX)**2+(candidate.y+result.dy-labelCenterY)**2;
+            if(!alternate||score<alternate.score)alternate={...candidate,x:candidate.x+result.dx,y:candidate.y+result.dy,score};
+          }
+          if(alternate) {
+            labelAnchor=alternate.anchor;labelX=alternate.x;labelCenterY=alternate.y;
+            chosenLabelRect=labelBoundsRect(labelAnchor,labelX,labelCenterY);
+            detachedPositiveLabel=true;
+          }
+        }
+      }
       placedPositiveLabelRects.push(chosenLabelRect);
+      positiveMarkup += `<path data-layout-branch-id="${positiveNodeId}" d="${flowPath(
+        positiveFrame.right, positiveFrame.top, positiveFrame.bottom,
+        netFrame.x + positiveTargetInsetX, adjustedTargetTop,
+        adjustedTargetTop + adjustedTargetHeight, positiveBranchPathOptions
+      )}" fill="${greenFlow}" opacity="0.97"></path>`;
+      positiveMarkup += renderEditableNodeRect(positiveFrame, greenNode);
+      const leaderX=clamp(positiveFrame.centerX,chosenLabelRect.left,chosenLabelRect.right);
+      const leaderY=clamp(positiveFrame.centerY,chosenLabelRect.top,chosenLabelRect.bottom);
+      if(detachedPositiveLabel&&Math.hypot(leaderX-positiveFrame.centerX,leaderY-positiveFrame.centerY)>scaleY(64)) {
+        positiveMarkup+=`<path data-branch-label-leader="${positiveNodeId}" d="M ${leaderX} ${leaderY} L ${positiveFrame.centerX} ${positiveFrame.centerY}" fill="none" stroke="${greenText}" stroke-width="1.5" opacity="0.65"></path>`;
+      }
+      positiveMarkup += `<g data-layout-label-id="${positiveNodeId}">`;
       positiveMarkup += `<text x="${labelX}" y="${labelCenterY - twoLineGap}" text-anchor="${labelAnchor}" font-size="${positiveNameSize}" font-weight="700" fill="${greenText}" paint-order="stroke fill" stroke="${background}" stroke-width="7" stroke-linejoin="round">${escapeHtml(localizedPositiveName)}</text>`;
       positiveMarkup += `<text x="${labelX}" y="${labelCenterY + valueYOffset}" text-anchor="${labelAnchor}" font-size="${positiveValueSize}" font-weight="700" fill="${greenText}" paint-order="stroke fill" stroke="${background}" stroke-width="6" stroke-linejoin="round">${escapeHtml(labelValue)}</text>`;
+      positiveMarkup += '</g>';
       positiveTop = finalSourceTop + gainHeight + positiveGap;
       netPositiveCursor += mergeHeight;
     });
