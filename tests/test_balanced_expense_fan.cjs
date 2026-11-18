@@ -137,7 +137,9 @@ test('Microsoft three quarters share a downward expense split without changing m
     for(const [id,node] of Object.entries(before)){
       assert.equal(after[id].height,node.height,`${q}/${id}: value thickness`);
       if(!['cost','operating-expenses'].includes(id)&&!/^(cost-breakdown|opex|deduction)-/.test(id)) assert.deepEqual(after[id],node,`${q}/${id}: keep main spine`);
-      if(!/^(cost-breakdown|opex|deduction)-/.test(id)) assert.equal(english[id].y,after[id].y,`${q}/${id}: bilingual core positions`);
+      // Gain annotations reserve their translated text footprint; only the
+      // main financial stages require identical bilingual positions.
+      if(!/^(cost-breakdown|opex|deduction|positive)-/.test(id)) assert.equal(english[id].y,after[id].y,`${q}/${id}: bilingual core positions`);
     }
     assert.ok(after['operating-expenses'].y >= after.gross.y+after.operating.height+20,`${q}: lower ribbon descends`);
     const gains=Object.entries(after).filter(([id])=>id.startsWith('positive-')).reduce((sum,[,n])=>sum+n.height,0);

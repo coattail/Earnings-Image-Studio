@@ -36,5 +36,5 @@ def record_failure(state, item, error, phase, now):
 
 def clear_failure(state, company_id):
     company_state = state.setdefault(company_id, {})
-    for field in ('error', 'failure', 'pendingDetails'):
+    for field in ('error', 'failure', 'pendingDetails', 'pendingRelease'):
         company_state.pop(field, None)

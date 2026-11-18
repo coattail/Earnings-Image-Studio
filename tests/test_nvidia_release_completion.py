@@ -81,7 +81,7 @@ class NvidiaReleaseCompletionTests(unittest.TestCase):
         names = ['nvda-20261117.htm','q3fy27cfocommentary.htm','q3fy27pr.htm',
                  'supplementalfinancialinfor.htm','nvdalogo.jpg','FilingSummary.xml']
         index = {'directory':{'item':[{'name':name} for name in names]}}
-        self.assertEqual(earnings_exhibit_names(index), names[1:4])
+        self.assertEqual(earnings_exhibit_names(index, primary_document=names[0]), names[1:4])
 
 
 if __name__ == '__main__':

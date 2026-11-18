@@ -12,7 +12,9 @@ set -euo pipefail
   tests.test_earnings_watch tests.test_check_for_updates_official_ir \
   tests.test_stockanalysis_financials_contracts tests.test_stockanalysis_financials_adapter \
   tests.test_earnings_pipeline_guardrails tests.test_scheduled_failure_replays \
-  tests.test_nvidia_release_completion tests.test_latest_nvidia_update
+  tests.test_nvidia_release_completion tests.test_latest_nvidia_update \
+  tests.test_universal_earnings_disclosures
 
 node --test tests/test_release_chart_render.cjs tests/test_cost_stage_clearance.cjs \
-  tests/test_startup_assets.cjs tests/test_balanced_expense_fan.cjs tests/test_built_runtime_parity.cjs
+  tests/test_startup_assets.cjs tests/test_balanced_expense_fan.cjs tests/test_built_runtime_parity.cjs \
+  tests/test_attached_branch_clearance.cjs

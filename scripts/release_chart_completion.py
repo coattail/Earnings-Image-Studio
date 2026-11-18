@@ -200,7 +200,64 @@ def table_candidates(html, entry):
         if re.search(r'non[- ]gaap|reconciliation of.*(?:income|profit)|adjusted earnings', heading):
             continue
         for rows in _extract_html_tables(str(table)):
+            fiscal_headers = [cell for row in rows[:6] for cell in row
+                              if re.fullmatch(r'Q[1-4] FY\d{2,4}', cell)]
+            if fiscal_headers and not any(h in fiscal_headers for h in
+                [f'{fiscal_quarter} FY{fiscal_year}', f'{fiscal_quarter} FY{fiscal_year[-2:]}']):
+                continue
             yield rows
+
+
+def fiscal_partition(rows, templates, prior, entry, url):
+    """Read any issuer's explicit fiscal columns at their published precision."""
+    year = str(entry.get('fiscalYear') or '')
+    quarter = entry.get('fiscalQuarter')
+    labels = {f'{quarter} FY{year}', f'{quarter} FY{year[-2:]}'}
+    header = next((r for r in rows[:6] if any(c in labels for c in r[1:])), None)
+    if not header or not templates:
+        return None
+    unit = re.search(r'\bin (thousands|millions|billions)\b', ' '.join(header), re.I)
+    if not unit:
+        return None
+    scale = {'thousands':1e-6, 'millions':.001, 'billions':1}[unit[1].lower()]
+    column = next(i for i, cell in enumerate(header) if i and cell in labels)
+    mapped = {label_key(r[0]):r for r in rows if r}
+    def read(template):
+        source = next((r for name, r in mapped.items() if name in names(template)), None)
+        if not source or len(source) <= column:
+            return None
+        cell = source[column].strip().replace(',', '').lstrip('$€£¥')
+        if not re.fullmatch(r'\d+(?:\.\d+)?', cell):
+            return None
+        value = float(cell) * scale
+        precision = scale * 10 ** -(len(cell.split('.')[1]) if '.' in cell else 0)
+        row = sourced(template, value, entry, url)
+        row['reportedPrecisionBn'] = precision
+        for i, heading in enumerate(header):
+            if i >= len(source): continue
+            field = 'qoqPct' if heading.rstrip('*').upper() == 'Q/Q' else 'yoyPct' if heading.rstrip('*').upper() == 'Y/Y' else None
+            growth = re.fullmatch(r'(-?\d+(?:\.\d+)?)%', source[i])
+            if field and growth: row[field] = float(growth[1])
+        return row
+    total = read({'name':'Total','memberKey':'totalrevenues'})
+    if not total or not finite(entry.get('revenueBn')) or abs(total['valueBn'] - entry['revenueBn']) > total['reportedPrecisionBn'] / 2 + 1e-8:
+        return None
+    def partition(definitions, parent):
+        values = [read(t) for t in definitions]
+        if any(v is None for v in values): return None
+        rounding = (sum(v['reportedPrecisionBn'] for v in values) + parent['reportedPrecisionBn']) / 2
+        return values if abs(sum(v['valueBn'] for v in values) - parent['valueBn']) <= rounding + 1e-8 else None
+    segments = partition(templates, total)
+    if not segments: return None
+    details = []
+    for parent in segments:
+        children = [r for r in prior.get('officialRevenueDetailGroups') or []
+                    if key(r.get('targetName') or r.get('targetId')) in names(parent)]
+        if children:
+            parsed = partition(children, parent)
+            if not parsed: return None
+            details.extend(parsed)
+    return segments, details
 
 def extract_partition(rows, templates, entry, url, *, allow_corporate=False, residual=None, allow_reconciliation=False):
     """Evaluate a whole partition. Amounts from separate tables never mix."""
@@ -286,60 +343,14 @@ def enrich_complete_partition(payload, html, url):
     elif cid=='home-depot':
         templates=[{'name':n,'nameZh':z,'memberKey':n.lower()}for n,z in [('Products','产品'),('Services','服务')]]
     tables=list(table_candidates(html,entry))
-    if cid == 'nvidia':
-        # CFO tables use fiscal headers and rounded billions, while the income
-        # statement reports exact millions. Keep each amount at its disclosed
-        # precision; never allocate the small rounding gap to a category.
-        for rows in tables:
-            if not rows or 'Revenue by Market Platform' not in ' '.join(rows[0]):
-                continue
-            header = next((r for r in rows if any(re.fullmatch(r'Q[1-4] FY\d{2,4}', c) for c in r)), None)
-            if not header or not re.search(r'\bin billions\b', ' '.join(header), re.I):
-                continue
-            fiscal = re.fullmatch(r'Q([1-4]) FY(\d{2,4})', header[1]) if len(header) > 1 else None
-            if not fiscal or f"FY{2000 + int(fiscal[2]) if len(fiscal[2]) == 2 else int(fiscal[2])} Q{fiscal[1]}" != entry.get('fiscalLabel'):
-                continue
-            mapped = {label_key(r[0]): r for r in rows if r}
-            total = mapped.get('total', [])
-            values = numbers(total[1:2])
-            if not values or not finite(entry.get('revenueBn')):
-                continue
-            precision = len(total[1].split('.')[1]) if '.' in total[1] else 0
-            tolerance = .5 * 10 ** -precision + 1e-9
-            if abs(values[0] - entry['revenueBn']) > tolerance:
-                continue
-            segments=[]; details=[]
-            for field, definitions in ((segments, [('Data Center','数据中心','datacenter',None),
-                                                   ('Edge Computing','边缘计算','edgecomputing',None)]),
-                                       (details, [('Hyperscale','超大规模','hyperscale','Data Center'),
-                                                  ('AI Clouds, Industrial, & Enterprise','AI云、工业与企业','aicloudsindustrialenterprise','Data Center')])):
-                for name, zh, member, parent in definitions:
-                    source = mapped.get(label_key(name), [])
-                    amounts = numbers(source[1:2])
-                    if not amounts or amounts[0] < 0:
-                        break
-                    row = sourced(dict(name=name, nameZh=zh, memberKey=member,
-                                       **({'targetName':parent} if parent else {})), amounts[0], entry, url)
-                    row['reportedPrecisionBn'] = 10 ** -precision
-                    if len(source) >= 6:
-                        for column, growth in ((4, 'qoqPct'), (5, 'yoyPct')):
-                            match = re.fullmatch(r'(-?\d+(?:\.\d+)?)%', source[column])
-                            if match: row[growth] = float(match[1])
-                    field.append(row)
-            if len(segments) != 2 or len(details) != 2:
-                continue
-            if abs(sum(r['valueBn'] for r in segments) - values[0]) > tolerance * 3:
-                continue
-            if abs(sum(r['valueBn'] for r in details) - segments[0]['valueBn']) > tolerance * 3:
-                continue
+    for rows in tables:
+        recovered = fiscal_partition(rows, prior.get('officialRevenueSegments') or templates, prior, entry, url)
+        if recovered:
+            segments, details = recovered
             entry.update(officialRevenueSegments=segments, officialRevenueDetailGroups=details,
-                         officialRevenueStyle='nvidia-fy2027-market-platform',
+                         officialRevenueStyle=prior.get('officialRevenueStyle') or entry.get('officialRevenueStyle'),
                          revenueClassificationSource='official-complete-table', revenueClassificationSourceUrl=url,
-                         revenueClassificationBasisNote='Market-platform amounts are reported in rounded billions; consolidated statements retain exact millions.')
-            return payload
-        if any(rows and 'Revenue by Market Platform' in ' '.join(rows[0]) for rows in tables):
-            # A rejected fiscal/precision check must not fall through to the
-            # generic table matcher, which has no fiscal-column validation.
+                         revenueClassificationBasisNote='Classification amounts retain their disclosed precision; consolidated statements retain exact amounts.')
             return payload
     if cid == 'chevron':
         from datetime import date
@@ -431,6 +442,9 @@ def enrich_complete_partition(payload, html, url):
                     revenueClassificationBasisNote='Segment revenue includes net sales and membership/other income; totals reconcile to consolidated revenue.')
                 return payload
     for rows in tables:
+        # Fiscal tables are validated above. Never reinterpret a rejected
+        # fiscal/rounding check as an unlabeled generic monetary column.
+        if any(re.fullmatch(r'Q[1-4] FY\d{2,4}', cell) for row in rows[:6] for cell in row): continue
         partition=extract_partition(rows,templates,entry,url,allow_corporate=cid=='procter-gamble',
                                     residual='otherproducts' if cid=='abbvie' else None,allow_reconciliation=cid=='coca-cola')
         if not partition and cid=='berkshire': partition=transposed_partition(rows,templates,entry,url)
@@ -471,7 +485,7 @@ def complete_current_chart(payload, company, *, documents=None, require_filing_d
     if not quarter: return payload
     entry=payload['financials'][quarter]
     attempts=[]
-    def apply(html,url,filed=None):
+    def apply_document(html,url,filed=None):
         from earnings_release import parse_release
         from bs4 import BeautifulSoup
         filed=filed or entry.get('statementFilingDate')or''
@@ -480,6 +494,9 @@ def complete_current_chart(payload, company, *, documents=None, require_filing_d
         # Re-read consolidated actuals too: otherwise an old "net sales"
         # figure could make an entirely correct total-revenue partition fail.
         parsed=parse_release(html,{**company,'id':payload['id'],'reportingCurrency':native},url,filed,allow_partial=True).get(quarter)
+        if parsed and entry.get('periodEnd') and parsed.get('periodEnd') != entry['periodEnd']:
+            attempts.append({'sourceUrl':url,'error':'Statement period differs from the requested reporting period'})
+            return
         if parsed and parsed.get('periodEnd','')<=filed:
             for field,value in parsed.items():
                 if value is not None and (field.endswith(('Bn','MarginPct','MarginYoyDeltaPp')) or field in {'periodEnd','statementCurrency'}
@@ -503,6 +520,14 @@ def complete_current_chart(payload, company, *, documents=None, require_filing_d
         enrich_complete_partition(payload,html,url)
         entry.pop('_classificationFilingDate',None)
         attempts.append({'sourceUrl':url,'remainingIssues':chart_issues(payload)})
+    def apply(html, url, filed=None):
+        before = deepcopy(entry)
+        try:
+            apply_document(html, url, filed)
+        except Exception:
+            entry.clear()
+            entry.update(before)
+            raise
     if documents is not None:
         for document in documents:
             url,html,*metadata=document
@@ -521,13 +546,13 @@ def complete_current_chart(payload, company, *, documents=None, require_filing_d
         if chart_issues(payload):
             # The statement and revenue classifications may be separate
             # exhibits of the SAME earnings 8-K, ahead of the statutory 10-Q.
-            from earnings_release import earnings_exhibit_names
+            from earnings_release import filing_exhibit_names
             match = re.match(r'(https://www\.sec\.gov/Archives/edgar/data/\d+/\d{18}/)', url)
             if match and (entry.get('automaticEarnings') or {}).get('form') in {'8-K', '6-K'}:
                 base = match[1]
                 try:
                     index = _request_json(base + 'index.json')
-                    for name in earnings_exhibit_names(index):
+                    for name in filing_exhibit_names(base, index, diagnostics=attempts):
                         companion = base + name
                         if companion == url: continue
                         try:
