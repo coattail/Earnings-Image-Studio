@@ -71,10 +71,11 @@ def sourced(template, value, entry, url):
 def matches_total(total, revenue):
     return finite(total) and finite(revenue) and abs(total-revenue) <= max(.00001, .0003*abs(revenue))
 
-def enrich_pdf_partition(payload, content, url):
+def enrich_pdf_partition(payload, content, url, *, pages=None):
     """Parse native monetary columns, including an explicit consolidation bridge."""
-    from pypdf import PdfReader
-    pages=[p.extract_text()for p in PdfReader(BytesIO(content)).pages]
+    if pages is None:
+        from pypdf import PdfReader
+        pages = [page.extract_text() for page in PdfReader(BytesIO(content)).pages]
     quarter=max(payload['financials']);entry=payload['financials'][quarter];cid=payload['id']
     if cid=='samsung':
         from earnings_release import samsung_statement
@@ -136,7 +137,15 @@ def enrich_pdf_partition(payload, content, url):
                 rows.append(sourced({'name':name,'nameZh':zh,'memberKey':member},value,entry,url))
             adjustment=amount('Inter-segment elimination')
             if len(rows)!=5 or adjustment is None or not matches_total(sum(r['valueBn']for r in rows)+adjustment,entry.get('revenueBn')): continue
+            from official_revenue_structures import _extract_alibaba_table_metrics
+            def add_reported_growth(row, label):
+                value, growth = _extract_alibaba_table_metrics(text, label)
+                if value == row['valueBn'] and growth is not None:
+                    row['yoyPct'] = growth
+
             unallocated=rows.pop()['valueBn']
+            for row, (label, *_) in zip(rows, defs):
+                add_reported_growth(row, label)
             entry.update(officialRevenueSegments=rows,officialRevenueStyle='alibaba-commerce-staged',
                 officialRevenueTaxonomyChangedFromPreviousQuarter=True,
                 officialRevenueReconciliation=sourced({'name':'Unallocated and intersegment reconciliation','nameZh':'未分配收入及分部间抵销净额'},adjustment+unallocated,entry,url))
@@ -151,9 +160,12 @@ def enrich_pdf_partition(payload, content, url):
                 clean=re.sub(r'\(\d\)','',text);old=text;text=clean
                 value=amount(label);text=old
                 if value is None: break
-                children.append(sourced({'name':name,'nameZh':zh,'memberKey':key(name),'targetName':'Alibaba E-commerce Group'},value,entry,url))
+                row = sourced({'name':name,'nameZh':zh,'memberKey':key(name),'targetName':'Alibaba E-commerce Group'},value,entry,url)
+                add_reported_growth(row, label)
+                children.append(row)
             if len(children)==5 and matches_total(sum(r['valueBn']for r in children),rows[0]['valueBn']):entry['officialRevenueDetailGroups']=children
             entry['revenueClassificationSource']='official-complete-table'
+            entry['revenueClassificationSourceUrl'] = url
             return payload
     # A transposed segment table can disclose its complete partition on one
     # page. Read only the requested quarterly section and its declared units.

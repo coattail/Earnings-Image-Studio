@@ -105,4 +105,30 @@ def test_alibaba_q2_2026_official_update_is_complete():
 
     index = json.loads((ROOT / "data" / "dataset-index.json").read_text())
     indexed = next(company for company in index["companies"] if company["id"] == "alibaba")
-    assert indexed["latestQuarter"] == "2026Q2"
+    assert "2026Q2" in indexed["quarters"]
+
+
+def test_alibaba_q3_2026_official_update_is_complete():
+    dataset = json.loads((ROOT / "data/earnings-dataset.json").read_text())
+    index = json.loads((ROOT / "data/dataset-index.json").read_text())
+    cache = json.loads((ROOT / "data/cache/alibaba.json").read_text())
+    alibaba = next(company for company in dataset["companies"] if company["id"] == "alibaba")
+    indexed = next(company for company in index["companies"] if company["id"] == "alibaba")
+    quarter = alibaba["financials"]["2026Q3"]
+
+    assert indexed["latestQuarter"] >= "2026Q3"
+    assert cache["financials"]["2026Q3"] == quarter
+    assert quarter["fiscalLabel"] == "FY2027 Q2"
+    assert quarter["statementFilingDate"] == "2026-11-19"
+    assert quarter["revenueBn"] == 271.519
+    assert quarter["costOfRevenueBn"] == 168.476
+    assert quarter["operatingIncomeBn"] == 29.116
+    assert quarter["pretaxIncomeBn"] == 100.570
+    assert quarter["netIncomeBn"] == 64.420
+    assert quarter["officialRevenueSegments"][1]["yoyPct"] == 53
+    bridge = quarter["officialRevenueReconciliation"]
+    assert bridge["reportedEliminationsBn"] == -19.382
+    assert bridge["reportedUnallocatedBn"] == 0.542
+    assert round(sum(r["valueBn"] for r in quarter["officialRevenueSegments"]) + bridge["valueBn"], 3) == 271.519
+    assert round(sum(r["valueBn"] for r in quarter["officialRevenueDetailGroups"]), 3) == 197.237
+    assert quarter["chartQuality"]["status"] == "ready"

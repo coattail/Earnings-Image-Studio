@@ -93,44 +93,71 @@ def latest_native_release(company):
             raise ValueError("Tencent official results index could not be parsed")
         return max(items, key=lambda item: item["quarter"])
     if company_id == "alibaba":
-        from official_revenue_structures import _quarter_from_alibaba_title, _timestamp_ms_to_iso_date
-        items = []
-        # This endpoint is indexed by calendar year, not Alibaba fiscal year.
-        for year in [date.today().year, date.today().year - 1]:
-            try:
-                payload = _request_json(f"https://data.alibabagroup.com/data/index/ir/quarterly-results/q{year}/list.json")
-            except Exception as error:
-                status = getattr(error, 'code', None) or getattr(getattr(error, 'response', None), 'status_code', None)
-                if status == 404 and year == date.today().year:
-                    continue  # Early January may still use last year's index.
-                raise
-            for item in payload.get("content", []):
-                title = item.get("documentTitle") or ""
-                if isinstance(title, dict): title = title.get("en_US", "")
-                title = title.strip()
-                is_results_article = bool(re.match(r"^Alibaba Group Announces\b", title, re.I))
-                press_release = item.get("pressRelease")
-                # The quarterly catalogue creates event rows before earnings.
-                # A plain period title needs a separate press-release link.
-                if not is_results_article and not (
-                    press_release and re.match(r"^(December|September|June|March)\s+Quarter\b", title, re.I)
-                ):
-                    continue
-                quarter = _quarter_from_alibaba_title(title)
-                if quarter:
-                    filed = _timestamp_ms_to_iso_date(item.get('eventDate') or item.get('documentPublishTime'))
-                    if not filed or filed > date.today().isoformat(): continue
-                    published = item.get("documentPublishTime")
-                    if published and int(published) > datetime.now(timezone.utc).timestamp() * 1000:
-                        continue
-                    document_id = press_release or item.get("documentId")
-                    if document_id:
-                        items.append(dict(quarter=quarter, filingDate=filed, sourceUrl=f"https://www.alibabagroup.com/en-US/document-{document_id}", form="official-ir-release"))
-            # The newest calendar-year index already covers current releases;
-            # do not spend the issuer's budget crawling an older archive too.
-            if items and max(i['quarter'] for i in items) >= (company.get('_localQuarter') or f'{date.today().year}Q2'):
-                break
-        if not items:
-            raise ValueError("Alibaba official results index could not be parsed")
-        return max(items, key=lambda item: item["quarter"])
+        return _latest_alibaba_release(company.get("_localQuarter") or "")
     return None
+
+
+def _alibaba_release_items(rows, today, now):
+    from official_revenue_structures import _quarter_from_alibaba_title, _timestamp_ms_to_iso_date
+
+    for item in rows:
+        title = item.get("documentTitle") or ""
+        if isinstance(title, dict):
+            title = title.get("en_US") or ""
+        title = title.strip()
+        press_release = str(item.get("pressRelease") or "").strip()
+        if re.match(r"^Alibaba Group Announces\b", title, re.I):
+            document_id = press_release or str(item.get("documentId") or "").strip()
+        elif re.match(r"^(December|September|June|March)\s+Quarter\b", title, re.I):
+            # Event entries can appear before the financial release.
+            document_id = press_release
+        else:
+            continue
+        quarter = _quarter_from_alibaba_title(title)
+        published = item.get("documentPublishTime")
+        filed = _timestamp_ms_to_iso_date(item.get("eventDate") or published)
+        if (document_id and quarter and filed and filed <= today.isoformat()
+                and (not published or int(published) <= now)):
+            yield dict(quarter=quarter, filingDate=filed,
+                       sourceUrl=f"https://www.alibabagroup.com/en-US/document-{document_id}",
+                       form="official-ir-release")
+
+
+def _latest_alibaba_release(local_quarter):
+    from official_revenue_structures import _extract_json_script_props
+
+    today = date.today()
+    now = datetime.now(timezone.utc).timestamp() * 1000
+    items = []
+    errors = []
+    year_url = "https://data.alibabagroup.com/data/index/ir/quarterly-results/q{year}/list.json"
+    news_url = "https://home.alibabagroup.com/en-US/ir-news-filings"
+    def latest():
+        return max(items, key=lambda item: (item["quarter"], item["filingDate"]), default=None)
+
+    try:
+        items.extend(_alibaba_release_items(_request_json(year_url.format(year=today.year)).get("content", []), today, now))
+    except (OSError, ValueError) as error:
+        errors.append(error)
+    newest = latest()
+    if newest and newest["quarter"] > local_quarter:
+        return newest
+
+    # News and the quarterly event catalogue update independently.
+    try:
+        news = _extract_json_script_props(_request(news_url).decode("utf-8", errors="replace"))
+        items.extend(_alibaba_release_items(news.get("newsData") or [], today, now))
+    except (OSError, ValueError) as error:
+        errors.append(error)
+    if items:
+        return latest()
+
+    try:
+        items.extend(_alibaba_release_items(_request_json(year_url.format(year=today.year - 1)).get("content", []), today, now))
+    except (OSError, ValueError) as error:
+        errors.append(error)
+    if items:
+        return latest()
+    if errors:
+        raise errors[0]
+    raise ValueError("Alibaba official results index could not be parsed")

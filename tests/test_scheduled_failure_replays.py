@@ -164,6 +164,32 @@ class PeriodAndProvenanceTests(unittest.TestCase):
             self.assertEqual(report['awaitingFilings'][0]['companyId'], 'home-depot')
             self.assertEqual(report['updatedCompanies'], [])
 
+    def test_an_older_index_does_not_clear_a_previously_discovered_release(self):
+        from argparse import Namespace
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            dataset = root / 'dataset.json'
+            dataset.write_text(json.dumps({'companies': [{'id': 'alibaba'}]}))
+            args = Namespace(universe=None, companies='', dry_run=False, report_path=root/'report.json',
+                             state_path=root/'state.json', budget_seconds=660)
+            source = 'https://www.alibabagroup.com/en-US/document-pending'
+            args.state_path.write_text(json.dumps({'alibaba': {'pendingRelease': {
+                'quarter': '2026Q3', 'filingDate': '2026-11-19', 'sourceUrl': source,
+            }}}))
+            item = dict(companyId='alibaba', needsUpdate=False, reason='up-to-date',
+                        remoteQuarter='2026Q2', localQuarter='2026Q2')
+            with patch.object(watch, 'TOP30_COMPANIES', [{'id': 'alibaba', 'ticker': 'BABA'}]), \
+                 patch.object(watch.checker, 'DATASET_PATH', dataset), \
+                 patch.object(watch, 'bounded_detect', return_value=item):
+                self.assertEqual(watch.run(args), 1)
+            state = json.loads(args.state_path.read_text())['alibaba']
+            self.assertEqual(state['pendingRelease']['quarter'], '2026Q3')
+            self.assertEqual(state['failure']['sourceUrl'], source)
+            report = json.loads(args.report_path.read_text())
+            self.assertEqual(report['failedCompanies'], ['alibaba'])
+
     def test_monthly_6k_event_date_is_not_a_quarterly_statement(self):
         import check_for_updates as checker
         recent = dict(form=['6-K','20-F'], filingDate=['2026-11-10','2026-04-01'],

@@ -3435,7 +3435,7 @@ def _parse_tencent_records(company: dict[str, Any]) -> dict[str, Any]:
 
 
 def _load_alibaba_press_release_pdf(item: dict[str, Any]) -> tuple[str | None, str | None]:
-    press_release_id = str(item.get("pressRelease") or "")
+    press_release_id = str(item.get("pressRelease") or "").strip()
     if not press_release_id:
         return None, None
     page_url = f"https://www.alibabagroup.com/en-US/document-{press_release_id}"

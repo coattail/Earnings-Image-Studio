@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-19T05:47:34Z",
+  "generatedAt": "2026-11-19T10:52:46Z",
   "companyCount": 41,
   "companies": [
     {
@@ -18372,35 +18372,36 @@
         "2025Q3",
         "2025Q4",
         "2026Q1",
-        "2026Q2"
+        "2026Q2",
+        "2026Q3"
       ],
       "statementSource": "stockanalysis-financials",
       "statementSourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/5b1cb883-8d00-4237-a148-6631cc12a5d2/Alibaba%20Group%20Announces%20March%20Quarter%202026%20and%20Fiscal%20Year%202026%20Results.pdf",
       "reportingCurrency": "CNY",
       "errors": [],
       "coverage": {
-        "quarterCount": 41,
+        "quarterCount": 42,
         "pixelReplicaQuarterCount": 0,
         "hasPixelReplica": false,
-        "officialFinancialQuarterCount": 41,
-        "officialSegmentQuarterCount": 41,
-        "officialExpenseQuarterCount": 1,
+        "officialFinancialQuarterCount": 42,
+        "officialSegmentQuarterCount": 42,
+        "officialExpenseQuarterCount": 2,
         "classification": {
           "status": "warning",
-          "latestQuarter": "2026Q2",
+          "latestQuarter": "2026Q3",
           "latestQuarterHasRevenueClassification": true,
           "latestQuarterHasExpenseClassification": true,
-          "latestRevenueClassificationQuarter": "2026Q2",
-          "latestExpenseClassificationQuarter": "2026Q2",
+          "latestRevenueClassificationQuarter": "2026Q3",
+          "latestExpenseClassificationQuarter": "2026Q3",
           "latestStructureHistoryQuarter": "2026Q2",
-          "revenueClassificationQuarterCount": 41,
-          "expenseClassificationQuarterCount": 1,
+          "revenueClassificationQuarterCount": 42,
+          "expenseClassificationQuarterCount": 2,
           "revenueClassificationCoverageRatio": 1.0,
-          "expenseClassificationCoverageRatio": 0.0244,
+          "expenseClassificationCoverageRatio": 0.0476,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": 0,
           "warnings": [
-            "Expense classification history is sparse: 1 of 41 quarters have official expense breakdowns."
+            "Expense classification history is sparse: 2 of 42 quarters have official expense breakdowns."
           ],
           "blockers": [],
           "policy": {}
@@ -18438,22 +18439,20 @@
           "validation": {
             "version": "parser-validation-v1",
             "status": "high",
-            "overallConfidenceScore": 0.9624,
+            "overallConfidenceScore": 0.9664,
             "financialConfidenceScore": 0.9483,
-            "structuralConfidenceScore": 0.9885,
-            "revenueSegmentChecks": 29,
-            "revenueSegmentMismatchCount": 1,
+            "structuralConfidenceScore": 1.0,
+            "revenueSegmentChecks": 30,
+            "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 12,
-            "detailGroupChecks": 25,
+            "detailGroupChecks": 26,
             "detailGroupMismatchCount": 0,
             "detailGroupSkippedChecks": 0,
-            "opexChecks": 1,
+            "opexChecks": 2,
             "opexSkippedChecks": 0,
             "opexOverflowMismatchCount": 0,
-            "warningCount": 1,
-            "warnings": [
-              "2026Q2: revenue segments sum to 286.44Bn vs revenue 268.953Bn."
-            ]
+            "warningCount": 0,
+            "warnings": []
           }
         }
       },
@@ -18463,149 +18462,252 @@
       "marketCapSource": "CompaniesMarketCap",
       "marketCapSourceUrl": "https://companiesmarketcap.com/alibaba/marketcap/",
       "dataLoadMode": "latest-only",
-      "latestQuarter": "2026Q2",
+      "latestQuarter": "2026Q3",
       "financials": {
-        "2026Q2": {
-          "calendarQuarter": "2026Q2",
-          "periodEnd": "2026-06-30",
+        "2026Q3": {
+          "calendarQuarter": "2026Q3",
+          "periodEnd": "2026-09-30",
           "fiscalYear": "2027",
-          "fiscalQuarter": "Q1",
-          "fiscalLabel": "FY2027 Q1",
+          "fiscalQuarter": "Q2",
+          "fiscalLabel": "FY2027 Q2",
           "statementCurrency": "CNY",
-          "revenueBn": 268.953,
-          "revenueYoyPct": 8.601,
-          "costOfRevenueBn": 166.096,
-          "grossProfitBn": 102.857,
+          "revenueBn": 271.519,
+          "revenueYoyPct": 9.574,
+          "costOfRevenueBn": 168.476,
+          "grossProfitBn": 103.043,
           "sgnaBn": null,
           "rndBn": null,
           "otherOpexBn": null,
-          "operatingExpensesBn": 87.696,
-          "operatingIncomeBn": 15.161,
-          "nonOperatingBn": 7.147,
-          "pretaxIncomeBn": 22.308,
-          "taxBn": 12.798,
-          "netIncomeBn": 10.444,
-          "netIncomeYoyPct": -75.357,
-          "grossMarginPct": 38.243,
-          "operatingMarginPct": 5.637,
-          "profitMarginPct": 3.883,
-          "effectiveTaxRatePct": 57.37,
-          "revenueQoqPct": 10.507,
-          "grossMarginYoyDeltaPp": -6.668,
-          "operatingMarginYoyDeltaPp": -8.491,
-          "profitMarginYoyDeltaPp": -13.23,
-          "statementSource": "alibaba-ir-pdf",
-          "statementSourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/fa5d65fc-9b3e-4e82-a8fc-4ce1c3e2c407/Alibaba%20Group%20Announces%20June%20Quarter%202026%20Results.pdf",
-          "statementFilingDate": "2026-08-20",
+          "operatingExpensesBn": 73.927,
+          "operatingIncomeBn": 29.116,
+          "nonOperatingBn": 71.454,
+          "pretaxIncomeBn": 100.57,
+          "taxBn": 37.126,
+          "netIncomeBn": 64.42,
+          "netIncomeYoyPct": null,
+          "grossMarginPct": 37.951,
+          "operatingMarginPct": 10.723,
+          "profitMarginPct": 23.726,
+          "effectiveTaxRatePct": 36.916,
+          "revenueQoqPct": 0.954,
+          "grossMarginYoyDeltaPp": -1.199,
+          "operatingMarginYoyDeltaPp": 8.603,
+          "profitMarginYoyDeltaPp": 15.406,
+          "statementSource": "official-ir-earnings-release",
+          "statementSourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/e676aff4-e76d-489b-960a-47b9cf36485d/Alibaba%20Group%20Announces%20September%20Quarter%202026%20Results%20and%20Interim%20Results%20for%20the%20Six%20Months%20Ended%20September%2030%2C%202026.pdf",
+          "statementFilingDate": "2026-11-19",
+          "officialOpexBreakdown": [
+            {
+              "name": "Product development expenses",
+              "nameZh": "产品研发费用",
+              "memberKey": "productdevelopmentexpenses",
+              "valueBn": 22.632,
+              "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/e676aff4-e76d-489b-960a-47b9cf36485d/Alibaba%20Group%20Announces%20September%20Quarter%202026%20Results%20and%20Interim%20Results%20for%20the%20Six%20Months%20Ended%20September%2030%2C%202026.pdf",
+              "filingDate": "2026-11-19",
+              "sourceForm": "official current-period disclosure"
+            },
+            {
+              "name": "Sales and marketing expenses",
+              "nameZh": "销售及营销费用",
+              "memberKey": "salesmarketingexpenses",
+              "valueBn": 41.341,
+              "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/e676aff4-e76d-489b-960a-47b9cf36485d/Alibaba%20Group%20Announces%20September%20Quarter%202026%20Results%20and%20Interim%20Results%20for%20the%20Six%20Months%20Ended%20September%2030%2C%202026.pdf",
+              "filingDate": "2026-11-19",
+              "sourceForm": "official current-period disclosure"
+            },
+            {
+              "name": "General and administrative expenses",
+              "nameZh": "一般及行政费用",
+              "memberKey": "generaladministrativeexpenses",
+              "valueBn": 10.097,
+              "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/e676aff4-e76d-489b-960a-47b9cf36485d/Alibaba%20Group%20Announces%20September%20Quarter%202026%20Results%20and%20Interim%20Results%20for%20the%20Six%20Months%20Ended%20September%2030%2C%202026.pdf",
+              "filingDate": "2026-11-19",
+              "sourceForm": "official current-period disclosure"
+            },
+            {
+              "name": "Amortization of intangible assets",
+              "nameZh": "无形资产摊销",
+              "memberKey": "amortizationofintangibleassets",
+              "valueBn": 0.656,
+              "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/e676aff4-e76d-489b-960a-47b9cf36485d/Alibaba%20Group%20Announces%20September%20Quarter%202026%20Results%20and%20Interim%20Results%20for%20the%20Six%20Months%20Ended%20September%2030%2C%202026.pdf",
+              "filingDate": "2026-11-19",
+              "sourceForm": "official current-period disclosure"
+            },
+            {
+              "name": "Impairment of goodwill",
+              "nameZh": "商誉减值",
+              "memberKey": "impairmentofgoodwill",
+              "valueBn": 0.0,
+              "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/e676aff4-e76d-489b-960a-47b9cf36485d/Alibaba%20Group%20Announces%20September%20Quarter%202026%20Results%20and%20Interim%20Results%20for%20the%20Six%20Months%20Ended%20September%2030%2C%202026.pdf",
+              "filingDate": "2026-11-19",
+              "sourceForm": "official current-period disclosure"
+            }
+          ],
           "officialRevenueSegments": [
             {
               "name": "Alibaba E-commerce Group",
               "nameZh": "阿里电商集团",
               "memberKey": "alibabaecommercegroup",
-              "valueBn": 205.862,
-              "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/fa5d65fc-9b3e-4e82-a8fc-4ce1c3e2c407/Alibaba%20Group%20Announces%20June%20Quarter%202026%20Results.pdf",
-              "filingDate": "2026-08-20",
+              "valueBn": 197.237,
+              "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/e676aff4-e76d-489b-960a-47b9cf36485d/Alibaba%20Group%20Announces%20September%20Quarter%202026%20Results%20and%20Interim%20Results%20for%20the%20Six%20Months%20Ended%20September%2030%2C%202026.pdf",
+              "filingDate": "2026-11-19",
               "sourceForm": "official current-period disclosure",
-              "mixPct": 76.5
+              "yoyPct": 2.0,
+              "mixPct": 72.6,
+              "qoqPct": -4.19
             },
             {
               "name": "AI Cloud and Compute Services",
               "nameZh": "AI 云与计算服务",
               "memberKey": "aicloudandcomputeservices",
-              "valueBn": 48.437,
-              "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/fa5d65fc-9b3e-4e82-a8fc-4ce1c3e2c407/Alibaba%20Group%20Announces%20June%20Quarter%202026%20Results.pdf",
-              "filingDate": "2026-08-20",
+              "valueBn": 60.973,
+              "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/e676aff4-e76d-489b-960a-47b9cf36485d/Alibaba%20Group%20Announces%20September%20Quarter%202026%20Results%20and%20Interim%20Results%20for%20the%20Six%20Months%20Ended%20September%2030%2C%202026.pdf",
+              "filingDate": "2026-11-19",
               "sourceForm": "official current-period disclosure",
-              "mixPct": 18.0
+              "yoyPct": 53.0,
+              "mixPct": 22.5,
+              "qoqPct": 25.88
             },
             {
               "name": "AI Labs and Applications",
               "nameZh": "AI 实验室与应用",
               "memberKey": "ailabsandapplications",
-              "valueBn": 3.338,
-              "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/fa5d65fc-9b3e-4e82-a8fc-4ce1c3e2c407/Alibaba%20Group%20Announces%20June%20Quarter%202026%20Results.pdf",
-              "filingDate": "2026-08-20",
+              "valueBn": 4.435,
+              "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/e676aff4-e76d-489b-960a-47b9cf36485d/Alibaba%20Group%20Announces%20September%20Quarter%202026%20Results%20and%20Interim%20Results%20for%20the%20Six%20Months%20Ended%20September%2030%2C%202026.pdf",
+              "filingDate": "2026-11-19",
               "sourceForm": "official current-period disclosure",
-              "mixPct": 1.2
+              "yoyPct": 51.0,
+              "mixPct": 1.6,
+              "qoqPct": 32.86
             },
             {
               "name": "All others",
               "nameZh": "其他业务",
               "memberKey": "allothers",
-              "valueBn": 28.803,
-              "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/fa5d65fc-9b3e-4e82-a8fc-4ce1c3e2c407/Alibaba%20Group%20Announces%20June%20Quarter%202026%20Results.pdf",
-              "filingDate": "2026-08-20",
+              "valueBn": 27.714,
+              "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/e676aff4-e76d-489b-960a-47b9cf36485d/Alibaba%20Group%20Announces%20September%20Quarter%202026%20Results%20and%20Interim%20Results%20for%20the%20Six%20Months%20Ended%20September%2030%2C%202026.pdf",
+              "filingDate": "2026-11-19",
               "sourceForm": "official current-period disclosure",
-              "mixPct": 10.7
+              "yoyPct": -5.0,
+              "mixPct": 10.2,
+              "qoqPct": -3.78
             }
           ],
+          "officialRevenueStyle": "alibaba-commerce-staged",
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueReconciliation": {
+            "name": "Unallocated and intersegment reconciliation",
+            "nameZh": "未分配收入及分部间抵销净额",
+            "valueBn": -18.84,
+            "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/e676aff4-e76d-489b-960a-47b9cf36485d/Alibaba%20Group%20Announces%20September%20Quarter%202026%20Results%20and%20Interim%20Results%20for%20the%20Six%20Months%20Ended%20September%2030%2C%202026.pdf",
+            "filingDate": "2026-11-19",
+            "sourceForm": "official current-period disclosure",
+            "reportedEliminationsBn": -19.382,
+            "reportedUnallocatedBn": 0.542
+          },
           "officialRevenueDetailGroups": [
             {
               "name": "Customer management",
               "nameZh": "客户管理",
               "memberKey": "customermanagement",
               "targetName": "Alibaba E-commerce Group",
-              "valueBn": 82.547,
-              "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/fa5d65fc-9b3e-4e82-a8fc-4ce1c3e2c407/Alibaba%20Group%20Announces%20June%20Quarter%202026%20Results.pdf",
-              "filingDate": "2026-08-20",
+              "valueBn": 75.033,
+              "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/e676aff4-e76d-489b-960a-47b9cf36485d/Alibaba%20Group%20Announces%20September%20Quarter%202026%20Results%20and%20Interim%20Results%20for%20the%20Six%20Months%20Ended%20September%2030%2C%202026.pdf",
+              "filingDate": "2026-11-19",
               "sourceForm": "official current-period disclosure",
-              "mixPct": 30.7
+              "yoyPct": -5.0,
+              "mixPct": 27.6,
+              "qoqPct": -9.1
             },
             {
               "name": "Direct sales, logistics and others",
               "nameZh": "自营、物流及其他",
               "memberKey": "directsaleslogisticsothers",
               "targetName": "Alibaba E-commerce Group",
-              "valueBn": 28.353,
-              "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/fa5d65fc-9b3e-4e82-a8fc-4ce1c3e2c407/Alibaba%20Group%20Announces%20June%20Quarter%202026%20Results.pdf",
-              "filingDate": "2026-08-20",
+              "valueBn": 23.464,
+              "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/e676aff4-e76d-489b-960a-47b9cf36485d/Alibaba%20Group%20Announces%20September%20Quarter%202026%20Results%20and%20Interim%20Results%20for%20the%20Six%20Months%20Ended%20September%2030%2C%202026.pdf",
+              "filingDate": "2026-11-19",
               "sourceForm": "official current-period disclosure",
-              "mixPct": 10.5
+              "yoyPct": -7.0,
+              "mixPct": 8.6,
+              "qoqPct": -17.24
             },
             {
               "name": "China Quick Commerce",
               "nameZh": "中国即时零售",
               "memberKey": "chinaquickcommerce",
               "targetName": "Alibaba E-commerce Group",
-              "valueBn": 53.295,
-              "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/fa5d65fc-9b3e-4e82-a8fc-4ce1c3e2c407/Alibaba%20Group%20Announces%20June%20Quarter%202026%20Results.pdf",
-              "filingDate": "2026-08-20",
+              "valueBn": 58.757,
+              "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/e676aff4-e76d-489b-960a-47b9cf36485d/Alibaba%20Group%20Announces%20September%20Quarter%202026%20Results%20and%20Interim%20Results%20for%20the%20Six%20Months%20Ended%20September%2030%2C%202026.pdf",
+              "filingDate": "2026-11-19",
               "sourceForm": "official current-period disclosure",
-              "mixPct": 19.8
+              "yoyPct": 22.0,
+              "mixPct": 21.6,
+              "qoqPct": 10.25
             },
             {
               "name": "International E-commerce",
               "nameZh": "国际电商",
               "memberKey": "internationalecommerce",
               "targetName": "Alibaba E-commerce Group",
-              "valueBn": 27.761,
-              "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/fa5d65fc-9b3e-4e82-a8fc-4ce1c3e2c407/Alibaba%20Group%20Announces%20June%20Quarter%202026%20Results.pdf",
-              "filingDate": "2026-08-20",
+              "valueBn": 25.723,
+              "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/e676aff4-e76d-489b-960a-47b9cf36485d/Alibaba%20Group%20Announces%20September%20Quarter%202026%20Results%20and%20Interim%20Results%20for%20the%20Six%20Months%20Ended%20September%2030%2C%202026.pdf",
+              "filingDate": "2026-11-19",
               "sourceForm": "official current-period disclosure",
-              "mixPct": 10.3
+              "yoyPct": -8.0,
+              "mixPct": 9.5,
+              "qoqPct": -7.34
             },
             {
               "name": "Global Wholesale",
               "nameZh": "全球批发",
               "memberKey": "globalwholesale",
               "targetName": "Alibaba E-commerce Group",
-              "valueBn": 13.906,
-              "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/fa5d65fc-9b3e-4e82-a8fc-4ce1c3e2c407/Alibaba%20Group%20Announces%20June%20Quarter%202026%20Results.pdf",
-              "filingDate": "2026-08-20",
+              "valueBn": 14.26,
+              "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/e676aff4-e76d-489b-960a-47b9cf36485d/Alibaba%20Group%20Announces%20September%20Quarter%202026%20Results%20and%20Interim%20Results%20for%20the%20Six%20Months%20Ended%20September%2030%2C%202026.pdf",
+              "filingDate": "2026-11-19",
               "sourceForm": "official current-period disclosure",
-              "mixPct": 5.2
+              "yoyPct": 6.0,
+              "mixPct": 5.3,
+              "qoqPct": 2.55
             }
           ],
+          "revenueClassificationSource": "official-complete-table",
+          "revenueClassificationSourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/e676aff4-e76d-489b-960a-47b9cf36485d/Alibaba%20Group%20Announces%20September%20Quarter%202026%20Results%20and%20Interim%20Results%20for%20the%20Six%20Months%20Ended%20September%2030%2C%202026.pdf",
+          "statementSpanQuarters": 1,
+          "statementValueMode": "reported",
+          "parserFinancialFieldSources": {
+            "revenueBn": "official",
+            "operatingIncomeBn": "official",
+            "netIncomeBn": "official"
+          },
+          "parserFinancialValidation": {
+            "status": "high",
+            "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/e676aff4-e76d-489b-960a-47b9cf36485d/Alibaba%20Group%20Announces%20September%20Quarter%202026%20Results%20and%20Interim%20Results%20for%20the%20Six%20Months%20Ended%20September%2030%2C%202026.pdf"
+          },
+          "automaticEarnings": {
+            "filingDate": "2026-11-19",
+            "accession": "https://data.alibabagroup.com/ecms-files/1532295521/e676aff4-e76d-489b-960a-47b9cf36485d/Alibaba%20Group%20Announces%20September%20Quarter%202026%20Results%20and%20Interim%20Results%20for%20the%20Six%20Months%20Ended%20September%2030%2C%202026.pdf",
+            "form": "official-ir-release",
+            "indexSourceUrl": "https://www.alibabagroup.com/en-US/document-2060147792046718976"
+          },
           "displayCurrency": "USD",
-          "displayScaleFactor": 0.14873,
-          "officialRevenueStyle": "alibaba-commerce-staged",
-          "officialRevenueTaxonomyChangedFromPreviousQuarter": true,
+          "displayScaleFactor": 0.14999,
           "officialRevenueTaxonomyChangedFromPriorYear": true,
-          "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": true,
+          "officialRevenueDetailTaxonomyChangedFromPreviousQuarter": false,
           "officialRevenueDetailTaxonomyChangedFromPriorYear": true,
+          "sankeyStructureContinuity": {
+            "sourceQuarter": "2026Q2",
+            "fields": [
+              "officialRevenueSegments",
+              "officialRevenueDetailGroups",
+              "officialOpexBreakdown"
+            ],
+            "rule": "same-normalized-category-set"
+          },
           "chartQuality": {
             "version": 3,
-            "quarter": "2026Q2",
+            "quarter": "2026Q3",
             "status": "ready",
             "issues": [],
             "requiredMarginComparisons": [
@@ -18631,499 +18733,11 @@
                 "internationalecommerce"
               ]
             }
-          },
-          "officialOpexBreakdown": [
-            {
-              "name": "Product development expenses",
-              "nameZh": "产品研发费用",
-              "memberKey": "productdevelopmentexpenses",
-              "valueBn": 22.529,
-              "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/fa5d65fc-9b3e-4e82-a8fc-4ce1c3e2c407/Alibaba%20Group%20Announces%20June%20Quarter%202026%20Results.pdf",
-              "filingDate": "2026-08-20",
-              "sourceForm": "official current-period disclosure"
-            },
-            {
-              "name": "Sales and marketing expenses",
-              "nameZh": "销售及营销费用",
-              "memberKey": "salesmarketingexpenses",
-              "valueBn": 47.625,
-              "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/fa5d65fc-9b3e-4e82-a8fc-4ce1c3e2c407/Alibaba%20Group%20Announces%20June%20Quarter%202026%20Results.pdf",
-              "filingDate": "2026-08-20",
-              "sourceForm": "official current-period disclosure"
-            },
-            {
-              "name": "General and administrative expenses",
-              "nameZh": "一般及行政费用",
-              "memberKey": "generaladministrativeexpenses",
-              "valueBn": 12.708,
-              "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/fa5d65fc-9b3e-4e82-a8fc-4ce1c3e2c407/Alibaba%20Group%20Announces%20June%20Quarter%202026%20Results.pdf",
-              "filingDate": "2026-08-20",
-              "sourceForm": "official current-period disclosure"
-            },
-            {
-              "name": "Amortization of intangible assets",
-              "nameZh": "无形资产摊销",
-              "memberKey": "amortizationofintangibleassets",
-              "valueBn": 0.665,
-              "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/fa5d65fc-9b3e-4e82-a8fc-4ce1c3e2c407/Alibaba%20Group%20Announces%20June%20Quarter%202026%20Results.pdf",
-              "filingDate": "2026-08-20",
-              "sourceForm": "official current-period disclosure"
-            },
-            {
-              "name": "Impairment of goodwill",
-              "nameZh": "商誉减值",
-              "memberKey": "impairmentofgoodwill",
-              "valueBn": 4.458,
-              "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/fa5d65fc-9b3e-4e82-a8fc-4ce1c3e2c407/Alibaba%20Group%20Announces%20June%20Quarter%202026%20Results.pdf",
-              "filingDate": "2026-08-20",
-              "sourceForm": "official current-period disclosure"
-            }
-          ],
-          "officialRevenueReconciliation": {
-            "name": "Unallocated and intersegment reconciliation",
-            "nameZh": "未分配收入及分部间抵销净额",
-            "valueBn": -17.487,
-            "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/fa5d65fc-9b3e-4e82-a8fc-4ce1c3e2c407/Alibaba%20Group%20Announces%20June%20Quarter%202026%20Results.pdf",
-            "filingDate": "2026-08-20",
-            "sourceForm": "official current-period disclosure",
-            "reportedEliminationsBn": -18.27,
-            "reportedUnallocatedBn": 0.783
-          },
-          "revenueClassificationSource": "official-complete-table"
+          }
         }
       },
       "statementPresets": {},
-      "officialRevenueStructureHistory": {
-        "source": "official-ir-pdf",
-        "quarters": {
-          "2026Q2": {
-            "segments": [
-              {
-                "name": "Alibaba E-commerce Group",
-                "nameZh": null,
-                "memberKey": "alibabaecommercegroup",
-                "valueBn": 205.862,
-                "yoyPct": 4,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/fa5d65fc-9b3e-4e82-a8fc-4ce1c3e2c407/Alibaba%20Group%20Announces%20June%20Quarter%202026%20Results.pdf",
-                "sourceForm": "IR PDF",
-                "filingDate": "2026-08-20",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": false,
-                "validationNotes": [
-                  "segment-revenue-before-intersegment-elimination"
-                ]
-              },
-              {
-                "name": "AI Cloud and Compute Services",
-                "nameZh": null,
-                "memberKey": "aicloudandcomputeservices",
-                "valueBn": 48.437,
-                "yoyPct": 45,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/fa5d65fc-9b3e-4e82-a8fc-4ce1c3e2c407/Alibaba%20Group%20Announces%20June%20Quarter%202026%20Results.pdf",
-                "sourceForm": "IR PDF",
-                "filingDate": "2026-08-20",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": false,
-                "validationNotes": [
-                  "segment-revenue-before-intersegment-elimination"
-                ]
-              },
-              {
-                "name": "AI Labs and Applications",
-                "nameZh": null,
-                "memberKey": "ailabsandapplications",
-                "valueBn": 3.338,
-                "yoyPct": 16,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/fa5d65fc-9b3e-4e82-a8fc-4ce1c3e2c407/Alibaba%20Group%20Announces%20June%20Quarter%202026%20Results.pdf",
-                "sourceForm": "IR PDF",
-                "filingDate": "2026-08-20",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": false,
-                "validationNotes": [
-                  "segment-revenue-before-intersegment-elimination"
-                ]
-              },
-              {
-                "name": "All others",
-                "nameZh": null,
-                "memberKey": "allothers",
-                "valueBn": 28.803,
-                "yoyPct": 1,
-                "qoqPct": null,
-                "mixPct": null,
-                "mixYoyDeltaPp": null,
-                "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/fa5d65fc-9b3e-4e82-a8fc-4ce1c3e2c407/Alibaba%20Group%20Announces%20June%20Quarter%202026%20Results.pdf",
-                "sourceForm": "IR PDF",
-                "filingDate": "2026-08-20",
-                "supportLines": null,
-                "supportLinesZh": null,
-                "metricMode": null,
-                "validationEligible": false,
-                "validationNotes": [
-                  "segment-revenue-before-intersegment-elimination"
-                ]
-              }
-            ],
-            "detailGroups": [
-              {
-                "name": "Customer management",
-                "memberKey": "customermanagement",
-                "valueBn": 82.547,
-                "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/fa5d65fc-9b3e-4e82-a8fc-4ce1c3e2c407/Alibaba%20Group%20Announces%20June%20Quarter%202026%20Results.pdf",
-                "sourceForm": "IR PDF",
-                "filingDate": "2026-08-20",
-                "targetName": "Alibaba E-commerce Group",
-                "yoyPct": -7
-              },
-              {
-                "name": "Direct sales, logistics and others",
-                "memberKey": "directsaleslogisticsandothers",
-                "valueBn": 28.353,
-                "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/fa5d65fc-9b3e-4e82-a8fc-4ce1c3e2c407/Alibaba%20Group%20Announces%20June%20Quarter%202026%20Results.pdf",
-                "sourceForm": "IR PDF",
-                "filingDate": "2026-08-20",
-                "targetName": "Alibaba E-commerce Group",
-                "yoyPct": -10
-              },
-              {
-                "name": "China Quick Commerce",
-                "memberKey": "chinaquickcommerce",
-                "valueBn": 53.295,
-                "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/fa5d65fc-9b3e-4e82-a8fc-4ce1c3e2c407/Alibaba%20Group%20Announces%20June%20Quarter%202026%20Results.pdf",
-                "sourceForm": "IR PDF",
-                "filingDate": "2026-08-20",
-                "targetName": "Alibaba E-commerce Group",
-                "yoyPct": 45
-              },
-              {
-                "name": "International E-commerce",
-                "memberKey": "internationalecommerce",
-                "valueBn": 27.761,
-                "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/fa5d65fc-9b3e-4e82-a8fc-4ce1c3e2c407/Alibaba%20Group%20Announces%20June%20Quarter%202026%20Results.pdf",
-                "sourceForm": "IR PDF",
-                "filingDate": "2026-08-20",
-                "targetName": "Alibaba E-commerce Group",
-                "yoyPct": -1
-              },
-              {
-                "name": "Global Wholesale",
-                "memberKey": "globalwholesale",
-                "valueBn": 13.906,
-                "sourceUrl": "https://data.alibabagroup.com/ecms-files/1532295521/fa5d65fc-9b3e-4e82-a8fc-4ce1c3e2c407/Alibaba%20Group%20Announces%20June%20Quarter%202026%20Results.pdf",
-                "sourceForm": "IR PDF",
-                "filingDate": "2026-08-20",
-                "targetName": "Alibaba E-commerce Group",
-                "yoyPct": 7
-              }
-            ]
-          }
-        },
-        "filingsUsed": [
-          {
-            "title": "June Quarter 2026 Results",
-            "quarter": "2026Q2",
-            "filingDate": "2026-08-20",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/fa5d65fc-9b3e-4e82-a8fc-4ce1c3e2c407/Alibaba%20Group%20Announces%20June%20Quarter%202026%20Results.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-2026456290057781248"
-          },
-          {
-            "title": "March Quarter 2026 and Full Fiscal Year 2026 Results",
-            "quarter": "2026Q1",
-            "filingDate": "2026-05-13",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/5b1cb883-8d00-4237-a148-6631cc12a5d2/Alibaba%20Group%20Announces%20March%20Quarter%202026%20and%20Fiscal%20Year%202026%20Results.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1991237455038119936"
-          },
-          {
-            "title": "December Quarter 2025 Results",
-            "quarter": "2025Q4",
-            "filingDate": "2026-03-19",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/e48e70a1-e5c8-40ac-bdd2-951ebcb36946/Alibaba%20Group%20Announces%20December%20Quarter%202025%20Results.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1971014025827319808"
-          },
-          {
-            "title": "September Quarter 2025 Results",
-            "quarter": "2025Q3",
-            "filingDate": "2025-11-25",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/96ebbe16-9309-479f-b628-48b0ccc31b9c/Alibaba%20Group%20Announces%20September%20Quarter%202025%20Results%20and%20Interim%20Results%20for%20the%20Six%20Months%20Ended%20September%2030%2C%202025.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1929990445136347136"
-          },
-          {
-            "title": "June Quarter 2025 Results",
-            "quarter": "2025Q2",
-            "filingDate": "2025-08-29",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/d09dd487-1a87-4e17-aa5d-9eb4da7eb56b/Alibaba%20Group%20Announces%20June%20Quarter%202025%20Results.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1897714462505304064"
-          },
-          {
-            "title": "March Quarter 2025 and Full Fiscal Year 2025 Results",
-            "quarter": "2025Q1",
-            "filingDate": "2025-05-15",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/83f92d1d-d36f-4ecd-a56c-2d3c59cb251a/Alibaba%20Group%20Announces%20March%20Quarter%202025%20and%20Fiscal%20Year%202025%20Results.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1859016196574150656"
-          },
-          {
-            "title": "December Quarter 2024 Results",
-            "quarter": "2024Q4",
-            "filingDate": "2025-02-20",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/de0aaac9-4fd5-4a17-8762-526616f36ca8/Alibaba%20Group%20Announces%20December%20Quarter%202024%20Results.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1828621437708009472"
-          },
-          {
-            "title": "September Quarter 2024 Results",
-            "quarter": "2024Q3",
-            "filingDate": "2024-11-15",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/0cfe1fbc-94d9-4e25-a163-7e9fcab9fcb8/Alibaba%20Group%20Announces%20September%20Quarter%202024%20Results.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1793795541327413248"
-          },
-          {
-            "title": "June Quarter 2024 Results",
-            "quarter": "2024Q2",
-            "filingDate": "2024-08-15",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/a28fac87-995c-4e9a-8c0d-117023fa13fb/Alibaba%20Group%20Announces%20June%20Quarter%202024%20Results.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1760376653793460224"
-          },
-          {
-            "title": "March Quarter 2024 and Full Fiscal Year 2024 Results",
-            "quarter": "2024Q1",
-            "filingDate": "2024-05-14",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/afdeaf9e-5dd7-4a18-8ff0-968a6807f09d/Alibaba%20Group%20Announces%20March%20Quarter%202024%20and%20Fiscal%20Year%202024%20Results.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1726694664490188800"
-          },
-          {
-            "title": "December Quarter 2023 Results",
-            "quarter": "2023Q4",
-            "filingDate": "2024-02-07",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/8d278cf5-0e7b-4374-aa60-a184ddeb571a/Alibaba%20Group%20Announces%20December%20Quarter%202023%20Results.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1691884451786653696"
-          },
-          {
-            "title": "September Quarter 2023 Results",
-            "quarter": "2023Q3",
-            "filingDate": "2023-11-16",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/d838b84e-0823-43cb-a482-80e00daa6d2b/Alibaba%20Group%20Announces%20September%20Quarter%202023%20Results.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1661567996323168256"
-          },
-          {
-            "title": "June Quarter 2023 Results",
-            "quarter": "2023Q2",
-            "filingDate": "2023-08-10",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/3786c801-0efd-406a-a8a8-3c6934905558/Alibaba%20Group%20Announces%20June%20Quarter%202023%20Results.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1625939046058426368"
-          },
-          {
-            "title": "March Quarter 2023 and Full Fiscal Year 2023 Results",
-            "quarter": "2023Q1",
-            "filingDate": "2023-05-26",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/e6f712b2-580c-4adf-ae1b-77c15c1ac262/Alibaba%20Group%20Announces%20March%20Quarter%20and%20Full%20Fiscal%20Year%202023%20Results.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1595215205757878272"
-          },
-          {
-            "title": "December Quarter 2022 Results",
-            "quarter": "2022Q4",
-            "filingDate": "2023-03-07",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/27a80f3a-8bb0-480f-9fdf-ca19569e59f5/Alibaba%20Group%20Announces%20December%20Quarter%202022%20Results.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1565512332124094464"
-          },
-          {
-            "title": "September Quarter 2022 Results",
-            "quarter": "2022Q3",
-            "filingDate": "2022-12-01",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/7bfce448-276b-4f77-8f50-ad183a04b45a.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1529902238032461824"
-          },
-          {
-            "title": "June Quarter 2022 Results",
-            "quarter": "2022Q2",
-            "filingDate": "2022-12-01",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/fceda7a9-57ee-423d-a357-147f796a95e8.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1493362909613391872"
-          },
-          {
-            "title": "March Quarter 2022 and Full Fiscal Year 2022 Results",
-            "quarter": "2022Q1",
-            "filingDate": "2022-12-01",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/34596e84-ff0c-4522-bbc8-82a8c49c0bba.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1489047618746056704"
-          },
-          {
-            "title": "December Quarter 2021 Results",
-            "quarter": "2021Q4",
-            "filingDate": "2022-08-17",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/112489f7-3c86-4db8-9ab6-42a3357c9959.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1491837195881807872"
-          },
-          {
-            "title": "September Quarter 2021 Results",
-            "quarter": "2021Q3",
-            "filingDate": "2022-09-13",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/0dd0aa50-0431-4a9c-a612-dac40147bc22.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1491837925036392448"
-          },
-          {
-            "title": "June Quarter 2021 Results",
-            "quarter": "2021Q2",
-            "filingDate": "2022-09-13",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/792ccd5e-10b0-42ca-9aef-0453ffffaddc.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1491838954071130112"
-          },
-          {
-            "title": "March Quarter 2021 and Full Fiscal Year 2021 Results",
-            "quarter": "2021Q1",
-            "filingDate": "2022-09-13",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/69d0f33f-cc3f-48e8-b2ca-accf5801d63f.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1491839814327074816"
-          },
-          {
-            "title": "December Quarter 2020 Results",
-            "quarter": "2020Q4",
-            "filingDate": "2022-08-11",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/925581a3-4484-48f3-b4f9-949c2d3cec5b.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1491141375503106048"
-          },
-          {
-            "title": "September Quarter 2020 Results",
-            "quarter": "2020Q3",
-            "filingDate": "2022-08-11",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/29052aaa-739d-4725-bbd3-e1654f0afcfd.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1491840691645448192"
-          },
-          {
-            "title": "June Quarter 2020 Results",
-            "quarter": "2020Q2",
-            "filingDate": "2022-08-11",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/0c0aaf4b-fd90-4708-a9fc-e5d9ed1199a4.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1491859400522989568"
-          },
-          {
-            "title": "March Quarter 2020 and Full Fiscal Year 2020 Results",
-            "quarter": "2020Q1",
-            "filingDate": "2022-08-11",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/09046238-b133-4c78-8578-ade171e56e72.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1491860394761781248"
-          },
-          {
-            "title": "December Quarter 2019 Results",
-            "quarter": "2019Q4",
-            "filingDate": "2022-08-17",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/7a6bb4f9-90e6-4a26-81ac-10f3a7656fc6.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1491861354372399104"
-          },
-          {
-            "title": "September Quarter 2019 Results",
-            "quarter": "2019Q3",
-            "filingDate": "2022-08-11",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/513861b5-9aa2-4104-9644-aaffcb082fd8.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1491862070038102016"
-          },
-          {
-            "title": "June Quarter 2019 Results",
-            "quarter": "2019Q2",
-            "filingDate": "2022-08-11",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/e50224c9-2e5e-457e-a801-509c1417619f.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1491862722596306944"
-          },
-          {
-            "title": "March Quarter 2019 and Full Fiscal Year 2019 Results",
-            "quarter": "2019Q1",
-            "filingDate": "2022-08-11",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/f71f803e-c4ea-4833-a36e-f82e20e1cd73.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1491863512002068480"
-          },
-          {
-            "title": "December Quarter 2018 Results",
-            "quarter": "2018Q4",
-            "filingDate": "2024-04-01",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/2826f4ed-56cc-40bf-905b-ee04045a0db1.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1491864152853970944"
-          },
-          {
-            "title": "September Quarter 2018 Results",
-            "quarter": "2018Q3",
-            "filingDate": "2022-08-11",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/1bc4b029-4de5-4c84-8ffd-1587b1fa94c3.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1493316409415958528"
-          },
-          {
-            "title": "June Quarter 2018 Results",
-            "quarter": "2018Q2",
-            "filingDate": "2022-08-11",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/a18d1065-85be-48da-9bcc-98fb5dfdb122.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1491868403374227456"
-          },
-          {
-            "title": "March Quarter 2018 and Full Fiscal Year 2018 Results",
-            "quarter": "2018Q1",
-            "filingDate": "2022-08-11",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/8b2ea271-b368-4ea1-b9f2-204ada4327cd.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1493316827567095808"
-          },
-          {
-            "title": "December Quarter 2017 Results",
-            "quarter": "2017Q4",
-            "filingDate": "2022-08-11",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/08f4da0b-40a5-4d8b-81e4-3519ddb6934c.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1493315223325507584"
-          },
-          {
-            "title": "September Quarter 2017 Results",
-            "quarter": "2017Q3",
-            "filingDate": "2022-08-11",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/6f3833fe-a1c4-4ada-b095-78ebc55c707d.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1491862374490046464"
-          },
-          {
-            "title": "June Quarter 2017 Results",
-            "quarter": "2017Q2",
-            "filingDate": "2022-08-11",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/08cad29a-66a5-4f66-a8b5-324f2012a1b3.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1491837734648545280"
-          },
-          {
-            "title": "March Quarter 2017 and Full Fiscal Year 2017 Results",
-            "quarter": "2017Q1",
-            "filingDate": "2022-08-11",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/26b505de-d0ab-475a-a6c2-873bd6849c8d.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1491604157256171520"
-          },
-          {
-            "title": "December Quarter 2016 Results",
-            "quarter": "2016Q4",
-            "filingDate": "2022-08-11",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/ee88d92f-3831-4818-9053-6bddb87b442e.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1491590846716313600"
-          },
-          {
-            "title": "September Quarter 2016 Results",
-            "quarter": "2016Q3",
-            "filingDate": "2022-08-11",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/caa00ede-9b64-4173-9b76-40991c47ead7.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1491571379391168512"
-          },
-          {
-            "title": "June Quarter 2016 Results",
-            "quarter": "2016Q2",
-            "filingDate": "2022-08-11",
-            "pdf": "https://data.alibabagroup.com/ecms-files/1532295521/0ee2f6d6-07c9-457e-b445-e657cecb3622.pdf",
-            "page": "https://www.alibabagroup.com/en-US/document-1491559993663553536"
-          }
-        ],
-        "errors": []
-      },
+      "officialRevenueStructureHistory": {},
       "officialSegmentHistory": {}
     },
     {

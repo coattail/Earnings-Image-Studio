@@ -9,7 +9,7 @@ import json
 import io
 import math
 import re
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 from pathlib import Path
 from urllib.parse import urljoin, urlparse, unquote
 from bs4 import BeautifulSoup
@@ -358,7 +358,17 @@ def _read_ir_pdf(url, company_id, filed):
             except OSError:
                 pass
 
-    content = _request(url)
+    content = None
+    if company_id == "alibaba" and urlparse(url).hostname == "www.alibabagroup.com":
+        # The group's official IR mirror serves the same document IDs.
+        mirror = urlparse(url)._replace(netloc="home.alibabagroup.com").geturl()
+        try:
+            content = _request(mirror)
+            url = mirror
+        except OSError:
+            pass
+    if content is None:
+        content = _request(url)
     if content.startswith(b"%PDF"):
         return url, content
     soup = BeautifulSoup(content, "html.parser")
@@ -420,7 +430,28 @@ def discover_ir_statement(company: dict, item: dict) -> dict | None:
         filed = _extract_tencent_filing_date("", url, pages[0] if pages else "")
         if not filed:
             return None
-    entries = _entries_from_pdf_pages(pages, url, filed)
+    if company_id == "alibaba":
+        from official_revenue_structures import _alibaba_quarter_end_label
+        from stockanalysis_financials import _parse_alibaba_pdf_financial_entry
+
+        period_label = _alibaba_quarter_end_label(quarter)
+        if not period_label:
+            return None
+        period_end = datetime.strptime(period_label, "%B %d, %Y").date().isoformat()
+        calendar_quarter = int(quarter[-1])
+        fiscal_year = int(quarter[:4]) + (calendar_quarter != 1)
+        fiscal_quarter = (calendar_quarter - 2) % 4 + 1
+        entry = _parse_alibaba_pdf_financial_entry(
+            "\n".join(pages), quarter, f"FY{fiscal_year} Q{fiscal_quarter}", url, period_end, filed,
+        )
+        # The cost-of-revenue extraction is anchored to this exact quarter.
+        if not entry or entry.get("costOfRevenueBn") is None:
+            return sec_copy()
+        from release_chart_completion import enrich_pdf_partition
+        enrich_pdf_partition({"id": company_id, "financials": {quarter: entry}}, content, url, pages=pages)
+        entries = {quarter: entry}
+    else:
+        entries = _entries_from_pdf_pages(pages, url, filed)
     if company_id == "samsung":
         entry = samsung_statement(pages, quarter)
         if entry:

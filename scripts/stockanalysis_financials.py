@@ -230,10 +230,17 @@ def _parse_alibaba_pdf_financial_entry(
     )
     operating_income_bn = _extract_first_billion_value(r"Income from operations was RMB([\d,]+)\s+million", normalized)
     net_income_bn = _extract_first_billion_value(r"net income was RMB([\d,]+)\s+million", normalized)
-    pretax_income_bn = _extract_first_billion_value(
-        r"Income before income tax and share of results of equity method investees\s+\(?([\d,]+)\)?",
-        normalized,
+    # The consolidated statement lists prior-year RMB, current-year RMB,
+    # then convenience USD and (for interim reports) year-to-date amounts.
+    statement = re.search(
+        r"Income before income tax and share of results of equity method investees"
+        r"\s+(\(?[\d,]+\)?)(?:\s+(\(?[\d,]+\)?))?",
+        normalized, re.IGNORECASE,
     )
+    pretax_income_bn = None
+    if statement:
+        amount = (statement[2] or statement[1]).replace(",", "")
+        pretax_income_bn = float(amount.replace("(", "-").replace(")", "")) / 1000
     tax_bn = _extract_first_billion_value(
         rf"Income tax expenses\s*Income tax expenses in the quarter ended {re.escape(quarter_end_label)} (?:was|were) RMB([\d,]+)\s+million",
         normalized,

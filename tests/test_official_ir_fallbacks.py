@@ -98,18 +98,88 @@ class OfficialIrFallbackTests(unittest.TestCase):
         future = int(datetime(2099, 11, 4, 12, tzinfo=timezone.utc).timestamp() * 1000)
         payload = {'content': [
             {'documentTitle': 'September Quarter 2026 Results',
-             'documentId': 'webcast-only', 'eventDate': stamp},
+             'documentId': 'webcast-only', 'pressRelease': '   ', 'eventDate': stamp},
             {'documentTitle': 'Alibaba Group Will Announce September Quarter 2026 Results',
              'documentId': 'notice', 'pressRelease': 'announcement', 'eventDate': stamp},
             {'documentTitle': 'Alibaba Group Announces September Quarter 2026 Results',
              'documentId': 'upcoming', 'eventDate': stamp, 'documentPublishTime': future},
             {'documentTitle': 'June Quarter 2026 Results',
-             'documentId': 'calendar', 'pressRelease': 'released', 'eventDate': stamp}
+             'documentId': 'calendar', 'pressRelease': ' released ', 'eventDate': stamp}
         ]}
         with patch.object(native, 'date', FixedDate), patch.object(native, '_request_json', return_value=payload):
             result = native.latest_native_release({'id': 'alibaba', '_localQuarter': '2026Q2'})
         self.assertEqual(result['quarter'], '2026Q2')
         self.assertTrue(result['sourceUrl'].endswith('document-released'))
+
+    def test_alibaba_can_discover_published_results_while_event_catalogue_is_stale(self):
+        previous = int(datetime(2026, 8, 20, tzinfo=timezone.utc).timestamp() * 1000)
+        current = int(datetime(2026, 11, 4, tzinfo=timezone.utc).timestamp() * 1000)
+        catalogue = {'content': [
+            {'documentTitle': 'June Quarter 2026 Results', 'pressRelease': 'previous', 'eventDate': previous},
+            {'documentTitle': 'September Quarter 2026 Results', 'documentId': 'webcast', 'eventDate': current},
+        ]}
+        news = {'newsData': [
+            {'documentTitle': 'Alibaba Group Announces September Quarter 2026 Results',
+             'documentId': 'latest', 'documentPublishTime': current},
+        ]}
+        html = f'<script>window.__ICE_PAGE_PROPS__={json.dumps(news)};</script>'
+        with patch.object(native, 'date', FixedDate), \
+             patch.object(native, '_request_json', return_value=catalogue), \
+             patch.object(native, '_request', return_value=html.encode()):
+            result = native.latest_native_release({'id': 'alibaba', '_localQuarter': '2026Q2'})
+        self.assertEqual(result['quarter'], '2026Q3')
+        self.assertTrue(result['sourceUrl'].endswith('document-latest'))
+
+    def test_alibaba_reads_the_quarterly_rmb_column_and_reconciles_the_release(self):
+        from types import SimpleNamespace
+
+        source = 'https://www.alibabagroup.com/en-US/document-latest'
+        mirror = 'https://home.alibabagroup.com/en-US/document-latest'
+        pdf = 'https://data.alibabagroup.com/quarter.pdf'
+        props = {'document': {'documentContent': f'<a href="{pdf}">Results</a>'}}
+        html = f'<script>window.__ICE_PAGE_PROPS__={json.dumps(props)};</script>'
+        text = """Revenue was RMB271,519 million.
+Cost of revenue – Cost of revenue in the quarter ended September 30, 2026 was RMB168,476 million.
+Income from operations was RMB29,116 million.
+Net income was RMB64,420 million.
+The following table sets forth a breakdown of our revenue by segment
+Customer management 78,855 75,033 11,191 (5)%
+Direct sales, logistics and others(2) 25,119 23,464 3,500 (7)%
+China Quick Commerce(3) 48,126 58,757 8,764 22%
+International E-commerce 27,879 25,723 3,837 (8)%
+Global Wholesale 13,450 14,260 2,127 6%
+Total Alibaba E-commerce Group 193,429 197,237 29,419 2%
+AI Cloud and Compute Services 39,914 60,973 9,094 53%
+AI Labs and Applications 2,940 4,435 661 51%
+All others 29,118 27,714 4,134 (5)%
+Unallocated 577 542 81
+Inter-segment elimination (18,183) (19,382) (2,891)
+(1) During the June quarter
+UNAUDITED CONSOLIDATED INCOME STATEMENTS
+Product development expenses (17,095) (22,632) (3,375) (32,096) (45,161) (6,736)
+Sales and marketing expenses (66,496) (41,341) (6,166) (119,674) (88,966) (13,269)
+General and administrative expenses (7,380) (10,097) (1,506) (14,778) (22,805) (3,401)
+Amortization of intangible assets (826) (656) (98) (1,633) (1,321) (197)
+Impairment of goodwill – – – – (4,458) (665)
+Income before income tax and share
+  of results of equity method investees 23,921 100,570 15,000 74,155 122,878 18,328
+"""
+        responses = {mirror: html.encode(), pdf: b'%PDF'}
+        with tempfile.TemporaryDirectory() as directory, patch.object(release, 'CACHE', Path(directory)), \
+             patch.object(release, '_request', side_effect=responses.__getitem__), \
+             patch.object(release, 'PdfReader', return_value=SimpleNamespace(pages=[SimpleNamespace(extract_text=lambda: text)])):
+            result = release.discover_ir_statement({'id': 'alibaba'}, {
+                'sourceUrl': source, 'quarter': '2026Q3', 'filingDate': '2026-11-19',
+            })
+
+        entry = result['entry']
+        self.assertEqual(entry['fiscalLabel'], 'FY2027 Q2')
+        self.assertEqual(entry['pretaxIncomeBn'], 100.570)
+        self.assertEqual(entry['nonOperatingBn'], 71.454)
+        self.assertEqual(entry['officialRevenueReconciliation']['valueBn'], -18.840)
+        self.assertEqual(len(entry['officialRevenueDetailGroups']), 5)
+        self.assertEqual(entry['officialRevenueSegments'][1]['yoyPct'], 53)
+        self.assertEqual(entry['officialOpexBreakdown'][0]['valueBn'], 22.632)
 
     def test_tencent_uses_dated_official_pdf_and_publishes_its_current_categories(self):
         from types import SimpleNamespace
