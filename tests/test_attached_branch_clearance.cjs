@@ -95,11 +95,44 @@ test('NVIDIA quarter history and restored gain drags preserve money and editable
   }
 });
 
-test('Alibaba September gains stay readable beside the tax ribbon', () => {
+test('Alibaba September profit and gain ribbons use separate, readable lanes', () => {
   const company = ctx.dataset.companies.find(item => item.id === 'alibaba');
-  const {svg} = render(company, '2026Q3', 'en');
-  const gain = bounds(svg, 'positive-1');
-  const net = nodes(svg).net;
-  assert.ok(gain.left > net.x + net.width);
-  assert.match(svg, /data-branch-label-leader="positive-1"/);
+  for (const language of ['zh', 'en']) {
+    const {svg, unchanged} = render(company, '2026Q3', language);
+    const frames = nodes(svg);
+    const {gross, operating, net} = frames;
+    const major = frames['positive-0'];
+    const minor = frames['positive-1'];
+    const rise = gross.y - operating.y;
+    const runway = operating.x - gross.x - gross.width;
+    assert.ok(unchanged);
+    assert.ok(rise > 0 && rise / runway < 0.27, language);
+    assert.ok(net.y + net.height < operating.y, language);
+    assert.ok(major.y + major.height < minor.y, language);
+    assert.ok(!overlaps(bounds(svg, 'operating-summary'), {
+      left: major.x, right: major.x + major.width, top: major.y, bottom: major.y + major.height,
+    }, 4), language);
+
+    function mergePort(id) {
+      const path = svg.match(new RegExp(`data-layout-branch-id="${id}" d="([^"]+)"`))[1];
+      const netPoints = [...path.matchAll(/[ML] (-?[\d.]+) (-?[\d.]+)/g)]
+        .filter(point => +point[1] === net.x).map(point => +point[2]);
+      return {top: Math.min(...netPoints), bottom: Math.max(...netPoints)};
+    }
+    const majorPort = mergePort('positive-0');
+    const minorPort = mergePort('positive-1');
+    assert.ok(Math.abs(majorPort.top - net.y) < 0.1, language);
+    assert.ok(Math.abs(majorPort.bottom - minorPort.top) < 0.1, language);
+    assert.ok(minorPort.bottom - minorPort.top > 1, language);
+    assert.ok(Math.abs(minorPort.bottom - net.y - net.height) < 0.1, language);
+    const lead = minorPort.top - minor.y;
+    assert.ok(lead > 0 && lead / (net.x - minor.x - minor.width) < 0.5, language);
+
+    const label = bounds(svg, 'positive-1');
+    assert.ok(label.left > net.x + net.width && label.top > net.y + net.height, language);
+    assert.ok(label.bottom < frames['deduction-0'].y, language);
+    const leader = svg.match(/data-branch-label-leader="positive-1" d="([^"]+)"/)[1];
+    const [, bend] = [...leader.matchAll(/[ML] ([\d.]+) ([\d.]+)/g)];
+    assert.ok(+bend[1] < net.x && +bend[2] > net.y + net.height, language);
+  }
 });

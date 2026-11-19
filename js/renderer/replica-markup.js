@@ -10,7 +10,7 @@ function renderReplicaSvgMarkup(model) {
     greenFlow, greenNode, greenText, grossExpenseBand,
     grossFrame, grossMetricLayout, grossMetricY, grossMetricYShifted,
     grossProfitBand, grossProfitBn, grossToExpenseRibbonOptions, grossToOperatingRibbonOptions,
-    hasOperatingLoss, hasOrdinaryProfitSpine, height, layoutY,
+    hasGainDrivenProfitSplit, hasOperatingLoss, hasOrdinaryProfitSpine, height, layoutY,
     learnedEditorOffsetForNode, leftBoxes, leftDetailLabelBoxes, leftDetailRenderSlices,
     leftX, logoScale, logoX, logoY,
     lowerRightPressureY, maxPositiveLabelBlockWidth, mergeOutflowRibbonOptions, metricClusterObstacleRect,
@@ -550,6 +550,7 @@ function renderReplicaSvgMarkup(model) {
   `;
 
   let positiveMarkup = "";
+  let positiveLabelMarkup = "";
   if (positiveAdjustments.length) {
     const positiveUpperLane = positiveAbove || usesExtremePositiveTopLane;
     const positiveRunwayAvailable = Math.max(netX - (opX + nodeWidth), 1);
@@ -1547,8 +1548,13 @@ function renderReplicaSvgMarkup(model) {
         });
       }
     }
+    if (hasGainDrivenProfitSplit) {
+      const runway = netFrame.left - operatingFrame.right;
+      positiveNodeX = clamp(operatingFrame.right + runway * 0.48, positiveNodeMinX, positiveNodeMaxX);
+    }
     const placedPositiveLabelRects = [];
     const placedPositiveNodeRects = [];
+    const placedGainRibbons = [];
     let netPositiveCursor = netPositiveTop;
     const positiveStackStartY = positiveTop;
     positiveAdjustments.forEach((item, index) => {
@@ -2320,25 +2326,34 @@ function renderReplicaSvgMarkup(model) {
           placement: bestPlacement,
         };
       };
-      const lockedSourceTop = clamp(
-        positiveTop + positiveSourceDropY,
-        sourceTopSearchMin,
-        usesExtremePositiveTopLane
-          ? Math.min(
-              sourceTopSearchMax,
-              operatingLaneTop - extremePositiveTopLaneBottomGapY - gainHeight
-            )
-          : sourceTopSearchMax
-      );
-      const chosenLayout = resolvePositivePlacement(lockedSourceTop);
+      const positiveNodeId = `positive-${index}`;
+      const netDragY = safeNumber(snapshot.interactiveEditorNodeOverrides?.net?.dy, 0);
+      const gainLead = clamp((netFrame.left - positiveNodeX - positiveNodeWidth) * 0.16, scaleY(12), scaleY(32));
+      const lockedSourceTop = hasGainDrivenProfitSplit
+        ? positiveTargetBand.top + netShift.dy - netDragY - gainLead -
+          autoLayoutOffsetForNode(positiveNodeId).dy
+        : clamp(
+            positiveTop + positiveSourceDropY,
+            sourceTopSearchMin,
+            usesExtremePositiveTopLane
+              ? Math.min(sourceTopSearchMax, operatingLaneTop - extremePositiveTopLaneBottomGapY - gainHeight)
+              : sourceTopSearchMax
+          );
+      const chosenLayout = hasGainDrivenProfitSplit ? null : resolvePositivePlacement(lockedSourceTop);
       const finalSourceTop = chosenLayout?.sourceTop ?? lockedSourceTop;
       const finalSourceBottom = chosenLayout?.sourceBottom ?? finalSourceTop + gainHeight;
-      const chosenPlacement = chosenLayout?.placement || {
+      const gainsBesideNet = hasGainDrivenProfitSplit && index > 0;
+      const chosenPlacement = (gainsBesideNet
+        ? {
+            anchor: "start",
+            x: netFrame.right + rightPrimaryLabelGapX,
+            centerY: Math.max(netFrame.bottom, netSummaryObstacle?.bottom || 0) + scaleY(12) - labelTopOffset,
+          }
+        : chosenLayout?.placement) || {
         anchor: "middle",
         x: positiveNodeX + positiveNodeWidth / 2,
         centerY: finalSourceTop - labelTopGapY - labelBottomOffset,
       };
-      const positiveNodeId = `positive-${index}`;
       let positiveFrame = editableNodeFrame(positiveNodeId, positiveNodeX, finalSourceTop, positiveNodeWidth, gainHeight);
       const positiveShift = editorOffsetForNode(positiveNodeId);
       const forceLeftCenteredLabel = snapshot.layout?.positiveLabelPlacement === "left-center";
@@ -2383,7 +2398,7 @@ function renderReplicaSvgMarkup(model) {
         const headerFloor = Math.max(titleObstacle.bottom, periodEndObstacle?.bottom || 0) + scaleY(20);
         const top = Math.min(capRect.top, chosenLabelRect.top);
         const bottom = Math.max(capRect.bottom, chosenLabelRect.bottom);
-        const repaired = resolveAttachedBranchPlacement([chosenLabelRect, capRect],
+        const repaired = !hasGainDrivenProfitSplit && resolveAttachedBranchPlacement([chosenLabelRect, capRect],
           [...positiveLabelObstacles, ...placedPositiveLabelRects, ...placedPositiveNodeRects, ...smallBridgeCalloutRects,
            {left:operatingFrame.left,right:operatingFrame.right,top:operatingFrame.top,bottom:operatingFrame.bottom}], {
             minDx: Math.max(scaleY(20) - Math.min(chosenLabelRect.left, capRect.left), positiveNodeMinX - capRect.left),
@@ -2415,14 +2430,17 @@ function renderReplicaSvgMarkup(model) {
               return true;
             },
           });
-        if (repaired.feasible && (Math.abs(repaired.dx) > .01 || Math.abs(repaired.dy) > .01)) {
+        if (repaired?.feasible && (Math.abs(repaired.dx) > .01 || Math.abs(repaired.dy) > .01)) {
           const offset = autoLayoutOffsetForNode(positiveNodeId);
           setAutoLayoutNodeOffset(positiveNodeId, {dx:offset.dx + repaired.dx,dy:offset.dy + repaired.dy});
           positiveFrame = editableNodeFrame(positiveNodeId, positiveNodeX, finalSourceTop, positiveNodeWidth, gainHeight);
           labelX += repaired.dx; labelCenterY += repaired.dy;
           chosenLabelRect = labelBoundsRect(labelAnchor, labelX, labelCenterY);
         }
-        if (!repaired.feasible) {
+        const gainRibbon = { left: positiveFrame.right, right: netFrame.left + positiveTargetInsetX,
+          top: positiveFrame.top, bottom: positiveFrame.bottom,
+          targetTop: adjustedTargetTop, targetBottom: adjustedTargetTop + adjustedTargetHeight };
+        if (!repaired?.feasible) {
           // Long translations or several gains may have no attached corridor.
           // Search adjacent label lanes using the same hard obstacles, then
           // connect a detached label back to its unchanged monetary cap.
@@ -2432,7 +2450,9 @@ function renderReplicaSvgMarkup(model) {
             {anchor:'end',x:positiveFrame.left-clearance,y:positiveFrame.centerY-labelCenterBias},
             {anchor:'middle',x:positiveFrame.centerX,y:positiveFrame.bottom+clearance-labelTopOffset},
           ];
+          if (hasGainDrivenProfitSplit) candidates.unshift({ anchor: labelAnchor, x: labelX, y: labelCenterY });
           let alternate = null;
+          const nearbyGains = [...placedGainRibbons, gainRibbon];
           for (const candidate of candidates) {
             const rect = labelBoundsRect(candidate.anchor,candidate.x,candidate.y);
             const result = resolveAttachedBranchPlacement([rect],
@@ -2451,10 +2471,11 @@ function renderReplicaSvgMarkup(model) {
                       const main=shiftedMainNetRibbonEnvelopeAtX(x);
                       if(main&&(positiveAbove?box.bottom>main.top-clearance:box.top<main.bottom+clearance))return false;
                     }
-                    if(x>=positiveFrame.right&&x<=netFrame.left) {
-                      const own=flowEnvelopeAtX(x,positiveFrame.right,positiveFrame.top,positiveFrame.bottom,
-                        netFrame.left+positiveTargetInsetX,adjustedTargetTop,adjustedTargetTop+adjustedTargetHeight,positiveBranchPathOptions);
-                      if(own&&box.bottom>own.top-clearance&&box.top<own.bottom+clearance)return false;
+                    for (const gain of nearbyGains) {
+                      if (x < gain.left || x > gain.right) continue;
+                      const ribbon = flowEnvelopeAtX(x, gain.left, gain.top, gain.bottom,
+                        gain.right, gain.targetTop, gain.targetBottom, positiveBranchPathOptions);
+                      if (ribbon && box.bottom > ribbon.top - clearance && box.top < ribbon.bottom + clearance) return false;
                     }
                   }
                   return true;
@@ -2470,6 +2491,7 @@ function renderReplicaSvgMarkup(model) {
             detachedPositiveLabel=true;
           }
         }
+        if (hasGainDrivenProfitSplit) placedGainRibbons.push(gainRibbon);
       }
       placedPositiveLabelRects.push(chosenLabelRect);
       placedPositiveNodeRects.push({left:positiveFrame.left,right:positiveFrame.right,top:positiveFrame.top,bottom:positiveFrame.bottom});
@@ -2479,15 +2501,23 @@ function renderReplicaSvgMarkup(model) {
         adjustedTargetTop + adjustedTargetHeight, positiveBranchPathOptions
       )}" fill="${greenFlow}" opacity="0.97"></path>`;
       positiveMarkup += renderEditableNodeRect(positiveFrame, greenNode);
-      const leaderX=clamp(positiveFrame.centerX,chosenLabelRect.left,chosenLabelRect.right);
-      const leaderY=clamp(positiveFrame.centerY,chosenLabelRect.top,chosenLabelRect.bottom);
-      if(detachedPositiveLabel&&Math.hypot(leaderX-positiveFrame.centerX,leaderY-positiveFrame.centerY)>scaleY(64)) {
-        positiveMarkup+=`<path data-branch-label-leader="${positiveNodeId}" d="M ${leaderX} ${leaderY} L ${positiveFrame.centerX} ${positiveFrame.centerY}" fill="none" stroke="${greenText}" stroke-width="1.5" opacity="0.65"></path>`;
+      const leaderTargetX = gainsBesideNet && labelX > positiveFrame.right ? positiveFrame.right : positiveFrame.centerX;
+      const leaderTargetY = gainsBesideNet && labelCenterY > positiveFrame.bottom ? positiveFrame.bottom : positiveFrame.centerY;
+      const leaderX = clamp(leaderTargetX, chosenLabelRect.left, chosenLabelRect.right);
+      const leaderY = clamp(leaderTargetY, chosenLabelRect.top, chosenLabelRect.bottom);
+      if (detachedPositiveLabel && Math.hypot(leaderX - leaderTargetX, leaderY - leaderTargetY) > scaleY(64)) {
+        const clearanceY = netFrame.bottom + scaleY(5);
+        const passesBelowNet = gainsBesideNet && leaderX > netFrame.right &&
+          leaderTargetX < netFrame.left && leaderY >= clearanceY;
+        const bend = passesBelowNet
+          ? `L ${leaderTargetX + (netFrame.left - leaderTargetX) * 0.55} ${clearanceY} `
+          : "";
+        positiveLabelMarkup += `<path data-branch-label-leader="${positiveNodeId}" d="M ${leaderX} ${leaderY} ${bend}L ${leaderTargetX} ${leaderTargetY}" fill="none" stroke="${greenText}" stroke-width="1.5" stroke-linejoin="round" opacity="0.65"></path>`;
       }
-      positiveMarkup += `<g data-layout-label-id="${positiveNodeId}">`;
-      positiveMarkup += `<text x="${labelX}" y="${labelCenterY - twoLineGap}" text-anchor="${labelAnchor}" font-size="${positiveNameSize}" font-weight="700" fill="${greenText}" paint-order="stroke fill" stroke="${background}" stroke-width="7" stroke-linejoin="round">${escapeHtml(localizedPositiveName)}</text>`;
-      positiveMarkup += `<text x="${labelX}" y="${labelCenterY + valueYOffset}" text-anchor="${labelAnchor}" font-size="${positiveValueSize}" font-weight="700" fill="${greenText}" paint-order="stroke fill" stroke="${background}" stroke-width="6" stroke-linejoin="round">${escapeHtml(labelValue)}</text>`;
-      positiveMarkup += '</g>';
+      positiveLabelMarkup += `<g data-layout-label-id="${positiveNodeId}">`;
+      positiveLabelMarkup += `<text x="${labelX}" y="${labelCenterY - twoLineGap}" text-anchor="${labelAnchor}" font-size="${positiveNameSize}" font-weight="700" fill="${greenText}" paint-order="stroke fill" stroke="${background}" stroke-width="7" stroke-linejoin="round">${escapeHtml(localizedPositiveName)}</text>`;
+      positiveLabelMarkup += `<text x="${labelX}" y="${labelCenterY + valueYOffset}" text-anchor="${labelAnchor}" font-size="${positiveValueSize}" font-weight="700" fill="${greenText}" paint-order="stroke fill" stroke="${background}" stroke-width="6" stroke-linejoin="round">${escapeHtml(labelValue)}</text>`;
+      positiveLabelMarkup += '</g>';
       positiveTop = finalSourceTop + gainHeight + positiveGap;
       netPositiveCursor += mergeHeight;
     });
@@ -2504,6 +2534,7 @@ function renderReplicaSvgMarkup(model) {
     )}" fill="${netLoss ? redFlow : greenFlow}" opacity="0.97"></path>`;
   }
   svg += positiveMarkup;
+  if (!hasGainDrivenProfitSplit) svg += positiveLabelMarkup;
   svg += renderNetLossDriverBridge();
   svg += `
       ${renderEditableNodeRect(netFrame, netLoss ? redNode : greenNode)}
@@ -2605,6 +2636,7 @@ function renderReplicaSvgMarkup(model) {
     );
   });
 
+  if (hasGainDrivenProfitSplit) svg += positiveLabelMarkup;
   svg += renderOperatingProfitBreakdownCallout();
 
   svg += `
