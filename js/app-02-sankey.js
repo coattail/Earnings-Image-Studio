@@ -1143,13 +1143,17 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
   );
   opexTop += extremePositiveExpenseLanePushdownY + dominantPositiveExpenseLanePushdownY;
   opexBottom += extremePositiveExpenseLanePushdownY + dominantPositiveExpenseLanePushdownY;
+  const explicitBelowOperatingBn = belowOperatingItems.reduce((sum, item) => sum + Math.max(safeNumber(item.valueBn), 0), 0);
+  const hasGainDrivenProfitSplit =
+    !hasOperatingLoss && !netLoss && !useExtremePositiveLayout && opHeight > 0.5 && netHeight > 0.5 &&
+    positiveAdjustments.length === 2 && totalPositiveMergeHeight >= netHeight && explicitBelowOperatingBn >= operatingProfitBn;
   const hasOrdinaryProfitSpine =
     snapshot.layout?.disableAutomaticProfitSpine !== true &&
     !hasOperatingLoss && !netLoss && !useExtremePositiveLayout &&
     opHeight > 0.5 && netHeight > 0.5 &&
     totalPositiveMergeHeight <= opHeight * 0.85 &&
     totalPositiveMergeHeight <= netHeight * 0.72;
-  if (hasOrdinaryProfitSpine) {
+  if (hasOrdinaryProfitSpine || hasGainDrivenProfitSplit) {
     const structuralY = (id) => scaleY(safeNumber(snapshot.layout?.structuralNodeOffsets?.[id]?.dy, 0));
     const operatingStructuralY = structuralY("operating");
     const netStructuralY = structuralY("net");
@@ -1158,7 +1162,7 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
       operatingTop: operatingLaneTop + operatingStructuralY, netTop: netTop + netStructuralY,
       operatingRunway: opX - grossX - nodeWidth,
       netRunway: rightBaseX - opX - nodeWidth,
-      positiveMergeHeight: totalPositiveMergeHeight, unit: verticalScale,
+      positiveMergeHeight: hasGainDrivenProfitSplit ? netHeight : totalPositiveMergeHeight, unit: verticalScale,
       operatingMin: scaleY(220),
       operatingMax: Math.min(opexTop + structuralY("operating-expenses") - opHeight - opexMinGapFromOperating, chartBottomLimit - opHeight),
       netMin: Math.max(netTopMinY, scaleY(220)), netMax: chartBottomLimit - netHeight,
@@ -1169,7 +1173,6 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
     operatingLaneTop += operatingShift; operatingLaneBottom += operatingShift;
     netTop = spine.netTop - netStructuralY; netBottom = netTop + netHeight;
   }
-  const explicitBelowOperatingBn = belowOperatingItems.reduce((sum, item) => sum + Math.max(safeNumber(item.valueBn), 0), 0);
   const explicitCoreNetHeight = Math.max((operatingProfitBn - explicitBelowOperatingBn) * scale, 0);
   const zeroNetRibbonHeight =
     nearZeroNet && !netLoss && operatingProfitBn > 0
@@ -2609,7 +2612,7 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
     : false;
   const forcePositiveAbove = snapshot.layout?.forcePositiveAbove === true;
   const positiveAbove = sharedCore ? sharedCore.positiveAbove : positiveAdjustments.length
-    ? forcePositiveAbove ||
+    ? hasGainDrivenProfitSplit || forcePositiveAbove ||
       (abovePositiveFeasible &&
       (!belowPositiveFeasible ||
         !belowPositiveComfortable ||
@@ -3828,7 +3831,11 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
   if (positiveAdjustments.length) {
     if (positiveAbove) {
       let positiveCursor = netTop;
-      positiveTargetBands = positiveMergeHeights.map((height) => {
+      // When gains exceed net profit, share the visible net port proportionally.
+      // This keeps the smallest gain inside the node after the larger one.
+      const targetScale = hasGainDrivenProfitSplit ? netHeight / totalPositiveMergeHeight : 1;
+      positiveTargetBands = positiveMergeHeights.map((reportedHeight) => {
+        const height = reportedHeight * targetScale;
         const top = positiveCursor;
         positiveCursor += height;
         return {
@@ -8542,6 +8549,29 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
       }
     }
   }
+  if (hasGainDrivenProfitSplit && !sharedCore) {
+    // There is no operating-to-net ribbon in this case. Give the two outgoing
+    // flows separate lanes using their visible ports after template offsets.
+    const firstRun = Math.max(operatingFrame.left - grossFrame.right, 1);
+    const lastRun = Math.max(netFrame.left - operatingFrame.right, 1);
+    const targetOperatingTop = hasExplicitOpNodeTop ? automaticFrameCoordinate(operatingFrame, "top") : Math.min(
+      automaticFrameCoordinate(grossFrame, "top") - firstRun * 0.20,
+      automaticFrameCoordinate(operatingExpenseFrame, "top") - opHeight - opexMinGapFromOperating,
+    );
+    const targetNetTop = targetOperatingTop - netHeight - clamp(lastRun * 0.08, scaleY(14), scaleY(28));
+    const headerFloor = Math.max(titleObstacle.bottom, periodEndObstacle?.bottom || 0) + scaleY(24);
+    if (!hasExplicitOpNodeTop) {
+      const offset = autoLayoutOffsetForNode("operating");
+      setAutoLayoutNodeOffset("operating", {
+        dy: offset.dy + targetOperatingTop - automaticFrameCoordinate(operatingFrame, "top"),
+      });
+    }
+    if (!hasExplicitNetNodeTop && targetNetTop >= headerFloor) {
+      const offset = autoLayoutOffsetForNode("net");
+      setAutoLayoutNodeOffset("net", { dy: offset.dy + targetNetTop - automaticFrameCoordinate(netFrame, "top") });
+    }
+    refreshEditableNodeFrames();
+  }
   if (geometryOptions.captureCore) {
     return { canvas, positiveAbove, balancedPositiveTop,
       frames: [revenueFrame, grossFrame, costFrame, operatingFrame, operatingExpenseFrame, netFrame] };
@@ -8671,7 +8701,7 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
     holdDeltaScale: 0.4,
   };
   const shiftedMainNetRibbonEnvelopeAtX = (sampleX) =>
-    flowEnvelopeAtX(
+    coreNetHeight > 0 && coreNetTargetHeight > 0 ? flowEnvelopeAtX(
       sampleX,
       operatingFrame.right,
       opNetBand.top,
@@ -8680,7 +8710,7 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
       netDisplayBand.top,
       netDisplayBand.bottom,
       netRibbonOptions
-    );
+    ) : null;
   // Tiny gain/loss bridge nodes cannot safely carry adjacent labels. Place
   // those labels in collision-tested callout lanes and point back to the node.
   const smallBridgeCalloutRects = [];
@@ -8726,7 +8756,7 @@ function renderPixelReplicaSvg(snapshot, geometryOptions = {}) {
     greenFlow, greenNode, greenText, grossExpenseBand,
     grossFrame, grossMetricLayout, grossMetricY, grossMetricYShifted,
     grossProfitBand, grossProfitBn, grossToExpenseRibbonOptions, grossToOperatingRibbonOptions,
-    hasOperatingLoss, hasOrdinaryProfitSpine, height, layoutY,
+    hasGainDrivenProfitSplit, hasOperatingLoss, hasOrdinaryProfitSpine, height, layoutY,
     learnedEditorOffsetForNode, leftBoxes, leftDetailLabelBoxes, leftDetailRenderSlices,
     leftX, logoScale, logoX, logoY,
     lowerRightPressureY, maxPositiveLabelBlockWidth, mergeOutflowRibbonOptions, metricClusterObstacleRect,
