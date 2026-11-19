@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-19T10:52:46Z",
+  "generatedAt": "2026-11-19T13:00:21Z",
   "universeSource": {
     "label": "CompaniesMarketCap point-in-time ranking",
     "url": "https://companiesmarketcap.com/",
@@ -225859,7 +225859,8 @@
         "2025Q4",
         "2026Q1",
         "2026Q2",
-        "2026Q3"
+        "2026Q3",
+        "2026Q4"
       ],
       "financials": {
         "2018Q1": {
@@ -233091,6 +233092,222 @@
             "requiredDetailMembers": {}
           },
           "statementAccession": "0000104169-26-000154"
+        },
+        "2026Q4": {
+          "calendarQuarter": "2026Q4",
+          "periodEnd": "2026-10-31",
+          "fiscalYear": "2027",
+          "fiscalQuarter": "Q3",
+          "fiscalLabel": "FY2027 Q3",
+          "statementCurrency": "USD",
+          "revenueBn": 188.835,
+          "revenueYoyPct": 6.225,
+          "costOfRevenueBn": 141.003,
+          "grossProfitBn": 47.832,
+          "sgnaBn": 40.062,
+          "rndBn": null,
+          "otherOpexBn": null,
+          "operatingExpensesBn": 40.062,
+          "operatingIncomeBn": 7.77,
+          "nonOperatingBn": -1.026,
+          "pretaxIncomeBn": 6.744,
+          "taxBn": 1.649,
+          "netIncomeBn": 5.095,
+          "netIncomeYoyPct": null,
+          "grossMarginPct": 25.33,
+          "operatingMarginPct": 4.115,
+          "profitMarginPct": 2.698,
+          "effectiveTaxRatePct": 24.451,
+          "revenueQoqPct": 0.478,
+          "grossMarginYoyDeltaPp": 0.377,
+          "operatingMarginYoyDeltaPp": 0.385,
+          "profitMarginYoyDeltaPp": -0.694,
+          "statementSource": "official-earnings-release",
+          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000168/earningsreleasefy27q3.htm",
+          "statementFilingDate": "2026-11-19",
+          "statementSpanQuarters": 1,
+          "statementValueMode": "reported",
+          "officialOpexBreakdown": [
+            {
+              "name": "Selling, general and administrative",
+              "nameZh": "销售、一般及行政",
+              "valueBn": 40.062,
+              "valueFormat": "negative-parentheses",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000168/earningsreleasefy27q3.htm"
+            }
+          ],
+          "statementFiscalPeriodSource": "official-heading",
+          "parserFinancialFieldSources": {
+            "revenueBn": "official",
+            "operatingIncomeBn": "official",
+            "netIncomeBn": "official"
+          },
+          "parserFinancialValidation": {
+            "status": "high",
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000168/earningsreleasefy27q3.htm"
+          },
+          "automaticEarnings": {
+            "filingDate": "2026-11-19",
+            "accession": "0000104169-26-000168",
+            "form": "8-K"
+          },
+          "statementAccession": "0000104169-26-000168",
+          "officialRevenueSegments": [
+            {
+              "name": "Walmart U.S.",
+              "nameZh": "沃尔玛美国",
+              "memberKey": "walmartus",
+              "valueBn": 125.92,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000168/earningsreleasefy27q3.htm",
+              "filingDate": "2026-11-19",
+              "sourceForm": "official current-period disclosure",
+              "mixPct": 66.7,
+              "qoqPct": -0.02
+            },
+            {
+              "name": "Walmart International",
+              "nameZh": "沃尔玛国际",
+              "memberKey": "walmartinternational",
+              "valueBn": 36.330999999999996,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000168/earningsreleasefy27q3.htm",
+              "filingDate": "2026-11-19",
+              "sourceForm": "official current-period disclosure",
+              "mixPct": 19.2,
+              "qoqPct": 1.98
+            },
+            {
+              "name": "Sam’s Club U.S.",
+              "nameZh": "山姆会员店美国",
+              "memberKey": "samsclubus",
+              "valueBn": 26.57,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000168/earningsreleasefy27q3.htm",
+              "filingDate": "2026-11-19",
+              "sourceForm": "official current-period disclosure",
+              "mixPct": 14.1,
+              "qoqPct": 0.77
+            },
+            {
+              "name": "Corporate and support",
+              "nameZh": "公司及支持部门",
+              "memberKey": "corporate",
+              "valueBn": 0.014,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000168/earningsreleasefy27q3.htm",
+              "filingDate": "2026-11-19",
+              "sourceForm": "official current-period disclosure",
+              "mixPct": 0.0,
+              "qoqPct": 100.0
+            }
+          ],
+          "officialRevenueComponents": [
+            {
+              "name": "Net sales",
+              "nameZh": "商品净销售额",
+              "memberKey": "walmartusnetsales",
+              "targetName": "Walmart U.S.",
+              "valueBn": 124.969,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000168/earningsreleasefy27q3.htm",
+              "filingDate": "2026-11-19",
+              "sourceForm": "official current-period disclosure"
+            },
+            {
+              "name": "Membership and other income",
+              "nameZh": "会员及其他收入",
+              "memberKey": "walmartusmembershipotherincome",
+              "targetName": "Walmart U.S.",
+              "valueBn": 0.951,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000168/earningsreleasefy27q3.htm",
+              "filingDate": "2026-11-19",
+              "sourceForm": "official current-period disclosure"
+            },
+            {
+              "name": "Net sales",
+              "nameZh": "商品净销售额",
+              "memberKey": "walmartinternationalnetsales",
+              "targetName": "Walmart International",
+              "valueBn": 35.876,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000168/earningsreleasefy27q3.htm",
+              "filingDate": "2026-11-19",
+              "sourceForm": "official current-period disclosure"
+            },
+            {
+              "name": "Membership and other income",
+              "nameZh": "会员及其他收入",
+              "memberKey": "walmartinternationalmembershipotherincome",
+              "targetName": "Walmart International",
+              "valueBn": 0.455,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000168/earningsreleasefy27q3.htm",
+              "filingDate": "2026-11-19",
+              "sourceForm": "official current-period disclosure"
+            },
+            {
+              "name": "Net sales",
+              "nameZh": "商品净销售额",
+              "memberKey": "samsclubusnetsales",
+              "targetName": "Sam’s Club U.S.",
+              "valueBn": 25.912,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000168/earningsreleasefy27q3.htm",
+              "filingDate": "2026-11-19",
+              "sourceForm": "official current-period disclosure"
+            },
+            {
+              "name": "Membership and other income",
+              "nameZh": "会员及其他收入",
+              "memberKey": "samsclubusmembershipotherincome",
+              "targetName": "Sam’s Club U.S.",
+              "valueBn": 0.658,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000168/earningsreleasefy27q3.htm",
+              "filingDate": "2026-11-19",
+              "sourceForm": "official current-period disclosure"
+            },
+            {
+              "name": "Membership and other income",
+              "nameZh": "会员及其他收入",
+              "memberKey": "corporatemembershipotherincome",
+              "targetName": "Corporate and support",
+              "valueBn": 0.014,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000168/earningsreleasefy27q3.htm",
+              "filingDate": "2026-11-19",
+              "sourceForm": "official current-period disclosure"
+            }
+          ],
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueStyle": null,
+          "revenueClassificationBasisNote": "Segment revenue includes net sales and membership/other income; totals reconcile to consolidated revenue.",
+          "chartCompletionAttempts": [
+            {
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000168/earningsreleasefy27q3.htm",
+              "remainingIssues": []
+            }
+          ],
+          "displayCurrency": "USD",
+          "displayScaleFactor": 1,
+          "officialRevenueTaxonomyChangedFromPriorYear": true,
+          "sankeyStructureContinuity": {
+            "sourceQuarter": "2026Q3",
+            "fields": [
+              "officialRevenueSegments"
+            ],
+            "rule": "same-normalized-category-set"
+          },
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q4",
+            "status": "ready",
+            "issues": [],
+            "requiredMarginComparisons": [
+              "grossMarginYoyDeltaPp",
+              "operatingMarginYoyDeltaPp",
+              "profitMarginYoyDeltaPp"
+            ],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "corporate",
+              "samsclubus",
+              "walmartinternational",
+              "walmartus"
+            ],
+            "requiredDetailMembers": {}
+          }
         }
       },
       "statementSource": "official-sec-companyfacts",
@@ -235653,7 +235870,7 @@
           "overallConfidenceScore": 0.9843,
           "financialConfidenceScore": 0.9759,
           "structuralConfidenceScore": 1.0,
-          "revenueSegmentChecks": 35,
+          "revenueSegmentChecks": 36,
           "revenueSegmentMismatchCount": 0,
           "revenueSegmentSkippedChecks": 0,
           "detailGroupChecks": 0,
@@ -239128,24 +239345,24 @@
       "marketCapSourceUrl": "https://companiesmarketcap.com/walmart/marketcap/",
       "statementPresets": {},
       "coverage": {
-        "quarterCount": 35,
+        "quarterCount": 36,
         "pixelReplicaQuarterCount": 0,
         "hasPixelReplica": false,
-        "officialFinancialQuarterCount": 35,
-        "officialSegmentQuarterCount": 35,
-        "officialExpenseQuarterCount": 1,
+        "officialFinancialQuarterCount": 36,
+        "officialSegmentQuarterCount": 36,
+        "officialExpenseQuarterCount": 2,
         "classification": {
           "status": "ok",
-          "latestQuarter": "2026Q3",
+          "latestQuarter": "2026Q4",
           "latestQuarterHasRevenueClassification": true,
           "latestQuarterHasExpenseClassification": true,
-          "latestRevenueClassificationQuarter": "2026Q3",
-          "latestExpenseClassificationQuarter": "2026Q3",
+          "latestRevenueClassificationQuarter": "2026Q4",
+          "latestExpenseClassificationQuarter": "2026Q4",
           "latestStructureHistoryQuarter": "2026Q2",
-          "revenueClassificationQuarterCount": 35,
-          "expenseClassificationQuarterCount": 1,
+          "revenueClassificationQuarterCount": 36,
+          "expenseClassificationQuarterCount": 2,
           "revenueClassificationCoverageRatio": 1.0,
-          "expenseClassificationCoverageRatio": 0.0286,
+          "expenseClassificationCoverageRatio": 0.0556,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": 0,
           "warnings": [],
@@ -239189,7 +239406,7 @@
             "overallConfidenceScore": 0.9843,
             "financialConfidenceScore": 0.9759,
             "structuralConfidenceScore": 1.0,
-            "revenueSegmentChecks": 35,
+            "revenueSegmentChecks": 36,
             "revenueSegmentMismatchCount": 0,
             "revenueSegmentSkippedChecks": 0,
             "detailGroupChecks": 0,
@@ -574903,7 +575120,8 @@
         "2025Q3",
         "2025Q4",
         "2026Q1",
-        "2026Q2"
+        "2026Q2",
+        "2026Q3"
       ],
       "financials": {
         "2021Q1": {
@@ -581778,6 +581996,173 @@
             ],
             "requiredDetailMembers": {}
           }
+        },
+        "2026Q3": {
+          "calendarQuarter": "2026Q3",
+          "periodEnd": "2026-09-30",
+          "fiscalYear": "2026",
+          "fiscalQuarter": "Q3",
+          "fiscalLabel": "FY2026 Q3",
+          "statementCurrency": "CNY",
+          "revenueBn": 27.8524,
+          "revenueYoyPct": -1.786,
+          "costOfRevenueBn": 8.807375,
+          "grossProfitBn": 19.045025,
+          "sgnaBn": 4.92297,
+          "rndBn": 4.694212,
+          "otherOpexBn": null,
+          "operatingExpensesBn": 9.617182,
+          "operatingIncomeBn": 9.427843,
+          "nonOperatingBn": 0.957388,
+          "pretaxIncomeBn": 10.385231,
+          "taxBn": 1.983008,
+          "netIncomeBn": 8.402223,
+          "netIncomeYoyPct": null,
+          "grossMarginPct": 68.378,
+          "operatingMarginPct": 33.849,
+          "profitMarginPct": 30.167,
+          "effectiveTaxRatePct": 19.095,
+          "revenueQoqPct": -7.489,
+          "grossMarginYoyDeltaPp": 4.279,
+          "operatingMarginYoyDeltaPp": 5.591,
+          "profitMarginYoyDeltaPp": -0.214,
+          "statementSource": "official-earnings-release",
+          "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926129894/tm2630023d1_ex99-1.htm",
+          "statementFilingDate": "2026-11-19",
+          "statementSpanQuarters": 1,
+          "statementValueMode": "reported",
+          "officialOpexBreakdown": [
+            {
+              "name": "Sales & Marketing",
+              "nameZh": "销售与营销",
+              "valueBn": 4.090659,
+              "valueFormat": "negative-parentheses",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926129894/tm2630023d1_ex99-1.htm"
+            },
+            {
+              "name": "G&A",
+              "nameZh": "管理费用",
+              "valueBn": 0.832311,
+              "valueFormat": "negative-parentheses",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926129894/tm2630023d1_ex99-1.htm"
+            },
+            {
+              "name": "R&D",
+              "nameZh": "研发",
+              "valueBn": 4.694212,
+              "valueFormat": "negative-parentheses",
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926129894/tm2630023d1_ex99-1.htm"
+            }
+          ],
+          "statementFiscalPeriodSource": "official-heading",
+          "parserFinancialFieldSources": {
+            "revenueBn": "official",
+            "operatingIncomeBn": "official",
+            "netIncomeBn": "official"
+          },
+          "parserFinancialValidation": {
+            "status": "high",
+            "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926129894/tm2630023d1_ex99-1.htm"
+          },
+          "automaticEarnings": {
+            "filingDate": "2026-11-19",
+            "accession": "0001104659-26-129894",
+            "form": "6-K"
+          },
+          "statementAccession": "0001104659-26-129894",
+          "officialRevenueSegments": [
+            {
+              "name": "Games and related value-added services",
+              "nameZh": null,
+              "memberKey": "gamesandrelatedvalueaddedservices",
+              "valueBn": 22.937367,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926129894/tm2630023d1_ex99-1.htm",
+              "filingDate": "2026-11-19",
+              "sourceForm": "official current-period disclosure",
+              "mixPct": 82.4,
+              "qoqPct": -8.33,
+              "yoyPct": -1.56,
+              "mixYoyDeltaPp": 0.2
+            },
+            {
+              "name": "Innovative businesses and others",
+              "nameZh": null,
+              "memberKey": "innovativebusinessesandothers",
+              "valueBn": 1.540229,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926129894/tm2630023d1_ex99-1.htm",
+              "filingDate": "2026-11-19",
+              "sourceForm": "official current-period disclosure",
+              "mixPct": 5.5,
+              "qoqPct": -6.05,
+              "yoyPct": 10.02,
+              "mixYoyDeltaPp": 0.6
+            },
+            {
+              "name": "Cloud Music",
+              "nameZh": null,
+              "memberKey": "cloudmusic",
+              "valueBn": 1.946001,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926129894/tm2630023d1_ex99-1.htm",
+              "filingDate": "2026-11-19",
+              "sourceForm": "official current-period disclosure",
+              "mixPct": 7.0,
+              "qoqPct": -1.59,
+              "yoyPct": -2.7,
+              "mixYoyDeltaPp": -0.1
+            },
+            {
+              "name": "Youdao",
+              "nameZh": null,
+              "memberKey": "youdao",
+              "valueBn": 1.428803,
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926129894/tm2630023d1_ex99-1.htm",
+              "filingDate": "2026-11-19",
+              "sourceForm": "official current-period disclosure",
+              "mixPct": 5.1,
+              "qoqPct": -2.59,
+              "yoyPct": -10.7,
+              "mixYoyDeltaPp": -0.5
+            }
+          ],
+          "revenueClassificationSourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926129894/tm2630023d1_ex99-1.htm",
+          "revenueClassificationSource": "official-complete-table",
+          "chartCompletionAttempts": [
+            {
+              "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1110646/000110465926129894/tm2630023d1_ex99-1.htm",
+              "remainingIssues": []
+            }
+          ],
+          "displayCurrency": "USD",
+          "displayScaleFactor": 0.14999,
+          "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+          "officialRevenueTaxonomyChangedFromPriorYear": false,
+          "sankeyStructureContinuity": {
+            "sourceQuarter": "2026Q2",
+            "fields": [
+              "officialRevenueSegments",
+              "officialOpexBreakdown"
+            ],
+            "rule": "same-normalized-category-set"
+          },
+          "chartQuality": {
+            "version": 3,
+            "quarter": "2026Q3",
+            "status": "ready",
+            "issues": [],
+            "requiredMarginComparisons": [
+              "grossMarginYoyDeltaPp",
+              "operatingMarginYoyDeltaPp",
+              "profitMarginYoyDeltaPp"
+            ],
+            "requiredDetailParents": [],
+            "requiredSegmentKeys": [
+              "cloudmusic",
+              "gamesrelatedvalueaddedservices",
+              "innovativebusinessesothers",
+              "youdao"
+            ],
+            "requiredDetailMembers": {}
+          }
         }
       },
       "statementSource": "stockanalysis-financials",
@@ -585203,16 +585588,16 @@
         "validation": {
           "version": "parser-validation-v1",
           "status": "high",
-          "overallConfidenceScore": 0.9802,
+          "overallConfidenceScore": 0.9804,
           "financialConfidenceScore": 0.9775,
-          "structuralConfidenceScore": 0.9853,
-          "revenueSegmentChecks": 34,
+          "structuralConfidenceScore": 0.9857,
+          "revenueSegmentChecks": 35,
           "revenueSegmentMismatchCount": 1,
           "revenueSegmentSkippedChecks": 0,
           "detailGroupChecks": 0,
           "detailGroupMismatchCount": 0,
           "detailGroupSkippedChecks": 0,
-          "opexChecks": 29,
+          "opexChecks": 30,
           "opexSkippedChecks": 0,
           "opexOverflowMismatchCount": 0,
           "warningCount": 1,
@@ -585223,24 +585608,24 @@
       },
       "statementPresets": {},
       "coverage": {
-        "quarterCount": 34,
+        "quarterCount": 35,
         "pixelReplicaQuarterCount": 0,
         "hasPixelReplica": false,
-        "officialFinancialQuarterCount": 34,
-        "officialSegmentQuarterCount": 34,
-        "officialExpenseQuarterCount": 29,
+        "officialFinancialQuarterCount": 35,
+        "officialSegmentQuarterCount": 35,
+        "officialExpenseQuarterCount": 30,
         "classification": {
           "status": "ok",
-          "latestQuarter": "2026Q2",
+          "latestQuarter": "2026Q3",
           "latestQuarterHasRevenueClassification": true,
           "latestQuarterHasExpenseClassification": true,
-          "latestRevenueClassificationQuarter": "2026Q2",
-          "latestExpenseClassificationQuarter": "2026Q2",
+          "latestRevenueClassificationQuarter": "2026Q3",
+          "latestExpenseClassificationQuarter": "2026Q3",
           "latestStructureHistoryQuarter": "2026Q1",
-          "revenueClassificationQuarterCount": 34,
-          "expenseClassificationQuarterCount": 29,
+          "revenueClassificationQuarterCount": 35,
+          "expenseClassificationQuarterCount": 30,
           "revenueClassificationCoverageRatio": 1.0,
-          "expenseClassificationCoverageRatio": 0.8529,
+          "expenseClassificationCoverageRatio": 0.8571,
           "latestRevenueClassificationLagQuarters": 0,
           "latestExpenseClassificationLagQuarters": 0,
           "warnings": [],
@@ -585280,16 +585665,16 @@
           "validation": {
             "version": "parser-validation-v1",
             "status": "high",
-            "overallConfidenceScore": 0.9802,
+            "overallConfidenceScore": 0.9804,
             "financialConfidenceScore": 0.9775,
-            "structuralConfidenceScore": 0.9853,
-            "revenueSegmentChecks": 34,
+            "structuralConfidenceScore": 0.9857,
+            "revenueSegmentChecks": 35,
             "revenueSegmentMismatchCount": 1,
             "revenueSegmentSkippedChecks": 0,
             "detailGroupChecks": 0,
             "detailGroupMismatchCount": 0,
             "detailGroupSkippedChecks": 0,
-            "opexChecks": 29,
+            "opexChecks": 30,
             "opexSkippedChecks": 0,
             "opexOverflowMismatchCount": 0,
             "warningCount": 1,
@@ -614811,14 +615196,14 @@
         "id": "walmart",
         "ticker": "WMT",
         "financialSource": null,
-        "latestQuarter": "2026Q3",
+        "latestQuarter": "2026Q4",
         "status": "ok",
         "latestQuarterHasRevenueClassification": true,
         "latestQuarterHasExpenseClassification": true,
-        "latestRevenueClassificationQuarter": "2026Q3",
-        "latestExpenseClassificationQuarter": "2026Q3",
-        "revenueClassificationQuarterCount": 35,
-        "expenseClassificationQuarterCount": 1,
+        "latestRevenueClassificationQuarter": "2026Q4",
+        "latestExpenseClassificationQuarter": "2026Q4",
+        "revenueClassificationQuarterCount": 36,
+        "expenseClassificationQuarterCount": 2,
         "warnings": [],
         "blockers": []
       },
@@ -615214,14 +615599,14 @@
         "id": "netease",
         "ticker": "NTES",
         "financialSource": "stockanalysis",
-        "latestQuarter": "2026Q2",
+        "latestQuarter": "2026Q3",
         "status": "ok",
         "latestQuarterHasRevenueClassification": true,
         "latestQuarterHasExpenseClassification": true,
-        "latestRevenueClassificationQuarter": "2026Q2",
-        "latestExpenseClassificationQuarter": "2026Q2",
-        "revenueClassificationQuarterCount": 34,
-        "expenseClassificationQuarterCount": 29,
+        "latestRevenueClassificationQuarter": "2026Q3",
+        "latestExpenseClassificationQuarter": "2026Q3",
+        "revenueClassificationQuarterCount": 35,
+        "expenseClassificationQuarterCount": 30,
         "warnings": [],
         "blockers": []
       },
