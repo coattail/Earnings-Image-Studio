@@ -342,6 +342,14 @@ def run(args) -> int:
             company = futures[future]
             try:
                 item = future.result()
+                pending = state.get(company["id"], {}).get("pendingRelease") or {}
+                pending_quarter = pending.get("quarter") or ""
+                if (item.get("reason") == "up-to-date" and pending_quarter > (item.get("localQuarter") or "")
+                        and pending_quarter > (item.get("remoteQuarter") or "")):
+                    raise SourceContractError(
+                        f"Latest source has not returned the previously discovered {pending_quarter} release",
+                        pending.get("sourceUrl") or "",
+                    )
             except Exception as error:
                 item = dict(companyId=company["id"], ticker=company["ticker"], needsUpdate=False, reason="check-failed", error=str(error))
                 report["failedCompanies"].append(company["id"])
@@ -354,9 +362,11 @@ def run(args) -> int:
                 # Persist discovery before refresh budgeting. An issuer queued
                 # at the end of today's poll must not disappear outside its
                 # release window just because no refresh was attempted yet.
+                release = item.get('release') or {}
                 state.setdefault(company['id'], {})['pendingRelease'] = {
                     'quarter': item.get('remoteQuarter') or item.get('remoteOfficialRevenueQuarter') or '',
                     'filingDate': item.get('remoteFilingDate') or '',
+                    'sourceUrl': release.get('indexSourceUrl') or release.get('sourceUrl') or '',
                 }
             if item.get('reason') == 'incomplete-chart-classification' and state.get(company['id'], {}).get('error'):
                 item['buildRefreshMode'] = 'full-refresh'

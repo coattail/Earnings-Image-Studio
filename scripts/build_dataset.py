@@ -1884,6 +1884,9 @@ def _build_parser_validation_summary(payload: dict[str, Any]) -> dict[str, Any]:
             else:
                 revenue_segment_checks += 1
                 segment_sum = _sum_row_values(revenue_segments)
+                reconciliation = entry.get("officialRevenueReconciliation") or {}
+                if reconciliation.get("sourceUrl"):
+                    segment_sum = round(segment_sum + (_safe_float(reconciliation.get("valueBn")) or 0), 3)
                 delta = round(segment_sum - revenue_bn, 3)
                 if abs(delta) > _bn_tolerance(revenue_bn):
                     revenue_segment_mismatches += 1

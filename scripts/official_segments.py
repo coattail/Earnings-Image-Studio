@@ -237,12 +237,21 @@ def _apply_sec_rate_limit_cooldown(error: urllib.error.HTTPError) -> None:
 def _request(url: str) -> bytes:
     last_error: Exception | None = None
     sec_url = _is_sec_url(url)
+    headers = SEC_HEADERS
+    if urllib.parse.urlsplit(url).hostname in {
+        "www.alibabagroup.com", "home.alibabagroup.com", "data.alibabagroup.com",
+    }:
+        # Alibaba's public IR CDN rejects the SEC-specific client identity.
+        headers = {**SEC_HEADERS, "User-Agent": (
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+        )}
     sec_rate_limit_attempts = 0
     for attempt in range(5):
         timeout = _request_timeout(25)
         if sec_url:
             _wait_for_sec_request_slot()
-        request = urllib.request.Request(url, headers=SEC_HEADERS)
+        request = urllib.request.Request(url, headers=headers)
         try:
             with urllib.request.urlopen(request, timeout=timeout) as response:
                 return response.read()
@@ -271,7 +280,7 @@ def _request(url: str) -> bytes:
     try:
         if sec_url:
             _wait_for_sec_request_slot()
-        response = requests.get(url, timeout=_request_timeout(60), headers=SEC_HEADERS)
+        response = requests.get(url, timeout=_request_timeout(60), headers=headers)
         response.raise_for_status()
         return response.content
     except Exception as exc:  # noqa: BLE001
