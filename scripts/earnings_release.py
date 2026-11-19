@@ -348,7 +348,7 @@ def supplement_cached_release(payload: dict) -> dict:
 def _read_ir_pdf(url, company_id, filed):
     if company_id == "tencent":
         path = urlparse(url).path
-        match = re.fullmatch(r"/website-2026-upload/(Tencent-Announces-.+)-\d{4}-[a-f0-9]+\.pdf", path, re.I)
+        match = re.fullmatch(r"/website-20\d{2}-upload/(Tencent-Announces-.+)-\d{4}-[a-f0-9]+\.pdf", path, re.I)
         if match and filed and urlparse(url).hostname == "static.www.tencent.com":
             mirror = f"https://www.tencent.net.cn/wp-content/uploads/{filed[:4]}/{filed[5:7]}/{match[1]}.pdf"
             try:

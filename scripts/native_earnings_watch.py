@@ -107,7 +107,14 @@ def latest_native_release(company):
             for item in payload.get("content", []):
                 title = item.get("documentTitle") or ""
                 if isinstance(title, dict): title = title.get("en_US", "")
-                if not re.match(r"^Alibaba Group Announces\b", title, re.I):
+                title = title.strip()
+                is_results_article = bool(re.match(r"^Alibaba Group Announces\b", title, re.I))
+                press_release = item.get("pressRelease")
+                # The quarterly catalogue creates event rows before earnings.
+                # A plain period title needs a separate press-release link.
+                if not is_results_article and not (
+                    press_release and re.match(r"^(December|September|June|March)\s+Quarter\b", title, re.I)
+                ):
                     continue
                 quarter = _quarter_from_alibaba_title(title)
                 if quarter:
@@ -116,7 +123,7 @@ def latest_native_release(company):
                     published = item.get("documentPublishTime")
                     if published and int(published) > datetime.now(timezone.utc).timestamp() * 1000:
                         continue
-                    document_id = item.get("pressRelease") or item.get("documentId")
+                    document_id = press_release or item.get("documentId")
                     if document_id:
                         items.append(dict(quarter=quarter, filingDate=filed, sourceUrl=f"https://www.alibabagroup.com/en-US/document-{document_id}", form="official-ir-release"))
             # The newest calendar-year index already covers current releases;

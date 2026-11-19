@@ -97,11 +97,13 @@ class OfficialIrFallbackTests(unittest.TestCase):
         stamp = int(datetime(2026, 8, 20, tzinfo=timezone.utc).timestamp() * 1000)
         future = int(datetime(2099, 11, 4, 12, tzinfo=timezone.utc).timestamp() * 1000)
         payload = {'content': [
+            {'documentTitle': 'September Quarter 2026 Results',
+             'documentId': 'webcast-only', 'eventDate': stamp},
             {'documentTitle': 'Alibaba Group Will Announce September Quarter 2026 Results',
-             'documentId': 'notice', 'eventDate': stamp},
+             'documentId': 'notice', 'pressRelease': 'announcement', 'eventDate': stamp},
             {'documentTitle': 'Alibaba Group Announces September Quarter 2026 Results',
              'documentId': 'upcoming', 'eventDate': stamp, 'documentPublishTime': future},
-            {'documentTitle': 'Alibaba Group Announces June Quarter 2026 Results',
+            {'documentTitle': 'June Quarter 2026 Results',
              'documentId': 'calendar', 'pressRelease': 'released', 'eventDate': stamp}
         ]}
         with patch.object(native, 'date', FixedDate), patch.object(native, '_request_json', return_value=payload):
