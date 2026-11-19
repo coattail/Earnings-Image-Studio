@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 import json
 from pathlib import Path
 import subprocess
@@ -21,9 +21,13 @@ import check_for_updates as checker
 from build_dataset import TOP30_COMPANIES, parse_company_selection, company_matches_selection
 from earnings_release import discover_release, complete_quarter, discover_ir_statement, plausible
 from native_earnings_watch import latest_native_release
-from earnings_diagnostics import record_failure, clear_failure
+from earnings_diagnostics import SourceContractError, record_failure, clear_failure
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+class AwaitingStatutoryFiling(ValueError):
+    pass
 
 
 def bounded_detect(company, local, external):
@@ -63,7 +67,7 @@ def detect(company: dict, local: dict | None = None, *, external=False) -> dict:
     company = {**company, **({"reportingCurrency": native} if native else {}),
                '_localQuarter':latest,'_localFilingDate':entry.get('statementFilingDate'),'_localSourceUrl':entry.get('statementSourceUrl')}
     native_release = latest_native_release(company)
-    covered_sources = {entry.get('statementSourceUrl')}
+    covered_sources = {entry.get('statementSourceUrl'), (entry.get('automaticEarnings') or {}).get('indexSourceUrl')}
     if company['id'] == 'alibaba' and native_release:
         # The live official index links a document page; the parsed statement
         # links its PDF. Match the recorded page/PDF pair, not just a quarter.
@@ -71,17 +75,26 @@ def detect(company: dict, local: dict | None = None, *, external=False) -> dict:
             if (filing.get('quarter') == latest and filing.get('filingDate') == native_release.get('filingDate')
                 and filing.get('pdf') == entry.get('statementSourceUrl')):
                 covered_sources.add(filing.get('page'))
-    if ((company.get('hkexStockId') or company['id'] == 'alibaba') and native_release and native_release['quarter'] == latest
+    if ((company.get('hkexStockId') or company['id'] in {'alibaba', 'tencent'}) and native_release and native_release['quarter'] == latest
         and native_release.get('filingDate') and native_release['filingDate'] <= (entry.get('statementFilingDate')or'')
         and native_release.get('sourceUrl') and native_release['sourceUrl'] in covered_sources and not pending_chart_issues
         and all(isinstance(entry.get(k),(int,float)) for k in ('revenueBn','grossProfitBn','operatingIncomeBn','netIncomeBn'))):
         return dict(companyId=company['id'],ticker=company['ticker'],needsUpdate=False,reason='up-to-date',
                     localQuarter=latest,remoteQuarter=latest,remoteFilingDate=native_release['filingDate'])
     if native_release and native_release["quarter"] > latest:
+        requires_verified_release = company["id"] in {"alibaba", "tencent"}
         try:
-            native_release = discover_ir_statement(company, native_release) or native_release
+            parsed = discover_ir_statement(company, native_release)
         except Exception as error:
+            if requires_verified_release:
+                raise
             native_release["parseError"] = str(error)
+            parsed = None
+        if requires_verified_release and not parsed:
+            # Surface the failing source instead of rebuilding its archive.
+            raise SourceContractError("Official results document does not contain a verified quarterly statement",
+                                      native_release["sourceUrl"])
+        native_release = parsed or native_release
         return dict(companyId=company["id"], ticker=company["ticker"], needsUpdate=True,
                     localQuarter=latest, remoteQuarter=native_release["quarter"], remoteFilingDate=native_release.get("filingDate", ""),
                     reason="new-official-ir-quarter-detected", release=native_release)
@@ -163,6 +176,15 @@ def validate_refresh(item: dict, payload: dict, previous: dict | None = None) ->
     from release_chart_quality import chart_issues
     issues = chart_issues(payload)
     if issues:
+        release = item.get("release") or {}
+        period_end = entry.get("periodEnd")
+        if (entry.get("chartCompletionAwaitingStatutoryFiling")
+            and release.get("form") == "8-K" and release.get("reportDate") == period_end
+            and quarter == release.get("quarter") and period_end
+            and 0 <= (date.today() - date.fromisoformat(period_end)).days <= 45
+            and all(issue.startswith(("missing current-quarter revenue", "missing previously disclosed revenue"))
+                    for issue in issues)):
+            raise AwaitingStatutoryFiling(f"{quarter} revenue detail awaits the matching 10-Q or 10-K")
         raise ValueError(f"{item['companyId']}: incomplete Sankey chart: {'; '.join(issues)}")
 
 
@@ -280,7 +302,7 @@ def refresh_one(item: dict, timeout: int = 150) -> None:
 
 def run(args) -> int:
     started = time.monotonic()
-    report = dict(startedAt=datetime.now(timezone.utc).isoformat(), checked=0, report=[], updatedCompanies=[], failedCompanies=[], deferredCompanies=[], pendingDetails=[])
+    report = dict(startedAt=datetime.now(timezone.utc).isoformat(), checked=0, report=[], updatedCompanies=[], failedCompanies=[], deferredCompanies=[], pendingDetails=[], awaitingFilings=[])
     if args.universe:
         universe = json.loads(args.universe.read_text())
         companies = universe["companies"]
@@ -367,6 +389,12 @@ def run(args) -> int:
                 if blockers:
                     report["pendingDetails"].append(dict(companyId=company_id, issues=blockers))
                     state[company_id]["pendingDetails"] = True
+            except AwaitingStatutoryFiling as error:
+                pending = state[company_id].get("pendingRelease")
+                clear_failure(state, company_id)
+                state[company_id]["pendingRelease"] = pending
+                report["awaitingFilings"].append(dict(companyId=company_id, quarter=item["remoteQuarter"],
+                                                      reason=str(error)))
             except Exception as error:
                 report["failedCompanies"].append(company_id)
                 item["refreshError"] = str(error)

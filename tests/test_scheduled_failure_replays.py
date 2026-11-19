@@ -103,6 +103,67 @@ class ScheduledFailureReplays(unittest.TestCase):
 if __name__ == '__main__': unittest.main()
 
 class PeriodAndProvenanceTests(unittest.TestCase):
+    def test_8k_without_revenue_detail_waits_for_exact_period_filing(self):
+        from datetime import date
+        from release_chart_completion import complete_current_chart
+
+        class FilingWeek(date):
+            @classmethod
+            def today(cls):
+                return cls(2026, 11, 19)
+
+        period_end = '2026-11-01'
+        url = 'https://www.sec.gov/Archives/edgar/data/354950/000035495026000184/hd_exhibit991x11012026.htm'
+        item = dict(companyId='home-depot', remoteQuarter='2026Q4',
+                    release=dict(quarter='2026Q4', reportDate=period_end, form='8-K'))
+        entry = dict(periodEnd=period_end, revenueBn=43.398, netIncomeBn=3.674,
+                     statementFilingDate='2026-11-17', statementSourceUrl=url, automaticEarnings={'form': '8-K'})
+        previous = dict(revenueBn=40, netIncomeBn=3, officialRevenueSegments=[
+            {'name': 'Products', 'valueBn': 38}, {'name': 'Services', 'valueBn': 2}])
+        payload = dict(id='home-depot', financials={'2026Q3': previous, '2026Q4': entry})
+        recent = dict(form=['10-Q'], reportDate=['2026-10-01'], filingDate=['2026-11-18'],
+                      accessionNumber=['0000354950-26-000185'], primaryDocument=['hd.htm'])
+        with patch('official_segments._request', return_value=b'<p>Earnings release</p>') as request, \
+             patch('official_segments._request_json', side_effect=lambda source: {'filings': {'recent': recent}}
+                   if 'submissions' in source else {'directory': {'item': []}}), \
+             patch.object(watch, 'date', FilingWeek):
+            complete_current_chart(payload, {'id': 'home-depot', 'cik': 354950})
+            request.assert_called_once_with(url)
+            with self.assertRaises(watch.AwaitingStatutoryFiling):
+                watch.validate_refresh(item, payload)
+
+            recent['reportDate'] = [period_end]
+            complete_current_chart(payload, {'id': 'home-depot', 'cik': 354950})
+            self.assertNotIn('chartCompletionAwaitingStatutoryFiling', entry)
+            # Once the exact filing exists, missing categories are a genuine
+            # parsing failure and must be reported again.
+            with self.assertRaisesRegex(ValueError, 'incomplete Sankey chart'):
+                watch.validate_refresh(item, payload)
+
+    def test_waiting_for_statutory_filing_retains_retry_without_a_failed_run(self):
+        from argparse import Namespace
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            dataset = root / 'dataset.json'
+            dataset.write_text(json.dumps({'companies': [{'id': 'home-depot'}]}))
+            args = Namespace(universe=None, companies='', dry_run=False, report_path=root/'report.json',
+                             state_path=root/'state.json', budget_seconds=660)
+            item = dict(companyId='home-depot', needsUpdate=True, reason='earnings-release-detected',
+                        remoteQuarter='2026Q4', remoteFilingDate='2026-11-17')
+            with patch.object(watch, 'TOP30_COMPANIES', [{'id': 'home-depot', 'ticker': 'HD'}]), \
+                 patch.object(watch.checker, 'DATASET_PATH', dataset), \
+                 patch.object(watch, 'bounded_detect', return_value=item), \
+                 patch.object(watch, 'refresh_one', side_effect=watch.AwaitingStatutoryFiling('awaiting 10-Q')):
+                self.assertEqual(watch.run(args), 0)
+            state = json.loads(args.state_path.read_text())['home-depot']
+            self.assertEqual(state['pendingRelease']['quarter'], '2026Q4')
+            self.assertNotIn('failure', state)
+            report = json.loads(args.report_path.read_text())
+            self.assertEqual(report['awaitingFilings'][0]['companyId'], 'home-depot')
+            self.assertEqual(report['updatedCompanies'], [])
+
     def test_monthly_6k_event_date_is_not_a_quarterly_statement(self):
         import check_for_updates as checker
         recent = dict(form=['6-K','20-F'], filingDate=['2026-11-10','2026-04-01'],

@@ -93,6 +93,58 @@ class OfficialIrFallbackTests(unittest.TestCase):
         self.assertEqual(result['quarter'],'2026Q2')
         request.assert_called_once_with('https://data.alibabagroup.com/data/index/ir/quarterly-results/q2026/list.json')
 
+    def test_alibaba_ignores_calendar_notices_and_unpublished_result_documents(self):
+        stamp = int(datetime(2026, 8, 20, tzinfo=timezone.utc).timestamp() * 1000)
+        future = int(datetime(2099, 11, 4, 12, tzinfo=timezone.utc).timestamp() * 1000)
+        payload = {'content': [
+            {'documentTitle': 'Alibaba Group Will Announce September Quarter 2026 Results',
+             'documentId': 'notice', 'eventDate': stamp},
+            {'documentTitle': 'Alibaba Group Announces September Quarter 2026 Results',
+             'documentId': 'upcoming', 'eventDate': stamp, 'documentPublishTime': future},
+            {'documentTitle': 'Alibaba Group Announces June Quarter 2026 Results',
+             'documentId': 'calendar', 'pressRelease': 'released', 'eventDate': stamp}
+        ]}
+        with patch.object(native, 'date', FixedDate), patch.object(native, '_request_json', return_value=payload):
+            result = native.latest_native_release({'id': 'alibaba', '_localQuarter': '2026Q2'})
+        self.assertEqual(result['quarter'], '2026Q2')
+        self.assertTrue(result['sourceUrl'].endswith('document-released'))
+
+    def test_tencent_uses_dated_official_pdf_and_publishes_its_current_categories(self):
+        from types import SimpleNamespace
+        source = 'https://static.www.tencent.com/website-2026-upload/Tencent-Announces-2026-Third-Quarter-Results-1800-6d9a2a.pdf'
+        pdf = 'https://www.tencent.net.cn/wp-content/uploads/2026/11/Tencent-Announces-2026-Third-Quarter-Results.pdf'
+        news = f"""<article class='investor-news-item'><p class='entry-meta'>November 18, 2026</p>
+        <p class='entry-title'>Tencent Announces 2026 Third Quarter Results</p><a href='{source}'>View</a></article>"""
+        with patch.object(native, '_exchange_day', return_value=date(2026, 11, 19)), \
+             patch.object(native, '_request', return_value=news.encode()):
+            item = native.latest_native_release({'id': 'tencent'})
+        self.assertEqual(item['filingDate'], '2026-11-18')
+        text = """3Q2026 Management Discussion and Analysis
+Domestic Games revenues were RMB47.6 billion, up 11% year-on-year.
+International Games revenues were RMB18.9 billion, down 9% year-on-year.
+Social Networks revenues decreased by 1% year-on-year to RMB31.8 billion.
+CONDENSED CONSOLIDATED INCOME STATEMENT
+VAS 98,326 95,860 98,414
+Marketing Services 43,049 36,242 43,565
+FinTech and Business Services 63,655 58,174 60,286
+Others 2,306 2,593 2,520
+Equity holders of the Company 63,612 63,133 56,022
+"""
+        statement = {'revenueBn': 207.336, 'netIncomeBn': 65.139, 'periodEnd': '2026-09-30'}
+        with tempfile.TemporaryDirectory() as directory, patch.object(release, 'CACHE', Path(directory)), \
+             patch.object(release, '_request', return_value=b'%PDF') as request, \
+             patch.object(release, 'PdfReader', return_value=SimpleNamespace(pages=[SimpleNamespace(extract_text=lambda: text)])), \
+             patch('generic_ir_pdf_parser._entries_from_pdf_pages', return_value={'2026Q3': statement}):
+            result = release.discover_ir_statement({'id': 'tencent'}, item)
+            request.assert_called_once_with(pdf)
+            self.assertEqual(json.loads((Path(directory) / 'tencent.json').read_text()), result)
+        entry = result['entry']
+        self.assertEqual(entry['statementSourceUrl'], pdf)
+        self.assertEqual(entry['automaticEarnings']['indexSourceUrl'], source)
+        self.assertEqual(entry['netIncomeBn'], 63.612)
+        self.assertAlmostEqual(sum(row['valueBn'] for row in entry['officialRevenueSegments']), 207.336)
+        self.assertEqual([row['valueBn'] for row in entry['officialRevenueDetailGroups']], [47.6, 18.9, 31.8])
+
     def test_vendor_quarter_numbers_do_not_suppress_a_new_official_release(self):
         recent = dict(form=['10-Q','8-K'],filingDate=['2026-11-04','2026-11-03'],
             reportDate=['2026-09-26','2026-11-03'],items=['','2.02'],accessionNumber=['regular','release'])

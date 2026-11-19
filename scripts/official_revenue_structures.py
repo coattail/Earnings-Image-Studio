@@ -3321,6 +3321,85 @@ def _parse_generic_segment_cache_records(company: dict[str, Any], refresh: bool 
     return result
 
 
+def parse_tencent_revenue_rows(raw_pdf_text, quarter, mode, pdf_url, filing_date):
+    """Read the segment table and its narrative details from one results PDF."""
+    pdf_text = _normalize_text_space(raw_pdf_text)
+    quarter_discussion = _extract_tencent_quarter_discussion(raw_pdf_text, quarter)
+    top_level_rows = [
+        (["VAS"], "Value-added services", "valueaddedservices", "VAS"),
+        (["Marketing Services", "Online Advertising"], "Marketing Services", "marketingservices", "Marketing Services"),
+        (["FinTech and Business Services"], "FinTech and Business Services", "fintechandbusinessservices", "FinTech and Business Services"),
+        (["Others"], "Others", "others", "Others"),
+    ]
+    top_level_row_aliases = {
+        "valueaddedservices": ["VAS"],
+        "marketingservices": ["Marketing Services", "Online Advertising"],
+        "fintechandbusinessservices": ["FinTech and Business Services"],
+        "others": ["Others"],
+    }
+    parsed_top_level_rows = _shared_parse_labeled_numeric_rows(raw_pdf_text, top_level_row_aliases)
+    parsed_top_level_map = parsed_top_level_rows.rows if isinstance(parsed_top_level_rows.rows, dict) else {}
+    segments = []
+    selected_top_level_values: dict[str, float] = {}
+    for source_labels, display_name, member_key, narrative_label in top_level_rows:
+        values = parsed_top_level_map.get(member_key) or []
+        if not values:
+            for source_label in source_labels:
+                values = _extract_labeled_number_sequence(pdf_text, source_label, min_count=2, max_count=4)
+                if values:
+                    break
+        selected_value = _select_tencent_quarter_value(values, mode)
+        narrative_value, narrative_yoy = _extract_tencent_growth_metrics(
+            quarter_discussion,
+            narrative_label,
+            prefix="Revenues from",
+        )
+        current_value_bn = selected_value / 1000 if selected_value is not None else narrative_value
+        if current_value_bn is None:
+            continue
+        segments.append(
+            _build_row(
+                display_name,
+                current_value_bn,
+                member_key=member_key,
+                source_url=pdf_url,
+                source_form="IR PDF",
+                filing_date=filing_date,
+                yoy_pct=narrative_yoy,
+            )
+        )
+        selected_top_level_values[member_key] = current_value_bn
+
+    detail_groups = []
+    detail_names = ["Domestic Games", "International Games", "Social Networks"]
+    vas_quarter_value = selected_top_level_values.get("valueaddedservices")
+    for detail_name in detail_names:
+        detail_value, detail_yoy = _extract_tencent_growth_metrics(quarter_discussion, detail_name)
+        if detail_value is None:
+            continue
+        selected_detail_value = _select_tencent_detail_value([detail_value], vas_quarter_value=vas_quarter_value)
+        if selected_detail_value is None:
+            continue
+        detail_row = _build_row(
+            detail_name,
+            selected_detail_value,
+            member_key=_normalize_member_key(detail_name),
+            source_url=pdf_url,
+            source_form="IR PDF",
+            filing_date=filing_date,
+            target_name="Value-added services",
+            yoy_pct=detail_yoy,
+        )
+        detail_groups.append(detail_row)
+
+    if detail_groups and len(detail_groups) < len(detail_names):
+        for row in detail_groups:
+            row["validationEligible"] = False
+            row["validationNotes"] = ["partial-narrative-detail-disclosure"]
+
+    return segments, detail_groups
+
+
 def _parse_tencent_records(company: dict[str, Any]) -> dict[str, Any]:
     result = {"source": "official-ir-pdf", "quarters": {}, "filingsUsed": [], "errors": [], "errorDetails": []}
     html_text = _request("https://www.tencent.com/investors/results/").decode("utf-8", errors="ignore")
@@ -3334,79 +3413,7 @@ def _parse_tencent_records(company: dict[str, Any]) -> dict[str, Any]:
         try:
             raw_pdf_text = _extract_pdf_text(pdf_url)
             filing_date = _extract_tencent_filing_date(date_text, pdf_url, raw_pdf_text)
-            pdf_text = _normalize_text_space(raw_pdf_text)
-            quarter_discussion = _extract_tencent_quarter_discussion(raw_pdf_text, quarter)
-            top_level_rows = [
-                (["VAS"], "Value-added services", "valueaddedservices", "VAS"),
-                (["Marketing Services", "Online Advertising"], "Marketing Services", "marketingservices", "Marketing Services"),
-                (["FinTech and Business Services"], "FinTech and Business Services", "fintechandbusinessservices", "FinTech and Business Services"),
-                (["Others"], "Others", "others", "Others"),
-            ]
-            top_level_row_aliases = {
-                "valueaddedservices": ["VAS"],
-                "marketingservices": ["Marketing Services", "Online Advertising"],
-                "fintechandbusinessservices": ["FinTech and Business Services"],
-                "others": ["Others"],
-            }
-            parsed_top_level_rows = _shared_parse_labeled_numeric_rows(raw_pdf_text, top_level_row_aliases)
-            parsed_top_level_map = parsed_top_level_rows.rows if isinstance(parsed_top_level_rows.rows, dict) else {}
-            segments = []
-            selected_top_level_values: dict[str, float] = {}
-            for source_labels, display_name, member_key, narrative_label in top_level_rows:
-                values = parsed_top_level_map.get(member_key) or []
-                if not values:
-                    for source_label in source_labels:
-                        values = _extract_labeled_number_sequence(pdf_text, source_label, min_count=2, max_count=4)
-                        if values:
-                            break
-                selected_value = _select_tencent_quarter_value(values, mode)
-                narrative_value, narrative_yoy = _extract_tencent_growth_metrics(
-                    quarter_discussion,
-                    narrative_label,
-                    prefix="Revenues from",
-                )
-                current_value_bn = selected_value / 1000 if selected_value is not None else narrative_value
-                if current_value_bn is None:
-                    continue
-                segments.append(
-                    _build_row(
-                        display_name,
-                        current_value_bn,
-                        member_key=member_key,
-                        source_url=pdf_url,
-                        source_form="IR PDF",
-                        filing_date=filing_date,
-                        yoy_pct=narrative_yoy,
-                    )
-                )
-                selected_top_level_values[member_key] = current_value_bn
-
-            detail_groups = []
-            detail_names = ["Domestic Games", "International Games", "Social Networks"]
-            vas_quarter_value = selected_top_level_values.get("valueaddedservices")
-            for detail_name in detail_names:
-                detail_value, detail_yoy = _extract_tencent_growth_metrics(quarter_discussion, detail_name)
-                if detail_value is None:
-                    continue
-                selected_detail_value = _select_tencent_detail_value([detail_value], vas_quarter_value=vas_quarter_value)
-                if selected_detail_value is None:
-                    continue
-                detail_row = _build_row(
-                    detail_name,
-                    selected_detail_value,
-                    member_key=_normalize_member_key(detail_name),
-                    source_url=pdf_url,
-                    source_form="IR PDF",
-                    filing_date=filing_date,
-                    target_name="Value-added services",
-                    yoy_pct=detail_yoy,
-                )
-                detail_groups.append(detail_row)
-
-            if detail_groups and len(detail_groups) < len(detail_names):
-                for row in detail_groups:
-                    row["validationEligible"] = False
-                    row["validationNotes"] = ["partial-narrative-detail-disclosure"]
+            segments, detail_groups = parse_tencent_revenue_rows(raw_pdf_text, quarter, mode, pdf_url, filing_date)
 
             if segments:
                 quarter_payload: dict[str, Any] = {"segments": segments}

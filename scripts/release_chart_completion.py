@@ -484,6 +484,7 @@ def complete_current_chart(payload, company, *, documents=None, require_filing_d
     quarter=max(payload.get('financials',{}),default='')
     if not quarter: return payload
     entry=payload['financials'][quarter]
+    entry.pop('chartCompletionAwaitingStatutoryFiling', None)
     attempts=[]
     def apply_document(html,url,filed=None):
         from earnings_release import parse_release
@@ -571,10 +572,13 @@ def complete_current_chart(payload, company, *, documents=None, require_filing_d
                 for i,form in enumerate(recent['form']):
                     if form not in {'10-Q','10-K','20-F'}: continue
                     end=recent['reportDate'][i]or''
-                    if not end or f'{end[:4]}Q{(int(end[5:7])-1)//3+1}'!=quarter: continue
+                    if not end or end != entry.get('periodEnd'): continue
                     url=f"https://www.sec.gov/Archives/edgar/data/{int(cik)}/{recent['accessionNumber'][i].replace('-','')}/{recent['primaryDocument'][i]}"
                     try: apply(_request(url).decode('utf-8',errors='replace'),url,recent['filingDate'][i])
                     except Exception as exc: attempts.append({'sourceUrl':url,'error':str(exc)})
                     break
+                else:
+                    if (entry.get('automaticEarnings') or {}).get('form') == '8-K':
+                        entry['chartCompletionAwaitingStatutoryFiling'] = True
     entry['chartCompletionAttempts']=attempts
     return payload
