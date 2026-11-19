@@ -345,45 +345,108 @@ def supplement_cached_release(payload: dict) -> dict:
     return payload
 
 
+def _read_ir_pdf(url, company_id, filed):
+    if company_id == "tencent":
+        path = urlparse(url).path
+        match = re.fullmatch(r"/website-20\d{2}-upload/(Tencent-Announces-.+)-\d{4}-[a-f0-9]+\.pdf", path, re.I)
+        if match and filed and urlparse(url).hostname == "static.www.tencent.com":
+            mirror = f"https://www.tencent.net.cn/wp-content/uploads/{filed[:4]}/{filed[5:7]}/{match[1]}.pdf"
+            try:
+                content = _request(mirror)
+                if content.startswith(b"%PDF"):
+                    return mirror, content
+            except OSError:
+                pass
+
+    content = _request(url)
+    if content.startswith(b"%PDF"):
+        return url, content
+    soup = BeautifulSoup(content, "html.parser")
+    links = [urljoin(url, a["href"]) for a in soup.find_all("a", href=True)
+             if re.search(r"\.pdf(?:\?|$)", a["href"], re.I)]
+    if company_id == "alibaba":
+        from official_revenue_structures import _extract_json_script_props, _extract_first_pdf_link_from_html
+        props = _extract_json_script_props(content.decode("utf-8", errors="replace"))
+        article = str((props.get("document") or {}).get("documentContent") or "")
+        link = _extract_first_pdf_link_from_html(article)
+        if link:
+            links.insert(0, urljoin(url, link))
+    if links:
+        url = links[0]
+        content = _request(url)
+        if content.startswith(b"%PDF"):
+            return url, content
+    return None
+
+
 def discover_ir_statement(company: dict, item: dict) -> dict | None:
     """Read one newly published IR document instead of rebuilding its archive."""
-    url = item.get("sourceUrl") or item.get("pdfUrl")
+    index_url = item.get("sourceUrl") or item.get("pdfUrl")
     filed = item.get("filingDate") or ""
     quarter = item.get("quarter") or ""
-    if not url or not filed or not quarter:
+    company_id = company["id"]
+    if not index_url or not quarter or (not filed and company_id != "tencent"):
         return None
+    def sec_copy():
+        if not filed:
+            return None
+        result = discover_release(company, expected_filing_date=filed, expected_quarter=quarter)
+        if not result or result.get("quarter") != quarter or not complete_quarter(result.get("entry", {})):
+            return None
+        result["entry"].setdefault("automaticEarnings", {})["indexSourceUrl"] = index_url
+        cache = CACHE / f"{company_id}.json"
+        cache.parent.mkdir(parents=True, exist_ok=True)
+        cache.write_text(json.dumps(result, ensure_ascii=False, indent=2))
+        return result
+
     try:
-        content = _request(url)
+        pdf = _read_ir_pdf(index_url, company_id, filed)
     except Exception:
         # Investor-relations CDNs may block cloud runners. A same-date SEC
         # exhibit is an independent official copy, validated for this quarter.
-        alternative = discover_release(company, expected_filing_date=filed, expected_quarter=quarter)
-        if alternative and alternative.get('quarter') == quarter and complete_quarter(alternative.get('entry', {})):
+        alternative = sec_copy()
+        if alternative:
             return alternative
         raise
-    if not content.startswith(b"%PDF"):
-        soup = BeautifulSoup(content, "html.parser")
-        links = [urljoin(url, a["href"]) for a in soup.find_all("a", href=True) if re.search(r"\.pdf(?:\?|$)", a["href"], re.I)]
-        if not links:
-            return None
-        url = links[0]
-        content = _request(url)
+    if not pdf:
+        # A catalogue entry can precede the live PDF. Look for the same
+        # released period on EDGAR before treating the link as actionable.
+        return sec_copy() if company_id == "alibaba" else None
+    url, content = pdf
     from generic_ir_pdf_parser import _entries_from_pdf_pages
     pages = [page.extract_text() for page in PdfReader(io.BytesIO(content)).pages[:100]]
+    if company_id == "tencent" and not filed:
+        from official_revenue_structures import _extract_tencent_filing_date
+        filed = _extract_tencent_filing_date("", url, pages[0] if pages else "")
+        if not filed:
+            return None
     entries = _entries_from_pdf_pages(pages, url, filed)
-    if company["id"] == "samsung":
+    if company_id == "samsung":
         entry = samsung_statement(pages, quarter)
         if entry:
             entries[quarter] = entry
     entry = entries.get(quarter)
-    if not entry or not complete_quarter(entry, company["id"]):
+    if not entry or not complete_quarter(entry, company_id) or entry["periodEnd"] > filed:
         return None
     entry.update(statementFilingDate=filed, statementSource="official-ir-earnings-release", statementSourceUrl=url,
                  statementSpanQuarters=1, statementValueMode="reported")
     entry["parserFinancialFieldSources"] = {k: "official" for k in CORE if isinstance(entry.get(k), (int, float))}
     entry["parserFinancialValidation"] = {"status": "high", "sourceUrl": url}
-    marker = dict(filingDate=filed, accession=url, form="official-ir-release")
+    marker = dict(filingDate=filed, accession=url, form="official-ir-release", indexSourceUrl=index_url)
     entry["automaticEarnings"] = marker
+    if company_id == "tencent":
+        from official_revenue_structures import parse_tencent_revenue_rows, _shared_parse_labeled_numeric_rows
+        segments, details = parse_tencent_revenue_rows("\n".join(pages), quarter, item.get("mode"), url, filed)
+        entry.update(officialRevenueSegments=segments, officialRevenueDetailGroups=details,
+                     revenueClassificationSource="official-complete-table", revenueClassificationSourceUrl=url)
+        # The published series uses profit attributable to shareholders.
+        statement = next((page for page in pages if "CONDENSED CONSOLIDATED INCOME STATEMENT" in page
+                          and "Equity holders of the Company" in page), "")
+        rows = _shared_parse_labeled_numeric_rows(statement, {"owners": ["Equity holders of the Company"]}).rows
+        if rows.get("owners"):
+            entry["netIncomeBn"] = round(rows["owners"][0] / 1000, 3)
+            entry.pop("profitMarginPct", None)
+            entry.pop("profitMarginYoyDeltaPp", None)
     payload = dict(**marker, quarter=quarter, reportDate=entry["periodEnd"], entry=entry, _cacheVersion=VERSION)
     CACHE.mkdir(parents=True, exist_ok=True)
     (CACHE / f"{company['id']}.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2))

@@ -11,6 +11,8 @@ if not path.exists():
 report = json.loads(path.read_text())
 lines = [f"Checked companies: {report['checked']}", f"Updated: {', '.join(report['updatedCompanies']) or 'none'}",
          f"Failed: {', '.join(report['failedCompanies']) or 'none'}", f"Queued for next run: {', '.join(report['deferredCompanies']) or 'none'}"]
+for item in report.get("awaitingFilings", []):
+    lines.append(f"Awaiting statutory filing for {item['companyId']}: {item['reason']}. Last validated chart retained. Will retry.")
 if os.environ.get("GITHUB_STEP_SUMMARY"):
     with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as summary:
         summary.write("\n\n".join(lines) + "\n")

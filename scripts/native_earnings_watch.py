@@ -1,6 +1,6 @@
 """Official release indexes for non-SEC issuers; never treat guidance as results."""
 import re
-from datetime import date
+from datetime import date, datetime, timezone
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin, urlparse
 from official_segments import _request, _request_json
@@ -39,7 +39,6 @@ def latest_native_release(company):
         href, year, quarter = max(matches, key=lambda row: (row[1], row[2]))
         if company.get('_localQuarter')==f'{year}Q{quarter}'and str(company.get('_localSourceUrl')or'').endswith(href.split('/')[-1])and company.get('_localFilingDate'):
             return dict(quarter=f'{year}Q{quarter}',sourceUrl=urljoin(url,href),filingDate=company['_localFilingDate'],form='official-ir-pdf')
-        from datetime import datetime
         ordinal = {"1": "first", "2": "second", "3": "third", "4": "fourth"}[quarter]
         news_url = f"https://news.samsung.com/global/samsung-electronics-announces-{ordinal}-quarter-{year}-results"
         news = BeautifulSoup(_request(news_url), "html.parser").get_text(" ", strip=True)
@@ -62,12 +61,34 @@ def latest_native_release(company):
         return dict(quarter=f"{year}Q{quarter}", sourceUrl=source, filingDate="", form="official-ir-release")
     if company_id == "tencent":
         from official_revenue_structures import _extract_tencent_result_links, _quarter_from_tencent_title, _extract_tencent_filing_date
-        html = _request("https://www.tencent.com/investors/results/").decode("utf-8", errors="replace")
+        # The results landing page can omit the release date. The dated
+        # investor-news feed lists the same press releases.
+        news_url = "https://www.tencent.net.cn/investors/investor-news/"
         items = []
+        try:
+            news = BeautifulSoup(_request(news_url), "html.parser")
+            for article in news.select("article.investor-news-item"):
+                title = article.select_one(".entry-title")
+                published = article.select_one(".entry-meta")
+                link = article.select_one('a[href$=".pdf"]')
+                if not (title and published and link):
+                    continue
+                quarter, mode = _quarter_from_tencent_title(title.get_text(" ", strip=True))
+                source = urljoin(news_url, link["href"])
+                filed = _extract_tencent_filing_date(published.get_text(" ", strip=True), source)
+                if quarter and filed and filed <= _exchange_day().isoformat():
+                    items.append(dict(quarter=quarter, sourceUrl=source, filingDate=filed, form="official-ir-pdf", mode=mode))
+        except TimeoutError:
+            raise
+        except (OSError, ValueError):
+            pass
+        if items:
+            return max(items, key=lambda item: (item["quarter"], item["filingDate"]))
+        html = _request("https://www.tencent.com/investors/results/").decode("utf-8", errors="replace")
         for link in _extract_tencent_result_links(html):
-            quarter, _ = _quarter_from_tencent_title(link["title"])
+            quarter, mode = _quarter_from_tencent_title(link["title"])
             if quarter:
-                items.append(dict(quarter=quarter, sourceUrl=link["pdfUrl"], filingDate=_extract_tencent_filing_date(link["dateText"], link["pdfUrl"]), form="official-ir-pdf"))
+                items.append(dict(quarter=quarter, sourceUrl=link["pdfUrl"], filingDate=_extract_tencent_filing_date(link["dateText"], link["pdfUrl"]), form="official-ir-pdf", mode=mode))
         if not items:
             raise ValueError("Tencent official results index could not be parsed")
         return max(items, key=lambda item: item["quarter"])
@@ -86,11 +107,25 @@ def latest_native_release(company):
             for item in payload.get("content", []):
                 title = item.get("documentTitle") or ""
                 if isinstance(title, dict): title = title.get("en_US", "")
+                title = title.strip()
+                is_results_article = bool(re.match(r"^Alibaba Group Announces\b", title, re.I))
+                press_release = item.get("pressRelease")
+                # The quarterly catalogue creates event rows before earnings.
+                # A plain period title needs a separate press-release link.
+                if not is_results_article and not (
+                    press_release and re.match(r"^(December|September|June|March)\s+Quarter\b", title, re.I)
+                ):
+                    continue
                 quarter = _quarter_from_alibaba_title(title)
                 if quarter:
                     filed = _timestamp_ms_to_iso_date(item.get('eventDate') or item.get('documentPublishTime'))
                     if not filed or filed > date.today().isoformat(): continue
-                    items.append(dict(quarter=quarter, filingDate=filed, sourceUrl=f"https://www.alibabagroup.com/en-US/document-{item.get('documentId')}", form="official-ir-release"))
+                    published = item.get("documentPublishTime")
+                    if published and int(published) > datetime.now(timezone.utc).timestamp() * 1000:
+                        continue
+                    document_id = press_release or item.get("documentId")
+                    if document_id:
+                        items.append(dict(quarter=quarter, filingDate=filed, sourceUrl=f"https://www.alibabagroup.com/en-US/document-{document_id}", form="official-ir-release"))
             # The newest calendar-year index already covers current releases;
             # do not spend the issuer's budget crawling an older archive too.
             if items and max(i['quarter'] for i in items) >= (company.get('_localQuarter') or f'{date.today().year}Q2'):
