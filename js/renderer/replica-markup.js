@@ -2439,7 +2439,9 @@ function renderReplicaSvgMarkup(model) {
               [...positiveLabelObstacles,...placedPositiveLabelRects,...placedPositiveNodeRects,...smallBridgeCalloutRects,capRect], {
                 minDx:Math.max(scaleY(20)-rect.left,positiveFrame.left-scaleY(180)-rect.left),
                 maxDx:Math.min(width-scaleY(24)-rect.right,positiveFrame.right+positiveRunwayAvailable-rect.right),
-                minDy:scaleY(24)-rect.top,
+                // The title and date are already protected individually.
+                // The space beside them can hold a callout above a thick gain.
+                minDy:clearance-rect.top,
                 maxDy:Math.min(chartBottomLimit-clearance-rect.bottom,positiveFrame.bottom+scaleY(120)-rect.bottom),
                 gap:clearance,
                 accept:([box])=>{
