@@ -94,3 +94,12 @@ test('NVIDIA quarter history and restored gain drags preserve money and editable
     }
   }
 });
+
+test('Alibaba September gains stay readable beside the tax ribbon', () => {
+  const company = ctx.dataset.companies.find(item => item.id === 'alibaba');
+  const {svg} = render(company, '2026Q3', 'en');
+  const gain = bounds(svg, 'positive-1');
+  const net = nodes(svg).net;
+  assert.ok(gain.left > net.x + net.width);
+  assert.match(svg, /data-branch-label-leader="positive-1"/);
+});
