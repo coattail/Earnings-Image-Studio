@@ -17,6 +17,7 @@ from pypdf import PdfReader
 from official_segments import _request, _request_json, _resolve_cik
 from official_financials import _extract_html_tables
 from generic_filing_table_parser import _period_entries_from_table
+from release_chart_quality import preserve_statement_row_filing_dates
 from sankey_statement_backfill import parse_inline_statements, complete_statement
 
 CACHE = Path(__file__).resolve().parents[1] / "data/cache/earnings-releases"
@@ -180,6 +181,7 @@ def parse_release(html: str, company: dict, url: str, filed: str, *, allow_parti
             continue
         entry.update(statementSource="official-earnings-release", statementSourceUrl=url,
                      statementFilingDate=filed, statementValueMode="reported", statementSpanQuarters=1)
+        preserve_statement_row_filing_dates(entry)
         if fiscal_heading and quarter==max(financials):
             ordinal={'first':1,'second':2,'third':3,'fourth':4}[fiscal_heading[1].lower()]
             entry.update(fiscalYear=fiscal_heading[2],fiscalQuarter=f'Q{ordinal}',fiscalLabel=f'FY{fiscal_heading[2]} Q{ordinal}')

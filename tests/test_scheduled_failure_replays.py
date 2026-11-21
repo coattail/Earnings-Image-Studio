@@ -103,6 +103,65 @@ class ScheduledFailureReplays(unittest.TestCase):
 if __name__ == '__main__': unittest.main()
 
 class PeriodAndProvenanceTests(unittest.TestCase):
+    def test_10q_promotion_preserves_provenance_of_cached_8k_expense_rows(self):
+        from release_chart_completion import complete_current_chart
+
+        release_url = 'https://www.sec.gov/Archives/edgar/data/354950/000035495026000184/hd_exhibit991x11012026.htm'
+        filing_url = 'https://www.sec.gov/Archives/edgar/data/354950/000162828026075287/hd-20261101.htm'
+        release_date, filing_date = '2026-11-17', '2026-11-20'
+        statement = """<p>Consolidated Statements of Earnings (in millions)</p><table>
+        <tr><td>Three Months Ended</td><td colspan="2"></td></tr>
+        <tr><td></td><td>November 1, 2026</td><td>November 2, 2025</td></tr>
+        <tr><td>Net sales</td><td>43,398</td><td>41,352</td></tr>
+        <tr><td>Gross profit</td><td>14,220</td><td>13,815</td></tr>
+        <tr><td>Selling, general and administrative</td><td>7,892</td><td>7,636</td></tr>
+        <tr><td>Operating income</td><td>5,479</td><td>5,353</td></tr>
+        <tr><td>Net earnings</td><td>3,713</td><td>3,600</td></tr>
+        </table>"""
+        partition = """<table>
+        <tr><td>Three Months Ended (in millions)</td><td>November 1, 2026</td><td>November 2, 2025</td></tr>
+        <tr><td>Net sales – products</td><td>41,901</td><td>39,874</td></tr>
+        <tr><td>Net sales – services</td><td>1,497</td><td>1,478</td></tr>
+        <tr><td>Net sales</td><td>43,398</td><td>41,352</td></tr>
+        </table>"""
+        company = {'id': 'home-depot'}
+        current = parse_release(statement, company, release_url, release_date)['2026Q4']
+        opex = current['officialOpexBreakdown'][0]
+        self.assertEqual(opex['filingDate'], release_date)
+        # Cached 8-K rows written before this fix carry only the document URL.
+        del opex['filingDate']
+        current['automaticEarnings'] = {'form': '8-K', 'filingDate': release_date}
+        previous = {'revenueBn': 40, 'netIncomeBn': 3, 'officialRevenueSegments': [
+            {'name': 'Products', 'memberKey': 'products', 'valueBn': 38},
+            {'name': 'Services', 'memberKey': 'services', 'valueBn': 2},
+        ]}
+        payload = {'id': 'home-depot', 'financials': {'2026Q3': previous, '2026Q4': current}}
+        documents = [(filing_url, statement + partition, filing_date)]
+        for bad_source in ({'sourceUrl': 'https://example.test/undated'}, {'filingDate': '2026-10-30'}):
+            with self.subTest(bad_source=bad_source):
+                invalid = copy.deepcopy(payload)
+                bad_row = invalid['financials']['2026Q4']['officialOpexBreakdown'][0]
+                bad_row.update(bad_source)
+                complete_current_chart(invalid, company, documents=documents)
+                self.assertIn('unverified current-quarter source in officialOpexBreakdown', chart_issues(invalid))
+
+        vendor = copy.deepcopy(payload)
+        vendor_entry = vendor['financials']['2026Q4']
+        vendor_entry['statementSource'] = 'stockanalysis'
+        vendor_entry['statementSourceUrl'] = 'https://example.test/vendor'
+        vendor_entry['officialOpexBreakdown'][0]['sourceUrl'] = vendor_entry['statementSourceUrl']
+        complete_current_chart(vendor, company, documents=documents)
+        self.assertIn('unverified current-quarter source in officialOpexBreakdown', chart_issues(vendor))
+
+        complete_current_chart(payload, company, documents=documents)
+        self.assertEqual(current['statementSourceUrl'], filing_url)
+        self.assertEqual(current['statementFilingDate'], filing_date)
+        self.assertEqual(current['statementAccession'], '0001628280-26-075287')
+        self.assertEqual([(row['valueBn'], row['filingDate']) for row in current['officialRevenueSegments']],
+                         [(41.901, filing_date), (1.497, filing_date)])
+        self.assertEqual((opex['valueBn'], opex['sourceUrl'], opex['filingDate']), (7.892, release_url, release_date))
+        watch.validate_refresh({'companyId': 'home-depot', 'remoteQuarter': '2026Q4'}, payload)
+
     def test_8k_without_revenue_detail_waits_for_exact_period_filing(self):
         from datetime import date
         from release_chart_completion import complete_current_chart
