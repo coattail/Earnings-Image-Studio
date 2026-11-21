@@ -8,7 +8,7 @@ from copy import deepcopy
 from io import BytesIO
 import re
 
-from release_chart_quality import key, finite, previous_entry, chart_issues
+from release_chart_quality import key, finite, previous_entry, chart_issues, preserve_statement_row_filing_dates
 
 # Names describe disclosure schemas, not quarter-specific amounts.
 ALIASES = {
@@ -496,6 +496,8 @@ def complete_current_chart(payload, company, *, documents=None, require_filing_d
     quarter=max(payload.get('financials',{}),default='')
     if not quarter: return payload
     entry=payload['financials'][quarter]
+    # Legacy cached releases omit row dates when the row and statement share a document.
+    preserve_statement_row_filing_dates(entry)
     entry.pop('chartCompletionAwaitingStatutoryFiling', None)
     attempts=[]
     def apply_document(html,url,filed=None):

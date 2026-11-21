@@ -34,6 +34,23 @@ def previous_entry(payload, quarter):
     previous = complete or previous
     return financials[max(previous)] if previous else {}
 
+def preserve_statement_row_filing_dates(entry):
+    """Keep the original document date when the statement source changes."""
+    if entry.get('statementSource') not in {'official-earnings-release', 'official-ir-earnings-release'}:
+        return
+    source = entry.get('statementSourceUrl')
+    filed = entry.get('statementFilingDate')
+    period_end = entry.get('periodEnd')
+    if not (source and filed and period_end and period_end <= filed):
+        return
+    for field in FIELDS:
+        rows = entry.get(field)
+        if not isinstance(rows, list):
+            continue
+        for row in rows:
+            if isinstance(row, dict) and row.get('sourceUrl') == source and not row.get('filingDate'):
+                row['filingDate'] = filed
+
 def chart_issues(payload, quarter=None):
     financials = payload.get('financials', {})
     if not financials:
