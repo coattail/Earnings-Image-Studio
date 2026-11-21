@@ -4,7 +4,7 @@
   "nameZh": "家得宝",
   "nameEn": "Home Depot",
   "slug": "hd",
-  "rank": 33,
+  "rank": 31,
   "isAdr": false,
   "brand": {
     "primary": "#F96302",
@@ -45,7 +45,8 @@
     "2025Q3",
     "2025Q4",
     "2026Q1",
-    "2026Q3"
+    "2026Q3",
+    "2026Q4"
   ],
   "financials": {
     "2018Q1": {
@@ -5543,6 +5544,141 @@
       "displayScaleFactor": 1,
       "officialRevenueTaxonomyChangedFromPriorYear": true,
       "statementAccession": "0001628280-26-058715"
+    },
+    "2026Q4": {
+      "calendarQuarter": "2026Q4",
+      "periodEnd": "2026-11-01",
+      "fiscalYear": "2026",
+      "fiscalQuarter": "Q3",
+      "fiscalLabel": "FY2026 Q3",
+      "statementCurrency": "USD",
+      "revenueBn": 43.398,
+      "revenueYoyPct": 4.948,
+      "costOfRevenueBn": 29.178,
+      "grossProfitBn": 14.22,
+      "sgnaBn": 7.892,
+      "rndBn": null,
+      "otherOpexBn": 0.849,
+      "operatingExpensesBn": 8.741,
+      "operatingIncomeBn": 5.479,
+      "nonOperatingBn": -0.528,
+      "pretaxIncomeBn": 4.951,
+      "taxBn": 1.238,
+      "netIncomeBn": 3.713,
+      "netIncomeYoyPct": null,
+      "grossMarginPct": 32.766487,
+      "operatingMarginPct": 12.625006,
+      "profitMarginPct": 8.555694,
+      "effectiveTaxRatePct": null,
+      "revenueQoqPct": -9.325,
+      "grossMarginYoyDeltaPp": -0.642,
+      "operatingMarginYoyDeltaPp": -0.32,
+      "profitMarginYoyDeltaPp": -0.152,
+      "statementSource": "official-earnings-release",
+      "statementSourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000162828026075287/hd-20261101.htm",
+      "statementFilingDate": "2026-11-20",
+      "statementSpanQuarters": 1,
+      "statementValueMode": "reported",
+      "officialOpexBreakdown": [
+        {
+          "name": "Selling, general and administrative",
+          "nameZh": "销售、一般及行政",
+          "valueBn": 7.892,
+          "valueFormat": "negative-parentheses",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495026000184/hd_exhibit991x11012026.htm",
+          "filingDate": "2026-11-17"
+        }
+      ],
+      "statementFiscalPeriodSource": "official-heading",
+      "parserFinancialFieldSources": {
+        "revenueBn": "official",
+        "operatingIncomeBn": "official",
+        "netIncomeBn": "official"
+      },
+      "parserFinancialValidation": {
+        "status": "high",
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495026000184/hd_exhibit991x11012026.htm"
+      },
+      "automaticEarnings": {
+        "filingDate": "2026-11-17",
+        "accession": "0000354950-26-000184",
+        "form": "8-K"
+      },
+      "statementAccession": "0001628280-26-075287",
+      "officialRevenueSegments": [
+        {
+          "name": "Products",
+          "nameZh": "产品",
+          "memberKey": "products",
+          "valueBn": 41.901,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000162828026075287/hd-20261101.htm",
+          "filingDate": "2026-11-20",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 96.6,
+          "qoqPct": -9.5
+        },
+        {
+          "name": "Services",
+          "nameZh": "服务",
+          "memberKey": "services",
+          "valueBn": 1.497,
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000162828026075287/hd-20261101.htm",
+          "filingDate": "2026-11-20",
+          "sourceForm": "official current-period disclosure",
+          "mixPct": 3.4,
+          "qoqPct": -4.1
+        }
+      ],
+      "revenueClassificationSourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000162828026075287/hd-20261101.htm",
+      "revenueClassificationSource": "official-complete-table",
+      "chartCompletionAttempts": [
+        {
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495026000184/hd_exhibit991x11012026.htm",
+          "remainingIssues": [
+            "missing current-quarter revenue classification",
+            "missing previously disclosed revenue categories: products,services"
+          ]
+        },
+        {
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000035495026000184/hd-20261117.htm",
+          "remainingIssues": [
+            "missing current-quarter revenue classification",
+            "missing previously disclosed revenue categories: products,services"
+          ]
+        },
+        {
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/354950/000162828026075287/hd-20261101.htm",
+          "remainingIssues": []
+        }
+      ],
+      "displayCurrency": "USD",
+      "displayScaleFactor": 1,
+      "officialRevenueTaxonomyChangedFromPreviousQuarter": false,
+      "officialRevenueTaxonomyChangedFromPriorYear": true,
+      "sankeyStructureContinuity": {
+        "sourceQuarter": "2026Q3",
+        "fields": [
+          "officialRevenueSegments"
+        ],
+        "rule": "same-normalized-category-set"
+      },
+      "chartQuality": {
+        "version": 3,
+        "quarter": "2026Q4",
+        "status": "ready",
+        "issues": [],
+        "requiredMarginComparisons": [
+          "grossMarginYoyDeltaPp",
+          "operatingMarginYoyDeltaPp",
+          "profitMarginYoyDeltaPp"
+        ],
+        "requiredDetailParents": [],
+        "requiredSegmentKeys": [
+          "products",
+          "services"
+        ],
+        "requiredDetailMembers": {}
+      }
     }
   },
   "statementSource": "official-sec-companyfacts",
@@ -7876,7 +8012,7 @@
       "overallConfidenceScore": 1.0,
       "financialConfidenceScore": 1.0,
       "structuralConfidenceScore": 1.0,
-      "revenueSegmentChecks": 1,
+      "revenueSegmentChecks": 2,
       "revenueSegmentMismatchCount": 0,
       "revenueSegmentSkippedChecks": 23,
       "detailGroupChecks": 0,
@@ -7891,24 +8027,24 @@
   },
   "statementPresets": {},
   "coverage": {
-    "quarterCount": 34,
+    "quarterCount": 35,
     "pixelReplicaQuarterCount": 0,
     "hasPixelReplica": false,
-    "officialFinancialQuarterCount": 34,
-    "officialSegmentQuarterCount": 31,
-    "officialExpenseQuarterCount": 1,
+    "officialFinancialQuarterCount": 35,
+    "officialSegmentQuarterCount": 32,
+    "officialExpenseQuarterCount": 2,
     "classification": {
       "status": "ok",
-      "latestQuarter": "2026Q3",
+      "latestQuarter": "2026Q4",
       "latestQuarterHasRevenueClassification": true,
       "latestQuarterHasExpenseClassification": true,
-      "latestRevenueClassificationQuarter": "2026Q3",
-      "latestExpenseClassificationQuarter": "2026Q3",
+      "latestRevenueClassificationQuarter": "2026Q4",
+      "latestExpenseClassificationQuarter": "2026Q4",
       "latestStructureHistoryQuarter": "2024Q2",
-      "revenueClassificationQuarterCount": 31,
-      "expenseClassificationQuarterCount": 1,
-      "revenueClassificationCoverageRatio": 0.9118,
-      "expenseClassificationCoverageRatio": 0.0294,
+      "revenueClassificationQuarterCount": 32,
+      "expenseClassificationQuarterCount": 2,
+      "revenueClassificationCoverageRatio": 0.9143,
+      "expenseClassificationCoverageRatio": 0.0571,
       "latestRevenueClassificationLagQuarters": 0,
       "latestExpenseClassificationLagQuarters": 0,
       "warnings": [],
@@ -7952,7 +8088,7 @@
         "overallConfidenceScore": 1.0,
         "financialConfidenceScore": 1.0,
         "structuralConfidenceScore": 1.0,
-        "revenueSegmentChecks": 1,
+        "revenueSegmentChecks": 2,
         "revenueSegmentMismatchCount": 0,
         "revenueSegmentSkippedChecks": 23,
         "detailGroupChecks": 0,
@@ -7966,9 +8102,9 @@
       }
     }
   },
-  "marketCapUsd": 328439431168,
-  "marketCapAsOf": "2026-10-31",
-  "marketCapSourceRank": 44,
+  "marketCapUsd": 338256691200,
+  "marketCapAsOf": "2026-11-21",
+  "marketCapSourceRank": 40,
   "marketCapSource": "CompaniesMarketCap",
   "marketCapSourceUrl": "https://companiesmarketcap.com/home-depot/marketcap/"
 }
