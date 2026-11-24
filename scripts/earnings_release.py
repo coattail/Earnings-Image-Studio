@@ -11,9 +11,11 @@ import math
 import re
 from datetime import date, datetime, timedelta
 from pathlib import Path
+from urllib.error import HTTPError
 from urllib.parse import urljoin, urlparse, unquote
 from bs4 import BeautifulSoup
 from pypdf import PdfReader
+from requests import HTTPError as RequestsHTTPError
 from official_segments import _request, _request_json, _resolve_cik
 from official_financials import _extract_html_tables
 from generic_filing_table_parser import _period_entries_from_table
@@ -28,6 +30,13 @@ CORE = ("revenueBn", "operatingIncomeBn", "netIncomeBn")
 MAX_EARNINGS_EXHIBITS = 12
 
 
+def _declared_exhibit_links(html: str, *, allow_number=False):
+    exhibit = r"(?:EX-99|99)(?:\.\d+)?" if allow_number else r"EX-99(?:\.\d+)?"
+    for row in BeautifulSoup(html, 'html.parser').find_all('tr'):
+        if any(re.fullmatch(exhibit, cell.get_text(strip=True), re.I) for cell in row.find_all(['td', 'th'])):
+            yield from (link['href'] for link in row.find_all('a', href=True))
+
+
 def earnings_exhibit_names(index: dict, manifest: str = '', primary_document: str = '') -> list[str]:
     """Prefer SEC document types, with a bounded filename-independent fallback.
 
@@ -40,14 +49,10 @@ def earnings_exhibit_names(index: dict, manifest: str = '', primary_document: st
                  and not re.search(r'-index(?:-headers)?\.html?$|^R\d+\.htm$|^FilingSummary', item['name'], re.I)
                  and item['name'] != primary_document}
     declared = []
-    for row in BeautifulSoup(manifest, 'html.parser').find_all('tr') if manifest else []:
-        cells = row.find_all(['td', 'th'])
-        if not any(re.fullmatch(r'EX-99(?:\.\d+)?', cell.get_text(strip=True), re.I) for cell in cells):
-            continue
-        for link in row.find_all('a', href=True):
-            name = unquote(urlparse(link['href']).path.rsplit('/', 1)[-1])
-            if name in available and name not in declared:
-                declared.append(name)
+    for href in _declared_exhibit_links(manifest):
+        name = unquote(urlparse(href).path.rsplit('/', 1)[-1])
+        if name in available and name not in declared:
+            declared.append(name)
     named = sorted(available - set(declared), key=lambda name: (
         not bool(re.search(r'ex(?:hibit)?[._-]?99|earn|result|press|financial|commentary|q[1-4]fy\d+pr', name, re.I)),
         '99' not in name, name))
@@ -66,6 +71,19 @@ def filing_exhibit_names(base: str, index: dict, primary_document: str = '', dia
             if diagnostics is not None:
                 diagnostics.append(dict(sourceUrl=base + manifest_name, error=str(error)))
     return earnings_exhibit_names(index, manifest, primary_document)
+
+
+def _exhibits_from_primary_filing(base, primary, form):
+    if not re.fullmatch(r"[\w.-]+\.html?", primary, re.I):
+        return []
+    filing = _request(base + primary).decode("utf-8", errors="replace")
+    names = [] if form == "8-K" else [primary]
+    for href in _declared_exhibit_links(filing, allow_number=True):
+        url = urljoin(base, href)
+        name = url.removeprefix(base)
+        if re.fullmatch(r"[\w.-]+\.(?:html?|pdf)", name, re.I) and name != primary and name not in names:
+            names.append(name)
+    return names[:MAX_EARNINGS_EXHIBITS]
 
 
 def complete_quarter(entry: dict, company_id: str = "") -> bool:
@@ -261,12 +279,23 @@ def discover_release(company: dict, local: dict | None = None, *, expected_filin
             if saved.get("accession") == accession and saved.get("_cacheVersion") == VERSION and plausible(saved.get("entry", {}), existing):
                 return saved
         base = f"https://www.sec.gov/Archives/edgar/data/{int(cik)}/{accession.replace('-', '')}/"
-        index = _request_json(base + "index.json")
         document_errors = []
         primary = (recent.get('primaryDocument') or [''] * len(recent['form']))[i]
         # A 6-K may contain the financial statements in its primary document;
         # unlike an 8-K wrapper, that document must remain a parse candidate.
-        names = filing_exhibit_names(base, index, primary if form == '8-K' else '', document_errors)
+        try:
+            index = _request_json(base + "index.json")
+        except (HTTPError, RequestsHTTPError) as error:
+            status = getattr(error, "code", None) or getattr(getattr(error, "response", None), "status_code", None)
+            if status != 404:
+                raise
+            # EDGAR can serve the filing before its directory JSON is visible.
+            # Use the exhibit links declared by that same accession.
+            names = _exhibits_from_primary_filing(base, primary, form)
+            if not names:
+                raise
+        else:
+            names = filing_exhibit_names(base, index, primary if form == '8-K' else '', document_errors)
         partials = []
         for name in names:
             url = base + name
