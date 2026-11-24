@@ -183,8 +183,8 @@ class PeriodAndProvenanceTests(unittest.TestCase):
         recent = dict(form=['10-Q'], reportDate=['2026-10-01'], filingDate=['2026-11-18'],
                       accessionNumber=['0000354950-26-000185'], primaryDocument=['hd.htm'])
         with patch('official_segments._request', return_value=b'<p>Earnings release</p>') as request, \
-             patch('official_segments._request_json', side_effect=lambda source: {'filings': {'recent': recent}}
-                   if 'submissions' in source else {'directory': {'item': []}}), \
+             patch('earnings_release._request_json', return_value={'directory': {'item': []}}), \
+             patch('official_segments._request_json', return_value={'filings': {'recent': recent}}), \
              patch.object(watch, 'date', FilingWeek):
             complete_current_chart(payload, {'id': 'home-depot', 'cik': 354950})
             request.assert_called_once_with(url)

@@ -36,7 +36,7 @@ class NvidiaReleaseCompletionTests(unittest.TestCase):
         responses = {STATEMENT:(ROOT / 'tests/fixtures/nvidia-fy2027-q3-supplement.html').read_bytes(),
                      CFO:(ROOT / 'tests/fixtures/nvidia-fy2027-q3-cfo.html').read_bytes()}
         with patch('official_segments._request', side_effect=lambda url:responses[url]) as request, \
-             patch('official_segments._request_json', return_value=index) as request_json:
+             patch('earnings_release._request_json', return_value=index) as request_json:
             complete_current_chart(payload, {'id':'nvidia','cik':1045810})
         request_json.assert_called_once_with(BASE + 'index.json')
         self.assertEqual([call.args[0] for call in request.call_args_list], [STATEMENT, CFO])
