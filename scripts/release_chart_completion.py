@@ -561,13 +561,12 @@ def complete_current_chart(payload, company, *, documents=None, require_filing_d
         if chart_issues(payload):
             # The statement and revenue classifications may be separate
             # exhibits of the SAME earnings 8-K, ahead of the statutory 10-Q.
-            from earnings_release import filing_exhibit_names
+            from earnings_release import discover_filing_exhibits
             match = re.match(r'(https://www\.sec\.gov/Archives/edgar/data/\d+/\d{18}/)', url)
             if match and (entry.get('automaticEarnings') or {}).get('form') in {'8-K', '6-K'}:
                 base = match[1]
                 try:
-                    index = _request_json(base + 'index.json')
-                    for name in filing_exhibit_names(base, index, diagnostics=attempts):
+                    for name in discover_filing_exhibits(base, diagnostics=attempts):
                         companion = base + name
                         if companion == url: continue
                         try:

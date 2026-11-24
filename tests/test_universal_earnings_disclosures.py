@@ -8,6 +8,7 @@ import sys
 import tempfile
 import unittest
 from unittest.mock import patch
+from urllib.error import HTTPError
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
@@ -65,7 +66,6 @@ class UniversalDisclosureTests(unittest.TestCase):
         self.assertEqual(len(result['documentWarnings']),2)
 
     def test_missing_edgar_directory_uses_same_accession_8k_exhibit(self):
-        from urllib.error import HTTPError
         from requests import HTTPError as RequestsHTTPError, Response
 
         accession = '0001585521-26-000170'
@@ -99,6 +99,53 @@ class UniversalDisclosureTests(unittest.TestCase):
                 self.assertEqual(result['entry']['statementSourceUrl'], exhibit)
                 self.assertEqual(result['entry']['revenueBn'], 1.2)
                 self.assertEqual([call.args[0] for call in request.call_args_list], [primary, exhibit])
+
+    def test_chart_completion_finds_companion_when_edgar_directory_is_missing(self):
+        fixtures = json.loads((ROOT / 'tests/fixtures/automatic-release-classifications.json').read_text())
+        fixture = next(item for item in fixtures if item['company'] == 'jpmorgan')
+        companion, html, filed = fixture['documents'][0]
+        base = companion.rsplit('/', 1)[0] + '/'
+        source = base + 'release.htm'
+        primary = base + 'jpm-20261013.htm'
+        accession = '0001628280-26-065582'
+        entry = fixture['payload']['financials'][max(fixture['payload']['financials'])]
+        entry.update(statementSourceUrl=source, statementFilingDate=filed,
+                     automaticEarnings={'form': '8-K', 'accession': accession})
+        wrapper = f'''<table>
+        <tr><td>99.1</td><td><a href="{source}">Press release</a></td></tr>
+        <tr><td>99.2</td><td><a href="{companion}">Financial supplement</a></td></tr>
+        </table>'''
+        documents = {source: b'<html></html>', primary: wrapper.encode(), companion: html.encode()}
+        submissions = 'https://data.sec.gov/submissions/CIK0000019617.json'
+        calls = []
+
+        def metadata(url):
+            calls.append(url)
+            if url == base + 'index.json':
+                raise HTTPError(url, 404, 'Not Found', None, None)
+            self.assertEqual(url, submissions)
+            return {'filings': {'recent': dict(form=['8-K', '8-K'],
+                accessionNumber=['0001628280-26-065583', accession],
+                primaryDocument=['unrelated.htm', 'jpm-20261013.htm'])}}
+
+        with patch('official_segments._request', side_effect=documents.__getitem__) as request, \
+             patch.object(release, '_request', side_effect=documents.__getitem__) as wrapper_request, \
+             patch.object(release, '_request_json', side_effect=metadata):
+            complete_current_chart(fixture['payload'], {'cik': 19617})
+
+        self.assertEqual(chart_issues(fixture['payload']), [])
+        self.assertEqual(calls, [base + 'index.json', submissions])
+        wrapper_request.assert_called_once_with(primary)
+        self.assertEqual([call.args[0] for call in request.call_args_list], [source, companion])
+
+    def test_edgar_directory_outage_is_reported(self):
+        base = 'https://www.sec.gov/Archives/edgar/data/1585521/000158552126000170/'
+        failure = HTTPError(base + 'index.json', 503, 'Unavailable', None, None)
+        with patch.object(release, '_request_json', side_effect=failure) as request:
+            with self.assertRaises(HTTPError) as caught:
+                release.discover_filing_exhibits(base)
+        self.assertIs(caught.exception, failure)
+        request.assert_called_once_with(base + 'index.json')
 
     def test_foreign_issuer_primary_6k_statement_is_not_excluded(self):
         recent=dict(form=['6-K'],filingDate=['2026-11-02'],accessionNumber=['0000000001-26-000001'],primaryDocument=['opaque.htm'])

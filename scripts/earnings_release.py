@@ -86,6 +86,40 @@ def _exhibits_from_primary_filing(base, primary, form):
     return names[:MAX_EARNINGS_EXHIBITS]
 
 
+def _primary_earnings_filing(base: str) -> tuple[str, str]:
+    match = re.fullmatch(r'https://www\.sec\.gov/Archives/edgar/data/(\d+)/(\d{10})(\d{2})(\d{6})/', base)
+    if not match:
+        return '', ''
+    cik, *accession_parts = match.groups()
+    accession = '-'.join(accession_parts)
+    url = f'https://data.sec.gov/submissions/CIK{int(cik):010d}.json'
+    recent = _request_json(url)['filings']['recent']
+    for number, primary, form in zip(recent.get('accessionNumber', []),
+                                     recent.get('primaryDocument', []), recent.get('form', [])):
+        if number == accession and form in {'8-K', '6-K'}:
+            return primary, form
+    return '', ''
+
+
+def discover_filing_exhibits(base: str, primary_document: str | None = None, form: str = '',
+                             diagnostics: list | None = None) -> list[str]:
+    """Find earnings attachments even if EDGAR has not exposed the directory yet."""
+    try:
+        index = _request_json(base + 'index.json')
+    except (HTTPError, RequestsHTTPError) as error:
+        status = getattr(error, 'code', None) or getattr(getattr(error, 'response', None), 'status_code', None)
+        if status != 404:
+            raise
+        if primary_document is None:
+            primary_document, form = _primary_earnings_filing(base)
+        names = _exhibits_from_primary_filing(base, primary_document, form)
+        if not names:
+            raise
+        return names
+    # A 6-K may contain the financial statements in its primary document.
+    return filing_exhibit_names(base, index, (primary_document or '') if form == '8-K' else '', diagnostics)
+
+
 def complete_quarter(entry: dict, company_id: str = "") -> bool:
     # Not every issuer discloses a GAAP operating-income subtotal. Publish
     # reported revenue/earnings first; leave undisclosed intermediate nodes null.
@@ -281,21 +315,7 @@ def discover_release(company: dict, local: dict | None = None, *, expected_filin
         base = f"https://www.sec.gov/Archives/edgar/data/{int(cik)}/{accession.replace('-', '')}/"
         document_errors = []
         primary = (recent.get('primaryDocument') or [''] * len(recent['form']))[i]
-        # A 6-K may contain the financial statements in its primary document;
-        # unlike an 8-K wrapper, that document must remain a parse candidate.
-        try:
-            index = _request_json(base + "index.json")
-        except (HTTPError, RequestsHTTPError) as error:
-            status = getattr(error, "code", None) or getattr(getattr(error, "response", None), "status_code", None)
-            if status != 404:
-                raise
-            # EDGAR can serve the filing before its directory JSON is visible.
-            # Use the exhibit links declared by that same accession.
-            names = _exhibits_from_primary_filing(base, primary, form)
-            if not names:
-                raise
-        else:
-            names = filing_exhibit_names(base, index, primary if form == '8-K' else '', document_errors)
+        names = discover_filing_exhibits(base, primary, form, diagnostics=document_errors)
         partials = []
         for name in names:
             url = base + name
