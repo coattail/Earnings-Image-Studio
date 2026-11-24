@@ -64,6 +64,42 @@ class UniversalDisclosureTests(unittest.TestCase):
         self.assertEqual(result['entry']['revenueBn'],1.2)
         self.assertEqual(len(result['documentWarnings']),2)
 
+    def test_missing_edgar_directory_uses_same_accession_8k_exhibit(self):
+        from urllib.error import HTTPError
+        from requests import HTTPError as RequestsHTTPError, Response
+
+        accession = '0001585521-26-000170'
+        base = 'https://www.sec.gov/Archives/edgar/data/1585521/000158552126000170/'
+        primary = base + 'zm-20261123.htm'
+        exhibit = base + 'zm-20261031ex991.htm'
+        recent = dict(form=['8-K'], items=['2.02,9.01'], filingDate=['2026-11-23'],
+                      accessionNumber=[accession], primaryDocument=['zm-20261123.htm'])
+        wrapper = f'''<table>
+        <tr><td>99.1</td><td><a href="{exhibit}">External link canonicalized by EDGAR</a></td></tr>
+        <tr><td>99.2</td><td><a href="../000158552126000119/other.htm">Different accession</a></td></tr>
+        <tr><td>99.3</td><td><a href="https://example.test/exhibit.htm">Different host</a></td></tr>
+        </table>'''.encode()
+        response = Response()
+        response.status_code = 404
+        failures = [HTTPError(base + 'index.json', 404, 'Not Found', None, None),
+                    RequestsHTTPError('Not Found', response=response)]
+        for error in failures:
+            def metadata(url):
+                if url.endswith('index.json'):
+                    raise error
+                return {'filings': {'recent': recent}}
+
+            documents = {primary: wrapper, exhibit: statement().replace('September 27', 'October 31').encode()}
+            with self.subTest(error=type(error).__name__), tempfile.TemporaryDirectory() as directory, \
+                 patch.object(release, 'CACHE', Path(directory)), patch.object(release, '_request_json', side_effect=metadata), \
+                 patch.object(release, '_request', side_effect=documents.__getitem__) as request:
+                result = release.discover_release({'id': 'zoom', 'ticker': 'ZM', 'cik': 1585521},
+                                                  expected_filing_date='2026-11-23')
+                self.assertEqual(result['quarter'], '2026Q4')
+                self.assertEqual(result['entry']['statementSourceUrl'], exhibit)
+                self.assertEqual(result['entry']['revenueBn'], 1.2)
+                self.assertEqual([call.args[0] for call in request.call_args_list], [primary, exhibit])
+
     def test_foreign_issuer_primary_6k_statement_is_not_excluded(self):
         recent=dict(form=['6-K'],filingDate=['2026-11-02'],accessionNumber=['0000000001-26-000001'],primaryDocument=['opaque.htm'])
         index={'directory':{'item':[{'name':'opaque.htm'}]}}
