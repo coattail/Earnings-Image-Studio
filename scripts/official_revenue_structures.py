@@ -2625,7 +2625,7 @@ def _quarterly_title_for_quarter(quarter: str) -> str:
     return f"Xiaomi {quarter} Results Announcement"
 
 
-def _parse_xiaomi_quarter_item(quarter: str, source_url: str) -> tuple[str, dict[str, Any], dict[str, Any]] | None:
+def _parse_xiaomi_quarter_item(quarter: str, source_url: str, *, text: str | None = None) -> tuple[str, dict[str, Any], dict[str, Any]] | None:
     if not quarter or not source_url:
         return None
 
@@ -2661,7 +2661,8 @@ def _parse_xiaomi_quarter_item(quarter: str, source_url: str) -> tuple[str, dict
         ("Administrative expenses", "General and administrative", "generalandadministrative"),
         ("Research and development expenses", "Research and development", "researchanddevelopment"),
     ]
-    text = _extract_pdf_text_fast(source_url)
+    if text is None:
+        text = _extract_pdf_text_fast(source_url)
     uses_hybrid_segment_schema = _period_key(quarter) >= _period_key("2024Q2")
     prefer_narrative_standard_q4 = not uses_hybrid_segment_schema and str(quarter).endswith("Q4")
     table_revenue_aliases = {

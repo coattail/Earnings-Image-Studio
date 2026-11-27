@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
 from earnings_release import parse_release
 from official_revenue_structures import XIAOMI_QUARTERLY_PDF_URLS, _parse_xiaomi_quarter_item
-from release_chart_completion import complete_current_chart
+from release_chart_completion import complete_current_chart, enrich_pdf_partition
 from release_chart_quality import chart_issues, chart_fingerprint
 from verify_earnings_deployment import fingerprint
 from sankey_statement_backfill import parse_inline_statements
@@ -49,6 +49,11 @@ class ReleaseComparativeTests(unittest.TestCase):
         self.assertTrue(data['segments'][1]['name'].startswith('NEV'))
         self.assertEqual([row['valueBn'] for row in data['detailGroups']], [45.579, 27.153, 9.45, 1.174])
         self.assertEqual([row['valueBn'] for row in data['costBreakdown']], [41.397, 21.263, 2.478, 1.189, 19.299])
+        entry = {'revenueBn': 107.239525}
+        enrich_pdf_partition({'id': 'xiaomi', 'financials': {'2026Q3': entry}}, None, url, pages=[text])
+        self.assertEqual(entry['officialRevenueSegments'], data['segments'])
+        self.assertEqual(entry['officialRevenueDetailGroups'], data['detailGroups'])
+        self.assertEqual(entry['officialCostBreakdown'], data['costBreakdown'])
 
     def test_native_columns_exclude_dollar_translations_and_preserve_actual_quarter_dates(self):
         html = (ROOT / 'tests/fixtures/netease-q2-2026-release.html').read_text()

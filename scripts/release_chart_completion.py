@@ -77,6 +77,22 @@ def enrich_pdf_partition(payload, content, url, *, pages=None):
         from pypdf import PdfReader
         pages = [page.extract_text() for page in PdfReader(BytesIO(content)).pages]
     quarter=max(payload['financials']);entry=payload['financials'][quarter];cid=payload['id']
+    if cid == 'xiaomi':
+        from official_revenue_structures import XIAOMI_QUARTERLY_PDF_URLS, _parse_xiaomi_quarter_item
+        if XIAOMI_QUARTERLY_PDF_URLS.get(quarter) == url:
+            parsed = _parse_xiaomi_quarter_item(quarter, url, text='\n'.join(page or '' for page in pages))
+            if parsed:
+                _, structure, _ = parsed
+                if matches_total(sum(row['valueBn'] for row in structure['segments']), entry.get('revenueBn')):
+                    for source, target in (
+                        ('segments', 'officialRevenueSegments'), ('detailGroups', 'officialRevenueDetailGroups'),
+                        ('costBreakdown', 'officialCostBreakdown'), ('opexBreakdown', 'officialOpexBreakdown'),
+                    ):
+                        if structure.get(source):
+                            entry[target] = structure[source]
+                    entry['revenueClassificationSource'] = 'official-complete-table'
+                    entry['revenueClassificationSourceUrl'] = url
+                    return payload
     if cid=='samsung':
         from earnings_release import samsung_statement
         from sankey_statement_backfill import complete_statement
