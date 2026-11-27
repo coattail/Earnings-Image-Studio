@@ -159,6 +159,7 @@ XIAOMI_QUARTERLY_PDF_URLS: dict[str, str] = {
     "2025Q4": "https://ir.mi.com/system/files-encrypted/nasdaq_kms/assets/2026/03/24/5-35-03/25Q4%20EN%20AC%20Xiaomi.pdf",
     "2026Q1": "https://ir.mi.com/static-files/098acc43-1b58-4d1b-b375-9ea25f35477b",
     "2026Q2": "https://ir.mi.com/static-files/4a85fc36-8a6d-4c24-b45b-b18d5d162e6c",
+    "2026Q3": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/1124/2026112400538.pdf",
 }
 
 SEGMENT_CACHE_HIERARCHY_CONFIGS: dict[str, dict[str, Any]] = {
@@ -1436,7 +1437,10 @@ def _extract_tencent_growth_metrics(text: str, label: str, *, prefix: str | None
 
 
 def _extract_date_from_url(url: str) -> str:
-    match = re.search(r"/(20\d{2})/(\d{2})/(\d{2})/", str(url or ""))
+    url = str(url or "")
+    match = re.search(r"/(20\d{2})/(\d{2})/(\d{2})/", url) or re.search(
+        r"^https://www1?\.hkexnews\.hk/listedco/listconews/sehk/(20\d{2})/(\d{2})(\d{2})/", url
+    )
     if not match:
         return ""
     return f"{match.group(1)}-{match.group(2)}-{match.group(3)}"
@@ -2165,38 +2169,43 @@ def _xiaomi_table_section_patterns(
                 re.compile(r"cost\s+of\s+sales\s+by\s+line\s+of\s+business", re.IGNORECASE),
             ])
         return (start_patterns, [re.compile(r"Gross\s+Profit\s+and\s+Margin", re.IGNORECASE)])
-    if normalized_kind == "segment-revenue":
+    if normalized_kind in {"segment-revenue", "segment-cost"}:
+        metric = r"revenue" if normalized_kind == "segment-revenue" else r"cost\s+of\s+sales"
+        table = rf"{metric}\s+by\s+segment"
         start_patterns = []
         if quarter_pattern:
             start_patterns.extend([
-                re.compile(rf"The\s+following\s+table\s+sets\s+forth\s+our\s+revenue\s+by\s+segment\s+in\s+the\s+{quarter_pattern}", re.IGNORECASE),
-                re.compile(rf"revenue\s+by\s+segment\s+in\s+the\s+{quarter_pattern}", re.IGNORECASE),
+                re.compile(rf"The\s+following\s+table\s+sets\s+forth\s+our\s+{table}\s+in\s+the\s+{quarter_pattern}", re.IGNORECASE),
+                re.compile(rf"{table}\s+in\s+the\s+{quarter_pattern}", re.IGNORECASE),
             ])
         if include_generic or not start_patterns:
             start_patterns.extend([
-                re.compile(r"The\s+following\s+table\s+sets\s+forth\s+our\s+revenue\s+by\s+segment", re.IGNORECASE),
-                re.compile(r"revenue\s+by\s+segment", re.IGNORECASE),
+                re.compile(rf"The\s+following\s+table\s+sets\s+forth\s+our\s+{table}", re.IGNORECASE),
+                re.compile(table, re.IGNORECASE),
             ])
-        return (start_patterns, [re.compile(r"revenue\s+by\s+line\s+of\s+our\s+smartphone\s*(?:×|x)\s*aiot\s+segment", re.IGNORECASE)])
-    if normalized_kind == "segment-detail-revenue":
+        return (start_patterns, [re.compile(rf"{metric}\s+by\s+line\s+of\s+our\s+smartphone\s*(?:×|x)\s*aiot\s+segment", re.IGNORECASE)])
+    if normalized_kind in {"segment-detail-revenue", "segment-detail-cost"}:
+        metric = r"revenue" if normalized_kind == "segment-detail-revenue" else r"cost\s+of\s+sales"
+        target = r"smartphone\s*(?:×|x)\s*aiot\s+segment"
+        table = rf"{metric}\s+by\s+line\s+of\s+our\s+{target}"
         start_patterns = []
         if quarter_pattern:
             start_patterns.extend([
                 re.compile(
-                    rf"The\s+following\s+table\s+sets\s+forth\s+our\s+revenue\s+by\s+line\s+of\s+our\s+smartphone\s*(?:×|x)\s*aiot\s+segment\s+in\s+the\s+{quarter_pattern}",
+                    rf"The\s+following\s+table\s+sets\s+forth\s+our\s+{table}\s+in\s+the\s+{quarter_pattern}",
                     re.IGNORECASE,
                 ),
                 re.compile(
-                    rf"revenue\s+by\s+line\s+of\s+our\s+smartphone\s*(?:×|x)\s*aiot\s+segment\s+in\s+the\s+{quarter_pattern}",
+                    rf"{table}\s+in\s+the\s+{quarter_pattern}",
                     re.IGNORECASE,
                 ),
             ])
         if include_generic or not start_patterns:
             start_patterns.extend([
-                re.compile(r"The\s+following\s+table\s+sets\s+forth\s+our\s+revenue\s+by\s+line\s+of\s+our\s+smartphone\s*(?:×|x)\s*aiot\s+segment", re.IGNORECASE),
-                re.compile(r"revenue\s+by\s+line\s+of\s+our\s+smartphone\s*(?:×|x)\s*aiot\s+segment", re.IGNORECASE),
+                re.compile(rf"The\s+following\s+table\s+sets\s+forth\s+our\s+{table}", re.IGNORECASE),
+                re.compile(table, re.IGNORECASE),
             ])
-        return (start_patterns, [re.compile(r"Total\s+revenue\s+of\s+smartphone\s*(?:×|x)\s*aiot\s+segment", re.IGNORECASE), re.compile(r"Smart\s+EV", re.IGNORECASE)])
+        return (start_patterns, [re.compile(rf"Total\s+{metric}\s+of\s+{target}", re.IGNORECASE), re.compile(r"(?:Smart\s+EV|NEV,\s*AI)", re.IGNORECASE)])
     start_patterns = []
     if quarter_pattern:
         start_patterns.extend([
@@ -2488,6 +2497,7 @@ def _build_xiaomi_cost_breakdown(
     quarter_payload: dict[str, Any],
     source_url: str,
     filing_date: str,
+    table_aliases: dict[str, list[str]],
 ) -> list[dict[str, Any]]:
     segment_rows = [row for row in quarter_payload.get("segments") or [] if isinstance(row, dict)]
     detail_rows = [row for row in quarter_payload.get("detailGroups") or [] if isinstance(row, dict)]
@@ -2498,6 +2508,7 @@ def _build_xiaomi_cost_breakdown(
     top_level_margin_labels = {
         "smartphonexaiot": ["smartphone × AIoT segment", "smartphone x AIoT segment", "Smartphone × AIoT segment"],
         "smartevaiandothernewinitiatives": [
+            "NEV, AI and other new initiatives segment",
             "smart EV, AI and other new initiatives segment",
             "smart EV and other new initiatives segment",
             "Smart EV and other new initiatives segment",
@@ -2516,7 +2527,13 @@ def _build_xiaomi_cost_breakdown(
                 return value
         return None
 
-    def resolve_cost(member_key: str) -> float | None:
+    def resolve_cost(member_key: str, section_kind: str) -> float | None:
+        if _period_key(quarter) >= _period_key("2026Q3"):
+            value = _extract_xiaomi_table_row_value_bn(
+                text, table_aliases[member_key], quarter=quarter, section_kind=section_kind,
+            )
+            if value is not None:
+                return value
         for candidate in top_level_margin_labels.get(member_key, []):
             value = _extract_xiaomi_cost_billion_value(text, candidate, quarter=quarter)
             if value is not None:
@@ -2528,7 +2545,7 @@ def _build_xiaomi_cost_breakdown(
         revenue_bn = float(row.get("valueBn") or 0)
         if revenue_bn <= 0:
             continue
-        cost_bn = resolve_cost(member_key)
+        cost_bn = resolve_cost(member_key, "segment-cost")
         if cost_bn is None:
             margin_pct = resolve_margin(member_key)
             if margin_pct is None:
@@ -2557,7 +2574,7 @@ def _build_xiaomi_cost_breakdown(
             revenue_bn = float(row.get("valueBn") or 0)
             if revenue_bn <= 0:
                 continue
-            cost_bn = resolve_cost(member_key)
+            cost_bn = resolve_cost(member_key, "segment-detail-cost")
             if cost_bn is None:
                 margin_pct = resolve_margin(member_key)
                 if margin_pct is None:
@@ -2629,6 +2646,10 @@ def _parse_xiaomi_quarter_item(quarter: str, source_url: str) -> tuple[str, dict
         ("smart EV, AI and other new initiatives segment", "Smart EV, AI and other new initiatives", "smartevaiandothernewinitiatives"),
         ("smart EV and other new initiatives segment", "Smart EV, AI and other new initiatives", "smartevaiandothernewinitiatives"),
     ]
+    if _period_key(quarter) >= _period_key("2026Q3"):
+        hybrid_segment_rows = [*hybrid_segment_rows[:2], (
+            "NEV, AI and other new initiatives segment", "NEV, AI and other new initiatives", "smartevaiandothernewinitiatives",
+        )]
     detail_rows = [
         ("Revenue from smartphones", "Smartphones", "smartphones", "Smartphone x AIoT"),
         ("Revenue from IoT and lifestyle products", "IoT and lifestyle products", "iotandlifestyleproducts", "Smartphone x AIoT"),
@@ -2648,10 +2669,11 @@ def _parse_xiaomi_quarter_item(quarter: str, source_url: str) -> tuple[str, dict
         "iotandlifestyleproducts": ["IoT and lifestyle products"],
         "internetservices": ["Internet services"],
         "otherrelatedbusinesses": ["Others", "Other related business", "Other related businesses"],
-        "smartphonexaiot": ["Smartphone × AIoT segment", "Smartphone x AIoT segment"],
+        "smartphonexaiot": ["Smartphone × AIoT segment", "Smartphone x AIoT segment", "Smartphone × AIoT", "Smartphone x AIoT"],
         "smartevaiandothernewinitiatives": [
             "Smart EV, AI and other new initiatives segment",
             "Smart EV and other new initiatives segment",
+            "NEV, AI and other new initiatives",
         ],
     }
     table_revenue_values = {
@@ -2760,7 +2782,7 @@ def _parse_xiaomi_quarter_item(quarter: str, source_url: str) -> tuple[str, dict
     if opex_breakdown:
         quarter_payload["opexBreakdown"] = opex_breakdown
 
-    cost_breakdown = _build_xiaomi_cost_breakdown(text, quarter, quarter_payload, source_url, filing_date)
+    cost_breakdown = _build_xiaomi_cost_breakdown(text, quarter, quarter_payload, source_url, filing_date, table_revenue_aliases)
     if cost_breakdown:
         quarter_payload["costBreakdown"] = cost_breakdown
     if not quarter_payload.get("segments"):
